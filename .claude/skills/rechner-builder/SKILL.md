@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026)
+## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026 · Prüfvorschriften-Update Welle 114, 26.08.2026)
 
 > **Welle 19 (10.06.2026):** Neue Rechner und Migrationen nutzen den Content-Baustein-Standard (`contentBloecke`) statt des Thin-`erklaerung`-String-Pfads, der die 4. AdSense-Ablehnung verursacht hat. Details im Abschnitt „Content-Bausteine (contentBloecke) — Standard ab Welle 19" weiter unten.
 
@@ -1189,6 +1189,30 @@ export function getAktuellerMindestlohn(stichtag: Date = new Date()) {
 }
 ```
 
+### 🚫 Exportierter Helfer mit einem Namen, der lokal schon mehrfach existiert (Welle 114, 26.08.2026)
+
+Ein neuer Formatier-Helfer sollte als `fmtProzent` aus `lib/berechnungen/brutto-netto.ts` exportiert werden. Gemessen existierte `fmtProzent` bereits **siebenmal** als dateiprivate `const` in anderen Rechnern — und zwar mit **zwei verschiedenen Verhalten**:
+
+| Datei | Nachkommastellen |
+|---|---|
+| `GewerbesteuerRechner.tsx`, `MietrenditeRechner.tsx`, `PfaendungRechner.tsx`, `SchenkungssteuerRechner.tsx` | 1 |
+| `EinkommensteuerRechner.tsx`, `IndexmieteRechner.tsx` | **2** |
+| `BudgetRechner.tsx` | mehrzeilig |
+
+Technisch gab es keine Kollision: keine der sieben war exportiert, keine lag in einer der Zieldateien. Der Build wäre grün gewesen.
+
+**Die Falle liegt in der Zukunft.** Sobald jemand später in `EinkommensteuerRechner.tsx` den Import ergänzt — weil der Name ja passt und der exportierte Helfer „der richtige\" scheint — überschreibt der Import still die lokale Definition und kappt zwei Nachkommastellen auf eine. Kein Fehler, kein Warning, nur falsche Zahlen.
+
+**Regel:** Vor jedem neuen **exportierten** Symbol den Namen repo-weit zählen:
+
+```bash
+git grep -nE '(const|function)\s+<name>' -- '*.ts' '*.tsx'
+```
+
+Bei Treffern mit abweichendem Verhalten: **umbenennen, nicht überlagern.** Der Helfer heißt deshalb `fmtAbzugsquote` — sprechend, an den Wert gebunden, gemessen 0-mal vergeben. Ein Name, der repo-weit schon mehrfach mit unterschiedlicher Semantik existiert, ist als Export verbrannt, auch wenn der Compiler schweigt.
+
+Gilt sinngemäß auch beim Umgekehrten: Wer eine der sieben lokalen Definitionen durch einen Import ersetzen will, muss vorher die Nachkommastellen beider Seiten vergleichen.
+
 ### 📌 Meta-Lektion: Soli ohne Milderungszone — ein Wiederholungs-Bug
 
 Das Muster `est > 20350 ? est * 0.055 : 0` (harte Kante ohne Milderungszone)
@@ -1874,6 +1898,47 @@ Tauglich ist der Vergleich des **sichtbaren Textes**: Vorzustand über `git stas
 
 ## Operative Disziplin
 
+### Prüfvorschriften in Build-Prompts (Welle 114, 26.08.2026)
+
+Jeder Build-Prompt enthält Greps mit Sollwerten. In Welle 114 sind **drei** Prompts an fehlerhaften Prüfvorschriften hängengeblieben — alle drei Fehler kamen aus der Vorlage, keiner aus dem Repo. Die folgenden sechs Regeln adressieren jeweils einen davon.
+
+**R1 — `git grep` statt `grep -r`.**
+`git grep` durchsucht nur getrackte Dateien. Verwaiste Worktrees unter `.claude/worktrees/`, `node_modules` und alles Gitignorierte fallen automatisch heraus. In Welle 114 lieferten drei tote Worktree-Kopien von `lib/seo.ts` und `app/layout.tsx` bei `grep -r` vier statt einem Treffer und lösten eine STOP-Bedingung fälschlich aus. Ein Ausschlusspfad im Prompt ist die schwächere Lösung, weil ihn jede Folgevorlage neu mitschleppen muss.
+
+**R2 — Dateityp immer eingrenzen.**
+`-- '*.ts' '*.tsx'`. Ohne Eingrenzung zählen Arbeitspapiere unter `docs/` mit, die Code zitieren. Beispiel: `abzuegeProzent` steht in `docs/audit-arbeitspapiere/w15b-longtail-scoping.md` und verschiebt jede Gesamtzählung um eins.
+
+**R3 — Bezeichner-Greps brauchen Wortgrenzen auf beiden Seiten, Zeichenklasse `[^a-zA-Z0-9_]`.**
+
+```bash
+git grep -oE '(^|[^a-zA-Z0-9_])name([^a-zA-Z0-9_]|$)' -- '*.ts' '*.tsx'
+```
+
+Ziffern **und** Unterstrich gehören in die Klasse, weil beide in JavaScript-Bezeichnern zulässig sind. Ohne linke Grenze zählte `gesamtabzuegeProzent` als zusätzlicher Treffer für `abzuegeProzent` (22 statt 20). Das ist dieselbe Klasse Fehler wie die dokumentierte Ziffern-Lehre bei `check24` — nur mit Teilstring statt mit Ziffer im Namen.
+
+**R4 — Ein Satzzeichen ist keine Wortgrenze.**
+Ein Anker wie `(,|$)` ist eine Annahme über die **Formatierung**, nicht über den Bezeichner. In Welle 114 stand in allen sechs Dateien
+
+```ts
+twitter: { card: 'summary_large_image', title: TITEL, description: DESC },
+```
+
+Auf `TITEL` folgt ein Komma, auf `DESC` ein Leerzeichen. Derselbe Prompt zählte deshalb 18 gegen 12 — für zwei Konstanten, die exakt gleich oft verwendet wurden. Beide Seiten brauchen `[^a-zA-Z0-9_]`.
+
+**R5 — `-n` und `-o` nie voneinander ableiten.**
+Zeilenzahl und Vorkommenszahl sind zwei Messungen, nicht eine Messung und eine Rechnung. Wer aus „19 Zeilen, davon eine mit zwei Treffern" auf 20 Vorkommen schließt, hat geschätzt. Beide Kommandos einzeln ausführen, beide Ergebnisse in den Prompt schreiben. Weicht die Differenz von der erwarteten ab, ist das der Hinweis auf einen Teilstring-Effekt (siehe R3).
+
+**R6 — Ein Sollwert darf nicht nur erreichbar sein, wenn eine STOP-Bedingung verletzt wird.**
+Ein Prompt forderte `0` für ein Muster, das genau einmal in der ausdrücklich als tabu markierten CSS-Zeile steht. Der Sollwert war nur zu erfüllen, indem man die Tabu-Zeile ändert. Jede Prüfung gegen den geplanten **End**zustand rechnen, nicht gegen den Wunschzustand — und wenn eine Zeile bewusst unangetastet bleibt, gehört ihr Treffer in den Sollwert.
+
+**Und quer über alle sechs: Sollwerte werden gemessen, nie gerechnet.**
+Auch die scheinbar triviale Arithmetik der Vorlage. „Elf Pfade, davon einer nicht betroffen, also zehn Dateien\" war falsch — der eine war nie in der Liste. Die Zahl der geänderten Dateien ist ein `git diff --name-only | wc -l`, kein Kopfrechnen.
+
+**Verhalten bei Abweichung — gilt für Code-Claude, nicht verhandelbar:**
+Ist-Wert melden, Vorlage **nicht** stillschweigend reparieren, Sollwert **nicht** anpassen, nichts committen. Genau dieses Verhalten hat in Welle 114 dreimal einen falschen Commit verhindert. Ein Prompt, der eine Abweichung „plausibel wegerklärt\", ist wertlos.
+
+Siehe auch: „Beim Entfernen: Gegenzählung dessen, was nicht getroffen werden darf\" (Wächter-Abschnitt oben) — dort steht die inhaltliche Seite derselben Disziplin.
+
 ### Verify-Modus
 
 Nach jedem Deploy macht **nur Karsten** Live-Verify per Inkognito-Browser. **Claude macht keine eigenen web_fetch-Aussagen** zum Live-Stand, weil web_fetch session-übergreifend stale-cached.
@@ -1887,10 +1952,14 @@ Nach jedem Deploy macht **nur Karsten** Live-Verify per Inkognito-Browser. **Cla
 - `lib/rechner-config/client-data.ts` ist auto-generierter Datums-Stempel-Drift — **NICHT mit-committen** (in jeder Sub-Welle vor `git add` prüfen)
 - Atomic-Commits: ein Sub-Wellen-Commit, prägnante Message
 - Working-Tree nach Commit clean (außer client-data.ts-Drift)
+- **Verwaiste Worktrees regelmäßig wegräumen:** `git worktree prune`, danach die Verzeichnisse unter `.claude/worktrees/` löschen. Sie sind gitignoriert (`.gitignore:106`), liegen aber im Dateisystem und enthalten alte Fassungen echter Repo-Dateien. Bei `grep -r` zählen sie mit und erzeugen Fehlalarme (siehe R1 unter „Prüfvorschriften in Build-Prompts").
+- **Untracked Artefakte, die nicht gitignoriert sind, brechen den Clean-Standard dauerhaft.** Sie sind kein Grund für einen Abbruch, wenn sie außerhalb des Änderungsbereichs liegen — aber sie gehören gemeldet und dann entweder gelöscht oder in `.gitignore` aufgenommen. Nicht ungefragt löschen: der Prompt-Autor weiß nicht immer, wofür eine Datei da ist.
 
 ### Beispielrechnungen
 
 Werte für Beispiele in Specs IMMER aus Live-Calculator ziehen, nicht schätzen. Drift zwischen Spec-Wert und Live-Calculator wäre fachlich peinlich.
+
+Dasselbe gilt für Beträge, die in Metadaten wandern: Wenn Title oder Description eine Zahl tragen sollen, wird sie zur Build-Zeit aus derselben Funktion abgeleitet, aus der die Seite rechnet — nie hartkodiert. Sonst laufen Snippet und Seiteninhalt beim nächsten Parameter-Stichtag auseinander, und das Snippet ist die Fassung, die Google zeigt. Muster siehe Welle 114, sechs Brutto-Netto-Varianten (`const TITEL` / `const DESC` aus `n(1)` bzw. `n(3)` oberhalb von `export const metadata`).
 
 ### Pre-Phase-Pflicht
 

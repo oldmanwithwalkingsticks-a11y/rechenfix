@@ -108,3 +108,17 @@ Vor jeder neuen Rechner-Implementierung oder Sub-Wellen-Update:
 - [ ] Prägnante Commit-Message mit Sub-Wellen-ID
 - [ ] `lib/rechner-config/client-data.ts` NICHT mit-committen
 - [ ] Working-Tree nach Commit clean (außer client-data.ts-Drift)
+
+### Prüfvorschrift schreiben (Welle 114, 26.08.2026)
+
+Vor dem Abschicken eines Build-Prompts jede Grep-Zeile gegen diese sechs Punkte halten. Details im SKILL.md unter „Prüfvorschriften in Build-Prompts".
+
+- [ ] **R1** `git grep` statt `grep -r` (schließt Worktrees und Gitignoriertes aus)
+- [ ] **R2** Dateityp eingegrenzt: `-- '*.ts' '*.tsx'` (sonst zählen `docs/`-Zitate mit)
+- [ ] **R3** Bezeichner-Greps mit Wortgrenze **beidseitig**, Klasse `[^a-zA-Z0-9_]` (Ziffern und Unterstrich gehören hinein)
+- [ ] **R4** Kein Satzzeichen als Anker — `(,|$)` ist eine Formatierungsannahme, keine Wortgrenze
+- [ ] **R5** `-n` und `-o` einzeln ausgeführt, beide Ist-Werte notiert, keiner aus dem anderen gerechnet
+- [ ] **R6** Kein Sollwert, der nur durch Verletzung einer STOP-Bedingung erreichbar ist (Tabu-Zeilen zählen in den Sollwert hinein)
+- [ ] Sollwerte **gemessen**, auch die triviale Arithmetik (Dateizahl = `git diff --name-only | wc -l`, nicht Kopfrechnen)
+- [ ] Verifikation per Pathspec auf die Zieldateien eingegrenzt, nicht repo-weit mit nachgeschaltetem `grep -v`
+- [ ] Bei neuem **exportiertem** Symbol: `git grep -nE '(const|function)\s+<name>' -- '*.ts' '*.tsx'` → bei Treffern mit abweichendem Verhalten umbenennen, nicht überlagern
