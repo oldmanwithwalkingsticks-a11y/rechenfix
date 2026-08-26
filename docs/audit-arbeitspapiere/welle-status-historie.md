@@ -6,6 +6,59 @@
 
 ---
 
+## 26.08.2026 — Welle 114: Abzugsquote deutsch formatiert — ✅ ABGESCHLOSSEN
+
+**Ein deutschsprachiger Finanzrechner schrieb Prozentwerte mit Punkt.** Live standen auf den sechs
+Varianten-Seiten Sätze wie „Abzugsquote rund 29.4 %", im Haupt-Rechner „29.4% Abzüge" und „70.6%
+Netto". Ursache war kein Rechenfehler: `abzuegeProzent` wurde als rohe `number` in Template-Strings
+und JSX interpoliert, und JavaScript gibt dabei die englische Standardschreibweise aus. Der Wert
+selbst kommt seit jeher korrekt auf eine Nachkommastelle gerundet aus `brutto-netto.ts:263` — die
+Berechnung wurde nicht angefasst, `git diff --numstat` der Lib meldet 16 hinzugefügte und 0
+entfernte Zeilen.
+
+**Der Helfer heißt bewusst nicht `fmtProzent`.** Dieser Name existiert im Repo bereits siebenmal
+als dateiprivate `const` — in `GewerbesteuerRechner`, `MietrenditeRechner`, `PfaendungRechner`,
+`SchenkungssteuerRechner` (je eine Nachkommastelle), in `EinkommensteuerRechner` und
+`IndexmieteRechner` (je **zwei**) sowie mehrzeilig in `BudgetRechner`. Ein exportierter
+gleichnamiger Helfer wäre eine gestellte Falle gewesen: Wer später in `EinkommensteuerRechner.tsx`
+den Import ergänzt, hätte dort still zwei Nachkommastellen auf eine gekürzt. Der neue Export heißt
+`fmtAbzugsquote` und war im Repo 0-mal vergeben. Die sieben Bestandsdefinitionen sind unangetastet.
+
+**Umfang: 13 Zeilen mit 14 Vorkommen in 10 Dateien, plus die Lib — 11 Dateien insgesamt.**
+Commit `143e790`. Die Differenz zwischen 13 und 14 ist `brutto-netto-tabelle/page.tsx:165`, wo zwei
+Werte in einer Zeile stehen; beide wurden umgestellt (gebautes HTML: 22,4 % und 43,4 %). Nicht
+angefasst: die CSS-Breitenangabe in `BruttoNettoRechner.tsx:570`, die beiden
+Datenstruktur-Übergaben in Zeile 748/770 und `StandardBruttoNettoBlock.tsx`, das über
+`.toFixed(0)` ohnehin ganzzahlig ausgibt.
+
+**Die Risikostelle war der Balken, nicht der Text.** Zeile 570 steckt den Wert in
+``style={{ width: `${100 - ergebnis.abzuegeProzent}%` }}``; CSS versteht kein Komma. Die Zeile
+darunter — 571 — ist die zu ändernde Textausgabe. Im gebauten HTML steht die Breite weiterhin als
+`width:66.5%` mit Punkt, während der Text daneben ein Komma zeigt.
+
+**Werte gegengeprüft, nicht angenommen.** Aus dem lokalen Build der sechs Varianten-Seiten:
+26,3 / 29,4 / 31,7 / 33,5 / 35,0 / 37,6 — dieselben Ziffern wie vorher live, nur mit Komma. Die
+einzige beabsichtigte Darstellungsänderung ist `35` → `35,0`; `fmtAbzugsquote` erzwingt eine
+Nachkommastelle über alle Gehaltsstufen. In den zehn gebauten Zielseiten findet sich kein
+Prozentwert mehr im Muster `[0-9]+\.[0-9]%`.
+
+**Drei Fassungen der Vorlage, zwei davon an Zählmustern gescheitert — und eine Restabweichung.**
+v1 nannte 18 Treffer, v2 nannte 20 Vorkommen; tatsächlich liefert `git grep -o "abzuegeProzent"`
+**22**, weil `gesamtabzuegeProzent` in Zeile 748/770 den Suchbegriff als Teilstring enthält. Erst
+v3 löste das über eine linke Wortgrenze `(^|[^a-zA-Z0-9_])` — mit Ziffern und Unterstrich in der
+Klasse, weil beide in JavaScript-Bezeichnern zulässig sind. **Lehre: Bezeichner-Greps ohne
+Wortgrenze zählen Präfix-Komposita mit.** Zwei Prüfwerte in v3 blieben dennoch falsch, beide als
+Vorlagenfehler gemeldet statt stillschweigend übergangen: Verifikation 1a fordert 0 Treffer für
+`\$\{[^}]*abzuegeProzent\}\s*%`, doch der einzige verbliebene Treffer **ist** die Tabu-Zeile 570
+— der Sollwert ist mit dem Tabu unvereinbar und muss 1 lauten (ohne Zeile 570 gemessen: 0).
+Verifikation 8 fordert 10 geänderte Dateien; die Zieldateiliste umfasst elf Pfade, von denen alle
+elf geändert werden — „`brutto-netto.ts` plus neun weitere" hätte „plus zehn weitere" heißen müssen.
+
+**Laufzeit-Gegenprobe steht aus.** Nach dem Deploy die sechs Varianten-Seiten auf Kommas prüfen
+und im Rechner die Balkenbreite ansehen.
+
+---
+
 ## 26.08.2026 — Welle 114: SearchAction aus dem WebSite-Schema entfernt — ✅ ABGESCHLOSSEN
 
 **Ein Platzhalter, den Googlebot wörtlich genommen hat.** Die Search Console führte zwei URLs unter
