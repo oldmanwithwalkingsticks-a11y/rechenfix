@@ -9,7 +9,7 @@ Build standardized, SEO-optimized calculator pages for the German calculator por
 
 ## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026 · Prüfvorschriften-Update Welle 114, 26.08.2026)
 
-> **Welle 19 (10.06.2026):** Neue Rechner und Migrationen nutzen den Content-Baustein-Standard (`contentBloecke`) statt des Thin-`erklaerung`-String-Pfads, der die 4. AdSense-Ablehnung verursacht hat. Details im Abschnitt „Content-Bausteine (contentBloecke) — Standard ab Welle 19" weiter unten.
+> **Welle 19 (10.06.2026):** Neue Rechner und Migrationen nutzen den Content-Baustein-Standard (`contentBloecke`) statt des Thin-`erklaerung`-String-Pfads, der die 4. AdSense-Ablehnung verursacht hat. Das ist keine Empfehlung, sondern der Pfad — der Thin-String-Pfad ist geschlossen. Die acht Blocktypen, das Leitformat-Prinzip, die Quellen-Pflicht und der Self-Check vor dem Commit stehen in **`references/content-standards.md`**; diese Datei vor dem Schreiben von Inhalten lesen.
 
 Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veraltete Affiliate-Verteilung, zu kurze Content-Texte, veraltete Gesetzes-Werte und schlecht dokumentierte Tabellen-Werte wochenlange Korrektur-Sprints nötig machten. Konsequente Befolgung ab Build-Phase erspart spätere Audits.
 
@@ -18,7 +18,7 @@ Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veralte
 1. **Affiliate-Architektur:** `config.affiliate` (Single-Object oder Array) statt hartkodierter `<AffiliateBox />`-JSX. Siehe „Affiliate-Platzierung"-Sektion.
 2. **Content-Wortzahl:** `erklaerung` + FAQ kombiniert ≥ 750 W (Ideal 1.000–1.500 W), FAQ 5–8 Fragen. Siehe Step 7 + 8.
 3. **Aktuelle Gesetze:** Vor dem Code-Schreiben relevante Paragraphen recherchieren und im Code-Kommentar mit § + Stand + Quelle dokumentieren. Siehe „Pre-Build: Gesetzes-Recherche".
-4. **Tabellen/Sätze/Grenzen:** Als named constants am File-Anfang mit Stichtag + Quelle, KEINE magic numbers inline. Siehe „Pre-Build: Tabellen-Aktualität".
+4. **Tabellen/Sätze/Grenzen:** Als named constants am File-Anfang mit Stichtag + Quelle, KEINE magic numbers inline. Siehe „Pre-Build: Tabellen-Aktualität". Vorher in **`references/zentrale-libs.md`** nachsehen, ob der Wert bereits als SSOT existiert — Duplikate zentraler Werte sind der häufigste Wiederholungsfehler im Repo (G10).
 
 **Bei jährlichem Januar-Audit greift folgender Workflow:**
 
@@ -224,7 +224,7 @@ const GRUNDFREIBETRAG_2026 = 12_348;
 const ergebnis = brutto - GRUNDFREIBETRAG_2026;
 ```
 
-Im Idealfall liegt der Wert bereits in einer zentralen Lib (`lib/berechnungen/<domain>.ts`) — siehe CLAUDE.md → „Zentrale Libs (SSOT)". Eigene Hardcodes nur, wenn der Wert nirgendwo zentral verfügbar ist; dann Inline-Constants mit Stichtag.
+Im Idealfall liegt der Wert bereits in einer zentralen Lib (`lib/berechnungen/<domain>.ts`) — Kurzliste in `references/zentrale-libs.md`, Volltabelle in CLAUDE.md → „Zentrale Libs (SSOT)". Eigene Hardcodes nur, wenn der Wert nirgendwo zentral verfügbar ist; dann Inline-Constants mit Stichtag.
 
 ---
 
@@ -380,7 +380,7 @@ Place below the calculator (below the fold). Include:
 - **H2 headings** for structure (3-5 sections)
 - **Content-Mindestumfang für AdSense-Konformität (seit W13.C-Audit, 09.05.2026):**
   - `erklaerung` + FAQ kombiniert: **MINDESTENS 750 Wörter**
-  - Ideal: **1.000–1.500 Wörter** (Pattern-Goldstandard der Top-10-Rechner)
+  - Ideal: **1.000–1.500 Wörter** (Pattern-Goldstandard der Top-10-Rechner, `references/content-standards.md`)
   - Begründung: W13.C-Audit hat ergeben, dass Rechner mit <700 W AdSense-Reject-Risiko haben („Minderwertige Inhalte"). 750 W ist die sichere Untergrenze.
   - Wortzählung pro Rechner manuell oder via `scripts/word-count.mjs` (falls vorhanden) verifizierbar.
 - **Formel-Box:** Show the formula used in a highlighted box
@@ -480,7 +480,7 @@ After creating the calculator, verify:
 - [ ] **Meta-Description ≤ 155 Zeichen** (zählen! `node -e "console.log('…'.length)"`)
 - [ ] Kein `✓ Kostenlos. ✓ Mit KI-Erklärung.`-Suffix, keine ✓-Emojis in der Description
 - [ ] **Smoke-Test v3** nach Deploy über die betroffenen Routen laufen lassen: `scripts/smoke-test-v3.js` in die Browser-Konsole auf `https://www.rechenfix.de` pasten und `await runSmokeTestV3({ filter: /<slug>/ })` ausführen. Alle 9 Checks (C1–C9) müssen grün sein.
-- [ ] **Guards G1–G14 geprüft** (siehe Abschnitt „Qualitäts-Guards" in diesem Skill)
+- [ ] **Guards G1–G14 geprüft** (`references/qualitaets-guards.md`)
 - [ ] "Fix erklärt"-Button erscheint erst, nachdem der `ergebnis`-State gefüllt ist — das ist **kein Bug**, sondern gewollt
 
 ### Step 11b: SSOT-Import-Audit (Pflicht vor Commit)
@@ -503,7 +503,7 @@ hartcodieren.
 
 Hintergrund: Der Welle-1-Audit (Prompts 94–95) hat in fünf Rechnern
 solche Duplikate gefunden — alle mit veralteten oder frei erfundenen
-Werten. Siehe „Anti-Patterns aus der Audit-Welle 2026" weiter unten.
+Werten. Siehe `references/anti-patterns.md`.
 
 **Seit Prompt 99c kennt das Lint-Script einen `contextKeywords`-Mechanismus**
 für generische Werte (z. B. `1230` WK-Pauschale, `20350` Soli-Freigrenze):
@@ -602,8 +602,9 @@ export function getAktuelleXxxParameter(stichtag: Date = new Date()): XxxParamet
 
 ### Step 13: Qualitäts-Guards G1–G14 durchgehen
 
-Bevor ein Rechner committed wird, die vierzehn Guards unten im Abschnitt
-„Qualitäts-Guards (aus Rezept-Umrechner-Audit, April 2026)" abarbeiten.
+Bevor ein Rechner committed wird, die vierzehn Guards aus
+**`references/qualitaets-guards.md`** abarbeiten — die Datei jetzt lesen,
+nicht aus dem Gedächtnis abhaken.
 Wo ein Guard nicht zutrifft (z. B. G5 ohne Einheiten-Output), das in der
 Code-Review-Notiz kurz begründen. G10 (keine Dubletten zentraler Werte)
 ist nach dem Jahresaudit 2026 hinzugekommen — besonders wichtig für
@@ -616,620 +617,6 @@ Vor dem Commit einmal `await runSmokeTestV3({ filter: /<slug>/ })` in der
 Browser-Konsole laufen lassen (siehe `scripts/smoke-test-v3.js`). Alle
 neun Checks müssen grün sein — oder dokumentierte Ausnahme. Erst danach
 committen.
-
-## Qualitäts-Guards (aus Rezept-Umrechner-Audit, April 2026)
-
-Diese neun Guards wurden nach einem Audit der Rezept-Umrechner-Session
-extrahiert. Jeder neue Rechner MUSS sie einhalten. Sie sind außerdem in
-`scripts/smoke-test-v3.js` als automatisierte Checks C1–C9 abgebildet.
-
-### G1 — Division-by-zero-Guards
-Jede Formel muss Null-Werte und leere Inputs abfangen. Zwei akzeptable
-Muster:
-- **Input-Clamping:** Wert springt on-change auf sinnvolles Minimum (≥1).
-- **Early-Return in Berechnung:** statt `NaN`/`Infinity` eine Hinweisbox
-  rendern („Bitte alle Felder ausfüllen").
-
-Anti-Pattern: `const faktor = neueMenge / alteMenge;` ohne Guard.
-
-### G2 — Reset-Button mit Default-Set
-Definiere am Datei-Anfang eine `DEFAULT_STATE`-Konstante mit sinnvollen
-Beispiel-Werten. Initial-State und Reset nutzen dieselbe Konstante.
-NIEMALS auf `0`/`0` zurücksetzen — der Rechner soll nach Reset sofort
-wieder ein plausibles Ergebnis zeigen.
-
-```ts
-const DEFAULT_STATE = { menge: 500, personen: 4, einheit: 'g' };
-const [state, setState] = useState(DEFAULT_STATE);
-const reset = () => setState(DEFAULT_STATE);
-```
-
-### G3 — JS-seitiges Clamping
-`max` und `min` als HTML5-Attribute reichen nicht — der Browser erlaubt
-out-of-range Werte, solange das Formular nicht submitted wird. In jedem
-`onChange`:
-
-```ts
-const raw = parseInt(e.target.value, 10);
-const clamped = isNaN(raw) ? MIN : Math.min(MAX, Math.max(MIN, raw));
-setMenge(clamped);
-```
-
-### G4 — `step="1"` auf Integer-Inputs
-Wenn der Wert nur ganzzahlig Sinn macht (Portionen, Personen, Stückzahl,
-Tage, Kinderzahl), `step="1"` setzen. Verhindert Dezimaleingabe per
-Pfeiltasten und schützt vor Rundungs-Quirks.
-
-### G5 — Pluralisierung bei Einheiten-Output
-Wenn der Rechner Zahlen + Einheiten ausgibt, eine `PLURAL_MAP` am
-Komponenten-Anfang pflegen und an **allen** Ausgabestellen (Tabelle,
-Copy-Output, aria-live) anwenden:
-
-```ts
-const PLURAL_MAP: Record<string, string> = {
-  'Prise': 'Prisen',
-  'Dose': 'Dosen',
-  'Tasse': 'Tassen',
-  'Packung': 'Packungen',
-  // … bei Bedarf erweitern
-};
-const formatUnit = (n: number, unit: string) =>
-  n === 1 ? unit : (PLURAL_MAP[unit] ?? unit);
-```
-
-### G6 — aria-live ohne Prefix-Dopplung
-Nur EIN Präfix (Rechnername) im aria-live-Text, nicht im umgebenden
-Label UND im Message-String. Format:
-
-```
-<Rechnername>: <X> → <Y> <Einheit> (Faktor × <n>)
-```
-
-Anti-Pattern: `aria-label="Rezept-Umrechner"` plus Textinhalt
-`Rezept-Umrechner: Rezept-Umrechner: 2 Eier → 4 Eier`.
-
-### G7 — Title maximal 72 Zeichen gerendert
-`metaTitle` im Config muss so gewählt sein, dass
-`metaTitle.length + 15` (Suffix ` | Rechenfix.de`) ≤ 60 ergibt.
-Ausnahme nur mit Begründung im Kommentar (aktuelle Ausnahme:
-`/gesundheit/schwangerschaft-gewicht-rechner` bei 72). Jahreszahl nur
-dann, wenn tatsächlich jährlich ändernde Werte relevant sind
-(Steuer-Tabellen, Sozialleistungen, Kindergeld, Rente, BAföG, AfA).
-
-### G8 — Sidebar wird aus Route abgeleitet
-Für Einzel-Rechner nicht relevant (Layout-Sache). Aber wenn eine neue
-Kategorie eröffnet wird: Die Sidebar-Komponente muss `params.kategorie`
-auswerten, nicht hardcoden. Sonst zeigt der neue Rechner die falsche
-Sidebar.
-
-### G9 — Skalierungs-Caps für nicht-linear skalierende Einheiten
-Wenn ein Rechner Werte multipliziert (z. B. Rezept-Umrechner
-Faktor × Menge), prüfen: Welche Einheiten machen mathematisch keinen
-Sinn beim Skalieren? Diese vom Faktor ausnehmen und in der Komponente
-dokumentieren:
-
-```ts
-// Nicht-skalierende Einheiten (Prise bleibt Prise, egal wie groß das Rezept)
-const UNSCALED_UNITS = new Set(['Prise', 'n.B.', 'nach Geschmack']);
-const skalieren = (menge: number, einheit: string, faktor: number) =>
-  UNSCALED_UNITS.has(einheit) ? menge : menge * faktor;
-```
-
-### G10 — Keine Dubletten zentraler Werte
-
-Jeder Rechner, der einen gesetzlich fixierten Jahreswert benötigt
-(Grundfreibetrag, Kindergeld, Mindestlohn, Rentenwert, BBG, JAEG,
-Soli-Grenzen, Pfändungsfreibeträge, Tabaksteuer, D-Ticket-Preis,
-Zusatzbeitrag etc.), MUSS diesen aus der entsprechenden
-`lib/berechnungen/*`-Datei importieren. Hartcodierte Zahlen für solche
-Werte sind verboten — auch dann, wenn sie in einem einzelnen SEO-Text
-oder in einer einzelnen Berechnung stehen.
-
-**Warum:** Die Jahresparameter-Audits Sprint 1 (April 2026) und
-Jahresaudit 2026 (Prompts 86–91) haben gemeinsam in neun Rechnern
-Werte gefunden, die 1–2 Jahre veraltet waren — weil sie lokal
-hartkodiert waren statt aus der zentralen Lib gezogen.
-
-**Ausnahme:** Nicht rechts-/jahresabhängige Konstanten (z. B.
-„12 Monate pro Jahr", „π ≈ 3,14159") dürfen hartkodiert sein.
-
-**Verweis:** Siehe `CLAUDE.md` Abschnitt „Zentrale Libs (SSOT)" für
-die vollständige Liste und das Stichtag-Switch-Pattern.
-
-### G11 — SSOT-Import-Pflicht (Welle-1-Audit, April 2026)
-
-Vor jedem Rechner-Bau prüfen und konsumieren — niemals duplizieren:
-
-- ESt? → `berechneEStGrund(zvE, jahr)` aus `einkommensteuer.ts`
-- Soli? → `berechneSoli(est, splittingtarif, jahr)` (mit Milderungszone)
-- Kirchensteuer? → `berechneKirchensteuerByBundesland(est, bundesland)`
-- Rentenwert? → `getAktuellerRentenwert()` aus `rente.ts` (Stichtag-Switch)
-- BBG? → `BBG_RV_MONAT` / `BBG_KV_MONAT` aus `brutto-netto.ts`
-- Kindergeld / Kinderfreibetrag? → Konstanten + Logik aus `kindergeld.ts`
-  (`KIFB_GESAMT_ZUSAMMEN_2026` = 9.756 €, `KIFB_GESAMT_EINZEL_2026` = 4.878 €)
-- Pfändungstabelle? → `pfaendung.ts`
-- Mindestlohn? → `mindestlohn.ts`
-- Pendlerpauschale-Satz? → `PENDLERPAUSCHALE_SATZ_2026` (= 0,38 €) aus `pendlerpauschale.ts`
-
-Keine eigenen Zahlen-Konstanten für gesetzliche Werte. Keine eigenen
-Tarif-Formeln. Jede Verletzung ist ein P1-Bug wie die im April 2026
-gefundenen (Steuerklassen-Faktor, Rentenwert 39,32, Kifb 15.612,
-Pendler-Staffelung 0,30/0,38).
-
-### G12 — Keine Transform-Hover auf Karten (Prompt 96/96a)
-
-Keine `transform`/`scale`/`translate`-basierten Hover-Effekte auf
-Karten-artigen Elementen. Der Browser promotet transformierte
-Elemente auf eine Compositor-Ebene und rendert Text mit Subpixel-
-Antialiasing → Text-Blur während der Transition. Auch `translateY(-2px)`
-ist betroffen.
-
-**Korrekte Umsetzung:** Nutze die zentrale `.card`-Utility aus
-`app/globals.css` oder eine äquivalente Shadow-only-Animation.
-Elevation-Eindruck entsteht allein durch verstärkten Box-Shadow —
-keine Pixel-Bewegung nötig. Siehe CLAUDE.md Abschnitt
-„UI-Regeln für Rechner-Kacheln".
-
-### G13 — Differenz-Methode für Steuer-/Soli-Ersparnis (Prompt 100)
-
-Bei Rechnern, die Steuerersparnis aus Absetzungen schätzen
-(Spenden, Werbungskosten, Altersvorsorge): Immer Differenz-Methode
-nutzen — nie pauschal `ersparnis * 0.055`:
-
-```ts
-// FALSCH (ignoriert Soli-Freigrenze):
-const soliErsparnis = estErsparnis * 0.055;
-
-// RICHTIG (berücksichtigt Freigrenze + Milderungszone):
-const soliVoll = berechneSoli(estVoll, splitting, 2026);
-const soliNachAbzug = berechneSoli(estNachAbzug, splitting, 2026);
-const soliErsparnis = soliVoll - soliNachAbzug;
-```
-
-Dieselbe Logik gilt für KiSt:
-`berechneKirchensteuerByBundesland(estVoll, bundesland) − berechneKirchensteuerByBundesland(estNachAbzug, bundesland)`.
-
-Der pauschale 5,5 %-Ansatz überschätzt die Ersparnis systematisch,
-wenn zvE vor oder nach Abzug unter die Soli-Freigrenze rutscht
-(Prompt 100: ~200 €/Jahr Überschätzung bei typischen Spendern
-um zvE 70–80 k).
-
-### G14 — Ein Footer, dynamische Zahlen (Prompt 107b)
-
-Genau **eine** Footer-Komponente site-weit: [components/layout/Footer.tsx](components/layout/Footer.tsx). Keine zweite Footer-Komponente anlegen (z. B. für Landing-Pages, Admin-Bereiche oder Rechner-Subseiten).
-
-Rechner- und Kategorie-Zahlen im Footer werden **dynamisch** aus [lib/rechner-config/client-data.ts](lib/rechner-config/client-data.ts) berechnet — niemals hartcodieren:
-
-```tsx
-// RICHTIG:
-{rechner.length} Rechner in {kategorien.length} Kategorien
-
-// FALSCH (veraltet, sobald ein Rechner dazukommt):
-206 Rechner in 10 Kategorien
-```
-
-Das Lint-Script `npm run lint:footer` prüft beides automatisch:
-- `footer-uniqueness`: genau 1 Footer-Datei in `{app,components}/**/*Footer*.{ts,tsx}`
-- `footer-hardcoded-count`: Regex `\b\d{2,4}\s+Rechner\s+(in|pro)\s+\d+\s+Kategorien?\b` im Footer-Content → Fehler
-
-## Anti-Patterns aus der Audit-Welle 2026 (nicht wiederholen)
-
-Reale Bugs, die der April-2026-Audit aufgedeckt hat. Bei jedem neuen
-Rechner, der ESt/SV/Rente/Kindergeld berührt, diese Liste vor dem
-Commit durchsehen.
-
-### 🚫 Erfundener Steuerklassen-Faktor (Prompt 94)
-
-```ts
-// FALSCH (altes abfindung.ts):
-const SK_FAKTOR = { 1: 1.0, 2: 0.85, 3: 0.55, 4: 1.0, 5: 1.55, 6: 1.25 };
-const est = berechneEStGrund(zve, 2026) * SK_FAKTOR[steuerklasse];
-```
-
-§ 34 EStG kennt keinen Steuerklassen-Faktor. Die Fünftelregelung
-wirkt auf zvE; die Steuerklasse spielt bei der ESt-Veranlagung keine
-Rolle. Korrekt: bei verheiratet → Splittingtarif
-(`berechneEStGrund(zvE/2, 2026) × 2`), sonst Grundtarif. Mehr nicht.
-
-### 🚫 Hartcodierter Rentenwert (Prompt 95)
-
-```ts
-// FALSCH (alter WitwenrenteRechner):
-const RENTENWERT_2026 = 39.32;  // war der Wert bis 30.06.2025!
-```
-
-Der Rentenwert ändert sich jährlich zum 01.07. Hartcodierung bedeutet
-automatisch Bug nach wenigen Monaten. Immer `getAktuellerRentenwert()`
-aus `rente.ts` nutzen, das Stichtag-Switch enthält.
-
-### 🚫 Kinderfreibetrag selbst zusammenbauen (Prompt 94a)
-
-```ts
-// FALSCH (alter KindergeldRechner):
-const KIFB_EINZEL = 4878;
-const BEA_EINZEL = 2928;  // ← ist der ZUSAMMEN-Wert, nicht Einzel!
-const KIFB_ZUSAMMEN = (KIFB_EINZEL + BEA_EINZEL) * 2;  // = 15.612, falsch
-```
-
-Korrekte Werte: `KIFB_GESAMT_ZUSAMMEN_2026 = 9.756 €`
-(6.828 sächlich + 2.928 BEA), `KIFB_GESAMT_EINZEL_2026 = 4.878 €`.
-Immer aus `kindergeld.ts` importieren.
-
-### 🚫 WK+SA-Pauschale bei Zusammenveranlagung nur einmal (Prompt 94a)
-
-```ts
-// FALSCH (alter SplittingRechner):
-const zveGesamt = bruttoP1 + bruttoP2 - 1266;  // nur einmal abgezogen
-```
-
-Jeder Partner mit Einkommen hat eigene WK-Pauschale (1.230 €,
-§ 9a EStG) und Sonderausgabenpauschale (36 €, § 10c EStG). Auch bei
-Zusammenveranlagung. Korrekt:
-```ts
-const zveA = bruttoP1 > 0 ? Math.max(0, bruttoP1 - 1266) : 0;
-const zveB = bruttoP2 > 0 ? Math.max(0, bruttoP2 - 1266) : 0;
-const zveGesamt = zveA + zveB;
-```
-
-### 🚫 Pendlerpauschale mit 2025er-Staffelung (Prompt 94a)
-
-```ts
-// FALSCH (Code bis StÄndG 2025):
-const pauschale = km <= 20
-  ? km * 0.30 * tage
-  : (20 * 0.30 + (km - 20) * 0.38) * tage;
-```
-
-Seit StÄndG 2025 (01.01.2026): einheitlich `km * 0.38 * tage` ab dem
-ersten Kilometer. `PENDLERPAUSCHALE_SATZ_2026` aus `pendlerpauschale.ts`.
-
-### 🚫 Soli ohne Milderungszone (Prompt 94/95)
-
-```ts
-// FALSCH:
-const soli = est > 20350 ? est * 0.055 : 0;  // harter Sprung an Freigrenze
-```
-
-Korrekt ist der gleitende Übergang in der Milderungszone
-(20.350 – 37.838 € ESt). `berechneSoli(est, splittingtarif, jahr)` aus
-`einkommensteuer.ts` enthält die Milderungszone und die doppelte
-Freigrenze (40.700 €) bei Splittingtarif bereits.
-
-### 🚫 `transform: scale()` oder `translate()` beim Hover auf Karten (Prompt 96/96a)
-
-```css
-/* FALSCH: */
-.rechner-kachel:hover { transform: scale(1.05); }
-.rechner-kachel:hover { transform: translateY(-3px); }
-```
-
-Beide erzeugen Subpixel-Antialiasing während der Transition →
-Text verschwimmt. Nutze die zentrale `.card`-Klasse aus
-`app/globals.css` oder reine Shadow-Animation ohne Transform.
-
-### 🚫 Eigene Pendlerpauschale-Kopie (Prompt 100)
-
-```ts
-// FALSCH (aus altem steuererstattung.ts):
-function berechnePendlerpauschale(km: number, tage: number) {
-  const ersteZwanzig = Math.min(km, 20) * 0.30 * tage;
-  const abKm21 = km > 20 ? (km - 20) * 0.38 * tage : 0;
-  return ersteZwanzig + abKm21;
-}
-```
-
-Pendlerpauschale ist seit StÄndG 2025 einheitlich **0,38 €/km ab 1. Kilometer**.
-Die alte Staffelung wurde in `pendlerpauschale.ts` korrekt gefixt (Prompt 94a),
-aber das Duplikat in `steuererstattung.ts` blieb stehen — führte zu **−352 €/Jahr WK**
-bei einem typischen Pendler mit 30 km × 220 Tagen. Immer aus `pendlerpauschale.ts`
-importieren (`PENDLERPAUSCHALE_SATZ_2026` oder `berechnePendlerpauschale`).
-
-### 🚫 Hartkodierte Tarif-Schwellen ohne Jahr-Parameter (Prompt 100)
-
-```ts
-// FALSCH (aus altem steuererstattung.ts — die Werte sind 2025er!):
-if (zvE < 12084) return 0;           // 2025er Grundfreibetrag
-if (zvE < 17005) return tarif2(zvE); // 2025er Zone-2-Grenze
-if (zvE < 66760) return tarif3(zvE); // 2025er Zone-3-Grenze
-```
-
-Die Grenzen werden jährlich angepasst (Inflationsausgleichsgesetz). Harte Werte
-ohne Jahr-Bezug werden nach dem Jahreswechsel unbemerkt falsch.
-Immer `berechneEStGrund(zvE, 2026)` aus `einkommensteuer.ts`.
-
-### 🚫 Soli-Ersparnis pauschal als 5,5 % der ESt-Ersparnis (Prompt 100)
-
-```ts
-// FALSCH (aus altem spenden.ts):
-const soliErsparnis = estErsparnis * 0.055;
-```
-
-Ignoriert, dass bei Jahres-ESt unter 20.350 € gar kein Soli anfällt — der Effekt
-kann komplett ausbleiben oder nur teilweise wirken. Bei Spendern mit zvE knapp
-über 20.350 € überschätzt der pauschale Ansatz die Ersparnis um ~200 €/Jahr.
-
-Immer Differenz-Methode (siehe Guard G13 und CLAUDE.md → SSOT-Patterns).
-
-### 🚫 BBG-Hardcodes außerhalb der zentralen Lib (Prompt 99b / 100 / 101)
-
-```ts
-// FALSCH (aus altem nebenjob.ts, GmbhGfRechner.tsx, steuerklassen-vergleich.ts):
-const BBG_KV = 5812.5;
-const BBG_RV = 8450;
-```
-
-BBG-Werte ändern sich jährlich via SV-Rechengrößenverordnung. Aus
-`brutto-netto.ts` importieren (`BBG_KV_MONAT`, `BBG_RV_MONAT`).
-
-**Bekannte Ausnahme:** `lohnsteuer.ts` behält BBG inline (zirkulärer Import mit
-`brutto-netto.ts`) — dokumentiert in CLAUDE.md → Architektur-Notes. Lint-Script
-schützt über forbiddenValues-Einträge.
-
-### 🚫 Grundfreibetrag oder WK-Pauschale inline (Prompt 101)
-
-```ts
-// FALSCH:
-if (zvE <= 12348) return 0;
-const wkAbzug = Math.min(brutto, 1230);
-```
-
-Immer die SSOT-Konstanten `GRUNDFREIBETRAG_2026` und `WK_PAUSCHALE_AN_2026`
-aus `einkommensteuer.ts`. Inline-Werte bleiben beim Jahreswechsel stehen
-(G11 deckt das ab, hier nur als Merk-Anker).
-
-### 🚫 Backtick-Falle in Template-Literal-Erklärtexten (Prompt 149b, 26.04.2026)
-
-```ts
-// FALSCH (in lib/rechner-config/<kat>.ts):
-erklaerung: `…wird wie folgt berechnet: `getVpi(jahr)` aus vpi.ts.…`,
-//                                       ^^^^^^^^^^^^^^^^
-//                                       Inline-Code-Backticks schließen
-//                                       das umgebende Template-Literal!
-```
-
-Das löst beim Build einen esbuild-Fehler aus
-(`ERROR: Expected "}" but found "..."`). Die `formel`/`beispiel`/`erklaerung`/
-`faq`-Felder in `lib/rechner-config/<kat>.ts` sind selbst Template-Literals
-mit Backticks — Inline-Code-Backticks darin müssen vermieden werden.
-
-**Korrekt:** Klartext oder typografische Apostrophe verwenden:
-
-```ts
-// RICHTIG:
-erklaerung: `…wird wie folgt berechnet: getVpi(jahr) aus vpi.ts.…`,
-// oder mit typografischen Anführungszeichen:
-erklaerung: `…Faktor = VPI(End) / VPI(Heirat).…`,
-```
-
-Bei Code-Beispielen, die unbedingt monospace dargestellt werden müssen:
-ggf. das ganze Feld vom Template-Literal auf einen normalen String mit
-`'…'` umstellen — dann sind Backticks im Inhalt erlaubt. In der Praxis
-ist Klartext aber meist ausreichend, weil die Anzeige im Browser ohnehin
-über einen Markdown-Renderer oder Plain-Text läuft.
-
-### 🚫 Slug-Drift in Kategorie-Datei (Prompt 149a, 26.04.2026)
-
-```ts
-// FALSCH (in lib/rechner-config/arbeit.ts):
-{
-  slug: 'arbeitslosengeld-rechner',
-  kategorie: 'Finanzen',          // ← stimmt nicht mit Datei überein
-  kategorieSlug: 'finanzen',      // ← stimmt nicht mit Datei überein
-  …
-}
-```
-
-Ein Eintrag in `arbeit.ts` muss `kategorie: 'Arbeit & Recht'` und
-`kategorieSlug: 'arbeit'` haben. Sonst wird die SSOT-Eigenschaft pro
-Kategorie-Datei verletzt — der Eintrag landet in der falschen Sidebar,
-Footer-Counts werden falsch, hartkodierte URLs (CrossLinks, Markdown-
-Links in Erklärtexten) zeigen auf nicht-existierende Pfade.
-
-**Korrekt:** Eintrag in die zur Kategorie-Slug passende Datei migrieren
-(siehe Prompt 149a für Beispiel: arbeitslosengeld-rechner aus
-arbeit.ts → finanzen.ts). Slug-Drift-Scan (Prebuild-Hook seit 132.6)
-fängt Folge-Effekte (hartkodierte CrossLinks auf alten Pfad) ab, aber
-das Konfig-Drift selbst kann er nicht entdecken — Audit-Disziplin nötig.
-
-### 🚫 Phantom-Befund-Diagnose ohne Code-Inspektion (149-Lehre, 26.04.2026)
-
-Audit-Befunde, die aus Screenshots oder visueller Intuition stammen,
-ohne dass der Code geprüft wurde, können falsch sein. Beispiel aus
-Welle 2 Stufe 3 PV: Audit behauptete „bei Wechsel Süd → Nord ändert
-sich kWp-Default automatisch von 8,8 auf 7,3" — Code-Inspektion
-zeigte: `kwpAuto = dach / 5,5` ist ausrichtungsunabhängig, der Befund
-war Phantom.
-
-**Regel:** Vor dem Fix den Code lesen und gegen den Audit-Befund
-abgleichen. Bei Diskrepanz STOP und Karsten zeigen — nicht „Phantom-
-Bugs" mit No-Op-Commits dokumentieren.
-
-### 🚫 Test-Soll-Werte gegen UI-Anzeige rechnen (149b-Lehre)
-
-UI-Anzeige rundet (z. B. „21.083,80 € → 21.084 €" via `Math.round`).
-Verify-Tests müssen gegen die unverrundete Berechnung prüfen, sonst
-schlagen sie an Floating-Point-Drift fehl. Beispiel: 8,8 × 950 × 0,65
-= 4.861,99... → `Math.round` = 4.862 (nicht 4.866 oder 4.861).
-
-**Regel:** Im Verify-Script den Soll-Wert exakt durchrechnen und mit
-der Lib-Logik (inkl. Math.round/floor/ceil) abgleichen. Bei Tol-Werten
-mindestens 1 Cent für Floating-Point-Drift einplanen, aber nie
-„auf den Test-Output anpassen" — das ist verbotenes Test-Adjusting
-gegen die Berechnungs-Wahrheit (siehe Prompt 120a Lehre).
-
-### 🚫 Content-Sektionen in client-only Lazy-Wrapper (Lehre 26 aus Prompt 154, 27.04.2026)
-
-```tsx
-// FALSCH (in app/[kategorie]/[rechner]/page.tsx):
-<LazySection className="no-print">
-  <section className="card …">
-    <h2>So funktioniert der {config.titel}</h2>
-    {/* Erklärtext + FAQ — wird bei SSR nur als leeres Placeholder-div gerendert */}
-  </section>
-</LazySection>
-```
-
-`<LazySection>` und ähnliche `'use client'`-Wrapper mit IntersectionObserver
-liefern bei SSR nur ein leeres 200-px-Placeholder-`<div>`. Der Content
-erscheint erst nach Hydration + Scroll-Trigger im Client-Render. Der
-**AdSense-Crawler bewertet primär SSR-HTML** und sieht den Erklärtext + FAQ
-deshalb nie — Konsequenz: Bewertung als „Minderwertige Inhalte"
-(Ablehnung 27.04.2026, Sprint 154+155+156 als Reaktion).
-
-**Regel:** Erklärtext, FAQ, Disclaimer, Quellenangaben oder andere für
-Crawler relevante Text-Sektionen rendern **eager im SSR**. Lazy-Loading
-bleibt nur für Bilder, Iframes oder schwere interaktive Components mit
-echtem Interactivity-Cost legitim. SSR-Sichtbarkeit für Content-Sektionen
-hat Vorrang vor jeder Performance-Mikro-Optimierung.
-
-```tsx
-// RICHTIG:
-<>
-  <section className="card … no-print">
-    <h2>So funktioniert der {config.titel}</h2>
-    {/* Erklärtext eager rendered, im SSR sichtbar */}
-  </section>
-  <section className="card … no-print">
-    <h2>Häufige Fragen</h2>
-    {/* FAQ eager rendered */}
-  </section>
-</>
-```
-
-### 🚫 Klasse auf Wrapper statt auf direkte Kinder (Lehre 27 aus Prompt 154, 27.04.2026)
-
-```tsx
-// FALSCH — beim Wrapper-Removal die no-print-Klasse einfach gestrichen:
-- <LazySection className="no-print">
-+ <>
-    <section className="card …">
-      …
-    </section>
-+ </>
-```
-
-Beim Entfernen einer Wrapper-Komponente, die nur ein `className` durchreicht
-(z. B. `no-print`, `aria-hidden`, semantische Wrapper-Klassen), die Klasse
-auf alle direkt umschlossenen Kinder migrieren — **nicht ersatzlos
-streichen**. Sonst ändert sich Druck-Verhalten, A11y-Sichtbarkeit oder
-Print-Layout unbeabsichtigt.
-
-```tsx
-// RICHTIG:
-- <LazySection className="no-print">
--   <section className="card …">
-+ <>
-+   <section className="card … no-print">
-      …
-    </section>
-+ </>
-```
-
-### 🚫 `new Date()` auf Modul-Ebene in `'use client'`-Components (Lehre 24 aus Prompt 152b, 27.04.2026)
-
-```tsx
-// FALSCH (Modul-Scope eines 'use client'-Components):
-'use client';
-
-const JAHR_OPTIONEN = Array.from({ length: 10 }, (_, i) => String(new Date().getFullYear() - 2 + i));
-//                                                          ^^^^^^^^^^
-//                                                          Server-Build-Output kann sich
-//                                                          zwischen 23:59 und 00:01 verschieben
-//                                                          → Hydration-Mismatch im Client
-```
-
-Year-Dropdowns und ähnliche Auswahllisten in `'use client'`-Components als
-**statische Konstante** im Modul-Scope definieren. `new Date()` zur Laufzeit
-auf Modul-Ebene erzeugt Hydration-Mismatch zwischen SSR-Build-Output und
-Client-Render (Jahresgrenze, Zeitzonen-Drift). Wartungsaufwand „alle
-4–7 Jahre Konstanten-Bump" ist akzeptabel; Hydration-Bugs sind es nicht.
-
-```tsx
-// RICHTIG:
-'use client';
-
-const JAHR_OPTIONEN = ['2024', '2025', '2026', '2027', '2028', '2029', '2030'];
-// Wartung: nächster Bump ~2030 (oder im jahreswerte-kalender.md eintragen).
-```
-
-Ausnahme: In **Berechnungs-Libs** (kein `'use client'`, server- oder
-testbar) ist `new Date().getFullYear()` als Default für mathematisch-
-deterministische Werte (z. B. `anzahlBundesweiterFeiertageMoBisFr(jahr)`)
-zulässig — siehe Lehre 23.
-
-### 🚫 Stichtag-Wert als dynamischer Lookup verkleidet (Lehre 23 aus Prompt 152b, 27.04.2026)
-
-Die zwei Default-Strategien für jahresabhängige Werte sauber trennen:
-
-| Wertart | Default | Beispiele |
-|---|---|---|
-| **Stichtag-Wert** (legislativ/extern entschieden) | Stichtag-Konstante mit Quelle + Wechseldatum, Switch über `getAktuelle…(stichtag)` | Mindestlohn (`mindestlohn.ts`), Rentenwert (`rente.ts`), Pfändungsfreigrenze (`pfaendung.ts`), Bürgergeld-Regelsätze, BAföG-Sätze |
-| **Berechenbarer Wert** (mathematische Funktion des Jahres) | Dynamisch `new Date().getFullYear()` mit Test-Override-Möglichkeit | Anzahl Mo-Fr-Feiertage, Ostersonntag (Spencer-Formel), Indexierungs-Faktor aus VPI |
-
-**Faustregel:** Stichtag, wenn der Wert sich an einem konkreten Datum durch
-externe (legislative) Entscheidung ändert. Dynamisch, wenn der Wert eine
-reine Funktion des Jahres ist.
-
-```ts
-// FALSCH (legislativer Wert als dynamischer Lookup verkleidet):
-export function getMindestlohn(jahr: number = new Date().getFullYear()) {
-  return jahr >= 2027 ? 14.60 : 13.90;
-  //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  //   Lückenhaft: keine Quelle, keine Begründung, kein Audit-Anker.
-}
-
-// RICHTIG (Stichtag-Konstante mit Switch):
-// Quelle: § 1 MiLoG i.V.m. Beschluss der Mindestlohnkommission v. 26.06.2025.
-const MINDESTLOHN_BIS_STICHTAG = 13.90;
-const MINDESTLOHN_AB_STICHTAG = 14.60;
-const SWITCH = new Date(2027, 0, 1); // 01.01.2027
-
-export function getAktuellerMindestlohn(stichtag: Date = new Date()) {
-  return stichtag >= SWITCH ? MINDESTLOHN_AB_STICHTAG : MINDESTLOHN_BIS_STICHTAG;
-}
-```
-
-### 🚫 Exportierter Helfer mit einem Namen, der lokal schon mehrfach existiert (Welle 114, 26.08.2026)
-
-Ein neuer Formatier-Helfer sollte als `fmtProzent` aus `lib/berechnungen/brutto-netto.ts` exportiert werden. Gemessen existierte `fmtProzent` bereits **siebenmal** als dateiprivate `const` in anderen Rechnern — und zwar mit **zwei verschiedenen Verhalten**:
-
-| Datei | Nachkommastellen |
-|---|---|
-| `GewerbesteuerRechner.tsx`, `MietrenditeRechner.tsx`, `PfaendungRechner.tsx`, `SchenkungssteuerRechner.tsx` | 1 |
-| `EinkommensteuerRechner.tsx`, `IndexmieteRechner.tsx` | **2** |
-| `BudgetRechner.tsx` | mehrzeilig |
-
-Technisch gab es keine Kollision: keine der sieben war exportiert, keine lag in einer der Zieldateien. Der Build wäre grün gewesen.
-
-**Die Falle liegt in der Zukunft.** Sobald jemand später in `EinkommensteuerRechner.tsx` den Import ergänzt — weil der Name ja passt und der exportierte Helfer „der richtige\" scheint — überschreibt der Import still die lokale Definition und kappt zwei Nachkommastellen auf eine. Kein Fehler, kein Warning, nur falsche Zahlen.
-
-**Regel:** Vor jedem neuen **exportierten** Symbol den Namen repo-weit zählen:
-
-```bash
-git grep -nE '(const|function)\s+<name>' -- '*.ts' '*.tsx'
-```
-
-Bei Treffern mit abweichendem Verhalten: **umbenennen, nicht überlagern.** Der Helfer heißt deshalb `fmtAbzugsquote` — sprechend, an den Wert gebunden, gemessen 0-mal vergeben. Ein Name, der repo-weit schon mehrfach mit unterschiedlicher Semantik existiert, ist als Export verbrannt, auch wenn der Compiler schweigt.
-
-Gilt sinngemäß auch beim Umgekehrten: Wer eine der sieben lokalen Definitionen durch einen Import ersetzen will, muss vorher die Nachkommastellen beider Seiten vergleichen.
-
-### 📌 Meta-Lektion: Soli ohne Milderungszone — ein Wiederholungs-Bug
-
-Das Muster `est > 20350 ? est * 0.055 : 0` (harte Kante ohne Milderungszone)
-wurde zwischen März und April 2026 **fünfmal** in unterschiedlichen Libs gefunden:
-1. `ArbeitslosengeldRechner` (vor Prompt 95)
-2. `GmbhGfRechner` (vor Prompt 99a)
-3. `nebenjob.ts` — drei Stellen (vor Prompt 100)
-4. `spenden.ts` — pauschal 5,5 % ohne Freigrenze-Check (vor Prompt 100)
-
-Seit Prompt 101 sind die Soli-Grenzen (20350 / 37838 / 40700) im Lint-Script
-(`scripts/check-jahreswerte.mjs`) mit `contextKeywords` aufgenommen — ein
-sechster Auftritt wird automatisch erkannt, False Positives bei Layout-Werten
-werden ausgefiltert.
-
-**Trotzdem: Bei neuen Rechnern immer `berechneSoli(est, splitting, 2026)` nutzen,
-nie eigene Schwellen-Logik.** Das Lint-Script ist Sicherheitsnetz, nicht Ersatz
-für korrektes Pattern-Wissen.
 
 ## Bewährte Patterns (Kopiervorlagen)
 
@@ -1244,9 +631,31 @@ Kopiervorlagen bereit. Volldetails in `CLAUDE.md` → „SSOT-Patterns":
 Bei neuen Rechnern: erst prüfen, ob eines dieser Patterns zutrifft,
 dann aus dem Referenz-Rechner kopieren.
 
-## Rechner-Specific Templates
+## Referenzdateien — wann welche lesen
 
-For detailed templates per calculator type, see `references/templates.md`.
+Diese Datei enthält den Ablauf, die Pflicht-Gates und die Disziplin. Die
+Detailbestände liegen in `references/` und werden **bei Bedarf gelesen**, nicht
+vorsorglich. Jede Zeile nennt den Auslöser, bei dem die Datei fällig ist.
+
+| Datei | Lesen, wenn … |
+|---|---|
+| `references/checklist.md` | **immer** — Schnell-Checkliste zum Abhaken, plus der Block „Prüfvorschrift schreiben" vor jedem Build-Prompt |
+| `references/templates.md` | ein neuer Rechner gebaut wird — Vorlagen je Rechnertyp |
+| `references/qualitaets-guards.md` | **vor jedem Commit** — die vierzehn Guards G1–G14 (Step 13) |
+| `references/anti-patterns.md` | vor dem Bau eines Finanz-, Steuer-, SV- oder Arbeits-Rechners; außerdem bei jedem Bug, der sich „schon mal gesehen" anfühlt |
+| `references/content-standards.md` | Inhalte geschrieben werden — `contentBloecke`-Standard (Pflicht seit Welle 19) und Pattern-Goldstandard für Layout |
+| `references/zentrale-libs.md` | ein gesetzlich bestimmter Wert gebraucht wird — erst hier nachsehen, bevor irgendetwas hartkodiert wird |
+| `references/audit-methodik.md` | eine Audit- oder Korrektur-Welle läuft, oder redaktionelle Referenzwerte in Configs angefasst werden |
+| `references/kategorien.md` | ein Technik-Rechner gebaut wird — was diese Kategorie von den anderen unterscheidet |
+
+**Drei davon sind keine Nachschlagewerke, sondern Gates:**
+`qualitaets-guards.md` vor jedem Commit, `zentrale-libs.md` vor jedem
+hartkodierten Wert, `content-standards.md` vor jedem Inhalt. Wer sie
+überspringt, baut an einem der dokumentierten Wiederholungsfehler vorbei.
+
+Die Wellbeing-Pflichten für Gesundheits-Rechner stehen **nicht** in
+`references/`, sondern weiter unten in dieser Datei. Sie sind
+sicherheitsrelevant und dürfen nicht hinter einer Indirektion liegen.
 
 ## Affiliate-Platzierung (Verweis)
 
@@ -1282,118 +691,6 @@ affiliate: [
 - **P4b (RentenRechner):** Hybrid — 3 unconditional Boxen ins Array, 1 Conditional-Box (verivox auf `rentenluecke > 0`) inline behalten.
 
 Neue Rechner nutzen ausschließlich das Standard-Pattern (Single-Object oder Array via `config.affiliate`). Sonderfall-Patterns werden nicht aktiv für Neubauten gewählt — siehe welle-status-historie für die Präzedenz-Begründungen.
-
-## Audit-Lehre-Checkliste (Prompts 120d, 121-analyse, 22.04.2026)
-
-Vor Behauptung eines Soll-Werts oder Testfall-Erwartungswerts:
-
-1. **Niemals aus dem Gedächtnis schätzen.** Weder in Prompts noch in Code-Kommentaren noch in FAQ-Texten.
-2. **Primärquelle oder externes Oracle konsultieren:**
-   - Gesetze im Internet (gesetzestext-Konstanten, Frist- und Satz-Regelungen)
-   - BGBl.-Anlagen (amtliche Tabellen, z. B. § 850c ZPO Pfändungstabelle, § 12 WoGG Anlage 1)
-   - Offizielle Referenz-Rechner mit Oracle-Charakter:
-     - BMF-Steuerrechner ([bmf-steuerrechner.de/ekst/](https://www.bmf-steuerrechner.de/ekst/)) — ESt/LSt/Soli
-     - BMWSB-Wohngeldrechner — Wohngeld
-     - BA-Bürgergeldrechner — SGB II Regelsätze + Mehrbedarfe
-     - BMBF-BAföG-Rechner ([bafoeg-rechner.de](https://www.bafoeg-rechner.de)) — BAföG
-3. **Bei Prompt-Diskrepanz:** Gesetzestext-Prüfung schlägt Prompt-Vorgabe. Dokumentieren, warum abgewichen wurde (Kommentar im Code + Prompt-Antwort).
-4. **Verify-Scripts gegen externe Oracle**, niemals zirkulär Lib-gegen-Lib (Lehre aus Prompt 120a — zirkulärer Test lief 41/41 grün, obwohl die Lib-Koeffizienten seit 2022 veraltet waren).
-
-Reale Vorfälle, die diese Regel nötig gemacht haben (alle 22.04.2026):
-- FAQ-Faustregel zu Wohngeld-Einkommensgrenzen (Prompt 120d-fix)
-- 3-Monats-Rückwirkungs-Annahme Wohngeld (120d-fix)
-- BAföG-Schätzwert 600 € in Beispielrechnung
-- BAföG-Geschwister-Anrechnungsquote 0,45 vs. korrekt 0,50 bei 0 Geschwistern (Prompt 121)
-- Wohngeld § 17 Nr. 1 Schwerbehinderten-FB 125 € statt korrekt 150 €/Monat (Prompt 120a-Rollback)
-- CO₂-Staffel § 9 Abs. 1 Nr. 2c KraftStG: „glatte" 2,5/3,0/3,5/4,0 €/g Delta wirkten plausibel, Gesetz hat 2,20/2,50/2,90/3,40 (Prompt 130)
-- § 3d KraftStG Elektro-Befreiung: Memory erinnerte 31.12.2030 (alte Fassung), aktuell 31.12.2035 seit 8. KraftStÄndG vom 04.12.2025 (Prompt 131)
-
-## Audit-Methodik (Welle 2 ab Prompt 130)
-
-Für **Audit-Arbeit an bestehenden Rechnern** (nicht Neubau) gilt eine
-reduzierte 4-Punkt-Methodik. Die Welle-1-7-Punkt-Methodik (Clamping,
-Barrierefreiheit, Copy-Button, Smoketest, …) ist für Audits zu
-umfangreich — die Infrastruktur-Punkte sind projektweit stabil und
-werden über Guards G1–G14 + Prebuild-Hooks abgesichert.
-
-**4-Punkt-Audit:**
-
-1. **Formel/Rechtsquelle** — Gegen Primärquelle prüfen (Gesetz im
-   Internet, BGBl.-Anlage, amtliche Tabelle). Regel 12 aus CLAUDE.md
-   („Claudes Memory ist keine Primärquelle") besonders beachten bei
-   Parametern, die nach Knowledge-Cutoff Januar 2026 geändert wurden.
-2. **Input-Validierung** — Min/Max/Schritt sinnvoll, Typecheck
-   korrekt, Clamping im State-Reducer (nicht nur HTML-`max`).
-3. **Edge Cases** — Leere Eingabe, Division durch null, Extremwerte,
-   Datumsgrenzen.
-4. **SSOT-Verwendung** — Nutzt der Rechner die zentrale Lib, oder
-   hartkodiert er Werte? Ist er konsistent mit anderen Rechnern?
-
-**Ablauf:** Audit-Prompt ohne Code-Fix → Bericht unter
-`docs/audit-arbeitspapiere/` mit Executive Summary (Bug-Zahlen
-P1/P2/P3), Pro-Rechner-Detail-Abschnitten, SSOT-Refactor-Kandidaten,
-Fix-Plan als Folge-Prompts. **Folge-Prompts** (P1-Eskalation sofort,
-P2-Polish-Batch danach, P3-UX-Extras bei Gelegenheit) greifen die
-Befunde auf.
-
-**Commits auf Folge-Prompts referenzieren den Detail-Abschnitt**
-(Datei:Zeile oder Abschnittstitel), nicht die Executive Summary —
-Summary-Paraphrasen können fehlerhaft sein (vgl. UND-vs-ODER-Slip
-in Welle 1 Stufe 4a, 5-vs-6-P2-Zählfehler in Welle 2 Stufe 1).
-
-Gilt für Welle 2 Stufe 1 Auto (Prompt 130, abgeschlossen 23.04.2026),
-Stufe 2 Gesundheit (Prompts 140–144b, abgeschlossen 25.04.2026 — 17 Rechner,
-2 P1 + 9 P2 + 9 P3 alle gefixt + Feature-Add Perioden-Länge). Rechtsstand-
-Parameter werden nicht in SKILL.md dupliziert — siehe `CLAUDE.md` Abschnitt
-„Aktueller Rechtsstand" für verifizierte Werte.
-
-**Verify-Script-Pattern pro Stufe:** Pro Welle-2-Stufe entstehen
-stufenspezifische Verify-Scripts (`scripts/verify-<kategorie>-p1.ts`,
-`-p2.ts`, `-p3.ts`), die jeweils die P1-/P2-/P3-Findings absichern.
-**Alle Tests gegen externe Primärquellen** — niemals zirkulär gegen die
-getestete Lib (Lehre aus Prompt 120a). Beispiel-Stufe Gesundheit: 21 Tests
-in 3 Scripts (7+6+8), gegen WHO-Fact-Sheet, ESH-2023, DGE-Referenzwerte,
-IOM 2009, Naegele/§ 3 MuSchG, US-Navy Hodgdon-Beckett 1984, Fitzpatrick,
-Widmark 1932, NSF/Hirshkowitz 2015. Pro Folge-Prompt wird das relevante
-Script grün gehalten, die anderen als Regressions-Check mitgelaufen.
-
-**Verify-Skripte-Konvention (seit Lehre 149d, 26.04.2026):** Endung `.ts`
-(NICHT `.mjs`), Aufruf via `npx tsx scripts/verify-XYZ.ts` (NICHT `node`),
-Helper-Parameter explizit typisiert (z. B. `eq(name: string, ist: number,
-soll: number, tol = 0.005)`). Mjs-mit-`.ts`-Suffix-im-Import scheitert
-sowohl beim Loader als auch beim `next build` strict-typecheck.
-
-**Audit-Bundle-Pattern (seit Welle 2 Stufe 3 Arbeit Block B, 26.04.2026):**
-Bei Audits mit vielen Files (>5) ist ein vorgeneriertes Bundle in
-`docs/audit-bundles/<thema>.md` mit allen relevanten Datei-Inhalten als
-Code-Blöcke effizienter als URL-Listen pro Datei. **Eine** `web_fetch`-URL
-→ **alle** Files in einem Aufruf.
-
-- **Generator-Skript:** `scripts/build-audit-bundle.ts` (TypeScript, NICHT `.mjs`!)
-- **CLI:** `npm run audit:bundle <name>`
-- **Bundle-Definitionen:** `scripts/audit-bundles.ts` (zentrale Liste mit File-Pfaden pro Bundle-Name)
-- **Pflicht-Parameter** bei Bundles >100 KB: `text_content_token_limit: 300000` — Default reicht nicht und schneidet ohne sichtbare Warnung mitten im Inhalt ab
-- **Lib-Audit als Folge-Bundle abhängbar**, wenn Component+Konfig+Beispiel-Trio Konsistenz erlaubt — Beispiel-Werte aus dem Konfig-`beispiel`-Feld manuell nachrechnen reicht oft für indirekte Lib-Verifikation
-- **Beispiele aus 26.04.:** `block-b-arbeit` (149 KB, 13 Files), `block-b-libs` (16 KB, 5 Libs) — beide vollständig im Audit verarbeitet
-- **Methodik-Lehre 20** (CLAUDE.md → Gelernte Regeln): Audit-Bundle-Pattern via konsolidierte MD-Datei
-
-**Pre-5a/5b-Disziplin (Validation-Sweep-Methodik, 30.04.2026):**
-Konsolidiert aus Validation-Sweep M3+M5+M6 (drei unabhängige Validierungen):
-
-- **Pre-5a — SSOT-vor-Memory:** Bei Werte-Drift-Verdacht den SSOT-Soll-Wert direkt aus `lib/berechnungen/*.ts` lesen, nicht aus Memory entscheiden. Memory ist bei Konstanten mit Stichtag-Switch (Mindestlohn, Pfändung, BAföG, Strompreis, Mindestbedarf nach DT) systematisch unterspezifiziert oder veraltet. Beispiel M6: DT-Mindestbedarf-Drift 482/554/649 sah „oberflächlich plausibel" aus, war aber Pre-Welle-3-Werte — SSOT-Lookup ergab 486/558/653/698.
-- **Pre-5b — Volltext-vor-UNKLAR:** Bei Drift-Klassifikations-Verdacht erst alle Konfig-Felder volltextlich auf den Begriff durchsuchen, bevor als UNKLAR oder DRIFT klassifiziert wird. Oft klärt ein nachgelagerter Absatz die scheinbare Diskrepanz, dann ist es KONSISTENT. Beispiel M6: 4 Verdachts-Stellen (kuendigungsfrist § 168/169 SGB IX, unterhalt § 94 Abs., abfindung 17.500 € vs. 10.300 €, zugewinnausgleich Werte-Vielfalt) wurden durch Volltext-Check als KONSISTENT bestätigt — hätten ohne Pre-5b zu UNKLAR-Verschiebung geführt.
-- **Anwendungs-Konvention:** Beide Pre-5-Disziplinen gelten verbindlich für jeden Audit/Sweep mit Drift-Klassifikation. Pre-5a ergänzt L-30 (Konsumenten-Sweep nach SSOT-Refactor) auf der Audit-Seite; Pre-5b verhindert künstliche UNKLAR-Aufblähung.
-
-**Wert-Recherche durch Claude im Web (seit Lehre 22, 26.04.2026):** Bei
-Werten, die durch Web-Suche eindeutig recherchierbar sind (Mieterbund
-Betriebskostenspiegel, BMF-Tabellen, Destatis, BDEW, Bundesnetzagentur,
-Stiftung Warentest), kann Claude die Recherche direkt durchführen statt
-auf Karsten zu warten. **Pflicht:** (1) Aktualität-Hinweis im Quellen-
-Verweis, (2) zwei unabhängige Sekundärquellen für Konsistenz-Check, (3)
-Repo-Stand vor Patch-Generierung lesen. **URL-Permission-Workflow:**
-`web_fetch`-Permissions blockieren Pattern-Konstruktion auf URLs ohne
-User-Klartext-Freigabe — Karsten muss neue URLs als Klartext im Chat
-pasten, Screenshot-OCR aus Bildern zählt nicht.
 
 ## Wellbeing-sensible Rechner — Patterns (Welle 2 Stufe 2 Gesundheit, 25.04.2026)
 
@@ -1464,101 +761,6 @@ mit sachlichem Info-Hinweis flankieren. Berechnung läuft trotzdem (User
 darf Extremwerte sehen), aber das UI macht klar, dass medizinischer Rat
 sinnvoll ist.
 
-## Technik — was diese Kategorie von den anderen unterscheidet
-
-**Stand 20.08.2026, gemessen an `cc4adf4`: 15 Rechner, `kategorieSlug: 'technik'`, Kategoriename `Technik`.**
-
-### Die meisten Werte sind Physik, nicht Recht
-
-Technik ist die einzige Kategorie, deren Zahlen überwiegend aus Einheiten­definitionen und physikalischen Zusammenhängen stammen: Bit zu Byte, Pixel zu Zoll, Diagonale zu Seitenverhältnis, Kapazität durch Leistung. Diese Werte **driften nicht**. Kein Jahres-Audit, keine Verordnung, kein Stichtag.
-
-Praktische Folge beim Bauen: Der sonst richtige Reflex — „welche SSOT-Lib liefert diesen Wert, wann wurde sie zuletzt geprüft" — geht bei **dreizehn** der fünfzehn Rechner ins Leere. Dort ist die richtige Prüfung eine **Gegenrechnung von Hand**, kein Quellenabgleich.
-
-### Die zwei Ausnahmen stehen dafür in der Audit-Kette
-
-Genau zwei Technik-Rechner beziehen Preise und veralten damit wie Finanz- oder Wohnen-Rechner:
-
-| Rechner | Bezug |
-|---|---|
-| `eauto-ladekosten-rechner` | `ladepreise-parameter`, `spritpreise-parameter`, `strompreis` — Komponente **und** Config |
-| `stromverbrauch-geraete-rechner` | `strompreis`, über die Modul-Konstante `SG_PREIS` in der Config |
-
-**`eauto-ladezeit-rechner` gehört ausdrücklich NICHT dazu.** Der Name legt es nahe, der Rechner rechnet aber reine Physik: kWh ÷ kW. Er enthält keine einzige Preis-Zeichenkette. Wer ihn beim Preis-Audit mitnimmt, sucht dort nach etwas, das es nicht gibt — und wer umgekehrt vom Namen auf den Inhalt schließt, baut denselben Fehler in die andere Richtung.
-
-Merksatz: **Preisbezug wird gemessen, nicht am Namen abgelesen.** Er kann in der Komponente sitzen oder in der Config — beide Ebenen prüfen, weil die Config die Libs modulweit importiert und über abgeleitete Konstanten (`SG_PREIS`, `STAND_STROM`, `STAND_LADEN`, `ekJahr*`) an einzelne Einträge weiterreicht.
-
-### Die Falle, die schon einmal zugeschnappt ist
-
-In `lib/rechner-config/technik.ts` steht dieser Kommentar. Er ist keine Formalie, sondern die Kodifizierung eines echten Fehlers:
-
-> Bewusst NICHT `LADEPREISE.wallbox`: das ist derselbe Zahlenwert, meint aber das Laden eines Autos. Hier geht es um Haushaltsgeraete.
-
-Die beiden Größen sind nicht zufällig verwandt — `lib/berechnungen/ladepreise-parameter.ts` definiert `wallbox: STROMPREIS_2026.durchschnitt_bdew / 100`. Der eine Wert **ist** der andere, nur anders benannt und anders skaliert.
-
-Daraus folgen zwei Regeln:
-
-**Erstens: Bedeutung schlägt Herkunft.** Genau weil die Ersetzung heute folgenlos aussähe, steht der Warnkommentar da. Die Ableitung ist eine Entscheidung von heute, keine Naturkonstante — sobald Ladestrom und Haushaltsstrom getrennt gepflegt werden, laufen die Werte auseinander, und jede Stelle, die den falschen Bezeichner nennt, wird still falsch. Anzusprechen ist immer der Bezeichner, der die **gemeinte Größe** trägt, nie der, der zufällig die passende Zahl hält.
-
-**Zweitens: die Einheit mitlesen.** `durchschnitt_bdew` ist **37** (ct/kWh), `wallbox` ist **0,37** (€/kWh). Die Werte sind einheitengleich, nicht zahlengleich. Ein unbedachter Tausch bringt keinen kleinen Fehler, sondern den Faktor 100.
-
-### Zwei Einheitenkonventionen, die festliegen
-
-**Mbit/s zu MB/s: durch 8.** Anbieter werben in Bit, Ladefenster zeigen Byte. Der Faktor ist keine Näherung und wird nie weggelassen.
-
-**Dezimal, nicht binär.** Die Rechner rechnen mit 1 GB = 1.000 MB. Die binäre Entsprechung (1 GiB = 1.024 MiB) wird in FAQ und Erklärtext **benannt und erklärt**, aber nicht zur Rechengrundlage gemacht. Das ist bereits so ausgerollt und wird nicht je Rechner neu entschieden.
-
-### Prüfung beim Bauen
-
-Weil bei dreizehn von fünfzehn Rechnern keine Quelle gegenliest, ersetzt die **Gegenrechnung** den Quellenabgleich:
-
-- Jedes Zahlenbeispiel in `beispiel`, `faq`, `erklaerung` und `formel` von Hand nachrechnen — dieselbe Stale-Nest-Regel wie überall, nur ohne die Ausrede, die Quelle habe sich geändert.
-- Bei Umrechnungen die **Gegenprobe in die andere Richtung**: 100 Mbit/s ÷ 8 = 12,5 MB/s, also muss 12,5 × 8 wieder 100 ergeben.
-- Bei Zeit- und Kapazitätsrechnern die Größenordnung prüfen: eine 5-GB-Datei bei 50 Mbit/s dauert rund 13 Minuten — nicht 13 Sekunden, nicht 13 Stunden.
-
-## Casing-Konsistenz Component-Datei (Lehre aus Prompt 145b, 25.04.2026)
-
-Auf **Windows-NTFS-Dev-Maschinen** ist das Filesystem case-insensitive,
-auf **Vercel/Linux case-sensitive**. Wenn die Component-Datei lokal
-`MwStRueckerstattungRechner.tsx` heißt, aber git die Datei als
-`MwstRueckerstattungRechner.tsx` (kleines st) trackt, läuft der Build
-lokal grün und scheitert auf Vercel mit „Module not found".
-
-**Vor jedem Edit an Component-Dateien (oder beim Erstinstall einer
-AffiliateBox):** mit `git ls-files | grep -i <name>` prüfen, ob das
-git-getrackte Casing zum lokalen Filesystem und zum Importpfad passt.
-Bei Drift sofort fixen, nicht in einen Folge-Commit verschieben.
-
-**Fix-Pattern für case-only-Rename auf Windows** (zwei Schritte, weil
-case-only-Renames nicht atomar sind):
-
-```bash
-git mv components/rechner/File.tsx components/rechner/File_temp.tsx
-git mv components/rechner/File_temp.tsx components/rechner/FILE.tsx
-```
-
-Anschließend `git ls-files | grep -i file` zur Bestätigung.
-
-## UI-Labels und rechtliche Tatbestände (Prompt 121-fix, 22.04.2026)
-
-Wenn ein Rechner Mehrbedarfe, Freibeträge oder Tarif-Optionen mit rechtlichen Voraussetzungen anbietet:
-
-- **Keine impliziten Auto-Aktivierungen** basierend auf Kontext-Wahrscheinlichkeiten. Beispiel-Anti-Pattern: „Alleinerziehenden-Mehrbedarf wirkt automatisch bei Kind im Haushalt" — § 21 Abs. 3 SGB II verlangt **alleinige Pflege und Erziehung**, nicht bloßes Kind-Vorhandensein. Im Wechselmodell oder bei Paar mit Kindern greift er nicht.
-- **Explizite Checkbox mit Rechtsbegriff im Label**, nicht nur „Alleinerziehend", sondern „Alleinerziehend — alleinige Pflege und Erziehung des/der Kinder". Der Rechtsbegriff **ist** das Label.
-- **Hilfetext erläutert die Ausnahmen** (z. B. Wechselmodell). Kein pauschaler „automatisch"-Text.
-- **Tatbestandsgebundene Inputs nur sichtbar**, wenn die Grundvoraussetzung erfüllt ist (z. B. Alleinerziehend-Checkbox erst bei `bedarfsgemeinschaft === 'alleinstehend' && kinder.length > 0`).
-
-## Statische Routes müssen Kategorie-Sidebar explizit integrieren (Prompt 120d-sidebar, 22.04.2026)
-
-Für Rechner- oder Explainer-Seiten, die nicht über die dynamische Route `app/[kategorie]/[rechner]/page.tsx` laufen:
-
-- Sidebar-Pattern 1:1 aus der dynamischen Route übernehmen (`kategorien` + `getRechnerByKategorie` + `aria-current`-Markierung)
-- `AKTUELLER_SLUG`-Konstante setzen, damit der aktive Rechner visuell hervorgehoben wird
-- Breite konsistent: `lg:w-64 shrink-0`
-- AdSlot typ="rectangle" unter der Sidebar-Kategorie platzieren
-- **Prompts für neue statische Routes müssen explizit „inkl. Kategorie-Sidebar" nennen** — „passt optisch zu anderen Rechnern" ist nicht präzise genug (Fallstrick-Herkunft)
-
-Referenz-Umsetzung: [`app/finanzen/wohngeld-rechner/page.tsx`](../../app/finanzen/wohngeld-rechner/page.tsx) (seit Prompt 120d-sidebar).
-
 ## Common Mistakes to Avoid
 
 - URLs without www in sitemap or canonical tags
@@ -1588,52 +790,30 @@ Für Finanz- und Steuer-Rechner immer gegen diese externen Referenzen prüfen:
 - **BMF Änderungen 2026**: `https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/das-aendert-sich-2026.html`
 - **Gesetze im Internet**: `https://www.gesetze-im-internet.de/estg/__32a.html` (ESt-Tarif), `https://www.sozialgesetzbuch-sgb.de/sgbxi/55.html` (PV-Beiträge)
 
-## Zentrale Libs (nicht duplizieren)
-
-Tarif-, SV-, Unterhalts-, Mindestlohn-, Renten- und Pfändungs-Rechner dürfen Parameter nicht hartkodieren, sondern nutzen die zentralen Libs. Die vollständige Tabelle mit Exports steht in `CLAUDE.md` unter „Zentrale Libs (SSOT)". Kurzliste der wichtigsten:
-
-- `lib/berechnungen/einkommensteuer.ts` — § 32a EStG Tarifzonen 2024/2025/2026, Grundfreibeträge, Soli-Freigrenzen
-- `lib/berechnungen/lohnsteuer.ts` — Vorsorgepauschale § 39b Abs. 4 EStG PAP-konform
-- `lib/berechnungen/brutto-netto.ts` — BBG (`BBG_KV_MONAT`, `BBG_RV_MONAT`), orchestriert LSt + SV + PV zum Netto
-- `lib/berechnungen/sv-parameter.ts` — KV-Zusatzbeitrag, JAEG (`JAEG_2026_JAHR`/`_MONAT`)
-- `lib/berechnungen/pflegeversicherung.ts` — PV-AN-Satz, Kinderlos-Zuschlag, Kinderabschlag § 55 Abs. 3 SGB XI (PUEG 2023)
-- `lib/berechnungen/kindergeld.ts` — Kindergeld + Günstigerprüfung (`KINDERGELD_2026 = 259`)
-- `lib/berechnungen/duesseldorfer-tabelle.ts` — DT 2026, Mindestbedarf, Selbstbehalte
-- `lib/berechnungen/mindestlohn.ts` **(neu, 04/2026)** — `MINDESTLOHN`, `getAktuellerMindestlohn(stichtag)`, Switch auf 14,60 € zum 01.01.2027
-- `lib/berechnungen/rente.ts` **(erweitert, 04/2026)** — `RENTENWERT`, `getAktuellerRentenwert(stichtag)`, Switch 40,79 → 42,52 € zum 01.07.2026
-- `lib/berechnungen/pfaendung.ts` **(erweitert, 04/2026)** — `getAktuellePfaendungsParameter(stichtag)`, Switch 1.555,00 → 1.587,40 € zum 01.07.2026 (BGBl. 2026 I Nr. 80)
-- `lib/berechnungen/bafoeg-parameter.ts` **(neu, Prompt 121, 22.04.2026)** — `getAktuelleBafoegParameter(stichtag)`, `getAnrechnungsquote(geschwister)` (0,50 − 0,05 × Kinder, min/max-Clamp), single-bucket `BAFOEG_AB_2024_08_01` mit Skeleton für WS 2026/27. Antragsteller zählt NICHT mit.
-- `lib/berechnungen/buergergeld-parameter.ts` **(neu, Prompt 121, 22.04.2026)** — `getAktuelleBuergergeldParameter(stichtag)`, Zwei Buckets `BUERGERGELD_2026_H1` + `BUERGERGELD_2026_H2` (Switch 01.07.2026 auf „Neue Grundsicherung"; H2 derzeit identisch zu H1 als Skeleton bis Gesetzestext verabschiedet). Enthält Regelsätze RSS1–6, Vermögensfreibeträge, Mehrbedarfs-Sätze § 21 Abs. 2–7 SGB II.
-- `lib/berechnungen/kfz-steuer-parameter.ts` **(neu, Prompt 131, 23.04.2026)** — SSOT KraftStG: § 9 Abs. 1 Nr. 2c CO₂-Staffel + § 3d Elektro-Befreiung. Exports: `CO2_STAFFEL_KRAFTSTG_9_NR2C` (7-stufig progressiv 2,00/2,20/2,50/2,90/3,40/4,00 €/g), `ELEKTRO_BEFREIUNG`, `berechneCO2Komponente(gProKm)`, `berechneElektroBefreiungsende(erstzulassung)` (8. KraftStÄndG v. 04.12.2025 — bis 31.12.2035, Erstzulassung bis 31.12.2030), `SOCKEL_PRO_100CCM`.
-- `lib/berechnungen/strompreis.ts` **(neu, Prompt 147, 25.04.2026)** — BDEW-Mittel + Festpreis-Neukundentarif + Worst-Case Grundversorgung + Wärmepumpen-Spezialtarif. Exports: `STROMPREIS_2026` (4 Profile: durchschnitt_bdew=37, neukunden_festpreis=33, grundversorgung=40, waermepumpen_tarif=28 ct/kWh), `getStrompreis(profil?)`. Konsumiert von stromkosten-, stromvergleich-, balkon-solar-, energiekosten-, photovoltaik-, poolkosten-, waermepumpen-, heizkosten-Rechner.
-- `lib/berechnungen/eeg-einspeiseverguetung.ts` **(neu, Prompt 147)** — § 49 EEG 2023 Halbjahres-Schalter. Exports: `getEegSatz(stichtag?)` (gibt 6 Sätze für bis-10/40/100 kWp jeweils Teil-/Volleinspeisung zurück + Prognose-Flag), `getMischVerguetung(kwp, modus, stichtag?)`, `EEG_DEGRESSION_HINWEIS`. BNetzA 04/2026: 7,78 ct/kWh bis 10 kWp Teil, 12,34 ct Voll; 6,73 ct 10–40 kWp Teil, 10,35 ct Voll; 5,50 ct 40–100 kWp Teil, 10,35 ct Voll. Prognose-Bucket für 01.08.2026 (−1 % Degression).
-- `lib/berechnungen/beg-foerderung.ts` **(neu, Prompt 147)** — KfW 458 Förderquoten Heizungstausch. Exports: `BEG_FOERDERUNG_2026` (Konstanten: Grundförderung 30 %, Klimageschwindigkeit 20 %, Einkommen 30 %, Effizienz 5 %, Cap 70 %, Einkommensgrenze 40.000 €, max. förderfähige Kosten 30.000 €/1. WE), `berechneBegFoerderquote(boni)`, `berechneBegZuschuss(invest, boni, wohneinheiten)`, `BEG_LAUTSTAERKE_HINWEIS_2026` (10 dB unter Grenzwerten ab 01.01.2026 für Bestandsgebäude).
-- `lib/berechnungen/vpi.ts` **(neu Prompt 147, erweitert Prompt 149b)** — Verbraucherpreisindex Destatis Lange Reihe (Tabelle 61111-0001, Basisjahr 2020 = 100). Exports: `VPI_AKTUELL` (letzter Monatswert + Veränderung), `VPI_JAHRESDURCHSCHNITTE` (Jahre 1995–2025), **`getVpi(jahr)` mit Fallback auf VPI_AKTUELL für laufendes Jahr** und Throw bei Out-of-Range, **`indexiereVermoegen(betrag, jahrAnfang, jahrEnde)` als § 1376 BGB-konformer Helper** (Verwendung im Zugewinnausgleich-Rechner zur Anfangsvermögen-Indexierung; Identitäts-Test bei gleichem Stichtag).
-- `lib/berechnungen/pv-ertragsmodell.ts` **(neu, Prompt 147c, 25.04.2026)** — Mertens-Faktoren für PV-Ertragsschätzung (PR=0,85 nach VDI 6002 / IEC 61724 implizit im Basiswert 850 kWh/kWp/Jahr eingebacken). Exports: `PV_BASIS_ERTRAG_KWH_KWP = 850`, `AUSRICHTUNGS_FAKTOR` (8 Stufen: Süd 1,00 / SO/SW 0,95 / Ost/West 0,85 / NO/NW 0,72 / Nord 0,65), `NEIGUNGS_FAKTOR` (5 Stufen: 0–15° 0,87 / 15–25° 0,94 / 25–35° 1,00 / 35–45° 0,97 / 45°+ 0,91), Label-Maps für Dropdowns, `berechnePvErtrag({kwp, ausrichtung, neigung})`, `berechneSpezifischenErtrag(ausrichtung, neigung)`. Konsumiert von photovoltaik- und dachflaechen-Rechner. Hinweis: `lib/berechnungen/balkon-solar.ts` nutzt bewusst eigenes BKW-Modell (950 kWh/kWp Brutto vor PR + BKW-spezifische Aufstellungs-Faktoren), siehe Header-Doku in der Lib.
-- `lib/berechnungen/bmi.ts` **(erweitert, Prompts 141 + 143, 25.04.2026)** — WHO-BMI-Kategorien + alters-adjustierter Optimal-Bereich (NRC 1989). Exports: `bmiKategorien` (SSOT seit 143, auch von SchwangerschaftGewichtRechner konsumiert), `getOptimalerBereich(alter)` (SSOT seit 143, auch von idealgewicht.ts konsumiert), **`BMI_ADULT_MIN_AGE = 18`** (Erwachsenen-Gating, Component unterdrückt Kategorie/Skala/Optimal-Bereich bei `alter < 18` und zeigt Verweis auf BMI-Perzentilen Kromeyer-Hauschild).
-- `lib/berechnungen/kalorien.ts` **(erweitert, Prompt 141, 25.04.2026)** — Mifflin-St Jeor mit Eating-Disorder-Floor. `berechneKalorien(...)` setzt `zielKalorien = Math.max(zielKalorienRoh, grundumsatz)` und neues Flag `zielGeklammertAufGrundumsatz: boolean`; UI zeigt Hinweis bei Klammer.
-- `lib/berechnungen/schwangerschaft.ts` **(neu, Prompt 143, 25.04.2026 — Voll-Fusion)** — Konsolidiert die früheren `geburtstermin.ts` + `ssw.ts` (beide gelöscht). Enthält Naegele + erweiterte Naegele für Zykluslänge ≠ 28; SSW-Berechnung; Trimester; Meilensteine. Exports: `parseDatum(s)` (zeitzonen-sicher mit `+'T00:00:00'`), `berechneGeburtstermin(eingabe)` (SSW ab LMP+Zyklus-Korrektur), `berechneSsw(eingabe)` (SSW ab reinem LMP — gynäkologischer Standard), `defaultPeriodeDatum`, `defaultTerminDatum`, `Methode`, `SswMethode`, `Meilenstein`. **Beide SSW-Konventionen klinisch korrekt** — JSDoc dokumentiert die Divergenz, nicht versehentlich vereinheitlichen.
-
-Die drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine **Rechner-Gruppe** mit geteilter Logik. Änderungen an zentralen Parametern wirken auf alle drei. Siehe auch G10 (keine Dubletten zentraler Werte).
-
 ## Skill-Synchronisation
 
 **Letzte Aktualisierung:** 04.05.2026 nach Welle-5-Closure und Welle-6-Eröffnung. Drei Pre-Phase-Pflichten (L-37 + C1-Lehre + L-38) als neue Step 3b ergänzt. SSOT-Import-Audit-Hinweis um Welle-5-Lehren erweitert. Bei künftigen Wellen-Closures Skill auf neue Lehren prüfen.
 
 Dieser Skill existiert in zwei Kopien:
 
-1. **Repo (maßgeblich):** `.claude/skills/rechner-builder/SKILL.md` — diese Datei, gepflegt von Claude Code
-2. **claude.ai Skills-UI:** Menü oben links → Einstellungen → Skills → rechner-builder → Bearbeiten
+1. **Repo (maßgeblich):** `.claude/skills/rechner-builder/` — SKILL.md plus `references/`, gepflegt über Commits
+2. **claude.ai Skills-UI:** unter **Anpassen → Fähigkeiten** (`claude.ai/customize/skills`), gebunden an Karstens persönliches Konto
 
-Die claude.ai-Kopie wird von Claude-Chat-Instanzen beim Trigger geladen (nicht als lokale Datei auf Disk, sondern cloud-basiert). Nach einem Update der Repo-Version muss der Inhalt **manuell** in die claude.ai-UI übertragen werden:
+Die claude.ai-Kopie liest jede Chat-Instanz beim Trigger. Ein Commit erreicht sie **nicht** — sie wird ausschließlich per ZIP-Upload aktualisiert.
 
-1. Vollständigen Inhalt dieser Datei kopieren (ohne YAML-Frontmatter falls vorhanden)
-2. In claude.ai → Einstellungen → Skills → rechner-builder → Bearbeiten öffnen
-3. Gesamten Inhalt dort ersetzen
-4. Speichern
-5. Laufende Claude-Chat-Session neu starten, damit der frische Skill geladen wird
+**Ablauf nach jeder Skill-Änderung (Stand 26.08.2026):**
 
-Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge (Chat arbeitet mit veralteter Skill-Version).
+1. Skill-Ordner als ZIP packen. Linux-`zip` oder -`tar` verwenden, **nicht** PowerShell `Compress-Archive` — das schreibt Backslashes als Pfadtrenner, und der Upload scheitert.
+2. In claude.ai unter Anpassen → Fähigkeiten den bestehenden `rechner-builder` öffnen, Schalter aus, löschen.
+3. „+" → „Fähigkeit hochladen" → das ZIP wählen. Ein direktes Ersetzen gibt es nicht; ohne vorheriges Löschen entstehen zwei gleichnamige Einträge.
+4. Schalter einschalten.
+5. Neuen Chat öffnen — eine laufende Sitzung lädt den Skill nicht nach.
+
+Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge, weil der Chat mit einer veralteten Fassung arbeitet.
+
+> **Falle beim Repo-Commit:** `.gitignore` enthält `.claude/skills/` (pauschal, damit die privaten Assistenten-Pakete nicht in dieses öffentliche Repo geraten). Die Regel greift nur für **untracked** Dateien — die bereits versionierten SKILL.md, checklist.md und templates.md sind davon unberührt. **Eine neu hinzugekommene Datei unter `references/` wird von `git add` stillschweigend übergangen.** Sie braucht `git add -f`. Nach jeder Struktur­änderung deshalb `git ls-files .claude/skills/rechner-builder/` gegen den Ordnerinhalt halten.
+
+**Struktur seit Welle 114 (26.08.2026):** SKILL.md trägt Ablauf, Pflicht-Gates und Disziplin (898 Zeilen); die Detailbestände liegen in acht Dateien unter `references/` und werden bei Bedarf geladen. Die Zuordnung steht im Abschnitt „Referenzdateien — wann welche lesen". Beim Ergänzen neuer Lehren gilt: Ablauf und Gates gehören in die SKILL.md, Einzelfälle und Nachschlagewerke in die passende Referenzdatei.
 
 **Sync-Protokoll:**
 
@@ -1651,250 +831,9 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge 
 | 26.04.2026 | Prompt 154: Welle-2-Stufe-3-Wohnen-Abschluss (Prompts 147–148b) + Welle-2-Stufe-3-Arbeit-Status (149a/b/c durch, 149d offen), 6 neue SSOT-Libs ergänzt (`strompreis.ts`, `eeg-einspeiseverguetung.ts`, `beg-foerderung.ts`, `vpi.ts` mit § 1376 BGB-Helper, `pv-ertragsmodell.ts`, plus `kfz-steuer-parameter.ts` aus Welle 2 Stufe 1), 4 neue Anti-Patterns (Backtick-Falle in Template-Literals, Slug-Drift in Kategorie-Datei, Phantom-Befund-Diagnose, Test-Soll-Werte gegen UI-Anzeige), Counts korrigiert (170 = Alltag 23 / Finanzen 45 / Gesundheit 17 / Auto 11 / Wohnen 25 / Mathe 18 / Arbeit 17 / Kochen 12 / Sport 2) | [ ] noch offen |
 | 26.04.2026 | Prompt 155: Welle-2-Komplett-Abschluss-Sync — Header-Stand auf „Welle 2 KOMPLETT abgeschlossen 26.04.2026" mit allen 4 Stufen ✅ und Welle-3-Backlog-Stichworten (152b/P3-B1/151/150e/Validation-Sweep). Audit-Methodik-Sektion ergänzt um Audit-Bundle-Pattern (Generator-Skript `scripts/build-audit-bundle.ts`, CLI `npm run audit:bundle <name>`, Bundle-Defs in `scripts/audit-bundles.ts`, 300k-text-Limit-Pflicht für Bundles >100 KB), Verify-Skripte-Konvention (Lehre 149d: `.ts` statt `.mjs`, `npx tsx`-Aufruf, typisierte Helper), Wert-Recherche-Disziplin durch Claude im Web (Lehre 22: Aktualität-Hinweis + zwei Sekundärquellen + URL-Permission-Workflow). | [ ] noch offen |
 | 28.04.2026 | Prompt 158a: Welle-3-Lehren-Sync — Header-Stand auf 28.04.2026 mit Welle 3 6/9 ✅ (152b, 154, 155, 156, 151, 150e). Vier neue Anti-Pattern-Blöcke ergänzt: Content-Sektionen in client-only Lazy-Wrapper (Lehre 26 / 154 — AdSense-Trigger), Klasse auf Wrapper statt direkten Kindern (Lehre 27 / 154), `new Date()` auf Modul-Ebene in `'use client'`-Components (Lehre 24 / 152b — Hydration-Mismatch-Risiko), Stichtag-Wert als dynamischer Lookup verkleidet (Lehre 23 / 152b — Stichtag vs. berechenbar mit Decision-Tabelle). AdSense-Status im Header: erste Prüfung 27.04.2026 negativ, Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. | [ ] noch offen |
+| 26.08.2026 | Welle 114: Prüfvorschriften-Regeln R1–R6 in der Operativen Disziplin, Anti-Pattern zur Namenswahl exportierter Helfer, Working-Tree-Disziplin um Worktree-Pflege und untracked Artefakte erweitert, Checkliste um den Block „Prüfvorschrift schreiben". **Struktur-Umbau:** SKILL.md 1966 → 898 Zeilen, sechs neue Referenzdateien (Qualitäts-Guards, Anti-Patterns, Audit-Methodik, Kategorien, Zentrale Libs, Content-Standards), Sync-Ablauf auf ZIP-Upload umgestellt. | [ ] noch offen |
 
 ---
-
-## Pattern-Goldstandard (Welle 13, Stand 08.05.2026)
-
-Top-10-Rechner (BN, MwSt, Zins, BMI etc.) folgen einem etablierten Layout-Pattern für AdSense-Konformität und maximale Conversion. Bei neuen Rechnern oder Updates bestehender Rechner gilt:
-
-### Component-Layout (`components/rechner/<Name>Rechner.tsx`)
-
-Innerhalb des `{ergebnis && (...)}`-Blocks in dieser Reihenfolge:
-
-1. **Result-Box** (blau, Hauptzahl + Kategorie-Badge)
-2. **Custom-UI** rechner-spezifisch (z.B. Aufschlüsselung, Skala, Tabelle, dynamische Hinweise)
-3. **CrossLinks** zu verwandten Rechnern
-4. **AiExplain im `mt-4`-Wrapper:**
-   ```tsx
-   <div className="mt-4">
-     <AiExplain rechnerName="..." eingaben={{...}} ergebnis={{...}} />
-   </div>
-   ```
-5. **ErgebnisAktionen im `mt-6`-Wrapper:**
-   ```tsx
-   <div className="mt-6">
-     <ErgebnisAktionen ergebnisText="..." seitenTitel="..." />
-   </div>
-   ```
-
-**Wichtig:** Beide Wrapper IMMER zusammen setzen. Nur `mt-4` oder nur `mt-6` führt zu Spacing-Hotfix-Bedarf (Lerneffekt aus W13.3.1, W13.3.6, W13.4.1).
-
-### Page-Layout (durch `app/[kategorie]/[rechner]/page.tsx` automatisch gerendert)
-
-1. AdSlot Rectangle
-2. h2 „So funktioniert..." + `config.formel` + `config.beispiel`
-3. `config.erklaerung` mit Existing + NEU-Sektionen
-4. h2 „Häufige Fragen" mit `config.faq`
-5. **`config.affiliate` (Single-Object oder Array)** — AdSense-konform post-FAQ; Renderer macht `Array.isArray`-Check automatisch (seit W14.A.1)
-6. „Das könnte Sie auch interessieren" + Sidebar
-
-### Inhalts-Standards für Top-Rechner
-
-Jeder Top-Rechner (BN, MwSt, Zins, BMI etc.) hat in `config.erklaerung`:
-
-- **Existing-Sektionen** (rechner-spezifische Grundlagen, Formel, Tabellen)
-- **„Anwendungsfälle: Wann brauchen Sie den X-Rechner?"** (NEU, ~250W, 5 konkrete Szenarien als Bold-Lead-Liste)
-- **„Häufige Fehler bei der X-Berechnung"** (NEU, ~150W, 5 Stichpunkte als Bold-Lead-Liste)
-
-`config.faq` mit mindestens 8 Q&A (5 Existing + 3 rechner-spezifische NEU-Fragen).
-
-> **Welle-19-Hinweis:** Neue und neu zu überarbeitende Top-Rechner nutzen statt der `erklaerung`-NEU-Sektionen das Content-Baustein-Muster (`contentBloecke`, siehe eigener Abschnitt „Content-Bausteine" weiter unten). Der hier beschriebene Bold-Lead-Listen-Weg in `erklaerung` bleibt **Bestandsschutz** für die noch nicht migrierten Rechner.
-
-### Bold-Lead-Listen-Pattern
-
-```markdown
-- **Punkt-Titel.** Erklärungs-Text mit konkreten Werten/Beispielen für ein Mini-Mehrwert-Element.
-```
-
-Markdown-Render in `page.tsx` parsiert dieses Pattern korrekt — gilt kategorie-übergreifend.
-
-### Affiliate-Architektur (Stand W14.A-Abschluss, 10.05.2026)
-
-| Pattern | Wann | Wo |
-|---|---|---|
-| Single-Box via `config.affiliate` (Object) | 1 Affiliate-Box pro Rechner | Property in `lib/rechner-config/<kat>.ts` |
-| Multi-Box via `config.affiliate` (Array) | 2+ Affiliate-Boxen | Array-Property in `lib/rechner-config/<kat>.ts` |
-| Kein Affiliate | Affiliate-frei (z. B. Gesundheit/Mathe) | Property weglassen (undefined) |
-| **P1 Inline-Custom (Bestandsschutz)** | BN-Pattern (Position-Erhalt als CTR-Slot) | Inline-JSX im Component, kein `config.affiliate` |
-| **P4a Inline-Conditional (Bestandsschutz)** | Render-Conditional auf User-Input-State (≤1:1 unconditional:conditional) | Inline-JSX im Component, kein `config.affiliate` (ElterngeldRechner) |
-| **P4b Hybrid (Bestandsschutz)** | 3+ Boxen mit Mehrheit-unconditional + 1 Conditional | Mehrheit ins `config.affiliate`-Array, Conditional inline (RentenRechner) |
-
-Neue Rechner nutzen **ausschließlich** die ersten 4 Zeilen (Standard-Pattern). Patterns P1/P4a/P4b sind Bestandsschutz für dokumentierte Sonderfälle aus W14.A — keine neuen Anwendungen.
-
-L-43 (Multi-Box-Drift) ist mit W14.A.6 eliminiert. **L-46-Pflicht:** Bei jedem Component-Edit, der `AffiliateBox` berührt, `grep -nE '<AffiliateBox' components/rechner/<File>.tsx` als Pre-Phase. Bei hartkodierten Treffern entweder Standard-Migration oder Sonderfall-Triage (P1/P2/P3/P4a/P4b — siehe welle-status-historie).
-
-### Sensitivitäts-Layer
-
-Bei Gesundheits-, Finanz-, Familien- und ähnlichen sensiblen Themen:
-- Keine wertende Sprache, keine Empfehlungen zur Verhaltensänderung
-- Verweise auf Fachpersonen (Arzt, Hebamme, Steuerberater) statt eigener Empfehlungen
-- Limitierungen klar benennen
-
----
-
-## Content-Bausteine (contentBloecke) — Standard ab Welle 19 (10.06.2026)
-
-**Neuer Content-Standard für neue Rechner und Migrationen.** Statt des einzelnen `erklaerung`-Strings tragen Rechner ihren Fachinhalt in modularen Bausteinen (`contentBloecke`). Das Baustein-System ist live (Pilot: `spritkosten-rechner`), Gestaltung/Renderer sind final (Commits 6299c7f→386e846) — Baustein-Arbeit ist ausschließlich **Content im Config-Eintrag**.
-
-### Warum
-
-Ein einziger `erklaerung`-String über 170 strukturgleiche Seiten erzeugt Thin-Content- bzw. AI-Massen-Verdacht — die Ursache der 4. AdSense-Ablehnung. Lösung: modulare Bausteine, bei denen **jeder Rechner ein eigenes Leitformat** trägt (siehe „Leitformat-Prinzip"), sodass jede Seite strukturell einzigartig wird. **Nicht** Wortzahl strecken, **nicht** noindex. Ziel pro Rechner: **~1.500 Wörter sichtbarer Text, nie unter 1.500** (mit Self-Check vor jedem Commit erzwungen, siehe unten).
-
-> **Goldstandard-Erkenntnis (11.06.2026, Pilot-Tranche mwst/zins/stundenlohn/bmi/tage/spritkosten):** Das ursprüngliche Wortziel 1.250 und der bloße „Mindestmix" reichten nicht. Zwei Fehler traten reproduzierbar auf: (1) Dieselben Bausteine nur neu sortiert → Seiten sahen weiter gleich aus (Mindestmix erzeugt Schablonen). (2) Wort-Budgets wurden konsequent unterschätzt — real lagen vermeintlich „~1.500 W"-Seiten bei 766–1.394 W. Beide Fehler sind unten durch das **Leitformat-Prinzip** und den **Self-Check** behoben.
-
-### Die 8 Block-Typen (exakte Feldnamen aus `lib/rechner-config/types.ts`)
-
-```ts
-type ContentBlock =
-  | { typ: 'text'; titel?: string; html: string }
-  | { typ: 'tabelle'; titel?: string; kopf: string[]; zeilen: string[][]; fussnote?: string }
-  | { typ: 'statistik'; titel?: string; werte: { label: string; wert: string; hinweis?: string }[] }
-  | { typ: 'diagramm'; titel?: string; variante: 'balken' | 'kreis' | 'linie' | 'gestapelt' | 'wasserfall'; daten?: { label: string; wert: number; einheit?: string }[]; gestapelt?: { label: string; segmente: { name: string; wert: number }[] }[]; wasserfall?: { label: string; wert: number; art: 'start' | 'delta' | 'summe' }[]; einheit?: string; fussnote?: string }
-  | { typ: 'vergleich'; titel?: string; spalteA: string; spalteB: string; zeilen: { kriterium: string; a: string; b: string }[] }
-  | { typ: 'beispielrechnung'; titel?: string; schritte: { label: string; formel: string; ergebnis: string }[]; fazit?: string }
-  | { typ: 'checkliste'; titel?: string; punkte: string[] }
-  | { typ: 'infobox'; variante: 'tipp' | 'warnung' | 'hinweis'; titel?: string; text: string };
-```
-
-Optionales Feld in `RechnerConfig`: `contentBloecke?: ContentBlock[]`. Bei gesetzter Länge rendert `page.tsx` den `ContentBlockRenderer` (freistehende Kacheln); sonst greift der Fallback-Pfad (Außenbox + Formel + Beispiel + `erklaerung`-Split).
-
-### Leitformat-Prinzip (Kern der Einzigartigkeit)
-
-Jeder Rechner bekommt **ein eigenes Leitformat** — eine dominante Darstellungsform + einen inhaltlichen Schwerpunkt, plus **bewusst weggelassene** Bausteintypen. NICHT dieselben Bausteine neu sortieren (das erzeugt Schablonen). Erprobte Leitformate der Pilot-Tranche:
-
-- **Tabellen-Nachschlagewerk** (mwst): mehrere Tabellen, KEIN Diagramm. Für Referenz-/Übersichtsthemen (Sätze, Fristen, Kategorien).
-- **Visueller Zeitverlauf** (zins): Diagramme dominant (Linie/Balken), KEIN Vergleich. Für Entwicklung über Zeit.
-- **Vergleich & Einordnung** (stundenlohn): mehrere Vergleiche + Statistik, KEIN Diagramm. Für „X im Verhältnis zu Y".
-- **Risiko- & Kontext** (bmi): Verteilungs-Diagramm (Kreis) + erklärender Kontext. Für sensible/deskriptive Themen.
-- **Anwendungsfall-Sammlung** (tage): mehrere Beispielrechnungen + Checklisten, KEINE großen Datentabellen, KEIN Diagramm. Für „wofür man das braucht".
-
-Wähle pro neuem Rechner das thematisch passende Leitformat und grenze es durch ausgelassene Typen von den Nachbarn ab. Mindestens vorhanden sein sollten: 3–4 gehaltvolle `text`-Blöcke (Hauptanteil der Wörter) + 1 `beispielrechnung` + mindestens 1 Daten-/Visual-Baustein (tabelle/diagramm/vergleich/statistik) + 1 Callout (checkliste/infobox).
-
-### Diagramm-Varianten (5 Typen, je eigener Erkenntniswert)
-
-`variante` wählen nach Datenform — das variiert Diagramme zwischen Rechnern (visuelle Einzigartigkeit):
-
-- **balken** — Kategorienvergleich nebeneinander (Kosten, Verbrauch je Klasse)
-- **kreis** (Donut) — Anteile, die ein Ganzes ergeben (Verteilung, Kostenaufteilung; Werte summieren sinnvoll); nutzt `daten`
-- **linie** — Zeitverlauf/Entwicklung über Jahre; `daten`-Reihenfolge = x-Achse
-- **gestapelt** — Zusammensetzung über Kategorien; nutzt `gestapelt`-Feld (Kategorie → Segmente)
-- **wasserfall** — schrittweise Zu-/Abnahme (z. B. Brutto → Abzüge → Netto); nutzt `wasserfall`-Feld (`art: 'start'|'delta'|'summe'`, delta auch negativ)
-
-balken/kreis/linie nutzen das flache `daten`-Feld; gestapelt/wasserfall ihre eigenen Felder. **Wichtig:** Diagramm-/Vergleich-/Statistik-Bausteine sind **wortarm** — wer sie dominant einsetzt (zins, stundenlohn), muss von vornherein mehr und tiefere `text`-Blöcke einplanen, sonst reißt die Seite das 1.500-Wort-Ziel.
-
-### Self-Check (Pflicht vor jedem Commit) — L-W19.SelfCheck
-
-Wort-Budgets werden beim Bauen konsequent unterschätzt. Daher **objektiv messen, nicht schätzen**:
-
-```
-node scripts/check-contentbloecke-wortzahl.mjs <slug> --min 1500
-```
-
-Muss „OK" zeigen, BEVOR committet wird. Bei „UNTER SCHWELLE" die `text`-Bausteine vertiefen (echte Fachsubstanz, kein Fülltext) und erneut messen. Auf ~1.500–1.560 puffern, nicht knapp auf der Schwelle committen (Mess-Reserve). Das Skript zählt sichtbaren Text aller Bausteine (html ohne Tags, Tabellenzellen, Labels, Schritte, Punkte).
-
-### Daten-Disziplin
-
-- Markt-/Zahlenwerte in Bausteinen als **SSOT-Konstante** in `lib/berechnungen/<thema>-parameter.ts` (Muster: `SPRITPREISE_REFERENZ`), mit **Stichtag + Quelle** im Kommentar. Im Config über Helper einsetzen (z. B. `eur()`/`STAND_DE` im Auto-Pilot), nicht hartkodieren.
-- **Rechtsdaten (YMYL) NIE aus Memory** — Primärquelle prüfen (L-37, siehe CLAUDE.md).
-- `scripts/check-jahreswerte.mjs` warnt (soft, im Prebuild) bei einem Markt-Stichtag > 45 Tage.
-- Für externe Marktwerte gilt weiter L-38 (User-Eingabe-Default, Step 3b): redaktionelle Referenzwerte in Bausteinen ergänzen die User-Eingabe, ersetzen sie nicht.
-
-### erklaerung-Fallback bleibt Pflicht
-
-Auch bei gesetzten `contentBloecke` das `erklaerung`-Feld **befüllt lassen** (Schema-Konsistenz + Sicherheit). Der Renderer zeigt `erklaerung` nicht, solange `contentBloecke?.length` greift — es bleibt der Fallback-Pfad für alle nicht-migrierten Rechner.
-
-### Quellen-Pflicht (ab 06/2026)
-
-Jeder Goldstandard-Rechner setzt `config.quellen` (2–4 Einträge, `{ titel, url?, hinweis? }` aus `types.ts`). Bei YMYL-Themen Primärquellen mit Link (gesetze-im-internet.de, BMF, Destatis, Bundesbank, BEEG/SGB/BGB/PAngV); bei Mathe/Alltag ohne Gesetzesbezug genügt ein didaktischer `hinweis` ohne `url`. Die Quellen-Sektion rendert automatisch über das Page-Template (`app/[kategorie]/[rechner]/page.tsx`), sobald `config.quellen` gesetzt ist — fehlt das Feld, bleibt die Sektion leer und verschenkt E-E-A-T (gerade bei YMYL). Pflicht-Bestandteil neben `contentBloecke` + Self-Check.
-
-**Überschrift ist typabhängig (seit 19.06.2026, `components/Quellen.tsx`):** Die Komponente leitet die Überschrift aus den Quellen ab — KEINE manuelle Steuerung nötig. Hat mindestens eine Quelle einen Rechtsbezug (URL auf `gesetze-im-internet.de`/`bundesgesetzblatt`/`eur-lex` ODER `§`/Gesetzeskürzel wie EStG, BGB, ArbZG, SGB, BUrlG, KraftStG, BetrKV, StGB, StVG, StVO, BKatV, WoFlV, BKKG im `titel`), erscheint **„Quellen & Rechtsgrundlagen"**. Sonst — also bei rein didaktischen Hinweisen UND bei reinen Daten-/Behördenquellen ohne Gesetzesbezug (Destatis, ADAC, DGSM, BfS …) — erscheint **„Quellen & Methodik"**. Konsequenz fürs Quellen-Setzen: Bei didaktischen/Daten-Rechnern keinen Gesetzes-Etikettenschwindel erzeugen; ein `hinweis` ohne `§` ist korrekt und führt automatisch zur richtigen „Methodik"-Überschrift.
-
-### Referenz-Beispiele (Goldstandard-Tranche, 11.06.2026)
-
-Sechs fertige Goldstandard-Rechner als Kopiervorlage (je >1.500 W, eigenes Leitformat, primärquellen-verifiziert):
-
-- `lib/rechner-config/finanzen.ts`: **mwst-rechner** (Tabellen-Nachschlagewerk), **zinsrechner** (Zeitverlauf, Linie+Kreis), **stundenlohn-rechner** (Vergleich & Einordnung)
-- `lib/rechner-config/gesundheit.ts`: **bmi-rechner** (Risiko-/Kontext, Kreis, sensibel-deskriptiv)
-- `lib/rechner-config/alltag.ts`: **tagerechner** (Anwendungsfall-Sammlung, mehrere Beispielrechnungen)
-- `lib/rechner-config/auto.ts`: **spritkosten-rechner** (gemischt, Pilot)
-
-Für Komposition + Daten-Disziplin diese als Muster nehmen — nicht den ursprünglichen dünnen Pilot-Stand.
-
-### Renderer/Design NICHT anfassen
-
-Gestaltung ist final: `ContentBlockRenderer.tsx` (Server-Component, Kachel = `card p-5 md:p-6` mit Hover-Lift, Titel `primary-600`). Der Renderer beherrscht 5 Diagramm-Varianten (balken/kreis/linie/gestapelt/wasserfall, CLS-sicher, kontrastreiche Hex-Palette, Donut zentriert) — diese werden über das `variante`-Feld im Config gesteuert, NICHT durch Renderer-Änderungen. Baustein-Arbeit = **ausschließlich Content** im Config-Eintrag der jeweiligen Kategorie-Datei (`lib/rechner-config/<kategorie>.ts`) — nur die Auto-Kategorie selbst liegt in `auto.ts`.
-
----
-
-## Redaktionelle Referenzwerte in Configs (Wellen 82–102, 14.08.2026)
-
-**Die Lücke, die diese Wellen aufgedeckt haben:** G11 verbietet eigene Konstanten für *gesetzliche* Werte in *Berechnungs-Libs*. Für **redaktionelle Referenzwerte in Config-Prosa** — Spritpreise, Strompreise, Ladepreise — gab es keine Regel. Ergebnis: 56 hartkodierte Energiepreise über drei Config-Dateien, teils widersprüchlich zueinander, teils zwei Jahre alt. `lib/berechnungen/strompreis.ts` verbot in seinem eigenen Kopfkommentar ausdrücklich hartkodierte Werte — und keine einzige Config hielt sich daran.
-
-### G13 — Referenzwerte kommen aus einer SSOT und werden interpoliert
-
-Jeder wiederkehrende Zahlenwert in Config-Text (Preise, Marktspannen, Durchschnittswerte) gehört in eine Parameter-Datei unter `lib/berechnungen/` und wird von dort interpoliert, nicht abgeschrieben. Bestehende: `spritpreise-parameter.ts`, `strompreis.ts`, `ladepreise-parameter.ts`.
-
-`check-energiepreise.mjs` erzwingt das für Energiepreise. **Szenariospannen** (`0,20–0,25 €/kWh`) sind erlaubt und werden an ihrer Form erkannt — sie beschreiben eine Bandbreite, keinen Referenzwert, und gehören in keine SSOT.
-
-Semantik vor Bequemlichkeit: `LADEPREISE.wallbox` ist in `ladepreise-parameter.ts` als `STROMPREIS_2026.durchschnitt_bdew / 100` definiert — nicht zufällig verwandt, sondern abgeleitet, und dabei anders skaliert (0,37 €/kWh gegen 37 ct/kWh). Ein Haushaltsgeräte-Rechner nimmt die Strompreis-SSOT, kein Ladepreis-Feld. Ausführlich mit Begründung im Abschnitt »Technik — was diese Kategorie von den anderen unterscheidet«.
-
-### Preise binden ist die halbe Arbeit — die Ergebnisse stehen woanders
-
-Eine Suche nach `€/kWh` oder `€/l` findet die **Preise**. Sie findet nicht die Beträge, die aus ihnen gerechnet wurden — die stehen als nackte Zahlen in Rechenwegen, Tabellen, Fazit-Texten und Fußnoten, oft mehrere Blöcke entfernt.
-
-Dieser Fehler ist in dieser Serie **dreimal** aufgetreten (Wellen 85→86, 88→89, 89 Nachlauf). Nach jeder Preisbindung folgt ein zweiter Durchgang: nach den alten **Ergebniswerten** suchen, nicht nach den Preisen.
-
-Und ein dritter Durchgang nach **Rückverweisen**: „den größten Teil der hier gerechneten 123 Euro" nennt den Betrag ein zweites Mal, drei Sätze später.
-
-### Beschriftungen neben gebundenen Beträgen mitbinden
-
-Wird ein Betrag an eine Konstante gebunden und die Beschriftung daneben bleibt hartkodiert, entsteht aus einer veralteten Zahl ein **sichtbarer Rechenfehler**:
-
-```
-Benziner (Vergleich) | 7,5 l × 1,75 € | 15,94 €
-```
-
-7,5 × 1,75 ergibt 13,13. Das ist die schlechtere Lage als eine bloß alte Zahl, weil es die ganze Rechnung in Zweifel zieht — und es entsteht **durch** das Binden. Nach jeder Bindung prüfen, ob im selben Element eine beschreibende Formel steht.
-
-### Quotierung prüfen, bevor `${…}` eingesetzt wird
-
-Ein Interpolationsausdruck in einem **einfach gequoteten** Feld landet wörtlich auf der Seite. Weder der Build noch `check-backticks.mjs` melden das — beides ist syntaktisch einwandfrei.
-
-Vor jeder Ersetzung prüfen, wie das Zielfeld gequotet ist. Bei einfachen Anführungszeichen die **ganze Zeile** ersetzen und öffnendes **und** schließendes Zeichen auf Backtick umstellen. In JSX gilt das Gegenteil: dort `{…}` ohne Dollarzeichen.
-
-### Erst klären, ob das Feld gerendert wird — und wer es sonst liest
-
-`app/[kategorie]/[rechner]/page.tsx` entscheidet per Ternär zwischen `contentBloecke` und dem alten Pfad. Vor Welle 101 war der alte Pfad für **keinen** Rechner erreichbar, obwohl er wie eine Absicherung für zwei Ausnahmen aussah. Von 14 gefundenen Fundstellen in einem Rechner waren 7 unsichtbar; eine Korrektur landete in totem Text.
-
-Die zweite Frage ist wichtiger als die erste: **Wer liest das Feld sonst noch?** `beispiel` speist `scripts/social-caption-builder.ts` — ein Feld zu entfernen, das nur die Seite nicht rendert, hätte die Social-Pipeline getroffen. Vor jeder großflächigen Änderung `grep -rn "\.feldname"` über `app`, `components`, `lib`, `scripts`.
-
-### Wächter: die Frage muss zur Änderungsrate der Quelle passen
-
-Ein Wächter, der das **Datenalter** einer Quelle prüft, die nur zweimal im Jahr veröffentlicht, warnt dauerhaft bei korrekten Werten — und erzieht dazu, Warnungen zu überlesen. Das entwertet die nächste echte Warnung.
-
-- Wert ändert sich laufend (Spritpreise, wöchentlich) → `stand` prüfen
-- Wert ändert sich träge (BDEW, ACE) → `geprueft` prüfen: wann hat zuletzt jemand nachgesehen, ob es Neueres gibt
-
-Beim Bau eines Wächters gehört jeder Treffer, der **nicht** gemeldet wird, genauso geprüft wie jeder gemeldete. Ein stilles `continue` bei fehlendem Feld, ein `catch`, das eine fehlende Datei überspringt, ein Muster ohne Wortgrenze — alle drei lassen einen Wächter grün melden, ohne geprüft zu haben. Ein Wächter, der eine echte Lücke verdeckt, ist schlechter als keiner.
-
-### Ein toter Auffangpfad ist gefährlicher als gar keiner
-
-Der entfernte Fallback in `page.tsx` hat jahrelang die Illusion einer Absicherung erzeugt und dabei verdeckt, dass die eigentliche Prüfung fehlt. Wird ein Fallback entfernt, muss vorher geklärt sein, wer seine Aufgabe übernimmt — hier `check-contentbloecke-pflicht.mjs`.
-
-### Beim Entfernen: Gegenzählung dessen, was nicht getroffen werden darf
-
-Bei 412 Schnitten über zehn Dateien prüft niemand den Diff mit dem Auge. Die aussagekräftige Zahl ist nicht, wie viele Felder entfernt wurden, sondern wie viele gleichnamige Vorkommen **unberührt** geblieben sind — 1.875 `formel:`-Schlüssel in den `contentBloecke`-Bausteinen. Wäre das Muster zu weit gegriffen, hätte genau diese Zahl den Schaden sofort angezeigt.
-
-Dazu die Strukturprobe auf verwaiste Kommas (`,\s*,` und `\{\s*,`) — der wahrscheinlichste Schaden beim Entfernen von Objekteigenschaften.
-
-Und: Feldwerte niemals per Regex schneiden. Sie enthalten Apostrophe, Zeilenumbrüche und Template-Literale mit eigenen Anführungszeichen. String-Leser mit Escape-Behandlung, rückwärts arbeitend, mit Abbruch bei unlesbarem Literal.
-
-### Belegkriterien müssen erreichbar sein
-
-Ein Prüfkriterium, das nie grün werden kann, ist kein Beleg, sondern Aufwand. Datei-Hashes gebauter Seiten taugen in diesem Projekt **nicht**: Next.js schreibt je Build eine neue `buildId` und neue Chunk-Namen, zwei Builds aus identischen Quellen liefern verschiedene Hashes.
-
-Tauglich ist der Vergleich des **sichtbaren Textes**: Vorzustand über `git stash` bauen, Skripte und Tags entfernen, ab dem Breadcrumb vergleichen, Zeichenzahl gegenüberstellen.
 
 ## Operative Disziplin
 

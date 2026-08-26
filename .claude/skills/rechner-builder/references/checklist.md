@@ -92,7 +92,7 @@ Vor jeder neuen Rechner-Implementierung oder Sub-Wellen-Update:
 - [ ] **Gesetzes-Bezüge recherchiert** und im Code-Kommentar mit Paragraf + Stand + Quelle dokumentiert (gesetze-im-internet.de / bundesfinanzministerium.de / BMAS / DRV / BGBl-PDFs)
 - [ ] **Alle verwendeten Tabellen-Werte/Sätze/Grenzen** als named constants am File-Anfang gesammelt — KEINE magic numbers inline
 - [ ] **Jeder gesetzlich bestimmte Wert** hat Inline-Begründung mit Paragraf + Stand + Quelle (auch in zentralen Libs)
-- [ ] Wo möglich SSOT-Import aus `lib/berechnungen/<domain>.ts` statt eigener Hardcode (CLAUDE.md → „Zentrale Libs (SSOT)")
+- [ ] Wo möglich SSOT-Import aus `lib/berechnungen/<domain>.ts` statt eigener Hardcode (Kurzliste: `references/zentrale-libs.md`, Volltabelle: CLAUDE.md → „Zentrale Libs (SSOT)")
 - [ ] Bei unterjährig wechselnden Werten: Stichtag-Switch-Pattern (`getAktuelle…(stichtag)`) statt nackter Konstante
 - [ ] Audit-Vorbereitung: `grep -rn "Stand: " lib/berechnungen/` zeigt alle Stichtage des Repos — neue Datei muss dort auftauchen
 
