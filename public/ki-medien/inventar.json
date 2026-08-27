@@ -1,6 +1,6 @@
 {
   "_hinweis": "Bestand der KI-erzeugten Medien auf rechenfix.de. Grundlage fuer den Soll-Ist-Abgleich der Kennzeichen-Wache (Skill peter-ai).",
-  "_stand": "19.08.2026",
+  "_stand": "27.08.2026",
   "_quelle": "GENERATOREN-Tabelle in scripts/ki-metadaten-schreiben.mjs",
   "ki_medien": [
     {
@@ -10,10 +10,10 @@
       "generator": "Gemini 3 Pro Image (Google)"
     },
     {
-      "datei": "/blog/bildschirm-video-standbild.png",
+      "datei": "/blog/bildschirm-video-standbild.jpg",
       "art": "bild",
       "seite": "/blog/warum-ein-27-zoll-monitor-viermal-so-gross-ist",
-      "generator": "Gemini 3 Pro Image (Google)"
+      "generator": "Kling AI 3.0 (Kuaishou)"
     },
     {
       "datei": "/blog/bildschirm.mp4",
@@ -28,10 +28,10 @@
       "generator": "Gemini 3 Pro Image (Google)"
     },
     {
-      "datei": "/blog/blutdruck-video-standbild.png",
+      "datei": "/blog/blutdruck-video-standbild.jpg",
       "art": "bild",
       "seite": "/blog/warum-der-blutdruck-in-millimetern-gemessen-wird",
-      "generator": "Gemini 3 Pro Image (Google)"
+      "generator": "Kling AI 3.0 (Kuaishou)"
     },
     {
       "datei": "/blog/blutdruck.mp4",
@@ -124,10 +124,10 @@
       "generator": "Gemini 3 Pro Image (Google)"
     },
     {
-      "datei": "/blog/meter-video-standbild.png",
+      "datei": "/blog/meter-video-standbild.jpg",
       "art": "bild",
       "seite": "/blog/wie-das-meter-erfunden-wurde",
-      "generator": "Gemini 3 Pro Image (Google)"
+      "generator": "Kling AI 3.0 (Kuaishou)"
     },
     {
       "datei": "/blog/meter.mp4",
@@ -235,6 +235,24 @@
       "datei": "/blog/zeit.mp4",
       "art": "video",
       "seite": "/blog/warum-in-deutschland-alle-uhren-gleich-gehen",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/steuerklassen-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/steuerklassen-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/steuerklassen.mp4",
+      "art": "video",
+      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
       "generator": "Kling AI 3.0 (Kuaishou)"
     }
   ]

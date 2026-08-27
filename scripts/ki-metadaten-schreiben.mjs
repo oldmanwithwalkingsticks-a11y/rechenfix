@@ -43,10 +43,10 @@ const DIGITAL_SOURCE_TYPE =
  */
 const GENERATOREN = {
   'bildschirm-titelbild.png': 'Gemini 3 Pro Image (Google)',
-  'bildschirm-video-standbild.png': 'Gemini 3 Pro Image (Google)',
+  'bildschirm-video-standbild.jpg': 'Kling AI 3.0 (Kuaishou)',
   'bildschirm.mp4': 'Kling AI 3.0 (Kuaishou)',
   'blutdruck-titelbild.png': 'Gemini 3 Pro Image (Google)',
-  'blutdruck-video-standbild.png': 'Gemini 3 Pro Image (Google)',
+  'blutdruck-video-standbild.jpg': 'Kling AI 3.0 (Kuaishou)',
   'blutdruck.mp4': 'Kling AI 3.0 (Kuaishou)',
   'bmi-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'bmi.mp4': 'Kling AI 3.0 (Kuaishou)',
@@ -59,7 +59,7 @@ const GENERATOREN = {
   'kalorien-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'kalorien.mp4': 'Kling AI 3.0 (Kuaishou)',
   'meter-titelbild.png': 'Gemini 3 Pro Image (Google)',
-  'meter-video-standbild.png': 'Gemini 3 Pro Image (Google)',
+  'meter-video-standbild.jpg': 'Kling AI 3.0 (Kuaishou)',
   'meter.mp4': 'Kling AI 3.0 (Kuaishou)',
   'pferdestaerke-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'pferdestaerke-muehlenpferd.mp4': 'Kling AI 3.0 (Kuaishou)',
