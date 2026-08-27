@@ -6,6 +6,66 @@
 
 ---
 
+## 27.08.2026 — Welle 121: Blog bekommt eigene openGraph- und twitter-Metadaten — ✅ ABGESCHLOSSEN
+
+**Achtzehn Blog-Seiten sahen beim Teilen identisch aus.** Keine einzige hatte einen eigenen
+`openGraph`-Block; alle erbten den Standard aus `app/layout.tsx`. Wer einen Artikel bei Facebook,
+LinkedIn, X oder in WhatsApp teilte, bekam überall „Rechenfix.de — Kostenlose Online-Rechner" —
+derselbe Titel, dieselbe Beschreibung, der Artikel nicht erkennbar. Dasselbe galt für
+`twitter:title`. Gemessen vor der Änderung: `openGraph` kam in den 17 `page.mdx` **null**-mal vor
+und in `app/blog/page.tsx` ebenfalls nicht.
+
+**Jetzt trägt jeder Artikel Titel, Beschreibung, eigene URL, `type: 'article'` und
+`publishedTime`** aus `artikel.datum`; die Übersicht entsprechend mit `type: 'website'` und ohne
+`publishedTime` — eine Übersichtsseite hat kein Erscheinungsdatum.
+
+**Die Falle: Next.js ersetzt `openGraph` als ganzes Objekt.** Es mischt nicht feldweise mit dem
+Layout. Ein unvollständiger Block hätte `siteName`, `locale` und `type` **verloren** — die Änderung
+hätte die Vorschaukarten also verschlechtert statt verbessert, und zwar unsichtbar. Deshalb ist
+jeder der 18 Blöcke vollständig, so wie `app/qualitaet/page.tsx` es bereits vormacht. Im gebauten
+HTML nachgezählt: alle 17 Artikel liefern `og:site_name`, `og:locale`, `og:type=article`,
+`article:published_time` und `twitter:title` je genau einmal — **0 Abweichungen von 17**. Und
+**0 von 17** tragen noch den Layout-Standardtitel.
+
+**`og:url` kommt aus der canonical-Zeile derselben Datei**, nicht aus dem Ordnernamen. Damit können
+die beiden nicht auseinanderlaufen — ein Punkt, den der Prompt zu Recht als STOP-Bedingung geführt
+hat, weil auseinanderlaufende `canonical` und `og:url` ein echter SEO-Fehler sind. Prüfung 6:
+**17× `ok`**.
+
+**Warum das Bild die generierte Marken-Karte bleibt.** Ursprünglich war ein Feld `titelbild` in
+`meta.ts` geplant. Die Messung hat den Plan verworfen: Die 17 Titelbilder liegen bei 2752 × 1536
+Pixeln und **durchschnittlich 6,5 MB**, das größte (`bremsweg-titelbild.png`) bei **10,7 MB**. X
+lehnt PNG über 5 MB ab, Facebook über 8 MB — ein `og:image` darauf ergäbe kaputte oder gar keine
+Vorschaukarten, also schlechter als der Ausgangszustand. Für Besucher ist die Größe unkritisch,
+weil `components/blog/Bild.tsx` über `next/image` optimiertes WebP ausliefert; **Social-Crawler
+holen dagegen den Rohpfad.** Das ist der Unterschied, der den Plan gekippt hat.
+
+`/opengraph-image` steht relativ in den Blöcken, so wie das Layout es selbst schreibt. Weil
+`metadataBase` in `app/layout.tsx:49` auf `https://www.rechenfix.de` gesetzt ist, rendert Next.js
+daraus die absolute URL — im gebauten HTML verifiziert.
+
+**Umfang:** Commit `92657d1`, 18 Dateien, **289 Einfügungen und 0 Löschungen** — reine Ergänzung,
+je 16 Zeilen pro Artikel und 17 in der Übersicht. Im Diff steht keine Überschrift, kein
+`StructuredData`- und kein `generateArticleSchema`-Block; `app/layout.tsx`, die `meta.ts`-Dateien,
+`lib/blog.ts` und `app/opengraph-image.tsx` sind unberührt. Kein Titelbild-Pfad als `og:image`.
+`npx tsc --noEmit` und `npm run build` grün, 267 Seiten. Die `<title>` tragen weiterhin genau einen
+Suffix — Welle 120 ist nicht zurückgedreht.
+
+**Prüfvorschrift-Nachtrag, eigener Fehler.** Eine Zählung über `grep -c 'article:published_time'`
+lieferte für alle 17 Artikel den Wert 2 statt 1 und sah nach einem Doppel-Tag aus. Nachgesehen: Der
+zweite Treffer steckt im RSC-Flight-Payload (`self.__next_f.push`), nicht im `<head>`. **Im
+gebauten HTML einer Next.js-Seite kommt jedes Metadatum zweimal vor** — einmal als `<meta>`-Tag und
+einmal serialisiert im Payload. Zählungen über gebautes HTML müssen deshalb auf die Tag-Form
+eingegrenzt werden (`<meta property="…" content="…"`), sonst zählt man doppelt. Gilt für jede
+künftige Metadaten-Welle.
+
+**Nicht Teil dieser Welle, bewusst:** individuelle OG-Bilder pro Artikel (17 neue Edge-Routen nach
+dem Muster von `app/opengraph-image.tsx`), verkleinerte Kopien der Titelbilder, das Feld `titelbild`
+in `meta.ts` — und die Titelbild-Größen selbst. Dass 17 Quelldateien mit zusammen rund 110 MB im
+Repo liegen, ist ein eigener Befund für eine eigene Entscheidung.
+
+---
+
 ## 27.08.2026 — Welle 120: Titel-Dopplung „| Rechenfix.de | Rechenfix.de" behoben — ✅ ABGESCHLOSSEN
 
 **Einundzwanzig Seiten lieferten den Markennamen zweimal aus.** `app/layout.tsx:46` definiert
