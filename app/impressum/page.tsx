@@ -26,7 +26,7 @@ export default function ImpressumSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Impressum
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 22. August 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 28. August 2026</p>
 
         <div className="space-y-8 text-gray-700 dark:text-gray-300">
           {/* Anbieter */}
@@ -76,28 +76,6 @@ export default function ImpressumSeite() {
             <p>Karsten Kautz</p>
             <p>Dülkener Straße 35</p>
             <p>47804 Krefeld</p>
-          </section>
-
-          {/* Streitbeilegung */}
-          <section>
-            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">
-              Verbraucherstreitbeilegung / Universalschlichtungsstelle
-            </h2>
-            <p>
-              Wir nehmen an einem Streitbeilegungsverfahren vor einer
-              Verbraucherschlichtungsstelle teil. Zuständig ist die
-              Universalschlichtungsstelle des Zentrums für Schlichtung e.V.,
-              Straßburger Straße 8, 77694 Kehl am Rhein (
-              <a
-                href="https://www.verbraucher-schlichter.de"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-600 dark:text-primary-400 underline"
-              >
-                https://www.verbraucher-schlichter.de
-              </a>
-              ).
-            </p>
           </section>
 
           {/* Affiliate-Hinweis */}
