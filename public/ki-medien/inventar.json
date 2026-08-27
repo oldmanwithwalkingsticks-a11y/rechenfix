@@ -1,5 +1,5 @@
 {
-  "_hinweis": "Bestand der KI-erzeugten Medien auf rechenfix.de. Grundlage fuer den Soll-Ist-Abgleich der Kennzeichen-Wache (Skill peter-ai).",
+  "_hinweis": "Bestand der KI-erzeugten Medien auf rechenfix.de. Grundlage fuer den Soll-Ist-Abgleich der Kennzeichen-Wache (Skill peter-ki).",
   "_stand": "27.08.2026",
   "_quelle": "GENERATOREN-Tabelle in scripts/ki-metadaten-schreiben.mjs",
   "ki_medien": [
