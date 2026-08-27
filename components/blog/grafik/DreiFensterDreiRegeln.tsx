@@ -42,8 +42,22 @@
  * Regel und Planbarkeit. Damit kollidiert nichts mehr, und die Zeitachse
  * gewinnt 68 px an Länge.
  *
+ * v4 (27.08.2026) — ZWEITE GEOMETRIE-KORREKTUR, wieder nach Sichtprüfung.
+ * In v3 saß das Label „1. Januar“ der ALG-Bahn 18 px über der Bahnlinie,
+ * die Bahn 26 px unter der Kopfzeile. Zwischen Kopfzeile und Label blieben
+ * damit 8 px — bei 11 px Schriftgröße eine Überlappung, zusätzlich waagerecht
+ * (Label x=100..155, Kopfzeile x=24..147). Der Fehler betraf nur diese eine
+ * Bahn, weil nur sie ein Label über der Linie trägt; in v3 waren lediglich
+ * die Regel- und Planbar-Zeilen unter den Bahnen durchgerechnet worden.
+ *
+ * v4 setzt den Abstand Kopfzeile→Bahn von 26 auf 40 px. Zwischen Kopfzeile und
+ * Label liegen damit 22 px. Blockhöhe 100 → 118 px, viewBox-Höhe 520 → 572.
+ *
  * LEHRE: Eine Beschriftung links neben einem Diagrammfeld braucht eine
- * gemessene Spaltenbreite. Dasselbe Versäumnis wie in EinBruttoSechsNettos v1.
+ * gemessene Spaltenbreite — und jedes Element, das nur in EINER von mehreren
+ * gleichartigen Reihen vorkommt, muss einzeln gegen seine Nachbarn geprüft
+ * werden. Es fällt bei einer Reihenprüfung sonst durch. Dritter Fall derselben
+ * Fehlerklasse in Welle 115/116.
  *
  * Server-Komponente, statisch. Dark Mode über <style> mit .dark-Selektor.
  * Muster: components/blog/grafik/ZehnProzentZeitachse.tsx.
@@ -69,7 +83,7 @@ const bahnen = [
     id: 'alg',
     leistung: 'Arbeitslosengeld',
     norm: '§ 153 Abs. 2 SGB III',
-    kopf: 268,
+    kopf: 286,
     punkt: 0.18,
     regel: 'die Klasse am 1. Januar des Anspruchsjahres',
     planbar: 'teils planbar — ein Datum im Kalender',
@@ -79,7 +93,7 @@ const bahnen = [
     id: 'kranken',
     leistung: 'Krankengeld',
     norm: '§ 47 Abs. 2 SGB V',
-    kopf: 368,
+    kopf: 404,
     fensterVon: 11 / 12,
     fensterBis: 1,
     regel: 'letzter Abrechnungszeitraum, mindestens vier Wochen',
@@ -91,7 +105,7 @@ const bahnen = [
 export default function DreiFensterDreiRegeln() {
   return (
     <figure className="my-8">
-      <svg width="100%" viewBox="0 0 680 520" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
+      <svg width="100%" viewBox="0 0 680 572" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
         <style>{`
           .f-gut { fill: #0F6E56; }
           .f-neutral { fill: #185FA5; }
@@ -124,9 +138,9 @@ export default function DreiFensterDreiRegeln() {
         <text x="24" y="54" fontSize="12" fill="#9ca3af">Welcher Zeitraum darüber entscheidet, mit welcher Klasse gerechnet wird</text>
 
         {/* Ereignis-Achse: senkrechte Konstante rechts */}
-        <line x1={X_ENDE} y1="120" x2={X_ENDE} y2="448" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4 4" />
+        <line x1={X_ENDE} y1="120" x2={X_ENDE} y2="500" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4 4" />
         <text x={X_ENDE} y="112" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">Ereignis</text>
-        <text x="656" y="466" fontSize="10" textAnchor="end" fill="#9ca3af">Geburt · Arbeitslosigkeit · Erkrankung</text>
+        <text x="656" y="516" fontSize="10" textAnchor="end" fill="#9ca3af">Geburt · Arbeitslosigkeit · Erkrankung</text>
 
         {/* Skala */}
         <text x="24" y="134" fontSize="11" fill="#9ca3af">12 Monate vorher</text>
@@ -135,7 +149,7 @@ export default function DreiFensterDreiRegeln() {
         {bahnen.map((b) => {
           const fk = b.ton === 'gut' ? 'f-gut' : b.ton === 'hart' ? 'f-hart' : 'f-neutral';
           const tk = b.ton === 'gut' ? 't-gut' : b.ton === 'hart' ? 't-hart' : 't-neutral';
-          const yBahn = b.kopf + 26;
+          const yBahn = b.kopf + 40;
           return (
             <g key={b.id}>
               <text x="24" y={b.kopf} fontSize="14" fontWeight="600" fill="currentColor">{b.leistung}</text>
@@ -179,8 +193,8 @@ export default function DreiFensterDreiRegeln() {
           );
         })}
 
-        <line x1="24" y1="482" x2="656" y2="482" stroke="#d1d5db" strokeWidth="1" />
-        <text x="24" y="504" fontSize="12" fill="#9ca3af">
+        <line x1="24" y1="532" x2="656" y2="532" stroke="#d1d5db" strokeWidth="1" />
+        <text x="24" y="554" fontSize="12" fill="#9ca3af">
           Elterngeld lässt sich planen. Arbeitslosengeld teilweise. Krankengeld gar nicht — und dort
           ist das Fenster am kürzesten.
         </text>
