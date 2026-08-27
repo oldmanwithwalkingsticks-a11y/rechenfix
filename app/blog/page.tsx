@@ -9,6 +9,23 @@ export const metadata: Metadata = {
   description:
     'Der Rechenfix-Blog: Hintergründe, Rechenwege und Alltagsbeispiele zu unseren Rechnern — verständlich erklärt, mit Quellen und dem passenden Rechner direkt im Text.',
   alternates: { canonical: 'https://www.rechenfix.de/blog' },
+  openGraph: {
+    title: 'Blog: Geschichten hinter den Zahlen',
+    description:
+      'Hintergründe, Rechenwege und Alltagsbeispiele zu den Rechnern von Rechenfix.de — mit Primärquellen und dem passenden Rechner direkt im Text.',
+    url: 'https://www.rechenfix.de/blog',
+    siteName: 'Rechenfix.de',
+    type: 'website',
+    locale: 'de_DE',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Rechenfix-Blog' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog: Geschichten hinter den Zahlen',
+    description:
+      'Hintergründe, Rechenwege und Alltagsbeispiele zu den Rechnern von Rechenfix.de.',
+    images: ['/opengraph-image'],
+  },
 };
 
 export default async function BlogUebersicht() {

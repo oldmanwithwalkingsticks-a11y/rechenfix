@@ -6,6 +6,22 @@ export const metadata = {
   title: artikel.titel,
   description: artikel.beschreibung,
   alternates: { canonical: 'https://www.rechenfix.de/blog/warum-1-terabyte-nur-931-gigabyte-sind' },
+  openGraph: {
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    url: 'https://www.rechenfix.de/blog/warum-1-terabyte-nur-931-gigabyte-sind',
+    siteName: 'Rechenfix.de',
+    type: 'article',
+    locale: 'de_DE',
+    publishedTime: artikel.datum,
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: artikel.titel }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    images: ['/opengraph-image'],
+  },
 };
 
 <StructuredData data={generateArticleSchema({
