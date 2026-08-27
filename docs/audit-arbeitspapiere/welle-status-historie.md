@@ -6,6 +6,66 @@
 
 ---
 
+## 27.08.2026 — Welle 125: Guard gegen auseinanderlaufende KI-Medien-Listen — ✅ ABGESCHLOSSEN
+
+**Diese Welle behebt keinen Fehler, sondern die Ursache.** Die drei Medien von Artikel 17 fehlten
+seit Welle 115 in `public/ki-medien/inventar.json`; die Lücke lag **zwölf Tage unbemerkt** und fiel
+erst am 27.08.2026 bei einer unabhängigen Zählung auf — Tabelle 42 Schlüssel, Inventar 39 Einträge.
+Repariert wurde sie in Welle 124. **Der eigentliche Befund war aber nicht die Lücke, sondern dass
+niemand sie bemerken konnte:** Kein Schritt vergleicht die beiden Listen.
+
+Das Inventar ist laut eigenem `_hinweis` die Grundlage für den Soll-Ist-Abgleich der
+Kennzeichen-Wache. Ein stilles Auseinanderlaufen entwertet diese Prüfung vollständig — sie prüft
+dann Medien, die es nicht mehr gibt, und übersieht die, die dazugekommen sind. **Eine Checkliste
+kann man übersehen, ein Glied der prebuild-Kette nicht.**
+
+**`scripts/check-ki-inventar.mjs` prüft drei Regeln.** Regel 1: beide Listen in beide Richtungen.
+Regel 2: Übereinstimmung des `generator` je Datei — mit konkretem Anlass, denn in Welle 124 änderte
+sich beim Wechsel von `.png` auf `.jpg` neben dem Dateinamen auch der Generator (Gemini → Kling),
+weil das Standbild ab dann ein Einzelbild aus dem Video ist. Regel 3: Dateibestand in
+`public/blog/` gegen beide Listen, in beide Richtungen. Dazu eine **Plausibilitätsbremse**: Liest
+der Guard weniger als 30 Einträge aus einer Liste, bricht er ab, statt still grün zu werden — nach
+dem Vorbild von `check-ki-beispiele.mjs`.
+
+**Gegen sieben eingebaute Fehler geprüft, nicht nur im Grundzustand.** Ein Wächter, der im
+Fehlerfall nicht anschlägt, erzeugt falsche Sicherheit:
+
+| Fall | Exit |
+|---|---|
+| Grundzustand 42 / 42 / 42 | **0**, ohne Ausgabe |
+| **die drei Artikel-17-Einträge entfernt — der echte Welle-115-Fall** | **1** |
+| Generator im Inventar verfälscht | **1** |
+| unerfasste Mediendatei in `public/blog/` | **1** |
+| geführte Datei von der Platte entfernt | **1** |
+| Inventar-Eintrag ohne Tabellenschlüssel | **1** |
+| Tabelle auf fünf Einträge gekürzt (Bremse) | **1** |
+| `const GENERATOREN` echt umbenannt | **1** |
+
+Der zweite Fall ist der aussagekräftigste: **Der Guard hätte die Lücke, die ihn ausgelöst hat,
+gefangen.** Jeder Fall wurde eingebaut, geprüft und der Ursprungszustand danach byteweise
+wiederhergestellt und verifiziert.
+
+**Eine Feinheit, die beim Testen aufgefallen ist.** Der Guard findet den Tabellenblock über
+`indexOf('const GENERATOREN')`. Eine Umbenennung, die den Bezeichner nur **verlängert**
+(`const GENERATOREN_X`), lässt den Präfix stehen — der Guard liest den Block weiter und meldet
+grün. Das ist **richtig so**: Der Tabelleninhalt ist unverändert, die Listen stimmen weiterhin
+überein, und die Aufgabe dieses Guards ist der Listenabgleich, nicht die Syntaxprüfung von
+`ki-metadaten-schreiben.mjs` (die bräche ohnehin beim nächsten Lauf). Eine Umbenennung, die den
+Präfix **entfernt** (`const TABELLE_GEN`), wird dagegen zuverlässig gefangen. Festgehalten, damit
+die Zeile nicht bei nächster Gelegenheit „verschärft" wird.
+
+**Umfang:** Commit `8ef2383`, zwei Dateien — `scripts/check-ki-inventar.mjs` neu (158 Zeilen),
+`package.json` eine Zeile. Der Guard sitzt unmittelbar nach `check-ki-beispiele.mjs`, sodass die
+beiden KI-bezogenen Konsistenzprüfungen beieinanderstehen; die Reihenfolge der übrigen 14 Glieder
+ist unverändert. **prebuild-Kette von 14 auf 15 Glieder**, `npm run build` grün — der Guard läuft
+an Position 10 und meldet nichts, wie es sich für einen grünen Guard gehört.
+
+**Damit ist die Lehre aus Welle 124 umgesetzt.** Dort stand noch als Vorschlag, was hier gebaut
+wurde: eine dauerhaft geltende Eigenschaft gehört in ein Prüfskript in der prebuild-Kette, nicht in
+eine Checkliste, die man vergessen kann.
+
+---
+
 ## 27.08.2026 — Welle 124: Drei Video-Standbilder, echter erster Frame statt 7-MB-PNG — ✅ ABGESCHLOSSEN
 
 **Diese Welle wiegt schwerer als die Video-Welle davor.** Die Standbilder von `bildschirm`,
