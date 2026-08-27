@@ -6,6 +6,54 @@
 
 ---
 
+## 27.08.2026 — Welle 118: Admin-Tab „Social" unterscheidet TikTok-Nicht-Takttag von „inaktiv" — ✅ ABGESCHLOSSEN
+
+**Eine Anzeige, die korrektes Verhalten wie einen Defekt aussehen ließ.** Der Admin-Tab meldete für
+TikTok „inaktiv", während die Pipeline nachweislich lief — bundle.social belegt Posts am 18., 20.,
+22., 24. und 26.08.2026, jeweils `POSTED`.
+
+**Die Ursachenkette, im Code nachvollzogen:** `tiktokEnabled()` in `lib/social/state.ts` verlangt
+neben der Umgebungsvariablen auch `istTikTokTag(heute)`. An einem Nicht-Takttag liefert
+`platformsForSlug()` für **jeden** Slug eine Liste ohne TikTok, `app/api/social-status/route.ts`
+zählt daraus `zustaendig = 0`, und die Admin-Seite schrieb dafür pauschal „inaktiv". Nachgerechnet
+gegen `TIKTOK_TAKT_START = '2026-08-06'`: der 18./20./22./24./26.08. liegen 12/14/16/18/20 Tage
+danach, alles gerade Abstände; der 27.08. liegt 21 Tage danach und ist damit **kein** Takttag. Am
+Tag der Meldung war also exakt das richtige Verhalten zu sehen, nur mit der falschen Beschriftung.
+
+**Die Backend-Hälfte existierte bereits — seit Welle 52.** `/api/social-status` liefert die Felder
+`tiktokTakttagHeute` und `tiktokNaechsterTakttag`, und der Kommentar darüber nennt den Zweck
+wörtlich: „Damit der Admin-Tab an einem Nicht-Takttag (TikTok ohne Zuständigkeit) nicht wie ein
+Defekt aussieht." Das Frontend hat sie nie ausgewertet; das Interface `SocialStatus` kannte sie
+nicht einmal. **Die Absicht war da, die Frontend-Hälfte fehlte — sechsundsechzig Wellen lang.**
+
+**Was jetzt steht:** Bei `platform === 'tiktok'` und `tiktokTakttagHeute === false` erscheint „Heute
+kein Takttag" samt Datum des nächsten Posts. Instagram und Facebook behalten „inaktiv" — dort hieße
+es tatsächlich abgeschaltet.
+
+**Zwei Entscheidungen, die den Unterschied machen:** Die Felder sind **optional** getypt, damit eine
+gecachte ältere Antwort ohne sie die Seite nicht zerlegt. Und die Bedingung prüft explizit auf
+`=== false` statt mit `!`. Bei einer alten Antwort ist der Wert `undefined`; ein `!` würde das als
+„Nicht-Takttag" deuten und damit eine **echte** Abschaltung verschleiern — also genau den Fall
+unsichtbar machen, den man sehen will. Der teurere Zustand gewinnt.
+
+**Umfang:** Commit `267b401`, eine Datei, 26 hinzugefügte und 1 entfernte Zeile. Im Diff steht
+nichts sonst — nicht `app/api/social-status/route.ts`, nicht `lib/social/**`, nicht `lib/redis.ts`.
+Der Social-Tab bleibt strikt lesend: schreibende Redis-Operationen in der Datei weiterhin **0**.
+`>inaktiv<` kommt weiterhin genau **einmal** vor, im Zweig für Instagram und Facebook.
+`npx tsc --noEmit` und `npm run build` grün, 267 Seiten.
+
+**Lehre, allgemeiner als der Fall:** Wenn eine API Felder liefert, die niemand liest, altert die
+Absicht still. Der W52-Kommentar beschrieb die Lösung vollständig und richtig — nur eben in der
+Datei, die die Hälfte davon nicht braucht. **Ein Kommentar an der Erzeugerseite belegt nicht, dass
+die Verbraucherseite existiert.** Wer ein Feld einführt, sollte im selben Zug prüfen, ob es
+irgendwo gelesen wird; ein Grep über den Feldnamen hätte den Befund jederzeit gezeigt.
+
+**Sichtprüfung, beide Zustände nötig:** Heute (Nicht-Takttag) muss bei TikTok „Heute kein Takttag"
+mit Datum stehen, am nächsten Takttag (28.08.2026) wieder der normale Fortschrittsblock. Nur einer
+der beiden Zustände belegt die halbe Änderung.
+
+---
+
 ## 27.08.2026 — Welle 117: Abstand Kopfzeile/Bahn in `DreiFensterDreiRegeln` — ✅ ABGESCHLOSSEN
 
 **Zweite Geometrie-Korrektur an derselben Grafik, und die interessantere von beiden.** Karstens
