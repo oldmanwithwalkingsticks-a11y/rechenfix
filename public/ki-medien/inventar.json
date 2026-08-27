@@ -190,6 +190,24 @@
       "generator": "Kling AI 3.0 (Kuaishou)"
     },
     {
+      "datei": "/blog/steuerklassen-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/steuerklassen-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/steuerklassen.mp4",
+      "art": "video",
+      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
       "datei": "/blog/suesskartoffel-titelbild.png",
       "art": "bild",
       "seite": "/blog/warum-die-suesskartoffel-teurer-besteuert-wird",
@@ -235,24 +253,6 @@
       "datei": "/blog/zeit.mp4",
       "art": "video",
       "seite": "/blog/warum-in-deutschland-alle-uhren-gleich-gehen",
-      "generator": "Kling AI 3.0 (Kuaishou)"
-    },
-    {
-      "datei": "/blog/steuerklassen-titelbild.png",
-      "art": "bild",
-      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
-      "generator": "Gemini 3 Pro Image (Google)"
-    },
-    {
-      "datei": "/blog/steuerklassen-video-standbild.jpg",
-      "art": "bild",
-      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
-      "generator": "Kling AI 3.0 (Kuaishou)"
-    },
-    {
-      "datei": "/blog/steuerklassen.mp4",
-      "art": "video",
-      "seite": "/blog/warum-steuerklasse-3-keine-steuern-spart",
       "generator": "Kling AI 3.0 (Kuaishou)"
     }
   ]
