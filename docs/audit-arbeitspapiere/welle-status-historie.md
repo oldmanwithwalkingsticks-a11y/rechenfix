@@ -6,6 +6,62 @@
 
 ---
 
+## 27.08.2026 — Welle 126: Mess-Skripte nach `scripts/`, blog-builder auf v11 — ✅ ABGESCHLOSSEN
+
+**Vier Wellen lang lagen die Werkzeuge untracked im Repo-Root.** `videos-neu-kodieren.ps1`,
+`videos-ssim-pruefen.ps1` und `scripts/titelbilder-verkleinern.mjs` dokumentieren genau die
+Messmethodik, die in den Commit-Nachrichten der Wellen 122 bis 124 steht — Kodierparameter,
+SSIM-Werte, Zielbreite, Qualitätsstufen. **Ohne sie ist der Weg von 313 MB auf 76 MB im Repo
+behauptet, aber nicht reproduzierbar.**
+
+**Die beiden Video-Skripte wurden zusammengeführt, und der Grund ist der interessante Teil.** Die
+Trennung entstand nur, weil die SSIM-Messung im ersten Skript kaputt war: `-v error` unterdrückt
+die Zusammenfassung des `ssim`-Filters, die Spalte blieb leer. Zwei Dateien abzulegen, von denen
+eine die andere repariert, wäre **die Dokumentation eines Fehlers statt einer Methode**. Die drei
+behobenen Fehler stehen jetzt im Kopf des einen Skripts, damit sie nicht zurückkehren:
+`SSIM WURDE NICHT GEMESSEN`, `PIPE STATT WORTGRENZE`, `NativeCommandError`.
+
+**blog-builder v11, drei inhaltliche Korrekturen — die erste ist eine echte Falschaussage
+gewesen.** Der Skill beschrieb das Video-Standbild als ein **anderes** Motiv als das Titelbild und
+nannte `meter-video-standbild.png` als Vorbild. Gemessen ist das Gegenteil richtig: Der aus
+`steuerklassen.mp4` extrahierte erste Frame erreicht gegenüber dem dortigen JPG einen **SSIM von
+0,9902** — die Standbilder *sind* der erste Frame. Ausgerechnet die drei als Vorbild genannten
+PNG-Fassungen waren die Ausreißer und kosteten 18,9 MB Grundlast, die ohne Nutzeraktion luden
+(Welle 124). Der Abschnitt trägt jetzt die verbindliche `ffmpeg`-Zeile mit `-q:v 3` und den
+Hinweis, dass der Generator des Standbilds der **Video**generator ist.
+
+Zweitens fehlte `public/ki-medien/inventar.json` in der Ausroll-Checkliste — deshalb lief es in
+Welle 115 zwölf Tage unbemerkt aus dem Tritt. Der Eintrag steht jetzt im Ebene-3-Abschnitt und in
+der Build-Prompt-Struktur, mit Verweis auf den Guard aus Welle 125. Drittens die Regel aus drei
+Messungen in Folge: **Jede Neuerzeugung einer Mediendatei zerstört die Ebene-3-Kennzeichnung,
+ausnahmslos** — deshalb gehört in jeden Prompt, der Mediendateien ersetzt, eine Messung **vor** dem
+Skriptlauf. Sonst ist nur belegt, dass der Schritt ausgeführt wurde, nicht dass er gewirkt hat.
+
+**Umfang:** Commit `814b0e0`, drei Dateien — zwei neu, `SKILL.md` von 899 auf 952 Zeilen. Kein
+Eingriff in Code, Konfiguration, Medien oder die prebuild-Kette; kein npm-Skript für die beiden
+Werkzeuge, weil sie einmalig und von Hand laufen. `npm run build` grün, 267 Seiten, der neue
+Inventar-Guard aus Welle 125 läuft in der Kette mit. Der Repo-Root ist wieder frei von untracked
+Dateien.
+
+**Zwei Prüfwerte der Vorlage, beide erklärt statt angepasst.** Prüfung 5 verlangt, dass
+`grep -A3 'function Get-Ssim' | grep -c '-v error'` **0** liefert; gemessen wurde **1**. Der
+Treffer ist Zeile 136 — der *Kommentar* „KEIN `-v error`: der ssim-Filter schreibt seine
+Zusammenfassung auf `info`". Der tatsächliche `ffmpeg`-Aufruf steht in Zeile 139 und trägt kein
+`-v error`; über die ganze Funktion ohne Kommentarzeilen gemessen: **0**. **Das ist exakt die
+Fehlerklasse, die der Skill selbst kodifiziert** — ein Prüfbefehl darf die gesuchte Zeichenfolge
+nicht im Kommentar seines eigenen Ziels finden. Hier steht sie im Kommentar des geprüften Skripts
+statt in dem des Prompts, aber der Effekt ist derselbe. Prüfung 6 nennt 953 Zeilen für die
+`SKILL.md`; `wc -l` liefert **952**. Beide Zahlen sind richtig: `wc -l` zählt Zeilenumbrüche, eine
+Zählung über `split('\n')` liefert bei abschließendem Zeilenumbruch einen mehr. Die Datei im Baum
+ist **byte-identisch** mit der im ZIP.
+
+**Offen für Karsten:** Die claude.ai-Kopie des `blog-builder` steht noch auf v10.
+`blog-builder-v11.zip` unter Anpassen → Fähigkeiten einspielen — alten Eintrag ausschalten,
+löschen, ZIP hochladen, einschalten, neuen Chat öffnen. Sonst arbeitet Chat-Claude beim nächsten
+Artikel weiter mit der falschen Standbild-Beschreibung.
+
+---
+
 ## 27.08.2026 — Welle 125: Guard gegen auseinanderlaufende KI-Medien-Listen — ✅ ABGESCHLOSSEN
 
 **Diese Welle behebt keinen Fehler, sondern die Ursache.** Die drei Medien von Artikel 17 fehlten
