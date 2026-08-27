@@ -5,7 +5,7 @@ import { generateBreadcrumbSchema } from '@/lib/seo';
 import StructuredData from '@/components/seo/StructuredData';
 
 export const metadata: Metadata = {
-  title: 'Blog: Geschichten hinter den Zahlen | Rechenfix.de',
+  title: 'Blog: Geschichten hinter den Zahlen',
   description:
     'Der Rechenfix-Blog: Hintergründe, Rechenwege und Alltagsbeispiele zu unseren Rechnern — verständlich erklärt, mit Quellen und dem passenden Rechner direkt im Text.',
   alternates: { canonical: 'https://www.rechenfix.de/blog' },

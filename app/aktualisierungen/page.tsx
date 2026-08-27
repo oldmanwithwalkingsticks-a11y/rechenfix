@@ -24,7 +24,7 @@ const PAGE_DESC =
 const PAGE_URL = `${SITE_URL}/aktualisierungen`;
 
 export const metadata: Metadata = {
-  title: `${PAGE_TITLE} | ${SITE_NAME}`,
+  title: PAGE_TITLE,
   description: PAGE_DESC,
   alternates: { canonical: PAGE_URL },
   openGraph: {

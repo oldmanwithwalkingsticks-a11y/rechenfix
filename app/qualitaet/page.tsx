@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Qualität & Methodik | Rechenfix.de',
+  title: 'Qualität & Methodik',
   description: 'Wie Rechenfix.de Genauigkeit und Aktualität sicherstellt: Audit-Workflow, Primärquellen-Pflicht, Verify-Skripte, Stichtag-Logik, A11y-Konformität.',
   alternates: { canonical: 'https://www.rechenfix.de/qualitaet' },
   openGraph: {

@@ -8,7 +8,7 @@ import Link from 'next/link';
  * Bewusst ohne dynamische Inhalte, damit sie in jedem Fall funktioniert.
  */
 export const metadata: Metadata = {
-  title: 'Keine Verbindung | Rechenfix.de',
+  title: 'Keine Verbindung',
   description: 'Diese Seite ist ohne Internetverbindung nicht verfügbar.',
   robots: { index: false, follow: false },
 };
