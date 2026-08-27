@@ -2,7 +2,7 @@
 
 `inventar.json` listet alle KI-erzeugten Medien auf rechenfix.de. Die Datei liegt bewusst unter
 `public/`, ist also öffentlich unter `https://www.rechenfix.de/ki-medien/inventar.json` erreichbar:
-Die Kennzeichen-Wache im Skill `peter-ai` hat keinen Repo-Zugriff, wohl aber HTTP. Ein Inventar,
+Die Kennzeichen-Wache im Skill `peter-ki` hat keinen Repo-Zugriff, wohl aber HTTP. Ein Inventar,
 das die Wache nicht lesen kann, ist kein Inventar.
 
 ## Pflegeregel

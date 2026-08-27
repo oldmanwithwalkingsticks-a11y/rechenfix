@@ -134,7 +134,7 @@ scripts/_tmp-etf-check.mjs
 # SKILL.md einchecken -> Drift bei "npx skills update". Deshalb ignoriert.
 .claude/skills/find-skills/
 
-# Skill-Pakete der Assistenten (peter-ai, susanne-recht). Sie werden in einem
+# Skill-Pakete der Assistenten (peter-ki, susanne-recht). Sie werden in einem
 # eigenen, PRIVATEN Repo unter .claude/skills/ versioniert, weil dieses Repo
 # oeffentlich ist und die Pakete interne Arbeitsstaende samt Fehlerprotokollen
 # der Tageslaeufe enthalten. Achtung: Diese Zeile untrackt nichts Bestehendes:
