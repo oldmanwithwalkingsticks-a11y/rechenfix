@@ -61,6 +61,62 @@ nicht in eine einmalige Prüfung.
 
 ---
 
+## 27.08.2026 — Welle 123: Blog-Titelbilder verkleinert, 110 MB auf 12 MB — ✅ ABGESCHLOSSEN
+
+**Die 17 Titelbilder lagen in Generatorauflösung im Repo:** 2752 × 1536 bei durchschnittlich
+6,5 MB, zusammen **110,3 MB**. Ausgeliefert wird davon nie mehr als 1536 Pixel Breite — am
+ausgelieferten HTML gemessen fordert `next/image` `w=1536` an, und das ist die größte Breite auf
+der ganzen Seite. Die Quelle war damit 1,8-fach größer als je gebraucht.
+
+**Neu erzeugt mit `sharp` auf exakt 1536 Pixel Breite, verlustfreies PNG: 11,7 MB, Faktor 9,46,
+89 Prozent gespart.** `sharp` ist dieselbe Bibliothek, die `next/image` zur Laufzeit benutzt — und
+ist die Quelle exakt 1536 breit, skaliert `next/image` gar nicht mehr. Aus zwei
+Verarbeitungsschritten wird einer, mit demselben Resampler wie in der Produktion.
+
+**Warum PNG bleibt, obwohl `.jpg` naheliegt.** Die Umbenennung war geplant und wurde nach der
+Messung verworfen: Jede verlustbehaftete Zwischenstufe kostet rund **0,03 bis 0,04 SSIM**,
+unabhängig von der Qualitätsstufe — auch JPEG q97 und WebP q99 —, weil lossy Codecs die feine
+Körnung der generierten Bilder glätten. Verlustfrei kostet nichts und spart trotzdem Faktor 9,46.
+**Und die gleichbleibende Endung macht aus einer Welle mit breitem Eingriff eine mit 17
+Binärdateien und null Codezeilen:** keine MDX-Referenz, kein `image:` im Article-Schema, keine
+Komponente, keine `GENERATOREN`-Zeile.
+
+**`meter-titelbild.png` ist der Sonderfall, und die Vorlage hat ihn vorher benannt.** Es war als
+einziges 2720 statt 2752 breit und ergibt deshalb 1536 × **867** statt 1536 × 857 — Seitenverhältnis
+erhalten, kein Fehler. Eine Prüfung, die stur 857 erwartet, hätte hier fälschlich angeschlagen.
+Gemessen: 17 von 17 exakt 1536 breit, 16× Höhe 857, `meter` 867, **0 Abweichungen**.
+
+**Wieder gilt: Neuschreiben zerstört die KI-Kennzeichnung.** Belegt statt angenommen — direkt nach
+dem Kopieren lieferte `grep -ac trainedAlgorithmicMedia` für **alle 17** Dateien **0**
+(Verteilung `17 0`). Nach dem Skriptlauf melden alle 17 `OK`, der Grep liefert `17 1`, und im
+gesamten `--pruefen`-Lauf steht **0-mal** `UNBEKANNT` oder `FEHLT`. Das ist derselbe Befund wie in
+Welle 122 bei den Videos und in Welle 124 bei den Standbildern — **jede Neuerzeugung einer
+Mediendatei erfordert den Ebene-3-Schritt, ohne Ausnahme.**
+
+**Doppelt gemessen.** Vor dem Kopieren wurden alle 34 Größen (17 alt, 17 neu) gegen die Tabelle des
+Verkleinerungslaufs gehalten — **alle 34 auf zwei Nachkommastellen deckungsgleich**, Summen und
+Gesamtfaktor ebenfalls. Nach dem XMP-Schreiben noch einmal gegen die committeten Blobs aus
+`git show HEAD:…`: 110,3 → 11,7 MB, **keine einzige Datei größer geworden**.
+
+**Umfang:** Commit `9495c3d`, 17 Binärdateien, **0 Codezeilen**. Im Diff steht keine `.tsx`, `.ts`,
+`.mdx`, `.mjs` oder `.json`, kein `.mp4` und kein `video-standbild` — die Standbilder waren ein
+eigener Befund und sind in Welle 124 erledigt worden. `npm run build` grün, 267 Seiten.
+
+**Zur Reihenfolge, damit die Historie nicht in die Irre führt:** Diese Welle wurde **nach** Welle
+124 ausgerollt. Der genannte Messstand `520d3f3` war zu diesem Zeitpunkt Vorfahre von HEAD, und die
+Titelbilder waren seitdem unverändert — die Baseline galt also weiter, alle 34 Sollwerte wurden
+unverändert vorgefunden. Welle 124 hat nur `*-video-standbild.*` angefasst, es gab keine
+Überschneidung.
+
+**Zur Repo-Größe:** Wie bei Welle 122 behält Git die alten Blobs; `.git` **wächst** um rund 12 MB.
+Die Ersparnis wirkt bei der Auslieferung und in künftigen Klonen mit `--filter=blob:none`, nicht in
+der Historie.
+
+**Bilanz der drei Medien-Wellen 122 bis 124:** 183,8 + 110,3 + 18,9 = **313 MB** ausgelieferter
+Medien sind auf 64,2 + 11,7 + 0,4 = **76,3 MB** gesunken. Faktor 4,1 über den gesamten Blog-Bestand.
+
+---
+
 ## 27.08.2026 — Welle 122: Blogvideos neu kodiert, 184 MB auf 64 MB — ✅ ABGESCHLOSSEN
 
 **Videos durchlaufen keinen Optimierer.** Bilder gehen über `next/image` und werden als WebP
