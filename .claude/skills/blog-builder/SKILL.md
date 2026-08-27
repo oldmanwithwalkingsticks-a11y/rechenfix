@@ -5,11 +5,13 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v10 (27.08.2026, verifiziert an HEAD `6b318c8`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v11 (27.08.2026, verifiziert an HEAD `f07f4df`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
 
 **v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
 
 **v10-Nachtrag (27.08.2026 — nach Artikel 17 „Steuerklassen", Wellen 115 bis 117):** Zwei der drei Grafiken mussten nach dem Ausrollen zweimal geometrisch nachgebessert werden — drei Sichtprüfungen für Fehler, die vorher rechnerisch auffindbar gewesen wären. Beide Ursachen waren neu: eine ungemessene **linke** Spaltenbreite (die bisherige Regel schaute nur nach rechts auf Balkenenden) und ein Element, das nur in einer von drei gleichartigen Reihen vorkommt und bei reihenweiser Prüfung systematisch durchfällt. Kodifiziert in zwei neuen Unterabschnitten der Geometrie-Prüfung, samt Skript für die paarweise Vollprüfung. Seitdem gilt: **Geometrie wird gerechnet, nicht angeschaut.**
+
+**v11-Nachtrag (27.08.2026 — nach den Medien-Wellen 122 bis 125):** Der Blog-Medienbestand lag in Generatorauflösung im Repo und wurde teils roh ausgeliefert: 313 MB, davon 184 MB Videos mit durchschnittlich 10,4 Mbit/s und drei Standbilder à 5 bis 7 MB, die ohne jede Nutzeraktion luden. Neu erzeugt sind es 76 MB. Drei Lehren sind eingearbeitet: die Beschreibung des Video-Standbilds war **sachlich falsch** (es ist der erste Frame, nicht ein anderes Motiv — SSIM 0,9902), `public/ki-medien/inventar.json` fehlte in der Ausroll-Checkliste und lief zwölf Tage unbemerkt aus dem Tritt, und **jede Neuerzeugung einer Mediendatei zerstört die Ebene-3-Kennzeichnung** — dreimal in Folge gemessen. Seitdem gilt: **Ins Repo gehört die Auslieferungsfassung, nicht die Generatorfassung.**
 
 **Was dieser Skill NICHT abnimmt:** Faktenrecherche, Widersprüche in Quellen aufspüren, Erzählung bauen, Grafiken inhaltlich entwerfen, den „Karsten sagt"-Block. Das ist pro Artikel neu und ist der eigentliche Wert. Der Skill verschlankt das Drumherum, nicht den Kern.
 
@@ -526,9 +528,30 @@ Das ist der Schritt, der vergessen wird. Bei jedem neuen Asset:
 
 1. Datei in `public/blog/` ablegen und committen.
 2. **In `scripts/ki-metadaten-schreiben.mjs` die `GENERATOREN`-Tabelle ergänzen** — Dateiname → Generatorbezeichnung. Fehlt der Eintrag, meldet das Skript `UNBEKANNT` und überspringt die Datei.
-3. `node scripts/ki-metadaten-schreiben.mjs` ausführen.
-4. `node scripts/ki-metadaten-schreiben.mjs --pruefen` — **jede Datei muss `OK` melden.**
-5. Die Assets erscheinen danach als geändert und müssen erneut committet werden.
+3. **In `public/ki-medien/inventar.json` denselben Eintrag ergänzen** (`datei`, `art`, `seite`, `generator`) und `_stand` aktualisieren.
+4. `node scripts/ki-metadaten-schreiben.mjs` ausführen.
+5. `node scripts/ki-metadaten-schreiben.mjs --pruefen` — **jede Datei muss `OK` melden.**
+6. Die Assets erscheinen danach als geändert und müssen erneut committet werden.
+
+**Zu Schritt 3:** Das Inventar ist laut eigenem `_hinweis` die Grundlage für den
+Soll-Ist-Abgleich der Kennzeichen-Wache (Skill `peter-ki`). In Welle 115 wurde es
+vergessen; die Lücke lag **zwölf Tage unbemerkt** und fiel erst bei einer unabhängigen
+Zählung auf — Tabelle 42 Schlüssel, Inventar 39 Einträge. Seit Welle 125 prüft
+`scripts/check-ki-inventar.mjs` beide Listen in beide Richtungen, den Generator je Datei
+und den Dateibestand; der Guard hängt als zehntes Glied in der prebuild-Kette. Der Schritt
+bleibt trotzdem hier stehen: Der Guard verhindert das Ausrollen, er füllt das Inventar nicht.
+
+**Jede Neuerzeugung einer Mediendatei zerstört die Ebene-3-Kennzeichnung — ausnahmslos.**
+Dreimal in Folge gemessen: In den Wellen 122 (Videos neu kodiert), 123 (Titelbilder
+verkleinert) und 124 (Standbilder neu extrahiert) lieferte `grep -ac trainedAlgorithmicMedia`
+direkt nach dem Kopieren für **jede** betroffene Datei `0`. Das gilt für jedes Werkzeug, das
+die Datei neu schreibt — ffmpeg, sharp, ein Bildbearbeitungsprogramm. Wer Mediendateien
+anfasst, ohne danach das Skript laufen zu lassen, stellt ungekennzeichnete Medien online.
+
+Deshalb gehört in jeden Prompt, der Mediendateien ersetzt, eine Messung **vor** dem
+Skriptlauf: `grep -ac trainedAlgorithmicMedia` je Datei, Erwartung `0`, danach erneut,
+Erwartung `≥ 1`. Erst das belegt, dass der Schritt gewirkt hat, statt nur ausgeführt worden
+zu sein.
 
 **Fallen, die je eine Welle gekostet haben:**
 
@@ -598,12 +621,42 @@ Daraus folgen drei Medien-Assets je Artikel, nicht zwei:
 | Datei | Inhalt |
 |---|---|
 | `<thema>-titelbild.png` | eigenes Motiv, steht unter der H1 |
-| `<thema>-video-standbild.png` | **anderes** Motiv, dient als `poster` und als erster Frame |
-| `<thema>.mp4` | aus dem Video-Standbild animiert |
+| `<thema>-video-standbild.jpg` | **der erste Frame des Videos** — dient als `poster` |
+| `<thema>.mp4` | eigenständig generiert, nicht aus dem Titelbild abgeleitet |
 
-**Der `poster` des `Video`-Blocks zeigt nie auf das Titelbild.** Vorbild ist der Meter-Artikel
-(`meter-video-standbild.png`); die älteren Zwei-Asset-Artikel (bmi, cups, euro) sind die
-Ausnahme, nicht die Regel.
+**Der `poster` des `Video`-Blocks zeigt nie auf das Titelbild.** Titelbild und Video sind
+zwei verschiedene Motive; ein Titelbild als `poster` lässt das Bild beim Abspielstart
+umspringen.
+
+> **Korrektur Welle 124 (27.08.2026):** Hier stand bis dahin, das Standbild sei ein
+> **anderes** Motiv, und der Meter-Artikel mit `meter-video-standbild.png` sei das Vorbild.
+> Beides war falsch. Gemessen: Der aus `steuerklassen.mp4` extrahierte erste Frame erreicht
+> gegenüber dem dortigen `-video-standbild.jpg` einen **SSIM von 0,9902** — die Standbilder
+> sind der erste Frame. Ausgerechnet die drei als Vorbild genannten PNG-Fassungen
+> (`bildschirm`, `blutdruck`, `meter`) waren die Ausreißer: 2752×1536 statt der Videoauflösung
+> 1928×1072, zusammen **18,9 MB**, und sie wurden roh ausgeliefert — das `poster`-Attribut
+> läuft nicht durch `next/image`, und das Standbild lädt beim Rendern der Seite, auch mit
+> `preload="none"`. Drei Artikel zogen dadurch 5 bis 7 MB Grundlast, ohne dass jemand etwas
+> anklickte. Ersetzt durch den echten ersten Frame: zusammen 382 KB, Faktor 51.
+
+**Standbild erzeugen — verbindlich:**
+
+```bash
+ffmpeg -y -v error -i public/blog/<thema>.mp4 -vframes 1 -q:v 3 \
+  public/blog/<thema>-video-standbild.jpg
+```
+
+`-q:v 3` ist gemessen: 114 KB gegenüber 129 KB beim Bestand, SSIM 0,9912. `-q:v 2` liefert
+149 KB bei minimal schlechterem Wert. **JPG, nicht PNG** — ein PNG-Standbild in
+Videoauflösung ist rund fünfzigmal so groß, ohne sichtbaren Gewinn.
+
+Der Generator des Standbilds ist damit der **Videogenerator**, nicht der Bildgenerator. Beim
+Umstellen eines Bestands-PNG auf einen Videoframe muss der Eintrag in `GENERATOREN` und im
+Inventar mitgezogen werden — eine falsche Herstellerangabe in der Kennzeichnung nach Art. 50
+KI-VO ist schlimmer als gar keine. Seit Welle 125 fängt `scripts/check-ki-inventar.mjs`
+genau das.
+
+Die älteren Zwei-Asset-Artikel (bmi, cups, euro) sind die Ausnahme, nicht die Regel.
 
 Konsequenzen für die Mechanik:
 
@@ -756,7 +809,7 @@ Jeder Prompt als eigene `.md` in `/mnt/user-data/outputs/`, Konvention `welle<N>
 - **Harter Kontext-Header:** Repo, lokaler Pfad, HEAD-Erwartung, betroffene Dateien.
 - **STOP-Bedingungen (ZERO Commits):** Zieldatei fehlt; wörtlicher Suchtext nicht gefunden → NICHT raten, STOP + melden; Build schlägt fehl → nicht committen, Fehlermeldung; **der Prompt nennt keine Generatornamen für die neuen Medien → melden und stoppen** (nicht aus der Tabelle für andere Artikel übernehmen und nicht schätzen — Lehre Welle 55).
 - **Schritte** mit wörtlichen Such-/Ersetz-Blöcken. **Wortlaute vorab per git clone verifizieren**, damit Code-Claudes STOP-Bedingung nicht fälschlich greift.
-- **Pflichtschritt KI-Metadaten Ebene 3 (Art. 50 KI-VO)** direkt nach dem Schritt, der Titelbild und Video ablegt — sonst geht das Video auf Dateiebene ungekennzeichnet live (Ebene 1/2 reichen NICHT, sie gelten nur auf der eigenen Seite). Der Schritt lautet: je eine Zeile `'<titelbild>.png': '<Generatorname>'` und `'<video>.mp4': '<Generatorname>'` in `GENERATOREN` in `scripts/ki-metadaten-schreiben.mjs` ergänzen (Werte aus der Datei-Tabelle des Prompts, siehe nächster Punkt), dann `node scripts/ki-metadaten-schreiben.mjs` und `node scripts/ki-metadaten-schreiben.mjs --pruefen`. Erwartung: beide neuen Dateien melden `OK` (`UNBEKANNT` = GENERATOREN-Zeile fehlt; `FEHLT` = Skript nicht/nicht erfolgreich gelaufen). `scripts/ki-metadaten-schreiben.mjs` gehört mit in den Commit.
+- **Pflichtschritt KI-Metadaten Ebene 3 (Art. 50 KI-VO)** direkt nach dem Schritt, der Titelbild und Video ablegt — sonst geht das Video auf Dateiebene ungekennzeichnet live (Ebene 1/2 reichen NICHT, sie gelten nur auf der eigenen Seite). Der Schritt lautet: je eine Zeile `'<titelbild>.png': '<Generatorname>'` und `'<video>.mp4': '<Generatorname>'` in `GENERATOREN` in `scripts/ki-metadaten-schreiben.mjs` ergänzen (Werte aus der Datei-Tabelle des Prompts, siehe nächster Punkt), dann `node scripts/ki-metadaten-schreiben.mjs` und `node scripts/ki-metadaten-schreiben.mjs --pruefen`. Erwartung: beide neuen Dateien melden `OK` (`UNBEKANNT` = GENERATOREN-Zeile fehlt; `FEHLT` = Skript nicht/nicht erfolgreich gelaufen). `scripts/ki-metadaten-schreiben.mjs` gehört mit in den Commit. **Ebenso `public/ki-medien/inventar.json`** — dort braucht jede neue Mediendatei denselben Eintrag (`datei`, `art`, `seite`, `generator`), und `_stand` wird aktualisiert. In Welle 115 wurde das vergessen; seit Welle 125 bricht der prebuild-Guard `scripts/check-ki-inventar.mjs` den Build ab, wenn Tabelle und Inventar auseinanderlaufen.
 - **Datei-Tabelle des Prompts trägt eine Generator-Spalte.** Die „Mitgelieferte Dateien"-Tabelle bekommt neben `Ziel` die Spalte `Generator (für GENERATOREN)`, damit der Wert an derselben Stelle wie der Dateiname steht und beim Prompt-Schreiben nicht übersehen wird. Chat-Claude füllt sie beim Erzeugen der Assets — nicht aus Gewohnheit, sondern mit dem real verwendeten Modell.
 - **Gezieltes Staging:** `git add <konkrete Pfade>` — NIE `git add .` und **nie ein Verzeichnis** (Lehre Welle 74) (sonst wandern `client-data.ts`-Drift und ungetrackte Handoff-Dateien mit). `client-data.ts` ist auto-generierter Datums-Drift, nie mitcommitten.
 - **Übergabe-Format:** knappe Punktliste (geänderte Dateien, Build-Ergebnis, Routen-Check, Commit-Hash, offene Punkte für Karsten).
