@@ -6,6 +6,52 @@
 
 ---
 
+## 27.08.2026 — Welle 122: Blogvideos neu kodiert, 184 MB auf 64 MB — ✅ ABGESCHLOSSEN
+
+**Videos durchlaufen keinen Optimierer.** Bilder gehen über `next/image` und werden als WebP
+ausgeliefert; die 17 Blogvideos gingen roh raus — 1920 × 1080 bei durchschnittlich 10,4 Mbit/s.
+Wer eines startete, lud zwischen 2,8 und 23,7 MB, im schlimmsten Fall über Mobilfunk. Zusammen
+**183,8 MB**.
+
+**Neu kodiert mit `libx264 -crf 20 -preset slow -c:a copy`: 64,1 MB, Faktor 2,87, 65 Prozent
+gespart.** Auflösung, Bildrate und Dauer bleiben; die Tonspuren von `bildschirm.mp4` und
+`pferdestaerke-muehlenpferd.mp4` wurden byteweise kopiert statt neu kodiert.
+
+**Qualität objektiv gemessen statt behauptet.** SSIM gegen die Originale, alle 17 Dateien: Minimum
+**0,9866**, Mittel **0,9906**, Maximum **0,996** — keine Datei unter 0,98. Das ist der Grund, warum
+diese Welle überhaupt vertretbar ist: Ohne Messung wäre „sieht gleich aus" eine Behauptung.
+
+**Der Punkt, der die Welle hätte kippen können: Neukodieren zerstört die KI-Kennzeichnung.** Die
+XMP-Auszeichnung nach Art. 50 Abs. 4 KI-VO überlebt einen ffmpeg-Durchlauf nicht. Belegt, nicht
+angenommen: Direkt nach dem Kopieren lieferte `grep -ac trainedAlgorithmicMedia` für **alle 17**
+Dateien **0**. Nach dem Lauf von `scripts/ki-metadaten-schreiben.mjs` melden alle 17 `OK`, und der
+Grep liefert für jede genau **1**. Ebene 1 und 2 — sichtbarer Badge und On-Page-JSON-LD — entstehen
+weiter über die Defaults von `Video.tsx` und waren nie betroffen; **Ebene 3 war es, und sie wäre
+still verschwunden.**
+
+**Die `GENERATOREN`-Tabelle blieb unangetastet**, weil sich kein Dateiname geändert hat: Das Skript
+meldet „42 Dateien ausgezeichnet, **0 unbekannt**". Ein `UNBEKANNT` wäre hier ein Alarmzeichen
+gewesen, kein Anlass zum Ergänzen.
+
+**Umfang:** Commit `129ef93`, 17 Binärdateien, **0 Codezeilen**. Im Diff steht keine `.tsx`, `.ts`,
+`.mdx`, `.mjs`, `.csv` oder `.json`, kein `.jpg` und kein `.png` — Standbilder und Titelbilder sind
+unberührt, `scripts/ki-metadaten-schreiben.mjs` ebenfalls. `bilanz.csv` und `ssim.csv` sind im
+Quellordner geblieben. `npm run build` grün, 267 Seiten; da sich kein Code ändert, ist der Build
+nur die Gegenprobe, dass keine Referenz ins Leere zeigt.
+
+**Doppelt gemessen, weil das XMP-Schreiben die Dateien wieder wachsen lässt.** Vor dem Kopieren
+wurden alle 34 Größen (17 alt, 17 neu) gegen die Tabelle des Kodierlaufs gehalten — alle 34 auf
+zwei Nachkommastellen deckungsgleich. Nach dem XMP-Schreiben noch einmal gegen die **committeten
+Blobs** aus `git show HEAD:…` geprüft: 183,8 → 64,2 MB, und **keine einzige Datei ist größer
+geworden**. Die 0,1 MB Differenz zur reinen Kodierbilanz ist die neu geschriebene Kennzeichnung.
+
+**Zur Repo-Größe, damit die Erwartung stimmt:** Git behält die alten Blobs. `.git` **wächst** durch
+diese Welle um rund 64 MB, statt zu schrumpfen. Die Ersparnis wirkt bei der Auslieferung an
+Besucher und in künftigen Klonen mit `--filter=blob:none`, nicht in der Historie. Ein Rückbau mit
+`git filter-repo` steht ausdrücklich nicht zur Debatte.
+
+---
+
 ## 27.08.2026 — Welle 121: Blog bekommt eigene openGraph- und twitter-Metadaten — ✅ ABGESCHLOSSEN
 
 **Achtzehn Blog-Seiten sahen beim Teilen identisch aus.** Keine einzige hatte einen eigenen
