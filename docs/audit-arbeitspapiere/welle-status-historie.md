@@ -6,6 +6,58 @@
 
 ---
 
+## 27.08.2026 — Welle 116: Zwei Grafiken aus Artikel 17 geometrisch korrigiert — ✅ ABGESCHLOSSEN
+
+**Der Code war richtig, der Abstand zwischen zwei Zahlen nicht.** Karstens Sichtprüfung im
+Inkognito zeigte in beiden Grafiken Textkollisionen in der linken Spalte — Beschriftungen, die
+unter den Balken beziehungsweise auf den Zeitachsen lagen. Jede Zeile für sich war plausibel; erst
+das Breitenmodell von 0,55 × fontSize je Zeichen macht sichtbar, dass die freigehaltene Spalte zu
+schmal war.
+
+**`EinBruttoSechsNettos`:** Das Balkenfeld begann bei x=148, die Klassenbeschreibungen bei x=56 —
+92 px dazwischen. **Vier der sechs** Beschreibungen sind breiter; „verheiratet, ähnliches
+Einkommen" endete rechnerisch bei x=228, also 80 px im Balkenfeld. Das Feld steht jetzt bei x=248
+und ist auf 272 px gekürzt; die längste Beschreibung endet bei x=232, die Grenze liegt bei x=240.
+Nachgerechnet: 32 Zeichen × 0,55 × fontSize 10 = 176 px ab x=56. Entfallen ist außerdem die
+Klammer, die Klasse I und IV als identisch markierte — ihr Label saß bei x=114 und lag ebenfalls
+auf den Beschreibungen. Die Aussage tragen jetzt eine dezente Zeilenhinterlegung beider Zeilen
+(`zeile-hervor`, hell und dark definiert) und eine eigene Fußzeile.
+
+**`DreiFensterDreiRegeln`:** Die Bahnen begannen bei x=92, Leistungsname und Norm standen links
+daneben bei x=24. **Alle sechs** Beschriftungen sind breiter als diese 68 px — „Arbeitslosengeld"
+endet bei x=147, „§ 153 Abs. 2 SGB III" bei x=134. Jede Bahn ist jetzt ein eigener Block: Kopfzeile
+mit Leistungsname bei x=24 und Norm bei x=200, darunter die Zeitachse über die volle Breite von
+x=24 bis x=600. Die Achse gewinnt dabei 68 px, weil links keine Spalte mehr freigehalten werden
+muss.
+
+**Reine Geometrie, belegt statt behauptet.** Vor dem Ersetzen wurde die Menge aller Dezimalzahlen
+beider Dateien festgehalten und danach gegengeprüft. Die einzigen Änderungen: `0,55` und `27.08`
+aus dem neuen Kopfkommentar — und ein verschwundenes `1.5`, das sich als `strokeWidth` der
+entfallenen Klammer herausstellte. Alle zwölf Inhaltswerte stehen unverändert: die sechs Nettos
+(2.049,50 zweimal, 2.144,08, 2.309,17, 1.715,17, 1.675,67) und die sechs Abzugsquoten
+(31,7 zweimal, 28,5, 23,0, 42,8, 44,1). Neu ist je Datenzeile nur ein `hervor`-Flag für die
+Hinterlegung.
+
+**Ursache in beiden Fällen dieselbe, und sie steht jetzt im Dateikopf:** Beim Bau war nur der
+Überlauf nach **rechts** geprüft worden — das Wertelabel hinter dem Balken —, nie die Breite der
+linken Spalte. Die Lehre gehört zur Geometrie-Prüfung des blog-builder-Skills: **Bei
+Balkendiagrammen beide Seiten des Balkenfelds gegen Textbreiten prüfen.**
+
+**Umfang:** Commit `d9f01e1`, zwei Dateien, 89 hinzugefügte und 70 entfernte Zeilen. Unberührt und
+im Diff nicht vorhanden: `page.mdx`, `mdx-components.tsx`, `scripts/ki-metadaten-schreiben.mjs`,
+alles unter `public/blog/` und die dritte Grafik `DreiTarifeSechsKlassen`. Keine neuen Medien,
+deshalb kein KI-Metadaten-Schritt; die Komponentennamen sind identisch geblieben, deshalb keine
+Änderung an der Registrierung. `npx tsc --noEmit` und `npm run build` grün, 267 Seiten.
+
+**Prüfvorschrift-Nachtrag.** Verifikation 3 des Prompts überschreibt ihre Einzelwerte mit „Soll je
+1", während zwei der genannten Zahlen zweimal vorkommen (`2049.5` für Klasse I und IV, `633,50` in
+Fußzeile und Beschreibung). Der Inline-Kommentar an `2049.5` nennt die zwei richtig — die
+Überschrift war die ungenauere Stelle. Gemessen wurde deshalb gegen eine **vor** dem Ersetzen
+aufgenommene Baseline statt gegen den Pauschalwert; das ist ohnehin die belastbarere Form, weil sie
+auch Zahlen erfasst, die in der Vorschrift gar nicht aufgeführt sind.
+
+---
+
 ## 26.08.2026 — Welle 114: Nettobetrag in Title und Description der Varianten-Seiten — ✅ ABGESCHLOSSEN
 
 **865 Impressionen, null Klicks.** Die sechs Brutto-Netto-Varianten standen in der Search Console
