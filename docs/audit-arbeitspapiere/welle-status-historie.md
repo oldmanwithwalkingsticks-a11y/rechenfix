@@ -6,6 +6,51 @@
 
 ---
 
+## 27.08.2026 — Welle 117: Abstand Kopfzeile/Bahn in `DreiFensterDreiRegeln` — ✅ ABGESCHLOSSEN
+
+**Zweite Geometrie-Korrektur an derselben Grafik, und die interessantere von beiden.** Karstens
+Sichtprüfung nach Welle 116 zeigte, dass das Label „1. Januar" der Arbeitslosengeld-Bahn die
+Kopfzeile „Arbeitslosengeld" überlagert. Nachgerechnet: Kopfzeile bei y=268 über x 24…147, Label
+bei y=276 über x 100…155 — **acht Pixel senkrechter Abstand bei elf Pixel Schriftgröße**, dazu
+waagerechte Überlappung von 100 bis 147. Das Label sitzt 18 px über der Bahnlinie, die Bahn lag
+26 px unter der Kopfzeile; 26 minus 18 lässt 8.
+
+**Warum Welle 116 das nicht gefunden hat — das ist die eigentliche Lehre.** Geprüft worden waren
+die Regel- und Planbar-Zeilen **unter** den Bahnen, weil die in allen drei Blöcken vorkommen. Das
+Label über der Linie gibt es nur bei **einer** der drei Bahnen. Eine reihenweise Prüfung, die
+Blöcke als gleichförmig behandelt, sieht so etwas nie. **Eine Geometrie-Prüfung, die über Reihen
+läuft, prüft nur, was in jeder Reihe vorkommt.** Was nur einmal auftritt, fällt durch — und genau
+das war hier der Fall. Die v4-Fassung ist deshalb nicht reihenweise, sondern **paarweise**
+geprüft: jedes Textelement gegen jedes andere, 171 Elementpaare, null Kollisionen, kein Überlauf
+über x=680, höchstes y=554 bei viewBox-Höhe 572.
+
+**Was sich geändert hat, sind ausschließlich Abstände:** Kopfzeile zu Bahnlinie von 26 auf **40 px**,
+Kopfzeile zu Label „1. Januar" von 8 auf **22 px**, Blockhöhe von 100 auf **118 px**, Kopfpositionen
+168/268/368 auf 168/**286**/**404**, viewBox-Höhe 520 auf **572**, Ereignis-Linie bis y=**500**,
+Untertitel/Trennlinie/Fußzeile auf **516/532/554**.
+
+**Kein Text geändert, und das ist gemessen, nicht behauptet.** Vor dem Ersetzen wurden die
+sichtbaren JSX-Textknoten aufgenommen — Kommentarblöcke, `<style>`-Inhalt und
+JSX-Ausdrucksfragmente ausgeklammert — und danach dieselbe Messung wiederholt: **11 Textknoten,
+Diff leer.** In den Ausdrucksfragmenten gibt es genau eine Abweichung, auf das Zeichen reduziert:
+`b.kopf + 26` → `b.kopf + 40`. Bei den Dezimalzahlen kam nur `27.08` aus dem neuen Kopfkommentar
+hinzu.
+
+**Umfang:** Commit `8598127`, eine Datei, 23 hinzugefügte und 9 entfernte Zeilen. Im Diff steht
+nichts sonst — nicht `EinBruttoSechsNettos` (nach Welle 116 in Ordnung), nicht
+`DreiTarifeSechsKlassen`, nicht die `page.mdx`, nichts unter `public/blog/`. `npx tsc --noEmit` und
+`npm run build` grün, 267 Seiten. Dark-Mode-Selektoren unverändert 6, farbige `fill`-Attribute an
+`<text>` weiterhin 0.
+
+**Für den blog-builder-Skill:** Der Abschnitt „Geometrie-Prüfung für SVG-Grafiken" nennt bisher
+Kopfbereich, Textbreite, Balkenenden, Fußbereich und Kurven — alles Kategorien, die man reihenweise
+abarbeitet. Ihm fehlt der Satz, den diese Welle geliefert hat: **Elemente, die nur in einem von
+mehreren gleichartigen Blöcken vorkommen, sind die gefährlichsten**, weil die naheliegende
+Prüfstrategie sie systematisch übersieht. Paarweise Prüfung ist bei drei Blöcken noch bezahlbar
+(171 Paare) und fängt genau diese Klasse.
+
+---
+
 ## 27.08.2026 — Welle 116: Zwei Grafiken aus Artikel 17 geometrisch korrigiert — ✅ ABGESCHLOSSEN
 
 **Der Code war richtig, der Abstand zwischen zwei Zahlen nicht.** Karstens Sichtprüfung im
