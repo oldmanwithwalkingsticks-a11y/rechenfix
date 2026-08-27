@@ -42,6 +42,10 @@ interface SocialStatus {
   queueLaenge: number;
   abgerufenAm: string;
   plattformen: SocialPlattformStatus[];
+  /** W118 — von /api/social-status seit W52 geliefert, bis dahin ungenutzt.
+   *  Unterscheidet „TikTok heute nicht am Zug" von „TikTok abgeschaltet". */
+  tiktokTakttagHeute?: boolean;
+  tiktokNaechsterTakttag?: string;
 }
 
 const AUTH_STORAGE_KEY = 'rf_admin_stats_token';
@@ -298,6 +302,15 @@ export default function AffiliateStatsPage() {
     const ja = feedbacks.filter(f => f.v === 'ja').length;
     return { ja, nein: feedbacks.length - ja, gesamt: feedbacks.length };
   }, [feedbacks]);
+
+  /** W118 — reines Tagesdatum (YYYY-MM-DD) ohne Uhrzeit, für den
+   *  TikTok-Takttag. fmtDate erwartet Millisekunden und hängt eine Uhrzeit an. */
+  const fmtTag = (iso: string) =>
+    new Date(`${iso}T00:00:00`).toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
 
   const fmtDate = (t: number) => {
     const d = new Date(t);
@@ -565,7 +578,19 @@ export default function AffiliateStatsPage() {
                 <div key={p.platform} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 capitalize mb-3">{p.platform}</h3>
                   {p.zustaendig === 0 ? (
-                    <p className="text-gray-500 dark:text-gray-400">inaktiv</p>
+                    p.platform === 'tiktok' && socialData.tiktokTakttagHeute === false ? (
+                      <>
+                        <p className="text-gray-700 dark:text-gray-300">Heute kein Takttag</p>
+                        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                          TikTok postet jeden zweiten Tag.
+                          {socialData.tiktokNaechsterTakttag
+                            ? ` Nächster Post am ${fmtTag(socialData.tiktokNaechsterTakttag)}.`
+                            : ''}
+                        </p>
+                      </>
+                    ) : (
+                      <p className="text-gray-500 dark:text-gray-400">inaktiv</p>
+                    )
                   ) : (
                     <>
                       <div className="text-2xl font-extrabold text-gray-900 dark:text-gray-50 mb-2">Runde {p.runde}</div>
