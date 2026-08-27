@@ -6,6 +6,56 @@
 
 ---
 
+## 27.08.2026 — Welle 120: Titel-Dopplung „| Rechenfix.de | Rechenfix.de" behoben — ✅ ABGESCHLOSSEN
+
+**Einundzwanzig Seiten lieferten den Markennamen zweimal aus.** `app/layout.tsx:46` definiert
+`title.template = '%s | Rechenfix.de'`; Next.js hängt das an jeden Titel eines **untergeordneten**
+Routen-Segments an. Wer den Suffix zusätzlich in den eigenen `title` schreibt, bekommt ihn doppelt.
+Betroffen waren 17 Blogartikel, die Blog-Übersicht, `/qualitaet`, `/aktualisierungen` und die
+Offline-Rückfallseite.
+
+**Der Fehler war geerbt, nicht einzeln entstanden.** Er stammt aus dem Frontmatter-Muster des
+blog-builder-Skills und aus dem Referenzartikel — jeder neue Artikel hat ihn mitgenommen.
+Aufgefallen ist er bei der Live-Gegenprobe zu Welle 115; das Muster wurde in Welle 119 korrigiert,
+die Bestandsdateien blieben. **Eine Musterkorrektur repariert den Bestand nicht** — das ist der
+Grund, warum diese Welle überhaupt nötig war.
+
+**Die Falle: `openGraph.title` wird vom Template nicht erfasst.** Live belegt an `/impressum`,
+dessen `<title>` den Suffix trägt und dessen `og:title` nicht. In `app/qualitaet/page.tsx` und
+`app/aktualisierungen/page.tsx` steht deshalb **derselbe String zweimal in derselben Datei** — und
+nur die `metadata.title`-Zeile durfte fallen. Unterschieden werden die beiden allein durch die
+Einrückung: zwei Leerzeichen gegen vier. Ein Suchen-und-Ersetzen über die Datei hätte die og-Titel
+zerstört; gearbeitet wurde deshalb mit **Vollzeilen-Gleichheit**, weil `  title:` Teilstring von
+`    title:` ist. Nach der Änderung tragen die og-Titel beider Seiten den Suffix nachweislich
+weiter.
+
+**Nicht angefasst, weil korrekt:** Die Startseite — `title.template` gilt nicht für die `page.tsx`
+desselben Segments wie das Layout, live bestätigt mit einem einzigen Markennamen. Ebenso
+`/ki-transparenz` und `/ueber-uns`, die „Rechenfix.de" im Fließtitel führen statt als Suffix.
+
+**Umfang:** Commit `d155dbd`, 21 Dateien, **je genau eine Zeile** (21 Einfügungen, 21 Löschungen).
+`npx tsc --noEmit` und `npm run build` grün, 267 Seiten. Im Diff steht keine Zeile mit vier
+Leerzeichen Einrückung, also keine `openGraph`- oder `twitter`-Änderung; `app/layout.tsx` ist
+unberührt, das Template bleibt.
+
+**Prüfvorschrift-Nachtrag zu Prüfung 7.** Der Prompt erwartete nach der Änderung **5** Vorkommen
+von `| Rechenfix.de` unter `app/`; gemessen wurden **2**. Die Sollvorgabe wurde nicht angepasst,
+sondern der Ist-Wert nachgezählt: Die Annahme, `/ki-transparenz` und `/ueber-uns` trügen die
+Zeichenfolge, stimmt nicht — beide führen den Markennamen nur im Titeltext („Über Rechenfix.de …",
+„… wo auf Rechenfix.de KI eingesetzt wird"), nie als Pipe-Suffix. Und `/aktualisierungen` benutzt
+`${SITE_NAME}` statt des Literals und taucht in diesem Grep weder vorher noch nachher auf. Die
+Rechnung geht damit auf: 22 vorher, minus 17 MDX, minus je eine Zeile in `blog/page.tsx`,
+`offline/page.tsx` und der `metadata.title`-Zeile von `qualitaet` = **2**. Übrig bleiben genau die
+zwei, die bleiben sollen — das Template in `app/layout.tsx:46` und der og-Titel in
+`app/qualitaet/page.tsx:10`.
+
+**Live gegengeprüft** an neun Seiten quer durch alle Typen: Startseite, Blog-Übersicht,
+Blogartikel, `/qualitaet`, `/aktualisierungen`, `/impressum`, `/ueber-uns`, `/offline` und einem
+Rechner. In keinem Titel steht der Suffix mehr zweimal. Bei `/ueber-uns` erscheint der Markenname
+weiterhin zweimal — einmal im Titeltext, einmal als Suffix; das ist korrekt und kein Befund.
+
+---
+
 ## 27.08.2026 — Welle 118: Admin-Tab „Social" unterscheidet TikTok-Nicht-Takttag von „inaktiv" — ✅ ABGESCHLOSSEN
 
 **Eine Anzeige, die korrektes Verhalten wie einen Defekt aussehen ließ.** Der Admin-Tab meldete für
