@@ -13,14 +13,24 @@
  * WARTUNG: Diese Zahlen veralten zum 01.01.2027 mit den SV-Parametern. Beim
  * Jahresaudit gegen die Live-Seite gegenprüfen und ersetzen — nicht hochrechnen.
  *
- * Layout-Entscheidung: Balken zeigen das NETTO, nicht die Abzüge. Der Leser
- * sucht die Zahl, die auf dem Konto landet. Die Abzugsquote steht als Zahl
- * daneben, damit der Zusammenhang sichtbar bleibt, ohne einen zweiten Balken
- * zu brauchen.
+ * v2 (27.08.2026) — GEOMETRIE-KORREKTUR nach Sichtprüfung im Inkognito.
+ * In v1 begannen die Balken bei x=148, die Klassenbeschreibungen bei x=56.
+ * Vier der sechs Beschreibungen sind breiter als die 92 px dazwischen und
+ * liefen unter die Balken: „verheiratet, ähnliches Einkommen" endete
+ * rechnerisch bei x=228, also 80 px im Balkenfeld. Nachgemessen mit einem
+ * Breitenmodell von 0,55 × fontSize je Zeichen.
  *
- * Die Gleichheit von Klasse I und IV ist der eigentliche Beleg der Grafik und
- * deshalb eigens markiert: § 39b Abs. 2 Satz 6 EStG ordnet für beide denselben
- * Tarif an, und die Zahlen sind auf den Cent identisch.
+ * v2 verschiebt das Balkenfeld auf x=248 und kürzt es auf 272 px. Die
+ * längste Beschreibung endet damit bei x=232, die Grenze liegt bei x=240.
+ *
+ * Ebenfalls entfernt: die Klammer, die Klasse I und IV als identisch
+ * markierte. Ihr Label „identisch" saß bei x=114 und überlagerte die
+ * Beschreibungstexte. Die Aussage trägt jetzt eine dezente Hinterlegung
+ * beider Zeilen plus eine eigene Fußzeile — ohne Beschriftung im Textfeld.
+ *
+ * LEHRE: Bei Balkendiagrammen beide Seiten des Balkenfelds gegen Textbreiten
+ * prüfen, nicht nur die rechte. In v1 war nur der Wertelabel-Überlauf nach
+ * rechts geprüft worden.
  *
  * Server-Komponente, statisch. Dark Mode über <style> mit .dark-Selektor.
  * Muster: components/blog/grafik/AusgabenGegenHaeufigkeit.tsx.
@@ -28,36 +38,32 @@
 const BRUTTO = 3000;
 
 const klassen = [
-  { nr: 'I', wer: 'ledig', netto: 2049.5, nettoText: '2.049,50', quote: '31,7', ton: 'neutral' },
-  { nr: 'II', wer: 'alleinerziehend', netto: 2144.08, nettoText: '2.144,08', quote: '28,5', ton: 'neutral' },
-  { nr: 'III', wer: 'verheiratet, Hauptverdiener', netto: 2309.17, nettoText: '2.309,17', quote: '23,0', ton: 'gut' },
-  { nr: 'IV', wer: 'verheiratet, ähnliches Einkommen', netto: 2049.5, nettoText: '2.049,50', quote: '31,7', ton: 'neutral' },
-  { nr: 'V', wer: 'verheiratet, Geringverdiener', netto: 1715.17, nettoText: '1.715,17', quote: '42,8', ton: 'hart' },
-  { nr: 'VI', wer: 'Zweit- oder Nebenjob', netto: 1675.67, nettoText: '1.675,67', quote: '44,1', ton: 'hart' },
+  { nr: 'I', wer: 'ledig', netto: 2049.5, nettoText: '2.049,50', quote: '31,7', ton: 'neutral', hervor: true },
+  { nr: 'II', wer: 'alleinerziehend', netto: 2144.08, nettoText: '2.144,08', quote: '28,5', ton: 'neutral', hervor: false },
+  { nr: 'III', wer: 'verheiratet, Hauptverdiener', netto: 2309.17, nettoText: '2.309,17', quote: '23,0', ton: 'gut', hervor: false },
+  { nr: 'IV', wer: 'verheiratet, ähnliches Einkommen', netto: 2049.5, nettoText: '2.049,50', quote: '31,7', ton: 'neutral', hervor: true },
+  { nr: 'V', wer: 'verheiratet, Geringverdiener', netto: 1715.17, nettoText: '1.715,17', quote: '42,8', ton: 'hart', hervor: false },
+  { nr: 'VI', wer: 'Zweit- oder Nebenjob', netto: 1675.67, nettoText: '1.675,67', quote: '44,1', ton: 'hart', hervor: false },
 ] as const;
 
-const X0 = 148;
-const BREITE_MAX = 372;
+const X0 = 248;
+const BREITE_MAX = 272;
 const Y0 = 118;
 const ZEILE = 44;
 
 export default function EinBruttoSechsNettos() {
   return (
     <figure className="my-8">
-      <svg width="100%" viewBox="0 0 680 434" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
+      <svg width="100%" viewBox="0 0 680 450" role="img" xmlns="http://www.w3.org/2000/svg" className="rounded-xl text-gray-900 dark:text-gray-100">
         <style>{`
           .b-neutral { fill: #185FA5; }
           .b-gut { fill: #0F6E56; }
           .b-hart { fill: #993C1D; }
-          .t-gut { fill: #0F6E56; }
-          .t-hart { fill: #993C1D; }
-          .marke { stroke: #854F0B; }
+          .zeile-hervor { fill: #E8F0F9; }
           .dark .b-neutral { fill: #85B7EB; }
           .dark .b-gut { fill: #5DCAA5; }
           .dark .b-hart { fill: #F0A88C; }
-          .dark .t-gut { fill: #5DCAA5; }
-          .dark .t-hart { fill: #F0A88C; }
-          .dark .marke { stroke: #E8C06A; }
+          .dark .zeile-hervor { fill: #16283C; }
         `}</style>
         <title>Dasselbe Bruttogehalt in sechs Lohnsteuerklassen</title>
         <desc>
@@ -85,8 +91,11 @@ export default function EinBruttoSechsNettos() {
           const bk = k.ton === 'gut' ? 'b-gut' : k.ton === 'hart' ? 'b-hart' : 'b-neutral';
           return (
             <g key={k.nr}>
+              {k.hervor && (
+                <rect x="16" y={y - 18} width="640" height="34" rx="6" className="zeile-hervor" />
+              )}
               <text x="24" y={y + 5} fontSize="15" fontWeight="600" fill="currentColor">{k.nr}</text>
-              <text x="52" y={y + 5} fontSize="10" fill="#9ca3af">{k.wer}</text>
+              <text x="56" y={y + 5} fontSize="10" fill="#9ca3af">{k.wer}</text>
 
               <rect x={X0} y={y - 12} width={BREITE_MAX} height="22" rx="4" fill="#d1d5db" opacity="0.28" />
               <rect x={X0} y={y - 12} width={breite} height="22" rx="4" className={bk} />
@@ -96,22 +105,14 @@ export default function EinBruttoSechsNettos() {
           );
         })}
 
-        {/* Markierung: I und IV sind identisch */}
-        <path
-          d="M 132 118 L 120 118 L 120 250 L 132 250"
-          fill="none"
-          className="marke"
-          strokeWidth="1.5"
-        />
-        <text x="114" y="188" fontSize="10" textAnchor="end" fill="#9ca3af">identisch</text>
-
-        <line x1="24" y1="390" x2="656" y2="390" stroke="#d1d5db" strokeWidth="1" />
+        <line x1="24" y1="392" x2="656" y2="392" stroke="#d1d5db" strokeWidth="1" />
         <text x="24" y="412" fontSize="12" fill="#9ca3af">
-          633,50 € Unterschied zwischen der günstigsten und der ungünstigsten Klasse — bei
-          identischem Brutto.
+          Die hinterlegten Zeilen I und IV liefern auf den Cent dasselbe Ergebnis — § 39b Abs. 2
+          Satz 6 EStG.
         </text>
-        <text x="24" y="428" fontSize="12" fill="#9ca3af">
-          Die Jahressteuer des Haushalts ändert sich dadurch um keinen Cent.
+        <text x="24" y="430" fontSize="12" fill="#9ca3af">
+          633,50 € zwischen günstigster und ungünstigster Klasse. Die Jahressteuer ändert sich um
+          keinen Cent.
         </text>
       </svg>
       <figcaption className="mt-2 text-sm text-gray-600 dark:text-gray-400">
