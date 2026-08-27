@@ -119,6 +119,7 @@ Vor dem Abschicken eines Build-Prompts jede Grep-Zeile gegen diese sechs Punkte 
 - [ ] **R4** Kein Satzzeichen als Anker — `(,|$)` ist eine Formatierungsannahme, keine Wortgrenze
 - [ ] **R5** `-n` und `-o` einzeln ausgeführt, beide Ist-Werte notiert, keiner aus dem anderen gerechnet
 - [ ] **R6** Kein Sollwert, der nur durch Verletzung einer STOP-Bedingung erreichbar ist (Tabu-Zeilen zählen in den Sollwert hinein)
+- [ ] **R7** Neues Feld an einer Schnittstelle? `git grep` über den Feldnamen → mindestens ein Treffer **außerhalb** der erzeugenden Datei, sonst ist das Feld tot
 - [ ] Sollwerte **gemessen**, auch die triviale Arithmetik (Dateizahl = `git diff --name-only | wc -l`, nicht Kopfrechnen)
 - [ ] Verifikation per Pathspec auf die Zieldateien eingegrenzt, nicht repo-weit mit nachgeschaltetem `grep -v`
 - [ ] Bei neuem **exportiertem** Symbol: `git grep -nE '(const|function)\s+<name>' -- '*.ts' '*.tsx'` → bei Treffern mit abweichendem Verhalten umbenennen, nicht überlagern

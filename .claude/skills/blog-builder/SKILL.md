@@ -5,9 +5,11 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v9 (14.08.2026, verifiziert an HEAD `d344375`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v10 (27.08.2026, verifiziert an HEAD `6b318c8`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
 
 **v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
+
+**v10-Nachtrag (27.08.2026 — nach Artikel 17 „Steuerklassen", Wellen 115 bis 117):** Zwei der drei Grafiken mussten nach dem Ausrollen zweimal geometrisch nachgebessert werden — drei Sichtprüfungen für Fehler, die vorher rechnerisch auffindbar gewesen wären. Beide Ursachen waren neu: eine ungemessene **linke** Spaltenbreite (die bisherige Regel schaute nur nach rechts auf Balkenenden) und ein Element, das nur in einer von drei gleichartigen Reihen vorkommt und bei reihenweiser Prüfung systematisch durchfällt. Kodifiziert in zwei neuen Unterabschnitten der Geometrie-Prüfung, samt Skript für die paarweise Vollprüfung. Seitdem gilt: **Geometrie wird gerechnet, nicht angeschaut.**
 
 **Was dieser Skill NICHT abnimmt:** Faktenrecherche, Widersprüche in Quellen aufspüren, Erzählung bauen, Grafiken inhaltlich entwerfen, den „Karsten sagt"-Block. Das ist pro Artikel neu und ist der eigentliche Wert. Der Skill verschlankt das Drumherum, nicht den Kern.
 
@@ -290,6 +292,63 @@ Vor jeder Auslieferung durchrechnen:
 **Asymmetrie begründen.** Steht eine Beschriftung unter ihrer Kurve, eine
 zweite darüber, gehört der Grund in den Dateikopf — sonst „glättet" die nächste
 Bearbeitung es zurück in die Kollision.
+
+### Die linke Spalte ist genauso gefährlich wie die rechte (Lehre Welle 116)
+
+Die Regel zu Balkenenden oben schaut nach rechts. In Welle 116 kollidierten
+**zwei** Grafiken auf der anderen Seite, weil beim Bau nur der Überlauf nach
+rechts geprüft worden war.
+
+`EinBruttoSechsNettos`: Balkenfeld ab x = 148, Klassenbeschreibungen ab x = 56.
+Vier von sechs Beschreibungen sind breiter als die 92 px dazwischen; die
+längste („verheiratet, ähnliches Einkommen", 32 Zeichen bei Größe 10) endet
+rechnerisch bei x = 228, also 80 px im Balkenfeld.
+
+`DreiFensterDreiRegeln`: Zeitachsen ab x = 92, Leistungsname und Norm links
+daneben ab x = 24. **Alle sechs** Beschriftungen sind breiter als diese 68 px.
+
+**Regel:** Wo Text neben einem Diagrammfeld steht, ist die Spaltenbreite eine
+**gemessene** Größe, nicht eine geschätzte. Die längste Zeichenkette bestimmt
+sie, nicht die erste. Passt sie nicht, sind die Auswege in dieser Reihenfolge:
+Feld nach rechts schieben und kürzen, Beschriftung über das Feld setzen (bei
+`DreiFensterDreiRegeln` gewann die Achse dadurch 68 px Länge), oder die
+Beschriftung kürzen.
+
+Breitenmodell: rund **0,55 × fontSize je Zeichen**. Deckt sich mit den 6,8 px
+bei Größe 12 aus dem Abschnitt oben.
+
+### Reihenweise Prüfung übersieht Einzelstücke systematisch (Lehre Welle 117)
+
+Nach der Korrektur aus Welle 116 lag in `DreiFensterDreiRegeln` **noch** eine
+Kollision: Das Label „1. Januar" der ALG-Bahn saß 8 px unter der Kopfzeile
+„Arbeitslosengeld" — bei 11 px Schriftgröße eine Überlagerung, dazu waagerecht
+von x = 100 bis 147.
+
+Geprüft worden waren die Regel- und Planbar-Zeilen **unter** den Bahnen, weil
+die in allen drei Blöcken vorkommen. Das Label über der Linie gibt es nur bei
+**einer** der drei Bahnen. Eine reihenweise Prüfung sieht es nie.
+
+**Regel:** Jedes Element, das nur in einer von mehreren gleichartigen Reihen
+vorkommt, wird einzeln gegen seine Nachbarn geprüft. Sicherer und billiger ist
+die **paarweise Vollprüfung**: alle Textelemente mit x-Bereich, y-Grundlinie und
+Schriftgröße in eine Liste, dann jedes Paar gegen jedes. Bei zwanzig Elementen
+sind das 190 Vergleiche, die ein Skript in Millisekunden macht.
+
+```python
+def w(t, f): return len(t) * 0.55 * f          # Textbreite
+E = [("Name", x_start, x_start + w(text, f), y_grundlinie, f), ...]
+for i in range(len(E)):
+    for j in range(i + 1, len(E)):
+        n1, a1, b1, y1, f1 = E[i]; n2, a2, b2, y2, f2 = E[j]
+        if abs(y1 - y2) < max(f1, f2) * 0.95 and a1 < b2 and a2 < b1:
+            print("KOLLISION", n1, n2)
+```
+
+Zusätzlich prüfen: kein `b > viewBox`-Breite, und `max(y) < viewBox`-Höhe.
+
+Für die drei Grafiken aus Artikel 17 lieferte das 171 bzw. 465 Elementpaare bei
+null Kollisionen — nachdem drei Sichtprüfungen nötig gewesen waren, um dieselben
+Fehler von Hand zu finden.
 
 ## Umlaute in Prosa, ASCII in Bezeichnern (Lehre Welle 80)
 
@@ -649,7 +708,11 @@ Pro Welle prüfen (`web_fetch` NICHT nutzen — liefert stale Cache; Live-Verify
 - Neue Grafik-Komponenten vorhanden? `'use client'` nur bei interaktiven, als erste Zeile?
 - Global in `mdx-components.tsx` registriert (Import + Rückgabeobjekt), bestehende Bausteine unangetastet?
 - MDX: Titelbild sichtbar (`<Bild>`, nicht nur Schema)? Video via `<Video>` (nicht rohes `<video>`)? Rechner in Artikelmitte (nicht am Ende), nur einmal? `<ArtikelDatum>` nach der H1? Breadcrumb-Pfade relativ?
-- Video: `preload="none"` in `Video.tsx`? poster = Titelbild?
+- Video: `preload="none"` in `Video.tsx`? `poster` gesetzt? **Nicht automatisch das
+  Titelbild** — sind Titelbild und Video zwei verschiedene Motive (Regel „Titelbild und
+  Video sind getrennte Motive"), muss der poster das Standbild des Videos sein, sonst
+  springt das Bild beim Start um. Artikel 17 nutzt dafür
+  `steuerklassen-video-standbild.jpg`.
 - „Karsten sagt": Roh-Platzhalter (`%% … %%`) WEG, echter Text drin? — Grep: `grep -c "VON KARSTEN SELBST GEFÜLLT" app/blog/<slug>/page.mdx` soll 0 sein.
 - Assets committet? — `ls -la public/blog/<name>.png <name>.mp4` im Klon, beide > 0 Bytes (nicht nur lokal bei Karsten).
 - Dark Mode: `.dark`-Selektoren (nicht `@media`) in den farbigen Grafiken? Null farbige `fill`-Attribute mehr an `<text>` (nur `className`)? — Grep: `grep -rn '<text[^>]*fill="#' components/blog/grafik/` soll 0 für die Farbwerte liefern.
@@ -664,6 +727,10 @@ Pro Welle prüfen (`web_fetch` NICHT nutzen — liefert stale Cache; Live-Verify
   Messung wie Wortzahl und Quellen (Lehre Welle 67).
 - **Verhaltensändernde Wellen:** Netzwerk-Beleg von Karsten eingefordert? (siehe „Eine grüne
   Repo-Prüfung sagt nichts über das Laufzeitverhalten")
+- **Geometrie paarweise gerechnet, bevor eine Grafik ausgeliefert wird?** Nicht reihenweise,
+  nicht per Augenmaß. Ein Skript über alle Textelemente: Kollisionen, Überlauf über die
+  `viewBox`-Breite, größtes y gegen die `viewBox`-Höhe. Drei Sichtprüfungen für zwei
+  Grafiken sind der Preis dafür, es nicht getan zu haben (Lehre Wellen 116 und 117).
 
 **Erwartungswert und Messverfahren aus derselben Quelle (Lehre Welle 80).** Zwei
 Werte im Ausroll-Prompt für Artikel 15 waren arithmetisch unerreichbar:

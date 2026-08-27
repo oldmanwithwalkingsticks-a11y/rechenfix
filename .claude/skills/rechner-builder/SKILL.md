@@ -7,7 +7,7 @@ description: Template and checklist for building standardized online calculators
 
 Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
-## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026 · Prüfvorschriften-Update Welle 114, 26.08.2026)
+## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026 · Prüfvorschriften-Update Welle 114, 26.08.2026 · Struktur-Umbau und R7, Welle 114b/118, 27.08.2026)
 
 > **Welle 19 (10.06.2026):** Neue Rechner und Migrationen nutzen den Content-Baustein-Standard (`contentBloecke`) statt des Thin-`erklaerung`-String-Pfads, der die 4. AdSense-Ablehnung verursacht hat. Das ist keine Empfehlung, sondern der Pfad — der Thin-String-Pfad ist geschlossen. Die acht Blocktypen, das Leitformat-Prinzip, die Quellen-Pflicht und der Self-Check vor dem Commit stehen in **`references/content-standards.md`**; diese Datei vor dem Schreiben von Inhalten lesen.
 
@@ -837,9 +837,9 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge,
 
 ## Operative Disziplin
 
-### Prüfvorschriften in Build-Prompts (Welle 114, 26.08.2026)
+### Prüfvorschriften in Build-Prompts (Welle 114, 26.08.2026 · R7 aus Welle 118, 27.08.2026)
 
-Jeder Build-Prompt enthält Greps mit Sollwerten. In Welle 114 sind **drei** Prompts an fehlerhaften Prüfvorschriften hängengeblieben — alle drei Fehler kamen aus der Vorlage, keiner aus dem Repo. Die folgenden sechs Regeln adressieren jeweils einen davon.
+Jeder Build-Prompt enthält Greps mit Sollwerten. In Welle 114 sind **drei** Prompts an fehlerhaften Prüfvorschriften hängengeblieben — alle drei Fehler kamen aus der Vorlage, keiner aus dem Repo. R1 bis R6 adressieren jeweils einen davon. R7 kam aus Welle 118 hinzu und betrifft nicht die Prüfvorschrift selbst, sondern die Frage, wann eine Änderung überhaupt fertig ist.
 
 **R1 — `git grep` statt `grep -r`.**
 `git grep` durchsucht nur getrackte Dateien. Verwaiste Worktrees unter `.claude/worktrees/`, `node_modules` und alles Gitignorierte fallen automatisch heraus. In Welle 114 lieferten drei tote Worktree-Kopien von `lib/seo.ts` und `app/layout.tsx` bei `grep -r` vier statt einem Treffer und lösten eine STOP-Bedingung fälschlich aus. Ein Ausschlusspfad im Prompt ist die schwächere Lösung, weil ihn jede Folgevorlage neu mitschleppen muss.
@@ -870,7 +870,29 @@ Zeilenzahl und Vorkommenszahl sind zwei Messungen, nicht eine Messung und eine R
 **R6 — Ein Sollwert darf nicht nur erreichbar sein, wenn eine STOP-Bedingung verletzt wird.**
 Ein Prompt forderte `0` für ein Muster, das genau einmal in der ausdrücklich als tabu markierten CSS-Zeile steht. Der Sollwert war nur zu erfüllen, indem man die Tabu-Zeile ändert. Jede Prüfung gegen den geplanten **End**zustand rechnen, nicht gegen den Wunschzustand — und wenn eine Zeile bewusst unangetastet bleibt, gehört ihr Treffer in den Sollwert.
 
-**Und quer über alle sechs: Sollwerte werden gemessen, nie gerechnet.**
+**R7 — Ein neues Feld an einer Schnittstelle wird auf der Verbraucherseite mit einem Grep belegt, nicht mit einem Kommentar.**
+In Welle 52 lieferte `app/api/social-status/route.ts` zwei neue Felder
+(`tiktokTakttagHeute`, `tiktokNaechsterTakttag`) mit einem ausführlichen
+Kommentar darüber, welches Anzeigeproblem sie lösen. Die Lösung war vollständig
+und richtig beschrieben — nur stand die Beschreibung in der Datei, die sie
+**erzeugt**, und die Verbraucherseite wurde nie gebaut. Das Interface im
+Frontend kannte die Felder nicht einmal. Sie lagen **66 Wellen** ungenutzt
+bereit, und der Admin-Tab zeigte in dieser Zeit an jedem zweiten Tag „inaktiv"
+für eine laufende Pipeline.
+
+Ein Kommentar an der Erzeugerseite belegt nicht, dass die Verbraucherseite
+existiert. Der Beleg ist ein Grep über den Feldnamen:
+
+```bash
+git grep -nE '(^|[^a-zA-Z0-9_])feldName([^a-zA-Z0-9_]|$)' -- '*.ts' '*.tsx'
+```
+
+**Mindestens ein Treffer außerhalb der erzeugenden Datei** — sonst ist das Feld
+tot. Gilt für API-Routen, geteilte Typen, Redis-Werte, Config-Exporte und
+Rückgabeobjekte zentraler Libs. Umgekehrt genauso: Wer ein Feld entfernt,
+greppt vorher nach Verbrauchern.
+
+**Und quer über alle sieben: Sollwerte werden gemessen, nie gerechnet.**
 Auch die scheinbar triviale Arithmetik der Vorlage. „Elf Pfade, davon einer nicht betroffen, also zehn Dateien\" war falsch — der eine war nie in der Liste. Die Zahl der geänderten Dateien ist ein `git diff --name-only | wc -l`, kein Kopfrechnen.
 
 **Verhalten bei Abweichung — gilt für Code-Claude, nicht verhandelbar:**
