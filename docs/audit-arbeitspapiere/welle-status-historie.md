@@ -6,6 +6,61 @@
 
 ---
 
+## 27.08.2026 — Welle 124: Drei Video-Standbilder, echter erster Frame statt 7-MB-PNG — ✅ ABGESCHLOSSEN
+
+**Diese Welle wiegt schwerer als die Video-Welle davor.** Die Standbilder von `bildschirm`,
+`blutdruck` und `meter` lagen als PNG in **2752 × 1536** vor — der Auflösung der *Titelbilder*. Die
+zugehörigen Videos sind 1928 × 1072; es waren also gar keine Videoframes, sondern Titelbilder in
+Standbild-Rolle. Zusammen **18,9 MB**.
+
+**Und sie luden ohne jede Nutzeraktion.** Das `poster`-Attribut läuft nicht durch `next/image`, und
+das Standbild wird beim Rendern der Seite geholt; `preload="none"` gilt nur für das Video selbst.
+Wer einen dieser drei Artikel öffnete, lud 5 bis 7 MB, ohne etwas anzuklicken. In Welle 122 musste
+man wenigstens auf Abspielen drücken.
+
+**Ersetzt durch den tatsächlichen ersten Frame**, extrahiert mit `ffmpeg -vframes 1 -q:v 3`:
+82 + 154 + 156 KB, zusammen **rund 392 KB statt 18,9 MB — Faktor 49**. Alle drei in 1928 × 1072,
+also passend zum Video. **Nebeneffekt, der die eigentliche Verbesserung ist:** Das Standbild zeigt
+jetzt exakt das, was das Video im ersten Moment zeigt — der Bildsprung beim Abspielstart entfällt.
+
+**Die Methode wurde vorher validiert, nicht danach begründet.** Aus `steuerklassen.mp4` — dessen
+Standbild bereits ein echter JPG-Frame ist — wurde derselbe Weg gegangen und das Ergebnis gegen das
+vorhandene Standbild gemessen: **SSIM 0,9909**. Die bestehenden JPG-Standbilder sind also
+tatsächlich der erste Frame, und die Extraktion reproduziert sie.
+
+**Der Punkt, an dem eine reine Endungs-Ersetzung falsch gewesen wäre:** In der
+`GENERATOREN`-Tabelle ändert sich nicht nur `.png` zu `.jpg`, sondern auch der Generator — von
+`Gemini 3 Pro Image (Google)` auf `Kling AI 3.0 (Kuaishou)`. Das Bild stammt ab jetzt aus einem
+Kling-Video, nicht mehr aus einem Gemini-Bild. **Eine falsche Herstellerangabe in der Kennzeichnung
+nach Art. 50 KI-VO wäre schlimmer als gar keine.** Die fünf bereits vorhandenen
+`-video-standbild.jpg`-Einträge tragen aus demselben Grund Kling.
+
+**Ebenfalls repariert: `public/ki-medien/inventar.json` war drei Einträge hinterher.** Die Datei
+wird von Hand gepflegt und ist laut eigenem `_hinweis` die Grundlage für den Soll-Ist-Abgleich der
+Kennzeichen-Wache. Gemessen vor der Änderung: **Tabelle 42 Schlüssel, Inventar 39** — es fehlten
+genau die drei Medien aus Artikel 17, die in Welle 115 hinzugekommen sind. Nach der Welle sind
+beide bei **42**, `fehlt im Inventar` und `überzählig` beide leer. Die `art`-Werte wurden an
+Bestandseinträgen abgelesen, nicht geraten; `_stand` steht auf dem Ausrolltag.
+
+**Die XMP-Kennzeichnung war auf den frischen JPG erwartungsgemäß nicht vorhanden** — `grep -ac
+trainedAlgorithmicMedia` lieferte für alle drei **0**. Nach dem Skriptlauf melden alle drei `OK`
+und der Grep je **1**; im gesamten `--pruefen`-Lauf **0-mal** `UNBEKANNT` oder `FEHLT`.
+
+**Umfang:** Commit `ec590da`, 11 Dateien — 3 neu, 3 gelöscht, 5 geändert. Keine PNG-Standbild-Datei
+und keine PNG-Standbild-Referenz mehr im Repo. Genau **3** Artikel berührt, je eine Zeile, und an
+den `poster`-Zeilen hat sich nachweislich nur die Endung geändert (die Ersetzung wurde
+zurückgeprüft, indem `.jpg` wieder zu `.png` gemacht und mit der Ursprungszeile verglichen wurde).
+`npm run build` grün, 267 Seiten.
+
+**Lehre für den blog-builder-Skill, nicht für diese Welle:** `public/ki-medien/inventar.json` fehlt
+in der Ausroll-Checkliste. Deshalb ist sie in Welle 115 aus dem Tritt geraten — und niemandem ist
+es aufgefallen, weil kein Guard die beiden Listen vergleicht. Der Eintrag gehört neben den Schritt
+„KI-Metadaten Ebene 3". **Besser noch: Der Abgleich Tabelle-gegen-Inventar ist ein Zweizeiler und
+gehörte in die prebuild-Kette** — eine dauerhaft geltende Eigenschaft gehört in ein Prüfskript,
+nicht in eine einmalige Prüfung.
+
+---
+
 ## 27.08.2026 — Welle 122: Blogvideos neu kodiert, 184 MB auf 64 MB — ✅ ABGESCHLOSSEN
 
 **Videos durchlaufen keinen Optimierer.** Bilder gehen über `next/image` und werden als WebP
