@@ -323,6 +323,16 @@ landete damit in Zugriffs- und Server-Logs, in Referrer-Headern und im Browserve
 | Datum | Gegenstand | Änderung | Commit |
 |---|---|---|---|
 | 18.08.2026 | S2.1 — drei Routen | Beide Wege gelten gleichzeitig, nichts entfernt. Cron-Routen akzeptieren zusätzlich den Kopf `X-Admin-Password`, `/api/tiktok/auth` zusätzlich das `rf_admin_session`-Cookie aus S1. Jeder Treffer über den alten Weg wird protokolliert — nur Route und Zeitpunkt, nie der Wert. Vergleich in konstanter Zeit über gehashte Puffer. | `acc0cef` |
+| 28.08.2026 | S2.3 — beide Cron-Routen | Der Query-Weg `?admin=` ist ersatzlos entfernt, mit ihm der Übergangskommentar aus S2.1 und die Protokollzeile. Es bleibt der Kopf `X-Admin-Password`. `/api/tiktok/auth` ist ausgenommen: Der Aufruf dort ist eine Adresszeilen-Navigation, die keinen eigenen Kopf setzen kann; maßgeblich ist das `rf_admin_session`-Cookie aus S1. Unverändert bleiben die `CRON_SECRET`-Prüfung als erster Schritt jedes Aufrufs und deren Vergleichsstelle. | `e2d7d52` |
+
+**Belegstand S2.3 — so eng wie geprüft.** In den Runtime-Logs erscheint die Marke `[S2] alter Weg
+benutzt` über drei Tage null Mal. Das Instrument wurde gegengeprüft, weil ein leeres Ergebnis sonst
+nicht von einem stillen Fehlschlag zu unterscheiden ist: dieselbe Abfrageform mit `/api/cron/`
+liefert im selben Fenster 3 + 3 + 3 Treffer. **Die volle Zeitspanne seit `acc0cef` (18.08.2026) ist
+nicht belegt** — die Logs reichen über diesen Weg nicht weiter zurück als drei Tage. Die
+geschriebene Auslösebedingung (mindestens 24 Stunden ohne Protokollzeile) verlangt sie nicht; dass
+in den ungeprüften Tagen niemand den alten Weg benutzt hat, ist damit aber nicht gezeigt. **S2.4
+bleibt offen** und wird von Hand ausgeführt.
 
 **Untersuchungsergebnis S2.0 — die Ausgangslage war günstiger als angenommen.** Der Auftrag ging
 davon aus, dass der tägliche Cron über `?admin=` läuft. Das trifft nicht zu:
@@ -372,11 +382,11 @@ als kompromittiert zu behandeln.
 
 ## Nächste Termine
 
-- **frühestens 19.08.2026, nach mindestens 24 Stunden ohne Protokollzeile** — Welle S2 fortsetzen:
-  In den Vercel-Logs nach `[S2] alter Weg benutzt` suchen. Erscheint nichts mehr, S2.3 ausführen
-  (Query-Parameter-Prüfung ersatzlos streichen), danach S2.4 (Kennwort wechseln). **Reihenfolge
-  zwingend** — wer zuerst wechselt, sperrt sich selbst aus. Erscheint noch etwas, gibt es einen
-  Aufrufer, den niemand auf dem Zettel hat; dann erst klären, nicht abschneiden.
+- **offen, von Hand durch Karsten** — S2.4: `ADMIN_PASSWORD` in den Vercel-Umgebungsvariablen
+  wechseln. Der Wert ist durch die Logs als kompromittiert zu behandeln. S2.3 ist am 28.08.2026
+  ausgeführt (`e2d7d52`), die zwingende Reihenfolge damit gewahrt: Der alte Weg ist weg, ein
+  Wechsel sperrt niemanden mehr aus. Zu beachten — `/api/tiktok/auth` nimmt `?admin=` weiterhin an
+  und gilt dort begründet; nach dem Wechsel zählt auch dort der neue Wert.
 
 - **täglich** — Dienste-Wache (`scripts/dienste-wache.py`). Ersetzt die Wiedervorlage für die AdSense-Rückkehr: Sie erinnert nicht an ein Datum, sie merkt, dass etwas passiert ist.
 - **~01/2027** — AdSense-Wiederaufnahme: Registry auf `aktiv`, Abschnitte 2, 7, 8 und **die gesamte Einwilligungsmechanik** zurück, Stand-Datum setzen — **vor** der Freischaltung. Der Banner existiert seit R3.3 nicht mehr und muss neu gebaut werden, nicht nur wieder eingebunden; AdSense ist einwilligungspflichtig. Die Dienste-Wache meldet zwar den Ladecode, prüft aber **nicht**, ob ein Banner vorhanden ist. Vorlage: `docs/rechtstexte/adsense-rueckbau-2026-08.md`.
