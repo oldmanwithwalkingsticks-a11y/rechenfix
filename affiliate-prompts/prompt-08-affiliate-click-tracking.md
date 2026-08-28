@@ -1,5 +1,16 @@
 # Prompt 8: Affiliate-Click-Tracking einbauen
 
+> **Historischer Prompt — so nie ausgerollt (Vermerk vom 28.08.2026).** Die hier
+> beschriebene localStorage-Lösung (`rf_affiliate_clicks`) ist nicht umgesetzt worden:
+> Der Schlüssel kommt in `app/`, `components/`, `lib/` und `hooks/` null Mal vor.
+> Ausgeliefert wird stattdessen ein POST an den eigenen Endpunkt `/api/track`, der
+> serverseitig zählt; im Endgerät wird dabei nichts abgelegt und nichts ausgelesen.
+> Auch die Annahme unter "Technischer Kontext", Google Analytics sei vermutlich
+> eingebunden, hat sich nicht bestätigt — `gtag(`, `window.gtag`,
+> `googletagmanager.com` und `google-analytics.com` kommen im Code je null Mal vor.
+> Der Prompt bleibt unverändert stehen, weil er zeigt, was geplant war. Er beschreibt
+> nicht den Ist-Stand.
+
 ## Aufgabe
 Implementiere ein einfaches, datenschutzkonformes Tracking-System für Affiliate-Klicks auf rechenfix.de, damit du weißt, welche Rechner und Programme am besten konvertieren.
 

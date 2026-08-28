@@ -558,7 +558,7 @@ Publisher-ID: 2843240
 ### AffiliateBox-Komponente
 - Pfad: `components/AffiliateBox.tsx`
 - Client Component mit Props: `programId`, `context`, `variant` ("compact" | "full")
-- Enthält localStorage-Tracking (`rf_aff_clicks`) und GA-Events
+- Klickzähler: POST an den eigenen Endpunkt `/api/track` (Felder siehe `app/api/track/route.ts`) — kein localStorage, kein Google Analytics
 - "Anzeige"-Label oben rechts (deutsche Werbekennzeichnungs-Pflicht)
 - `rel="noopener noreferrer sponsored"` auf allen Links
 - CHECK24 hat ein `deeplinks`-Objekt (verschiedene Deeplinks je nach Context)
@@ -566,7 +566,7 @@ Publisher-ID: 2843240
 
 ### Affiliate-Stats-Dashboard
 - Route: `/admin/affiliate-stats` (versteckt, noindex)
-- Liest localStorage-Klick-Daten aus
+- Liest die serverseitig gezählten Daten über `/api/stats`, nicht aus dem Browserspeicher
 - Tabs: Nach Programm | Nach Rechner | Chronologisch
 - CSV-Export und Daten-Löschen-Funktion
 
