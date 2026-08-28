@@ -27,9 +27,7 @@
  * Auth: Authorization: Bearer ${CRON_SECRET}.
  * Pause-Schalter: SOCIAL_PIPELINE_ENABLED (nur "true" lässt echte Posts durch).
  * Query-Parameter: ?force=true (Re-Trigger), ?test=true (dryRun; in production
- *   zusätzlich der Kopf X-Admin-Password: ${ADMIN_PASSWORD}. Der alte Weg
- *   ?admin= wird in der Übergangsphase S2.1 noch akzeptiert, aber
- *   protokolliert und mit S2.3 entfernt).
+ *   zusätzlich der Kopf X-Admin-Password: ${ADMIN_PASSWORD}).
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -106,11 +104,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   // 3) test=true in production braucht zusätzlich das Betreiber-Kennwort.
   //
-  // S2.1 — Übergangsphase: Der Kopf `X-Admin-Password` wird zuerst geprüft,
-  // der bisherige Query-Parameter `?admin=` bleibt daneben gültig. Jeder
-  // Treffer über den alten Weg wird protokolliert (nur Route und Zeitpunkt,
-  // niemals der Wert); diese Zeilen sind die Abnahme für S2.3.
-  //
   // Der Kopf heisst bewusst NICHT `Authorization` — der ist auf dieser Route
   // bereits durch CRON_SECRET belegt (Schritt 1).
   let dryRun = false;
@@ -119,11 +112,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     if (isDev) {
       dryRun = true;
     } else if (await pruefeAdminPasswort(request.headers.get('x-admin-password'))) {
-      dryRun = true;
-    } else if (await pruefeAdminPasswort(url.searchParams.get('admin'))) {
-      console.warn(
-        `[S2] alter Weg benutzt: ?admin= auf /api/cron/social-post-tiktok um ${new Date().toISOString()}`,
-      );
       dryRun = true;
     } else {
       return unauthorized('test=true in production requires header X-Admin-Password');
