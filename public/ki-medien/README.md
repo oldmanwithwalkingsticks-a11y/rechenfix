@@ -7,8 +7,11 @@ das die Wache nicht lesen kann, ist kein Inventar.
 
 ## Pflegeregel
 
-Jedes neue KI-Medium wird beim Anlegen hier eingetragen — Datei, Art, Seite, Generator, wörtlich
-passend zur `GENERATOREN`-Tabelle in `scripts/ki-metadaten-schreiben.mjs`.
+Jedes neue KI-Medium braucht zwei Dinge und kein drittes: einen Eintrag in der
+`GENERATOREN`-Tabelle in `scripts/ki-metadaten-schreiben.mjs` und eine Referenz in der `page.mdx`
+des Artikels. Das Inventar wird daraus seit dem 28.08.2026 von `scripts/generate-ki-inventar.mjs`
+erzeugt und nicht mehr von Hand gepflegt; `--pruefen` in der prebuild-Kette bricht den Build ab,
+sobald die abgelegte Datei von der ableitbaren abweicht. Diese Datei hier also nicht bearbeiten.
 
 Das Inventar wird **nicht** aus der Website neu erzeugt. Ein Generator, der den Bestand ausliest,
 übernimmt genau die Lücken, die er finden soll — beim ersten Versuch fehlten dadurch alle sieben
