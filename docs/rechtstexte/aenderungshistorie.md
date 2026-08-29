@@ -324,6 +324,21 @@ landete damit in Zugriffs- und Server-Logs, in Referrer-Headern und im Browserve
 |---|---|---|---|
 | 18.08.2026 | S2.1 — drei Routen | Beide Wege gelten gleichzeitig, nichts entfernt. Cron-Routen akzeptieren zusätzlich den Kopf `X-Admin-Password`, `/api/tiktok/auth` zusätzlich das `rf_admin_session`-Cookie aus S1. Jeder Treffer über den alten Weg wird protokolliert — nur Route und Zeitpunkt, nie der Wert. Vergleich in konstanter Zeit über gehashte Puffer. | `acc0cef` |
 | 28.08.2026 | S2.3 — beide Cron-Routen | Der Query-Weg `?admin=` ist ersatzlos entfernt, mit ihm der Übergangskommentar aus S2.1 und die Protokollzeile. Es bleibt der Kopf `X-Admin-Password`. `/api/tiktok/auth` ist ausgenommen: Der Aufruf dort ist eine Adresszeilen-Navigation, die keinen eigenen Kopf setzen kann; maßgeblich ist das `rf_admin_session`-Cookie aus S1. Unverändert bleiben die `CRON_SECRET`-Prüfung als erster Schritt jedes Aufrufs und deren Vergleichsstelle. | `e2d7d52` |
+| 29.08.2026 | S3 — alle drei Cron-Routen | Der Vergleich des `CRON_SECRET` läuft nicht mehr über `!==`, sondern über den neuen, zweckgebundenen Prüfer `pruefeCronGeheimnis` in `lib/admin-session.ts`; er kapselt die Bearer-Zerlegung und vergleicht das Geheimnis in konstanter Zeit. Das Primitiv `vergleicheGeheimnis` bleibt bewusst dateiprivat — alle exportierten Funktionen dieser Datei sind zweckgebundene Prüfer, ein `export` hätte ein beliebig falsch anwendbares Werkzeug öffentlich gemacht. Statuscode, Antwortkörper, `cronSecret`-Beschaffung und der 500-Guard sind unangetastet. | `dde8fd0` |
+
+**Belegstand S3 — so eng wie geprüft.** Vorbedingung war, dass alle drei Routen nach S2.3 wieder
+gelaufen sind; neu gemessen und nicht aus dem Auftrag übernommen, je auf dem Deployment
+`dpl_9tVMi6iskpFyEUWJTGMC6aDw7aHH`: `/api/cron/social-post` 28.08. 17:00:34,
+`/api/cron/social-post-tiktok` 29.08. 05:01:34, `/api/cron/health-check` 29.08. 06:00:35 — alle
+drei mit **200**. **Die Annahmemenge ist unverändert**, festgemacht daran, dass das Präfix aus
+`Bearer` und einem Leerzeichen exakt verlangt bleibt (Groß- und Kleinschreibung beachtet, kein
+`trim`, kein `toLowerCase`) und `vergleicheGeheimnis` über gehashte Puffer genau dann wahr liefert,
+wenn die Zeichenketten gleich sind. Eine bewusste Verengung bleibt: Bei leerem `CRON_SECRET` gibt
+der Prüfer `false` — früher wäre ein Kopf, der genau aus `Bearer` samt Leerzeichen besteht, dann
+angenommen worden. Der 500-Guard greift vorher, der Fall ist unerreichbar. **Ein Testaufruf mit
+`Authorization: Bearer …` wurde nicht unternommen** — er bräuchte das Geheimnis. Belegt ist die
+Änderung erst, wenn alle drei Routen erneut mit 200 gelaufen sind: 29.08. 17:00, 30.08. 05:00 und
+30.08. 06:00 UTC. **S2.4 bleibt offen** und erfolgt von Hand.
 
 **Belegstand S2.3 — so eng wie geprüft.** In den Runtime-Logs erscheint die Marke `[S2] alter Weg
 benutzt` über drei Tage null Mal. Das Instrument wurde gegengeprüft, weil ein leeres Ergebnis sonst
