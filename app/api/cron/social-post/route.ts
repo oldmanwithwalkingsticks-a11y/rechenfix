@@ -44,7 +44,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { publishToBothPlatforms, type PublishResult } from '@/lib/social/publisher';
 import { ALL_PLATFORMS, type Platform } from '@/lib/social/state';
-import { pruefeAdminPasswort } from '@/lib/admin-session';
+import { pruefeAdminPasswort, pruefeCronGeheimnis } from '@/lib/admin-session';
 
 // Route ist dynamisch — niemals pre-rendern, KV-Reads sind Request-spezifisch.
 export const dynamic = 'force-dynamic';
@@ -109,7 +109,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     );
   }
   const authHeader = request.headers.get('authorization');
-  if (authHeader !== `Bearer ${cronSecret}`) {
+  if (!(await pruefeCronGeheimnis(authHeader, cronSecret))) {
     return unauthorized('missing or invalid Authorization header');
   }
 

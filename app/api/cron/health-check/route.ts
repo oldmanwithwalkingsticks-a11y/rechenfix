@@ -14,6 +14,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { getTerminlage } from '@/lib/termine';
+import { pruefeCronGeheimnis } from '@/lib/admin-session';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -164,7 +165,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: 'CRON_SECRET nicht konfiguriert' }, { status: 500 });
   }
   const authHeader = request.headers.get('authorization');
-  if (authHeader !== `Bearer ${cronSecret}`) {
+  if (!(await pruefeCronGeheimnis(authHeader, cronSecret))) {
     return unauthorized('missing or invalid Authorization header');
   }
 

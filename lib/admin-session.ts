@@ -126,6 +126,31 @@ export async function pruefeAdminPasswort(eingabe: string | null | undefined): P
   return vergleicheGeheimnis(eingabe, erwartet);
 }
 
+/**
+ * Prüft den `Authorization`-Kopf einer Cron-Route gegen `CRON_SECRET` (Welle S3).
+ *
+ * Das erwartete Geheimnis wird übergeben und nicht hier aus der Umgebung gelesen:
+ * Die drei Cron-Routen lesen `CRON_SECRET` bereits selbst und brechen mit HTTP 500
+ * ab, wenn es fehlt. Ein zweiter Zugriff an dieser Stelle wäre eine zweite Quelle
+ * derselben Angabe.
+ *
+ * Die Annahmemenge ist dieselbe wie beim früheren Vergleich mit `!==` gegen den
+ * vollständigen Kopf aus Präfix und Geheimnis: Das Präfix `Bearer ` muss exakt so
+ * dastehen — ein Leerzeichen, Groß- und Kleinschreibung beachtet, keine Toleranz.
+ * Die Präfixprüfung ist keine Geheimnisprüfung und darf früh abbrechen; sie
+ * verrät nur, ob das Präfix davorstand. Der Vergleich des Geheimnisses selbst
+ * läuft über `vergleicheGeheimnis` und damit in konstanter Zeit.
+ */
+export async function pruefeCronGeheimnis(
+  authHeader: string | null,
+  erwartet: string,
+): Promise<boolean> {
+  if (!erwartet || !authHeader) return false;
+  const praefix = 'Bearer ';
+  if (!authHeader.startsWith(praefix)) return false;
+  return vergleicheGeheimnis(authHeader.slice(praefix.length), erwartet);
+}
+
 /** Erzeugt ein signiertes, ablaufendes Sitzungskennzeichen. */
 export async function erzeugeSitzung(): Promise<string> {
   const schluessel = signaturSchluessel();
