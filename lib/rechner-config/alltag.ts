@@ -3876,16 +3876,16 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'zeitwert-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-09-02',
     titel: 'Zeitwert-Rechner',
-    beschreibung: 'Zeitwert gebrauchter Gegenstände berechnen: Restwert für Versicherung, Verkauf oder Schadensersatz.',
+    beschreibung: 'Zeitwert gebrauchter Gegenstände und Fahrzeuge berechnen: Restwert nach Alter, Nutzungsdauer und Zustand — für Versicherung, Verkauf oder Schadensersatz.',
     kategorie: 'Alltag & Leben',
     kategorieSlug: 'alltag',
     metaTitle: 'Zeitwert-Rechner — Restwert nach AfA-Tabelle',
-    metaDescription: 'Zeitwert kostenlos berechnen — Restwert nach Alter, Nutzungsdauer und Zustand. Für Versicherung, Verkauf und Schadensersatz.',
-    keywords: ['zeitwert rechner', 'restwert berechnen', 'wertverlust', 'zeitwert möbel', 'zeitwert elektronik', 'lineare abschreibung', 'gebrauchtwert'],
+    metaDescription: 'Zeitwert kostenlos berechnen — Auto, Elektronik, Möbel. Restwert nach Alter, Nutzungsdauer und Zustand, Nutzungsdauern nach amtlicher AfA-Tabelle.',
+    keywords: ['zeitwert rechner', 'restwert berechnen', 'wertverlust', 'zeitwert möbel', 'zeitwert elektronik', 'lineare abschreibung', 'gebrauchtwert', 'zeitwert auto', 'zeitwert fahrzeug', 'restwert auto berechnen'],
     icon: '📦',
-    beispiel: 'Laptop 1.000 €, 3 Jahre alt, Nutzungsdauer 5 Jahre, Zustand gut (75 %): Zeitwert = (1.000 − 600) × 0,75 = 300 €.',
+    beispiel: 'Pkw 30.000 €, 3 Jahre alt, Nutzungsdauer 6 Jahre (AfA 4.2.1), Zustand gut (75 %): Zeitwert = (30.000 − 15.000) × 0,75 = 11.250 €.',
     faq: [
       {
         frage: 'Wie berechnet man den Zeitwert?',
@@ -4043,6 +4043,11 @@ export const alltagRechner: RechnerConfig[] = [
     ],
     quellen: [
       { titel: 'Zeitwert-Methodik (lineare Wertminderung + Zustandsfaktor)', hinweis: 'Zeitwert = Neupreis − (Neupreis ÷ Nutzungsdauer) × Alter, nicht unter 0; bereinigt = linearer Zeitwert × Zustandsfaktor (0,9 / 0,75 / 0,6 / 0,4 / 0,2).' },
+      {
+        titel: 'BMF, AfA-Tabelle für die allgemein verwendbaren Anlagegüter („AV"), IV D 2-S 1551-188/00, 15.12.2000, BStBl I 2000 S. 1532',
+        url: 'https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/Weitere_Steuerthemen/Betriebspruefung/AfA-Tabellen/Ergaenzende-AfA-Tabellen/AfA-Tabelle_AV.html',
+        hinweis: 'Betriebsgewöhnliche Nutzungsdauern; Pkw und Kombi 6 Jahre (4.2.1), Motorräder und Fahrräder 7 (4.2.2), Wohnmobile 8 (4.2.9), PC und Notebooks 3 (6.14.3.2), Foto- und Videogeräte 7 (6.14.4), Büromöbel 13 (6.15), Kühlschränke und Waschmaschinen 10 (7.7 / 7.2.10). Gültig für Anschaffungen nach dem 31.12.2000.',
+      },
       { titel: 'Gesamtverband der Deutschen Versicherungswirtschaft (GDV) — Hausrat und Zeitwert', url: 'https://www.gdv.de', hinweis: 'Hintergrund zu Neuwert- und Zeitwertversicherung im Hausrat.' },
     ],
   },
