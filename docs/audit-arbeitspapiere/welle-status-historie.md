@@ -6,6 +6,47 @@
 
 ---
 
+## 02.09.2026 — Welle 132: Die FAQ zieht der Optionsliste nach — ✅ ABGESCHLOSSEN
+
+**Die Auslassung war die Ursache, nicht ein Versehen.** Welle 130 hat die Nutzungsdauern des
+Zeitwert-Rechners auf die amtliche AfA-Tabelle umgestellt und Fahrzeuge ergänzt — und die FAQ im
+selben Config-Block bewusst ausgeklammert, mit der Begründung, sie werde nachgezogen, sobald die
+Optionsliste live geprüft ist. Zwischen Auswahlfeld und FAQ stand danach ein sichtbarer Widerspruch,
+zwei Zentimeter auseinander auf derselben Seite. Ein Feld auszusparen ist kein neutraler Zustand: Es
+erzeugt die Drift, die es vermeiden wollte.
+
+**Zwei Befunde, beide gemessen.** Erstens nannte die Antwort auf „Welche Nutzungsdauer soll ich
+wählen?" weiterhin die alte Kategorienliste — Elektronik 3–5 Jahre, günstige Möbel 5, hochwertige
+Möbel 8–10, Großgeräte 10, Küchen 15. Kein Fahrzeug, keine Fundstelle, und die Spannen deckten sich
+nicht mit den Werten im Auswahlfeld darüber. Zweitens war die Beispielrechnung in „Wie berechnet man
+den Zeitwert?" im Zwischenschritt gerundet: `(800 − 800/7 × 4) × 0,75 = (800 − 457) × 0,75 =
+257,25 €`. Gegen die Lib gerechnet ergibt `berechneZeitwert(800, 4, 7, 0.75)` einen jährlichen
+Wertverlust von 114,29 €, 342,86 € linearen Zeitwert und **257,14 €** bereinigt. Der Text rundete den
+Zwischenwert auf 457 und rechnete damit weiter, der Rechner rundet erst am Ende. Elf Cent — aber
+genau die Drift zwischen Spec-Wert und Live-Rechner, die der Skill unter „Beispielrechnungen"
+ausschließt. Die Nutzungsdauer 7 für einen Fernseher blieb dabei richtig, AfA 6.14.4 führt Foto-,
+Film-, Video- und Audiogeräte mit sieben Jahren; falsch war allein die Arithmetik.
+
+**Die Lehre: `beispiel` und `faq` sind ein systematisches Stale-Nest.** Wer die Rechenlogik oder eine
+Auswahlliste ändert, prüft **alle vier** Config-Felder gegen den neuen Stand — `beispiel`, `formel`,
+`erklaerung` und `faq` —, nicht nur das Feld, das er gerade anfasst. Die vier Felder beschreiben
+dieselbe Sache aus vier Blickwinkeln; ändert sich die Sache, veralten sie gemeinsam, aber nur eines
+davon fällt beim Arbeiten auf.
+
+**Eine Quoting-Falle, gefangen vor dem Schreiben.** Der Ersatztext enthält `„AV"`. Beim Vorbereiten
+wurde das Schlusszeichen erst zu einem escapten ASCII-Zeichen, dann auf U+201C „korrigiert" — beides
+falsch. Die Messung an der Zieldatei entschied: `alltag.ts` verwendet 134-mal U+201E als öffnendes
+und durchgehend ASCII `"` als schließendes Zeichen, U+201C kommt dort **kein einziges Mal** vor. Die
+vermeintliche Korrektur wurde zurückgenommen. R9 in Reinform — der Endstand gehört gegen die Datei
+geprüft, nicht gegen die Absicht, und die Konvention der Zieldatei schlägt die typografisch
+„richtigere" Variante.
+
+**Umfang:** Commit `afe8546`, eine Datei, zwei Zeilen ersetzt. Prüfgreps nach der Änderung:
+„Elektronik 3–5 Jahre" 0, „257,25" 0, „257,14" 1, „4.2.1" 3. `letzteAktualisierung` blieb auf
+`2026-09-02` — das Datum stimmt weiterhin.
+
+---
+
 ## 02.09.2026 — Welle 131: R8 und R9, und eine Datei auf zwei Wegen — ✅ ABGESCHLOSSEN
 
 **Zwei Regeln aus drei Wellen, beide aus der Vorlage, keine aus dem Repo.**
