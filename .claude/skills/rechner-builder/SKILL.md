@@ -28,7 +28,7 @@ Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veralte
 
 Wenn diese Standards befolgt werden, dauert der Januar-Audit 1–2 Tage statt 2–3 Wochen.
 
-**Aktueller Stand (20.08.2026, gemessen an HEAD `76f5552`):** 206 Rechner in **zehn** Kategorien — Alltag 24, Finanzen 45, Gesundheit 17, Auto & Verkehr 15, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 15, Sport & Fitness 15, **Technik 15**. Dazu 16 Blogartikel und 73 Grafik-Komponenten. Die Prebuild-Kette hat **14** Glieder. **Affiliate:** **13** Programme in `components/AffiliateBox.tsx` (wiso, smartsteuer, lexware, check24, congstar, ks-auxilia, hotelde, burdaZahn, verivox, naturesway, cosmosdirekt, smava, hansemerkur); 55 `<AffiliateBox>`-Aufrufe in 52 Dateien. **AdSense:** seit Februar 2026 bewusst pausiert, der Ladecode wurde am **16.08.2026** vollständig entfernt (Susanne Recht R2) — es findet derzeit **keine** Werbeauslieferung statt. Neue Rechner dürfen deshalb keine AdSense-Annahmen enthalten. **Wellenverlauf:** vollständig in [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md) — bewusst nicht hier gespiegelt, damit der Skill nicht mit jeder Welle veraltet.
+**Aktueller Stand (02.09.2026, gemessen an HEAD `7516f54`):** 206 Rechner in **zehn** Kategorien — Alltag 24, Finanzen 45, Gesundheit 17, Auto & Verkehr 15, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 15, Sport & Fitness 15, **Technik 15**. Dazu 17 Blogartikel und 76 Grafik-Komponenten. Die Prebuild-Kette hat **15** Glieder. **Affiliate:** **13** Programme in `components/AffiliateBox.tsx` (wiso, smartsteuer, lexware, check24, congstar, ks-auxilia, hotelde, burdaZahn, verivox, naturesway, cosmosdirekt, smava, hansemerkur); 55 `<AffiliateBox>`-Aufrufe in 52 Dateien. **AdSense:** seit Februar 2026 bewusst pausiert, der Ladecode wurde am **16.08.2026** vollständig entfernt (Susanne Recht R2) — es findet derzeit **keine** Werbeauslieferung statt. Neue Rechner dürfen deshalb keine AdSense-Annahmen enthalten. **Wellenverlauf:** vollständig in [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md) — bewusst nicht hier gespiegelt, damit der Skill nicht mit jeder Welle veraltet.
 
 > **Pflege dieses Blocks:** Die Zahlen oben veralten mit jeder Welle. Sie sind eine Momentaufnahme, keine SSOT — im Zweifel gegen `lib/rechner-config/` und `components/AffiliateBox.tsx` messen, nie aus diesem Skill zitieren. Zuletzt berichtigt in Welle 111 (20.08.2026), davor unverändert seit 01.05.2026.
 
@@ -832,6 +832,7 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge,
 | 26.04.2026 | Prompt 155: Welle-2-Komplett-Abschluss-Sync — Header-Stand auf „Welle 2 KOMPLETT abgeschlossen 26.04.2026" mit allen 4 Stufen ✅ und Welle-3-Backlog-Stichworten (152b/P3-B1/151/150e/Validation-Sweep). Audit-Methodik-Sektion ergänzt um Audit-Bundle-Pattern (Generator-Skript `scripts/build-audit-bundle.ts`, CLI `npm run audit:bundle <name>`, Bundle-Defs in `scripts/audit-bundles.ts`, 300k-text-Limit-Pflicht für Bundles >100 KB), Verify-Skripte-Konvention (Lehre 149d: `.ts` statt `.mjs`, `npx tsx`-Aufruf, typisierte Helper), Wert-Recherche-Disziplin durch Claude im Web (Lehre 22: Aktualität-Hinweis + zwei Sekundärquellen + URL-Permission-Workflow). | [ ] noch offen |
 | 28.04.2026 | Prompt 158a: Welle-3-Lehren-Sync — Header-Stand auf 28.04.2026 mit Welle 3 6/9 ✅ (152b, 154, 155, 156, 151, 150e). Vier neue Anti-Pattern-Blöcke ergänzt: Content-Sektionen in client-only Lazy-Wrapper (Lehre 26 / 154 — AdSense-Trigger), Klasse auf Wrapper statt direkten Kindern (Lehre 27 / 154), `new Date()` auf Modul-Ebene in `'use client'`-Components (Lehre 24 / 152b — Hydration-Mismatch-Risiko), Stichtag-Wert als dynamischer Lookup verkleidet (Lehre 23 / 152b — Stichtag vs. berechenbar mit Decision-Tabelle). AdSense-Status im Header: erste Prüfung 27.04.2026 negativ, Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. | [ ] noch offen |
 | 26.08.2026 | Welle 114: Prüfvorschriften-Regeln R1–R6 in der Operativen Disziplin, Anti-Pattern zur Namenswahl exportierter Helfer, Working-Tree-Disziplin um Worktree-Pflege und untracked Artefakte erweitert, Checkliste um den Block „Prüfvorschrift schreiben". **Struktur-Umbau:** SKILL.md 1966 → 898 Zeilen, sechs neue Referenzdateien (Qualitäts-Guards, Anti-Patterns, Audit-Methodik, Kategorien, Zentrale Libs, Content-Standards), Sync-Ablauf auf ZIP-Upload umgestellt. | [ ] noch offen |
+| 02.09.2026 | Wellen 128–131: R8 (Abschluss-Commit mit Historienblock gehört in jeden Wellen-Prompt) und R9 (Text mit typografischen Zeichen über Dateien statt zitierter Literale) in der Operativen Disziplin, dazu zwei Zählfallen als Ergänzung zu R2 und R3 (`types.ts`/`index.ts` bei der Rechner-Zählung, Quote-Form bei Objektschlüsseln mit Bindestrich). Bestandszahlen nachgemessen: 16→17 Blogartikel, 73→76 Grafik-Komponenten, 14→15 prebuild-Glieder. | [ ] noch offen |
 
 ---
 
@@ -839,7 +840,7 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge,
 
 ### Prüfvorschriften in Build-Prompts (Welle 114, 26.08.2026 · R7 aus Welle 118, 27.08.2026)
 
-Jeder Build-Prompt enthält Greps mit Sollwerten. In Welle 114 sind **drei** Prompts an fehlerhaften Prüfvorschriften hängengeblieben — alle drei Fehler kamen aus der Vorlage, keiner aus dem Repo. R1 bis R6 adressieren jeweils einen davon. R7 kam aus Welle 118 hinzu und betrifft nicht die Prüfvorschrift selbst, sondern die Frage, wann eine Änderung überhaupt fertig ist.
+Jeder Build-Prompt enthält Greps mit Sollwerten. In Welle 114 sind **drei** Prompts an fehlerhaften Prüfvorschriften hängengeblieben — alle drei Fehler kamen aus der Vorlage, keiner aus dem Repo. R1 bis R6 adressieren jeweils einen davon. R7 kam aus Welle 118 hinzu und betrifft nicht die Prüfvorschrift selbst, sondern die Frage, wann eine Änderung überhaupt fertig ist. R8 und R9 kamen aus den Wellen 128 und 129 hinzu; beide betreffen nicht den Inhalt einer Prüfung, sondern die Vollständigkeit und die Herstellung des Prompts selbst.
 
 **R1 — `git grep` statt `grep -r`.**
 `git grep` durchsucht nur getrackte Dateien. Verwaiste Worktrees unter `.claude/worktrees/`, `node_modules` und alles Gitignorierte fallen automatisch heraus. In Welle 114 lieferten drei tote Worktree-Kopien von `lib/seo.ts` und `app/layout.tsx` bei `grep -r` vier statt einem Treffer und lösten eine STOP-Bedingung fälschlich aus. Ein Ausschlusspfad im Prompt ist die schwächere Lösung, weil ihn jede Folgevorlage neu mitschleppen muss.
@@ -892,7 +893,24 @@ tot. Gilt für API-Routen, geteilte Typen, Redis-Werte, Config-Exporte und
 Rückgabeobjekte zentraler Libs. Umgekehrt genauso: Wer ein Feld entfernt,
 greppt vorher nach Verbrauchern.
 
-**Und quer über alle sieben: Sollwerte werden gemessen, nie gerechnet.**
+**R8 — Ein Wellen-Prompt ohne Abschluss-Commit ist unvollständig.**
+Jeder Prompt, der Commits erzeugt, endet mit einem Schritt, der den Block in `docs/audit-arbeitspapiere/welle-status-historie.md` schreibt — mit den echten Commit-Hashes, die erst währenddessen entstehen, und deshalb als **letzter** Commit der Welle. Belegt: In Welle 128 mussten die Blöcke für 115, 119 und 127 nachgetragen werden. Danach fehlte er für 128 selbst und anschließend für 129, jeweils weil der Prompt keinen vorsah. `scripts/check-wellenhistorie.mjs` fängt das zuverlässig — aber erst nach dem Push, und jedes Mal kostet es einen zusätzlichen Prompt. Der Wächter ist das Netz, nicht der Plan.
+
+Zwei Punkte, die dabei regelmäßig danebengehen: Der Block braucht die Hashes der vorangegangenen Commits, also gehört „Hash aus Schritt N einsetzen" ausdrücklich in den Prompt statt eines Platzhalters, der stehenbleibt. Und wenn der Prompt selbst die Schreibweise `W1xx —` verwendet, meldet der Wächter im Zwischenstand die **laufende** Welle — das ist erwartet und darf nicht hinter einer STOP-Bedingung stehen (siehe R6). In Welle 128 hat genau das einen richtigen Commit blockiert.
+
+**R9 — Text mit typografischen Zeichen wird über eine Datei geschrieben, nie über zitierte Shell- oder Sprach-Literale.**
+Betroffen sind deutsche Anführungszeichen, Apostrophe, Geviertstriche, Template-Literale `${…}` und alles, was wie ein Escape aussieht. Drei Vorfälle in zwei Wellen:
+
+- Eine Python-Ersetzung mit normalen Zeichenketten machte aus `\b` im Kommentar ein unsichtbares Backspace-Zeichen (0x08) und aus `\u2014` einen literalen Geviertstrich — also genau das, was der Prompt ausgeschlossen hatte.
+- Ein deutsches Anführungszeichen in einem Historienblock schloss die Python-Zeichenkette vorzeitig, `SyntaxError`.
+- Ein Bash-Heredoc brach an einem Apostroph in einer 300-Zeilen-TSX mit `unexpected EOF while looking for matching '` ab.
+
+Der Weg, der keine dieser Fallen hat: den Inhalt mit dem Schreibwerkzeug in eine Datei legen und diese Datei einfügen oder verschieben. Danach den **Endstand gegen die Datei** prüfen, nicht gegen die Absicht — ein Byte-Scan auf Steuerzeichen und eine Zählung der Zeichen, die literal auftauchen sollen. Beide Male wurde der Fehler genau dadurch gefangen.
+
+**Zwei Zählfallen, gemessen am 02.09.2026 — Ergänzung zu R2 und R3.**
+`git grep -c "^\s*slug:" -- 'lib/rechner-config/*.ts'` liefert 208 statt 206: `types.ts` enthält zwei Interface-Felder namens `slug`, und `index.ts` enthält zehn `slug:`-Zeilen für die **Kategorien**. Beide Dateien gehören aus der Rechner-Zählung heraus. Und ein Schlüssel-Grep der Form `^  [a-zA-Z0-9]+: \{` zählt in `components/AffiliateBox.tsx` zwölf Programme statt dreizehn — `'ks-auxilia'` trägt einen Bindestrich und steht deshalb in Anführungszeichen. Wer Objektschlüssel zählt, muss die Quote-Form mitdenken: `^  '?[a-zA-Z0-9-]+'?: \{`.
+
+**Und quer über alle neun: Sollwerte werden gemessen, nie gerechnet.**
 Auch die scheinbar triviale Arithmetik der Vorlage. „Elf Pfade, davon einer nicht betroffen, also zehn Dateien\" war falsch — der eine war nie in der Liste. Die Zahl der geänderten Dateien ist ein `git diff --name-only | wc -l`, kein Kopfrechnen.
 
 **Verhalten bei Abweichung — gilt für Code-Claude, nicht verhandelbar:**
