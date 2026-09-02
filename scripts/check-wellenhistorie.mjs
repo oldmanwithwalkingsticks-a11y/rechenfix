@@ -37,7 +37,13 @@ try {
   const betreffs = git('git log --pretty=%s');
   const committet = new Set();
   for (const zeile of betreffs.split('\n')) {
-    const m = zeile.match(/^Welle\s+(\d+[a-z]?)\s*[:,]/i);
+    // Zwei Schreibweisen: "Welle 84:" bis Welle 113, "W114 —" ab Welle 114.
+    // Trennzeichen: Doppelpunkt, Komma, Geviertstrich (U+2014) oder Bindestrich.
+    // Die Auswertungsseite unten akzeptiert "W127" schon seit jeher (\bW(\d+)\b);
+    // ohne diese Zeile blieb die Erfassungsseite dahinter zurueck und alle Wellen
+    // ab 114 waren unsichtbar. Gemessen an HEAD 56a501c: 196 -> 227 Commits,
+    // 131 -> 146 Wellen, zusaetzlich gefangen genau 114, 114b und 115-127.
+    const m = zeile.match(/^(?:Welle\s+|W)(\d+[a-z]?)\s*[:,\u2014-]/i);
     if (m) committet.add(m[1].toLowerCase());
   }
   if (committet.size === 0) process.exit(0);
