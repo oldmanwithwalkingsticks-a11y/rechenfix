@@ -6,6 +6,90 @@
 
 ---
 
+## 02.09.2026 — Welle 131: R8 und R9, und eine Datei auf zwei Wegen — ✅ ABGESCHLOSSEN
+
+**Zwei Regeln aus drei Wellen, beide aus der Vorlage, keine aus dem Repo.**
+
+**R8 — ein Wellen-Prompt ohne Abschluss-Commit ist unvollständig.** Welle 128 trug die fehlenden
+Blöcke für 115, 119 und 127 nach; danach fehlte er für 128 selbst, dann für 129, dann für 130 —
+jedes Mal, weil der Prompt keinen vorsah. `check-wellenhistorie.mjs` fängt das zuverlässig, aber erst
+nach dem Push, und jedes Mal kostet es einen zusätzlichen Prompt. Der Wächter ist das Netz, nicht der
+Plan. Dazu gehört: Wenn der Prompt selbst die Schreibweise `W1xx —` benutzt, meldet der Wächter im
+Zwischenstand die laufende Welle. Das ist erwartet und darf nicht hinter einer STOP-Bedingung stehen
+— in Welle 128 hat genau das einen richtigen Commit blockiert.
+
+**R9 — Text mit typografischen Zeichen geht über eine Datei, nie über zitierte Literale.** Drei
+Vorfälle in zwei Wellen: ein `\b` im Kommentar wurde zu einem unsichtbaren Backspace (0x08) und ein
+`\u2014` zum literalen Geviertstrich; ein deutsches Anführungszeichen schloss eine
+Python-Zeichenkette vorzeitig; ein Bash-Heredoc brach an einem Apostroph in einer 300-Zeilen-TSX ab.
+Gefangen wurden alle drei, weil der Endstand gegen die **Datei** geprüft wurde und nicht gegen die
+Absicht.
+
+**Zwei Zählfallen als Ergänzung zu R2 und R3**, beide beim Nachmessen der Bestandszahlen
+aufgetreten: `git grep -c "^\s*slug:"` über `lib/rechner-config/*.ts` liefert 208 statt 206, weil
+`types.ts` zwei Interface-Felder namens `slug` enthält und `index.ts` zehn Kategorie-Slugs. Und ein
+Schlüssel-Grep `^  [a-zA-Z0-9]+: \{` zählt in `AffiliateBox.tsx` zwölf Programme statt dreizehn —
+`'ks-auxilia'` trägt einen Bindestrich und steht deshalb in Anführungszeichen.
+
+**Bestandszahlen nachgemessen:** 16 → 17 Blogartikel, 73 → 76 Grafik-Komponenten, 14 → 15
+prebuild-Glieder. Rechnerzahl und Affiliate-Bestand unverändert bei 206 und 13.
+
+**Der eigentliche Befund dieser Welle war ein Verfahrensfehler.** Chat-Claude hat den geänderten
+Skill sowohl als Build-Prompt für Code-Claude vorbereitet **als auch** als ZIP zur Handinstallation
+ausgeliefert. Weil `.claude/skills/` vom Seiten-Repo getrackt wird und Karsten genau dorthin
+entpackt, erschien die Datei als Fremdänderung im Arbeitsbaum — mitten in einer laufenden Welle.
+Code-Claude hat sie korrekt als Befund gemeldet und nicht mitcommittet. Zwei Wege zur selben Datei
+sind einer zu viel; das gehört als Regel in den nächsten Skill-Durchgang.
+
+**Umfang:** SKILL.md 927 → 945 Zeilen, 21 Einfügungen, 3 Löschungen, sha256
+`9a0e8ee2…`. Erste Welle, die R8 auf sich selbst anwendet.
+
+---
+
+## 02.09.2026 — Welle 130: Zeitwert-Rechner kann endlich Fahrzeuge — ✅ ABGESCHLOSSEN
+
+**0 zu 4 über drei Monate.** `/alltag/zeitwert-rechner` war im Feedback der schlechteste Rechner der
+Seite und der einzige, der über mehrere Monate kein einziges Ja bekam. Die Ursache ließ sich am Code
+zeigen, nicht nur vermuten: Die Nutzungsdauer-Auswahl bot Elektronik 3, Möbel 5, Möbel 8,
+Haushaltsgroßgeräte 10 und Küche 15 — **kein Fahrzeug**. „Zeitwert berechnen" meint im deutschen
+Sprachgebrauch überwiegend den Fahrzeug-Zeitwert. Wer deswegen kam, sah eine Liste ohne seinen Fall
+und schloss daraus, dass der Rechner ihn nicht kann.
+
+**Dazu ein Versprechen ohne Deckung.** Der `metaTitle` lautete „Restwert nach AfA-Tabelle", die
+angebotenen Werte standen dort aber nur teilweise: „Küche 15" und „Möbel günstig 5" kennt die
+amtliche Tabelle nicht, Büromöbel führt sie mit 13 Jahren.
+
+**Primärquelle statt Erfahrungswert.** Acht Nutzungsdauern stammen jetzt wörtlich aus der AfA-Tabelle
+„AV" des BMF (IV D 2-S 1551-188/00, 15.12.2000, BStBl I 2000 S. 1532) und tragen ihre Fundstelle im
+Auswahl-Label: Pkw und Kombi 6 (4.2.1), Motorrad und Fahrrad 7 (4.2.2), Wohnmobil 8 (4.2.9), PC und
+Notebook 3 (6.14.3.2), Foto- und Videogeräte 7 (6.14.4), Kühlschrank und Waschmaschine 10 (7.7 /
+7.2.10), Büromöbel 13 (6.15). Die Einbauküche bleibt mit 15 Jahren als Erfahrungswert und ist als
+solcher ausgewiesen.
+
+**Der Hinweis, ohne den das Preset das Missverständnis nur verschiebt.** Bei Fahrzeug-Nutzungsdauern
+erscheint jetzt der Satz, dass die lineare AfA für Steuer und Buchhaltung richtig und für den
+Verkaufswert falsch ist — ein Neuwagen verliert im ersten Jahr mehr als ein Sechstel, und für Verkauf
+oder Versicherungsschaden zählt der Wiederbeschaffungswert nach Schwacke oder DAT.
+
+**Zwei Werte, an denen der Prompt nicht raten durfte.** Zwei Optionen tragen sieben Jahre, deshalb
+trägt eine den Schlüssel `'7-av'`. Gemessen statt abgeleitet: `parseInt('7-av', 10)` ergibt 7,
+`Number('7-av')` dagegen `NaN`. Die Umwandlung musste deshalb **nicht** geändert werden — der Radix
+steht jetzt trotzdem explizit da, mit Kommentar, damit aus stillem Funktionieren eine sichtbare
+Absicht wird und niemand beim nächsten Aufräumen auf `Number()` umstellt. Und die neue
+Beispielrechnung wurde gegen die echte Lib gerechnet, nicht gelesen: `berechneZeitwert(30000, 3, 6,
+0.75)` liefert 5.000 jährlich, 15.000 linear, **11.250,00 €** bereinigt, 37,5 % Restwert.
+
+**Umfang:** Commits `fa81e12` (Optionsliste, Default, Fahrzeug-Hinweis) und `331a115` (Config:
+Beschreibung, metaDescription mit 146 Zeichen, Beispiel, drei Keywords, AfA-Quelle, Stichtag). Die
+FAQ blieb unangetastet — sie wird nachgezogen, wenn die Optionsliste live geprüft ist.
+
+**Verfahrensnotiz:** Der Bash-Klassifikator fiel während der Welle mehrere Minuten aus. Code-Claude
+hat die Änderungen vorbereitet, aber **nicht** committet, weil Build und die zwei Messungen nicht
+ausführbar waren — ungeprüft ist für einen Commit derselbe Zustand wie fehlgeschlagen. Die Messungen
+wurden anschließend nachgeholt und bestätigten den Prompt.
+
+---
+
 ## 02.09.2026 — Welle 129: Das „Nein" bekommt einen Grund — ✅ ABGESCHLOSSEN
 
 **24 zu 24 über fünf Monate.** Von April bis zum 02.09.2026 sind 48 Bewertungen eingegangen, exakt
