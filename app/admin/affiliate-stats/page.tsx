@@ -10,10 +10,31 @@ interface ClickEntry {
 }
 
 interface FeedbackEntry {
-  v: 'ja' | 'nein';
+  v: 'ja' | 'nein' | 'grund';
   r: string;
   t: number;
+  /** W129: Eingabe-Ereignisse im Rechnerbereich vor dem Klick. */
+  e?: number;
+  /** W129: Sekunden zwischen Seitenaufbau und Klick. */
+  s?: number;
+  /** W129: Viewport-Klasse, kein Pixelwert. */
+  g?: 'mobil' | 'tablet' | 'desktop';
+  /** W129: gewaehlter Grund, nur bei v === 'grund'. */
+  gr?: string;
 }
+
+/**
+ * W129: Klartext zu den sechs Grund-IDs aus components/ui/FeedbackButtons.tsx.
+ * Einmal hier definiert -- kein zweites Mapping an anderer Stelle.
+ */
+const GRUND_LABEL: Record<string, string> = {
+  falsch: 'Ergebnis wirkt falsch',
+  anderes: 'Wollte etwas anderes berechnen',
+  'feld-fehlt': 'Eingabefeld fehlt',
+  unklar: 'Zu kompliziert oder unverstaendlich',
+  'weg-fehlt': 'Rechenweg oder Erklaerung fehlt',
+  defekt: 'Etwas hat nicht funktioniert',
+};
 
 interface PdfEntry {
   r: string;
@@ -282,9 +303,17 @@ export default function AffiliateStatsPage() {
 
   const alleKlicks = useMemo(() => [...clicks].sort((a, b) => b.t - a.t), [clicks]);
 
+  // W129: In derselben Redis-Liste stehen jetzt Bewertungen (v 'ja'/'nein') und
+  // Gruende (v 'grund'). Ohne diese Trennung zaehlte jeder Grund als weiteres Nein.
+  const bewertungen = useMemo(
+    () => feedbacks.filter(f => f.v === 'ja' || f.v === 'nein'),
+    [feedbacks],
+  );
+  const gruende = useMemo(() => feedbacks.filter(f => f.v === 'grund'), [feedbacks]);
+
   const feedbackStats = useMemo(() => {
     const map = new Map<string, { ja: number; nein: number; letzter: number }>();
-    for (const f of feedbacks) {
+    for (const f of bewertungen) {
       const e = map.get(f.r) || { ja: 0, nein: 0, letzter: 0 };
       if (f.v === 'ja') e.ja++; else e.nein++;
       if (f.t > e.letzter) e.letzter = f.t;
@@ -296,12 +325,48 @@ export default function AffiliateStatsPage() {
         return { rechner, ...d, gesamt, rate: gesamt > 0 ? (d.ja / gesamt) * 100 : 0 };
       })
       .sort((a, b) => b.gesamt - a.gesamt);
-  }, [feedbacks]);
+  }, [bewertungen]);
 
   const feedbackGesamt = useMemo(() => {
-    const ja = feedbacks.filter(f => f.v === 'ja').length;
-    return { ja, nein: feedbacks.length - ja, gesamt: feedbacks.length };
-  }, [feedbacks]);
+    const ja = bewertungen.filter(f => f.v === 'ja').length;
+    return { ja, nein: bewertungen.length - ja, gesamt: bewertungen.length };
+  }, [bewertungen]);
+
+  /** W129: Gruende gesamt, absteigend, plus 'ohne Grund' als Differenz zu den Neins. */
+  const gruendeGesamt = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const g of gruende) {
+      const id = typeof g.gr === 'string' ? g.gr : 'unbekannt';
+      map.set(id, (map.get(id) || 0) + 1);
+    }
+    const zeilen = Array.from(map.entries())
+      .map(([id, anzahl]) => ({ id, anzahl }))
+      .sort((a, b) => b.anzahl - a.anzahl);
+    const roh = feedbackGesamt.nein - gruende.length;
+    // Negativ heisst: mehr Gruende als Neins im Monat -- etwa wenn das Nein im
+    // Vormonat liegt. Dann 0 anzeigen und die Rohzahlen daneben, damit es auffaellt.
+    return { zeilen, ohneGrund: Math.max(0, roh), rohDifferenz: roh };
+  }, [gruende, feedbackGesamt]);
+
+  /** W129: Gruende je Rechner, nur Rechner mit mindestens einem Grund. */
+  const gruendeJeRechner = useMemo(() => {
+    const map = new Map<string, Map<string, number>>();
+    for (const g of gruende) {
+      const id = typeof g.gr === 'string' ? g.gr : 'unbekannt';
+      const je = map.get(g.r) || new Map<string, number>();
+      je.set(id, (je.get(id) || 0) + 1);
+      map.set(g.r, je);
+    }
+    return Array.from(map.entries())
+      .map(([rechner, je]) => ({
+        rechner,
+        eintraege: Array.from(je.entries())
+          .map(([id, anzahl]) => ({ id, anzahl }))
+          .sort((a, b) => b.anzahl - a.anzahl),
+        gesamt: Array.from(je.values()).reduce((a, b) => a + b, 0),
+      }))
+      .sort((a, b) => b.gesamt - a.gesamt);
+  }, [gruende]);
 
   /** W118 — reines Tagesdatum (YYYY-MM-DD) ohne Uhrzeit, für den
    *  TikTok-Takttag. fmtDate erwartet Millisekunden und hängt eine Uhrzeit an. */
@@ -326,7 +391,7 @@ export default function AffiliateStatsPage() {
     for (const c of [...clicks].sort((a, b) => a.t - b.t)) {
       lines.push(`Affiliate-Klick;${fmtDate(c.t)};${c.p};${c.c || '-'};${c.r}`);
     }
-    for (const f of [...feedbacks].sort((a, b) => a.t - b.t)) {
+    for (const f of [...bewertungen].sort((a, b) => a.t - b.t)) {
       lines.push(`Feedback;${fmtDate(f.t)};${f.v === 'ja' ? 'Daumen hoch' : 'Daumen runter'};${f.r};${f.r}`);
     }
 
@@ -334,7 +399,7 @@ export default function AffiliateStatsPage() {
     lines.push('--- ZUSAMMENFASSUNG ---');
     lines.push(`Monat;${getMonatLabel(monat)}`);
     lines.push(`Affiliate-Klicks gesamt;${clicks.length}`);
-    lines.push(`Feedback gesamt;${feedbacks.length}`);
+    lines.push(`Feedback gesamt;${feedbackGesamt.gesamt}`);
     lines.push(`Daumen hoch;${feedbackGesamt.ja}`);
     lines.push(`Daumen runter;${feedbackGesamt.nein}`);
     if (feedbackGesamt.gesamt > 0) {
@@ -352,11 +417,28 @@ export default function AffiliateStatsPage() {
     for (const r of feedbackStats) lines.push(`${r.rechner};${r.ja};${r.nein};${r.gesamt};${r.rate.toFixed(0)}%`);
 
     lines.push('');
+    lines.push('--- GRUENDE ---');
+    lines.push('Grund;Anzahl');
+    for (const g of gruendeGesamt.zeilen) {
+      lines.push(`${GRUND_LABEL[g.id] || g.id};${g.anzahl}`);
+    }
+    lines.push(`ohne Grund;${gruendeGesamt.ohneGrund}`);
+
+    lines.push('');
+    lines.push('--- GRUENDE NACH RECHNER ---');
+    lines.push('Rechner;Grund;Anzahl');
+    for (const r of gruendeJeRechner) {
+      for (const g of r.eintraege) {
+        lines.push(`${r.rechner};${GRUND_LABEL[g.id] || g.id};${g.anzahl}`);
+      }
+    }
+
+    lines.push('');
     lines.push('--- KI-NUTZUNG NACH FUNKTION ---');
     lines.push('Funktion;Aufrufe;davon Fehler');
     for (const k of nachKiFunktion) lines.push(`${k.label};${k.gesamt};${k.fehler}`);
     return lines.join('\n');
-  }, [clicks, feedbacks, monat, feedbackGesamt, nachProgramm, feedbackStats, nachKiFunktion]);
+  }, [clicks, bewertungen, monat, feedbackGesamt, gruendeGesamt, gruendeJeRechner, nachProgramm, feedbackStats, nachKiFunktion]);
 
   const handleExport = () => {
     const blob = new Blob([buildCsv()], { type: 'text/csv;charset=utf-8;' });
@@ -507,7 +589,7 @@ export default function AffiliateStatsPage() {
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">Feedback</p>
-          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{feedbackGesamt.ja}</p>
+          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{feedbackGesamt.gesamt}</p>
           <p className="text-xs text-gray-600 dark:text-gray-500">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
@@ -748,6 +830,63 @@ export default function AffiliateStatsPage() {
                 </tbody>
               </table>
               <div className="border-t border-gray-200 dark:border-gray-700 mt-2">
+                <p className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Gruende gesamt</p>
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
+                      <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Grund</th>
+                      <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right">Anzahl</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                    {gruendeGesamt.zeilen.map(g => (
+                      <tr key={`gr-${g.id}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                        <td className="px-4 py-2 text-gray-800 dark:text-gray-200">{GRUND_LABEL[g.id] || g.id}</td>
+                        <td className="px-4 py-2 text-right tabular-nums text-gray-600 dark:text-gray-400">{g.anzahl}</td>
+                      </tr>
+                    ))}
+                    <tr className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                      <td className="px-4 py-2 text-gray-500 dark:text-gray-400 italic">
+                        ohne Grund
+                        {gruendeGesamt.rohDifferenz < 0 && (
+                          <span className="ml-2 not-italic text-xs text-red-600 dark:text-red-400">
+                            (Neins {feedbackGesamt.nein}, Gruende {gruendeGesamt.zeilen.reduce((a, b) => a + b.anzahl, 0)} — pruefen)
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{gruendeGesamt.ohneGrund}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {gruendeJeRechner.length > 0 && (
+                <div className="border-t border-gray-200 dark:border-gray-700 mt-2">
+                  <p className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Gruende je Rechner</p>
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
+                        <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Rechner</th>
+                        <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Gruende</th>
+                        <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 text-right">Gesamt</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+                      {gruendeJeRechner.map(r => (
+                        <tr key={`grr-${r.rechner}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                          <td className="px-4 py-2 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
+                          <td className="px-4 py-2 text-gray-600 dark:text-gray-400 text-xs">
+                            {r.eintraege.map(g => `${GRUND_LABEL[g.id] || g.id} ${g.anzahl}`).join(' · ')}
+                          </td>
+                          <td className="px-4 py-2 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.gesamt}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              <div className="border-t border-gray-200 dark:border-gray-700 mt-2">
                 <p className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Einzelne Feedbacks</p>
                 <table className="w-full text-sm">
                   <thead>
@@ -755,14 +894,18 @@ export default function AffiliateStatsPage() {
                       <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Datum/Uhrzeit</th>
                       <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Bewertung</th>
                       <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300">Rechner</th>
+                      <th className="px-4 py-2 font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">Eing. · Sek. · Geraet</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-                    {[...feedbacks].sort((a, b) => b.t - a.t).map((f, i) => (
+                    {[...bewertungen].sort((a, b) => b.t - a.t).map((f, i) => (
                       <tr key={`fb-${f.t}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                         <td className="px-4 py-2 text-gray-500 dark:text-gray-400 whitespace-nowrap">{fmtDate(f.t)}</td>
                         <td className="px-4 py-2">{f.v === 'ja' ? <span className="text-green-600 dark:text-green-400">👍 Ja</span> : <span className="text-red-600 dark:text-red-400">👎 Nein</span>}</td>
                         <td className="px-4 py-2 text-gray-800 dark:text-gray-200 font-mono text-xs">{f.r}</td>
+                        <td className="px-4 py-2 text-gray-500 dark:text-gray-400 text-xs whitespace-nowrap tabular-nums">
+                          {`${f.e ?? '—'} · ${f.s ?? '—'} · ${f.g ?? '—'}`}
+                        </td>
                       </tr>
                     ))}
                   </tbody>

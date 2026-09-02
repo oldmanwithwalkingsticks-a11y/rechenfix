@@ -13,9 +13,17 @@ interface ClickEntry {
 }
 
 interface FeedbackEntry {
-  v: 'ja' | 'nein';
+  v: 'ja' | 'nein' | 'grund';
   r: string;
   t: number;
+  /** W129: Eingabe-Ereignisse im Rechnerbereich vor dem Klick. */
+  e?: number;
+  /** W129: Sekunden zwischen Seitenaufbau und Klick. */
+  s?: number;
+  /** W129: Viewport-Klasse, kein Pixelwert. */
+  g?: 'mobil' | 'tablet' | 'desktop';
+  /** W129: gewaehlter Grund, nur bei v === 'grund'. */
+  gr?: string;
 }
 
 interface PdfEntry {
