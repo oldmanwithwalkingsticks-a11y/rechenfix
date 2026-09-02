@@ -13,13 +13,19 @@ const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2,
 export default function ZeitwertRechner() {
   const [neupreis, setNeupreis] = useState('1000');
   const [alter, setAlter] = useState('3');
-  const [nutzungsdauerModus, setNutzungsdauerModus] = useState('5');
+  // W130: Default Pkw — der häufigste Anlass für „Zeitwert berechnen".
+  const [nutzungsdauerModus, setNutzungsdauerModus] = useState('6');
   const [nutzungsdauerEigen, setNutzungsdauerEigen] = useState('5');
   const [zustand, setZustand] = useState('0.75');
 
+  // W130: Die Option '7-av' (Foto/Video, AfA 6.14.4) trägt denselben Jahreswert
+  // wie '7' (Motorrad, AfA 4.2.2) und braucht nur deshalb einen eigenen value,
+  // damit der option-key eindeutig bleibt. parseInt liest den Zahlenpräfix und
+  // liefert dafür 7 — das ist hier Absicht, kein Zufall. Wer hier auf Number()
+  // umstellt, bekommt NaN und einen stillen Ausfall genau dieser Option.
   const nutzungsdauer = nutzungsdauerModus === 'eigene'
     ? parseDeutscheZahl(nutzungsdauerEigen)
-    : parseInt(nutzungsdauerModus);
+    : parseInt(nutzungsdauerModus, 10);
 
   const ergebnis = useMemo(() => {
     const np = parseDeutscheZahl(neupreis);
@@ -184,6 +190,22 @@ export default function ZeitwertRechner() {
               💡 Der Zeitwert basiert auf linearer Abschreibung und dient als Orientierung. Versicherungen und Gerichte können andere Berechnungsmethoden verwenden. Für Schadensersatzansprüche empfiehlt sich ein Sachverständigengutachten.
             </p>
           </div>
+
+          {/* W130: nur bei den drei Fahrzeug-Nutzungsdauern (Pkw 6, Zweirad 7, Wohnmobil 8). */}
+          {(nutzungsdauerModus === '6' ||
+            nutzungsdauerModus === '7' ||
+            nutzungsdauerModus === '8') && (
+            <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
+              <p className="text-sm text-amber-800 dark:text-amber-300">
+                <strong>Beim Fahrzeug ist das eine Rechengröße, kein Marktpreis.</strong> Die
+                AfA-Tabelle verteilt den Kaufpreis gleichmäßig über sechs Jahre. Der Markt tut das
+                nicht: Ein Neuwagen verliert im ersten Jahr typischerweise deutlich mehr als ein
+                Sechstel. Für Steuer und Buchhaltung ist die lineare Rechnung die richtige. Für
+                Verkauf oder Versicherungsschaden zählt der Wiederbeschaffungswert — den ermitteln
+                Schwacke oder DAT, nicht diese Formel.
+              </p>
+            </div>
+          )}
 
           <CrossLink href="/alltag/prozentrechner" emoji="%" text="Prozentwerte berechnen" />
           <CrossLink href="/auto/autokosten-rechner" emoji="🚗" text="Autokosten und Wertverlust berechnen" />

@@ -11,12 +11,25 @@ export interface ZeitwertErgebnis {
   verlaufskurve: { jahr: number; wert: number }[];
 }
 
+/**
+ * Nutzungsdauern nach der amtlichen AfA-Tabelle „AV" des BMF
+ * (IV D 2-S 1551-188/00, 15.12.2000, BStBl I 2000 S. 1532), Fundstelle in Klammern.
+ * Die Werte ohne Fundstelle sind Erfahrungswerte für den privaten Hausrat und als
+ * solche im Text ausgewiesen — die AfA-Tabelle kennt sie nicht.
+ *
+ * Reihenfolge bewusst: Fahrzeuge zuerst, weil sie der häufigste Anlass sind.
+ * `'7-av'` trägt denselben Jahreswert wie `'7'`, braucht aber einen eigenen
+ * `value`, damit der `key` im option-Loop eindeutig bleibt.
+ */
 export const NUTZUNGSDAUER_OPTIONEN = [
-  { value: '3', label: '3 Jahre (Elektronik)' },
-  { value: '5', label: '5 Jahre (Möbel günstig)' },
-  { value: '8', label: '8 Jahre (Möbel hochwertig)' },
-  { value: '10', label: '10 Jahre (Haushaltsgroßgeräte)' },
-  { value: '15', label: '15 Jahre (Küche)' },
+  { value: '6', label: '6 Jahre — Pkw und Kombi (AfA 4.2.1)' },
+  { value: '7', label: '7 Jahre — Motorrad, Roller, Fahrrad (AfA 4.2.2)' },
+  { value: '8', label: '8 Jahre — Wohnmobil, Wohnwagen (AfA 4.2.9)' },
+  { value: '3', label: '3 Jahre — PC, Notebook, Drucker (AfA 6.14.3.2)' },
+  { value: '7-av', label: '7 Jahre — Kamera, Fernseher, Audiogeräte (AfA 6.14.4)' },
+  { value: '10', label: '10 Jahre — Kühlschrank, Waschmaschine (AfA 7.7 / 7.2.10)' },
+  { value: '13', label: '13 Jahre — Büromöbel (AfA 6.15)' },
+  { value: '15', label: '15 Jahre — Einbauküche (Erfahrungswert)' },
   { value: 'eigene', label: 'Eigene Angabe' },
 ];
 
