@@ -121,7 +121,11 @@ export default async function RechnerSeite({ params }: Props) {
               {config.icon} {config.titel}
             </h1>
             <p className="text-gray-500 dark:text-gray-400 mb-6 no-print">{config.beschreibung}</p>
-            <RechnerLoader slug={config.slug} />
+            {/* W129: Marker fuer FeedbackButtons -- misst, ob der Nutzer im Rechner
+                ueberhaupt etwas eingegeben hat. Keine Eingabewerte, nur ein Zaehler. */}
+            <div data-rechnerbereich>
+              <RechnerLoader slug={config.slug} />
+            </div>
             <FeedbackButtons />
           </div>
 

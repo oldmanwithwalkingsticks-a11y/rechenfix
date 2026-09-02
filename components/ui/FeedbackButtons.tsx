@@ -18,18 +18,70 @@
  *   Feedback zu bedanken.
  * - Optionales E-Mail-Feld für Rückfragen. Freiwillig, leer voreingestellt,
  *   in der Datenschutzerklärung ausgewiesen.
+ *
+ * Erweitert in Welle 129:
+ * - Nach dem „Nein" kommt zwingend eine Grundauswahl: sechs Knöpfe, ein Klick,
+ *   kein Tippen. Vorher stand dort sofort ein Textfeld mit „Überspringen" —
+ *   das Nein kostete einen Klick, die Begründung Tipparbeit auf dem Handy.
+ *   Die Hälfte aller Neins kam so ohne jede Information an.
+ * - Das Nein selbst wird weiterhin sofort gezählt. Der Grund ist ein zweites
+ *   Ereignis; wer wegklickt, erscheint in der Auswertung als „ohne Grund".
+ * - Bei jeder Bewertung gehen drei Kontextwerte mit: Zahl der Eingaben im
+ *   Rechnerbereich, Sekunden auf der Seite, Viewport-Klasse. Keine
+ *   Eingabewerte, keine Pixelwerte, nichts Personenbezogenes.
+ * - Das Freitextformular bleibt unverändert in Funktion und Route
+ *   (`/api/feedback`, E-Mail) und rückt hinter die Grundauswahl.
  */
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const MAX_ZEICHEN = 1000;
 
+const GRUENDE = [
+  { id: 'falsch', label: 'Das Ergebnis wirkt falsch' },
+  { id: 'anderes', label: 'Ich wollte etwas anderes berechnen' },
+  { id: 'feld-fehlt', label: 'Mir fehlt ein Eingabefeld' },
+  { id: 'unklar', label: 'Zu kompliziert oder unverständlich' },
+  { id: 'weg-fehlt', label: 'Rechenweg oder Erklärung fehlt' },
+  { id: 'defekt', label: 'Etwas hat nicht funktioniert' },
+] as const;
+
+type Grund = (typeof GRUENDE)[number]['id'];
+
+/** Viewport-Klasse statt Pixelwert — grob genug, um nichts zu identifizieren. */
+function geraeteKlasse(): 'mobil' | 'tablet' | 'desktop' {
+  const breite = window.innerWidth;
+  if (breite < 640) return 'mobil';
+  if (breite < 1024) return 'tablet';
+  return 'desktop';
+}
+
 export default function FeedbackButtons() {
   const [feedback, setFeedback] = useState<'ja' | 'nein' | null>(null);
+  const [grund, setGrund] = useState<Grund | null>(null);
   const [nachricht, setNachricht] = useState('');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'sendet' | 'ok' | 'fehler'>('idle');
   const [uebersprungen, setUebersprungen] = useState(false);
+
+  const startZeit = useRef<number>(Date.now());
+  const eingaben = useRef<number>(0);
+
+  // Zählt Eingabe-Ereignisse im Rechnerbereich. Nur die Anzahl, nie ein Wert.
+  // Fehlt der Marker, bleibt der Zähler auf 0 — das ist kein Fehlerfall.
+  useEffect(() => {
+    const bereich = document.querySelector('[data-rechnerbereich]');
+    if (!bereich) return;
+    const zaehle = () => {
+      eingaben.current += 1;
+    };
+    bereich.addEventListener('input', zaehle, { passive: true });
+    bereich.addEventListener('change', zaehle, { passive: true });
+    return () => {
+      bereich.removeEventListener('input', zaehle);
+      bereich.removeEventListener('change', zaehle);
+    };
+  }, []);
 
   if (feedback === 'ja') {
     return (
@@ -56,7 +108,58 @@ export default function FeedbackButtons() {
     );
   }
 
-  if (feedback === 'nein') {
+  // Stufe 2 nach dem Nein: Grundauswahl. Kein Textfeld, kein Überspringen —
+  // ein Klick genügt, und das Nein ist zu diesem Zeitpunkt bereits gezählt.
+  if (feedback === 'nein' && grund === null) {
+    const waehle = (id: Grund) => {
+      setGrund(id);
+      try {
+        fetch('/api/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'feedback-grund',
+            grund: id,
+            rechner: window.location.pathname,
+          }),
+          keepalive: true,
+        }).catch(() => {
+          /* ignore */
+        });
+      } catch {
+        /* ignore */
+      }
+    };
+
+    return (
+      <div className="py-4 no-print">
+        <div className="max-w-md mx-auto bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4">
+          <p className="text-sm font-medium text-amber-800 dark:text-amber-300 mb-1">
+            Schade, dass der Rechner nicht hilfreich war!
+          </p>
+          <p className="text-xs text-amber-700 dark:text-amber-400 mb-3">
+            Woran lag es? Ein Klick genügt.
+          </p>
+          <div className="flex flex-col gap-2">
+            {GRUENDE.map((eintrag) => (
+              <button
+                key={eintrag.id}
+                onClick={() => waehle(eintrag.id)}
+                className="w-full min-h-[48px] px-4 py-3 text-sm text-left font-medium rounded-lg border border-amber-200 dark:border-amber-500/30 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-amber-100 dark:hover:bg-amber-500/20 transition-colors"
+              >
+                {eintrag.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Stufe 3: das bestehende Freitextformular, unverändert in Funktion und Route.
+  if (feedback === 'nein' && grund !== null) {
+    const gewaehlt = GRUENDE.find((eintrag) => eintrag.id === grund);
+
     const absenden = async () => {
       if (!nachricht.trim()) return;
       setStatus('sendet');
@@ -68,6 +171,7 @@ export default function FeedbackButtons() {
             typ: 'Rechner verbessern',
             felder: {
               rechner: window.location.pathname,
+              grund,
               wasFehlt: nachricht.trim().slice(0, MAX_ZEICHEN),
             },
             email: email.trim(),
@@ -87,17 +191,21 @@ export default function FeedbackButtons() {
       <div className="py-4 no-print">
         <div className="max-w-md mx-auto bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4">
           <p className="text-sm font-medium text-amber-800 dark:text-amber-300 mb-1">
-            Schade, dass der Rechner nicht hilfreich war!
+            {gewaehlt?.label}
           </p>
           <p className="text-xs text-amber-700 dark:text-amber-400 mb-3">
-            Was können wir verbessern? Ihr Feedback hilft uns direkt weiter.
+            Mögen Sie das kurz ergänzen? Freiwillig — es hilft uns beim Nachbessern.
           </p>
 
           <textarea
             value={nachricht}
             onChange={(e) => setNachricht(e.target.value.slice(0, MAX_ZEICHEN))}
             maxLength={MAX_ZEICHEN}
-            placeholder="z.B. Ergebnis war falsch, Eingabefeld fehlt, Berechnung unklar..."
+            placeholder={
+              grund === 'anderes'
+                ? 'Was wollten Sie berechnen?'
+                : 'z.B. Ergebnis war falsch, Eingabefeld fehlt, Berechnung unklar...'
+            }
             className="w-full px-3 py-2 text-sm border border-amber-200 dark:border-amber-500/30 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 dark:focus:ring-amber-500/50 resize-none min-h-[80px]"
           />
 
@@ -155,7 +263,9 @@ export default function FeedbackButtons() {
 
   const handleFeedback = (wert: 'ja' | 'nein') => {
     setFeedback(wert);
-    // Fire-and-forget Tracking — keine personenbezogenen Daten
+    // Fire-and-forget Tracking — keine personenbezogenen Daten.
+    // Die Kontextwerte gehen bei beiden Bewertungen mit; sonst wäre die
+    // Ja-Seite nicht vergleichbar und die Zahlen taugten nichts.
     try {
       fetch('/api/track', {
         method: 'POST',
@@ -164,6 +274,9 @@ export default function FeedbackButtons() {
           type: 'feedback',
           feedback: wert,
           rechner: window.location.pathname,
+          eingaben: eingaben.current,
+          sekunden: Math.round((Date.now() - startZeit.current) / 1000),
+          geraet: geraeteKlasse(),
         }),
         keepalive: true,
       }).catch(() => {
