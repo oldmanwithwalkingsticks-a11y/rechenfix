@@ -21,6 +21,23 @@ interface TrackFeedbackBody {
   type: 'feedback';
   feedback: 'ja' | 'nein';
   rechner: string;
+  /** Zahl der Eingabe-Ereignisse im Rechnerbereich vor dem Klick. 0 = nichts angefasst. */
+  eingaben?: number;
+  /** Sekunden zwischen Seitenaufbau und Klick. */
+  sekunden?: number;
+  /** Viewport-Klasse, kein Pixelwert: 'mobil' | 'tablet' | 'desktop'. */
+  geraet?: 'mobil' | 'tablet' | 'desktop';
+}
+
+const FEEDBACK_GRUENDE = [
+  'falsch', 'anderes', 'feld-fehlt', 'unklar', 'weg-fehlt', 'defekt',
+] as const;
+type FeedbackGrund = (typeof FEEDBACK_GRUENDE)[number];
+
+interface TrackGrundBody {
+  type: 'feedback-grund';
+  grund: FeedbackGrund;
+  rechner: string;
 }
 
 interface TrackPdfBody {
@@ -42,7 +59,12 @@ interface TrackKiBody {
   status: 'ok' | 'fehler';
 }
 
-type TrackBody = TrackClickBody | TrackFeedbackBody | TrackPdfBody | TrackKiBody;
+type TrackBody =
+  | TrackClickBody
+  | TrackFeedbackBody
+  | TrackGrundBody
+  | TrackPdfBody
+  | TrackKiBody;
 
 function isString(v: unknown): v is string {
   return typeof v === 'string' && v.length > 0 && v.length < 500;
@@ -76,9 +98,21 @@ export async function POST(req: Request) {
       if ((body.feedback !== 'ja' && body.feedback !== 'nein') || !isString(body.rechner)) {
         return NextResponse.json({ ok: false }, { status: 400 });
       }
+      // W129: drei Kontextfelder, jeweils hart begrenzt. JSON.stringify laesst
+      // undefined weg -- Alt- und Neudaten bleiben damit im selben Format lesbar.
       const entry = {
         v: body.feedback,
         r: body.rechner.slice(0, 200),
+        e: Number.isFinite(body.eingaben)
+          ? Math.min(Math.max(0, Math.trunc(body.eingaben as number)), 99)
+          : undefined,
+        s: Number.isFinite(body.sekunden)
+          ? Math.min(Math.max(0, Math.trunc(body.sekunden as number)), 3600)
+          : undefined,
+        g:
+          body.geraet === 'mobil' || body.geraet === 'tablet' || body.geraet === 'desktop'
+            ? body.geraet
+            : undefined,
         t: Date.now(),
       };
       await redis.lpush(KEYS.feedbacks, JSON.stringify(entry));
@@ -114,6 +148,23 @@ export async function POST(req: Request) {
       };
       await redis.lpush(KEYS.ki, JSON.stringify(entry));
       await redis.ltrim(KEYS.ki, 0, MAX_KI - 1);
+      return NextResponse.json({ ok: true });
+    }
+
+    // W129: Der Grund kommt als zweites Ereignis in dieselbe Liste. Feldname 'gr',
+    // nicht 'g' -- 'g' ist im Feedback-Eintrag bereits das Geraet.
+    if (body.type === 'feedback-grund') {
+      if (!FEEDBACK_GRUENDE.includes(body.grund) || !isString(body.rechner)) {
+        return NextResponse.json({ ok: false }, { status: 400 });
+      }
+      const entry = {
+        v: 'grund' as const,
+        gr: body.grund,
+        r: body.rechner.slice(0, 200),
+        t: Date.now(),
+      };
+      await redis.lpush(KEYS.feedbacks, JSON.stringify(entry));
+      await redis.ltrim(KEYS.feedbacks, 0, MAX_FEEDBACKS - 1);
       return NextResponse.json({ ok: true });
     }
 
