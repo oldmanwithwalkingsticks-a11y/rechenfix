@@ -6,6 +6,45 @@
 
 ---
 
+## 02.09.2026 — Welle 128: Der Wellen-Wächter sah die eigene Schreibweise nicht — ✅ ABGESCHLOSSEN
+
+**Das Werkzeug gegen die 75-Wellen-Lücke konnte genau diese Lücke nicht mehr erkennen.**
+`scripts/check-wellenhistorie.mjs` las Wellennummern aus Commit-Betreffs mit
+`/^Welle\s+(\d+[a-z]?)\s*[:,]/i`. Ab Welle 114 heißen die Commits aber `W114 —` statt `Welle 114:`.
+Die **Auswertungs**seite des Skripts akzeptiert `W127` in Überschriften seit jeher
+(`\bW(\d+[a-z]?)\b`, Zeile 57) — nur die Erfassungsseite blieb zurück. Die beiden Regexe waren
+auseinandergelaufen, und alles ab Welle 114 war unsichtbar.
+
+**Vor der Änderung gemessen, nicht geschätzt.** Über 1.630 Commits: die bisherige Regex trifft 196
+Commits und 131 distinkte Wellen, die neue 227 und 146. Zusätzlich gefangen werden genau 15
+Kennungen — `114`, `114b` und `115` bis `127`. Keine Altwelle, kein Fehlalarm. Damit war die
+Befürchtung widerlegt, eine gelockerte Regex werde beim nächsten Build über hundert Wellen anschlagen
+und deshalb wieder abgeschaltet.
+
+**Drei Wellen fehlten tatsächlich in der Historie:** 115 (Blogartikel 17, die größte der Reihe), 119
+(Skill-Regel R7 und zwei Geometrie-Regeln) und 127 (blog-builder v12). Alle anderen von 114 bis 126
+hatten ihren Folgecommit. Sie wurden in `W128a` nachgetragen, bevor die Regex geändert wurde — die
+umgekehrte Reihenfolge hätte die Warnung in jeden Build getragen.
+
+**Der erste Lauf fing die Welle, die ihn repariert.** Nach `W128b` meldete der Wächter `128a`: der
+Commit trägt die neue Schreibweise, ein Historienblock für Welle 128 existierte noch nicht. Die
+Meldung war korrekt und ist der Beleg, dass die Änderung wirkt. Gegengeprüft wurde außerdem, dass
+ohne den Nachtrag aus `W128a` gar keine Welle gemeldet würde — die drei Blöcke haben genau
+geschlossen, was sie schließen sollten.
+
+**Zwei Lehren, beide aus dem Verfahren, nicht aus dem Code.** Erstens: Der Prompt zu 128b trug hinter
+seiner STOP-Bedingung einen Sollwert („erwartet ist Stille") und blockierte damit einen richtigen
+Commit — dieselbe Falle, gegen die Regel R6 geschrieben wurde. Zweitens: Beim Schreiben der
+Regex-Zeile erzeugte eine Python-Escape-Auflösung ein unsichtbares Backspace-Zeichen (0x08) aus `\b`
+im Kommentar und einen literalen Geviertstrich aus `\u2014`. Beides wurde gefangen, weil der
+Endstand gegen die Datei geprüft wurde statt gegen die Absicht.
+
+**Umfang:** drei Commits. `c17a9c6` (128a, Historie, +80 Zeilen), `61cbb8c` (128b, eine Zeile
+Regex plus Kommentar) und dieser Block. Zeile 35 — stiller Ausstieg bei flachem Klon — blieb
+unangetastet; auf Vercel läuft der Wächter deshalb ohnehin nicht, nur lokal.
+
+---
+
 ## 28.08.2026 — Welle 127: blog-builder v12, Inventar abgeleitet statt handgepflegt — ✅ ABGESCHLOSSEN
 
 **Der Skill wies eine Anweisung aus, die den Build bricht.** `blog-builder/SKILL.md` verlangte
