@@ -6,6 +6,33 @@
 
 ---
 
+## 28.08.2026 — Welle 127: blog-builder v12, Inventar abgeleitet statt handgepflegt — ✅ ABGESCHLOSSEN
+
+**Der Skill wies eine Anweisung aus, die den Build bricht.** `blog-builder/SKILL.md` verlangte
+weiterhin, je neuem Medium einen Eintrag in `public/ki-medien/inventar.json` von Hand zu ergänzen,
+und nannte als prebuild-Guard das am 28.08.2026 gelöschte `scripts/check-ki-inventar.mjs`
+(Commit `557381e`). Wer der Anweisung heute folgt, erzeugt eine handgeschriebene Datei, die von der
+ableitbaren abweicht — und `generate-ki-inventar.mjs --pruefen` fällt als zehntes Glied der
+prebuild-Kette darüber.
+
+**Drei Stellen geändert, alle in derselben Datei.** In der Ebene-3-Schrittliste ersetzt ein Lauf des
+Generators den Handeintrag, das Ergebnis wird mitcommittet; der Absatz darunter sagt jetzt, dass das
+Inventar abgeleitet und nicht gepflegt wird, und verweist für die Herkunft der Felder auf den
+Dateikopf des Generators, statt ihn nachzuerzählen. Genau diese Doppelung — eine Beschreibung im
+Skript, eine zweite im Skill — hatte den Bruch erzeugt. Beim Umstellen eines Bestands-PNG auf einen
+Videoframe wird nur noch `GENERATOREN` mitgezogen, das Inventar zieht von selbst nach. Der
+Build-Prompt-Pflichtschritt verlangt den Generatorlauf statt des Handeintrags.
+
+**Ungeprüft übernommen: nichts.** Der Verweis auf `scripts/generate-ki-inventar.mjs` ist gegen die
+Datei im Seiten-Repo geprüft, ebenso die Stellung als zehntes Glied der prebuild-Kette und die
+Arbeitsteilung der beiden Aufrufe — `--pruefen` vergleicht nur, der Lauf ohne Schalter schreibt.
+
+**Umfang:** Commit `b600db8`, eine Datei, 30 Einfügungen / 16 Löschungen. Paket
+`dist/blog-builder-v12.zip` gebaut, Stand-Zeile aus dem Archiv zurückgelesen. Gepackt ist nicht
+installiert.
+
+---
+
 ## 27.08.2026 — Welle 126: Mess-Skripte nach `scripts/`, blog-builder auf v11 — ✅ ABGESCHLOSSEN
 
 **Vier Wellen lang lagen die Werkzeuge untracked im Repo-Root.** `videos-neu-kodieren.ps1`,
@@ -389,6 +416,35 @@ weiterhin zweimal — einmal im Titeltext, einmal als Suffix; das ist korrekt un
 
 ---
 
+## 27.08.2026 — Welle 119: Regel R7 und zwei Geometrie-Regeln in den Skills — ✅ ABGESCHLOSSEN
+
+**Zwei Felder lagen 66 Wellen ungenutzt bereit.** Anlass ist Welle 118: `/api/social-status`
+lieferte seit Welle 52 `tiktokTakttagHeute` und `tiktokNaechsterTakttag` samt ausführlicher
+Begründung, welches Anzeigeproblem sie lösen — aber die Begründung stand in der **erzeugenden**
+Datei, und die Verbraucherseite wurde nie gebaut. Der Admin-Tab zeigte in dieser Zeit an jedem
+zweiten Tag „inaktiv" für eine laufende Pipeline. Daraus die neue Regel **R7** in den
+Prüfvorschriften des `rechner-builder`: Ein neues Feld an einer Schnittstelle wird auf der
+Verbraucherseite mit einem Grep belegt, nicht mit einem Kommentar. Test ist ein `git grep` über den
+Feldnamen mit mindestens einem Treffer außerhalb der erzeugenden Datei. Dazu ein Haken in der
+Checkliste.
+
+**blog-builder v10, zwei Unterabschnitte aus den Wellen 116 und 117.** „Die linke Spalte ist genauso
+gefährlich wie die rechte" — die bisherige Regel schaute nur nach rechts auf Balkenenden. In zwei
+Grafiken kollidierten Beschriftungen links, weil die Spaltenbreite geschätzt statt gemessen war;
+vier von sechs beziehungsweise alle sechs Beschriftungen waren breiter als der Platz. Breitenmodell
+0,55 × `fontSize` je Zeichen. „Reihenweise Prüfung übersieht Einzelstücke systematisch" — ein Label,
+das nur in einer von drei gleichartigen Bahnen vorkommt, fällt bei reihenweiser Prüfung durch;
+Ersatz ist die paarweise Vollprüfung über alle Textelemente.
+
+**Außerdem ein Widerspruch im selben Skill aufgelöst.** Die Verifikations-Checkliste verlangte
+pauschal `poster = Titelbild`. Das steht gegen die Regel, dass Titelbild und Video getrennte Motive
+sind. Bei getrennten Motiven muss der `poster` das Standbild des Videos sein, sonst springt das Bild
+beim Start um.
+
+**Umfang:** Commit `282895f`, drei Dateien, 96 Einfügungen / 6 Löschungen.
+
+---
+
 ## 27.08.2026 — Welle 118: Admin-Tab „Social" unterscheidet TikTok-Nicht-Takttag von „inaktiv" — ✅ ABGESCHLOSSEN
 
 **Eine Anzeige, die korrektes Verhalten wie einen Defekt aussehen ließ.** Der Admin-Tab meldete für
@@ -531,6 +587,30 @@ Fußzeile und Beschreibung). Der Inline-Kommentar an `2049.5` nennt die zwei ric
 Überschrift war die ungenauere Stelle. Gemessen wurde deshalb gegen eine **vor** dem Ersetzen
 aufgenommene Baseline statt gegen den Pauschalwert; das ist ohnehin die belastbarere Form, weil sie
 auch Zahlen erfasst, die in der Vorschrift gar nicht aufgeführt sind.
+
+---
+
+## 27.08.2026 — Welle 115: Blogartikel 17 „Steuerklasse 3 spart keine Steuern" — ✅ ABGESCHLOSSEN
+
+**Siebzehnter Artikel der Maßeinheiten-Reihe, der größte bis dahin.** Kern: Die Steuerklasse regelt
+nach § 38b Abs. 1 Satz 1 EStG nur den Lohnsteuerabzug, nicht die Jahressteuer. § 39b Abs. 2 Satz 6
+EStG ordnet für Klasse III das Splittingverfahren des § 32a Abs. 5 EStG an — angewendet auf ein
+einzelnes Gehalt. Deshalb wirkt III wie eine Ersparnis, obwohl § 46 Abs. 2 Nr. 3a EStG die
+Abrechnung erzwingt.
+
+**Zweiter Strang: für Lohnersatzleistungen ist die Steuerklasse sehr wohl relevant** — mit drei
+verschiedenen Stichtagsregeln (§ 2c Abs. 3 BEEG, § 153 Abs. 2 SGB III, § 47 Abs. 2 SGB V). Die
+verbreitete Faustformel „sieben Monate vorher wechseln" gilt nur für das Elterngeld.
+
+**Dritter Strang: die Behauptung, III und V würden 2030 abgeschafft, ist falsch.** Die Überführung
+ins Faktorverfahren wurde im Dezember 2024 aus dem Steuerfortentwicklungsgesetz gestrichen
+(BGBl. 2024 I Nr. 449) und steht auch nicht im Koalitionsvertrag vom 09.04.2025.
+
+**Umfang:** Commit `5a36f18`, zehn Dateien, 980 Einfügungen. Drei neue Grafik-Komponenten
+(`DreiFensterDreiRegeln`, `DreiTarifeSechsKlassen`, `EinBruttoSechsNettos`), eingebetteter
+Steuerklassen-Vergleich-Rechner bei 38 Prozent Textposition, Titelbild und Video mit
+KI-Kennzeichnung nach Art. 50 Abs. 4 KI-VO auf allen drei Ebenen. Die Titelbild-Größe von 6,96 MB
+wurde später in Welle 123 korrigiert.
 
 ---
 
