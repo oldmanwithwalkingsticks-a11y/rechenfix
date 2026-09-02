@@ -3889,11 +3889,11 @@ export const alltagRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Wie berechnet man den Zeitwert?',
-        antwort: 'Zeitwert = Neupreis minus Wertverlust mal Alter, multipliziert mit dem Zustandsfaktor. Bei einem Fernseher für 800 €, 4 Jahre alt, Nutzungsdauer 7 Jahre, Zustand gut: Zeitwert = (800 − 800/7 × 4) × 0,75 = (800 − 457) × 0,75 = 257,25 €.',
+        antwort: 'Zeitwert = Neupreis minus jährlicher Wertverlust mal Alter, das Ergebnis multipliziert mit dem Zustandsfaktor. Bei einem Fernseher für 800 €, 4 Jahre alt, Nutzungsdauer 7 Jahre (AfA-Tabelle 6.14.4), Zustand gut: Der jährliche Wertverlust beträgt 800 ÷ 7 = 114,29 €, nach 4 Jahren bleiben 342,86 € linearer Zeitwert, mal 0,75 ergibt 257,14 €. Wichtig ist die Reihenfolge: Erst am Ende wird gerundet. Wer den Zwischenwert rundet, landet ein paar Cent daneben.',
       },
       {
         frage: 'Welche Nutzungsdauer soll ich wählen?',
-        antwort: 'Orientieren Sie sich an der Produktkategorie: Elektronik 3–5 Jahre, günstige Möbel 5 Jahre, hochwertige Möbel 8–10 Jahre, Großgeräte 10 Jahre, Küchen 15 Jahre. Im Zweifel wählen Sie die kürzere Dauer — das ergibt einen niedrigeren Zeitwert, was bei Verkäufen realistischer ist.',
+        antwort: 'Die Auswahlliste im Rechner folgt der amtlichen AfA-Tabelle „AV" des Bundesfinanzministeriums: Pkw und Kombi 6 Jahre (Fundstelle 4.2.1), Motorrad und Fahrrad 7 (4.2.2), Wohnmobil und Wohnwagen 8 (4.2.9), PC und Notebook 3 (6.14.3.2), Kamera, Fernseher und Audiogeräte 7 (6.14.4), Kühlschrank und Waschmaschine 10 (7.7 und 7.2.10), Büromöbel 13 (6.15). Die Einbauküche mit 15 Jahren ist ein Erfahrungswert — die Tabelle führt sie nicht. Für Steuer und Buchhaltung gelten die Tabellenwerte; wer für einen privaten Verkauf schätzt, darf kürzer ansetzen, denn das ergibt einen niedrigeren und meist realistischeren Wert.',
       },
       {
         frage: 'Was zahlt die Versicherung — Zeitwert oder Neuwert?',
