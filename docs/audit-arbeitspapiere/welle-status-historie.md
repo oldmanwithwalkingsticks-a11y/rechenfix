@@ -6,6 +6,61 @@
 
 ---
 
+## 02.09.2026 — Welle 129: Das „Nein" bekommt einen Grund — ✅ ABGESCHLOSSEN
+
+**24 zu 24 über fünf Monate.** Von April bis zum 02.09.2026 sind 48 Bewertungen eingegangen, exakt
+zur Hälfte negativ. Die Hälfte aller Neins entfällt auf drei von 206 Rechnern:
+`/alltag/zeitwert-rechner` 0:4 über drei Monate, `/mathe/zufallszahl-generator` 0:4,
+`/mathe/bruchrechner` 1:4. Warum, wusste niemand — gespeichert wurde pro Bewertung nur `{ v, r, t }`.
+
+**Der eingebaute Grund für die Sprachlosigkeit.** `handleFeedback` sendete das Tracking sofort beim
+Klick, das Begründungsformular öffnete sich erst danach. Wer „Nein" drückte und dann „Überspringen"
+wählte, hinterließ ein gezähltes Nein ohne jede Information. Das Nein kostete einen Klick, die
+Begründung Tipparbeit auf dem Handy. Die Lücke war keine Eigenschaft der Nutzer.
+
+**Was jetzt passiert.** Nach dem Nein erscheint zwingend eine Auswahl von sechs Gründen — ein Klick,
+kein Textfeld, kein „Überspringen" auf dieser Stufe: Ergebnis wirkt falsch · wollte etwas anderes
+berechnen · Eingabefeld fehlt · zu kompliziert · Rechenweg fehlt · etwas funktionierte nicht. Das
+Freitextformular rückt dahinter und bleibt freiwillig; bei „wollte etwas anderes berechnen" fragt es
+gezielt, was gesucht wurde. Der Grund geht zusätzlich als Feld in die bestehende Freitext-Mail.
+
+**Das Nein zählt weiterhin sofort.** Damit bleibt die Zeitreihe seit April anschlussfähig, und wer
+die Auswahl wegklickt, erscheint in der Auswertung als „ohne Grund" statt zu verschwinden. Die
+Grund-Einträge liegen in derselben Redis-Liste, unterschieden durch `v: 'grund'` und das Feld `gr` —
+**nicht** `g`, denn `g` trägt im Bewertungseintrag bereits die Geräteklasse.
+
+**Kontext ohne Personenbezug, bei jeder Bewertung.** Erhoben werden die Zahl der Eingabe-Ereignisse
+im Rechnerbereich (0 = nichts angefasst, gedeckelt bei 99), die Sekunden bis zum Klick (gedeckelt bei
+3600) und eine Viewport-Klasse mobil/tablet/desktop. Keine Eingabewerte, keine Pixelmaße. Möglich
+wurde das durch einen einzigen Marker `data-rechnerbereich` um den `RechnerLoader` in
+`app/[kategorie]/[rechner]/page.tsx` — ein Listener am Container statt Änderungen an 206
+Rechnerkomponenten. Damit trennt sich künftig „Nein, das Ergebnis stimmt nicht" von „Nein, ich habe
+gar nicht erst gerechnet".
+
+**Zwei Zählfehler, die dabei auffielen.** Der Admin zählte Neins als `feedbacks.length - ja`; mit den
+neuen Grund-Einträgen in derselben Liste wäre jeder Grund als zusätzliches Nein erschienen. Sechs
+Stellen wurden auf ein explizites `bewertungen`-Filter umgestellt, sechs bleiben bewusst auf der
+Rohliste (Laden, Monatsfilter, Leerzustands-Wächter). Und die Kachel „Feedback" zeigte seit jeher
+`feedbackGesamt.ja` statt `.gesamt` — im Mai stand dort „2" bei vier Bewertungen.
+
+**Eine begründete Abweichung vom Prompt, übernommen.** Der Prompt verlangte die Kontextspalte nur bei
+Neins. Code-Claude zeigt sie für beide Bewertungen, weil die Welle die Werte ausdrücklich auch beim
+Ja erhebt — eine Vergleichszahl, die man nur auf einer Seite anzeigt, ist keine.
+
+**Lehre, zweimal in Folge dieselbe.** Der Versuch, eine 300-Zeilen-TSX per zitiertem Heredoc zu
+schreiben, brach an einem typografischen Anführungszeichen ab; in Welle 128 hatte dieselbe
+Fehlerklasse ein unsichtbares Steuerzeichen erzeugt. Für Dateien mit Template-Literalen und
+deutschen Anführungszeichen ist das Schreibwerkzeug zuständig, nicht die Shell.
+
+**Umfang:** drei Commits. `a9b1127` (Track-Route, +52/−1), `95fef3e` (Komponente und Marker,
++124/−7), `7516f54` (Admin und Stats, +163/−12). `tsc --noEmit` nach jedem Commit ohne Ausgabe, Build
+je Commit grün.
+
+**Offen:** Ob die Datenschutzerklärung einen Satz zur erweiterten Feedback-Erhebung braucht, ist
+Susannes Feld und wurde in dieser Welle nicht angefasst.
+
+---
+
 ## 02.09.2026 — Welle 128: Der Wellen-Wächter sah die eigene Schreibweise nicht — ✅ ABGESCHLOSSEN
 
 **Das Werkzeug gegen die 75-Wellen-Lücke konnte genau diese Lücke nicht mehr erkennen.**
