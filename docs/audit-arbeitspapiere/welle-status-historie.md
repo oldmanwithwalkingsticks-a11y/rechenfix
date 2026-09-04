@@ -6,6 +6,55 @@
 
 ---
 
+## 04.09.2026 — Welle 136: Artikel 18 nachgebessert — ✅ ABGESCHLOSSEN
+
+**Die Wortzahl im Welle-135-Prompt war falsch, und der Fehler ist ein bekannter.** Der Skill
+beschreibt ihn seit Nachtrag v9 wörtlich: Eine Zählung mit einem anderen Werkzeug ist keine
+Zählung nach der verbindlichen Methode, auch wenn sie ähnlich aussieht. Gemeldet waren 3.022
+Wörter — ohne die Implementierung vorher an einem Bestandsartikel zu kalibrieren. Daraus wurde
+dann noch die Erfolgsmeldung abgeleitet, die 3.000er-Regel sei erstmals ohne Nachbesserung
+erfüllt. Gemessen waren es **2.882**. Dass die Abweichung überhaupt auffiel, lag allein daran,
+dass beim Ausrollen kalibriert statt übernommen wurde: Die Zählung traf im selben Lauf Terabyte
+mit 2.846 und Bremsweg mit 3.128 bei 54,3 Prozent, beide auf den Punkt. Erst diese zwei
+Referenzwerte machen aus einer Zahl einen Befund. Nach dem Nachtrag stehen **3.098 Wörter** bei
+einer Rechnerposition von **30,9 Prozent** — die Vorgabe ist erfüllt, der Rechner steht weiter
+im Korridor und wurde nicht verschoben.
+
+**Der Welle-135-Prompt hatte außerdem eine Lücke, die den Build gebrochen hätte.** Der
+Inventar-Lauf war dort nicht vorgesehen; `generate-ki-inventar.mjs --pruefen` hängt als zehntes
+Glied in der prebuild-Kette und meldete die Abweichung erst nach dem Metadatenschritt. In dieser
+Welle stand er ausdrücklich in der Kette — und lieferte einen eigenen Befund: **Das Inventar
+führt keine Dateigrößen.** Ein Eintrag hat genau die Felder `datei`, `art`, `seite` und
+`generator`; der Generator meldete folgerichtig „unverändert übernommen, kein inhaltlicher
+Unterschied", und der Guard war schon vor dem Lauf still. Der Prompt nahm das Gegenteil an. Der
+Lauf war trotzdem richtig: Er belegt, dass nichts nachzuziehen war, statt es zu vermuten.
+
+**Das Titelbild lag in Generatorfassung im Repo** — 7.462.873 B gegen 1.242 KB beim größten
+Bestandsbild. Die Auslieferungsfassung ist seit Welle 123 Vorgabe; beim Ausrollen wurde sie
+nicht geprüft, weil der Prompt es nicht verlangte. Das Zielmaß stammt nicht aus einer
+Schätzung, sondern aus dem Bestand: **17 von 17** Titelbildern liegen bei 1536×857 (meter bei
+1536×867) und sind durchweg **PNG8 mit Palette**. Genau daran hing die Zielvorgabe von 1.300 KB:
+Dieselben Pixelmaße als RGB ergaben 3.121 KB und hätten sie verfehlt — mit Palette sind es
+760 KB. Wer nur die Kantenlänge angleicht und das Format übersieht, verfehlt das Ziel um den
+Faktor vier und merkt es nicht, weil das Bild richtig aussieht.
+
+Die Reihenfolge war zwingend und ist eingehalten: verkleinern, Metadaten, Inventar. Der
+Rohbefund `grep -ac trainedAlgorithmicMedia` belegt beide Enden — **3** vor dem Verkleinern,
+**0** unmittelbar danach, **1** nach dem Metadatenlauf. Damit ist die Skill-Lehre zum vierten
+Mal gemessen: Jede Neuerzeugung einer Mediendatei zerstört die Ebene-3-Kennzeichnung.
+
+**Inhaltlich ergänzt wurde § 9a HeizkostenV:** die Schätzung bei Geräteausfall nach Absatz 1 und
+die 25-Prozent-Schwelle des Absatzes 2, ab der überhaupt nicht mehr nach Verbrauch abgerechnet
+wird, sondern vollständig nach Fläche. Der Punkt stand in keiner der herangezogenen
+Ratgeberquellen und ist für den sparsamen Mieter der ungünstigste Ausgang, den die Verordnung
+kennt — sein gemessener Minderverbrauch spielt keine Rolle mehr, obwohl sein eigenes Gerät
+einwandfrei lief, und anders als beim Kürzungsrecht des § 12 steht ihm nichts zu: Die Verordnung
+ordnet die Flächenverteilung an, sie ahndet keinen Verstoß.
+
+**Commits:** `070390a` (W136a, § 9a und Wortzahl), `413ec48` (W136b, Titelbild).
+
+---
+
 ## 04.09.2026 — Welle 135: Artikel 18 Heizkostenverordnung ausgerollt — ✅ ABGESCHLOSSEN
 
 **Der Artikel wäre um ein Haar an einem Werkzeugfehler gescheitert.** Ein Fußvermerk auf buzer
