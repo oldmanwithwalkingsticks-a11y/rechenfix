@@ -450,6 +450,29 @@ export default function DatenschutzSeite() {
               Rechtsgrundlage ist unser berechtigtes Interesse an der Fehlerbehebung nach
               Art. 6 Abs. 1 lit. f DSGVO.
             </p>
+            <p className="mt-3">
+              Unser E-Mail-Postfach betreiben wir bei der <strong>Hostinger International Ltd.</strong>{' '}
+              (61 Lordou Vironos str., 6023 Larnaca, Zypern). Nachrichten, die Sie an uns richten,
+              werden dort auf Servern innerhalb der Europäischen Union gespeichert. Hostinger setzt
+              zur Erbringung des Dienstes eigene Unterauftragnehmer ein; zum Schutz vor Spam und
+              Schadsoftware gehört dazu die Proofpoint, Inc. (USA), die technische Begleitdaten zu
+              eingehenden Nachrichten verarbeitet. Melden wir eine Nachricht ausdrücklich als
+              verdächtig, erhält Proofpoint Zugriff auf deren vollständigen Inhalt einschließlich
+              Anhängen. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren
+              E-Mail-Betrieb (Art. 6 Abs. 1 lit. f DSGVO). Die vollständige Liste der
+              Unterauftragnehmer führt Hostinger in Anhang 3 seines{' '}
+              <a href="https://www.hostinger.com/legal/dpa" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
+                Auftragsverarbeitungsvertrags
+              </a>.
+            </p>
+            <Hinweisbox>
+              <strong>Datenübermittlung in Drittländer:</strong> Soweit Unterauftragnehmer von
+              Hostinger personenbezogene Daten außerhalb der Europäischen Union verarbeiten, stützt
+              sich die Übermittlung auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US
+              Data Privacy Framework, im Übrigen auf die Standardvertragsklauseln nach
+              Art. 46 Abs. 2 lit. c DSGVO, die Bestandteil des Auftragsverarbeitungsvertrags mit
+              Hostinger sind.
+            </Hinweisbox>
             <Hinweisbox>
               <strong>Datenübermittlung in die USA:</strong> Die Übermittlung an Resend, Inc. erfolgt auf
               Grundlage der Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO. Es gelten dieselben
