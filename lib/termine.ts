@@ -209,11 +209,11 @@ export const TERMINE: Termin[] = [
   {
     id: 'dpf-angemessenheit',
     titel: 'Angemessenheitsbeschluss Data Privacy Framework prüfen',
-    datum: '2026-12-01',
+    datum: '2026-09-24',
     vorlaufTage: 7,
     wiederholungMonate: 3,
     bereich: 'Recht',
-    was: 'Nachsehen, ob der Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 zum EU-US Data Privacy Framework noch in Kraft ist. Anlass: Der US Supreme Court hat am 29.06.2026 in Trump v. Slaughter die Unabhängigkeit der FTC verneint; der EDSA hat die Kommission am 31.07.2026 zur Prüfung der Folgen aufgefordert. Fällt der Beschluss, müssen die Abschnitte 5, 6 und 11 der Datenschutzerklärung noch am selben Tag auf Art. 46 Abs. 2 lit. c DSGVO umgestellt werden — die Standardvertragsklauseln liegen bei Vercel und Hostinger vertraglich bereits vor.',
+    was: 'Nachsehen, ob der Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 zum EU-US Data Privacy Framework noch in Kraft ist. Anlass: Der US Supreme Court hat am 29.06.2026 in Trump v. Slaughter die Unabhängigkeit der FTC verneint; der EDSA hat die Kommission am 31.07.2026 zur Prüfung der Folgen aufgefordert. Fällt der Beschluss, müssen die Abschnitte 5, 6 und 11 der Datenschutzerklärung noch am selben Tag auf Art. 46 Abs. 2 lit. c DSGVO umgestellt werden — die Standardvertragsklauseln liegen bei Vercel und Hostinger vertraglich bereits vor. Zusätzlich bei jedem Durchlauf den Listenstatus der beiden US-Unterauftragnehmer von Hostinger prüfen: Cloudflare, Inc. ist am 23.09.2026 zur Erneuerung fällig, Proofpoint, Inc. stand am 04.09.2026 auf Active mit dem Unterstatus Re-certification under Review. Deshalb liegt der erste Durchlauf auf dem 24.09.2026 und nicht im Dezember.',
     quelle: 'app/datenschutz/page.tsx, Abschnitte 5, 6 und 11',
   },
   {
