@@ -206,6 +206,26 @@ export const TERMINE: Termin[] = [
     was: 'VT-13 gegen den tatsächlichen Dienstleisterbestand abgleichen: Zugänge, Abgänge, Drittlandtransfers, AVV-Stand.',
     quelle: 'Fassung 18.08.2026, lokal bei Karsten als .docx',
   },
+  {
+    id: 'dpf-angemessenheit',
+    titel: 'Angemessenheitsbeschluss Data Privacy Framework prüfen',
+    datum: '2026-12-01',
+    vorlaufTage: 7,
+    wiederholungMonate: 3,
+    bereich: 'Recht',
+    was: 'Nachsehen, ob der Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 zum EU-US Data Privacy Framework noch in Kraft ist. Anlass: Der US Supreme Court hat am 29.06.2026 in Trump v. Slaughter die Unabhängigkeit der FTC verneint; der EDSA hat die Kommission am 31.07.2026 zur Prüfung der Folgen aufgefordert. Fällt der Beschluss, müssen die Abschnitte 5, 6 und 11 der Datenschutzerklärung noch am selben Tag auf Art. 46 Abs. 2 lit. c DSGVO umgestellt werden — die Standardvertragsklauseln liegen bei Vercel und Hostinger vertraglich bereits vor.',
+    quelle: 'app/datenschutz/page.tsx, Abschnitte 5, 6 und 11',
+  },
+  {
+    id: 'hostinger-unterauftragnehmer',
+    titel: 'Unterauftragnehmer von Hostinger abgleichen',
+    datum: '2027-03-04',
+    vorlaufTage: 14,
+    wiederholungMonate: 6,
+    bereich: 'Recht',
+    was: 'Anhang 3 des Hostinger-Auftragsverarbeitungsvertrags gegen den geführten Stand vom 04.09.2026 prüfen: AWS EMEA, Google Cloud EMEA, Cloudflare, MailChannels, Proofpoint, Anthropic Ireland, spectra tech. Nach Abschnitt 6.3 des Vertrags werden neue Unterauftragnehmer dort ergänzt, mit zehn Tagen Widerspruchsfrist. Zugänge außerhalb der EU können Abschnitt 11 der Datenschutzerklärung berühren.',
+    quelle: 'https://www.hostinger.com/legal/dpa, Anhang 3',
+  },
 ];
 
 /** Normiert auf UTC-Tagesbeginn, damit Zeitzonen keine Off-by-one erzeugen. */
