@@ -6,6 +6,37 @@
 
 ---
 
+## 04.09.2026 — Welle 134: DPF-Termin vorgezogen — ✅ ABGESCHLOSSEN
+
+**Ein Termin, der zehn Wochen nach dem überwachten Ereignis anläuft, überwacht nichts.** Der
+Termin `dpf-angemessenheit` war in Welle 133 auf den 01.12.2026 gesetzt worden — ein Datum, das
+aus dem Quartalsraster kam und nicht aus der Sache, denn die Fälligkeitsdaten der einzelnen
+Zertifizierungen waren zu diesem Zeitpunkt nicht bekannt. Die Listenprüfung am 04.09.2026 hat sie
+geliefert: Cloudflare, Inc. ist am 23.09.2026 zur Erneuerung fällig, Proofpoint, Inc. stand auf
+Active mit dem Unterstatus Re-certification under Review. Das Datum ist deshalb auf den
+24.09.2026 vorgezogen; der Quartalsrhythmus läuft ab dann (24.09. → 24.12. → 24.03.) und liegt
+damit jedes Mal einen Tag hinter dem Erneuerungsstichtag statt zehn Wochen davor im Nichts.
+
+**Vorgezogen statt ergänzt.** Ein zweiter Termin für dieselbe Sache hätte genau die doppelte
+Pflege erzeugt, die im Terminverzeichnis ausdrücklich vermieden werden soll — und die in der
+Änderungshistorie der Rechtstexte seit Welle 133 als Regel steht. Geändert wurden deshalb nur
+zwei Felder desselben Eintrags: das Datum und der Prüfauftrag im `was`-Text, der jetzt den
+Listenstatus der beiden US-Unterauftragnehmer mitnimmt und die Vorziehung begründet.
+`scripts/check-termine.mjs` blieb unberührt: Es wechselt ein Datumsfeld, die doppelt geführte
+Monatskappung ist nicht betroffen.
+
+**Der Ausgangspunkt war ein Fehlalarm, der sich als Werkzeugfehler entpuppte.** Die
+Beteiligtensuche lieferte zu „Proofpoint" zunächst keinen Treffer — was, für sich genommen, wie
+ein Befund über die Zertifizierung ausgesehen hätte. Erst die Gegenprobe mit zwei bekannt
+gelisteten Unternehmen zeigte, dass die Suche selbst zu prüfen war und nicht das Ergebnis. **Ein
+Negativbefund taugt nur, wenn das Werkzeug an einem Positivfall geprüft wurde** — dieselbe Lehre
+wie bei der Kopfzeilenauswertung im August. Der Unterschied zwischen „ich habe nichts gefunden"
+und „es ist nichts da" ist genau die Gegenprobe.
+
+**Commits:** `c464ba5` (W134a, Termin vorgezogen).
+
+---
+
 ## 04.09.2026 — Welle 133: Der Postfachanbieter, der nirgends stand — ✅ ABGESCHLOSSEN
 
 **Die Auskunft war der Anlass, nicht der Beleg.** Auf schriftliche Anfrage nannte das
