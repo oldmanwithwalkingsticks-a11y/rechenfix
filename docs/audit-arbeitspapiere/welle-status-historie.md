@@ -6,6 +6,58 @@
 
 ---
 
+## 04.09.2026 — Welle 135: Artikel 18 Heizkostenverordnung ausgerollt — ✅ ABGESCHLOSSEN
+
+**Der Artikel wäre um ein Haar an einem Werkzeugfehler gescheitert.** Ein Fußvermerk auf buzer
+legte nahe, die Heizkostenverordnung sei am 23.07.2026 geändert worden — was den ganzen Artikel
+auf einen falschen Rechtsstand gestellt hätte. Der Vermerk gehört zum
+Kohlendioxidkostenaufteilungsgesetz, das in seinem neuen § 7 Absatz 5 auf die §§ 6 bis 10
+HeizkostenV verweist: zwei Normen, eine Seite, eine Fußzeile. Am 04.09.2026 wurde die
+Standangabe über den Browser an der Primärquelle abgelesen — unverändert „zuletzt geändert durch
+Art. 3 G v. 16.10.2023". Die §§ 5, 7, 8 und 12 sind im Volltext gegengelesen. Die Lehre ist
+dieselbe wie eine Welle zuvor bei der DPF-Liste: **Was ein Werkzeug anzeigt, ist erst dann ein
+Befund, wenn man weiß, worauf es sich bezieht.**
+
+**Vier inhaltliche Korrekturen gegenüber der Fassung vom 03.09.** Die drei VDI-Kriterien stehen
+jetzt vollständig mit ihren Zahlenwerten da statt in Andeutungen; der Plausibilitätswert lautet
+43 Prozent ohne das frühere „rund"; der Vorbehalt aus § 10 ist ergänzt (Vereinbarungen über
+70 Prozent hinaus bleiben unberührt — der Rat an den Leser gilt nur nach unten); und zwei
+Quellen kamen dazu. Die VDI 2077 war im Text viermal zitiert, stand aber nicht im Quellenblock:
+Sie war beim Übertragen der Prosa in die MDX verlorengegangen. Ein Beleg, der im Fließtext
+mehrfach trägt und in der Quellenliste fehlt, ist kein Formfehler — er ist die Stelle, an der
+ein Leser die Nachprüfung abbricht.
+
+**Der VDI-Beleg läuft bewusst über veröffentlichte Gerichtsentscheidungen.** Die Richtlinie ist
+kostenpflichtig und darf Abrechnungen aus urheberrechtlichen Gründen nicht beigefügt werden; die
+Zahlenwerte sind in den Verfahren aber wörtlich wiedergegeben. Der Quellenblock sagt das
+ausdrücklich, statt eine Fundstelle vorzugeben, die niemand ohne Kauf einsehen kann.
+
+**Zur Wortzahl, gegen die Erwartung des Ausroll-Prompts.** Der Prompt führte 3.022 Wörter und
+37,3 Prozent Rechnerposition als gemessene Werte und leitete daraus ab, der Artikel erfülle die
+3.000-Wörter-Regel erstmals ohne Nachbesserung. Nach der verbindlichen Zählmethode sind es
+**2.882 Wörter** bei **33,2 Prozent** Rechnerposition. Die Methode wurde vor der Aussage an zwei
+Bestandsartikeln kalibriert und trifft deren dokumentierte Werte exakt (Terabyte 2.846,
+Bremsweg 3.128 bei 54,3 Prozent). Die Rechnerposition liegt damit gut im Zielkorridor, die
+Wortzahl **118 Wörter unter der Vorgabe**. Der Artikel ist ausgerollt, die Regel ist nicht
+erfüllt; eine Nachbesserung um rund 120 Wörter Fließtext bleibt offen und gehört zu Chat-Claude,
+nicht in diese Welle. Festgehalten wird beides, damit die Zahl nicht als erledigt weitergelesen
+wird.
+
+**Zwei Befunde am Rand, beide nicht in dieser Welle behoben.** Erstens sah der Prompt den Lauf
+von `generate-ki-inventar.mjs` nicht vor; ohne ihn bricht der Build, weil sein `--pruefen` als
+zehntes Glied in der prebuild-Kette hängt und die abgelegte Datei von der ableitbaren abwich.
+Der Lauf ist nachgeholt und mitcommittet. Zweitens liegt `heizkosten-titelbild.png` mit 7.287 KB
+im Repo — fast sechsmal so groß wie das nächstgrößte Bestandstitelbild (Bremsweg, 1.242 KB). Das
+ist die Generatorfassung, nicht die Auslieferungsfassung, die seit Welle 123 gilt. Eine
+Verkleinerung zerstört die XMP-Kennzeichnung und braucht deshalb einen anschließenden
+Metadatenlauf — also eine eigene Welle, keinen beiläufigen Handgriff.
+
+**Commits:** `f8953ab` (W135a, drei Grafiken), `b894db4` (W135b, Registrierung), `922801f`
+(W135c, Artikelordner), `a0722cf` (W135d, GENERATOREN), `98b22fa` (W135e, KI-Metadaten und
+Inventar).
+
+---
+
 ## 04.09.2026 — Welle 134: DPF-Termin vorgezogen — ✅ ABGESCHLOSSEN
 
 **Ein Termin, der zehn Wochen nach dem überwachten Ereignis anläuft, überwacht nichts.** Der
