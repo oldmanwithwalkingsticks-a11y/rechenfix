@@ -6,6 +6,49 @@
 
 ---
 
+## 04.09.2026 — Welle 133: Der Postfachanbieter, der nirgends stand — ✅ ABGESCHLOSSEN
+
+**Die Auskunft war der Anlass, nicht der Beleg.** Auf schriftliche Anfrage nannte das
+Compliance-Team von Hostinger am 04.09.2026 zwei Unterauftragnehmer: Proofpoint und, eingeschränkt
+auf den Website Builder, Cloudflare. Anhang 3 des eigenen Auftragsverarbeitungsvertrags führt
+**sieben** — AWS EMEA, Google Cloud EMEA, Cloudflare, MailChannels, Proofpoint, Anthropic Ireland,
+spectra tech. Die Support-Auskunft war gegenüber dem eigenen veröffentlichten Dokument des Anbieters
+unvollständig. Die Lehre reicht über diesen Fall hinaus: **Eine Auskunft per Support-Mail ist ein
+Anlass zur Prüfung, nicht ihr Ergebnis.** Das veröffentlichte Vertragsdokument ist die Primärquelle;
+wer die Mail zitiert, zitiert eine Zusammenfassung, die niemand als Beleg gemeint hat.
+
+**Die Lücke war messbar, nicht gefühlt.** `grep -ri "hostinger"` über das gesamte Repo lieferte
+genau einen Treffer, und der lag in `lib/termine.ts` bei der Vertragsverlängerung. Wer an
+`info@rechenfix.de` schrieb, dessen Nachricht lag damit bei einem Auftragsverarbeiter, der in der
+Datenschutzerklärung nicht vorkam — Art. 13 Abs. 1 lit. e, wegen des US-Unterauftragnehmers auch
+lit. f. Alle anderen Auftragsverarbeiter stehen namentlich in der Erklärung. Die Auslassung fiel
+nur deshalb nicht auf, weil niemand nach dem Postfach gesucht hatte: Sie war keine falsche Aussage,
+die ein Abgleich gefunden hätte, sondern eine fehlende, die keinen Widerspruch erzeugt.
+
+**Vercel: ergänzt, nicht korrigiert.** Abschnitt 5 stützte die Übermittlung bisher allein auf
+Art. 45 DSGVO. Das Vercel-DPA in der Fassung vom 17.03.2026 gilt ausdrücklich für Enterprise- und
+Pro-Tarife und inkorporiert in Schedule 3 die Standardvertragsklauseln 2021/914, Modul 2. Der
+Rückfallweg bestand vertraglich also längst, er stand nur nicht im Text. Die bisherige Aussage
+bleibt richtig; sie war unvollständig, nicht falsch.
+
+**Bewusst offen geblieben:** Die Rolle von MailChannels und Cloudflare im E-Mail-Dienst und deren
+Sitzländer sind ungeklärt — Anhang 3 ist nicht nach Diensten gegliedert, und eine Zuordnung wäre
+geraten. Die Erklärung behauptet deshalb nur, was belegt ist: Proofpoint namentlich, der Rest über
+den Verweis auf Anhang 3. Ebenfalls offen ist der Eintrag der Proofpoint, Inc. und der
+Cloudflare, Inc. in der DPF-Liste mit Status „Aktiv": Er ist nur über die Selbstauskunft der beiden
+Unternehmen belegt, nicht aus der Liste selbst gemessen. Die Prüfung im Browser steht aus.
+
+Zwei Termine sichern das Ergebnis gegen Alterung: `dpf-angemessenheit` vierteljährlich ab
+01.12.2026 (Anlass ist Trump v. Slaughter vom 29.06.2026 und die Aufforderung des EDSA an die
+Kommission vom 31.07.2026) und `hostinger-unterauftragnehmer` halbjährlich ab 04.03.2027. Beide
+stehen in `lib/termine.ts` und sind in der Änderungshistorie ausdrücklich als nicht zweitzupflegen
+markiert.
+
+**Commits:** `79df0e4` (W133a, Abschnitt 11), `97d490c` (W133b, Abschnitt 5), `d6002b0` (W133c,
+Stand-Datum), `1850a48` (W133d, Termine), `e91704f` (W133e, Änderungshistorie).
+
+---
+
 ## 02.09.2026 — Welle 132: Die FAQ zieht der Optionsliste nach — ✅ ABGESCHLOSSEN
 
 **Die Auslassung war die Ursache, nicht ein Versehen.** Welle 130 hat die Nutzungsdauern des
