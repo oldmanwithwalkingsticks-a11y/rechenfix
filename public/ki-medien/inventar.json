@@ -1,6 +1,6 @@
 {
   "_hinweis": "Bestand der KI-erzeugten Medien auf rechenfix.de. Grundlage fuer den Soll-Ist-Abgleich der Kennzeichen-Wache (Skill peter-ki).",
-  "_stand": "27.08.2026",
+  "_stand": "04.09.2026",
   "_quelle": "GENERATOREN-Tabelle in scripts/ki-metadaten-schreiben.mjs",
   "ki_medien": [
     {
@@ -103,6 +103,24 @@
       "datei": "/blog/euro-dmark.mp4",
       "art": "video",
       "seite": "/blog/warum-sich-der-euro-teurer-anfuehlte",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/heizkosten-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-wer-weniger-heizt-trotzdem-zahlt",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/heizkosten-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-wer-weniger-heizt-trotzdem-zahlt",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/heizkosten.mp4",
+      "art": "video",
+      "seite": "/blog/warum-wer-weniger-heizt-trotzdem-zahlt",
       "generator": "Kling AI 3.0 (Kuaishou)"
     },
     {
