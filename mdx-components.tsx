@@ -83,6 +83,9 @@ import PositionEinhundertEins from '@/components/blog/grafik/PositionEinhundertE
 import DreiTarifeSechsKlassen from '@/components/blog/grafik/DreiTarifeSechsKlassen';
 import EinBruttoSechsNettos from '@/components/blog/grafik/EinBruttoSechsNettos';
 import DreiFensterDreiRegeln from '@/components/blog/grafik/DreiFensterDreiRegeln';
+import HalbeHeizungGanzeRechnung from '@/components/blog/grafik/HalbeHeizungGanzeRechnung';
+import RohrwaermeVerschiebung from '@/components/blog/grafik/RohrwaermeVerschiebung';
+import EinePutzschicht from '@/components/blog/grafik/EinePutzschicht';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -206,6 +209,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     DreiTarifeSechsKlassen,
     EinBruttoSechsNettos,
     DreiFensterDreiRegeln,
+    HalbeHeizungGanzeRechnung,
+    RohrwaermeVerschiebung,
+    EinePutzschicht,
     ...components,
   };
 }
