@@ -1,0 +1,457 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: artikel.titel,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-wer-weniger-heizt-trotzdem-zahlt' },
+  openGraph: {
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    url: 'https://www.rechenfix.de/blog/warum-wer-weniger-heizt-trotzdem-zahlt',
+    siteName: 'Rechenfix.de',
+    type: 'article',
+    locale: 'de_DE',
+    publishedTime: artikel.datum,
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: artikel.titel }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    images: ['/opengraph-image'],
+  },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-wer-weniger-heizt-trotzdem-zahlt',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/heizkosten-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-wer-weniger-heizt-trotzdem-zahlt' },
+])} />
+
+# Wer weniger heizt, zahlt trotzdem – und schuld sind nicht die Nachbarn
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/heizkosten-titelbild.png" alt="Altbauzimmer im Winterlicht: An der Wand verläuft eine ungedämmte Heizungsleitung senkrecht nach oben, daneben steht ein alter Gussheizkörper mit heruntergedrehtem Thermostatventil" caption="Die Wärme kommt aus dem Rohr – gemessen wird am Heizkörper." width={1200} height={675} />
+
+Die Abrechnung kommt im Frühjahr, und sie erzählt eine Geschichte, die nicht stimmen
+kann. Sie haben im Winter gefroren. Sie haben das Thermostat auf zwei gestellt, im
+Schlafzimmer auf null, und abends einen Pullover getragen statt die Heizung
+höherzudrehen. Ihre Nachbarin im dritten Stock läuft im T-Shirt durch die Wohnung und
+kippt das Fenster, wenn es zu warm wird. Am Ende des Jahres trennen Sie beide 90 Euro.
+
+Die Erklärung, die man sich dann gegenseitig über den Gartenzaun erzählt, geht so: Wer
+nicht heizt, wird von den Nachbarn mitgeheizt. Die Wärme wandert durch die Wände, das
+Sparen bringt nichts, das System ist ungerecht.
+
+Der erste Teil stimmt sogar. Wärme wandert tatsächlich durch Wände, und wer zwischen
+zwei gut geheizten Wohnungen liegt, braucht weniger eigene Energie als jemand unter dem
+Dach. Nur ist das nicht der Grund für Ihre Abrechnung. Der Grund steht in einer
+Verordnung von 1981, und er hat einen zweiten Grund hinter sich, der noch weniger
+bekannt ist und der davon abhängt, ob ein Rohr in Ihrer Wohnung sichtbar an der Wand
+entlangläuft oder unter dem Putz verschwindet.
+
+## Dreißig Prozent zahlen Sie, bevor Sie irgendetwas tun
+
+Die Verordnung über Heizkostenabrechnung regelt in § 7 Absatz 1 Satz 1, wie die Kosten
+des Betriebs einer zentralen Heizungsanlage zu verteilen sind: mindestens 50, höchstens
+70 vom Hundert nach dem erfassten Wärmeverbrauch der Nutzer. Der Rest geht nach
+Wohnfläche.
+
+Diesen Satz liest man am besten von hinten. Wenn höchstens 70 Prozent nach Verbrauch
+verteilt werden dürfen, dann werden **mindestens 30 Prozent nach Fläche verteilt** — und
+dieser Anteil hat mit Ihrem Verhalten nichts zu tun. Er hängt an Ihren Quadratmetern,
+und die ändern sich nicht, wenn Sie das Thermostat zudrehen.
+
+Was das ausmacht, lässt sich ausrechnen. Nehmen Sie ein Haus mit zehn gleich großen
+Wohnungen und 12.000 Euro Heizkosten im Jahr. Wer genau den Durchschnitt verbraucht,
+zahlt 1.200 Euro — egal, wie das Haus abrechnet. Interessant wird es bei dem, der spart.
+
+<HalbeHeizungGanzeRechnung />
+
+Bei einem Grundkostenanteil von 50 Prozent entfallen 600 Euro auf die Fläche und 600
+Euro auf den Verbrauch. Wer seinen Verbrauch halbiert, zahlt 600 plus 300, also 900
+Euro. Halber Verbrauch, 25 Prozent weniger auf der Rechnung. Bei einem Grundkostenanteil
+von 30 Prozent sind es 360 Euro Fläche und 840 Euro Verbrauch. Halbierter Verbrauch
+ergibt 360 plus 420, also 780 Euro — 35 Prozent weniger.
+
+Dieselbe Person, dasselbe Verhalten, zehn Prozentpunkte Unterschied im Ergebnis. Und
+über den Schlüssel entscheidet nicht sie.
+
+Das ist kein Fehler im System, sondern seine Absicht. Ein Gebäude verliert Wärme über
+Dach, Keller und Außenwände, ganz unabhängig davon, wer welches Thermostat bedient. Die
+Wohnung im ersten Stock zwischen zwei bewohnten Nachbarn hat es leichter als die
+Dachgeschosswohnung mit drei Außenwänden, und ohne einen Grundkostenanteil würde die
+Dachgeschosswohnung für ihre Lage bestraft. Der Grundkostenanteil verteilt die
+Gebäudehülle. Der Verbrauchsanteil verteilt das Verhalten.
+
+Über das Verhältnis der beiden entscheidet allerdings nicht der Mieter, und meistens
+nicht einmal der Vermieter. § 7 Absatz 1 Satz 2 schreibt **70 Prozent zwingend** vor für
+Gebäude, die das Anforderungsniveau der Wärmeschutzverordnung von 1994 nicht erfüllen,
+die mit Öl oder Gas beheizt werden und in denen die freiliegenden Leitungen der
+Wärmeverteilung überwiegend gedämmt sind. Drei Merkmale, alle drei am Bau festgemacht,
+keines am Bewohner. Ihr Verteilerschlüssel wurde also nicht verhandelt. Er wurde gebaut,
+meistens vor Ihrer Geburt.
+
+Für Warmwasser gilt in § 8 Absatz 1 dieselbe Spanne noch einmal, mit derselben Logik.
+
+## Der eigentliche Wärmeklau steht an der Wand
+
+Bis hierher ließe sich das noch als grobe Gerechtigkeit verteidigen. Der interessante
+Teil kommt jetzt.
+
+In vielen Gebäuden aus den Sechzigern und Siebzigern, besonders in solchen mit
+Einrohrheizung, verlaufen die Leitungen der Wärmeverteilung ungedämmt durch die
+Wohnungen. Diese Rohre sind heiß. Sie geben Wärme ab, den ganzen Tag, unabhängig davon,
+ob jemand den Heizkörper aufdreht. In ungünstigen Fällen wird ein Raum allein durch die
+Steigleitung so warm, dass sein Bewohner den Heizkörper überhaupt nicht braucht.
+
+<Video src="/blog/heizkosten.mp4" poster="/blog/heizkosten-video-standbild.jpg" caption="Das Thermostat ist zu. Über der Steigleitung steigt die Wärme weiter auf – nur zählt sie niemand." />
+
+Und genau hier bricht die Messung zusammen. Heizkostenverteiler messen nicht die Wärme
+im Raum, sie messen die Wärme **am Heizkörper**. Wer seinen Heizkörper nie aufdreht,
+weil die Rohre die Arbeit erledigen, hat auf dem Papier einen Verbrauch nahe null. Wer
+im selben Haus einen Raum ohne Steigleitung bewohnt und deshalb heizen muss, erscheint
+als Großverbraucher. Der eine subventioniert den anderen, und beide haben sich völlig
+gleich verhalten.
+
+Das ist der Wärmeklau, um den es wirklich geht. Er findet nicht zwischen Nachbarn statt,
+sondern zwischen dem, was gemessen wird, und dem, was tatsächlich verbraucht wird. Der
+Verordnungsgeber hat das Problem 2009 erkannt und § 7 Absatz 1 einen dritten Satz
+angehängt: In Gebäuden, in denen die freiliegenden Leitungen der Wärmeverteilung
+überwiegend ungedämmt sind und deswegen ein wesentlicher Anteil des Wärmeverbrauchs
+nicht erfasst wird, kann der Wärmeverbrauch der Nutzer nach anerkannten Regeln der
+Technik bestimmt werden.
+
+Übersetzt: Wenn die Messung nachweislich Unsinn produziert, darf man sie rechnerisch
+korrigieren. Welche Regeln der Technik gemeint sind, steht nicht in der Verordnung,
+sondern in ihrer Begründung — das Beiblatt „Verfahren zur Berücksichtigung der
+Rohrwärmeabgabe" der VDI-Richtlinie 2077. Der Bundesgerichtshof hat am 6. Mai 2015
+bestätigt, dass dieser Verweis trägt, dass er verfassungsrechtlich nicht zu beanstanden
+ist und dass der Vermieter die Anwendung dem Mieter nicht vorher ankündigen muss
+(VIII ZR 193/14).
+
+## Wie man Wärme berechnet, die niemand gemessen hat
+
+An dieser Stelle lohnt ein Blick auf das Verfahren selbst, weil es erklärt, warum die
+Sache vor Gericht landet.
+
+Der Kennwert heißt Verbrauchswärmeanteil, in der Praxis auch Erfassungsrate genannt. Er
+sagt, welcher Anteil der gesamten Heizwärme eines Gebäudes überhaupt auf den
+Heizkostenverteilern ankommt. In einem gut gedämmten Haus mit Zweirohrheizung liegt er
+hoch. In einem Haus mit ungedämmten Steigleitungen sinkt er, weil ein wachsender Teil
+der Wärme das Rohr verlässt, bevor sie den Heizkörper erreicht. Fällt er unter
+**34 Prozent**, gilt er nach der Richtlinie als kritisch — dann bildet die Messung nicht
+mehr ab, was die Bewohner tun, sondern vor allem, wo die Rohre verlaufen. Dieser
+Grenzwert ist eines von drei Kriterien, die zusammen erfüllt sein sollen: Neben der
+Erfassungsrate unter 34 Prozent müssen mehr als 15 Prozent der Nutzer Niedrigverbraucher
+sein, und die Standardabweichung der normierten flächenbezogenen Verbrauchswerte muss
+über 0,85 liegen. Ob wirklich alle drei vorliegen müssen, hat der Bundesgerichtshof offen
+gelassen — im entschiedenen Fall waren sie es. Die Instanzgerichte neigen dazu, schon eine
+deutlich unterschrittene Erfassungsrate genügen zu lassen; das Amtsgericht Bayreuth hat
+dem Vermieter dann sogar jeden Ermessensspielraum abgesprochen.
+
+Die Korrektur selbst ist eine Auffüllrechnung. Es wird ermittelt, wie viele
+Verbrauchseinheiten zusätzlich hätten auflaufen müssen, damit die Erfassungsrate den
+Plausibilitätswert von 43 Prozent erreicht. Diese fiktiven Einheiten stehen für die
+Wärme, die aus den Rohren kam. Und weil niemand sagen kann, wer sie verbraucht hat,
+werden sie nach der beheizten Fläche verteilt.
+
+Was das bewirkt, lässt sich am selben Haus zeigen. Zehn gleich große Wohnungen, wieder
+12.000 Euro Heizkosten, Aufteilung 50 zu 50. Auf allen Heizkostenverteilern zusammen
+sind 2.500 Einheiten aufgelaufen, das entspricht einer Erfassungsrate von 25 Prozent —
+die Anlage ist ein klarer Rohrwärmefall. Um auf 43 Prozent zu kommen, fehlen 1.800
+Einheiten, also 180 je Wohnung.
+
+<RechnerLoader slug="heizkosten-rechner" />
+
+In diesem Haus wohnen zwei Mieter, die uns interessieren. Bei Mieter A läuft die
+Steigleitung durchs Wohnzimmer; er hat 100 Einheiten abgelesen. Bei Mieter B liegt kein
+Rohr, er musste heizen und kommt auf 400.
+
+<RohrwaermeVerschiebung />
+
+Ohne Korrektur kostet die Einheit 2,40 Euro. A zahlt 600 Euro Grundkosten plus 240 Euro
+Verbrauch, zusammen 840 Euro. B zahlt 600 plus 960, zusammen 1.560 Euro. Mit Korrektur
+bekommt jeder 180 fiktive Einheiten dazu, und weil sich derselbe Kostentopf auf mehr
+Einheiten verteilt, sinkt der Preis je Einheit auf 1,40 Euro. A zahlt jetzt 990,70 Euro,
+B 1.409,30 Euro. Die Korrektur verschiebt 150,70 Euro von B zu A — von dem, der heizen
+musste, zu dem, der die Rohrwärme geschenkt bekam.
+
+Genau darum wird gestritten. Für B ist die Korrektur die Wiederherstellung der
+Gerechtigkeit. Für A ist sie eine Rechnung über Wärme, die er nie bestellt hat. Und ob
+sie überhaupt angewandt werden darf, hängt an der Frage, ob seine Steigleitung sichtbar
+ist.
+
+## Ein Wort entscheidet über ein paar hundert Euro
+
+Eine Mieterin in Dresden bewohnte eine Wohnung mit Einrohrheizung. Die Leitungen der
+Wärmeverteilung waren überwiegend ungedämmt — aber sie lagen nicht sichtbar an der Wand,
+sondern unter Putz und im Estrich. Der Vermieter rechnete die Jahre 2010, 2011 und 2012
+mit der Rohrwärmekorrektur nach VDI 2077 ab. Die Mieterin hielt das für unzulässig, weil
+§ 7 Absatz 1 Satz 3 von **freiliegenden** Leitungen spricht und ihre Rohre nicht
+freilagen.
+
+Physikalisch ist das eine seltsame Unterscheidung. Ein ungedämmtes Rohr im Estrich gibt
+Wärme ab wie ein ungedämmtes Rohr an der Wand; der Fußboden wird warm statt der Wand.
+Das VDI-Beiblatt, auf das sich die Verordnung stützt, sagt das sogar ausdrücklich: Es
+sei technisch unerheblich, ob die Rohrleitungen freiliegend oder nicht sichtbar im
+Estrich beziehungsweise unter Putz geführt werden.
+
+<EinePutzschicht />
+
+Der Bundesgerichtshof hat am 15. März 2017 trotzdem für die Mieterin entschieden.
+Leitsatz: § 7 Absatz 1 Satz 3 HeizkostenV ist auf überwiegend ungedämmte, aber nicht
+freiliegende Leitungen der Wärmeverteilung **nicht analog anwendbar** (VIII ZR 5/16).
+Die Begründung ist bemerkenswert offen: Nach den Verordnungsmaterialien sollte die
+Korrekturmöglichkeit nur bei „auf der Wand verlaufenden Rohrleitungen" eröffnet werden.
+Es fehle deshalb an einer planwidrigen Regelungslücke — der Verordnungsgeber habe den
+Fall der unter Putz verlegten Rohre nicht übersehen, sondern nicht geregelt. Und das sei
+verfassungsrechtlich hinnehmbar, weil es beim sichtbaren Rohr leichter nachzuweisen ist,
+dass es überwiegend ungedämmt ist.
+
+Die Mieterin bekam 489,05 Euro für drei Abrechnungsjahre zurück.
+
+Halten Sie beide Sätze nebeneinander. Das technische Regelwerk, auf das die Verordnung
+verweist, sagt: Es ist egal, wo das Rohr liegt. Das höchste deutsche Zivilgericht sagt:
+Es ist entscheidend, wo das Rohr liegt. Beide haben recht — in ihrem jeweiligen System.
+Zwei Häuser derselben Baujahre, dieselbe Einrohrheizung, dieselbe unerfasste Rohrwärme,
+und in dem einen darf korrigiert werden, im anderen nicht. Der Unterschied ist eine
+Putzschicht.
+
+## Was der Leerstand damit zu tun hat
+
+Der Vollständigkeit halber gehört ein zweiter Fall dazu, weil er dieselbe Erwartung
+enttäuscht.
+
+Stehen in einem Haus viele Wohnungen leer, wird die Heizungsanlage unwirtschaftlich: Sie
+ist für volle Belegung ausgelegt und läuft für wenige Bewohner. Zusätzlich beheizen die
+verbliebenen Mieter die leeren Wohnungen faktisch mit, weil aus diesen keine Wärme
+zurückkommt. Der Bundesgerichtshof hat am 10. Dezember 2014 entschieden, dass die Mieter
+einen nicht ganz unerheblichen Teil dieser leerstandsbedingten Mehrkosten zu tragen
+haben (VIII ZR 9/14). Der Vermieter trage über den Flächenanteil der leeren Wohnungen
+ohnehin erhebliche Kosten, ohne dafür Miete zu bekommen; eine weitere Kürzung sei auch
+unter dem Gesichtspunkt von Treu und Glauben nicht geboten.
+
+Absolute Verteilungsgerechtigkeit, so der Senat sinngemäß, verlangt das Gesetz bei
+Betriebskosten nicht. Das ist ein Satz, den man sich merken sollte, bevor man eine
+Abrechnung anficht.
+
+## Zwei Kürzungsrechte, von denen die Ratgeber nur eines kennen
+
+Wenn Sie jetzt den Eindruck haben, der Mieter sei rechtlos gestellt, stimmt das nicht.
+§ 12 der Verordnung gibt ihm ein Druckmittel — und zwar in zwei Stufen, was in fast
+keinem Ratgeber steht.
+
+**Satz 1:** Soweit die Kosten der Versorgung mit Wärme oder Warmwasser entgegen den
+Vorschriften der Verordnung nicht verbrauchsabhängig abgerechnet werden, hat der Nutzer
+das Recht, den auf ihn entfallenden Anteil um **15 vom Hundert** zu kürzen.
+
+**Satz 2:** Hat der Gebäudeeigentümer entgegen § 5 Absatz 2 oder 3 keine fernablesbare
+Ausstattung zur Verbrauchserfassung installiert, darf der Nutzer um **3 vom Hundert**
+kürzen.
+
+**Satz 3:** Dasselbe gilt, wenn die Informationen nach § 6a nicht oder nicht vollständig
+mitgeteilt werden.
+
+**Satz 4:** Beim Wohnungseigentum gilt das alles nicht im Verhältnis des einzelnen
+Eigentümers zur Gemeinschaft.
+
+Drei Dinge dazu, die man wissen sollte. Erstens ist das ein **Recht**, keine
+automatische Folge: Die Kürzung tritt nicht kraft Gesetzes ein, sie muss geltend gemacht
+werden, und kein Gericht nimmt sie von Amts wegen vor. Zweitens ist es ein
+pauschalierter Schadensersatzanspruch — wer einen höheren Schaden nachweisen kann, ist
+damit nicht abgeschnitten. Drittens sind die Prozentsätze nicht kumulativ gedacht,
+sondern knüpfen an verschiedene Pflichtverletzungen an; wer eine Abrechnung um 21
+Prozent kürzen will, sollte das nicht aus einer Werbeseite abschreiben, sondern prüfen
+lassen.
+
+## Der 31. Dezember 2026 und der Satz, den alle weglassen
+
+Damit sind wir beim Datum, das diesen Winter interessant macht.
+
+§ 5 Absatz 3 verlangt, dass nicht fernablesbare Ausstattungen zur Verbrauchserfassung,
+die bis zum 1. Dezember 2021 installiert wurden, bis zum **31. Dezember 2026** durch
+Nachrüstung oder Austausch fernablesbar gemacht werden. In vier Monaten ist es so weit,
+und der Verstoß dagegen ist genau der Fall, für den § 12 Absatz 1 Satz 2 die drei
+Prozent bereithält.
+
+So steht es auch auf den Seiten der Messdienstleister — allerdings meist ohne den
+zweiten Satz der Vorschrift. Der nimmt nämlich den Einzelfall aus, in dem die
+Nachrüstung technisch nicht möglich ist oder zu unangemessenem Aufwand oder unbilliger
+Härte führen würde. Wer im Januar eine Abrechnung bekommt und feststellt, dass sein
+Zähler noch abgelesen statt ausgelesen wurde, hat also nicht automatisch recht. Er hat
+einen Anspruch, gegen den es eine Einrede gibt.
+
+Für fernablesbare Ausstattungen, die bis zum 1. Dezember 2022 eingebaut wurden, kommt
+nach dem 31. Dezember 2031 noch die Anforderung an die Interoperabilität dazu.
+
+## Die stille Novelle von 2024, deren Frist letztes Jahr abgelaufen ist
+
+Eine Änderung hat es fast an allen vorbei geschafft. Das Gesetz vom 16. Oktober 2023 hat
+in seinem Artikel 3 die Heizkostenverordnung geändert, in Kraft getreten am 1. Oktober
+2024. Vier Punkte:
+
+In § 7 Absatz 2 wurden die Kosten „des zur Wärmeerzeugung verbrauchten Stroms" in die
+umlagefähigen Kosten aufgenommen — das ist der Strom für die Wärmepumpe. Die Ausnahme
+für Wärmepumpen in § 11 wurde gestrichen; sie fallen jetzt also unter die
+Abrechnungspflicht. In § 9 kam für den Betrieb einer monovalenten Wärmepumpe ein Faktor
+von 0,30 hinzu.
+
+Und § 12 bekam einen neuen Absatz 3, der eine Frist enthielt, die inzwischen verstrichen
+ist: Wurde der anteilige Verbrauch aus Wärmepumpen am 1. Oktober 2024 noch nicht
+erfasst, war bis zum Ablauf des **30. September 2025** eine Ausstattung zur
+Verbrauchserfassung zu installieren. Für vermietete Gebäude, in denen mindestens ein
+Mieter eine Bruttowarmmiete zahlt, kam eine zweite Pflicht dazu: vor Beginn des ersten
+Abrechnungszeitraums nach dem 30. September 2025 den Durchschnitt der in den Jahren
+2022, 2023 und 2024 angefallenen Kosten zu bestimmen sowie den Anteil der einzelnen
+Nutzeinheiten daran nach Fläche.
+
+Wenn Ihr Haus eine Wärmepumpe hat und Ihre nächste Abrechnung keine Verbrauchserfassung
+ausweist, ist das kein Versehen mehr, sondern eine abgelaufene Frist.
+
+## Das Heizungsgesetz wurde umbenannt. Die Verordnung nicht.
+
+Im Juli 2026 ist etwas passiert, das die Nachrichten wochenlang gefüllt hat. Mit dem
+Gesetz vom 23. Juli 2026, verkündet am 28. Juli, heißt das Gebäudeenergiegesetz jetzt
+**Gebäudemodernisierungsgesetz**. Die pauschale Pflicht, neue Heizungen zu 65 Prozent
+mit erneuerbarer Energie zu betreiben, ist gestrichen, ebenso die Betriebsverbote für
+alte Heizkessel. Ab 2028 teilen sich Vermieter und Mieter bei neu eingebauten fossilen
+Heizungen die CO₂-Kosten und die Gas-Netzentgelte je zur Hälfte, ab 2029 auch die Kosten
+der verpflichtend anteilig zu nutzenden Brennstoffe, begrenzt auf 30 Prozent des
+Gesamtverbrauchs. Wer glaubt, das sei alles, findet im selben Gesetz einen
+Härtefallkatalog mit fünf kumulativen Voraussetzungen, der bei Effizienzklasse G oder H
+und höchstens sechs vermieteten Wohnungen greift.
+
+59 Seiten Bundesgesetzblatt. Neun Artikel. Elf Folgeänderungen von der Kehr- und
+Überprüfungsordnung bis zum Wärmeplanungsgesetz.
+
+Die Heizkostenverordnung kommt darin dreimal vor — jedes Mal als Verweis, kein einziges
+Mal als Änderung. Ihr amtlicher Stand lautet unverändert: zuletzt geändert durch Artikel
+3 des Gesetzes vom 16. Oktober 2023.
+
+Mehr noch: Der neue § 7 Absatz 5 des Kohlendioxidkostenaufteilungsgesetzes, der regelt,
+wie die neu verteilten Kosten beim einzelnen Mieter ankommen, verweist dafür
+ausdrücklich auf die §§ 6 bis 10 der Verordnung über Heizkostenabrechnung. Das gesamte
+umgebaute Heizungsrecht hängt seine neue Kostenverteilung an eine Verordnung, die sich
+seit 2023 nicht bewegt hat und deren 50-bis-70-Spanne seit 1981 im Kern unverändert ist.
+
+Das ist der Grund, warum die Schlagzeilen an Ihrer Abrechnung vorbeigehen. Was sich
+ändert, ist, welche Heizung eingebaut werden darf und wer die CO₂-Kosten trägt. Was
+gleich bleibt, ist der Schlüssel, nach dem die Rechnung am Ende auf die Wohnungen
+verteilt wird — und der entscheidet darüber, ob sich Ihr Pullover gelohnt hat.
+
+<KarstenSagt>
+Den Grundkostenanteil habe ich auf meinen Abrechnungen jahrelang gesehen, ohne zu
+wissen, woraus er sich zusammensetzt. Er stand da, er war eine Zahl, und ich habe sie
+hingenommen. Jetzt, wo ich weiß, was dahintersteckt, finde ich ihn gerecht. Eine
+Dachgeschosswohnung mit drei Außenwänden verliert nun einmal mehr Wärme als eine Wohnung
+im zweiten Stock zwischen zwei bewohnten Nachbarn, und dafür kann niemand etwas. Der
+Flächenanteil gleicht aus, was die Bauweise verteilt hat, und nicht das Verhalten. Das
+ist mir lieber, als wenn jemand dafür bestraft wird, dass er unter dem Dach wohnt.
+
+Dasselbe gilt für die Rohrwärme. Wenn ungedämmte Leitungen durch eine Wohnung laufen und
+der Mieter deswegen seine Heizung gar nicht erst aufdrehen muss, dann finde ich es
+richtig, dass er wenigstens den Flächenanteil zahlt. Er spart beim Verbrauch ohnehin
+schon deutlich, auf Kosten derer, die keine offenen Rohre haben und ihre Heizkörper
+aufdrehen müssen.
+
+Woran ich hängen bleibe, ist die Verlegeart. Wenn der Vermieter die Verzerrung überhaupt
+herausrechnen darf, dann sollte das nicht davon abhängen, ob das Rohr über oder unter
+dem Putz liegt. Die Wärme kommt auf jeden Fall an. Dass ein Nachweisproblem vor Gericht
+darüber entscheidet, wer am Ende zahlt, ist für den Mieter kein Trost — der merkt von
+der Putzschicht nichts, nur von der Rechnung.
+
+Und was die Novelle von 2024 angeht, ärgert mich beides gleichermaßen: Der Gesetzgeber
+setzt eine Frist, die für Mieter bares Geld bedeutet, und tut es so leise, dass sie kaum
+jemand mitbekommt. Die Ratgeberseiten, die davon leben, solche Dinge zu erklären,
+greifen sie nicht auf. Zusammen ergibt das für mich weniger den Eindruck von Zufall als
+von Verschleierung, an beiden Enden. Bei der großen Reform vom Juli ist es dasselbe
+Muster. Die Schlagzeile hieß, Heizungsvorschriften fallen weg. Tatsächlich blieb der
+Schlüssel, nach dem die Rechnung verteilt wird, unangetastet, und die neuen Lasten
+wurden auf 2028 und 2029 verschoben — also hinter die nächste Wahl. Ich habe aufgehört,
+solchen Ankündigungen zu glauben, bevor ich die Abrechnung gesehen habe.
+</KarstenSagt>
+
+## Was Sie im Frühjahr tun können
+
+Vier Dinge, in dieser Reihenfolge.
+
+Sehen Sie nach, welcher Verteilerschlüssel angewandt wurde. Liegt der Verbrauchsanteil
+**unter** 50 Prozent, ist die Abrechnung angreifbar — 30/70 und 20/80 gibt es, und beides
+ist unzulässig. Nach oben gilt das nicht: § 10 der Verordnung lässt rechtsgeschäftliche
+Bestimmungen ausdrücklich unberührt, die einen höheren Verbrauchsanteil als 70 Prozent
+vorsehen. Ein Schlüssel von 80/20 kann also wirksam vereinbart sein.
+
+Prüfen Sie, ob überhaupt verbrauchsabhängig abgerechnet wurde. Wenn nicht, stehen Ihnen
+15 Prozent zu, aber nur, wenn Sie sie verlangen.
+
+Schauen Sie ab Januar 2027 auf die Zählerart. Wurde noch abgelesen statt ausgelesen,
+kommen drei Prozent in Betracht — vorbehaltlich des Härtefalls.
+
+Und wenn in Ihrer Wohnung heiße Rohre sichtbar an der Wand entlanglaufen, lohnt sich der
+Blick auf den Punkt, an dem dieser Artikel hängt: Dann darf Ihr Vermieter die Rohrwärme
+herausrechnen. Liegen dieselben Rohre unter dem Putz, darf er es nicht. Sie merken den
+Unterschied nicht — die Abrechnung schon.
+
+<Quellen eintraege={[
+  {
+    titel: 'Verordnung über Heizkostenabrechnung (HeizkostenV)',
+    beschreibung:
+      'Fassung der Bekanntmachung vom 05.10.2009 (BGBl. I S. 3250), zuletzt geändert durch Artikel 3 des Gesetzes vom 16.10.2023 (BGBl. 2023 I Nr. 280). Herangezogen: §§ 5, 7, 8, 9, 11 und 12.',
+    url: 'https://www.gesetze-im-internet.de/heizkostenv/',
+  },
+  {
+    titel: 'Gesetz zur Änderung des Gebäudeenergiegesetzes vom 16.10.2023, BGBl. 2023 I Nr. 280',
+    beschreibung:
+      'Artikel 3 ändert die Heizkostenverordnung, Artikel 6 Absatz 2 setzt diese Änderungen zum 01.10.2024 in Kraft. Quelle für den Wärmepumpenstrom in § 7 Absatz 2, die Streichung in § 11 und den neuen § 12 Absatz 3.',
+    url: 'https://www.recht.bund.de/bgbl/1/2023/280/regelungstext.pdf',
+  },
+  {
+    titel: 'Gesetz zur Änderung von Vorschriften im Wärmebereich vom 23.07.2026, BGBl. 2026 I Nr. 226',
+    beschreibung:
+      'Verkündet am 28.07.2026. Artikel 1 benennt das Gebäudeenergiegesetz in Gebäudemodernisierungsgesetz um, Artikel 5 ändert das Kohlendioxidkostenaufteilungsgesetz einschließlich des neuen § 7 Absatz 5, der auf die §§ 6 bis 10 HeizkostenV verweist.',
+    url: 'https://www.recht.bund.de/bgbl/1/2026/226/regelungstext.pdf',
+  },
+  {
+    titel: 'BGH, Urteil vom 06.05.2015 – VIII ZR 193/14',
+    beschreibung:
+      'Das Beiblatt der VDI-Richtlinie 2077 zur Rohrwärmeabgabe ist eine anerkannte Regel der Technik im Sinne von § 7 Absatz 1 Satz 3 HeizkostenV. Die Anwendung muss dem Mieter nicht vorher angekündigt werden.',
+    url: 'https://juris.bundesgerichtshof.de/cgi-bin/rechtsprechung/document.py?Gericht=bgh&Art=en&nr=71160',
+  },
+  {
+    titel: 'BGH, Urteil vom 15.03.2017 – VIII ZR 5/16',
+    beschreibung:
+      '§ 7 Absatz 1 Satz 3 HeizkostenV ist auf überwiegend ungedämmte, aber nicht freiliegende Leitungen der Wärmeverteilung nicht analog anwendbar. Rückzahlung von 489,05 Euro für drei Abrechnungsjahre.',
+    url: 'https://juris.bundesgerichtshof.de/cgi-bin/rechtsprechung/document.py?Gericht=bgh&Art=en&nr=77896',
+  },
+  {
+    titel: 'VDI 2077, Beiblatt „Verfahren zur Berücksichtigung der Rohrwärmeabgabe", Ausgabe März 2009',
+    beschreibung:
+      'Beschreibt das Bilanzverfahren und die Anwendungskriterien: kritischer Verbrauchswärmeanteil unter 34 Prozent, Anteil der Niedrigverbraucher über 15 Prozent, Standardabweichung der normierten flächenbezogenen Verbrauchswerte über 0,85, Auffüllung auf den Plausibilitätswert 0,43. Die Richtlinie ist kostenpflichtig und darf Abrechnungen aus urheberrechtlichen Gründen nicht beigefügt werden; die hier genannten Werte sind den unten angeführten Gerichtsentscheidungen und der Fachliteratur entnommen.',
+    url: 'https://www.vdi.de/richtlinien',
+  },
+  {
+    titel: 'AG Bayreuth, 102 C 1359/13, sowie Instanzrechtsprechung zur Erfassungsrate',
+    beschreibung:
+      'Bei deutlicher Unterschreitung des Grenzwerts von 34 Prozent verbleibt dem Gebäudeeigentümer kein Ermessensspielraum mehr. In den veröffentlichten Verfahren werden die drei Anwendungskriterien mit ihren Zahlenwerten wiedergegeben; sie sind die belastbare Fundstelle für einen Beleg ohne Zugriff auf die kostenpflichtige Richtlinie.',
+    url: 'https://www.mietrechtsiegen.de/heizkostenabrechnung-aus-rohrwaerme-unter-anwendung-der-vdi-richtlinie-2077/',
+  },
+  {
+    titel: 'BGH, Urteil vom 10.12.2014 – VIII ZR 9/14',
+    beschreibung:
+      'Mieter haben einen nicht ganz unerheblichen Teil der leerstandsbedingten Mehrkosten zu tragen; eine weitere Kürzung ist auch nach Treu und Glauben nicht geboten.',
+    url: 'https://juris.bundesgerichtshof.de/cgi-bin/rechtsprechung/document.py?Gericht=bgh&Art=en&nr=69736',
+  },
+]} />
