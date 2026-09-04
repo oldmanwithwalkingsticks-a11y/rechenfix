@@ -100,7 +100,10 @@ export default function DatenschutzSeite() {
               <strong>Datenübermittlung in die USA:</strong> Vercel Inc. ist unter dem EU-US Data Privacy Framework (DPF) zertifiziert, wodurch ein angemessenes Datenschutzniveau im Sinne von Art. 45 DSGVO gewährleistet wird. Weitere Informationen finden Sie unter{' '}
               <a href="https://www.dataprivacyframework.gov" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
                 dataprivacyframework.gov
-              </a>.
+              </a>. Zusätzlich sind die Standardvertragsklauseln der EU-Kommission nach
+              Art. 46 Abs. 2 lit. c DSGVO Bestandteil des Auftragsverarbeitungsvertrags mit
+              Vercel und stehen als Übermittlungsgarantie bereit, falls der Angemessenheitsbeschluss
+              entfällt.
             </Hinweisbox>
           </Section>
 
