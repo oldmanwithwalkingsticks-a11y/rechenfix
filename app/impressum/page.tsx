@@ -26,7 +26,7 @@ export default function ImpressumSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Impressum
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 28. August 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 6. September 2026</p>
 
         <div className="space-y-8 text-gray-700 dark:text-gray-300">
           {/* Anbieter */}
@@ -65,6 +65,10 @@ export default function ImpressumSeite() {
             <p>
               Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:{' '}
               <span className="font-semibold whitespace-nowrap">DE293513316</span>
+            </p>
+            <p className="mt-3">
+              Wirtschafts-Identifikationsnummer gemäß § 139 c Abgabenordnung:{' '}
+              <span className="font-semibold whitespace-nowrap">DE293513316-00001</span>
             </p>
           </section>
 
