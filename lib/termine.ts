@@ -56,15 +56,6 @@ export const TERMINE: Termin[] = [
     quelle: 'Verarbeitungsverzeichnis VT-13 (lokal bei Karsten, nicht im Repo)',
   },
   {
-    id: 'postpeer-loeschbestaetigung',
-    titel: 'Löschbestätigung PostPeer',
-    datum: '2026-09-18',
-    vorlaufTage: 7,
-    bereich: 'Recht',
-    was: 'Monatsfrist nach Art. 12 Abs. 3 DSGVO für die Antwort auf das Löschverlangen. Bei Ausbleiben: schriftlich nachfassen und im Verarbeitungsverzeichnis vermerken.',
-    quelle: 'Verarbeitungsverzeichnis VT-13',
-  },
-  {
     id: 'domain-checkdomain',
     titel: 'Domain rechenfix.de läuft aus',
     datum: '2027-04-03',
