@@ -47,12 +47,12 @@ export interface Termin {
 
 export const TERMINE: Termin[] = [
   {
-    id: 'tia-bundle-social',
-    titel: 'Transfer-Folgenabschätzung bundle.social',
-    datum: '2026-09-05',
-    vorlaufTage: 10,
+    id: 'bundle-social-rueckfragen',
+    titel: 'Rückfragen an bundle.social zu Supabase',
+    datum: '2026-09-20',
+    vorlaufTage: 7,
     bereich: 'Recht',
-    was: 'Supabase-TIA von bundle.social anmahnen oder selbst erstellen. Angefordert 10.08.2026, erneut zugesagt 18.08.2026, liegt nicht vor.',
+    was: 'Antwort von bundle.social auf die Rückfragen vom 06.09.2026 erwarten: in welcher Region die Supabase-Instanz läuft und wie weit der Supportzugriff von Supabase, Inc. reicht. Bleibt die Antwort aus, ist das kein Mangel — die Transfer-Folgenabschätzung vom 06.09.2026 steht ohne sie. Dann Ausbleiben mit Datum vermerken.',
     quelle: 'Verarbeitungsverzeichnis VT-13 (lokal bei Karsten, nicht im Repo)',
   },
   {
