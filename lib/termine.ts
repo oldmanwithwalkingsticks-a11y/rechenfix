@@ -101,12 +101,12 @@ export const TERMINE: Termin[] = [
   },
   {
     id: 'bundle-social-kontingent',
-    titel: 'bundle.social Kontingent prüfen',
-    datum: '2026-09-06',
+    titel: 'bundle.social Kontingent sichten',
+    datum: '2026-09-25',
     vorlaufTage: 2,
     wiederholungMonate: 1,
     bereich: 'Betrieb',
-    was: 'Zyklusgrenze des Gratistarifs (20 Posts/Monat). Verbrauch gegen den Jeden-zweiten-Tag-Takt gegenrechnen.',
+    was: 'Kontingent des Gratistarifs (20 Posts/Monat) gegen Monatsende sichten. Der Zähler springt zum Monatsersten auf null — abgeleitet am 06.09.2026 aus dem Stand 3 von 20 bei drei Beiträgen mit September-Datum, aus einer einzigen Beobachtung, am 01.10.2026 zu bestätigen. Im Zwei-Tage-Takt fallen höchstens 16 Beiträge im Monat an; das Kontingent ist dann nicht auszuschöpfen. Der Termin greift erst bei dichterem Takt oder wenn weitere Plattformen über bundle.social laufen.',
     quelle: 'docs/social-pipeline.md',
   },
   {
