@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 4. September 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 10. September 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -447,7 +447,7 @@ export default function DatenschutzSeite() {
             <p className="mt-3">
               Für den Versand von E-Mails, die aus Formularen dieser Website ausgelöst werden — etwa
               Rückmeldungen über das Feedback-Feld —, nutzen wir den Dienst <strong>Resend</strong> der
-              Resend, Inc. (USA). Übermittelt werden dabei der Inhalt Ihrer Nachricht, technische Angaben
+              Plus Five Five, Inc. (2261 Market Street #5039, San Francisco, CA 94114, USA). Übermittelt werden dabei der Inhalt Ihrer Nachricht, technische Angaben
               zu Ihrem Browser (User-Agent) sowie, sofern von Ihnen angegeben, Ihre E-Mail-Adresse. Der
               User-Agent hilft uns, gemeldete Darstellungs- und Bedienfehler nachzuvollziehen;
               Rechtsgrundlage ist unser berechtigtes Interesse an der Fehlerbehebung nach
@@ -477,7 +477,7 @@ export default function DatenschutzSeite() {
               Hostinger sind.
             </Hinweisbox>
             <Hinweisbox>
-              <strong>Datenübermittlung in die USA:</strong> Die Übermittlung an Resend, Inc. erfolgt auf
+              <strong>Datenübermittlung in die USA:</strong> Die Übermittlung an Plus Five Five, Inc. erfolgt auf
               Grundlage der Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO. Es gelten dieselben
               Einschränkungen wie im Abschnitt zu den KI-Funktionen beschrieben.
             </Hinweisbox>
