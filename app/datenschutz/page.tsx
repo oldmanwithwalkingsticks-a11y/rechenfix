@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 10. September 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 11. September 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -294,7 +294,7 @@ export default function DatenschutzSeite() {
               Bei Klick auf einen Affiliate-Link werden Sie auf die Website des Anbieters weitergeleitet. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Die Affiliate-Links werden über das Netzwerk der <strong>Awin AG</strong> (Eichhornstraße 3, 10785 Berlin) vermittelt. Awin kann dabei einen Tracking-Cookie setzen, um die Zuordnung des Kaufs zu ermöglichen.
             </p>
             <p className="mt-3">
-              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm-ID, Rechner-Seitenpfad, Zeitstempel und Kontext der angeklickten Fläche) auf unserem Server, um die Nutzung der Empfehlungen intern statistisch auszuwerten. Es werden <strong>keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten</strong> gespeichert. Eine Zuordnung zu einer konkreten Person ist uns nicht möglich. Zu den Angaben, die beim Absenden des Feedback-Formulars übermittelt werden, siehe Abschnitt 11. Die technische Speicherung erfolgt bei unserem Auftragsverarbeiter <strong>Upstash, Inc.</strong> in einer Redis-Datenbank mit Standort in der Europäischen Union (Frankfurt/Irland). Mit Upstash besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Die Liste ist auf maximal 20.000 Einträge begrenzt; ältere Einträge werden automatisch überschrieben.
+              Zusätzlich speichern wir bei Klick auf einen Affiliate-Link anonymisierte Klickdaten (Programm-ID, Rechner-Seitenpfad, Zeitstempel und Kontext der angeklickten Fläche) auf unserem Server, um die Nutzung der Empfehlungen intern statistisch auszuwerten. Es werden <strong>keine IP-Adressen, keine User-Agents und keine sonstigen personenbezogenen Daten</strong> gespeichert. Eine Zuordnung zu einer konkreten Person ist uns nicht möglich. Zu den Angaben, die beim Absenden des Feedback-Formulars übermittelt werden, siehe Abschnitt 11. Die technische Speicherung erfolgt bei unserem Auftragsverarbeiter <strong>Upstash, Inc.</strong> in einer Redis-Datenbank mit Standort in der Europäischen Union (Frankfurt am Main). Mit Upstash besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Die Liste ist auf maximal 20.000 Einträge begrenzt; ältere Einträge werden automatisch überschrieben.
             </p>
             <p className="mt-3">
               Die Einbindung von Affiliate-Links erfolgt auf Grundlage unseres berechtigten Interesses an der Finanzierung unseres kostenlosen Angebots (Art. 6 Abs. 1 lit. f DSGVO). Affiliate-Links sind auf unserer Website stets als &bdquo;Anzeige&ldquo; gekennzeichnet.
@@ -317,7 +317,7 @@ export default function DatenschutzSeite() {
               Für diese Nutzungsstatistik gilt: Wir erfassen dabei <strong>keine IP-Adressen, keine User-Agents, keine Cookies und keine sonstigen Merkmale</strong>, die einen Rückschluss auf Ihre Person erlauben würden. Eine Identifizierung einzelner Nutzer ist für uns anhand dieser Daten technisch nicht möglich. Zu den Angaben, die beim Absenden des Feedback-Formulars übermittelt werden, siehe Abschnitt 11. Zur Zählung der Anfragen an die KI-Funktionen siehe Abschnitt 9.
             </p>
             <p className="mt-3">
-              Die technische Speicherung erfolgt in einer Redis-Datenbank bei <strong>Upstash, Inc.</strong> (Auftragsverarbeiter gemäß Art. 28 DSGVO). Der Datenbank-Standort liegt innerhalb der Europäischen Union (Frankfurt/Irland). Die Listen sind auf jeweils 20.000 Einträge begrenzt, ältere Einträge werden automatisch überschrieben.
+              Die technische Speicherung erfolgt in einer Redis-Datenbank bei <strong>Upstash, Inc.</strong> (Auftragsverarbeiter gemäß Art. 28 DSGVO). Der Datenbank-Standort liegt innerhalb der Europäischen Union (Frankfurt am Main). Die Listen sind auf jeweils 20.000 Einträge begrenzt, ältere Einträge werden automatisch überschrieben.
             </p>
             <p className="mt-3">
               Rechtsgrundlage ist unser berechtigtes Interesse an einer anonymen Auswertung der Nutzung zur Verbesserung unseres kostenlosen Angebots sowie an der Finanzierung über Affiliate-Partnerschaften (Art. 6 Abs. 1 lit. f DSGVO). Da keine personenbezogenen Daten verarbeitet werden, ist eine Einwilligung nicht erforderlich.
@@ -477,9 +477,13 @@ export default function DatenschutzSeite() {
               Hostinger sind.
             </Hinweisbox>
             <Hinweisbox>
-              <strong>Datenübermittlung in die USA:</strong> Die Übermittlung an Plus Five Five, Inc. erfolgt auf
-              Grundlage der Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO. Es gelten dieselben
-              Einschränkungen wie im Abschnitt zu den KI-Funktionen beschrieben.
+              <strong>Datenübermittlung in die USA:</strong> Plus Five Five, Inc. ist unter dem EU-US Data Privacy Framework (DPF) zertifiziert, wodurch ein angemessenes Datenschutzniveau im Sinne von Art. 45 DSGVO gewährleistet wird. Weitere Informationen finden Sie unter{' '}
+              <a href="https://www.dataprivacyframework.gov" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
+                dataprivacyframework.gov
+              </a>. Zusätzlich sind die Standardvertragsklauseln der EU-Kommission nach
+              Art. 46 Abs. 2 lit. c DSGVO Bestandteil des Auftragsverarbeitungsvertrags mit
+              Plus Five Five, Inc. und stehen als Übermittlungsgarantie bereit, falls der
+              Angemessenheitsbeschluss entfällt.
             </Hinweisbox>
           </Section>
 
