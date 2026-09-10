@@ -132,6 +132,12 @@ scripts/_tmp-etf-check.mjs
 # .claude/skills/<name> ist nur ein lokaler Symlink darauf. Da dieses Repo mit
 # core.symlinks=false laeuft, wuerde git den Symlink als zweite Kopie der
 # SKILL.md einchecken -> Drift bei "npx skills update". Deshalb ignoriert.
+#
+# Derzeit ist diese Regel durch die breitere Zeile ".claude/skills/" weiter
+# unten mit abgedeckt: "git check-ignore -v .claude/skills/find-skills" nennt
+# jene, nicht diese. Sie bleibt trotzdem stehen -- als Sicherheitsabstand fuer
+# den Fall, dass die breitere Regel einmal verengt wird. Dann traegt wieder
+# diese hier, und die Begruendung darueber steht schon da.
 .claude/skills/find-skills/
 
 # Skill-Pakete der Assistenten (peter-ki, susanne-recht). Sie werden in einem
