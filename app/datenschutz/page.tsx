@@ -342,7 +342,7 @@ export default function DatenschutzSeite() {
               <li>technisch notwendige Verbindungsdaten</li>
             </ul>
             <p className="mt-3">
-              Dienstleister ist <strong>Anthropic PBC, 500 Howard Street, San Francisco, CA 94105, USA</strong>.
+              Dienstleister ist <strong>Anthropic Ireland, Limited, 6th Floor, South Bank House, Barrow Street, Dublin 4, D04 TR29, Irland</strong>.
               Anthropic verarbeitet die Daten für uns als Auftragsverarbeiter auf Grundlage eines
               Auftragsverarbeitungsvertrags. Rechtsgrundlage ist unser berechtigtes Interesse an einer
               verständlichen und komfortablen Bedienung (Art. 6 Abs. 1 lit. f DSGVO); durch das bewusste
@@ -367,9 +367,11 @@ export default function DatenschutzSeite() {
               zu Ihrer eigenen Person noch zu Dritten. Für die Berechnung sind sie nicht erforderlich.
             </p>
             <Hinweisbox>
-              <strong>Datenübermittlung in die USA:</strong> Die Übermittlung an Anthropic PBC erfolgt auf
-              Grundlage der von der EU-Kommission erlassenen Standardvertragsklauseln nach Art. 46 Abs. 2
-              lit. c DSGVO, die Bestandteil des Auftragsverarbeitungsvertrags sind. Ein dem europäischen
+              <strong>Datenübermittlung in die USA:</strong> Anthropic Ireland, Limited setzt zur Erbringung
+              des Dienstes verbundene Unternehmen ein, darunter die Anthropic, PBC in den USA. Soweit Ihre
+              Daten dabei in die USA übermittelt werden, erfolgt das auf Grundlage der von der EU-Kommission
+              erlassenen Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO, die Bestandteil des
+              Auftragsverarbeitungsvertrags sind. Ein dem europäischen
               Niveau entsprechender Datenschutz kann für Übermittlungen in die USA trotz dieser Garantien
               nicht vollständig gewährleistet werden; insbesondere ist ein Zugriff durch US-Behörden nicht
               in jedem Fall auszuschließen. Sie können die Übermittlung vollständig vermeiden, indem Sie die
