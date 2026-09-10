@@ -56,15 +56,6 @@ export const TERMINE: Termin[] = [
     quelle: 'Verarbeitungsverzeichnis VT-13 (lokal bei Karsten, nicht im Repo)',
   },
   {
-    id: 'anthropic-vertragspartnerin',
-    titel: 'Antwort von Anthropic zur Vertragspartnerin',
-    datum: '2026-09-25',
-    vorlaufTage: 3,
-    bereich: 'Recht',
-    was: 'Antwort von Anthropic (privacy@anthropic.com) auf die Anfrage vom 11.09.2026 erwarten: Welche Gesellschaft ist Vertragspartnerin und Datenimporteurin für das API-Konto? Nach den Commercial Terms ist das für Kunden im EWR die Anthropic Ireland, Limited; die Quittungen stellt Anthropic, PBC aus. Bis zur Antwort bleiben Abschnitt 9 der Datenschutzerklärung und VT-07/VT-08 unverändert, auch die Anschrift. Bleibt die Antwort aus: einmal nachfassen und das Ausbleiben mit Datum vermerken.',
-    quelle: 'Verarbeitungsverzeichnis VT-07 (lokal bei Karsten, nicht im Repo)',
-  },
-  {
     id: 'domain-checkdomain',
     titel: 'Domain rechenfix.de läuft aus',
     datum: '2027-04-03',
