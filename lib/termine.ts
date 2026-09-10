@@ -56,6 +56,15 @@ export const TERMINE: Termin[] = [
     quelle: 'Verarbeitungsverzeichnis VT-13 (lokal bei Karsten, nicht im Repo)',
   },
   {
+    id: 'anthropic-vertragspartnerin',
+    titel: 'Antwort von Anthropic zur Vertragspartnerin',
+    datum: '2026-09-25',
+    vorlaufTage: 3,
+    bereich: 'Recht',
+    was: 'Antwort von Anthropic (privacy@anthropic.com) auf die Anfrage vom 11.09.2026 erwarten: Welche Gesellschaft ist Vertragspartnerin und Datenimporteurin für das API-Konto? Nach den Commercial Terms ist das für Kunden im EWR die Anthropic Ireland, Limited; die Quittungen stellt Anthropic, PBC aus. Bis zur Antwort bleiben Abschnitt 9 der Datenschutzerklärung und VT-07/VT-08 unverändert, auch die Anschrift. Bleibt die Antwort aus: einmal nachfassen und das Ausbleiben mit Datum vermerken.',
+    quelle: 'Verarbeitungsverzeichnis VT-07 (lokal bei Karsten, nicht im Repo)',
+  },
+  {
     id: 'domain-checkdomain',
     titel: 'Domain rechenfix.de läuft aus',
     datum: '2027-04-03',
@@ -204,7 +213,7 @@ export const TERMINE: Termin[] = [
     vorlaufTage: 7,
     wiederholungMonate: 3,
     bereich: 'Recht',
-    was: 'Nachsehen, ob der Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 zum EU-US Data Privacy Framework noch in Kraft ist. Anlass: Der US Supreme Court hat am 29.06.2026 in Trump v. Slaughter die Unabhängigkeit der FTC verneint; der EDSA hat die Kommission am 31.07.2026 zur Prüfung der Folgen aufgefordert. Fällt der Beschluss, müssen die Abschnitte 5, 6 und 11 der Datenschutzerklärung noch am selben Tag auf Art. 46 Abs. 2 lit. c DSGVO umgestellt werden — die Standardvertragsklauseln liegen bei Vercel und Hostinger vertraglich bereits vor. Zusätzlich bei jedem Durchlauf den Listenstatus der beiden US-Unterauftragnehmer von Hostinger prüfen: Cloudflare, Inc. ist am 23.09.2026 zur Erneuerung fällig, Proofpoint, Inc. stand am 04.09.2026 auf Active mit dem Unterstatus Re-certification under Review, nächste Fälligkeit 24.04.2027. Deshalb liegt der erste Durchlauf auf dem 24.09.2026 und nicht im Dezember.',
+    was: 'Nachsehen, ob der Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 zum EU-US Data Privacy Framework noch in Kraft ist. Anlass: Der US Supreme Court hat am 29.06.2026 in Trump v. Slaughter die Unabhängigkeit der FTC verneint; der EDSA hat die Kommission am 31.07.2026 zur Prüfung der Folgen aufgefordert. Fällt der Beschluss, müssen die Abschnitte 5, 6 und 11 der Datenschutzerklärung noch am selben Tag auf Art. 46 Abs. 2 lit. c DSGVO umgestellt werden — die Standardvertragsklauseln liegen bei Vercel, Hostinger und Plus Five Five, Inc. (Resend) vertraglich bereits vor. Zusätzlich bei jedem Durchlauf den Listenstatus der beiden US-Unterauftragnehmer von Hostinger prüfen: Cloudflare, Inc. ist am 23.09.2026 zur Erneuerung fällig, Proofpoint, Inc. stand am 04.09.2026 auf Active mit dem Unterstatus Re-certification under Review, nächste Fälligkeit 24.04.2027. Ebenso den Listenstatus von Plus Five Five, Inc. (Resend, Teilnehmer Nr. 8907) prüfen: am 11.09.2026 Active mit dem Unterstatus Re-certification under Review, nächste Fälligkeit 03.03.2027. Deshalb liegt der erste Durchlauf auf dem 24.09.2026 und nicht im Dezember.',
     quelle: 'app/datenschutz/page.tsx, Abschnitte 5, 6 und 11',
   },
   {
