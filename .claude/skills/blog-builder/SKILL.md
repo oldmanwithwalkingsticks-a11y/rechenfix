@@ -723,6 +723,32 @@ Regel:
 
 ## Wortzahl: eine Methode, verbindlich (Lehre Welle 61)
 
+**Ab Welle 137 ist diese Methode ausführbar: `scripts/check-blog-wortzahl.mjs`. Diese
+Implementierung ist maßgeblich.** Wer eine Zahl braucht, ruft das Skript auf:
+
+```
+node scripts/check-blog-wortzahl.mjs <slug>     # ein Artikel
+node scripts/check-blog-wortzahl.mjs --all      # alle Artikel
+```
+
+Eine eigene Zählung — mit `sed`, mit Python, mit einem Einzeiler im Kopf — ist keine
+Zählung nach dieser Methode, auch wenn sie ähnlich aussieht. Der Nachtrag v9 weiter unten
+sagt das bereits; er bekommt jetzt ein Werkzeug zur Seite. Der Grund für das Werkzeug: Eine
+Regel, die nur beschrieben ist, wird bei jeder Anwendung neu implementiert, und zwei von
+zwei Neuimplementierungen lagen daneben — bei Artikel 15 zu hoch, bei Artikel 18 zu hoch.
+Beide Male fiel es erst beim Ausrollen auf.
+
+Das Skript prüft sich vor jeder Messung selbst gegen die Bestandswerte, die in Welle 61 die
+Methode festgelegt haben. Schlägt der Selbsttest fehl, gibt es **keine** Zahlen aus. Wer die
+Zähllogik ändert und dabei den Selbsttest anpasst, hat die Methode geändert und nicht das
+Skript verbessert.
+
+**Prompts behaupten keine Wortzahl, sie verlangen die Messung.** Eine Zahl im Prompt, die
+nicht aus diesem Skript stammt, ist eine Schätzung — und eine Erfolgsmeldung, die auf ihr
+aufbaut, ist unbelegt.
+
+Der Rest dieses Abschnitts beschreibt, was das Skript tut, und bleibt gültig.
+
 Karstens Vorgabe lautet 3.000+ Wörter Fließtext. Bis Welle 60 wurde unterschiedlich gezählt,
 weshalb Artikel als erledigt galten, die es nach strenger Zählung nicht waren — Terabyte und
 Kalorien lagen bei 2.846 und 2.843 statt der berichteten 3.021 und 3.020.
