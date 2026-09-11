@@ -8,6 +8,81 @@
 
 ## 11.09.2026 — Welle 137: Die Zählmethode hat jetzt ein Werkzeug — ✅ ABGESCHLOSSEN
 
+**Eine Regel, die nur beschrieben ist, wird bei jeder Anwendung neu implementiert.** Die
+verbindliche Zählmethode für Blog-Fließtext steht seit Welle 61 im Skill `blog-builder`, als
+Prosa: gezählt wird Markdown zwischen der ersten `##`-Überschrift und der Zeile `<Quellen`,
+ohne Zeilen, die mit `<` beginnen oder auf `/>` enden, ohne die Überschriften selbst. Der Text
+ist präzise. Er ist trotzdem zweimal falsch umgesetzt worden, und beide Male in dieselbe
+Richtung — zu hoch. Bei **Artikel 15** zählte ein `sed`-Einzeiler die JSX-Attributtexte mit:
+3.609 statt 3.128 Wörter, 51 statt 54 Prozent Rechnerposition. Bei **Artikel 18** in Welle 135
+meldete eine nicht kalibrierte Zählung 3.022 Wörter, und aus dieser Zahl wurde die
+Erfolgsmeldung abgeleitet, die 3.000er-Regel sei erfüllt; gemessen waren es 2.882. Beide Male
+fiel es erst beim Ausrollen auf, beide Male nur, weil dort an einem Bestandsartikel kalibriert
+statt übernommen wurde.
+
+Die Lehre ist allgemeiner als die Wortzahl: **Eine verbindliche Methode gehört in ausführbaren
+Code, nicht in Prosa.** Prosa beschreibt, Code entscheidet. Solange die Methode nur beschrieben
+ist, ist jede Messung eine Neuimplementierung, und jede Neuimplementierung ist eine neue
+Gelegenheit danebenzuliegen. `scripts/check-blog-wortzahl.mjs` beendet diese Fehlerklasse,
+indem es der Methode **eine** Implementierung gibt.
+
+Dass der Code nicht aus dem Prompt dieser Welle stammt, gehört zur Lehre dazu: Beim Vorbereiten
+wurde die Methode zweimal nachgebaut und verfehlte beide Male die Referenzwerte — einmal 45
+Wörter zu wenig, einmal 50 zu viel. Eine dritte falsche Implementierung ins Repo zu schreiben
+wäre das Gegenteil des Zwecks gewesen. Maßgeblich war die Fassung, die in den Wellen 135 und
+136 beide Sollwerte exakt getroffen hat; sie wurde zum Skript gemacht, in der Zähllogik
+unverändert.
+
+**Der Selbsttest ist kein Beiwerk.** Er läuft vor jeder Messung, nicht nur auf Zuruf, und
+prüft die eigene Zählung gegen zwei fest verdrahtete Bestandswerte aus Welle 61: Terabyte mit
+2.846 Wörtern und Artikel 15 mit 3.128 Wörtern bei 54,3 Prozent Rechnerposition. Weicht ein
+Wert ab, bricht das Skript ab und gibt **keine** Zahlen aus — auch mit `--warnung` nicht. Ein
+Zählskript, dessen Richtigkeit nicht geprüft ist, verleiht einer falschen Zahl Autorität, und
+das ist schlechter als gar keine Zahl. Wer die Zähllogik später ändert und dabei den Selbsttest
+anpasst, hat nicht das Skript verbessert, sondern die Methode geändert.
+
+In der prebuild-Kette hängt das Skript zwischen `check-wellenhistorie.mjs` und
+`check-contentbloecke-pflicht.mjs`, mit `--warnung`. Ohne diesen Schalter würde jeder Build an
+Terabyte und Kalorien scheitern, und das Skript wäre binnen einer Woche wieder ausgebaut. Die
+Zahlen stehen damit in jedem Bauprotokoll, ohne den Bau aufzuhalten.
+
+### Erste vollständige Bestandsaufnahme der Reihe
+
+Bisher wurden Artikel einzeln gemessen. Das ist der Lauf über alle 18 auf einmal:
+
+| Artikel | Wörter | Rechner | |
+|---|---:|---:|---|
+| `warum-1-terabyte-nur-931-gigabyte-sind` | 2.846 | 27,7 % | unter 3.000, außerhalb |
+| `warum-100-kmh-dort-noch-87-sind` | 3.128 | 54,3 % | außerhalb |
+| `warum-11-promille-eine-gerechnete-zahl-sind` | 3.151 | 44,0 % | außerhalb |
+| `warum-der-balkon-nur-ein-viertel-zaehlt` | 3.177 | 43,7 % | außerhalb |
+| `warum-der-blutdruck-in-millimetern-gemessen-wird` | 3.077 | 31,3 % | |
+| `warum-die-suesskartoffel-teurer-besteuert-wird` | 3.025 | 28,4 % | außerhalb |
+| `warum-ein-27-zoll-monitor-viermal-so-gross-ist` | 3.023 | 33,5 % | |
+| `warum-in-deutschland-alle-uhren-gleich-gehen` | 3.437 | 28,0 % | außerhalb |
+| `warum-sich-der-euro-teurer-anfuehlte` | 3.009 | 29,1 % | |
+| `warum-steuerklasse-3-keine-steuern-spart` | 3.107 | 38,3 % | |
+| `warum-wer-weniger-heizt-trotzdem-zahlt` | 3.098 | 30,9 % | |
+| `was-ein-pfund-wirklich-wiegt` | 3.153 | 32,3 % | |
+| `wie-das-meter-erfunden-wurde` | 3.045 | 26,8 % | außerhalb |
+| `wie-viel-ist-eine-cup` | 3.005 | 36,4 % | |
+| `woher-der-bmi-kommt` | 3.071 | 26,0 % | außerhalb |
+| `woher-die-kalorien-auf-der-packung-kommen` | 2.843 | 31,1 % | unter 3.000 |
+| `woher-die-pferdestaerke-kommt` | 3.060 | 34,6 % | |
+| `woher-die-schuhgroessen-kommen` | 3.011 | 39,3 % | |
+
+**Unter 3.000 Wörtern liegen zwei Artikel:** Terabyte mit 2.846 und Kalorien mit 2.843 — genau
+die beiden, die schon in Welle 61 als zu kurz erkannt und seither nicht nachgebessert wurden.
+Kein neuer Befund, aber jetzt einer, der in jedem Bauprotokoll steht.
+
+**Außerhalb des Rechnerkorridors von 29 bis 40 Prozent liegen acht Artikel**, in beide
+Richtungen: fünf zu früh (BMI 26,0; Meter 26,8; Terabyte 27,7; Uhren 28,0; Süßkartoffel 28,4 —
+die letzten drei knapp), und drei deutlich zu spät (Balkon 43,7; Promille 44,0; Artikel 15 mit
+54,3 als Ausreißer nach oben). Neun der achtzehn Artikel treffen beide Vorgaben.
+
+Das ist Bestandsaufnahme, kein Arbeitsauftrag. Ob und wann nachgebessert wird, entscheidet
+Karsten. Diese Welle misst, sie schreibt keinen Fließtext.
+
 ### Bestandszahl der Seiten, gemessen
 
 Zwei ältere Seitenzahlen weiter unten in dieser Datei — „alle 265 gebauten Seiten" im
