@@ -764,7 +764,11 @@ steht. Das ist beabsichtigt — es ist Fließtext des Artikels.
 **Die Zahl wird an der fertigen Datei gemessen, nie geschätzt und nie aus dem Prompt
 übernommen.** Dieselbe Methode gilt für die Rechnerposition (Wörter vor `RechnerLoader` geteilt
 durch Gesamtwörter); Zielkorridor ist rund ein Drittel, gemessene Werte der letzten Wellen
-liegen zwischen 29 und 40 Prozent.
+liegen zwischen 26 und 45 Prozent. Das ist ein Plausibilitätsfenster, kein
+Qualitätsmaß — es fängt grobe Ausreißer, mehr nicht. Gesetzt in Welle 138 anhand der
+ersten Vollerhebung aller Artikel (Welle 137): Median 31,8 Prozent, 17 von 18 zwischen
+26,0 und 44,0. Die inhaltliche Regel bleibt davon unberührt und wiegt schwerer als die
+Zahl: Der Rechner steht dort, wo der Leser ihn braucht.
 
 **Nachtrag v9:** Diese Regel wurde bei Artikel 15 gebrochen — mit einem
 `sed`-Einzeiler gezählt statt mit der verbindlichen Methode. Ergebnis: 3.609

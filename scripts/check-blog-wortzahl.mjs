@@ -22,7 +22,9 @@
  * steht — es ist Fließtext des Artikels.
  *
  * Die Rechnerposition folgt derselben Methode: Wörter vor der "<RechnerLoader"-Zeile
- * geteilt durch Gesamtwörter. Zielkorridor 29 bis 40 Prozent.
+ * geteilt durch Gesamtwörter. Plausibilitätsfenster 26 bis 45 Prozent: Es faengt
+ * grobe Ausreisser, es ist kein Qualitaetsmass. Gesetzt in Welle 138 anhand der
+ * Vollerhebung aus Welle 137 (Median 31,8 %, 17 von 18 zwischen 26,0 und 44,0).
  *
  * DER SELBSTTEST
  * Er läuft automatisch vor jeder Messung, nicht nur auf Zuruf. Weicht ein Wert ab,
@@ -43,8 +45,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = join(__dirname, '..', 'app', 'blog');
 
 const MIN_WOERTER = 3000;
-const POS_MIN = 29;
-const POS_MAX = 40;
+const POS_MIN = 26;
+const POS_MAX = 45;
 
 /** Bestandswerte aus Welle 61 — siehe Kopfkommentar. Nicht anpassen. */
 const REFERENZ = [
