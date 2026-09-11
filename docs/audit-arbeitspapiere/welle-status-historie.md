@@ -6,6 +6,67 @@
 
 ---
 
+## 11.09.2026 — Welle 138: Eine Regel geprüft, eine Schwelle belegt — ✅ ABGESCHLOSSEN
+
+**Der gemeldete „Zwitterzustand" in der `.gitignore` war keiner.** Chat-Claude hatte die
+getrackten Builder-Skills neben der Ignore-Regel als Widerspruch gemeldet, ohne den Kommentar
+darüber zu lesen — dort stand die Absicht wörtlich: Die Assistenten-Pakete bleiben draußen,
+weil sie interne Arbeitsstände samt Fehlerprotokollen enthalten und dieses Repo öffentlich ist;
+`blog-builder` und `rechner-builder` bleiben bewusst versioniert. Das war am selben Tag der
+zweite Fall dieser Art; der erste betraf einen Nachtrag zum Verarbeitungsverzeichnis, dessen
+Inhalt dort längst genauer geführt war. **Ein gemeldeter Widerspruch ist erst einer, wenn der
+geführte Stand gelesen wurde.**
+
+### Die Umschreibung der Regel wurde geprüft und verworfen
+
+Geplant war, `.claude/skills/` als `.claude/skills/*` zu schreiben und die beiden Builder als
+Ausnahmen darunter zu setzen — allein, damit `git add` auf sie nicht mehr mit Ignore-Hinweis
+abbricht. Die Git-Feinheit dahinter stimmt und gehört festgehalten, weil sie wiederkehrt:
+
+> Ein mit abschließendem Schrägstrich ausgeschlossenes **Verzeichnis** betritt Git nicht mehr;
+> eine Ausnahme darin kann nie greifen. Mit `*` am Ende werden die **Einträge** ausgeschlossen,
+> und Ausnahmen tragen.
+
+**Sie trägt hier trotzdem nicht, und der Grund ist eine zweite Feinheit.** `.claude/skills` ist
+selbst ein Git-Repo — das private `rechenfix-skills`. Es führt eine eigene `.gitignore`, die
+`/blog-builder`, `/rechner-builder` und `/find-skills` ausschließt, und zwar zu Recht: Diese
+drei gehören nicht in das private Repo. Solange das äußere Repo das Verzeichnis gar nicht
+betritt, liest es diese Datei nie. Sobald es mit `*` hineinsieht, liest es sie — und **eine
+`.gitignore` in einem tieferen Verzeichnis schlägt die im Wurzelverzeichnis.** Die Ausnahmen im
+Wurzel-`.gitignore` werden damit überstimmt, von einer Datei, die einem anderen Repo gehört und
+dort das Richtige tut.
+
+Gemessen, nicht vermutet. Vorher meldete `git check-ignore --no-index` für
+`blog-builder/SKILL.md` die Zeile `.gitignore:148`; nachher meldete es
+`.claude/skills/.gitignore:25`. Die Gegenprobe — Leerzeichen anfügen, `git add`, Ergebnis
+festhalten — brach **vorher wie nachher** mit Exit 1 ab; der genannte Pfad wechselte lediglich
+von `.claude/skills` zu `.claude/skills/blog-builder`. Auch `advice.addIgnoredFile=false`
+entfernt nur den Hinweistext, nicht den Fehler. Die Änderung hätte also nichts verbessert,
+dafür das äußere Repo an die Ignore-Datei eines fremden Repos gekoppelt. Sie wurde
+zurückgenommen; `.gitignore` ist unverändert.
+
+Was bleibt, ist der Umgang mit der Reibung: `git add` auf eine dieser Dateien **stagt sie
+trotzdem** — der Exit-Code 1 bricht nur eine `&&`-Kette. Wer sie ändert, trennt `add` und
+`commit` in zwei Befehle. Das ist billiger als jede Regeländerung.
+
+### Der Korridor wurde an Daten angepasst, nicht an Wünsche
+
+Neun von achtzehn Artikeln lagen außerhalb des Fensters 29 bis 40 Prozent. Eine Schwelle, die
+die Hälfte des Bestands verfehlt, beschreibt nicht die Wirklichkeit. Sie stammte laut Skill aus
+„gemessenen Werten der letzten Wellen" — einer Stichprobe; die Vollerhebung aus Welle 137
+lieferte erstmals die Datengrundlage, die es vorher nicht gab: Median **31,8 Prozent**, 17 der
+18 zwischen 26,0 und 44,0, nur Bremsweg mit 54,3 als Ausreißer. Neu ist **26 bis 45 Prozent**,
+ausdrücklich als Plausibilitätsfenster und nicht als Qualitätsmaß. Kein einziger Artikel wurde
+dafür umgeschrieben; acht Artikel umzubauen, damit eine geschätzte Zahl stimmt, wäre die
+teuerste denkbare Antwort auf ein Messproblem gewesen.
+
+Die Zahl der Abweichler fällt damit von neun auf **vier**: die zwei unter 3.000 Wörtern
+(Terabyte, Kalorien), Bremsweg mit 54,3 Prozent — und `woher-der-bmi-kommt`. Erwartet waren
+drei. Der BMI-Artikel liegt bei exakt **25,985 Prozent** und damit knapp unter der Untergrenze;
+die Tabelle aus Welle 137 zeigt ihn gerundet als 26,0, daher die Erwartung. An der Schwelle
+wurde dafür nicht nachjustiert — eine Grenze, die man verschiebt, bis der Bestand sie einhält,
+ist keine Grenze mehr.
+
 ## 11.09.2026 — Welle 137: Die Zählmethode hat jetzt ein Werkzeug — ✅ ABGESCHLOSSEN
 
 **Eine Regel, die nur beschrieben ist, wird bei jeder Anwendung neu implementiert.** Die
