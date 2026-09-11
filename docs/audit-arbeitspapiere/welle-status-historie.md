@@ -6,6 +6,34 @@
 
 ---
 
+## 11.09.2026 — Welle 137: Die Zählmethode hat jetzt ein Werkzeug — ✅ ABGESCHLOSSEN
+
+### Bestandszahl der Seiten, gemessen
+
+Zwei ältere Seitenzahlen weiter unten in dieser Datei — „alle 265 gebauten Seiten" im
+Welle-Kontext und „Sitemap 264 → 265" — bleiben unverändert. Es sind historische Aussagen
+ihrer Welle; Historie wird nicht rückwirkend korrigiert. Der Ist-Stand gehört hierher, und
+zwar gemessen, nicht erinnert:
+
+| Größe | Stand Welle 135 (berichtet) | Stand Welle 137 (gemessen) | Quelle der Messung |
+|---|---|---|---|
+| Gebaute Seiten | 267 | **268** | `npm run build` dieser Welle: `✓ Generating static pages (268/268)` |
+| Sitemap-URLs | 255 | **255** | `<loc>`-Zählung in `.next/server/app/sitemap.xml.body` nach demselben Build |
+
+Die Seitenzahl war zu berichtigen, die Sitemap-Zahl bestätigt sich.
+
+**Der Abstand zwischen beiden Zahlen ist ebenfalls gemessen, nicht geschätzt.** Ein Abgleich
+von `.next/prerender-manifest.json` gegen die Sitemap-URLs ergibt: 261 vorgerenderte Routen,
+davon 255 in der Sitemap. Die sechs Routen, die gebaut werden und bewusst nicht in der Sitemap
+stehen, sind `/admin/affiliate-stats`, `/offline`, `/favicon.ico`, `/manifest.webmanifest`,
+`/robots.txt` und `/sitemap.xml` selbst — vier davon sind gar keine Seiten, sondern Dateien.
+Umgekehrt steht **keine** Sitemap-URL ohne vorgerenderte Route da; das ist die Richtung, in der
+ein Fehler wehtun würde, und sie ist sauber.
+
+Die Restdifferenz von 268 zu 261 sind Einträge, die Next im Generierungszähler mitführt, ohne
+dass sie als Route im Manifest erscheinen. Sie ist hier nicht weiter aufgeschlüsselt — die
+Aussage lautet ausdrücklich nur, was belegt ist.
+
 ## 04.09.2026 — Welle 136: Artikel 18 nachgebessert — ✅ ABGESCHLOSSEN
 
 **Die Wortzahl im Welle-135-Prompt war falsch, und der Fehler ist ein bekannter.** Der Skill
