@@ -101,6 +101,14 @@ export const TERMINE: Termin[] = [
     quelle: 'docs/social-pipeline.md',
   },
   {
+    id: 'anthropic-egress-allowlist',
+    titel: 'Anthropic-Support: Fehlermeldung zur Egress-Allowlist nachfassen',
+    datum: '2026-09-18',
+    vorlaufTage: 7,
+    bereich: 'Betrieb',
+    was: 'Am 11.09.2026 als Fehler gemeldet: Das Eintragen von sechs Domains mit www.-Praefix in die Allowlist hat den Netzzugang der geplanten Laeufe gekappt, auch fuer Hosts, die vorher trugen. Eintraege entfernt, Zugang wieder da. Ohne Antwort ist die Allowlist bis auf Weiteres nicht benutzbar. Bleibt eine Antwort aus: nachfassen unter Bezug auf die urspruengliche Meldung.',
+  },
+  {
     id: 'anthropic-key-vorlauf',
     titel: 'Anthropic-API-Schlüssel: Rotation vorbereiten',
     datum: '2026-10-25',
@@ -117,6 +125,15 @@ export const TERMINE: Termin[] = [
     wiederholungMonate: 3,
     bereich: 'Betrieb',
     was: 'Harter Ablauf. Ist die Rotation nicht erfolgt, fallen KI-Erklärung und KI-Rechner aus.',
+  },
+  {
+    id: 'zeitumstellung-cron-laufzeiten',
+    titel: 'Zeitumstellung: Laufzeiten der drei geplanten Aufgaben prüfen',
+    datum: '2026-10-25',
+    vorlaufTage: 7,
+    bereich: 'Betrieb',
+    was: 'Die geplanten Aufgaben laufen nach UTC-Cron: Peter 0 5 * * *, Susanne 0 6 * * *, Berichtswache 0 7 * * *. Bis zur Umstellung sind das 07:00, 08:00 und 09:00 Berliner Zeit, danach 06:00, 07:00 und 08:00. Die Reihenfolge und die Abstände bleiben; nur der ganze Block rutscht eine Stunde nach vorn. Zu entscheiden ist allein, ob die Uhrzeiten so bleiben sollen. Sollen sie es nicht, sind die drei Cron-Ausdrücke auf 0 6, 0 7 und 0 8 zu setzen.',
+    quelle: 'Routinen unter claude.ai/code/routines — Peter Ai, Susanne Recht, Berichtswache',
   },
   {
     id: 'sv-rechengroessen',
