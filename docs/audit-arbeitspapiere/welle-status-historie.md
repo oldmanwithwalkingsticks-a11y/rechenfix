@@ -6,6 +6,29 @@
 
 ---
 
+## 13.09.2026 — Welle 139: Acht unsichtbare Quellenhinweise — ✅ ABGESCHLOSSEN
+
+**Ein Feldname, den niemand prüft.** Der Quellenblock von Artikel 18 übergab seine
+Erläuterungen als `beschreibung:`. Die Komponente `Quellen.tsx` kennt nur `titel`, `url`
+und `hinweis`. MDX wird nicht typgeprüft, deshalb blieb der Build grün, deshalb fiel es
+zehn Tage lang nicht auf — und deshalb standen die Erläuterungen zu allen acht Quellen
+seit dem Ausrollen am 03.09.2026 nicht auf der Seite. Die übrigen 17 Artikel mit
+Quellenblock nutzen `hinweis:`; Artikel 18 war der einzige Abweichler.
+
+Gefunden wurde es nicht im Code, sondern im ausgelieferten HTML: Der Quellentitel stand
+darin, der Erläuterungstext nicht. **Eine grüne Typprüfung sagt nichts über Felder, die
+gar nicht geprüft werden** — bei MDX-Props entscheidet der Abgleich mit der Komponente,
+nicht der Build.
+
+- **97ee655** — acht Vorkommen `beschreibung:` im Quellenblock von
+  `app/blog/warum-wer-weniger-heizt-trotzdem-zahlt/page.mdx` zu `hinweis:` geändert.
+  Textinhalte, Reihenfolge und Einrückung unverändert. Die `meta.ts` der Blogartikel
+  behalten ihr eigenes, echtes Feld `beschreibung` (18 Dateien, unberührt).
+- Nachher gemessen: `hinweis:` 18 von 18 Artikeln, `beschreibung:` in keiner `page.mdx`,
+  genau eine geänderte Datei im Arbeitsbaum, Build erfolgreich.
+- Offen für Karstens Sichtprüfung: Quellenblock von Artikel 18 im Inkognito-Fenster,
+  hell und dunkel — unter jedem der acht Quellentitel muss jetzt eine graue Zeile stehen.
+
 ## 11.09.2026 — Welle 138: Eine Regel geprüft, eine Schwelle belegt — ✅ ABGESCHLOSSEN
 
 **Der gemeldete „Zwitterzustand" in der `.gitignore` war keiner.** Chat-Claude hatte die
