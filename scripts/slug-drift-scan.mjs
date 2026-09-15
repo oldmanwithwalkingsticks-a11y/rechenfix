@@ -83,6 +83,13 @@ const META_ROUTES = new Set([
   // Worker ausgeliefert, wenn eine Seite weder im Netz noch im Cache vorhanden
   // ist. Aktuell nicht intern verlinkt; wie 'social' vorsorglich registriert.
   'offline',
+  // WürdeZeit YouTube MCP (15.09.2026) — drei statische Seiten für die
+  // Google-OAuth-Verifizierung, noindex/follow, nicht in der Sitemap und
+  // nirgends im Footer verlinkt. Die Einstiegsseite verlinkt ihre beiden
+  // Rechtsseiten, daher hier als Meta-Routen registriert.
+  'wuerdezeit-mcp',
+  'wuerdezeit-mcp/datenschutz',
+  'wuerdezeit-mcp/nutzungsbedingungen',
   // Sonder-Targets (Next.js-generated oder Metadata-only Routes)
   'opengraph-image',
   'sitemap.xml',
