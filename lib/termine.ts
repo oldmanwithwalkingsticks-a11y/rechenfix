@@ -1,5 +1,10 @@
 /**
- * Termin-SSOT für rechenfix.de.
+ * Termin-SSOT für Karstens eigene Seiten.
+ *
+ * Seit 17.09.2026 nicht mehr nur für rechenfix.de: Das Feld `projekt`
+ * kennzeichnet Einträge, die eine andere Domain betreffen. Der Versand bleibt
+ * unverändert der rechenfix-Cron — WürdeZeit hat keinen eigenen, und ein
+ * zweiter Mailweg wäre eine zweite Stelle, die unbemerkt ausfallen kann.
  *
  * Bewusst in `lib/` und NICHT in `docs/`: `vercel.json` überspringt Deploys,
  * bei denen nur `docs/**` oder `*.md` geändert wurde. Eine Terminänderung in
@@ -27,6 +32,9 @@
 
 export type Terminbereich = 'Recht' | 'Betrieb' | 'Gesetzeswerte' | 'Inhalt';
 
+/** Welche Seite der Termin betrifft. Fehlt das Feld, ist rechenfix.de gemeint. */
+export type Terminprojekt = 'rechenfix.de' | 'wuerdezeit.de';
+
 export interface Termin {
   /** Stabile Kennung, kleingeschrieben, Bindestriche. */
   id: string;
@@ -39,6 +47,8 @@ export interface Termin {
   /** 12 = jährlich, 24 = zweijährlich, 3 = quartalsweise, 1 = monatlich. Fehlt = einmalig. */
   wiederholungMonate?: number;
   bereich: Terminbereich;
+  /** Betroffene Seite. Fehlt = rechenfix.de. */
+  projekt?: Terminprojekt;
   /** Die konkrete Handlung — nicht das Thema, sondern was zu tun ist. */
   was: string;
   /** Wo das Verfahren beschrieben steht. */
@@ -46,6 +56,36 @@ export interface Termin {
 }
 
 export const TERMINE: Termin[] = [
+  {
+    id: 'wz-sipload-nummer',
+    titel: 'WürdeZeit: Rufnummer scharf schalten',
+    datum: '2026-09-24',
+    vorlaufTage: 7,
+    bereich: 'Betrieb',
+    projekt: 'wuerdezeit.de',
+    was: 'Reihenfolge einhalten, sonst läuft eine Nummer im Impressum ins Leere: Rechnung von sipload bezahlen, Nummer aktivieren lassen, Anrufbeantworter einrichten, Ansage nach docs/telefon/ansagetext.md aufsprechen, von einem ANDEREN Telefon anrufen und selbst anhören, Mailzustellung der Nachricht prüfen — und ERST DANACH die Nummer ins Impressum aufnehmen. Einmaltermin: bleibt als überfällig stehen, bis es erledigt ist.',
+    quelle: 'docs/telefon/ansagetext.md',
+  },
+  {
+    id: 'wz-zweiter-kontaktweg',
+    titel: 'WürdeZeit: zweiter Kontaktweg im Impressum',
+    datum: '2026-09-24',
+    vorlaufTage: 7,
+    bereich: 'Recht',
+    projekt: 'wuerdezeit.de',
+    was: 'Nach § 5 Abs. 1 Nr. 2 DDG ist neben der E-Mail-Adresse ein weiterer Weg zu nennen, der schnelle, unmittelbare und effiziente Kommunikation erlaubt. Eine Telefonnummer ist dafür NICHT zwingend (EuGH C-298/07, Tenor: „Diese Informationen müssen nicht zwingend eine Telefonnummer umfassen"). Erfüllt wird es hier durch die Rufnummer, sobald sie geschaltet ist — hilfsweise durch das geplante Kontaktformular. Erst eintragen, wenn der Weg tatsächlich funktioniert.',
+    quelle: 'app/impressum/page.tsx (WürdeZeit)',
+  },
+  {
+    id: 'wz-freigabe',
+    titel: 'WürdeZeit: Freigabe der Seite',
+    datum: '2026-10-15',
+    vorlaufTage: 14,
+    bereich: 'Betrieb',
+    projekt: 'wuerdezeit.de',
+    was: 'Erst wenn alles fertig ist — so von Karsten am 17.09.2026 entschieden. Dann: SEITE_PASSWORT in Vercel entfernen, SEITE_OEFFENTLICH=ja setzen, neu ausliefern, Sitemap in der Search Console einreichen. Danach im Registry-Eintrag von Susanne den Block zugangsschutz streichen und einen site-scan.py-Erstlauf sowie die Browserprüfung nachholen. Datum ist ein Platzhalter und wird verschoben, nicht stillschweigend überrollt.',
+    quelle: 'assets/websites.json (Susanne), Eintrag www.wuerdezeit.de',
+  },
   {
     id: 'bundle-social-rueckfragen',
     titel: 'Rückfragen an bundle.social zu Supabase',

@@ -123,7 +123,7 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     for (const e of lage.ueberfaellig) {
       lines.push(
         '',
-        `🔴 ÜBERFÄLLIG seit ${Math.abs(e.tage)} Tagen (${e.datum}) — [${e.termin.bereich}] ${e.termin.titel}`,
+        `🔴 ÜBERFÄLLIG seit ${Math.abs(e.tage)} Tagen (${e.datum}) — [${e.termin.bereich}${e.termin.projekt ? ' · ' + e.termin.projekt : ''}] ${e.termin.titel}`,
         `   ${e.termin.was}`,
         ...(e.termin.quelle ? [`   Quelle: ${e.termin.quelle}`] : []),
       );
@@ -131,7 +131,7 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     for (const e of lage.faellig) {
       lines.push(
         '',
-        `🟡 in ${e.tage} Tagen (${e.datum}) — [${e.termin.bereich}] ${e.termin.titel}`,
+        `🟡 in ${e.tage} Tagen (${e.datum}) — [${e.termin.bereich}${e.termin.projekt ? ' · ' + e.termin.projekt : ''}] ${e.termin.titel}`,
         `   ${e.termin.was}`,
         ...(e.termin.quelle ? [`   Quelle: ${e.termin.quelle}`] : []),
       );
