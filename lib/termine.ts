@@ -73,7 +73,7 @@ export const TERMINE: Termin[] = [
     vorlaufTage: 7,
     bereich: 'Recht',
     projekt: 'wuerdezeit.de',
-    was: 'Nach § 5 Abs. 1 Nr. 2 DDG ist neben der E-Mail-Adresse ein weiterer Weg zu nennen, der schnelle, unmittelbare und effiziente Kommunikation erlaubt. Eine Telefonnummer ist dafür NICHT zwingend (EuGH C-298/07, Tenor: „Diese Informationen müssen nicht zwingend eine Telefonnummer umfassen"). Erfüllt wird es hier durch die Rufnummer, sobald sie geschaltet ist — hilfsweise durch das geplante Kontaktformular. Erst eintragen, wenn der Weg tatsächlich funktioniert.',
+    was: 'Nach § 5 Abs. 1 Nr. 2 DDG ist neben der E-Mail-Adresse ein weiterer Weg zu nennen, der schnelle, unmittelbare und effiziente Kommunikation erlaubt. Eine Telefonnummer ist dafür NICHT zwingend (EuGH C-298/07, Tenor: „Diese Informationen müssen nicht zwingend eine Telefonnummer umfassen"). Erfüllt wird es hier durch die Rufnummer, sobald sie geschaltet ist. Das Kontaktformular unter /kontakt ist seit 17.09.2026 gebaut und in beiden Varianten erprobt, trägt diese Pflicht aber NICHT von sich aus: Der EuGH hat ein Anfrageformular nur deshalb als tauglich angesehen, weil binnen 30 bis 60 Minuten geantwortet wurde. Eine solche Zusage gibt es hier bewusst nicht. Das Formular ist ein Zusatz, die Rufnummer ist der Weg. Erst eintragen, wenn der Weg tatsächlich funktioniert.',
     quelle: 'app/impressum/page.tsx (WürdeZeit)',
   },
   {
@@ -85,6 +85,17 @@ export const TERMINE: Termin[] = [
     projekt: 'wuerdezeit.de',
     was: 'Erst wenn alles fertig ist — so von Karsten am 17.09.2026 entschieden. Dann: SEITE_PASSWORT in Vercel entfernen, SEITE_OEFFENTLICH=ja setzen, neu ausliefern, Sitemap in der Search Console einreichen. Danach im Registry-Eintrag von Susanne den Block zugangsschutz streichen und einen site-scan.py-Erstlauf sowie die Browserprüfung nachholen. Datum ist ein Platzhalter und wird verschoben, nicht stillschweigend überrollt.',
     quelle: 'assets/websites.json (Susanne), Eintrag www.wuerdezeit.de',
+  },
+  {
+    id: 'wz-formular-loeschlauf',
+    titel: 'WürdeZeit: Nachrichten aus dem Kontaktformular löschen',
+    datum: '2026-10-20',
+    vorlaufTage: 3,
+    wiederholungMonate: 1,
+    bereich: 'Recht',
+    projekt: 'wuerdezeit.de',
+    was: 'Ordner „Formular“ im Postfach info@wuerdezeit.de öffnen und zwei Sorten löschen: erledigte Anliegen, und Nachrichten OHNE Antwortadresse, die älter als drei Monate sind. Beides steht so in Abschnitt 9 der Datenschutzerklärung und ist damit eine Zusage an den Absender, keine Absichtserklärung. MONATLICH und nicht quartalsweise, weil die Zusage drei Monate lautet: Bei einem Quartalsrhythmus käme eine Nachricht, die einen Tag nach dem Termin eingeht, erst beim übernächsten Lauf dran — nach bis zu sechs Monaten. Die zugesagte Frist und der Rhythmus, der sie einhält, sind zwei verschiedene Zahlen, und die zweite muss kleiner sein. Der Lauf dauert eine halbe Minute, solange die Postfachregel greift; greift sie nicht mehr, ist DAS der eigentliche Befund und nicht die Arbeit.',
+    quelle: 'app/datenschutz/page.tsx (WürdeZeit), Abschnitt 9; docs/kontaktformular/spezifikation.md Abschnitt 5',
   },
   {
     id: 'bundle-social-rueckfragen',
