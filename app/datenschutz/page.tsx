@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 11. September 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 18. September 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -458,23 +458,45 @@ export default function DatenschutzSeite() {
             <p className="mt-3">
               Unser E-Mail-Postfach betreiben wir bei der <strong>Hostinger International Ltd.</strong>{' '}
               (61 Lordou Vironos str., 6023 Larnaca, Zypern). Nachrichten, die Sie an uns richten,
-              werden dort auf Servern innerhalb der Europäischen Union gespeichert. Hostinger setzt
-              zur Erbringung des Dienstes eigene Unterauftragnehmer ein; zum Schutz vor Spam und
-              Schadsoftware gehört dazu die Proofpoint, Inc. (USA), die technische Begleitdaten zu
-              eingehenden Nachrichten verarbeitet. Melden wir eine Nachricht ausdrücklich als
-              verdächtig, erhält Proofpoint Zugriff auf deren vollständigen Inhalt einschließlich
-              Anhängen. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren
-              E-Mail-Betrieb (Art. 6 Abs. 1 lit. f DSGVO). Die vollständige Liste der
-              Unterauftragnehmer führt Hostinger in Anhang 3 seines{' '}
+              werden dort auf Servern innerhalb der Europäischen Union gespeichert.
+            </p>
+            <p className="mt-3">
+              Hostinger setzt für den E-Mail-Betrieb eigene Unterauftragnehmer ein. Auf
+              Nachfrage hat Hostinger am 18. September 2026 diese drei benannt:
+            </p>
+            <ul className="mt-3 list-disc space-y-2 pl-6">
+              <li>
+                <strong>Proofpoint, Inc.</strong> (USA) — Schutz vor Spam und Schadsoftware.
+                Verarbeitet technische Begleitdaten zu eingehenden Nachrichten. Melden wir eine
+                Nachricht ausdrücklich als verdächtig, erhält Proofpoint Zugriff auf deren
+                vollständigen Inhalt einschließlich Anhängen.
+              </li>
+              <li>
+                <strong>Cloudflare, Inc.</strong> (USA) — vorgelagerte Schicht zwischen den
+                Nutzern und Hostingers Servern, für Erreichbarkeit, Geschwindigkeit und
+                Sicherheit des E-Mail-Dienstes.
+              </li>
+              <li>
+                <strong>MailChannels Corporation</strong> (Kanada) — Zustellung ausgehender
+                Nachrichten, einschließlich deren Prüfung auf Spam.
+              </li>
+            </ul>
+            <p className="mt-3">
+              Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und
+              funktionierenden E-Mail-Betrieb (Art. 6 Abs. 1 lit. f DSGVO). Die vollständige
+              und jeweils aktuelle Liste führt Hostinger in Anhang 3 seines{' '}
               <a href="https://www.hostinger.com/legal/dpa" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">
                 Auftragsverarbeitungsvertrags
               </a>.
             </p>
             <Hinweisbox>
-              <strong>Datenübermittlung in Drittländer:</strong> Soweit Unterauftragnehmer von
-              Hostinger personenbezogene Daten außerhalb der Europäischen Union verarbeiten, stützt
-              sich die Übermittlung auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US
-              Data Privacy Framework, im Übrigen auf die Standardvertragsklauseln nach
+              <strong>Datenübermittlung in Drittländer:</strong> Proofpoint und Cloudflare
+              verarbeiten Daten auch in den Vereinigten Staaten. Die Übermittlung dorthin stützt
+              sich auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US Data Privacy
+              Framework. Für Kanada gilt ein eigener Angemessenheitsbeschluss der EU-Kommission
+              (Entscheidung 2002/2/EG); er erfasst privatwirtschaftliche Organisationen, die dem
+              kanadischen Datenschutzgesetz PIPEDA unterliegen. Gelangen darüber hinaus Daten in
+              Länder ohne einen solchen Beschluss, gelten die Standardvertragsklauseln nach
               Art. 46 Abs. 2 lit. c DSGVO, die Bestandteil des Auftragsverarbeitungsvertrags mit
               Hostinger sind.
             </Hinweisbox>
