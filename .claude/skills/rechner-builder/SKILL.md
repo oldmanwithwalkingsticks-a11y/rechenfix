@@ -28,7 +28,7 @@ Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veralte
 
 Wenn diese Standards befolgt werden, dauert der Januar-Audit 1–2 Tage statt 2–3 Wochen.
 
-**Aktueller Stand (02.09.2026, gemessen an HEAD `7516f54`):** 206 Rechner in **zehn** Kategorien — Alltag 24, Finanzen 45, Gesundheit 17, Auto & Verkehr 15, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 15, Sport & Fitness 15, **Technik 15**. Dazu 17 Blogartikel und 76 Grafik-Komponenten. Die Prebuild-Kette hat **15** Glieder. **Affiliate:** **13** Programme in `components/AffiliateBox.tsx` (wiso, smartsteuer, lexware, check24, congstar, ks-auxilia, hotelde, burdaZahn, verivox, naturesway, cosmosdirekt, smava, hansemerkur); 55 `<AffiliateBox>`-Aufrufe in 52 Dateien. **AdSense:** seit Februar 2026 bewusst pausiert, der Ladecode wurde am **16.08.2026** vollständig entfernt (Susanne Recht R2) — es findet derzeit **keine** Werbeauslieferung statt. Neue Rechner dürfen deshalb keine AdSense-Annahmen enthalten. **Wellenverlauf:** vollständig in [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md) — bewusst nicht hier gespiegelt, damit der Skill nicht mit jeder Welle veraltet.
+**Aktueller Stand (18.09.2026, gemessen an HEAD `4193aa1`):** 206 Rechner in **zehn** Kategorien — Alltag 24, Finanzen 45, Gesundheit 17, Auto & Verkehr 15, Wohnen & Energie 25, Mathe & Schule 18, Arbeit & Recht 17, Kochen & Ernährung 15, Sport & Fitness 15, **Technik 15**. Dazu 18 Blogartikel und 79 Grafik-Komponenten. Die Prebuild-Kette hat **16** Glieder. **Affiliate:** **13** Programme in `components/AffiliateBox.tsx` (wiso, smartsteuer, lexware, check24, congstar, ks-auxilia, hotelde, burdaZahn, verivox, naturesway, cosmosdirekt, smava, hansemerkur); 55 `<AffiliateBox>`-Aufrufe in 52 Dateien. **AdSense:** seit Februar 2026 bewusst pausiert, der Ladecode wurde am **16.08.2026** vollständig entfernt (Susanne Recht R2) — es findet derzeit **keine** Werbeauslieferung statt. Neue Rechner dürfen deshalb keine AdSense-Annahmen enthalten. **Wellenverlauf:** vollständig in [docs/audit-arbeitspapiere/welle-status-historie.md](../../docs/audit-arbeitspapiere/welle-status-historie.md) — bewusst nicht hier gespiegelt, damit der Skill nicht mit jeder Welle veraltet.
 
 > **Pflege dieses Blocks:** Die Zahlen oben veralten mit jeder Welle. Sie sind eine Momentaufnahme, keine SSOT — im Zweifel gegen `lib/rechner-config/` und `components/AffiliateBox.tsx` messen, nie aus diesem Skill zitieren. Zuletzt berichtigt in Welle 111 (20.08.2026), davor unverändert seit 01.05.2026.
 
@@ -382,7 +382,7 @@ Place below the calculator (below the fold). Include:
   - `erklaerung` + FAQ kombiniert: **MINDESTENS 750 Wörter**
   - Ideal: **1.000–1.500 Wörter** (Pattern-Goldstandard der Top-10-Rechner, `references/content-standards.md`)
   - Begründung: W13.C-Audit hat ergeben, dass Rechner mit <700 W AdSense-Reject-Risiko haben („Minderwertige Inhalte"). 750 W ist die sichere Untergrenze.
-  - Wortzählung pro Rechner manuell oder via `scripts/word-count.mjs` (falls vorhanden) verifizierbar.
+  - Wortzählung pro Rechner über `node scripts/check-contentbloecke-wortzahl.mjs` — `scripts/word-count.mjs` gibt es nicht und hat es nie gegeben (berichtigt 18.09.2026).
 - **Formel-Box:** Show the formula used in a highlighted box
 - **Rechenbeispiel-Box:** Show a worked example
 - **Internal links** to related calculators within the text
@@ -523,11 +523,11 @@ Nach jeder Änderung an Rechnern oder zentralen Libs:
 1. `https://www.rechenfix.de` im Inkognito-Tab öffnen
 2. DevTools → Console → Smoketest-v3-Script einfügen
 3. `await runSmokeTestV3()` ausführen
-4. Erwartung: **178/178 Rechner-URLs grün, 0 Fails, 0 Errors**
+4. Erwartung: **206/206 Rechner-URLs grün, 0 Fails, 0 Errors** — die Zahl ist der Bestand, nicht eine feste Marke: bei jedem neuen Rechner steigt sie mit.
 
 Für Tarif-Änderungen zusätzlich: **Testfall 2 Familie** cent-genau verifizieren (5.000 €/Monat, StKl III, 2 Kinder unter 25, keine KiSt → Netto **3.546,00 €/Monat**).
 
-Bekannter Noise: `adsbygoogle.js AdSense head tag doesn't support data-nscript attribute`-Warning. Ist kein Fail, kann ignoriert werden. Fix parkt bis AdSense-Freigabe (Prompt 85).
+**Kein AdSense-Noise mehr.** Der frühere Hinweis auf die `adsbygoogle.js … data-nscript`-Warnung ist gegenstandslos: Der Ladecode wurde am 16.08.2026 vollständig entfernt (Susanne Recht R2), im Repo steht heute kein einziges `adsbygoogle`-Vorkommen mehr (gemessen 18.09.2026). Taucht die Warnung wieder auf, ist das ein Befund und kein Rauschen.
 
 ### Step 12: Register the Calculator
 
@@ -833,6 +833,7 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge,
 | 28.04.2026 | Prompt 158a: Welle-3-Lehren-Sync — Header-Stand auf 28.04.2026 mit Welle 3 6/9 ✅ (152b, 154, 155, 156, 151, 150e). Vier neue Anti-Pattern-Blöcke ergänzt: Content-Sektionen in client-only Lazy-Wrapper (Lehre 26 / 154 — AdSense-Trigger), Klasse auf Wrapper statt direkten Kindern (Lehre 27 / 154), `new Date()` auf Modul-Ebene in `'use client'`-Components (Lehre 24 / 152b — Hydration-Mismatch-Risiko), Stichtag-Wert als dynamischer Lookup verkleidet (Lehre 23 / 152b — Stichtag vs. berechenbar mit Decision-Tabelle). AdSense-Status im Header: erste Prüfung 27.04.2026 negativ, Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. | [ ] noch offen |
 | 26.08.2026 | Welle 114: Prüfvorschriften-Regeln R1–R6 in der Operativen Disziplin, Anti-Pattern zur Namenswahl exportierter Helfer, Working-Tree-Disziplin um Worktree-Pflege und untracked Artefakte erweitert, Checkliste um den Block „Prüfvorschrift schreiben". **Struktur-Umbau:** SKILL.md 1966 → 898 Zeilen, sechs neue Referenzdateien (Qualitäts-Guards, Anti-Patterns, Audit-Methodik, Kategorien, Zentrale Libs, Content-Standards), Sync-Ablauf auf ZIP-Upload umgestellt. | [ ] noch offen |
 | 02.09.2026 | Wellen 128–131: R8 (Abschluss-Commit mit Historienblock gehört in jeden Wellen-Prompt) und R9 (Text mit typografischen Zeichen über Dateien statt zitierter Literale) in der Operativen Disziplin, dazu zwei Zählfallen als Ergänzung zu R2 und R3 (`types.ts`/`index.ts` bei der Rechner-Zählung, Quote-Form bei Objektschlüsseln mit Bindestrich). Bestandszahlen nachgemessen: 16→17 Blogartikel, 73→76 Grafik-Komponenten, 14→15 prebuild-Glieder. | [ ] noch offen |
+| 18.09.2026 | Durchsicht aller Skills: Bestandszahlen nachgemessen an HEAD `4193aa1` — 17→18 Blogartikel, 76→79 Grafik-Komponenten, 15→16 prebuild-Glieder. Unverändert bestätigt: 206 Rechner (R2-Zählfalle greift — roh gegrept sind es 220, `client-data.ts`/`index.ts`/`types.ts` gehören abgezogen), 13 Affiliate-Programme (R3-Zählfalle greift — `'ks-auxilia'` steht in Quote-Form), 55 Aufrufe in 52 Dateien. Drei überholte Stellen berichtigt: Smoketest-Erwartung 178→206 Rechner-URLs, der AdSense-Noise-Hinweis (Ladecode seit 16.08.2026 entfernt, kein `adsbygoogle` mehr im Repo) und die Empfehlung eines nie existierenden `scripts/word-count.mjs`. | [ ] noch offen |
 
 ---
 

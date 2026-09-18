@@ -5,7 +5,19 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v12 (28.08.2026, verifiziert an HEAD `c5d25fe`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v13 (18.09.2026, Pfade und Kettenpositionen gemessen an HEAD `4193aa1`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+
+**v13-Nachtrag (18.09.2026 — zweimal geändert, ohne es oben zu sagen):** Zwischen dem
+28.08. und heute ist dieser Skill zweimal inhaltlich geändert worden, ohne dass die
+Stand-Zeile mitging: W137c (Verweis auf `scripts/check-blog-wortzahl.mjs`) und W138b
+(Rechnerkorridor auf 26 bis 45 Prozent). Wer dem Kopf glaubte, hielt beides für nicht
+vorhanden. **Eine Änderung am Skill ohne Anhebung der Stand-Zeile ist keine kleine
+Änderung, sondern eine unsichtbare** — dieselbe Regel, nach der bei Susanne jede
+Textänderung ins Protokoll gehört. Gleichzeitig nachgemessen: Der Aufruf
+`generate-ki-inventar.mjs --pruefen` hängt nicht mehr als zehntes, sondern als **elftes**
+Glied in der prebuild-Kette, weil W137b die Blog-Wortzahl als sechstes eingezogen hat; die
+Kette ist auf 16 Glieder gewachsen. Alle im Skill genannten Dateipfade existieren, und die
+Quellen-Konvention aus W139a (`hinweis` statt `beschreibung`) ist bereits eingearbeitet.
 
 **v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
 
@@ -546,7 +558,7 @@ Das ist der Schritt, der vergessen wird. Bei jedem neuen Asset:
 
 **Zum Inventar `public/ki-medien/inventar.json`:** Es wird **abgeleitet, nicht gepflegt**. Seit
 dem 28.08.2026 erzeugt es `scripts/generate-ki-inventar.mjs` im Seiten-Repo; der Aufruf mit
-`--pruefen` hängt als zehntes Glied in der prebuild-Kette und hat den gelöschten
+`--pruefen` hängt als elftes Glied in der prebuild-Kette (gemessen 18.09.2026; 16 Glieder insgesamt) und hat den gelöschten
 `scripts/check-ki-inventar.mjs` ersetzt. **Ein handgeschriebener Eintrag ist kein gültiger
 Arbeitsschritt mehr** — er bricht den Build, sobald die abgelegte Datei von der ableitbaren
 abweicht. Woraus der Generator seine Felder zieht, steht in seinem Dateikopf; wer das beim
