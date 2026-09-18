@@ -153,11 +153,12 @@ export const TERMINE: Termin[] = [
   },
   {
     id: 'anthropic-egress-allowlist',
-    titel: 'Anthropic-Support: Fehlermeldung zur Egress-Allowlist nachfassen',
-    datum: '2026-09-18',
-    vorlaufTage: 7,
+    titel: 'Egress-Allowlist: besteht die Sperre noch?',
+    datum: '2026-10-12',
+    vorlaufTage: 3,
+    wiederholungMonate: 1,
     bereich: 'Betrieb',
-    was: 'Am 11.09.2026 als Fehler gemeldet: Das Eintragen von sechs Domains mit www.-Praefix in die Allowlist hat den Netzzugang der geplanten Laeufe gekappt, auch fuer Hosts, die vorher trugen. Eintraege entfernt, Zugang wieder da. Ohne Antwort ist die Allowlist bis auf Weiteres nicht benutzbar. Bleibt eine Antwort aus: nachfassen unter Bezug auf die urspruengliche Meldung.',
+    was: 'Am 11.09.2026 gemeldet: Das Eintragen von sechs Domains mit www.-Praefix in die Allowlist hat den Netzzugang der geplanten Laeufe gekappt, auch fuer Hosts, die vorher trugen. Eintraege entfernt, Zugang wieder da. ANTWORT LIEGT VOR (16.09.2026, Conversation ID 215475901888167): bestaetigter Fehler, die Behebung muss von Anthropic kommen, es gibt ausdruecklich keinen Workaround auf Betreiberseite, eine Frist wird nicht zugesagt, der Vorgang ist vorlaeufig geschlossen mit der Bitte, sich zu melden, falls es weiter auftritt. Deshalb ist dies KEIN Nachfasstermin mehr, sondern eine monatliche Nachschau: Zeigt Susannes Tagesmeldung weiterhin CONNECT 403 fuer www.wuerdezeit.de, eur-lex.europa.eu, edpb.europa.eu oder ldi.nrw.de, besteht die Sperre fort — dann unter Bezug auf die Conversation ID erneut melden, mit Datum und Hostliste aus der Tagesmeldung. VORSICHT beim Gegentest: Erneut Domains einzutragen ist genau die Handlung, die am 11.09. alle Laeufe gekappt hat. Wer es probiert, tut es an einem Tag, an dem ein ausgefallener Lauf verschmerzbar ist, und entfernt die Eintraege sofort wieder. Was die Sperre kostet: Die Dienste-Wache erreicht wuerdezeit.de gar nicht, und vier von Susannes Primaerquellen bleiben ungeprueft, darunter die Aufsichtsbehoerde LDI NRW, die in beiden Datenschutzerklaerungen als zustaendig benannt ist. Nicht betroffen sind Aufgaben, die aus einer Chat-Sitzung laufen: Von dort ist www.wuerdezeit.de erreichbar (gemessen 18.09.2026: HTTP 401). Der site-scan.py-Erstlauf und die Browserpruefung nach dem Oeffentlichmachen sind deshalb NICHT blockiert — sie laufen aus einer Sitzung, nicht aus dem Container.',
   },
   {
     id: 'anthropic-key-vorlauf',
