@@ -5,7 +5,18 @@ description: Template and checklist for building standardized online calculators
 
 # Rechner Builder für rechenfix.de
 
-Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
+**Stand: v3 (18.09.2026).** Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
+
+**Zur Fassungszählung (eingeführt 18.09.2026):** Dieser Skill hatte als einziger der
+fünf keine Stand-Zeile, und `scripts/skill-paket.sh` verweigerte deshalb den Paketbau — die
+Fassung wird dort aus genau dieser Zeile gelesen. Jedes Archiv musste von Hand gebaut
+werden, ohne die Rückleseprobe, die bei den anderen vier verhindert, dass ein Paket mit
+einer anderen Stand-Zeile ausgeliefert wird als die Quelle trägt; das Archivstück
+`rechenfix-rechner-builder-w103-d44dcd6.zip` zeigt das alte Namensschema aus Welle und
+Commit-Kürzel. **v1 und v2 sind nicht rekonstruiert, sondern stehen dort, wo sie immer
+standen:** in der Überschrift des folgenden Abschnitts. Die Ausbaustufen dazwischen liefen
+ohne Nummer über die Historientabelle am Ende dieser Datei, die weiterhin die maßgebliche
+Spur ist. v3 ist deshalb kein Neuanfang, sondern der erste Stand, der sich packen lässt.
 
 ## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026 · Prüfvorschriften-Update Welle 114, 26.08.2026 · Struktur-Umbau und R7, Welle 114b/118, 27.08.2026)
 
@@ -833,7 +844,7 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge,
 | 28.04.2026 | Prompt 158a: Welle-3-Lehren-Sync — Header-Stand auf 28.04.2026 mit Welle 3 6/9 ✅ (152b, 154, 155, 156, 151, 150e). Vier neue Anti-Pattern-Blöcke ergänzt: Content-Sektionen in client-only Lazy-Wrapper (Lehre 26 / 154 — AdSense-Trigger), Klasse auf Wrapper statt direkten Kindern (Lehre 27 / 154), `new Date()` auf Modul-Ebene in `'use client'`-Components (Lehre 24 / 152b — Hydration-Mismatch-Risiko), Stichtag-Wert als dynamischer Lookup verkleidet (Lehre 23 / 152b — Stichtag vs. berechenbar mit Decision-Tabelle). AdSense-Status im Header: erste Prüfung 27.04.2026 negativ, Drei-Maßnahmen-Sprint 154+155+156 als Reaktion. | [ ] noch offen |
 | 26.08.2026 | Welle 114: Prüfvorschriften-Regeln R1–R6 in der Operativen Disziplin, Anti-Pattern zur Namenswahl exportierter Helfer, Working-Tree-Disziplin um Worktree-Pflege und untracked Artefakte erweitert, Checkliste um den Block „Prüfvorschrift schreiben". **Struktur-Umbau:** SKILL.md 1966 → 898 Zeilen, sechs neue Referenzdateien (Qualitäts-Guards, Anti-Patterns, Audit-Methodik, Kategorien, Zentrale Libs, Content-Standards), Sync-Ablauf auf ZIP-Upload umgestellt. | [ ] noch offen |
 | 02.09.2026 | Wellen 128–131: R8 (Abschluss-Commit mit Historienblock gehört in jeden Wellen-Prompt) und R9 (Text mit typografischen Zeichen über Dateien statt zitierter Literale) in der Operativen Disziplin, dazu zwei Zählfallen als Ergänzung zu R2 und R3 (`types.ts`/`index.ts` bei der Rechner-Zählung, Quote-Form bei Objektschlüsseln mit Bindestrich). Bestandszahlen nachgemessen: 16→17 Blogartikel, 73→76 Grafik-Komponenten, 14→15 prebuild-Glieder. | [ ] noch offen |
-| 18.09.2026 | Durchsicht aller Skills: Bestandszahlen nachgemessen an HEAD `4193aa1` — 17→18 Blogartikel, 76→79 Grafik-Komponenten, 15→16 prebuild-Glieder. Unverändert bestätigt: 206 Rechner (R2-Zählfalle greift — roh gegrept sind es 220, `client-data.ts`/`index.ts`/`types.ts` gehören abgezogen), 13 Affiliate-Programme (R3-Zählfalle greift — `'ks-auxilia'` steht in Quote-Form), 55 Aufrufe in 52 Dateien. Drei überholte Stellen berichtigt: Smoketest-Erwartung 178→206 Rechner-URLs, der AdSense-Noise-Hinweis (Ladecode seit 16.08.2026 entfernt, kein `adsbygoogle` mehr im Repo) und die Empfehlung eines nie existierenden `scripts/word-count.mjs`. | [ ] noch offen |
+| 18.09.2026 | Durchsicht aller Skills: Bestandszahlen nachgemessen an HEAD `4193aa1` — 17→18 Blogartikel, 76→79 Grafik-Komponenten, 15→16 prebuild-Glieder. Unverändert bestätigt: 206 Rechner (R2-Zählfalle greift — roh gegrept sind es 220, `client-data.ts`/`index.ts`/`types.ts` gehören abgezogen), 13 Affiliate-Programme (R3-Zählfalle greift — `'ks-auxilia'` steht in Quote-Form), 55 Aufrufe in 52 Dateien. Drei überholte Stellen berichtigt: Smoketest-Erwartung 178→206 Rechner-URLs, der AdSense-Noise-Hinweis (Ladecode seit 16.08.2026 entfernt, kein `adsbygoogle` mehr im Repo) und die Empfehlung eines nie existierenden `scripts/word-count.mjs`. Dazu die Stand-Zeile `Stand: v3` eingeführt, ohne die `skill-paket.sh` den Paketbau verweigerte. | [ ] noch offen |
 
 ---
 
