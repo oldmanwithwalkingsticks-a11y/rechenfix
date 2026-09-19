@@ -57,26 +57,6 @@ export interface Termin {
 
 export const TERMINE: Termin[] = [
   {
-    id: 'wz-sipload-nummer',
-    titel: 'WürdeZeit: Rufnummer scharf schalten',
-    datum: '2026-09-24',
-    vorlaufTage: 7,
-    bereich: 'Betrieb',
-    projekt: 'wuerdezeit.de',
-    was: 'Reihenfolge einhalten, sonst läuft eine Nummer im Impressum ins Leere: Rechnung von sipload bezahlen, Nummer aktivieren lassen, Anrufbeantworter einrichten, Ansage nach docs/telefon/ansagetext.md aufsprechen, von einem ANDEREN Telefon anrufen und selbst anhören, Mailzustellung der Nachricht prüfen — und ERST DANACH die Nummer ins Impressum aufnehmen. Einmaltermin: bleibt als überfällig stehen, bis es erledigt ist.',
-    quelle: 'docs/telefon/ansagetext.md',
-  },
-  {
-    id: 'wz-zweiter-kontaktweg',
-    titel: 'WürdeZeit: zweiter Kontaktweg im Impressum',
-    datum: '2026-09-24',
-    vorlaufTage: 7,
-    bereich: 'Recht',
-    projekt: 'wuerdezeit.de',
-    was: 'Nach § 5 Abs. 1 Nr. 2 DDG ist neben der E-Mail-Adresse ein weiterer Weg zu nennen, der schnelle, unmittelbare und effiziente Kommunikation erlaubt. Eine Telefonnummer ist dafür NICHT zwingend (EuGH C-298/07, Tenor: „Diese Informationen müssen nicht zwingend eine Telefonnummer umfassen"). Erfüllt wird es hier durch die Rufnummer, sobald sie geschaltet ist. Das Kontaktformular unter /kontakt ist seit 17.09.2026 gebaut und in beiden Varianten erprobt, trägt diese Pflicht aber NICHT von sich aus: Der EuGH hat ein Anfrageformular nur deshalb als tauglich angesehen, weil binnen 30 bis 60 Minuten geantwortet wurde. Eine solche Zusage gibt es hier bewusst nicht. Das Formular ist ein Zusatz, die Rufnummer ist der Weg. Erst eintragen, wenn der Weg tatsächlich funktioniert.',
-    quelle: 'app/impressum/page.tsx (WürdeZeit)',
-  },
-  {
     id: 'wz-freigabe',
     titel: 'WürdeZeit: Freigabe der Seite',
     datum: '2026-10-15',
