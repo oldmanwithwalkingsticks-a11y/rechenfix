@@ -78,15 +78,6 @@ export const TERMINE: Termin[] = [
     quelle: 'app/datenschutz/page.tsx (WürdeZeit), Abschnitt 9; docs/kontaktformular/spezifikation.md Abschnitt 5',
   },
   {
-    id: 'bundle-social-rueckfragen',
-    titel: 'Rückfragen an bundle.social zu Supabase',
-    datum: '2026-09-20',
-    vorlaufTage: 7,
-    bereich: 'Recht',
-    was: 'Antwort von bundle.social auf die Rückfragen vom 06.09.2026 erwarten: in welcher Region die Supabase-Instanz läuft und wie weit der Supportzugriff von Supabase, Inc. reicht. Bleibt die Antwort aus, ist das kein Mangel — die Transfer-Folgenabschätzung vom 06.09.2026 steht ohne sie. Dann Ausbleiben mit Datum vermerken.',
-    quelle: 'Verarbeitungsverzeichnis VT-13 (lokal bei Karsten, nicht im Repo)',
-  },
-  {
     id: 'domain-checkdomain',
     titel: 'Domain rechenfix.de läuft aus',
     datum: '2027-04-03',
