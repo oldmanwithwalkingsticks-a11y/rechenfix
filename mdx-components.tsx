@@ -86,6 +86,9 @@ import DreiFensterDreiRegeln from '@/components/blog/grafik/DreiFensterDreiRegel
 import HalbeHeizungGanzeRechnung from '@/components/blog/grafik/HalbeHeizungGanzeRechnung';
 import RohrwaermeVerschiebung from '@/components/blog/grafik/RohrwaermeVerschiebung';
 import EinePutzschicht from '@/components/blog/grafik/EinePutzschicht';
+import VierMethodenVergleich from '@/components/blog/grafik/VierMethodenVergleich';
+import ZinstageKalender from '@/components/blog/grafik/ZinstageKalender';
+import ZweiJahreslaengen from '@/components/blog/grafik/ZweiJahreslaengen';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -212,6 +215,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     HalbeHeizungGanzeRechnung,
     RohrwaermeVerschiebung,
     EinePutzschicht,
+    VierMethodenVergleich,
+    ZinstageKalender,
+    ZweiJahreslaengen,
     ...components,
   };
 }

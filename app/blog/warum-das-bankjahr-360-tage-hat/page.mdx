@@ -1,0 +1,472 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: artikel.titel,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-das-bankjahr-360-tage-hat' },
+  openGraph: {
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    url: 'https://www.rechenfix.de/blog/warum-das-bankjahr-360-tage-hat',
+    siteName: 'Rechenfix.de',
+    type: 'article',
+    locale: 'de_DE',
+    publishedTime: artikel.datum,
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: artikel.titel }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    images: ['/opengraph-image'],
+  },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-das-bankjahr-360-tage-hat',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/bankjahr-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-das-bankjahr-360-tage-hat' },
+])} />
+
+# Das Bankjahr hat 360 Tage – und das Gesetz widerspricht sich dabei selbst
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/bankjahr-titelbild.png" alt="Aufgeschlagenes Zinsstaffelbuch mit handschriftlichen Spalten auf einem dunklen Holzschreibtisch, daneben liegt flach ein Kalenderblatt, auf dem die 31 rot durchgestrichen ist" caption="Im Kalender gibt es den 31. In der Zinsstaffel nicht." width={1200} height={675} />
+
+Ein Jahr hat 365 Tage. Das lernt man früh, es steht im Kalender, und es stimmt. Nur
+rechnet Ihre Bank nicht damit.
+
+Wer Geld anlegt oder einen Kredit aufnimmt, bekommt eine Prozentzahl genannt: drei
+Prozent, sieben Prozent, elf Prozent. Was diese Zahl in Euro bedeutet, hängt jedoch
+nicht nur vom Zinssatz ab, sondern von einer zweiten Angabe, die in kaum einem
+Werbeprospekt vorkommt und in fast jedem Vertrag steht: wie viele Tage ein Jahr hat und
+wie viele ein Monat. Dafür gibt es nicht eine Antwort, sondern vier gebräuchliche. Sie
+führen bei identischem Zinssatz und identischem Kapital zu unterschiedlichen Beträgen.
+
+Und der kurioseste Teil daran: Der Gesetzgeber hat sich für zwei dieser Antworten
+gleichzeitig entschieden – in einem einzigen Satz des Bürgerlichen Gesetzbuchs.
+
+## Vier Rechenwege, vier Beträge
+
+Zinsen werden fast immer nach derselben Grundformel berechnet: Kapital mal Zinssatz mal
+Zinstage, geteilt durch Jahrestage. Der Streit steckt in den letzten beiden Größen. Vier
+Verfahren sind im Umlauf, und jedes hat einen Namen, der seine Herkunft verrät.
+
+Die **deutsche kaufmännische Methode**, kurz 30/360, setzt jeden Monat auf 30 Tage und
+jedes Jahr auf 360. Ob der Februar 28 Tage hat oder der Juli 31, spielt keine Rolle. Die
+**Eurozinsmethode**, kurz act/360, zählt die Kalendertage tatsächlich, teilt aber
+trotzdem durch 360. Die **englische Methode**, act/365, zählt tatsächlich und teilt durch
+365. Und act/act, im Anleihehandel üblich, zählt tatsächlich und teilt im Schaltjahr
+durch 366.
+
+Auf dem Papier klingt das nach einer Fußnote für Buchhalter. In Euro sieht es anders aus.
+Zehntausend Euro, drei Prozent, ein volles Kalenderjahr vom 1. Januar 2025 bis zum
+1. Januar 2026:
+
+<VierMethodenVergleich />
+
+Nach 30/360 sind es 300,00 Euro. Nach act/365 ebenfalls 300,00 Euro. Nach act/360 sind es
+304,17 Euro. Der Unterschied ist kein Rundungsfehler, sondern Methode: act/360 zählt 365
+Tage und teilt sie durch ein Jahr, das nur 360 Tage lang sein soll. Fünf Tage bleiben
+übrig, und die werden mitbezahlt.
+
+Der Aufschlag beträgt exakt 1,3889 Prozent. Aus drei Prozent nominal werden 3,0417
+Prozent tatsächlich, aus zehn Prozent werden 10,1389 Prozent. Bei einem Dispositionskredit
+über 3.000 Euro zu elf Prozent sind das keine dramatischen Summen – gut vier Euro im Jahr.
+Bei einem Unternehmenskredit über zwei Millionen reden wir über eine vierstellige Zahl,
+die nirgends als Kostenposition auftaucht, weil sie im Zinssatz versteckt ist, der gar
+nicht erhöht wurde.
+
+## Das Gesetz legt zwei Jahreslängen gleichzeitig fest
+
+Man würde erwarten, dass ein Land, das die Länge des Meters, das Gewicht des Pfunds und
+die Sekunde der Atomuhr gesetzlich fixiert hat, sich auch bei der Länge eines Jahres
+festlegt. Das hat es getan. Zweimal, unterschiedlich, im selben Satz.
+
+§ 191 des Bürgerlichen Gesetzbuchs regelt die Berechnung von Zeiträumen und lautet: Ist
+ein Zeitraum nach Monaten oder nach Jahren in dem Sinne bestimmt, dass er nicht
+zusammenhängend zu verlaufen braucht, so wird der Monat zu 30, das Jahr zu 365 Tagen
+gerechnet.
+
+Zwölf Monate zu je 30 Tagen ergeben 360. Das Jahr im selben Satz hat 365. Die Vorschrift
+enthält beide Zahlen und stellt keine Beziehung zwischen ihnen her. Sie ist seit dem
+1. Januar 1900 in Kraft und in diesem Punkt nie geändert worden.
+
+Juristisch lässt sich der Widerspruch auflösen: Die Norm regelt nicht, wie lang ein Jahr
+ist, sondern wie man zusammengestückelte Zeiträume zusammenzählt – etwa mehrere getrennte
+Urlaubsabschnitte oder Unterbrechungen einer Frist. Wer in solchen Fällen in Monaten
+rechnet, nimmt 30; wer in Jahren rechnet, nimmt 365. Beide Maßstäbe dürfen sich nie
+begegnen, weil sie für verschiedene Fälle gedacht sind.
+
+Praktisch begegnen sie sich jeden Tag. Und zwar auf Ihrem Kontoauszug.
+
+## Woher die 360 kommen
+
+Die 360 ist älter als jedes deutsche Kreditinstitut. Sie stammt aus einer Zeit, in der
+Zinsen mit Feder, Papier und Kopfrechnen ermittelt wurden, und sie hat genau einen Zweck:
+Teilbarkeit. 360 lässt sich glatt durch 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30,
+36, 40, 45, 60, 72, 90, 120 und 180 teilen. 365 lässt sich durch 5 teilen und durch 73.
+Das war es.
+
+Wer ein Halbjahr, ein Quartal oder einen Monat aus dem Jahreszins herausrechnen musste,
+kam mit 360 ohne einen einzigen Bruch aus. Ein Monat war ein Zwölftel, ein Quartal ein
+Viertel, ein Tag ein Dreihundertsechzigstel. Die sogenannte Zinszahlmethode, mit der
+Bankkaufleute noch in den Siebzigerjahren arbeiteten, beruhte vollständig darauf:
+Kapital mal Tage geteilt durch 100 ergab die Zinszahl, und der feste Divisor 360 geteilt
+durch den Zinssatz erledigte den Rest.
+
+Das klingt abstrakt, ist aber verblüffend praktisch. Bei drei Prozent lautet der Divisor
+120, denn 360 geteilt durch 3 ergibt 120. Wer 10.000 Euro für 90 Tage liegen hatte,
+bildete die Zinszahl 10.000 mal 90 geteilt durch 100, also 9.000, und teilte sie durch
+120. Ergebnis: 75 Euro. Keine Prozentrechnung, keine Klammern, eine Division. Bei fünf
+Prozent war der Divisor 72, bei vier Prozent 90, bei sechs Prozent 60 – lauter glatte
+Zahlen, die Bankkaufleute auswendig kannten und die es mit einem 365er-Jahr allesamt
+nicht gegeben hätte. Die Zinsstaffel auf der Rückseite des Sparbuchs war nichts anderes
+als diese Rechnung, Zeile für Zeile mit der Hand geführt.
+
+Der Rechner auf dem Schreibtisch hat dieses Argument vor Jahrzehnten erledigt. Die
+Methode blieb trotzdem. Nicht aus Trägheit allein, sondern weil sie inzwischen in
+Millionen laufender Verträge steht und weil sie eine Eigenschaft hat, die Banken
+schätzen: Sie liefert für jeden Monat denselben Zinsbetrag. Zwölf gleiche Raten, zwölf
+gleiche Zinsanteile, keine Rückfragen wegen des kurzen Februars.
+
+## Was in den Sparbedingungen steht
+
+Die Zahl steht nicht im Gesetz, sondern im Vertrag. In den Bedingungen für den
+Sparverkehr, die bundesweit nahezu gleichlautend verwendet werden, findet sich unter
+Nummer 3.2 der Satz: „Der Monat wird zu 30 Tagen, das Jahr zu 360 Tagen gerechnet.“
+Davor steht die zweite, häufiger übersehene Regel: Die Verzinsung beginnt am Tag der
+Einzahlung und endet an dem Kalendertag, der der Rückzahlung vorausgeht. Der Tag, an dem
+Sie Ihr Geld abholen, bringt nichts mehr.
+
+Diese zweite Regel wird gern überlesen, weil sie so beiläufig formuliert ist. Sie bedeutet:
+Ein Betrag, der morgens eingeht und abends wieder abgeht, bringt null Zinsen – und zwar
+nicht, weil die Zeit zu kurz wäre, sondern weil die Zählung ihn nicht erfasst. Wer am
+1. August einzahlt und am 31. August abhebt, hat sein Geld 30 Kalendertage bei der Bank –
+verzinst werden davon 29 Tage. Ein Tag verschwindet am Anfang der Rechnung, bevor die
+Frage nach der Jahreslänge überhaupt gestellt ist.
+
+Unter Nummer 3.3 folgt die Zinskapitalisierung: Die aufgelaufenen Zinsen werden zum Ende
+des Geschäftsjahres gutgeschrieben, dem Kapital zugeschlagen und ab dem neuen Jahr
+mitverzinst. Das ist Zinseszins, und Zinseszins ist im deutschen Recht der Ausnahmefall.
+§ 248 Absatz 1 BGB erklärt eine im Voraus getroffene Vereinbarung, dass fällige Zinsen
+wieder Zinsen tragen sollen, ausdrücklich für nichtig. Absatz 2 nimmt Sparkassen,
+Kreditanstalten und Inhaber von Bankgeschäften davon aus – für Einlagen, nicht für
+Kredite. Was auf dem Sparbuch selbstverständlich wirkt, ist eine gesetzliche Sondererlaubnis
+für eine bestimmte Gruppe von Vertragspartnern.
+
+Wie stark sich diese Ausnahme über die Jahre auswirkt, sieht man am besten, wenn man
+dieselbe Anlage einmal mit und einmal ohne Zinseszins durchrechnet:
+
+<RechnerLoader slug="zinsrechner" />
+
+Für eine Prognose über Jahre spielt die Tagezählung übrigens fast keine Rolle mehr – über
+ein volles Jahr liefern 30/360 und act/365 denselben Betrag. Sie wird erst dort scharf, wo
+es um Teilzeiträume geht: um den ersten und den letzten Monat einer Anlage, um die Tage
+zwischen Auszahlung und erster Rate, um jede vorzeitige Rückzahlung.
+
+## Der Februar gewinnt, der August verliert
+
+Die deutsche Methode verändert nicht die Summe über ein ganzes Jahr, sondern ihre
+Verteilung. Sie schiebt Zinstage von den langen Monaten in die kurzen. Zwei gemessene
+Fälle, jeweils 10.000 Euro zu drei Prozent:
+
+<ZinstageKalender />
+
+Vom 1. Februar bis zum 1. März 2026 vergehen tatsächlich 28 Kalendertage. Die deutsche
+Methode zählt 30. Ergebnis: 25,00 Euro statt 23,01 Euro nach act/365. Der Sparer bekommt
+zwei Tage geschenkt, die es nicht gibt.
+
+Vom 1. bis zum 31. August 2026 vergehen tatsächlich 30 Tage. Die deutsche Methode zählt
+29, weil sie jeden 31. auf den 30. zurücksetzt und deshalb vom 1. bis zum 30. rechnet.
+Ergebnis: 24,17 Euro statt 24,66 Euro. Ein Tag fällt ersatzlos weg.
+
+Über ein volles Kalenderjahr gleichen sich diese Verschiebungen aus – sieben Monate mit 31
+Tagen verlieren je einen Tag, der Februar gewinnt zwei oder drei. Wer aber am 31. Januar
+anlegt und am 1. März wieder abhebt, wer Ende Juli einzahlt und Ende August abhebt, wer
+zwischen zwei Kontenwechseln die Monate falsch erwischt, für den ist die Rechnung nicht
+neutral. Und wer bei mehreren Banken gleichzeitig in kurzen Zeiträumen hin- und
+herschiebt, kann ganz ohne Zinssatzänderung Geld verlieren.
+
+Im Schaltjahr wird es deutlicher. 2024 hatte 366 Kalendertage. Nach 30/360 gab es
+trotzdem exakt 360 Zinstage und 300,00 Euro. Nach act/365 waren es 300,82 Euro, nach
+act/360 sogar 305,00 Euro. Derselbe Zinssatz, dasselbe Kapital, dasselbe Jahr, drei
+Beträge.
+
+<Video src="/blog/bankjahr.mp4" poster="/blog/bankjahr-video-standbild.jpg" caption="Die Blätter fliegen, eines bleibt liegen: Die Methode entscheidet, welcher Tag zählt." />
+
+## act/360 – die Richtung, in der es teuer wird
+
+30/360 verteilt um. act/360 verteilt nicht, sondern vermehrt. Die Methode zählt jeden
+Kalendertag mit und teilt trotzdem durch 360 – der Zähler wächst, der Nenner bleibt.
+Über ein Normaljahr ergibt das 365 Zinstage auf einer 360er-Basis, also 1,3889 Prozent
+mehr Zinsen, als der genannte Satz verspricht. Im Schaltjahr sind es 1,6667 Prozent.
+
+Der Effekt ist klein genug, um in der Werbung nicht aufzufallen, und groß genug, um sich
+zu lohnen. Er trifft typischerweise die Seite, auf der der Kunde zahlt: Kontokorrent- und
+Dispositionskredite, Betriebsmittellinien, variabel verzinste Darlehen, viele
+Bauzwischenfinanzierungen. Auf der Guthabenseite ist er seltener anzutreffen – dort steht
+in den Bedingungen in aller Regel 30/360.
+
+Rechtlich ist diese Ungleichbehandlung nicht verboten. Der österreichische Oberste
+Gerichtshof hat die Klausel in einem Verbandsverfahren geprüft und nicht beanstandet, weil
+der Aufschlag von rund 0,0137 Prozentpunkten je Prozentpunkt Zinsbelastung unterhalb der
+Schwelle liege, auf die Sollzinssätze ohnehin kaufmännisch gerundet werden. Ein deutsches
+Urteil, das die Tagezählmethode als solche kippt, ist nicht bekannt. Das ist kein Beleg
+dafür, dass es keines gibt – es ist der Stand dessen, was wir gefunden haben, und wir
+schreiben es lieber so hin, als eine Lücke als Ergebnis auszugeben.
+
+Wichtiger für die Praxis ist ohnehin: Die Methode muss im Vertrag stehen. Steht dort
+act/360 oder „taggenaue Berechnung auf Basis von 360 Tagen“, dann ist der effektive
+Aufschlag kein Versehen, sondern vereinbart.
+
+## Zwei Jahreslängen in einem Vertrag
+
+Jetzt kommt die Stelle, an der es wirklich unübersichtlich wird. In einem
+Verbraucherkreditvertrag stehen zwei Zinssätze: der Sollzins und der effektive
+Jahreszins. Der Sollzins wird nach der Methode berechnet, die der Vertrag vorsieht – in
+der Regel 30/360 oder act/360. Der effektive Jahreszins wird nach einer Methode
+berechnet, die der Staat vorschreibt. Und die sieht anders aus.
+
+Die Anlage zur Preisangabenverordnung, auf die § 16 PAngV verweist, legt fest: Zugrunde
+gelegt werden für ein Jahr 365 Tage, im Schaltjahr 366, oder wahlweise 52 Wochen oder 12
+Standardmonate. Und dann folgt ein Satz, den man zweimal lesen muss: Ein Standardmonat hat
+30,41666 Tage, also 365 geteilt durch 12, unabhängig davon, ob es sich um ein Schaltjahr
+handelt oder nicht.
+
+<ZweiJahreslaengen />
+
+Damit stehen in einem einzigen Kreditvertrag zwei Monate nebeneinander, die
+unterschiedlich lang sind: der Zinsmonat mit 30 Tagen und der Effektivzinsmonat mit
+30,41666 Tagen. Und zwei Jahre: das Zinsjahr mit 360 Tagen und das Effektivzinsjahr mit
+365. Beide Zahlen sind korrekt berechnet. Beide beziehen sich auf dasselbe Geld. Sie sind
+nur nicht dasselbe Maß.
+
+Das ist kein Fehler des Gesetzgebers, sondern eine bewusste Entscheidung. Der Effektivzins
+soll vergleichbar machen, was unterschiedlich gebaut ist: Kredite mit Bearbeitungsentgelt,
+mit Disagio, mit monatlicher oder vierteljährlicher Rate, mit Restschuldversicherung. Eine
+Vergleichszahl braucht ein einheitliches Maß, sonst vergleicht sie nichts. Die Folge ist
+aber, dass die vorgeschriebene Vergleichszahl mit einer anderen Zeitrechnung arbeitet als
+der Vertrag, den sie beschreibt.
+
+Wer nachrechnen will, warum der effektive Jahreszins bei einem Kredit ohne jede Nebenkosten
+trotzdem über dem Sollzins liegt, findet die Antwort selten in versteckten Gebühren. Er
+findet sie im unterjährigen Zinseszins: Wer monatlich zahlt, zahlt bei nominal 6,00
+Prozent effektiv 6,17 Prozent, einfach weil zwölf Monatszinsen aufeinander aufbauen.
+
+## Der gesetzliche Zins sagt, wie viel – aber nicht, wie gerechnet wird
+
+Das deutsche Recht kennt eine ganze Reihe fester Zinssätze, und keiner von ihnen bringt
+eine Tagezählung mit. § 246 BGB bestimmt vier vom Hundert für das Jahr, wenn eine Schuld
+zu verzinsen ist und nichts anderes bestimmt wurde. § 352 HGB setzt fünf Prozent an, wenn
+beide Seiten Kaufleute sind. Bei Zahlungsverzug gilt § 288 BGB mit fünf Prozentpunkten
+über dem Basiszinssatz, bei Entgeltforderungen ohne Verbraucherbeteiligung mit neun. Für
+Verbraucherdarlehen senkt § 497 BGB den Verzugszins auf fünf Prozentpunkte über dem
+Basiszinssatz, bei Immobiliardarlehen auf zweieinhalb.
+
+Sechs Vorschriften, sechs Zahlen – und in keiner steht, ob das Jahr für diese Rechnung 360
+oder 365 Tage hat. Das ist kein Versehen. Der Gesetzgeber regelt die Höhe des Anspruchs,
+nicht die Kontoführung. Wie die Tage gezählt werden, ergibt sich aus dem Vertrag, und wo
+kein Vertrag etwas sagt, aus den allgemeinen Fristenregeln der §§ 187 bis 193 BGB: Der Tag
+des Ereignisses zählt nicht mit, der letzte Tag der Frist zählt ganz.
+
+Deshalb rechnen Gerichte Verzugszinsen in aller Regel nach tatsächlichen Kalendertagen ab
+– bei einer Forderung, die 100 Tage offen ist, sind es 100 Tage, nicht 98 und nicht 102.
+Die Bank, die dieselbe Forderung in ihrem System führt, kann dabei zu einem anderen Betrag
+kommen als die Anwaltskanzlei, die sie einklagt, ohne dass eine von beiden falsch rechnet.
+Der Unterschied liegt bei wenigen Euro, aber er erklärt, warum Mahnbescheid und
+Kontoauszug bei denselben Zinsen unterschiedliche Cent-Beträge ausweisen können.
+
+Wer nachrechnen will, braucht also beides: die Prozentzahl und die Methode. Die
+Prozentzahl steht im Gesetz. Die Methode nicht.
+
+## Was sich am 20. November 2026 ändert – und was nicht
+
+Am 20. November 2026 tritt das Gesetz zur Umsetzung der Richtlinie (EU) 2023/2225 über
+Verbraucherkreditverträge in Kraft, verkündet am 18. Mai 2026 im Bundesgesetzblatt unter
+der Nummer 139. Es ist die größte Überarbeitung des deutschen Verbraucherkreditrechts seit
+2010. Kleinkredite unter 200 Euro fallen künftig darunter, ebenso zins- und gebührenfreie
+Darlehen, kurzfristige Kredite und die Ratenzahlungsmodelle, die im Onlinehandel unter
+„jetzt kaufen, später zahlen“ angeboten werden. Die Obergrenze des Anwendungsbereichs
+steigt auf 100.000 Euro.
+
+Artikel 8 des Gesetzes ändert die Preisangabenverordnung an sieben Stellen. § 16 Absatz 2
+Satz 1 wird neu gefasst, Absatz 7 ersatzlos gestrichen, die Kostenbestandteile werden
+umsortiert, und Notarkosten sowie die Kosten eines freiwillig eröffneten Kontos bleiben
+unter bestimmten Bedingungen außen vor. Wer erwartet hat, dass bei dieser Gelegenheit auch
+die Tagezählung angefasst wird, wird enttäuscht: Der Satz mit den 365 Tagen und dem
+Standardmonat von 30,41666 Tagen steht im neuen Anlagentext wortgleich wieder da. Wir
+haben den Regelungstext heruntergeladen und die Stelle gesucht – sie ist unverändert.
+
+Die Zweiteilung bleibt also bestehen, und sie bleibt es bewusst. Der Gesetzgeber hat das
+Rechenverfahren für die Vergleichszahl präzise geregelt und das Rechenverfahren für den
+Betrag, den Sie tatsächlich überweisen, weiterhin dem Vertrag überlassen.
+
+## Das Finanzamt rechnet auch mit 360
+
+Die 360 ist keine Marotte der Banken. Sie steckt auch dort, wo man sie am wenigsten
+vermutet: im Lohnsteuerabzug.
+
+Der Programmablaufplan für die maschinelle Berechnung der Lohnsteuer ist ein amtliches
+Rechenwerk. Das Bundesfinanzministerium gibt ihn jedes Jahr heraus, das IT-Zentrum Bund
+veröffentlicht ihn als maschinenlesbaren Pseudocode, und jede Lohnabrechnungssoftware in
+Deutschland bildet ihn nach – auch unser eigener Lohnsteuerrechner, der den Plan Zeile für
+Zeile portiert.
+
+In diesem Plan steht, wie aus einem Lohn für einen kürzeren Zeitraum ein
+Jahresarbeitslohn wird, denn die Steuertabelle kennt nur Jahresbeträge. Bei monatlicher
+Zahlung wird mit zwölf multipliziert. Bei wöchentlicher Zahlung mit 360 und durch sieben
+geteilt. Bei täglicher Zahlung schlicht mit 360.
+
+Wer also 100 Euro am Tag verdient, hat für die Lohnsteuer einen Jahresarbeitslohn von
+36.000 Euro – nicht 36.500. Das amtliche Steuerjahr ist, an dieser Stelle, 360 Tage lang.
+Die Wirkung ist nicht theoretisch: Ein Jahresarbeitslohn, der um 1,4 Prozent niedriger
+angesetzt wird, landet in einer etwas niedrigeren Progressionsstufe, und die
+Jahressteuerschuld wird am Ende über die Einkommensteuererklärung wieder
+geradegezogen. Der Abzug im Monat ist trotzdem einer, der auf einem 360-Tage-Jahr beruht.
+
+## Was auf dieser Seite steht
+
+An dieser Stelle wäre es bequem, den Blick auf Banken und Behörden zu richten und das
+eigene Haus auszulassen. Wir haben stattdessen nachgesehen, womit unsere eigenen Rechner
+rechnen. Das Ergebnis ist uneinheitlich.
+
+Vier Berechnungsbibliotheken teilen Jahresbeträge durch 365: der Autokosten-Rechner beim
+Umrechnen auf Tageskosten, der Stromkosten-Rechner ebenso, der Kaffee-Rechner beim
+Hochrechnen aufs Jahr und der Pfändungsrechner beim Umrechnen monatlicher Beträge auf
+Tageswerte. Zwei rechnen mit 365,25, also inklusive anteiligem Schalttag: der
+Lebenszeit-Rechner und der Raucher-Rechner. Der Kern des Lohnsteuerrechners rechnet mit
+360, weil der amtliche Plan es so vorschreibt. Und der Zinsrechner, um den es in diesem
+Artikel geht, zählt überhaupt keine Tage: Er rechnet in ganzen Jahren und zwölf gleich
+langen Monaten.
+
+Nachgesehen haben wir das nicht aus Selbstkritik, sondern weil dieselbe Frage, die man an
+eine Bank stellt, auch an den eigenen Rechner gehört. Wer einen Jahresbetrag durch 365
+teilt, behauptet damit etwas über das Jahr. Wer durch 365,25 teilt, behauptet etwas
+anderes. Und wer gar nicht teilt, sondern in gleich langen Monaten rechnet, behauptet
+wieder etwas anderes. Keine dieser Annahmen steht sonst irgendwo auf der Seite – sie
+steckt im Code, und sie wirkt trotzdem auf jedes Ergebnis, das jemand ausgedruckt mit zur
+Bank nimmt.
+
+Jede dieser Entscheidungen ist für sich richtig. Eine Lebenserwartung ohne Schalttage wäre
+falsch, eine Lohnsteuer mit 365 Tagen wäre nicht die amtliche, und eine Zinsprognose über
+zwanzig Jahre wird durch Tagezählung nicht genauer, sondern nur umständlicher. In der
+Summe rechnet dieselbe Seite trotzdem mit vier verschiedenen Jahreslängen. Genau das ist
+das Muster, von dem dieser Artikel handelt – es entsteht nicht aus Nachlässigkeit, sondern
+daraus, dass jede Fachwelt ihr eigenes Jahr mitbringt.
+
+## Worauf Sie im Vertrag schauen
+
+Die Methode ist selten fett gedruckt, aber sie steht fast immer da. Bei Krediten unter
+Überschriften wie „Zinsberechnung“, „Zinsmethode“ oder „Berechnungsgrundlage“, bei
+Spareinlagen in den Bedingungen für den Sparverkehr unter Nummer 3, bei Tagesgeld im
+Preis- und Leistungsverzeichnis.
+
+Vier Formulierungen sind gebräuchlich, und sie bedeuten das, was oben steht: „30/360“ oder
+„der Monat zu 30, das Jahr zu 360 Tagen“ ist die deutsche Methode. „act/360“,
+„taggenau auf Basis 360“ oder „Eurozinsmethode“ ist die Variante mit dem Aufschlag von
+1,3889 Prozent. „act/365“ oder „englische Methode“ zählt und teilt tatsächlich. Fehlt die
+Angabe ganz, hilft eine Rückfrage bei der Bank mehr als jede Schätzung.
+
+Nachrechnen lässt sich das ohne Tabellenkalkulation. Man braucht das Kapital, den
+Zinssatz, die Zahl der Zinstage nach der vereinbarten Methode und die Jahresbasis. Kapital
+mal Zinssatz mal Zinstage, geteilt durch hundert mal Jahresbasis – das ist die ganze
+Formel, und sie steckt hinter jeder Zinsstaffel, die je in ein Sparbuch geschrieben wurde.
+Weicht das Ergebnis von der Gutschrift ab, liegt es fast immer an einem von drei Dingen:
+an der Methode, am nicht mitgezählten Tag der Rückzahlung oder an einer Kapitalisierung,
+die zu einem anderen Stichtag stattgefunden hat als vermutet.
+
+Drei Situationen lohnen den Blick besonders. Erstens jede kurze Laufzeit: Bei einem
+Zwischenkredit über vier Monate entscheidet die Methode spürbar über den Betrag, bei einer
+zwanzigjährigen Finanzierung fällt sie kaum ins Gewicht. Zweitens jede vorzeitige
+Rückzahlung, weil dann ein krummer Teilzeitraum abgerechnet wird. Und drittens der
+Vergleich zweier Angebote mit identischem Sollzins: Wenn eines act/360 verwendet und das
+andere 30/360, ist das eine um gut 1,4 Prozent teurer, ohne dass die beworbene
+Prozentzahl das verrät. Der effektive Jahreszins bildet diesen Unterschied ab – er ist
+genau deshalb die Zahl, auf die man beim Vergleichen schaut.
+
+<KarstenSagt>
+
+Mein erstes eigenes Sparbuch war eines von der Stadtsparkasse, irgendwann in den
+Achtzigern, ohne besonderen Anlass — einfach zum Sparen. Zweieinhalb Prozent standen
+drin. Diese Zahl war für mich die ganze Geschichte: Ich brachte Geld hin, einmal im Jahr
+kam etwas dazu, und wie viel, das sagte die 2,5.
+
+Dass hinter diesen zweieinhalb Prozent eine zweite Zahl steht, die genauso über den
+Betrag entscheidet, habe ich damals nicht gewusst und auch nie gefragt. Es gab bei mir
+auch nie den Moment, in dem etwas nicht aufging. Die Gutschrift stand da, sie sah
+plausibel aus, fertig.
+
+Genau das ist der Punkt, an dem ich beim Recherchieren hängengeblieben bin. Diese
+Rechnung fällt nicht auf, weil sie falsch wäre — sie ist richtig. Sie fällt nicht auf,
+weil niemand nachrechnet, solange die Zahl unten stimmig aussieht. Bei mir hat das
+Jahrzehnte gehalten.
+
+</KarstenSagt>
+
+## Was bleibt
+
+Das Jahr hat 365 Tage. Das Bankjahr hat 360. Das Steuerjahr hat 360. Das Effektivzinsjahr
+hat 365 mit Monaten zu 30,41666 Tagen. Und § 191 BGB hat 30 und 365 zugleich, seit 1900,
+in einem Satz.
+
+Keine dieser Zahlen ist falsch. Sie sind für verschiedene Zwecke gemacht, und jede
+erfüllt ihren. Falsch wird es erst, wenn man annimmt, es gäbe nur eine – und den Betrag
+auf dem Kontoauszug mit dem Kalender an der Wand nachrechnen will.
+
+<Quellen eintraege={[
+  {
+    titel: '§ 191 BGB – Berechnung von Zeiträumen',
+    hinweis:
+      'Der Monat wird zu 30, das Jahr zu 365 Tagen gerechnet. Beide Werte stehen in einem Satz, zwölf Monate ergeben danach 360 Tage. In Kraft seit 1. Januar 1900, in diesem Punkt unverändert.',
+    url: 'https://www.gesetze-im-internet.de/bgb/__191.html',
+  },
+  {
+    titel: '§ 248 BGB – Zinseszinsen',
+    hinweis:
+      'Absatz 1 erklärt die Vorausvereinbarung von Zinseszins für nichtig. Absatz 2 Satz 1 nimmt Sparkassen, Kreditanstalten und Inhaber von Bankgeschäften für Einlagen davon aus – nicht für Kredite.',
+    url: 'https://www.gesetze-im-internet.de/bgb/__248.html',
+  },
+  {
+    titel: 'Anlage zu § 16 der Preisangabenverordnung – Berechnung des effektiven Jahreszinses',
+    hinweis:
+      'Legt 365 Tage je Jahr (366 im Schaltjahr) und einen Standardmonat von 30,41666 Tagen fest. Damit rechnet der Effektivzins mit einer anderen Monats- und Jahreslänge als der Sollzins im selben Vertrag.',
+    url: 'https://www.gesetze-im-internet.de/pangv_2022/anlage.html',
+  },
+  {
+    titel: 'Gesetz zur Umsetzung der Richtlinie (EU) 2023/2225 über Verbraucherkreditverträge, BGBl. 2026 I Nr. 139',
+    hinweis:
+      'Verkündet am 18.05.2026, in Kraft am 20.11.2026. Artikel 8 ändert die Preisangabenverordnung an sieben Stellen, unter anderem § 16 Absatz 2 Satz 1 und die Streichung von Absatz 7. Die Tagezählung in der Anlage (365 Tage, Standardmonat 30,41666 Tage) bleibt wortgleich erhalten.',
+    url: 'https://www.recht.bund.de/bgbl/1/2026/139/regelungstext.pdf',
+  },
+  {
+    titel: 'Bedingungen für den Sparverkehr, Nummern 3.2 und 3.3 (Fassung Januar 2017, bundesweit gleichlautend verwendet)',
+    hinweis:
+      'Nummer 3.2 setzt den Monat auf 30 und das Jahr auf 360 Tage und lässt die Verzinsung am Kalendertag vor der Rückzahlung enden. Nummer 3.3 regelt die jährliche Zinskapitalisierung, die § 248 Absatz 2 BGB erlaubt.',
+    url: 'https://www.ksk-koeln.de/content/dam/myif/kskkoeln/work/dokumente/pdf/vertragsbedingungen/bedingungen-fuer-den-sparverkehr.pdf',
+  },
+  {
+    titel: 'Programmablaufplan für den Lohnsteuerabzug 2026 (IT-Zentrum Bund, amtliches Werk nach § 5 UrhG)',
+    hinweis:
+      'Rechnet Löhne kürzerer Zahlungszeiträume auf den Jahresarbeitslohn hoch: monatlich mal zwölf, wöchentlich mal 360 geteilt durch sieben, täglich mal 360. Das amtliche Steuerjahr ist an dieser Stelle 360 Tage lang.',
+    url: 'https://www.bmf-steuerrechner.de/javax.faces.resource/daten/xmls/Lohnsteuer2026.xml.xhtml',
+  },
+  {
+    titel: 'OGH Wien, Verbandsverfahren zu Kreditbedingungen (Bundesarbeiterkammer gegen ein Kreditinstitut)',
+    hinweis:
+      'Beurteilt eine act/360-Klausel als nicht gröblich benachteiligend, weil der Aufschlag von rund 0,0137 Prozentpunkten je Prozentpunkt Zinsbelastung unter der üblichen Rundungsschwelle von einem Achtel Prozentpunkt liegt. Eine deutsche Entscheidung zur Tagezählmethode als solcher haben wir nicht gefunden; das ist ein Rechercheergebnis, kein Beleg für ihr Fehlen.',
+    url: 'https://verbraucherrecht.at/urteil-gesetzwidrige-klauseln-kreditbedingungen/3536',
+  },
+]} />

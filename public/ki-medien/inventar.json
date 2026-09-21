@@ -1,8 +1,26 @@
 {
   "_hinweis": "Bestand der KI-erzeugten Medien auf rechenfix.de. Grundlage fuer den Soll-Ist-Abgleich der Kennzeichen-Wache (Skill peter-ki).",
-  "_stand": "04.09.2026",
+  "_stand": "22.09.2026",
   "_quelle": "GENERATOREN-Tabelle in scripts/ki-metadaten-schreiben.mjs",
   "ki_medien": [
+    {
+      "datei": "/blog/bankjahr-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-das-bankjahr-360-tage-hat",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/bankjahr-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-das-bankjahr-360-tage-hat",
+      "generator": "Kling AI 3.0 Omni (Kuaishou)"
+    },
+    {
+      "datei": "/blog/bankjahr.mp4",
+      "art": "video",
+      "seite": "/blog/warum-das-bankjahr-360-tage-hat",
+      "generator": "Kling AI 3.0 Omni (Kuaishou)"
+    },
     {
       "datei": "/blog/bildschirm-titelbild.png",
       "art": "bild",
