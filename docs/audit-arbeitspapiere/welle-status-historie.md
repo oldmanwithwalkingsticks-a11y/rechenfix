@@ -6,7 +6,50 @@
 
 ---
 
-## 13.09.2026 — Welle 139: Acht unsichtbare Quellenhinweise — ✅ ABGESCHLOSSEN
+## 22.09.2026 — Welle 140: Blogartikel 19, das Bankjahr mit 360 Tagen — ✅ ABGESCHLOSSEN
+
+**Der dritte Top-10-Rechner bekommt einen Artikel.** `zinsrechner` liegt auf Platz 3 der
+meistgenutzten Rechner und hatte bis heute keinen Text. Der Artikel führt vier
+Tagezählmethoden gegeneinander, belegt den Widerspruch in § 191 BGB (Monat zu 30, Jahr
+zu 365, in einem Satz), stellt den Sollzins nach 30/360 gegen den Effektivzins nach der
+Anlage zu § 16 PAngV mit Standardmonat 30,41666 Tage und nimmt das
+Verbraucherkredit-Umsetzungsgesetz vom 20.11.2026 als Aufhänger — dessen Artikel 8 die
+PAngV an sieben Stellen ändert und die Tagezählung ausdrücklich nicht. Die Selbstauskunft
+steht im Text: vier Bibliotheken der eigenen Seite rechnen mit 365, zwei mit 365,25, der
+Lohnsteuerkern mit 360, der Zinsrechner ohne Tagezählung.
+
+**Der erste Lauf hat an STOP 5 angehalten, und das war richtig.** Die Vorlage band das
+Titelbild als Poster ein, obwohl der Prompt ein Standbild erzeugte und kennzeichnete. Das
+Standbild hatte damit keinen Seitenbezug, der Inventar-Generator brach ab, der Build kam
+nicht zum Kompilieren. Die Reichweite wurde gemessen, ohne zu korrigieren: Mit gesetztem
+Standbild-Poster lief alles durch, danach wurde die Vorlage bitgenau wiederhergestellt.
+**Ein Fehler in der Vorlage wird in der Vorlage behoben, nicht im Repo** — sonst driften
+beide auseinander.
+
+**Und die PNG8-Lehre ist zum zweiten Mal gemessen.** Der Prompt verlangte 1536 Pixel
+Breite und prüfte nur die Breite. Ergebnis: 2,74 MB, mehr als doppelt so groß wie das
+größte Bestandsbild. Alle 18 Bestandstitelbilder sind PNG8 mit Palette — das stand seit
+der Heizkosten-Nachtragswelle in dieser Historie, wurde beim Schreiben des Prompts aber
+nicht nachgeschlagen. **Eine Zielvorgabe, die nur die Kante prüft, verfehlt das Format,
+und das Bild sieht trotzdem richtig aus.** Die Prüfung liest jetzt den Farbtyp direkt aus
+dem PNG-Kopf.
+
+- **05cfc16** — `app/blog/warum-das-bankjahr-360-tage-hat/` mit `meta.ts` und `page.mdx`,
+  drei Grafik-Server-Komponenten (`VierMethodenVergleich`, `ZinstageKalender`,
+  `ZweiJahreslaengen`), je zwei Einträge in `mdx-components.tsx`, drei Zeilen in der
+  `GENERATOREN`-Tabelle, neu erzeugtes `public/ki-medien/inventar.json`, drei Assets.
+- Gemessen: 3.213 Wörter, Rechner bei 31,8 Prozent. Geometrie der drei Grafiken vorab
+  paarweise vollgeprüft, 497 Elementpaare, null Kollisionen.
+- Assets: Titelbild 6.514.392 B → 1536 × 857 als PNG8 mit Palette, 678.368 B palettiert
+  und 679.472 B mit eingeschriebener Kennzeichnung, Video 4.750.968 B → 1.522.088 B bei
+  1920 × 1080, Standbild 93.161 B als echter erster Frame der umgewandelten Datei.
+  `grep -ac trainedAlgorithmicMedia` liefert für alle drei 1.
+- Die Kopfzeile des Blocks zu Welle 139 trägt jetzt `14.09.2026` statt `13.09.2026` — das
+  Datum der Arbeit, nicht der Live-Messung, die den Befund auslöste.
+- Offen für Karstens Sichtprüfung: Dark Mode der drei Grafiken, Rechnerposition im Fluss,
+  Video-Standbild und Abspielen, Datumszeile, Quellen-Links.
+
+## 14.09.2026 — Welle 139: Acht unsichtbare Quellenhinweise — ✅ ABGESCHLOSSEN
 
 **Ein Feldname, den niemand prüft.** Der Quellenblock von Artikel 18 übergab seine
 Erläuterungen als `beschreibung:`. Die Komponente `Quellen.tsx` kennt nur `titel`, `url`
