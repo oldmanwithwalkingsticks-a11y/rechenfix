@@ -6,6 +6,37 @@
 
 ---
 
+## 22.09.2026 — Welle 144: 78 Rechner, auf die niemand verlinkt hat — ✅ ABGESCHLOSSEN
+
+**Der Block war da, die Hälfte der Daten nicht.** `getVerwandteRechner` rendert seit
+Langem „Das könnte Sie auch interessieren". Für 65 der 206 Rechner griff dabei der
+Notbehelf — die ersten vier ihrer Kategorie, für jeden dieselben. Und 78 Rechner waren in
+keinem einzigen Block Ziel: kein thematischer Eingangslink aus dem gesamten Projekt.
+Darunter `internetgeschwindigkeit-rechner` und `noten-international`, zwei der sechs
+Seiten, für die Google eine fremde Domain als kanonisch gewählt hat.
+
+**Ein Notbehelf, der nie anschlägt, sieht aus wie ein funktionierendes Feature.** Die
+Seiten waren nicht leer, der Block war gefüllt, der Build grün. Sichtbar wurde es erst
+beim Zählen, wer wie oft Ziel ist: `brutto-netto-rechner` 39-mal, 78 Rechner null-mal.
+
+- **272f4cf** — 64 Einträge in `verwandteMap` ergänzt, 40 Bestandszeilen umgehängt. In den
+  40 wurde jeweils das generischste Ziel durch einen bis dahin unverlinkten Rechner
+  ersetzt. Ergebnis gemessen: 206 Einträge bei 206 Rechnern, 0 Notbehelf, 0 Rechner ohne
+  eingehenden Querverweis, Spitze von 39 auf 35 gesunken.
+- **9676093** — `scripts/check-verwandte-rechner.mjs` als 18. Glied der Prebuild-Kette.
+  Er prüft beide Regeln: eigener Eintrag mit vier gültigen Zielen, und mindestens ein
+  fremder Eintrag, der den Rechner unter seinen ersten vier führt. Grün gemessen **und**
+  rot: Die Gegenprobe mit entferntem Eintrag liefert Exit 1 und nennt den Rechner.
+- **Die Zuordnungen sind von Hand gesetzt.** Ein Automat aus den vorhandenen `keywords`
+  lieferte für 90 von 205 Rechnern brauchbare Vorschläge und für den Rest Unsinn —
+  `bruchrechner` zu `uhrzeitrechner`, `afa-rechner` zu `bmi-rechner`. **Stichwort-Ähnlichkeit
+  ersetzt keine thematische Entscheidung.**
+- Für den `rechner-builder`-Skill: Ein neuer Rechner braucht ab sofort zwei Pflegeschritte
+  in `verwandteMap` — den eigenen Eintrag und einen Nachbarn, der ihn aufnimmt. Sonst
+  bricht der Build.
+- Offen für Karstens Sichtprüfung: drei Rechnerseiten aufrufen, deren Block vorher der
+  Notbehelf gefüllt hat, und prüfen, ob die vier Kacheln jetzt thematisch passen.
+
 ## 22.09.2026 — Welle 142: Die Partnerliste, die niemand gegen den Code gehalten hat — ✅ ABGESCHLOSSEN
 
 **Sieben von vierzehn.** Die Datenschutzerklärung nannte unter „Wir arbeiten derzeit mit
