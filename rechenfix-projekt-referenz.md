@@ -542,6 +542,9 @@ Publisher-ID: 2843240
 | burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de | /campaign_600.html |
 | Nature's Way | 47173 | naturesway.de | /collections/all |
 | **CosmosDirekt** (neu, Prompts 145 + 145b, 25.04.2026) | **11893** | cosmosdirekt.de | /geldanlage/tagesgeld/, /flexinvest-altersvorsorge/, /flexinvest/, /flexinvest-einmalanlage/, /flexinvest-junior-sparplan/, /risikolebensversicherung/, /berufsunfaehigkeitsversicherung/, /unfallversicherung/, /sterbegeldversicherung/, /private-haftpflichtversicherung/, /hausratversicherung/, /wohngebaeudeversicherung/, /bauherrenhaftpflicht/, /tierhalterhaftpflicht/, /reiseruecktrittsversicherung/ |
+| smava | 9351 | smava.de | /kredit/ratenkredit/, /kreditvergleich/ (Standard: kreditvergleich.smava.de) |
+| HanseMerkur | 11705 | hansemerkur.de | /reisekrankenversicherung (Standard: /) |
+| GymBeam DE (Welle 141) | 127679 | gymbeam.de | /proteine, /kreatin, /trainingszubehor, /gesunde-lebensmittel, /sportflaschen — nur Kategorien, keine Produktseiten |
 
 ### WICHTIG zu CHECK24
 - Awin-Links leiten auf **check24.net** weiter, NICHT auf check24.de

@@ -35,6 +35,9 @@
 | burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de |
 | Nature's Way | 47173 | naturesway.de |
 | **CosmosDirekt** (neu, Prompt 145, 25.04.2026) | **11893** | cosmosdirekt.de — 15 Produkt-Deeplinks (Tagesgeld, Altersvorsorge, Sparplan, Junior, Risikoleben, BU, Unfall, Sterbegeld, Privat-Haftpflicht, Hausrat, Wohngebäude, Bauherrenhaftpflicht, Tierhalter, Reiserücktritt) |
+| smava | 9351 | smava.de / kreditvergleich.smava.de |
+| HanseMerkur | 11705 | hansemerkur.de |
+| GymBeam DE (Welle 141) | 127679 | gymbeam.de — 5 Kategorie-Deeplinks, keine Produktseiten |
 
 ## Amazon Partner-Programm (seit 22.04.2026, Prompt 122-amazon)
 

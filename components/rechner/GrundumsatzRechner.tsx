@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 /**
  * Grundumsatz-Rechner (BMR nach Mifflin-St Jeor; Sport-Kategorie). BLOCK B — YMYL Ernährung.
@@ -134,6 +135,8 @@ export default function GrundumsatzRechner() {
 
           <CrossLink href="/sport/kalorienbedarf-rechner" emoji="🍽️" text="Tagesbedarf mit Aktivität berechnen (TDEE)" />
           <CrossLink href="/gesundheit/bmi-rechner" emoji="⚖️" text="BMI berechnen" />
+
+          <AffiliateBox programId="gymbeam" context="grundumsatz" />
 
           <ErgebnisAktionen
             ergebnisText={`Grundumsatz (BMR) nach Mifflin-St Jeor: ${fmt0(ergebnis.bmr)} kcal/Tag in völliger Ruhe. Schätzwert ±10 %, untere Grenze — kein Zielwert.`}

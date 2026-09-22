@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 /**
  * Kalorienbedarf-Rechner (TDEE; Sport-Kategorie). BLOCK B — YMYL Ernährung.
@@ -149,6 +150,8 @@ export default function KalorienbedarfRechner() {
 
           <CrossLink href="/sport/grundumsatz-rechner" emoji="🔥" text="Grundumsatz — nur der Ruheverbrauch" />
           <CrossLink href="/sport/makronaehrstoffe-rechner" emoji="🥗" text="Makros aus deinem Kalorienziel verteilen" />
+
+          <AffiliateBox programId="gymbeam" context="kalorienbedarf" />
 
           <ErgebnisAktionen
             ergebnisText={`Kalorienbedarf (TDEE): ${fmt0(ergebnis.tdee)} kcal/Tag zum Gewicht-Halten (Grundumsatz ${fmt0(ergebnis.bmr)} kcal × Aktivitätsfaktor ${faktor.toLocaleString('de-DE')}). Schätzwert.`}

@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 /**
  * Makronährstoffe-Rechner (Sport-Kategorie). BLOCK B — YMYL Ernährung.
@@ -187,6 +188,8 @@ export default function MakronaehrstoffeRechner() {
 
           <CrossLink href="/sport/kalorienbedarf-rechner" emoji="🍽️" text="Kalorienziel berechnen — TDEE" />
           <CrossLink href="/sport/grundumsatz-rechner" emoji="🔥" text="Grundumsatz — nur der Ruheverbrauch" />
+
+          <AffiliateBox programId="gymbeam" context="makros" />
 
           <ErgebnisAktionen
             ergebnisText={`Makros bei ${fmt0(nKcal)} kcal (${anteile.p}/${anteile.k}/${anteile.f}): Protein ${fmt0(ergebnis.proteinG)} g, Kohlenhydrate ${fmt0(ergebnis.khG)} g, Fett ${fmt0(ergebnis.fettG)} g. Orientierungswerte.`}

@@ -123,6 +123,15 @@ const AFFILIATE_PROGRAMS = {
     icon: '⛵',
     color: '#005CA9',
   },
+  gymbeam: {
+    name: 'GymBeam',
+    tagline: 'Sporternährung, Lebensmittel und Trainingszubehör — mit Filtern für vegan, laktosefrei und glutenfrei',
+    cta: 'Sortiment ansehen',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=127679&awinaffid=2843240',
+    deeplink: 'https://gymbeam.de/proteine',
+    icon: '🏋️',
+    color: '#C2410C',
+  },
 } as const;
 
 export type ProgramId = keyof typeof AFFILIATE_PROGRAMS;
@@ -256,6 +265,15 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'urlaub': 'Vor dem Urlaub absichern: HanseMerkur Reiseversicherung mit Auslandskrankenschutz und 24-Stunden-Notruf.',
     'zahnzusatz': 'HanseMerkur Zahnzusatzversicherung — Eigenanteil beim Zahnarzt deutlich senken, bis zu 90 % Erstattung für Zahnersatz.',
   },
+  gymbeam: {
+    'protein': 'Proteinpulver aus Molke oder pflanzlichen Quellen — auch vegan und laktosefrei, nach Geschmack und Marke filterbar.',
+    'ffmi': 'Kreatin in verschiedenen Formen, darunter Monohydrat und Creapure®.',
+    '1rm': 'Trainingszubehör für schwere Sätze — Gewichthebergürtel, Zughilfen und Bandagen.',
+    'makros': 'Lebensmittel für die eigene Makroverteilung — von Haferflocken und Reis bis Hülsenfrüchte und Nussbutter.',
+    'kalorienbedarf': 'Lebensmittel für den Alltag — Haferflocken, Reis, Hülsenfrüchte, Nussbutter und mehr.',
+    'grundumsatz': 'Lebensmittel für den Alltag — Haferflocken, Reis, Hülsenfrüchte, Nussbutter und mehr.',
+    'kalorienverbrauch': 'Trinkflaschen für Training und Alltag.',
+  },
 };
 
 // --- Kontextspezifische Deeplinks ---
@@ -313,6 +331,16 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
   hansemerkur: {
     'reisekranken': 'https://www.hansemerkur.de/reisekrankenversicherung',
     'default': 'https://www.hansemerkur.de/',
+  },
+  gymbeam: {
+    'protein': 'https://gymbeam.de/proteine',
+    'ffmi': 'https://gymbeam.de/kreatin',
+    '1rm': 'https://gymbeam.de/trainingszubehor',
+    'makros': 'https://gymbeam.de/gesunde-lebensmittel',
+    'kalorienbedarf': 'https://gymbeam.de/gesunde-lebensmittel',
+    'grundumsatz': 'https://gymbeam.de/gesunde-lebensmittel',
+    'kalorienverbrauch': 'https://gymbeam.de/sportflaschen',
+    'default': 'https://gymbeam.de/proteine',
   },
 };
 

@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 type Aktivitaet = 'kaum' | 'leicht' | 'kraft' | 'intensiv' | 'ausdauer';
 type Ziel = 'halten' | 'aufbau' | 'abnehmen';
@@ -177,6 +178,8 @@ export default function ProteinRechner() {
 
           <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Gesamten Kalorienbedarf berechnen" />
           <CrossLink href="/gesundheit/wasserbedarf-rechner" emoji="💧" text="Wasserbedarf pro Tag" />
+
+          <AffiliateBox programId="gymbeam" context="protein" />
 
           <ErgebnisAktionen
             ergebnisText={`Proteinbedarf: ${fmt(ergebnis.bedarf)} g/Tag (${fmt1(ergebnis.faktor)} g/kg) bei ${fmt(g)} kg Körpergewicht, ${ergebnis.aktObj.label}, Ziel: ${ergebnis.zielObj.label}. Pro Mahlzeit: ${fmt(ergebnis.proMahlzeit)} g.`}

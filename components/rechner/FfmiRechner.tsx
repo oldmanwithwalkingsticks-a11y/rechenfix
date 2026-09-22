@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 /**
  * FFMI-Rechner (Fat-Free-Mass-Index; Sport-Kategorie). BLOCK B — YMYL, körperbild-neutral.
@@ -163,6 +164,8 @@ export default function FfmiRechner() {
 
           <CrossLink href="/gesundheit/koerperfett-rechner" emoji="⚖️" text="Körperfettanteil schätzen" />
           <CrossLink href="/sport/1rm-rechner" emoji="🏋️" text="Maximalkraft (1RM) berechnen" />
+
+          <AffiliateBox programId="gymbeam" context="ffmi" />
 
           <ErgebnisAktionen
             ergebnisText={`FFMI ${fmt1(ergebnis.ffmi)} (normalisiert ${fmt1(ergebnis.norm)}), fettfreie Masse ${fmt1(ergebnis.ffm)} kg — Einordnung: ${einordnung(ergebnis.norm, geschlecht)}. Schätzwert, kein Ziel.`}

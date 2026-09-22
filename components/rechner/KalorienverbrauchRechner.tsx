@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 /**
  * Kalorienverbrauch-Rechner (Sport-Kategorie, Wellbeing-sensibel).
@@ -107,6 +108,8 @@ export default function KalorienverbrauchRechner() {
 
           <CrossLink href="/sport/herzfrequenz-zonen-rechner" emoji="❤️" text="Trainings-Herzfrequenzzonen berechnen" />
           <CrossLink href="/sport/pace-rechner" emoji="🏃" text="Lauf-Pace und Zielzeit berechnen" />
+
+          <AffiliateBox programId="gymbeam" context="kalorienverbrauch" />
 
           <ErgebnisAktionen
             ergebnisText={`${AKTIVITAETEN.find((a) => a.key === aktivitaet)?.label}, ${f0(nDauer)} min bei ${f0(nGewicht)} kg: ≈ ${f0(ergebnis.kcal)} kcal (Schätzung)`}

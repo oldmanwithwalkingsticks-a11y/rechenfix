@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 /**
  * 1RM-Rechner / Maximalkraft-Schätzung (Sport-Kategorie).
@@ -116,6 +117,8 @@ export default function EinRmRechner() {
 
           <CrossLink href="/sport/kalorienverbrauch-rechner" emoji="🏃" text="Kalorienverbrauch bei Bewegung schätzen" />
           <CrossLink href="/sport/herzfrequenz-zonen-rechner" emoji="❤️" text="Trainings-Herzfrequenzzonen berechnen" />
+
+          <AffiliateBox programId="gymbeam" context="1rm" />
 
           <ErgebnisAktionen
             ergebnisText={`${f0(nGewicht)} kg × ${f0(nWdh)} Wdh → geschätztes 1RM ≈ ${f0(ergebnis.mittel)} kg (Epley ${f0(ergebnis.epley)}, Brzycki ${ergebnis.brzycki !== null ? f0(ergebnis.brzycki) : '–'})`}
