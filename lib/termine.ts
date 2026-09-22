@@ -57,14 +57,14 @@ export interface Termin {
 
 export const TERMINE: Termin[] = [
   {
-    id: 'wz-freigabe',
-    titel: 'WürdeZeit: Freigabe der Seite',
-    datum: '2026-10-15',
-    vorlaufTage: 14,
-    bereich: 'Betrieb',
+    id: 'wz-browserpruefung',
+    titel: 'WürdeZeit: Browserprüfung nach der Freigabe',
+    datum: '2026-09-29',
+    vorlaufTage: 3,
+    bereich: 'Recht',
     projekt: 'wuerdezeit.de',
-    was: 'Erst wenn alles fertig ist — so von Karsten am 17.09.2026 entschieden. Dann: SEITE_PASSWORT in Vercel entfernen, SEITE_OEFFENTLICH=ja setzen, neu ausliefern, Sitemap in der Search Console einreichen. Danach im Registry-Eintrag von Susanne den Block zugangsschutz streichen und einen site-scan.py-Erstlauf sowie die Browserprüfung nachholen. Datum ist ein Platzhalter und wird verschoben, nicht stillschweigend überrollt.',
-    quelle: 'assets/websites.json (Susanne), Eintrag www.wuerdezeit.de',
+    was: 'Der Vorgänger dieses Termins hieß wz-freigabe und ist am 22.09.2026 erledigt worden: SEITE_OEFFENTLICH=ja gesetzt und ausgerollt, Sitemap in der Search Console eingereicht, der Block zugangsschutz in Susannes Registry aufgelöst, site-scan.py-Erstlauf nachgeholt (43 Seiten, null eingebundene Drittdomains). Offen ist allein die Browserprüfung, und die kann nur Karsten machen, weil sie einen echten Browser braucht. Gegenstand: Legt die Seite ohne jede Interaktion etwas im Endgerät ab? Erwartet werden genau zwei Einträge, beide erst nach einer Nutzerhandlung — die Lesehilfe-Einstellung und die Haken der Checkliste. Das Kontaktformular unter /kontakt darf NICHTS ablegen; seine Zeitsperre steht in einem versteckten Formularfeld, nicht im lokalen Speicher. Genau deshalb nennt /datenschutz Abschnitt 6 zwei Funktionen. Findet sich dort ein dritter Eintrag, ist das ein Befund und der Text muss nach.',
+    quelle: 'assets/websites.json (Susanne), Eintrag www.wuerdezeit.de, Block browserpruefung',
   },
   {
     id: 'wz-umlaut-domain',
