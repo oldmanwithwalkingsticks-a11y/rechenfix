@@ -6,6 +6,22 @@
 
 ---
 
+## 23.09.2026 — Welle 146: ein Kommentar, der das Gegenteil des Codes behauptete — ✅ ABGESCHLOSSEN
+
+Welle 145 stellte das lastmod der Rechnerseiten auf `letzteAktualisierung` um. Der
+Kommentar über `rechnerPages` beschrieb weiter das alte Verhalten und pries es sogar als
+„starkes Re-Crawl-Signal" — eben das Verhalten, das abgeschafft wurde. Gemeldet hat es
+Code-Claude im selben Lauf, ohne es eigenmächtig zu ändern; die Vorlage hatte den Kommentar
+schlicht übersehen.
+
+**Wer Verhalten ändert, ändert die Sätze, die es erklären, im selben Zug mit.** Ein
+veralteter Kommentar ist die erste Quelle, die jemand liest, und er überlebt, weil niemand
+ihn gegen den Code prüft.
+
+- **ac6b24f** — Kommentar über `rechnerPages` in `app/sitemap.ts` berichtigt: nennt jetzt
+  `letzteAktualisierung`, den Befund von 175 gleichen Stempeln und den Rückfallweg in
+  `rechnerLastMod`. Keine Verhaltensänderung.
+
 ## 23.09.2026 — Welle 145: 175 Seiten, die am selben Tag geändert wurden — ✅ ABGESCHLOSSEN
 
 **Ein Signal, das keines war.** Die Sitemap setzte das `lastmod` jeder Rechnerseite auf die
