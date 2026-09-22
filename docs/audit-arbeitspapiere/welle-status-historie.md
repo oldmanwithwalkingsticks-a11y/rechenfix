@@ -6,6 +6,45 @@
 
 ---
 
+## 22.09.2026 — Welle 141: GymBeam DE auf sieben Sport- und Ernährungsrechnern — ✅ ABGESCHLOSSEN
+
+**Eine leere Stelle gefüllt, keine besetzte umverteilt.** Von 13 geprüften Sport- und
+Ernährungsrechnern hatten 11 keine AffiliateBox. GymBeam DE (Awin 127679) steht jetzt auf
+sieben davon: Protein, FFMI, 1RM, Makronährstoffe, Kalorienbedarf, Grundumsatz und
+Kalorienverbrauch.
+
+**Kategorien statt Produkte, und das mit Absicht.** Ein Link auf ein einzelnes Produkt
+liest sich als Empfehlung eines Produkts, das rechenfix nie getestet hat; die
+Produktseiten tragen eigene Wirkaussagen; Produkte verschwinden. Die fünf Ziele sind
+Kategorieseiten — `/proteine`, `/kreatin`, `/trainingszubehor`, `/gesunde-lebensmittel`,
+`/sportflaschen` —, und die Texte auf rechenfix beschreiben nur, was dort zu finden ist.
+Der 1RM-Rechner verweist auf Gürtel, Zughilfen und Bandagen statt auf ein Supplement,
+Kalorienbedarf und Grundumsatz auf Lebensmittel statt auf Pulver.
+
+**Die Ausschlussliste ist Teil der Welle, nicht eine Randnotiz.** BMI, Idealgewicht,
+Körperfett, WHR, Kalorienrechner, SSW, Geburtstermin, Schwangerschaftsgewicht und Zyklus
+tragen kein GymBeam — und die Verifikation prüft das ausdrücklich. GymBeam verkauft auch
+Fatburner; neben einem Rechner, der Körpergewicht bewertet, liest sich jede
+Supplement-Box als Abnehmversprechen.
+
+- **f3a27a2** — Programm `gymbeam` in `components/AffiliateBox.tsx` (Farbe `#C2410C`, weil
+  das Markenorange den Kontrast für weiße Button-Schrift nicht schafft), sieben
+  Kontexttexte ohne Wirkaussage, sieben Kontext-Deeplinks plus Standard; Import und Box in
+  sieben Rechner-Komponenten, jeweils direkt vor `<ErgebnisAktionen`. `<AffiliateBox>`
+  jetzt 62 Aufrufe in 59 Dateien (vorher 55 in 52).
+- Dokutabellen in `CLAUDE.md` und `rechenfix-projekt-referenz.md`: GymBeam ergänzt, dazu
+  smava (9351) und HanseMerkur (11705), die dort seit ihrem Einbau fehlten.
+- **Befund für Susanne, bewusst nicht angefasst:** Die Datenschutzerklärung nennt unter
+  „Wir arbeiten derzeit mit folgenden Partnerprogrammen“ sieben Programme. Im Code stehen
+  jetzt vierzehn. Es fehlen hotel.de, burda-vergleicht, Nature's Way, CosmosDirekt, smava,
+  HanseMerkur und GymBeam. Das ist ein Rechtstext und geht über Karsten an Susanne.
+- Alle sieben Rechnerseiten tragen den Deeplink schon im serverseitig gerenderten HTML
+  (`awinmid=127679`, geprüft je Seite mit dem richtigen Ziel) — der Prompt hatte hier
+  weniger erwartet, weil die Box eine Client-Komponente ist.
+- Offen für Karstens Sichtprüfung: je ein Rechner pro Ziel durchrechnen, Box erscheint
+  unter dem Ergebnis mit „Anzeige“, Klick landet auf der richtigen Kategorie; Dark Mode
+  der Box.
+
 ## 22.09.2026 — Welle 140: Blogartikel 19, das Bankjahr mit 360 Tagen — ✅ ABGESCHLOSSEN
 
 **Der dritte Top-10-Rechner bekommt einen Artikel.** `zinsrechner` liegt auf Platz 3 der
