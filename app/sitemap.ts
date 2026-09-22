@@ -27,6 +27,20 @@ function gitMtime(relativePath: string): Date {
   return result;
 }
 
+// W145: lastmod je Rechner aus dem gepflegten Feld `letzteAktualisierung`.
+// Vorher stand hier die Git-mtime der Kategoriedatei — dadurch trugen 175 der 256
+// Sitemap-URLs denselben Stempel, und eine Änderung an einem Rechner meldete alle
+// Rechner seiner Kategorie als geändert. Ein fehlendes, unlesbares oder in der Zukunft
+// liegendes Datum fällt auf die alte Berechnung zurück.
+function rechnerLastMod(r: { letzteAktualisierung?: string; kategorieSlug: string }): Date {
+  const iso = r.letzteAktualisierung;
+  if (iso && /^\d{4}-\d{2}-\d{2}$/.test(iso)) {
+    const d = new Date(`${iso}T00:00:00Z`);
+    if (!Number.isNaN(d.getTime()) && d.getTime() <= Date.now()) return d;
+  }
+  return gitMtime(`lib/rechner-config/${r.kategorieSlug}.ts`);
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const startseiteMtime = gitMtime('app/page.tsx');
 
@@ -181,7 +195,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // für die ganze Kategorie, was ein starkes Re-Crawl-Signal ist).
   const rechnerPages: MetadataRoute.Sitemap = rechner.map(r => ({
     url: `${SITE_URL}/${r.kategorieSlug}/${r.slug}`,
-    lastModified: gitMtime(`lib/rechner-config/${r.kategorieSlug}.ts`),
+    lastModified: rechnerLastMod(r),
     changeFrequency: 'monthly',
     priority: 0.8,
   }));
