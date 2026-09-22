@@ -67,6 +67,17 @@ export const TERMINE: Termin[] = [
     quelle: 'assets/websites.json (Susanne), Eintrag www.wuerdezeit.de',
   },
   {
+    id: 'wz-umlaut-domain',
+    titel: 'WürdeZeit: prüfen, ob würdezeit.de mit Umlaut frei geworden ist',
+    datum: '2026-12-22',
+    vorlaufTage: 7,
+    wiederholungMonate: 3,
+    bereich: 'Betrieb',
+    projekt: 'wuerdezeit.de',
+    was: 'Abfrage bei DENIC für xn--wrdezeit-65a.de — das ist die Punycode-Form von würdezeit.de. Ohne Browser: whois.denic.de Port 43, Anfrage "-T dn,ace xn--wrdezeit-65a.de". Status "free" heißt frei, "connect" heißt vergeben. Wird sie frei: sofort registrieren und per Weiterleitung auf www.wuerdezeit.de legen, kein eigener Inhalt. Stand 22.09.2026: connect, Strato-Nameserver, HTTP 200 mit Strato-Platzhalter ohne Inhalt, zuletzt geändert 28.08.2026 — also eine frische Registrierung, die noch nichts trägt. ACHTUNG beim Nachmessen: xn--wrdezeit-r4a.de ist NICHT diese Domain, sondern wrdezöeit.de. An dieser Verwechslung sind am 22.09.2026 drei Messungen gescheitert.',
+    quelle: 'docs/youtube-verweise.md im WuerdeZeit-Repo, Abschnitt zur Umlaut-Domain',
+  },
+  {
     id: 'wz-formular-loeschlauf',
     titel: 'WürdeZeit: Nachrichten aus dem Kontaktformular löschen',
     datum: '2026-10-20',
