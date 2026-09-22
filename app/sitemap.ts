@@ -190,9 +190,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
-  // Rechner: mtime der Config-Datei ihrer Kategorie (dasselbe Datum wie die
-  // Kategorieseite — Content-Änderung an einem Rechner aktualisiert lastmod
-  // für die ganze Kategorie, was ein starkes Re-Crawl-Signal ist).
+  // Rechner: lastmod aus dem gepflegten Feld `letzteAktualisierung` des jeweiligen
+  // Rechners (W145). Vorher stand hier die mtime der Kategoriedatei — dadurch trugen
+  // 175 der 256 URLs denselben Stempel, und eine Änderung an einem Rechner meldete
+  // alle Rechner seiner Kategorie als geändert. Der Rückfallweg auf die mtime steckt
+  // in rechnerLastMod.
   const rechnerPages: MetadataRoute.Sitemap = rechner.map(r => ({
     url: `${SITE_URL}/${r.kategorieSlug}/${r.slug}`,
     lastModified: rechnerLastMod(r),
