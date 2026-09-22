@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 18. September 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 22. September 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -268,26 +268,47 @@ export default function DatenschutzSeite() {
             </p>
             <p className="mt-3">Wir arbeiten derzeit mit folgenden Partnerprogrammen (über das Awin-Netzwerk):</p>
             <ul className="list-disc pl-5 space-y-2 mt-3">
-              <li>
-                <strong>congstar</strong> (Mobilfunk)
+              <li data-programm="burdaZahn">
+                <strong>burda-vergleicht</strong> (Vergleich von Zahnzusatzversicherungen)
               </li>
-              <li>
-                <strong>Lexware Office</strong> (Buchhaltungssoftware)
-              </li>
-              <li>
-                <strong>WISO Steuer / Buhl Data</strong> (Steuersoftware)
-              </li>
-              <li>
-                <strong>smartsteuer</strong> (Online-Steuererklärung)
-              </li>
-              <li>
+              <li data-programm="check24">
                 <strong>CHECK24</strong> (Vergleichsportal)
               </li>
-              <li>
+              <li data-programm="congstar">
+                <strong>congstar</strong> (Mobilfunk)
+              </li>
+              <li data-programm="cosmosdirekt">
+                <strong>CosmosDirekt</strong> (Versicherungen und Geldanlage)
+              </li>
+              <li data-programm="gymbeam">
+                <strong>GymBeam</strong> (Sporternährung, Lebensmittel und Fitnesszubehör)
+              </li>
+              <li data-programm="hansemerkur">
+                <strong>HanseMerkur</strong> (Reise- und Zahnzusatzversicherung)
+              </li>
+              <li data-programm="hotelde">
+                <strong>hotel.de</strong> (Hotelbuchung)
+              </li>
+              <li data-programm="ks-auxilia">
                 <strong>KS Auxilia</strong> (Rechtsschutzversicherung)
               </li>
-              <li>
+              <li data-programm="lexware">
+                <strong>Lexware Office</strong> (Buchhaltungssoftware)
+              </li>
+              <li data-programm="naturesway">
+                <strong>Nature&apos;s Way</strong> (Nahrungsergänzungsmittel)
+              </li>
+              <li data-programm="smartsteuer">
+                <strong>smartsteuer</strong> (Online-Steuererklärung)
+              </li>
+              <li data-programm="smava">
+                <strong>smava</strong> (Kreditvergleich)
+              </li>
+              <li data-programm="verivox">
                 <strong>Verivox</strong> (Vergleichsportal)
+              </li>
+              <li data-programm="wiso">
+                <strong>WISO Steuer / Buhl Data</strong> (Steuersoftware)
               </li>
             </ul>
             <p className="mt-3">
