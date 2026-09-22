@@ -6,6 +6,30 @@
 
 ---
 
+## 23.09.2026 — Welle 145: 175 Seiten, die am selben Tag geändert wurden — ✅ ABGESCHLOSSEN
+
+**Ein Signal, das keines war.** Die Sitemap setzte das `lastmod` jeder Rechnerseite auf die
+Git-mtime der Kategorie-Konfigurationsdatei. In der ausgelieferten Sitemap trugen dadurch
+175 der 256 URLs denselben Stempel, den 14.08.2026 — und eine Änderung an einem einzigen
+Finanzrechner meldete Google 45 geänderte Seiten. **Wer jede Woche dasselbe meldet, meldet
+nichts.**
+
+Das ehrliche Datum lag die ganze Zeit daneben: Jeder der 206 Rechner pflegt
+`letzteAktualisierung`, gemessen alle im Format JJJJ-MM-TT, keiner in der Zukunft. Nach der
+Umstellung verteilen sich die Rechner auf 26 verschiedene Daten, das größte Bündel umfasst
+29 statt 175 Seiten.
+
+- **c982711** — Hilfsfunktion `rechnerLastMod` in `app/sitemap.ts`; sie nimmt
+  `letzteAktualisierung` und fällt bei fehlendem, unlesbarem oder zukünftigem Datum auf die
+  bisherige Git-mtime zurück. Kategorieseiten, Blogartikel, Longtail- und Meta-Seiten
+  bleiben unverändert — dort entspricht die Git-mtime der Wahrheit.
+- Teil des Maßnahmenplans zur Indexierung: 83 von 272 Seiten indexiert, 168 in „gecrawlt
+  bzw. gefunden, zurzeit nicht indexiert". Vorher lief Welle 144 (Querverweise), als
+  Nächstes folgt der Artikel zum Brutto-Netto-Rechner, dem einzigen Top-3-Rechner ohne
+  eigenen Text.
+- Offen für Karstens Sichtprüfung: `https://www.rechenfix.de/sitemap.xml` nach dem Deploy
+  aufrufen; die Rechner-URLs müssen unterschiedliche `lastmod`-Werte tragen.
+
 ## 22.09.2026 — Welle 144: 78 Rechner, auf die niemand verlinkt hat — ✅ ABGESCHLOSSEN
 
 **Der Block war da, die Hälfte der Daten nicht.** `getVerwandteRechner` rendert seit
