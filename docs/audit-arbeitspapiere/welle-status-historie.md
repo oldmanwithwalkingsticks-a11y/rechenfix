@@ -6,6 +6,41 @@
 
 ---
 
+## 22.09.2026 — Welle 142: Die Partnerliste, die niemand gegen den Code gehalten hat — ✅ ABGESCHLOSSEN
+
+**Sieben von vierzehn.** Die Datenschutzerklärung nannte unter „Wir arbeiten derzeit mit
+folgenden Partnerprogrammen“ sieben Programme; der Code führte nach Welle 141 vierzehn.
+Sechs davon fehlten schon vorher — hotel.de, burda-vergleicht, Nature's Way, CosmosDirekt,
+smava, HanseMerkur —, über sechs Einbauten hinweg, ohne dass es auffiel. Aufgefallen ist es
+beim Einbau von GymBeam, nicht in einem Prüflauf.
+
+**Die Wache war richtig gebaut, nur für eine andere Frage.** Susannes Dienste-Wache
+erkennt Awin am Ladecode, und der ist bei einem Programm derselbe wie bei vierzehn. **Eine
+Aufzählung im Rechtstext braucht eine benannte Quelle und einen Abgleich** — sonst ist sie
+nach dem nächsten Einbau falsch, und nichts schlägt an.
+
+- **11f7faa** (`recht:`) — Liste auf vierzehn Einträge, alphabetisch, je mit
+  `data-programm`; Stand-Datum auf den Tag der Arbeit. Stufe A, Beleg ist der Codestand.
+- **690b809** — `scripts/check-affiliate-partnerliste.mjs` als 17. Glied der
+  Prebuild-Kette, direkt hinter `check-drittanbieter.mjs`. Grün gemessen **und** rot: Die
+  Gegenprobe mit entfernter GymBeam-Zeile liefert Exit 1 und nennt genau `gymbeam`.
+  Zusätzlich gegen den Ist-Stand **vor** der Textänderung gelaufen: Exit 1 mit allen
+  vierzehn Schlüsseln als fehlend — der Guard findet den echten Befund, nicht nur einen
+  gestellten.
+- **6cffa0d** (`recht:`) — Eintrag in `docs/rechtstexte/aenderungshistorie.md`.
+- **Befund am Rand, nicht angefasst:** Die Änderungshistorie endet mit einem Terminblock,
+  und dahinter steht seit dem 18.09.2026 eine einzelne Tabellenzeile ohne Kopf — sie
+  rendert nicht als Tabelle und trägt sieben Felder statt sechs. Der Eintrag zu dieser
+  Welle steht deshalb am Ende der Haupttabelle unter der Dateiüberschrift, wo die
+  Chronologie weiterläuft. Die fehlplatzierte Zeile bleibt unberührt; sie zu verschieben
+  ist ein eigener `recht:`-Vorgang.
+- **Für Susanne (Skill-Nachtrag v38, als Text an Karsten):** In der Vollprüfung
+  nachsehen, dass der Guard noch in der Prebuild-Kette steht; fehlt er, ist die Liste
+  wieder ungesichert. Bei jedem neuen Partner gilt die Textpflege Stufe A mit
+  `data-programm`.
+- Offen für Karstens Sichtprüfung: `/datenschutz` zeigt vierzehn Einträge und das neue
+  Stand-Datum; die Seite sieht sonst unverändert aus.
+
 ## 22.09.2026 — Welle 141: GymBeam DE auf sieben Sport- und Ernährungsrechnern — ✅ ABGESCHLOSSEN
 
 **Eine leere Stelle gefüllt, keine besetzte umverteilt.** Von 13 geprüften Sport- und
