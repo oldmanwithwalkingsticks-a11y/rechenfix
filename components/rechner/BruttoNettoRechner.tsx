@@ -40,7 +40,7 @@ const STATIC_FAQ: { frage: string; antwort: string }[] = [
   {
     frage: 'Was ist der Solidaritätszuschlag?',
     antwort:
-      'Der Soli beträgt 5,5 % der Lohnsteuer. Seit 2021 fällt er für rund 90 % der Steuerzahler weg. Erst ab einer Jahres-Lohnsteuer von 20.350 € (Single 2026) bzw. 40.700 € (gemeinsam) wird er wieder fällig — das entspricht etwa 73.500 € Jahresbrutto in Steuerklasse 1. Auf Kapitalerträge fällt der Soli unverändert weiter an, wenn Kapitalertragsteuer einbehalten wird.',
+      'Der Soli beträgt 5,5 % der Lohnsteuer, wird aber erst oberhalb einer Freigrenze fällig: 20.350 € Jahres-Lohnsteuer (2026), in Steuerklasse III 40.700 €. Direkt darüber steigt er gleitend an (Milderungszone: höchstens 11,9 % des Betrags über der Freigrenze), die vollen 5,5 % gelten erst ab 37.838 € Jahres-Lohnsteuer. In Steuerklasse 1 ohne Kinder beginnt der Soli bei rund 7.700 € Monatsbrutto (rund 92.400 € im Jahr). Eingetragene Kinderfreibeträge senken die Bemessungsgrundlage und verschieben diese Grenze nach oben. Auf Kapitalerträge fällt der Soli ohne Freigrenze an.',
   },
   {
     frage: 'Warum unterscheidet sich mein Netto je nach Bundesland?',
@@ -60,12 +60,12 @@ const STATIC_FAQ: { frage: string; antwort: string }[] = [
   {
     frage: 'Welche Freibeträge berücksichtigt der Rechner?',
     antwort:
-      'Der Rechner rechnet automatisch mit dem Grundfreibetrag (2026: 12.348 € Single, 24.696 € verheiratet), dem Kinderfreibetrag bei eingetragenen Kindern und dem Entlastungsbetrag für Alleinerziehende. Individuelle Freibeträge auf der Lohnsteuerkarte — etwa für hohe Werbungskosten, die Pendlerpauschale oder außergewöhnliche Belastungen — müssen Sie separat eintragen, falls sie für Sie zutreffen.',
+      'Der Rechner rechnet automatisch mit dem Grundfreibetrag (2026: 12.348 € Single, 24.696 € verheiratet), den eingetragenen Kinderfreibeträgen (sie senken beim Lohnsteuerabzug nur Solidaritätszuschlag und Kirchensteuer) und dem Entlastungsbetrag für Alleinerziehende. Individuelle Freibeträge auf der Lohnsteuerkarte — etwa für hohe Werbungskosten, die Pendlerpauschale oder außergewöhnliche Belastungen — müssen Sie separat eintragen, falls sie für Sie zutreffen.',
   },
   {
     frage: 'Wie wirken sich Kinderfreibeträge konkret auf mein Netto aus?',
     antwort:
-      'Kinderfreibeträge senken die monatlichen Abzüge bei der Pflegeversicherung — der 0,6-%-Kinderlosenzuschlag entfällt, ab dem zweiten Kind wird der AN-Anteil zusätzlich um 0,25 Prozentpunkte je Kind reduziert (bis maximal 5 Kinder). Steuerlich nimmt das Finanzamt eine Günstigerprüfung vor: Es prüft automatisch, ob Kindergeld oder der Kinderfreibetrag (2026: 6.826 € pro Kind) günstiger für Sie ist und gewährt das Bessere.',
+      'Die Lohnsteuer ändern sie nicht. Kinderfreibeträge senken beim monatlichen Abzug nur Solidaritätszuschlag und Kirchensteuer: Beide werden nach einer fiktiven Lohnsteuer berechnet, von der die Freibeträge für Kinder abgezogen sind (§ 51a Abs. 2a EStG) — 2026 sind das 9.756 € je Zähler in den Klassen I bis III und 4.878 € je Zähler in Klasse IV. Der Pflegebeitrag hängt dagegen an der Zahl der Kinder unter 25 (eigenes Feld): Eltern zahlen keinen Zuschlag von 0,6 Prozentpunkten, ab dem zweiten Kind sinkt der Beitrag um 0,25 Punkte je Kind. Weil der niedrigere Pflegebeitrag auch die Vorsorgepauschale senkt, steigt die Lohnsteuer von Eltern dadurch sogar leicht. Ob Kindergeld oder Kinderfreibetrag bei der Einkommensteuer günstiger ist, prüft das Finanzamt erst in der Veranlagung (Günstigerprüfung).',
   },
   {
     frage: 'Lohnt sich der Kirchenaustritt finanziell?',
@@ -75,7 +75,7 @@ const STATIC_FAQ: { frage: string; antwort: string }[] = [
   {
     frage: 'Wie berechne ich mein Netto pro Stunde?',
     antwort:
-      'Teilen Sie Ihr monatliches Nettogehalt durch Ihre durchschnittlichen Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 174 Stunden (40 × 52 Wochen ÷ 12 Monate). Beispiel: 2.340 € netto ÷ 174 = 13,45 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch im Ergebnis-Bereich an.',
+      'Teilen Sie Ihr monatliches Nettogehalt durch Ihre durchschnittlichen Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 174 Stunden (40 × 52 Wochen ÷ 12 Monate). Beispiel: 2.333 € netto ÷ 174 = 13,41 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch im Ergebnis-Bereich an.',
   },
 ];
 
@@ -784,7 +784,7 @@ export default function BruttoNettoRechner() {
               </p>
               <ol className="list-decimal pl-5 space-y-1.5">
                 <li><strong className="text-gray-800 dark:text-gray-100">Lohnsteuer</strong> — abhängig von Steuerklasse, Bundesland und Freibeträgen</li>
-                <li><strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag</strong> — nur bei höheren Einkommen (2026: ab ca. 73.500 € Jahresbrutto Single)</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag</strong> — nur bei höheren Einkommen (2026: ab rund 92.400 € Jahresbrutto in Steuerklasse 1 ohne Kinder)</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Kirchensteuer</strong> — 8 % (Bayern, Baden-Württemberg) bzw. 9 % (übrige Bundesländer) auf die Lohnsteuer, nur bei Kirchenzugehörigkeit</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Sozialabgaben</strong> — Kranken-, Pflege-, Renten- und Arbeitslosenversicherung, in Summe rund 21 % vom Brutto (Arbeitnehmer-Anteil)</li>
               </ol>
@@ -792,14 +792,14 @@ export default function BruttoNettoRechner() {
                 <strong className="text-gray-800 dark:text-gray-100">Formel:</strong> Netto = Brutto − Lohnsteuer − Soli − Kirchensteuer − Sozialabgaben
               </p>
               <p>
-                <strong className="text-gray-800 dark:text-gray-100">Beispiel:</strong> Bei 4.000 € Brutto in Steuerklasse 1 (ledig, kinderlos, NRW, ohne Kirchensteuer) bleiben rund <strong className="text-gray-800 dark:text-gray-100">2.598 € Netto</strong> übrig — also etwa 65 % des Brutto. Die Quote sinkt mit höherem Einkommen, weil die Lohnsteuer progressiv steigt, und kann bei niedrigen Gehältern bei knapp 75 % liegen.
+                <strong className="text-gray-800 dark:text-gray-100">Beispiel:</strong> Bei 4.000 € Brutto in Steuerklasse 1 (ledig, kinderlos, NRW, ohne Kirchensteuer) bleiben rund <strong className="text-gray-800 dark:text-gray-100">2.606 € Netto</strong> übrig — also etwa 65 % des Brutto. Die Quote sinkt mit höherem Einkommen, weil die Lohnsteuer progressiv steigt, und kann bei niedrigen Gehältern bei knapp 75 % liegen.
               </p>
 
               <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 mt-6 mb-3">Alle Abzüge im Detail (2026)</h3>
               <ul className="list-disc pl-5 space-y-1.5">
                 <li><strong className="text-gray-800 dark:text-gray-100">Lohnsteuer:</strong> Progressive Besteuerung nach dem Einkommensteuertarif § 32a EStG. Grundfreibetrag 2026: 12.348 €. Der Eingangssteuersatz beträgt 14 %, der Spitzensteuersatz 42 % (ab 69.879 €) und der Reichensteuersatz 45 % (ab 277.826 €).</li>
-                <li><strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag:</strong> 5,5 % der Lohnsteuer. Seit 2021 für ca. 90 % der Steuerzahler abgeschafft (Freigrenze 2026: 20.350 € Jahressteuer).</li>
-                <li><strong className="text-gray-800 dark:text-gray-100">Kirchensteuer:</strong> 8 % der Lohnsteuer in Baden-Württemberg und Bayern, 9 % in allen anderen Bundesländern. Nur bei Kirchenmitgliedschaft.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag:</strong> 5,5 % der Lohnsteuer, aber erst oberhalb einer Freigrenze von 20.350 € Jahres-Lohnsteuer (Klasse III: 40.700 €), darüber zunächst gleitend in einer Milderungszone. Die meisten Arbeitnehmer zahlen deshalb keinen Soli; abgeschafft ist er nicht.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Kirchensteuer:</strong> 8 % der Lohnsteuer in Baden-Württemberg und Bayern, 9 % in allen anderen Bundesländern. Nur bei Kirchenmitgliedschaft. Eingetragene Kinderfreibeträge senken die Bemessungsgrundlage.</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Krankenversicherung (GKV):</strong> Allgemeiner Beitragssatz 14,6 % (Arbeitnehmeranteil: 7,3 %) + kassenindividueller Zusatzbeitrag (Durchschnitt 2026: 2,9 %, AN-Anteil: 1,45 %). Beitragsbemessungsgrenze: 5.812,50 €/Monat.</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Rentenversicherung:</strong> 18,6 % (Arbeitnehmeranteil: 9,3 %). BBG 2026 einheitlich: 8.450 €/Monat (seit 2025 keine West/Ost-Trennung mehr).</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Arbeitslosenversicherung:</strong> 2,6 % (Arbeitnehmeranteil: 1,3 %). Gleiche BBG wie RV.</li>
@@ -848,7 +848,7 @@ export default function BruttoNettoRechner() {
                 <strong className="text-gray-800 dark:text-gray-100">4. Kirchenein- oder -austritt.</strong> Wer aus der Kirche austritt, spart die Kirchensteuer komplett. Bei 3.500 € Brutto sind das je nach Bundesland 25–40 € monatlich, bei höheren Einkommen schnell 60–100 €. Über 30 Jahre Berufsleben kommen so leicht 15.000 € oder mehr zusammen.
               </p>
               <p>
-                <strong className="text-gray-800 dark:text-gray-100">5. Familienplanung.</strong> Mit der Geburt eines Kindes ändern sich Freibeträge: der Kinderfreibetrag (2026: 6.826 € pro Kind), der Entlastungsbetrag für Alleinerziehende und der Wegfall des Pflegeversicherungs-Zuschlags für Kinderlose. Der Rechner berücksichtigt diese Faktoren und zeigt Ihnen das neue Netto sofort.
+                <strong className="text-gray-800 dark:text-gray-100">5. Familienplanung.</strong> Mit der Geburt eines Kindes ändern sich Freibeträge: die Freibeträge für Kinder (2026: 4.878 € je Elternteil, 9.756 € für beide Eltern), der Entlastungsbetrag für Alleinerziehende und der Wegfall des Pflegeversicherungs-Zuschlags für Kinderlose. Der Rechner berücksichtigt diese Faktoren und zeigt Ihnen das neue Netto sofort.
               </p>
             </div>
           </section>
@@ -864,7 +864,7 @@ export default function BruttoNettoRechner() {
                 <strong className="text-gray-800 dark:text-gray-100">Sozialabgaben unterschätzt.</strong> Viele rechnen mit pauschal 20 %. Tatsächlich liegt der Arbeitnehmer-Anteil 2026 bei rund 21 % — abhängig vom Krankenkassen-Zusatzbeitrag und mit zusätzlich 0,6 % Aufschlag für Kinderlose ab 23 Jahren.
               </li>
               <li>
-                <strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag pauschal abgezogen.</strong> Seit 2021 zahlen rund 90 % der Steuerzahler keinen Soli mehr. Erst ab einer Jahres-Lohnsteuer von 20.350 € (Single 2026) bzw. 40.700 € (gemeinsam) wird er fällig — das entspricht etwa 73.500 € Jahresbrutto Single.
+                <strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag pauschal abgezogen.</strong> Seit 2021 zahlen rund 90 % der Steuerzahler keinen Soli mehr. Erst ab einer Jahres-Lohnsteuer von 20.350 € (Single 2026) bzw. 40.700 € (gemeinsam) wird er fällig — in Steuerklasse 1 ohne Kinder bei rund 92.400 € Jahresbrutto, und auch dann zunächst gleitend statt sofort mit vollen 5,5 %.
               </li>
               <li>
                 <strong className="text-gray-800 dark:text-gray-100">Beitragsbemessungsgrenze ignoriert.</strong> Bei Bruttogehältern über 5.812,50 € pro Monat zahlen Sie nicht weiter mehr in Kranken- und Pflegeversicherung ein (RV und ALV: bis 8.450 € pro Monat). Wer das nicht weiß, rechnet sein Netto bei hohen Gehältern zu niedrig.
@@ -882,7 +882,7 @@ export default function BruttoNettoRechner() {
               <p>Es gibt legale Wege, Ihr Nettogehalt zu optimieren:</p>
               <ul className="list-disc pl-5 space-y-1.5">
                 <li><strong className="text-gray-800 dark:text-gray-100">Steuerklassenwechsel:</strong> Verheiratete können durch die Kombination 3/5 statt 4/4 das monatliche Netto des Hauptverdieners deutlich erhöhen.</li>
-                <li><strong className="text-gray-800 dark:text-gray-100">Kinderfreibeträge eintragen lassen:</strong> Reduziert die monatliche Pflegeversicherung und kann steuerlich günstiger sein als Kindergeld.</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Kinderfreibeträge eintragen lassen:</strong> Senkt Solidaritätszuschlag und Kirchensteuer schon beim monatlichen Abzug; die Lohnsteuer bleibt gleich. Für den Pflegebeitrag zählt dagegen die Zahl der Kinder unter 25.</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Steuererklärung machen:</strong> Viele Arbeitnehmer erhalten im Schnitt ca. 1.100 € Erstattung pro Jahr.</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Betriebliche Altersvorsorge:</strong> Beiträge zur bAV werden vor Steuern und Sozialabgaben abgezogen.</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Sachbezüge:</strong> Der Arbeitgeber kann bis zu 50 € monatlich steuerfrei als Sachbezug gewähren (z. B. Tankgutschein, Jobticket).</li>

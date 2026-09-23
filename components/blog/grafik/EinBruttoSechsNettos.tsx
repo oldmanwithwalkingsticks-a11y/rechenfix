@@ -28,6 +28,11 @@
  * Beschreibungstexte. Die Aussage trägt jetzt eine dezente Hinterlegung
  * beider Zeilen plus eine eigene Fußzeile — ohne Beschriftung im Textfeld.
  *
+ * v3 (W147) — WERTE NEU GELESEN: Die Vorsorgepauschale des Brutto-Netto-Rechners
+ * enthielt bei Kinderlosen den Pflege-Zuschlag nicht (PAP-Eingang PVZ). Nach der
+ * Korrektur liegt jedes Netto um drei bis sieben Euro höher. Geometrie unverändert:
+ * die breiteste Zeile (III) wächst um 0,3 px.
+ *
  * LEHRE: Bei Balkendiagrammen beide Seiten des Balkenfelds gegen Textbreiten
  * prüfen, nicht nur die rechte. In v1 war nur der Wertelabel-Überlauf nach
  * rechts geprüft worden.
@@ -38,12 +43,12 @@
 const BRUTTO = 3000;
 
 const klassen = [
-  { nr: 'I', wer: 'ledig', netto: 2049.5, nettoText: '2.049,50', quote: '31,7', ton: 'neutral', hervor: true },
-  { nr: 'II', wer: 'alleinerziehend', netto: 2144.08, nettoText: '2.144,08', quote: '28,5', ton: 'neutral', hervor: false },
-  { nr: 'III', wer: 'verheiratet, Hauptverdiener', netto: 2309.17, nettoText: '2.309,17', quote: '23,0', ton: 'gut', hervor: false },
-  { nr: 'IV', wer: 'verheiratet, ähnliches Einkommen', netto: 2049.5, nettoText: '2.049,50', quote: '31,7', ton: 'neutral', hervor: true },
-  { nr: 'V', wer: 'verheiratet, Geringverdiener', netto: 1715.17, nettoText: '1.715,17', quote: '42,8', ton: 'hart', hervor: false },
-  { nr: 'VI', wer: 'Zweit- oder Nebenjob', netto: 1675.67, nettoText: '1.675,67', quote: '44,1', ton: 'hart', hervor: false },
+  { nr: 'I', wer: 'ledig', netto: 2054.42, nettoText: '2.054,42', quote: '31,5', ton: 'neutral', hervor: true },
+  { nr: 'II', wer: 'alleinerziehend', netto: 2148.75, nettoText: '2.148,75', quote: '28,4', ton: 'neutral', hervor: false },
+  { nr: 'III', wer: 'verheiratet, Hauptverdiener', netto: 2312.17, nettoText: '2.312,17', quote: '22,9', ton: 'gut', hervor: false },
+  { nr: 'IV', wer: 'verheiratet, ähnliches Einkommen', netto: 2054.42, nettoText: '2.054,42', quote: '31,5', ton: 'neutral', hervor: true },
+  { nr: 'V', wer: 'verheiratet, Geringverdiener', netto: 1721.84, nettoText: '1.721,84', quote: '42,6', ton: 'hart', hervor: false },
+  { nr: 'VI', wer: 'Zweit- oder Nebenjob', netto: 1682.5, nettoText: '1.682,50', quote: '43,9', ton: 'hart', hervor: false },
 ] as const;
 
 const X0 = 248;
@@ -67,11 +72,11 @@ export default function EinBruttoSechsNettos() {
         `}</style>
         <title>Dasselbe Bruttogehalt in sechs Lohnsteuerklassen</title>
         <desc>
-          Bei 3.000 Euro Bruttogehalt im Monat bleiben in Steuerklasse eins 2.049,50 Euro netto,
-          in Steuerklasse zwei 2.144,08 Euro, in Steuerklasse drei 2.309,17 Euro, in Steuerklasse
-          vier wieder exakt 2.049,50 Euro, in Steuerklasse fünf 1.715,17 Euro und in Steuerklasse
-          sechs 1.675,67 Euro. Zwischen der günstigsten und der ungünstigsten Klasse liegen
-          633,50 Euro im Monat. Die Klassen eins und vier führen zu auf den Cent identischen
+          Bei 3.000 Euro Bruttogehalt im Monat bleiben in Steuerklasse eins 2.054,42 Euro netto,
+          in Steuerklasse zwei 2.148,75 Euro, in Steuerklasse drei 2.312,17 Euro, in Steuerklasse
+          vier wieder exakt 2.054,42 Euro, in Steuerklasse fünf 1.721,84 Euro und in Steuerklasse
+          sechs 1.682,50 Euro. Zwischen der günstigsten und der ungünstigsten Klasse liegen
+          629,67 Euro im Monat. Die Klassen eins und vier führen zu auf den Cent identischen
           Ergebnissen, weil Paragraf 39b Absatz 2 Satz 6 des Einkommensteuergesetzes für beide
           denselben Grundtarif anordnet. Die Jahressteuer des Haushalts ist von der Klassenwahl
           unberührt.
@@ -111,15 +116,15 @@ export default function EinBruttoSechsNettos() {
           Satz 6 EStG.
         </text>
         <text x="24" y="430" fontSize="12" fill="#9ca3af">
-          633,50 € zwischen günstigster und ungünstigster Klasse. Die Jahressteuer ändert sich um
+          629,67 € zwischen günstigster und ungünstigster Klasse. Die Jahressteuer ändert sich um
           keinen Cent.
         </text>
       </svg>
       <figcaption className="mt-2 text-sm text-gray-600 dark:text-gray-400">
         Klasse I und Klasse IV liefern auf den Cent dasselbe Ergebnis — § 39b Abs. 2 Satz 6 EStG
         ordnet für beide den Grundtarif an. Wer verheiratet ist und in IV steht, wird beim
-        Lohnsteuerabzug behandelt wie ein Lediger. Werte am 26.08.2026 aus dem
-        Brutto-Netto-Rechner dieser Seite gelesen.
+        Lohnsteuerabzug behandelt wie ein Lediger. Werte im September 2026 aus dem
+        Brutto-Netto-Rechner dieser Seite gelesen, nach dessen Korrektur der Vorsorgepauschale für Kinderlose.
       </figcaption>
     </figure>
   );

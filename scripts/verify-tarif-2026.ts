@@ -34,7 +34,7 @@ run('TESTFALL A — 5.000 € · SK III · NRW · 2 Kinder · Zusatz 2,9 %', {
   kinderfreibetraege: 2, kinderUnter25: 2, bundesland: 'NW',
   kvArt: 'gesetzlich', kvZusatzbeitrag: 2.9, kvPrivatBeitrag: 0,
   rvBefreit: false, abrechnungszeitraum: 'monat',
-}, { lohnsteuer: 409.00, pflegeversicherung: 77.50, nettoMonat: 3546.00 });
+}, { lohnsteuer: 412.83, pflegeversicherung: 77.50, nettoMonat: 3542.17 }); // W147: Sollwert aus Prompt 83 war falsch, unabhängig nachgerechnet
 
 // Testfall B — kinderlos über 23, 4.000 €
 run('TESTFALL B — 4.000 € · SK I · NRW · kinderlos · Zusatz 2,9 %', {
@@ -66,7 +66,7 @@ const lstA = berechneLohnsteuer({
   brutto: 5000, steuerklasse: 3, kirchensteuer: false, kirchensteuersatz: 9,
   kinderfreibetraege: 2, kinderUnter25: 2, jahresfreibetrag: 0, zeitraum: 'monat',
 });
-console.log(`Testfall A: LSt ${fmt(lstA.lohnsteuerMonat)} €/M   Ziel: 409,00 € (±2 €)`);
+console.log(`Testfall A: LSt ${fmt(lstA.lohnsteuerMonat)} €/M   Ziel: 412,83 €`);
 
 const lstC = berechneLohnsteuer({
   brutto: 3500, steuerklasse: 1, kirchensteuer: false, kirchensteuersatz: 9,

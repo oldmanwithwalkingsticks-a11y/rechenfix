@@ -13,11 +13,11 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Brutto-Netto-Rechner 2026: Nettogehalt sofort berechnen — mit Steuerklasse, Bundesland, KV, Kirchensteuer und Aufschlüsselung. Kostenlos.',
     keywords: ['brutto netto rechner', 'brutto netto rechner 2026', 'gehaltsrechner', 'nettogehalt berechnen', 'lohnrechner', 'netto brutto', 'steuerklasse', 'gehaltsrechner 2026', 'nettolohn berechnen', 'was bleibt vom brutto'],
     icon: '💶',
-    beispiel: 'Beispiel: Bei 3.500 € brutto, Steuerklasse 1, NRW, keine Kirchensteuer ≈ 2.340 € netto (ca. 33% Abzüge)',
+    beispiel: 'Beispiel: Bei 3.500 € brutto, Steuerklasse 1, NRW, keine Kirchensteuer ≈ 2.333 € netto (ca. 33% Abzüge)',
     faq: [
       {
         frage: 'Wie viel Netto bleibt von meinem Brutto?',
-        antwort: 'Das hängt von Steuerklasse, Bundesland, Kirchensteuerpflicht und KV ab. Als Faustregel: In Steuerklasse 1 bleiben bei 3.500 € brutto etwa 60-67% als Netto (ca. 2.300 €). Bei höheren Gehältern steigt der Abzugsanteil wegen der progressiven Steuer.',
+        antwort: 'Das hängt von Steuerklasse, Bundesland, Kirchensteuerpflicht und KV ab. Als Faustregel: In Steuerklasse 1 bleiben bei 3.500 € brutto etwa 60-67% als Netto (ca. 2.330 €). Bei höheren Gehältern steigt der Abzugsanteil wegen der progressiven Steuer.',
       },
       {
         frage: 'Welche Steuerklasse habe ich?',
@@ -29,7 +29,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist der Solidaritätszuschlag?',
-        antwort: 'Der Soli beträgt 5,5% der Lohnsteuer. Seit 2021 fällt er für ca. 90% der Steuerzahler weg (Freigrenze 2026: 20.350 € Jahres-Lohnsteuer bei Einzelveranlagung, 40.700 € bei Splitting). Das entspricht etwa 73.000 € zu versteuerndem Einkommen in Steuerklasse 1.',
+        antwort: 'Der Soli beträgt 5,5% der Lohnsteuer, aber erst oberhalb einer Freigrenze von 20.350 € Jahres-Lohnsteuer (2026; Steuerklasse III: 40.700 €). Darüber steigt er in einer Milderungszone gleitend an, die vollen 5,5% gelten ab 37.838 € Jahres-Lohnsteuer. In Steuerklasse 1 ohne Kinder beginnt er bei rund 7.700 € Monatsbrutto. Eingetragene Kinderfreibeträge senken die Bemessungsgrundlage.',
       },
       {
         frage: 'Lohnt sich die Steuerklassenkombination 3/5?',
@@ -37,7 +37,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie wirken sich Kinderfreibeträge auf das Nettogehalt aus?',
-        antwort: 'Kinderfreibeträge senken die Pflegeversicherung (kein Zuschlag von 0,6% für Kinderlose). Steuerlich prüft das Finanzamt automatisch, ob Kindergeld oder Kinderfreibetrag günstiger ist (Günstigerprüfung).',
+        antwort: 'Die Lohnsteuer ändern sie nicht. Beim monatlichen Abzug senken Kinderfreibeträge nur Solidaritätszuschlag und Kirchensteuer, weil beide nach einer fiktiven Lohnsteuer mit Kinderfreibeträgen berechnet werden (§ 51a Abs. 2a EStG). Der Pflegebeitrag hängt an der Zahl der Kinder unter 25: kein Zuschlag von 0,6% für Eltern, ab dem zweiten Kind 0,25 Prozentpunkte weniger je Kind. Ob Kindergeld oder Kinderfreibetrag günstiger ist, prüft das Finanzamt in der Veranlagung (Günstigerprüfung).',
       },
       {
         frage: 'Was ist die Beitragsbemessungsgrenze?',
@@ -45,7 +45,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie berechne ich mein Netto pro Stunde?',
-        antwort: 'Teilen Sie Ihr monatliches Nettogehalt durch Ihre Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 160 Stunden. Beispiel: 2.340 € netto ÷ 160 = 14,63 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch an.',
+        antwort: 'Teilen Sie Ihr monatliches Nettogehalt durch Ihre Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 160 Stunden. Beispiel: 2.333 € netto ÷ 160 = 14,58 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch an.',
       },
     ],
     quellen: [
@@ -3864,11 +3864,11 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Gehaltserhöhung berechnen: Wie viel Netto bleibt von Ihrer Brutto-Erhöhung? ✓ Grenzbelastung ✓ Jahreseffekt ✓ Inflationscheck ✓ KI-Erklärung.',
     keywords: ['gehaltserhöhung rechner', 'gehaltserhöhung netto', 'brutto erhöhung netto', 'grenzbelastung gehalt', 'wie viel netto bleibt', 'kalte progression', 'reallohnerhöhung', 'gehaltssprung steuer', 'gehaltserhöhung berechnen', 'gehaltserhöhung wie viel netto'],
     icon: '📈',
-    beispiel: '3.500 € → 3.800 €, Steuerklasse I, keine Kirchensteuer → Brutto +300 € → Netto ca. +167 € → Grenzbelastung ca. 44,3 %.',
+    beispiel: '3.500 € → 3.800 €, Steuerklasse I, keine Kirchensteuer → Brutto +300 € → Netto ca. +164 € → Grenzbelastung ca. 45,3 %.',
     faq: [
       {
         frage: 'Wie viel Netto bekomme ich bei einer Gehaltserhöhung von 300 Euro?',
-        antwort: 'Das hängt stark von Ihrem Ausgangsgehalt und Ihrer Steuerklasse ab. Bei einem Brutto von 3.500 € und Steuerklasse I bleiben von 300 € Brutto-Erhöhung etwa 165–175 € Netto übrig — der Rest (ca. 125–135 €) geht an Lohnsteuer, Solidaritätszuschlag und Sozialabgaben. Je höher Ihr Ausgangsgehalt, desto höher die Grenzbelastung. Bei 5.000 € Brutto verbleiben von 300 € Erhöhung oft nur noch 150–160 € Netto.',
+        antwort: 'Das hängt stark von Ihrem Ausgangsgehalt und Ihrer Steuerklasse ab. Bei einem Brutto von 3.500 € und Steuerklasse I bleiben von 300 € Brutto-Erhöhung etwa 160–170 € Netto übrig — der Rest (ca. 130–140 €) geht an Lohnsteuer, Solidaritätszuschlag und Sozialabgaben. Je höher Ihr Ausgangsgehalt, desto höher die Grenzbelastung. Bei 5.000 € Brutto verbleiben von 300 € Erhöhung oft nur noch 150–160 € Netto.',
       },
       {
         frage: 'Warum bleibt so wenig Netto von der Brutto-Erhöhung?',
@@ -5220,8 +5220,8 @@ export const finanzenRechner: RechnerConfig[] = [
     // Leitformat „Benefit-Optionsmatrix" — 3 tabelle dominant (Bausteine-Übersicht ·
     // 200-€-Budget-Vergleich AN-Netto/AG-Kosten · Brutto→Netto-Quote), grenzt sich von
     // gehaltserhoehung (vergleich) und steuererstattung (beispielrechnung) ab. Alle Netto-
-    // Werte aus berechneBruttoNetto reproduziert (Resolver-Check 25.06.2026, 3.500 €, StKl I):
-    // +200 € brutto → +109,25 € netto (Quote ~55 %); AG-Kosten 200 € × 1,2035 = 240,70 €.
+    // Werte aus berechneBruttoNetto reproduziert (Resolver-Check 25.06.2026, nach W147 neu gemessen, 3.500 €, StKl I):
+    // +200 € brutto → +109,75 € netto (Quote ~55 %); AG-Kosten 200 € × 1,2035 = 240,70 €.
     // Bausteine 2026: Sachbezug 50 € (§ 8 Abs. 2 EStG, FREIGRENZE), Jobticket 63 € (§ 3 Nr. 15),
     // Essenszuschuss 115,05 € (7,67 €/Tag × 15, 16. SvEV — GEFIXT f013478), Internet 50 €
     // (§ 40 Abs. 2, 25 % pauschal AG), BAV 302 € (§ 3 Nr. 63, mindert spätere Rente).
@@ -5261,12 +5261,12 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: '200-€-Budget: Brutto-Erhöhung vs. Essenszuschuss',
         schritte: [
           { label: 'AG-Budget', formel: 'Arbeitgeber stellt bereit', ergebnis: '200 €/Monat' },
-          { label: 'Variante A: Brutto-Erhöhung', formel: 'Netto(3.700 €) − Netto(3.500 €), StKl I', ergebnis: '+109,25 € netto' },
+          { label: 'Variante A: Brutto-Erhöhung', formel: 'Netto(3.700 €) − Netto(3.500 €), StKl I', ergebnis: '+109,75 € netto' },
           { label: 'Variante B: Essenszuschuss', formel: '7,67 € × 15 Tage, steuerfrei', ergebnis: '+115,05 € netto' },
           { label: 'AG-Kosten Variante A', formel: '200 € × 1,2035 (AG-SV-Anteil)', ergebnis: '240,70 €' },
           { label: 'AG-Kosten Variante B', formel: 'kein AG-SV-Anteil', ergebnis: '115,05 €' },
         ],
-        fazit: 'Bei 200 € Budget bringt der Essenszuschuss 115,05 € netto — rund 6 € mehr als die Brutto-Erhöhung (109,25 €) — und kostet den Arbeitgeber mit 115,05 € weniger als die Hälfte. Steuerfreie Bausteine gewinnen also auf beiden Seiten: mehr Netto für Sie, weniger Kosten für den Arbeitgeber.',
+        fazit: 'Bei 200 € Budget bringt der Essenszuschuss 115,05 € netto — rund 5 € mehr als die Brutto-Erhöhung (109,75 €) — und kostet den Arbeitgeber mit 115,05 € weniger als die Hälfte. Steuerfreie Bausteine gewinnen also auf beiden Seiten: mehr Netto für Sie, weniger Kosten für den Arbeitgeber.',
       },
       {
         typ: 'tabelle',
@@ -5274,7 +5274,7 @@ export const finanzenRechner: RechnerConfig[] = [
         kopf: ['Option', 'kommt netto an', 'kostet den AG', 'Rang'],
         zeilen: [
           ['Essenszuschuss', '115,05 €', '115,05 €', '1'],
-          ['Brutto-Gehaltserhöhung', '109,25 €', '240,70 €', '2'],
+          ['Brutto-Gehaltserhöhung', '109,75 €', '240,70 €', '2'],
           ['Jobticket 63 €', '63,00 €', '63,00 €', '3'],
           ['Sachbezug 50 €', '50,00 €', '50,00 €', '4'],
           ['Internet-Pauschale 50 €', '50,00 €', '50,00 €', '4'],
@@ -5285,20 +5285,20 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum die Brutto-Erhöhung den Arbeitgeber doppelt kostet',
-        html: `<p>Der Kostenvorteil steuerfreier Bausteine zeigt sich besonders aus Arbeitgebersicht. Eine <strong>Brutto-Gehaltserhöhung</strong> belastet den Arbeitgeber doppelt: Er zahlt nicht nur die Erhöhung selbst, sondern zusätzlich rund 20 % Arbeitgeber-Sozialabgaben. Aus 200 € Brutto-Erhöhung werden so <strong>240,70 €</strong> echte Kosten — bei denen beim Arbeitnehmer aber nur 109 € netto ankommen.</p><p>Ein steuerfreier Baustein kennt diesen Aufschlag nicht: 115 € Essenszuschuss kosten den Arbeitgeber genau 115 € — und kommen voll beim Arbeitnehmer an. Für dieselbe Netto-Wirkung zahlt der Arbeitgeber also deutlich weniger.</p><p>Das macht steuerfreie Extras zu einem starken Argument in der Gehaltsverhandlung: Sie sind für beide Seiten günstiger. Viele Arbeitgeber sind hier flexibler als bei der Bruttoerhöhung, gerade weil sie selbst Sozialabgaben sparen.</p>`,
+        html: `<p>Der Kostenvorteil steuerfreier Bausteine zeigt sich besonders aus Arbeitgebersicht. Eine <strong>Brutto-Gehaltserhöhung</strong> belastet den Arbeitgeber doppelt: Er zahlt nicht nur die Erhöhung selbst, sondern zusätzlich rund 20 % Arbeitgeber-Sozialabgaben. Aus 200 € Brutto-Erhöhung werden so <strong>240,70 €</strong> echte Kosten — bei denen beim Arbeitnehmer aber nur rund 110 € netto ankommen.</p><p>Ein steuerfreier Baustein kennt diesen Aufschlag nicht: 115 € Essenszuschuss kosten den Arbeitgeber genau 115 € — und kommen voll beim Arbeitnehmer an. Für dieselbe Netto-Wirkung zahlt der Arbeitgeber also deutlich weniger.</p><p>Das macht steuerfreie Extras zu einem starken Argument in der Gehaltsverhandlung: Sie sind für beide Seiten günstiger. Viele Arbeitgeber sind hier flexibler als bei der Bruttoerhöhung, gerade weil sie selbst Sozialabgaben sparen.</p>`,
       },
       {
         typ: 'tabelle',
         titel: 'Brutto-Erhöhung → Netto (3.500 €, Steuerklasse I)',
         kopf: ['Brutto-Erhöhung', 'davon Netto', 'Netto-Quote'],
         zeilen: [
-          ['+50 €', '+27,46 €', '55 %'],
-          ['+100 €', '+54,75 €', '55 %'],
-          ['+200 €', '+109,25 €', '55 %'],
-          ['+300 €', '+163,41 €', '54 %'],
-          ['+400 €', '+217,33 €', '54 %'],
+          ['+50 €', '+27,55 €', '55 %'],
+          ['+100 €', '+55,00 €', '55 %'],
+          ['+200 €', '+109,75 €', '55 %'],
+          ['+300 €', '+164,17 €', '55 %'],
+          ['+400 €', '+218,34 €', '55 %'],
         ],
-        fussnote: 'Basis 3.500 € Monatsbrutto, Steuerklasse I, 2026 (mit der Brutto-Netto-Lib berechnet). Rund 45 % jeder Brutto-Erhöhung gehen in Steuern und Sozialabgaben — ein steuerfreier Baustein von z. B. 109 € entspricht damit etwa 200 € Brutto-Erhöhung.',
+        fussnote: 'Basis 3.500 € Monatsbrutto, Steuerklasse I, 2026 (mit der Brutto-Netto-Lib berechnet). Rund 45 % jeder Brutto-Erhöhung gehen in Steuern und Sozialabgaben — ein steuerfreier Baustein von z. B. 110 € entspricht damit etwa 200 € Brutto-Erhöhung.',
       },
       {
         typ: 'text',
@@ -7428,7 +7428,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Lohnsteuer 2026 kostenlos berechnen: alle Steuerklassen I–VI, Soli mit Freigrenze, Kirchensteuer und Vergleichstabelle — mit KI-Erklärung.',
     keywords: ['lohnsteuer rechner', 'lohnsteuer berechnen', 'lohnsteuer 2026', 'lohnsteuer steuerklasse', 'lohnsteuer tabelle 2026', 'pap 2026', 'lohnsteuer monatlich', 'lohnsteuer jahrestabelle', 'lohnsteuer rechner brutto', 'lohnsteuer klasse 1'],
     icon: '💷',
-    beispiel: '3.500 € Brutto/Monat, Klasse I, ohne Kirchensteuer (2026): Lohnsteuer ca. 412 €/Monat, Soli 0 € (unter Freigrenze). Gleicher Lohn in Klasse VI: ca. 831 €/Monat — deutlich mehr, weil dort kein Grundfreibetrag gilt.',
+    beispiel: '3.500 € Brutto/Monat, Klasse I, kinderlos, ohne Kirchensteuer (2026): Lohnsteuer ca. 406 €/Monat, Soli 0 € (unter Freigrenze). Gleicher Lohn in Klasse VI: ca. 822 €/Monat — deutlich mehr, weil dort kein Grundfreibetrag gilt.',
     faq: [
       {
         frage: 'Was ist der Unterschied zwischen Lohnsteuer und Einkommensteuer?',
@@ -7467,15 +7467,15 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Lohnsteuer nach Bruttomonatslohn (Steuerklasse I, 2026)',
         kopf: ['Bruttolohn / Monat', 'Lohnsteuer / Monat', 'Solidaritätszuschlag'],
         zeilen: [
-          ['2.000 €', '91 €', '0 €'],
-          ['2.500 €', '191 €', '0 €'],
-          ['3.000 €', '298 €', '0 €'],
-          ['3.500 €', '412 €', '0 €'],
-          ['4.000 €', '532 €', '0 €'],
-          ['5.000 €', '793 €', '0 €'],
-          ['6.000 €', '1.087 €', '0 €'],
+          ['2.000 €', '88 €', '0 €'],
+          ['2.500 €', '187 €', '0 €'],
+          ['3.000 €', '293 €', '0 €'],
+          ['3.500 €', '406 €', '0 €'],
+          ['4.000 €', '525 €', '0 €'],
+          ['5.000 €', '782 €', '0 €'],
+          ['6.000 €', '1.074 €', '0 €'],
         ],
-        fussnote: 'Steuerklasse I (ledig), ohne Kirchensteuer und ohne eingetragenen Freibetrag, nach dem amtlichen Programmablaufplan 2026. Der Solidaritätszuschlag bleibt in allen Zeilen bei 0 €, weil die Jahres-Lohnsteuer unter der Soli-Freigrenze von 20.350 € liegt; erst bei deutlich höheren Gehältern fällt Solidaritätszuschlag an. Die Werte sind der reine Steuerabzug — Sozialversicherungsbeiträge sind hier nicht enthalten. Gut erkennbar ist die Progression: Von 2.000 auf 3.000 € verdoppelt sich der Lohn nicht, die Lohnsteuer steigt aber von 91 auf 298 € überproportional, weil höhere Einkommensteile mit höheren Sätzen belastet werden.',
+        fussnote: 'Steuerklasse I (ledig, kinderlos), ohne Kirchensteuer und ohne eingetragenen Freibetrag, nach dem amtlichen Programmablaufplan 2026. Der Solidaritätszuschlag bleibt in allen Zeilen bei 0 €, weil die Jahres-Lohnsteuer unter der Soli-Freigrenze von 20.350 € liegt; erst bei deutlich höheren Gehältern fällt Solidaritätszuschlag an. Die Werte sind der reine Steuerabzug — Sozialversicherungsbeiträge sind hier nicht enthalten. Gut erkennbar ist die Progression: Von 2.000 auf 3.000 € verdoppelt sich der Lohn nicht, die Lohnsteuer steigt aber von 88 auf 293 € überproportional, weil höhere Einkommensteile mit höheren Sätzen belastet werden.',
       },
       {
         typ: 'text',
@@ -7488,26 +7488,26 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Gleicher Lohn (4.000 €/Monat), verschiedene Steuerklassen',
         kopf: ['Steuerklasse', 'Lohnsteuer / Monat'],
         zeilen: [
-          ['I — ledig', '532 €'],
-          ['II — alleinerziehend', '425 €'],
-          ['III — Ehe, Hauptverdiener', '208 €'],
-          ['IV — Ehe, ähnliches Einkommen', '532 €'],
-          ['V — Ehe, Zweitverdiener', '955 €'],
-          ['VI — Zweit-/Nebenjob', '999 €'],
+          ['I — ledig', '525 €'],
+          ['II — alleinerziehend', '418 €'],
+          ['III — Ehe, Hauptverdiener', '202 €'],
+          ['IV — Ehe, ähnliches Einkommen', '525 €'],
+          ['V — Ehe, Zweitverdiener', '945 €'],
+          ['VI — Zweit-/Nebenjob', '989 €'],
         ],
-        fussnote: 'Bruttomonatslohn 4.000 €, ohne Kirchensteuer und Freibetrag, PAP 2026. Gut sichtbar: Klasse III hat den niedrigsten Abzug (doppelter Grundfreibetrag), Klasse V und VI den höchsten (kein Grundfreibetrag). Klasse I und IV sind identisch, weil IV pro Partner wie I behandelt wird. Die Summe der Lohnsteuer eines Ehepaars in III/V entspricht dabei nicht der Jahressteuer — diese wird erst bei der Veranlagung über den Splittingtarif ermittelt. Der scheinbar günstige Abzug in Klasse III darf deshalb nicht mit einer echten Steuerersparnis verwechselt werden; er bedeutet nur, dass der Partner in Klasse V umso mehr trägt.',
+        fussnote: 'Bruttomonatslohn 4.000 €, kinderlos, ohne Kirchensteuer und Freibetrag, PAP 2026. Gut sichtbar: Klasse III hat den niedrigsten Abzug (doppelter Grundfreibetrag), Klasse V und VI den höchsten (kein Grundfreibetrag). Klasse I und IV sind identisch, weil IV pro Partner wie I behandelt wird. Die Summe der Lohnsteuer eines Ehepaars in III/V entspricht dabei nicht der Jahressteuer — diese wird erst bei der Veranlagung über den Splittingtarif ermittelt. Der scheinbar günstige Abzug in Klasse III darf deshalb nicht mit einer echten Steuerersparnis verwechselt werden; er bedeutet nur, dass der Partner in Klasse V umso mehr trägt.',
       },
       {
         typ: 'tabelle',
         titel: 'Lohnsteuer nach Klasse und Lohnhöhe (I / III / V)',
         kopf: ['Bruttolohn / Monat', 'Klasse I', 'Klasse III', 'Klasse V'],
         zeilen: [
-          ['2.500 €', '191 €', '0 €', '472 €'],
-          ['3.500 €', '412 €', '115 €', '788 €'],
-          ['4.500 €', '659 €', '307 €', '1.124 €'],
-          ['5.500 €', '933 €', '516 €', '1.462 €'],
+          ['2.500 €', '187 €', '0 €', '466 €'],
+          ['3.500 €', '406 €', '110 €', '779 €'],
+          ['4.500 €', '650 €', '300 €', '1.113 €'],
+          ['5.500 €', '921 €', '507 €', '1.448 €'],
         ],
-        fussnote: 'Monatliche Lohnsteuer nach PAP 2026, ohne Kirchensteuer und Freibetrag. Klasse III (höher verdienender Ehepartner) zahlt durchgehend am wenigsten, Klasse V (geringer verdienender Partner) am meisten — gemeinsam tragen beide die Steuer des Paares, nur anders verteilt. Bei 2.500 € fällt in Klasse III noch gar keine Lohnsteuer an, weil der doppelte Grundfreibetrag greift. Diese Tabelle dient als schnelles Nachschlagewerk: Den eigenen Bruttolohn in der Zeile suchen und in der Spalte der eigenen Steuerklasse den ungefähren monatlichen Steuerabzug ablesen. Zwischenwerte lassen sich grob interpolieren.',
+        fussnote: 'Monatliche Lohnsteuer nach PAP 2026, kinderlos, ohne Kirchensteuer und Freibetrag. Klasse III (höher verdienender Ehepartner) zahlt durchgehend am wenigsten, Klasse V (geringer verdienender Partner) am meisten — gemeinsam tragen beide die Steuer des Paares, nur anders verteilt. Bei 2.500 € fällt in Klasse III noch gar keine Lohnsteuer an, weil der doppelte Grundfreibetrag greift. Diese Tabelle dient als schnelles Nachschlagewerk: Den eigenen Bruttolohn in der Zeile suchen und in der Spalte der eigenen Steuerklasse den ungefähren monatlichen Steuerabzug ablesen. Zwischenwerte lassen sich grob interpolieren.',
       },
       {
         typ: 'beispielrechnung',
@@ -7515,11 +7515,11 @@ export const finanzenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Bruttomonatslohn', formel: '', ergebnis: '4.000 €' },
           { label: 'Bruttojahreslohn', formel: '4.000 × 12', ergebnis: '48.000 €' },
-          { label: 'Lohnsteuer / Jahr (PAP 2026)', formel: 'Klasse I', ergebnis: '6.382 €' },
-          { label: 'Lohnsteuer / Monat', formel: '6.382 ÷ 12', ergebnis: '≈ 532 €' },
+          { label: 'Lohnsteuer / Jahr (PAP 2026)', formel: 'Klasse I, kinderlos', ergebnis: '6.294 €' },
+          { label: 'Lohnsteuer / Monat', formel: '6.294 ÷ 12', ergebnis: '524,50 €' },
           { label: 'Solidaritätszuschlag', formel: 'unter Freigrenze 20.350 €', ergebnis: '0 €' },
         ],
-        fazit: 'Für 4.000 € brutto im Monat (48.000 € im Jahr) behält der Arbeitgeber in Klasse I rund 532 € Lohnsteuer monatlich ein. Der Programmablaufplan zieht dabei intern bereits den Arbeitnehmer-Pauschbetrag (1.230 €), die Sonderausgabenpauschale und eine Vorsorgepauschale für Kranken-, Pflege- und Rentenversicherung ab, bevor der Tarif greift. Solidaritätszuschlag fällt nicht an, weil die Jahres-Lohnsteuer (6.382 €) deutlich unter der Freigrenze von 20.350 € liegt. Wichtig: Das ist nur der Steueranteil — vom Brutto gehen zusätzlich die Sozialversicherungsbeiträge ab. Das vollständige Netto zeigt der Brutto-Netto-Rechner. Alle Werte folgen dem amtlichen PAP 2026. Wäre derselbe Lohn in Klasse VI zu versteuern (etwa als Zweitjob), läge die Lohnsteuer mit rund 999 € fast doppelt so hoch — weil dort kein Grundfreibetrag und keine weiteren Pauschalen berücksichtigt werden. Das zeigt, wie stark allein die Steuerklasse den monatlichen Abzug verschiebt, obwohl die Jahressteuer am Ende dieselbe bleibt.',
+        fazit: 'Für 4.000 € brutto im Monat (48.000 € im Jahr) behält der Arbeitgeber in Klasse I (kinderlos) rund 525 € Lohnsteuer monatlich ein. Der Programmablaufplan zieht dabei intern bereits den Arbeitnehmer-Pauschbetrag (1.230 €), die Sonderausgabenpauschale und eine Vorsorgepauschale für Kranken-, Pflege- und Rentenversicherung ab — bei Kinderlosen einschließlich des Beitragszuschlags zur Pflegeversicherung —, bevor der Tarif greift. Solidaritätszuschlag fällt nicht an, weil die Jahres-Lohnsteuer (6.294 €) deutlich unter der Freigrenze von 20.350 € liegt. Wichtig: Das ist nur der Steueranteil — vom Brutto gehen zusätzlich die Sozialversicherungsbeiträge ab. Das vollständige Netto zeigt der Brutto-Netto-Rechner. Alle Werte folgen dem amtlichen PAP 2026. Wäre derselbe Lohn in Klasse VI zu versteuern (etwa als Zweitjob), läge die Lohnsteuer mit rund 989 € fast doppelt so hoch — weil dort kein Grundfreibetrag und keine weiteren Pauschalen berücksichtigt werden. Das zeigt, wie stark allein die Steuerklasse den monatlichen Abzug verschiebt, obwohl die Jahressteuer am Ende dieselbe bleibt.',
       },
       {
         typ: 'statistik',
