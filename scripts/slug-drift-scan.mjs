@@ -26,7 +26,7 @@
  * META_ROUTES und META_WHITELIST.
  */
 
-import { readFileSync, readdirSync, statSync } from 'fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
 import { dirname, join, extname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -71,8 +71,8 @@ const META_ROUTES = new Set([
   'social',
   // Blog-Übersicht (Welle 24) — neue statische Route app/blog/page.tsx,
   // verlinkt aus Header (Desktop), Mega-Menu (mobil) und Blog-Layout.
-  // Artikel-Links /blog/<slug> sind dynamisch (Template-Literal) und werden
-  // vom Scan nicht als hartkodierte Cross-Links erfasst.
+  // Artikel-Links /blog/<slug>: dynamische (Template-Literal) erfasst der Scan
+  // nicht; hartkodierte in MDX prüft der Meta-Pass gegen den Artikelordner (W148).
   'blog',
   // Offline-Nutzung (Welle 69) — neue statische Route app/offline-nutzung/page.tsx,
   // Einwilligungs-Schalter für den PWA-Service-Worker nach § 25 TDDDG. Aus der
@@ -285,6 +285,9 @@ for (const f of FILES) {
         if (SSOT[firstSeg] !== undefined) continue;
         // Bekannte Meta-Route?
         if (META_ROUTES.has(route)) continue;
+        // Blogartikel-Link /blog/<slug> (W148): gültig, wenn der Artikelordner existiert.
+        // Ein Tippfehler im Slug bleibt ein Drift, weil der Ordner dann fehlt.
+        if (firstSeg === 'blog' && existsSync(join(ROOT, 'app', 'blog', route.split('/')[1] ?? '', 'page.mdx'))) continue;
         // Whitelist?
         if (isMetaWhitelisted(rel, route)) continue;
         metaDrifts.push({
