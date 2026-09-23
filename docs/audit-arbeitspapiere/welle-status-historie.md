@@ -6,6 +6,29 @@
 
 ---
 
+## 23.09.2026 — Welle 150: Bruchrechner rechnet mit Dezimalzahlen und rundet nicht mehr stumm — ✅ ABGESCHLOSSEN
+
+Anlass war ein Nutzerwunsch über das Feedback-Formular (23.09.2026): „Dezimalzahl mal Bruch“.
+Beim Nachsehen zeigte sich der eigentliche Fehler: Der Bruchrechner las jedes Feld mit
+`Math.round(parseDeutscheZahl(…))`. Wer 0,75 eintippte, rechnete ohne jeden Hinweis mit 1 — in
+allen vier Tabs. Vermutlich hat der Nutzer genau das erlebt.
+
+**Stumm runden ist schlimmer als ablehnen.** Ein abgelehntes Feld sieht man, ein gerundetes
+nicht. Jetzt gilt: Bruchfelder nehmen nur ganze Zahlen an, alles andere erzeugt einen sichtbaren
+Hinweis; Kommazahlen haben einen eigenen, exakten Eingabeweg.
+
+- **09c005d** — Lib: `dezimalTextZuBruch` rechnet mit den Ziffern statt mit der Gleitkommazahl
+  (0,75 = 75/100 = 3/4); `dezimalZuBruch` las Zahlen unter 1e-6 wegen der Exponentialschreibweise
+  als 0. Neu: `scripts/verify-bruchrechnung.ts` mit von Hand gerechneten Sollwerten.
+- **6e33898** — Komponente: Umschalter „Bruch | Dezimalzahl“ je Seite, Umwandlung im Rechenweg,
+  sichtbare Hinweise statt Rundung in allen vier Tabs, KI-Erklärung und Teilen-Text mit den
+  tatsächlichen Eingaben.
+- **37dfa53** — Konfiguration (Beispiel, neue FAQ, Stichwort, letzteAktualisierung) und Eintrag auf
+  /aktualisierungen.
+- **d5cb57c** — /aktualisierungen: Die Links (Bereich und E-Mail) waren im Dunkelmodus
+  `primary-700` (#1A365D) auf dunklem Grund und ohne Unterstreichung kaum zu sehen. Jetzt
+  `primary-300` im Dunkelmodus und dauerhaft unterstrichen.
+
 ## 23.09.2026 — Welle 149: Veröffentlichungsdatum rutschte in den Artikeltitel — ✅ ABGESCHLOSSEN
 
 Aufgefallen bei der Sichtprüfung von Artikel 20: Das Datum unter der Überschrift klebte an der
