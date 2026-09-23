@@ -10,10 +10,14 @@
  *
  * Erfolg je Probe: HTTP 200 UND nicht-leeres Feld `explanation`.
  * Sendet IMMER eine Status-Mail (OK und FAIL) an ADMIN_NOTIFICATION_EMAIL.
+ *
+ * Die Mail geht zusätzlich an BERICHTSWACHE_EMAIL, damit die Berichtswache sie über den
+ * Gmail-Konnektor lesen kann; sie endet mit einer Maschinenzeile aus lib/betriebsmeldung.ts.
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { getTerminlage } from '@/lib/termine';
+import { baueMaschinenzeile } from '@/lib/betriebsmeldung';
 import { pruefeCronGeheimnis } from '@/lib/admin-session';
 
 export const dynamic = 'force-dynamic';
@@ -103,6 +107,14 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     return;
   }
 
+  const wache = process.env.BERICHTSWACHE_EMAIL?.trim();
+  const empfaenger = [to];
+  if (!wache) {
+    console.warn('[health-check] BERICHTSWACHE_EMAIL nicht gesetzt — Berichtswache erhält die Betriebsmeldung nicht.');
+  } else if (wache !== to) {
+    empfaenger.push(wache);
+  }
+
   const date = new Date().toISOString().slice(0, 10);
   const statusWord = allOk ? 'OK' : 'FEHLER';
 
@@ -139,6 +151,9 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     lines.push('', 'Gepflegt in lib/termine.ts. Erledigte Einmaltermine dort entfernen.');
   }
 
+  // Letzte Zeile, in jeder Mail — die Berichtswache liest sie mechanisch.
+  lines.push('', baueMaschinenzeile(results, lage, new Date()));
+
   const terminMarke =
     lage.ueberfaellig.length > 0
       ? ` · ${lage.ueberfaellig.length} ÜBERFÄLLIG`
@@ -150,7 +165,7 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     const resend = new Resend(apiKey);
     await resend.emails.send({
       from: 'Rechenfix Stats <feedback@rechenfix.de>',
-      to,
+      to: empfaenger,
       subject: `[Rechenfix KI-Check] ${statusWord}${terminMarke} — ${date}`,
       text: lines.join('\n'),
     });

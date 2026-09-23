@@ -95,6 +95,7 @@ Alle ENV-Vars in der Vercel-Dashboard-UI setzen (Settings → Environment Variab
 | `META_PAGE_ID` | Facebook-Page-ID (numerisch, z. B. `1127293363806857`) | Production + Preview |
 | `META_INSTAGRAM_USER_ID` | IG-Business-Account-ID aus Schritt 8 | Production + Preview |
 | `ADMIN_NOTIFICATION_EMAIL` | `info@rechenfix.de` (oder andere Empfangs-Adresse) | Production + Preview |
+| `BERICHTSWACHE_EMAIL` | Zweiter Empfänger der täglichen Betriebsmeldung (`/api/cron/health-check`); die Berichtswache liest sie über den Gmail-Konnektor. Wert wird nur in Vercel gesetzt, nie ins Repository geschrieben. Fehlt er, geht die Mail nur an `ADMIN_NOTIFICATION_EMAIL`. | Production |
 | `CRON_SECRET` | Random 32-Zeichen-String, manuell generieren (`openssl rand -hex 16`) | Production + Preview |
 | `ADMIN_PASSWORD` | Random String — schützt `?test=true` in Production | Production + Preview |
 | **`SOCIAL_PIPELINE_ENABLED`** | **`"true"` (String, exakt) → live; alles andere oder unset → pausiert.** Siehe §10. | Production + Preview |
