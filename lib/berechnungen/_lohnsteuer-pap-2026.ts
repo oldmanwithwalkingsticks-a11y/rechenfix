@@ -929,7 +929,7 @@ export function berechneLohnsteuerPAP2026(params: {
   kinderfreibetraege?: number;
   religion?: 0 | 1;
   vorsorge?: VorsorgeParams;
-}): { lstJahr: number; soliJahr: number } {
+}): { lstJahr: number; soliJahr: number; kistBmgJahr: number } {
   const pap = new LohnsteuerPAP2026();
   const vorsorge = params.vorsorge ?? {};
   const kvPrivat = vorsorge.kvArt === 'privat';
@@ -964,5 +964,7 @@ export function berechneLohnsteuerPAP2026(params: {
   return {
     lstJahr: out.LSTLZZ.div(100).toNumber(),
     soliJahr: out.SOLZLZZ.div(100).toNumber(),
+    // Bemessungsgrundlage der Kirchensteuer (JBMG, mit Kinderfreibeträgen) — nur bei religion=1 befüllt.
+    kistBmgJahr: out.BK.div(100).toNumber(),
   };
 }

@@ -1,4 +1,4 @@
-import { berechneSoli, WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
+import { WK_PAUSCHALE_AN_2026 } from './einkommensteuer';
 import { pvAnteilAnVorsorge2026 } from './pflegeversicherung';
 import { berechneLohnsteuerPAP2026 } from './_lohnsteuer-pap-2026';
 
@@ -32,6 +32,13 @@ export interface VorsorgeParams {
   kinderUnter25?: number;
   kvPrivatBeitragJahr?: number;      // nur relevant wenn kvArt === 'privat'
   rvBefreit?: boolean;
+  /**
+   * Beitragszuschlag für Kinderlose in der Vorsorgepauschale (PAP-Eingang PVZ,
+   * § 39b Abs. 2 Satz 5 Nr. 3 Buchst. c EStG). Muss gesetzt werden, wenn der
+   * PV-Abzug den Zuschlag enthält — sonst ist die Lohnsteuer für Kinderlose zu hoch.
+   * Default false (bestehende Konsumenten unverändert).
+   */
+  pvKinderlosZuschlag?: boolean;
 }
 
 export interface LohnsteuerErgebnis {
@@ -166,15 +173,45 @@ void ARBEITNEHMER_PAUSCHBETRAG;
 void SONDERAUSGABEN_PAUSCHBETRAG;
 void ENTLASTUNGSBETRAG_ALLEINERZIEHENDE;
 
-function berechneSoliJahr(lstJahr: number, sk: Steuerklasse): number {
-  // SK III = Splittingtarif → doppelte Freigrenze (40.700 €) + Milderungszone
-  // wird von berechneSoli zentral behandelt (§ 4 SolzG).
-  return berechneSoli(lstJahr, sk === 3, 2026);
+/**
+ * Lohnsteuer, Solidaritätszuschlag und Kirchensteuer-Bemessungsgrundlage für ein
+ * Jahr — alle drei aus EINEM Lauf des amtlichen PAP (W147).
+ *
+ * Die Lohnsteuer rechnet der PAP ohne Kinderfreibeträge. Soli und Kirchensteuer
+ * bemessen sich nach einer fiktiven Lohnsteuer MIT Kinderfreibeträgen
+ * (§ 51a Abs. 2a EStG, § 3 Abs. 2a SolzG); der Soli mit Freigrenze, verdoppelt in
+ * Klasse III, und Milderungszone (§§ 3, 4 SolzG). Nichts davon wird hier
+ * nachgebaut — die Werte kommen unverändert aus dem PAP.
+ */
+export function berechneLohnsteuerMitZuschlaegenJahr(
+  bruttoJahr: number,
+  sk: Steuerklasse,
+  jahresfreibetrag: number,
+  kinderfreibetraege: number,
+  vorsorge?: VorsorgeParams,
+): { lstJahr: number; soliJahr: number; kistBmgJahr: number } {
+  if (bruttoJahr <= 0) return { lstJahr: 0, soliJahr: 0, kistBmgJahr: 0 };
+  return berechneLohnsteuerPAP2026({
+    jahresBrutto: bruttoJahr,
+    steuerklasse: sk,
+    jahresfreibetrag,
+    kinderfreibetraege,
+    religion: 1, // nur damit der PAP die Bemessungsgrundlage BK befüllt
+    vorsorge,
+  });
 }
 
-function berechneKiStJahr(lstJahr: number, kirchensteuer: boolean, satz: 8 | 9): number {
-  if (!kirchensteuer) return 0;
-  return lstJahr * (satz / 100);
+/**
+ * Monatsanteil eines Jahresbetrags wie im PAP bei monatlichem Lohnzahlungszeitraum
+ * (UPANTEIL, LZZ = 2): Jahresbetrag in Cent durch 12, abgerundet.
+ */
+export function monatsanteilPAP(jahresbetrag: number): number {
+  return Math.floor(Math.round(jahresbetrag * 100) / 12) / 100;
+}
+
+/** Kirchensteuer aus einer Bemessungsgrundlage; Cent-Bruchteile bleiben außer Ansatz. */
+export function kirchensteuerAusBmg(bemessungsgrundlage: number, satz: 8 | 9): number {
+  return Math.floor(Math.round(bemessungsgrundlage * 100) * satz / 100) / 100;
 }
 
 export function berechneLohnsteuer(e: LohnsteuerEingabe): LohnsteuerErgebnis {
@@ -182,38 +219,45 @@ export function berechneLohnsteuer(e: LohnsteuerEingabe): LohnsteuerErgebnis {
   const bruttoMonat = bruttoJahr / 12;
 
   // Vorsorgepauschale braucht die Anzahl Kinder unter 25 für den PV-Staffel-Satz
-  // (§ 55 Abs. 3 SGB XI). Ohne Angabe: kinderlos (Default im Helper).
-  const vorsorge: VorsorgeParams = { kinderUnter25: e.kinderUnter25 ?? 0 };
+  // (§ 55 Abs. 3 SGB XI). Ohne Kinder unter 25: Beitragszuschlag für Kinderlose
+  // (Annahme: älter als 23, wie im PV-Abzug des Brutto-Netto-Rechners).
+  const kinderUnter25 = e.kinderUnter25 ?? 0;
+  const vorsorge: VorsorgeParams = { kinderUnter25, pvKinderlosZuschlag: kinderUnter25 === 0 };
 
-  const lstJahr = berechneLohnsteuerJahr(bruttoJahr, e.steuerklasse, e.jahresfreibetrag, vorsorge);
-  const soliJahr = berechneSoliJahr(lstJahr, e.steuerklasse);
-  const kistJahr = berechneKiStJahr(lstJahr, e.kirchensteuer, e.kirchensteuersatz);
+  const jahr = berechneLohnsteuerMitZuschlaegenJahr(bruttoJahr, e.steuerklasse, e.jahresfreibetrag, e.kinderfreibetraege, vorsorge);
+  const lstJahr = jahr.lstJahr;
+  const soliJahr = jahr.soliJahr;
+  const kistJahr = e.kirchensteuer ? kirchensteuerAusBmg(jahr.kistBmgJahr, e.kirchensteuersatz) : 0;
+  const lstMonat = monatsanteilPAP(lstJahr);
+  const soliMonat = monatsanteilPAP(soliJahr);
+  const kistMonat = e.kirchensteuer ? kirchensteuerAusBmg(monatsanteilPAP(jahr.kistBmgJahr), e.kirchensteuersatz) : 0;
 
   // Vergleich aller Steuerklassen
   const skListe: Steuerklasse[] = [1, 2, 3, 4, 5, 6];
   const vergleichsTabelle = skListe.map(sk => {
-    const lst = berechneLohnsteuerJahr(bruttoJahr, sk, e.jahresfreibetrag, vorsorge);
-    const soli = berechneSoliJahr(lst, sk);
-    const kist = berechneKiStJahr(lst, e.kirchensteuer, e.kirchensteuersatz);
+    const j = berechneLohnsteuerMitZuschlaegenJahr(bruttoJahr, sk, e.jahresfreibetrag, e.kinderfreibetraege, vorsorge);
+    const lstM = monatsanteilPAP(j.lstJahr);
+    const soliM = monatsanteilPAP(j.soliJahr);
+    const kistM = e.kirchensteuer ? kirchensteuerAusBmg(monatsanteilPAP(j.kistBmgJahr), e.kirchensteuersatz) : 0;
     return {
       steuerklasse: sk,
-      lohnsteuerMonat: Math.round(lst / 12 * 100) / 100,
-      soliMonat: Math.round(soli / 12 * 100) / 100,
-      kistMonat: Math.round(kist / 12 * 100) / 100,
-      gesamtMonat: Math.round((lst + soli + kist) / 12 * 100) / 100,
+      lohnsteuerMonat: lstM,
+      soliMonat: soliM,
+      kistMonat: kistM,
+      gesamtMonat: Math.round((lstM + soliM + kistM) * 100) / 100,
     };
   });
 
   return {
     bruttoMonat: Math.round(bruttoMonat * 100) / 100,
     bruttoJahr: Math.round(bruttoJahr * 100) / 100,
-    lohnsteuerMonat: Math.round(lstJahr / 12 * 100) / 100,
+    lohnsteuerMonat: lstMonat,
     lohnsteuerJahr: Math.round(lstJahr * 100) / 100,
-    solidaritaetszuschlagMonat: Math.round(soliJahr / 12 * 100) / 100,
+    solidaritaetszuschlagMonat: soliMonat,
     solidaritaetszuschlagJahr: Math.round(soliJahr * 100) / 100,
-    kirchensteuerMonat: Math.round(kistJahr / 12 * 100) / 100,
+    kirchensteuerMonat: kistMonat,
     kirchensteuerJahr: Math.round(kistJahr * 100) / 100,
-    gesamtabzuegeMonat: Math.round((lstJahr + soliJahr + kistJahr) / 12 * 100) / 100,
+    gesamtabzuegeMonat: Math.round((lstMonat + soliMonat + kistMonat) * 100) / 100,
     gesamtabzuegeJahr: Math.round((lstJahr + soliJahr + kistJahr) * 100) / 100,
     steuerklasse: e.steuerklasse,
     vergleichsTabelle,

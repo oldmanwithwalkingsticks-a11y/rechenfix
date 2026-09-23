@@ -1,4 +1,4 @@
-import { berechneLohnsteuerJahr } from './lohnsteuer';
+import { berechneLohnsteuerMitZuschlaegenJahr, monatsanteilPAP, kirchensteuerAusBmg } from './lohnsteuer';
 import { pvAnteilAn2026 } from './pflegeversicherung';
 
 export interface BruttoNettoEingabe {
@@ -86,6 +86,7 @@ function buildVorsorgeParams(eingabe: BruttoNettoEingabe): {
   kinderUnter25: number;
   kvPrivatBeitragJahr: number;
   rvBefreit: boolean;
+  pvKinderlosZuschlag: boolean;
 } {
   const kinderUnter25 = eingabe.kinderUnter25 ?? Math.floor(eingabe.kinderfreibetraege);
   return {
@@ -94,25 +95,20 @@ function buildVorsorgeParams(eingabe: BruttoNettoEingabe): {
     kinderUnter25,
     kvPrivatBeitragJahr: eingabe.kvPrivatBeitrag * 12,
     rvBefreit: eingabe.rvBefreit,
+    // W147: Der PV-Abzug unten (pvAnteilAn2026) enthält bei 0 Kindern den Zuschlag für
+    // Kinderlose. Die Vorsorgepauschale muss ihn dann ebenfalls enthalten (PAP-Eingang PVZ).
+    pvKinderlosZuschlag: eingabe.kvArt === 'gesetzlich' && kinderUnter25 === 0,
   };
 }
 
-function berechneLohnsteuer(
-  brutto: number,
-  steuerklasse: 1 | 2 | 3 | 4 | 5 | 6,
-  vorsorge: ReturnType<typeof buildVorsorgeParams>,
-): number {
-  const jahresBrutto = brutto * 12;
-  const lstJahr = berechneLohnsteuerJahr(jahresBrutto, steuerklasse, 0, vorsorge);
-  return Math.round((lstJahr / 12) * 100) / 100;
-}
-
-function berechneJahressteuer(
+// W147: Lohnsteuer, Soli und Kirchensteuer-Bemessungsgrundlage kommen aus einem PAP-Lauf
+// (berechneLohnsteuerMitZuschlaegenJahr). Keine eigene Soli- oder KiSt-Formel in dieser Datei.
+function berechneJahreswerte(
   jahresBrutto: number,
-  steuerklasse: 1 | 2 | 3 | 4 | 5 | 6,
+  eingabe: BruttoNettoEingabe,
   vorsorge: ReturnType<typeof buildVorsorgeParams>,
-): number {
-  return Math.round(berechneLohnsteuerJahr(jahresBrutto, steuerklasse, 0, vorsorge) * 100) / 100;
+) {
+  return berechneLohnsteuerMitZuschlaegenJahr(jahresBrutto, eingabe.steuerklasse, 0, eingabe.kinderfreibetraege, vorsorge);
 }
 
 // Beitragsbemessungsgrenzen 2026 (einheitlich, seit 2025 keine West/Ost-Trennung)
@@ -138,19 +134,15 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   const bbgRv = BBG_RV;
   const vorsorgeParams = buildVorsorgeParams(eingabe);
 
-  // Lohnsteuer
-  const lohnsteuer = berechneLohnsteuer(brutto, eingabe.steuerklasse, vorsorgeParams);
-
-  // Solidaritätszuschlag
-  const jahresLohnsteuer = lohnsteuer * 12;
-  const solidaritaet = jahresLohnsteuer > 20350
-    ? Math.round(lohnsteuer * 0.055 * 100) / 100
-    : 0;
-
-  // Kirchensteuer
+  // Lohnsteuer, Soli, Kirchensteuer — Monatswerte wie im PAP bei monatlichem Lohnzahlungszeitraum.
+  // Kinderfreibeträge wirken nur auf Soli und Kirchensteuer (§ 51a Abs. 2a EStG, § 3 Abs. 2a SolzG),
+  // der Soli hat Freigrenze (Klasse III doppelt) und Milderungszone (§§ 3, 4 SolzG).
+  const jahreswerte = berechneJahreswerte(brutto * 12, eingabe, vorsorgeParams);
+  const lohnsteuer = monatsanteilPAP(jahreswerte.lstJahr);
+  const solidaritaet = monatsanteilPAP(jahreswerte.soliJahr);
   const kstSatz = eingabe.kirchensteuersatz;
   const kirchensteuer = eingabe.kirchensteuer
-    ? Math.round(lohnsteuer * (kstSatz / 100) * 100) / 100
+    ? kirchensteuerAusBmg(monatsanteilPAP(jahreswerte.kistBmgJahr), kstSatz)
     : 0;
 
   // Sozialabgaben
@@ -188,22 +180,25 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   const wgBrutto = eingabe.weihnachtsgeld ?? 0;
 
   if (wgBrutto > 0) {
-    // Steuer: Jahressteuer mit WG minus Jahressteuer ohne WG
+    // Steuer auf den sonstigen Bezug wie im PAP (MSONST): Jahreslohnsteuer mit WG minus ohne WG.
     const jahresBruttoOhne = brutto * 12;
     const jahresBruttoMit = jahresBruttoOhne + wgBrutto;
-    const jahressteuerOhne = berechneJahressteuer(jahresBruttoOhne, eingabe.steuerklasse, vorsorgeParams);
-    const jahressteuerMit = berechneJahressteuer(jahresBruttoMit, eingabe.steuerklasse, vorsorgeParams);
-    const wgLohnsteuer = Math.round((jahressteuerMit - jahressteuerOhne) * 100) / 100;
+    const ohne = berechneJahreswerte(jahresBruttoOhne, eingabe, vorsorgeParams);
+    const mit = berechneJahreswerte(jahresBruttoMit, eingabe, vorsorgeParams);
+    const wgLohnsteuer = Math.max(0, Math.round((mit.lstJahr - ohne.lstJahr) * 100) / 100);
 
-    // Soli auf WG-Lohnsteuer
-    const wgJahresLst = jahressteuerMit;
-    const wgSolidaritaet = wgJahresLst > 20350
-      ? Math.round(wgLohnsteuer * 0.055 * 100) / 100
+    // Soli auf den sonstigen Bezug (PAP MSOLZSTS): 5,5 % der Steuer auf den Bezug, sobald die
+    // fiktive Jahressteuer MIT Bezug und MIT Kinderfreibeträgen die Freigrenze übersteigt
+    // (Klasse III doppelt); für sonstige Bezüge kennt der PAP keine Milderungszone. Die
+    // Bedingung ist genau dann erfüllt, wenn der PAP für das Jahr mit Bezug einen Soli > 0
+    // ausweist — so bleibt die Freigrenze allein im PAP und steht hier nicht als Literal.
+    const wgSolidaritaet = mit.soliJahr > 0
+      ? Math.floor(Math.round(wgLohnsteuer * 100) * 5.5 / 100) / 100
       : 0;
 
-    // Kirchensteuer auf WG
+    // Kirchensteuer auf den Bezug: Bemessungsgrundlage ist die Steuer auf den Bezug selbst (PAP BKS = STS).
     const wgKirchensteuer = eingabe.kirchensteuer
-      ? Math.round(wgLohnsteuer * (kstSatz / 100) * 100) / 100
+      ? kirchensteuerAusBmg(wgLohnsteuer, kstSatz)
       : 0;
 
     // SV-Beiträge auf Weihnachtsgeld (reguläre Sätze, BBG beachten)

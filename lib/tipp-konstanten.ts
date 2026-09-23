@@ -13,4 +13,4 @@ export const MINDESTLOHN_TIPP_STUNDE = 13.9;
 export const MINDESTLOHN_TIPP_BRUTTO = 2407;
 
 /** Netto in SK 1, NRW, GKV mit Ø-Zusatzbeitrag, ohne Kirchensteuer. */
-export const MINDESTLOHN_TIPP_NETTO = 1711;
+export const MINDESTLOHN_TIPP_NETTO = 1715;
