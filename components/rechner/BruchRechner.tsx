@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import {
   berechneBrueche,
   kuerzeBruch,
-  dezimalZuBruch,
+  dezimalTextZuBruch,
   bruchZuDezimal,
   vergleicheBrueche,
   gemischtZuBruch,
@@ -12,6 +12,10 @@ import {
   kuerzen,
   type Operation,
   type Bruch,
+  type BruchRechenErgebnis,
+  type KuerzenErgebnis,
+  type GemischteZahl,
+  type VergleichErgebnis,
 } from '@/lib/berechnungen/bruchrechnung';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -41,6 +45,99 @@ function GemischtAnzeige({ ganz, zaehler, nenner, className = '' }: { ganz: numb
       <span className="mr-0.5">{ganz}</span>
       <BruchAnzeige zaehler={Math.abs(zaehler)} nenner={nenner} />
     </span>
+  );
+}
+
+/**
+ * Ganzzahl aus einem Bruchfeld (W150). Kommazahlen und ungültige Eingaben ergeben null —
+ * früher wurde hier stumm gerundet, aus „0,75“ wurde 1 und das Ergebnis war falsch.
+ */
+function ganzzahl(text: string): number | null {
+  const v = parseDeutscheZahl(text);
+  return Number.isInteger(v) ? v : null;
+}
+
+const HINWEIS_GANZZAHL = 'Zähler, Nenner und ganze Zahl bitte als ganze Zahlen eingeben.';
+const HINWEIS_ZN = 'Zähler und Nenner bitte als ganze Zahlen eingeben.';
+
+function Hinweis({ text }: { text: string }) {
+  return (
+    <div
+      role="status"
+      className="rounded-xl border border-amber-200 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10 px-4 py-3 text-sm text-amber-800 dark:text-amber-200"
+    >
+      {text}
+    </div>
+  );
+}
+
+type OperandModus = 'bruch' | 'dezimal';
+
+type OperandOk = { ok: true; bruch: Bruch; text: string; umwandlung: string | null };
+type Operand = OperandOk | { ok: false; fehler: string };
+
+/** Ergebnis eines Tabs: entweder ein sichtbarer Hinweis oder die Werte (W150, nie stumm leer). */
+type Pruefung<T> = { ok: false; fehler: string } | ({ ok: true } & T);
+
+/** Liest eine Seite der Rechnung — als Bruch (auch gemischt) oder als Dezimalzahl (W150). */
+function leseOperand(
+  name: string, modus: OperandModus, dezimal: string, z: string, n: string, g: string,
+): Operand {
+  if (modus === 'dezimal') {
+    const r = dezimalTextZuBruch(dezimal);
+    if (!r) {
+      return { ok: false, fehler: `${name}: bitte eine Dezimalzahl mit höchstens neun Nachkommastellen eingeben, zum Beispiel 0,75.` };
+    }
+    const text = dezimal.trim();
+    const roh = `${r.roh.zaehler}/${r.roh.nenner}`;
+    const gekuerzt = `${r.bruch.zaehler}/${r.bruch.nenner}`;
+    return { ok: true, bruch: r.bruch, text, umwandlung: roh === gekuerzt ? `${text} = ${gekuerzt}` : `${text} = ${roh} = ${gekuerzt}` };
+  }
+  const zaehler = ganzzahl(z);
+  const nenner = ganzzahl(n);
+  const ganz = g.trim() ? ganzzahl(g) : 0;
+  if (zaehler === null || nenner === null || ganz === null) {
+    return { ok: false, fehler: `${name}: ${HINWEIS_GANZZAHL} Für Kommazahlen auf „Dezimalzahl“ umschalten.` };
+  }
+  if (nenner === 0) return { ok: false, fehler: `${name}: Der Nenner darf nicht 0 sein.` };
+  const bruch: Bruch = ganz !== 0 ? gemischtZuBruch(ganz, zaehler, nenner) : { zaehler, nenner };
+  return { ok: true, bruch, text: ganz !== 0 ? `${ganz} ${zaehler}/${nenner}` : `${zaehler}/${nenner}`, umwandlung: null };
+}
+
+function OperandEingabe({
+  nr, modus, setModus, dezimal, setDezimal, zaehler, setZaehler, nenner, setNenner, ganz, setGanz,
+}: {
+  nr: 1 | 2;
+  modus: OperandModus; setModus: (m: OperandModus) => void;
+  dezimal: string; setDezimal: (v: string) => void;
+  zaehler: string; setZaehler: (v: string) => void;
+  nenner: string; setNenner: (v: string) => void;
+  ganz: string; setGanz: (v: string) => void;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <RadioToggleGroup
+        name={`bruch-modus-${nr}`}
+        legend={`Zahl ${nr} eingeben als`}
+        srOnlyLegend
+        options={[
+          { value: 'bruch', label: 'Bruch' },
+          { value: 'dezimal', label: 'Dezimalzahl' },
+        ]}
+        value={modus}
+        onChange={(v) => setModus(v as OperandModus)}
+      />
+      {modus === 'dezimal' ? (
+        <div>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1.5">Zahl {nr} (Dezimalzahl)</p>
+          <div className="w-32">
+            <NummerEingabe value={dezimal} onChange={setDezimal} placeholder="0,75" />
+          </div>
+        </div>
+      ) : (
+        <BruchEingabe zaehler={zaehler} setZaehler={setZaehler} nenner={nenner} setNenner={setNenner} ganz={ganz} setGanz={setGanz} label={`Bruch ${nr}`} />
+      )}
+    </div>
   );
 }
 
@@ -95,6 +192,10 @@ export default function BruchRechner() {
   const [z2, setZ2] = useState('2');
   const [n2, setN2] = useState('5');
   const [g2, setG2] = useState('');
+  const [modus1, setModus1] = useState<OperandModus>('bruch');
+  const [modus2, setModus2] = useState<OperandModus>('bruch');
+  const [d1, setD1] = useState('0,75');
+  const [d2, setD2] = useState('0,5');
 
   // Tab 2: Kürzen
   const [kz, setKz] = useState('12');
@@ -113,62 +214,61 @@ export default function BruchRechner() {
   const [vn2, setVn2] = useState('4');
 
   // Ergebnis Tab 1
-  const rechenErgebnis = useMemo(() => {
-    const zaehler1 = Math.round(parseDeutscheZahl(z1));
-    const nenner1 = Math.round(parseDeutscheZahl(n1));
-    const ganz1 = g1.trim() ? Math.round(parseDeutscheZahl(g1)) : 0;
-    const zaehler2 = Math.round(parseDeutscheZahl(z2));
-    const nenner2 = Math.round(parseDeutscheZahl(n2));
-    const ganz2 = g2.trim() ? Math.round(parseDeutscheZahl(g2)) : 0;
-
-    if (nenner1 === 0 || nenner2 === 0) return null;
-
-    const b1: Bruch = ganz1 !== 0
-      ? gemischtZuBruch(ganz1, zaehler1, nenner1)
-      : { zaehler: zaehler1, nenner: nenner1 };
-    const b2: Bruch = ganz2 !== 0
-      ? gemischtZuBruch(ganz2, zaehler2, nenner2)
-      : { zaehler: zaehler2, nenner: nenner2 };
-
-    return berechneBrueche(b1, op, b2);
-  }, [z1, n1, g1, op, z2, n2, g2]);
+  const rechnung = useMemo<Pruefung<{ o1: OperandOk; o2: OperandOk; ergebnis: BruchRechenErgebnis }>>(() => {
+    const o1 = leseOperand(modus1 === 'dezimal' ? 'Zahl 1' : 'Bruch 1', modus1, d1, z1, n1, g1);
+    const o2 = leseOperand(modus2 === 'dezimal' ? 'Zahl 2' : 'Bruch 2', modus2, d2, z2, n2, g2);
+    if (!o1.ok) return { ok: false, fehler: o1.fehler };
+    if (!o2.ok) return { ok: false, fehler: o2.fehler };
+    if (op === '÷' && o2.bruch.zaehler === 0) return { ok: false, fehler: 'Durch 0 kann man nicht teilen.' };
+    const ergebnis = berechneBrueche(o1.bruch, op, o2.bruch);
+    if (!ergebnis) return { ok: false, fehler: 'Diese Aufgabe lässt sich nicht berechnen.' };
+    return { ok: true, o1, o2, ergebnis };
+  }, [modus1, d1, z1, n1, g1, op, modus2, d2, z2, n2, g2]);
+  const rechenErgebnis = rechnung.ok ? rechnung.ergebnis : null;
 
   // Ergebnis Tab 2
-  const kuerzenErgebnis = useMemo(() => {
-    const z = Math.round(parseDeutscheZahl(kz));
-    const n = Math.round(parseDeutscheZahl(kn));
-    if (n === 0) return null;
-    return kuerzeBruch({ zaehler: z, nenner: n });
+  const kuerzen2 = useMemo<Pruefung<{ e: KuerzenErgebnis }>>(() => {
+    const z = ganzzahl(kz);
+    const n = ganzzahl(kn);
+    if (z === null || n === null) return { ok: false, fehler: HINWEIS_ZN };
+    if (n === 0) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
+    const e = kuerzeBruch({ zaehler: z, nenner: n });
+    return e ? { ok: true, e } : { ok: false, fehler: 'Dieser Bruch lässt sich nicht kürzen.' };
   }, [kz, kn]);
+  const kuerzenErgebnis = kuerzen2.ok ? kuerzen2.e : null;
 
   // Ergebnis Tab 3
-  const dezimalErgebnis = useMemo(() => {
+  const dezimal3 = useMemo<Pruefung<{ e: { bruch: Bruch; dezimal: number; gemischt: GemischteZahl | null } }>>(() => {
     if (dezMode === 'zuBruch') {
-      const wert = parseDeutscheZahl(dezWert);
-      if (isNaN(wert)) return null;
-      const bruch = dezimalZuBruch(wert);
-      if (!bruch) return null;
-      return { bruch, dezimal: wert, gemischt: zuGemischt(bruch) };
+      // Exakt aus den Ziffern (W150) statt über die Gleitkommazahl
+      const r = dezimalTextZuBruch(dezWert);
+      if (!r) return { ok: false, fehler: 'Bitte eine Dezimalzahl mit höchstens neun Nachkommastellen eingeben, zum Beispiel 0,75.' };
+      return { ok: true, e: { bruch: r.bruch, dezimal: parseDeutscheZahl(dezWert), gemischt: zuGemischt(r.bruch) } };
     } else {
-      const z = Math.round(parseDeutscheZahl(dz));
-      const n = Math.round(parseDeutscheZahl(dn));
-      if (n === 0) return null;
+      const z = ganzzahl(dz);
+      const n = ganzzahl(dn);
+      if (z === null || n === null) return { ok: false, fehler: HINWEIS_ZN };
+      if (n === 0) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
       const b = kuerzen({ zaehler: z, nenner: n });
       const d = bruchZuDezimal(b);
-      if (d === null) return null;
-      return { bruch: b, dezimal: Math.round(d * 1000000) / 1000000, gemischt: zuGemischt(b) };
+      if (d === null) return { ok: false, fehler: 'Dieser Bruch lässt sich nicht umrechnen.' };
+      return { ok: true, e: { bruch: b, dezimal: Math.round(d * 1000000) / 1000000, gemischt: zuGemischt(b) } };
     }
   }, [dezMode, dezWert, dz, dn]);
+  const dezimalErgebnis = dezimal3.ok ? dezimal3.e : null;
 
   // Ergebnis Tab 4
-  const vergleichErgebnis = useMemo(() => {
-    const z1v = Math.round(parseDeutscheZahl(vz1));
-    const n1v = Math.round(parseDeutscheZahl(vn1));
-    const z2v = Math.round(parseDeutscheZahl(vz2));
-    const n2v = Math.round(parseDeutscheZahl(vn2));
-    if (n1v === 0 || n2v === 0) return null;
-    return vergleicheBrueche({ zaehler: z1v, nenner: n1v }, { zaehler: z2v, nenner: n2v });
+  const vergleich4 = useMemo<Pruefung<{ e: VergleichErgebnis; b1: Bruch; b2: Bruch }>>(() => {
+    const z1v = ganzzahl(vz1);
+    const n1v = ganzzahl(vn1);
+    const z2v = ganzzahl(vz2);
+    const n2v = ganzzahl(vn2);
+    if (z1v === null || n1v === null || z2v === null || n2v === null) return { ok: false, fehler: HINWEIS_ZN };
+    if (n1v === 0 || n2v === 0) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
+    const e = vergleicheBrueche({ zaehler: z1v, nenner: n1v }, { zaehler: z2v, nenner: n2v });
+    return e ? { ok: true, e, b1: { zaehler: z1v, nenner: n1v }, b2: { zaehler: z2v, nenner: n2v } } : { ok: false, fehler: 'Diese Brüche lassen sich nicht vergleichen.' };
   }, [vz1, vn1, vz2, vn2]);
+  const vergleichErgebnis = vergleich4.ok ? vergleich4.e : null;
 
   const fmtDez = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 6 });
 
@@ -195,7 +295,7 @@ export default function BruchRechner() {
       {tab === 'rechnen' && (
         <div>
           <div className="flex flex-wrap items-end justify-center gap-3 mb-6">
-            <BruchEingabe zaehler={z1} setZaehler={setZ1} nenner={n1} setNenner={setN1} ganz={g1} setGanz={setG1} label="Bruch 1" />
+            <OperandEingabe nr={1} modus={modus1} setModus={setModus1} dezimal={d1} setDezimal={setD1} zaehler={z1} setZaehler={setZ1} nenner={n1} setNenner={setN1} ganz={g1} setGanz={setG1} />
 
             <div className="flex gap-1 pb-4">
               {operationen.map(o => (
@@ -213,10 +313,12 @@ export default function BruchRechner() {
               ))}
             </div>
 
-            <BruchEingabe zaehler={z2} setZaehler={setZ2} nenner={n2} setNenner={setN2} ganz={g2} setGanz={setG2} label="Bruch 2" />
+            <OperandEingabe nr={2} modus={modus2} setModus={setModus2} dezimal={d2} setDezimal={setD2} zaehler={z2} setZaehler={setZ2} nenner={n2} setNenner={setN2} ganz={g2} setGanz={setG2} />
           </div>
 
-          {rechenErgebnis && (
+          {!rechnung.ok && <Hinweis text={rechnung.fehler} />}
+
+          {rechenErgebnis && rechnung.ok && (
             <div className="space-y-4">
               <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
                 <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-2">Ergebnis</p>
@@ -240,13 +342,13 @@ export default function BruchRechner() {
               <CrossLink href="/alltag/prozentrechner" emoji="%" text="Bruch in Prozent umrechnen" />
 
               <ErgebnisAktionen
-                ergebnisText={`${rechenErgebnis.schritte.eingabe} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner} (${fmtDez(rechenErgebnis.dezimal)})`}
+                ergebnisText={`${rechnung.o1.text} ${op} ${rechnung.o2.text} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner} (${fmtDez(rechenErgebnis.dezimal)})`}
                 seitenTitel="Bruchrechner"
               />
 
               <AiExplain
                 rechnerName="Bruchrechner"
-                eingaben={{ bruch1Zaehler: Math.round(parseDeutscheZahl(z1)), bruch1Nenner: Math.round(parseDeutscheZahl(n1)), operation: op, bruch2Zaehler: Math.round(parseDeutscheZahl(z2)), bruch2Nenner: Math.round(parseDeutscheZahl(n2)) }}
+                eingaben={{ eingabe1: rechnung.o1.text, bruch1Zaehler: rechnung.o1.bruch.zaehler, bruch1Nenner: rechnung.o1.bruch.nenner, operation: op, eingabe2: rechnung.o2.text, bruch2Zaehler: rechnung.o2.bruch.zaehler, bruch2Nenner: rechnung.o2.bruch.nenner }}
                 ergebnis={{ ergebnisZaehler: rechenErgebnis.ergebnis.zaehler, ergebnisNenner: rechenErgebnis.ergebnis.nenner, dezimal: rechenErgebnis.dezimal }}
               />
 
@@ -256,6 +358,12 @@ export default function BruchRechner() {
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Rechenweg</p>
                 </div>
                 <div className="px-4 py-3 space-y-2 text-sm">
+                  {[rechnung.o1.umwandlung, rechnung.o2.umwandlung].filter(Boolean).map((u) => (
+                    <p key={u} className="text-gray-600 dark:text-gray-400">
+                      <span className="font-medium text-gray-800 dark:text-gray-200">Umwandlung:</span>{' '}
+                      {u}
+                    </p>
+                  ))}
                   <p className="text-gray-600 dark:text-gray-400">
                     <span className="font-medium text-gray-800 dark:text-gray-200">Aufgabe:</span>{' '}
                     {rechenErgebnis.schritte.eingabe}
@@ -295,6 +403,8 @@ export default function BruchRechner() {
           <div className="flex justify-center mb-6">
             <BruchEingabe zaehler={kz} setZaehler={setKz} nenner={kn} setNenner={setKn} label="Bruch eingeben" />
           </div>
+
+          {!kuerzen2.ok && <Hinweis text={kuerzen2.fehler} />}
 
           {kuerzenErgebnis && (
             <div className="space-y-4">
@@ -346,6 +456,8 @@ export default function BruchRechner() {
             )}
           </div>
 
+          {!dezimal3.ok && <Hinweis text={dezimal3.fehler} />}
+
           {dezimalErgebnis && (
             <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
               {dezMode === 'zuBruch' ? (
@@ -386,10 +498,12 @@ export default function BruchRechner() {
             <BruchEingabe zaehler={vz2} setZaehler={setVz2} nenner={vn2} setNenner={setVn2} label="Bruch 2" />
           </div>
 
-          {vergleichErgebnis && (
+          {!vergleich4.ok && <Hinweis text={vergleich4.fehler} />}
+
+          {vergleichErgebnis && vergleich4.ok && (
             <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
               <div className="flex items-center justify-center gap-4 text-3xl font-extrabold text-primary-700 dark:text-primary-300">
-                <BruchAnzeige zaehler={Math.round(parseDeutscheZahl(vz1))} nenner={Math.round(parseDeutscheZahl(vn1))} />
+                <BruchAnzeige zaehler={vergleich4.b1.zaehler} nenner={vergleich4.b1.nenner} />
                 <span className={`text-4xl ${
                   vergleichErgebnis.zeichen === '='
                     ? 'text-green-600 dark:text-green-400'
@@ -397,7 +511,7 @@ export default function BruchRechner() {
                 }`}>
                   {vergleichErgebnis.zeichen}
                 </span>
-                <BruchAnzeige zaehler={Math.round(parseDeutscheZahl(vz2))} nenner={Math.round(parseDeutscheZahl(vn2))} />
+                <BruchAnzeige zaehler={vergleich4.b2.zaehler} nenner={vergleich4.b2.nenner} />
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
                 {fmtDez(vergleichErgebnis.b1Dezimal)} {vergleichErgebnis.zeichen} {fmtDez(vergleichErgebnis.b2Dezimal)}
