@@ -6,6 +6,31 @@
 
 ---
 
+## 23.09.2026 — Welle 148: Blogartikel 20 „Kinder senken die Lohnsteuer nicht“ — ✅ ABGESCHLOSSEN
+
+Artikel 20 der Reihe, zum Brutto-Netto-Rechner. Beim Nachrechnen der Beispiele zeigte sich, dass
+der Rechner genau das falsch machte, wovon der Artikel handelt; korrigiert in Welle 147, bevor der
+Artikel online ging. Der Artikel beschreibt die Korrektur in einem eigenen Abschnitt. Alle Zahlen
+im Text sind unabhängig aus den Gesetzestexten gerechnet und gegen den PAP 2026 geprüft.
+
+**Zwei Wächter schlugen im Probelauf an, bevor die Vorlage das Haus verließ.** `check-jahreswerte`
+fand 8.450 und 20.350 als Zahlen in zwei Grafiken — beide kommen jetzt aus der Lib
+(`BBG_KV_MONAT`/`BBG_RV_MONAT`, `berechneSoli`, `soliFreigrenze`). Und `slug-drift-scan` kannte
+keine Querverweise zwischen Artikeln: Artikel 20 verlinkt als erster Artikel einen anderen
+(Artikel 17), der Scan hielt `/blog/<slug>` für eine unbekannte Meta-Route. Der Meta-Pass prüft
+solche Links jetzt gegen den Artikelordner; ein erfundener Slug bleibt ein Drift (Gegenprobe
+grün/rot vor Auslieferung).
+
+- **1a7063f** — `slug-drift-scan`: Blogartikel-Links gültig, wenn `app/blog/<slug>/page.mdx`
+  existiert; Kommentar über `META_ROUTES` nachgezogen.
+- **74d3735** — Grafiken `ZweiKollegenVergleich`, `SoliRampe`, `GrenznettoKurve` und ihre
+  Registrierung in `mdx-components.tsx` (Import und Rückgabeobjekt). Paarweise Geometrieprüfung
+  über 782 Textpaare und alle Markenlinien: 0 Befunde; hell und dunkel gerendert.
+- **6104b24** — Artikelordner `app/blog/warum-kinder-die-lohnsteuer-nicht-senken/`.
+- **62cc36e** — Medien und KI-Kennzeichnung: Titelbild 1536 × 857 PNG8 (Gemini 3 Pro Image), Video
+  auf 1920 × 1080 neu kodiert und Standbild aus dem ersten Frame (Kling AI 3.0), drei
+  `GENERATOREN`-Zeilen, Inventar abgeleitet. Kennzeichen vor dem Skriptlauf 0, danach je ≥ 1.
+
 ## 23.09.2026 — Welle 147: Soli und Kirchensteuer kommen aus dem amtlichen Rechenwerk — ✅ ABGESCHLOSSEN
 
 Beim Nachrechnen für Blogartikel 20 zeigte sich, dass der Brutto-Netto-Rechner genau das falsch
