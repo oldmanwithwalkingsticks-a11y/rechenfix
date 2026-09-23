@@ -89,6 +89,9 @@ import EinePutzschicht from '@/components/blog/grafik/EinePutzschicht';
 import VierMethodenVergleich from '@/components/blog/grafik/VierMethodenVergleich';
 import ZinstageKalender from '@/components/blog/grafik/ZinstageKalender';
 import ZweiJahreslaengen from '@/components/blog/grafik/ZweiJahreslaengen';
+import ZweiKollegenVergleich from '@/components/blog/grafik/ZweiKollegenVergleich';
+import SoliRampe from '@/components/blog/grafik/SoliRampe';
+import GrenznettoKurve from '@/components/blog/grafik/GrenznettoKurve';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -218,6 +221,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     VierMethodenVergleich,
     ZinstageKalender,
     ZweiJahreslaengen,
+    ZweiKollegenVergleich,
+    SoliRampe,
+    GrenznettoKurve,
     ...components,
   };
 }
