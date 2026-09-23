@@ -27,6 +27,25 @@ export type FeedbackEntry = {
 
 export const FEEDBACK_LOG: FeedbackEntry[] = [
   {
+    id: '2026-09-23-01',
+    datumAnfrage: '2026-09-23',
+    datumUmsetzung: '2026-09-23',
+    status: 'umgesetzt',
+    bereich: 'mathe/bruchrechner',
+    wunsch: 'Dezimalzahl mal Bruch rechnen',
+    kommentar:
+      'Beim Rechnen mit Brüchen lässt sich jede Seite der Aufgabe ' +
+      'jetzt auch als Dezimalzahl eingeben, etwa 0,75 × 2/3. Die ' +
+      'Dezimalzahl wird exakt in einen Bruch umgewandelt, und der ' +
+      'Rechenweg zeigt diesen Schritt mit (0,75 = 75/100 = 3/4). ' +
+      'Bei der Umsetzung ist aufgefallen, dass der Rechner eine ' +
+      'Kommazahl in den Bruchfeldern bisher stillschweigend auf eine ' +
+      'ganze Zahl rundete und damit ein falsches Ergebnis zeigte. ' +
+      'Stattdessen erscheint jetzt ein Hinweis. Periodische ' +
+      'Dezimalzahlen wie 0,333… lassen sich nicht exakt eintippen; ' +
+      'dafür bitte den Bruch 1/3 verwenden.',
+  },
+  {
     id: '2026-05-31-01',
     datumAnfrage: '2026-05-31',
     datumUmsetzung: '2026-05-31',

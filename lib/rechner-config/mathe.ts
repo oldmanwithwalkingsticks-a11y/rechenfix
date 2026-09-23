@@ -3,16 +3,16 @@ import type { RechnerConfig } from './types';
 export const matheRechner: RechnerConfig[] = [
   {
     slug: 'bruchrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-09-23',
     titel: 'Bruchrechner',
     beschreibung: 'Brüche berechnen: Addieren, subtrahieren, multiplizieren, dividieren. Mit Rechenweg, Kürzen und Umrechnung.',
     kategorie: 'Mathe & Schule',
     kategorieSlug: 'mathe',
     metaTitle: 'Bruchrechner — Brüche berechnen & kürzen',
     metaDescription: 'Bruchrechner ✓ Addieren, subtrahieren, multiplizieren, dividieren ✓ Kürzen ✓ Mit Rechenweg ✓ Kostenlos. Jetzt Brüche berechnen! ✓ Mit KI-Erklärung.',
-    keywords: ['bruchrechner', 'brüche berechnen', 'bruch kürzen', 'bruchrechnung', 'brüche addieren', 'brüche multiplizieren', 'dezimalzahl in bruch'],
+    keywords: ['bruchrechner', 'brüche berechnen', 'bruch kürzen', 'bruchrechnung', 'brüche addieren', 'brüche multiplizieren', 'dezimalzahl in bruch', 'dezimalzahl mal bruch'],
     icon: '🔢',
-    beispiel: '1/3 + 2/5: Hauptnenner 15 → 5/15 + 6/15 = 11/15. Multiplikation: 2/3 × 3/4 = 6/12 = 1/2.',
+    beispiel: '1/3 + 2/5: Hauptnenner 15 → 5/15 + 6/15 = 11/15. Multiplikation: 2/3 × 3/4 = 6/12 = 1/2. Mit Dezimalzahl: 0,75 × 2/3 = 3/4 × 2/3 = 1/2.',
     faq: [
       {
         frage: 'Wie addiert man Brüche mit unterschiedlichem Nenner?',
@@ -29,6 +29,10 @@ export const matheRechner: RechnerConfig[] = [
       {
         frage: 'Wie wandle ich einen Bruch in eine Dezimalzahl um?',
         antwort: 'Teilen Sie den Zähler durch den Nenner. Beispiel: 3/4 = 3÷4 = 0,75. Manche Brüche ergeben periodische Dezimalzahlen, z. B. 1/3 = 0,333...',
+      },
+      {
+        frage: 'Wie rechnet man eine Dezimalzahl mal einen Bruch?',
+        antwort: 'Die Dezimalzahl zuerst in einen Bruch umwandeln, dann wie gewohnt rechnen. Beispiel: 0,75 × 2/3 — 0,75 = 75/100 = 3/4, also 3/4 × 2/3 = 6/12 = 1/2. Im Rechner lässt sich jede Seite der Aufgabe auf „Dezimalzahl“ umstellen; die Umwandlung steht dann im Rechenweg. Periodische Dezimalzahlen wie 0,333… lassen sich so nicht exakt eingeben — dafür den Bruch 1/3 verwenden.',
       },
       {
         frage: 'Was ist der größte gemeinsame Teiler (GGT)?',
