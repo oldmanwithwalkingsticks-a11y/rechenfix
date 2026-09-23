@@ -54,15 +54,21 @@ const STATUS_BADGE: Record<FeedbackStatus, { label: string; classes: string }> =
 
 const SLUG_PATTERN = /^([a-z0-9-]+)\/([a-z0-9-]+)$/;
 
+// W150: Links waren im Dunkelmodus dunkelblau auf dunklem Grund und ohne Unterstreichung kaum
+// als Link zu erkennen. Heller Farbton im Dunkelmodus und dauerhafte Unterstreichung.
+const LINK_KLASSEN =
+  'font-medium text-primary-700 dark:text-primary-300 underline underline-offset-2 ' +
+  'decoration-primary-300 dark:decoration-primary-400/60 hover:decoration-2';
+
 function renderBereich(bereich: string) {
   const match = SLUG_PATTERN.exec(bereich);
   if (!match) {
-    return <span className="text-gray-600">{bereich}</span>;
+    return <span className="text-gray-600 dark:text-gray-300">{bereich}</span>;
   }
   return (
     <Link
       href={`/${match[1]}/${match[2]}`}
-      className="text-primary-700 hover:underline"
+      className={LINK_KLASSEN}
     >
       /{match[1]}/{match[2]}
     </Link>
@@ -110,7 +116,7 @@ export default function AktualisierungenPage() {
           <p>
             Rechenfix lebt vom Feedback seiner Nutzerinnen und Nutzer. Wünsche
             und Hinweise erreichen uns per E-Mail an{' '}
-            <a href="mailto:info@rechenfix.de" className="text-primary-700 hover:underline">
+            <a href="mailto:info@rechenfix.de" className={LINK_KLASSEN}>
               info@rechenfix.de
             </a>{' '}
             oder über den Feedback-Button am Ende jeder Rechner-Seite. Wir
