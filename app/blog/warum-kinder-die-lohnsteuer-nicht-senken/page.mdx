@@ -1,0 +1,482 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: artikel.titel,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-kinder-die-lohnsteuer-nicht-senken' },
+  openGraph: {
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    url: 'https://www.rechenfix.de/blog/warum-kinder-die-lohnsteuer-nicht-senken',
+    siteName: 'Rechenfix.de',
+    type: 'article',
+    locale: 'de_DE',
+    publishedTime: artikel.datum,
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: artikel.titel }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    images: ['/opengraph-image'],
+  },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-kinder-die-lohnsteuer-nicht-senken',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/kinder-lohnsteuer-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-kinder-die-lohnsteuer-nicht-senken' },
+])} />
+
+# Kinder senken die Lohnsteuer nicht – und das Netto steigt trotzdem
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/kinder-lohnsteuer-titelbild.png" alt="Zwei gleich aufgebaute Gehaltsabrechnungen nebeneinander auf einem hellen Holztisch. Auf der rechten ist eine Kinderzeichnung von einem Haus mit zwei Figuren, daneben liegen ein Holzauto und ein Kinderbecher; neben der linken stehen nur eine Kaffeetasse und ein Kugelschreiber, dazwischen liegt ein Taschenrechner" caption="Dasselbe Brutto auf beiden Blättern. Was die Kinder ändern, steht nicht dort, wo man es sucht." width={1200} height={675} />
+
+Zwei Kollegen, dieselbe Firma, dasselbe Gehalt: 4.500 Euro brutto im Monat. Beide sind
+verheiratet und in Steuerklasse IV, beide sind Mitglied der Kirche, beide wohnen in
+Nordrhein-Westfalen, beide sind bei einer Krankenkasse mit durchschnittlichem
+Zusatzbeitrag versichert. Der eine hat keine Kinder. Der andere hat zwei, beide im
+Grundschulalter, beide ordnungsgemäß in seinen Lohnsteuerabzugsmerkmalen eingetragen.
+
+Wer von beiden zahlt weniger Lohnsteuer?
+
+Der Kinderlose. Er zahlt 650,16 Euro im Monat, der Vater zweier Kinder 662,50 Euro – zwölf
+Euro und 34 Cent mehr, für denselben Lohn. Und trotzdem überweist der Arbeitgeber dem
+Vater am Monatsende 47,31 Euro mehr als seinem Kollegen.
+
+Beides stimmt. Es zeigt nur, dass das Netto an Zahlen hängt, die in keinem Arbeitsvertrag
+stehen – und die sich oft anders verhalten, als ihr Name verspricht.
+
+## Zwei Abrechnungen, drei Unterschiede
+
+Gerechnet ist beides nach den Regeln, die 2026 gelten: dem Einkommensteuertarif, den
+Vorschriften für den Lohnsteuerabzug und den Beitragssätzen der Sozialversicherung.
+Geprüft haben wir das Ergebnis gegen den amtlichen Programmablaufplan für die Lohnsteuer,
+nach dem jede Lohnabrechnungssoftware in Deutschland arbeitet. Beide Wege kommen auf den
+Cent zum selben Ergebnis.
+
+Drei Posten sind bei beiden Kollegen identisch. Die Krankenversicherung kostet jeden
+393,75 Euro, die Rentenversicherung 418,50 Euro, die Arbeitslosenversicherung 58,50 Euro.
+Einen Solidaritätszuschlag zahlt keiner von beiden. Unterschiede gibt es an genau drei
+Stellen, und sie zeigen in verschiedene Richtungen.
+
+<ZweiKollegenVergleich />
+
+Die Pflegeversicherung kostet den Kinderlosen 108,00 Euro, den Vater 69,75 Euro – 38,25
+Euro weniger. Die Kirchensteuer beträgt beim Kinderlosen 58,51 Euro, beim Vater 37,11
+Euro – 21,40 Euro weniger. Und die Lohnsteuer liegt beim Vater um 12,34 Euro höher.
+Unterm Strich bleiben dem einen 2.812,58 Euro, dem anderen 2.859,89 Euro.
+
+Das Kindergeld ist in dieser Rechnung nicht enthalten. Es kommt nicht vom Arbeitgeber,
+sondern von der Familienkasse, derzeit 259 Euro je Kind und Monat, und es taucht auf
+keiner Gehaltsabrechnung auf.
+
+Was in der Aufstellung fehlt, ist ausgerechnet die Stelle, an der die meisten Menschen
+die Kinder zuerst vermuten würden: eine niedrigere Lohnsteuer. Um zu verstehen, warum es
+sie nicht gibt, muss man wissen, was der Kinderfreibetrag eigentlich ist – und was er
+nicht ist.
+
+## Warum die Lohnsteuer keine Kinder kennt
+
+Der Staat stellt das Existenzminimum eines Kindes steuerfrei. Er tut das auf zwei Wegen,
+von denen eine Familie nur einen bekommt: über das Kindergeld oder über die Freibeträge
+für Kinder. Nach § 32 Absatz 6 des Einkommensteuergesetzes sind das 2026 für jedes Kind
+3.414 Euro Kinderfreibetrag und 1.464 Euro für Betreuung, Erziehung oder Ausbildung, und
+zwar je Elternteil. Zusammen 4.878 Euro, für beide Eltern 9.756 Euro im Jahr.
+
+Welcher der beiden Wege günstiger ist, entscheidet das Finanzamt erst nach Ablauf des
+Jahres, in der Einkommensteuerveranlagung. Diese Günstigerprüfung vergleicht die
+Steuerersparnis, die die Freibeträge bringen würden, mit dem Kindergeld, das im Jahr
+tatsächlich gezahlt wurde. Nur wenn die Freibeträge mehr bringen, werden sie abgezogen –
+und das bereits gezahlte Kindergeld wird der Steuer dann wieder hinzugerechnet. Doppelt
+gibt es nichts.
+
+Für die meisten Familien gewinnt das Kindergeld, und zwar deutlich. 259 Euro im Monat
+sind 3.108 Euro im Jahr. Um mit einem Freibetrag von 9.756 Euro genauso viel Steuer zu
+sparen, müsste auf diese 9.756 Euro im Schnitt knapp 32 Prozent Steuer entfallen. Nach
+unserer Rechnung erreichen zusammen veranlagte Eltern mit einem Kind diese Schwelle 2026
+erst bei einem gemeinsamen zu versteuernden Einkommen von gut 86.000 Euro. Darunter ist
+das Kindergeld mehr wert – und darunter liegt die große Mehrheit der Familien.
+
+Der monatliche Lohnsteuerabzug zieht daraus eine einfache Konsequenz: Er rechnet so, als
+würde das Kindergeld gezahlt, was in aller Regel ja auch geschieht. Die Freibeträge für
+Kinder kommen in der Rechenvorschrift für die Lohnsteuer, von Sonderfällen abgesehen,
+schlicht nicht vor. Ob in den Lohnsteuerabzugsmerkmalen zwei Kinderfreibeträge stehen
+oder keiner, ändert an der Lohnsteuer nichts. Dass der Vater aus dem Beispiel trotzdem
+eine andere Lohnsteuer zahlt als sein Kollege, hat einen anderen Grund, zu dem wir gleich
+kommen.
+
+Eine Ausnahme bestätigt die Regel, weil sie gar nicht über den Kinderfreibetrag läuft:
+Alleinerziehende in Steuerklasse II bekommen einen Entlastungsbetrag von 4.260 Euro im
+Jahr, der die Lohnsteuer tatsächlich senkt. Er hängt an der Steuerklasse, nicht am
+Kinderfreibetrag.
+
+## Die zweite Rechnung, die nie bezahlt wird
+
+Wozu steht dann überhaupt ein Kinderfreibetrag auf der Lohnabrechnung? Genauer gesagt:
+ein Zähler. Für jedes Kind wird in den elektronischen Lohnsteuerabzugsmerkmalen ein Wert
+von 0,5 oder 1,0 gebildet, je nachdem, ob einem Elternteil der halbe oder der volle
+Freibetrag zusteht. Bei verheirateten Eltern ist es in der Regel 1,0 je Kind; der Vater
+aus unserem Beispiel hat den Zähler 2,0. Bei minderjährigen Kindern, die mit den Eltern
+gemeldet sind, wird er meist automatisch gebildet, für volljährige Kinder in Ausbildung
+muss man ihn beim Finanzamt beantragen.
+
+Dieser Zähler wird für eine zweite Rechnung gebraucht, die auf jeder Lohnabrechnung
+stattfindet und die niemand zu sehen bekommt. Der Arbeitgeber, genauer seine Software,
+berechnet die Lohnsteuer zweimal. Einmal regulär, ohne Kinderfreibeträge – das ist die
+Lohnsteuer, die ans Finanzamt geht. Und einmal fiktiv, mit abgezogenen
+Kinderfreibeträgen. Diese zweite Lohnsteuer wird nie gezahlt. Sie dient nur als
+Bemessungsgrundlage für die beiden Steuern, die auf die Lohnsteuer aufgeschlagen werden:
+Kirchensteuer und Solidaritätszuschlag.
+
+So steht es in § 51a Absatz 2a des Einkommensteuergesetzes und, fast wortgleich, in § 3
+Absatz 2a des Solidaritätszuschlaggesetzes. Für die Zuschlagsteuern ist danach die
+Lohnsteuer maßgebend, die sich ergibt, wenn der Jahresbetrag um die Freibeträge für jedes
+Kind vermindert wird – in den Steuerklassen I bis III um den doppelten, in Steuerklasse
+IV um den einfachen Betrag. In Euro sind das 9.756 Euro je Zähler in den Klassen I bis
+III und 4.878 Euro je Zähler in Klasse IV. Weil in Klasse IV beide Ehegatten je einen
+vollen Zähler haben, bekommt jeder rechnerisch seine Hälfte.
+
+Beim Vater aus dem Beispiel sieht das so aus: Seine echte Jahreslohnsteuer beträgt 7.950
+Euro. Die fiktive, um 9.756 Euro Kinderfreibeträge verminderte, beträgt 4.949 Euro. Neun
+Prozent Kirchensteuer darauf – in Bayern und Baden-Württemberg wären es acht – ergeben
+37,11 Euro im Monat statt 59,62 Euro, die ohne den Zähler fällig wären.
+
+Das eigentlich Bemerkenswerte steht einen Absatz davor, in § 51a Absatz 2: Für die
+Zuschlagsteuern werden die Freibeträge für Kinder „in allen Fällen“ berücksichtigt. Also
+auch dann, wenn die Günstigerprüfung für die Einkommensteuer ergibt, dass das Kindergeld
+besser ist. Für die Einkommensteuer gilt: Kindergeld oder Freibetrag. Für Kirchensteuer
+und Soli gilt: Kindergeld und Freibetrag. Die Familie bekommt beides, nur eben an
+verschiedenen Stellen.
+
+Fehlt der Zähler, etwa weil ein volljähriges Kind nicht nachgetragen wurde, zahlt der
+Vater 22,51 Euro Kirchensteuer im Monat zu viel, rund 270 Euro im Jahr. Verloren ist das
+Geld nicht: Mit der Einkommensteuererklärung wird die Kirchensteuer neu berechnet, dann
+mit den Freibeträgen. Aber eben erst dann, und nur, wenn man eine Erklärung abgibt.
+
+## Warum Eltern mehr Lohnsteuer zahlen
+
+Bleibt die Frage, woher die 12,34 Euro kommen, die der Vater mehr an Lohnsteuer zahlt.
+Die Antwort steckt in der Pflegeversicherung.
+
+Der Beitragssatz zur sozialen Pflegeversicherung beträgt 3,6 Prozent. Im Gesetz steht das
+übrigens nicht: § 55 Absatz 1 des Elften Sozialgesetzbuchs nennt bis heute 3,4 Prozent.
+Die 3,6 stammen aus einer Verordnung, mit der die Bundesregierung den Satz zum 1. Januar
+2025 angehoben hat, gestützt auf eine Ermächtigung im selben Paragraphen. Wer den Beitrag
+im Gesetzestext nachschlägt, rechnet also zwei Zehntelprozentpunkte zu niedrig.
+
+Arbeitnehmer tragen davon 1,8 Prozent. Wer das 23. Lebensjahr vollendet hat und keine
+Kinder hat, zahlt einen Zuschlag von 0,6 Prozentpunkten, insgesamt also 2,4 Prozent.
+Eltern zahlen keinen Zuschlag, und ab dem zweiten Kind unter 25 sinkt ihr Anteil um 0,25
+Prozentpunkte je Kind, bis zum fünften Kind. Mit zwei Kindern sind es 1,55 Prozent. Das
+erklärt die 108,00 Euro des Kinderlosen und die 69,75 Euro des Vaters.
+
+Nun kennt die Lohnsteuer eine Vorsorgepauschale. Sie zieht die Beiträge zur Renten-,
+Kranken-, Pflege- und Arbeitslosenversicherung in typisierter Form vom Lohn ab, bevor die
+Steuer berechnet wird, weil diese Beiträge später in der Steuererklärung ohnehin als
+Sonderausgaben zählen. Der Teilbetrag für die Pflegeversicherung folgt dabei dem
+tatsächlichen Beitrag: mit Zuschlag für Kinderlose, mit Abschlägen für Eltern mehrerer
+Kinder.
+
+Der Kinderlose darf deshalb 459 Euro im Jahr mehr als Vorsorge abziehen als der Vater.
+Sein zu versteuerndes Einkommen ist entsprechend niedriger, seine Lohnsteuer auch – um
+genau die 12,34 Euro im Monat. Der Vater spart 38,25 Euro Pflegebeitrag, und knapp ein
+Drittel davon holt sich die Lohnsteuer zurück.
+
+Das ist kein Fehler und keine versteckte Strafe für Familien. Es ist die Logik jedes
+Abzugs: Wer weniger Beitrag zahlt, hat weniger abzusetzen. Schon mit einem einzigen Kind
+wirkt der Effekt. Dann entfällt nur der Zuschlag, und die Lohnsteuer liegt bei 4.500 Euro
+brutto um 8,67 Euro über der des kinderlosen Kollegen.
+
+Für das Netto heißt das: Kinder verändern die Abzüge an drei Stellen, und nur zwei davon
+zugunsten der Eltern. Wer die eigene Abrechnung nachvollziehen will, braucht deshalb zwei
+verschiedene Kinderzahlen. Im Brutto-Netto-Rechner sind das zwei getrennte Felder:
+„Kinder (Freibeträge)“ ist der Zähler aus den Lohnsteuerabzugsmerkmalen, er wirkt auf
+Soli und Kirchensteuer. „Kinder unter 25 Jahren“ ist die Zahl, nach der sich der
+Pflegebeitrag richtet – und über die Vorsorgepauschale auch die Lohnsteuer.
+
+<RechnerLoader slug="brutto-netto-rechner" />
+
+Die beiden Zahlen müssen nicht übereinstimmen. Ein Sohn mit 23 in der Ausbildung zählt
+beim Kinderfreibetrag noch mit und bei der Pflegeversicherung ebenfalls. Ein Kind mit 26
+senkt den Pflegebeitrag dagegen nicht mehr. Die Elterneigenschaft bleibt aber bestehen,
+der Zuschlag für Kinderlose fällt also auch später nicht wieder an.
+
+## Der Soli ist nicht abgeschafft
+
+Die dritte Stelle, an der das Netto anders funktioniert als vermutet, ist der
+Solidaritätszuschlag. Die verbreitete Kurzfassung lautet, er sei 2021 abgeschafft worden.
+Im Ergebnis stimmt das für die meisten Arbeitnehmer. Als Aussage über das Gesetz stimmt es
+nicht.
+
+Seit 2021 gilt eine stark angehobene Freigrenze. 2026 liegt sie bei 20.350 Euro
+Einkommensteuer im Jahr, bei zusammen veranlagten Ehepaaren bei 40.700 Euro. Beim
+Lohnsteuerabzug entspricht dem die verdoppelte Grenze in Steuerklasse III. Wer darunter
+bleibt, zahlt keinen Soli. Für einen kinderlosen Arbeitnehmer in Steuerklasse I wird die
+Grenze nach unserer Rechnung bei rund 7.700 Euro brutto im Monat überschritten – ein
+Gehalt, das die große Mehrheit nicht erreicht.
+
+Der Zuschlag selbst besteht weiter, mit unverändert 5,5 Prozent. Das
+Bundesverfassungsgericht hat am 26. März 2025 eine Verfassungsbeschwerde gegen ihn
+zurückgewiesen (2 BvR 1505/20): Die Erhebung ist mit dem Grundgesetz vereinbar. Zugleich
+hat das Gericht festgehalten, dass eine solche Ergänzungsabgabe aufzuheben ist, wenn der
+Mehrbedarf wegfällt, der sie trägt. Der Gesetzgeber muss das im Blick behalten.
+
+Und es gibt einen Bereich, in dem die Freigrenze gar nicht gilt: Kapitalerträge. Auf die
+Abgeltungsteuer von 25 Prozent wird der Soli ab dem ersten Euro über dem
+Sparer-Pauschbetrag erhoben, ohne jede Freigrenze. 25 Prozent mal 1,055 ergibt 26,375
+Prozent. Wer nie in die Nähe von 7.700 Euro Monatsgehalt kommt, aber Zinsen auf einem
+Tagesgeldkonto hat, zahlt also sehr wohl Soli – nur eben nicht auf der Lohnabrechnung.
+
+## Eine Freigrenze ist kein Freibetrag
+
+Die beiden Wörter klingen verwandt und bedeuten fast das Gegenteil. Ein Freibetrag bleibt
+immer frei: Was darüber liegt, wird belastet, was darunter liegt, nie. Eine Freigrenze
+ist eine Schwelle. Solange man darunter bleibt, ist alles frei. Liegt man darüber, wird
+das Ganze belastet, als hätte es die Grenze nie gegeben.
+
+Wörtlich angewendet, würde eine Freigrenze beim Soli einen absurden Sprung erzeugen. Bei
+20.350 Euro Einkommensteuer wären null Euro fällig, bei 20.351 Euro auf einmal 5,5 Prozent
+der ganzen Summe, also 1.119 Euro – für einen einzigen Euro mehr Steuer. Deshalb enthält
+§ 4 des Solidaritätszuschlaggesetzes einen zweiten Satz: Der Zuschlag beträgt höchstens
+11,9 Prozent des Betrags, um den die Steuer die Freigrenze übersteigt.
+
+Diese sogenannte Milderungszone macht aus dem Sprung eine Rampe. Direkt über der Grenze
+ist der Soli winzig, dann wächst er, und zwar steiler als mit 5,5 Prozent: Jeder
+zusätzliche Euro Einkommensteuer kostet in dieser Zone 11,9 Cent Soli, mehr als das
+Doppelte des nominalen Satzes. Die Rampe endet dort, wo 11,9 Prozent des Überhangs so
+groß sind wie 5,5 Prozent der ganzen Steuer. Das ist bei 37.838 Euro Einkommensteuer der
+Fall. Für den kinderlosen Arbeitnehmer in Steuerklasse I entspricht das rund 11.240 Euro
+brutto im Monat.
+
+<SoliRampe />
+
+Wie groß der Unterschied zwischen den denkbaren Rechenweisen ist, zeigt ein Gehalt von
+8.000 Euro brutto in Steuerklasse I, kinderlos. Die Lohnsteuer beträgt 1.810,33 Euro im
+Monat. Der Soli nach geltendem Recht, mit Milderungszone, beträgt 13,62 Euro. Wäre die
+Freigrenze ein Freibetrag, wären es 6,29 Euro. Und würden schlicht 5,5 Prozent auf die
+ganze Lohnsteuer erhoben, wie es viele Faustregeln nahelegen, wären es 99,56 Euro.
+
+Bei 10.000 Euro brutto liegen die drei Werte bei 111,49 Euro, 51,53 Euro und 144,80 Euro.
+Bei 12.000 Euro ist die Rampe durchlaufen, und geltendes Recht und die einfache Rechnung
+mit 5,5 Prozent treffen sich bei 191,00 Euro. Von da an ist die Freigrenze vollständig
+aufgezehrt. Und hier zeigt sich der eigentliche Unterschied zum Freibetrag: Ein
+Freibetrag würde 20.350 Euro Steuer dauerhaft vom Soli freistellen, das wären rund 93
+Euro im Monat, bei jedem Einkommen. Die Freigrenze nimmt diesen Vorteil mit steigendem
+Einkommen vollständig zurück.
+
+## Wenn der Kinderfreibetrag den Soli ausschaltet
+
+An einer Stelle treffen Kinderfreibetrag und Freigrenze direkt aufeinander. Denn die
+Freigrenze wird nicht an der echten Lohnsteuer gemessen, sondern an der fiktiven – der
+mit abgezogenen Kinderfreibeträgen.
+
+Ein Beispiel: verheiratet, Steuerklasse IV, 8.000 Euro brutto, zwei Kinder, Zähler 2,0,
+kirchensteuerpflichtig in Nordrhein-Westfalen. Die echte Jahreslohnsteuer beträgt 21.973
+Euro und liegt damit über der Freigrenze. Ohne eingetragenen Zähler wären 16,09 Euro Soli
+im Monat fällig. Mit Zähler sinkt die fiktive Steuer auf 17.876 Euro, unter die Grenze,
+und der Soli fällt ganz weg. Die Kirchensteuer sinkt zugleich von 164,79 auf 134,06 Euro.
+
+Zusammen sind das 46,82 Euro im Monat mehr netto, bei auf den Cent identischer
+Lohnsteuer von 1.831,08 Euro. Nach unserer Rechnung verschieben die beiden
+Kinderfreibeträge die Schwelle, ab der diese Familie überhaupt Soli zahlt, von rund 7.650
+auf rund 8.540 Euro brutto. Fast 900 Euro Monatsgehalt, auf die kein Soli anfällt,
+obwohl die Lohnsteuer dieselbe ist.
+
+<Video src="/blog/kinder-lohnsteuer.mp4" poster="/blog/kinder-lohnsteuer-video-standbild.jpg" caption="Zweimal dasselbe Brutto – und doch nicht zweimal dasselbe Netto." />
+
+## Der Deckel auf den Sozialabgaben
+
+Die vierte Zahl, die das Netto bestimmt und in keinem Arbeitsvertrag steht, ist eine
+Obergrenze. Sozialbeiträge werden nur bis zur Beitragsbemessungsgrenze erhoben. 2026 liegt
+sie für Kranken- und Pflegeversicherung bei 5.812,50 Euro im Monat, für Renten- und
+Arbeitslosenversicherung bei 8.450 Euro, seit 2025 bundesweit einheitlich. Was darüber
+liegt, ist beitragsfrei.
+
+Das hat eine Folge, die der üblichen Vorstellung von Progression widerspricht: Von einer
+Gehaltserhöhung bleibt nicht immer weniger übrig, je mehr man verdient. Wir haben
+nachgerechnet, wie viel von 100 Euro mehr Brutto netto ankommt – Steuerklasse I,
+kinderlos, ohne Kirchensteuer, mit durchschnittlichem Zusatzbeitrag.
+
+<GrenznettoKurve />
+
+Bei 3.000 Euro brutto bleiben 56,33 Euro. Bei 5.000 Euro sind es 51,00 Euro, knapp unter
+der Grenze der Krankenversicherung nur noch 49,16 Euro – die Steuerprogression frisst sich
+nach oben. Dann der erste Knick: Oberhalb von 5.812,50 Euro fallen Kranken- und
+Pflegebeitrag auf den zusätzlichen Lohn weg, und von 100 Euro mehr bleiben plötzlich
+55,73 Euro. Danach sinkt der Betrag wieder, weil die Steuer weiter steigt.
+
+Der Tiefpunkt liegt zwischen rund 7.700 und 8.450 Euro. Dort überschreitet die Lohnsteuer
+die Soli-Freigrenze, die Milderungszone setzt mit ihren 11,9 Cent je Steuereuro ein, und
+Renten- und Arbeitslosenbeitrag laufen noch voll weiter. Von 100 Euro mehr kommen hier nur
+rund 46,70 Euro an, weniger als an jeder anderen Stelle zwischen 2.000 und 16.000 Euro.
+Oberhalb der Rentengrenze sind es wieder 53,00 Euro. Und wer mehr als 11.240 Euro
+verdient, die Milderungszone also hinter sich hat, behält von jeder Erhöhung 55,69 Euro:
+fast so viel wie bei 3.000 Euro und mehr als bei 5.000 Euro.
+
+Der Grund ist schlicht. Oberhalb beider Grenzen wird von jedem zusätzlichen Euro nur noch
+Steuer abgezogen. Darunter kommen für einen Kinderlosen knapp 22 Prozent Sozialbeiträge
+hinzu, und die wiegen mehr, als der höhere Steuersatz oben wieder wegnimmt.
+
+Das ist allerdings nur die halbe Wahrheit. Die Beiträge enden an der Grenze, die Ansprüche
+auch. Rentenpunkte, Arbeitslosengeld und Krankengeld werden ebenfalls nur bis zur
+Bemessungsgrenze berechnet. Das Netto oberhalb der Grenze ist höher, weil es nicht mehr
+versichert ist.
+
+## Was 2027 kommen soll – und was davon schon gilt
+
+Am 2. September 2026 hat das Bundeskabinett den Entwurf eines
+Einkommensteuerreformgesetzes 2027 beschlossen. Nach Angaben des
+Bundesfinanzministeriums soll der Grundfreibetrag von 12.348 Euro auf 12.564 Euro im Jahr
+2027 und 12.900 Euro im Jahr 2028 steigen, die Freibeträge für Kinder auf 10.056 und dann
+10.236 Euro, das Kindergeld von 259 auf 267 und dann 272 Euro im Monat. Der
+Arbeitnehmer-Pauschbetrag soll von 1.230 auf 1.430 Euro steigen, die zweite
+Progressionszone bis 70.600 Euro abgeflacht werden. Zur Gegenfinanzierung soll der Satz
+von 45 Prozent schon ab 250.000 Euro greifen, und ab 280.000 Euro soll ein neuer Satz von
+47 Prozent gelten.
+
+Nichts davon ist geltendes Recht. Ein Kabinettsbeschluss ist ein Gesetzentwurf der
+Bundesregierung, über den Bundestag und Bundesrat erst noch entscheiden, und bis zur
+Verkündung kann sich jede dieser Zahlen ändern. Trotzdem liest man vielerorts schon
+heute, was „ab 2027 gilt“. Wie schnell sich ein Entwurf als beschlossene Sache verfestigt,
+haben wir an den angeblich zum Jahr 2030 abgeschafften Steuerklassen III und V
+[beschrieben](/blog/warum-steuerklasse-3-keine-steuern-spart) – einem Vorhaben, das im
+parlamentarischen Verfahren gestrichen wurde und trotzdem weiter zitiert wird.
+
+Ein Blick auf den Entwurf lohnt sich für die Lohnabrechnung dennoch, weil er die Mechanik
+dieses Artikels bestätigt. Von den genannten Punkten senken der höhere Grundfreibetrag,
+der flachere Tarif und der höhere Arbeitnehmer-Pauschbetrag die monatliche Lohnsteuer
+unmittelbar. Die höheren Freibeträge für Kinder tun das nicht. Sie wirken beim
+Lohnsteuerabzug wieder nur auf Kirchensteuer und Soli, und in der Veranlagung verschieben
+sie die Schwelle, ab der sich der Freibetrag gegen das Kindergeld durchsetzt. Das höhere
+Kindergeld schließlich wird auf keiner Gehaltsabrechnung stehen.
+
+## Was unser eigener Rechner falsch gemacht hat
+
+Beim Nachrechnen der Beispiele für diesen Artikel haben wir unserem eigenen
+Brutto-Netto-Rechner dieselben Fragen gestellt. Er hat an vier Stellen falsch geantwortet,
+und zwar genau an den Stellen, um die es hier geht.
+
+Erstens wirkte das Feld für die Kinderfreibeträge nicht auf Soli und Kirchensteuer,
+obwohl genau das darunter stand. Für den Vater aus dem ersten Beispiel zeigte der Rechner
+59,63 Euro Kirchensteuer statt 37,11 Euro. Zweitens kannte er keine Milderungszone: Sobald
+die Freigrenze überschritten war, setzte er die vollen 5,5 Prozent an. Bei 8.000 Euro
+brutto in Steuerklasse I waren das gut 100 Euro Soli statt 13,62 Euro. Drittens
+verdoppelte er die Freigrenze in Steuerklasse III nicht. Eine Familie mit zwei Kindern
+bekam deshalb schon ab rund 9.630 Euro brutto einen Soli angezeigt, der nach geltendem
+Recht erst ab rund 15.600 Euro anfällt. Und viertens zog er Kinderlosen den Zuschlag zur
+Pflegeversicherung zwar vom Lohn ab, ließ ihn in der Vorsorgepauschale aber weg. Dem
+kinderlosen Kollegen aus dem Eingangsbeispiel zeigte er dadurch 658,83 Euro Lohnsteuer
+statt 650,16 Euro.
+
+Der Rechenkern selbst, eine Umsetzung des amtlichen Programmablaufplans, war dabei nicht
+das Problem. Richtig befüllt, rechnet er auf den Cent dasselbe wie unsere unabhängige
+Nachrechnung. Falsch war, was davor und danach geschah: Die Kinderfreibeträge wurden ihm
+gar nicht erst übergeben, und für Soli und Kirchensteuer wurde anschließend eine eigene,
+verkürzte Formel benutzt statt der Werte, die der Kern bereits korrekt ermittelt hatte.
+
+Alle vier Fehler sind korrigiert, bevor dieser Artikel online gegangen ist. Wir schreiben
+sie trotzdem hierher, weil sie das Thema besser belegen als jedes Beispiel: Die Zahlen,
+an denen das Netto hängt, stehen nicht nur in keinem Arbeitsvertrag. Sie standen auch in
+unserem eigenen Programmcode an der falschen Stelle.
+
+<KarstenSagt>
+
+Als ich noch angestellt war, war mir der Solidaritätszuschlag schon ziemlich suspekt. Mein
+Eindruck damals: Es wurde zusätzliches Geld für den Bundeshaushalt gefordert, und man wusste
+nie, wofür es wirklich eingesetzt wurde.
+
+Wie Kinder auf der Abrechnung wirken, habe ich dagegen nie wirklich verstanden. Deshalb hatte
+ich auch keine anderen Erwartungen — ich hatte schlicht gar keine.
+
+Entsetzt hat mich etwas anderes: dass unser eigener Brutto-Netto-Rechner an genau den Stellen
+falsch gerechnet hat, um die es in diesem Artikel geht. Das hätte viel früher auffallen müssen.
+
+</KarstenSagt>
+
+## Was bleibt
+
+Ein Zähler, der die Lohnsteuer nicht berührt und trotzdem Kirchensteuer und Soli senkt.
+Ein Pflegebeitrag, der Eltern entlastet und ihnen dafür etwas mehr Lohnsteuer abverlangt.
+Eine Freigrenze, die wie ein Freibetrag klingt und sich wie eine Rampe verhält. Und zwei
+Beitragsgrenzen, oberhalb derer von einer Gehaltserhöhung mehr übrig bleibt als darunter.
+
+Keine dieser Zahlen steht im Arbeitsvertrag. Alle stehen auf der Gehaltsabrechnung. Man
+muss nur wissen, in welcher Zeile – und dass die Zeile mit der Überschrift „Lohnsteuer“
+bei Kindern nicht die ist, in der man suchen sollte.
+
+<Quellen eintraege={[
+  {
+    titel: '§ 51a EStG – Festsetzung und Erhebung von Zuschlagsteuern',
+    hinweis:
+      'Absatz 2 berücksichtigt die Freibeträge für Kinder nach § 32 Absatz 6 EStG (2026: 3.414 Euro und 1.464 Euro je Elternteil) für Kirchensteuer und Soli „in allen Fällen“, also unabhängig davon, ob in der Günstigerprüfung das Kindergeld gewinnt. Absatz 2a überträgt das auf den Lohnsteuerabzug: doppelter Betrag in den Steuerklassen I bis III, einfacher in Klasse IV. Die Lohnsteuer selbst bleibt davon unberührt.',
+    url: 'https://www.gesetze-im-internet.de/estg/__51a.html',
+  },
+  {
+    titel: 'Solidaritätszuschlaggesetz 1995, §§ 3 und 4',
+    hinweis:
+      '§ 3 Absatz 2a bemisst den Soli beim Lohnsteuerabzug an der fiktiven Lohnsteuer mit Kinderfreibeträgen. Absatz 3 setzt die Freigrenze auf 20.350 Euro, bei Zusammenveranlagung auf 40.700 Euro. § 4 Satz 2 begrenzt den Zuschlag auf 11,9 Prozent des Betrags über der Freigrenze; die Rampe endet bei 37.838 Euro Einkommensteuer. Eine Freigrenze, kein Freibetrag – oberhalb der Rampe wird die ganze Steuer belastet.',
+    url: 'https://www.gesetze-im-internet.de/solzg_1995/BJNR097500993.html',
+  },
+  {
+    titel: '§ 32a EStG – Einkommensteuertarif',
+    hinweis:
+      'Tarif ab 2026: Grundfreibetrag 12.348 Euro, zwei Progressionszonen bis 69.878 Euro, 42 Prozent bis 277.825 Euro, darüber 45 Prozent. Grundlage aller Beispielrechnungen dieses Artikels.',
+    url: 'https://www.gesetze-im-internet.de/estg/__32a.html',
+  },
+  {
+    titel: 'Programmablaufplan für den Lohnsteuerabzug 2026 (IT-Zentrum Bund, amtliches Werk nach § 5 UrhG)',
+    hinweis:
+      'Berechnet die Lohnsteuer ohne Kinderfreibeträge und die Bemessungsgrundlage für Soli und Kirchensteuer in einem zweiten Durchlauf mit ihnen: 9.756 Euro je Zähler, in Klasse IV 4.878 Euro. Die Vorsorgepauschale enthält Zuschlag und Abschläge der Pflegeversicherung. Unsere unabhängige Nachrechnung aus den Gesetzestexten stimmt in allen Beispielen dieses Artikels auf den Cent mit ihm überein.',
+    url: 'https://www.bmf-steuerrechner.de/javax.faces.resource/daten/xmls/Lohnsteuer2026.xml.xhtml',
+  },
+  {
+    titel: '§ 55 SGB XI – Beitragssatz, Beitragsbemessungsgrenze',
+    hinweis:
+      'Absatz 1 nennt bis heute einen Beitragssatz von 3,4 Prozent. Absatz 3 regelt den Zuschlag für Kinderlose von 0,6 Beitragssatzpunkten nach Vollendung des 23. Lebensjahres und den Abschlag von 0,25 Punkten je Kind vom zweiten bis zum fünften Kind unter 25. Der tatsächlich geltende Satz von 3,6 Prozent steht nicht hier, sondern in der PBAV 2025.',
+    url: 'https://www.gesetze-im-internet.de/sgb_11/__55.html',
+  },
+  {
+    titel: 'Pflege-Beitragssatz-Anpassungsverordnung 2025 (PBAV 2025), § 1',
+    hinweis:
+      'Setzt den Beitragssatz nach § 55 Absatz 1 Satz 1 SGB XI zum 1. Januar 2025 auf 3,6 Prozent fest. Der Gesetzestext selbst nennt weiterhin 3,4 Prozent – wer nur dort nachschlägt, rechnet zu niedrig.',
+    url: 'https://www.gesetze-im-internet.de/pbav_2025/__1.html',
+  },
+  {
+    titel: 'Sozialversicherungsrechengrößen-Verordnung 2026, BGBl. 2025 I Nr. 278',
+    hinweis:
+      'Beitragsbemessungsgrenzen 2026: Kranken- und Pflegeversicherung 69.750 Euro im Jahr (5.812,50 Euro im Monat), Renten- und Arbeitslosenversicherung 101.400 Euro (8.450 Euro), bundeseinheitlich.',
+    url: 'https://www.recht.bund.de/bgbl/1/2025/278/VO.html',
+  },
+  {
+    titel: 'Bekanntmachung des durchschnittlichen Zusatzbeitragssatzes für 2026 (BAnz AT 10.11.2025 B7)',
+    hinweis:
+      'Der durchschnittliche Zusatzbeitragssatz der gesetzlichen Krankenversicherung beträgt 2026 2,9 Prozent. Mit diesem Wert sind alle Beispiele gerechnet; die Kassen setzen ihren tatsächlichen Satz selbst fest.',
+    url: 'https://www.bundesanzeiger.de/pub/publication/oUJYVk8GYRXybnb9Y4h/content/oUJYVk8GYRXybnb9Y4h/BAnz%20AT%2010.11.2025%20B7.pdf',
+  },
+  {
+    titel: 'BMF-Monatsbericht Juni 2025: Der Solidaritätszuschlag vor dem Bundesverfassungsgericht',
+    hinweis:
+      'Zusammenfassung des Urteils vom 26. März 2025 (2 BvR 1505/20): Die Verfassungsbeschwerde gegen das Solidaritätszuschlaggesetz wurde zurückgewiesen, die Erhebung ist mit dem Grundgesetz vereinbar.',
+    url: 'https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/06/Inhalte/Kapitel-3-Analysen/3-2-solidaritaetszuschlag-vor-bverfge.html?nn=237786',
+  },
+  {
+    titel: 'Bundesfinanzministerium, Pressemitteilung vom 2. September 2026: Einkommensteuerreform',
+    hinweis:
+      'Eckwerte des Regierungsentwurfs eines Einkommensteuerreformgesetzes 2027. Ein Kabinettsbeschluss, kein Gesetz: Bundestag und Bundesrat haben noch nicht entschieden. Manche Berichte nennen die 47 Prozent den neuen Spitzensteuersatz; nach dem Entwurf ist es eine zusätzliche Stufe ab 280.000 Euro, der Satz von 42 Prozent bleibt.',
+    url: 'https://www.bundesfinanzministerium.de/Content/DE/Pressemitteilungen/Finanzpolitik/2026/09/2026-09-02-einkommensteuerreform.html',
+  },
+]} />
