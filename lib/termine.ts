@@ -170,6 +170,15 @@ export const TERMINE: Termin[] = [
     quelle: 'Routinen unter claude.ai/code/routines — Peter Ai, Susanne Recht, Berichtswache',
   },
   {
+    id: 'berichte-restrisiko',
+    titel: 'Tagesberichte: Restrisiko senken, Schritte 2 bis 5',
+    datum: '2026-10-01',
+    vorlaufTage: 0,
+    bereich: 'Betrieb',
+    was: 'Voraussetzung prüfen: Die Berichtswache ist seit dem 24.09.2026 als v15 mit der Betriebsmeldung als viertem Eingang gelaufen. Stabil heißt: keine Befunde über die Wache selbst und keine ausgebliebene Betriebsmeldung. Ist das erfüllt, im Claude-Projekt Assistenten Builder die vier aufeinander aufbauenden Schritte angehen: 2 Prüfkatalog mit festen Prüfpunkt-Kennungen je Bericht und Soll-Liste in der Wache-Konfiguration, auch für Quellen; 3 Kontrollfälle, je Skill eine Testdatei mit bekanntem Fehler, die jeder Lauf finden muss; 4 Stand-Daten mit Höchstalter je Kategorie; 5 Quittungen mit Ablaufdatum für bekannte Befunde. Einmaltermin: bleibt als überfällig stehen, bis er nach Beginn der Arbeit hier entfernt wird. Ist die Wache nicht stabil gelaufen, das Datum bewusst verschieben, nicht löschen.',
+    quelle: 'Claude-Projekt Assistenten Builder, Projektnotiz rechenfix, Abschnitt Tägliche Berichte',
+  },
+  {
     id: 'sv-rechengroessen',
     titel: 'SV-Rechengrößenverordnung Folgejahr',
     datum: '2026-10-01',
