@@ -6,6 +6,41 @@
 
 ---
 
+## 23.09.2026 — Welle 147: Soli und Kirchensteuer kommen aus dem amtlichen Rechenwerk — ✅ ABGESCHLOSSEN
+
+Beim Nachrechnen für Blogartikel 20 zeigte sich, dass der Brutto-Netto-Rechner genau das falsch
+machte, wovon der Artikel handelt. Der PAP-Port selbst war richtig; falsch war, was davor und
+danach geschah. Die Kinderfreibeträge wurden dem PAP nie übergeben, Soli und Kirchensteuer liefen
+über eine eigene Kurzformel ohne Milderungszone und ohne verdoppelte Freigrenze in Klasse III, und
+die Vorsorgepauschale ließ den Pflege-Zuschlag für Kinderlose weg, den der PV-Abzug enthielt. Der
+Lohnsteuer-Rechner teilte den ersten und den letzten Fehler. Zwei Beispiele: Klasse I, 8.000 € —
+Soli 100,37 € statt 13,62 €; Klasse IV, 4.500 €, zwei Kinder — Kirchensteuer 59,63 € statt 37,11 €.
+
+**Ein Sollwert, der nur gedruckt wird, ist keine Prüfung.** `verify-tarif-2026.ts` erwartete
+405,50 € Lohnsteuer für 3.500 € in Klasse I, kinderlos. Die Lib lieferte 411,58 €; das Skript
+druckte beide Zahlen untereinander und endete mit Exit 0. Das neue Prüfskript bricht bei jeder
+Abweichung ab — und wurde vor dem Einsatz gegen den alten Stand geprüft: Dort meldet es 12.497
+Abweichungen.
+
+- **84de96b** — Lib: `berechneLohnsteuerMitZuschlaegenJahr` liefert Lohnsteuer, Soli und
+  Kirchensteuer-Bemessungsgrundlage aus einem PAP-Lauf. `brutto-netto.ts` ohne eigene Soli- und
+  Kirchensteuerformel, Monatswerte wie im PAP bei monatlichem Lohnzahlungszeitraum,
+  Kinderlosenzuschlag in der Vorsorgepauschale (Brutto-Netto- und Lohnsteuer-Rechner), Soli auf
+  Weihnachtsgeld nach PAP (MSOLZSTS). Neu: `scripts/verify-bruttonetto-zuschlaege.ts` mit 6.552
+  Rasterfällen gegen den PAP und 11 unabhängig aus den Gesetzestexten gerechneten Referenzfällen.
+  Tipp-Konstante Mindestlohn-Netto 1.711 → 1.715 €.
+- **6984add** — 63 Text- und Zahlenstellen angeglichen: Brutto-Netto-Rechner (Soli-Schwelle
+  „73.500 € Jahresbrutto“ → rund 92.400 €, „abgeschafft“ gestrichen, Kinderfreibeträge wirken auf Soli
+  und Kirchensteuer statt auf die Pflegeversicherung, 6.826 € → Freibeträge je Elternteil),
+  Lohnsteuer-Rechner-Tabellen (kinderlos, je 3 bis 13 € niedriger), Nettolohn-Optimierer,
+  Gehaltserhöhungs-Rechner, Grafik `EinBruttoSechsNettos` in Artikel 17 (jedes Netto 3 bis 7 € höher,
+  Spanne 629,67 € statt 633,50 €). Sollwert Testfall A in `verify-tarif-2026.ts`: 409,00 € aus
+  Prompt 83 war falsch, unabhängig nachgerechnet sind es 412,83 €.
+- **Offen für eigene Wellen:** Steuerklassen-Vergleich-Rechner (eigene vereinfachte Formeln,
+  Kirchensteuer ohne Kinderfreibeträge, Soli-Freigrenze auch in Klasse V verdoppelt);
+  Kinderlosenzuschlag in der Vorsorgepauschale bei Arbeitslosengeld, Kurzarbeitergeld und Midijob
+  prüfen; totes `berechneVorsorgepauschale2026` mit überholten Aussagen.
+
 ## 23.09.2026 — Welle 146: ein Kommentar, der das Gegenteil des Codes behauptete — ✅ ABGESCHLOSSEN
 
 Welle 145 stellte das lastmod der Rechnerseiten auf `letzteAktualisierung` um. Der
