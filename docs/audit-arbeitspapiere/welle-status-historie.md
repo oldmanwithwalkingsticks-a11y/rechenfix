@@ -6,6 +6,17 @@
 
 ---
 
+## 23.09.2026 — Welle 149: Veröffentlichungsdatum rutschte in den Artikeltitel — ✅ ABGESCHLOSSEN
+
+Aufgefallen bei der Sichtprüfung von Artikel 20: Das Datum unter der Überschrift klebte an der
+zweiten Titelzeile. Ursache war kein Artikel, sondern die Komponente: Die H1 endet mit `mb-3`
+(12 px), `ArtikelDatum` begann mit `-mt-4` (−16 px). Die beiden Ränder verrechnen sich zu −4 px,
+das Datum saß also in jedem der 20 Artikel ein Stück im Titel. Bei einzeiligen Titeln fiel das
+kaum auf, bei zweizeiligen stößt es an die Unterlängen.
+
+- **542e319** — `ArtikelDatum`: negativer oberer Rand entfernt, der Abstand kommt allein aus der
+  H1; Kommentar erklärt, warum.
+
 ## 23.09.2026 — Welle 148: Blogartikel 20 „Kinder senken die Lohnsteuer nicht“ — ✅ ABGESCHLOSSEN
 
 Artikel 20 der Reihe, zum Brutto-Netto-Rechner. Beim Nachrechnen der Beispiele zeigte sich, dass
