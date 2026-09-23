@@ -167,10 +167,12 @@ export function kuerzeBruch(b: Bruch): KuerzenErgebnis | null {
 // --- Tab 3: Dezimal ↔ Bruch ---
 
 export function dezimalZuBruch(dezimal: number): Bruch | null {
-  if (!isFinite(dezimal)) return null;
+  if (!isFinite(dezimal) || Math.abs(dezimal) >= 1e15) return null;
 
-  // Dezimalstellen zählen
-  const str = dezimal.toString();
+  // Dezimalstellen zählen. toFixed statt toString (W150): toString liefert unter 1e-6 die
+  // Exponentialschreibweise ("1e-7"), deren Nachkommastellen die Zählung übersah — aus
+  // 0,0000001 wurde 0. Zwölf Stellen, Nullen am Ende entfallen.
+  const str = Number.isInteger(dezimal) ? String(dezimal) : dezimal.toFixed(12).replace(/0+$/, '');
   const dotIndex = str.indexOf('.');
   const nachkommastellen = dotIndex === -1 ? 0 : str.length - dotIndex - 1;
 
@@ -179,6 +181,36 @@ export function dezimalZuBruch(dezimal: number): Bruch | null {
   const nenner = faktor;
 
   return kuerzen({ zaehler, nenner });
+}
+
+/**
+ * Dezimalzahl aus einer Texteingabe exakt als Bruch (W150). Rechnet mit den Ziffern, nicht mit
+ * der Gleitkommazahl: „0,1“ wird 1/10. `roh` ist der ungekürzte Zehnerbruch für den Rechenweg
+ * (0,75 = 75/100), `bruch` der gekürzte (3/4).
+ *
+ * Zahlformat wie parseDeutscheZahl: Komma = Dezimalzeichen, Punkte davor sind Tausenderpunkte;
+ * ohne Komma gelten mehrere Punkte oder ein Punkt vor genau drei Ziffern als Tausenderpunkte.
+ * Abweichung: Steht vor dem Punkt nur eine Null (0.125), ist er ein Dezimalpunkt — eine
+ * Tausendergruppe beginnt nie mit 0. Höchstens neun Nachkommastellen und 15 Ziffern, sonst null.
+ */
+export function dezimalTextZuBruch(text: string): { roh: Bruch; bruch: Bruch } | null {
+  let t = (text ?? '').replace(/\s/g, '');
+  if (t === '') return null;
+  if (t.includes(',')) {
+    t = t.replace(/\./g, '').replace(',', '.');
+  } else {
+    const punkte = (t.match(/\./g) ?? []).length;
+    const tausender = punkte >= 2 || (punkte === 1 && /^[+-]?[1-9]\d{0,2}\.\d{3}$/.test(t));
+    if (tausender) t = t.replace(/\./g, '');
+  }
+  const m = /^([+-]?)(\d*)(?:\.(\d+))?$/.exec(t);
+  if (!m || (m[2] === '' && m[3] === undefined)) return null;
+  const nachkomma = m[3] ?? '';
+  const ziffern = (m[2] === '' ? '0' : m[2]) + nachkomma;
+  if (nachkomma.length > 9 || ziffern.replace(/^0+/, '').length > 15) return null;
+  const vorzeichen = m[1] === '-' ? -1 : 1;
+  const roh: Bruch = { zaehler: vorzeichen * Number(ziffern), nenner: 10 ** nachkomma.length };
+  return { roh, bruch: kuerzen(roh) };
 }
 
 // --- Tab 4: Brüche vergleichen ---
