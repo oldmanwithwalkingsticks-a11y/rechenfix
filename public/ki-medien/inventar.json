@@ -1,6 +1,6 @@
 {
   "_hinweis": "Bestand der KI-erzeugten Medien auf rechenfix.de. Grundlage fuer den Soll-Ist-Abgleich der Kennzeichen-Wache (Skill peter-ki).",
-  "_stand": "22.09.2026",
+  "_stand": "23.09.2026",
   "_quelle": "GENERATOREN-Tabelle in scripts/ki-metadaten-schreiben.mjs",
   "ki_medien": [
     {
@@ -151,6 +151,24 @@
       "datei": "/blog/kalorien.mp4",
       "art": "video",
       "seite": "/blog/woher-die-kalorien-auf-der-packung-kommen",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/kinder-lohnsteuer-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-kinder-die-lohnsteuer-nicht-senken",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/kinder-lohnsteuer-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-kinder-die-lohnsteuer-nicht-senken",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/kinder-lohnsteuer.mp4",
+      "art": "video",
+      "seite": "/blog/warum-kinder-die-lohnsteuer-nicht-senken",
       "generator": "Kling AI 3.0 (Kuaishou)"
     },
     {
