@@ -128,9 +128,8 @@ export const TERMINE: Termin[] = [
     titel: 'bundle.social Zähler-Rücksetzung bestätigen',
     datum: '2026-10-01',
     vorlaufTage: 2,
-    wiederholungMonate: 1,
     bereich: 'Betrieb',
-    was: 'Prüfen, ob der Zähler des Gratistarifs am Monatsersten auf null steht. Abgeleitet am 06.09.2026 aus einer einzigen Beobachtung; mit dieser Sichtung bestätigt oder widerlegt. Im Zwei-Tage-Takt fallen höchstens 16 von 20 Beiträgen an. Nach der Sichtung Termin schließen.',
+    was: 'Prüfen, ob der Zähler des Gratistarifs am Monatsersten auf null steht. Abgeleitet am 06.09.2026 aus einer einzigen Beobachtung; mit dieser Sichtung bestätigt oder widerlegt. Stand 25.09.2026: 13 von 20, passend zum Zwei-Tage-Takt. Im Zwei-Tage-Takt fallen höchstens 16 von 20 Beiträgen an. Nach der Sichtung Termin schließen.',
     quelle: 'docs/social-pipeline.md',
   },
   {
