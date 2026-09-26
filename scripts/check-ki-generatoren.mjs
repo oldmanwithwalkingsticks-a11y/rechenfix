@@ -4,9 +4,9 @@
 // ANLASS (Welle 151): Der Tageslauf von Peter Ki und Susanne Recht vom 26.09.2026 hat im
 // Medieninventar den Generator „Kling AI 3.0 Omni" gefunden — zwei Medien zum
 // Bankjahr-Artikel (/blog/bankjahr.mp4, /blog/bankjahr-video-standbild.jpg), im Inventar
-// seit dem Stand 23.09.2026. Die Generatortabelle auf /ki-transparenz nannte nur
-// „Kling AI 3.0". Die Seite trifft eine Tatsachenangabe über die eingesetzten Systeme;
-// sie war drei Tage lang unvollständig, und kein Build hat es bemerkt.
+// und live seit 22.09.2026 (W140a, 05cfc16). Die Generatortabelle auf /ki-transparenz
+// nannte nur „Kling AI 3.0". Die Seite trifft eine Tatsachenangabe über die eingesetzten
+// Systeme; sie war vier Tage lang unvollständig, und kein Build hat es bemerkt.
 //
 // SCHWESTERFALL: scripts/check-affiliate-partnerliste.mjs (Welle 142) — dieselbe Art
 // Fehler an der Partnerliste der Datenschutzerklärung. Eine Aufzählung im Rechtstext, die
