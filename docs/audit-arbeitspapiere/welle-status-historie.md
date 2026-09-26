@@ -6,6 +6,40 @@
 
 ---
 
+## 26.09.2026 — Welle 151: Der dritte Generator, den /ki-transparenz nicht nannte — ✅ ABGESCHLOSSEN
+
+Anlass war der Tageslauf von Peter Ki und Susanne Recht vom 26.09.2026. Im Medieninventar stand
+„Kling AI 3.0 Omni (Kuaishou)“ — zwei Medien zum Bankjahr-Artikel (`bankjahr.mp4` und
+`bankjahr-video-standbild.jpg`), seit 22.09.2026 im Inventar und live (W140a, `05cfc16`). Die
+Generatortabelle auf /ki-transparenz nannte nur „Kling AI 3.0“. Vier Tage lang stimmte eine
+Tatsachenangabe der Seite nicht, und kein Build hat es bemerkt — derselbe Fehlertyp wie die
+Partnerliste in Welle 142.
+
+**Eine Zeile, nicht zwei.** Der Entwurf aus dem Tageslauf sah eine eigene Zeile für
+Omni-Vorschaubilder vor. Gezählt über das ganze Inventar: 11 Vorschaubilder, davon 10 Kling AI 3.0
+und eines Omni, und jedes ist das erste Einzelbild seines Videos. Deshalb nennt jetzt EINE Zeile
+„Videos im Blog und ihre Vorschaubilder“ beide Generatoren.
+
+- **98c62bf** — `recht:`-Commit: Zeile und Stand-Datum auf /ki-transparenz; neuer Prebuild-Guard
+  `scripts/check-ki-generatoren.mjs` direkt hinter `generate-ki-inventar.mjs --pruefen`. Jeder
+  Generator des Inventars (ohne Klammerzusatz) muss auf der Seite stehen, gezählt nach Länge
+  absteigend mit Entfernen, damit Omni nicht als Treffer für Kling AI 3.0 zählt. Gemessen: Seite an
+  HEAD Exit 1 („Kling AI 3.0 Omni“, 2 Medien), nach der Änderung Exit 0, Build 273/273 grün.
+- **90fdb44** — Kopfkommentar des Guards berichtigt: Die Omni-Medien kamen am 22.09. und nicht mit
+  dem Inventarstand 23.09., die Lücke bestand also vier Tage und nicht drei. `_stand` 23.09. stammt
+  aus W148d.
+- **W151b** — Eintrag in `docs/rechtstexte/aenderungshistorie.md` und diese Historie.
+
+**Lehre: Ein Selbsttest muss die Eigenschaft prüfen, für die der Guard gebaut ist.** Vorgegeben
+waren zwei Fälle („ Omni“ entfernt, „Kling AI 3.0“ entfernt). Eine Kopie des Guards OHNE den
+Entfernen-Schritt hat beide bestanden und dann eine Seite, die nur „Kling AI 3.0 Omni“ nennt, als
+vollständig gemeldet (Exit 0). Deshalb gibt es einen dritten Fall: Das einfache „Kling AI 3.0“ wird
+entfernt, Omni bleibt stehen. Ergebnis: Kopie ohne Entfernen Exit 2, Kopie mit „immer gefunden“
+Exit 2. Außerdem läuft der Selbsttest auf dem Seitentext plus den im echten Lauf fehlenden Namen.
+Am reinen Seitentext scheiterte er an jedem anderen fehlenden Namen, und ein künftig fehlender
+vierter Generator käme als „keine Aussage“ (Exit 2) an statt mit seinem Namen (Exit 1).
+Gegenprobe: Seite ohne Gemini ergibt Exit 1 „Gemini 3 Pro Image“.
+
 ## 23.09.2026 — Welle 150: Bruchrechner rechnet mit Dezimalzahlen und rundet nicht mehr stumm — ✅ ABGESCHLOSSEN
 
 Anlass war ein Nutzerwunsch über das Feedback-Formular (23.09.2026): „Dezimalzahl mal Bruch“.
