@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.rechenfix.de/ki-transparenz' },
 };
 
-const STAND = '19. August 2026';
+const STAND = '26. September 2026';
 
 function Abschnitt({ titel, children }: { titel: string; children: React.ReactNode }) {
   return (
@@ -73,11 +73,12 @@ export default function KiTransparenzPage() {
                 </td>
               </tr>
               <tr className="border-b border-gray-200 dark:border-gray-800">
-                <td className="py-3 pr-4 font-medium">Videos im Blog</td>
-                <td className="py-3 pr-4">Kling AI 3.0 (Kuaishou Technology, China)</td>
+                <td className="py-3 pr-4 font-medium">Videos im Blog und ihre Vorschaubilder</td>
+                <td className="py-3 pr-4">Kling AI 3.0 und Kling AI 3.0 Omni (Kuaishou Technology, China)</td>
                 <td className="py-3">
                   Die Videos sind vollständig künstlich erzeugt. Keine realen Aufnahmen,
-                  keine realen Personen.
+                  keine realen Personen. Das Vorschaubild eines Videos ist dessen erstes
+                  Einzelbild.
                 </td>
               </tr>
               <tr className="border-b border-gray-200 dark:border-gray-800">
