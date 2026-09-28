@@ -49,6 +49,9 @@ const FAELLE: Fall[] = [
   { name: '30–250: „80“ tippen', getippt: '80', min: 30, max: 250, soll: '80' },
   { name: '1–20: „15“ tippen', getippt: '15', min: 1, max: 20, soll: '15' },
   { name: 'leer verlassen → bleibt leer wie bisher', getippt: '', min: 18, max: 99, soll: '' },
+  // Ergänzt am 28.09.2026 (Rezept-Umrechner auf den gemeinsamen Helfer): Die alte
+  // eigene Klammerung setzte ein leeres Feld sofort auf 1, aus „26“ wurde „126“ → 50.
+  { name: '1–50 (Portionen): leeres Feld, „26“ tippen', getippt: '26', min: 1, max: 50, soll: '26' },
 ];
 
 function tippeUndVerlasse(fall: Fall, onChange: Klammer, onBlur: Klammer): { schritte: string[]; ende: string } {

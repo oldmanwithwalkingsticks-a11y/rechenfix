@@ -2,10 +2,14 @@
 
 import { useState, useMemo, useId } from 'react';
 import { berechneTageszeit, berechneWoche, type WochenTag } from '@/lib/berechnungen/arbeitszeit';
-import { clampInputValue, clampInputValueOnBlur, clampNumber } from '@/lib/zahlenformat';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+
+// Tag plus der getippte Text des Pausenfelds — nur für die Eingabe; die Lib
+// rechnet weiter mit der Zahl aus WochenTag.
+type TagEingabe = WochenTag & { pauseText?: string };
 
 type Modus = 'tag' | 'woche';
 
@@ -89,7 +93,7 @@ export default function ArbeitszeitRechner() {
   const [pausen, setPausen] = useState<string[]>(['30']);
 
   // Modus 2
-  const [tage, setTage] = useState<WochenTag[]>(DEFAULT_TAGE.map(t => ({ ...t })));
+  const [tage, setTage] = useState<TagEingabe[]>(DEFAULT_TAGE.map(t => ({ ...t })));
   const [gleicheZeiten, setGleicheZeiten] = useState(true);
 
   // Ergebnis Modus 1
@@ -106,7 +110,7 @@ export default function ArbeitszeitRechner() {
     return berechneWoche(tage);
   }, [tage]);
 
-  const updateTag = (idx: number, updates: Partial<WochenTag>) => {
+  const updateTag = (idx: number, updates: Partial<TagEingabe>) => {
     setTage(prev => {
       const neu = prev.map((t, i) => i === idx ? { ...t, ...updates } : t);
       // Bei gleichen Zeiten: Mo-Fr synchronisieren
@@ -117,6 +121,7 @@ export default function ArbeitszeitRechner() {
             if (updates.beginn !== undefined) neu[i].beginn = quelle.beginn;
             if (updates.ende !== undefined) neu[i].ende = quelle.ende;
             if (updates.pause !== undefined) neu[i].pause = quelle.pause;
+            if (updates.pauseText !== undefined) neu[i].pauseText = quelle.pauseText;
           }
         }
       }
@@ -309,8 +314,9 @@ export default function ArbeitszeitRechner() {
                       inputMode="numeric"
                       min="0"
                       max="480"
-                      value={tag.pause}
-                      onChange={e => updateTag(idx, { pause: clampNumber(parseInt(e.target.value, 10), 0, 480) })}
+                      value={tag.pauseText ?? tag.pause}
+                      onChange={e => { const t = clampInputValue(e.target.value, 0, 480); updateTag(idx, { pauseText: t, pause: parseInt(t, 10) || 0 }); }}
+                      onBlur={e => { const t = clampInputValueOnBlur(e.target.value, 0, 480); updateTag(idx, { pauseText: t, pause: parseInt(t, 10) || 0 }); }}
                       className="input-field w-16 text-xs py-1.5 text-center"
                       aria-label={`Pause ${tag.label} in Minuten`}
                     />

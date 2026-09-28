@@ -357,7 +357,8 @@ export default function BuergergeldRechner() {
                 max={99}
                 step={1}
                 value={jugendlicherAlter}
-                onChange={e => setJugendlicherAlter(e.target.value)}
+                onChange={e => setJugendlicherAlter(clampInputValue(e.target.value, 14, 99))}
+                onBlur={e => setJugendlicherAlter(clampInputValueOnBlur(e.target.value, 14, 99))}
                 className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
               />
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">

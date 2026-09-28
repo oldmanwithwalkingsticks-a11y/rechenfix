@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import {
   rechneNotenUm,
   UMRECHNUNGSTABELLE,
@@ -124,7 +124,8 @@ export default function NotenInternationalRechner() {
               max="4"
               step="0.1"
               value={gpaWert}
-              onChange={(e) => setGpaWert(e.target.value)}
+              onChange={(e) => setGpaWert(clampInputValue(e.target.value, 0, 4))}
+              onBlur={(e) => setGpaWert(clampInputValueOnBlur(e.target.value, 0, 4))}
               className="input-field w-full min-h-[48px]"
               placeholder="3.0"
             />

@@ -6,7 +6,7 @@ import {
   SCHNELLWAHL,
   type Getraenk,
 } from '@/lib/berechnungen/promille';
-import { clampInputValue, clampInputValueOnBlur, clampNumber } from '@/lib/zahlenformat';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -14,6 +14,10 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const fmtZahl = (n: number, s = 2) =>
   n.toLocaleString('de-DE', { minimumFractionDigits: s, maximumFractionDigits: s });
+
+// Getränk plus der getippte Text der beiden Zahlenfelder — nur für die Eingabe;
+// die Lib rechnet weiter mit den Zahlen aus Getraenk.
+type GetraenkEingabe = Getraenk & { mengeLText?: string; alkoholProzentText?: string };
 
 let nextId = 1;
 
@@ -53,7 +57,7 @@ const zoneIcons = { gruen: '✅', gelb: '⚠️', orange: '🚫', rot: '🛑' };
 export default function PromilleRechner() {
   const [geschlecht, setGeschlecht] = useState<'mann' | 'frau'>('mann');
   const [gewicht, setGewicht] = useState('80');
-  const [getraenke, setGetraenke] = useState<Getraenk[]>([]);
+  const [getraenke, setGetraenke] = useState<GetraenkEingabe[]>([]);
   const [trinkzeit, setTrinkzeit] = useState('2');
 
   const fuegeHinzu = useCallback((name: string, mengeL: number, alkoholProzent: number) => {
@@ -64,9 +68,15 @@ export default function PromilleRechner() {
     setGetraenke(prev => prev.filter(g => g.id !== id));
   }, []);
 
-  const updateGetraenk = useCallback((id: number, updates: Partial<Getraenk>) => {
+  const updateGetraenk = useCallback((id: number, updates: Partial<GetraenkEingabe>) => {
     setGetraenke(prev => prev.map(g => g.id === id ? { ...g, ...updates } : g));
   }, []);
+
+  // Getippter Text und Zahl gemeinsam setzen; leer zählt als 0 wie in den übrigen Feldern.
+  const setzeMenge = (id: number, text: string) =>
+    updateGetraenk(id, { mengeLText: text, mengeL: parseFloat(text.replace(',', '.')) || 0 });
+  const setzeAlkohol = (id: number, text: string) =>
+    updateGetraenk(id, { alkoholProzentText: text, alkoholProzent: parseFloat(text.replace(',', '.')) || 0 });
 
   const ergebnis = useMemo(() => berechnePromille({
     geschlecht,
@@ -159,8 +169,9 @@ export default function PromilleRechner() {
                   min="0.01"
                   max="5"
                   step="0.01"
-                  value={g.mengeL}
-                  onChange={e => updateGetraenk(g.id, { mengeL: clampNumber(parseFloat(e.target.value), 0.01, 5) })}
+                  value={g.mengeLText ?? g.mengeL}
+                  onChange={e => setzeMenge(g.id, clampInputValue(e.target.value, 0.01, 5))}
+                  onBlur={e => setzeMenge(g.id, clampInputValueOnBlur(e.target.value, 0.01, 5))}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
                 <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">L</span>
@@ -172,8 +183,9 @@ export default function PromilleRechner() {
                   min="0.1"
                   max="100"
                   step="0.1"
-                  value={g.alkoholProzent}
-                  onChange={e => updateGetraenk(g.id, { alkoholProzent: clampNumber(parseFloat(e.target.value), 0.1, 100) })}
+                  value={g.alkoholProzentText ?? g.alkoholProzent}
+                  onChange={e => setzeAlkohol(g.id, clampInputValue(e.target.value, 0.1, 100))}
+                  onBlur={e => setzeAlkohol(g.id, clampInputValueOnBlur(e.target.value, 0.1, 100))}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
                 <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">%</span>

@@ -7,6 +7,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 
 function toIso(d: Date): string {
   return d.toISOString().slice(0, 10);
@@ -182,13 +183,15 @@ export default function KuendigungsfristRechner() {
 
       {abweichendeFrist && (
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Individuelle Frist</label>
+          <label htmlFor="kuendigungsfrist-individuelle-wochen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Individuelle Frist</label>
           <div className="flex items-center gap-2">
             <input
+              id="kuendigungsfrist-individuelle-wochen"
               type="number"
               inputMode="numeric"
               value={individuelleFristWochen}
-              onChange={e => setIndividuelleFristWochen(e.target.value)}
+              onChange={e => setIndividuelleFristWochen(clampInputValue(e.target.value, 1, 52))}
+              onBlur={e => setIndividuelleFristWochen(clampInputValueOnBlur(e.target.value, 1, 52))}
               min={1}
               max={52}
               className="w-24 px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"

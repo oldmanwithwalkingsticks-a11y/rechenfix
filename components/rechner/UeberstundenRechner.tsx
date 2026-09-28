@@ -322,26 +322,30 @@ export default function UeberstundenRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Anzahl Überstunden</label>
+              <label htmlFor="ueberstunden-anzahl" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Anzahl Überstunden</label>
               <input
+                id="ueberstunden-anzahl"
                 type="number"
                 inputMode="decimal"
                 min="0"
                 step="0.5"
                 value={ueberstunden}
-                onChange={e => setUeberstunden(e.target.value)}
+                onChange={e => setUeberstunden(clampInputValue(e.target.value, 0, null))}
+                onBlur={e => setUeberstunden(clampInputValueOnBlur(e.target.value, 0, null))}
                 className="input-field w-full"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bruttogehalt monatlich</label>
+              <label htmlFor="ueberstunden-bruttogehalt" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bruttogehalt monatlich</label>
               <div className="relative">
                 <input
+                  id="ueberstunden-bruttogehalt"
                   type="number"
                   inputMode="decimal"
                   min="0"
                   value={bruttogehalt}
-                  onChange={e => setBruttogehalt(e.target.value)}
+                  onChange={e => setBruttogehalt(clampInputValue(e.target.value, 0, null))}
+                  onBlur={e => setBruttogehalt(clampInputValueOnBlur(e.target.value, 0, null))}
                   className="input-field w-full pr-8"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">€</span>
@@ -352,15 +356,17 @@ export default function UeberstundenRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Monatsstunden (vertraglich)</label>
+              <label htmlFor="ueberstunden-monatsstunden" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Monatsstunden (vertraglich)</label>
               <div className="relative">
                 <input
+                  id="ueberstunden-monatsstunden"
                   type="number"
                   inputMode="decimal"
                   min="0"
                   step="0.01"
                   value={monatsstunden}
-                  onChange={e => setMonatsstunden(e.target.value)}
+                  onChange={e => setMonatsstunden(clampInputValue(e.target.value, 0, null))}
+                  onBlur={e => setMonatsstunden(clampInputValueOnBlur(e.target.value, 0, null))}
                   className="input-field w-full pr-8"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">h</span>

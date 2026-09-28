@@ -6,11 +6,15 @@ import {
   type FortbildungsArt,
   type AfbgKind,
 } from '@/lib/berechnungen/afbg';
-import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+
+// Kind plus der getippte Text des Altersfelds — nur für die Eingabe; die Lib
+// rechnet weiter mit der Zahl aus AfbgKind.
+type KindEingabe = AfbgKind & { alterText?: string };
 
 export default function AfbgRechner() {
   const [fortbildungsart, setFortbildungsart] = useState<FortbildungsArt>('vollzeit');
@@ -20,7 +24,7 @@ export default function AfbgRechner() {
   const [vermoegen, setVermoegen] = useState('0');
   const [ehegatteVorhanden, setEhegatteVorhanden] = useState(false);
   const [ehegatteBrutto, setEhegatteBrutto] = useState('0');
-  const [kinder, setKinder] = useState<AfbgKind[]>([]);
+  const [kinder, setKinder] = useState<KindEingabe[]>([]);
   const [bestehensErlass, setBestehensErlass] = useState(true);
   const [gruenderErlass, setGruenderErlass] = useState(false);
 
@@ -51,7 +55,7 @@ export default function AfbgRechner() {
     setKinder([...kinder, { alter: 5, anspruchAufKindergeld: true }]);
   };
   const kindEntfernen = (index: number) => setKinder(kinder.filter((_, i) => i !== index));
-  const kindAendern = (index: number, patch: Partial<AfbgKind>) => {
+  const kindAendern = (index: number, patch: Partial<KindEingabe>) => {
     setKinder(kinder.map((k, i) => i === index ? { ...k, ...patch } : k));
   };
 
@@ -169,8 +173,9 @@ export default function AfbgRechner() {
                         type="number"
                         min={0} max={25} step={1}
                         aria-label={`Alter Kind ${i + 1}`}
-                        value={kind.alter}
-                        onChange={e => kindAendern(i, { alter: Math.max(0, Math.min(25, parseInt(e.target.value) || 0)) })}
+                        value={kind.alterText ?? kind.alter}
+                        onChange={e => { const t = clampInputValue(e.target.value, 0, 25); kindAendern(i, { alterText: t, alter: parseInt(t) || 0 }); }}
+                        onBlur={e => { const t = clampInputValueOnBlur(e.target.value, 0, 25); kindAendern(i, { alterText: t, alter: parseInt(t) || 0 }); }}
                         className="w-20 text-sm bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-2 py-2 text-gray-800 dark:text-gray-200"
                       />
                       <span className="text-xs text-gray-600 dark:text-gray-400">J.</span>
