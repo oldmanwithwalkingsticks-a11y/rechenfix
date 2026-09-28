@@ -324,6 +324,39 @@ aber vor dem ersten Deploy auf 16 stehen, sonst läuft mindestens ein Deploy ohn
 
 ---
 
+## 7. Folgewellen
+
+Angelegt am 28.09.2026 mit der Migrationswelle `next16` (Branch `next16`, Next.js 16.3.6 mit
+`--webpack`). Nichts davon ist Teil dieser Welle.
+
+1. **Turbopack.** Entfernt den MDX-Workaround in `next.config.mjs` (webpack-Hook, der den
+   SWC-Schritt der MDX-Regel von `@next/mdx` in die RSC-Schicht legt) samt
+   `scripts/check-mdx-nur-seiten.mjs` in der Prebuild-Kette. Braucht Ersatz für `@serwist/next`:
+   Version 9.5.12 unterstützt Turbopack nicht und nennt als Wege `@serwist/turbopack` oder den
+   „configurator mode“. Bis dahin gilt: Nach jedem Nachzug der Next-Fassung einmal ohne den Hook
+   bauen; baut es grün, fliegt der Workaround raus. Stand 28.09.2026: 16.3.6 ohne Hook scheitert an
+   allen `page.mdx`.
+2. **Interne Links auf `<Link>` umstellen.** 17 interne `<a href>`-Links in 14 Dateien, gemeldet von
+   `@next/next/no-html-link-for-pages` (34 Meldungen, jede Fundstelle doppelt): `app/datenschutz/page.tsx`,
+   `app/impressum/page.tsx`, `app/ki-rechner/page.tsx`, `app/nutzungsbedingungen/page.tsx` (2),
+   `components/rechner/AiExplain.tsx`, `AutokostenRechner.tsx`, `BafoegRechner.tsx`,
+   `FirmenwagenRechner.tsx`, `GehaltserhoehungRechner.tsx`, `MidijobRechner.tsx` (2),
+   `MinijobRechner.tsx` (2), `SplittingRechner.tsx`, `TeilzeitRechner.tsx`, `WohngeldRechner.tsx`
+   (Komponenten unter `components/rechner/`). Danach die Regel in `eslint.config.mjs` wieder
+   einschalten.
+3. **Die 15 neuen Lint-Regeln einzeln bewerten.** In `eslint.config.mjs` vorerst aus:
+   `@next/next/no-location-assign-relative-destination` und die 14 React-Compiler-Regeln aus
+   `eslint-plugin-react-hooks` 7 (`config`, `error-boundaries`, `gating`, `globals`, `immutability`,
+   `incompatible-library`, `preserve-manual-memoization`, `purity`, `refs`, `set-state-in-effect`,
+   `set-state-in-render`, `static-components`, `unsupported-syntax`, `use-memo`). Am Bestand
+   gemessen: 19 × `set-state-in-effect` in 17 Dateien, 2 × `immutability`, 2 ×
+   `preserve-manual-memoization`, 1 × `purity`.
+4. **ESLint-Fassung.** npm meldet `eslint@9.39.5` bei der Installation als „no longer supported“.
+   `eslint-config-next` 16.3.6 verlangt `eslint >=9.0.0`; installiert ist die Hauptversion 9
+   nach Entscheidung 1. Zu prüfen ist der Sprung auf 10.
+
+---
+
 ## Anhang A — Dateien mit `next/link` (36)
 
 Suchmuster `from ['"]next/link['"]` in `app/`, `components/`, `lib/`:
