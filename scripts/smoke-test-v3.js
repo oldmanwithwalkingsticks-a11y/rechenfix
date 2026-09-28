@@ -1,5 +1,5 @@
 /**
- * Rechenfix Smoke Test v3.1 — 9 automated checks per Rechner.
+ * Rechenfix Smoke Test v3.2 — 10 automated checks per Rechner.
  *
  * USAGE:
  *   1. Open https://www.rechenfix.de (or any Rechenfix page) in the browser.
@@ -29,6 +29,7 @@
  *   C7  Title consistency (length, single suffix)
  *   C8  Copy button produces non-empty output
  *   C9  No unresolved template placeholders
+ *   C3b Typing a valid value keystroke by keystroke keeps it (added in v3.2)
  *
  * V3.1 changes (Prompt 87, April 2026):
  *   C8  — Replace clipboard.readText() with UI-feedback check
@@ -37,6 +38,23 @@
  *   C2  — Broaden post-reset number scan to include table/hero/result/
  *          faktor containers. Rezept-Umrechner showed reset-state numbers
  *          only in the result-table, which the narrow scan missed.
+ *
+ * V3.2 changes (28.09.2026):
+ *   Kategorien — werden aus der Sitemap abgeleitet (erste Ebene jedes
+ *          zweistufigen Pfads außer /blog/) statt aus einer festen Liste, weil
+ *          die feste Liste die Kategorie `technik` nicht kannte und deren 15
+ *          Rechner seit ihrer Einführung ungeprüft blieben. Die Ausgabe zählt
+ *          die geprüften Seiten je Kategorie.
+ *   Feld verlassen — setInputValue löst zusätzlich `focusout` aus. React
+ *          (ab 17) hängt `onBlur` an `focusout`; das bisherige `blur`-Ereignis
+ *          allein erreichte `onBlur` nie. C3 prüft damit nach dem Verlassen
+ *          des Feldes, wie ein Nutzer es erlebt.
+ *   C3b  — neuer Check: je Zahlenfeld mit min und max einen gültigen Wert aus
+ *          der Mitte Zeichen für Zeichen tippen (je Zeichen ein input-Ereignis),
+ *          dann das Feld verlassen; der Wert muss danach genau so im Feld
+ *          stehen. Fängt Klammerungen, die schon beim Tippen die Untergrenze
+ *          erzwingen und damit gültige Eingaben unmöglich machen, z. B. „80“ in
+ *          einem Feld 30–250 (aus „8“ wird 30, aus „300“ wird 250).
  */
 
 (function () {
@@ -66,10 +84,11 @@
   ]);
 
   // Category slugs — anything directly under `/<slug>/` counts as a Rechner.
-  const CATEGORY_SLUGS = new Set([
-    'finanzen', 'alltag', 'wohnen', 'arbeit',
-    'gesundheit', 'auto', 'kochen', 'mathe', 'sport',
-  ]);
+  // Seit v3.2 aus der Sitemap abgeleitet (fetchSitemapUrls): jede erste Ebene
+  // eines zweistufigen Pfads, außer den hier genannten. Eine neue Kategorie
+  // kann so nicht mehr ungeprüft bleiben.
+  const KEINE_KATEGORIE = new Set(['blog']);
+  let CATEGORY_SLUGS = new Set();
 
   // Units that should pluralise. Extend as new patterns appear.
   // Each entry: singular → expected plural. The check flags "(2+) singular".
@@ -112,7 +131,25 @@
     const paths = locs.map((u) => {
       try { return new URL(u).pathname; } catch { return null; }
     }).filter(Boolean);
-    return Array.from(new Set(paths)).filter(isRechnerPath).sort();
+    const unique = Array.from(new Set(paths));
+    CATEGORY_SLUGS = new Set(
+      unique
+        .filter((p) => !META_PATHS.has(p))
+        .map((p) => p.split('/').filter(Boolean))
+        .filter((parts) => parts.length === 2 && !KEINE_KATEGORIE.has(parts[0]))
+        .map((parts) => parts[0]),
+    );
+    return unique.filter(isRechnerPath).sort();
+  }
+
+  /** „alltag 24 · arbeit 17 · …“ — Seiten je Kategorie, alphabetisch. */
+  function zaehleJeKategorie(urls) {
+    const z = {};
+    for (const u of urls) {
+      const k = currentCategoryFromPath(u);
+      z[k] = (z[k] || 0) + 1;
+    }
+    return Object.keys(z).sort().map((k) => `${k} ${z[k]}`).join(' · ');
   }
 
   function isRechnerPath(p) {
@@ -151,14 +188,40 @@
 
   // Dispatch change + input + blur so React's controlled inputs actually pick up the value.
   function setInputValue(input, value) {
+    setzeRohwert(input, value);
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    verlasseFeld(input);
+  }
+
+  // Wert am React-Tracker vorbei setzen, ohne Ereignis.
+  function setzeRohwert(input, value) {
     const proto = input.tagName === 'SELECT'
       ? HTMLSelectElement.prototype
       : HTMLInputElement.prototype;
     const setter = Object.getOwnPropertyDescriptor(proto, 'value').set;
     setter.call(input, String(value));
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  // Feld verlassen wie ein Nutzer: blur und focusout. React (ab 17) hängt
+  // onBlur an focusout — blur allein erreicht onBlur nicht (v3.2).
+  function verlasseFeld(input) {
     input.dispatchEvent(new Event('blur', { bubbles: true }));
+    input.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+  }
+
+  // Tippen nachspielen: Feld leeren, dann je Zeichen den aktuellen Feldinhalt
+  // um das Zeichen verlängern und ein input-Ereignis auslösen — so sieht ein
+  // controlled input echte Tastendrücke, inklusive jeder Zwischenklammerung.
+  async function tippe(input, text) {
+    setzeRohwert(input, '');
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await sleep(20);
+    for (const zeichen of text) {
+      setzeRohwert(input, input.value + zeichen);
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await sleep(20);
+    }
   }
 
   function queryResultArea(doc) {
@@ -262,6 +325,38 @@
         if (!isNaN(raw) && raw < min) {
           recordFail('C3', `min=${min}, Eingabe ${min - 100} → Wert ${raw} bleibt (name=${input.name || input.id || '?'})`);
         }
+      }
+    }
+  }
+
+  // C3b (v3.2): Ein gültiger Wert muss sich Zeichen für Zeichen eintippen
+  // lassen. Ziel ist eine ganze Zahl aus der Mitte von min..max (auf das
+  // step-Raster gesetzt, falls step ≥ 1). Ganze Zahlen, weil ein Zahlenfeld
+  // halbe Eingaben wie „5.“ als leeren Wert meldet — das wäre ein Artefakt der
+  // Simulation, kein Fehler des Rechners. Felder ohne min und max: übersprungen.
+  function mitteImRaster(min, max, stepAttr) {
+    let ziel = Math.round((min + max) / 2);
+    const step = parseFloat(stepAttr);
+    if (!isNaN(step) && step >= 1) ziel = min + Math.round((ziel - min) / step) * step;
+    if (!Number.isInteger(ziel) || ziel < min || ziel > max) return null;
+    return ziel;
+  }
+
+  async function checkC3b_Tippen(doc, recordFail) {
+    const inputs = Array.from(doc.querySelectorAll('input[type="number"]'));
+    for (const input of inputs) {
+      if (input.disabled || input.readOnly) continue;
+      const min = input.min !== '' ? parseFloat(input.min) : NaN;
+      const max = input.max !== '' ? parseFloat(input.max) : NaN;
+      if (isNaN(min) || isNaN(max) || max <= min) continue;
+      const ziel = mitteImRaster(min, max, input.step);
+      if (ziel === null) continue;
+      await tippe(input, String(ziel));
+      verlasseFeld(input);
+      await sleep(50);
+      const ist = parseFloat(input.value);
+      if (ist !== ziel) {
+        recordFail('C3b', `min=${min}, max=${max}: „${ziel}“ Zeichen für Zeichen getippt → Wert ${input.value === '' ? '(leer)' : input.value} (name=${input.name || input.id || '?'})`);
       }
     }
   }
@@ -409,7 +504,7 @@
       try { await fn(); } catch (e) { entry.errors.push(`${name}: ${e.message}`); }
     };
 
-    // Checks are ordered so destructive ones (C1, C2, C3) come last,
+    // Checks are ordered so destructive ones (C1, C2, C3, C3b) come last,
     // because they mutate inputs. Read-only checks run first on pristine DOM.
     await safe('C4', () => checkC4_AriaLiveDouble(doc, recordFail));
     await safe('C5', () => checkC5_PluralUnits(doc, recordFail));
@@ -420,6 +515,7 @@
     // Destructive:
     await safe('C1', () => checkC1_DivisionByZero(doc, recordFail));
     await safe('C3', () => checkC3_Clamping(doc, recordFail));
+    await safe('C3b', () => checkC3b_Tippen(doc, recordFail));
     await safe('C2', () => checkC2_ResetButton(doc, recordFail));
 
     handle.dispose();
@@ -430,7 +526,7 @@
 
   async function runSmokeTestV3(options = {}) {
     const { limit = Infinity, filter = null } = options;
-    console.log('%cSMOKE TEST v3', 'font-weight:bold;font-size:14px;');
+    console.log('%cSMOKE TEST v3.2', 'font-weight:bold;font-size:14px;');
     console.log('Discovering Rechner URLs via sitemap …');
     let urls;
     try {
@@ -450,7 +546,7 @@
     results.errors = 0;
     results.perRechner = [];
 
-    console.log(`Found ${urls.length} Rechner. Starting sweep …`);
+    console.log(`Found ${urls.length} Rechner (${zaehleJeKategorie(urls)}). Starting sweep …`);
 
     for (const url of urls) {
       const entry = await runChecksForUrl(url);
@@ -475,8 +571,9 @@
   function printSummary(r) {
     const lines = [];
     lines.push('');
-    lines.push(`SMOKE TEST v3 — ${r.total} Rechner, 9 Checks`);
+    lines.push(`SMOKE TEST v3.2 — ${r.total} Rechner, 10 Checks`);
     lines.push('======================================');
+    lines.push(`Seiten je Kategorie: ${zaehleJeKategorie(r.perRechner.map((e) => e.url))}`);
     lines.push(`✅ ${r.passed} Rechner: alle Checks grün`);
     const problematic = r.perRechner.filter((e) => e.fails.length || e.errors.length);
     lines.push(`❌ ${problematic.length} Rechner mit Fails/Errors:`);
@@ -485,6 +582,7 @@
       C1: 'Division-by-zero',
       C2: 'Reset-Button',
       C3: 'Clamping',
+      C3b: 'Tippen',
       C4: 'aria-live Prefix',
       C5: 'Plural',
       C6: 'Sidebar-Kategorie',
@@ -505,6 +603,6 @@
 
   // Export
   window.runSmokeTestV3 = runSmokeTestV3;
-  console.log('Smoke Test v3 geladen. `await runSmokeTestV3()` ausführen.');
+  console.log('Smoke Test v3.2 geladen. `await runSmokeTestV3()` ausführen.');
   console.log('Optionen: `runSmokeTestV3({ limit: 5 })` oder `{ filter: /finanzen/ }`.');
 })();
