@@ -1,5 +1,5 @@
 /**
- * Rechenfix Smoke Test v3.2 — 10 automated checks per Rechner.
+ * Rechenfix Smoke Test v3.3 — 10 automated checks per Rechner.
  *
  * USAGE:
  *   1. Open https://www.rechenfix.de (or any Rechenfix page) in the browser.
@@ -55,6 +55,8 @@
  *          stehen. Fängt Klammerungen, die schon beim Tippen die Untergrenze
  *          erzwingen und damit gültige Eingaben unmöglich machen, z. B. „80“ in
  *          einem Feld 30–250 (aus „8“ wird 30, aus „300“ wird 250).
+ *
+ * V3.3 (28.09.2026): C3b tippt zusätzlich den größten gültigen Wert ab „1“, C3 und C3b erfassen Textfelder über data-min/data-max (NummerEingabe), der Sitemap-Abruf nutzt credentials 'same-origin'.
  */
 
 (function () {
@@ -123,7 +125,9 @@
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
   async function fetchSitemapUrls() {
-    const res = await fetch(SITEMAP_URL, { credentials: 'omit' });
+    // same-origin (v3.3): schickt das Vercel-Anmeldecookie mit, damit der Test
+    // auch auf einer geschützten Vorschau läuft; auf www.rechenfix.de ohne Wirkung.
+    const res = await fetch(SITEMAP_URL, { credentials: 'same-origin' });
     if (!res.ok) throw new Error(`sitemap fetch ${res.status}`);
     const xml = await res.text();
     const doc = new DOMParser().parseFromString(xml, 'application/xml');
@@ -305,11 +309,22 @@
     recordFail('C2', 'Reset: Inputs gesetzt, aber kein Ergebnis/Zahl sichtbar');
   }
 
+  // Felder mit Grenzen für C3/C3b: <input type="number"> mit min/max und seit
+  // v3.3 Textfelder mit data-min/data-max (NummerEingabe gibt ihre Grenzen so
+  // aus). data-* hat Vorrang vor min/max.
+  const GRENZ_FELDER = 'input[type="number"], input[data-min], input[data-max]';
+  function grenzen(input) {
+    const lies = (dataAttr, attr) => {
+      const v = input.getAttribute(dataAttr) ?? input.getAttribute(attr);
+      return v !== null && v !== '' ? parseFloat(v) : null;
+    };
+    return { min: lies('data-min', 'min'), max: lies('data-max', 'max') };
+  }
+
   async function checkC3_Clamping(doc, recordFail) {
-    const inputs = Array.from(doc.querySelectorAll('input[type="number"]'));
+    const inputs = Array.from(doc.querySelectorAll(GRENZ_FELDER));
     for (const input of inputs) {
-      const max = input.max !== '' ? parseFloat(input.max) : null;
-      const min = input.min !== '' ? parseFloat(input.min) : null;
+      const { min, max } = grenzen(input);
       if (max != null && !isNaN(max)) {
         setInputValue(input, max + 100);
         await sleep(50);
@@ -342,21 +357,43 @@
     return ziel;
   }
 
+  // v3.3: Zweiter Wert für C3b — der größte gültige Wert mit mindestens zwei
+  // Stellen, der mit „1“ beginnt (15 bei 2–15, 19 bei 18–99, 199 bei 30–250).
+  // „1“ ist die kleinste mögliche erste Ziffer; greift eine Untergrenze zu früh,
+  // zeigt sie sich genau hier. Ohne solchen Wert (etwa bei 0–4): null.
+  function groessterWertAbEins(min, max, stepAttr) {
+    const step = parseFloat(stepAttr);
+    const raster = !isNaN(step) && step >= 1 ? step : 1;
+    for (let stellen = String(Math.floor(max)).length; stellen >= 2; stellen--) {
+      const unten = 10 ** (stellen - 1); // 10, 100, …
+      const oben = 2 * 10 ** (stellen - 1) - 1; // 19, 199, …
+      const roh = Math.min(Math.floor(max), oben);
+      const ziel = min + Math.floor((roh - min) / raster) * raster;
+      if (Number.isInteger(ziel) && ziel >= Math.max(min, unten) && ziel <= max && String(ziel)[0] === '1') {
+        return ziel;
+      }
+    }
+    return null;
+  }
+
   async function checkC3b_Tippen(doc, recordFail) {
-    const inputs = Array.from(doc.querySelectorAll('input[type="number"]'));
+    const inputs = Array.from(doc.querySelectorAll(GRENZ_FELDER));
     for (const input of inputs) {
       if (input.disabled || input.readOnly) continue;
-      const min = input.min !== '' ? parseFloat(input.min) : NaN;
-      const max = input.max !== '' ? parseFloat(input.max) : NaN;
-      if (isNaN(min) || isNaN(max) || max <= min) continue;
-      const ziel = mitteImRaster(min, max, input.step);
-      if (ziel === null) continue;
-      await tippe(input, String(ziel));
-      verlasseFeld(input);
-      await sleep(50);
-      const ist = parseFloat(input.value);
-      if (ist !== ziel) {
-        recordFail('C3b', `min=${min}, max=${max}: „${ziel}“ Zeichen für Zeichen getippt → Wert ${input.value === '' ? '(leer)' : input.value} (name=${input.name || input.id || '?'})`);
+      const { min, max } = grenzen(input);
+      if (min === null || max === null || isNaN(min) || isNaN(max) || max <= min) continue;
+      const ziele = [
+        ['Mitte', mitteImRaster(min, max, input.step)],
+        ['ab 1', groessterWertAbEins(min, max, input.step)],
+      ].filter(([, z], i, alle) => z !== null && alle.findIndex(([, w]) => w === z) === i);
+      for (const [art, ziel] of ziele) {
+        await tippe(input, String(ziel));
+        verlasseFeld(input);
+        await sleep(50);
+        const ist = parseFloat(input.value);
+        if (ist !== ziel) {
+          recordFail('C3b', `min=${min}, max=${max}, ${art}: „${ziel}“ Zeichen für Zeichen getippt → Wert ${input.value === '' ? '(leer)' : input.value} (name=${input.name || input.id || '?'})`);
+        }
       }
     }
   }
@@ -526,7 +563,7 @@
 
   async function runSmokeTestV3(options = {}) {
     const { limit = Infinity, filter = null } = options;
-    console.log('%cSMOKE TEST v3.2', 'font-weight:bold;font-size:14px;');
+    console.log('%cSMOKE TEST v3.3', 'font-weight:bold;font-size:14px;');
     console.log('Discovering Rechner URLs via sitemap …');
     let urls;
     try {
@@ -571,7 +608,7 @@
   function printSummary(r) {
     const lines = [];
     lines.push('');
-    lines.push(`SMOKE TEST v3.2 — ${r.total} Rechner, 10 Checks`);
+    lines.push(`SMOKE TEST v3.3 — ${r.total} Rechner, 10 Checks`);
     lines.push('======================================');
     lines.push(`Seiten je Kategorie: ${zaehleJeKategorie(r.perRechner.map((e) => e.url))}`);
     lines.push(`✅ ${r.passed} Rechner: alle Checks grün`);
@@ -603,6 +640,6 @@
 
   // Export
   window.runSmokeTestV3 = runSmokeTestV3;
-  console.log('Smoke Test v3.2 geladen. `await runSmokeTestV3()` ausführen.');
+  console.log('Smoke Test v3.3 geladen. `await runSmokeTestV3()` ausführen.');
   console.log('Optionen: `runSmokeTestV3({ limit: 5 })` oder `{ filter: /finanzen/ }`.');
 })();

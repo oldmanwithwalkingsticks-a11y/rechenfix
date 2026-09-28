@@ -124,7 +124,7 @@ export default function AlkoholAbbauRechner() {
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Körpergewicht</label>
-          <NummerEingabe value={gewicht} onChange={v => setGewicht(clampInputValue(v, 30, 250))} onBlur={v => setGewicht(clampInputValueOnBlur(v, 30, 250))} einheit="kg" />
+          <NummerEingabe value={gewicht} onChange={v => setGewicht(clampInputValue(v, 30, 250))} onBlur={v => setGewicht(clampInputValueOnBlur(v, 30, 250))} min={30} max={250} einheit="kg" />
         </div>
 
         <div>

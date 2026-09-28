@@ -14,6 +14,13 @@ interface NummerEingabeProps {
   id?: string;
   /** Schrittweite für +/- Buttons (nicht verwendet, nur für Kompatibilität) */
   step?: string;
+  /**
+   * Grenzen des Feldes. Werden nur als data-min/data-max ausgegeben, damit der
+   * Smoketest (C3/C3b) das Feld findet; geklammert wird über onChange/onBlur
+   * des Aufrufers (clampInputValue/clampInputValueOnBlur), nicht hier.
+   */
+  min?: number;
+  max?: number;
 }
 
 /**
@@ -35,6 +42,8 @@ export default function NummerEingabe({
   className = '',
   einheit,
   id,
+  min,
+  max,
 }: NummerEingabeProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const neuerWert = e.target.value;
@@ -63,6 +72,8 @@ export default function NummerEingabe({
         onBlur={onBlur ? (e) => onBlur(e.target.value) : undefined}
         placeholder={placeholder}
         id={id}
+        data-min={min}
+        data-max={max}
         className={`input-field ${einheitPadding} ${className}`}
       />
       {einheit && (
