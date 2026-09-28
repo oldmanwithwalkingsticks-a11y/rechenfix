@@ -1,7 +1,7 @@
 /**
  * Verify-Script für die Eingabe-Klammerung in lib/zahlenformat.ts (Guard G3).
  *
- * Simuliert Tastendrücke wie ein controlled `<input type="number">`: Jedes
+ * Simuliert Tastendrücke wie ein controlled Eingabefeld: Jedes
  * Zeichen wird an den aktuellen, bereits geklammerten Feldinhalt angehängt und
  * durch `clampInputValue` (onChange) geschickt; danach verlässt der Nutzer das
  * Feld, und `clampInputValueOnBlur` (onBlur) greift.
@@ -15,6 +15,10 @@
  * Anlass: Mit der alten Fassung ließ sich in einem Feld 18–99 „35“ nicht tippen
  * („3“ wurde sofort 18, dann „185“ → 99); live betroffen waren die Gewichtsfelder
  * 30–250 im Promille- und im Alkohol-Abbau-Rechner. Smoketest v3.2, Check C3b.
+ *
+ * Dezimalfälle (29.09.2026): Die Dezimalfelder sind Textfelder und nehmen das
+ * Komma an. Für sie gibt es zusätzlich einen Soll-Zahlenwert: Der Feldinhalt nach
+ * dem Verlassen wird mit `parseDeutscheZahl` desselben Moduls umgewandelt.
  *
  * Soll-Werte stammen aus der Regel oben, nicht aus dem Helfer (nicht zirkulär).
  * Negativkontrolle: Mit einem anderen Modulpfad als Argument läuft dasselbe Skript
@@ -37,6 +41,8 @@ interface Fall {
   min: number;
   max: number;
   soll: string;
+  /** Zahl nach Umwandlung mit parseDeutscheZahl, wo die Vorgabe sie nennt. */
+  sollZahl?: number;
 }
 
 // Die Fälle aus der Vorgabe vom 28.09.2026.
@@ -52,6 +58,10 @@ const FAELLE: Fall[] = [
   // Ergänzt am 28.09.2026 (Rezept-Umrechner auf den gemeinsamen Helfer): Die alte
   // eigene Klammerung setzte ein leeres Feld sofort auf 1, aus „26“ wurde „126“ → 50.
   { name: '1–50 (Portionen): leeres Feld, „26“ tippen', getippt: '26', min: 1, max: 50, soll: '26' },
+  // Ergänzt am 29.09.2026 (Dezimalfelder nehmen das Komma an): Trinkzeit und
+  // Körpergewicht im Promille-Rechner.
+  { name: '0–48: „1,5“ tippen', getippt: '1,5', min: 0, max: 48, soll: '1,5', sollZahl: 1.5 },
+  { name: '30–250: „72,5“ tippen', getippt: '72,5', min: 30, max: 250, soll: '72,5', sollZahl: 72.5 },
 ];
 
 function tippeUndVerlasse(fall: Fall, onChange: Klammer, onBlur: Klammer): { schritte: string[]; ende: string } {
@@ -72,8 +82,9 @@ async function main(): Promise<void> {
   const modul = await import(pfad);
   const onChange: Klammer = modul.clampInputValue;
   const onBlur: Klammer = modul.clampInputValueOnBlur ?? ((w: string) => w);
-  if (typeof onChange !== 'function') {
-    console.error(`clampInputValue fehlt in ${pfad}`);
+  const alsZahl: (wert: string) => number = modul.parseDeutscheZahl;
+  if (typeof onChange !== 'function' || typeof alsZahl !== 'function') {
+    console.error(`clampInputValue oder parseDeutscheZahl fehlt in ${pfad}`);
     process.exit(1);
   }
   if (!modul.clampInputValueOnBlur) {
@@ -83,11 +94,13 @@ async function main(): Promise<void> {
   let gruen = 0;
   for (const fall of FAELLE) {
     const { schritte, ende } = tippeUndVerlasse(fall, onChange, onBlur);
-    const ok = ende === fall.soll;
+    const zahl = fall.sollZahl === undefined ? undefined : alsZahl(ende);
+    const ok = ende === fall.soll && zahl === fall.sollZahl;
     if (ok) gruen++;
     const weg = schritte.length ? `${schritte.join(' → ')} → blur` : 'blur';
+    const zahlText = fall.sollZahl === undefined ? '' : `, Zahl ${zahl} soll ${fall.sollZahl}`;
     console.log(
-      `${ok ? '✓' : '✗'} ${fall.name.padEnd(42)} ${weg.padEnd(28)} ist ${JSON.stringify(ende).padEnd(6)} soll ${JSON.stringify(fall.soll)}`,
+      `${ok ? '✓' : '✗'} ${fall.name.padEnd(42)} ${weg.padEnd(28)} ist ${JSON.stringify(ende).padEnd(6)} soll ${JSON.stringify(fall.soll)}${zahlText}`,
     );
   }
   console.log(`\nErgebnis: ${gruen}/${FAELLE.length} grün${gruen < FAELLE.length ? `, ${FAELLE.length - gruen} rot` : ''}.`);

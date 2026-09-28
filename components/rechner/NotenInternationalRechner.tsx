@@ -37,21 +37,25 @@ export default function NotenInternationalRechner() {
   const [ukWert, setUkWert] = useState('first');
   const [ectsWert, setEctsWert] = useState('A');
 
+  // Leeres GPA-Feld bleibt ohne Ergebnis (NaN) wie zuvor mit parseFloat;
+  // parseDeutscheZahl allein läse es als 0, und 0 ist ein gültiger GPA.
+  const gpaZahl = gpaWert.trim() === '' ? NaN : parseDeutscheZahl(gpaWert);
+
   // Aktuellen Rohwert für Berechnung ermitteln
   const eingabeWert = useMemo(() => {
     if (system === 'deutsch') return parseDeutscheZahl(deutschWert);
-    if (system === 'gpa') return parseFloat(gpaWert);
+    if (system === 'gpa') return gpaZahl;
     if (system === 'uk') return ukWert;
     if (system === 'ects') return ectsWert;
     return 0;
-  }, [system, deutschWert, gpaWert, ukWert, ectsWert]);
+  }, [system, deutschWert, gpaZahl, ukWert, ectsWert]);
 
   const ergebnis = useMemo(() => {
     if (system === 'deutsch') {
       return rechneNotenUm('deutsch', parseDeutscheZahl(deutschWert));
     }
     if (system === 'gpa') {
-      return rechneNotenUm('gpa', parseFloat(gpaWert));
+      return rechneNotenUm('gpa', gpaZahl);
     }
     if (system === 'uk') {
       return rechneNotenUm('uk', ukWert);
@@ -60,7 +64,7 @@ export default function NotenInternationalRechner() {
       return rechneNotenUm('ects', ectsWert);
     }
     return null;
-  }, [system, deutschWert, gpaWert, ukWert, ectsWert]);
+  }, [system, deutschWert, gpaZahl, ukWert, ectsWert]);
 
   // Nächste Zeile in Umrechnungstabelle hervorheben
   const highlightNote = ergebnis?.deutscheNote ?? null;
@@ -117,17 +121,15 @@ export default function NotenInternationalRechner() {
             <label htmlFor="noten-int-gpa" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               GPA (0.0 – 4.0)
             </label>
-            <input
+            <NummerEingabe
               id="noten-int-gpa"
-              type="number"
-              min="0"
-              max="4"
-              step="0.1"
               value={gpaWert}
-              onChange={(e) => setGpaWert(clampInputValue(e.target.value, 0, 4))}
-              onBlur={(e) => setGpaWert(clampInputValueOnBlur(e.target.value, 0, 4))}
-              className="input-field w-full min-h-[48px]"
+              onChange={(v) => setGpaWert(clampInputValue(v, 0, 4))}
+              onBlur={(v) => setGpaWert(clampInputValueOnBlur(v, 0, 4))}
+              className="min-h-[48px]"
               placeholder="3.0"
+              min={0}
+              max={4}
             />
           </div>
         )}

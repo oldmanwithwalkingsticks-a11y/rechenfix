@@ -6,7 +6,8 @@ import {
   SCHNELLWAHL,
   type Getraenk,
 } from '@/lib/berechnungen/promille';
-import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, istGueltigeZahleneingabe, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -18,6 +19,9 @@ const fmtZahl = (n: number, s = 2) =>
 // Getränk plus der getippte Text der beiden Zahlenfelder — nur für die Eingabe;
 // die Lib rechnet weiter mit den Zahlen aus Getraenk.
 type GetraenkEingabe = Getraenk & { mengeLText?: string; alkoholProzentText?: string };
+
+// Zahl aus der Schnellwahl als Feldtext mit deutschem Komma („0,5“).
+const alsFeldtext = (n: number) => String(n).replace('.', ',');
 
 let nextId = 1;
 
@@ -74,16 +78,19 @@ export default function PromilleRechner() {
 
   // Getippter Text und Zahl gemeinsam setzen; leer zählt als 0 wie in den übrigen Feldern.
   const setzeMenge = (id: number, text: string) =>
-    updateGetraenk(id, { mengeLText: text, mengeL: parseFloat(text.replace(',', '.')) || 0 });
+    updateGetraenk(id, { mengeLText: text, mengeL: parseDeutscheZahl(text) || 0 });
   const setzeAlkohol = (id: number, text: string) =>
-    updateGetraenk(id, { alkoholProzentText: text, alkoholProzent: parseFloat(text.replace(',', '.')) || 0 });
+    updateGetraenk(id, { alkoholProzentText: text, alkoholProzent: parseDeutscheZahl(text) || 0 });
+
+  const gewichtKg = parseDeutscheZahl(gewicht) || 0;
+  const trinkzeitStunden = parseDeutscheZahl(trinkzeit) || 0;
 
   const ergebnis = useMemo(() => berechnePromille({
     geschlecht,
-    gewichtKg: parseFloat(gewicht.replace(',', '.')) || 0,
+    gewichtKg,
     getraenke,
-    trinkzeitStunden: parseFloat(trinkzeit.replace(',', '.')) || 0,
-  }), [geschlecht, gewicht, getraenke, trinkzeit]);
+    trinkzeitStunden,
+  }), [geschlecht, gewichtKg, getraenke, trinkzeitStunden]);
 
   const restH = ergebnis ? Math.floor(ergebnis.restStunden) : 0;
   const restM = ergebnis ? Math.round((ergebnis.restStunden - restH) * 60) : 0;
@@ -106,36 +113,25 @@ export default function PromilleRechner() {
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
           <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Körpergewicht</label>
-          <div className="relative">
-            <input
-              type="number"
-              inputMode="decimal"
-              min="30"
-              max="250"
-              value={gewicht}
-              onChange={e => setGewicht(clampInputValue(e.target.value, 30, 250))}
-              onBlur={e => setGewicht(clampInputValueOnBlur(e.target.value, 30, 250))}
-              className="input-field w-full pr-10"
-            />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">kg</span>
-          </div>
+          <NummerEingabe
+            value={gewicht}
+            onChange={v => setGewicht(clampInputValue(v, 30, 250))}
+            onBlur={v => setGewicht(clampInputValueOnBlur(v, 30, 250))}
+            einheit="kg"
+            min={30}
+            max={250}
+          />
         </div>
         <div>
           <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Trinkbeginn vor</label>
-          <div className="relative">
-            <input
-              type="number"
-              inputMode="decimal"
-              min="0"
-              max="48"
-              step="0.5"
-              value={trinkzeit}
-              onChange={e => setTrinkzeit(clampInputValue(e.target.value, 0, 48))}
-              onBlur={e => setTrinkzeit(clampInputValueOnBlur(e.target.value, 0, 48))}
-              className="input-field w-full pr-10"
-            />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std.</span>
-          </div>
+          <NummerEingabe
+            value={trinkzeit}
+            onChange={v => setTrinkzeit(clampInputValue(v, 0, 48))}
+            onBlur={v => setTrinkzeit(clampInputValueOnBlur(v, 0, 48))}
+            einheit="Std."
+            min={0}
+            max={48}
+          />
         </div>
       </div>
 
@@ -164,13 +160,12 @@ export default function PromilleRechner() {
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300 w-20 shrink-0">{g.name}</span>
               <div className="relative flex-1">
                 <input
-                  type="number"
+                  type="text"
                   inputMode="decimal"
-                  min="0.01"
-                  max="5"
-                  step="0.01"
-                  value={g.mengeLText ?? g.mengeL}
-                  onChange={e => setzeMenge(g.id, clampInputValue(e.target.value, 0.01, 5))}
+                  data-min={0.01}
+                  data-max={5}
+                  value={g.mengeLText ?? alsFeldtext(g.mengeL)}
+                  onChange={e => { if (istGueltigeZahleneingabe(e.target.value)) setzeMenge(g.id, clampInputValue(e.target.value, 0.01, 5)); }}
                   onBlur={e => setzeMenge(g.id, clampInputValueOnBlur(e.target.value, 0.01, 5))}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
@@ -178,13 +173,12 @@ export default function PromilleRechner() {
               </div>
               <div className="relative flex-1">
                 <input
-                  type="number"
+                  type="text"
                   inputMode="decimal"
-                  min="0.1"
-                  max="100"
-                  step="0.1"
-                  value={g.alkoholProzentText ?? g.alkoholProzent}
-                  onChange={e => setzeAlkohol(g.id, clampInputValue(e.target.value, 0.1, 100))}
+                  data-min={0.1}
+                  data-max={100}
+                  value={g.alkoholProzentText ?? alsFeldtext(g.alkoholProzent)}
+                  onChange={e => { if (istGueltigeZahleneingabe(e.target.value)) setzeAlkohol(g.id, clampInputValue(e.target.value, 0.1, 100)); }}
                   onBlur={e => setzeAlkohol(g.id, clampInputValueOnBlur(e.target.value, 0.1, 100))}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
@@ -334,7 +328,7 @@ export default function PromilleRechner() {
 
           <AiExplain
             rechnerName="Promillerechner"
-            eingaben={{ geschlecht, gewichtKg: parseFloat(gewicht.replace(',', '.')) || 0, anzahlGetraenke: getraenke.length, trinkzeitStunden: parseFloat(trinkzeit.replace(',', '.')) || 0 }}
+            eingaben={{ geschlecht, gewichtKg, anzahlGetraenke: getraenke.length, trinkzeitStunden }}
             ergebnis={{ aktuellPromille: ergebnis.aktuellPromille, maxPromille: ergebnis.maxPromille, gesamtAlkoholGramm: ergebnis.gesamtAlkoholGramm, restStunden: ergebnis.restStunden, zone: ergebnis.zone }}
           />
         </div>
