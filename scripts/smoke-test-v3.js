@@ -1,5 +1,5 @@
 /**
- * Rechenfix Smoke Test v3.3 — 10 automated checks per Rechner.
+ * Rechenfix Smoke Test v3.4 — 10 automated checks per Rechner.
  *
  * USAGE:
  *   1. Open https://www.rechenfix.de (or any Rechenfix page) in the browser.
@@ -57,6 +57,7 @@
  *          einem Feld 30–250 (aus „8“ wird 30, aus „300“ wird 250).
  *
  * V3.3 (28.09.2026): C3b tippt zusätzlich den größten gültigen Wert ab „1“, C3 und C3b erfassen Textfelder über data-min/data-max (NummerEingabe), der Sitemap-Abruf nutzt credentials 'same-origin'.
+ * V3.4 (28.09.2026): C3b tippt in Dezimalfeldern (step oder Grenze nicht ganzzahlig, inputmode="decimal") zusätzlich die Mitte mit einer Nachkommastelle und Komma, z. B. „1,5“ bei 0–3; Befund bei mehr als 0,1 Abweichung.
  */
 
 (function () {
@@ -376,6 +377,32 @@
     return null;
   }
 
+  // v3.4: Dezimalfelder — step nicht ganzzahlig oder „any“, eine Grenze nicht
+  // ganzzahlig, oder inputmode="decimal". In ihnen tippt C3b zusätzlich einen
+  // Wert mit Komma. Ein Zahlenfeld (type="number") verwirft das Komma: aus
+  // „1,5“ wird bei Tastatureingabe in Chromium (de-DE) 15; in dieser
+  // Simulation leert das Komma das Feld (Wertbereinigung für type="number").
+  function istDezimalfeld(input, min, max) {
+    const step = (input.getAttribute('step') || '').trim().toLowerCase();
+    if (step === 'any') return true;
+    const stepZahl = parseFloat(step);
+    if (!isNaN(stepZahl) && !Number.isInteger(stepZahl)) return true;
+    if (!Number.isInteger(min) || !Number.isInteger(max)) return true;
+    return (input.getAttribute('inputmode') || '').trim().toLowerCase() === 'decimal';
+  }
+
+  // Zielwert für Dezimalfelder: Untergrenze plus halber Abstand, auf eine
+  // Nachkommastelle gerundet und immer mit einer Nachkommastelle und Komma
+  // geschrieben („1,5“ bei 0–3, „140,0“ bei 30–250) — das Komma steht so in
+  // jedem Fall im Getippten. Die Rundung weicht höchstens 0,05 von der Mitte
+  // ab; ein Befund ist erst eine Abweichung über das Doppelte, 0,1.
+  const DEZIMAL_RUNDUNG = 0.05;
+  function dezimalMitte(min, max) {
+    const mitte = min + (max - min) / 2;
+    const ziel = Math.round(mitte * 10) / 10;
+    return { mitte, text: ziel.toFixed(1).replace('.', ',') };
+  }
+
   async function checkC3b_Tippen(doc, recordFail) {
     const inputs = Array.from(doc.querySelectorAll(GRENZ_FELDER));
     for (const input of inputs) {
@@ -393,6 +420,18 @@
         const ist = parseFloat(input.value);
         if (ist !== ziel) {
           recordFail('C3b', `min=${min}, max=${max}, ${art}: „${ziel}“ Zeichen für Zeichen getippt → Wert ${input.value === '' ? '(leer)' : input.value} (name=${input.name || input.id || '?'})`);
+        }
+      }
+      // v3.4: Dezimaleingabe mit Komma. Gelesen wird mit Komma und Punkt als
+      // gleichwertigem Dezimalzeichen.
+      if (istDezimalfeld(input, min, max)) {
+        const { mitte, text } = dezimalMitte(min, max);
+        await tippe(input, text);
+        verlasseFeld(input);
+        await sleep(50);
+        const ist = parseFloat(input.value.replace(',', '.'));
+        if (isNaN(ist) || Math.abs(ist - mitte) > 2 * DEZIMAL_RUNDUNG) {
+          recordFail('C3b', `min=${min}, max=${max}, Dezimal: „${text}“ Zeichen für Zeichen getippt → Wert ${input.value === '' ? '(leer)' : input.value} (name=${input.name || input.id || '?'})`);
         }
       }
     }
@@ -563,7 +602,7 @@
 
   async function runSmokeTestV3(options = {}) {
     const { limit = Infinity, filter = null } = options;
-    console.log('%cSMOKE TEST v3.3', 'font-weight:bold;font-size:14px;');
+    console.log('%cSMOKE TEST v3.4', 'font-weight:bold;font-size:14px;');
     console.log('Discovering Rechner URLs via sitemap …');
     let urls;
     try {
@@ -608,7 +647,7 @@
   function printSummary(r) {
     const lines = [];
     lines.push('');
-    lines.push(`SMOKE TEST v3.3 — ${r.total} Rechner, 10 Checks`);
+    lines.push(`SMOKE TEST v3.4 — ${r.total} Rechner, 10 Checks`);
     lines.push('======================================');
     lines.push(`Seiten je Kategorie: ${zaehleJeKategorie(r.perRechner.map((e) => e.url))}`);
     lines.push(`✅ ${r.passed} Rechner: alle Checks grün`);
@@ -640,6 +679,6 @@
 
   // Export
   window.runSmokeTestV3 = runSmokeTestV3;
-  console.log('Smoke Test v3.3 geladen. `await runSmokeTestV3()` ausführen.');
+  console.log('Smoke Test v3.4 geladen. `await runSmokeTestV3()` ausführen.');
   console.log('Optionen: `runSmokeTestV3({ limit: 5 })` oder `{ filter: /finanzen/ }`.');
 })();
