@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useId } from 'react';
 import { berechneTageszeit, berechneWoche, type WochenTag } from '@/lib/berechnungen/arbeitszeit';
-import { clampInputValue, clampNumber } from '@/lib/zahlenformat';
+import { clampInputValue, clampInputValueOnBlur, clampNumber } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -39,6 +39,7 @@ function MinutenEingabe({ value, onChange, label }: { value: string; onChange: (
           max="480"
           value={value}
           onChange={e => onChange(clampInputValue(e.target.value, 0, 480))}
+          onBlur={e => onChange(clampInputValueOnBlur(e.target.value, 0, 480))}
           className="input-field w-full pr-10"
         />
         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">min</span>

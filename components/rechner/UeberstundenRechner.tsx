@@ -5,7 +5,7 @@ import {
   berechneUeberstunden,
   berechneVerguetung,
 } from '@/lib/berechnungen/ueberstunden';
-import { clampInputValue } from '@/lib/zahlenformat';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -122,6 +122,7 @@ export default function UeberstundenRechner() {
                 step="0.5"
                 value={vertraglicheStunden}
                 onChange={e => setVertraglicheStunden(clampInputValue(e.target.value, 0, 80))}
+                onBlur={e => setVertraglicheStunden(clampInputValueOnBlur(e.target.value, 0, 80))}
                 className="input-field w-full pr-16"
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std./Wo.</span>
@@ -160,6 +161,7 @@ export default function UeberstundenRechner() {
                   step="0.5"
                   value={tatsaechlich}
                   onChange={e => setTatsaechlich(clampInputValue(e.target.value, 0, 120))}
+                  onBlur={e => setTatsaechlich(clampInputValueOnBlur(e.target.value, 0, 120))}
                   className="input-field w-full pr-16"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std./Wo.</span>
@@ -179,6 +181,7 @@ export default function UeberstundenRechner() {
                       step="0.5"
                       value={tagesStunden[idx]}
                       onChange={e => updateTag(idx, clampInputValue(e.target.value, 0, 24))}
+                      onBlur={e => updateTag(idx, clampInputValueOnBlur(e.target.value, 0, 24))}
                       className="input-field w-full pr-8"
                     />
                     <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">h</span>
@@ -222,6 +225,7 @@ export default function UeberstundenRechner() {
                   max="52"
                   value={customWochen}
                   onChange={e => setCustomWochen(clampInputValue(e.target.value, 1, 52))}
+                  onBlur={e => setCustomWochen(clampInputValueOnBlur(e.target.value, 1, 52))}
                   className="input-field w-full pr-16"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">Wochen</span>
@@ -372,6 +376,7 @@ export default function UeberstundenRechner() {
                   max="200"
                   value={zuschlag}
                   onChange={e => setZuschlag(clampInputValue(e.target.value, 0, 200))}
+                  onBlur={e => setZuschlag(clampInputValueOnBlur(e.target.value, 0, 200))}
                   className="input-field w-full pr-8"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">%</span>

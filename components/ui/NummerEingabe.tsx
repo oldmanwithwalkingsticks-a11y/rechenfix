@@ -5,6 +5,8 @@ import { istGueltigeZahleneingabe } from '@/lib/zahlenformat';
 interface NummerEingabeProps {
   value: string;
   onChange: (wert: string) => void;
+  /** Beim Verlassen des Feldes, z. B. für clampInputValueOnBlur (Untergrenze). */
+  onBlur?: (wert: string) => void;
   placeholder?: string;
   className?: string;
   einheit?: string;
@@ -28,6 +30,7 @@ interface NummerEingabeProps {
 export default function NummerEingabe({
   value,
   onChange,
+  onBlur,
   placeholder,
   className = '',
   einheit,
@@ -57,6 +60,7 @@ export default function NummerEingabe({
         inputMode="decimal"
         value={value}
         onChange={handleChange}
+        onBlur={onBlur ? (e) => onBlur(e.target.value) : undefined}
         placeholder={placeholder}
         id={id}
         className={`input-field ${einheitPadding} ${className}`}

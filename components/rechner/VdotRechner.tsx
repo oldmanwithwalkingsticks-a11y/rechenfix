@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { parseDeutscheZahl, clampInputValue } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -154,18 +154,21 @@ export default function VdotRechner() {
             <label htmlFor="vdot-std" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Stunden</label>
             <input id="vdot-std" type="number" min="0" max="99" value={stunden}
               onChange={(e) => setStunden(clampInputValue(e.target.value, 0, 99))}
+              onBlur={(e) => setStunden(clampInputValueOnBlur(e.target.value, 0, 99))}
               className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center" />
           </div>
           <div>
             <label htmlFor="vdot-min" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Minuten</label>
             <input id="vdot-min" type="number" min="0" max="59" value={minuten}
               onChange={(e) => setMinuten(clampInputValue(e.target.value, 0, 59))}
+              onBlur={(e) => setMinuten(clampInputValueOnBlur(e.target.value, 0, 59))}
               className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center" />
           </div>
           <div>
             <label htmlFor="vdot-sek" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Sekunden</label>
             <input id="vdot-sek" type="number" min="0" max="59" value={sekunden}
               onChange={(e) => setSekunden(clampInputValue(e.target.value, 0, 59))}
+              onBlur={(e) => setSekunden(clampInputValueOnBlur(e.target.value, 0, 59))}
               className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center" />
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { berechneSchlaf, getEmpfohleneSchlafdauer } from '@/lib/berechnungen/schlaf';
-import { clampInputValue } from '@/lib/zahlenformat';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import SchlafTipp from '@/components/rechner/SchlafTipp';
@@ -83,6 +83,7 @@ export default function SchlafRechner() {
               type="number"
               value={alter}
               onChange={e => setAlter(clampInputValue(e.target.value, 1, 120))}
+              onBlur={e => setAlter(clampInputValueOnBlur(e.target.value, 1, 120))}
               min={1}
               max={120}
               className="input-field pr-14"
@@ -98,6 +99,7 @@ export default function SchlafRechner() {
               type="number"
               value={einschlafzeit}
               onChange={e => setEinschlafzeit(clampInputValue(e.target.value, 0, 60))}
+              onBlur={e => setEinschlafzeit(clampInputValueOnBlur(e.target.value, 0, 60))}
               min={0}
               max={60}
               className="input-field pr-14"

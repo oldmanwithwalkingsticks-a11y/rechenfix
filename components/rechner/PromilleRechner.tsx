@@ -6,7 +6,7 @@ import {
   SCHNELLWAHL,
   type Getraenk,
 } from '@/lib/berechnungen/promille';
-import { clampInputValue, clampNumber } from '@/lib/zahlenformat';
+import { clampInputValue, clampInputValueOnBlur, clampNumber } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -104,6 +104,7 @@ export default function PromilleRechner() {
               max="250"
               value={gewicht}
               onChange={e => setGewicht(clampInputValue(e.target.value, 30, 250))}
+              onBlur={e => setGewicht(clampInputValueOnBlur(e.target.value, 30, 250))}
               className="input-field w-full pr-10"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">kg</span>
@@ -120,6 +121,7 @@ export default function PromilleRechner() {
               step="0.5"
               value={trinkzeit}
               onChange={e => setTrinkzeit(clampInputValue(e.target.value, 0, 48))}
+              onBlur={e => setTrinkzeit(clampInputValueOnBlur(e.target.value, 0, 48))}
               className="input-field w-full pr-10"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std.</span>

@@ -73,16 +73,28 @@ export function istGueltigeZahleneingabe(wert: string): boolean {
   return /^-?[\d.]*,?\d*$/.test(wert);
 }
 
+/** Leere und angefangene Eingaben, die beim Tippen stehen bleiben dürfen. */
+function istAngefangeneEingabe(wert: string): boolean {
+  return wert === '' || wert === '-' || wert === '.' || wert === ',';
+}
+
 /**
  * Guard G3 — Clamping für `<input type="number">` onChange-Handler.
  *
- * Begrenzt einen String-Wert auf das Intervall [min, max]. Leere und
- * angefangene Eingaben ("", "-", ".") werden durchgelassen, damit Benutzer
- * in Ruhe tippen können. Sobald ein vollständiger numerischer Wert das
- * Intervall verlässt, wird auf die Grenze gekappt.
+ * Beim Tippen greift nur die Obergrenze. Weitere Ziffern machen eine positive
+ * Zahl nur größer — die Obergrenze ist also schon beim Tippen endgültig, die
+ * Untergrenze nicht: „3“ ist auf dem Weg zu „35“ kein Fehler. Die Untergrenze
+ * setzt `clampInputValueOnBlur` beim Verlassen des Feldes durch. Bis 28.09.2026
+ * klammerte diese Funktion auch die Untergrenze bei jedem Tastendruck; damit
+ * ließ sich in einem Feld 18–99 kein „35“ tippen (aus „3“ wurde 18).
  *
- * Verwendung:
+ * Ist min ≥ 0, wird ein Minuszeichen abgewiesen. Leere und angefangene
+ * Eingaben ("", "-", ".", ",") bleiben stehen, damit Benutzer in Ruhe tippen
+ * können.
+ *
+ * Verwendung (immer beide zusammen):
  *   onChange={e => setX(clampInputValue(e.target.value, 0, 100))}
+ *   onBlur={e => setX(clampInputValueOnBlur(e.target.value, 0, 100))}
  *
  * Mit `null` kann eine Grenze deaktiviert werden (z. B. min=0, max=null).
  */
@@ -91,7 +103,28 @@ export function clampInputValue(
   min: number | null,
   max: number | null,
 ): string {
-  if (wert === '' || wert === '-' || wert === '.' || wert === ',') return wert;
+  if (min !== null && min >= 0 && wert.includes('-')) wert = wert.replace(/-/g, '');
+  if (istAngefangeneEingabe(wert)) return wert;
+  const zahl = parseFloat(wert.replace(',', '.'));
+  if (isNaN(zahl)) return wert;
+  if (max !== null && zahl > max) return String(max);
+  return wert;
+}
+
+/**
+ * Guard G3 — Gegenstück zu `clampInputValue` für den onBlur-Handler: Beim
+ * Verlassen des Feldes gelten beide Grenzen. Leere und angefangene Eingaben
+ * bleiben stehen wie bisher.
+ *
+ * Verwendung:
+ *   onBlur={e => setX(clampInputValueOnBlur(e.target.value, 0, 100))}
+ */
+export function clampInputValueOnBlur(
+  wert: string,
+  min: number | null,
+  max: number | null,
+): string {
+  if (istAngefangeneEingabe(wert)) return wert;
   const zahl = parseFloat(wert.replace(',', '.'));
   if (isNaN(zahl)) return wert;
   if (max !== null && zahl > max) return String(max);
