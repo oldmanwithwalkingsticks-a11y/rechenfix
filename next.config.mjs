@@ -22,6 +22,43 @@ const nextConfig = {
     '*': ['public/blog/**', 'public/social-videos-src/**'],
   },
 
+  // WORKAROUND MDX-Seiten unter Next.js 16 mit Webpack (Welle next16, 28.09.2026).
+  //
+  // Ursache: Next.js 16 übergibt `pageExtensions` an die Server-Components-
+  // Transformation von SWC (next/dist/build/swc/options.js). Die MDX-Regel von
+  // @next/mdx läuft aber über `defaultLoaders.babel`, einen SWC-Loader ohne
+  // `bundleLayer` — also ohne Server-Schicht. SWC erkennt app/**/page.mdx damit
+  // als App-Seite, hält sie aber für eine Client-Komponente und bricht an
+  // `export const metadata` ab („You are attempting to export "metadata" from a
+  // component marked with "use client"“). Unter 14.2.35 wurden MDX-Dateien nicht
+  // als Seiten erkannt, der Fehler trat nicht auf.
+  //
+  // Abhilfe: Der SWC-Schritt der MDX-Regel läuft ausdrücklich in der RSC-Schicht.
+  // Tragfähig nur, weil MDX ausschließlich als app/**/page.mdx vorkommt und nie
+  // importiert wird — Seiten entstehen nur in der RSC-Schicht. Erzwungen durch
+  // scripts/check-mdx-nur-seiten.mjs in der Prebuild-Kette.
+  //
+  // Getestet mit next 16.3.6 und @next/mdx 16.3.6 (Webpack, --webpack).
+  // Entfernen: mit der Turbopack-Welle oder sobald Next.js das korrigiert. Nach
+  // jedem Nachzug der Next-Fassung einmal ohne diesen Hook bauen — baut es grün,
+  // fliegt er raus.
+  //
+  // Reihenfolge: withSerwist → withMDX → dieser Hook. @next/mdx legt seine Regel
+  // an, bevor es diese Funktion aufruft; sie ist hier also schon vorhanden. Der
+  // Loader wird kopiert, nicht verändert — `defaultLoaders.babel` ist ein
+  // gemeinsames Objekt, das auch andere Regeln nutzen.
+  webpack(config) {
+    for (const rule of config.module.rules) {
+      if (rule && rule.test instanceof RegExp && rule.test.test('x.mdx') && Array.isArray(rule.use)) {
+        const [swc, ...rest] = rule.use;
+        if (swc && swc.loader === 'next-swc-loader') {
+          rule.use = [{ ...swc, options: { ...swc.options, bundleLayer: 'rsc', esm: true } }, ...rest];
+        }
+      }
+    }
+    return config;
+  },
+
   // Komprimierung aktivieren
   compress: true,
 
