@@ -169,6 +169,15 @@ export const TERMINE: Termin[] = [
     quelle: 'Claude-Projekt Assistenten Builder, Projektnotiz rechenfix, Abschnitt Tägliche Berichte',
   },
   {
+    id: 'nextjs-sicherheitsrelease-2026-09',
+    titel: 'Next.js: Advisories vom 30.09.2026 gegen 14.2.35 halten',
+    datum: '2026-10-01',
+    vorlaufTage: 0,
+    bereich: 'Betrieb',
+    was: 'Am 30.09.2026 hat Next.js neun Sicherheitsluecken veroeffentlicht, Korrekturen nur in 16.3.7 und 15.5.27. rechenfix laeuft auf 14.2.35, und 14.x erhaelt keine Korrekturen mehr. Fuer jede der neun Advisories auf github.com/vercel/next.js/security/advisories nachsehen: Schliessen die betroffenen Fassungen 14.x ein, und nutzt rechenfix die betroffene Funktion? Ergebnis in docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md im Abschnitt Advisories 30.09.2026 festhalten. Ist mindestens eine Luecke mit Schweregrad hoch oder kritisch fuer 14.x einschlaegig, wird die Migration auf 16 vorgezogen; sonst folgt sie nach Plan. Eintrag erst nach dieser Einordnung entfernen.',
+    quelle: 'nextjs.org/support-policy; nextjs.org/blog/upcoming-nextjs-security-release-september-2026; docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md',
+  },
+  {
     id: 'sv-rechengroessen',
     titel: 'SV-Rechengrößenverordnung Folgejahr',
     datum: '2026-10-01',
