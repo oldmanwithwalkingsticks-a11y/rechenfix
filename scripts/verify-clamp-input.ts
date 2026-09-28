@@ -20,10 +20,17 @@
  * Komma an. Für sie gibt es zusätzlich einen Soll-Zahlenwert: Der Feldinhalt nach
  * dem Verlassen wird mit `parseDeutscheZahl` desselben Moduls umgewandelt.
  *
+ * Konsistenzprüfung (29.09.2026): Für jede Eingabe × jeden Bereich wird das
+ * Ergebnis von `clampInputValueOnBlur` mit `parseDeutscheZahl` desselben Moduls
+ * gelesen. Ist es eine Zahl, muss sie in den Grenzen liegen. Anlass: Die
+ * Klammerung las früher mit parseFloat(wert.replace(',', '.')); „1.500,50“ ging
+ * in einem Feld 0–48 als 1,5 durch, gerechnet wurde mit 1500,5.
+ *
  * Soll-Werte stammen aus der Regel oben, nicht aus dem Helfer (nicht zirkulär).
  * Negativkontrolle: Mit einem anderen Modulpfad als Argument läuft dasselbe Skript
  * gegen eine andere Fassung des Helfers; gegen die alte Fassung muss es am Fall
- * „35“ scheitern. Fehlt dem Modul `clampInputValueOnBlur` (alte Fassung), ändert
+ * „35“ scheitern, gegen die Fassung vor dem 29.09.2026 an der Konsistenzprüfung
+ * (darunter „1.500,50“ bei 0–48). Fehlt dem Modul `clampInputValueOnBlur` (alte Fassung), ändert
  * das Verlassen des Feldes nichts — so verhielt sich der Bestand.
  *
  * Run: npx tsx scripts/verify-clamp-input.ts [modulpfad]
@@ -62,6 +69,19 @@ const FAELLE: Fall[] = [
   // Körpergewicht im Promille-Rechner.
   { name: '0–48: „1,5“ tippen', getippt: '1,5', min: 0, max: 48, soll: '1,5', sollZahl: 1.5 },
   { name: '30–250: „72,5“ tippen', getippt: '72,5', min: 30, max: 250, soll: '72,5', sollZahl: 72.5 },
+  // Ergänzt am 29.09.2026 (Klammerung liest wie parseDeutscheZahl): „0.500“ ist
+  // kein Tausenderpunkt, „72.500“ schon und liegt über der Obergrenze.
+  { name: '0,01–5: „0.500“ tippen', getippt: '0.500', min: 0.01, max: 5, soll: '0.500', sollZahl: 0.5 },
+  { name: '30–250: „72.500“ → 250', getippt: '72.500', min: 30, max: 250, soll: '250' },
+];
+
+// Konsistenzprüfung: jede Eingabe in jedem Bereich; null = ohne Obergrenze.
+const KONSISTENZ_EINGABEN = [
+  '0.500', '0.330', '72.500', '12.500', '150.000', '1.500,50', '1,5', '1.5', '0,01',
+  '480', '12.5', '-3', 'abc', '1.000.000', '1234.567', '24,0', '140,0',
+];
+const KONSISTENZ_BEREICHE: Array<[number, number | null]> = [
+  [0.01, 5], [30, 250], [0, 48], [1, 999], [0, null],
 ];
 
 function tippeUndVerlasse(fall: Fall, onChange: Klammer, onBlur: Klammer): { schritte: string[]; ende: string } {
@@ -104,7 +124,26 @@ async function main(): Promise<void> {
     );
   }
   console.log(`\nErgebnis: ${gruen}/${FAELLE.length} grün${gruen < FAELLE.length ? `, ${FAELLE.length - gruen} rot` : ''}.`);
-  process.exit(gruen === FAELLE.length ? 0 : 1);
+
+  // Konsistenz: Klammerung und Umwandlung lesen dieselbe Zahl.
+  let paare = 0;
+  const verstoesse: string[] = [];
+  for (const [min, max] of KONSISTENZ_BEREICHE) {
+    for (const eingabe of KONSISTENZ_EINGABEN) {
+      paare++;
+      const ergebnis = onBlur(eingabe, min, max);
+      const zahl = alsZahl(ergebnis);
+      if (Number.isNaN(zahl)) continue;
+      if (zahl < min || (max !== null && zahl > max)) {
+        const bereich = `${min}–${max ?? '∞'}`;
+        verstoesse.push(`${bereich.padEnd(8)} ${JSON.stringify(eingabe).padEnd(12)} → Feld ${JSON.stringify(ergebnis).padEnd(12)} → Zahl ${zahl}`);
+      }
+    }
+  }
+  console.log(`\nKonsistenz: ${paare} Paare, ${verstoesse.length} Verstöße${verstoesse.length ? ':' : '.'}`);
+  for (const v of verstoesse) console.log(`✗ ${v}`);
+
+  process.exit(gruen === FAELLE.length && verstoesse.length === 0 ? 0 : 1);
 }
 
 main().catch((e) => {

@@ -14,7 +14,8 @@
  * Heuristik (W12, L-41-Folge):
  *   R1: Komma vorhanden → Komma=Dezimal, alle Punkte=Tausender (entfernt)
  *   R2: Mehrere Punkte → alle Tausenderpunkte (entfernt)
- *   R3: Ein Punkt + GENAU 3 Ziffern danach → Tausenderpunkt (entfernt)
+ *   R3: Ein Punkt, davor ein gültiger erster Block (1–3 Ziffern ohne führende
+ *       Null, optional Minus), danach GENAU 3 Ziffern → Tausenderpunkt (entfernt)
  *   R4: Sonst (1 Punkt, ≠3 Ziffern) → Punkt=Dezimal (US-Toleranz)
  *
  * Beispiele:
@@ -23,6 +24,8 @@
  *   "1.500,50"    → 1500.5   (R1)
  *   "1.5"         → 1.5      (R4)
  *   "1.000.000"   → 1000000  (R2)
+ *   "0.500"       → 0.5      (R4)
+ *   "1234.567"    → 1234.567 (R4)
  *
  * Empty/Whitespace-String → 0 (UX-Default für Initial-State, W12-Hotfix);
  * ungültige Eingaben (`'abc'` etc.) → NaN.
@@ -49,10 +52,11 @@ export function parseDeutscheZahl(wert: string): number {
     return isNaN(zahl) ? NaN : zahl;
   }
 
-  // R3: 1 Punkt + GENAU 3 Ziffern danach → Tausenderpunkt
+  // R3: 1 Punkt, davor gültiger erster Block, dahinter GENAU 3 Ziffern →
+  // Tausenderpunkt. „0.500“ und „1234.567“ sind keine Tausendergruppierungen.
   if (anzPunkte === 1) {
     const teile = trimmed.split('.');
-    if (/^\d{3}$/.test(teile[1])) {
+    if (/^-?[1-9]\d{0,2}$/.test(teile[0]) && /^\d{3}$/.test(teile[1])) {
       const ohnePunkt = teile[0] + teile[1];
       const zahl = parseFloat(ohnePunkt);
       return isNaN(zahl) ? NaN : zahl;
@@ -97,6 +101,9 @@ function istAngefangeneEingabe(wert: string): boolean {
  *   onBlur={e => setX(clampInputValueOnBlur(e.target.value, 0, 100))}
  *
  * Mit `null` kann eine Grenze deaktiviert werden (z. B. min=0, max=null).
+ *
+ * Die Zahl wird mit `parseDeutscheZahl` gelesen: Klammerung und Rechnung lesen
+ * dieselbe Zahl.
  */
 export function clampInputValue(
   wert: string,
@@ -104,8 +111,8 @@ export function clampInputValue(
   max: number | null,
 ): string {
   if (min !== null && min >= 0 && wert.includes('-')) wert = wert.replace(/-/g, '');
-  if (istAngefangeneEingabe(wert)) return wert;
-  const zahl = parseFloat(wert.replace(',', '.'));
+  if (istAngefangeneEingabe(wert) || wert.trim() === '') return wert;
+  const zahl = parseDeutscheZahl(wert);
   if (isNaN(zahl)) return wert;
   if (max !== null && zahl > max) return String(max);
   return wert;
@@ -118,14 +125,17 @@ export function clampInputValue(
  *
  * Verwendung:
  *   onBlur={e => setX(clampInputValueOnBlur(e.target.value, 0, 100))}
+ *
+ * Die Zahl wird mit `parseDeutscheZahl` gelesen: Klammerung und Rechnung lesen
+ * dieselbe Zahl.
  */
 export function clampInputValueOnBlur(
   wert: string,
   min: number | null,
   max: number | null,
 ): string {
-  if (istAngefangeneEingabe(wert)) return wert;
-  const zahl = parseFloat(wert.replace(',', '.'));
+  if (istAngefangeneEingabe(wert) || wert.trim() === '') return wert;
+  const zahl = parseDeutscheZahl(wert);
   if (isNaN(zahl)) return wert;
   if (max !== null && zahl > max) return String(max);
   if (min !== null && zahl < min) return String(min);
