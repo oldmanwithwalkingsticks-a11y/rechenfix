@@ -24,8 +24,12 @@ const eslintConfig = defineConfig([
   {
     rules: {
       // Unter 14.2.35 ebenfalls aktiv, meldete dort aber 0 Treffer. Das Plugin
-      // 16.3.6 wertet jetzt auch die statischen Routen unter app/ aus und meldet
-      // 34 interne <a href>-Links in 14 Dateien. Aus, bis sie auf <Link> umgestellt sind.
+      // 16.3.6 meldet 34 Mal (17 Fundstellen, jede doppelt) in 14 Dateien — das
+      // sind ECHTE interne <a href>-Links (/datenschutz, /impressum,
+      // /ki-transparenz, Rechnerseiten), die das alte Plugin nicht erkannt hat.
+      // Kein Fehlalarm. Aus, bis sie auf <Link> umgestellt sind (Folgewelle, siehe
+      // docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md, „Folgewellen“);
+      // danach wieder einschalten.
       '@next/next/no-html-link-for-pages': 'off',
       // Neu in @next/eslint-plugin-next 16 (warn), vorher nicht vorhanden.
       '@next/next/no-location-assign-relative-destination': 'off',
