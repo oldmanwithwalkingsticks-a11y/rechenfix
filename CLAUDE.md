@@ -65,6 +65,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 
 ## Tech Stack
 - Next.js 14 (App Router), TypeScript, Tailwind CSS
+- Next.js 16: Vor jeder Änderung an Next-Code AGENTS.md lesen; der Block dort wird von next dev verwaltet und verweist auf die Doku unter node_modules/next/dist/docs.
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
 
