@@ -237,6 +237,16 @@ export const TERMINE: Termin[] = [
     quelle: 'docs/jahreswerte-kalender.md, August-Audit',
   },
   {
+    id: 'spritpreise-energiesteuer-q4',
+    titel: 'Spritpreise nach der Energiesteuersenkung ab 01.10.2026',
+    datum: '2026-10-01',
+    vorlaufTage: 0,
+    bereich: 'Gesetzeswerte',
+    projekt: 'rechenfix.de',
+    was: 'Zwei Schritte, beide in lib/berechnungen/spritpreise-parameter.ts. Erstens der Hinweis: Fundstelle des Gesetzes zur Energiesteuersenkung im Bundesgesetzblatt nachschlagen (laut ADAC am 25.09.2026 unterzeichnet, 14 Cent je Liter netto, knapp 17 Cent brutto, Oktober bis Dezember 2026) und tankrabattHinweis danach neu fassen. Der bisherige Satz über das Auslaufen am 30.06.2026 ist ab dem 01.10.2026 irreführend. Zweitens die Preise: superE10 und diesel mit dem ersten ADAC-Bundesschnitt, der nach dem 01.10.2026 erhoben ist, aktualisieren, stand bumpen und das Verhältnis Diesel zu Super E10 prüfen. Am 22.09.2026 lag Diesel mit 2,428 über E10 mit 2,267, wie schon am 12.08.2026. Kippt es, sind die vier Prosa-Stellen in lib/rechner-config/auto.ts nachzuziehen, die der Dateikopf nennt. Bis dahin warnt der Build wegen des Alters der Werte. Das ist am 29.09.2026 bewusst in Kauf genommen worden, weil Werte vom 22.09. zwei Tage später wieder veraltet wären. Einmaltermin: nach Erledigung entfernen.',
+    quelle: 'Build-Warnung vom 29.09.2026; ADAC, Seite aktueller Spritpreis, Stand 28.09.2026',
+  },
+  {
     id: 'verarbeitungsverzeichnis-durchsicht',
     titel: 'Verarbeitungsverzeichnis durchsehen',
     datum: '2027-02-18',
