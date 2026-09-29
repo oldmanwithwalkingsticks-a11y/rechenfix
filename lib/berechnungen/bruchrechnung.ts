@@ -69,11 +69,27 @@ export interface RechenSchritte {
   gekuerzt: string;
 }
 
+/**
+ * Zwischenwerte der Rechnung, unverändert aus berechneBrueche durchgereicht (W152).
+ * Der Rechenweg wird daraus gebildet und nicht neu gerechnet.
+ */
+export interface BruchZwischenwerte {
+  /** Nur + und −: kgV der Nenner, Erweiterungsfaktoren und erweiterte Zähler. */
+  hauptnenner: number | null;
+  faktor1: number | null;
+  faktor2: number | null;
+  zaehler1: number | null;
+  zaehler2: number | null;
+  /** Ergebnis vor dem Kürzen. */
+  roh: Bruch;
+}
+
 export interface BruchRechenErgebnis {
   ergebnis: Bruch;
   dezimal: number;
   gemischt: GemischteZahl | null;
   schritte: RechenSchritte;
+  zwischen: BruchZwischenwerte;
 }
 
 function fmtBruch(b: Bruch): string {
@@ -95,6 +111,9 @@ export function berechneBrueche(
   let hauptnenner: string | null = null;
   let erweitert: string | null = null;
   let ungekuerztStr: string | null = null;
+  let zw: Omit<BruchZwischenwerte, 'roh'> = {
+    hauptnenner: null, faktor1: null, faktor2: null, zaehler1: null, zaehler2: null,
+  };
 
   if (op === '+' || op === '-') {
     const hn = kgv(b1.nenner, b2.nenner);
@@ -102,6 +121,7 @@ export function berechneBrueche(
     const f2 = hn / b2.nenner;
     const z1 = b1.zaehler * f1;
     const z2 = b2.zaehler * f2;
+    zw = { hauptnenner: hn, faktor1: f1, faktor2: f2, zaehler1: z1, zaehler2: z2 };
 
     if (hn !== b1.nenner || hn !== b2.nenner) {
       hauptnenner = `Hauptnenner: ${hn}`;
@@ -140,6 +160,7 @@ export function berechneBrueche(
       ungekuerzt: ungekuerztStr,
       gekuerzt: fmtBruch(ergebnis),
     },
+    zwischen: { ...zw, roh: ungekuerzt },
   };
 }
 
@@ -221,6 +242,18 @@ export interface VergleichErgebnis {
   b1Dezimal: number;
   b2Dezimal: number;
   zeichen: Vergleich;
+  /**
+   * Beide Brüche auf den Hauptnenner gebracht (W152), für den Rechenweg. Vorzeichen stehen im
+   * Zähler, Nenner sind positiv. `zeichen` oben bleibt der bisherige Dezimalvergleich.
+   */
+  gleichnamig: {
+    nenner1: number;
+    nenner2: number;
+    hauptnenner: number;
+    zaehler1: number;
+    zaehler2: number;
+    zeichen: Vergleich;
+  };
 }
 
 export function vergleicheBrueche(b1: Bruch, b2: Bruch): VergleichErgebnis | null {
@@ -233,9 +266,284 @@ export function vergleicheBrueche(b1: Bruch, b2: Bruch): VergleichErgebnis | nul
   else if (d1 > d2) zeichen = '>';
   else zeichen = '<';
 
+  const n1 = Math.abs(b1.nenner);
+  const n2 = Math.abs(b2.nenner);
+  const hn = kgv(n1, n2);
+  const z1 = Math.sign(b1.nenner) * b1.zaehler * (hn / n1);
+  const z2 = Math.sign(b2.nenner) * b2.zaehler * (hn / n2);
+
   return {
     b1Dezimal: Math.round(d1 * 1000000) / 1000000,
     b2Dezimal: Math.round(d2 * 1000000) / 1000000,
     zeichen,
+    gleichnamig: {
+      nenner1: n1,
+      nenner2: n2,
+      hauptnenner: hn,
+      zaehler1: z1,
+      zaehler2: z2,
+      zeichen: z1 === z2 ? '=' : z1 > z2 ? '>' : '<',
+    },
   };
+}
+
+// --- Rechenweg Schritt für Schritt (W152) ---
+//
+// Reine Funktionen ohne UI. Sie bilden den Rechenweg aus den Zwischenwerten der Funktionen
+// oben und rechnen das Ergebnis nicht neu. Schreibweise: a/b, ×, ÷, Dezimalkomma,
+// Minuszeichen (U+2212) vor dem Bruch.
+
+export interface RechenwegSchritt {
+  titel: string;
+  rechnung: string;
+}
+
+/** Wie eine Seite der Aufgabe eingegeben wurde — für den Umwandlungsschritt. */
+export type OperandQuelle =
+  | { art: 'bruch'; bruch: Bruch }
+  | { art: 'gemischt'; ganz: number; zaehler: number; nenner: number; bruch: Bruch }
+  | { art: 'dezimal'; text: string; roh: Bruch; bruch: Bruch };
+
+const MINUS = '−';
+
+/** Ganze Zahl mit echtem Minuszeichen. */
+function zahl(x: number): string {
+  return x < 0 ? `${MINUS}${-x}` : String(x);
+}
+
+/** Wie zahl(), negative Werte in Klammern — für die zweite Stelle einer Rechnung. */
+function klammer(x: number): string {
+  return x < 0 ? `(${zahl(x)})` : String(x);
+}
+
+/** Bruch mit dem Minuszeichen vor dem Bruch: −7/12. */
+function bruchText(b: Bruch): string {
+  const negativ = b.zaehler !== 0 && (b.zaehler < 0) !== (b.nenner < 0);
+  return `${negativ ? MINUS : ''}${Math.abs(b.zaehler)}/${Math.abs(b.nenner)}`;
+}
+
+/** Bruch als zweiter Operand: negative Brüche in Klammern. */
+function bruchOperand(b: Bruch): string {
+  const t = bruchText(b);
+  return t.startsWith(MINUS) ? `(${t})` : t;
+}
+
+function opZeichen(op: Operation): string {
+  return op === '-' ? MINUS : op;
+}
+
+/**
+ * Dezimalzahl in derselben Stellenzahl und Rundung wie die Ergebniszeile des Rechners
+ * (der Wert kommt bereits auf sechs Stellen gerundet an). Der Rechner nutzt dieselbe Funktion.
+ */
+export function formatDezimal(n: number): string {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 6 });
+}
+
+function dezimalText(n: number): string {
+  return formatDezimal(n).replace(/^-/, MINUS);
+}
+
+/**
+ * Kürzen: `ggtWert` ist der Teiler, den kuerzen() verwendet hat. Aus den Nennern abgeleitet
+ * (|roh.nenner| / gekuerzt.nenner), nicht neu bestimmt.
+ */
+function schrittKuerzen(roh: Bruch, gekuerzt: Bruch, ggtWert: number, titel = 'Kürzen'): RechenwegSchritt {
+  const z = Math.abs(roh.zaehler);
+  const n = Math.abs(roh.nenner);
+  if (ggtWert === 1) {
+    return { titel: 'Kürzen prüfen', rechnung: `GGT(${z}, ${n}) = 1 — der Bruch ist bereits vollständig gekürzt` };
+  }
+  const vz = bruchText(gekuerzt).startsWith(MINUS) ? MINUS : '';
+  return {
+    titel,
+    rechnung: `GGT(${z}, ${n}) = ${ggtWert} → ${vz}(${z} ÷ ${ggtWert})/(${n} ÷ ${ggtWert}) = ${bruchText(gekuerzt)}`,
+  };
+}
+
+/** Gemischte Zahl, nur wenn |Zähler| > Nenner. Ganze und Rest kommen aus zuGemischt(). */
+function schrittGemischt(b: Bruch): RechenwegSchritt | null {
+  if (Math.abs(b.zaehler) <= Math.abs(b.nenner)) return null;
+  const g = zuGemischt(b);
+  if (!g) return null;
+  const vz = bruchText(b).startsWith(MINUS) ? MINUS : '';
+  const ganz = Math.abs(g.ganz);
+  const ziel = g.zaehler === 0 ? `${vz}${ganz}` : `${vz}${ganz} ${g.zaehler}/${g.nenner}`;
+  return {
+    titel: 'In eine gemischte Zahl umwandeln',
+    rechnung: `${Math.abs(b.zaehler)} ÷ ${Math.abs(b.nenner)} = ${ganz} Rest ${g.zaehler} → ${ziel}`,
+  };
+}
+
+/** Zähler durch Nenner — `dezimal` ist der gerundete Wert der Ergebniszeile. */
+function schrittDezimal(b: Bruch, dezimal: number): RechenwegSchritt {
+  return { titel: 'Zähler durch Nenner teilen', rechnung: `${zahl(b.zaehler)} ÷ ${b.nenner} = ${dezimalText(dezimal)}` };
+}
+
+function schritteUmwandeln(o: OperandQuelle, nr: 1 | 2): RechenwegSchritt[] {
+  const welche = nr === 1 ? 'erste' : 'zweite';
+  if (o.art === 'gemischt') {
+    const vz = o.ganz < 0 ? MINUS : '';
+    const g = Math.abs(o.ganz);
+    const z = Math.abs(o.zaehler);
+    return [{
+      titel: `Gemischte Zahl umwandeln (${welche} Zahl)`,
+      rechnung: `${vz}${g} ${z}/${klammer(o.nenner)} = ${vz}(${g} × ${klammer(o.nenner)} + ${z})/${klammer(o.nenner)} = ${bruchText(o.bruch)}`,
+    }];
+  }
+  if (o.art === 'dezimal') {
+    const text = o.text.replace(/^-/, MINUS);
+    const schritte: RechenwegSchritt[] = [
+      { titel: `Dezimalzahl als Bruch schreiben (${welche} Zahl)`, rechnung: `${text} = ${bruchText(o.roh)}` },
+    ];
+    const ggtWert = Math.abs(o.roh.nenner) / o.bruch.nenner;
+    if (ggtWert > 1) schritte.push(schrittKuerzen(o.roh, o.bruch, ggtWert, `Bruch kürzen (${welche} Zahl)`));
+    return schritte;
+  }
+  return [];
+}
+
+/**
+ * Reiter „Brüche rechnen“. `o1`/`o2` beschreiben die Eingabe, `erg` ist das Ergebnis von
+ * berechneBrueche() mit genau diesen Brüchen. Ohne Ergebnis (etwa Division durch 0) kein
+ * Rechenweg.
+ */
+export function rechenwegBrueche(
+  o1: OperandQuelle,
+  op: Operation,
+  o2: OperandQuelle,
+  erg: BruchRechenErgebnis | null,
+): RechenwegSchritt[] {
+  if (!erg) return [];
+  const b1 = o1.bruch;
+  const b2 = o2.bruch;
+  const zw = erg.zwischen;
+  const schritte: RechenwegSchritt[] = [...schritteUmwandeln(o1, 1), ...schritteUmwandeln(o2, 2)];
+
+  if (op === '÷') {
+    const kehrwert: Bruch = { zaehler: b2.nenner, nenner: b2.zaehler };
+    schritte.push({
+      titel: 'Kehrwert bilden',
+      rechnung: `${bruchText(b1)} ÷ ${bruchOperand(b2)} = ${bruchText(b1)} × ${bruchOperand(kehrwert)} (mit dem Kehrwert von ${bruchText(b2)} multiplizieren)`,
+    });
+  }
+
+  if ((op === '+' || op === '-') && zw.hauptnenner !== null && zw.faktor1 !== null && zw.faktor2 !== null
+      && zw.zaehler1 !== null && zw.zaehler2 !== null) {
+    const hn = zw.hauptnenner;
+    if (hn === b1.nenner && hn === b2.nenner) {
+      schritte.push({
+        titel: 'Gleiche Nenner — kein Erweitern nötig',
+        rechnung: `${bruchText(b1)} ${opZeichen(op)} ${bruchOperand(b2)}`,
+      });
+    } else {
+      schritte.push({ titel: 'Hauptnenner bestimmen', rechnung: `kgV(${Math.abs(b1.nenner)}, ${Math.abs(b2.nenner)}) = ${hn}` });
+      const erweitern: [Bruch, number, number, string][] = [
+        [b1, zw.faktor1, zw.zaehler1, 'Ersten'],
+        [b2, zw.faktor2, zw.zaehler2, 'Zweiten'],
+      ];
+      for (const [b, f, z, welcher] of erweitern) {
+        if (f === 1) continue;
+        schritte.push({
+          titel: `${welcher} Bruch mit ${zahl(f)} erweitern`,
+          rechnung: `${bruchText(b)} = (${zahl(b.zaehler)} × ${klammer(f)})/(${zahl(b.nenner)} × ${klammer(f)}) = ${bruchText({ zaehler: z, nenner: hn })}`,
+        });
+      }
+    }
+    schritte.push({
+      titel: op === '+' ? 'Zähler addieren, Nenner beibehalten' : 'Zähler subtrahieren, Nenner beibehalten',
+      rechnung: `(${zahl(zw.zaehler1)} ${opZeichen(op)} ${klammer(zw.zaehler2)})/${hn} = ${bruchText(zw.roh)}`,
+    });
+  } else if (op === '×') {
+    schritte.push({
+      titel: 'Zähler mal Zähler, Nenner mal Nenner',
+      rechnung: `(${zahl(b1.zaehler)} × ${klammer(b2.zaehler)})/(${zahl(b1.nenner)} × ${klammer(b2.nenner)}) = ${bruchText(zw.roh)}`,
+    });
+  } else if (op === '÷') {
+    schritte.push({
+      titel: 'Zähler mal Zähler, Nenner mal Nenner',
+      rechnung: `(${zahl(b1.zaehler)} × ${klammer(b2.nenner)})/(${zahl(b1.nenner)} × ${klammer(b2.zaehler)}) = ${bruchText(zw.roh)}`,
+    });
+  }
+
+  schritte.push(schrittKuerzen(zw.roh, erg.ergebnis, Math.abs(zw.roh.nenner) / erg.ergebnis.nenner));
+  const gemischt = schrittGemischt(erg.ergebnis);
+  if (gemischt) schritte.push(gemischt);
+  schritte.push(schrittDezimal(erg.ergebnis, erg.dezimal));
+  return schritte;
+}
+
+/** Reiter „Kürzen“. */
+export function rechenwegKuerzen(e: KuerzenErgebnis): RechenwegSchritt[] {
+  const z = Math.abs(e.original.zaehler);
+  const n = Math.abs(e.original.nenner);
+  const schritte: RechenwegSchritt[] = [];
+  if (e.teilGgt === 1) {
+    schritte.push({ titel: 'Kürzen prüfen', rechnung: `GGT(${z}, ${n}) = 1 — der Bruch ist bereits vollständig gekürzt` });
+  } else {
+    schritte.push({ titel: 'Größten gemeinsamen Teiler bestimmen', rechnung: `GGT(${z}, ${n}) = ${e.teilGgt}` });
+    schritte.push({
+      titel: `Zähler und Nenner durch ${e.teilGgt} teilen`,
+      rechnung: `${z} ÷ ${e.teilGgt} = ${Math.abs(e.gekuerzt.zaehler)}, ${n} ÷ ${e.teilGgt} = ${e.gekuerzt.nenner} → ${bruchText(e.gekuerzt)}`,
+    });
+  }
+  const gemischt = schrittGemischt(e.gekuerzt);
+  if (gemischt) schritte.push(gemischt);
+  return schritte;
+}
+
+/** Reiter „Dezimal ↔ Bruch“, Richtung Dezimal → Bruch. `r` kommt aus dezimalTextZuBruch(text). */
+export function rechenwegDezimalZuBruch(text: string, r: { roh: Bruch; bruch: Bruch }): RechenwegSchritt[] {
+  const stellen = String(r.roh.nenner).length - 1;
+  const schritte: RechenwegSchritt[] = [{
+    titel: 'Als Zehnerbruch schreiben',
+    rechnung: `${stellen} ${stellen === 1 ? 'Nachkommastelle' : 'Nachkommastellen'} → Nenner ${r.roh.nenner}: ${text.trim().replace(/^-/, MINUS)} = ${bruchText(r.roh)}`,
+  }];
+  schritte.push(schrittKuerzen(r.roh, r.bruch, r.roh.nenner / r.bruch.nenner));
+  const gemischt = schrittGemischt(r.bruch);
+  if (gemischt) schritte.push(gemischt);
+  return schritte;
+}
+
+/**
+ * Reiter „Dezimal ↔ Bruch“, Richtung Bruch → Dezimal. `eingabe` ist der eingegebene Bruch,
+ * `gekuerzt` und `dezimal` sind die Werte der Ergebnisanzeige.
+ */
+export function rechenwegBruchZuDezimal(eingabe: Bruch, gekuerzt: Bruch, dezimal: number): RechenwegSchritt[] {
+  const schritte: RechenwegSchritt[] = [];
+  const ggtWert = Math.abs(eingabe.nenner) / gekuerzt.nenner;
+  if (ggtWert > 1) schritte.push(schrittKuerzen(eingabe, gekuerzt, ggtWert));
+  schritte.push(schrittDezimal(gekuerzt, dezimal));
+  return schritte;
+}
+
+/** Reiter „Vergleichen“: gleichnamig machen, Zähler vergleichen, Dezimalzeile als Kontrolle. */
+export function rechenwegVergleich(b1: Bruch, b2: Bruch, e: VergleichErgebnis): RechenwegSchritt[] {
+  const g = e.gleichnamig;
+  const schritte: RechenwegSchritt[] = [];
+  if (g.nenner1 === g.nenner2) {
+    schritte.push({ titel: 'Gleiche Nenner — kein Erweitern nötig', rechnung: `${bruchText(b1)} und ${bruchText(b2)}` });
+  } else {
+    schritte.push({ titel: 'Hauptnenner bestimmen', rechnung: `kgV(${g.nenner1}, ${g.nenner2}) = ${g.hauptnenner}` });
+    const erweitern: [Bruch, number, number, string][] = [
+      [b1, g.hauptnenner / g.nenner1, g.zaehler1, 'Ersten'],
+      [b2, g.hauptnenner / g.nenner2, g.zaehler2, 'Zweiten'],
+    ];
+    for (const [b, f, z, welcher] of erweitern) {
+      if (f === 1) continue;
+      schritte.push({
+        titel: `${welcher} Bruch mit ${f} erweitern`,
+        rechnung: `${bruchText(b)} = ${bruchText({ zaehler: z, nenner: g.hauptnenner })}`,
+      });
+    }
+  }
+  schritte.push({
+    titel: 'Zähler vergleichen',
+    rechnung: `${zahl(g.zaehler1)} ${g.zeichen} ${zahl(g.zaehler2)} → ${bruchText(b1)} ${g.zeichen} ${bruchText(b2)}`,
+  });
+  schritte.push({
+    titel: 'Kontrolle',
+    rechnung: `${dezimalText(e.b1Dezimal)} ${e.zeichen} ${dezimalText(e.b2Dezimal)}`,
+  });
+  return schritte;
 }

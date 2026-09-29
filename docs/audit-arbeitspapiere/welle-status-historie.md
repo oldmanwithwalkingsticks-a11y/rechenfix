@@ -6,6 +6,75 @@
 
 ---
 
+## 30.09.2026 — Welle 152: Bruchrechner zeigt den vollständigen Rechenweg in allen vier Reitern — ✅ ABGESCHLOSSEN
+
+**Anlass** war ein Feedback „Rechner verbessern“ vom 28.09.2026, 17:57 Uhr, zu
+/mathe/bruchrechner. Grund „weg-fehlt“, Text „RECHENWEG“, von einem Android-Mobilgerät.
+
+**Ist-Stand am 30.09.2026, live gemessen bei 412 px:**
+- **Teilen (÷):** nur Aufgabe und Ergebnis, kein einziger Schritt.
+- **Plus und Minus:** Hauptnenner und erweiterte Brüche, aber ohne Erweiterungsfaktoren und ohne
+  gemischte Zahl, obwohl die Ergebniszeile 1 7/12 zeigte.
+- **Gemischte Zahlen:** schon umgewandelt angezeigt, der Umwandlungsschritt fehlte.
+- **Kürzen:** eine einzige Zeile.
+- **Dezimal ↔ Bruch:** gar kein Rechenweg.
+- **Vergleichen:** nur ein Dezimalvergleich.
+- **Position:** Der Block stand rund 500 px unter dem Ergebnis, hinter den Buttons und Fix erklärt.
+
+**Ein Rechenweg, der den Schritt auslässt, den der Nutzer nicht kann, ist keiner.** Der
+Kehrwert beim Teilen und die Faktoren beim Erweitern sind genau die Stellen, an denen Schüler
+hängen bleiben. Beides stand vorher nicht da.
+
+**Rechenlogik:**
+- **Reine Funktionen:** In `lib/berechnungen/bruchrechnung.ts` stehen jetzt `rechenwegBrueche`,
+  `rechenwegKuerzen`, `rechenwegDezimalZuBruch`, `rechenwegBruchZuDezimal` und
+  `rechenwegVergleich`. Sie liefern je Aufgabe `{ titel, rechnung }[]`.
+- **Nicht neu gerechnet:** Die Schritte stammen aus den Zwischenwerten der bestehenden
+  Rechnung. `berechneBrueche` reicht dafür Hauptnenner, Faktoren, erweiterte Zähler und das
+  ungekürzte Ergebnis als neues Feld `zwischen` durch. Der GGT wird aus den Nennern abgeleitet.
+  Das Ergebnis selbst rechnet unverändert.
+- **Vergleichen:** `vergleicheBrueche` liefert zusätzlich die gleichnamigen Brüche. Das
+  Vergleichszeichen der Ergebnisanzeige bleibt der bisherige Dezimalvergleich.
+
+**Darstellung:**
+- **Optik:** Nummeriert mit denselben Klassen wie der Inhaltsbaustein „beispielrechnung“. Der
+  ist keine eigene Komponente, sondern steht inline im `ContentBlockRenderer`, deshalb sind die
+  Klassen übernommen.
+- **Position:** direkt unter der Ergebnisanzeige, vor „Bruch in Prozent umrechnen“ und vor
+  PDF/Kopieren/Teilen/Feedback. Die Reihenfolge legt `BruchRechner.tsx` selbst fest, keine
+  gemeinsame Komponente.
+- **Gemessen bei 412 px** mit Playwright gegen `next start`: In allen vier Reitern steht
+  „Rechenweg“ 29 px unter der Unterkante der Ergebnisanzeige.
+
+**Probe:** `/tmp/bruch-probe.mjs` rechnet GGT und kgV selbst und hält 13 Fälle mit den
+erwarteten Schrittzeilen als Literale. Die Rechner-Lib ist dort nur Prüfling. Ergebnis: 13 von
+13 OK. `scripts/verify-bruchrechnung.ts` bleibt grün.
+
+**Abweichungen vom Auftrag, bewusst:**
+- **Kein „…“ beim Dezimalschritt.** Der Auftrag verlangt, periodische Werte „genau so“ zu
+  kennzeichnen wie die Ergebniszeile. Die Ergebniszeile rundet auf sechs Stellen und kennzeichnet
+  nichts, also steht dort 19 ÷ 12 = 1,583333. Ein „…“ wäre bei aufgerundeten Werten falsch, etwa
+  bei 5/7 = 0,714286.
+- **„Kürzen wie g)“ als f) gelesen.** Der Auftrag verweist beim Umwandeln einer Dezimalzahl auf
+  g), Fall 9 erwartet aber „GGT 25 → 3/4“, also den Kürzen-Schritt f). Beim Umwandeln entfällt
+  der Kürzen-Schritt, wenn der GGT 1 ist.
+- **Dezimal → Bruch mit gemischter Zahl.** Zeigt die Ergebnisanzeige eine gemischte Zahl (1,25 →
+  1 1/4), bekommt auch der Rechenweg den Schritt dazu.
+- **Die Dezimalzeile im Reiter Vergleichen** steht nicht mehr in der Ergebnisanzeige. Sie ist der
+  letzte Schritt „Kontrolle“ im Rechenweg.
+- **Keine weiteren Verbraucher.** PDF, „Ergebnis kopieren“ und Fix erklärt haben den alten
+  Rechenweg nie bekommen. Das PDF entsteht aus `ergebnisText`, der Bruchrechner übergibt kein
+  `pdfDaten`. Nachgerüstet wurde dort nichts.
+
+**Grenze, benannt:** Im Reiter Vergleichen vergleicht der Rechenweg die gleichnamigen Zähler exakt,
+die Ergebnisanzeige die Dezimalwerte mit der Toleranz 1e-10. Bei Brüchen, die sich um weniger
+unterscheiden, zeigen beide verschiedene Zeichen. Gemessen an 1/10000000000 gegen 1/10000000001:
+Die Ergebnisanzeige zeigt „=“, der Rechenweg „>“, und die Kontrolle lautet „0,0 = 0,0“.
+Gewöhnliche Eingaben sind nicht betroffen.
+
+Dazu: Eintrag in `lib/feedback-log.ts` (Anfrage 28.09.2026, umgesetzt 30.09.2026),
+`letzteAktualisierung` des Bruchrechners auf 30.09.2026.
+
 ## 26.09.2026 — Welle 151: Der dritte Generator, den /ki-transparenz nicht nannte — ✅ ABGESCHLOSSEN
 
 Anlass war der Tageslauf von Peter Ki und Susanne Recht vom 26.09.2026. Im Medieninventar stand
