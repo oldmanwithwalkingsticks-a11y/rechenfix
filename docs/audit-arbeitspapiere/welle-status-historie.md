@@ -6,6 +6,60 @@
 
 ---
 
+## 30.09.2026 — Welle 154: Bruchrechner rechnet durchgehend exakt mit BigInt — ✅ ABGESCHLOSSEN
+
+**Anlass** war die Messung aus Welle 153. Bei 999999999/1000000000 − 999999998/999999999 zeigte
+die Ergebniszeile „0/1 = 0,0“, exakt ist 1/999999999000000000. Die Zwischenwerte lagen über
+`Number.MAX_SAFE_INTEGER` und wurden still gerundet.
+
+**Invariante:** In `lib/berechnungen/bruchrechnung.ts` sind Zähler, Nenner, ganze Teile, kgV,
+GGT, Erweiterungsfaktoren und alle Zwischenwerte BigInt, in allen vier Reitern und im
+Rechenweg.
+- **Eingaben:** Die Felder gehen als Text direkt in BigInt, über `ganzzahlText()` und
+  `dezimalTextZuBruch()`. Dezimalzahlen setzen die Ziffern vor und nach dem Komma als Text zum
+  Zähler zusammen, der Nenner ist 10^Nachkommastellen.
+- **Keine Number mehr, auch nicht in der Darstellung.** `dezimalAnzeige()` rundet mit BigInt
+  auf sechs Stellen. Mit `toLocaleString` hätte ein 34-stelliger Zähler in der Dezimalzeile
+  erfundene Ziffern bekommen. Gerundet wird weiter wie `Math.round(x · 10^6)`.
+- **Entfallen:** `mitGrenze()` und der Hinweis „zu groß“ aus Welle 153. `dezimalZuBruch(number)`
+  nahm eine Gleitkommazahl entgegen, der Rechner nutzt sie seit Welle 150 nicht mehr.
+  `bruchZuDezimal()` hat keinen Verbraucher mehr. Mit BigInt fällt auch die Grenze von neun
+  Nachkommastellen und 15 Ziffern.
+- **Strengerer Ganzzahl-Leser:** `ganzzahlText()` weist „12abc“ und „1e3“ ab. Bisher las
+  `parseFloat` sie als 12 und 1000. Ein leeres Feld zählt weiter als 0.
+
+**Verbraucher:**
+- **Komponente:** formatiert mit `String()`.
+- **`AiExplain`:** bekommt Strings, weil BigInt sich nicht per JSON senden lässt.
+- **Kopier- und PDF-Text:** Template-Strings, damit exakt.
+- **Link „Bruch in Prozent umrechnen“:** übergibt keinen Wert. Er ist ein fester Link auf
+  /alltag/prozentrechner.
+
+**Beim Rendern gefunden und behoben:** Im Reiter Kürzen stand „Gekürzt mit GGT — Zähler und
+Nenner durch geteilt.“, ohne Zahl. React 18 rendert BigInt-Kinder nicht, obwohl die Typen sie
+zulassen. Deshalb blieb `tsc` grün. Jetzt steht dort `String(teilGgt)`. Das war die einzige
+Stelle, an der ein BigInt direkt im JSX stand.
+
+**Lange Zahlen:** Zähler und Nenner in der Ergebnisanzeige bekommen `break-all` und dürfen
+schrumpfen (`min-w-0 max-w-full`). Rechenweg-Zeilen und Dezimalwerte brechen mit
+`[overflow-wrap:anywhere]` um. Gemessen bei 412 px mit Playwright gegen `next start`:
+- **Fälle 1, 21, 22 und 23:** `document.documentElement.scrollWidth` = 412, und in Ergebnis
+  und Rechenweg ist kein Element breiter als sein Platz. Das ist eigens geprüft, weil der
+  Rechenweg `overflow-hidden` trägt und einen Überlauf nur abschneiden würde.
+- **Reiter Kürzen, Dezimal ↔ Bruch und Vergleichen mit 17- bis 34-stelligen Zahlen:** ebenfalls
+  412 und kein Überlauf.
+
+**Probe:** 25 von 25 OK. Die Fälle 1 bis 20 sind unverändert. Fall 21 zeigt jetzt den exakten
+Rechenweg statt des Hinweises, das war die gewollte Änderung. Neu sind 22 (1/999999999000000000
+statt 0), 23 (12345678901234567 × 98765432109876543 = 1219326311370217861743636654061881, als
+Text eingelesen), 24 (GGT 12345678901234560) und 25 (19 Nachkommastellen). Die Messung aus Welle
+153 trifft beide Fälle exakt.
+
+`verify-bruchrechnung.ts` hat 16 Texteingaben, 9 Ganzzahlfelder und 3 Rechenbeispiele,
+darunter die Fälle 22 und 23 als exakte Stringvergleiche. Die großen Sollwerte sind zusätzlich
+mit Pythons Ganzzahlen nachgerechnet. „0,3333333333“ ergibt jetzt einen Bruch statt null, weil
+die Neun-Stellen-Grenze entfallen ist.
+
 ## 30.09.2026 — Welle 153: Bruchrechner — „≈“ bei gerundeten Dezimalwerten, exakter Vergleich, Grenze für den Rechenweg — ✅ ABGESCHLOSSEN
 
 Nachtrag zu Welle 152, derselbe Nutzerwunsch vom 28.09.2026, kein neuer Eintrag im Feedback-Log.
@@ -56,6 +110,8 @@ mit „=“ ein exaktes Ergebnis 0, das falsch ist. Gemessen am 30.09.2026.
 Der Rechenweg verschweigt das jetzt nicht mehr, die Ergebniszeile schon. **Offen:** die
 Ergebnisrechnung auf BigInt umstellen oder bei unsicheren Zwischenwerten statt des Ergebnisses
 einen Hinweis zeigen. Zu entscheiden ist das in einer eigenen Welle.
+**→ Erledigt in Welle 154 (30.09.2026):** Der Bruchrechner rechnet durchgehend mit BigInt, die
+Ergebniszeile trifft beide Messfälle exakt. Der Hinweis „zu groß“ ist wieder entfallen.
 
 **Probe:** 21 von 21 OK, mit eigener BigInt-Rechnung. Die Fälle 1 bis 13 stehen unverändert,
 bis auf „=“ → „≈“ in Schritt h) der Fälle 1, 2, 5, 6, 7 und 8 und die neue Kontrollzeile in
