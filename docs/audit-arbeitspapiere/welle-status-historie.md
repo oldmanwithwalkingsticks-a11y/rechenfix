@@ -6,6 +6,70 @@
 
 ---
 
+## 30.09.2026 — Welle 153: Bruchrechner — „≈“ bei gerundeten Dezimalwerten, exakter Vergleich, Grenze für den Rechenweg — ✅ ABGESCHLOSSEN
+
+Nachtrag zu Welle 152, derselbe Nutzerwunsch vom 28.09.2026, kein neuer Eintrag im Feedback-Log.
+
+**„=“ steht nur noch da, wo der Wert exakt ist.** Bisher zeigte der Rechner 5/7 als
+„= 0,714286“. Das ist gerundet und damit schlicht falsch. Die Lösung von Welle 152, mangels
+Kennzeichnung in der Ergebniszeile auf „…“ zu verzichten, hat das Problem nur verschoben.
+
+Jetzt liefert `dezimalAnzeige()` in `lib/berechnungen/bruchrechnung.ts` Zeichen und Wert für jede
+Dezimalanzeige eines Bruchs:
+- die Ergebniszeile „Brüche rechnen“,
+- den Kopier- und PDF-Text,
+- Bruch → Dezimal, die große Zahl und die Zeile darunter,
+- Schritt h) im Rechenweg,
+- die Kontrollzeile im Reiter Vergleichen.
+
+Exakt heißt: Mit dem gekürzten Bruch z/n und der angezeigten Stellenzahl s ist
+(z × 10^s) mod n = 0, gerechnet mit BigInt. Stellenzahl und Rundung sind unverändert.
+Gewechselt ist das Minuszeichen in der Ergebniszeile: jetzt U+2212, wie im Rechenweg.
+
+**Vergleichen rechnet exakt.** Das Zeichen der Ergebnisanzeige kam bisher aus einem
+Dezimalvergleich mit der Toleranz 1e-10. Welle 152 hatte gemessen, dass er 1/10000000000 und
+1/10000000001 für gleich hielt. Jetzt kommen Hauptnenner, erweiterte Zähler und der Vergleich aus
+einer BigInt-Rechnung, und Anzeige und Rechenweg nutzen dasselbe Zeichen. Die Zahlen im
+Rechenweg werden aus den BigInt-Werten formatiert.
+
+Die Kontrollzeile zeigt beide Brüche mit ihrem Dezimalwert: „2/3 ≈ 0,666667 < 0,75 = 3/4“.
+Sind die gerundeten Werte gleich, die Brüche aber nicht, sagt sie das: „auf sechs
+Nachkommastellen nicht zu unterscheiden“.
+
+**Grenze für den Rechenweg.** Ist in den Reitern Brüche rechnen, Kürzen oder Dezimal ↔ Bruch ein
+Zwischenwert kein `Number.isSafeInteger`, steht statt der Schritte nur „Die Zahlen sind zu groß
+für einen exakten Rechenweg.“ Die Ergebnisrechnung ist bewusst nicht umgebaut.
+
+**Messung dazu: Die Ergebniszeile ist bei solchen Zahlen falsch.** Eigene BigInt-Rechnung in
+`/tmp/bruch-probe.mjs` gegen die Ergebniszeile:
+
+| Aufgabe | exakt | Ergebniszeile |
+|---|---|---|
+| 999999999/1000000000 − 999999998/999999999 | 1/999999999000000000 | **0/1 = 0,0** |
+| 1/10000000000 + 1/10000000001 | 20000000001/100000000010000000000 | **350877193/1754385965087719400 ≈ 0,0** |
+
+Im ersten Fall liegt 999999999 × 999999999 = 999999998000000001 über
+`Number.MAX_SAFE_INTEGER` (9007199254740991). Als Gleitkommazahl wird daraus
+999999998000000000, und die Differenz zum zweiten Zähler ist 0. Die Anzeige behauptet dann
+mit „=“ ein exaktes Ergebnis 0, das falsch ist. Gemessen am 30.09.2026.
+
+Der Rechenweg verschweigt das jetzt nicht mehr, die Ergebniszeile schon. **Offen:** die
+Ergebnisrechnung auf BigInt umstellen oder bei unsicheren Zwischenwerten statt des Ergebnisses
+einen Hinweis zeigen. Zu entscheiden ist das in einer eigenen Welle.
+
+**Probe:** 21 von 21 OK, mit eigener BigInt-Rechnung. Die Fälle 1 bis 13 stehen unverändert,
+bis auf „=“ → „≈“ in Schritt h) der Fälle 1, 2, 5, 6, 7 und 8 und die neue Kontrollzeile in
+Fall 11. Der Auftrag hatte nur Fall 1 genannt. Die übrigen sechs folgen aus derselben Regel und
+sind am 30.09.2026 von Karsten als gewollt bestätigt. `verify-bruchrechnung.ts` bleibt grün.
+
+**Gerendert bei 412 px** mit Playwright gegen `next start`:
+- **Fall 14 (5/7 + 0/1):** Ergebnisanzeige „≈ 0,714286“, Schritt h) „5 ÷ 7 ≈ 0,714286“.
+- **Fall 17 (3/4 + 5/6):** „19 ÷ 12 ≈ 1,583333“.
+- **Fall 19 (Vergleichen):** „>“ in Anzeige und Rechenweg, kgV 100000000010000000000.
+- **Fall 21:** der Hinweis „zu groß“ statt der Schritte.
+
+Der Rechenweg steht in allen vier Fällen 29 px unter der Ergebnisanzeige.
+
 ## 30.09.2026 — Welle 152: Bruchrechner zeigt den vollständigen Rechenweg in allen vier Reitern — ✅ ABGESCHLOSSEN
 
 **Anlass** war ein Feedback „Rechner verbessern“ vom 28.09.2026, 17:57 Uhr, zu

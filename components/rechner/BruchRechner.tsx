@@ -5,12 +5,11 @@ import {
   berechneBrueche,
   kuerzeBruch,
   dezimalTextZuBruch,
-  bruchZuDezimal,
   vergleicheBrueche,
   gemischtZuBruch,
   zuGemischt,
   kuerzen,
-  formatDezimal,
+  dezimalAnzeige,
   rechenwegBrueche,
   rechenwegKuerzen,
   rechenwegDezimalZuBruch,
@@ -23,7 +22,8 @@ import {
   type GemischteZahl,
   type VergleichErgebnis,
   type OperandQuelle,
-  type RechenwegSchritt,
+  type Rechenweg as RechenwegDaten,
+  type DezimalAnzeige,
 } from '@/lib/berechnungen/bruchrechnung';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -72,13 +72,17 @@ const HINWEIS_ZN = 'Zähler und Nenner bitte als ganze Zahlen eingeben.';
  * Rechenweg Schritt für Schritt (W152). Nummerierung und Klassen wie der Inhaltsbaustein
  * „beispielrechnung“ im ContentBlockRenderer, damit Rechner und Beispiel gleich aussehen.
  */
-function Rechenweg({ schritte }: { schritte: RechenwegSchritt[] }) {
-  if (schritte.length === 0) return null;
+function Rechenweg({ weg }: { weg: RechenwegDaten }) {
+  const { schritte, hinweis } = weg;
+  if (!hinweis && schritte.length === 0) return null;
   return (
     <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
       <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
         <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Rechenweg</p>
       </div>
+      {hinweis ? (
+        <p className="px-4 py-3 text-gray-700 dark:text-gray-300">{hinweis}</p>
+      ) : (
       <ol className="px-4 py-3 space-y-3">
         {schritte.map((s, i) => (
           <li key={i} className="flex gap-3 items-start">
@@ -92,6 +96,7 @@ function Rechenweg({ schritte }: { schritte: RechenwegSchritt[] }) {
           </li>
         ))}
       </ol>
+      )}
     </div>
   );
 }
@@ -262,8 +267,10 @@ export default function BruchRechner() {
     return { ok: true, o1, o2, ergebnis };
   }, [modus1, d1, z1, n1, g1, op, modus2, d2, z2, n2, g2]);
   const rechenErgebnis = rechnung.ok ? rechnung.ergebnis : null;
+  // Dezimalanzeige mit „=“ nur bei exaktem Wert, sonst „≈“ (W153)
+  const anzeige1 = rechenErgebnis ? dezimalAnzeige(rechenErgebnis.ergebnis) : null;
   const rechenweg1 = useMemo(
-    () => (rechnung.ok ? rechenwegBrueche(rechnung.o1.quelle, op, rechnung.o2.quelle, rechnung.ergebnis) : []),
+    () => (rechnung.ok ? rechenwegBrueche(rechnung.o1.quelle, op, rechnung.o2.quelle, rechnung.ergebnis) : { schritte: [], hinweis: null }),
     [rechnung, op],
   );
 
@@ -279,22 +286,21 @@ export default function BruchRechner() {
   const kuerzenErgebnis = kuerzen2.ok ? kuerzen2.e : null;
 
   // Ergebnis Tab 3
-  const dezimal3 = useMemo<Pruefung<{ e: { bruch: Bruch; dezimal: number; gemischt: GemischteZahl | null; schritte: RechenwegSchritt[] } }>>(() => {
+  const dezimal3 = useMemo<Pruefung<{ e: { bruch: Bruch; anzeige: DezimalAnzeige | null; gemischt: GemischteZahl | null; weg: RechenwegDaten } }>>(() => {
     if (dezMode === 'zuBruch') {
       // Exakt aus den Ziffern (W150) statt über die Gleitkommazahl
       const r = dezimalTextZuBruch(dezWert);
       if (!r) return { ok: false, fehler: 'Bitte eine Dezimalzahl mit höchstens neun Nachkommastellen eingeben, zum Beispiel 0,75.' };
-      return { ok: true, e: { bruch: r.bruch, dezimal: parseDeutscheZahl(dezWert), gemischt: zuGemischt(r.bruch), schritte: rechenwegDezimalZuBruch(dezWert, r) } };
+      return { ok: true, e: { bruch: r.bruch, anzeige: null, gemischt: zuGemischt(r.bruch), weg: rechenwegDezimalZuBruch(dezWert, r) } };
     } else {
       const z = ganzzahl(dz);
       const n = ganzzahl(dn);
       if (z === null || n === null) return { ok: false, fehler: HINWEIS_ZN };
       if (n === 0) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
       const b = kuerzen({ zaehler: z, nenner: n });
-      const d = bruchZuDezimal(b);
-      if (d === null) return { ok: false, fehler: 'Dieser Bruch lässt sich nicht umrechnen.' };
-      const dezimal = Math.round(d * 1000000) / 1000000;
-      return { ok: true, e: { bruch: b, dezimal, gemischt: zuGemischt(b), schritte: rechenwegBruchZuDezimal({ zaehler: z, nenner: n }, b, dezimal) } };
+      const anzeige = dezimalAnzeige(b);
+      if (anzeige === null) return { ok: false, fehler: 'Dieser Bruch lässt sich nicht umrechnen.' };
+      return { ok: true, e: { bruch: b, anzeige, gemischt: zuGemischt(b), weg: rechenwegBruchZuDezimal({ zaehler: z, nenner: n }, b) } };
     }
   }, [dezMode, dezWert, dz, dn]);
   const dezimalErgebnis = dezimal3.ok ? dezimal3.e : null;
@@ -312,8 +318,6 @@ export default function BruchRechner() {
   }, [vz1, vn1, vz2, vn2]);
   const vergleichErgebnis = vergleich4.ok ? vergleich4.e : null;
 
-  // Dieselbe Formatierung wie im Rechenweg (W152), damit Ergebniszeile und Schritt übereinstimmen.
-  const fmtDez = formatDezimal;
 
   return (
     <div>
@@ -369,7 +373,7 @@ export default function BruchRechner() {
                   <BruchAnzeige zaehler={rechenErgebnis.ergebnis.zaehler} nenner={rechenErgebnis.ergebnis.nenner} />
                 </div>
                 <div className="flex flex-wrap items-center justify-center gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400">
-                  <span>= {fmtDez(rechenErgebnis.dezimal)}</span>
+                  {anzeige1 && <span>{anzeige1.zeichen} {anzeige1.wert}</span>}
                   {rechenErgebnis.gemischt && (
                     <span className="inline-flex items-center">
                       = <GemischtAnzeige
@@ -382,12 +386,12 @@ export default function BruchRechner() {
                 </div>
               </div>
 
-              <Rechenweg schritte={rechenweg1} />
+              <Rechenweg weg={rechenweg1} />
 
               <CrossLink href="/alltag/prozentrechner" emoji="%" text="Bruch in Prozent umrechnen" />
 
               <ErgebnisAktionen
-                ergebnisText={`${rechnung.o1.text} ${op} ${rechnung.o2.text} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner} (${fmtDez(rechenErgebnis.dezimal)})`}
+                ergebnisText={`${rechnung.o1.text} ${op} ${rechnung.o2.text} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner}${anzeige1 ? ` (${anzeige1.zeichen} ${anzeige1.wert})` : ''}`}
                 seitenTitel="Bruchrechner"
               />
 
@@ -426,7 +430,7 @@ export default function BruchRechner() {
                 )}
               </div>
 
-              <Rechenweg schritte={rechenwegKuerzen(kuerzenErgebnis)} />
+              <Rechenweg weg={rechenwegKuerzen(kuerzenErgebnis)} />
             </div>
           )}
         </div>
@@ -483,17 +487,17 @@ export default function BruchRechner() {
                   <>
                     <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-2">Als Dezimalzahl</p>
                     <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
-                      {fmtDez(dezimalErgebnis.dezimal)}
+                      {dezimalErgebnis.anzeige?.zeichen === '≈' ? '≈ ' : ''}{dezimalErgebnis.anzeige?.wert}
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 inline-flex items-center justify-center">
                       <BruchAnzeige zaehler={dezimalErgebnis.bruch.zaehler} nenner={dezimalErgebnis.bruch.nenner} className="text-base" />
-                      <span className="ml-1">= {fmtDez(dezimalErgebnis.dezimal)}</span>
+                      <span className="ml-1">{dezimalErgebnis.anzeige?.zeichen} {dezimalErgebnis.anzeige?.wert}</span>
                     </p>
                   </>
                 )}
               </div>
 
-              <Rechenweg schritte={dezimalErgebnis.schritte} />
+              <Rechenweg weg={dezimalErgebnis.weg} />
             </div>
           )}
         </div>
@@ -527,7 +531,7 @@ export default function BruchRechner() {
               </div>
 
               {/* Die frühere Dezimalzeile steht jetzt als letzter Schritt „Kontrolle“ im Rechenweg (W152). */}
-              <Rechenweg schritte={rechenwegVergleich(vergleich4.b1, vergleich4.b2, vergleichErgebnis)} />
+              <Rechenweg weg={rechenwegVergleich(vergleich4.b1, vergleich4.b2, vergleichErgebnis)} />
             </div>
           )}
         </div>
