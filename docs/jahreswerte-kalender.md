@@ -251,6 +251,8 @@
 
 **Typischer Zeitraum: Oktober–Dezember** vor dem 01.01.-Wechsel (alle 2 Jahre: 2025, 2027, 2029 …).
 
+**Notiz 01.10.2026:** Zum 01.01.2027 ist keine Fortschreibung geplant, weil der Entwurf des Gesetzes zur Vereinfachung und Fortentwicklung des Wohngeldgesetzes (BT-Drs. 21/8284 vom 30.09.2026) sie aussetzt (§ 43 Abs. 11 neu), die dauerhafte Heizkostenkomponente halbiert sowie Parameter c und die Mietenstufen ändert, mit geplantem Inkrafttreten am 01.01.2027 — bei Verkündung Rechner und Texte nachziehen, ohne Verkündung gelten die Werte 2025 weiter (Termin `wohngeld-2027-gesetzgebung`, 02.11.2026).
+
 **Checkliste:**
 
 1. [ ] **Höchstbeträge § 12 WoGG Anlage 1**: komplette 35-Zellen-Matrix + ZUSCHLAG_PRO_PERSON
