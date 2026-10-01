@@ -7,9 +7,8 @@ import ZurueckButton from '@/components/layout/ZurueckButton';
 import StructuredData from '@/components/seo/StructuredData';
 import type { Metadata } from 'next';
 
-interface Props {
-  params: { kategorie: string };
-}
+// Seit Next.js 16 sind params ein Promise; PageProps erzeugt `next typegen`.
+type Props = PageProps<'/[kategorie]'>;
 
 // Einfacher Markdown-Link-Renderer für Kategorie-Einleitungstexte:
 // wandelt `[text](/pfad)` in <Link> um, lässt alles andere als Plain-Text stehen.
@@ -37,17 +36,19 @@ export function generateStaticParams() {
   return kategorien.map(k => ({ kategorie: k.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const kategorie = getKategorieBySlug(params.kategorie);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { kategorie: kategorieSlug } = await params;
+  const kategorie = getKategorieBySlug(kategorieSlug);
   if (!kategorie) return {};
   return generateKategorieMetadata(kategorie);
 }
 
-export default function KategorieSeite({ params }: Props) {
-  const kategorie = getKategorieBySlug(params.kategorie);
+export default async function KategorieSeite({ params }: Props) {
+  const { kategorie: kategorieSlug } = await params;
+  const kategorie = getKategorieBySlug(kategorieSlug);
   if (!kategorie) notFound();
 
-  const rechnerListe = getRechnerByKategorie(params.kategorie);
+  const rechnerListe = getRechnerByKategorie(kategorieSlug);
 
   const breadcrumbItems = [
     { name: 'Startseite', url: '/' },
@@ -101,7 +102,7 @@ export default function KategorieSeite({ params }: Props) {
       </div>
 
       {/* Brutto-Netto-Beispiele (nur auf Finanzen-Kategorie) */}
-      {params.kategorie === 'finanzen' && (
+      {kategorieSlug === 'finanzen' && (
         <section className="mt-12">
           <h2 className="section-title mb-4">Brutto-Netto-Beispiele</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Wie viel netto bleibt bei diesen Bruttogehältern?</p>

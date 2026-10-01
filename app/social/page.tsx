@@ -99,14 +99,12 @@ function CalcButton({
   );
 }
 
-export default async function SocialBioHubPage({
-  searchParams,
-}: {
-  searchParams: { ref?: string };
-}) {
+export default async function SocialBioHubPage({ searchParams }: PageProps<'/social'>) {
   // TikTok-Bio-Link trägt `?ref=tt` → eigener Bio-Slug + eigene Überschrift.
   // Ohne ref bleibt alles beim bestehenden IG-Verhalten (abwärtskompatibel).
-  const isTikTok = searchParams?.ref === 'tt';
+  // Seit Next.js 16 sind searchParams ein Promise.
+  const { ref } = await searchParams;
+  const isTikTok = ref === 'tt';
   const currentSlug = isTikTok
     ? await getCurrentBioSlug('tiktok')
     : await getCurrentBioSlug();

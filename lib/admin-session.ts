@@ -211,11 +211,19 @@ export function cookieOptionen(maxAgeSekunden: number = GUELTIGKEIT_MS / 1000) {
  * Serverseitige Anmeldeprüfung für Route Handler.
  * Vor jeder Datenrückgabe aufzurufen — eine Prüfung, die nur die Anzeige
  * verbirgt, ist keine.
+ *
+ * Fail closed, aber laut: Wirft `cookies()` oder die Auswertung, gilt die
+ * Anfrage als nicht angemeldet — der Fehler landet jedoch in den
+ * Vercel-Laufzeitlogs, statt den Admin-Zugang still zu sperren. Ein fehlendes
+ * Cookie ist kein Fehler: es endet ohne Ausnahme in `pruefeSitzung` als false.
  */
 export async function istAdminAngemeldet(): Promise<boolean> {
   try {
-    return await pruefeSitzung(cookies().get(ADMIN_COOKIE_NAME)?.value);
-  } catch {
+    // Seit Next.js 16 ist cookies() ausschließlich asynchron.
+    const cookieStore = await cookies();
+    return await pruefeSitzung(cookieStore.get(ADMIN_COOKIE_NAME)?.value);
+  } catch (err) {
+    console.error('[admin-session] Anmeldeprüfung fehlgeschlagen, Anfrage gilt als nicht angemeldet', err);
     return false;
   }
 }

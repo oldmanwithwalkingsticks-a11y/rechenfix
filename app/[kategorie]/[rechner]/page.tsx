@@ -16,9 +16,8 @@ import BlogHinweis from '@/components/blog/BlogHinweis';
 import { getArtikelZuRechner } from '@/lib/blog';
 import type { Metadata } from 'next';
 
-interface Props {
-  params: { kategorie: string; rechner: string };
-}
+// Seit Next.js 16 sind params ein Promise; PageProps erzeugt `next typegen`.
+type Props = PageProps<'/[kategorie]/[rechner]'>;
 
 // Rechner, die eine eigene statische Route in app/<kategorie>/<slug>/page.tsx
 // haben und deshalb NICHT unter der dynamischen Route gerendert werden sollen.
@@ -43,14 +42,16 @@ export function generateStaticParams() {
     }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const config = getRechnerBySlug(params.kategorie, params.rechner);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { kategorie, rechner } = await params;
+  const config = getRechnerBySlug(kategorie, rechner);
   if (!config) return {};
   return generateRechnerMetadata(config);
 }
 
 export default async function RechnerSeite({ params }: Props) {
-  const config = getRechnerBySlug(params.kategorie, params.rechner);
+  const { kategorie, rechner } = await params;
+  const config = getRechnerBySlug(kategorie, rechner);
   if (!config) notFound();
 
   // W68: Gibt es zu diesem Rechner einen Blogartikel? Die Zuordnung stammt aus der

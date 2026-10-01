@@ -497,6 +497,269 @@ Sitzung**. Hier gegen das Repository gehalten.
 
 ---
 
+## 7. Folgewellen
+
+Angelegt am 28.09.2026 mit der Migrationswelle `next16` (Branch `next16`, Next.js 16.3.6 mit
+`--webpack`). Nichts davon ist Teil dieser Welle.
+
+1. **Turbopack.** Entfernt den MDX-Workaround in `next.config.mjs` (webpack-Hook, der den
+   SWC-Schritt der MDX-Regel von `@next/mdx` in die RSC-Schicht legt) samt
+   `scripts/check-mdx-nur-seiten.mjs` in der Prebuild-Kette. Braucht Ersatz für `@serwist/next`:
+   Version 9.5.12 unterstützt Turbopack nicht und nennt als Wege `@serwist/turbopack` oder den
+   „configurator mode“. Bis dahin gilt: Nach jedem Nachzug der Next-Fassung einmal ohne den Hook
+   bauen; baut es grün, fliegt der Workaround raus. Stand 28.09.2026: 16.3.6 ohne Hook scheitert an
+   allen `page.mdx`.
+2. **Interne Links auf `<Link>` umstellen.** 17 interne `<a href>`-Links in 14 Dateien, gemeldet von
+   `@next/next/no-html-link-for-pages` (34 Meldungen, jede Fundstelle doppelt): `app/datenschutz/page.tsx`,
+   `app/impressum/page.tsx`, `app/ki-rechner/page.tsx`, `app/nutzungsbedingungen/page.tsx` (2),
+   `components/rechner/AiExplain.tsx`, `AutokostenRechner.tsx`, `BafoegRechner.tsx`,
+   `FirmenwagenRechner.tsx`, `GehaltserhoehungRechner.tsx`, `MidijobRechner.tsx` (2),
+   `MinijobRechner.tsx` (2), `SplittingRechner.tsx`, `TeilzeitRechner.tsx`, `WohngeldRechner.tsx`
+   (Komponenten unter `components/rechner/`). Danach die Regel in `eslint.config.mjs` wieder
+   einschalten.
+3. **Die 15 neuen Lint-Regeln einzeln bewerten.** In `eslint.config.mjs` vorerst aus:
+   `@next/next/no-location-assign-relative-destination` und die 14 React-Compiler-Regeln aus
+   `eslint-plugin-react-hooks` 7 (`config`, `error-boundaries`, `gating`, `globals`, `immutability`,
+   `incompatible-library`, `preserve-manual-memoization`, `purity`, `refs`, `set-state-in-effect`,
+   `set-state-in-render`, `static-components`, `unsupported-syntax`, `use-memo`). Am Bestand
+   gemessen: 19 × `set-state-in-effect` in 17 Dateien, 2 × `immutability`, 2 ×
+   `preserve-manual-memoization`, 1 × `purity`.
+4. **ESLint-Fassung.** npm meldet `eslint@9.39.5` bei der Installation als „no longer supported“.
+   `eslint-config-next` 16.3.6 verlangt `eslint >=9.0.0`; installiert ist die Hauptversion 9
+   nach Entscheidung 1. Zu prüfen ist der Sprung auf 10.
+
+---
+
+## 8. Migration durchgeführt (01.10.2026, Zweig next16)
+
+Welle 155. Der Build-Prompt sah diesen Abschnitt als „7“ vor. Abschnitt 7 trägt auf diesem Zweig aber
+schon die Folgewellen vom 28.09.2026, deshalb steht die Migration hier als 8.
+
+### 8.1 Vorgeschichte und Vorgehen
+
+Auf `next16` lag seit dem 28.09.2026 eine Migration auf 16.3.6 mit 13 Commits, gepusht und mit
+Freigaben von Karsten:
+
+| Commit | Inhalt |
+|---|---|
+| `37655f1` | Pakete auf Next.js 16.3.6, React 19, ESLint 9 |
+| `9d657c5` | Webpack beibehalten — `dev` und `build` mit `--webpack` |
+| `e4a1d6f` | Async Request APIs — `params` und `searchParams` mit `await` |
+| `de1ab24` | `admin-session` — `cookies()` mit `await`, fail closed mit Protokoll |
+| `d576071` | Lint bleibt Teil des Builds — Flat Config, `npm run lint` am Ende der Prebuild-Kette |
+| `ef78da6` | `outputFileTracingExcludes` auf die oberste Ebene |
+| `ce72d6b` | `browserslist` auf den Mindeststand von 16 |
+| `8657a71` | Workaround MDX-Seiten unter Next.js 16 mit Webpack |
+| `5302f3e` | `check-mdx-nur-seiten` erzwingt die Voraussetzung des Workarounds |
+| `81e852d` | ESLint-Kommentar zu `no-html-link-for-pages` präzisiert |
+| `c1a7ac6` | `tsconfig.json` so, wie Next.js 16 sie selbst schreibt |
+| `43ff3ba` | Bestandsaufnahme: Abschnitt Folgewellen |
+| `4a56d79` | `AGENTS.md` mit dem von `next dev` verwalteten Block |
+
+Der Build-Prompt vom 01.10.2026 sah `git switch -c next16` von `main` aus vor. Nach Rückfrage gilt
+Karstens Entscheidung: auf dem bestehenden Zweig weiterbauen, kein Force-Push.
+1. **Grundlinie** auf `main` (`1c231f3`, 14.2.35) vor dem Merge gemessen (8.4).
+2. **Merge** `main` → `next16`: `1998423`. Konflikt nur in `package.json`, die `prebuild`-Kette ist als
+   Vereinigung aufgelöst: `check-mdx-nur-seiten` von next16, `verify-zahlenformat` und
+   `verify-clamp-input` von main, `npm run lint` am Ende wie auf next16.
+   - `next.config.mjs` ist automatisch zusammengeführt: Stand next16 mit `images.formats: ['image/webp']`
+     und dem AVIF-Kommentar von main, **kein `image/avif`**.
+   - In dieser Datei ist Abschnitt 6 vollständig wie auf main.
+3. **Fassungen** fest auf 16.3.8: `f5674ee`.
+
+**MDX-Workaround (`8657a71`), Ursache:** Unter Next.js 16 mit `--webpack` brach der Build an allen 20
+`app/blog/*/page.mdx` ab: „You are attempting to export "metadata" from a component marked with "use
+client"“.
+- Next.js 16 übergibt `pageExtensions` an die Server-Components-Transformation von SWC
+  (`next/dist/build/swc/options.js`).
+- Die MDX-Regel von `@next/mdx` läuft über `defaultLoaders.babel`, einen SWC-Loader ohne `bundleLayer`.
+  `page.mdx` gilt damit als App-Seite in der Client-Schicht. Unter 14.2.35 wurde `pageExtensions`
+  nicht übergeben.
+- Abhilfe: Ein `webpack`-Hook in `next.config.mjs` lässt den SWC-Schritt der MDX-Regel in der
+  RSC-Schicht laufen (`bundleLayer: 'rsc'`, `esm`).
+- Das trägt nur, solange MDX ausschließlich als `app/**/page.mdx` vorkommt. Das erzwingt
+  `scripts/check-mdx-nur-seiten.mjs` in der Prebuild-Kette. Entfällt mit Turbopack (Abschnitt 7, Nr. 1).
+
+### 8.2 Entscheidungen
+
+| Punkt | Entscheidung laut Build-Prompt | umgesetzt |
+|---|---|---|
+| Zielfassung | `next`, `eslint-config-next`, `@next/mdx` fest 16.3.8 | ja (`f5674ee`); 16.3.6 enthielt die Korrekturen vom 30.09. nicht |
+| React | `^19.2.0`, `@types` `^19` | `^19` bleibt, installiert 19.3.0 ≥ 19.2.0 (Karsten, 01.10.2026) |
+| ESLint | Peer von `eslint-config-next` 16.3.8 (`>=9.0.0`) | `^9`, installiert 9.39.5 |
+| Node (16-1) | erfüllt, Vercel `nodeVersion: 24.x` | unverändert; abgelesen in einer Chat-Sitzung am 01.10.2026 |
+| Build-Weg (16-4) | Weg A, `--webpack` | ja (`9d657c5`) |
+| `browserslist` (16-3) | Chrome/Edge/Firefox 111, Safari 16.4 | ja (`ce72d6b`) |
+| Lint (16-25, 16-19) | Flat Config, Lint in der `prebuild`-Kette über `app components lib` | ja (`d576071`): `eslint . --cache` mit globalen Ignores, Geltungsbereich `app/`, `components/`, `lib/`; `npm run lint` am Ende der Kette |
+| Neue Lint-Regeln | auf `"warn"` | **abweichend: `"off"`** nach Karstens Freigabe vom 28.09.2026, bestätigt am 01.10.2026 (8.3) |
+| `lib/admin-session.ts` (15-2d) | `async`, `await cookies()`, `catch` → `console.error` und `false` | ja (`de1ab24`) |
+| `outputFileTracingExcludes` | oberste Ebene | ja (`ef78da6`) |
+| AVIF | bleibt aus | ja, nach dem Merge geprüft: `formats: ['image/webp']` |
+| `AGENTS.md` | nein | **abweichend: ja** nach Karstens Freigabe vom 28.09.2026, bestätigt am 01.10.2026; ohne die Datei schreibt `next dev` seinen Block in `CLAUDE.md` |
+
+**Installierte Fassungen** (`node_modules/<paket>/package.json`):
+
+| Paket | Fassung |
+|---|---|
+| `next` | 16.3.8 |
+| `react`, `react-dom` | 19.3.0 |
+| `@types/react`, `@types/react-dom` | 19.3.0 |
+| `eslint` | 9.39.5 |
+| `eslint-config-next` | 16.3.8 |
+| `@next/mdx` | 16.3.8 |
+
+`npm install`:
+- keine Peer-Warnung;
+- einzige Warnung: `eslint@9.39.5` sei „no longer supported“ (Abschnitt 7, Nr. 4).
+
+`npm audit` danach:
+- `next` ist nicht mehr betroffen.
+- Übrig sind 9 Meldungen (1 niedrig, 4 mittel, 4 hoch, 0 kritisch).
+- Direkte Abhängigkeiten darunter: `@serwist/next` (hoch), `sharp` (hoch), `resend` (mittel).
+- Diese Meldungen sind nicht Gegenstand dieser Welle.
+
+**Code-Änderungen der Migration** (alle aus den Commits vom 28.09.2026, am 01.10.2026 am
+zusammengeführten Stand nachgeprüft):
+- `app/[kategorie]/[rechner]/page.tsx`, `app/[kategorie]/page.tsx`: `params` abgewartet, `generateMetadata` async, Typen über `PageProps<…>`.
+- `app/social/page.tsx`: `searchParams` abgewartet.
+- `lib/admin-session.ts`: `istAdminAngemeldet()` wartet `cookies()` ab.
+  - Alle 5 Aufrufe warten das Ergebnis ab: `monthly-report`, `social-status`, `stats` (GET und DELETE), `tiktok/auth`.
+  - Synchrone `cookies()`/`headers()`/`draftMode()` gibt es im Code nicht mehr.
+
+Der Codemod `next-async-request-api` lief am 01.10.2026 nicht erneut, weil die Änderungen auf dem Zweig
+schon standen.
+
+**React-19-Suche** (Leitfaden react.dev, abgerufen 01.10.2026, HTTP 200; `app components lib`,
+`*.ts/tsx/js/jsx/mdx`): 0 Treffer für jedes Muster:
+- `propTypes`, `defaultProps`;
+- Legacy Context (`contextTypes`, `childContextTypes`, `getChildContext`);
+- String-Refs;
+- `ReactDOM.render`/`hydrate`, `unmountComponentAtNode`, `findDOMNode`;
+- `react-dom/test-utils`, `react-test-renderer`;
+- `useRef()` ohne Argument;
+- `element.ref`;
+- globale `JSX.`-Typen.
+
+Kein Typ-Codemod nötig.
+
+### 8.3 Lint
+
+| | 14.2.35 (`next lint`, main) | 16.3.8 (`eslint`, next16) |
+|---|---|---|
+| Fehler | 0 | 0 |
+| Warnungen | 2 × `react-hooks/exhaustive-deps` | 2 × `react-hooks/exhaustive-deps` |
+
+`react/no-unescaped-entities` = `error` (gelesen mit `eslint --print-config`).
+
+**Probe:** `components/__lintprobe.tsx` mit `<p>Karstens "Probe"</p>` → `npx eslint` endet mit Exit 1 und
+zwei Fehlern `react/no-unescaped-entities`. Die Datei ist danach entfernt und nicht committet.
+
+**Auf `"off"`, offen für eine eigene Welle** (16 Regeln, gelesen mit `eslint --print-config`):
+- `@next/next/no-html-link-for-pages`: 17 interne `<a href>` in 14 Dateien, Abschnitt 7 Nr. 2;
+- `@next/next/no-location-assign-relative-destination`;
+- aus `eslint-plugin-react-hooks` 7: `react-hooks/config`, `react-hooks/error-boundaries`,
+  `react-hooks/gating`, `react-hooks/globals`, `react-hooks/immutability`,
+  `react-hooks/incompatible-library`, `react-hooks/preserve-manual-memoization`, `react-hooks/purity`,
+  `react-hooks/refs`, `react-hooks/set-state-in-effect`, `react-hooks/set-state-in-render`,
+  `react-hooks/static-components`, `react-hooks/unsupported-syntax`, `react-hooks/use-memo`.
+
+### 8.4 Build, `sw.js`, `.nft.json` gegen die Grundlinie
+
+Grundlinie: `main` `1c231f3`, Next.js 14.2.35, `npm run build` vom 01.10.2026 (identischer Baum).
+Ergebnis: `next16` nach `f5674ee`, Next.js 16.3.8 (webpack).
+
+| | Grundlinie 14.2.35 | 16.3.8 |
+|---|---|---|
+| `npm run build` | grün | grün |
+| Zähler „Generating static pages“ | 273 | **271** |
+| Routentabelle | 70 Einträge (51 ○, 2 ●, 17 ƒ) | gleiche 70 Einträge; die beiden ●-Routen ohne eigenes Zeichen, ihre Unterpfade mit ● |
+| Unterpfade `[kategorie]` / `[kategorie]/[rechner]` | `[+7 more paths]` / `[+202 more paths]` | identisch |
+| Warnungen | Spritpreis-Alter; „Using edge runtime on a page …“ | dieselben, dazu **neu:** „The Edge Runtime is deprecated“ |
+| `public/sw.js` | 129.488 B, `!function(){"use strict";…` | 131.366 B, `(()=>{"use strict";…`, gleiche Serwist-Kennungen |
+| `.nft.json` `[kategorie]/[rechner]` | 986 Einträge | 1.064 Einträge |
+| davon `public/blog/`, `public/social-videos-src/` | 257 | 257 |
+
+**Zähler 273 → 271:** Erzeugt werden dieselben Seiten: Die Routentabelle und die Zahl der Unterpfade
+sind gleich. Die Differenz von 2 entspricht den zwei dynamischen SSG-Routen. Die genaue Zählweise von
+Next 14 ist nicht nachgewiesen.
+
+**Edge Runtime:** neu als veraltet gemeldet. Betroffen sind die 5 Dateien mit `runtime = 'edge'` aus
+15-3, offen für eine eigene Welle.
+
+**`.nft.json` lokal kein Beleg.** Next 14 und 16 wenden `outputFileTracingExcludes` unter Windows nicht
+an:
+- `next/dist/build/collect-build-traces.js` (14.2.35, Z. 576–585) baut das Muster mit `path.join`, unter
+  Windows also mit Backslashes.
+- Gemessen mit dem mitgelieferten picomatch:
+  - Muster `G:\Projekte\Rechenfix\public\blog\**` gegen `…\public\blog\bankjahr.mp4` → **kein**
+    Treffer;
+  - mit `/` → Treffer.
+- Deshalb stehen die 257 Pfade schon in der Grundlinie.
+- **Maßgeblich ist der Vercel-Build der Vorschau** (Linux). Läuft er auf READY, liegt die Function
+  `[kategorie]/[rechner]` unter 250 MB.
+
+**Vorschau:** READY für `02b00ec`, danach READY für `59998fd`
+(Alias `rechenfix-git-next16-karsten-kautzs-projects.vercel.app`). Karstens Prüfliste für die Vorschau
+ist am 01.10.2026 bestanden.
+
+### 8.5 Serverprüfung (`npm start`, 16.3.8, lokal)
+
+| Pfad | Status | Bytes | Anmerkung |
+|---|---|---|---|
+| `/` | 200 | 236.801 | |
+| `/alltag/prozentrechner` | 200 | 264.844 | |
+| `/finanzen/brutto-netto-rechner` | 200 | 269.460 | |
+| `/finanzen/wohngeld-rechner` | 200 | 243.127 | statische Route |
+| `/auto/spritkosten-rechner` | 200 | 279.059 | |
+| `/blog` | 200 | 192.426 | |
+| `/blog/warum-kinder-die-lohnsteuer-nicht-senken` | 200 | 335.324 | erster Artikel der Liste, MDX |
+| `/social?ref=tt` | 200 | 145.319 | |
+| `/tt` | 307 | 14 | → `/social?ref=tt` |
+| `/opengraph-image` | 200 | 175.670 | `image/png` |
+| `/sitemap.xml` | 200 | 45.830 | `application/xml` |
+| `/robots.txt` | 200 | 70 | |
+| `/gesundheit/herzfrequenz-rechner` | 308 | 33 | → `/sport/herzfrequenz-zonen-rechner` |
+| `/api/stats` ohne Cookie | 401 | 24 | **nicht 500**; kein `[admin-session]`-Fehler im Serverprotokoll |
+
+Antwortköpfe von `/`:
+- `Content-Security-Policy: frame-ancestors 'self'`
+- `X-Frame-Options: SAMEORIGIN`
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy: origin-when-cross-origin`
+- `Cross-Origin-Opener-Policy: same-origin-allow-popups`
+
+**`verify-critical-css.mjs`: erledigt in `59998fd`.** Der erste Lauf meldete ✗ an allen 4 URLs
+(`<style>` 1, Stylesheet-Links 2). Das war keine Folge der Migration.
+- **Ursache:** Das Skript (24.05.2026, `96c2ead`) zählte den `<noscript>`-Ausweichblock aus
+  `app/layout.tsx` mit. Der Block stammt aus W14 (08.06.2026, `90f5c84`). Die Live-Seite auf 14.2.35
+  (www.rechenfix.de, 01.10.2026) zählte ebenfalls 2.
+- **Korrektur:** Gezählt wird nur noch außerhalb von `<noscript>`; die Ausgabe nennt den noscript-Link
+  getrennt. Vor den Abrufen läuft ein Selbsttest mit 3 präparierten HTML-Strings. Er belegt, dass ein
+  zweites Stylesheet außerhalb von `<noscript>` weiter als Regression gilt.
+- **Ergebnis unter 16.3.8 (`npm start`):** Selbsttest 3/3, alle 4 URLs ✓ (`<style>` 1, Stylesheet-Links
+  1, dazu 1 in `<noscript>`), Exit 0.
+- **Gegenprobe:** Ein Wegwerf-Server auf Port 3000 lieferte ein zweites Stylesheet außerhalb von
+  `<noscript>`. Ergebnis: alle 4 URLs ✗, Exit 1. Der Seitencode blieb unberührt.
+
+**Verify-Skripte:** `verify-zahlenformat.ts` 29/29 grün, `verify-clamp-input.ts` 13/13 grün (85 Paare,
+0 Verstöße).
+
+### 8.6 Offen für eine eigene Welle
+
+- **Turbopack (Weg B):** entfernt den MDX-Workaround, braucht Ersatz für `@serwist/next` (Abschnitt 7,
+  Nr. 1).
+- **Die 16 Regeln auf `"off"`** aus 8.3 (Abschnitt 7, Nr. 2 und 3).
+- **AVIF wieder einschalten,** sobald Next.js die Optimierung freigibt.
+- Bei der Migration aufgefallen:
+  - Edge Runtime veraltet (5 Dateien);
+  - ESLint 9 nicht mehr unterstützt (Abschnitt 7, Nr. 4);
+  - 9 verbliebene `npm audit`-Meldungen außerhalb von `next`.
+
+**Erledigt:** `verify-critical-css.mjs` zählt `<noscript>` nicht mehr mit (`59998fd`, 01.10.2026, siehe
+8.5).
+
+---
+
 ## Anhang A — Dateien mit `next/link` (36)
 
 Suchmuster `from ['"]next/link['"]` in `app/`, `components/`, `lib/`:

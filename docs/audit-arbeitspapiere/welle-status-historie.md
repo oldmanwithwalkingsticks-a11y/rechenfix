@@ -6,6 +6,54 @@
 
 ---
 
+## 01.10.2026 — Welle 155: Next.js 16.3.8, React 19 — Weg A (webpack), Lint im Prebuild — 🟡 VORSCHAU GEPRÜFT (01.10.2026), Merge nach main
+
+**Anlass:** Die Bestandsaufnahme zieht die Migration in Abschnitt 6.5 vor. 23 Advisories treffen
+14.2.35, darunter GHSA-2xp9-vwfh-vxw4 (kritisch, offen), und 14.x bekommt keine Korrekturen mehr.
+15.x endet am 21.10.2026.
+
+**Vorgehen:**
+- Auf `next16` lag seit 28.09.2026 eine Migration auf 16.3.6 (13 Commits). Darauf wird weitergebaut,
+  kein Force-Push (Karsten, 01.10.2026).
+- Grundlinie auf `main` `1c231f3` gemessen.
+- `main` hineingemergt (`1998423`): Konflikt nur in der `prebuild`-Kette, als Vereinigung aufgelöst.
+  AVIF bleibt aus.
+- `next`, `eslint-config-next` und `@next/mdx` fest auf 16.3.8 (`f5674ee`).
+- Wo der Prompt abweicht, gelten die Freigaben vom 28.09.2026: `AGENTS.md` bleibt, 16 neue Lint-Regeln
+  bleiben `"off"`.
+
+**Ergebnis:**
+- Build grün, gleiche Routen und Unterpfade. Der Zähler sagt 271 statt 273, erzeugt werden dieselben
+  Seiten.
+- Lint wie vorher: 0 Fehler, 2 Warnungen.
+- `react/no-unescaped-entities` greift per Probe weiter im Prebuild.
+- `sw.js` wird erzeugt.
+- Serverprüfung: 14 Pfade wie erwartet, `/api/stats` ohne Cookie 401.
+- Sicherheits-Header vorhanden.
+- `next` steht nicht mehr in `npm audit`.
+
+**Befunde:**
+- **`.nft.json` lokal kein Beleg:** Next wendet `outputFileTracingExcludes` unter Windows nicht an
+  (`path.join` mit Backslashes, mit picomatch gemessen). Die 257 Pfade stehen schon in der Grundlinie.
+  Maßgeblich ist der Vercel-Build der Vorschau.
+- **`verify-critical-css.mjs` rot, auch auf 14.2.35 live:** Es zählt den `<noscript>`-Ausweichblock seit
+  W14 (08.06.2026) mit. Außerhalb von `<noscript>` steht genau 1 Stylesheet.
+  **→ Erledigt in `59998fd` (01.10.2026):** Gezählt wird nur noch außerhalb von `<noscript>`, dazu ein
+  Selbsttest mit 3 präparierten HTML-Strings. Unter 16.3.8 alle 4 URLs ✓. Gegenprobe mit einem
+  Wegwerf-Server und zweitem Stylesheet außerhalb von `<noscript>`: alle 4 URLs ✗.
+- **Neu gemeldet:** „The Edge Runtime is deprecated“ (5 Dateien).
+
+**Vorschau:** READY für `02b00ec`, danach READY für `59998fd`. Karstens Prüfliste am 01.10.2026
+bestanden.
+
+**Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitt 8. `CLAUDE.md`: Tech Stack auf Next.js 16 und der
+Hinweis, dass `react/no-unescaped-entities` jetzt über `npm run lint` im Prebuild greift.
+
+**Offen:** Merge nach `main` und Prüfung der Produktion. Eigene Wellen: Turbopack, die 16 Lint-Regeln auf
+`"off"`, AVIF wieder an, Edge Runtime, ESLint 9.
+
+---
+
 ## 30.09.2026 — Welle 154: Bruchrechner rechnet durchgehend exakt mit BigInt — ✅ ABGESCHLOSSEN
 
 **Anlass** war die Messung aus Welle 153. Bei 999999999/1000000000 − 999999998/999999999 zeigte

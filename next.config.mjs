@@ -6,20 +6,57 @@ const nextConfig = {
   // MDX-Blog: .md/.mdx als Seiten-Endungen zulassen (neben den bestehenden)
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 
-  experimental: {
-    // W53a (02.08.2026) — Serverless-Function-Größe unter dem 250-MB-Limit halten.
-    // public/blog (8 Blog-Videos, ~154 MB) und public/social-videos-src (~16 MB)
-    // werden NIE zur Laufzeit aus einer Function gelesen — Blog-Medien werden nur
-    // statisch ausgeliefert (<Bild>/<Video src="/blog/…">, CDN), social-videos-src
-    // ist reine Build-Quelle des lokalen Bild-Builders. Ohne diesen Ausschluss zieht
-    // der node-file-trace sie über die process.cwd()+'public'-Referenzen (AuthorBio,
-    // /ueber-uns, publisher) konservativ in JEDE Function; der [kategorie]/[rechner]-
-    // Bundle lief dadurch mit dem kalorien-Video auf 263,82 MB (Deploy-Fehler,
-    // Commit f706af7). public/social-posts und public/social-videos bleiben im Trace,
-    // weil der Cron-Publisher sie zur Laufzeit per existsSync prüft.
-    outputFileTracingExcludes: {
-      '*': ['public/blog/**', 'public/social-videos-src/**'],
-    },
+  // W53a (02.08.2026) — Serverless-Function-Größe unter dem 250-MB-Limit halten.
+  // public/blog (8 Blog-Videos, ~154 MB) und public/social-videos-src (~16 MB)
+  // werden NIE zur Laufzeit aus einer Function gelesen — Blog-Medien werden nur
+  // statisch ausgeliefert (<Bild>/<Video src="/blog/…">, CDN), social-videos-src
+  // ist reine Build-Quelle des lokalen Bild-Builders. Ohne diesen Ausschluss zieht
+  // der node-file-trace sie über die process.cwd()+'public'-Referenzen (AuthorBio,
+  // /ueber-uns, publisher) konservativ in JEDE Function; der [kategorie]/[rechner]-
+  // Bundle lief dadurch mit dem kalorien-Video auf 263,82 MB (Deploy-Fehler,
+  // Commit f706af7). public/social-posts und public/social-videos bleiben im Trace,
+  // weil der Cron-Publisher sie zur Laufzeit per existsSync prüft.
+  // Seit Next.js 16 (Welle next16) auf oberster Ebene statt unter `experimental` —
+  // die 16er-Referenz (next-config-js/output) führt den Schlüssel nur dort.
+  outputFileTracingExcludes: {
+    '*': ['public/blog/**', 'public/social-videos-src/**'],
+  },
+
+  // WORKAROUND MDX-Seiten unter Next.js 16 mit Webpack (Welle next16, 28.09.2026).
+  //
+  // Ursache: Next.js 16 übergibt `pageExtensions` an die Server-Components-
+  // Transformation von SWC (next/dist/build/swc/options.js). Die MDX-Regel von
+  // @next/mdx läuft aber über `defaultLoaders.babel`, einen SWC-Loader ohne
+  // `bundleLayer` — also ohne Server-Schicht. SWC erkennt app/**/page.mdx damit
+  // als App-Seite, hält sie aber für eine Client-Komponente und bricht an
+  // `export const metadata` ab („You are attempting to export "metadata" from a
+  // component marked with "use client"“). Unter 14.2.35 wurden MDX-Dateien nicht
+  // als Seiten erkannt, der Fehler trat nicht auf.
+  //
+  // Abhilfe: Der SWC-Schritt der MDX-Regel läuft ausdrücklich in der RSC-Schicht.
+  // Tragfähig nur, weil MDX ausschließlich als app/**/page.mdx vorkommt und nie
+  // importiert wird — Seiten entstehen nur in der RSC-Schicht. Erzwungen durch
+  // scripts/check-mdx-nur-seiten.mjs in der Prebuild-Kette.
+  //
+  // Getestet mit next 16.3.6 und @next/mdx 16.3.6 (Webpack, --webpack).
+  // Entfernen: mit der Turbopack-Welle oder sobald Next.js das korrigiert. Nach
+  // jedem Nachzug der Next-Fassung einmal ohne diesen Hook bauen — baut es grün,
+  // fliegt er raus.
+  //
+  // Reihenfolge: withSerwist → withMDX → dieser Hook. @next/mdx legt seine Regel
+  // an, bevor es diese Funktion aufruft; sie ist hier also schon vorhanden. Der
+  // Loader wird kopiert, nicht verändert — `defaultLoaders.babel` ist ein
+  // gemeinsames Objekt, das auch andere Regeln nutzen.
+  webpack(config) {
+    for (const rule of config.module.rules) {
+      if (rule && rule.test instanceof RegExp && rule.test.test('x.mdx') && Array.isArray(rule.use)) {
+        const [swc, ...rest] = rule.use;
+        if (swc && swc.loader === 'next-swc-loader') {
+          rule.use = [{ ...swc, options: { ...swc.options, bundleLayer: 'rsc', esm: true } }, ...rest];
+        }
+      }
+    }
+    return config;
   },
 
   // Komprimierung aktivieren
