@@ -27,7 +27,12 @@ const nextConfig = {
 
   // Bilder-Optimierung
   images: {
-    formats: ['image/webp', 'image/avif'],
+    // 01.10.2026 — AVIF-Optimierung abgeschaltet: GHSA-2xp9-vwfh-vxw4 (kritisch, RCE ueber
+    // libheif in sharp, "when AVIF files are optimized"). Die korrigierten Next-Fassungen
+    // schalten die AVIF-Optimierung selbst ab ("optimization of AVIF files is disabled");
+    // das hier ist dieselbe Massnahme auf 14.2.35. Wieder einschalten erst, wenn Next.js
+    // die Optimierung freigibt. Siehe docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md 6.4.
+    formats: ['image/webp'],
     deviceSizes: [640, 768, 1024, 1280, 1536],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 Tage
   },

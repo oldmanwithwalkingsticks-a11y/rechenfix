@@ -439,7 +439,7 @@ Gemeinsame Repository-Befunde, Stand 01.10.2026:
 
 | GHSA | Schwere | Einordnung | Beleg aus dem Advisory | Beleg aus dem Repository |
 |---|---|---|---|---|
-| GHSA-2xp9-vwfh-vxw4 | kritisch | **offen** | „A vulnerability in the underlying `libheif` library used by `sharp` which Next.js uses for image optimization can lead to remote code execution when AVIF files are optimized.“ — „Until a fix has propagated, optimization of AVIF files is disabled.“ Zu Vercel: nichts, also **nicht angegeben**. | Die Image Optimization API ist mit Rasterquellen in Betrieb, und `formats` enthält `image/avif`. Damit kann jeder Aufrufer über den `Accept`-Header eine AVIF-**Ausgabe** anstoßen. Eine AVIF-**Quelle** kann ein Angreifer nicht unterschieben, denn es gibt keine AVIF-Dateien und keine Remote-Quellen. Ob „AVIF files are optimized“ die Quelle oder das Zielformat meint, sagt das Advisory nicht. |
+| GHSA-2xp9-vwfh-vxw4 | kritisch | **offen** | „A vulnerability in the underlying `libheif` library used by `sharp` which Next.js uses for image optimization can lead to remote code execution when AVIF files are optimized.“ — „Until a fix has propagated, optimization of AVIF files is disabled.“ Zu Vercel: nichts, also **nicht angegeben**. | Die Image Optimization API ist mit Rasterquellen in Betrieb, und `formats` enthält `image/avif`. Damit kann jeder Aufrufer über den `Accept`-Header eine AVIF-**Ausgabe** anstoßen. Eine AVIF-**Quelle** kann ein Angreifer nicht unterschieben, denn es gibt keine AVIF-Dateien und keine Remote-Quellen. Ob „AVIF files are optimized“ die Quelle oder das Zielformat meint, sagt das Advisory nicht. **Abgeschaltet am 01.10.2026** durch Entfernen von `image/avif` aus `images.formats` in `next.config.mjs`, entsprechend der Abhilfe der korrigierten Fassungen. |
 | GHSA-p293-qw3h-jr36 | kritisch | **nicht einschlägig** | „…can lead to remote code execution when the server is hosted on machines using a Windows filesystem.“ | Die Produktion läuft auf Vercel, nicht unter Windows. **Lokaler Rest außerhalb der Produktion:** `next dev` und das `npm start` für `verify-critical-css.mjs` laufen auf Karstens Windows-Rechner. Die Einordnung gilt für die ausgelieferte Seite. |
 | GHSA-36qx-fr4f-26g5 | hoch | **nicht einschlägig** | „Applications using the Pages Router with `i18n` configured and middleware/proxy-based authorization…“ | kein `pages/`, kein `i18n`, keine Middleware |
 | GHSA-89xv-2m56-2m9x | hoch | **nicht einschlägig** | „Applications that use Server Actions are affected when the incoming host header is not fixed to a trusted value.“ | 0 Server Actions, Manifest leer |
@@ -467,12 +467,12 @@ Maintenance-LTS von 15.x zwei Jahre nach dem Erscheinen am 21.10.2024, errechnet
 Folge für dieses Papier: Abschnitt 3 hat die Peer-Abhängigkeiten gegen 16.0.0 und 16.3.7 geprüft. Bei
 der Migration ist dieselbe Prüfung gegen die tatsächliche Zielversion zu wiederholen.
 
-**Überbrückung bis zur Migration, nicht umgesetzt:** `'image/avif'` aus `images.formats` in
-`next.config.mjs` Z. 30 streichen. Dann entsteht keine AVIF-Ausgabe mehr. AVIF-Quellen gibt es heute
-ohnehin nicht, beide Lesarten aus 6.4 wären damit für rechenfix geschlossen. Das entspricht im Ergebnis
-dem, was die korrigierten Fassungen nach dem Advisory tun („optimization of AVIF files is disabled“).
-Der Preis: Browser bekommen WebP statt AVIF. Die Entscheidung liegt bei Karsten; dieser Prompt fasst
-`next.config.mjs` nicht an.
+**Überbrückung, umgesetzt am 01.10.2026 und über die Migration hinaus gültig:** `'image/avif'` aus
+`images.formats` in `next.config.mjs` gestrichen. Wieder eingeschaltet wird AVIF erst, wenn Next.js die
+Optimierung selbst freigibt. Seitdem entsteht keine AVIF-Ausgabe mehr. AVIF-Quellen gibt es ohnehin
+nicht, beide Lesarten aus 6.4 sind damit für rechenfix geschlossen. Das entspricht im Ergebnis dem, was
+die korrigierten Fassungen nach dem Advisory tun („optimization of AVIF files is disabled“). Der Preis:
+Browser bekommen WebP statt AVIF.
 
 ### 6.6 Zurückgehaltene Advisories
 

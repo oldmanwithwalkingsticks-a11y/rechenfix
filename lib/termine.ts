@@ -203,7 +203,7 @@ export const TERMINE: Termin[] = [
     datum: '2026-11-02',
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
-    was: 'Keine Fortschreibung zum 01.01.2027 geplant. Der Entwurf des Gesetzes zur Vereinfachung und Fortentwicklung des Wohngeldgesetzes (BT-Drs. 21/8284 vom 30.09.2026) setzt sie aus (§ 43 Abs. 11 neu), halbiert die dauerhafte Heizkostenkomponente, ändert Parameter c und die Mietenstufen; Inkrafttreten 01.01.2027 geplant. Bei Verkündung Rechner und Texte nachziehen. Wird nichts verkündet, gelten die Werte 2025 weiter.',
+    was: 'Keine Fortschreibung zum 01.01.2027 geplant. Der Entwurf des Gesetzes zur Vereinfachung und Fortentwicklung des Wohngeldgesetzes (BT-Drs. 21/8284 vom 30.09.2026) setzt sie aus (§ 43 Abs. 11 neu), halbiert die dauerhafte Heizkostenkomponente, ändert Parameter c und die Mietenstufen; Inkrafttreten 01.01.2027 geplant. Bei Verkündung Rechner und Texte nachziehen. Wird nichts verkündet, gelten die Werte 2025 weiter. Stellen im Code, die bei Verkündung nachzuziehen sind: app/finanzen/wohngeld-rechner/page.tsx Z. 157–158 (‚alle zwei Jahre dynamisiert …‘) und Z. 275 (‚Dynamisierungsverordnung vom 21.10.2024‘), lib/berechnungen/wohngeld.ts Z. 65 (Kommentar). Zeilen Stand 01.10.2026.',
     quelle: 'BT-Drs. 21/8284 vom 30.09.2026; docs/jahreswerte-kalender.md, Abschnitt Wohngeld-Dynamisierung',
   },
   {
@@ -248,12 +248,22 @@ export const TERMINE: Termin[] = [
   {
     id: 'spritpreise-energiesteuer-q4',
     titel: 'Spritpreise nach der Energiesteuersenkung ab 01.10.2026',
-    datum: '2026-10-01',
+    datum: '2026-10-02',
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
     projekt: 'rechenfix.de',
-    was: 'Zwei Schritte, beide in lib/berechnungen/spritpreise-parameter.ts. Erstens der Hinweis: Fundstelle des Gesetzes zur Energiesteuersenkung im Bundesgesetzblatt nachschlagen (laut ADAC am 25.09.2026 unterzeichnet, 14 Cent je Liter netto, knapp 17 Cent brutto, Oktober bis Dezember 2026) und tankrabattHinweis danach neu fassen. Der bisherige Satz über das Auslaufen am 30.06.2026 ist ab dem 01.10.2026 irreführend. Zweitens die Preise: superE10 und diesel mit dem ersten ADAC-Bundesschnitt, der nach dem 01.10.2026 erhoben ist, aktualisieren, stand bumpen und das Verhältnis Diesel zu Super E10 prüfen. Am 22.09.2026 lag Diesel mit 2,428 über E10 mit 2,267, wie schon am 12.08.2026. Kippt es, sind die vier Prosa-Stellen in lib/rechner-config/auto.ts nachzuziehen, die der Dateikopf nennt. Bis dahin warnt der Build wegen des Alters der Werte. Das ist am 29.09.2026 bewusst in Kauf genommen worden, weil Werte vom 22.09. zwei Tage später wieder veraltet wären. Einmaltermin: nach Erledigung entfernen.',
+    was: 'Die Preise in lib/berechnungen/spritpreise-parameter.ts: superE10 und diesel mit dem ersten ADAC-Bundesschnitt, der nach dem 01.10.2026 erhoben ist, aktualisieren, stand bumpen und das Verhältnis Diesel zu Super E10 prüfen. Am 22.09.2026 lag Diesel mit 2,428 über E10 mit 2,267, wie schon am 12.08.2026. Kippt es, sind die vier Prosa-Stellen in lib/rechner-config/auto.ts nachzuziehen, die der Dateikopf nennt. Bis dahin warnt der Build wegen des Alters der Werte. Das ist am 29.09.2026 bewusst in Kauf genommen worden, weil Werte vom 22.09. zwei Tage später wieder veraltet wären. Einmaltermin: nach Erledigung entfernen. Zuletzt vor der Senkung, ADAC Stichtag 29.09.2026: Super E10 2,258, Diesel 2,409.',
     quelle: 'Build-Warnung vom 29.09.2026; ADAC, Seite aktueller Spritpreis, Stand 28.09.2026',
+  },
+  {
+    id: 'tankrabatt-ende-2026',
+    titel: 'Tankrabatt endet: Hinweis und Preise nachziehen',
+    datum: '2027-01-02',
+    vorlaufTage: 0,
+    bereich: 'Gesetzeswerte',
+    projekt: 'rechenfix.de',
+    was: 'Die Senkung nach § 68 EnergieStG endet am 31.12.2026. Ab 01.01.2027 gelten wieder die Sätze des § 2 Abs. 1 EnergieStG (Benzin 654,50 €, Diesel 470,40 € je 1.000 l). tankrabattHinweis neu fassen oder entfernen, Preise mit dem ersten ADAC-Bundesschnitt nach dem 01.01.2027 aktualisieren.',
+    quelle: '§ 68 EnergieStG (gesetze-im-internet.de, abgerufen 01.10.2026); Änderungsgesetz laut Chat-Recherche BGBl. 2026 I Nr. 275 vom 30.09.2026 — recht.bund.de war für den Abruf gesperrt, Fundstelle bei Gelegenheit im Browser bestätigen',
   },
   {
     id: 'verarbeitungsverzeichnis-durchsicht',
