@@ -262,7 +262,7 @@ export const TERMINE: Termin[] = [
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
     projekt: 'rechenfix.de',
-    was: 'Die Senkung nach § 68 EnergieStG endet am 31.12.2026. Ab 01.01.2027 gelten wieder die Sätze des § 2 Abs. 1 EnergieStG (Benzin 654,50 €, Diesel 470,40 € je 1.000 l). tankrabattHinweis neu fassen oder entfernen, Preise mit dem ersten ADAC-Bundesschnitt nach dem 01.01.2027 aktualisieren.',
+    was: 'Die Senkung nach § 68 EnergieStG endet am 31.12.2026. Ab 01.01.2027 gelten wieder die Sätze des § 2 Abs. 1 EnergieStG (Benzin 654,50 €, Diesel 470,40 € je 1.000 l). tankrabattHinweis neu fassen oder entfernen, Preise mit dem ersten ADAC-Bundesschnitt nach dem 01.01.2027 aktualisieren. Außerdem auf /auto/spritkosten-rechner den Absatz ‚Eine Besonderheit gilt 2026 …‘ und die Quellenzeile zum Steueranteil nachziehen (Fundstellen: lib/rechner-config/auto.ts Z. 148, Block „Spritpreise verstehen: Tagesschwankung & Zusammensetzung“, und Z. 211, quellen-Eintrag „Energiesteuergesetz (EnergieStG)“).',
     quelle: '§ 68 EnergieStG (gesetze-im-internet.de, abgerufen 01.10.2026); Änderungsgesetz laut Chat-Recherche BGBl. 2026 I Nr. 275 vom 30.09.2026 — recht.bund.de war für den Abruf gesperrt, Fundstelle bei Gelegenheit im Browser bestätigen',
   },
   {

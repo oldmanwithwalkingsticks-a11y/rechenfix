@@ -18,5 +18,5 @@ export const SPRITPREISE_REFERENZ = {
   // 31.12.2026 je 1.000 l: Benzin 514,10 € (statt 654,50 € nach § 2 Abs. 1 Nr. 1 b),
   // Diesel 330,00 € (statt 470,40 € nach § 2 Abs. 1 Nr. 4 b). Differenz je 140,40 € =
   // 14,04 ct/L netto, mit 19 % USt 16,71 ct/L.
-  tankrabattHinweis: 'Tankrabatt: Vom 1. Oktober bis 31. Dezember 2026 ist die Energiesteuer auf Benzin und Diesel um 14,04 Cent je Liter gesenkt, mit Umsatzsteuer rund 16,7 Cent (§ 68 Energiesteuergesetz). Die Durchschnittspreise im Rechner geben den ADAC-Bundesschnitt zum genannten Stand wieder.',
+  tankrabattHinweis: 'Energiesteuer vom 01.10. bis 31.12.2026 um 16,7 Cent/L brutto gesenkt',
 } as const;
