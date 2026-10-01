@@ -64,7 +64,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 **Neue Partner (April 2026, Prompt 106):** hotel.de (MID 16018), burda-Zahnzusatz (MID 121064), eventfloss-berlin (MID 27722). Vollständige MID-Tabelle und Platzierungs-Zuordnung pro Rechner: siehe [rechenfix-projekt-referenz.md](rechenfix-projekt-referenz.md) → Abschnitt „Affiliate-System".
 
 ## Tech Stack
-- Next.js 14 (App Router), TypeScript, Tailwind CSS
+- Next.js 16 (App Router, Build mit `--webpack`; seit Welle 155), React 19, TypeScript, Tailwind CSS
 - Next.js 16: Vor jeder Änderung an Next-Code AGENTS.md lesen; der Block dort wird von next dev verwaltet und verweist auf die Doku unter node_modules/next/dist/docs.
 - Vercel Hosting
 - Anthropic Claude API für "Fix erklärt"
@@ -78,7 +78,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - **AffiliateBox-Aufrufe:** 116 in 72 Dateien (Stand 30.04.2026 nach M5-Validation-Sweep — 1 Box aus MwStRueckerstattungRechner entfernt, Import-Cleanup leerte 1 Datei), 12 Programme inkl. CosmosDirekt (seit 25.04.2026, Prompt 145)
 - **AdSense:** Script live seit 20.04.2026, Publisher-ID `pub-1389746597486587`. Erste Prüfung 27.04.2026 negativ („Minderwertige Inhalte"); Root Cause: `<LazySection>`-Wrapper machte Erklärtext + FAQ im SSR unsichtbar. Drei-Maßnahmen-Sprint 154+155+156 (28.04.2026): LazySection-Removal, /ueber-uns ausgebaut, /qualitaet neu. Re-Review-Anfrage steht aus (Karsten triggert nach Vercel-Deploy). Prompts 68 (Google CMP) und 85 (next/script) bleiben parkend bis Approval.
 - **Domain:** `https://www.rechenfix.de` (immer mit www, 308-Redirect von nicht-www)
-- **Stack:** Next.js 14 App Router, Tailwind, TypeScript, Vercel
+- **Stack:** Next.js 16 App Router (`--webpack`), React 19, Tailwind, TypeScript, Vercel
 - **Smoketest v3.1** mit 9 Checks (C1–C9) als Regressions-Sweep über alle Rechner-URLs, Pflicht nach jeder Änderung
 - **Workflow-Tools (seit 20.04.2026):** Claude-in-Chrome Extension (Live-HTML-Inspektion, „Ask before acting") und Vercel-MCP-Connector (`https://mcp.vercel.com`, Deploy-Status, Logs)
 
@@ -110,7 +110,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - Ergebnis-Updates ohne aria-live-Region
 - Erklärtext, FAQ, Disclaimer oder andere Crawler-relevante Text-Sektionen in client-only Lazy-Wrappern (`<LazySection>`, `IntersectionObserver`-gated Render) — bei SSR liefern solche Wrapper nur einen leeren Placeholder, AdSense-Crawler bewertet die Seite als „thin content" (Lehre 25 / Vorfall 27.04.2026, Sprint 154+155+156)
 - `new Date()` auf Modul-Ebene in `'use client'`-Components für Year-Dropdowns o. Ä. — Hydration-Mismatch-Risiko, statische Range bevorzugen (Lehre 24)
-- **Gerade ASCII-Quotes `"`/`'` als sichtbarer JSX-Text** in `components/rechner/*.tsx` — die ESLint-Regel `react/no-unescaped-entities` bricht den Vercel-Build (`Failed to compile`), läuft aber NUR in der Lint-Phase von `next build`, NICHT bei `tsc --noEmit` oder den prebuild-Node-Guards → lokal grün, Vercel rot. Immer typografische Anführungszeichen („…", ') im sichtbaren Text. Attribut-Strings (`className="…"`) und `{}`-Ausdrücke sind exempt. Prüf-Grep vor Push: `grep -nE '>[^<{]*"[^<]*<' components/rechner/<Datei>.tsx`. JSX-Analog zur Backtick-Falle (Lehre 17, nur Config-Template-Literals). Vorfall 19.06.2026: internetgeschwindigkeit-rechner (L-W19.JSX, Memory `feedback_jsx_unescaped_quotes.md`).
+- **Gerade ASCII-Quotes `"`/`'` als sichtbarer JSX-Text** in `components/rechner/*.tsx` — die ESLint-Regel `react/no-unescaped-entities` bricht den Vercel-Build, läuft aber NICHT bei `tsc --noEmit`. Seit Welle 155 (Next.js 16) lintet `next build` nicht mehr; die Regel greift über `npm run lint` am Ende der `prebuild`-Kette, also bei jedem `npm run build` lokal wie auf Vercel (vorher nur in der Lint-Phase von `next build`, Vorfall: lokal grün, Vercel rot). Immer typografische Anführungszeichen („…", ') im sichtbaren Text. Attribut-Strings (`className="…"`) und `{}`-Ausdrücke sind exempt. Prüf-Grep vor Push: `grep -nE '>[^<{]*"[^<]*<' components/rechner/<Datei>.tsx`. JSX-Analog zur Backtick-Falle (Lehre 17, nur Config-Template-Literals). Vorfall 19.06.2026: internetgeschwindigkeit-rechner (L-W19.JSX, Memory `feedback_jsx_unescaped_quotes.md`).
 
 ## Accessibility (WCAG 2.1 AA)
 
