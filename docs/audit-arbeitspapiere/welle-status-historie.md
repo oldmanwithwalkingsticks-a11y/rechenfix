@@ -6,7 +6,7 @@
 
 ---
 
-## 01.10.2026 — Welle 155: Next.js 16.3.8, React 19 — Weg A (webpack), Lint im Prebuild — 🟡 AUF ZWEIG next16, Merge nach Prüfung der Vorschau
+## 01.10.2026 — Welle 155: Next.js 16.3.8, React 19 — Weg A (webpack), Lint im Prebuild — 🟡 VORSCHAU GEPRÜFT (01.10.2026), Merge nach main
 
 **Anlass:** Die Bestandsaufnahme zieht die Migration in Abschnitt 6.5 vor. 23 Advisories treffen
 14.2.35, darunter GHSA-2xp9-vwfh-vxw4 (kritisch, offen), und 14.x bekommt keine Korrekturen mehr.
@@ -38,13 +38,19 @@
   Maßgeblich ist der Vercel-Build der Vorschau.
 - **`verify-critical-css.mjs` rot, auch auf 14.2.35 live:** Es zählt den `<noscript>`-Ausweichblock seit
   W14 (08.06.2026) mit. Außerhalb von `<noscript>` steht genau 1 Stylesheet.
+  **→ Erledigt in `59998fd` (01.10.2026):** Gezählt wird nur noch außerhalb von `<noscript>`, dazu ein
+  Selbsttest mit 3 präparierten HTML-Strings. Unter 16.3.8 alle 4 URLs ✓. Gegenprobe mit einem
+  Wegwerf-Server und zweitem Stylesheet außerhalb von `<noscript>`: alle 4 URLs ✗.
 - **Neu gemeldet:** „The Edge Runtime is deprecated“ (5 Dateien).
+
+**Vorschau:** READY für `02b00ec`, danach READY für `59998fd`. Karstens Prüfliste am 01.10.2026
+bestanden.
 
 **Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitt 8. `CLAUDE.md`: Tech Stack auf Next.js 16 und der
 Hinweis, dass `react/no-unescaped-entities` jetzt über `npm run lint` im Prebuild greift.
 
-**Offen:** Merge nach `main` nach Karstens Prüfung der Vorschau. Eigene Wellen: Turbopack, die 16
-Lint-Regeln auf `"off"`, AVIF wieder an, Edge Runtime, `verify-critical-css` ohne `<noscript>`, ESLint 9.
+**Offen:** Merge nach `main` und Prüfung der Produktion. Eigene Wellen: Turbopack, die 16 Lint-Regeln auf
+`"off"`, AVIF wieder an, Edge Runtime, ESLint 9.
 
 ---
 

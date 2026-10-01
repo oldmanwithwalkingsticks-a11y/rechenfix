@@ -698,6 +698,10 @@ an:
 - **Maßgeblich ist der Vercel-Build der Vorschau** (Linux). Läuft er auf READY, liegt die Function
   `[kategorie]/[rechner]` unter 250 MB.
 
+**Vorschau:** READY für `02b00ec`, danach READY für `59998fd`
+(Alias `rechenfix-git-next16-karsten-kautzs-projects.vercel.app`). Karstens Prüfliste für die Vorschau
+ist am 01.10.2026 bestanden.
+
 ### 8.5 Serverprüfung (`npm start`, 16.3.8, lokal)
 
 | Pfad | Status | Bytes | Anmerkung |
@@ -724,15 +728,18 @@ Antwortköpfe von `/`:
 - `Referrer-Policy: origin-when-cross-origin`
 - `Cross-Origin-Opener-Policy: same-origin-allow-popups`
 
-**`verify-critical-css.mjs`: ✗ an allen 4 URLs** (`<style>` 1, Stylesheet-Links 2). **Das ist keine Folge
-der Migration.**
-- Der zweite Treffer ist der `<noscript>`-Ausweichblock aus `app/layout.tsx`.
-- Die Live-Seite auf 14.2.35 (www.rechenfix.de, 01.10.2026) zählt ebenfalls 2.
-- Außerhalb von `<noscript>` steht auf allen 4 URLs genau 1 Stylesheet (das Font-CSS). Das Kriterium,
-  das das Skript prüfen will, ist also erfüllt.
-- Das Skript stammt vom 24.05.2026 (`96c2ead`), der `<noscript>`-Block vom 08.06.2026 (`90f5c84`, W14).
-  Seitdem zählt es einen Treffer zu viel.
-- Offen für eine eigene Welle: `<noscript>`-Inhalt von der Zählung ausnehmen.
+**`verify-critical-css.mjs`: erledigt in `59998fd`.** Der erste Lauf meldete ✗ an allen 4 URLs
+(`<style>` 1, Stylesheet-Links 2). Das war keine Folge der Migration.
+- **Ursache:** Das Skript (24.05.2026, `96c2ead`) zählte den `<noscript>`-Ausweichblock aus
+  `app/layout.tsx` mit. Der Block stammt aus W14 (08.06.2026, `90f5c84`). Die Live-Seite auf 14.2.35
+  (www.rechenfix.de, 01.10.2026) zählte ebenfalls 2.
+- **Korrektur:** Gezählt wird nur noch außerhalb von `<noscript>`; die Ausgabe nennt den noscript-Link
+  getrennt. Vor den Abrufen läuft ein Selbsttest mit 3 präparierten HTML-Strings. Er belegt, dass ein
+  zweites Stylesheet außerhalb von `<noscript>` weiter als Regression gilt.
+- **Ergebnis unter 16.3.8 (`npm start`):** Selbsttest 3/3, alle 4 URLs ✓ (`<style>` 1, Stylesheet-Links
+  1, dazu 1 in `<noscript>`), Exit 0.
+- **Gegenprobe:** Ein Wegwerf-Server auf Port 3000 lieferte ein zweites Stylesheet außerhalb von
+  `<noscript>`. Ergebnis: alle 4 URLs ✗, Exit 1. Der Seitencode blieb unberührt.
 
 **Verify-Skripte:** `verify-zahlenformat.ts` 29/29 grün, `verify-clamp-input.ts` 13/13 grün (85 Paare,
 0 Verstöße).
@@ -745,9 +752,11 @@ der Migration.**
 - **AVIF wieder einschalten,** sobald Next.js die Optimierung freigibt.
 - Bei der Migration aufgefallen:
   - Edge Runtime veraltet (5 Dateien);
-  - `verify-critical-css.mjs` zählt `<noscript>` mit;
   - ESLint 9 nicht mehr unterstützt (Abschnitt 7, Nr. 4);
   - 9 verbliebene `npm audit`-Meldungen außerhalb von `next`.
+
+**Erledigt:** `verify-critical-css.mjs` zählt `<noscript>` nicht mehr mit (`59998fd`, 01.10.2026, siehe
+8.5).
 
 ---
 
