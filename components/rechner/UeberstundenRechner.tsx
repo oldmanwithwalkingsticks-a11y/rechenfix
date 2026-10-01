@@ -5,7 +5,8 @@ import {
   berechneUeberstunden,
   berechneVerguetung,
 } from '@/lib/berechnungen/ueberstunden';
-import { clampInputValue } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -54,29 +55,29 @@ export default function UeberstundenRechner() {
   // Modus 2
   const [ueberstunden, setUeberstunden] = useState('10');
   const [bruttogehalt, setBruttogehalt] = useState('3500');
-  const [monatsstunden, setMonatsstunden] = useState('173.33');
+  const [monatsstunden, setMonatsstunden] = useState('173,33');
   const [zuschlag, setZuschlag] = useState('0');
   const [steuerklasse, setSteuerklasse] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
   const [bundesland, setBundesland] = useState('NW');
   const [kirchensteuer, setKirchensteuer] = useState(false);
 
   const tatsaechlicheStunden = useMemo(() => {
-    if (eingabeArt === 'gesamt') return parseFloat(tatsaechlich.replace(',', '.')) || 0;
-    return tagesStunden.reduce((s, v) => s + (parseFloat(v.replace(',', '.')) || 0), 0);
+    if (eingabeArt === 'gesamt') return parseDeutscheZahl(tatsaechlich) || 0;
+    return tagesStunden.reduce((s, v) => s + (parseDeutscheZahl(v) || 0), 0);
   }, [eingabeArt, tatsaechlich, tagesStunden]);
 
   const ergebnis1 = useMemo(() => berechneUeberstunden({
-    vertraglicheStunden: parseFloat(vertraglicheStunden.replace(',', '.')) || 0,
+    vertraglicheStunden: parseDeutscheZahl(vertraglicheStunden) || 0,
     tatsaechlicheStunden,
     zeitraum,
     customWochen: parseInt(customWochen, 10) || 0,
   }), [vertraglicheStunden, tatsaechlicheStunden, zeitraum, customWochen]);
 
   const ergebnis2 = useMemo(() => berechneVerguetung({
-    ueberstunden: parseFloat(ueberstunden.replace(',', '.')) || 0,
-    bruttogehalt: parseFloat(bruttogehalt.replace(',', '.')) || 0,
-    monatsstunden: parseFloat(monatsstunden.replace(',', '.')) || 0,
-    zuschlag: parseFloat(zuschlag.replace(',', '.')) || 0,
+    ueberstunden: parseDeutscheZahl(ueberstunden) || 0,
+    bruttogehalt: parseDeutscheZahl(bruttogehalt) || 0,
+    monatsstunden: parseDeutscheZahl(monatsstunden) || 0,
+    zuschlag: parseDeutscheZahl(zuschlag) || 0,
     steuerklasse,
     bundesland,
     kirchensteuer,
@@ -113,19 +114,14 @@ export default function UeberstundenRechner() {
         <div>
           <div className="mb-4">
             <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Vertragliche Wochenarbeitszeit</label>
-            <div className="relative">
-              <input
-                type="number"
-                inputMode="decimal"
-                min="0"
-                max="80"
-                step="0.5"
-                value={vertraglicheStunden}
-                onChange={e => setVertraglicheStunden(clampInputValue(e.target.value, 0, 80))}
-                className="input-field w-full pr-16"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std./Wo.</span>
-            </div>
+            <NummerEingabe
+              value={vertraglicheStunden}
+              onChange={v => setVertraglicheStunden(clampInputValue(v, 0, 80))}
+              onBlur={v => setVertraglicheStunden(clampInputValueOnBlur(v, 0, 80))}
+              einheit="Std./Wo."
+              min={0}
+              max={80}
+            />
           </div>
 
           {/* Eingabeart Toggle */}
@@ -151,37 +147,29 @@ export default function UeberstundenRechner() {
           {eingabeArt === 'gesamt' ? (
             <div className="mb-4">
               <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Tatsächliche Wochenarbeitszeit</label>
-              <div className="relative">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  min="0"
-                  max="120"
-                  step="0.5"
-                  value={tatsaechlich}
-                  onChange={e => setTatsaechlich(clampInputValue(e.target.value, 0, 120))}
-                  className="input-field w-full pr-16"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Std./Wo.</span>
-              </div>
+              <NummerEingabe
+                value={tatsaechlich}
+                onChange={v => setTatsaechlich(clampInputValue(v, 0, 120))}
+                onBlur={v => setTatsaechlich(clampInputValueOnBlur(v, 0, 120))}
+                einheit="Std./Wo."
+                min={0}
+                max={120}
+              />
             </div>
           ) : (
             <div className="space-y-2 mb-4">
               {WOCHENTAGE.map((tag, idx) => (
                 <div key={tag} className="flex items-center gap-3">
                   <span className="text-xs font-medium text-gray-600 dark:text-gray-400 w-12">{tag.slice(0, 2)}</span>
-                  <div className="relative flex-1">
-                    <input
-                      type="number"
-                      inputMode="decimal"
-                      min="0"
-                      max="24"
-                      step="0.5"
+                  <div className="flex-1">
+                    <NummerEingabe
                       value={tagesStunden[idx]}
-                      onChange={e => updateTag(idx, clampInputValue(e.target.value, 0, 24))}
-                      className="input-field w-full pr-8"
+                      onChange={v => updateTag(idx, clampInputValue(v, 0, 24))}
+                      onBlur={v => updateTag(idx, clampInputValueOnBlur(v, 0, 24))}
+                      einheit="h"
+                      min={0}
+                      max={24}
                     />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">h</span>
                   </div>
                 </div>
               ))}
@@ -222,6 +210,7 @@ export default function UeberstundenRechner() {
                   max="52"
                   value={customWochen}
                   onChange={e => setCustomWochen(clampInputValue(e.target.value, 1, 52))}
+                  onBlur={e => setCustomWochen(clampInputValueOnBlur(e.target.value, 1, 52))}
                   className="input-field w-full pr-16"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">Wochen</span>
@@ -305,7 +294,7 @@ export default function UeberstundenRechner() {
 
               <AiExplain
                 rechnerName="Überstunden-Rechner"
-                eingaben={{ vertraglicheStunden: parseFloat(vertraglicheStunden.replace(',', '.')) || 0, tatsaechlicheStunden, zeitraum }}
+                eingaben={{ vertraglicheStunden: parseDeutscheZahl(vertraglicheStunden) || 0, tatsaechlicheStunden, zeitraum }}
                 ergebnis={{ proWoche: ergebnis1.proWoche, proMonat: ergebnis1.proMonat, proJahr: ergebnis1.proJahr, istMinusstunden: ergebnis1.istMinusstunden, zusaetzlicheTageProJahr: ergebnis1.zusaetzlicheTageProJahr }}
               />
             </div>
@@ -318,64 +307,51 @@ export default function UeberstundenRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Anzahl Überstunden</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                min="0"
-                step="0.5"
+              <label htmlFor="ueberstunden-anzahl" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Anzahl Überstunden</label>
+              <NummerEingabe
+                id="ueberstunden-anzahl"
                 value={ueberstunden}
-                onChange={e => setUeberstunden(e.target.value)}
-                className="input-field w-full"
+                onChange={v => setUeberstunden(clampInputValue(v, 0, null))}
+                onBlur={v => setUeberstunden(clampInputValueOnBlur(v, 0, null))}
+                min={0}
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bruttogehalt monatlich</label>
-              <div className="relative">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  min="0"
-                  value={bruttogehalt}
-                  onChange={e => setBruttogehalt(e.target.value)}
-                  className="input-field w-full pr-8"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">€</span>
-              </div>
+              <label htmlFor="ueberstunden-bruttogehalt" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bruttogehalt monatlich</label>
+              <NummerEingabe
+                id="ueberstunden-bruttogehalt"
+                value={bruttogehalt}
+                onChange={v => setBruttogehalt(clampInputValue(v, 0, null))}
+                onBlur={v => setBruttogehalt(clampInputValueOnBlur(v, 0, null))}
+                einheit="€"
+                min={0}
+              />
               <CrossLink href="/finanzen/stundenlohn-rechner" emoji="💶" text="Stundenlohn aus Gehalt berechnen" />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Monatsstunden (vertraglich)</label>
-              <div className="relative">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  min="0"
-                  step="0.01"
-                  value={monatsstunden}
-                  onChange={e => setMonatsstunden(e.target.value)}
-                  className="input-field w-full pr-8"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">h</span>
-              </div>
+              <label htmlFor="ueberstunden-monatsstunden" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Monatsstunden (vertraglich)</label>
+              <NummerEingabe
+                id="ueberstunden-monatsstunden"
+                value={monatsstunden}
+                onChange={v => setMonatsstunden(clampInputValue(v, 0, null))}
+                onBlur={v => setMonatsstunden(clampInputValueOnBlur(v, 0, null))}
+                einheit="h"
+                min={0}
+              />
             </div>
             <div>
               <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Überstundenzuschlag</label>
-              <div className="relative">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  min="0"
-                  max="200"
-                  value={zuschlag}
-                  onChange={e => setZuschlag(clampInputValue(e.target.value, 0, 200))}
-                  className="input-field w-full pr-8"
-                />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">%</span>
-              </div>
+              <NummerEingabe
+                value={zuschlag}
+                onChange={v => setZuschlag(clampInputValue(v, 0, 200))}
+                onBlur={v => setZuschlag(clampInputValueOnBlur(v, 0, 200))}
+                einheit="%"
+                min={0}
+                max={200}
+              />
             </div>
           </div>
 
@@ -469,7 +445,7 @@ export default function UeberstundenRechner() {
                       {ergebnis2.szenarien.map(s => (
                         <tr
                           key={s.zuschlag}
-                          className={s.zuschlag === (parseFloat(zuschlag) || 0)
+                          className={s.zuschlag === (parseDeutscheZahl(zuschlag) || 0)
                             ? 'bg-primary-50/50 dark:bg-primary-500/5 font-medium'
                             : ''
                           }

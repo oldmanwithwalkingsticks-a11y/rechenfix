@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { parseDeutscheZahl, clampInputValue } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -74,12 +74,14 @@ export default function SchwimmPaceRechner() {
         <label htmlFor={`${id}-m`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">{labelMin}</label>
         <input id={`${id}-m`} type="number" min="0" max="99" value={mv}
           onChange={(e) => setM(clampInputValue(e.target.value, 0, 99))}
+          onBlur={(e) => setM(clampInputValueOnBlur(e.target.value, 0, 99))}
           className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center" />
       </div>
       <div>
         <label htmlFor={`${id}-s`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Sekunden</label>
         <input id={`${id}-s`} type="number" min="0" max="59" value={sv}
           onChange={(e) => setS(clampInputValue(e.target.value, 0, 59))}
+          onBlur={(e) => setS(clampInputValueOnBlur(e.target.value, 0, 59))}
           className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center" />
       </div>
     </div>

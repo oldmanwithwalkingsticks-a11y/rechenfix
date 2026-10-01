@@ -2,10 +2,14 @@
 
 import { useState, useMemo, useId } from 'react';
 import { berechneTageszeit, berechneWoche, type WochenTag } from '@/lib/berechnungen/arbeitszeit';
-import { clampInputValue, clampNumber } from '@/lib/zahlenformat';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+
+// Tag plus der getippte Text des Pausenfelds — nur für die Eingabe; die Lib
+// rechnet weiter mit der Zahl aus WochenTag.
+type TagEingabe = WochenTag & { pauseText?: string };
 
 type Modus = 'tag' | 'woche';
 
@@ -39,6 +43,7 @@ function MinutenEingabe({ value, onChange, label }: { value: string; onChange: (
           max="480"
           value={value}
           onChange={e => onChange(clampInputValue(e.target.value, 0, 480))}
+          onBlur={e => onChange(clampInputValueOnBlur(e.target.value, 0, 480))}
           className="input-field w-full pr-10"
         />
         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">min</span>
@@ -88,7 +93,7 @@ export default function ArbeitszeitRechner() {
   const [pausen, setPausen] = useState<string[]>(['30']);
 
   // Modus 2
-  const [tage, setTage] = useState<WochenTag[]>(DEFAULT_TAGE.map(t => ({ ...t })));
+  const [tage, setTage] = useState<TagEingabe[]>(DEFAULT_TAGE.map(t => ({ ...t })));
   const [gleicheZeiten, setGleicheZeiten] = useState(true);
 
   // Ergebnis Modus 1
@@ -105,7 +110,7 @@ export default function ArbeitszeitRechner() {
     return berechneWoche(tage);
   }, [tage]);
 
-  const updateTag = (idx: number, updates: Partial<WochenTag>) => {
+  const updateTag = (idx: number, updates: Partial<TagEingabe>) => {
     setTage(prev => {
       const neu = prev.map((t, i) => i === idx ? { ...t, ...updates } : t);
       // Bei gleichen Zeiten: Mo-Fr synchronisieren
@@ -116,6 +121,7 @@ export default function ArbeitszeitRechner() {
             if (updates.beginn !== undefined) neu[i].beginn = quelle.beginn;
             if (updates.ende !== undefined) neu[i].ende = quelle.ende;
             if (updates.pause !== undefined) neu[i].pause = quelle.pause;
+            if (updates.pauseText !== undefined) neu[i].pauseText = quelle.pauseText;
           }
         }
       }
@@ -262,7 +268,7 @@ export default function ArbeitszeitRechner() {
             {tage.map((tag, idx) => (
               <div
                 key={tag.label}
-                className={`flex items-center gap-2 p-3 rounded-xl border transition-all ${
+                className={`flex flex-wrap items-center gap-2 p-3 rounded-xl border transition-all ${
                   tag.frei
                     ? 'bg-gray-50 dark:bg-gray-800/30 border-gray-100 dark:border-gray-700 opacity-60'
                     : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
@@ -287,34 +293,39 @@ export default function ArbeitszeitRechner() {
                 </button>
 
                 {!tag.frei && (
-                  <>
-                    <input
-                      type="time"
-                      value={tag.beginn}
-                      onChange={e => updateTag(idx, { beginn: e.target.value })}
-                      className="input-field w-24 text-xs py-1.5"
-                      aria-label={`Arbeitsbeginn ${tag.label}`}
-                    />
-                    <span className="text-gray-600 text-xs" aria-hidden="true">–</span>
-                    <input
-                      type="time"
-                      value={tag.ende}
-                      onChange={e => updateTag(idx, { ende: e.target.value })}
-                      className="input-field w-24 text-xs py-1.5"
-                      aria-label={`Arbeitsende ${tag.label}`}
-                    />
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      min="0"
-                      max="480"
-                      value={tag.pause}
-                      onChange={e => updateTag(idx, { pause: clampNumber(parseInt(e.target.value, 10), 0, 480) })}
-                      className="input-field w-16 text-xs py-1.5 text-center"
-                      aria-label={`Pause ${tag.label} in Minuten`}
-                    />
-                    <span className="text-xs text-gray-600 shrink-0" aria-hidden="true">min</span>
-                  </>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <input
+                        type="time"
+                        value={tag.beginn}
+                        onChange={e => updateTag(idx, { beginn: e.target.value })}
+                        className="input-field w-28 sm:w-32 text-xs py-1.5"
+                        aria-label={`Arbeitsbeginn ${tag.label}`}
+                      />
+                      <span className="text-gray-600 text-xs" aria-hidden="true">–</span>
+                      <input
+                        type="time"
+                        value={tag.ende}
+                        onChange={e => updateTag(idx, { ende: e.target.value })}
+                        className="input-field w-28 sm:w-32 text-xs py-1.5"
+                        aria-label={`Arbeitsende ${tag.label}`}
+                      />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        inputMode="numeric"
+                        min="0"
+                        max="480"
+                        value={tag.pauseText ?? tag.pause}
+                        onChange={e => { const t = clampInputValue(e.target.value, 0, 480); updateTag(idx, { pauseText: t, pause: parseInt(t, 10) || 0 }); }}
+                        onBlur={e => { const t = clampInputValueOnBlur(e.target.value, 0, 480); updateTag(idx, { pauseText: t, pause: parseInt(t, 10) || 0 }); }}
+                        className="input-field w-20 text-xs py-1.5 text-center"
+                        aria-label={`Pause ${tag.label} in Minuten`}
+                      />
+                      <span className="text-xs text-gray-600 shrink-0" aria-hidden="true">min</span>
+                    </div>
+                  </div>
                 )}
                 {tag.frei && (
                   <span className="text-xs text-gray-600 italic ml-2">Frei</span>

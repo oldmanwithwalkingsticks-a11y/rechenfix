@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { parseDeutscheZahl, clampInputValue } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -195,6 +195,7 @@ export default function PaceRechner() {
                 max="99"
                 value={stunden}
                 onChange={e => setStunden(clampInputValue(e.target.value, 0, 99))}
+                onBlur={e => setStunden(clampInputValueOnBlur(e.target.value, 0, 99))}
                 className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center"
               />
             </div>
@@ -207,6 +208,7 @@ export default function PaceRechner() {
                 max="59"
                 value={minuten}
                 onChange={e => setMinuten(clampInputValue(e.target.value, 0, 59))}
+                onBlur={e => setMinuten(clampInputValueOnBlur(e.target.value, 0, 59))}
                 className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center"
               />
             </div>
@@ -219,6 +221,7 @@ export default function PaceRechner() {
                 max="59"
                 value={sekunden}
                 onChange={e => setSekunden(clampInputValue(e.target.value, 0, 59))}
+                onBlur={e => setSekunden(clampInputValueOnBlur(e.target.value, 0, 59))}
                 className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center"
               />
             </div>
@@ -243,6 +246,7 @@ export default function PaceRechner() {
                 max="15"
                 value={paceMin}
                 onChange={e => setPaceMin(clampInputValue(e.target.value, 2, 15))}
+                onBlur={e => setPaceMin(clampInputValueOnBlur(e.target.value, 2, 15))}
                 className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center"
               />
             </div>
@@ -255,6 +259,7 @@ export default function PaceRechner() {
                 max="59"
                 value={paceSek}
                 onChange={e => setPaceSek(clampInputValue(e.target.value, 0, 59))}
+                onBlur={e => setPaceSek(clampInputValueOnBlur(e.target.value, 0, 59))}
                 className="w-full px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm text-center"
               />
             </div>

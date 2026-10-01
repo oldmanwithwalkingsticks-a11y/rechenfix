@@ -6,6 +6,195 @@
 
 ---
 
+## 30.09.2026 — Welle 154: Bruchrechner rechnet durchgehend exakt mit BigInt — ✅ ABGESCHLOSSEN
+
+**Anlass** war die Messung aus Welle 153. Bei 999999999/1000000000 − 999999998/999999999 zeigte
+die Ergebniszeile „0/1 = 0,0“, exakt ist 1/999999999000000000. Die Zwischenwerte lagen über
+`Number.MAX_SAFE_INTEGER` und wurden still gerundet.
+
+**Invariante:** In `lib/berechnungen/bruchrechnung.ts` sind Zähler, Nenner, ganze Teile, kgV,
+GGT, Erweiterungsfaktoren und alle Zwischenwerte BigInt, in allen vier Reitern und im
+Rechenweg.
+- **Eingaben:** Die Felder gehen als Text direkt in BigInt, über `ganzzahlText()` und
+  `dezimalTextZuBruch()`. Dezimalzahlen setzen die Ziffern vor und nach dem Komma als Text zum
+  Zähler zusammen, der Nenner ist 10^Nachkommastellen.
+- **Keine Number mehr, auch nicht in der Darstellung.** `dezimalAnzeige()` rundet mit BigInt
+  auf sechs Stellen. Mit `toLocaleString` hätte ein 34-stelliger Zähler in der Dezimalzeile
+  erfundene Ziffern bekommen. Gerundet wird weiter wie `Math.round(x · 10^6)`.
+- **Entfallen:** `mitGrenze()` und der Hinweis „zu groß“ aus Welle 153. `dezimalZuBruch(number)`
+  nahm eine Gleitkommazahl entgegen, der Rechner nutzt sie seit Welle 150 nicht mehr.
+  `bruchZuDezimal()` hat keinen Verbraucher mehr. Mit BigInt fällt auch die Grenze von neun
+  Nachkommastellen und 15 Ziffern.
+- **Strengerer Ganzzahl-Leser:** `ganzzahlText()` weist „12abc“ und „1e3“ ab. Bisher las
+  `parseFloat` sie als 12 und 1000. Ein leeres Feld zählt weiter als 0.
+
+**Verbraucher:**
+- **Komponente:** formatiert mit `String()`.
+- **`AiExplain`:** bekommt Strings, weil BigInt sich nicht per JSON senden lässt.
+- **Kopier- und PDF-Text:** Template-Strings, damit exakt.
+- **Link „Bruch in Prozent umrechnen“:** übergibt keinen Wert. Er ist ein fester Link auf
+  /alltag/prozentrechner.
+
+**Beim Rendern gefunden und behoben:** Im Reiter Kürzen stand „Gekürzt mit GGT — Zähler und
+Nenner durch geteilt.“, ohne Zahl. React 18 rendert BigInt-Kinder nicht, obwohl die Typen sie
+zulassen. Deshalb blieb `tsc` grün. Jetzt steht dort `String(teilGgt)`. Das war die einzige
+Stelle, an der ein BigInt direkt im JSX stand.
+
+**Lange Zahlen:** Zähler und Nenner in der Ergebnisanzeige bekommen `break-all` und dürfen
+schrumpfen (`min-w-0 max-w-full`). Rechenweg-Zeilen und Dezimalwerte brechen mit
+`[overflow-wrap:anywhere]` um. Gemessen bei 412 px mit Playwright gegen `next start`:
+- **Fälle 1, 21, 22 und 23:** `document.documentElement.scrollWidth` = 412, und in Ergebnis
+  und Rechenweg ist kein Element breiter als sein Platz. Das ist eigens geprüft, weil der
+  Rechenweg `overflow-hidden` trägt und einen Überlauf nur abschneiden würde.
+- **Reiter Kürzen, Dezimal ↔ Bruch und Vergleichen mit 17- bis 34-stelligen Zahlen:** ebenfalls
+  412 und kein Überlauf.
+
+**Probe:** 25 von 25 OK. Die Fälle 1 bis 20 sind unverändert. Fall 21 zeigt jetzt den exakten
+Rechenweg statt des Hinweises, das war die gewollte Änderung. Neu sind 22 (1/999999999000000000
+statt 0), 23 (12345678901234567 × 98765432109876543 = 1219326311370217861743636654061881, als
+Text eingelesen), 24 (GGT 12345678901234560) und 25 (19 Nachkommastellen). Die Messung aus Welle
+153 trifft beide Fälle exakt.
+
+`verify-bruchrechnung.ts` hat 16 Texteingaben, 9 Ganzzahlfelder und 3 Rechenbeispiele,
+darunter die Fälle 22 und 23 als exakte Stringvergleiche. Die großen Sollwerte sind zusätzlich
+mit Pythons Ganzzahlen nachgerechnet. „0,3333333333“ ergibt jetzt einen Bruch statt null, weil
+die Neun-Stellen-Grenze entfallen ist.
+
+## 30.09.2026 — Welle 153: Bruchrechner — „≈“ bei gerundeten Dezimalwerten, exakter Vergleich, Grenze für den Rechenweg — ✅ ABGESCHLOSSEN
+
+Nachtrag zu Welle 152, derselbe Nutzerwunsch vom 28.09.2026, kein neuer Eintrag im Feedback-Log.
+
+**„=“ steht nur noch da, wo der Wert exakt ist.** Bisher zeigte der Rechner 5/7 als
+„= 0,714286“. Das ist gerundet und damit schlicht falsch. Die Lösung von Welle 152, mangels
+Kennzeichnung in der Ergebniszeile auf „…“ zu verzichten, hat das Problem nur verschoben.
+
+Jetzt liefert `dezimalAnzeige()` in `lib/berechnungen/bruchrechnung.ts` Zeichen und Wert für jede
+Dezimalanzeige eines Bruchs:
+- die Ergebniszeile „Brüche rechnen“,
+- den Kopier- und PDF-Text,
+- Bruch → Dezimal, die große Zahl und die Zeile darunter,
+- Schritt h) im Rechenweg,
+- die Kontrollzeile im Reiter Vergleichen.
+
+Exakt heißt: Mit dem gekürzten Bruch z/n und der angezeigten Stellenzahl s ist
+(z × 10^s) mod n = 0, gerechnet mit BigInt. Stellenzahl und Rundung sind unverändert.
+Gewechselt ist das Minuszeichen in der Ergebniszeile: jetzt U+2212, wie im Rechenweg.
+
+**Vergleichen rechnet exakt.** Das Zeichen der Ergebnisanzeige kam bisher aus einem
+Dezimalvergleich mit der Toleranz 1e-10. Welle 152 hatte gemessen, dass er 1/10000000000 und
+1/10000000001 für gleich hielt. Jetzt kommen Hauptnenner, erweiterte Zähler und der Vergleich aus
+einer BigInt-Rechnung, und Anzeige und Rechenweg nutzen dasselbe Zeichen. Die Zahlen im
+Rechenweg werden aus den BigInt-Werten formatiert.
+
+Die Kontrollzeile zeigt beide Brüche mit ihrem Dezimalwert: „2/3 ≈ 0,666667 < 0,75 = 3/4“.
+Sind die gerundeten Werte gleich, die Brüche aber nicht, sagt sie das: „auf sechs
+Nachkommastellen nicht zu unterscheiden“.
+
+**Grenze für den Rechenweg.** Ist in den Reitern Brüche rechnen, Kürzen oder Dezimal ↔ Bruch ein
+Zwischenwert kein `Number.isSafeInteger`, steht statt der Schritte nur „Die Zahlen sind zu groß
+für einen exakten Rechenweg.“ Die Ergebnisrechnung ist bewusst nicht umgebaut.
+
+**Messung dazu: Die Ergebniszeile ist bei solchen Zahlen falsch.** Eigene BigInt-Rechnung in
+`/tmp/bruch-probe.mjs` gegen die Ergebniszeile:
+
+| Aufgabe | exakt | Ergebniszeile |
+|---|---|---|
+| 999999999/1000000000 − 999999998/999999999 | 1/999999999000000000 | **0/1 = 0,0** |
+| 1/10000000000 + 1/10000000001 | 20000000001/100000000010000000000 | **350877193/1754385965087719400 ≈ 0,0** |
+
+Im ersten Fall liegt 999999999 × 999999999 = 999999998000000001 über
+`Number.MAX_SAFE_INTEGER` (9007199254740991). Als Gleitkommazahl wird daraus
+999999998000000000, und die Differenz zum zweiten Zähler ist 0. Die Anzeige behauptet dann
+mit „=“ ein exaktes Ergebnis 0, das falsch ist. Gemessen am 30.09.2026.
+
+Der Rechenweg verschweigt das jetzt nicht mehr, die Ergebniszeile schon. **Offen:** die
+Ergebnisrechnung auf BigInt umstellen oder bei unsicheren Zwischenwerten statt des Ergebnisses
+einen Hinweis zeigen. Zu entscheiden ist das in einer eigenen Welle.
+**→ Erledigt in Welle 154 (30.09.2026):** Der Bruchrechner rechnet durchgehend mit BigInt, die
+Ergebniszeile trifft beide Messfälle exakt. Der Hinweis „zu groß“ ist wieder entfallen.
+
+**Probe:** 21 von 21 OK, mit eigener BigInt-Rechnung. Die Fälle 1 bis 13 stehen unverändert,
+bis auf „=“ → „≈“ in Schritt h) der Fälle 1, 2, 5, 6, 7 und 8 und die neue Kontrollzeile in
+Fall 11. Der Auftrag hatte nur Fall 1 genannt. Die übrigen sechs folgen aus derselben Regel und
+sind am 30.09.2026 von Karsten als gewollt bestätigt. `verify-bruchrechnung.ts` bleibt grün.
+
+**Gerendert bei 412 px** mit Playwright gegen `next start`:
+- **Fall 14 (5/7 + 0/1):** Ergebnisanzeige „≈ 0,714286“, Schritt h) „5 ÷ 7 ≈ 0,714286“.
+- **Fall 17 (3/4 + 5/6):** „19 ÷ 12 ≈ 1,583333“.
+- **Fall 19 (Vergleichen):** „>“ in Anzeige und Rechenweg, kgV 100000000010000000000.
+- **Fall 21:** der Hinweis „zu groß“ statt der Schritte.
+
+Der Rechenweg steht in allen vier Fällen 29 px unter der Ergebnisanzeige.
+
+## 30.09.2026 — Welle 152: Bruchrechner zeigt den vollständigen Rechenweg in allen vier Reitern — ✅ ABGESCHLOSSEN
+
+**Anlass** war ein Feedback „Rechner verbessern“ vom 28.09.2026, 17:57 Uhr, zu
+/mathe/bruchrechner. Grund „weg-fehlt“, Text „RECHENWEG“, von einem Android-Mobilgerät.
+
+**Ist-Stand am 30.09.2026, live gemessen bei 412 px:**
+- **Teilen (÷):** nur Aufgabe und Ergebnis, kein einziger Schritt.
+- **Plus und Minus:** Hauptnenner und erweiterte Brüche, aber ohne Erweiterungsfaktoren und ohne
+  gemischte Zahl, obwohl die Ergebniszeile 1 7/12 zeigte.
+- **Gemischte Zahlen:** schon umgewandelt angezeigt, der Umwandlungsschritt fehlte.
+- **Kürzen:** eine einzige Zeile.
+- **Dezimal ↔ Bruch:** gar kein Rechenweg.
+- **Vergleichen:** nur ein Dezimalvergleich.
+- **Position:** Der Block stand rund 500 px unter dem Ergebnis, hinter den Buttons und Fix erklärt.
+
+**Ein Rechenweg, der den Schritt auslässt, den der Nutzer nicht kann, ist keiner.** Der
+Kehrwert beim Teilen und die Faktoren beim Erweitern sind genau die Stellen, an denen Schüler
+hängen bleiben. Beides stand vorher nicht da.
+
+**Rechenlogik:**
+- **Reine Funktionen:** In `lib/berechnungen/bruchrechnung.ts` stehen jetzt `rechenwegBrueche`,
+  `rechenwegKuerzen`, `rechenwegDezimalZuBruch`, `rechenwegBruchZuDezimal` und
+  `rechenwegVergleich`. Sie liefern je Aufgabe `{ titel, rechnung }[]`.
+- **Nicht neu gerechnet:** Die Schritte stammen aus den Zwischenwerten der bestehenden
+  Rechnung. `berechneBrueche` reicht dafür Hauptnenner, Faktoren, erweiterte Zähler und das
+  ungekürzte Ergebnis als neues Feld `zwischen` durch. Der GGT wird aus den Nennern abgeleitet.
+  Das Ergebnis selbst rechnet unverändert.
+- **Vergleichen:** `vergleicheBrueche` liefert zusätzlich die gleichnamigen Brüche. Das
+  Vergleichszeichen der Ergebnisanzeige bleibt der bisherige Dezimalvergleich.
+
+**Darstellung:**
+- **Optik:** Nummeriert mit denselben Klassen wie der Inhaltsbaustein „beispielrechnung“. Der
+  ist keine eigene Komponente, sondern steht inline im `ContentBlockRenderer`, deshalb sind die
+  Klassen übernommen.
+- **Position:** direkt unter der Ergebnisanzeige, vor „Bruch in Prozent umrechnen“ und vor
+  PDF/Kopieren/Teilen/Feedback. Die Reihenfolge legt `BruchRechner.tsx` selbst fest, keine
+  gemeinsame Komponente.
+- **Gemessen bei 412 px** mit Playwright gegen `next start`: In allen vier Reitern steht
+  „Rechenweg“ 29 px unter der Unterkante der Ergebnisanzeige.
+
+**Probe:** `/tmp/bruch-probe.mjs` rechnet GGT und kgV selbst und hält 13 Fälle mit den
+erwarteten Schrittzeilen als Literale. Die Rechner-Lib ist dort nur Prüfling. Ergebnis: 13 von
+13 OK. `scripts/verify-bruchrechnung.ts` bleibt grün.
+
+**Abweichungen vom Auftrag, bewusst:**
+- **Kein „…“ beim Dezimalschritt.** Der Auftrag verlangt, periodische Werte „genau so“ zu
+  kennzeichnen wie die Ergebniszeile. Die Ergebniszeile rundet auf sechs Stellen und kennzeichnet
+  nichts, also steht dort 19 ÷ 12 = 1,583333. Ein „…“ wäre bei aufgerundeten Werten falsch, etwa
+  bei 5/7 = 0,714286.
+- **„Kürzen wie g)“ als f) gelesen.** Der Auftrag verweist beim Umwandeln einer Dezimalzahl auf
+  g), Fall 9 erwartet aber „GGT 25 → 3/4“, also den Kürzen-Schritt f). Beim Umwandeln entfällt
+  der Kürzen-Schritt, wenn der GGT 1 ist.
+- **Dezimal → Bruch mit gemischter Zahl.** Zeigt die Ergebnisanzeige eine gemischte Zahl (1,25 →
+  1 1/4), bekommt auch der Rechenweg den Schritt dazu.
+- **Die Dezimalzeile im Reiter Vergleichen** steht nicht mehr in der Ergebnisanzeige. Sie ist der
+  letzte Schritt „Kontrolle“ im Rechenweg.
+- **Keine weiteren Verbraucher.** PDF, „Ergebnis kopieren“ und Fix erklärt haben den alten
+  Rechenweg nie bekommen. Das PDF entsteht aus `ergebnisText`, der Bruchrechner übergibt kein
+  `pdfDaten`. Nachgerüstet wurde dort nichts.
+
+**Grenze, benannt:** Im Reiter Vergleichen vergleicht der Rechenweg die gleichnamigen Zähler exakt,
+die Ergebnisanzeige die Dezimalwerte mit der Toleranz 1e-10. Bei Brüchen, die sich um weniger
+unterscheiden, zeigen beide verschiedene Zeichen. Gemessen an 1/10000000000 gegen 1/10000000001:
+Die Ergebnisanzeige zeigt „=“, der Rechenweg „>“, und die Kontrolle lautet „0,0 = 0,0“.
+Gewöhnliche Eingaben sind nicht betroffen.
+
+Dazu: Eintrag in `lib/feedback-log.ts` (Anfrage 28.09.2026, umgesetzt 30.09.2026),
+`letzteAktualisierung` des Bruchrechners auf 30.09.2026.
+
 ## 26.09.2026 — Welle 151: Der dritte Generator, den /ki-transparenz nicht nannte — ✅ ABGESCHLOSSEN
 
 Anlass war der Tageslauf von Peter Ki und Susanne Recht vom 26.09.2026. Im Medieninventar stand

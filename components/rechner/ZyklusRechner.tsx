@@ -5,6 +5,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 
 type Modus = 1 | 3 | 6;
 
@@ -48,8 +49,10 @@ export default function ZyklusRechner() {
     setStartDatum(defaultStart());
   }, []);
 
-  // Parsen der Perioden-Länge ohne hartes Clamping — der Wert wird im Kalender
-  // angewendet, ein Warnhinweis erscheint ausserhalb des typischen Bereichs 2–10.
+  // Das Eingabefeld klammert auf 1–20, dieselben Grenzen wie die Absicherung
+  // unten (seit 28.09.2026, Smoketest C3). Innerhalb davon wird jeder Wert im
+  // Kalender angewendet; ausserhalb des typischen Bereichs 2–10 erscheint
+  // weiterhin ein Warnhinweis, statt die Eingabe abzuweisen (Prompt 144b).
   const periodenTage = useMemo(() => {
     const p = parseInt(periode);
     if (!Number.isFinite(p) || p <= 0) return 5;
@@ -124,11 +127,12 @@ export default function ZyklusRechner() {
             id="zyklus-periode"
             type="number"
             inputMode="numeric"
-            min={2}
-            max={10}
+            min={1}
+            max={20}
             step={1}
             value={periode}
-            onChange={e => setPeriode(e.target.value)}
+            onChange={e => setPeriode(clampInputValue(e.target.value, 1, 20))}
+            onBlur={e => setPeriode(clampInputValueOnBlur(e.target.value, 1, 20))}
             className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
           />
           <p className="text-xs text-gray-500 mt-1">Durchschnittliche Dauer der Menstruationsblutung. Typischer Bereich: 3–7 Tage.</p>

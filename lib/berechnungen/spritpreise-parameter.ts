@@ -14,5 +14,9 @@ export const SPRITPREISE_REFERENZ = {
   stand: '2026-08-12',    // ISO, ADAC-Bundesschnitt
   quelle: 'ADAC',
   quelleUrl: 'https://www.adac.de/news/aktueller-spritpreis/',
-  tankrabattHinweis: 'Energiesteuersenkung von 16,7 Cent/L brutto lief am 30.06.2026 aus',
+  // Quelle: § 68 EnergieStG, gesetze-im-internet.de, abgerufen 01.10.2026. Vom 01.10. bis
+  // 31.12.2026 je 1.000 l: Benzin 514,10 € (statt 654,50 € nach § 2 Abs. 1 Nr. 1 b),
+  // Diesel 330,00 € (statt 470,40 € nach § 2 Abs. 1 Nr. 4 b). Differenz je 140,40 € =
+  // 14,04 ct/L netto, mit 19 % USt 16,71 ct/L.
+  tankrabattHinweis: 'Energiesteuer vom 01.10. bis 31.12.2026 um 16,7 Cent/L brutto gesenkt',
 } as const;

@@ -3,7 +3,7 @@ import type { RechnerConfig } from './types';
 export const matheRechner: RechnerConfig[] = [
   {
     slug: 'bruchrechner',
-    letzteAktualisierung: '2026-09-23',
+    letzteAktualisierung: '2026-09-30',
     titel: 'Bruchrechner',
     beschreibung: 'Brüche berechnen: Addieren, subtrahieren, multiplizieren, dividieren. Mit Rechenweg, Kürzen und Umrechnung.',
     kategorie: 'Mathe & Schule',

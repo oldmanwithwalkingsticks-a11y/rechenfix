@@ -2,7 +2,9 @@
  * Verify-Script für lib/zahlenformat.ts (W12, L-41-Folge).
  *
  * Cluster A: parseDeutscheZahl-Test-Tabelle gegen DIN-5008-Heuristik (R1–R4).
- *            12 Cases — 10 aus Code-Phase-Prompt + 2 Whitespace/Negativ.
+ *            16 Cases — 10 aus Code-Phase-Prompt + 2 Whitespace/Negativ
+ *            + 4 R3-Abgrenzung (29.09.2026): ein Punkt nach führender Null
+ *            oder nach mehr als 3 Ziffern ist kein Tausenderpunkt (DIN 5008).
  * Cluster B: Round-Trip parseDeutscheZahl(n.toLocaleString('de-DE')) === n
  *            für 9 Werte (deckt SteuerprogressionsRechner-Slider-Bug ab).
  * Cluster C: Edge-Cases (leer, ungültig, Whitespace).
@@ -12,6 +14,7 @@
  * Bidirektionalität gegen den System-Standard `Number.toLocaleString('de-DE')`.
  *
  * Run: npx tsx scripts/verify-zahlenformat.ts
+ * Teil der prebuild-Kette (seit 29.09.2026, vor verify-clamp-input).
  */
 
 import { parseDeutscheZahl } from '../lib/zahlenformat';
@@ -45,6 +48,11 @@ const clusterA: Case[] = [
   { name: 'A-10 "" → 0 (Backwards-Compat, W12-Hotfix)',   actual: parseDeutscheZahl(''),            expected: 0 },
   { name: 'A-11 "abc" → NaN (edge)',                      actual: parseDeutscheZahl('abc'),         expected: NaN },
   { name: 'A-12 "-150.000" → -150000 (R3 mit Minus)',     actual: parseDeutscheZahl('-150.000'),    expected: -150000 },
+  // R3-Abgrenzung (29.09.2026): Nach DIN 5008 keine Tausendergruppierung → R4.
+  { name: 'A-13 "0.500" → 0.5 (R4, führende Null)',       actual: parseDeutscheZahl('0.500'),       expected: 0.5 },
+  { name: 'A-14 "0.330" → 0.33 (R4, führende Null)',      actual: parseDeutscheZahl('0.330'),       expected: 0.33 },
+  { name: 'A-15 "-0.500" → -0.5 (R4, Minus + Null)',      actual: parseDeutscheZahl('-0.500'),      expected: -0.5 },
+  { name: 'A-16 "1234.567" → 1234.567 (R4, 4er-Block)',   actual: parseDeutscheZahl('1234.567'),    expected: 1234.567 },
 ];
 
 // --- Cluster B: Round-Trip parseDeutscheZahl(n.toLocaleString('de-DE')) === n ---

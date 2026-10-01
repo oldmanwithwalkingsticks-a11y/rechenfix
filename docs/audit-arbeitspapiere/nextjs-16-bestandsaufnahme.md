@@ -3,7 +3,8 @@
 **Stand:** 28.09.2026. **Art:** Erhebung ohne Codeänderung. Die Migration selbst ist eine eigene Welle
 auf Grundlage dieses Papiers.
 **Termin:** `nextjs-sicherheitsrelease-2026-09` in `lib/termine.ts` (Commit `f61950d`), fällig am
-01.10.2026. Er füllt Abschnitt 6.
+01.10.2026. Er füllt Abschnitt 6. **Erledigt am 01.10.2026:** Abschnitt 6 ist ausgefüllt, die Migration
+auf 16 wird vorgezogen (6.5).
 
 ## Quellen
 
@@ -67,6 +68,8 @@ Sicherheitsrelease am **30.09.2026** mit neun Lücken: eine kritisch, zwei hoch,
 niedrig. Angekündigt sind die Fassungen **16.3.7** und **15.5.27**, veröffentlicht „alongside the
 full advisories, including impact, affected versions, and upgrade instructions“. Welche Fassungen
 betroffen sind, steht erst in den Advisories. Die Einordnung für 14.2.35 folgt in Abschnitt 6.
+**Berichtigt am 01.10.2026 (6.2):** Erschienen sind sieben Lücken, korrigiert in 16.3.8 und 15.5.27.
+Zwei weitere (1 kritisch, 1 hoch) sind zurückgestellt, und 16.3.7 enthält keine Sicherheitskorrektur.
 
 ### 1.4 Ziel
 
@@ -320,7 +323,177 @@ aber vor dem ersten Deploy auf 16 stehen, sonst läuft mindestens ein Deploy ohn
 
 ---
 
-## 6. Advisories 30.09.2026 — auszufüllen am 01.10.2026 (Termin nextjs-sicherheitsrelease-2026-09)
+## 6. Advisories 30.09.2026
+
+**Ausgefüllt:** 01.10.2026 nach dem Build-Prompt „Termine vom 01.10.2026 abarbeiten“. Der Termin
+`nextjs-sicherheitsrelease-2026-09` ist damit erledigt und aus `lib/termine.ts` entfernt. Folgetermin
+`nextjs-zurueckgehaltene-advisories` am 08.10.2026 (6.6). Ausgangsbasis waren Fakten aus einer
+Chat-Recherche vom 01.10.2026. Wo sie in dieser Sitzung nachgeprüft wurden, steht das Ergebnis dabei,
+und es gilt das Ergebnis.
+
+### 6.1 Quellen
+
+Alle am **01.10.2026** in dieser Sitzung abgerufen, wenn nicht anders vermerkt.
+
+| Kürzel | Quelle | Ergebnis des Abrufs |
+|---|---|---|
+| **SR** | nextjs.org/blog/september-2026-security-release | HTTP 200 |
+| **RL** | github.com/vercel/next.js/releases/tag/v16.3.8, gelesen über `api.github.com/repos/vercel/next.js/releases/tags/v16.3.8` | HTTP 200, `published_at` 2026-09-30T16:13:46Z |
+| **RL-16.3.7** | dasselbe für `v16.3.7` | HTTP 200, `published_at` 2026-09-29T08:54:51Z |
+| **RA** | `api.github.com/repos/vercel/next.js/security-advisories/<GHSA>` — Bereiche der sieben neuen GHSAs. In der globalen Datenbank (`api.github.com/advisories/<GHSA>`) standen sie am 01.10.2026 noch nicht (HTTP 404). | je HTTP 200 |
+| **GA** | `api.github.com/advisories/<GHSA>` — GitHub Advisory Database, Texte der Advisories aus 6.4 und der drei vorgelagerten React-Advisories | je HTTP 200 |
+| **AU** | `npm audit --json` im Repository, `auditReportVersion` 2 | Ausgabe in 6.3 |
+| SP | nextjs.org/support-policy — Stand aus Abschnitt 1.2 (28.09.2026), **nicht neu abgerufen** | — |
+
+### 6.2 Das Release vom 30.09.2026
+
+**Sieben Lücken statt der angekündigten neun.** Berichtigt Abschnitt 1.3. SR wörtlich: „A fix for one
+critical vulnerability and one high severity vulnerability was postponed due to upstream dependency
+delays.“ Der Satz aus der Chat-Recherche, „This release now addresses seven vulnerabilities instead of
+nine …“, steht am 01.10.2026 **nicht** in SR. Inhaltlich deckt er sich mit dem tatsächlichen Wortlaut.
+
+**Korrigiert in 16.3.8 und 15.5.27.** SR: „Updates are now available in v16.3.8 (Active LTS) and
+v15.5.27 (Maintenance LTS)“. Die in BL angekündigte 16.3.7 nennt SR nicht. RL-16.3.7 führt als einzige
+Änderung einen Turbopack-Fix auf („turbo-tasks-backend: fix strongly consistent read hanging on a
+canceled task (#98931)“), keine Sicherheitskorrektur. npm-Veröffentlichung laut Registry: 16.3.7 am
+29.09.2026, 16.3.8 und 15.5.27 am 30.09.2026.
+
+**Nachprüfung der sieben GHSAs: bestätigt.** RL und SR nennen dieselben sieben Kennungen mit
+denselben Schweregraden wie die Chat-Recherche. Die Bereiche stammen aus RA, wörtlich einschließlich
+der Platzhalter, die dort am 01.10.2026 standen.
+
+| GHSA | Schweregrad (RL) | Bereich (RA) | korrigiert (RA) | Titel (RL) | Voraussetzung laut SR |
+|---|---|---|---|---|---|
+| GHSA-cjq9-62q9-8jv4 | High | `>= 16.0.0 < 16.3.?` | `16.3.?` | Server-Side Request Forgery in Image Optimization | „If no images.remotePatterns are configured, your application is not affected.“ |
+| GHSA-4jqv-mc3x-m676 | Medium | `>= 15.0.0`; `>= 16.0.0` | `15.5.?`; `16.3.?` | Cache poisoning of SSG and ISR pages in self-hosted Next.js applications | Pages Router mit SSG/ISR, selbst gehostet. „Applications deployed on Vercel are not affected.“ |
+| GHSA-mcj8-r9mp-w47p | Medium | `>= 16.0.0`; `>= 15.0.0` | `16.3.?`; `15.5.?` | Cache poisoning in Next.js SSG/ISR rendering leads to cross-user content substitution and persistent denial of service | Catch-all-Seite auf oberster Ebene zusammen mit SSG/ISR |
+| GHSA-f87g-xv8r-7p7x | Medium | `>= 16.0.0` | `16.3.?` | Information disclosure in Next.js App Router metadata image routes via dynamicParams bypass | App Router mit Webpack, Metadaten-Bildrouten |
+| GHSA-h694-7cp9-m8p3 | Medium | `16.3.0` | `16.3.8` | Cache leak across root param values in nested 'use cache' functions | Cache Components eingeschaltet |
+| GHSA-3w37-wq28-93x7 | Medium | `16.3.0` | `16.3.?` | Pending `use cache` fill can leak Draft Mode content into regular responses and persisted pages | Cache Components (oder `experimental.useCache`) und Draft Mode |
+| GHSA-39w2-rjm5-chcv | Low | `>= 16.0.0` | `16.3.?` | Information disclosure in the Next.js development server's Model Context Protocol endpoint | „Only applications run with next dev are affected.“ |
+
+Alle Bereiche beginnen bei `>= 15.0.0`, `>= 16.0.0` oder `16.3.0`. **Keiner nennt 14.x.** Das heißt
+„nicht angegeben“, nicht „nicht betroffen“. Passend dazu führt AU keine der sieben für 14.2.35. Für die
+einzige hohe der sieben, GHSA-cjq9-62q9-8jv4, gilt unabhängig davon: rechenfix setzt keine
+`images.remotePatterns` (`next.config.mjs` Z. 29–34), nach dem Satz aus SR ist es also selbst dann nicht
+betroffen, wenn die Lücke 14.x einschlösse.
+
+### 6.3 `npm audit` gegen next@14.2.35 — maßgebliche Liste
+
+AU meldet für das Paket `next` den Gesamtschweregrad `critical`, den Bereich
+`9.3.4-canary.0 - 16.3.0-preview.10` und `fixAvailable` = `next@16.3.8` (`isSemVerMajor: true`).
+**23 Advisories: 2 kritisch, 8 hoch, 11 mittel, 2 niedrig.** Das deckt sich mit der Chat-Recherche
+(23, davon 2 kritisch und 8 hoch); eine Abweichung gibt es nicht. Für 14.x gibt es keine Korrektur
+mehr: Die korrigierten Fassungen beginnen bei 15.0.8.
+
+| # | GHSA | Schweregrad | Bereich | Titel |
+|---|---|---|---|---|
+| 1 | GHSA-2xp9-vwfh-vxw4 | kritisch | `>=10.0.0 <15.5.24` | Next.js: Unauthenticated Remote Code Execution in Image Optimization API when AVIF files are used |
+| 2 | GHSA-p293-qw3h-jr36 | kritisch | `>=13.4.0 <15.5.24` | Next.js: Unauthenticated Remote Code Execution on windows-hosted servers |
+| 3 | GHSA-36qx-fr4f-26g5 | hoch | `>=12.2.0 <15.5.16` | Next.js has a Middleware / Proxy bypass in Pages Router applications using i18n |
+| 4 | GHSA-89xv-2m56-2m9x | hoch | `>=14.1.1 <15.5.21` | Next.js: Server-Side Request Forgery in Server Actions on custom servers |
+| 5 | GHSA-8h8q-6873-q5fj | hoch | `>=13.0.0 <15.5.16` | Next.js Vulnerable to Denial of Service with Server Components |
+| 6 | GHSA-c4j6-fc7j-m34r | hoch | `>=13.4.13 <15.5.16` | Next.js vulnerable to server-side request forgery in applications using WebSocket upgrades |
+| 7 | GHSA-h25m-26qc-wcjf | hoch | `>=13.0.0 <15.0.8` | Next.js HTTP request deserialization can lead to DoS when using insecure React Server Components |
+| 8 | GHSA-m99w-x7hq-7vfj | hoch | `>=13.0.0 <15.5.21` | Next.js: Denial of Service in App Router using Server Actions |
+| 9 | GHSA-p9j2-gv94-2wf4 | hoch | `>=12.0.0 <15.5.21` | Next.js: Server-Side Request Forgery in rewrites via attacker-controlled destination hostname |
+| 10 | GHSA-q4gf-8mx6-v5v3 | hoch | `>=13.0.0 <15.5.15` | Next.js has a Denial of Service with Server Components |
+| 11 | GHSA-3x4c-7xq6-9pq8 | mittel | `>=10.0.0 <15.5.14` | Next.js: Unbounded next/image disk cache growth can exhaust storage |
+| 12 | GHSA-4633-3j49-mh5q | mittel | `>=13.0.0 <15.5.21` | Next.js: Cache confusion of response bodies for requests with bodies containing invalid UTF-8 byte sequences |
+| 13 | GHSA-4c39-4ccg-62r3 | mittel | `>=13.0.0 <15.5.21` | Next.js: Unbounded Server Action payload in Edge runtime |
+| 14 | GHSA-68g3-v927-f742 | mittel | `>=13.0.0 <15.5.21` | Next.js: Cache confusion of response bodies for requests with bodies |
+| 15 | GHSA-955p-x3mx-jcvp | mittel | `>=13.0.0 <15.5.21` | Next.js: Unauthenticated disclosure of internal Server Function endpoints |
+| 16 | GHSA-9g9p-9gw9-jx7f | mittel | `>=10.0.0 <15.5.10` | Next.js self-hosted applications vulnerable to DoS via Image Optimizer remotePatterns configuration |
+| 17 | GHSA-ffhc-5mcf-pf4q | mittel | `>=13.4.0 <15.5.16` | Next.js vulnerable to cross-site scripting in App Router applications using CSP nonces |
+| 18 | GHSA-ggv3-7p47-pfv8 | mittel | `>=9.5.0 <15.5.13` | Next.js: HTTP request smuggling in rewrites |
+| 19 | GHSA-gx5p-jg67-6x7h | mittel | `>=13.0.0 <15.5.16` | Next.js has cross-site scripting in beforeInteractive scripts with untrusted input |
+| 20 | GHSA-h64f-5h5j-jqjh | mittel | `>=10.0.0 <15.5.16` | Next.js has a Denial of Service in the Image Optimization API |
+| 21 | GHSA-wfc6-r584-vfw7 | mittel | `>=14.2.0 <15.5.16` | Next.js vulnerable to cache poisoning in React Server Component responses |
+| 22 | GHSA-3g8h-86w9-wvmq | niedrig | `>=12.2.0 <15.5.16` | Next.js's Middleware / Proxy redirects can be cache-poisoned |
+| 23 | GHSA-vfv6-92ff-j949 | niedrig | `>=13.4.6 <15.5.16` | Next.js vulnerable to cache poisoning via collisions in React Server Component cache-busting |
+
+Die Schweregrade sind von AU übersetzt (`moderate` = mittel). Die Bereiche gibt AU verkürzt wieder. GA
+nennt je zusätzlich die korrigierte 16er-Fassung, die höchste davon ist 16.3.3 (Nr. 1 und 2).
+
+### 6.4 Einordnung der kritischen und hohen Advisories
+
+Einordnung **einschlägig** / **nicht einschlägig** / **offen**. Die Zitate stammen aus GA. Steht im
+Advisory nichts zu Vercel, gilt der Vercel-Schutz als **nicht angegeben** und wird nicht angenommen.
+
+Gemeinsame Repository-Befunde, Stand 01.10.2026:
+
+- **Hosting:** Vercel, belegt durch `vercel.json` mit `crons` und `ignoreCommand`. Kein eigener Server: kein `server.*`, `package.json` Z. 10–12 `next dev`/`next build`/`next start`, kein `output` in `next.config.mjs`.
+- **Pages Router:** Es gibt kein Verzeichnis `pages/`.
+- **i18n:** steht nicht in `next.config.mjs`.
+- **Middleware:** Es gibt weder `middleware.*` noch `proxy.*`.
+- **Rewrites:** Kein `rewrites()`. `redirects()` (`next.config.mjs` Z. 36–78) hat vier Regeln, alle mit relativem Ziel (Z. 44, 52, 61, 73). `vercel.json` enthält weder Rewrites noch Redirects.
+- **Server Actions:** 0 Treffer für `"use server"`/`'use server'` in `app/`, `components/` und `lib/` (`*.ts`, `*.tsx`, `*.js`, `*.mjs`, `*.mdx`). `.next/server/server-reference-manifest.json` aus dem lokalen Build vom 30.09.2026 ist leer: `node` 0, `edge` 0. Im installierten Next 14.2.35 bricht `handleAction` in diesem Fall ab, bevor ein Request-Körper dekodiert wird: `node_modules/next/dist/server/app-render/action-handler.js` Z. 249–256, Kommentar „If the app has no server actions at all, we can 404 early.“, Prüfung `hasServerActions` in Z. 33–35. Die Aufrufe `decodeReply`/`decodeAction` folgen erst ab Z. 353.
+- **Image Optimization:**
+  - Aktiv mit dem Standard-Loader. `next.config.mjs` Z. 29–34 setzt `formats: ['image/webp', 'image/avif']`, `deviceSizes` und `minimumCacheTTL`. Es gibt kein `unoptimized`, kein `loader`, keine `remotePatterns` und kein `domains`. Auch im Code steht kein `unoptimized`.
+  - `next/image` steht in **6 Dateien**. **4 davon mit Rasterquellen:**
+    - `components/AuthorBio.tsx`, `components/blog/KarstenSagt.tsx` und `app/ueber-uns/page.tsx` mit `/about/karsten-kautz-v3.webp` (`lib/site-config.ts` Z. 17);
+    - `components/blog/Bild.tsx` mit **20 PNG-Titelbildern** aus den 20 Blog-MDX-Dateien.
+  - Wo das WebP-Foto erscheint: `AuthorBio` auf den 10 Rechnern mit `zeigtAuthorBio: true`, im Blog-Layout und auf den 6 Brutto-Netto-Long-Tail-Seiten; `KarstenSagt` in 20 MDX-Dateien; dazu `/ueber-uns`.
+  - `components/layout/Header.tsx` und `Footer.tsx` nutzen nur `/logo.svg`. SVG liefert Next 14 ohne Optimierung aus (`node_modules/next/dist/shared/lib/get-img-props.js` Z. 237).
+  - In `public/` liegen **0 Dateien `*.avif`**.
+
+| GHSA | Schwere | Einordnung | Beleg aus dem Advisory | Beleg aus dem Repository |
+|---|---|---|---|---|
+| GHSA-2xp9-vwfh-vxw4 | kritisch | **offen** | „A vulnerability in the underlying `libheif` library used by `sharp` which Next.js uses for image optimization can lead to remote code execution when AVIF files are optimized.“ — „Until a fix has propagated, optimization of AVIF files is disabled.“ Zu Vercel: nichts, also **nicht angegeben**. | Die Image Optimization API ist mit Rasterquellen in Betrieb, und `formats` enthält `image/avif`. Damit kann jeder Aufrufer über den `Accept`-Header eine AVIF-**Ausgabe** anstoßen. Eine AVIF-**Quelle** kann ein Angreifer nicht unterschieben, denn es gibt keine AVIF-Dateien und keine Remote-Quellen. Ob „AVIF files are optimized“ die Quelle oder das Zielformat meint, sagt das Advisory nicht. **Abgeschaltet am 01.10.2026** durch Entfernen von `image/avif` aus `images.formats` in `next.config.mjs`, entsprechend der Abhilfe der korrigierten Fassungen. |
+| GHSA-p293-qw3h-jr36 | kritisch | **nicht einschlägig** | „…can lead to remote code execution when the server is hosted on machines using a Windows filesystem.“ | Die Produktion läuft auf Vercel, nicht unter Windows. **Lokaler Rest außerhalb der Produktion:** `next dev` und das `npm start` für `verify-critical-css.mjs` laufen auf Karstens Windows-Rechner. Die Einordnung gilt für die ausgelieferte Seite. |
+| GHSA-36qx-fr4f-26g5 | hoch | **nicht einschlägig** | „Applications using the Pages Router with `i18n` configured and middleware/proxy-based authorization…“ | kein `pages/`, kein `i18n`, keine Middleware |
+| GHSA-89xv-2m56-2m9x | hoch | **nicht einschlägig** | „Applications that use Server Actions are affected when the incoming host header is not fixed to a trusted value.“ | 0 Server Actions, Manifest leer |
+| GHSA-8h8q-6873-q5fj | hoch | **nicht einschlägig** | „A specially crafted HTTP request can be sent to any App Router Server Function endpoint that, when deserialized, may trigger excessive CPU usage.“ Die vorgelagerte React-Advisory GHSA-rv78-f8rc-xrxh schließt nur Apps ohne Server oder ohne RSC-Framework aus. Das trifft auf rechenfix **nicht** zu. | App Router ist im Einsatz, aber es gibt keinen Server-Function-Endpunkt. Ohne Server Actions endet `handleAction` vor der Deserialisierung (Belege oben). |
+| GHSA-c4j6-fc7j-m34r | hoch | **nicht einschlägig** | „Self-hosted applications using the built-in Node.js server can be vulnerable…“ — „Vercel-hosted deployments are not affected.“ | Vercel-Hosting |
+| GHSA-h25m-26qc-wcjf | hoch | **nicht einschlägig** | wie GHSA-8h8q („…sent to any App Router Server Function endpoint that, when deserialized…“); vorgelagert GHSA-83fc-fqcc-2hmg, gleiche Ausschlussformel | wie GHSA-8h8q |
+| GHSA-m99w-x7hq-7vfj | hoch | **nicht einschlägig** | „Applications using Pages Router or not using Server Actions are not vulnerable.“ | 0 Server Actions |
+| GHSA-p9j2-gv94-2wf4 | hoch | **nicht einschlägig** | „A `rewrites()` or `redirects()` rule that builds its external destination hostname from request-controlled input…“ | kein `rewrites()`, alle vier `redirects()`-Ziele relativ |
+| GHSA-q4gf-8mx6-v5v3 | hoch | **nicht einschlägig** | wie GHSA-8h8q; vorgelagert GHSA-479c-33wc-g2pg, gleiche Ausschlussformel | wie GHSA-8h8q |
+
+**Grenze der Belege bei den drei RSC-DoS-Advisories:** Der Beleg ist der installierte Code von
+14.2.35 zusammen mit dem leeren Manifest. Er hält nur, solange rechenfix keine Server Action einführt.
+Mit dem ersten `'use server'` wären alle drei einschlägig.
+
+### 6.5 Entscheidung
+
+Regel: Ist mindestens ein kritisches oder hohes Advisory `einschlägig` oder `offen`, wird die Migration
+auf 16 vorgezogen.
+
+**GHSA-2xp9-vwfh-vxw4 (kritisch, Remote Code Execution) ist `offen`. Die Migration auf Next.js 16 wird
+vorgezogen. Zielversion mindestens 16.3.8.** Ein Ziel 15.x lohnt nicht: Nach SP endet die
+Maintenance-LTS von 15.x zwei Jahre nach dem Erscheinen am 21.10.2024, errechnet also am 21.10.2026
+(Abschnitt 1.2).
+
+Folge für dieses Papier: Abschnitt 3 hat die Peer-Abhängigkeiten gegen 16.0.0 und 16.3.7 geprüft. Bei
+der Migration ist dieselbe Prüfung gegen die tatsächliche Zielversion zu wiederholen.
+
+**Überbrückung, umgesetzt am 01.10.2026 und über die Migration hinaus gültig:** `'image/avif'` aus
+`images.formats` in `next.config.mjs` gestrichen. Wieder eingeschaltet wird AVIF erst, wenn Next.js die
+Optimierung selbst freigibt. Seitdem entsteht keine AVIF-Ausgabe mehr. AVIF-Quellen gibt es ohnehin
+nicht, beide Lesarten aus 6.4 sind damit für rechenfix geschlossen. Das entspricht im Ergebnis dem, was
+die korrigierten Fassungen nach dem Advisory tun („optimization of AVIF files is disabled“). Der Preis:
+Browser bekommen WebP statt AVIF.
+
+### 6.6 Zurückgehaltene Advisories
+
+SR: zwei Lücken, **1 kritisch, 1 hoch**, „postponed due to upstream dependency delays“. Bereiche,
+Kennungen und Voraussetzungen sind **unbekannt**. Folgetermin `nextjs-zurueckgehaltene-advisories` am
+08.10.2026: nachsehen, ob sie veröffentlicht sind, und ihre Bereiche gegen 14.2.35 und gegen die
+Zielversion der Migration halten.
+
+### 6.7 Außenmessung vom 01.10.2026
+
+Gemessen in einer Chat-Sitzung am 01.10.2026 von außen gegen www.rechenfix.de, **nicht in dieser
+Sitzung**. Hier gegen das Repository gehalten.
+
+| Messung (Chat) | Repository | Ergebnis |
+|---|---|---|
+| `window.next.version` = `14.2.35` | `package.json` Z. 39 `"next": "14.2.35"`; `package-lock.json`, `packages["node_modules/next"].version` = 14.2.35 | **bestätigt** |
+| KI-Erklärung über den Route Handler `POST /api/explain`, keine Server Action | `app/api/explain/route.ts` Z. 118 `export async function POST`; `components/rechner/AiExplain.tsx` Z. 86 `fetch('/api/explain'` | **bestätigt** |
+| Keine Action-IDs in den Client-Bündeln | 0 × `'use server'`; `server-reference-manifest.json` leer (6.4) | **bestätigt** |
+| `next/image` auf `/` und `/alltag/prozentrechner` nur mit `/logo.svg`, dort kein `_next/image` | Header und Footer nutzen `/logo.svg`, das Next 14 unoptimiert ausliefert (`get-img-props.js` Z. 237). `prozentrechner` setzt kein `zeigtAuthorBio`. | **bestätigt für die beiden Seiten — ergänzt:** `_next/image` ist auf rechenfix in Gebrauch. Es erscheint auf den 10 Rechnern mit `zeigtAuthorBio`, auf den 6 Brutto-Netto-Long-Tail-Seiten, im ganzen Blog (Foto und 20 PNG-Titelbilder) und auf `/ueber-uns`. Die beiden gemessenen Seiten sind dafür nicht repräsentativ. |
+| `/opengraph-image` antwortet mit HTTP 200 | `app/opengraph-image.tsx` existiert, `runtime = 'edge'` (Z. 3) | **passt**; der Statuscode selbst wurde hier nicht neu gemessen |
+| Kein `x-middleware-*`-Header | Weder `middleware.*` noch `proxy.*` im Repository | **bestätigt:** Es gibt keine Middleware. Der fehlende Header allein hätte das nicht bewiesen. |
 
 ---
 

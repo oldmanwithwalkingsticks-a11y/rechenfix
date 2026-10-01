@@ -5,7 +5,8 @@ import {
   berechnePendlerpauschale,
   berechneArbeitstage,
 } from '@/lib/berechnungen/pendlerpauschale';
-import { clampInputValue } from '@/lib/zahlenformat';
+import { parseDeutscheZahl, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
+import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -28,25 +29,28 @@ export default function PendlerpauschaleRechner() {
   const [krankheitstage, setKrankheitstage] = useState('10');
   const [homeofficeTage, setHomeofficeTage] = useState('0');
 
+  const homeofficeTageZahl = parseDeutscheZahl(homeofficeTage) || 0;
+  const homeofficeMax = parseInt(tageProWoche, 10) || 7;
+
   const detailArbeitstage = useMemo(() => berechneArbeitstage(
     parseInt(tageProWoche, 10) || 5,
     parseInt(urlaubstage, 10) || 0,
     parseInt(feiertage, 10) || 0,
     parseInt(krankheitstage, 10) || 0,
-    parseFloat(homeofficeTage) || 0,
-  ), [tageProWoche, urlaubstage, feiertage, krankheitstage, homeofficeTage]);
+    homeofficeTageZahl,
+  ), [tageProWoche, urlaubstage, feiertage, krankheitstage, homeofficeTageZahl]);
 
   const effektiveArbeitstage = arbeitstageMode === 'direkt'
     ? parseInt(arbeitstage, 10) || 0
     : detailArbeitstage;
 
   const ergebnis = useMemo(() => berechnePendlerpauschale({
-    entfernungKm: parseFloat(entfernung.replace(',', '.')) || 0,
+    entfernungKm: parseDeutscheZahl(entfernung) || 0,
     arbeitstageProJahr: effektiveArbeitstage,
-    grenzsteuersatz: parseFloat(grenzsteuersatz.replace(',', '.')) || 0,
-    homeofficeTageProWoche: parseFloat(homeofficeTage) || 0,
+    grenzsteuersatz: parseDeutscheZahl(grenzsteuersatz) || 0,
+    homeofficeTageProWoche: homeofficeTageZahl,
     arbeitstageProWoche: parseInt(tageProWoche, 10) || 5,
-  }), [entfernung, effektiveArbeitstage, grenzsteuersatz, homeofficeTage, tageProWoche]);
+  }), [entfernung, effektiveArbeitstage, grenzsteuersatz, homeofficeTageZahl, tageProWoche]);
 
   return (
     <div>
@@ -55,18 +59,14 @@ export default function PendlerpauschaleRechner() {
         <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
           Einfache Entfernung Wohnung — Arbeitsstätte
         </label>
-        <div className="relative">
-          <input
-            type="number"
-            inputMode="decimal"
-            min="1"
-            max="999"
-            value={entfernung}
-            onChange={e => setEntfernung(clampInputValue(e.target.value, 1, 999))}
-            className="input-field w-full pr-10"
-          />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">km</span>
-        </div>
+        <NummerEingabe
+          value={entfernung}
+          onChange={v => setEntfernung(clampInputValue(v, 1, 999))}
+          onBlur={v => setEntfernung(clampInputValueOnBlur(v, 1, 999))}
+          einheit="km"
+          min={1}
+          max={999}
+        />
         <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
           Nur die einfache Strecke (nicht Hin + Rück).
         </p>
@@ -94,6 +94,7 @@ export default function PendlerpauschaleRechner() {
               max="365"
               value={arbeitstage}
               onChange={e => setArbeitstage(clampInputValue(e.target.value, 1, 365))}
+              onBlur={e => setArbeitstage(clampInputValueOnBlur(e.target.value, 1, 365))}
               className="input-field w-full pr-12"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Tage</span>
@@ -110,6 +111,7 @@ export default function PendlerpauschaleRechner() {
                   max="7"
                   value={tageProWoche}
                   onChange={e => setTageProWoche(clampInputValue(e.target.value, 1, 7))}
+                  onBlur={e => setTageProWoche(clampInputValueOnBlur(e.target.value, 1, 7))}
                   className="input-field w-full"
                 />
               </div>
@@ -122,6 +124,7 @@ export default function PendlerpauschaleRechner() {
                   max="60"
                   value={urlaubstage}
                   onChange={e => setUrlaubstage(clampInputValue(e.target.value, 0, 60))}
+                  onBlur={e => setUrlaubstage(clampInputValueOnBlur(e.target.value, 0, 60))}
                   className="input-field w-full"
                 />
               </div>
@@ -134,6 +137,7 @@ export default function PendlerpauschaleRechner() {
                   max="20"
                   value={feiertage}
                   onChange={e => setFeiertage(clampInputValue(e.target.value, 0, 20))}
+                  onBlur={e => setFeiertage(clampInputValueOnBlur(e.target.value, 0, 20))}
                   className="input-field w-full"
                 />
               </div>
@@ -146,21 +150,20 @@ export default function PendlerpauschaleRechner() {
                   max="365"
                   value={krankheitstage}
                   onChange={e => setKrankheitstage(clampInputValue(e.target.value, 0, 365))}
+                  onBlur={e => setKrankheitstage(clampInputValueOnBlur(e.target.value, 0, 365))}
                   className="input-field w-full"
                 />
               </div>
             </div>
             <div>
               <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Homeoffice-Tage pro Woche</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                min="0"
-                max={tageProWoche}
-                step="0.5"
+              <NummerEingabe
                 value={homeofficeTage}
-                onChange={e => setHomeofficeTage(clampInputValue(e.target.value, 0, parseInt(tageProWoche, 10) || 7))}
-                className="input-field w-32"
+                onChange={v => setHomeofficeTage(clampInputValue(v, 0, homeofficeMax))}
+                onBlur={v => setHomeofficeTage(clampInputValueOnBlur(v, 0, homeofficeMax))}
+                className="w-32"
+                min={0}
+                max={homeofficeMax}
               />
             </div>
             <p className="text-xs font-medium text-gray-700 dark:text-gray-300">
@@ -174,17 +177,15 @@ export default function PendlerpauschaleRechner() {
       <div className="mb-6">
         <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Grenzsteuersatz</label>
         <div className="flex items-center gap-2 mb-2">
-          <div className="relative flex-1">
-            <input
-              type="number"
-              inputMode="decimal"
-              min="0"
-              max="100"
+          <div className="flex-1">
+            <NummerEingabe
               value={grenzsteuersatz}
-              onChange={e => setGrenzsteuersatz(clampInputValue(e.target.value, 0, 100))}
-              className="input-field w-full pr-8"
+              onChange={v => setGrenzsteuersatz(clampInputValue(v, 0, 100))}
+              onBlur={v => setGrenzsteuersatz(clampInputValueOnBlur(v, 0, 100))}
+              einheit="%"
+              min={0}
+              max={100}
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">%</span>
           </div>
         </div>
         <div className="flex gap-1.5 flex-wrap">
@@ -193,7 +194,7 @@ export default function PendlerpauschaleRechner() {
               key={s}
               onClick={() => setGrenzsteuersatz(String(s))}
               className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
-                parseInt(grenzsteuersatz, 10) === s
+                parseDeutscheZahl(grenzsteuersatz) === s
                   ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800'
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
@@ -256,7 +257,7 @@ export default function PendlerpauschaleRechner() {
           </div>
 
           {/* Homeoffice-Vergleich */}
-          {parseFloat(homeofficeTage) > 0 && (
+          {homeofficeTageZahl > 0 && (
             <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
               <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
                 <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Vergleich: Pendler vs. Homeoffice</p>
@@ -309,7 +310,7 @@ export default function PendlerpauschaleRechner() {
           />
           <AiExplain
             rechnerName="Pendlerpauschale-Rechner"
-            eingaben={{ entfernungKm: parseFloat(entfernung.replace(',', '.')) || 0, arbeitstageProJahr: effektiveArbeitstage, grenzsteuersatzProzent: parseFloat(grenzsteuersatz.replace(',', '.')) || 0 }}
+            eingaben={{ entfernungKm: parseDeutscheZahl(entfernung) || 0, arbeitstageProJahr: effektiveArbeitstage, grenzsteuersatzProzent: parseDeutscheZahl(grenzsteuersatz) || 0 }}
             ergebnis={{ pauschaleGesamtEuro: ergebnis.pauschaleGesamt, steuerersparnisEuro: ergebnis.steuerersparnis, monatlicheErsparnisEuro: ergebnis.monatlicheErsparnis }}
           />
         </div>

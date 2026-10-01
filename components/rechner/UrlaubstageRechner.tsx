@@ -7,7 +7,7 @@ import {
   type UrlaubsanspruchEingabe,
   type ResturlaubEingabe,
 } from '@/lib/berechnungen/urlaubstage';
-import { clampInputValue } from '@/lib/zahlenformat';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -91,6 +91,7 @@ export default function UrlaubstageRechner() {
                 max="365"
                 value={vertraglicheTage}
                 onChange={e => setVertraglicheTage(clampInputValue(e.target.value, 0, 365))}
+                onBlur={e => setVertraglicheTage(clampInputValueOnBlur(e.target.value, 0, 365))}
                 className="input-field w-full"
               />
             </div>
@@ -157,6 +158,7 @@ export default function UrlaubstageRechner() {
                 max={arbeitstageProWoche - 1}
                 value={teilzeitTage}
                 onChange={e => setTeilzeitTage(clampInputValue(e.target.value, 1, arbeitstageProWoche - 1))}
+                onBlur={e => setTeilzeitTage(clampInputValueOnBlur(e.target.value, 1, arbeitstageProWoche - 1))}
                 className="input-field w-32"
               />
               <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
@@ -273,6 +275,7 @@ export default function UrlaubstageRechner() {
                 max="365"
                 value={urlaubstageProJahr}
                 onChange={e => setUrlaubstageProJahr(clampInputValue(e.target.value, 0, 365))}
+                onBlur={e => setUrlaubstageProJahr(clampInputValueOnBlur(e.target.value, 0, 365))}
                 className="input-field w-full"
               />
             </div>
@@ -308,6 +311,7 @@ export default function UrlaubstageRechner() {
                 max="365"
                 value={bereitsGenommen}
                 onChange={e => setBereitsGenommen(clampInputValue(e.target.value, 0, 365))}
+                onBlur={e => setBereitsGenommen(clampInputValueOnBlur(e.target.value, 0, 365))}
                 className="input-field w-full"
               />
             </div>

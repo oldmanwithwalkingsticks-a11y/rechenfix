@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 
 type Einheit = 'g' | 'kg' | 'ml' | 'l' | 'EL' | 'TL' | 'Stück' | 'Prise' | 'Bund' | 'Dose' | 'Becher';
 
@@ -85,17 +86,21 @@ function fmtMenge(n: number, einheit: Einheit): string {
 }
 
 export default function RezeptUmrechner() {
-  const [originalPortionen, setOriginalPortionen] = useState<number>(4);
-  const [gewuenschtePortionen, setGewuenschtePortionen] = useState<number>(6);
+  // Text-State wie bei den übrigen Rechnern: Ein Feld darf beim Tippen leer sein.
+  // Leer zählt als 0 — dann blendet portionenValide das Ergebnis aus.
+  const [originalPortionen, setOriginalPortionen] = useState('4');
+  const [gewuenschtePortionen, setGewuenschtePortionen] = useState('6');
+  const originalZahl = parseInt(originalPortionen, 10) || 0;
+  const gewuenschtZahl = parseInt(gewuenschtePortionen, 10) || 0;
   const [zutaten, setZutaten] = useState<Zutat[]>(DEFAULT_INGREDIENTS);
 
   // Guard: ungültige Portionen (< 1) blenden Faktor und Tabelle aus
-  const portionenValide = originalPortionen >= 1 && gewuenschtePortionen >= 1;
+  const portionenValide = originalZahl >= 1 && gewuenschtZahl >= 1;
 
   const faktor = useMemo(() => {
     if (!portionenValide) return 1;
-    return gewuenschtePortionen / originalPortionen;
-  }, [originalPortionen, gewuenschtePortionen, portionenValide]);
+    return gewuenschtZahl / originalZahl;
+  }, [originalZahl, gewuenschtZahl, portionenValide]);
 
   const neuesZutatenliste = useMemo(() => {
     return zutaten.map(z => {
@@ -118,14 +123,15 @@ export default function RezeptUmrechner() {
 
   const fmtFaktor = faktor.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 
-  function handlePortionenChange(setter: (n: number) => void, e: React.ChangeEvent<HTMLInputElement>) {
-    const raw = parseInt(e.target.value, 10);
-    setter(clampPortionen(raw));
+  // Beim Verlassen wird ein leeres Feld zu MIN_PORTIONEN — ein Rezept ohne
+  // Portionenzahl ergibt keinen Sinn. Sonst gelten beide Grenzen.
+  function portionenBeimVerlassen(wert: string): string {
+    return clampInputValueOnBlur(wert === '' ? String(MIN_PORTIONEN) : wert, MIN_PORTIONEN, MAX_PORTIONEN);
   }
 
   function handleReset() {
-    setOriginalPortionen(4);
-    setGewuenschtePortionen(4);
+    setOriginalPortionen('4');
+    setGewuenschtePortionen('4');
     setZutaten(DEFAULT_INGREDIENTS);
   }
 
@@ -162,7 +168,8 @@ export default function RezeptUmrechner() {
             max={MAX_PORTIONEN}
             step="1"
             value={originalPortionen}
-            onChange={e => handlePortionenChange(setOriginalPortionen, e)}
+            onChange={e => setOriginalPortionen(clampInputValue(e.target.value, MIN_PORTIONEN, MAX_PORTIONEN))}
+            onBlur={e => setOriginalPortionen(portionenBeimVerlassen(e.target.value))}
             className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
           />
         </div>
@@ -177,7 +184,8 @@ export default function RezeptUmrechner() {
             max={MAX_PORTIONEN}
             step="1"
             value={gewuenschtePortionen}
-            onChange={e => handlePortionenChange(setGewuenschtePortionen, e)}
+            onChange={e => setGewuenschtePortionen(clampInputValue(e.target.value, MIN_PORTIONEN, MAX_PORTIONEN))}
+            onBlur={e => setGewuenschtePortionen(portionenBeimVerlassen(e.target.value))}
             className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
           />
         </div>
@@ -187,14 +195,14 @@ export default function RezeptUmrechner() {
       <div className="mb-6 flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => setGewuenschtePortionen(clampPortionen(originalPortionen * 2))}
+          onClick={() => setGewuenschtePortionen(String(clampPortionen(originalZahl * 2)))}
           className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
         >
           × 2 (verdoppeln)
         </button>
         <button
           type="button"
-          onClick={() => setGewuenschtePortionen(clampPortionen(Math.round(originalPortionen / 2)))}
+          onClick={() => setGewuenschtePortionen(String(clampPortionen(Math.round(originalZahl / 2))))}
           className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
         >
           ÷ 2 (halbieren)
@@ -214,7 +222,7 @@ export default function RezeptUmrechner() {
           <p className="text-white/80 text-sm mb-1">Umrechnungsfaktor</p>
           <p className="text-5xl font-bold">× {fmtFaktor}</p>
           <p className="text-white/90 text-sm mt-2">
-            Von {originalPortionen} auf {gewuenschtePortionen} Portionen
+            Von {originalZahl} auf {gewuenschtZahl} Portionen
           </p>
         </div>
       ) : (
@@ -287,7 +295,7 @@ export default function RezeptUmrechner() {
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">
-            Umgerechnete Zutaten für {gewuenschtePortionen} Portionen
+            Umgerechnete Zutaten für {gewuenschtZahl} Portionen
           </h2>
         </div>
         <div className="overflow-x-auto">
@@ -335,23 +343,28 @@ export default function RezeptUmrechner() {
       <CrossLink href="/mathe/einheiten-umrechner" emoji="📏" text="Einheiten umrechnen" />
       <CrossLink href="/alltag/dreisatz-rechner" emoji="⚖️" text="Dreisatz-Rechner" />
 
-      <ErgebnisAktionen
-        ergebnisText={`${originalPortionen} → ${gewuenschtePortionen} Portionen (Faktor × ${fmtFaktor})\n\n${zutatenListeText}`}
-        seitenTitel="Rezept-Umrechner"
-      />
+      {/* Wie bei den übrigen Rechnern nur mit gültigem Ergebnis (leeres Feld → ausgeblendet) */}
+      {portionenValide && (
+        <>
+          <ErgebnisAktionen
+            ergebnisText={`${originalZahl} → ${gewuenschtZahl} Portionen (Faktor × ${fmtFaktor})\n\n${zutatenListeText}`}
+            seitenTitel="Rezept-Umrechner"
+          />
 
-      <AiExplain
-        rechnerName="Rezept-Umrechner"
-        eingaben={{
-          originalPortionen,
-          gewuenschtePortionen,
-          anzahlZutaten: String(neuesZutatenliste.filter(z => z.name.trim()).length),
-        }}
-        ergebnis={{
-          faktor: `× ${fmtFaktor}`,
-          zutatenlisteNeu: zutatenListeText || '(keine Zutaten)',
-        }}
-      />
+          <AiExplain
+            rechnerName="Rezept-Umrechner"
+            eingaben={{
+              originalPortionen: originalZahl,
+              gewuenschtePortionen: gewuenschtZahl,
+              anzahlZutaten: String(neuesZutatenliste.filter(z => z.name.trim()).length),
+            }}
+            ergebnis={{
+              faktor: `× ${fmtFaktor}`,
+              zutatenlisteNeu: zutatenListeText || '(keine Zutaten)',
+            }}
+          />
+        </>
+      )}
     </div>
   );
 }

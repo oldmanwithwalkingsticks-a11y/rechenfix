@@ -27,6 +27,19 @@ export type FeedbackEntry = {
 
 export const FEEDBACK_LOG: FeedbackEntry[] = [
   {
+    id: '2026-09-28-01',
+    datumAnfrage: '2026-09-28',
+    datumUmsetzung: '2026-09-30',
+    status: 'umgesetzt',
+    bereich: 'mathe/bruchrechner',
+    wunsch: 'Vollständigen Rechenweg anzeigen',
+    kommentar:
+      'Vollständiger Rechenweg Schritt für Schritt in allen vier ' +
+      'Reitern — mit Kehrwert beim Teilen, Erweiterungsfaktoren, ' +
+      'Kürzen mit GGT, Umwandlung gemischter Zahlen und Dezimalzahlen; ' +
+      'Vergleichen jetzt über gleichnamige Brüche.',
+  },
+  {
     id: '2026-09-23-01',
     datumAnfrage: '2026-09-23',
     datumUmsetzung: '2026-09-23',

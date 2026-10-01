@@ -5,19 +5,27 @@ import {
   berechneBrueche,
   kuerzeBruch,
   dezimalTextZuBruch,
-  bruchZuDezimal,
+  ganzzahlText,
   vergleicheBrueche,
   gemischtZuBruch,
   zuGemischt,
   kuerzen,
+  dezimalAnzeige,
+  rechenwegBrueche,
+  rechenwegKuerzen,
+  rechenwegDezimalZuBruch,
+  rechenwegBruchZuDezimal,
+  rechenwegVergleich,
   type Operation,
   type Bruch,
   type BruchRechenErgebnis,
   type KuerzenErgebnis,
   type GemischteZahl,
   type VergleichErgebnis,
+  type OperandQuelle,
+  type RechenwegSchritt,
+  type DezimalAnzeige,
 } from '@/lib/berechnungen/bruchrechnung';
-import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -26,39 +34,70 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 type Tab = 'rechnen' | 'kuerzen' | 'dezimal' | 'vergleichen';
 
-function BruchAnzeige({ zaehler, nenner, className = '' }: { zaehler: number; nenner: number; className?: string }) {
+/** Null als BigInt — Zähler, Nenner und ganze Teile sind seit W154 BigInt. */
+const NULL = BigInt(0);
+
+// Lange Ziffernfolgen brechen um (W154): min-w-0 und max-w-full lassen die Anzeige schrumpfen,
+// break-all trennt die Ziffern. Ohne das sprengt ein 34-stelliger Zähler das Layout bei 412 px.
+function BruchAnzeige({ zaehler, nenner, className = '' }: { zaehler: bigint; nenner: bigint; className?: string }) {
   return (
-    <span className={`inline-flex flex-col items-center mx-1 ${className}`}>
-      <span className="text-center px-1 leading-tight">{zaehler}</span>
+    <span className={`inline-flex flex-col items-center mx-1 min-w-0 max-w-full ${className}`}>
+      <span className="text-center px-1 leading-tight break-all">{String(zaehler)}</span>
       <span className="w-full border-t-2 border-current" />
-      <span className="text-center px-1 leading-tight">{nenner}</span>
+      <span className="text-center px-1 leading-tight break-all">{String(nenner)}</span>
     </span>
   );
 }
 
-function GemischtAnzeige({ ganz, zaehler, nenner, className = '' }: { ganz: number; zaehler: number; nenner: number; className?: string }) {
-  if (zaehler === 0) {
-    return <span className={className}>{ganz}</span>;
+function GemischtAnzeige({ ganz, zaehler, nenner, className = '' }: { ganz: bigint; zaehler: bigint; nenner: bigint; className?: string }) {
+  if (zaehler === NULL) {
+    return <span className={`min-w-0 break-all ${className}`}>{String(ganz)}</span>;
   }
   return (
-    <span className={`inline-flex items-center ${className}`}>
-      <span className="mr-0.5">{ganz}</span>
-      <BruchAnzeige zaehler={Math.abs(zaehler)} nenner={nenner} />
+    <span className={`inline-flex items-center min-w-0 max-w-full ${className}`}>
+      <span className="mr-0.5 min-w-0 break-all">{String(ganz)}</span>
+      <BruchAnzeige zaehler={zaehler < NULL ? -zaehler : zaehler} nenner={nenner} />
     </span>
   );
 }
 
 /**
- * Ganzzahl aus einem Bruchfeld (W150). Kommazahlen und ungültige Eingaben ergeben null —
- * früher wurde hier stumm gerundet, aus „0,75“ wurde 1 und das Ergebnis war falsch.
+ * Ganzzahl aus einem Bruchfeld (W150): Kommazahlen und ungültige Eingaben ergeben null, statt
+ * stumm zu runden. Seit W154 liest ganzzahlText() den Text direkt als BigInt, ohne den Umweg
+ * über eine Gleitkommazahl.
  */
-function ganzzahl(text: string): number | null {
-  const v = parseDeutscheZahl(text);
-  return Number.isInteger(v) ? v : null;
-}
+const ganzzahl = ganzzahlText;
 
 const HINWEIS_GANZZAHL = 'Zähler, Nenner und ganze Zahl bitte als ganze Zahlen eingeben.';
 const HINWEIS_ZN = 'Zähler und Nenner bitte als ganze Zahlen eingeben.';
+
+/**
+ * Rechenweg Schritt für Schritt (W152). Nummerierung und Klassen wie der Inhaltsbaustein
+ * „beispielrechnung“ im ContentBlockRenderer, damit Rechner und Beispiel gleich aussehen.
+ */
+function Rechenweg({ schritte }: { schritte: RechenwegSchritt[] }) {
+  if (schritte.length === 0) return null;
+  return (
+    <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
+      <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
+        <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Rechenweg</p>
+      </div>
+      <ol className="px-4 py-3 space-y-3">
+        {schritte.map((s, i) => (
+          <li key={i} className="flex gap-3 items-start">
+            <span className="shrink-0 w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 text-xs font-bold flex items-center justify-center mt-0.5">
+              {i + 1}
+            </span>
+            <div className="min-w-0">
+              <span className="block text-gray-700 dark:text-gray-300">{s.titel}</span>
+              <span className="block font-mono text-xs text-gray-600 dark:text-gray-400 mt-0.5 [overflow-wrap:anywhere]">{s.rechnung}</span>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
 
 function Hinweis({ text }: { text: string }) {
   return (
@@ -73,7 +112,7 @@ function Hinweis({ text }: { text: string }) {
 
 type OperandModus = 'bruch' | 'dezimal';
 
-type OperandOk = { ok: true; bruch: Bruch; text: string; umwandlung: string | null };
+type OperandOk = { ok: true; bruch: Bruch; text: string; quelle: OperandQuelle };
 type Operand = OperandOk | { ok: false; fehler: string };
 
 /** Ergebnis eines Tabs: entweder ein sichtbarer Hinweis oder die Werte (W150, nie stumm leer). */
@@ -86,22 +125,23 @@ function leseOperand(
   if (modus === 'dezimal') {
     const r = dezimalTextZuBruch(dezimal);
     if (!r) {
-      return { ok: false, fehler: `${name}: bitte eine Dezimalzahl mit höchstens neun Nachkommastellen eingeben, zum Beispiel 0,75.` };
+      return { ok: false, fehler: `${name}: bitte eine Dezimalzahl eingeben, zum Beispiel 0,75.` };
     }
     const text = dezimal.trim();
-    const roh = `${r.roh.zaehler}/${r.roh.nenner}`;
-    const gekuerzt = `${r.bruch.zaehler}/${r.bruch.nenner}`;
-    return { ok: true, bruch: r.bruch, text, umwandlung: roh === gekuerzt ? `${text} = ${gekuerzt}` : `${text} = ${roh} = ${gekuerzt}` };
+    return { ok: true, bruch: r.bruch, text, quelle: { art: 'dezimal', text, roh: r.roh, bruch: r.bruch } };
   }
   const zaehler = ganzzahl(z);
   const nenner = ganzzahl(n);
-  const ganz = g.trim() ? ganzzahl(g) : 0;
+  const ganz = ganzzahl(g); // leeres Feld = 0
   if (zaehler === null || nenner === null || ganz === null) {
     return { ok: false, fehler: `${name}: ${HINWEIS_GANZZAHL} Für Kommazahlen auf „Dezimalzahl“ umschalten.` };
   }
-  if (nenner === 0) return { ok: false, fehler: `${name}: Der Nenner darf nicht 0 sein.` };
-  const bruch: Bruch = ganz !== 0 ? gemischtZuBruch(ganz, zaehler, nenner) : { zaehler, nenner };
-  return { ok: true, bruch, text: ganz !== 0 ? `${ganz} ${zaehler}/${nenner}` : `${zaehler}/${nenner}`, umwandlung: null };
+  if (nenner === NULL) return { ok: false, fehler: `${name}: Der Nenner darf nicht 0 sein.` };
+  const bruch: Bruch = ganz !== NULL ? gemischtZuBruch(ganz, zaehler, nenner) : { zaehler, nenner };
+  const quelle: OperandQuelle = ganz !== NULL
+    ? { art: 'gemischt', ganz, zaehler, nenner, bruch }
+    : { art: 'bruch', bruch };
+  return { ok: true, bruch, text: ganz !== NULL ? `${ganz} ${zaehler}/${nenner}` : `${zaehler}/${nenner}`, quelle };
 }
 
 function OperandEingabe({
@@ -219,40 +259,46 @@ export default function BruchRechner() {
     const o2 = leseOperand(modus2 === 'dezimal' ? 'Zahl 2' : 'Bruch 2', modus2, d2, z2, n2, g2);
     if (!o1.ok) return { ok: false, fehler: o1.fehler };
     if (!o2.ok) return { ok: false, fehler: o2.fehler };
-    if (op === '÷' && o2.bruch.zaehler === 0) return { ok: false, fehler: 'Durch 0 kann man nicht teilen.' };
+    if (op === '÷' && o2.bruch.zaehler === NULL) return { ok: false, fehler: 'Durch 0 kann man nicht teilen.' };
     const ergebnis = berechneBrueche(o1.bruch, op, o2.bruch);
     if (!ergebnis) return { ok: false, fehler: 'Diese Aufgabe lässt sich nicht berechnen.' };
     return { ok: true, o1, o2, ergebnis };
   }, [modus1, d1, z1, n1, g1, op, modus2, d2, z2, n2, g2]);
   const rechenErgebnis = rechnung.ok ? rechnung.ergebnis : null;
+  // Dezimalanzeige mit „=“ nur bei exaktem Wert, sonst „≈“ (W153)
+  const anzeige1 = rechenErgebnis ? dezimalAnzeige(rechenErgebnis.ergebnis) : null;
+  const rechenweg1 = useMemo(
+    () => (rechnung.ok ? rechenwegBrueche(rechnung.o1.quelle, op, rechnung.o2.quelle, rechnung.ergebnis) : []),
+    [rechnung, op],
+  );
 
   // Ergebnis Tab 2
   const kuerzen2 = useMemo<Pruefung<{ e: KuerzenErgebnis }>>(() => {
     const z = ganzzahl(kz);
     const n = ganzzahl(kn);
     if (z === null || n === null) return { ok: false, fehler: HINWEIS_ZN };
-    if (n === 0) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
+    if (n === NULL) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
     const e = kuerzeBruch({ zaehler: z, nenner: n });
     return e ? { ok: true, e } : { ok: false, fehler: 'Dieser Bruch lässt sich nicht kürzen.' };
   }, [kz, kn]);
   const kuerzenErgebnis = kuerzen2.ok ? kuerzen2.e : null;
 
   // Ergebnis Tab 3
-  const dezimal3 = useMemo<Pruefung<{ e: { bruch: Bruch; dezimal: number; gemischt: GemischteZahl | null } }>>(() => {
+  const dezimal3 = useMemo<Pruefung<{ e: { bruch: Bruch; anzeige: DezimalAnzeige | null; gemischt: GemischteZahl | null; weg: RechenwegSchritt[] } }>>(() => {
     if (dezMode === 'zuBruch') {
       // Exakt aus den Ziffern (W150) statt über die Gleitkommazahl
       const r = dezimalTextZuBruch(dezWert);
-      if (!r) return { ok: false, fehler: 'Bitte eine Dezimalzahl mit höchstens neun Nachkommastellen eingeben, zum Beispiel 0,75.' };
-      return { ok: true, e: { bruch: r.bruch, dezimal: parseDeutscheZahl(dezWert), gemischt: zuGemischt(r.bruch) } };
+      if (!r) return { ok: false, fehler: 'Bitte eine Dezimalzahl eingeben, zum Beispiel 0,75.' };
+      return { ok: true, e: { bruch: r.bruch, anzeige: null, gemischt: zuGemischt(r.bruch), weg: rechenwegDezimalZuBruch(dezWert, r) } };
     } else {
       const z = ganzzahl(dz);
       const n = ganzzahl(dn);
       if (z === null || n === null) return { ok: false, fehler: HINWEIS_ZN };
-      if (n === 0) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
+      if (n === NULL) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
       const b = kuerzen({ zaehler: z, nenner: n });
-      const d = bruchZuDezimal(b);
-      if (d === null) return { ok: false, fehler: 'Dieser Bruch lässt sich nicht umrechnen.' };
-      return { ok: true, e: { bruch: b, dezimal: Math.round(d * 1000000) / 1000000, gemischt: zuGemischt(b) } };
+      const anzeige = dezimalAnzeige(b);
+      if (anzeige === null) return { ok: false, fehler: 'Dieser Bruch lässt sich nicht umrechnen.' };
+      return { ok: true, e: { bruch: b, anzeige, gemischt: zuGemischt(b), weg: rechenwegBruchZuDezimal({ zaehler: z, nenner: n }, b) } };
     }
   }, [dezMode, dezWert, dz, dn]);
   const dezimalErgebnis = dezimal3.ok ? dezimal3.e : null;
@@ -264,13 +310,12 @@ export default function BruchRechner() {
     const z2v = ganzzahl(vz2);
     const n2v = ganzzahl(vn2);
     if (z1v === null || n1v === null || z2v === null || n2v === null) return { ok: false, fehler: HINWEIS_ZN };
-    if (n1v === 0 || n2v === 0) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
+    if (n1v === NULL || n2v === NULL) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
     const e = vergleicheBrueche({ zaehler: z1v, nenner: n1v }, { zaehler: z2v, nenner: n2v });
     return e ? { ok: true, e, b1: { zaehler: z1v, nenner: n1v }, b2: { zaehler: z2v, nenner: n2v } } : { ok: false, fehler: 'Diese Brüche lassen sich nicht vergleichen.' };
   }, [vz1, vn1, vz2, vn2]);
   const vergleichErgebnis = vergleich4.ok ? vergleich4.e : null;
 
-  const fmtDez = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 6 });
 
   return (
     <div>
@@ -326,9 +371,9 @@ export default function BruchRechner() {
                   <BruchAnzeige zaehler={rechenErgebnis.ergebnis.zaehler} nenner={rechenErgebnis.ergebnis.nenner} />
                 </div>
                 <div className="flex flex-wrap items-center justify-center gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400">
-                  <span>= {fmtDez(rechenErgebnis.dezimal)}</span>
+                  {anzeige1 && <span className="min-w-0 [overflow-wrap:anywhere]">{anzeige1.zeichen} {anzeige1.wert}</span>}
                   {rechenErgebnis.gemischt && (
-                    <span className="inline-flex items-center">
+                    <span className="inline-flex items-center min-w-0 max-w-full">
                       = <GemischtAnzeige
                         ganz={rechenErgebnis.gemischt.ganz}
                         zaehler={rechenErgebnis.gemischt.zaehler}
@@ -339,59 +384,20 @@ export default function BruchRechner() {
                 </div>
               </div>
 
+              <Rechenweg schritte={rechenweg1} />
+
               <CrossLink href="/alltag/prozentrechner" emoji="%" text="Bruch in Prozent umrechnen" />
 
               <ErgebnisAktionen
-                ergebnisText={`${rechnung.o1.text} ${op} ${rechnung.o2.text} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner} (${fmtDez(rechenErgebnis.dezimal)})`}
+                ergebnisText={`${rechnung.o1.text} ${op} ${rechnung.o2.text} = ${rechenErgebnis.ergebnis.zaehler}/${rechenErgebnis.ergebnis.nenner}${anzeige1 ? ` (${anzeige1.zeichen} ${anzeige1.wert})` : ''}`}
                 seitenTitel="Bruchrechner"
               />
 
               <AiExplain
                 rechnerName="Bruchrechner"
-                eingaben={{ eingabe1: rechnung.o1.text, bruch1Zaehler: rechnung.o1.bruch.zaehler, bruch1Nenner: rechnung.o1.bruch.nenner, operation: op, eingabe2: rechnung.o2.text, bruch2Zaehler: rechnung.o2.bruch.zaehler, bruch2Nenner: rechnung.o2.bruch.nenner }}
-                ergebnis={{ ergebnisZaehler: rechenErgebnis.ergebnis.zaehler, ergebnisNenner: rechenErgebnis.ergebnis.nenner, dezimal: rechenErgebnis.dezimal }}
+                eingaben={{ eingabe1: rechnung.o1.text, bruch1Zaehler: String(rechnung.o1.bruch.zaehler), bruch1Nenner: String(rechnung.o1.bruch.nenner), operation: op, eingabe2: rechnung.o2.text, bruch2Zaehler: String(rechnung.o2.bruch.zaehler), bruch2Nenner: String(rechnung.o2.bruch.nenner) }}
+                ergebnis={{ ergebnisZaehler: String(rechenErgebnis.ergebnis.zaehler), ergebnisNenner: String(rechenErgebnis.ergebnis.nenner), dezimal: anzeige1 ? `${anzeige1.zeichen} ${anzeige1.wert}` : null }}
               />
-
-              {/* Rechenweg */}
-              <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
-                <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
-                  <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Rechenweg</p>
-                </div>
-                <div className="px-4 py-3 space-y-2 text-sm">
-                  {[rechnung.o1.umwandlung, rechnung.o2.umwandlung].filter(Boolean).map((u) => (
-                    <p key={u} className="text-gray-600 dark:text-gray-400">
-                      <span className="font-medium text-gray-800 dark:text-gray-200">Umwandlung:</span>{' '}
-                      {u}
-                    </p>
-                  ))}
-                  <p className="text-gray-600 dark:text-gray-400">
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Aufgabe:</span>{' '}
-                    {rechenErgebnis.schritte.eingabe}
-                  </p>
-                  {rechenErgebnis.schritte.hauptnenner && (
-                    <p className="text-gray-600 dark:text-gray-400">
-                      <span className="font-medium text-gray-800 dark:text-gray-200">Schritt 1:</span>{' '}
-                      {rechenErgebnis.schritte.hauptnenner}
-                    </p>
-                  )}
-                  {rechenErgebnis.schritte.erweitert && (
-                    <p className="text-gray-600 dark:text-gray-400">
-                      <span className="font-medium text-gray-800 dark:text-gray-200">Erweitert:</span>{' '}
-                      {rechenErgebnis.schritte.erweitert}
-                    </p>
-                  )}
-                  {rechenErgebnis.schritte.ungekuerzt && (
-                    <p className="text-gray-600 dark:text-gray-400">
-                      <span className="font-medium text-gray-800 dark:text-gray-200">Ungekürzt:</span>{' '}
-                      {rechenErgebnis.schritte.ungekuerzt}
-                    </p>
-                  )}
-                  <p className="text-gray-600 dark:text-gray-400">
-                    <span className="font-medium text-primary-600 dark:text-primary-400">Ergebnis:</span>{' '}
-                    {rechenErgebnis.schritte.gekuerzt}
-                  </p>
-                </div>
-              </div>
             </div>
           )}
         </div>
@@ -417,10 +423,13 @@ export default function BruchRechner() {
                   <p className="text-sm text-green-600 dark:text-green-400 mt-3">Der Bruch ist bereits vollständig gekürzt.</p>
                 ) : (
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
-                    Gekürzt mit GGT {kuerzenErgebnis.teilGgt} — Zähler und Nenner durch {kuerzenErgebnis.teilGgt} geteilt.
+                    {/* String(): React 18 rendert BigInt-Kinder nicht, obwohl die Typen sie zulassen (W154) */}
+                    Gekürzt mit GGT {String(kuerzenErgebnis.teilGgt)} — Zähler und Nenner durch {String(kuerzenErgebnis.teilGgt)} geteilt.
                   </p>
                 )}
               </div>
+
+              <Rechenweg schritte={rechenwegKuerzen(kuerzenErgebnis)} />
             </div>
           )}
         </div>
@@ -459,31 +468,35 @@ export default function BruchRechner() {
           {!dezimal3.ok && <Hinweis text={dezimal3.fehler} />}
 
           {dezimalErgebnis && (
-            <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
-              {dezMode === 'zuBruch' ? (
-                <>
-                  <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-2">Als Bruch</p>
-                  <div className="flex items-center justify-center text-4xl font-extrabold text-primary-700 dark:text-primary-300">
-                    <BruchAnzeige zaehler={dezimalErgebnis.bruch.zaehler} nenner={dezimalErgebnis.bruch.nenner} />
-                  </div>
-                  {dezimalErgebnis.gemischt && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 inline-flex items-center justify-center">
-                      = <GemischtAnzeige ganz={dezimalErgebnis.gemischt.ganz} zaehler={dezimalErgebnis.gemischt.zaehler} nenner={dezimalErgebnis.gemischt.nenner} />
+            <div className="space-y-4">
+              <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
+                {dezMode === 'zuBruch' ? (
+                  <>
+                    <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-2">Als Bruch</p>
+                    <div className="flex items-center justify-center text-4xl font-extrabold text-primary-700 dark:text-primary-300">
+                      <BruchAnzeige zaehler={dezimalErgebnis.bruch.zaehler} nenner={dezimalErgebnis.bruch.nenner} />
+                    </div>
+                    {dezimalErgebnis.gemischt && (
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 inline-flex items-center justify-center max-w-full">
+                        = <GemischtAnzeige ganz={dezimalErgebnis.gemischt.ganz} zaehler={dezimalErgebnis.gemischt.zaehler} nenner={dezimalErgebnis.gemischt.nenner} />
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-2">Als Dezimalzahl</p>
+                    <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300 [overflow-wrap:anywhere]">
+                      {dezimalErgebnis.anzeige?.zeichen === '≈' ? '≈ ' : ''}{dezimalErgebnis.anzeige?.wert}
                     </p>
-                  )}
-                </>
-              ) : (
-                <>
-                  <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-2">Als Dezimalzahl</p>
-                  <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
-                    {fmtDez(dezimalErgebnis.dezimal)}
-                  </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 inline-flex items-center justify-center">
-                    <BruchAnzeige zaehler={dezimalErgebnis.bruch.zaehler} nenner={dezimalErgebnis.bruch.nenner} className="text-base" />
-                    <span className="ml-1">= {fmtDez(dezimalErgebnis.dezimal)}</span>
-                  </p>
-                </>
-              )}
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 inline-flex items-center justify-center max-w-full">
+                      <BruchAnzeige zaehler={dezimalErgebnis.bruch.zaehler} nenner={dezimalErgebnis.bruch.nenner} className="text-base" />
+                      <span className="ml-1 min-w-0 [overflow-wrap:anywhere]">{dezimalErgebnis.anzeige?.zeichen} {dezimalErgebnis.anzeige?.wert}</span>
+                    </p>
+                  </>
+                )}
+              </div>
+
+              <Rechenweg schritte={dezimalErgebnis.weg} />
             </div>
           )}
         </div>
@@ -501,21 +514,23 @@ export default function BruchRechner() {
           {!vergleich4.ok && <Hinweis text={vergleich4.fehler} />}
 
           {vergleichErgebnis && vergleich4.ok && (
-            <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
-              <div className="flex items-center justify-center gap-4 text-3xl font-extrabold text-primary-700 dark:text-primary-300">
-                <BruchAnzeige zaehler={vergleich4.b1.zaehler} nenner={vergleich4.b1.nenner} />
-                <span className={`text-4xl ${
-                  vergleichErgebnis.zeichen === '='
-                    ? 'text-green-600 dark:text-green-400'
-                    : 'text-accent-600 dark:text-accent-400'
-                }`}>
-                  {vergleichErgebnis.zeichen}
-                </span>
-                <BruchAnzeige zaehler={vergleich4.b2.zaehler} nenner={vergleich4.b2.nenner} />
+            <div className="space-y-4">
+              <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
+                <div className="flex items-center justify-center gap-4 text-3xl font-extrabold text-primary-700 dark:text-primary-300">
+                  <BruchAnzeige zaehler={vergleich4.b1.zaehler} nenner={vergleich4.b1.nenner} />
+                  <span className={`text-4xl ${
+                    vergleichErgebnis.zeichen === '='
+                      ? 'text-green-600 dark:text-green-400'
+                      : 'text-accent-600 dark:text-accent-400'
+                  }`}>
+                    {vergleichErgebnis.zeichen}
+                  </span>
+                  <BruchAnzeige zaehler={vergleich4.b2.zaehler} nenner={vergleich4.b2.nenner} />
+                </div>
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
-                {fmtDez(vergleichErgebnis.b1Dezimal)} {vergleichErgebnis.zeichen} {fmtDez(vergleichErgebnis.b2Dezimal)}
-              </p>
+
+              {/* Die frühere Dezimalzeile steht jetzt als letzter Schritt „Kontrolle“ im Rechenweg (W152). */}
+              <Rechenweg schritte={rechenwegVergleich(vergleich4.b1, vergleich4.b2, vergleichErgebnis)} />
             </div>
           )}
         </div>
