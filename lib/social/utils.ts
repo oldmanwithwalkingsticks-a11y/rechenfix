@@ -35,10 +35,10 @@ export const TIKTOK_TAKT_START = '2026-08-06';
  * NICHT. Wer den Takt aufheben will, braucht einen bezahlten Tarif, keinen
  * anderen Anbieter.
  *
- * Der Abrechnungszyklus läuft ab Registrierungsdatum, nicht kalendarisch —
- * belegt durch einen 402 „Not enough credits" am 02.08.2026, also an Tag zwei
- * eines Kalendermonats. Zyklusgrenze bei bundle.social daher um den 06./07.
- * jedes Monats.
+ * Der Zähler des Gratistarifs bei bundle.social steht am Monatsersten auf null —
+ * bestätigt durch Karstens Sichtung am 02.10.2026 (Rücksetzung zum 01.10.2026).
+ * Die frühere Annahme „Zyklus ab Registrierungsdatum, Grenze um den 06./07."
+ * stützte sich auf einen 402 „Not enough credits" am 02.08.2026, noch bei PostPeer.
  *
  * Gerechnet wird in ganzen Tagen seit dem Starttag, NICHT über die Parität des
  * Monatstags: Bei Monatstag-Parität entstünde an jedem 31. ein Doppel- bzw.
