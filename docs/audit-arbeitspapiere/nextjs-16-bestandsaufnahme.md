@@ -790,6 +790,57 @@ Antwortköpfe von `/`:
 | `uuid` | mittel | transitiv | GHSA-w5hq-g745-h8pq |
 | `postcss-selector-parser` | niedrig | transitiv | GHSA-w9m9-85wc-3x92 |
 
+### 8.8 npm-Advisories geschlossen (02.10.2026)
+
+**Ergebnis:** `npm audit` meldet 0, vorher 9 (4 hoch, 4 mittel, 1 niedrig). `npm ci` läuft auf dem neuen
+Lockfile durch. Unverändert: `next` und `eslint-config-next` 16.3.8, `@next/mdx` 16.3.8, `react` und
+`react-dom` 19.3.0, `eslint` 9.39.5. Welle 156 in der Wellenhistorie.
+
+| Paket | vorher | nachher | Weg |
+|---|---|---|---|
+| `sharp` (eigene devDependency) | 0.34.5 | 0.35.5 | `package.json` `^0.34.5` → `^0.35.5`; jetzt eine einzige Kopie, `next` nutzt sie mit (`deduped`) |
+| `sharp` (unter `next`) | 0.35.5 | 0.35.5 | unverändert |
+| `browserslist` | 4.28.6 | 4.29.3 | `overrides`; eine einzige Kopie für `@serwist/next`, `@serwist/utils`, `update-browserslist-db` und `@babel/helper-compilation-targets` |
+| `@serwist/next` | 9.5.12 | 9.5.12 | Meldung entfällt mit dem Override |
+| `brace-expansion` (unter `minimatch` 3.1.5, `eslint`) | 1.1.13 | 1.1.21 | `npm audit fix` |
+| `brace-expansion` (zweimal unter `minimatch` 10.2.6 über `glob` 13.0.6, `@serwist/build` und `@serwist/next`) | 5.0.9 | 5.0.12 | `npm audit fix` |
+| `brace-expansion` (unter `typescript-eslint`) | 5.0.12 | 5.0.12 | war nicht betroffen |
+| `dompurify` (optional unter `jspdf` 4.2.1) | 3.4.12 | 3.4.16 | `npm audit fix` |
+| `postcss-selector-parser` (unter `tailwindcss`, `postcss-nested`) | 6.1.2 | 6.1.4 | `npm audit fix` |
+| `resend` | 6.10.0 | 6.32.0 | `npm audit fix`, im Bereich `^6` |
+| `svix` | 1.88.0 | entfällt | `resend` 6.32.0 hängt nicht mehr von `svix` ab |
+| `uuid` | 10.0.0 | entfällt | kam nur über `svix` |
+
+**Entscheidungen:**
+1. **`npm audit fix` ohne `--force`.** Mit `--force` hätte npm `@serwist/next` auf 9.4.1 zurückgestuft
+   und `sharp` als Hauptversionssprung behandelt. Beides ist nicht nötig: Alle übrigen Behebungen liegen
+   im Rahmen der vorhandenen Bereiche.
+2. **`sharp` als devDependency auf `^0.35.5`.** Die eigene Kopie diente nur `scripts/titelbilder-verkleinern.mjs`.
+   Der Bildoptimierer nutzte schon vorher die gepatchte Kopie unter `next` (0.35.5). Mit dem Anheben
+   bleibt eine einzige Fassung.
+3. **`overrides` für `browserslist` (`^4.29.3`).** `@serwist/next` 9.5.12 pinnt genau 4.28.6 und ist die
+   neueste Fassung. `browserslist` läuft nur im Build und nur mit der eigenen Konfiguration; das
+   Override schließt die Meldung trotzdem, damit jede neue sofort auffällt. Termin
+   `serwist-browserslist-override` am 02.11.2026: Verlangt eine neuere `@serwist/next` selbst ≥ 4.28.7,
+   fällt das Override weg.
+
+**Geprüft:**
+- Build grün, 271 Seiten, nur die bekannten Warnungen. `public/sw.js` lokal 131.366 B, live vor dem
+  Deployment 130.543 B.
+- `sharp` 0.35.5 (vips 8.18.7) wandelt `public/about/karsten-kautz-v3.webp` (590×800) in eine PNG mit
+  590×800.
+- Lokaler Server (`npm start`): `/` 200, `/_next/image?url=%2Fabout%2Fkarsten-kautz-v3.webp&w=640&q=75`
+  200 mit `image/webp`, `/sw.js` 200, `/api/stats` ohne Cookie 401.
+
+**Verwendungen:**
+- `resend` nur über `resend.emails.send` in fünf Routen (`health-check`, `social-post`, `social-post-tiktok`,
+  `feedback`, `monthly-report`). `webhooks` und `svix` kommen im Code nicht vor.
+- `jspdf` wird in `ErgebnisAktionen` (200 Rechner, Knopf „Als PDF speichern“ immer sichtbar) sowie im
+  Brutto-Netto- und im MwSt-Rechner dynamisch geladen. `jsPDF.html()`, für das `dompurify` gebraucht
+  würde, wird nicht aufgerufen.
+
+**Reste:** keine. Ob `resend` 6.32.0 trägt, zeigt die Betriebsmeldung am Folgetag.
+
 ---
 
 ## Anhang A — Dateien mit `next/link` (36)

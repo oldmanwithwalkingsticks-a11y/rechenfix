@@ -6,6 +6,35 @@
 
 ---
 
+## 02.10.2026 — Welle 156: npm-Advisories nach Next 16 — 🟡 OFFEN
+
+**Anlass:** Nach dem Merge von Welle 155 meldete `npm audit` 9 Advisories außerhalb von `next`
+(4 hoch, 4 mittel, 1 niedrig), Bestandsaufnahme 8.7.
+
+**Änderungen:**
+- `sharp` als devDependency `^0.34.5` → `^0.35.5`. Damit gibt es nur noch eine Kopie, 0.35.5, die `next`
+  mitnutzt. Der Bildoptimierer lief schon vorher auf der gepatchten 0.35.5 unter `next`.
+- `overrides` in `package.json`: `browserslist` `^4.29.3`, weil `@serwist/next` 9.5.12 genau 4.28.6
+  pinnt.
+- `npm audit fix` ohne `--force`: `brace-expansion` 1.1.21 und 5.0.12, `dompurify` 3.4.16,
+  `postcss-selector-parser` 6.1.4, `resend` 6.10.0 → 6.32.0. `svix` und `uuid` entfallen, `resend`
+  hängt nicht mehr von `svix` ab.
+- Termin `serwist-browserslist-override` am 02.11.2026 in `lib/termine.ts`.
+
+**Ergebnis:**
+- `npm audit` 0, `npm ci` läuft durch.
+- `next`, `eslint-config-next`, `@next/mdx` 16.3.8, `react`, `react-dom` 19.3.0 und `eslint` 9.39.5
+  unverändert.
+- Build grün, 271 Seiten, `sw.js` erzeugt.
+- Lokal: `/` 200, Bildoptimierer 200 mit `image/webp`, `/sw.js` 200, `/api/stats` ohne Cookie 401.
+  `sharp` wandelt eine WebP aus `public/` in eine PNG mit denselben Maßen.
+
+**Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitt 8.8, mit Tabelle vorher → nachher.
+
+**Offen:** Betriebsmeldung am Folgetag bestätigt Versand über resend 6.32.0.
+
+---
+
 ## 01.10.2026 — Welle 155: Next.js 16.3.8, React 19 — Weg A (webpack), Lint im Prebuild — ✅ ABGESCHLOSSEN 02.10.2026
 
 **Anlass:** Die Bestandsaufnahme zieht die Migration in Abschnitt 6.5 vor. 23 Advisories treffen

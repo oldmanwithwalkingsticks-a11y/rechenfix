@@ -53,9 +53,12 @@
     "eslint-config-next": "16.3.8",
     "exiftool-vendored": "^37.0.0",
     "postcss": "^8",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "browserslist": "^4.29.3"
   },
   "browserslist": {
     "production": [

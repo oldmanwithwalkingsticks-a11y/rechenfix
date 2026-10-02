@@ -150,6 +150,15 @@ export const TERMINE: Termin[] = [
     quelle: 'https://nextjs.org/blog/september-2026-security-release',
   },
   {
+    id: 'serwist-browserslist-override',
+    titel: 'Override für browserslist prüfen',
+    datum: '2026-11-02',
+    vorlaufTage: 0,
+    bereich: 'Betrieb',
+    was: 'package.json überschreibt browserslist (^4.29.3), weil @serwist/next 9.5.12 genau 4.28.6 pinnt (GHSA-c83g-rgw3-j3cx, GHSA-73wf-gq98-2v4g). Prüfen, ob eine neuere @serwist/next browserslist ≥ 4.28.7 verlangt. Wenn ja: @serwist/next und serwist anheben, das Override entfernen, npm audit muss 0 bleiben. Wenn nein: Termin um einen Monat verschieben.',
+    quelle: 'npm-Advisories-Welle (Welle 156), docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md Abschnitt 8.8',
+  },
+  {
     id: 'sv-rechengroessen',
     titel: 'SV-Rechengrößenverordnung Folgejahr',
     datum: '2026-10-01',
