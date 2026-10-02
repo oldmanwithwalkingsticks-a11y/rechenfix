@@ -758,6 +758,38 @@ Antwortköpfe von `/`:
 **Erledigt:** `verify-critical-css.mjs` zählt `<noscript>` nicht mehr mit (`59998fd`, 01.10.2026, siehe
 8.5).
 
+### 8.7 Produktion bestätigt (02.10.2026)
+
+- **Merge und Deployment:** `2a8d621` auf `main`, Produktions-Deployment
+  `dpl_2PfBnJfA1FRGeoUsKzvzyaBLcWRP`. Angelegt am 01.10.2026 um 23:03:56 Uhr MESZ, READY seit 23:05:51
+  Uhr MESZ, Alias `www.rechenfix.de`. Laut Vercel ist es das einzige Produktions-Deployment seit dem
+  Merge, am 02.10.2026 nachgeprüft.
+- **Erste Cron-Läufe darauf am 02.10.2026,** laut Vercel-Laufzeitprotokoll dieses Deployments, beide
+  HTTP 200:
+  - 05:00:28 UTC `GET /api/cron/social-post-tiktok`;
+  - 06:00:14 UTC `GET /api/cron/health-check`. Das ist der Cron der Betriebsmeldung: versendet in
+    `app/api/cron/health-check/route.ts`, Betreff `[Rechenfix KI-Check] …`, Zeitplan `0 6 * * *`.
+- **Betriebsmeldung 02.10.2026:** `ki_proben=2`, `ki_fehler=0`. Das ist der erste KI-Lauf in Produktion
+  unter Next.js 16.3.8. Die Berichtswache vom selben Tag meldet „Betrieb: geprueft“; ihre beiden
+  Befunde zum Betrieb sind Termine (bundle.social, Spritpreise), kein Fehler.
+- **Rollback:** Das Rollback-Ziel `dpl_D3GrygFnSALZeE3otewnDQSvKFPt` (`1c231f3`, 14.2.35) wird nicht mehr
+  bereitgehalten.
+
+**`npm audit`, Stand 02.10.2026 nach dem Merge:** 9 Meldungen, 0 kritisch, 4 hoch, 4 mittel, 1 niedrig.
+`next` ist nicht darunter.
+
+| Paket | Schweregrad | Art | GHSA |
+|---|---|---|---|
+| `@serwist/next` | hoch | direkt | keine eigene; über `browserslist` |
+| `brace-expansion` | hoch | transitiv | GHSA-3jxr-9vmj-r5cp, GHSA-mh99-v99m-4gvg, GHSA-rgw5-rvv9-x895, GHSA-q2hr-2g5m-vwhr, GHSA-qhr7-859c-m2p7, GHSA-6j4f-fj2g-mc7p |
+| `browserslist` | hoch | transitiv | GHSA-c83g-rgw3-j3cx, GHSA-73wf-gq98-2v4g |
+| `sharp` | hoch | direkt | GHSA-f88m-g3jw-g9cj, GHSA-rgj7-g3m4-5g8c |
+| `dompurify` | mittel | transitiv | GHSA-55q2-fjhq-7xh7 |
+| `resend` | mittel | direkt | keine eigene; über `svix` |
+| `svix` | mittel | transitiv | keine eigene; über `uuid` |
+| `uuid` | mittel | transitiv | GHSA-w5hq-g745-h8pq |
+| `postcss-selector-parser` | niedrig | transitiv | GHSA-w9m9-85wc-3x92 |
+
 ---
 
 ## Anhang A — Dateien mit `next/link` (36)

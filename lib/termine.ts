@@ -248,12 +248,12 @@ export const TERMINE: Termin[] = [
   {
     id: 'spritpreise-energiesteuer-q4',
     titel: 'Spritpreise nach der Energiesteuersenkung ab 01.10.2026',
-    datum: '2026-10-02',
+    datum: '2026-10-08',
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
     projekt: 'rechenfix.de',
-    was: 'Die Preise in lib/berechnungen/spritpreise-parameter.ts: superE10 und diesel mit dem ersten ADAC-Bundesschnitt, der nach dem 01.10.2026 erhoben ist, aktualisieren, stand bumpen und das Verhältnis Diesel zu Super E10 prüfen. Am 22.09.2026 lag Diesel mit 2,428 über E10 mit 2,267, wie schon am 12.08.2026. Kippt es, sind die vier Prosa-Stellen in lib/rechner-config/auto.ts nachzuziehen, die der Dateikopf nennt. Bis dahin warnt der Build wegen des Alters der Werte. Das ist am 29.09.2026 bewusst in Kauf genommen worden, weil Werte vom 22.09. zwei Tage später wieder veraltet wären. Einmaltermin: nach Erledigung entfernen. Zuletzt vor der Senkung, ADAC Stichtag 29.09.2026: Super E10 2,258, Diesel 2,409.',
-    quelle: 'Build-Warnung vom 29.09.2026; ADAC, Seite aktueller Spritpreis, Stand 28.09.2026',
+    was: 'Die Preise in lib/berechnungen/spritpreise-parameter.ts: superE10 und diesel mit dem ersten ADAC-Bundesschnitt, der nach dem 01.10.2026 erhoben ist, aktualisieren, stand bumpen und das Verhältnis Diesel zu Super E10 prüfen. Am 22.09.2026 lag Diesel mit 2,428 über E10 mit 2,267, wie schon am 12.08.2026. Kippt es, sind die vier Prosa-Stellen in lib/rechner-config/auto.ts nachzuziehen, die der Dateikopf nennt. Bis dahin warnt der Build wegen des Alters der Werte. Das ist am 29.09.2026 bewusst in Kauf genommen worden, weil Werte vom 22.09. zwei Tage später wieder veraltet wären. Einmaltermin: nach Erledigung entfernen. Zuletzt vor der Senkung, ADAC Stichtag 29.09.2026: Super E10 2,258, Diesel 2,409. Verschoben am 02.10.2026: Die ADAC-Seite ‚Aktueller Spritpreis‘ (aktualisiert 01.10.2026, 14:00 Uhr) nannte noch Dienstag, 29.09.; die letzte Pressemitteilung zu Spritpreisen war vom 30.09.2026. Die Wochenmeldungen erscheinen mittwochs, die nächste am 07.10.2026 erwartet.',
+    quelle: 'Build-Warnung vom 29.09.2026; ADAC, Seite aktueller Spritpreis, Stand 28.09.2026; ADAC-Pressemitteilungen Verkehr, gelesen 02.10.2026',
   },
   {
     id: 'tankrabatt-ende-2026',

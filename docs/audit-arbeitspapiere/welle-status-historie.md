@@ -6,7 +6,7 @@
 
 ---
 
-## 01.10.2026 — Welle 155: Next.js 16.3.8, React 19 — Weg A (webpack), Lint im Prebuild — 🟡 VORSCHAU GEPRÜFT (01.10.2026), Merge nach main
+## 01.10.2026 — Welle 155: Next.js 16.3.8, React 19 — Weg A (webpack), Lint im Prebuild — ✅ ABGESCHLOSSEN 02.10.2026
 
 **Anlass:** Die Bestandsaufnahme zieht die Migration in Abschnitt 6.5 vor. 23 Advisories treffen
 14.2.35, darunter GHSA-2xp9-vwfh-vxw4 (kritisch, offen), und 14.x bekommt keine Korrekturen mehr.
@@ -46,11 +46,26 @@
 **Vorschau:** READY für `02b00ec`, danach READY für `59998fd`. Karstens Prüfliste am 01.10.2026
 bestanden.
 
-**Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitt 8. `CLAUDE.md`: Tech Stack auf Next.js 16 und der
-Hinweis, dass `react/no-unescaped-entities` jetzt über `npm run lint` im Prebuild greift.
+**Produktion bestätigt (02.10.2026):**
+- Merge `2a8d621`, Produktions-Deployment `dpl_2PfBnJfA1FRGeoUsKzvzyaBLcWRP`: angelegt 01.10.2026
+  23:03:56 Uhr MESZ, READY seit 23:05:51 Uhr MESZ. Es ist das einzige Produktions-Deployment seit dem
+  Merge.
+- Erste Cron-Läufe darauf am 02.10.2026, laut Vercel-Laufzeitprotokoll, beide HTTP 200:
+  `social-post-tiktok` um 05:00:28 UTC und `health-check` um 06:00:14 UTC. `health-check` ist der Cron,
+  der die Betriebsmeldung versendet (`app/api/cron/health-check/route.ts`, Betreff
+  `[Rechenfix KI-Check]`).
+- Betriebsmeldung 02.10.2026: `ki_proben=2`, `ki_fehler=0`. Das ist der erste KI-Lauf in Produktion
+  unter Next.js 16.3.8. Die Berichtswache vom selben Tag meldet „Betrieb: geprueft“; ihre beiden
+  Befunde zum Betrieb sind Termine, kein Fehler.
+- Das Rollback-Ziel `dpl_D3GrygFnSALZeE3otewnDQSvKFPt` (`1c231f3`) wird nicht mehr bereitgehalten.
+- Der Zweig `next16` ist vollständig in `main` und wird entfernt, lokal und auf `origin`.
 
-**Offen:** Merge nach `main` und Prüfung der Produktion. Eigene Wellen: Turbopack, die 16 Lint-Regeln auf
-`"off"`, AVIF wieder an, Edge Runtime, ESLint 9.
+**Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitt 8, Produktionsbefund in 8.7. `CLAUDE.md`: Tech Stack
+auf Next.js 16 und der Hinweis, dass `react/no-unescaped-entities` jetzt über `npm run lint` im Prebuild
+greift.
+
+**Offen für eigene Wellen:** Turbopack, die 16 Lint-Regeln auf `"off"`, AVIF wieder an, Edge Runtime,
+ESLint 9, die 9 `npm audit`-Meldungen außerhalb von `next` (Stand 02.10.2026 in 8.7).
 
 ---
 
