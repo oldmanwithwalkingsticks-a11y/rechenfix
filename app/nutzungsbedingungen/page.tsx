@@ -59,7 +59,9 @@ export default function NutzungsbedingungenSeite() {
               Ergebnisse übernommen. Die Nutzung erfolgt auf eigene Verantwortung. Für
               Entscheidungen auf Basis der Rechenergebnisse wird keine Haftung übernommen;
               verbindliche Auskünfte erteilen ausschließlich die jeweils zuständigen Stellen
-              (z.&nbsp;B. Finanzamt, Ärzte, Fachberater).
+              (z.&nbsp;B. Finanzamt, Ärzte, Fachberater). Unberührt bleibt die Haftung für Vorsatz
+              und grobe Fahrlässigkeit sowie für Schäden aus der Verletzung des Lebens, des Körpers
+              oder der Gesundheit.
             </p>
             <p className="mt-4">
               <strong>Nutzung ohne Internetverbindung.</strong> Wird die optionale Offline-Funktion
@@ -121,7 +123,7 @@ export default function NutzungsbedingungenSeite() {
             </p>
           </Section>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400">Stand: Juli 2026</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Stand: Oktober 2026</p>
         </div>
       </div>
     </div>
