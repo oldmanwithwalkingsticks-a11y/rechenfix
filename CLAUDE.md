@@ -60,6 +60,9 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - ❌ Mathe/Schule bleibt komplett ohne Affiliate (kein Kaufintent bei Schul-/Studium-Traffic)
 - Max. 2–4 AffiliateBoxen pro Rechner, erste `full`, weitere `compact`
 - Pflege zentral in `components/AffiliateBox.tsx` (Programme + `CONTEXT_TEXTS` + `CONTEXT_DEEPLINKS`), Platzierung pro Rechner-Komponente als JSX nach `AiExplain`/`ErgebnisAktionen`
+- **Kreditwerbung** (smava, CHECK24 mit Ziel `/kredit`) trägt ab Welle 157 den Warnhinweis nach Anhang Nr. 23e UWG. Die Komponente setzt ihn über `istKreditwerbung` in `lib/kreditwerbung.ts`; `scripts/verify-kreditwerbung.ts` prüft es im Prebuild.
+- **Text und Ziel** einer Platzierung müssen übereinstimmen. Kein Baufinanzierungs- oder Umschuldungstext auf ein Ratenkredit-Ziel; keine Kreditwerbung auf Spar- und Anlagerechnern.
+- **Kreditplatzierungen** stehen in der Rechner-Komponente, nicht in `lib/rechner-config/`, und ihr `rechnerName` steht in `KREDIT_RECHNER`.
 
 **Neue Partner (April 2026, Prompt 106):** hotel.de (MID 16018), burda-Zahnzusatz (MID 121064), eventfloss-berlin (MID 27722). Vollständige MID-Tabelle und Platzierungs-Zuordnung pro Rechner: siehe [rechenfix-projekt-referenz.md](rechenfix-projekt-referenz.md) → Abschnitt „Affiliate-System".
 

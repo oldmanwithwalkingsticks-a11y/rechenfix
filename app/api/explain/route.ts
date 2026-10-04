@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createHmac } from 'node:crypto';
+import { KREDIT_KI_REGEL, KREDIT_RECHNER } from '@/lib/kreditwerbung';
 
 // In-Memory Rate Limiting (pro IP, max 10/min)
 const rateLimit = new Map<string, { count: number; reset: number }>();
@@ -180,9 +181,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Fehlende Frage' }, { status: 400 });
   }
 
-  const systemPrompt = isSpezial
+  const basisPrompt = isSpezial
     ? SPEZIAL_PROMPTS[rechner_name]
     : (RECHNER_PROMPTS[rechner_name] || DEFAULT_PROMPT);
+  // Anhang Nr. 23e UWG (Welle 157): Auf Rechnern mit Kreditwerbung keine
+  // Aussagen im Sinne von Buchst. b bis d.
+  const systemPrompt = (KREDIT_RECHNER as readonly string[]).includes(rechner_name)
+    ? `${basisPrompt}\n\n${KREDIT_KI_REGEL}`
+    : basisPrompt;
 
   let userMessage: string;
   if (rechner_name === '__ki_rechner__') {

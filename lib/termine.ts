@@ -132,15 +132,6 @@ export const TERMINE: Termin[] = [
     was: 'Harter Ablauf. Ist die Rotation nicht erfolgt, fallen KI-Erklärung und KI-Rechner aus.',
   },
   {
-    id: 'zeitumstellung-cron-laufzeiten',
-    titel: 'Zeitumstellung: Laufzeiten der drei geplanten Aufgaben prüfen',
-    datum: '2026-10-25',
-    vorlaufTage: 7,
-    bereich: 'Betrieb',
-    was: 'Die geplanten Aufgaben laufen nach UTC-Cron: Peter 0 5 * * *, Susanne 0 6 * * *, Berichtswache 0 7 * * *. Bis zur Umstellung sind das 07:00, 08:00 und 09:00 Berliner Zeit, danach 06:00, 07:00 und 08:00. Die Reihenfolge und die Abstände bleiben; nur der ganze Block rutscht eine Stunde nach vorn. Zu entscheiden ist allein, ob die Uhrzeiten so bleiben sollen. Sollen sie es nicht, sind die drei Cron-Ausdrücke auf 0 6, 0 7 und 0 8 zu setzen.',
-    quelle: 'Routinen unter claude.ai/code/routines — Peter Ai, Susanne Recht, Berichtswache',
-  },
-  {
     id: 'nextjs-zurueckgehaltene-advisories',
     titel: 'Next.js: zwei zurückgehaltene Advisories vom 30.09.2026',
     datum: '2026-10-08',
@@ -294,6 +285,15 @@ export const TERMINE: Termin[] = [
     bereich: 'Recht',
     was: 'Anhang 3 des Hostinger-Auftragsverarbeitungsvertrags gegen den geführten Stand vom 04.09.2026 prüfen: AWS EMEA, Google Cloud EMEA, Cloudflare, MailChannels, Proofpoint, Anthropic Ireland, spectra tech. Nach Abschnitt 6.3 des Vertrags werden neue Unterauftragnehmer dort ergänzt, mit zehn Tagen Widerspruchsfrist. Zugänge außerhalb der EU können Abschnitt 11 der Datenschutzerklärung berühren.',
     quelle: 'https://www.hostinger.com/legal/dpa, Anhang 3',
+  },
+  {
+    id: 'uwg-23e-kreditwerbung',
+    titel: 'Anhang Nr. 23e UWG gilt: Warnhinweis bei Kreditwerbung live prüfen',
+    datum: '2026-11-20',
+    vorlaufTage: 0,
+    bereich: 'Recht',
+    was: 'Ab heute gilt Anhang Nr. 23e UWG (BGBl. 2026 I Nr. 139, Art. 6; Art. 16 Abs. 1). Im Inkognito-Fenster prüfen, dass Kreditrechner, Leasing-Rechner und Wertverlust-Auto-Rechner in der Anzeige „Achtung! Kreditaufnahme kostet Geld.“ zeigen, auch in Handybreite. Danach diesen Termin entfernen.',
+    quelle: 'Welle 157, docs/audit-arbeitspapiere/welle-status-historie.md; scripts/verify-kreditwerbung.ts',
   },
 ];
 

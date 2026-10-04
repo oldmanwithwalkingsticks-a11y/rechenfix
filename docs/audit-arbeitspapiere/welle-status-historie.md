@@ -6,6 +6,96 @@
 
 ---
 
+## 04.10.2026 — Welle 157: Kreditwerbung nach Anhang Nr. 23e UWG — Warnhinweis, sechs unpassende Platzierungen entfernt — 🟡 OFFEN (Live-Probe nach dem Deploy)
+
+**Anlass:** Das Gesetz vom 12.05.2026 zur Umsetzung der Verbraucherkreditrichtlinie (BGBl. 2026 I Nr. 139)
+fügt mit Art. 6 in den Anhang des UWG die Nr. 23e ein, anzuwenden nach Art. 16 Abs. 1 ab **20.11.2026**.
+Sie steht auf der Liste der stets unzulässigen Handlungen. Wortlaut (gelesen 04.10.2026, Prüfakte
+`peter-ki/references/pruefakten/ki-recht-2026-10-04-nachtrag.md` im Skills-Repository):
+
+> „23e. Irreführung bei Werbung für Kreditprodukte — die Werbung für Kreditprodukte gemäß § 491 Absatz 2
+> oder § 506 Absatz 1 des Bürgerlichen Gesetzbuchs, wenn
+> a) diese ohne einen klaren und auffallenden Warnhinweis auf die mit der Kreditaufnahme verbundenen
+> Kosten erfolgt, wobei die Formulierung „Achtung! Kreditaufnahme kostet Geld“ oder eine gleichwertige
+> Formulierung zu verwenden ist,
+> b) Verbraucher zur Kreditaufnahme ermutigt werden, indem suggeriert wird, ein Kredit würde ihre
+> finanzielle Situation verbessern,
+> c) angegeben wird, dass laufende Kreditverträge oder in Datenbanken eingetragene Kredite geringen oder
+> keinen Einfluss auf die Bewertung eines Kreditantrages hätten, oder
+> d) fälschlicherweise suggeriert wird, dass ein Kredit die Finanzmittel erhöhen, einen Ersatz für
+> Ersparnisse darstellen oder den Lebensstandard des Verbrauchers anheben würde;“
+
+Vor dieser Welle trug keine der Kreditanzeigen (smava, CHECK24 `/kredit/`) einen Warnhinweis.
+
+**Platzierungen mit Kreditziel** (Bestand in `06c0b6b`, Phase 0 ohne weitere Funde; keine Kreditlinks
+außerhalb von `components/AffiliateBox.tsx`):
+
+| Rechner | Platzierung | Ziel | Ergebnis |
+|---|---|---|---|
+| `finanzen/kreditrechner` | `KreditRechner.tsx:277`, check24 `kredit` | check24.net/kredit/ | bleibt, mit Warnhinweis |
+| `auto/leasing-rechner` | `LeasingRechner.tsx:249`, check24 `leasing` | check24.net/kredit/ | bleibt, mit Warnhinweis |
+| `auto/wertverlust-auto-rechner` | `WertverlustAutoRechner.tsx:210`, smava `autokredit` | kreditvergleich.smava.de | bleibt, mit Warnhinweis |
+| `finanzen/zinsrechner` | `ZinsRechner.tsx:257`, smava `zins` | smava.de/kreditvergleich/ | entfernt: Sparrechner mit Kreditwerbung |
+| `wohnen/baufinanzierung-rechner` | `BaufinanzierungRechner.tsx:427`, smava `baufinanzierung` | kreditvergleich.smava.de (Ratenkredit) | entfernt: Text passt nicht zum Ziel |
+| `wohnen/baufinanzierung-rechner` | `wohnen.ts:1036`, check24 `baufinanzierung` | check24.net/kredit/ (Ratenkredit) | entfernt |
+| `wohnen/mietrendite-rechner` | `wohnen.ts:1749`, check24 `mietrendite` | check24.net/kredit/ (Ratenkredit) | entfernt |
+| `wohnen/vorfaelligkeitsentschaedigung-rechner` | `VorfaelligkeitsentschaedigungRechner.tsx:146`, smava `umschuldung` | kreditvergleich.smava.de (Ratenkredit) | entfernt: Rechner für Immobiliendarlehen |
+| `wohnen/vorfaelligkeitsentschaedigung-rechner` | `wohnen.ts:3235`, check24 `vorfaelligkeit` | check24.net/kredit/ (Ratenkredit) | entfernt |
+
+Die drei `wohnen.ts`-Einträge behalten je ihre CosmosDirekt-Box, jetzt in Objektform, wie die Dateien
+einzelne Einträge sonst halten. Die Kontexte smava `baufinanzierung`, `zins`, `umschuldung` und check24
+`baufinanzierung`, `mietrendite`, `vorfaelligkeit` sind aus `CONTEXT_TEXTS` und `CONTEXT_DEEPLINKS`
+gestrichen; kein anderer Rechner nutzte sie. smava bleibt als Programm, die Partnerliste der
+Datenschutzerklärung ist unverändert.
+
+**Warnhinweis:** `lib/kreditwerbung.ts` (ohne React) führt `KREDIT_WARNHINWEIS`, `KREDIT_RECHNER`,
+`KREDIT_KI_REGEL` und `istKreditwerbung(programId, ziel)`: jede smava-Anzeige und jede Anzeige mit Ziel
+unter `/kredit`. `components/AffiliateBox.tsx` löst das Ziel wie `buildAwinUrl` auf und setzt bei
+Kreditwerbung ein eigenes Element mit `data-kreditwarnung`, `text-sm font-semibold text-gray-900
+dark:text-gray-100`: in der full-Variante unter der Beschreibung und über dem Button, in der
+compact-Variante als eigene Zeile unter der Linkzeile, innerhalb der Box und außerhalb des Links. Die
+Platzierung kann ihn nicht abschalten. `AFFILIATE_PROGRAMS`, `CONTEXT_TEXTS` und `CONTEXT_DEEPLINKS`
+sind exportiert, Werte und Aufbau unverändert.
+
+**„Fix erklärt“:** In `app/api/explain/route.ts` wird für `Kreditrechner`, `Leasing-Rechner` und
+`Wertverlust-Rechner (Auto)` die Zusatzregel mit einer Leerzeile an den gewählten Systemprompt
+angehängt: „Zusatzregel für diesen Rechner: Stelle eine Kreditaufnahme nie so dar, als verbessere sie die
+finanzielle Lage, erhöhe die verfügbaren Mittel, ersetze Ersparnisse oder hebe den Lebensstandard. Sage
+nie, laufende Kredite oder Einträge bei Auskunfteien hätten wenig oder keinen Einfluss auf einen
+Kreditantrag. Erwähnt ein Tipp einen Kredit, weise darauf hin, dass ein Kredit Geld kostet.“ Die drei
+`rechnerName` sind in den Komponenten bestätigt.
+
+**Wächter `scripts/verify-kreditwerbung.ts`** im Prebuild direkt nach `verify-clamp-input.ts`:
+1. Datenlage: Für jedes Programm/Kontext-Paar und jedes Programm ohne Kontext Ziel und Text bestimmen;
+   trifft einer davon `/kredit|darlehen|finanzier|umschuld/i`, muss `istKreditwerbung` wahr sein.
+2. Darstellung: jedes Kreditpaar in beiden Varianten mit `renderToStaticMarkup` gerendert, Pfad über
+   den `PathnameContext` von Next. Warnhinweis genau einmal, in `data-kreditwarnung`, außerhalb des
+   Links, ohne `hidden`, `truncate`, `sr-only` oder eine Klasse auf `sm:`/`md:`/`lg:`/`xl:`/`2xl:hidden`
+   an sich oder einem Vorfahren.
+3. Platzierungen: Kontext muss in `CONTEXT_TEXTS` stehen; Kreditwerbung in einer Komponente verlangt
+   einen `rechnerName` aus `KREDIT_RECHNER`; Kreditwerbung in `lib/rechner-config/` ist verboten.
+
+Ergebnis grün: 115 Paare, davon 5 Kreditwerbung, 10 Darstellungen gerendert, 16 Platzierungen
+smava/check24, davon 3 mit Kreditwerbung.
+- **Kontrollfall A** (compact-Warnhinweis mit `hidden`): Abbruch mit 1, fünf Verletzungen „<p> um den
+  Warnhinweis trägt die Klasse „hidden““, eine je Kreditpaar.
+- **Kontrollfall B** (`'test': 'Kredit testen.'` in `CONTEXT_TEXTS.check24` ohne Deeplink): Abbruch mit
+  1 über Prüfung 1, Ziel `https://www.check24.net/`, `istKreditwerbung` falsch.
+
+**Termine:** neu `uwg-23e-kreditwerbung` am 20.11.2026 (Recht, einmalig, Live-Prüfung in Handybreite);
+entfernt `zeitumstellung-cron-laufzeiten` — seit 04.10.2026 laufen alle geplanten Aufgaben auf festen
+UTC-Zeiten, die Cron-Werte im Termin stimmen nicht mehr.
+
+**Doku:** `CLAUDE.md` Affiliate-Platzierungs-Regel um drei Regeln (Kreditwerbung, Text und Ziel,
+Kreditplatzierungen in der Komponente); `rechenfix-projekt-referenz.md` Zuordnung je Rechner und
+smava-Zeile.
+
+**Build:** `npm run build` grün. Prebuild vollständig, darunter `check-affiliate-partnerliste` (14 Programme, deckungsgleich), `check-termine` und `verify-kreditwerbung`; Lint 0 Fehler, die zwei bekannten Warnungen. 271 Seiten. Im gebauten HTML (`.next/server/app`) steht der Warnhinweis auf Kredit-, Leasing- und Wertverlust-Auto-Rechner je genau einmal; Zins-, Baufinanzierungs-, Mietrendite- und Vorfälligkeitsentschädigungs-Rechner führen weder `awinmid=9351` noch `check24.net%2Fkredit`.
+
+**Offen:** Live-Probe nach dem Deploy (sieben Seiten per `curl`).
+
+---
+
 ## 02.10.2026 — Welle 156: npm-Advisories nach Next 16 — 🟡 OFFEN
 
 **Anlass:** Nach dem Merge von Welle 155 meldete `npm audit` 9 Advisories außerhalb von `next`

@@ -542,7 +542,7 @@ Publisher-ID: 2843240
 | burda-vergleicht (Zahnzusatz) | 121064 | zahn.burda-vergleicht.de | /campaign_600.html |
 | Nature's Way | 47173 | naturesway.de | /collections/all |
 | **CosmosDirekt** (neu, Prompts 145 + 145b, 25.04.2026) | **11893** | cosmosdirekt.de | /geldanlage/tagesgeld/, /flexinvest-altersvorsorge/, /flexinvest/, /flexinvest-einmalanlage/, /flexinvest-junior-sparplan/, /risikolebensversicherung/, /berufsunfaehigkeitsversicherung/, /unfallversicherung/, /sterbegeldversicherung/, /private-haftpflichtversicherung/, /hausratversicherung/, /wohngebaeudeversicherung/, /bauherrenhaftpflicht/, /tierhalterhaftpflicht/, /reiseruecktrittsversicherung/ |
-| smava | 9351 | smava.de | /kredit/ratenkredit/, /kreditvergleich/ (Standard: kreditvergleich.smava.de) |
+| smava | 9351 | smava.de | /kredit/ratenkredit/ (Standard: kreditvergleich.smava.de); seit Welle 157 nur noch Wertverlust-Auto-Rechner (`autokredit`, Standardziel) |
 | HanseMerkur | 11705 | hansemerkur.de | /reisekrankenversicherung (Standard: /) |
 | GymBeam DE (Welle 141) | 127679 | gymbeam.de | /proteine, /kreatin, /trainingszubehor, /gesunde-lebensmittel, /sportflaschen — nur Kategorien, keine Produktseiten |
 
@@ -867,6 +867,24 @@ Page-Render parsiert kategorie-übergreifend (`finanzen.ts`, `gesundheit.ts` etc
 
 Pflege: bei neuen Rechnern in `lib/rechner-config/<kategorie>.ts` ergänzen.
 W14-Erweiterung: Array-Property `affiliate?: AffiliateConfig[]` für Multi-Box-via-Property (BN-Migration).
+
+### Kreditwerbung (Stand 04.10.2026, Welle 157)
+
+Anzeigen mit Kreditziel tragen den Warnhinweis nach Anhang Nr. 23e UWG („Achtung! Kreditaufnahme kostet Geld.“), gesetzt von `components/AffiliateBox.tsx` über `istKreditwerbung` aus `lib/kreditwerbung.ts`, geprüft von `scripts/verify-kreditwerbung.ts` im Prebuild. Kreditplatzierungen stehen in der Rechner-Komponente, nie in `lib/rechner-config/`.
+
+| Rechner | Platzierung | Ziel | Stand |
+|---|---|---|---|
+| `finanzen/kreditrechner` | `KreditRechner.tsx`, check24 `kredit` | check24.net/kredit/ | bleibt, mit Warnhinweis |
+| `auto/leasing-rechner` | `LeasingRechner.tsx`, check24 `leasing` | check24.net/kredit/ | bleibt, mit Warnhinweis |
+| `auto/wertverlust-auto-rechner` | `WertverlustAutoRechner.tsx`, smava `autokredit` | kreditvergleich.smava.de | bleibt, mit Warnhinweis |
+| `finanzen/zinsrechner` | `ZinsRechner.tsx`, smava `zins` | smava.de/kreditvergleich/ | entfernt (Sparrechner mit Kreditwerbung) |
+| `wohnen/baufinanzierung-rechner` | `BaufinanzierungRechner.tsx`, smava `baufinanzierung` | kreditvergleich.smava.de (Ratenkredit) | entfernt |
+| `wohnen/baufinanzierung-rechner` | `wohnen.ts`, check24 `baufinanzierung` | check24.net/kredit/ (Ratenkredit) | entfernt |
+| `wohnen/mietrendite-rechner` | `wohnen.ts`, check24 `mietrendite` | check24.net/kredit/ (Ratenkredit) | entfernt |
+| `wohnen/vorfaelligkeitsentschaedigung-rechner` | `VorfaelligkeitsentschaedigungRechner.tsx`, smava `umschuldung` | kreditvergleich.smava.de (Ratenkredit) | entfernt (Rechner für Immobiliendarlehen) |
+| `wohnen/vorfaelligkeitsentschaedigung-rechner` | `wohnen.ts`, check24 `vorfaelligkeit` | check24.net/kredit/ (Ratenkredit) | entfernt |
+
+Auf Baufinanzierung, Mietrendite und Vorfälligkeitsentschädigung bleibt je die CosmosDirekt-Box (`bauherrenhaftpflicht` bzw. `wohngebaeude`), jetzt in Objektform. Auf dem Zinsrechner bleibt CosmosDirekt `tagesgeld`. Ein Wiedereinbau mit echtem Baufinanzierungsziel ist möglich, für Immobiliendarlehen (§ 491 Abs. 3 BGB) gilt Nr. 23e nicht; er braucht eine eigene Welle.
 
 ---
 

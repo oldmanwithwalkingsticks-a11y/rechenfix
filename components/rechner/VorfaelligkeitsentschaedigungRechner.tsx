@@ -10,7 +10,6 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { AffiliateBox } from '@/components/AffiliateBox';
 
 const BEARBEITUNG = VFE_BEARBEITUNGSGEBUEHR_EUR;
 
@@ -142,8 +141,6 @@ export default function VorfaelligkeitsentschaedigungRechner() {
           Sonderkuendigung: 'nach 10 Jahren Zinsbindung ohne VFE möglich (§ 489 BGB)',
         }}
       />
-
-      <AffiliateBox programId="smava" context="umschuldung" />
 
     </div>
   );

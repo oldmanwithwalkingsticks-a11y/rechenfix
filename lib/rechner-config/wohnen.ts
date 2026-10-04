@@ -1032,10 +1032,7 @@ export const wohnenRechner: RechnerConfig[] = [
       { titel: 'KfW – Wohneigentum & Baufinanzierung (Tilgung/Anschlussfinanzierung)', url: 'https://www.kfw.de/inlandsfoerderung/Privatpersonen/Neubau/' },
       { titel: 'Verbraucherzentrale – Baufinanzierung: Tilgung, Zinsbindung, Sondertilgung', url: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/baufinanzierung' },
     ],
-    affiliate: [
-      { programId: 'check24', context: 'baufinanzierung' },
-      { programId: 'cosmosdirekt', context: 'bauherrenhaftpflicht' },
-    ],
+    affiliate: { programId: 'cosmosdirekt', context: 'bauherrenhaftpflicht' },
   },
   {
     slug: 'quadratmeter-rechner',
@@ -1745,10 +1742,7 @@ export const wohnenRechner: RechnerConfig[] = [
       { titel: 'Deutsche Bundesbank – Indikatorensystem Wohnimmobilienmarkt', url: 'https://www.bundesbank.de/de/statistiken/indikatorensaetze/wohnimmobilienpreise' },
       { titel: 'Verbraucherzentrale – Immobilie als Kapitalanlage', url: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen' },
     ],
-    affiliate: [
-      { programId: 'check24', context: 'mietrendite' },
-      { programId: 'cosmosdirekt', context: 'wohngebaeude' },
-    ],
+    affiliate: { programId: 'cosmosdirekt', context: 'wohngebaeude' },
   },
   {
     slug: 'indexmiete-rechner',
@@ -3231,10 +3225,7 @@ export const wohnenRechner: RechnerConfig[] = [
       { titel: 'BGH, Urteil v. 03.12.2024 – XI ZR 75/23 (Berechnungsangaben / Zinserwartung)', url: 'https://www.bundesgerichtshof.de/' },
       { titel: 'Verbraucherzentrale – Vorfälligkeitsentschädigung prüfen lassen', url: 'https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-und-schulden/vorfaelligkeitsentschaedigung' },
     ],
-    affiliate: [
-      { programId: 'check24', context: 'vorfaelligkeit' },
-      { programId: 'cosmosdirekt', context: 'wohngebaeude' },
-    ],
+    affiliate: { programId: 'cosmosdirekt', context: 'wohngebaeude' },
   },
   {
     slug: 'energiekosten-rechner',

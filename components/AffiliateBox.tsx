@@ -2,10 +2,11 @@
 
 import { useCallback, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import { KREDIT_WARNHINWEIS, istKreditwerbung } from '@/lib/kreditwerbung';
 
 // --- Affiliate-Programm-Daten ---
 
-const AFFILIATE_PROGRAMS = {
+export const AFFILIATE_PROGRAMS = {
   wiso: {
     name: 'WISO Steuer',
     tagline: 'Steuererklärung leicht gemacht — durchschnittlich 1.063 € Erstattung',
@@ -138,7 +139,7 @@ export type ProgramId = keyof typeof AFFILIATE_PROGRAMS;
 
 // --- Kontextuelle Beschreibungen ---
 
-const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
+export const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
   wiso: {
     'brutto-netto': 'Mit der Steuererklärung holen Sie sich einen Teil der Abzüge zurück.',
     'kfz-steuer': 'Die Kfz-Steuer können Sie in der Steuererklärung angeben.',
@@ -187,15 +188,12 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'spritkosten': 'Autokosten senken? Kfz-Versicherung vergleichen auf CHECK24.',
     'kredit': 'Kredite vergleichen — niedrige Zinsen, schnelle Auszahlung, kostenlos.',
     'etf': 'Depot-Vergleich auf CHECK24 — das passende Depot für Ihren ETF-Sparplan finden.',
-    'baufinanzierung': 'Baufinanzierung vergleichen auf CHECK24 — über 450 Anbieter, kostenlos und unverbindlich.',
-    'mietrendite': 'Immobilienfinanzierung vergleichen — günstige Kredite für Ihre Kapitalanlage auf CHECK24.',
     'autokosten': 'Kfz-Versicherung vergleichen und bis zu 850 € pro Jahr sparen — der einfachste Weg Ihre Autokosten zu senken.',
     'waermepumpe': 'Günstigen Wärmepumpen-Stromtarif finden — Stromanbieter vergleichen auf CHECK24.',
     'leasing': 'Autofinanzierung als Alternative zum Leasing? Kredite vergleichen auf CHECK24.',
     'photovoltaik': 'Günstigen Reststrom-Tarif finden — Stromanbieter vergleichen auf CHECK24.',
     'balkonsolar': 'Günstigen Reststrom-Tarif finden — Stromanbieter vergleichen auf CHECK24.',
     'eauto': 'Kfz-Versicherung für Ihr E-Auto vergleichen — oft günstiger als für Verbrenner.',
-    'vorfaelligkeit': 'Umschuldung prüfen — günstigere Konditionen finden auf CHECK24.',
     'energiekosten': 'Stromtarif vergleichen und Energiekosten senken — kostenlos auf CHECK24.',
   },
   congstar: {
@@ -254,10 +252,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
     'reiseruecktritt': 'Reiserücktrittsversicherung — Stornokosten zurück bei Krankheit oder unerwarteten Ereignissen vor der Reise.',
   },
   smava: {
-    'baufinanzierung': 'Baufinanzierung von über 20 Banken vergleichen — smava findet die passenden Konditionen für Ihr Vorhaben.',
     'kredit': 'Ratenkredit-Vergleich über smava: über 20 Partnerbanken, SCHUFA-neutrale Anfrage und schnelle Auszahlung.',
-    'zins': 'Günstige Kreditzinsen über smava vergleichen — SCHUFA-neutral und unverbindlich, über 20 Banken auf einen Blick.',
-    'umschuldung': 'Bestehenden Kredit ablösen und Zinsen sparen — smava vergleicht Umschuldungsangebote von über 20 Banken.',
     'autokredit': 'Autokredit über smava vergleichen — oft günstiger als die Händlerfinanzierung, SCHUFA-neutral anfragen.',
   },
   hansemerkur: {
@@ -278,7 +273,7 @@ const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> = {
 
 // --- Kontextspezifische Deeplinks ---
 
-const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
+export const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
   check24: {
     'kfz-steuer': 'https://www.check24.net/kfz-versicherung/',
     'spritkosten': 'https://www.check24.net/kfz-versicherung/',
@@ -288,15 +283,12 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
     'heizkosten': 'https://www.check24.net/gasvergleich/',
     'kredit': 'https://www.check24.net/kredit/',
     'etf': 'https://www.check24.de/depot/',
-    'baufinanzierung': 'https://www.check24.net/kredit/',
-    'mietrendite': 'https://www.check24.net/kredit/',
     'autokosten': 'https://www.check24.net/kfz-versicherung/',
     'waermepumpe': 'https://www.check24.net/strom/',
     'leasing': 'https://www.check24.net/kredit/',
     'photovoltaik': 'https://www.check24.net/strom/',
     'balkonsolar': 'https://www.check24.net/strom/',
     'eauto': 'https://www.check24.net/kfz-versicherung/',
-    'vorfaelligkeit': 'https://www.check24.net/kredit/',
     'energiekosten': 'https://www.check24.net/strom/',
     'default': 'https://www.check24.net/',
   },
@@ -325,7 +317,6 @@ const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>>> = {
   },
   smava: {
     'kredit': 'https://www.smava.de/kredit/ratenkredit/',
-    'zins': 'https://www.smava.de/kreditvergleich/',
     'default': 'https://kreditvergleich.smava.de/',
   },
   hansemerkur: {
@@ -386,6 +377,9 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
     ? (CONTEXT_DEEPLINKS[programId]?.[context] || CONTEXT_DEEPLINKS[programId]?.['default'])
     : CONTEXT_DEEPLINKS[programId]?.['default'];
   const url = buildAwinUrl(program, clickref, contextDeeplink);
+  // Anhang Nr. 23e UWG: Das Ziel wird wie in buildAwinUrl aufgelöst; die
+  // einzelne Platzierung kann den Warnhinweis nicht abschalten.
+  const kreditwerbung = istKreditwerbung(programId, contextDeeplink || program.deeplink);
 
   const handleClick = useCallback(() => {
     // Fire-and-forget Tracking — keine personenbezogenen Daten
@@ -435,6 +429,11 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
             {program.cta} →
           </span>
         </a>
+        {kreditwerbung && (
+          <p data-kreditwarnung className="px-4 pb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
+            {KREDIT_WARNHINWEIS}
+          </p>
+        )}
       </div>
     );
   }
@@ -460,6 +459,11 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 pr-12">
           {description}
         </p>
+        {kreditwerbung && (
+          <p data-kreditwarnung className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
+            {KREDIT_WARNHINWEIS}
+          </p>
+        )}
         <a
           href={url}
           target="_blank"
