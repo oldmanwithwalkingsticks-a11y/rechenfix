@@ -6,7 +6,7 @@
 
 ---
 
-## 04.10.2026 — Welle 157: Kreditwerbung nach Anhang Nr. 23e UWG — Warnhinweis, sechs unpassende Platzierungen entfernt — 🟡 OFFEN (Live-Probe nach dem Deploy)
+## 04.10.2026 — Welle 157: Kreditwerbung nach Anhang Nr. 23e UWG — Warnhinweis, sechs unpassende Platzierungen entfernt — ✅ ABGESCHLOSSEN 04.10.2026
 
 **Anlass:** Das Gesetz vom 12.05.2026 zur Umsetzung der Verbraucherkreditrichtlinie (BGBl. 2026 I Nr. 139)
 fügt mit Art. 6 in den Anhang des UWG die Nr. 23e ein, anzuwenden nach Art. 16 Abs. 1 ab **20.11.2026**.
@@ -92,7 +92,25 @@ smava-Zeile.
 
 **Build:** `npm run build` grün. Prebuild vollständig, darunter `check-affiliate-partnerliste` (14 Programme, deckungsgleich), `check-termine` und `verify-kreditwerbung`; Lint 0 Fehler, die zwei bekannten Warnungen. 271 Seiten. Im gebauten HTML (`.next/server/app`) steht der Warnhinweis auf Kredit-, Leasing- und Wertverlust-Auto-Rechner je genau einmal; Zins-, Baufinanzierungs-, Mietrendite- und Vorfälligkeitsentschädigungs-Rechner führen weder `awinmid=9351` noch `check24.net%2Fkredit`.
 
-**Offen:** Live-Probe nach dem Deploy (sieben Seiten per `curl`).
+**Deploy:** Commit `bbc3011`, Deployment `dpl_4Rg2M2Ha5NbHYEY5ukRS4QfKFZ8N`, READY 04.10.2026 06:26:31 UTC,
+Alias `www.rechenfix.de`.
+
+**Live-Probe** (`curl`, 04.10.2026 nach READY; der Warnhinweis steht im ausgelieferten HTML, ein zweites
+Werkzeug war nicht nötig):
+
+| Seite | HTTP | Bytes | Ergebnis |
+|---|---|---|---|
+| `/finanzen/kreditrechner` | 200 | 284.561 | Warnhinweis 1×, `check24.net%2Fkredit` vorhanden ✅ |
+| `/auto/leasing-rechner` | 200 | 267.024 | Warnhinweis 1× ✅ |
+| `/auto/wertverlust-auto-rechner` | 200 | 267.515 | Warnhinweis 1×, `awinmid=9351` vorhanden ✅ |
+| `/finanzen/zinsrechner` | 200 | 303.150 | kein `awinmid=9351` ✅ |
+| `/wohnen/baufinanzierung-rechner` | 200 | 296.825 | kein `awinmid=9351`, kein `check24.net%2Fkredit` ✅ |
+| `/wohnen/mietrendite-rechner` | 200 | 288.807 | kein `check24.net%2Fkredit` ✅ |
+| `/wohnen/vorfaelligkeitsentschaedigung-rechner` | 200 | 281.844 | kein `awinmid=9351`, kein `check24.net%2Fkredit` ✅ |
+
+Der Hinweis steht auf allen drei Seiten in `<p data-kreditwarnung="true" class="text-sm font-semibold
+text-gray-900 dark:text-gray-100 mb-3">`. Die Prüfung in Handybreite am 20.11.2026 führt der Termin
+`uwg-23e-kreditwerbung`.
 
 ---
 
