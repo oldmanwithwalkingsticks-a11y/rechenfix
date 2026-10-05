@@ -13,17 +13,23 @@
  * Gelesen von:
  *   - app/api/cron/health-check/route.ts  (tägliche Mail 06 UTC)
  *   - scripts/check-termine.mjs           (Warnung im Prebuild, kein Gate)
+ *   - scripts/verify-termine.ts           (Prüfung im Prebuild: Fälle und Parität)
  *
  * ACHTUNG bei Änderungen an `naechstesVorkommen`: Die Monatskappung existiert
  * bewusst zweimal — hier und in scripts/check-termine.mjs, weil das Skript
  * reines Node ist und diese Datei nicht importieren kann. Wer eine Seite
  * ändert, muss an die andere denken, sonst nennen Mail und Build-Log
- * verschiedene Daten.
+ * verschiedene Daten. Die Quittungslogik (`offenesVorkommen`,
+ * `QUITTUNGSPFLICHT_AB`) existiert ebenfalls in beiden Dateien;
+ * `scripts/verify-termine.ts` prüft im Prebuild, dass beide dieselbe Lage liefern.
  *
  * Pflegeregel:
- *   - `wiederholungMonate` gesetzt  → wiederkehrender Termin. Liegt das Datum in
- *     der Vergangenheit, rollt die Berechnung automatisch auf das nächste
- *     Vorkommen. Erinnerung, keine Verpflichtung.
+ *   - `wiederholungMonate` gesetzt  → wiederkehrender Termin. Jedes Vorkommen ab
+ *     QUITTUNGSPFLICHT_AB wird quittiert (`quittiertVorkommen`, `quittiertAm`,
+ *     `quittungVermerk`). Bis dahin bleibt es stehen, nach seinem Tag als
+ *     ÜBERFÄLLIG; erst die Quittung lässt das nächste Vorkommen nachrücken.
+ *     Vorzeitig quittieren ist erlaubt und beendet den Vorlauf. Vorkommen vor
+ *     QUITTUNGSPFLICHT_AB sind nicht erfasst.
  *   - `wiederholungMonate` fehlt    → Einmaltermin. Bleibt nach Ablauf dauerhaft
  *     als ÜBERFÄLLIG in der Mail stehen, bis der Eintrag entfernt oder das Datum
  *     bewusst verschoben wird. Genau so gewollt: rechtliche Fristen und
@@ -53,7 +59,25 @@ export interface Termin {
   was: string;
   /** Wo das Verfahren beschrieben steht. */
   quelle?: string;
+  /**
+   * Nur wiederkehrende Termine: das zuletzt erledigte Vorkommen (ISO). Alle
+   * Vorkommen bis einschließlich dieses Tages gelten als erledigt. Muss ein
+   * tatsächliches Vorkommen sein (Monatskappung beachten).
+   */
+  quittiertVorkommen?: string;
+  /** Tag der Erledigung (ISO). */
+  quittiertAm?: string;
+  /** Ein Satz: was getan wurde, mit Beleg (Commit, Fundstelle). Keine geschweiften Klammern, kein Apostroph. */
+  quittungVermerk?: string;
 }
+
+/**
+ * Ab diesem Tag muss jedes Vorkommen eines wiederkehrenden Termins quittiert
+ * werden. Frühere Vorkommen sind nicht erfasst — ob sie erledigt wurden, sagt
+ * diese Datei nicht. Wird von scripts/check-termine.mjs per Regex gelesen:
+ * Schreibweise nicht ändern.
+ */
+export const QUITTUNGSPFLICHT_AB = '2026-10-06';
 
 export const TERMINE: Termin[] = [
   {
@@ -158,6 +182,9 @@ export const TERMINE: Termin[] = [
     bereich: 'Gesetzeswerte',
     was: 'Neue BBG-Werte (RV und KV/PV, Monat und Jahr) sowie Durchschnittsentgelt beobachten, Switch auf 01.01. vorbereiten.',
     quelle: 'docs/jahreswerte-kalender.md, Dezember-Audit Punkt 3',
+    quittiertVorkommen: '2026-10-01',
+    quittiertAm: '2026-10-01',
+    quittungVermerk: 'Referentenentwurf gesichtet; Folgearbeit als Einmaltermin sv-rechengroessen-2027-verfahren (15.10.2026) angelegt, Commit 78a84c7.',
   },
   {
     id: 'sv-rechengroessen-2027-verfahren',
@@ -187,6 +214,9 @@ export const TERMINE: Termin[] = [
     bereich: 'Gesetzeswerte',
     was: 'Zweijährliche Fortschreibung zum 01.01. Höchstbeträge Anlage 1 WoGG, Koeffizienten, Freibeträge § 17, Heiz- und Klimakomponente.',
     quelle: 'docs/jahreswerte-kalender.md, Abschnitt Wohngeld-Dynamisierung',
+    quittiertVorkommen: '2026-10-01',
+    quittiertAm: '2026-10-01',
+    quittungVermerk: 'Keine Fortschreibung zum 01.01.2027 (BT-Drs. 21/8284); Folgearbeit als Einmaltermin wohngeld-2027-gesetzgebung (02.11.2026), Commit 78a84c7.',
   },
   {
     id: 'wohngeld-2027-gesetzgebung',
@@ -273,8 +303,11 @@ export const TERMINE: Termin[] = [
     vorlaufTage: 7,
     wiederholungMonate: 3,
     bereich: 'Recht',
-    was: 'Nachsehen, ob der Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 zum EU-US Data Privacy Framework noch in Kraft ist. Anlass: Der US Supreme Court hat am 29.06.2026 in Trump v. Slaughter die Unabhängigkeit der FTC verneint; der EDSA hat die Kommission am 31.07.2026 zur Prüfung der Folgen aufgefordert. Fällt der Beschluss, müssen die Abschnitte 5, 6 und 11 der Datenschutzerklärung noch am selben Tag auf Art. 46 Abs. 2 lit. c DSGVO umgestellt werden — die Standardvertragsklauseln liegen bei Vercel, Hostinger und Plus Five Five, Inc. (Resend) vertraglich bereits vor. Zusätzlich bei jedem Durchlauf den Listenstatus der beiden US-Unterauftragnehmer von Hostinger prüfen: Cloudflare, Inc. ist am 23.09.2026 zur Erneuerung fällig, Proofpoint, Inc. stand am 04.09.2026 auf Active mit dem Unterstatus Re-certification under Review, nächste Fälligkeit 24.04.2027. Ebenso den Listenstatus von Plus Five Five, Inc. (Resend, Teilnehmer Nr. 8907) prüfen: am 11.09.2026 Active mit dem Unterstatus Re-certification under Review, nächste Fälligkeit 03.03.2027. Deshalb liegt der erste Durchlauf auf dem 24.09.2026 und nicht im Dezember.',
+    was: 'Nachsehen, ob der Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 zum EU-US Data Privacy Framework noch in Kraft ist. Anlass: Der US Supreme Court hat am 29.06.2026 in Trump v. Slaughter die Unabhängigkeit der FTC verneint; der EDSA hat die Kommission am 31.07.2026 zur Prüfung der Folgen aufgefordert. Fällt der Beschluss, müssen die Abschnitte 5, 6 und 11 der Datenschutzerklärung noch am selben Tag auf Art. 46 Abs. 2 lit. c DSGVO umgestellt werden — die Standardvertragsklauseln liegen bei Vercel, Hostinger und Plus Five Five, Inc. (Resend) vertraglich bereits vor. Zusätzlich bei jedem Durchlauf den Listenstatus der beiden US-Unterauftragnehmer von Hostinger prüfen: Cloudflare, Inc. stand am 05.10.2026 auf Active mit dem Unterstatus Re-certification under Review, nächste Fälligkeit 15.09.2027; Proofpoint, Inc. am selben Tag unverändert, nächste Fälligkeit 24.04.2027. Ebenso den Listenstatus von Plus Five Five, Inc. (Resend, Teilnehmer Nr. 8907) prüfen: am 11.09.2026 Active mit dem Unterstatus Re-certification under Review, nächste Fälligkeit 03.03.2027. Deshalb liegt der erste Durchlauf auf dem 24.09.2026 und nicht im Dezember.',
     quelle: 'app/datenschutz/page.tsx, Abschnitte 5, 6 und 11',
+    quittiertVorkommen: '2026-09-24',
+    quittiertAm: '2026-10-05',
+    quittungVermerk: 'Teilnehmerliste am 05.10.2026 gelesen: Cloudflare (Fälligkeit 15.09.2027), Proofpoint (24.04.2027) und Resend (03.03.2027) aktiv; der Angemessenheitsbeschluss steht in der Liste der Kommission. Nachgezogen im Verarbeitungsverzeichnis v14.',
   },
   {
     id: 'hostinger-unterauftragnehmer',
@@ -342,25 +375,43 @@ export function naechstesVorkommen(termin: Termin, heuteIso: string): string {
   return aktuell.iso;
 }
 
+/**
+ * Das Vorkommen, das als nächstes erledigt werden muss. Einmaltermine: ihr
+ * Datum. Wiederkehrende: das erste Vorkommen ab QUITTUNGSPFLICHT_AB, das nach
+ * `quittiertVorkommen` liegt. Hängt bewusst nicht vom heutigen Tag ab — ein
+ * nicht quittiertes Vorkommen bleibt stehen, auch wenn es vorbei ist.
+ */
+export function offenesVorkommen(termin: Termin): string {
+  if (!termin.wiederholungMonate) return termin.datum;
+  let grenze = QUITTUNGSPFLICHT_AB;
+  if (termin.quittiertVorkommen) {
+    const tagDanach = new Date(tagesbeginn(termin.quittiertVorkommen) + 86400000)
+      .toISOString()
+      .slice(0, 10);
+    if (tagDanach > grenze) grenze = tagDanach;
+  }
+  return naechstesVorkommen(termin, grenze);
+}
+
 export interface Terminlage {
-  ueberfaellig: { termin: Termin; datum: string; tage: number }[];
+  ueberfaellig: { termin: Termin; datum: string; tage: number; unquittiert: boolean }[];
   faellig: { termin: Termin; datum: string; tage: number }[];
 }
 
 /**
- * `ueberfaellig`: Datum liegt vor heute (nur Einmaltermine können das erreichen).
+ * `ueberfaellig`: Datum liegt vor heute (Einmaltermine nach Ablauf, wiederkehrende ab QUITTUNGSPFLICHT_AB bis zur Quittung).
  * `faellig`:      Datum liegt innerhalb des Vorlauffensters.
  * Alles Weitere wird bewusst nicht gemeldet — die Mail soll kurz bleiben.
  */
-export function getTerminlage(heuteIso: string): Terminlage {
+export function getTerminlage(heuteIso: string, termine: Termin[] = TERMINE): Terminlage {
   const heute = tagesbeginn(heuteIso);
   const ueberfaellig: Terminlage['ueberfaellig'] = [];
   const faellig: Terminlage['faellig'] = [];
 
-  for (const termin of TERMINE) {
-    const datum = naechstesVorkommen(termin, heuteIso);
+  for (const termin of termine) {
+    const datum = offenesVorkommen(termin);
     const tage = Math.round((tagesbeginn(datum) - heute) / 86400000);
-    if (tage < 0) ueberfaellig.push({ termin, datum, tage });
+    if (tage < 0) ueberfaellig.push({ termin, datum, tage, unquittiert: !!termin.wiederholungMonate });
     else if (tage <= termin.vorlaufTage) faellig.push({ termin, datum, tage });
   }
 

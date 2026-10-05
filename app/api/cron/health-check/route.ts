@@ -135,7 +135,7 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     for (const e of lage.ueberfaellig) {
       lines.push(
         '',
-        `🔴 ÜBERFÄLLIG seit ${Math.abs(e.tage)} Tagen (${e.datum}) — [${e.termin.bereich}${e.termin.projekt ? ' · ' + e.termin.projekt : ''}] ${e.termin.titel}`,
+        `🔴 ÜBERFÄLLIG seit ${Math.abs(e.tage)} Tagen (${e.datum}) — [${e.termin.bereich}${e.termin.projekt ? ' · ' + e.termin.projekt : ''}] ${e.termin.titel}${e.unquittiert ? ' · wiederkehrend, nicht quittiert' : ''}`,
         `   ${e.termin.was}`,
         ...(e.termin.quelle ? [`   Quelle: ${e.termin.quelle}`] : []),
       );
@@ -148,7 +148,7 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
         ...(e.termin.quelle ? [`   Quelle: ${e.termin.quelle}`] : []),
       );
     }
-    lines.push('', 'Gepflegt in lib/termine.ts. Erledigte Einmaltermine dort entfernen.');
+    lines.push('', 'Gepflegt in lib/termine.ts. Erledigte Einmaltermine dort entfernen, erledigte wiederkehrende dort quittieren (quittiertVorkommen, quittiertAm, quittungVermerk). Ohne Quittung bleibt ein Vorkommen ab dem Folgetag ÜBERFÄLLIG.');
   }
 
   // Letzte Zeile, in jeder Mail — die Berichtswache liest sie mechanisch.
