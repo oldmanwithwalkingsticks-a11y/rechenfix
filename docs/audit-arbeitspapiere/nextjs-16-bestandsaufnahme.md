@@ -495,6 +495,16 @@ Sitzung**. Hier gegen das Repository gehalten.
 | `/opengraph-image` antwortet mit HTTP 200 | `app/opengraph-image.tsx` existiert, `runtime = 'edge'` (Z. 3) | **passt**; der Statuscode selbst wurde hier nicht neu gemessen |
 | Kein `x-middleware-*`-Header | Weder `middleware.*` noch `proxy.*` im Repository | **bestätigt:** Es gibt keine Middleware. Der fehlende Header allein hätte das nicht bewiesen. |
 
+### 6.8 Nachschau vom 08.10.2026
+
+Gemessen in einer Chat-Sitzung am 08.10.2026 von außen, **nicht in dieser Sitzung**.
+
+- Die beiden am 30.09.2026 zurückgehaltenen Lücken (1 kritisch, 1 hoch) sind **nicht veröffentlicht**.
+- Next.js-Blog: letzter Sicherheitsbeitrag „September 2026 Security Release“ vom 30.09.2026. Danach nur „Next.js 16.4“ vom 06.10.2026, ein Funktionsrelease ohne Sicherheitshinweis.
+- npm: nach `16.3.8` (30.09.2026) kein 16.3.x-Release; `latest` ist `16.4.0` (06.10.2026), `backport` ist `15.5.27`.
+- rechenfix läuft seit der Migration (Abschnitt 8) auf `16.3.8`. Die Angabe „gegen 14.2.35 und gegen die Zielversion der Migration“ in 6.6 ist damit überholt; maßgeblich ist `16.3.8`. 6.6 bleibt als Stand vom 01.10.2026 stehen.
+- Folgetermin `nextjs-zurueckgehaltene-advisories` auf den 15.10.2026 verschoben.
+
 ---
 
 ## 7. Folgewellen

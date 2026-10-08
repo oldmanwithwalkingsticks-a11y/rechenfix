@@ -45,7 +45,7 @@ export const autoRechner: RechnerConfig[] = [
     icon: '⛽',
     beispiel: 'Beispiel: 250 km bei 7,5 L/100km und 1,65 €/L = (250 ÷ 100) × 7,5 × 1,65 = 30,94 €',
     // W19-Pilot → Goldstandard (~1.500 W): Modulare Content-Bausteine. Benzin/Diesel-Werte
-    // aus SPRITPREISE_REFERENZ (ADAC-Bundesschnitt, Stand 12.08.2026) zur Build-Zeit eingesetzt.
+    // aus SPRITPREISE_REFERENZ (ADAC-Bundesschnitt, Stand laut SPRITPREISE_REFERENZ.stand) zur Build-Zeit eingesetzt.
     // Strom-Vergleich: Haushaltsstrompreis aus STROMPREIS_2026.durchschnitt_bdew
     // (BDEW 04/2026), Verbrauchsannahme ~18 kWh/100km. Nicht hartkodieren.
     // — im Text als Annahme gekennzeichnet, reine Energiekosten ohne Anschaffung/Steuer/Wartung.
