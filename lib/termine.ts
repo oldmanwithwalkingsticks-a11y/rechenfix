@@ -128,6 +128,15 @@ export const TERMINE: Termin[] = [
     was: 'Abrechnung läuft automatisch am 30. jedes Monats. Vierteljährlich statt monatlich erinnert, weil die Abbuchung selbst keine Handlung erfordert — geprüft werden Verbrauch, Rechnungshöhe und ob der Tarif noch passt.',
   },
   {
+    id: 'vercel-deployment-storage',
+    titel: 'Vercel Deployment Storage nach der 30-Tage-Umstellung prüfen',
+    datum: '2026-10-26',
+    vorlaufTage: 2,
+    bereich: 'Betrieb',
+    was: 'Vercel hat die Aufbewahrung von Deployments am 23.10.2026 auf 30 Tage gesenkt (Mail vom 10.10.2026, Opt-out bewusst nicht gewählt: er hätte die Speicherabrechnung für alle Projekte sofort gestartet). Prüfen: Deployment- und Functions-Storage-Verbrauch im Team-Dashboard unter Usage, und ob Vercel die angekündigte zweite Nachricht vor dem Abrechnungsstart geschickt hat. Preis laut Mail 0,10 $ pro GB und Monat je Speicherart, vor Nutzungsguthaben. Die 10 neuesten Production-Deployments und alle Deployments mit Alias sind von der Aufbewahrung ausgenommen. Nach der Prüfung Termin schließen.',
+    quelle: 'Vercel-Mail vom 10.10.2026 (Deployment Storage pricing)',
+  },
+  {
     id: 'awin-programme',
     titel: 'AWIN-Programme auf Aktivität prüfen',
     datum: '2026-09-01',
