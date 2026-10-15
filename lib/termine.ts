@@ -174,6 +174,15 @@ export const TERMINE: Termin[] = [
     quelle: 'npm-Advisories-Welle (Welle 156), docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md Abschnitt 8.8',
   },
   {
+    id: 'npm-audit-buildwerkzeuge',
+    titel: 'npm audit: Meldungen der Build-Werkzeuge prüfen',
+    datum: '2026-11-02',
+    vorlaufTage: 0,
+    bereich: 'Betrieb',
+    was: 'Stand 15.10.2026 (Welle 159): npm audit meldet 9 Pakete, alle unter devDependencies (tailwindcss, eslint-config-next und deren Abhängigkeiten), next nicht. Ursache sind braces (GHSA-vfj7-8cjw-p6xm, betroffen bis 3.0.3, kein Fix veröffentlicht) und postcss-selector-parser (GHSA-rj75-hqrm-r3gf, behoben erst in 7.1.6, tailwindcss 3.4.19 verlangt ^6.1.2). Prüfen, ob es braces nach 3.0.3 gibt oder eine tailwindcss 3.4 mit postcss-selector-parser ab 7.1.6. Wenn ja: npm audit fix ohne --force, Ergebnis in nextjs-16-bestandsaufnahme.md Abschnitt 10 nachtragen. Wenn nein: um einen Monat verschieben. Tailwind 4 ist eine eigene Welle und nicht Teil dieses Termins.',
+    quelle: 'Welle 159, docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md Abschnitt 10',
+  },
+  {
     id: 'sv-rechengroessen',
     titel: 'SV-Rechengrößenverordnung Folgejahr',
     datum: '2026-10-01',
