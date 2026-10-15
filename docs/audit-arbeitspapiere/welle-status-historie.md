@@ -6,6 +6,39 @@
 
 ---
 
+## 15.10.2026 — Welle 159: npm-Meldungen der Build-Werkzeuge — source-map-js 1.2.2, der Rest ohne Fix — 🟡 OFFEN
+
+**Anlass:** `npm audit` meldete nach Welle 158 zehn Pakete (8 hoch, 2 mittel), alle unter
+`devDependencies`, `next` nicht darunter. Nach Welle 156 waren es 0.
+
+**Änderungen:**
+- `source-map-js` 1.2.1 → 1.2.2 per `npm audit fix` ohne `--force`, sonst keine Fassung;
+  `package.json` unverändert.
+- Termin `npm-audit-buildwerkzeuge` am 02.11.2026 in `lib/termine.ts`.
+- Bestandsaufnahme 9.7 mit dem Produktionsstand von Welle 158 (Deployment READY, `next` 16.4.1 live).
+
+**Entscheidungen:**
+- Für `braces` (GHSA-vfj7-8cjw-p6xm) gibt es keinen Fix, 3.0.3 ist die neueste Fassung; sieben der übrigen
+  Meldungen hängen daran.
+- Kein Override für `postcss-selector-parser`: 7.1.6 läge außerhalb der Bereiche, die `tailwindcss` 3.4.19
+  und `postcss-nested` 6.2.0 verlangen.
+- Tailwind 4 ist eine eigene Welle; npm nennt `tailwindcss@4.3.3` als Behebung, zieht damit aber nicht
+  alle gemeldeten Pakete nach.
+
+**Ergebnis:**
+- Lockfile-Vergleich: genau `node_modules/source-map-js: 1.2.1 -> 1.2.2`. `npm ci` läuft durch.
+- `check-termine` ohne Meldung, `verify-termine` 12/12 grün.
+- Build grün, 271 Seiten, `sw.js` 131.355 B, keine neuen Warnungen.
+- Lokal: `/` 200, `/sw.js` 200, `/api/stats` ohne Cookie 401, MDX-Blogseite 200,
+  `/finanzen/kreditrechner` 200, Bildoptimierer mit Browser-`Accept` 200 `image/webp`.
+- `npm audit` 10 → 9 (7 hoch, 2 mittel), `source-map-js` nicht mehr darunter, kein Paket hinzugekommen.
+
+**Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitte 9.7 und 10.
+
+**Offen:** Vercel-Build des Pushes.
+
+---
+
 ## 15.10.2026 — Welle 158: Next.js 16.4.1 nach den Advisories vom 14.10.2026 — 🟡 OFFEN
 
 **Anlass:** Next.js 16.4.1 vom 14.10.2026 behebt drei Advisories (GHSA-673q-mjm6-r5xr und
@@ -36,7 +69,8 @@ nachgezogen wird trotzdem.
 
 **Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitte 6.9 und 9.
 
-**Offen:** Deployment auf Vercel, `next.version` live 16.4.1, Betriebsmeldung am Folgetag mit `ki_fehler=0`. Wird nach der Prüfung nachgetragen.
+**Offen:** Betriebsmeldung vom 16.10.2026 mit `ki_fehler=0`. Deployment READY und `next` 16.4.1 live sind
+am 15.10.2026 bestätigt (Bestandsaufnahme 9.7).
 
 ---
 

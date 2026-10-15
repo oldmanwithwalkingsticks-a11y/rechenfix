@@ -1006,7 +1006,120 @@ dieser Welle.
 
 ### 9.7 Produktion
 
-Offen: Deployment auf Vercel, `next.version` live 16.4.1, Betriebsmeldung am Folgetag mit `ki_fehler=0`. Wird nach der Prüfung nachgetragen.
+Gemessen in einer Chat-Sitzung am 15.10.2026, **nicht in dieser Sitzung**:
+
+- **Vercel:** Deployment `dpl_38WUtCJbVamavrwqcHnHn7t4cELy` zu `1718d95`, Ziel `production`, Zustand
+  READY, angelegt am 15.10.2026 um 13:38:58 Uhr MESZ, Alias `www.rechenfix.de`. Es ist die einzige
+  Deployment für den Push `de93266..1718d95`.
+- **Live:** Im ausgelieferten Chunk `/_next/static/chunks/8755-a4568fb7547965cd.js` steht
+  `version:"16.4.1"`. `/` 200 (236.430 B), `/blog/warum-1-terabyte-nur-931-gigabyte-sind` 200
+  (282.313 B), Bildoptimierer mit Browser-`Accept` 200 `image/webp`, `/finanzen/kreditrechner` 200
+  (280.852 B) mit „Achtung! Kreditaufnahme kostet Geld.“ genau einmal, im Kasten „Anzeige“
+  (`data-kreditwarnung` einmal).
+- **Offen:** Betriebsmeldung vom 16.10.2026 mit `ki_proben=2` und `ki_fehler=0`.
+
+---
+
+## 10. npm-Meldungen der Build-Werkzeuge (Welle 159, 15.10.2026)
+
+**Anlass:** `npm audit` meldet seit Welle 158 zehn Pakete, 8 hoch und 2 mittel (9.1, 9.6). Nach Welle 156
+waren es 0 (8.8). `next` ist nicht darunter.
+
+### 10.1 Ausgangslage
+
+Gemessen in einer Chat-Sitzung am 15.10.2026 gegen den Lockfile von `1718d95` (`npm audit
+--package-lock-only`, Abfragen an die npm-Registry), **nicht in dieser Sitzung**. Dieser Lauf misst in
+10.3 nach.
+
+| Paket (installiert) | Schwere | Ursache | Behebung |
+|---|---|---|---|
+| `source-map-js` 1.2.1 | hoch | GHSA-68fv-2mgg-jv7q, betroffen `>=1.0.0 <1.2.2` | 1.2.2 vom 30.09.2026, im Bereich von `postcss`; `npm audit fix` |
+| `braces` 3.0.3 | hoch | GHSA-vfj7-8cjw-p6xm, betroffen `<=3.0.3` | **keine** — 3.0.3 ist die neueste Fassung |
+| `micromatch` 4.0.8 | hoch | über `braces` | keine — neueste Fassung, verlangt `braces` `^3.0.3` |
+| `chokidar` 3.6.0 | hoch | über `braces` | keine innerhalb von `tailwindcss` 3.4 (verlangt `^3.6.0`) |
+| `fast-glob` 3.3.1 und 3.3.3 | hoch | über `micromatch` | keine — 3.3.3 ist die neueste Fassung |
+| `@next/eslint-plugin-next` 16.4.1 | hoch | verlangt genau `fast-glob` 3.3.1 | keine |
+| `eslint-config-next` 16.4.1 | hoch | über `@next/eslint-plugin-next` | npm nennt `eslint-config-next@14.2.35` — eine Rückstufung, ausgeschlossen |
+| `tailwindcss` 3.4.19 | hoch | über `chokidar`, `fast-glob`, `micromatch`, `postcss-nested`, `postcss-selector-parser` | npm nennt `tailwindcss@4.3.3` — Hauptversionssprung, eigene Welle |
+| `postcss-selector-parser` 6.1.4 | mittel | GHSA-rj75-hqrm-r3gf, betroffen `<7.1.6` | nur 7.1.6; in der Linie 6 ist 6.1.4 die neueste, `tailwindcss` 3.4.19 verlangt `^6.1.2`, `postcss-nested` 6.2.0 `^6.1.1` |
+| `postcss-nested` 6.2.0 | mittel | über `postcss-selector-parser` | nur Hauptversion 7 oder 8 |
+
+**Einordnung:** Alle zehn hängen an `devDependencies` (`tailwindcss`, `postcss`, `eslint-config-next`) und
+laufen nur im Build und im Lint. Die drei Lücken sind Denial-of-Service-Formen über präparierte Eingaben
+(Klammermuster, Selektoren, Source Maps). Die Eingaben im Build sind die eigenen Dateien des Repositorys.
+Keine Wirkung zur Laufzeit von www.rechenfix.de.
+
+### 10.2 Entscheidung
+
+1. **`npm audit fix` ohne `--force`.** Behebt `source-map-js` (1.2.1 → 1.2.2) und sonst nichts. In der
+   Chat-Sitzung an einer Kopie des Lockfiles geprüft: eine geänderte Fassung, `package.json` unverändert,
+   danach 9 Meldungen, 7 hoch und 2 mittel.
+2. **Kein Override für `postcss-selector-parser`.** 7.1.6 läge außerhalb der Bereiche, die `tailwindcss`
+   3.4.19 und `postcss-nested` 6.2.0 verlangen. Ob Tailwind 3.4 mit der Hauptversion 7 richtig arbeitet,
+   ist nicht geprüft, und die Lücke betrifft nur eigene CSS-Dateien im Build. Anders lag es bei
+   `browserslist` in 8.8: eine Nebenversion innerhalb von 4.x.
+3. **Für `braces` gibt es keinen Fix.** Die Meldungen zu `micromatch`, `chokidar`, `fast-glob`,
+   `@next/eslint-plugin-next`, `eslint-config-next` und `tailwindcss` hängen daran, die beiden letzten
+   zusätzlich an `postcss-selector-parser`.
+4. **Tailwind 4 ist eine eigene Welle.** npm nennt `tailwindcss@4.3.3` als Behebung; diese Fassung zieht die
+   gemeldeten Pakete also nicht nach. `@next/eslint-plugin-next` bliebe über `fast-glob` gemeldet.
+5. **Termin `npm-audit-buildwerkzeuge` am 02.11.2026** in `lib/termine.ts`: nachsehen, ob es `braces` nach
+   3.0.3 gibt oder eine `tailwindcss` 3.4 mit `postcss-selector-parser` ab 7.1.6.
+
+### 10.3 Durchführung
+
+Gemessen in dieser Sitzung am 15.10.2026 auf `main` `1718d95`, nach `npm ci` (`next` 16.4.1). Windows,
+Node v24.14.1, npm 11.11.0.
+
+**Audit vorher:** `npm audit --json`, ausgewertet mit Python (`metadata.vulnerabilities`, Paketliste):
+
+```
+gesamt 10 {'critical': 0, 'high': 8, 'moderate': 2, 'low': 0}
+['@next/eslint-plugin-next', 'braces', 'chokidar', 'eslint-config-next', 'fast-glob', 'micromatch', 'postcss-nested', 'postcss-selector-parser', 'source-map-js', 'tailwindcss']
+```
+
+Das deckt sich mit 10.1.
+
+**`npm audit fix`** ohne `--force`. Danach der Vergleich aller `packages`-Fassungen zwischen der Kopie
+des alten Lockfiles und dem neuen:
+
+```
+node_modules/source-map-js: 1.2.1 -> 1.2.2
+```
+
+Sonst ändert sich keine Fassung. `git diff --stat -- package.json` ohne Ausgabe, `package.json` ist
+unverändert. `npm ci` danach mit Rückgabewert 0. Das Ergebnis gleicht der Probe der Chat-Sitzung mit
+npm 10.9.4.
+
+**Build:** `npm run build` grün, „Compiled successfully in 9.1s“, **271 Seiten** („Generating static
+pages using 15 workers (271/271)“), `wc -c < public/sw.js` **131.355 B**, beides wie Welle 158. **Keine
+neuen Warnungen:** Lint 0 Fehler, 2 Warnungen `react-hooks/exhaustive-deps`; „The Edge Runtime is
+deprecated“; „Using edge runtime on a page currently disables static generation for that page“.
+
+**Server lokal** (`npm start`), je `curl -s -o /dev/null -w "%{http_code} %{content_type}
+%{size_download}"`, der Bildoptimierer mit `-H "Accept: image/avif,image/webp,image/apng,image/*,*/*;q=0.8"`:
+
+| Pfad | Status | Content-Type | Bytes |
+|---|---|---|---|
+| `/` | 200 | `text/html; charset=utf-8` | 235.286 |
+| `/sw.js` | 200 | `application/javascript; charset=UTF-8` | 131.355 |
+| `/api/stats` ohne Cookie | 401 | `application/json` | 24 |
+| `/blog/warum-1-terabyte-nur-931-gigabyte-sind` (MDX) | 200 | `text/html; charset=utf-8` | 280.236 |
+| `/finanzen/kreditrechner` | 200 | `text/html; charset=utf-8` | 279.511 |
+| `/_next/image?url=%2Fabout%2Fkarsten-kautz-v3.webp&w=640&q=75` (Browser-`Accept`) | 200 | `image/webp` | 73.736 |
+
+Der Server ist danach beendet, der Node-Prozess auf Port 3000 per `taskkill`, Port 3000 frei.
+
+**Audit nachher** (Befehl wie vorher):
+
+```
+gesamt 9 {'critical': 0, 'high': 7, 'moderate': 2, 'low': 0}
+['@next/eslint-plugin-next', 'braces', 'chokidar', 'eslint-config-next', 'fast-glob', 'micromatch', 'postcss-nested', 'postcss-selector-parser', 'tailwindcss']
+```
+
+Dieselben Pakete wie vorher ohne `source-map-js`, keines hinzugekommen.
+
+Offen: Vercel-Build des Pushes. Die übrigen neun Meldungen führt der Termin `npm-audit-buildwerkzeuge` (02.11.2026).
 
 ---
 
