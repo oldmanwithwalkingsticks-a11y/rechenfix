@@ -505,6 +505,41 @@ Gemessen in einer Chat-Sitzung am 08.10.2026 von außen, **nicht in dieser Sitzu
 - rechenfix läuft seit der Migration (Abschnitt 8) auf `16.3.8`. Die Angabe „gegen 14.2.35 und gegen die Zielversion der Migration“ in 6.6 ist damit überholt; maßgeblich ist `16.3.8`. 6.6 bleibt als Stand vom 01.10.2026 stehen.
 - Folgetermin `nextjs-zurueckgehaltene-advisories` auf den 15.10.2026 verschoben.
 
+### 6.9 Veröffentlichung vom 14.10.2026
+
+Gemessen in einer Chat-Sitzung am 15.10.2026, **nicht in dieser Sitzung**. Die Einordnung gegen das
+Repository misst Welle 158 nach (Abschnitt 9.2).
+
+- **npm:** `16.4.1` (14.10.2026, 17:43 UTC, `latest`) und `15.5.28` (14.10.2026, 17:36 UTC,
+  `backport`). **Kein 16.3.x nach `16.3.8`.** Die Annahme im Termin vom 08.10.2026, es komme eine
+  Patchversion der Linie 16.3, trägt nicht. `@next/mdx` und `eslint-config-next` gibt es ebenfalls als
+  16.4.1. Die Peer-Bereiche von `next` 16.4.1 (`react` und `react-dom` `^19.0.0`) und `engines`
+  (`node >=20.9.0`) sind dieselben wie bei 16.3.8; `next` verlangt `sharp` `^0.35.5` (16.3.8: `^0.35.4`).
+- **Release `v16.4.1`** (GitHub, 14.10.2026): Sicherheitskorrekturen für **drei** Advisories, zwei
+  kritisch und eines hoch, nicht zwei wie am 30.09.2026 angekündigt (6.6). Welche davon die
+  zurückgehaltenen sind, sagt das Release nicht.
+
+| GHSA | Schwere | Titel | betroffen | behoben | Voraussetzung nach Advisory |
+|---|---|---|---|---|---|
+| GHSA-673q-mjm6-r5xr | kritisch, CVSS 4.0: 9,5 | Unauthenticated Remote Code Execution in `use cache` functions returning typed arrays | `>=16.0.0 <= 16.4.0` | 16.4.1 | App Router mit Cache Components und eine `use cache`-Funktion, die mehrere Typed Arrays zurückgibt. Kein Workaround; das Advisory empfiehlt das Upgrade auch ohne solche Funktionen. |
+| GHSA-2464-fhr4-w9xw (CVE-2026-96889) | kritisch, 9,5 | Unauthenticated Remote Code Execution in Image Optimization API when SVG files are used | `>= 10.0.0 <= 15.5.27`, `> 16.0.0 <= 16.4.0` | 15.5.28, 16.4.1 | Bildoptimierung auf glibc-Linux, Fehler in der vorgelagerten Bildbibliothek. Abhilfe: `sharp` ≥ 0.35.5. |
+| GHSA-p3m5-59mp-jv5r | hoch, 8,2 | Denial of Service in App Router using Server Actions | `>=13.0.0 <= 15.5.27`, `>= 16.0.0 <= 16.4.0` | 15.5.28, 16.4.1 | App Router mit mindestens einer Server Action. Kein Workaround. |
+
+**Einordnung gegen rechenfix** (Repository `de93266`, Chat-Sitzung 15.10.2026):
+
+- **GHSA-673q-mjm6-r5xr — nicht einschlägig.** `use cache` kommt im Code nicht vor, `cacheComponents`
+  steht nicht in `next.config.mjs`.
+- **GHSA-2464-fhr4-w9xw — geschlossen.** `_next/image` ist in Gebrauch (6.7). `sharp` steht seit Welle 156
+  auf 0.35.5, eine einzige Kopie, die `next` mitnutzt (8.8). Die Abhilfe des Advisories ist erfüllt.
+- **GHSA-p3m5-59mp-jv5r — nicht einschlägig.** Kein `'use server'` im Code, `server-reference-manifest.json`
+  leer (6.4, 6.7).
+
+**Entscheidung:** Nach der Regel aus 6.5 ist keines der drei einschlägig oder offen, ein Vorziehen ist
+nicht erzwungen. Trotzdem Nachzug auf **16.4.1** (Welle 158, Abschnitt 9): Für 16.3 erscheint kein Patch,
+GHSA-673q-mjm6-r5xr empfiehlt das Upgrade ausdrücklich auch ohne die Voraussetzung, und `npm audit` meldet
+`next` 16.3.8, sobald die Advisories in der Datenbank stehen (gemessen in 9.1). Der Termin
+`nextjs-zurueckgehaltene-advisories` ist erledigt und aus `lib/termine.ts` entfernt.
+
 ---
 
 ## 7. Folgewellen
@@ -850,6 +885,128 @@ Lockfile durch. Unverändert: `next` und `eslint-config-next` 16.3.8, `@next/mdx
   würde, wird nicht aufgerufen.
 
 **Reste:** keine. Ob `resend` 6.32.0 trägt, zeigt die Betriebsmeldung am Folgetag.
+
+---
+
+## 9. Nachzug auf 16.4.1 (Welle 158, 15.10.2026)
+
+Gemessen in dieser Sitzung am 15.10.2026 auf `main` `de93266` (vorher) und dem Arbeitsbaum der Welle
+(nachher). Windows, Node v24.14.1, npm 11.11.0.
+
+### 9.1 npm audit gegen 16.3.8 (vorher)
+
+Befehl: `npm audit --json`, ausgewertet mit Python (`metadata.vulnerabilities`, Eintrag `next`), auf dem
+installierten Baum mit `next` 16.3.8.
+
+```
+gesamt 10 {'critical': 0, 'high': 8, 'moderate': 2, 'low': 0}
+next: nicht gemeldet
+```
+
+Gemeldete Pakete: `@next/eslint-plugin-next`, `braces`, `chokidar`, `eslint-config-next`, `fast-glob`,
+`micromatch`, `postcss-nested`, `postcss-selector-parser`, `source-map-js`, `tailwindcss`. Das deckt sich
+mit der Messung der Chat-Sitzung (`--package-lock-only`). Die Advisories aus 6.9 stehen am 15.10.2026 noch
+nicht in der Datenbank, `npm audit` meldet `next` 16.3.8 nicht.
+
+### 9.2 Einordnung nachgemessen
+
+Befehle: `grep -rl` über `app lib components hooks` (`*.ts`, `*.tsx`, `*.js`, `*.mjs`) nach `'use cache'`/`"use cache"`
+und `'use server'`/`"use server"`, `grep -c cacheComponents next.config.mjs`, `sharp`-Einträge aus
+`package-lock.json`.
+
+```
+use cache: 0
+use server: 0
+cacheComponents: 0
+sharp [('node_modules/sharp', '0.35.5')]
+```
+
+Die Einordnung aus 6.9 trägt: Für GHSA-673q-mjm6-r5xr und GHSA-p3m5-59mp-jv5r fehlt die Voraussetzung,
+für GHSA-2464-fhr4-w9xw ist die Abhilfe (`sharp` ≥ 0.35.5) erfüllt.
+
+### 9.3 Änderung
+
+| Paket | vorher | nachher |
+|---|---|---|
+| `next` | 16.3.8 | 16.4.1 |
+| `@next/mdx` | 16.3.8 | 16.4.1 |
+| `eslint-config-next` | 16.3.8 | 16.4.1 |
+| `sharp` | 0.35.5, eine Kopie | 0.35.5, eine Kopie |
+| `react` | 19.3.0 | 19.3.0 |
+| `react-dom` | 19.3.0 | 19.3.0 |
+
+Weg: `package.json` von Hand (Änderungsskript, drei feste Fassungen), `package-lock.json` per
+`npm install` („changed 6 packages“, 55 Zeilen geändert), danach `npm ci` mit Rückgabewert 0.
+
+Der Versionsbefehl `node -p "require(p+'/package.json').version"` scheitert an `eslint-config-next`:
+`ERR_PACKAGE_PATH_NOT_EXPORTED`, das Paket gibt `./package.json` nicht über `exports` frei. Die Fassungen
+sind deshalb mit `fs.readFileSync('node_modules/<Paket>/package.json')` gelesen und im Lockfile
+gegengeprüft (`node_modules/next`, `node_modules/@next/mdx`, `node_modules/eslint-config-next` je 16.4.1).
+
+### 9.4 MDX-Workaround ohne Hook
+
+Der Block von `// WORKAROUND MDX-Seiten` bis vor `// Komprimierung aktivieren` (37 Zeilen) entfernt,
+`npm run build`: **Rückgabewert 1**, „Failed to compile“, „Build failed because of webpack errors“. Fünf
+Meldungen derselben Art, alle zu `app/blog/**/page.mdx`. Die erste wörtlich:
+
+```
+./app/blog/warum-das-bankjahr-360-tage-hat/page.mdx
+Error:   x You are attempting to export "metadata" from a component marked with "use client", which is disallowed. "metadata" must be resolved on the server before the page component is rendered. Keep your page as a Server Component and move Client Component logic to a separate file. Read more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#why-generatemetadata-is-server-component-only
+```
+
+Der Workaround bleibt. `next.config.mjs` ist aus der Sicherung zurückgeschrieben (`sha256sum` wieder
+`56f5b957…07f5`) und trägt unter „Getestet mit next 16.3.6 …“ die Zeile „Ohne Hook erneut gebaut mit
+next 16.4.1 am 15.10.2026: scheitert weiter (Welle 158).“
+
+### 9.5 Build, sw.js, Server
+
+`npm run build` mit Hook: grün, „Compiled successfully in 22.9s“, **271 Seiten** („Generating static
+pages using 15 workers (271/271)“), wie Welle 156. `wc -c < public/sw.js`: **131.355 B** (Welle 156:
+131.366 B).
+
+**Keine neuen Warnungen.** Es stehen die bekannten: Lint 0 Fehler, 2 Warnungen
+`react-hooks/exhaustive-deps`; „The Edge Runtime is deprecated“; „Using edge runtime on a page currently
+disables static generation for that page“. Die Spritpreis-Warnung aus der Grundlinie (8.4) erscheint in
+diesem Lauf nicht.
+
+Server lokal (`npm start`), je `curl -s -o /dev/null -w "%{http_code} %{content_type} %{size_download}"`
+ohne eigene Kopfzeilen:
+
+| Pfad | Status | Content-Type | Bytes |
+|---|---|---|---|
+| `/` | 200 | `text/html; charset=utf-8` | 235.286 |
+| `/_next/image?url=%2Fabout%2Fkarsten-kautz-v3.webp&w=640&q=75` | 200 | `image/jpeg` | 55.774 |
+| `/sw.js` | 200 | `application/javascript; charset=UTF-8` | 131.355 |
+| `/api/stats` ohne Cookie | 401 | `application/json` | 24 |
+| `/blog/warum-1-terabyte-nur-931-gigabyte-sind` (MDX) | 200 | `text/html; charset=utf-8` | 280.236 |
+| `/finanzen/kreditrechner` | 200 | `text/html; charset=utf-8` | 279.511 |
+
+**Bildoptimierer `image/jpeg` statt `image/webp`:** keine Änderung durch 16.4.1. Mit dem `Accept` eines
+Browsers (`image/avif,image/webp,image/apng,image/*,*/*;q=0.8`) liefert derselbe Pfad 200, `image/webp`,
+73.736 B. Ohne `Accept` stuft Next eine WebP-Quelle auf JPEG herab: 16.4.1 in
+`node_modules/next/dist/server/image-optimizer/transform.js` Z. 174–176 („Downlevel WebP and AVIF when the
+client does not advertise support.“). 16.3.8 tut dasselbe, gelesen am 15.10.2026 in
+`packages/next/src/server/image-optimizer.ts` beim Tag `v16.3.8` auf GitHub (`else`-Zweig `contentType =
+JPEG` für `upstreamType` WEBP und AVIF). Der Wert `image/webp` in 8.8 nennt den Abruf nicht; er ist
+vermutlich mit einem `Accept`-Header gemessen.
+
+Der Server ist danach beendet, der Node-Prozess auf Port 3000 per `taskkill`, Port 3000 frei.
+
+### 9.6 npm audit nachher
+
+Befehl wie 9.1, nach dem Nachzug:
+
+```
+gesamt 10 {'critical': 0, 'high': 8, 'moderate': 2, 'low': 0}
+next: nicht gemeldet
+```
+
+Dieselben zehn Pakete wie in 9.1, alle Build-Werkzeuge und ihre Abhängigkeiten. Kein `npm audit fix` in
+dieser Welle.
+
+### 9.7 Produktion
+
+Offen: Deployment auf Vercel, `next.version` live 16.4.1, Betriebsmeldung am Folgetag mit `ki_fehler=0`. Wird nach der Prüfung nachgetragen.
 
 ---
 

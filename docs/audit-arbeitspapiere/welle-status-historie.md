@@ -6,6 +6,40 @@
 
 ---
 
+## 15.10.2026 — Welle 158: Next.js 16.4.1 nach den Advisories vom 14.10.2026 — 🟡 OFFEN
+
+**Anlass:** Next.js 16.4.1 vom 14.10.2026 behebt drei Advisories (GHSA-673q-mjm6-r5xr und
+GHSA-2464-fhr4-w9xw kritisch, GHSA-p3m5-59mp-jv5r hoch), alle mit 16.3.8 im betroffenen Bereich.
+Für 16.3 gibt es keinen Patch. Für rechenfix ist keines einschlägig (Bestandsaufnahme 6.9);
+nachgezogen wird trotzdem.
+
+**Änderungen:**
+- `next`, `@next/mdx` und `eslint-config-next` 16.3.8 → 16.4.1 (`package.json` von Hand,
+  `package-lock.json` per `npm install`). `react`, `react-dom` 19.3.0 und `sharp` 0.35.5 (eine Kopie)
+  unverändert.
+- MDX-Workaround: ohne Hook gebaut, scheitert weiter (Rückgabewert 1, „You are attempting to export
+  "metadata" from a component marked with "use client"“ an fünf `app/blog/**/page.mdx`). Der Hook bleibt,
+  `next.config.mjs` trägt den Vermerk vom 15.10.2026.
+- Termine in `lib/termine.ts`: `nextjs-zurueckgehaltene-advisories` entfernt;
+  `sv-rechengroessen-2027-verfahren` auf 23.11.2026 mit den Kabinettswerten vom 07.10.2026;
+  `lohnsteuer-pap` Vorkommen 15.10.2026 quittiert (nur Entwürfe der PAP 2027); neuer Einmaltermin
+  `lohnsteuer-pap-2027-endfassung` am 16.11.2026. `docs/jahreswerte-kalender.md` Zeile
+  SV-Rechengrößenverordnung 2027 nachgezogen.
+
+**Ergebnis:**
+- `npm ci` läuft durch. `check-termine` ohne Meldung, `verify-termine` 12/12 grün.
+- Build grün, 271 Seiten, `sw.js` 131.355 B, keine neuen Warnungen.
+- Lokal: `/` 200, Bildoptimierer 200, `/sw.js` 200, `/api/stats` ohne Cookie 401, MDX-Blogseite 200,
+  `/finanzen/kreditrechner` 200. Der Bildoptimierer liefert ohne `Accept` `image/jpeg`, mit
+  Browser-`Accept` `image/webp`; das tut schon 16.3.8 (Bestandsaufnahme 9.5).
+- `npm audit` vorher und nachher 10 (8 hoch, 2 mittel), alle Build-Werkzeuge; `next` nicht gemeldet.
+
+**Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitte 6.9 und 9.
+
+**Offen:** Deployment auf Vercel, `next.version` live 16.4.1, Betriebsmeldung am Folgetag mit `ki_fehler=0`. Wird nach der Prüfung nachgetragen.
+
+---
+
 ## 04.10.2026 — Welle 157: Kreditwerbung nach Anhang Nr. 23e UWG — Warnhinweis, sechs unpassende Platzierungen entfernt — ✅ ABGESCHLOSSEN 04.10.2026
 
 **Anlass:** Das Gesetz vom 12.05.2026 zur Umsetzung der Verbraucherkreditrichtlinie (BGBl. 2026 I Nr. 139)
