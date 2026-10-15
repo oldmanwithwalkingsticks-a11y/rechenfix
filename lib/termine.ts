@@ -165,15 +165,6 @@ export const TERMINE: Termin[] = [
     was: 'Harter Ablauf. Ist die Rotation nicht erfolgt, fallen KI-Erklärung und KI-Rechner aus.',
   },
   {
-    id: 'nextjs-zurueckgehaltene-advisories',
-    titel: 'Next.js: zwei zurückgehaltene Advisories vom 30.09.2026',
-    datum: '2026-10-15',
-    vorlaufTage: 0,
-    bereich: 'Betrieb',
-    was: 'Stand 08.10.2026: Die beiden am 30.09.2026 zurückgehaltenen Lücken (1 kritisch, 1 hoch) sind nicht veröffentlicht. Der Next.js-Blog hat keinen Sicherheitsbeitrag nach dem 30.09.2026, auf npm gibt es kein 16.3.x-Release nach 16.3.8, und 16.4.0 vom 06.10.2026 ist ein Funktionsrelease ohne Sicherheitshinweis. rechenfix läuft auf 16.3.8 (Active LTS). Nachsehen, ob sie veröffentlicht sind. Wenn ja: betroffene Bereiche gegen 16.3.8 halten, die Patchversion der Linie 16.3 übernehmen und das Ergebnis in nextjs-16-bestandsaufnahme.md, Abschnitt 6, nachtragen. Wenn nein: um eine Woche verschieben. Einmaltermin: nach Erledigung entfernen.',
-    quelle: 'https://nextjs.org/blog/september-2026-security-release',
-  },
-  {
     id: 'serwist-browserslist-override',
     titel: 'Override für browserslist prüfen',
     datum: '2026-11-02',
@@ -198,10 +189,10 @@ export const TERMINE: Termin[] = [
   {
     id: 'sv-rechengroessen-2027-verfahren',
     titel: 'SV-Rechengrößen 2027: Verfahren verfolgen',
-    datum: '2026-10-15',
+    datum: '2026-11-23',
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
-    was: 'BMAS-Referentenentwurf vom 21.09.2026 liegt vor; Kabinett, Bundesrat und Verkündung stehen aus (Stand 01.10.2026). Werte erst aus der verkündeten Verordnung übernehmen. Vorab klären: BBG Pflegeversicherung 2027 — § 55 Abs. 2 SGB XI verweist auf die JAEG nach § 6 Abs. 7 SGB V, die BBG KV ergibt sich ab 2027 nach § 223 Abs. 4 SGB V (BGBl. 2026 I Nr. 228) mit 3.600 € Zuschlag. Ob beide Grenzen 2027 auseinanderfallen, ist nicht entschieden.',
+    was: 'Stand 15.10.2026: Kabinettsbeschluss vom 07.10.2026 (BMAS-Pressemitteilung vom selben Tag); Zustimmung des Bundesrats und Verkündung stehen aus. Kabinettswerte 2027, noch nicht verkündet: BBG allgemeine RV und AV 8.850 € im Monat (106.200 € im Jahr), knappschaftliche RV 10.900 € (130.800 €), BBG KV 6.375 € (76.500 €), JAEG nach § 6 Abs. 6 SGB V 7.012,50 € (84.150 €), JAEG nach § 6 Abs. 7 SGB V 6.075 € (72.900 €), Bezugsgröße 4.130 € (49.560 €), vorläufiges Durchschnittsentgelt 53.452 €. Werte erst aus der verkündeten Verordnung übernehmen. BBG Pflegeversicherung 2027: Folgt sie nach § 55 Abs. 2 SGB XI der JAEG nach § 6 Abs. 7 SGB V, liegt sie bei 72.900 € und damit 3.600 € unter der BBG KV (§ 223 Abs. 4 SGB V, BGBl. 2026 I Nr. 228). Die BMAS-Mitteilung nennt keine eigene BBG PV. Vor der Übernahme an der Verordnung oder ihrer Begründung bestätigen und dann klären, ob brutto-netto.ts getrennte Grenzen für KV und PV braucht. Nachsehen, ob der Bundesrat zugestimmt hat und die Verordnung verkündet ist; wenn nicht, um eine Woche verschieben. Einmaltermin: nach Übernahme der Werte entfernen.',
     quelle: 'docs/jahreswerte-kalender.md, Dezember-Audit Punkt 3',
   },
   {
@@ -212,6 +203,18 @@ export const TERMINE: Termin[] = [
     wiederholungMonate: 12,
     bereich: 'Gesetzeswerte',
     was: 'ITZBund-XML herunterladen, SHA256 und Abrufdatum eintragen, neue _lohnsteuer-pap-JAHR.ts ableiten, Stützpunkte erweitern.',
+    quelle: 'docs/jahreswerte-kalender.md, Dezember-Audit Punkt 9',
+    quittiertVorkommen: '2026-10-15',
+    quittiertAm: '2026-10-15',
+    quittungVermerk: 'Entwürfe der PAP 2027 gesichtet (BMF-Schreiben vom 08.10.2026, IV C 5 - S 2361/00025/017/004, nicht verbindlich); der BMF-Steuerrechner führt am 15.10.2026 als neuestes Jahr 2026, eine XML für 2027 fehlt. Folgearbeit als Einmaltermin lohnsteuer-pap-2027-endfassung (16.11.2026) angelegt.',
+  },
+  {
+    id: 'lohnsteuer-pap-2027-endfassung',
+    titel: 'Lohnsteuer-PAP 2027: Endfassung und XML',
+    datum: '2026-11-16',
+    vorlaufTage: 0,
+    bereich: 'Gesetzeswerte',
+    was: 'Stand 15.10.2026: Vom PAP 2027 liegen nur Entwürfe vor (BMF-Schreiben vom 08.10.2026, IV C 5 - S 2361/00025/017/004, nicht verbindlich, Endfassung ohne Datum angekündigt); der BMF-Steuerrechner führt als neuestes Jahr 2026. Die Endfassung für 2026 erschien am 12.11.2025. Nachsehen, ob Endfassung und XML-Pseudocode für 2027 veröffentlicht sind. Wenn ja: Verfahren nach Dezember-Audit Punkt 9 (XML laden, SHA256 und Abrufdatum in docs/referenzen/itzbund-README.md, lib/berechnungen/_lohnsteuer-pap-2027.ts ableiten, Jahres-Switch in lohnsteuer.ts, Stützpunkte in scripts/verify-lohnsteuer-pap.ts). Wenn nein: um eine Woche verschieben. Einmaltermin: nach Erledigung entfernen.',
     quelle: 'docs/jahreswerte-kalender.md, Dezember-Audit Punkt 9',
   },
   {
