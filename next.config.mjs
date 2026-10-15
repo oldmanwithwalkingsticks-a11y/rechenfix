@@ -39,6 +39,7 @@ const nextConfig = {
   // scripts/check-mdx-nur-seiten.mjs in der Prebuild-Kette.
   //
   // Getestet mit next 16.3.6 und @next/mdx 16.3.6 (Webpack, --webpack).
+  // Ohne Hook erneut gebaut mit next 16.4.1 am 15.10.2026: scheitert weiter (Welle 158).
   // Entfernen: mit der Turbopack-Welle oder sobald Next.js das korrigiert. Nach
   // jedem Nachzug der Next-Fassung einmal ohne diesen Hook bauen — baut es grün,
   // fliegt er raus.
