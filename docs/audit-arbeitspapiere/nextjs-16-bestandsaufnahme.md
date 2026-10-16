@@ -1016,7 +1016,11 @@ Gemessen in einer Chat-Sitzung am 15.10.2026, **nicht in dieser Sitzung**:
   (282.313 B), Bildoptimierer mit Browser-`Accept` 200 `image/webp`, `/finanzen/kreditrechner` 200
   (280.852 B) mit „Achtung! Kreditaufnahme kostet Geld.“ genau einmal, im Kasten „Anzeige“
   (`data-kreditwarnung` einmal).
-- **Offen:** Betriebsmeldung vom 16.10.2026 mit `ki_proben=2` und `ki_fehler=0`.
+- **Betriebsmeldung vom 16.10.2026,** gelesen in einer Chat-Sitzung am selben Tag: versandt um 06:00 UTC,
+  Betreff „[Rechenfix KI-Check] OK — 2026-10-16“, Maschinenzeile `ki_proben=2; ki_fehler=0;
+  termine_ueberfaellig=0; termine_heute=0; termine_vorlauf=0`; KI-Erklärung 588 Zeichen, KI-Rechner
+  97 Zeichen. Das ist der erste tägliche KI-Lauf in Produktion unter 16.4.1. **Welle 158 ist damit
+  abgeschlossen.**
 
 ---
 
@@ -1119,7 +1123,10 @@ gesamt 9 {'critical': 0, 'high': 7, 'moderate': 2, 'low': 0}
 
 Dieselben Pakete wie vorher ohne `source-map-js`, keines hinzugekommen.
 
-Offen: Vercel-Build des Pushes. Die übrigen neun Meldungen führt der Termin `npm-audit-buildwerkzeuge` (02.11.2026).
+Vercel, gemessen in einer Chat-Sitzung am 15.10.2026: Deployment `dpl_A4ZojYRh8SdAUvX4W9EzcjvV5AV1` zu
+`0385027`, Ziel `production`, angelegt um 21:03:34 Uhr MESZ, READY um 21:05:22 Uhr MESZ, Alias
+`www.rechenfix.de`, kein Alias-Fehler. **Welle 159 ist damit abgeschlossen.** Die übrigen neun Meldungen
+führt der Termin `npm-audit-buildwerkzeuge` (02.11.2026).
 
 ---
 

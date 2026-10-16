@@ -6,7 +6,7 @@
 
 ---
 
-## 15.10.2026 — Welle 159: npm-Meldungen der Build-Werkzeuge — source-map-js 1.2.2, der Rest ohne Fix — 🟡 OFFEN
+## 15.10.2026 — Welle 159: npm-Meldungen der Build-Werkzeuge — source-map-js 1.2.2, der Rest ohne Fix — ✅ ABGESCHLOSSEN 15.10.2026
 
 **Anlass:** `npm audit` meldete nach Welle 158 zehn Pakete (8 hoch, 2 mittel), alle unter
 `devDependencies`, `next` nicht darunter. Nach Welle 156 waren es 0.
@@ -35,11 +35,12 @@
 
 **Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitte 9.7 und 10.
 
-**Offen:** Vercel-Build des Pushes.
+**Produktion:** Deployment zu `0385027` READY am 15.10.2026 um 21:05 Uhr MESZ (Bestandsaufnahme 10.3).
+Die übrigen neun Meldungen führt der Termin `npm-audit-buildwerkzeuge` (02.11.2026).
 
 ---
 
-## 15.10.2026 — Welle 158: Next.js 16.4.1 nach den Advisories vom 14.10.2026 — 🟡 OFFEN
+## 15.10.2026 — Welle 158: Next.js 16.4.1 nach den Advisories vom 14.10.2026 — ✅ ABGESCHLOSSEN 16.10.2026
 
 **Anlass:** Next.js 16.4.1 vom 14.10.2026 behebt drei Advisories (GHSA-673q-mjm6-r5xr und
 GHSA-2464-fhr4-w9xw kritisch, GHSA-p3m5-59mp-jv5r hoch), alle mit 16.3.8 im betroffenen Bereich.
@@ -69,8 +70,8 @@ nachgezogen wird trotzdem.
 
 **Doku:** `nextjs-16-bestandsaufnahme.md` Abschnitte 6.9 und 9.
 
-**Offen:** Betriebsmeldung vom 16.10.2026 mit `ki_fehler=0`. Deployment READY und `next` 16.4.1 live sind
-am 15.10.2026 bestätigt (Bestandsaufnahme 9.7).
+**Produktion:** Deployment READY und `next` 16.4.1 live am 15.10.2026; Betriebsmeldung vom 16.10.2026 mit
+`ki_proben=2` und `ki_fehler=0` (Bestandsaufnahme 9.7).
 
 ---
 
