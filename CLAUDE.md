@@ -39,19 +39,14 @@
 | HanseMerkur | 11705 | hansemerkur.de |
 | GymBeam DE (Welle 141) | 127679 | gymbeam.de — 5 Kategorie-Deeplinks, keine Produktseiten |
 
-## Amazon Partner-Programm (seit 22.04.2026, Prompt 122-amazon)
+## Amazon Partner-Programm — entfernt (W14 Track B, 19.05.2026)
 
-Separates Partnerprogramm außerhalb von Awin. Tag-ID: **`rechenfix-21`**. Mechanik: keyword-basierte Suchlinks (keine festen ASINs, selbstheilend), Ziel-Domain `amazon.de`.
-
-- **Komponente:** [`components/AmazonBox.tsx`](components/AmazonBox.tsx) — unabhängig von `AffiliateBox`, weil Amazon eine andere Mechanik hat (Tag statt Publisher-ID, Suchlink statt Deeplink)
-- **Helper:** [`lib/amazon-link.ts`](lib/amazon-link.ts) — `createAmazonSearchLink(keyword, marketingConsentGranted)`. Tag `rechenfix-21` wird **nur** bei erteiltem Marketing-Consent angehängt; ohne Consent bleibt der Link funktionsfähig, aber ohne Provision
-- **Pflicht-Footer-Hinweis:** „Als Amazon-Partner verdiene ich an qualifizierten Verkäufen." — sichtbar auf jeder Seite, Teilnahmebedingung nicht optional
-- **Datenschutzerklärung:** Abschnitt 9b Amazon-Partnerprogramm in [`app/datenschutz/page.tsx`](app/datenschutz/page.tsx)
-- **Cookie-Banner:** Marketing-Kategorie erweitert um „Amazon Associates" mit expliziter Tag-Nennung
-- **Einsatz-Kategorien:** Kochen, Sport, Auto, Wohnen, Alltag, Arbeit. **Verboten** auf Gesundheit/Finanzen/Mathe (analog Awin-Platzierungsregel)
-- **Integrierte Rechner (Stand 22.04.2026):** 16 — siehe [`docs/amazon-integration.md`](docs/amazon-integration.md) für vollständige Tabelle mit Keywords und Platzierungs-Pattern
-- **Frist:** Erster qualifizierter Referral bis ca. 19.10.2026 (180-Tage-Uhr), sonst Account-Schließung durch Amazon
-- **Selbstbezug verboten:** Keine Käufe über eigene Affiliate-Links, auch nicht für Familie im selben Haushalt. Testklicks im Inkognito ohne Marketing-Consent (Tag wird nicht übermittelt)
+Auf rechenfix gibt es kein Amazon-Affiliate mehr. W14 Track B hat am 19.05.2026 alles entfernt
+(Commits `3db040c`, `9b1ff48`, `a111434`): die Komponente `AmazonBox`, den Helfer `lib/amazon-link.ts`
+mit dem Tag `rechenfix-21`, den Pflichthinweis im Footer, Abschnitt 9b der Datenschutzerklärung und den
+Amazon-Text im Cookie-Banner. Damit gibt es auch keine Frist des Partnerprogramms mehr. Die Einträge
+122-amazon und 122-doku-sync im Prompt-Verzeichnis beschreiben den Stand vom April 2026. Einzelheiten:
+`docs/audit-arbeitspapiere/welle-status-historie.md`, Block „W14 Track B“.
 
 ## Affiliate-Platzierungs-Regel (Stand April 2026, Prompt 106)
 Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entscheidung pro Rechner, nicht pauschal pro Kategorie.

@@ -7389,6 +7389,12 @@ In allen 5 Configs blieb die `affiliate`-Property direkt darüber unverändert (
 - Resttreffer-Check: kein `AmazonBox` / `amazonProducts` / `amazon-link` / `AMAZON_TAG` / `createAmazonSearchLink` / `AmazonProductConfig` in `app/` `components/` `lib/`
 - Einziger verbleibender Amazon-Treffer im Repo: Changelog-Eintrag SKILL.md Z. 1563 (historisch, Datum 22.04.2026)
 
+**Nachtrag 18.10.2026:** Der Abschnitt „Amazon Partner-Programm“ stand trotz Commit 3 wieder in
+`CLAUDE.md` (Z. 42–54), samt der Zeile „Erster qualifizierter Referral bis ca. 19.10.2026“. Eine
+Chat-Sitzung am 18.10.2026 hat deshalb an eine Frist erinnert, die es seit dieser Welle nicht mehr gibt.
+Der Abschnitt ist am 18.10.2026 durch einen kurzen Hinweis auf diese Welle ersetzt. Code und
+Datenschutzerklärung waren nicht betroffen.
+
 ### L-Lehren
 
 Keine neuen Lehren — Sprint war ein straight-forward Removal entlang Track-A-Pattern (Code → Doku → Welle-Historie). Anmerkung: **Renumber-Bug in einer Bash-Iteration** (Reihenfolge high-to-low statt low-to-high beim mass-renumber von Markdown-Listen via Node-Skript) — kein neuer L-Lehre-Anker, aber Reminder dass Mass-Renumbering immer von der niedrigsten Zahl aufwärts gehen muss (`8→7, 9→8, …, 38→37`), sonst werden bereits umnummerierte Items beim nächsten Pass nochmal erfasst.
