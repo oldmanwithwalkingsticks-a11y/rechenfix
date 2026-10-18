@@ -165,7 +165,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'raucher-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-19',
     titel: 'Raucher-Rechner',
     beschreibung: 'Berechnen Sie, wie viel Geld Sie fürs Rauchen ausgeben — und was Sie sich stattdessen leisten könnten.',
     kategorie: 'Gesundheit',
@@ -174,15 +174,15 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'Raucher-Rechner: Berechnen Sie, wie viel Geld Sie fürs Rauchen ausgeben — und was Sie sich stattdessen leisten könnten. Kostenlos.',
     keywords: ['raucher rechner', 'kosten rauchen', 'zigaretten kosten', 'rauchen kosten pro monat', 'rauchen kosten pro jahr', 'rauchen aufhören sparen', 'zigarettenpreis rechner', 'was kostet rauchen', 'raucher kosten', 'rauchfrei rechner'],
     icon: '🚬',
-    beispiel: 'Beispiel: 15 Zigaretten/Tag bei 9,00 €/Packung (20 Stück) = 6,75 € pro Tag = 2.464 € pro Jahr.',
+    beispiel: 'Beispiel: 15 Zigaretten/Tag bei 9,00 €/Packung (20 Stück) = 6,75 € pro Tag = 2.465,44 € pro Jahr.',
     faq: [
       {
         frage: 'Wie viel kostet eine Schachtel Zigaretten in Deutschland?',
-        antwort: 'Der Durchschnittspreis für eine Schachtel Markenzigaretten (20 Stück) liegt in Deutschland 2026 bei etwa 8,90 bis 10,00 Euro (Ø ~9,20 Euro). Grund für den Anstieg ist unter anderem die letzte Stufe des Tabaksteuermodernisierungsgesetzes, die zum 01.01.2026 in Kraft getreten ist. Bis 2027 wird bei vielen Marken die 10-Euro-Marke überschritten.',
+        antwort: 'Im Durchschnitt aller in Deutschland verkauften Zigaretten kostet eine Packung mit 20 Stück 2026 rund 8,05 Euro, davon sind durchschnittlich 4,05 Euro Tabaksteuer (Bundesfinanzministerium, Stand Juli 2026). Viele Markenzigaretten kosten mehr, günstige Handelsmarken weniger. Tragen Sie im Rechner deshalb den Preis Ihrer eigenen Marke ein. Die letzte Stufe des Tabaksteuermodernisierungsgesetzes ist zum 01.01.2026 in Kraft getreten. Am 15. Oktober 2026 hat der Bundestag eine weitere Erhöhung beschlossen: Die Tabaksteuer auf Zigaretten steigt ab dem 01.01.2027 in vier jährlichen Stufen bis 2030.',
       },
       {
         frage: 'Wie viel gibt ein durchschnittlicher Raucher pro Jahr aus?',
-        antwort: 'Bei einer halben Schachtel (10 Zigaretten) pro Tag und einem Packungspreis von 9 Euro sind es rund 1.645 Euro pro Jahr. Bei einer ganzen Schachtel pro Tag über 3.285 Euro. Starke Raucher (30+ Zigaretten) geben über 5.000 Euro jährlich aus.',
+        antwort: 'Mit dem Durchschnittspreis von 8,05 Euro je Packung mit 20 Stück sind es bei einer halben Schachtel (10 Zigaretten) am Tag rund 1.470 Euro im Jahr, bei einer ganzen Schachtel rund 2.940 Euro und bei 30 Zigaretten am Tag rund 4.410 Euro. Der Rechner zählt dabei 365,25 Tage im Jahr, damit Schaltjahre mitgerechnet sind.',
       },
       {
         frage: 'Wie wird der Investment-Vergleich berechnet?',
@@ -309,7 +309,8 @@ export const gesundheitRechner: RechnerConfig[] = [
     ],
     quellen: [
       { titel: 'BIÖG (ehemals BZgA) — rauchfrei-info.de', url: 'https://www.rauchfrei-info.de', hinweis: 'Kostenfreies Ausstiegsangebot und Rauchfrei-Telefon 0800 8 31 31 31 (kostenfrei, anonym).' },
-      { titel: 'Statistisches Bundesamt (Destatis) — Tabakwaren-Preise', url: 'https://www.destatis.de', hinweis: 'Preisentwicklung bei Tabakwaren als Orientierung.' },
+      { titel: 'Bundesfinanzministerium — Fragen und Antworten zur Änderung des Tabaksteuergesetzes', url: 'https://www.bundesfinanzministerium.de/Content/DE/FAQ/aenderung-des-tabaksteuergesetzes.html', hinweis: 'Durchschnittspreis 8,05 Euro je Packung mit 20 Zigaretten, davon 4,05 Euro Tabaksteuer (Stand 06.07.2026).' },
+      { titel: 'Deutscher Bundestag — Beschluss zur Tabaksteuer vom 15.10.2026', url: 'https://www.bundestag.de/dokumente/textarchiv/2026/kw42-de-tabaksteuer-1224154', hinweis: 'Steuerstufen für Zigaretten zum 01.01.2027, 2028, 2029 und 2030 laut Beschlussempfehlung des Finanzausschusses (Drucksache 21/8605).' },
       { titel: 'Methodik der Berechnung', hinweis: 'Hochrechnung = Zigaretten/Tag × (Packungspreis ÷ Packungsgröße) × 365,25 × Jahre; Anlage-Szenario als Rentenformel mit 5 % p. a. Reiner Kostenrechner, keine Gesundheitsbewertung.' },
     ],
   },

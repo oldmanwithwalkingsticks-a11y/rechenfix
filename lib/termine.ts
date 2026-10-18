@@ -301,6 +301,16 @@ export const TERMINE: Termin[] = [
     quelle: '§ 68 EnergieStG (gesetze-im-internet.de, abgerufen 01.10.2026); Änderungsgesetz laut Chat-Recherche BGBl. 2026 I Nr. 275 vom 30.09.2026 — recht.bund.de war für den Abruf gesperrt, Fundstelle bei Gelegenheit im Browser bestätigen',
   },
   {
+    id: 'tabaksteuer-2027-raucher-rechner',
+    titel: 'Tabaksteuer Stufe 2027: Raucher-Rechner nachziehen',
+    datum: '2027-01-04',
+    vorlaufTage: 0,
+    bereich: 'Gesetzeswerte',
+    projekt: 'rechenfix.de',
+    was: 'Seit 01.01.2027 gilt die erste Stufe der Tabaksteuererhöhung (Zigaretten 14,34 Cent je Stück plus 21,05 Prozent des Kleinverkaufspreises). Auf /gesundheit/raucher-rechner die beiden FAQ zum Schachtelpreis und zu den Jahresausgaben auf einen amtlich belegten Durchschnittspreis 2027 umstellen, sobald BMF oder Destatis ihn nennen; bis dahin bleibt der Stand 2026 im Text. Außerdem prüfen: Standardwert preisProPackung in components/rechner/RaucherRechner.tsx, das beispiel-Feld in lib/rechner-config/gesundheit.ts und die Beschreibung von preisProPackung in lib/ki-rechner/tools.ts.',
+    quelle: 'Drucksache 21/8605 (Beschlussempfehlung Finanzausschuss, 14.10.2026), Bundestag-Beschluss vom 15.10.2026; Welle 161',
+  },
+  {
     id: 'verarbeitungsverzeichnis-durchsicht',
     titel: 'Verarbeitungsverzeichnis durchsehen',
     datum: '2027-02-18',

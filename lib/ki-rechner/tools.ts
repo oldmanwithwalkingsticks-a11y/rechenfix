@@ -657,7 +657,7 @@ export const KI_TOOLS: KiTool[] = [
       type: 'object',
       properties: {
         zigarettenProTag: { type: 'number', description: 'Gerauchte Zigaretten pro Tag' },
-        preisProPackung: { type: 'number', description: 'Preis einer Packung in Euro (Standard 2026: ca. 8.50)' },
+        preisProPackung: { type: 'number', description: 'Preis einer Packung in Euro (Durchschnitt aller Marken 2026 laut BMF: 8.05)' },
         zigarettenProPackung: { type: 'number', description: 'Zigaretten pro Packung (üblich: 20)' },
         jahreGeraucht: { type: 'number', description: 'Anzahl Jahre, über die gerechnet wird (bei "pro Jahr" = 1)' },
       },
