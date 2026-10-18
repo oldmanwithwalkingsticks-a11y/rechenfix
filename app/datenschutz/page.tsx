@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 22. September 2026</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 18. Oktober 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -297,6 +297,9 @@ export default function DatenschutzSeite() {
               </li>
               <li data-programm="naturesway">
                 <strong>Nature&apos;s Way</strong> (Nahrungsergänzungsmittel)
+              </li>
+              <li data-programm="rockbros">
+                <strong>ROCKBROS</strong> (Fahrräder, Radbekleidung und Fahrradzubehör)
               </li>
               <li data-programm="smartsteuer">
                 <strong>smartsteuer</strong> (Online-Steuererklärung)
