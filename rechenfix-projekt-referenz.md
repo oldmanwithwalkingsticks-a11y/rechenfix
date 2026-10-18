@@ -545,6 +545,7 @@ Publisher-ID: 2843240
 | smava | 9351 | smava.de | /kredit/ratenkredit/ (Standard: kreditvergleich.smava.de); seit Welle 157 nur noch Wertverlust-Auto-Rechner (`autokredit`, Standardziel) |
 | HanseMerkur | 11705 | hansemerkur.de | /reisekrankenversicherung (Standard: /) |
 | GymBeam DE (Welle 141) | 127679 | gymbeam.de | /proteine, /kreatin, /trainingszubehor, /gesunde-lebensmittel, /sportflaschen — nur Kategorien, keine Produktseiten |
+| ROCKBROS (Welle 160) | 122456 | rockbrosbike.de | /collections/rennrad, /collections/mtb, /collections/fahrradhelme, /collections/bekleidung — nur Kollektionen, keine Produktseiten; keine E-Bikes, keine City-Kategorie |
 
 ### WICHTIG zu CHECK24
 - Awin-Links leiten auf **check24.net** weiter, NICHT auf check24.de

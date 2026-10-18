@@ -38,6 +38,7 @@
 | smava | 9351 | smava.de / kreditvergleich.smava.de |
 | HanseMerkur | 11705 | hansemerkur.de |
 | GymBeam DE (Welle 141) | 127679 | gymbeam.de — 5 Kategorie-Deeplinks, keine Produktseiten |
+| ROCKBROS (Welle 160) | 122456 | rockbrosbike.de — 4 Kollektions-Deeplinks, keine Produktseiten |
 
 ## Amazon Partner-Programm — entfernt (W14 Track B, 19.05.2026)
 

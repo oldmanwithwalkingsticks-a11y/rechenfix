@@ -6,6 +6,61 @@
 
 ---
 
+## 18.10.2026 — Welle 160: ROCKBROS (Awin 122456) auf Fahrrad-Rahmengröße- und FTP-Rechner — ✅ ABGESCHLOSSEN 18.10.2026
+
+**Anlass:** Neues Awin-Programm ROCKBROS, awinmid 122456, Shop `rockbrosbike.de` (Fahrräder, Helme,
+Radbekleidung, Zubehör). Merchant-Profil `ui.awin.com/merchant-profile/122456` gelesen 18.10.2026. Die
+Deeplink-Ziele am 18.10.2026 geladen und geprüft: `/collections/rennrad` (11 Produkte),
+`/collections/mtb` (6 Komplettbikes), `/collections/fahrradhelme` (35, darunter Stadthelme),
+`/collections/bekleidung` (338).
+
+**Platzierungen** (Phase 0 an `727f4a0`: `122456` nirgends im Repo, 14 Schlüssel in `AFFILIATE_PROGRAMS`,
+14 Einträge in der Partnerliste, beide Rechner ohne `AffiliateBox`, beide Configs ohne `affiliate`-Feld,
+Guard Exit 0):
+
+| Rechner | Platzierung | Kontext | Ziel |
+|---|---|---|---|
+| `auto/fahrrad-rahmengroesse-rechner` | `FahrradRahmenRechner.tsx:135`, Fahrradtyp Rennrad | `rahmen-rennrad` | rockbrosbike.de/collections/rennrad |
+| `auto/fahrrad-rahmengroesse-rechner` | dieselbe Box, Fahrradtyp Mountainbike | `rahmen-mtb` | rockbrosbike.de/collections/mtb |
+| `auto/fahrrad-rahmengroesse-rechner` | dieselbe Box, Fahrradtyp City/Trekking und E-Bike | `rahmen-helm` | rockbrosbike.de/collections/fahrradhelme |
+| `sport/ftp-rechner` | `FtpRechner.tsx:151` | `ftp` | rockbrosbike.de/collections/bekleidung |
+
+Die Box steht jeweils nach den CrossLinks und vor `ErgebnisAktionen`, wie bei GymBeam. Ohne Kontext
+führt ROCKBROS auf `rockbrosbike.de/`.
+
+**Begründungen:**
+- ROCKBROS führt keine E-Bikes und keine City-Kategorie. City/Trekking und E-Bike bekommen deshalb die
+  Helme; der Text sagt, dass beim Helm der Kopfumfang entscheidet und nicht die Rahmenhöhe.
+- Die drei Fahrradcomputer im Shop nennen keine Watt- oder ANT+-Anzeige. Der FTP-Rechner bekommt deshalb
+  Bekleidung und keine Computer.
+- Bewusst nicht belegt: Kalorienverbrauch (GymBeam steht dort, Radfahren ist nur eine Aktivität von
+  vielen), Pendlerpauschale (Steuerkontext, WISO), Reifengröße (Autoreifen), Herzfrequenz/VO2max
+  (sportartübergreifend).
+
+**Rechtstext:** eigener Commit `a58f3e0`, „recht: Datenschutzerklärung — ROCKBROS in der Partnerliste
+(Welle 160)“. ROCKBROS (Fahrräder, Radbekleidung und Fahrradzubehör) mit `data-programm="rockbros"`
+zwischen Nature's Way und smartsteuer, die Liste nennt jetzt fünfzehn Programme. Stand-Datum
+„22. September 2026“ → „18. Oktober 2026“. Zeile in `docs/rechtstexte/aenderungshistorie.md`.
+
+**Gates** (Exit-Codes ohne Pipe gemessen, an `a58f3e0`):
+1. `check-affiliate-partnerliste`: Exit 0, 15 Programme im Code, 15 in der Datenschutzerklärung.
+2. Gegenprobe mit der Datenschutzseite ohne den ROCKBROS-Eintrag: Exit 1, „im Code, aber nicht in der
+   Datenschutzerklärung: rockbros“.
+3. `npm run build`: Rückgabewert 0, 271 Seiten, Prebuild vollständig, Lint 0 Fehler, die zwei bekannten
+   Warnungen. Im gebauten HTML stehen `awinmid=122456` auf Rahmen- und FTP-Rechner je einmal (Rahmen im
+   Standard City/Trekking → `/collections/fahrradhelme`, FTP → `/collections/bekleidung`) und der
+   ROCKBROS-Eintrag einmal in `/datenschutz`.
+4. `git grep -c "rockbros" -- components/AffiliateBox.tsx` → **9**, der Prompt erwartete 3. Die 3 sind
+   die Schlüssel `rockbros: {` in den drei Objekten; die übrigen 6 Zeilen sind die vorgeschriebenen
+   Deeplinks auf `rockbrosbike.de` (einer in `AFFILIATE_PROGRAMS`, fünf in `CONTEXT_DEEPLINKS`).
+   `programId="rockbros"` in genau 2 Dateien: `FahrradRahmenRechner.tsx` und `FtpRechner.tsx`.
+
+**Commits:** A `3ebf617` (AffiliateBox und die zwei Rechner), B `a58f3e0` (Rechtstext), C ist dieser
+Doku-Commit (Historie, Änderungshistorie-Hash, Partnertabellen in `CLAUDE.md` und
+`rechenfix-projekt-referenz.md`). Die Live-Probe macht Karsten.
+
+---
+
 ## 15.10.2026 — Welle 159: npm-Meldungen der Build-Werkzeuge — source-map-js 1.2.2, der Rest ohne Fix — ✅ ABGESCHLOSSEN 15.10.2026
 
 **Anlass:** `npm audit` meldete nach Welle 158 zehn Pakete (8 hoch, 2 mittel), alle unter
