@@ -6,6 +6,63 @@
 
 ---
 
+## 19.10.2026 — Welle 161: Raucher-Rechner — Schachtelpreis 2026 nach BMF, FAQ-Beträge, Termin Tabaksteuer 2027 — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Video 1 „Was Rauchen WIRKLICH kostet“. Die Behauptung „9,20 € Durchschnittspreis“ wurde vor
+der Veröffentlichung als unbelegt erkannt. Die FAQ „Wie viel kostet eine Schachtel Zigaretten in
+Deutschland?“ auf `/gesundheit/raucher-rechner` trug denselben Wert („Ø ~9,20 Euro“), ohne Beleg.
+
+**Belege:**
+- BMF, Fragen und Antworten zur Änderung des Tabaksteuergesetzes: 8,05 € je Packung mit 20 Stück, davon
+  4,05 € Tabaksteuer, Stand 06.07.2026 (gelesen 19.10.2026).
+- Bundestag-Textarchiv kw42: Beschluss vom 15.10.2026 zur Erhöhung der Tabaksteuer.
+- Drucksache 21/8605 (Beschlussempfehlung Finanzausschuss): Stufen zum 01.01.2027, 2028, 2029 und 2030;
+  Zigaretten 2027: 14,34 Cent je Stück plus 21,05 Prozent.
+
+**Änderungen** (7 Ersetzungen in 3 Dateien, Vorlage `_lokal/welle161-raucher-faq.mjs`, nicht committet):
+1. `lib/rechner-config/gesundheit.ts`, `beispiel`: „= 2.464 € pro Jahr“ → „= 2.465,44 € pro Jahr“, wie der
+   Rechner bei den Standardwerten rechnet (365,25 Tage).
+2. FAQ Schachtelpreis: „8,90 bis 10,00 Euro (Ø ~9,20 Euro)“ und „Bis 2027 wird bei vielen Marken die
+   10-Euro-Marke überschritten“ → „rund 8,05 Euro, davon durchschnittlich 4,05 Euro Tabaksteuer
+   (Bundesfinanzministerium, Stand Juli 2026)“, Hinweis auf den Preis der eigenen Marke, Bundestagsbeschluss
+   vom 15.10.2026 mit vier jährlichen Stufen ab 01.01.2027 bis 2030.
+3. FAQ Jahresausgaben: bei 9 Euro „rund 1.645 / über 3.285 / über 5.000 Euro“ → bei 8,05 Euro „rund 1.470 /
+   2.940 / 4.410 Euro“ für 10, 20 und 30 Zigaretten am Tag, mit dem Satz zu 365,25 Tagen. Die alte Angabe
+   „über 5.000 Euro“ für 30 Stück stimmte schon bei 9 Euro nicht (4.931 Euro).
+4. Quellen: „Statistisches Bundesamt (Destatis) — Tabakwaren-Preise“ (verlinkte nur `destatis.de`) → zwei
+   Einträge: BMF-FAQ zur Änderung des Tabaksteuergesetzes und Bundestag-Beschluss vom 15.10.2026 mit
+   Verweis auf Drucksache 21/8605.
+5. `letzteAktualisierung` des Raucher-Rechners: `2026-06-21` → `2026-10-19`.
+6. `lib/ki-rechner/tools.ts`, Beschreibung `preisProPackung`: „Standard 2026: ca. 8.50“ → „Durchschnitt
+   aller Marken 2026 laut BMF: 8.05“.
+7. `lib/termine.ts`: neuer Einmaltermin `tabaksteuer-2027-raucher-rechner` am 04.01.2027 (Vorlauf 0,
+   Bereich Gesetzeswerte): FAQ, Standardwert, `beispiel` und KI-Beschreibung auf einen amtlichen
+   Durchschnittspreis 2027 prüfen, sobald BMF oder Destatis ihn nennen.
+
+**Bewusst nicht geändert:** Standardwert 9,00 € in `components/rechner/RaucherRechner.tsx`. Er ist auf der
+Seite als Orientierung gekennzeichnet und liegt im Bereich der Markenpreise. Ab 2027 entscheidet der Termin
+`tabaksteuer-2027-raucher-rechner`. Ebenfalls unverändert: die übrigen FAQ, `contentBloecke`,
+`lib/berechnungen/raucher.ts`.
+
+**Gates:**
+- Phase 0 an `29dd777`: `git status` leer, kein Diff an den drei Dateien. Greps „Ø ~9,20“ 1,
+  `letzteAktualisierung: '2026-06-21'` 6, „Standard 2026: ca. 8.50“ 1, `tabaksteuer-2027` keine Ausgabe
+  (Exit 1).
+- Phase 1: „OK — 7 Ersetzungen in 3 Dateien.“, Exit 0, alle drei Dateien LF; geändert genau
+  `gesundheit.ts`, `tools.ts`, `termine.ts`.
+- Phase 2: Probe ohne Lib 4× OK, Exit 0. Gegen `berechneRaucherKosten`: 15 Stück zu 9,00 € → 2.465,44;
+  10, 20, 30 Stück zu 8,05 € → 1.470, 2.940, 4.410 (20 Stück genau 2.940,26). Greps: „Ø ~9,20“ keine
+  Ausgabe, „8,05 Euro“ 3, „2.465,44 € pro Jahr“ 1, `letzteAktualisierung: '2026-06-21'` 5,
+  „laut BMF: 8.05“ 1, `tabaksteuer-2027-raucher-rechner` 1.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen.
+  `check-termine` ohne Meldung; der neue Termin erscheint erst am 04.01.2027 (`tage` 0). Im gebauten HTML
+  von `/gesundheit/raucher-rechner` steht „8,05 Euro“, „9,20“ fehlt, `destatis.de` fehlt, BMF- und
+  Bundestag-Link sind da.
+
+**Commits:** A `98ef43f` (die drei Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 18.10.2026 — Welle 160: ROCKBROS (Awin 122456) auf Fahrrad-Rahmengröße- und FTP-Rechner — ✅ ABGESCHLOSSEN 18.10.2026
 
 **Anlass:** Neues Awin-Programm ROCKBROS, awinmid 122456, Shop `rockbrosbike.de` (Fahrräder, Helme,
