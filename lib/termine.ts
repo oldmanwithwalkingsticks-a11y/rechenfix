@@ -101,6 +101,9 @@ export const TERMINE: Termin[] = [
     projekt: 'wuerdezeit.de',
     was: 'Ordner „Formular“ im Postfach info@wuerdezeit.de öffnen und zwei Sorten löschen: erledigte Anliegen, und Nachrichten OHNE Antwortadresse, die älter als drei Monate sind. Beides steht so in Abschnitt 9 der Datenschutzerklärung und ist damit eine Zusage an den Absender, keine Absichtserklärung. MONATLICH und nicht quartalsweise, weil die Zusage drei Monate lautet: Bei einem Quartalsrhythmus käme eine Nachricht, die einen Tag nach dem Termin eingeht, erst beim übernächsten Lauf dran — nach bis zu sechs Monaten. Die zugesagte Frist und der Rhythmus, der sie einhält, sind zwei verschiedene Zahlen, und die zweite muss kleiner sein. Der Lauf dauert eine halbe Minute, solange die Postfachregel greift; greift sie nicht mehr, ist DAS der eigentliche Befund und nicht die Arbeit.',
     quelle: 'app/datenschutz/page.tsx (WürdeZeit), Abschnitt 9; docs/kontaktformular/spezifikation.md Abschnitt 5',
+    quittiertVorkommen: '2026-10-20',
+    quittiertAm: '2026-10-18',
+    quittungVermerk: 'Ordner Formular im Postfach info@wuerdezeit.de am 18.10.2026 von Karsten bereinigt (erledigte Anliegen und Nachrichten ohne Antwortadresse älter als drei Monate gelöscht), zwei Tage vor dem Termin quittiert.',
   },
   {
     id: 'domain-checkdomain',
