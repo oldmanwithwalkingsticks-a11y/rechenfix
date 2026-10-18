@@ -7389,11 +7389,16 @@ In allen 5 Configs blieb die `affiliate`-Property direkt darüber unverändert (
 - Resttreffer-Check: kein `AmazonBox` / `amazonProducts` / `amazon-link` / `AMAZON_TAG` / `createAmazonSearchLink` / `AmazonProductConfig` in `app/` `components/` `lib/`
 - Einziger verbleibender Amazon-Treffer im Repo: Changelog-Eintrag SKILL.md Z. 1563 (historisch, Datum 22.04.2026)
 
-**Nachtrag 18.10.2026:** Der Abschnitt „Amazon Partner-Programm“ stand trotz Commit 3 wieder in
-`CLAUDE.md` (Z. 42–54), samt der Zeile „Erster qualifizierter Referral bis ca. 19.10.2026“. Eine
-Chat-Sitzung am 18.10.2026 hat deshalb an eine Frist erinnert, die es seit dieser Welle nicht mehr gibt.
-Der Abschnitt ist am 18.10.2026 durch einen kurzen Hinweis auf diese Welle ersetzt. Code und
-Datenschutzerklärung waren nicht betroffen.
+**Nachtrag 18.10.2026:** Der Abschnitt „Amazon Partner-Programm“ in `CLAUDE.md` ist mit Commit 3
+nicht entfernt worden. Die Commit-Nachricht von `a111434` nennt „Amazon-Sektion Z. 40-52 entfernt“,
+der Diff streicht in `CLAUDE.md` aber nur Regel 7; die Überschrift steht vor und nach dem Commit in
+Z. 40. Die Angabe zu `CLAUDE.md` unter Commit 3 trifft deshalb nur für Regel 7 zu. `git log -S` findet
+für die Überschrift nur `063a66c` (22.04.2026, angelegt) und `9b83af8` (18.10.2026, ersetzt). Der
+Abschnitt stand also durchgehend in der Datei, samt der Zeile „Erster qualifizierter Referral bis ca.
+19.10.2026“, und eine Chat-Sitzung hat am 18.10.2026 deshalb an eine Frist erinnert, die es seit dieser
+Welle nicht mehr gibt. Mit `9b83af8` ist er durch einen kurzen Hinweis auf diese Welle ersetzt. Die
+Nachricht von `9b83af8` und die erste Fassung dieses Nachtrags sagten, er habe „wieder“ in der Datei
+gestanden; das traf nicht zu, er war nie entfernt. Code und Datenschutzerklärung waren nicht betroffen.
 
 ### L-Lehren
 
