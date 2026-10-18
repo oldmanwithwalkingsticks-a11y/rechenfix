@@ -8,6 +8,7 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 export default function FahrradRahmenRechner() {
   const [koerpergroesse, setKoerpergroesse] = useState('178');
@@ -130,6 +131,11 @@ export default function FahrradRahmenRechner() {
 
           <CrossLink href="/mathe/einheiten-umrechner" emoji="📏" text="Zoll in Zentimeter umrechnen" />
           <CrossLink href="/auto/autokosten-rechner" emoji="🚗" text="Autokosten berechnen — Alternative zum Rad?" />
+
+          <AffiliateBox
+            programId="rockbros"
+            context={ergebnis.fahrradtyp === 'rennrad' ? 'rahmen-rennrad' : ergebnis.fahrradtyp === 'mtb' ? 'rahmen-mtb' : 'rahmen-helm'}
+          />
 
           <ErgebnisAktionen
             ergebnisText={`${ergebnis.fahrradtypLabel}: Rahmenhöhe ${ergebnis.rahmenhoeheCm} cm (${ergebnis.rahmenhoehZoll}"), Größe ${ergebnis.buchstabengroesse} (±2 cm)`}

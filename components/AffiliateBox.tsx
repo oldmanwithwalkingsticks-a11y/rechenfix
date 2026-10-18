@@ -133,6 +133,15 @@ export const AFFILIATE_PROGRAMS = {
     icon: '🏋️',
     color: '#C2410C',
   },
+  rockbros: {
+    name: 'ROCKBROS',
+    tagline: 'Fahrräder, Helme, Radbekleidung und Fahrradzubehör',
+    cta: 'Sortiment ansehen',
+    baseUrl: 'https://www.awin1.com/cread.php?awinmid=122456&awinaffid=2843240',
+    deeplink: 'https://rockbrosbike.de/',
+    icon: '🚴',
+    color: '#B91C1C',
+  },
 } as const;
 
 export type ProgramId = keyof typeof AFFILIATE_PROGRAMS;
@@ -269,6 +278,12 @@ export const CONTEXT_TEXTS: Partial<Record<ProgramId, Record<string, string>>> =
     'grundumsatz': 'Lebensmittel für den Alltag — Haferflocken, Reis, Hülsenfrüchte, Nussbutter und mehr.',
     'kalorienverbrauch': 'Trinkflaschen für Training und Alltag.',
   },
+  rockbros: {
+    'rahmen-rennrad': 'Rennräder für Straße und Training — die berechnete Rahmenhöhe vor dem Kauf mit der Größentabelle des jeweiligen Modells abgleichen.',
+    'rahmen-mtb': 'Mountainbikes für Gelände und Alltag — die berechnete Rahmenhöhe vor dem Kauf mit der Größentabelle des jeweiligen Modells abgleichen.',
+    'rahmen-helm': 'Fahrradhelme für Stadt und Tour — beim Helm entscheidet der Kopfumfang, nicht die Rahmenhöhe.',
+    'ftp': 'Radbekleidung für Training und lange Ausfahrten — Trikots, Radhosen, Handschuhe und Brillen.',
+  },
 };
 
 // --- Kontextspezifische Deeplinks ---
@@ -332,6 +347,13 @@ export const CONTEXT_DEEPLINKS: Partial<Record<ProgramId, Record<string, string>
     'grundumsatz': 'https://gymbeam.de/gesunde-lebensmittel',
     'kalorienverbrauch': 'https://gymbeam.de/sportflaschen',
     'default': 'https://gymbeam.de/proteine',
+  },
+  rockbros: {
+    'rahmen-rennrad': 'https://rockbrosbike.de/collections/rennrad',
+    'rahmen-mtb': 'https://rockbrosbike.de/collections/mtb',
+    'rahmen-helm': 'https://rockbrosbike.de/collections/fahrradhelme',
+    'ftp': 'https://rockbrosbike.de/collections/bekleidung',
+    'default': 'https://rockbrosbike.de/',
   },
 };
 

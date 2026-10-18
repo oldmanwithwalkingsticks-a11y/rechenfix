@@ -6,6 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { AffiliateBox } from '@/components/AffiliateBox';
 
 /**
  * FTP-Rechner (Functional Threshold Power, Radfahren; Sport-Kategorie).
@@ -146,6 +147,8 @@ export default function FtpRechner() {
 
           <CrossLink href="/sport/herzfrequenz-zonen-rechner" emoji="❤️" text="Herzfrequenz-Trainingszonen berechnen" />
           <CrossLink href="/sport/kalorienverbrauch-rechner" emoji="🔥" text="Kalorienverbrauch beim Radfahren" />
+
+          <AffiliateBox programId="rockbros" context="ftp" />
 
           <ErgebnisAktionen
             ergebnisText={`FTP ${fmt0(ergebnis.ftp)} W${ergebnis.wkg > 0 ? ` (${fmt2(ergebnis.wkg)} W/kg)` : ''} — Schwellenzone Z4: ${fmt0(ergebnis.zonen[3].loW)}–${fmt0(ergebnis.zonen[3].hiW)} W`}
