@@ -2,6 +2,7 @@ import { MINDESTLOHN } from './mindestlohn';
 import { berechneBruttoNetto } from './brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
 import { WOCHEN_PRO_MONAT } from './_helpers';
+import { anzahlBundesweiterFeiertageMoBisFr } from './feiertage';
 
 export interface WahrerStundenlohnEingabe {
   bruttoMonatlich: number;
@@ -11,6 +12,10 @@ export interface WahrerStundenlohnEingabe {
   essenProTag: number;
   kleidungMonat: number;
   ueberstundenWoche: number;
+  /** Urlaubstage pro Jahr, gezählt in Arbeitstagen. Ohne Angabe 30. */
+  urlaubstageJahr?: number;
+  /** Arbeitstage pro Woche. Ohne Angabe 5. */
+  arbeitstageWoche?: number;
 }
 
 export interface WahrerStundenlohnErgebnis {
@@ -20,6 +25,11 @@ export interface WahrerStundenlohnErgebnis {
   vertragsstundenMonat: number;
 
   // Tatsächlich
+  arbeitstageJahr: number;
+  arbeitstageMonat: number;
+  feiertageMoBisFr: number;
+  urlaubstageJahr: number;
+  arbeitstageWoche: number;
   pendelzeitStundenMonat: number;
   ueberstundenMonat: number;
   tatsaechlicheStundenMonat: number;
@@ -61,23 +71,43 @@ function nettoStandard(brutto: number): number {
   }).nettoMonat;
 }
 
-const ARBEITSTAGE_MONAT = 21.7; // Durchschnitt
 const WOCHEN_MONAT = WOCHEN_PRO_MONAT;
+export const URLAUBSTAGE_STANDARD = 30;
+export const ARBEITSTAGE_WOCHE_STANDARD = 5;
 
-export function berechneWahrenStundenlohn(eingabe: WahrerStundenlohnEingabe): WahrerStundenlohnErgebnis {
+// W165: Pendeln, Essen und unbezahlte Überstunden fallen nur an Tagen an, an denen tatsächlich
+// gearbeitet wird. Bezahlt werden dagegen alle Vertragsstunden, auch an Urlaubs- und Feiertagen.
+// Arbeitstage im Jahr = Arbeitstage pro Woche × 52 − Urlaubstage − bundesweite Feiertage, die auf
+// Mo–Fr fallen (bei weniger als fünf Arbeitstagen anteilig). Landesfeiertage zieht der Rechner
+// nicht ab, wie der Freelancer-Stundensatz-Rechner. Bis Welle 164 galten pauschal 21,7 Tage im
+// Monat (= 260 Tage Montag bis Freitag / 12), also ohne Urlaub und Feiertage.
+export function berechneWahrenStundenlohn(
+  eingabe: WahrerStundenlohnEingabe,
+  jahr: number = new Date().getFullYear(),
+): WahrerStundenlohnErgebnis {
   const nettoMonatlich = nettoStandard(eingabe.bruttoMonatlich);
+
+  const arbeitstageWoche = Math.min(7, Math.max(0, eingabe.arbeitstageWoche ?? ARBEITSTAGE_WOCHE_STANDARD));
+  const urlaubstageJahr = Math.max(0, eingabe.urlaubstageJahr ?? URLAUBSTAGE_STANDARD);
+  const feiertageMoBisFr = anzahlBundesweiterFeiertageMoBisFr(jahr);
+  const arbeitstageJahr = Math.max(
+    0,
+    arbeitstageWoche * 52 - urlaubstageJahr - (feiertageMoBisFr * Math.min(arbeitstageWoche, 5)) / 5,
+  );
+  const arbeitstageMonat = arbeitstageJahr / 12;
+  const arbeitswochenMonat = arbeitstageWoche > 0 ? arbeitstageMonat / arbeitstageWoche : 0;
 
   // Vertragliche Stunden pro Monat
   const vertragsstundenMonat = eingabe.arbeitsstundenWoche * WOCHEN_MONAT;
   const offiziellerStundenlohn = nettoMonatlich / vertragsstundenMonat;
 
   // Tatsächliche Stunden
-  const pendelzeitStundenMonat = (eingabe.pendelzeitMinutenTag / 60) * ARBEITSTAGE_MONAT;
-  const ueberstundenMonat = eingabe.ueberstundenWoche * WOCHEN_MONAT;
+  const pendelzeitStundenMonat = (eingabe.pendelzeitMinutenTag / 60) * arbeitstageMonat;
+  const ueberstundenMonat = eingabe.ueberstundenWoche * arbeitswochenMonat;
   const tatsaechlicheStundenMonat = vertragsstundenMonat + pendelzeitStundenMonat + ueberstundenMonat;
 
   // Tatsächliche Kosten
-  const essenskostenMonat = eingabe.essenProTag * ARBEITSTAGE_MONAT;
+  const essenskostenMonat = eingabe.essenProTag * arbeitstageMonat;
   const abzuegeMonat = eingabe.fahrtkostenMonat + essenskostenMonat + eingabe.kleidungMonat;
   const tatsaechlichesNetto = nettoMonatlich - abzuegeMonat;
   const wahrerStundenlohn = tatsaechlichesNetto / tatsaechlicheStundenMonat;
@@ -95,6 +125,11 @@ export function berechneWahrenStundenlohn(eingabe: WahrerStundenlohnEingabe): Wa
     nettoMonatlich,
     offiziellerStundenlohn,
     vertragsstundenMonat,
+    arbeitstageJahr,
+    arbeitstageMonat,
+    feiertageMoBisFr,
+    urlaubstageJahr,
+    arbeitstageWoche,
     pendelzeitStundenMonat,
     ueberstundenMonat,
     tatsaechlicheStundenMonat,

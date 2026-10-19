@@ -56,6 +56,8 @@ export default function WahrerStundenlohnRechner() {
   const [essen, setEssen] = useState('8');
   const [kleidung, setKleidung] = useState('0');
   const [ueberstunden, setUeberstunden] = useState('3');
+  const [urlaub, setUrlaub] = useState('30');
+  const [tageWoche, setTageWoche] = useState('5');
 
   function parse(v: string): number {
     return parseFloat(v.replace(',', '.')) || 0;
@@ -73,8 +75,10 @@ export default function WahrerStundenlohnRechner() {
       essenProTag: parse(essen),
       kleidungMonat: parse(kleidung),
       ueberstundenWoche: parse(ueberstunden),
+      urlaubstageJahr: parse(urlaub),
+      arbeitstageWoche: parse(tageWoche),
     });
-  }, [brutto, stunden, pendel, fahrt, essen, kleidung, ueberstunden]);
+  }, [brutto, stunden, pendel, fahrt, essen, kleidung, ueberstunden, urlaub, tageWoche]);
 
   const abstandMl = ergebnis ? aufCent(ergebnis.abstandMindestlohnNetto) : 0;
 
@@ -104,6 +108,8 @@ export default function WahrerStundenlohnRechner() {
         <Eingabefeld id="essen" label="Mittagessen / Kaffee pro Tag" value={essen} onChange={setEssen} suffix="€" />
         <Eingabefeld id="kleidung" label="Arbeitskleidung / Reinigung pro Monat" value={kleidung} onChange={setKleidung} suffix="€" />
         <Eingabefeld id="ueberstunden" label="Unbezahlte Überstunden pro Woche" value={ueberstunden} onChange={setUeberstunden} suffix="h" />
+        <Eingabefeld id="tageWoche" label="Arbeitstage pro Woche" value={tageWoche} onChange={setTageWoche} suffix="Tage" />
+        <Eingabefeld id="urlaub" label="Urlaubstage pro Jahr" value={urlaub} onChange={setUrlaub} suffix="Tage" />
       </div>
 
       {/* Ergebnis */}
@@ -170,6 +176,9 @@ export default function WahrerStundenlohnRechner() {
                 </div>
               </div>
             </div>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+              Pendeln, Essen und Überstunden gerechnet mit {ergebnis.arbeitstageJahr.toLocaleString('de-DE', { maximumFractionDigits: 1 })} Arbeitstagen im Jahr ({ergebnis.arbeitstageWoche.toLocaleString('de-DE')} × 52 Wochen − {ergebnis.urlaubstageJahr.toLocaleString('de-DE')} Urlaubstage − bundesweite Feiertage von Montag bis Freitag), also {ergebnis.arbeitstageMonat.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} Tagen im Monat. Bezahlt werden alle Vertragsstunden, auch im Urlaub.
+            </p>
           </div>
 
           {/* Aufschlüsselung: Geld */}
@@ -257,6 +266,7 @@ export default function WahrerStundenlohnRechner() {
                   { label: 'Tatsächliche Stunden pro Monat', wert: `${ergebnis.tatsaechlicheStundenMonat.toFixed(0)} h` },
                   { label: 'davon Pendelzeit', wert: `${ergebnis.pendelzeitStundenMonat.toFixed(0)} h` },
                   { label: 'davon Überstunden', wert: `${ergebnis.ueberstundenMonat.toFixed(0)} h` },
+                  { label: 'Arbeitstage im Jahr', wert: `${ergebnis.arbeitstageJahr.toLocaleString('de-DE', { maximumFractionDigits: 1 })}` },
                 ],
               },
             ]}
@@ -264,7 +274,7 @@ export default function WahrerStundenlohnRechner() {
 
           <AiExplain
             rechnerName="Wahrer Stundenlohn Rechner"
-            eingaben={{ bruttoMonatlich: parse(brutto), arbeitsstundenWoche: parse(stunden), pendelzeitMinuten: parse(pendel), fahrtkostenMonat: parse(fahrt), essenProTag: parse(essen), kleidungMonat: parse(kleidung), ueberstundenWoche: parse(ueberstunden) }}
+            eingaben={{ bruttoMonatlich: parse(brutto), arbeitsstundenWoche: parse(stunden), pendelzeitMinuten: parse(pendel), fahrtkostenMonat: parse(fahrt), essenProTag: parse(essen), kleidungMonat: parse(kleidung), ueberstundenWoche: parse(ueberstunden), urlaubstageJahr: parse(urlaub), arbeitstageWoche: parse(tageWoche) }}
             ergebnis={{ offiziellerStundenlohn: ergebnis.offiziellerStundenlohn, wahrerStundenlohn: ergebnis.wahrerStundenlohn, differenzProzent: ergebnis.differenzProzent, mindestlohnNettoStunde: ergebnis.mindestlohnNettoStunde, abstandMindestlohnNetto: ergebnis.abstandMindestlohnNetto, tatsaechlichesNetto: ergebnis.tatsaechlichesNetto }}
           />
         </div>

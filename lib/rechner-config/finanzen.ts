@@ -1667,11 +1667,11 @@ export const finanzenRechner: RechnerConfig[] = [
     beschreibung: 'Was verdienen Sie wirklich pro Stunde? Berechnen Sie Ihren wahren Stundenlohn inklusive Pendelzeit, Fahrtkosten und Überstunden.',
     kategorie: 'Finanzen',
     kategorieSlug: 'finanzen',
-    metaTitle: 'Wahrer Stundenlohn — im Beispiel 26 % weniger',
-    metaDescription: 'Wahrer Stundenlohn Rechner: Pendeln, Fahrtkosten und unbezahlte Überstunden senken Ihren realen Verdienst, im Beispiel um 26 %. Kostenlos berechnen.',
+    metaTitle: 'Wahrer Stundenlohn — im Beispiel 24 % weniger',
+    metaDescription: 'Wahrer Stundenlohn Rechner: Pendeln, Fahrtkosten und unbezahlte Überstunden senken Ihren realen Verdienst, im Beispiel um 24 %. Kostenlos berechnen.',
     keywords: ['wahrer stundenlohn', 'stundenlohn berechnen', 'was verdiene ich wirklich', 'netto stundenlohn', 'stundenlohn mit pendelzeit', 'echter stundenlohn', 'stundenlohn rechner', 'versteckte arbeitskosten', 'realer stundenlohn', 'pendelzeit kosten'],
     icon: '🔍',
-    beispiel: 'Beispiel: 3.500 € brutto, 40h/Woche, 60 Min. Pendeln, 100 € Fahrtkosten, 8 € Essen/Tag → offizieller Netto-Stundenlohn 13,46 €, wahrer Stundenlohn 9,90 €.',
+    beispiel: 'Beispiel: 3.500 € brutto, 40h/Woche, 60 Min. Pendeln, 100 € Fahrtkosten, 8 € Essen/Tag, 3 h unbezahlte Überstunden, 30 Urlaubstage → offizieller Netto-Stundenlohn 13,46 €, wahrer Stundenlohn 10,27 €.',
     faq: [
       {
         frage: 'Wie wird das Nettogehalt berechnet?',
@@ -1679,7 +1679,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Warum ist der wahre Stundenlohn so viel niedriger?',
-        antwort: 'Zwei Faktoren wirken zusammen: Erstens erhöht sich die investierte Zeit durch Pendeln und Überstunden, im Standardbeispiel von 173 auf 208 Stunden im Monat (+20 %). Zweitens reduzieren Fahrtkosten, Essen und Kleidung das verfügbare Einkommen, im Beispiel um 273,60 € im Monat. Zusammen senkt das den wahren Stundenlohn im Beispiel um gut ein Viertel, von 13,46 € auf 9,90 €.',
+        antwort: 'Zwei Faktoren wirken zusammen: Erstens erhöht sich die investierte Zeit durch Pendeln und Überstunden, im Standardbeispiel von 173 auf 203 Stunden im Monat (+17 %). Zweitens reduzieren Fahrtkosten, Essen und Kleidung das verfügbare Einkommen, im Beispiel um 248,67 € im Monat. Zusammen senkt das den wahren Stundenlohn im Beispiel um knapp ein Viertel, von 13,46 € auf 10,27 €. Pendeln, Essen und Überstunden zählen dabei nur an echten Arbeitstagen, nicht im Urlaub und nicht an Feiertagen.',
       },
       {
         frage: 'Zählt die Pendelzeit rechtlich als Arbeitszeit?',
@@ -1706,7 +1706,7 @@ export const finanzenRechner: RechnerConfig[] = [
           { kriterium: 'Zeitbasis', a: 'nur Vertragsstunden', b: 'plus Pendeln und unbezahlte Mehrarbeit' },
           { kriterium: 'Berufsbedingte Kosten', a: 'unberücksichtigt', b: 'abgezogen (Fahrt, Essen, Kleidung)' },
           { kriterium: 'Aussagekraft', a: 'schöngerechnet', b: 'realistischer Verdienst je Lebensstunde' },
-          { kriterium: 'Im Standardbeispiel', a: '≈ 13,46 €/h', b: '≈ 9,90 €/h' },
+          { kriterium: 'Im Standardbeispiel', a: '≈ 13,46 €/h', b: '≈ 10,27 €/h' },
         ],
       },
       {
@@ -1745,22 +1745,22 @@ export const finanzenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Netto (Beispiel)', formel: 'StKl I, 2026', ergebnis: '2.333,25 €' },
           { label: 'Vertragsstunden/Monat', formel: '40 h × 4,33', ergebnis: '173 h' },
-          { label: 'Pendelzeit/Monat', formel: '60 Min/Tag × 21,7 Tage', ergebnis: '+ 21,7 h' },
-          { label: 'Gesamtzeit', formel: '173 + 21,7', ergebnis: '≈ 195 h' },
-          { label: 'Lohn pro echter Stunde', formel: '2.333,25 € ÷ 195 h', ergebnis: '≈ 11,96 €' },
+          { label: 'Pendelzeit/Monat', formel: '60 Min/Tag × 18,58 Arbeitstage', ergebnis: '+ 18,6 h' },
+          { label: 'Gesamtzeit', formel: '173,3 + 18,6', ergebnis: '≈ 192 h' },
+          { label: 'Lohn pro echter Stunde', formel: '2.333,25 € ÷ 192 h', ergebnis: '≈ 12,16 €' },
         ],
-        fazit: 'Eine Stunde Pendeln am Tag — also je 30 Minuten pro Strecke — addiert über den Monat rund 22 unbezahlte Stunden. Die Gesamtzeit für den Job steigt damit von 173 auf etwa 195 Stunden, während das Netto gleich bleibt. Der Lohn pro tatsächlich investierter Stunde sinkt dadurch von 13,46 auf rund 11,96 Euro, ganz ohne dass Kosten berücksichtigt wären. Wer 45 Minuten pro Strecke fährt, verliert noch mehr. Das macht deutlich, warum Wohnortwahl und Arbeitsweg den realen Verdienst stärker beeinflussen als viele denken: Eine Gehaltserhöhung kann durch einen längeren Pendelweg rechnerisch teilweise aufgezehrt werden. Die 21,7 Arbeitstage pro Monat sind ein üblicher Durchschnittswert.',
+        fazit: 'Eine Stunde Pendeln am Tag — also je 30 Minuten pro Strecke — addiert über den Monat rund 19 unbezahlte Stunden. Die Gesamtzeit für den Job steigt damit von 173 auf etwa 192 Stunden, während das Netto gleich bleibt. Der Lohn pro tatsächlich investierter Stunde sinkt dadurch von 13,46 auf rund 12,16 Euro, ganz ohne dass Kosten berücksichtigt wären. Wer 45 Minuten pro Strecke fährt, verliert noch mehr. Das macht deutlich, warum Wohnortwahl und Arbeitsweg den realen Verdienst stärker beeinflussen als viele denken: Eine Gehaltserhöhung kann durch einen längeren Pendelweg rechnerisch teilweise aufgezehrt werden. Gerechnet wird mit 223 Arbeitstagen im Jahr, also rund 18,6 im Monat: 5 Tage × 52 Wochen, abzüglich 30 Urlaubstagen (der Standard in den meisten Tarifverträgen; gesetzlich sind es bei einer 5-Tage-Woche mindestens 20) und der 7 bundesweiten Feiertage, die 2026 auf Montag bis Freitag fallen. Im Urlaub und an Feiertagen fährt niemand zur Arbeit — bezahlt sind diese Tage trotzdem.',
       },
       {
         typ: 'beispielrechnung',
         titel: 'Unbezahlte Überstunden',
         schritte: [
-          { label: 'Gesamtzeit mit Pendeln', formel: 'aus Schritt zuvor', ergebnis: '≈ 195 h' },
-          { label: 'Unbezahlte Überstunden', formel: '3 h/Woche × 4,33', ergebnis: '+ 13 h' },
-          { label: 'Echte Gesamtzeit', formel: '195 + 13', ergebnis: '≈ 208 h' },
-          { label: 'Lohn pro echter Stunde', formel: '2.333,25 € ÷ 208 h', ergebnis: '≈ 11,22 €' },
+          { label: 'Gesamtzeit mit Pendeln', formel: 'aus Schritt zuvor', ergebnis: '≈ 192 h' },
+          { label: 'Unbezahlte Überstunden', formel: '3 h/Woche × 44,6 Arbeitswochen ÷ 12', ergebnis: '+ 11,15 h' },
+          { label: 'Echte Gesamtzeit', formel: '192 + 11,15', ergebnis: '≈ 203 h' },
+          { label: 'Lohn pro echter Stunde', formel: '2.333,25 € ÷ 203 h', ergebnis: '≈ 11,49 €' },
         ],
-        fazit: 'Kommen drei unbezahlte Überstunden pro Woche hinzu, wächst die echte Monatszeit um weitere rund 13 Stunden auf etwa 208 Stunden. Der Lohn je investierter Stunde fällt damit auf gut 11,20 Euro — und das immer noch vor Abzug der berufsbedingten Kosten. Unbezahlte Mehrarbeit ist besonders tückisch, weil sie oft schleichend zur Gewohnheit wird und im Gehalt überhaupt nicht auftaucht. Wer regelmäßig zwei Stunden täglich länger bleibt, arbeitet rechnerisch fast einen zusätzlichen unbezahlten Tag pro Woche. Für den ehrlichen Vergleich zweier Stellen ist genau diese unsichtbare Zeit entscheidend: Zwei Jobs mit identischem Gehalt können sich im wahren Stundenlohn erheblich unterscheiden. Die hier genutzten Werte stammen aus dem Standard-Beispiel des Rechners.',
+        fazit: 'Kommen drei unbezahlte Überstunden pro Woche hinzu, wächst die echte Monatszeit um weitere rund 11 Stunden auf etwa 203 Stunden — gezählt nur in den 44,6 Wochen, in denen tatsächlich gearbeitet wird. Der Lohn je investierter Stunde fällt damit auf knapp 11,50 Euro — und das immer noch vor Abzug der berufsbedingten Kosten. Unbezahlte Mehrarbeit ist besonders tückisch, weil sie oft schleichend zur Gewohnheit wird und im Gehalt überhaupt nicht auftaucht. Wer regelmäßig zwei Stunden täglich länger bleibt, arbeitet rechnerisch mehr als einen zusätzlichen unbezahlten Arbeitstag pro Woche. Für den ehrlichen Vergleich zweier Stellen ist genau diese unsichtbare Zeit entscheidend: Zwei Jobs mit identischem Gehalt können sich im wahren Stundenlohn erheblich unterscheiden. Die hier genutzten Werte stammen aus dem Standard-Beispiel des Rechners.',
       },
       {
         typ: 'vergleich',
@@ -1778,7 +1778,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Berufsbedingte Kosten gegenrechnen',
-        html: `<p>Neben der Zeit kostet ein Job auch Geld — und zwar Ausgaben, die ohne den Job gar nicht anfielen. Dazu zählen <strong>Fahrtkosten</strong> (Sprit, Verschleiß, ÖPNV-Ticket), das tägliche <strong>Mittagessen</strong> oder der Coffee-to-go auswärts sowie <strong>Arbeitskleidung</strong> und deren Reinigung. Im Standardbeispiel dieses Rechners sind es gut 270 Euro im Monat, die das verfügbare Netto schmälern.</p><p>Für den wahren Stundenlohn werden diese Kosten vom Nettogehalt abgezogen, bevor durch die Gesamtstunden geteilt wird. Ein Teil davon lässt sich über die Steuererklärung als Werbungskosten teilweise zurückholen — etwa die Entfernungspauschale für den Arbeitsweg oder Aufwendungen für typische Berufskleidung. Das mindert die Belastung, hebt sie aber selten vollständig auf, weil nur ein Teil erstattet wird und auch nur, soweit die Werbungskosten den Pauschbetrag übersteigen. In der Beispielrechnung bleiben die Kosten daher als realer Abzug stehen. Welche Posten im Einzelfall absetzbar sind, klärt die Steuererklärung — dies ist keine Steuerberatung.</p>`,
+        html: `<p>Neben der Zeit kostet ein Job auch Geld — und zwar Ausgaben, die ohne den Job gar nicht anfielen. Dazu zählen <strong>Fahrtkosten</strong> (Sprit, Verschleiß, ÖPNV-Ticket), das tägliche <strong>Mittagessen</strong> oder der Coffee-to-go auswärts sowie <strong>Arbeitskleidung</strong> und deren Reinigung. Im Standardbeispiel dieses Rechners sind es knapp 250 Euro im Monat, die das verfügbare Netto schmälern.</p><p>Für den wahren Stundenlohn werden diese Kosten vom Nettogehalt abgezogen, bevor durch die Gesamtstunden geteilt wird. Ein Teil davon lässt sich über die Steuererklärung als Werbungskosten teilweise zurückholen — etwa die Entfernungspauschale für den Arbeitsweg oder Aufwendungen für typische Berufskleidung. Das mindert die Belastung, hebt sie aber selten vollständig auf, weil nur ein Teil erstattet wird und auch nur, soweit die Werbungskosten den Pauschbetrag übersteigen. In der Beispielrechnung bleiben die Kosten daher als realer Abzug stehen. Welche Posten im Einzelfall absetzbar sind, klärt die Steuererklärung — dies ist keine Steuerberatung.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -1786,11 +1786,11 @@ export const finanzenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Netto (Beispiel)', formel: 'StKl I, 2026', ergebnis: '2.333,25 €' },
           { label: 'minus Fahrtkosten', formel: 'Sprit / Ticket', ergebnis: '− 100 €' },
-          { label: 'minus Essen auswärts', formel: '8 €/Tag × 21,7', ergebnis: '− 173,60 €' },
-          { label: 'Bereinigtes Netto', formel: '2.333,25 − 100 − 173,60', ergebnis: '2.059,65 €' },
-          { label: 'Wahrer Stundenlohn', formel: '2.059,65 € ÷ 208 h', ergebnis: '≈ 9,90 €' },
+          { label: 'minus Essen auswärts', formel: '8 €/Tag × 18,58', ergebnis: '− 148,67 €' },
+          { label: 'Bereinigtes Netto', formel: '2.333,25 − 100 − 148,67', ergebnis: '2.084,58 €' },
+          { label: 'Wahrer Stundenlohn', formel: '2.084,58 € ÷ 203 h', ergebnis: '≈ 10,27 €' },
         ],
-        fazit: 'Zieht man die berufsbedingten Kosten ab, sinkt das verfügbare Netto im Beispiel von 2.333,25 auf 2.059,65 Euro. Geteilt durch die echte Gesamtzeit von etwa 208 Stunden bleibt ein wahrer Stundenlohn von rund 9,90 Euro — gegenüber 13,46 Euro offiziellem Netto-Stundenlohn ein Minus von gut einem Viertel. Aus gut 20 Euro Brutto-Stundenlohn ist damit real ein einstelliger Betrag geworden. Genau dieser Wert zeigt, was eine Stunde Lebenszeit für den Job nach allen Abzügen tatsächlich einbringt. Die Einzelposten sind Beispielwerte; mit Arbeitskleidung, höheren Fahrtkosten oder mehr Pendelzeit fällt das Ergebnis noch niedriger aus. Der Rechner oben setzt Ihre eigenen Zahlen ein und vergleicht das Ergebnis zusätzlich mit dem Netto, das ein Job zum Mindestlohn mit gleicher Wochenarbeitszeit je bezahlter Stunde bringt. Im Beispiel liegen beide auf den Cent gleichauf bei 9,90 Euro.',
+        fazit: 'Zieht man die berufsbedingten Kosten ab, sinkt das verfügbare Netto im Beispiel von 2.333,25 auf 2.084,58 Euro. Geteilt durch die echte Gesamtzeit von etwa 203 Stunden bleibt ein wahrer Stundenlohn von rund 10,27 Euro — gegenüber 13,46 Euro offiziellem Netto-Stundenlohn ein Minus von knapp einem Viertel. Aus gut 20 Euro Brutto-Stundenlohn ist damit real ein einstelliger Betrag geworden. Genau dieser Wert zeigt, was eine Stunde Lebenszeit für den Job nach allen Abzügen tatsächlich einbringt. Die Einzelposten sind Beispielwerte; mit Arbeitskleidung, höheren Fahrtkosten oder mehr Pendelzeit fällt das Ergebnis noch niedriger aus. Der Rechner oben setzt Ihre eigenen Zahlen ein und vergleicht das Ergebnis zusätzlich mit dem Netto, das ein Job zum Mindestlohn mit gleicher Wochenarbeitszeit je bezahlter Stunde bringt. Im Beispiel liegt der wahre Stundenlohn mit 10,27 Euro nur 36 Cent über den 9,90 Euro eines Mindestlohn-Jobs.',
       },
       {
         typ: 'statistik',
@@ -1832,7 +1832,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'So rechnet dieser Rechner',
-        html: `<p><strong>Der Grundgedanke:</strong> Der offizielle Stundenlohn ist Netto geteilt durch die Vertragsstunden. Der <em>wahre</em> Stundenlohn zieht zusätzlich die unbezahlte Zeit (Pendeln, unbezahlte Überstunden) und die berufsbedingten Kosten (Fahrt, Verpflegung, Arbeitskleidung) ab — also den Aufwand, der mit dem Job verbunden ist, aber nicht vergütet wird.</p><p><strong>Netto:</strong> Der Rechner nutzt dieselbe Berechnung wie der Brutto-Netto-Rechner (Programmablaufplan Lohnsteuer 2026) mit festen Annahmen: Steuerklasse I, keine Kinder, keine Kirchensteuer, gesetzlich versichert mit durchschnittlichem Zusatzbeitrag. Weichen Ihre Eckdaten ab, rechnen Sie Ihr Netto dort aus. Das Ergebnis ist ein Denkwerkzeug, keine Lohnabrechnung und keine Steuerberatung.</p><p><strong>Bezugsgrößen 2026:</strong> gesetzlicher Mindestlohn 13,90 €, Grundfreibetrag 12.348 €, 52/12 Wochen und 21,7 Arbeitstage pro Monat. Alle Eingaben — Gehalt, Stunden, Pendelzeit, Kosten — sind frei anpassbar; das Ergebnis wird zusätzlich mit dem Netto-Stundenlohn eines Mindestlohn-Jobs bei gleicher Wochenarbeitszeit verglichen.</p>`,
+        html: `<p><strong>Der Grundgedanke:</strong> Der offizielle Stundenlohn ist Netto geteilt durch die Vertragsstunden. Der <em>wahre</em> Stundenlohn zieht zusätzlich die unbezahlte Zeit (Pendeln, unbezahlte Überstunden) und die berufsbedingten Kosten (Fahrt, Verpflegung, Arbeitskleidung) ab — also den Aufwand, der mit dem Job verbunden ist, aber nicht vergütet wird.</p><p><strong>Netto:</strong> Der Rechner nutzt dieselbe Berechnung wie der Brutto-Netto-Rechner (Programmablaufplan Lohnsteuer 2026) mit festen Annahmen: Steuerklasse I, keine Kinder, keine Kirchensteuer, gesetzlich versichert mit durchschnittlichem Zusatzbeitrag. Weichen Ihre Eckdaten ab, rechnen Sie Ihr Netto dort aus. Das Ergebnis ist ein Denkwerkzeug, keine Lohnabrechnung und keine Steuerberatung.</p><p><strong>Bezugsgrößen 2026:</strong> gesetzlicher Mindestlohn 13,90 €, Grundfreibetrag 12.348 €, 52/12 Wochen für die bezahlten Vertragsstunden. Pendeln, Essen und Überstunden zählen nur an echten Arbeitstagen: Arbeitstage pro Woche × 52, abzüglich Urlaub und der bundesweiten Feiertage, die auf Montag bis Freitag fallen (2026: 7). Landesfeiertage zieht der Rechner nicht ab. Alle Eingaben — Gehalt, Stunden, Pendelzeit, Kosten, Arbeitstage und Urlaub — sind frei anpassbar; das Ergebnis wird zusätzlich mit dem Netto-Stundenlohn eines Mindestlohn-Jobs bei gleicher Wochenarbeitszeit verglichen.</p>`,
       },
     ],
     quellen: [

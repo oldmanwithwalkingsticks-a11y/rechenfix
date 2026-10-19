@@ -319,6 +319,8 @@ export const KI_TOOLS: KiTool[] = [
         essenProTag: { type: 'number', description: 'Zusätzliche Essenskosten pro Arbeitstag in Euro' },
         kleidungMonat: { type: 'number', description: 'Arbeitskleidungskosten pro Monat in Euro' },
         ueberstundenWoche: { type: 'number', description: 'Unbezahlte Überstunden pro Woche' },
+        urlaubstageJahr: { type: 'number', description: 'Urlaubstage pro Jahr (Standard 30)' },
+        arbeitstageWoche: { type: 'number', description: 'Arbeitstage pro Woche (Standard 5)' },
       },
       required: ['bruttoMonatlich', 'arbeitsstundenWoche', 'pendelzeitMinutenTag', 'fahrtkostenMonat', 'essenProTag', 'kleidungMonat', 'ueberstundenWoche'],
     },
