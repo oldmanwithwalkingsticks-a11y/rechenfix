@@ -6,6 +6,89 @@
 
 ---
 
+## 19.10.2026 — Welle 168: Kurzarbeitergeld nach §§ 105, 106, 153 SGB III — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Offener Punkt 8 aus dem Historienblock von Welle 163 („Kurzarbeitergeld-SV-Pauschale 21 % gegen
+§ 153 SGB III, unverifiziert“), jetzt am Gesetzestext belegt: § 106 Abs. 1 Satz 6 SGB III verweist für das
+pauschalierte Netto auf § 153; § 153 Abs. 1 Satz 2 zieht eine Sozialversicherungspauschale von 20 % ab (laut
+BA-Weisung für alle Anspruchstage ab 01.01.2019, vorher 21 %), dazu Lohnsteuer nach dem Programmablaufplan und
+Solidaritätszuschlag. Keine Kirchensteuer, Kinderfreibeträge zählen nicht (Satz 3 Nr. 1), Vorsorgepauschale
+mit Ø-Zusatzbeitrag und PV-Satz ohne Kinderlosenzuschlag (Satz 4). Soll- und Ist-Entgelt werden auf den
+nächsten durch 20 teilbaren Euro-Betrag gerundet (§ 106 Abs. 1 Satz 5).
+
+**Befunde** (`KurzarbeitergeldRechner.tsx`, Rechnung in der Component, keine Lib):
+1. **Rechnung:** SV-Pauschale 21 % statt 20 %; Kirchensteuer abgezogen; kein Soli, keine 20-€-Rundung.
+2. **Ist-Netto und Gesamteinkommen** kamen aus dem Pauschalverfahren. Tatsächlich kommt das echte Netto aus dem
+   Ist-Brutto plus KuG an. Die Sozialabgaben auf das Ist-Entgelt laufen dabei regulär weiter, weil das
+   regelmäßige Entgelt das Soll-Entgelt bleibt; ein Ist-Brutto von 875 € ist kein Midijob.
+3. **Texte:** „keine Rentenlücke“ (beitragspflichtig sind 80 % des Ausfalls, die Beiträge trägt der Arbeitgeber
+   allein, § 163 Abs. 6, § 168 Abs. 1 Nr. 1a SGB VI, § 232a Abs. 2 SGB V; für 20 % des Ausfalls entstehen keine
+   Rentenpunkte); Steuerklassenwechsel „von der Agentur … nicht anerkannt“ (beim KuG nimmt § 106 Abs. 1 Satz 6
+   die Sonderregeln des § 153 zum Steuerklassenwechsel ausdrücklich aus); „kann sich später über die
+   Steuererklärung teilweise ausgleichen“ (das KuG ist steuerfrei und wird nicht verrechnet, es wirkt nur über
+   den Progressionsvorbehalt).
+- **Zahlen alt → neu** (3.500 € / 1.750 €, Klasse I, ohne Kind): pauschaliertes Netto ≈ 2.353 / 1.336 € →
+  2.388,42 € / 1.359,92 € (aus 1.760 €); Differenz 1.017 → 1.028,50 €; KuG 610 → **617,10 €**; Gesamteinkommen
+  1.946 → **1.942,14 €** (echtes Ist-Netto 1.325,04 € plus KuG) statt 2.333,25 €; Verlust 407 → 391,11 €
+  (17,3 → 16,8 %). Mit Kind 682 → 689,10 €; Klasse III 761 → 766,50 €; Klasse V 488 → 495,65 €; Kurzarbeit
+  Null 1.412 → 1.433,05 €.
+
+**Belege** (aus dem Prompt, in der Chat-Sitzung vom 19.10.2026 am Gesetzestext geprüft, nicht in diesem Lauf;
+die Zahlen bestätigen hier Probe und `verify-kurzarbeitergeld`):
+- §§ 105, 106, 153 SGB III und die BA-Weisung zu § 153.
+- § 163 Abs. 6 und § 168 Abs. 1 Nr. 1a SGB VI.
+- § 232a Abs. 2 SGB V.
+
+**Grenze der Rechnung:** Der Programmablauf der BA (§ 106 Abs. 1 Satz 7 SGB III) ist nicht nachgebaut;
+gegenüber der Kug-Tabelle sind Abweichungen um wenige Cent möglich.
+
+**Änderungen** (22 Ersetzungen in 4 Dateien und 2 neue Dateien, Vorlage `_lokal/welle168-kurzarbeitergeld.mjs`,
+nicht committet; Rechenprobe `_lokal/welle168-probe.mjs`):
+- **`lib/berechnungen/kurzarbeitergeld.ts` (neu, SSOT):** Konstanten `KUG_SV_PAUSCHALE = 0.2`,
+  `KUG_SATZ_OHNE_KIND = 0.6`, `KUG_SATZ_MIT_KIND = 0.67`; `rundeKugEntgelt` (§ 106 Abs. 1 Satz 5);
+  `pauschaliertesNettoKug` über `berechneLohnsteuerMitZuschlaegenJahr` (ohne Kirchensteuer, ohne
+  Kinderfreibeträge, PV ohne Zuschlag); `berechneKurzarbeitergeld` mit echtem Netto über `berechneBruttoNetto`
+  und `regelEntgeltMonat = Soll-Brutto`; Kopfkommentar mit allen Fundstellen.
+- **`lib/berechnungen/brutto-netto.ts`, 2:** optionales Eingabefeld `regelEntgeltMonat` für die SV-Zone
+  (Kurzarbeit: Soll-Entgelt); ohne Feld wie bisher Brutto plus ein Zwölftel Weihnachtsgeld.
+- **`components/rechner/KurzarbeitergeldRechner.tsx`, 8:** Rechnung aus der Lib, `nettoAus` und `SV_PAUSCHALE`
+  entfallen; neuer Kasten „So entsteht das Kurzarbeitergeld“; Beschriftungen „Normales Netto (aus dem
+  Soll-Brutto)“ und „Netto aus dem Ist-Brutto“; Hinweistexte. Kirchensteuer und Bundesland wirken nur noch auf
+  das echte Netto.
+- **`lib/rechner-config/finanzen.ts`, Block `kurzarbeitergeld-rechner`, 11:** Beispiel, Kommentar, beide
+  Beispielrechnungen, Tabelle (25 % / 50 % / 75 % / 100 %: Gesamteinkommen 2.155 / 1.946 / 1.689 / 1.412 →
+  2.146 / 1.942 / 1.695 / 1.433 €) und Fußnote, Abschnitt zum pauschalierten Netto, Steuerklassen-Beispiel
+  (1.268 / 761 → 1.277,50 / 766,50 €; 813 / 488 → 826,08 / 495,65 €), Statistik, Schlussabschnitt, FAQ zur
+  Sozialversicherung (80 % des Ausfalls, Beiträge allein vom Arbeitgeber); zwei neue Quellen (§ 106, § 153
+  SGB III); `letzteAktualisierung` `2026-06-23` → `2026-10-19`.
+- **`scripts/verify-kurzarbeitergeld.ts` (neu):** 15 Fälle; Klasse I unabhängig gerechnet (§ 32a EStG 2026,
+  Vorsorgepauschale wie PAP 2026), Klasse III und V als Regressionsanker.
+- **`CLAUDE.md`, 1:** Zeile für die neue Lib in der Tabelle der zentralen Libs.
+
+**Bewusst nicht geändert:** Arbeitslosengeld-Rechner, Weihnachtsgeld-Logik, `lib/social/` (Kachel in
+Welle 169).
+
+**Gates:**
+- Phase 0 an `57d376d`: `git status` leer, oben im Log `57d376d` und `3a8b936` (Welle 167).
+  `SV_PAUSCHALE = 0.21` `KurzarbeitergeldRechner.tsx:1`; „1.946“ `finanzen.ts:6`; `svZone` `brutto-netto.ts:6`;
+  `kurzarbeitergeld.ts` und `verify-kurzarbeitergeld.ts` nicht vorhanden.
+- Phase 1: „OK — 22 Ersetzungen in 4 Dateien, 2 neue Dateien.“, Exit 0; geändert genau die 4 Dateien, neu die 2
+  Dateien (beide reine LF-Zeilenenden, per Byte-Zählung geprüft).
+- Phase 2: Probe 21× OK, Exit 0; `verify-kurzarbeitergeld` „Ergebnis: 15/15 grün, 0 rot.“, Exit 0;
+  `verify-midijob-p1` 41/41; `verify-bruttonetto-zuschlaege` grün (6552 Rasterfälle). Zusätzlich als
+  Regressionsprobe die Lib-Prüfung von Welle 167 (18× OK). Greps: `SV_PAUSCHALE = 0.21`, „1.946“, „21 % SV“,
+  „keine Rentenlücke“ und `letzteAktualisierung: 'HEUTE'` keine Ausgabe; „617,10“ 7; `regelEntgeltMonat`
+  `brutto-netto.ts:2` und `kurzarbeitergeld.ts:1`.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen
+  (affiliate-stats, KaffeeWasserRechner); `check-metadescription` und `check-jahreswerte` grün. Im gebauten
+  HTML von `/finanzen/kurzarbeitergeld-rechner`: „617,10“ 13×, „So entsteht das Kurzarbeitergeld“ 1×, „1.946“
+  und „21 % SV“ fehlen.
+
+**Commits:** A `3d65415` (die 4 geänderten und die 2 neuen Dateien). B ist dieser Doku-Commit. Die Live-Probe
+macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 167: Minijob und Übergangsbereich, Sonderfälle — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Offene Punkte 2 (Weihnachtsgeld), 3 (Steuerklasse VI) und 7 (175-€-Mindestbemessung) aus dem
