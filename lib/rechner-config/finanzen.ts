@@ -3857,7 +3857,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'gehaltserhoehung-rechner',
-    letzteAktualisierung: '2026-06-20',
+    letzteAktualisierung: '2026-10-19',
     titel: 'Gehaltserhöhung-Rechner',
     beschreibung: 'Gehaltserhöhung berechnen: Wie viel Netto bleibt von Ihrer Brutto-Erhöhung — mit Steuer- und Abgabeneffekt.',
     kategorie: 'Finanzen',
@@ -3886,7 +3886,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Welche steuerfreien Alternativen gibt es zur Gehaltserhöhung?',
-        antwort: 'Viele. Die wichtigsten steuerfreien Benefits: Jobticket/Deutschlandticket (63 €/Monat seit 2026), Essenszuschuss (bis 7,67 €/Arbeitstag), Kindergarten-Zuschuss (unbegrenzt für nicht-schulpflichtige Kinder), betriebliche Altersvorsorge (bis 302 €/Monat), Gesundheitsförderung (600 €/Jahr), Handy-/Laptop-Zuschuss, Sachbezüge bis 50 €/Monat. Weil keine Abgaben anfallen, entspricht z.B. ein Jobticket von 63 € einer Brutto-Erhöhung von rund 100–120 €.',
+        antwort: 'Viele. Die wichtigsten steuerfreien oder vom Arbeitgeber pauschal versteuerten Benefits: Jobticket/Deutschlandticket (63 €/Monat seit 2026), Essensmarken (bis 7,67 €/Arbeitstag, der Sachbezugswert von 4,57 € wird pauschal versteuert), Kindergarten-Zuschuss (unbegrenzt für nicht-schulpflichtige Kinder), betriebliche Altersvorsorge (2026 steuerfrei bis 676 €/Monat, sozialabgabenfrei bis 338 €), Gesundheitsförderung (600 €/Jahr), Handy-/Laptop-Zuschuss, Sachbezüge bis 50 €/Monat. Weil keine Abgaben anfallen, entspricht z.B. ein Jobticket von 63 € einer Brutto-Erhöhung von rund 100–120 €.',
       },
       {
         frage: 'Was ist die kalte Progression?',
@@ -5220,7 +5220,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Nettolohn optimieren: Gehaltserhöhung vs. Sachbezüge wie Jobticket, Essenszuschuss oder BAV kostenlos vergleichen — mit KI-Erklärung.',
     keywords: ['nettolohn optimieren', 'sachbezüge', 'steuerfreie gehaltsextras', 'gehaltserhöhung vs sachbezug', 'jobticket steuerfrei', 'essenszuschuss', 'betriebliche altersvorsorge', '50 euro sachbezug', 'nettolohn maximieren'],
     icon: '💡',
-    beispiel: 'Beispiel: 200 € AG-Budget → Brutto-Erhöhung ≈ 109 € netto (StKl I). Als Essenszuschuss (115,05 € steuerfrei) ≈ 115,05 € netto — rund 6 € mehr pro Monat.',
+    beispiel: 'Beispiel: 200 € Budget, 3.500 € brutto, StKl I → Brutto-Erhöhung 109,75 € netto bei 242,30 € Arbeitgeberkosten. Essensmarken (15 × 7,67 €, vom Arbeitgeber pauschal versteuert) bringen 115,05 € netto bei 133,13 € Kosten.',
     // W19-Goldstandard: nettolohn-optimierer auf volle Tiefe (~1.560 W, 15 Bausteine).
     // Leitformat „Benefit-Optionsmatrix" — 3 tabelle dominant (Bausteine-Übersicht ·
     // 200-€-Budget-Vergleich AN-Netto/AG-Kosten · Brutto→Netto-Quote), grenzt sich von
@@ -5228,14 +5228,15 @@ export const finanzenRechner: RechnerConfig[] = [
     // Werte aus berechneBruttoNetto reproduziert (Resolver-Check 25.06.2026, nach W147 neu gemessen, 3.500 €, StKl I):
     // +200 € brutto → +109,75 € netto (Quote ~55 %); AG-Kosten 200 € + 21,15 % AG-SV = 242,30 € (W166, berechneArbeitgeberSvMonat).
     // Bausteine 2026: Sachbezug 50 € (§ 8 Abs. 2 EStG, FREIGRENZE), Jobticket 63 € (§ 3 Nr. 15),
-    // Essenszuschuss 115,05 € (7,67 €/Tag × 15, 16. SvEV — GEFIXT f013478), Internet 50 €
-    // (§ 40 Abs. 2, 25 % pauschal AG), BAV 302 € (§ 3 Nr. 63, mindert spätere Rente).
+    // Essensmarken 115,05 € (7,67 €/Tag × 15, SvEV 2026; 4,57 €/Tag pauschal 25 % durch AG → AG-Kosten
+    // 133,13 €), Internet 50 € (§ 40 Abs. 2, 25 % pauschal AG → 63,18 €), BAV steuerfrei 676 € /
+    // SV-frei 338 € (§ 3 Nr. 63 EStG, § 1 Abs. 1 Nr. 9 SvEV; W170, vorher 302 € = Wert 2024).
     // erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
         titel: 'Warum steuerfreie Bausteine die Gehaltserhöhung schlagen',
-        html: `<p>Eine Brutto-Gehaltserhöhung fühlt sich gut an — bis die Abrechnung kommt. Wer in Steuerklasse I rund 3.500 € verdient, hat eine <strong>Grenzbelastung von etwa 45 %</strong> aus Lohnsteuer, Soli und Sozialabgaben. Von 200 € Brutto-Erhöhung bleiben so nur rund <strong>109 € netto</strong> übrig; der Rest geht an Finanzamt und Sozialkassen. Zusätzlich zahlt der Arbeitgeber gut 21 % Arbeitgeber-Sozialabgaben obendrauf — das Budget wird doppelt belastet.</p><p>Genau hier setzen <strong>steuerfreie Sachbezüge</strong> an. Zahlt der Arbeitgeber statt Brutto einen steuerfreien Baustein, kommt der Betrag fast ungeschmälert bei Ihnen an — und der Arbeitgeber spart die Sozialabgaben gleich mit. Ein Deutschlandticket-Zuschuss von 63 € bringt also 63 € netto, nicht etwa die Hälfte.</p><p>Dieser Rechner vergleicht sechs gängige Bausteine parallel und zeigt für Ihr Budget, welcher netto am meisten bringt. Die exakte Abgabenlast Ihres Gehalts liefert der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
+        html: `<p>Eine Brutto-Gehaltserhöhung fühlt sich gut an — bis die Abrechnung kommt. Wer in Steuerklasse I rund 3.500 € verdient, hat eine <strong>Grenzbelastung von etwa 45 %</strong> aus Lohnsteuer, Soli und Sozialabgaben. Von 200 € Brutto-Erhöhung bleiben so nur rund <strong>109 € netto</strong> übrig; der Rest geht an Finanzamt und Sozialkassen. Zusätzlich zahlt der Arbeitgeber gut 21 % Arbeitgeber-Sozialabgaben obendrauf — das Budget wird doppelt belastet.</p><p>Genau hier setzen <strong>steuerfreie Sachbezüge</strong> an. Zahlt der Arbeitgeber statt Brutto einen steuerfreien oder von ihm pauschal versteuerten Baustein, kommt der Betrag ungeschmälert bei Ihnen an — und der Arbeitgeber spart die Sozialabgaben gleich mit. Ein Deutschlandticket-Zuschuss von 63 € bringt also 63 € netto, nicht etwa die Hälfte.</p><p>Dieser Rechner vergleicht sechs gängige Bausteine parallel und zeigt für Ihr Budget, welcher netto am meisten bringt. Die exakte Abgabenlast Ihres Gehalts liefert der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
       },
       {
         typ: 'tabelle',
@@ -5243,12 +5244,12 @@ export const finanzenRechner: RechnerConfig[] = [
         kopf: ['Baustein', 'max. pro Monat', 'Rechtsgrundlage', 'Besonderheit'],
         zeilen: [
           ['Sachbezug (Gutschein/Karte)', '50 €', '§ 8 Abs. 2 EStG', 'Freigrenze — bei 50,01 € voll steuerpflichtig'],
-          ['Jobticket / Deutschlandticket', '63 €', '§ 3 Nr. 15 EStG', 'voller Ticketpreis steuerfrei (Stand 2026)'],
-          ['Essenszuschuss', '115,05 €', '16. SvEV / R 8.1 LStR', '7,67 €/Tag × 15 Tage (4,57 € + 3,10 €)'],
+          ['Jobticket / Deutschlandticket', '63 €', '§ 3 Nr. 15 EStG', 'voller Ticketpreis steuerfrei (Stand 2026); mindert die Entfernungspauschale'],
+          ['Essensmarken', '115,05 €', 'SvEV / R 8.1 LStR / § 40 Abs. 2 EStG', '7,67 €/Tag × 15 Tage (4,57 € + 3,10 €); 4,57 € je Tag pauschal 25 % durch den Arbeitgeber'],
           ['Internet-Pauschale', '50 €', '§ 40 Abs. 2 EStG', 'pauschal 25 % durch den Arbeitgeber'],
-          ['BAV-Entgeltumwandlung', '302 €', '§ 3 Nr. 63 EStG', 'fließt in die Rente, heute 0 € netto'],
+          ['BAV-Entgeltumwandlung', '676 € (SV-frei 338 €)', '§ 3 Nr. 63 EStG, § 1 SvEV', 'fließt in die Rente, heute 0 € netto'],
         ],
-        fussnote: 'Werte 2026. Alle Bausteine müssen grundsätzlich zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt werden (§ 8 Abs. 4 EStG). Die BAV-Grenze entspricht 4 % der Beitragsbemessungsgrenze der Rentenversicherung.',
+        fussnote: 'Werte 2026. Alle Bausteine außer der BAV müssen grundsätzlich zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt werden (§ 8 Abs. 4 EStG). Bei der BAV sind 8 % der Beitragsbemessungsgrenze der Rentenversicherung (101.400 €) steuerfrei, 4 % auch sozialversicherungsfrei. Die 15 Tage bei den Essensmarken sind die Vereinfachungsregel der Lohnsteuer-Richtlinien.',
       },
       {
         typ: 'text',
@@ -5267,30 +5268,30 @@ export const finanzenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'AG-Budget', formel: 'Arbeitgeber stellt bereit', ergebnis: '200 €/Monat' },
           { label: 'Variante A: Brutto-Erhöhung', formel: 'Netto(3.700 €) − Netto(3.500 €), StKl I', ergebnis: '+109,75 € netto' },
-          { label: 'Variante B: Essenszuschuss', formel: '7,67 € × 15 Tage, steuerfrei', ergebnis: '+115,05 € netto' },
+          { label: 'Variante B: Essensmarken', formel: '7,67 € × 15 Tage, für Sie abgabenfrei', ergebnis: '+115,05 € netto' },
           { label: 'AG-Kosten Variante A', formel: '200 € + 21,15 % AG-SV-Anteil', ergebnis: '242,30 €' },
-          { label: 'AG-Kosten Variante B', formel: 'kein AG-SV-Anteil', ergebnis: '115,05 €' },
+          { label: 'AG-Kosten Variante B', formel: '115,05 € + 25 % Pauschalsteuer auf 68,55 € (15 × 4,57 €) + Soli', ergebnis: '133,13 €' },
         ],
-        fazit: 'Bei 200 € Budget bringt der Essenszuschuss 115,05 € netto — rund 5 € mehr als die Brutto-Erhöhung (109,75 €) — und kostet den Arbeitgeber mit 115,05 € weniger als die Hälfte. Steuerfreie Bausteine gewinnen also auf beiden Seiten: mehr Netto für Sie, weniger Kosten für den Arbeitgeber.',
+        fazit: 'Bei 200 € Budget bringen die Essensmarken 115,05 € netto — rund 5 € mehr als die Brutto-Erhöhung (109,75 €) — und kosten den Arbeitgeber mit 133,13 € gut die Hälfte. Solche Bausteine gewinnen also auf beiden Seiten: mehr Netto für Sie, weniger Kosten für den Arbeitgeber.',
       },
       {
         typ: 'tabelle',
         titel: '200-€-Budget: was kommt netto an?',
         kopf: ['Option', 'kommt netto an', 'kostet den AG', 'Rang'],
         zeilen: [
-          ['Essenszuschuss', '115,05 €', '115,05 €', '1'],
+          ['Essensmarken', '115,05 €', '133,13 €', '1'],
           ['Brutto-Gehaltserhöhung', '109,75 €', '242,30 €', '2'],
           ['Jobticket 63 €', '63,00 €', '63,00 €', '3'],
           ['Sachbezug 50 €', '50,00 €', '50,00 €', '4'],
-          ['Internet-Pauschale 50 €', '50,00 €', '50,00 €', '4'],
+          ['Internet-Pauschale 50 €', '50,00 €', '63,18 €', '4'],
           ['BAV (bis 200 €)', '0 € heute', '200,00 €', '–'],
         ],
-        fussnote: 'Basis: 3.500 € Monatsbrutto, Steuerklasse I, AG-Budget 200 €. „Kommt netto an" = monatlicher Netto-Zugewinn beim Arbeitnehmer. Die Brutto-Erhöhung bringt weniger Netto als der Essenszuschuss und kostet den Arbeitgeber mehr als das Doppelte. BAV fließt in die Altersvorsorge (heute 0 € netto).',
+        fussnote: 'Basis: 3.500 € Monatsbrutto, Steuerklasse I, AG-Budget 200 €. „Kommt netto an" = monatlicher Netto-Zugewinn beim Arbeitnehmer. Bei Essensmarken und Internet-Pauschale trägt der Arbeitgeber 25 % Pauschalsteuer und Soli, ohne Kirchensteuer gerechnet. Die Brutto-Erhöhung bringt weniger Netto als die Essensmarken und kostet den Arbeitgeber fast das Doppelte. BAV fließt in die Altersvorsorge (heute 0 € netto).',
       },
       {
         typ: 'text',
         titel: 'Warum die Brutto-Erhöhung den Arbeitgeber doppelt kostet',
-        html: `<p>Der Kostenvorteil steuerfreier Bausteine zeigt sich besonders aus Arbeitgebersicht. Eine <strong>Brutto-Gehaltserhöhung</strong> belastet den Arbeitgeber doppelt: Er zahlt nicht nur die Erhöhung selbst, sondern zusätzlich gut 21 % Arbeitgeber-Sozialabgaben. Aus 200 € Brutto-Erhöhung werden so <strong>242,30 €</strong> echte Kosten — bei denen beim Arbeitnehmer aber nur rund 110 € netto ankommen.</p><p>Ein steuerfreier Baustein kennt diesen Aufschlag nicht: 115 € Essenszuschuss kosten den Arbeitgeber genau 115 € — und kommen voll beim Arbeitnehmer an. Für dieselbe Netto-Wirkung zahlt der Arbeitgeber also deutlich weniger.</p><p>Das macht steuerfreie Extras zu einem starken Argument in der Gehaltsverhandlung: Sie sind für beide Seiten günstiger. Viele Arbeitgeber sind hier flexibler als bei der Bruttoerhöhung, gerade weil sie selbst Sozialabgaben sparen.</p>`,
+        html: `<p>Der Kostenvorteil steuerfreier Bausteine zeigt sich besonders aus Arbeitgebersicht. Eine <strong>Brutto-Gehaltserhöhung</strong> belastet den Arbeitgeber doppelt: Er zahlt nicht nur die Erhöhung selbst, sondern zusätzlich gut 21 % Arbeitgeber-Sozialabgaben. Aus 200 € Brutto-Erhöhung werden so <strong>242,30 €</strong> echte Kosten — bei denen beim Arbeitnehmer aber nur rund 110 € netto ankommen.</p><p>Ein Baustein ohne Sozialabgaben kennt diesen Aufschlag nicht: 115,05 € Essensmarken kosten den Arbeitgeber mit der Pauschalsteuer 133,13 € — und kommen voll beim Arbeitnehmer an. Für mehr Netto-Wirkung zahlt der Arbeitgeber also deutlich weniger.</p><p>Das macht steuerfreie Extras zu einem starken Argument in der Gehaltsverhandlung: Sie sind für beide Seiten günstiger. Viele Arbeitgeber sind hier flexibler als bei der Bruttoerhöhung, gerade weil sie selbst Sozialabgaben sparen.</p>`,
       },
       {
         typ: 'tabelle',
@@ -5313,7 +5314,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Jobticket, Essenszuschuss und Internet im Detail',
-        html: `<p>Jeder Baustein hat eigene Regeln. Das <strong>Deutschlandticket</strong> (§ 3 Nr. 15 EStG) ist seit 2026 mit 63 €/Monat voll steuerfrei übernehmbar — der Netto-Zugewinn entspricht exakt dem Ticketpreis. Der <strong>Essenszuschuss</strong> deckt das Mittagessen an Arbeitstagen: 7,67 € pro Tag (Sachbezugswert 4,57 € plus 3,10 € Zuschuss), bei 15 Tagen 115,05 € im Monat, meist über digitale Meal-Voucher.</p><p>Die <strong>Internet-Pauschale</strong> (§ 40 Abs. 2 EStG) erlaubt bis zu 50 €/Monat für die berufliche Nutzung des privaten Anschlusses — pauschal mit 25 % durch den Arbeitgeber versteuert, für den Arbeitnehmer ohne Abzug. Sie passt besonders ins Homeoffice.</p><p>Alle drei Bausteine lassen sich <strong>kombinieren</strong>, weil jede Grenze für sich gilt. Deutschlandticket, 50-€-Sachbezug und Essenszuschuss zusammen ergeben rund 228 € netto im Monat — dafür bräuchte es über 400 € Brutto-Erhöhung.</p>`,
+        html: `<p>Jeder Baustein hat eigene Regeln. Das <strong>Deutschlandticket</strong> (§ 3 Nr. 15 EStG) ist seit 2026 mit 63 €/Monat voll steuerfrei übernehmbar — der Netto-Zugewinn entspricht exakt dem Ticketpreis; in der Steuererklärung mindert der Zuschuss allerdings die Entfernungspauschale. Der <strong>Essenszuschuss</strong> deckt das Mittagessen an Arbeitstagen: Essensmarken bis 7,67 € pro Tag (Sachbezugswert 4,57 € plus 3,10 €), bei 15 Tagen 115,05 € im Monat, meist über digitale Meal-Voucher. Der Sachbezugswert von 4,57 € je Tag ist steuerpflichtig; der Arbeitgeber versteuert ihn in der Regel pauschal mit 25 %, dann bleibt die Marke für Sie abgabenfrei.</p><p>Die <strong>Internet-Pauschale</strong> (§ 40 Abs. 2 EStG) erlaubt bis zu 50 €/Monat für die berufliche Nutzung des privaten Anschlusses — pauschal mit 25 % durch den Arbeitgeber versteuert, für den Arbeitnehmer ohne Abzug. Sie passt besonders ins Homeoffice.</p><p>Alle drei Bausteine lassen sich <strong>kombinieren</strong>, weil jede Grenze für sich gilt. Deutschlandticket, 50-€-Sachbezug und Essensmarken zusammen ergeben rund 228 € netto im Monat und kosten den Arbeitgeber 246,13 € — kaum mehr als eine Brutto-Erhöhung um 200 € (242,30 €), die nur 109,75 € netto bringt. Für 228 € netto bräuchte es über 400 € Brutto-Erhöhung.</p>`,
       },
       {
         typ: 'text',
@@ -5323,7 +5324,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'BAV: Vorsorge statt Sofort-Netto',
-        html: `<p>Die <strong>betriebliche Altersvorsorge</strong> (BAV) per Entgeltumwandlung ist der Sonderfall unter den Bausteinen. Beiträge sind bis 4 % der Renten-Beitragsbemessungsgrenze steuerfrei — 2026 rund <strong>302 €/Monat</strong> — und teils auch sozialabgabenfrei.</p><p>Der entscheidende Unterschied: Heute landet <strong>nichts</strong> zusätzlich in Ihrem Geldbeutel. Das Geld fließt in einen Vorsorgevertrag und wird erst in der Rentenphase ausgezahlt — und dann besteuert. Außerdem mindert die Entgeltumwandlung das sozialversicherungspflichtige Brutto und damit geringfügig die <strong>spätere gesetzliche Rente</strong>.</p><p>Trotzdem ist die BAV oft attraktiv, weil der Arbeitgeber bei Entgeltumwandlung gesetzlich 15 % Zuschuss dazulegen muss (§ 1a Abs. 1a BetrAVG). Sie ist damit kein Werkzeug für mehr Sofort-Netto, sondern für den langfristigen Vermögensaufbau — wer heute jeden Euro braucht, greift eher zu Ticket oder Sachbezug.</p>`,
+        html: `<p>Die <strong>betriebliche Altersvorsorge</strong> (BAV) per Entgeltumwandlung ist der Sonderfall unter den Bausteinen. Beiträge sind bis 8 % der Renten-Beitragsbemessungsgrenze steuerfrei — 2026 <strong>676 €/Monat</strong> — und bis 4 % (338 €/Monat) auch sozialabgabenfrei.</p><p>Der entscheidende Unterschied: Heute landet <strong>nichts</strong> zusätzlich in Ihrem Geldbeutel. Das Geld fließt in einen Vorsorgevertrag und wird erst in der Rentenphase ausgezahlt — und dann besteuert. Außerdem mindert die Entgeltumwandlung das sozialversicherungspflichtige Brutto und damit geringfügig die <strong>spätere gesetzliche Rente</strong>.</p><p>Trotzdem ist die BAV oft attraktiv, weil der Arbeitgeber bei Entgeltumwandlung gesetzlich 15 % Zuschuss dazulegen muss (§ 1a Abs. 1a BetrAVG). Sie ist damit kein Werkzeug für mehr Sofort-Netto, sondern für den langfristigen Vermögensaufbau — wer heute jeden Euro braucht, greift eher zu Ticket oder Sachbezug.</p>`,
       },
       {
         typ: 'text',
@@ -5336,8 +5337,8 @@ export const finanzenRechner: RechnerConfig[] = [
         werte: [
           { label: 'Sachbezug-Freigrenze', wert: '50 €', hinweis: 'pro Monat, § 8 Abs. 2 EStG (Freigrenze!)' },
           { label: 'Deutschlandticket', wert: '63 €', hinweis: 'voll steuerfrei, § 3 Nr. 15 EStG (Stand 2026)' },
-          { label: 'Essenszuschuss', wert: '115,05 €', hinweis: '7,67 €/Tag × 15 Tage (16. SvEV 2026)' },
-          { label: 'BAV steuerfrei', wert: '302 €', hinweis: '4 % der RV-BBG, § 3 Nr. 63 EStG' },
+          { label: 'Essensmarken', wert: '115,05 €', hinweis: '7,67 €/Tag × 15 Tage; 4,57 €/Tag pauschal versteuert' },
+          { label: 'BAV steuerfrei', wert: '676 €', hinweis: '8 % der RV-BBG, § 3 Nr. 63 EStG; SV-frei bis 338 €' },
           { label: 'Netto-Quote Brutto-Erhöhung', wert: '~55 %', hinweis: '3.500 € Basis, StKl I — Rest: Steuern/SV' },
         ],
       },
@@ -5361,7 +5362,7 @@ export const finanzenRechner: RechnerConfig[] = [
         spalteB: 'BAV-Entgeltumwandlung',
         zeilen: [
           { kriterium: 'Heute im Geldbeutel', a: 'voller Betrag netto, sofort', b: '0 € — fließt in die Rente' },
-          { kriterium: 'Steuer', a: 'steuerfrei, endgültig', b: 'erst in der Rentenphase fällig (gestundet)' },
+          { kriterium: 'Steuer', a: 'für Sie abgabenfrei, endgültig', b: 'erst in der Rentenphase fällig (gestundet)' },
           { kriterium: 'Rentenwirkung', a: 'keine — zählt nicht für die Rente', b: 'baut zusätzliche Altersvorsorge auf' },
           { kriterium: 'Arbeitgeber', a: 'spart Sozialabgaben', b: 'gesetzlich 15 % Pflichtzuschuss' },
           { kriterium: 'Passt für', a: 'wer heute mehr Netto braucht', b: 'wer langfristig vorsorgen will' },
@@ -5377,19 +5378,19 @@ export const finanzenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Lohnt sich eine Gehaltserhöhung oder Sachbezüge mehr?',
-        antwort: 'In den meisten Fällen sind steuerfreie Sachbezüge attraktiver, weil weder Lohnsteuer noch Sozialabgaben anfallen. Von 200 € Brutto-Erhöhung bleiben in Steuerklasse I nur rund 105 bis 120 € netto — ein 63-€-Deutschlandticket (Stand 2026) bringt dagegen 63 € netto ohne Abzug. Der Rechner zeigt für Ihre Situation die optimale Lösung.',
+        antwort: 'In den meisten Fällen sind steuerfreie Sachbezüge attraktiver, weil weder Lohnsteuer noch Sozialabgaben anfallen. Von 200 € Brutto-Erhöhung bleiben bei 3.500 € brutto in Steuerklasse I nur rund 110 € netto — ein 63-€-Deutschlandticket (Stand 2026) bringt dagegen 63 € netto ohne Abzug. Der Rechner zeigt für Ihre Situation die optimale Lösung.',
       },
       {
         frage: 'Wie hoch ist die Sachbezugsfreigrenze 2026?',
         antwort: 'Die Freigrenze nach § 8 Abs. 2 EStG liegt bei 50 € pro Monat. Wichtig: Es ist eine Freigrenze, kein Freibetrag — schon ein Cent darüber macht den gesamten Betrag steuer- und sozialabgabenpflichtig. Der Sachbezug darf zudem keine reine Geldleistung sein, sondern muss echte Sachleistung (z. B. Gutschein, Tankkarte, Warenkarte) sein.',
       },
       {
-        frage: 'Was ist der maximale steuerfreie Essenszuschuss?',
-        antwort: 'Der Arbeitgeber kann 2026 einen Essenszuschuss bis 7,67 € pro Arbeitstag steuerfrei gewähren (amtlicher Sachbezugswert 4,57 € plus 3,10 € Zuschuss). Bei 15 Arbeitstagen pro Monat sind das 115,05 €. Abgewickelt wird das meist über digitale Meal-Voucher-Anbieter — eingelöst werden können die Gutscheine in Restaurants, Supermärkten oder Bäckereien.',
+        frage: 'Wie hoch dürfen Essensmarken 2026 sein?',
+        antwort: 'Eine Essensmarke darf 2026 bis 7,67 € je Arbeitstag wert sein (amtlicher Sachbezugswert 4,57 € plus 3,10 €). Die 3,10 € sind steuerfrei, die 4,57 € sind geldwerter Vorteil: Der Arbeitgeber versteuert sie meist pauschal mit 25 %, dann bleibt die Marke für Sie abgabenfrei. Bei 15 Arbeitstagen pro Monat sind das 115,05 €; die 15 Tage sind eine Vereinfachungsregel der Lohnsteuer-Richtlinien. Abgewickelt wird das meist über digitale Meal-Voucher-Anbieter — eingelöst werden können die Gutscheine in Restaurants, Supermärkten oder Bäckereien.',
       },
       {
         frage: 'Ist das Deutschlandticket vom Arbeitgeber steuerfrei?',
-        antwort: 'Ja. Zuschüsse des Arbeitgebers zum Deutschlandticket (63 €/Monat seit 01.01.2026) sind in voller Höhe steuer- und sozialabgabenfrei — vorausgesetzt, der Zuschuss wird zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt. Auch die Monatskarte des ÖPNV in Ihrer Stadt fällt unter die Jobticket-Regelung.',
+        antwort: 'Ja. Zuschüsse des Arbeitgebers zum Deutschlandticket (63 €/Monat seit 01.01.2026) sind in voller Höhe steuer- und sozialabgabenfrei — vorausgesetzt, der Zuschuss wird zusätzlich zum ohnehin geschuldeten Arbeitslohn gewährt. In der Steuererklärung mindert er die Entfernungspauschale (§ 3 Nr. 15 Satz 3 EStG). Auch die Monatskarte des ÖPNV in Ihrer Stadt fällt unter die Jobticket-Regelung.',
       },
       {
         frage: 'Lohnt sich BAV als Alternative zur Gehaltserhöhung?',
@@ -5403,7 +5404,8 @@ export const finanzenRechner: RechnerConfig[] = [
     quellen: [
       { titel: '§ 8 EStG: Sachbezüge & 50-€-Freigrenze (Abs. 2)', url: 'https://www.gesetze-im-internet.de/estg/__8.html' },
       { titel: '§ 3 EStG: Steuerfreie Einnahmen (Nr. 15 Jobticket, Nr. 63 BAV)', url: 'https://www.gesetze-im-internet.de/estg/__3.html' },
-      { titel: 'SvEV: Sachbezugswerte 2026 (16. Änderungsverordnung)', url: 'https://www.gesetze-im-internet.de/svev/', hinweis: 'Sachbezugswert Mittagessen 4,57 € + steuerfreier AG-Zuschuss 3,10 € = 7,67 €/Arbeitstag (BGBl. 29.12.2025).' },
+      { titel: 'SvEV: Sachbezugswerte 2026 (16. Änderungsverordnung)', url: 'https://www.gesetze-im-internet.de/svev/', hinweis: 'Sachbezugswert Mittagessen 4,57 € (§ 2 Abs. 1 und 6 SvEV); Essensmarken bis 4,57 € + 3,10 € = 7,67 €/Arbeitstag (BMF-Schreiben vom 18.01.2019).' },
+      { titel: '§ 40 EStG: Pauschalierung (Abs. 2 Nr. 1 Mahlzeiten, Nr. 5 Internet)', url: 'https://www.gesetze-im-internet.de/estg/__40.html' },
     ],
   },
   {

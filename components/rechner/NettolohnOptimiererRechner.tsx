@@ -64,6 +64,13 @@ export default function NettolohnOptimiererRechner() {
 
   const optionen: Option[] = useMemo(() => {
     const cap = (grenze: number) => Math.min(betrag, grenze);
+    // W170: pauschale Lohnsteuer 25 % (§ 40 Abs. 2 EStG) trägt der Arbeitgeber, dazu 5,5 % Soli darauf
+    // (Cent-Bruchteile fallen weg, § 4 SolzG). Kirchensteuer auf die Pauschalsteuer ist nicht eingerechnet.
+    const mitPauschalsteuer = (zuschuss: number, steuerpflichtig: number) => {
+      const lst = Math.round(steuerpflichtig * 0.25 * 100) / 100;
+      return zuschuss + lst + Math.floor(lst * 5.5) / 100;
+    };
+    const essen = cap(115.05);
     return [
       {
         id: 'brutto',
@@ -82,30 +89,30 @@ export default function NettolohnOptimiererRechner() {
       {
         id: 'jobticket',
         label: 'Jobticket / Deutschlandticket',
-        beschreibung: 'Deutschlandticket steuerfrei bis 63 €/Monat (Stand 2026, ÖPNV-Zuschuss).',
+        beschreibung: 'Zuschuss bis zum Ticketpreis steuer- und SV-frei (§ 3 Nr. 15 EStG), Deutschlandticket 2026: 63 €/Monat. Mindert die Entfernungspauschale in Ihrer Steuererklärung.',
         nettoZugewinn: cap(63),
         agKosten: cap(63),
       },
       {
         id: 'essen',
-        label: 'Essenszuschuss (Restaurantschecks)',
-        beschreibung: 'Bis 7,67 €/Arbeitstag steuerfrei (Sachbezugswert 4,57 € + AG-Zuschuss 3,10 €) — bei 15 Tagen = 115,05 €/Monat.',
-        nettoZugewinn: cap(115.05),
-        agKosten: cap(115.05),
+        label: 'Essensmarken (Restaurantschecks)',
+        beschreibung: 'Bis 7,67 € je Arbeitstag (Sachbezugswert 4,57 € + 3,10 €), bei 15 Tagen 115,05 €/Monat. Die 4,57 € je Tag versteuert der Arbeitgeber pauschal mit 25 % — für Sie abgabenfrei.',
+        nettoZugewinn: essen,
+        agKosten: mitPauschalsteuer(essen, Math.round(essen * 4.57 / 7.67 * 100) / 100),
       },
       {
         id: 'internet',
         label: 'Internet-Pauschale',
-        beschreibung: 'Pauschal 50 €/Monat steuerfrei für berufliche Internetnutzung.',
+        beschreibung: 'Bis 50 €/Monat, vom Arbeitgeber pauschal mit 25 % versteuert (§ 40 Abs. 2 EStG) und SV-frei — für Sie abgabenfrei.',
         nettoZugewinn: cap(50),
-        agKosten: cap(50),
+        agKosten: mitPauschalsteuer(cap(50), cap(50)),
       },
       {
         id: 'bav',
         label: 'Betriebliche Altersvorsorge (BAV)',
-        beschreibung: 'Bis 302 €/Monat steuer- und SV-frei — fließt aber in die Rente, heute 0 € netto.',
+        beschreibung: '2026 steuerfrei bis 676 €/Monat, SV-frei bis 338 €/Monat (8 % bzw. 4 % der RV-Beitragsbemessungsgrenze) — fließt in die Rente, heute 0 € netto.',
         nettoZugewinn: 0,
-        agKosten: cap(302),
+        agKosten: cap(676),
         rente: true,
       },
     ];
