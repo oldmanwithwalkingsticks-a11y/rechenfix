@@ -6,6 +6,91 @@
 
 ---
 
+## 19.10.2026 — Welle 165: Wahrer Stundenlohn — echte Arbeitstage — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Offener Punkt 1 aus Welle 163: `ARBEITSTAGE_MONAT = 21,7` in
+`lib/berechnungen/wahrer-stundenlohn.ts` zählt Urlaub und Feiertage als Pendeltage.
+
+**Befund:** Pendelzeit, Essen und Überstunden liefen über 260 Tage im Jahr (52 × 5 ÷ 12 = 21,7 im Monat). An
+Urlaubs- und Feiertagen fährt niemand zur Arbeit. Richtig: Arbeitstage im Jahr = Arbeitstage pro Woche × 52 −
+Urlaubstage − bundesweite Feiertage von Montag bis Freitag; für 2026 sind das 5 × 52 − 30 − 7 = 223, also
+18,58 im Monat. Bezahlt bleiben alle Vertragsstunden (52 ÷ 12 Wochen), auch im Urlaub.
+
+**Belege** (aus dem Prompt, in der Chat-Sitzung vom 19.10.2026 geprüft, nicht in diesem Lauf; die Zahlen
+bestätigen hier Probe und Lib-Prüfung):
+- § 3 Abs. 1 BUrlG: mindestens 24 Werktage, bei einer 5-Tage-Woche 20 Arbeitstage.
+- WSI-Tarifarchiv, Pressemitteilung vom 16.06.2026: Standard in Tarifverträgen 30 Tage. Das ist der neue
+  Standardwert.
+- Bundesweite Feiertage 2026 von Montag bis Freitag: 7, aus `anzahlBundesweiterFeiertageMoBisFr(2026)` in
+  `feiertage.ts` und unabhängig nachgerechnet; 03.10. und 26.12. fallen auf einen Samstag. Die Texte sagen
+  „Montag bis Freitag“, nicht „Werktag“, weil Werktage im Gesetz auch den Samstag umfassen (§ 3 Abs. 2 BUrlG).
+
+**Änderungen** (22 Ersetzungen in 4 Dateien, Vorlage `_lokal/welle165-arbeitstage.mjs`, nicht committet;
+Rechenprobe `_lokal/welle165-probe.mjs`, Lib-Prüfung `_lokal/welle165-lib.mts`):
+- **`lib/berechnungen/wahrer-stundenlohn.ts`, 6:** `ARBEITSTAGE_MONAT` entfällt; neue optionale Eingaben
+  `urlaubstageJahr` (Standard 30, `URLAUBSTAGE_STANDARD`) und `arbeitstageWoche` (Standard 5,
+  `ARBEITSTAGE_WOCHE_STANDARD`); Arbeitstage im Jahr = Tage × 52 − Urlaub − Feiertage, die Feiertage aus
+  `anzahlBundesweiterFeiertageMoBisFr(jahr)`, anteilig bei weniger als 5 Tagen; Pendelzeit und Essen über die
+  Arbeitstage im Monat, Überstunden über die Arbeitswochen im Monat; neue Ergebnisfelder `arbeitstageJahr`,
+  `arbeitstageMonat`, `feiertageMoBisFr`, `urlaubstageJahr`, `arbeitstageWoche`. Die Funktion nimmt das Jahr
+  als zweiten Parameter, Standard `new Date().getFullYear()`.
+- **`components/rechner/WahrerStundenlohnRechner.tsx`, 6:** Eingabefelder „Arbeitstage pro Woche“ (5) und
+  „Urlaubstage pro Jahr“ (30) mit State und `useMemo`-Abhängigkeiten; Erklärsatz unter der Zeittabelle in
+  `text-gray-600`; PDF-Zeile „Arbeitstage im Jahr“; AiExplain mit den neuen Eingaben.
+- **`lib/ki-rechner/tools.ts`, 1:** zwei optionale Schema-Felder `urlaubstageJahr` und `arbeitstageWoche`.
+- **`lib/rechner-config/finanzen.ts`, Block `wahrer-stundenlohn`, 9:**
+  - `metaTitle` und `metaDescription` „26 %“ → „24 %“ (Beschreibung 148 Zeichen); `beispiel` um
+    Überstunden und Urlaub ergänzt, 9,90 → 10,27 €.
+  - FAQ Ursachen: 208 → 203 h (+20 → +17 %), Kosten 273,60 → 248,67 €, 9,90 → 10,27 €, mit dem Satz zu
+    echten Arbeitstagen.
+  - Pendeln: 21,7 → 18,58 Arbeitstage, 21,7 → 18,6 h, 195 → 192 h, 11,96 → 12,16 €; der Satz zu „21,7
+    Arbeitstagen als üblichem Durchschnittswert“ → 223 Arbeitstage (5 × 52 − 30 Urlaub − 7 Feiertage).
+  - Überstunden: 4,33 Wochen → 44,6 Arbeitswochen ÷ 12, 13 → 11,15 h, 208 → 203 h, 11,22 → 11,49 €, Fazit
+    „gut 11,20“ → „knapp 11,50“.
+  - Kosten: „gut 270 Euro“ → „knapp 250 Euro“, Essen 173,60 → 148,67 €, bereinigtes Netto 2.059,65 →
+    2.084,58 €, wahrer Stundenlohn 9,90 → 10,27 €; Fazit „auf den Cent gleichauf bei 9,90 Euro“ → „nur 36 Cent
+    über den 9,90 Euro eines Mindestlohn-Jobs“.
+  - Methodenabsatz: Vertragsstunden bezahlt, Pendeln, Essen und Überstunden nur an echten Arbeitstagen,
+    Landesfeiertage nicht abgezogen.
+  - `letzteAktualisierung` auf heute gesetzt; sie stand seit Welle 162 schon auf `2026-10-19`, die Zeile
+    ist im Diff daher unverändert.
+- **Zahlen in Kurzform:** wahrer Stundenlohn 9,90 → 10,27 €; Arbeitstage 21,7 → 18,58 im Monat; Kosten
+  273,60 → 248,67 €; Minus 26 → 24 %; Jahreswert 8.888,38 → 7.786,91 €; Mindestlohn-Kasten „auf den Cent
+  gleichauf“ → „0,36 € darüber“. Damit ist Live-Probe 8 aus Welle 163 („weiterhin 9,90 € und gleichauf“)
+  überholt.
+
+**Bewusst nicht geändert:** `feiertage.ts`, die Netto-Rechnung (`berechneBruttoNetto`), der
+Mindestlohn-Vergleich aus Welle 162, `lib/social/captions.json` und `public/social-posts/` (die Kachel
+`wahrer-stundenlohn` kommt in Welle 169).
+
+**Hinweis zum Jahreswechsel** (gemessen in diesem Lauf, nicht geändert): Die Komponente ruft
+`berechneWahrenStundenlohn` ohne Jahr auf, die Feiertage kommen damit aus dem laufenden Jahr. Bei den
+Startwerten: 2026 7 Feiertage, 223 Arbeitstage, 10,27 €; 2027 5, 225, 10,25 €; 2028 8, 222, 10,28 € (Netto
+und Mindestlohn dabei jeweils auf Stand 2026). Die Texte in `finanzen.ts` nennen fest 223 Tage und 10,27 €.
+Zum 01.01.2027 ändern sich ohnehin Mindestlohn (14,60 €) und Tarif; die Texte gehören in diesen Nachzug.
+
+**Gates:**
+- Phase 0 an `7253c8e`: `git status` leer; im Log `7253c8e` und `96e3027` (Welle 164) über `d433299`;
+  `git diff --stat` ab `d433299` über die 4 Dateien leer. `ARBEITSTAGE_MONAT` `wahrer-stundenlohn.ts:3`;
+  `urlaubstageJahr` keine Ausgabe; „auf den Cent“ `WahrerStundenlohnRechner.tsx:1` und `finanzen.ts:2`;
+  „10,27“ keine Ausgabe.
+- Phase 1: „OK — 22 Ersetzungen in 4 Dateien.“, Exit 0; geändert genau die 4 Dateien.
+- Phase 2: Probe 22× OK, Exit 0 (223 Arbeitstage, 18,58 im Monat, 10,27 €, 24 %, 7.786,91 €, 9,90 €
+  Mindestlohn-Netto, bei 120 Minuten 9,40 € und −0,50 €). Lib-Prüfung 15× OK, Exit 0 (dazu 20 Urlaubstage:
+  233 Arbeitstage, 10,17 €). Greps: `ARBEITSTAGE_MONAT` keine Ausgabe; `anzahlBundesweiterFeiertageMoBisFr`
+  `wahrer-stundenlohn.ts:2`; `urlaubstageJahr` `WahrerStundenlohnRechner.tsx:3`, `wahrer-stundenlohn.ts:5`,
+  `tools.ts:1`; „auf den Cent“ `WahrerStundenlohnRechner.tsx:1` und `finanzen.ts:1` (ein anderer Rechner);
+  „10,27“ 5; „248,67“ 1; `letzteAktualisierung: 'HEUTE'` keine Ausgabe.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen
+  (affiliate-stats, KaffeeWasserRechner). `check-metadescription` und `check-jahreswerte` grün;
+  `check-blog-wortzahl --warnung` mit denselben vier Blog-Hinweisen wie in Welle 162. Im gebauten HTML von
+  `/finanzen/wahrer-stundenlohn`: „10,27“ 13×, „Urlaubstage pro Jahr“ 1×, „223 Arbeitstagen“ 2×, „21,7
+  Arbeitstage“ fehlt.
+
+**Commits:** A `3dec819` (die 4 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 164: Social-Kachel Midijob-Rechner — Caption und Bild nach Welle 163 — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Der Auswirkungs-Scan zu Welle 163 fand in `lib/social/captions.json`, Eintrag `midijob-rechner`,
