@@ -6,6 +6,96 @@
 
 ---
 
+## 19.10.2026 — Welle 172: Social-Kacheln und TikTok-Videos auf den Stand ihrer Datenquelle, Manifest gegen neue Abweichungen — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Offener Befund aus Welle 164 (Historie `7253c8e`): 141 Kacheln zeigten nicht den Stand von
+`lib/social/captions.json`. Chat-Claude hat am 19.10.2026 auf einem frischen Klon von `7253c8e` alle 206 Kacheln,
+205 Hochformate und 205 Videos nachgemessen: je Datei die Eingaben am Commit ihrer Erzeugung (`captions.json`,
+Snapshot aus `lib/rechner-config`, `kategorie-farben.json`), verglichen mit dem Stand nach Welle 171.
+
+**Befunde:**
+1. **Kacheln in `public/social-posts/`:** 136 zeigten andere Werte als ihre Datenquelle, 90 mit anderer Headline,
+   46 nur mit anderem Eyebrow; Titel, Emoji und Farben wichen nirgends ab. Beispiel `abfindungsrechner.png`: Bild
+   „Faustregel / ca. 10.300 € netto“, `captions.json` „Fünftelregelung / 10.300 € netto“. Ursache: Die Captions
+   wurden in `79d42c9` neu geschrieben, die Bilder aus `74b8e56` nicht neu erzeugt; die Cron-Posts zeigten deshalb
+   Bild und Text aus verschiedenen Ständen. Die 5 Kacheln aus den Wellen 169 bis 171 passten wieder, ebenso die 45
+   aus Welle 41 und die 2 aus Welle 40. Die Zahl schließt an Welle 164 an: 141 − 3 (Welle 169) − 2
+   (`nettolohn-optimierer` in Welle 170, `nebenjob-rechner` in Welle 171, beide ebenfalls aus `74b8e56` und mit
+   anderer Caption-Fassung) = 136.
+2. **Kästchen statt Emoji:** Kachel `vo2max-rechner` (🫁), Kachel `reifengroesse-rechner` (🛞), Kachel
+   `laminat-rechner` (🪵), bei Laminat auch Hochformat und Video. Segoe UI Emoji kennt diese Zeichen nicht. W18.3i
+   (`005c396`) hatte das nur im Hochformat und nur für die ersten beiden von Hand mit `.fonts/NotoColorEmoji.ttf`
+   behoben.
+3. **TikTok** (`public/social-videos-src/`, `public/social-videos/`): veraltet waren Hochformat und Video für
+   `midijob-rechner` (Welle 164) und die 5 Rechner aus den Wellen 169 bis 171; für `dm-euro-rechner` (Welle 46) gab
+   es weder Hochformat noch Video, der TikTok-Cron fand am Ende der Queue kein Video.
+4. **Nichts im Repo merkte solche Abweichungen.**
+
+**Lösung:**
+- **Manifest** `lib/social/kacheln-manifest.json`: je Kachel, Hochformat und Video die Eingaben (Emoji, Eyebrow,
+  Titelzeilen, Headline, beim Quadrat die Farben, Layout-Kennung `quadrat-1` bzw. `hochformat-1`) und der SHA-256
+  der Datei, bei Videos von Quellbild und MP4. `social-image-builder.py` und `build-tiktok-videos.mjs` tragen jede
+  erzeugte Datei ein und schreiben das Manifest im selben Format (sortierte Schlüssel, zwei Leerzeichen Einzug,
+  UTF-8, LF).
+- **Neu in beiden Skripten:** `--stale` erzeugt nur Fehlendes oder Veraltetes, `--check` meldet nur und endet bei
+  Veraltetem mit Exit 1. Ändert sich das Layout eines Renderers, wird die Kennung hochgezählt; dann gelten alle
+  Bilder dieses Formats als veraltet.
+- **Startbestand:** 63 Kacheln, 198 Hochformate und 198 Videos, die nachweislich zu den Eingaben nach Welle 171
+  passen und kein Kästchen zeigen; SHA-256 aus dem Repo, bitgleich mit dem Arbeitsverzeichnis. Alles andere hat
+  `--stale` erzeugt.
+- **Emoji:** Der Builder versucht der Reihe nach den Emoji-Font, `.fonts/NotoColorEmoji.ttf` (unter Linux
+  `/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf`, per `SOCIAL_FONT_EMOJI_FALLBACK` überschreibbar) und den
+  fetten Textfont (für Zeichen wie „%“). Kennt keiner das Zeichen, bricht er für diesen Rechner ab, statt ein
+  Kästchen zu zeichnen. Erkannt wird ein fehlendes Zeichen daran, dass es genauso gerendert wird wie ein Zeichen
+  aus der Private-Use-Ebene 16.
+- **Regeln:** `CLAUDE.md`, Abschnitt „Social-Post-Bilder“, mit vier Regeln und dem festen Ablauf; dazu
+  `docs/social-pipeline.md` unter 5c.
+
+**Änderungen** (20 Ersetzungen in 4 Dateien und 1 neue Datei, Vorlage `_lokal/welle172-social-kacheln-abgleich.mjs`,
+nicht committet): `scripts/social-image-builder.py` (Manifest-Helfer, `--stale`, `--check`, Layout-Kennungen,
+Emoji-Ersatz-Font), `scripts/build-tiktok-videos.mjs` (Manifest-Bereich `videos`, `--stale`, `--check`),
+`CLAUDE.md`, `docs/social-pipeline.md`, neu `lib/social/kacheln-manifest.json`. Erzeugt: 143 Kacheln (138 davon
+mit geänderten Bytes; die 5 aus den Wellen 169 bis 171 entstanden bitgleich), 8 Hochformate und 8 Videos (neu
+`dm-euro-rechner`, geändert `kurzarbeitergeld-rechner`, `laminat-rechner`, `midijob-rechner`, `nebenjob-rechner`,
+`nettolohn-optimierer`, `steuerklassen-vergleich-rechner`, `wahrer-stundenlohn`). Manifest danach je 206
+Einträge in `quadrat`, `hochformat` und `videos`.
+
+**Bewusst nicht geändert:** `captions.json`, `queue.json`, `kategorie-farben.json`, `lib/rechner-config`, Queue-
+und KV-Einträge (`social:done:*`, `social:posted:*`), die Cron-Routen.
+
+**Offen:** Ob die Headlines und Captions selbst sachlich stimmen, prüft diese Welle nicht. Sie bringt nur die Bilder
+auf den Stand der Captions.
+
+**Gates:**
+- Phase 0 an `ec73e6a`: `git status` leer, oben `ec73e6a` und `d396d13` (Welle 171); Pillow `12.2.0`, „Noto da“,
+  „kein Manifest“; 206 Kacheln, 205 Hochformate, 205 Videos.
+- Phase 1: „OK — 20 Ersetzungen in 4 Dateien, 1 neue Dateien.“, Exit 0; geändert `CLAUDE.md`,
+  `docs/social-pipeline.md`, `scripts/build-tiktok-videos.mjs`, `scripts/social-image-builder.py`, neu
+  `lib/social/kacheln-manifest.json` (63 / 198 / 198 Einträge).
+- Phase 2 (`--check` vorher, „Snapshot (206 Rechner)“): Kacheln Exit 1, „Aktuell: 63“, „Veraltet: 143“, „Failed:
+  0“; Hochformate Exit 1, „Aktuell: 198“, „Veraltet: 8“, „Failed: 0“; Videos Exit 1, „Aktuell: 198 · Veraltet:
+  7“. „nicht im Manifest“ 143 / 7 / 7; „Bild fehlt“ genau `dm-euro-rechner`. Die Ausgaben gingen in den
+  Scratchpad statt in `_w172_*.txt` im Repo (ein Befehl mit Kopieren und Löschen wurde nicht freigegeben und lief
+  nicht).
+- Phase 3 (`--stale`): Kacheln Exit 0, „Generated: 143“, „Aktuell: 63“, „Failed: 0“; Hochformate Exit 0,
+  „Generated: 8“, „Aktuell: 198“, „Failed: 0“; Videos Exit 0, „Rendered: 8 · Skipped: 0 · Aktuell: 198 · Failed:
+  0“.
+- Phase 4 (`--check` nachher): dreimal Exit 0, „Aktuell: 206“, „Veraltet: 0“ bzw. „Aktuell: 206 · Veraltet: 0“.
+  138 geänderte Kacheln; Hochformate und Videos `?? dm-euro-rechner` und ` M` für die 7 genannten; außerhalb der
+  Bilder genau die 5 Dateien aus Phase 1. Angesehen: `abfindungsrechner.png` „FÜNFTELREGELUNG /
+  Abfindungsrechner / 10.300 € netto“; `vo2max-rechner.png`, `reifengroesse-rechner.png`, `laminat-rechner.png`
+  mit Lunge, Reifen und Holzstamm, Headlines „≈ 42 ml/kg/min“, „≈ 1.926 mm Umfang“, „9 Pakete / 22,41 m²“;
+  Hochformat `dm-euro-rechner.png` „AMTLICHER KURS / 100 DM = 51,13 € / DM-Euro-Rechner“ auf schwarzem Grund;
+  Hochformat `laminat-rechner.png` mit Holzstamm. `dm-euro-rechner.mp4` nicht abgespielt, sondern gemessen:
+  h264, 1080 × 1920, 30 fps, 180 Bilder, 6,000 s wie `1rm-rechner.mp4`; Einzelbild bei 0,2 s wie das Hochformat,
+  bei 5,5 s vergrößert und fast ausgeblendet (mittlere Helligkeit 2,1, Referenzvideo 1,0).
+- Phase 5: `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen.
+
+**Commits:** A `13869e7` (159 Dateien: die 5 aus Phase 1, 138 Kacheln, 8 Hochformate, 8 Videos). B ist dieser
+Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 171: Nebenjob-Rechner auf den zentralen Libs — Minijob mit RV, Klasse VI nach PAP mit Nachzahlung, Texte, Social-Kachel — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Beim Abgleich der Minijob-Texte für Welle 167 fiel auf, dass `lib/berechnungen/nebenjob.ts` mit eigenen
