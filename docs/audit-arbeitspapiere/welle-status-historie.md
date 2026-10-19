@@ -6,6 +6,68 @@
 
 ---
 
+## 19.10.2026 — Welle 169: Social-Kacheln nach den Wellen 165 bis 168 — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Die Wellen 165 bis 168 haben Zahlen geändert, die in `lib/social/captions.json` stehen. Beim
+Abgleich fielen dort weitere falsche Werte auf. Nach der Regel „Social-Post-Bilder“ in `CLAUDE.md` werden die
+Bilder, deren `socialHeadline` sich ändert, in derselben Welle neu erzeugt (drei Bilder). Prompt Fassung 2:
+Bildgenerator mit `G:/Python314/python.exe`, weil `python` im PATH zu Inkscape gehört (Welle 164).
+
+**Änderungen** (4 Ersetzungen in 1 Datei, Vorlage `_lokal/welle169-social-kacheln.mjs`, nicht committet; dazu
+drei neu erzeugte Bilder), je Eintrag alt → neu, Instagram- und Facebook-Caption gleich:
+- **`wahrer-stundenlohn`** (Welle 165): Headline „9 € statt 13 €“ → „10,27 € statt 13,46 €“; „−2,69 €/Std
+  Zeitverlust“, „−1,77 €/Std Kosten“, „20 % deiner Zeit“, „rund 9.280 € weniger im Jahr“ → 223 Arbeitstage,
+  +18,6 Std. Pendeln, +11,15 Std. Überstunden, 248,67 € Kosten, 173 → gut 203 Stunden, Netto 2.084,58 €,
+  3,19 € weniger pro Stunde, „fast 7.800 €“ im Jahr. Bild neu.
+- **`kurzarbeitergeld-rechner`** (Welle 168): 2.260 / 1.240 / 612 / 1.852 € → 2.333,25 / 1.325,04 / 617,10 /
+  1.942,14 €, Differenz 1.020 → 1.028,50 €, „408 € weniger“ → „391 € weniger“, „18 % weniger Geld“ → „knapp
+  17 %“; pauschaliertes Netto erklärt (20 % SV, Lohnsteuer, Soli, keine Kirchensteuer); „bei längerer
+  Arbeitslosigkeit eventuell verlängerbar“ → „Bezug bis 12 Monate, per Verordnung verlängerbar“. Headline
+  „1.852 € statt 2.260 €“ → „1.942 € statt 2.333 €“. Bild neu.
+- **`steuerklassen-vergleich-rechner`:** Die Caption stimmte mit keiner Rechnung überein („Jahres-Netto
+  60.750 €“ für III/V und IV/IV, „IV/IV mit Faktor: wie III/V“, „+350 €/Monat“). Neu, bei 55.000 € +
+  35.000 € ohne Kinder: III/V 4.850 €, IV/IV mit Faktor 4.799 € im Monat; Hauptverdiener in III +368 €, Partner
+  in V −317 €; Jahressteuer in jeder Kombination 13.374 €; III/V behält 613 € zu wenig ein, die 51 € im Monat
+  sind „nur geliehen“. Headline „+350 € / Monat“ → „+51 € / Monat“. Bild neu.
+- **`minijob-rechner`** (Welle 167): AG-Kosten 793,55 € (+31,6 %) → 790,95 € (+31,2 %); „max. 10,8 Std./Woche“
+  → „max. 10 Std./Woche“; „Pauschalbeiträge von ~31,6 %“ → „Pauschalabgaben von rund 31 %“; RV-Eigenanteil
+  mit „Befreiung auf Antrag“. Headline „581,29 € netto“ unverändert, kein neues Bild.
+
+**Nachgerechnet in diesem Lauf** (lesend, `berechneSteuerklassenVergleich` mit 55.000 € / 35.000 €, ohne
+Kirchensteuer und Kinder): III/V 4.850,33 € (3.201,46 + 1.648,87), IV/IV mit Faktor 4.799,25 € (2.833,27 +
+1.965,98, Faktor 0,98), Differenz 51,08 €; +368,19 € / −317,11 €; Jahressteuer Splitting 13.374 €, III/V
+−613 €. Die übrigen Zahlen stammen aus den Wellen 165 und 168 und sind dort mit Probe, Lib-Prüfung und
+Verify-Skripten belegt.
+
+**Bilder angesehen:** `wahrer-stundenlohn.png` „MAL NACHGERECHNET / Wahrer Stundenlohn Rechner / 10,27 € statt
+13,46 €“; `kurzarbeitergeld-rechner.png` „KURZARBEIT / Kurzarbeitergeld-Rechner / 1.942 € statt 2.333 €“;
+`steuerklassen-vergleich-rechner.png` „FAUSTREGEL / Steuerklassen-Vergleich-Rechner / +51 € / Monat“.
+
+**Zum offenen Befund aus Welle 164** (Kacheln, die nicht zu `captions.json` passen): Alle drei neu erzeugten
+Bilder stammten aus `74b8e56`; laut `captions.json` bei `74b8e56` zeigten sie „Pendler-Realität / 9,20 € /
+Stunde“, „Krisenzeit / 612 € KuG“ und „Steuer-Optimierung / + 350 € / Monat“ (abgeleitet nach der in Welle 164
+an zwei Bildern geprüften Methode, die alten Bilder selbst nicht angesehen). Damit bleiben **138** der 141
+offen. `minijob-rechner.png` gehört
+weiter dazu: Das Bild zeigt den Eyebrow „Minijob-Realität“ aus `74b8e56`, die Caption sagt „Schnell
+gerechnet“; die Headline stimmt.
+
+**Bewusst nicht geändert:** andere Einträge in `captions.json` (darunter `nettolohn-optimierer`, Welle 170),
+andere Bilder, Queue- und KV-Einträge (`social:done:*`, `social:posted:*`).
+
+**Gates:**
+- Phase 0 an `fc7683d`: `git status` leer, oben im Log `fc7683d` und `3d65415` (Welle 168). „9 € statt 13 €“
+  `captions.json:1`, „1.852 € statt 2.260 €“ 3, „793,55“ 2, „60.750“ 2.
+- Phase 1: „OK — 4 Ersetzungen in 1 Dateien.“, Exit 0, „JSON ok“. „10,27 € statt 13,46 €“ 1, „1.942 € statt
+  2.333 €“ 1, „790,95“ 2, „+51 € / Monat“ 1, „60.750“ keine Ausgabe.
+- Phase 2: `npx tsx scripts/dump-rechner-data.ts` „Snapshot (206 Rechner)“. Bildgenerator mit
+  `G:/Python314/python.exe` je Slug: dreimal „Generated: 1“, „Skipped: 0“, „Failed: 0“. `git status --short`
+  danach genau `lib/social/captions.json` und die drei PNGs.
+
+**Commits:** A `b94ddee` (`captions.json` und die drei Bilder). B ist dieser Doku-Commit. Die Live-Probe macht
+Karsten.
+
+---
+
 ## 19.10.2026 — Welle 168: Kurzarbeitergeld nach §§ 105, 106, 153 SGB III — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Offener Punkt 8 aus dem Historienblock von Welle 163 („Kurzarbeitergeld-SV-Pauschale 21 % gegen
