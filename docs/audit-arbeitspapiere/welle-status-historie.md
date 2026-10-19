@@ -6,6 +6,72 @@
 
 ---
 
+## 19.10.2026 — Welle 164: Social-Kachel Midijob-Rechner — Caption und Bild nach Welle 163 — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Der Auswirkungs-Scan zu Welle 163 fand in `lib/social/captions.json`, Eintrag `midijob-rechner`,
+Werte, die schon vor Welle 163 mit keiner Rechnung übereinstimmten. Nach der Regel „Social-Post-Bilder“ in
+`CLAUDE.md` wird das Bild in derselben Welle neu erzeugt; Bilder entstehen nur in einer eigenen Welle.
+
+**Befunde:**
+1. **Zahlen:** Caption (Instagram und Facebook) „Arbeitnehmer-SV: ~257 € (statt ~287 €)“, „Netto: ~1.145 € →
+   30 € Ersparnis“, „= 360 € mehr im Jahr“; `socialHeadline` „1.145 € netto“. Richtig ist bei 1.500 € brutto,
+   Steuerklasse I, kinderlos, Zusatzbeitrag 2,9 % (`berechneBruttoNetto` nach Welle 163 und
+   `welle163-probe.mjs`): AN-SV 280,17 € statt regulär 326,25 €, Netto 1.210,58 €, Ersparnis 46,08 € im Monat,
+   rund 550 € im Jahr.
+2. **Rente:** „Der Arbeitgeber gleicht die Differenz aus, damit deine Rentenansprüche trotzdem voll erhalten
+   bleiben“ stellt einen falschen Zusammenhang her. Die Entgeltpunkte kommen per Gesetz aus dem vollen
+   Verdienst (§ 70 Abs. 1a SGB VI).
+3. **Bild (in diesem Lauf gefunden):** Das bisherige `public/social-posts/midijob-rechner.png` zeigte weder die
+   alte noch die neue Headline, sondern „MIDIJOB-VORTEIL“ und „~ 30 € gespart“. Das sind die Werte von
+   `socialEyebrow` und `socialHeadline` aus `74b8e56` (05.06.2026, „captions + images 160 slugs“). Die Captions
+   wurden zwei Tage später in `79d42c9` neu geschrieben, das Bild nicht.
+
+**Änderungen** (1 Ersetzung in 1 Datei, Vorlage `_lokal/welle164-social-midijob.mjs`, nicht committet; dazu
+das neu erzeugte Bild):
+- `lib/social/captions.json`, nur Eintrag `midijob-rechner`, ein Block über `captionIg`, `captionFb`,
+  `hashtagsIg`, `hashtagsFb` und `socialHeadline`:
+  - „~257 € (statt ~287 €)“ → „~280 € (statt ~326 €)“, je in Instagram- und Facebook-Caption.
+  - „Netto: ~1.145 € → 30 € Ersparnis“ → „Netto: ~1.211 € → 46 € Ersparnis“.
+  - „30 € weniger … = 360 € mehr im Jahr“ → „46 € weniger … = rund 550 € mehr im Jahr“.
+  - „Der Arbeitgeber gleicht die Differenz aus, damit deine Rentenansprüche trotzdem voll erhalten bleiben“ →
+    „Der Arbeitgeber trägt die Differenz, und deine Rentenansprüche richten sich trotzdem nach dem vollen
+    Verdienst“.
+  - `socialHeadline` „1.145 € netto“ → „1.211 € netto“. `socialEyebrow` „Übergangsbereich“ und die Hashtags
+    unverändert.
+- `public/social-posts/midijob-rechner.png` neu erzeugt (55.854 → 48.788 B, 1080 × 1080): Eyebrow
+  „ÜBERGANGSBEREICH“, Titel „Midijob-Rechner“, große Zeile „1.211 € netto“. Gestaltung, Schrift und Farben wie
+  das alte Bild, im Vergleich angesehen.
+
+**Offener Befund für eine eigene Bild-Welle** (gemessen in diesem Lauf, nicht geändert): Von den 206 Kacheln
+in `public/social-posts/` stammten vor dieser Welle 158 zuletzt aus `74b8e56`, also aus der Zeit vor
+`79d42c9`; dazu 45 aus Welle 41 (`116c6cd`), 2 aus Welle 40 (`5efd059`, `autokosten-rechner` und
+`kalorienrechner` angeglichen) und 1 aus Welle 46 (`39de7ac`). Nur die 158 sind hier verglichen; ob die 48
+späteren Kacheln noch zu ihren Captions passen, ist nicht gemessen. Verglichen wurden `socialHeadline` und
+`socialEyebrow` je Slug in `captions.json` bei `74b8e56` und bei `HEAD`: 96 Headlines und bei weiteren 46
+Slugs nur die Eyebrows weichen ab, 16 sind gleich. Nach dieser Welle zeigen damit **141 Kacheln** (95 mit
+anderer Headline, 46 nur mit anderem Eyebrow) nicht den Stand ihrer eigenen Datenquelle. Die Methode ist an
+zwei Bildern geprüft: Das alte Midijob-Bild zeigte „Midijob-Vorteil / ~ 30 € gespart“, `abfindungsrechner.png`
+zeigt „Faustregel / ca. 10.300 € netto“, beides die Werte aus `74b8e56`; aktuell stehen dort
+„Übergangsbereich / 1.145 € netto“ bzw. „Fünftelregelung / 10.300 € netto“. Der Cron postet diese Bilder mit
+den aktuellen Captions. Ob die abweichenden Headlines auch sachlich falsch sind, ist nicht geprüft.
+
+**Bewusst nicht geändert:** andere Einträge in `captions.json`, alle anderen Bilder in
+`public/social-posts/`, Queue- und KV-Einträge (`social:done:*`, `social:posted:*`).
+
+**Gates:**
+- Phase 0 an `d433299`: `git status` leer; `git log --grep "Welle 163"` zeigt `d433299` und `d7c31eb`.
+  „1.145 € netto“ `captions.json:1`, „~257 € (statt ~287 €)“ `captions.json:2`.
+- Phase 1: „OK — 1 Ersetzungen in 1 Dateien.“, Exit 0, „JSON ok“. „1.211 € netto“ `captions.json:1`,
+  „~280 € (statt ~326 €)“ `captions.json:2`, „1.145“ keine Ausgabe.
+- Phase 2: `npx tsx scripts/dump-rechner-data.ts` „Snapshot (206 Rechner)“, Exit 0. Bildgenerator mit
+  `G:/Python314/python.exe` (Pillow 12.2.0), weil `python` auf dem PATH zu Inkscape gehört: „Generated: 1“,
+  „Skipped: 0“, „Failed: 0“. `git status --short` danach genau `lib/social/captions.json` und
+  `public/social-posts/midijob-rechner.png`; der Snapshot ist gitignored.
+
+**Commits:** A `96e3027` (beide Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 163: Minijob und Übergangsbereich im Brutto-Netto, Midijob-Rechner, Mindestlohn-Verordnung — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Nebenbefunde aus dem Faktencheck für Video 2 und aus Welle 162, ergänzt um einen Auswirkungs-Scan
