@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneBruttoNetto, BUNDESLAENDER, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, BUNDESLAENDER, fmtAbzugsquote, SV_RECHENSTAND } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
@@ -627,7 +627,7 @@ export default function BruttoNettoRechner() {
             {/* W163: Hinweis für Minijob und Übergangsbereich (Sozialabgaben nach § 8 / § 20 Abs. 2a SGB IV) */}
             {ergebnis.bruttoMonat > 0 && ergebnis.bruttoMonat <= MIDIJOB_OBERGRENZE_MONAT && (
               <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
-                {ergebnis.bruttoMonat <= getMinijobGrenzeMonat()
+                {ergebnis.bruttoMonat <= getMinijobGrenzeMonat(SV_RECHENSTAND)
                   ? 'Minijob: Sie zahlen nur den Eigenanteil zur Rentenversicherung (3,6 %), bei Befreiung nichts. Kranken-, Pflege- und Arbeitslosenversicherung trägt der Arbeitgeber pauschal. Die Lohnsteuer ist hier nach Steuerklasse gerechnet; oft zahlt stattdessen der Arbeitgeber 2 % Pauschalsteuer.'
                   : 'Midijob (Übergangsbereich bis 2.000 €): Ihre Sozialabgaben werden auf eine reduzierte Bemessungsgrundlage berechnet (§ 20 Abs. 2a SGB IV), den Rest trägt der Arbeitgeber. Die Aufteilung zeigt der Midijob-Rechner.'}
               </p>

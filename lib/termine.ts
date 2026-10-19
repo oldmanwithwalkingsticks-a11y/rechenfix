@@ -267,8 +267,17 @@ export const TERMINE: Termin[] = [
     datum: '2027-01-02',
     vorlaufTage: 3,
     bereich: 'Gesetzeswerte',
-    was: 'Mindestlohn 14,60 € und Minijob-Grenze 633 € sind als automatischer Switch vorbereitet. Am Stichtag live gegenprüfen, dass sie tatsächlich greifen.',
+    was: 'Mindestlohn 14,60 € und Minijob-Grenze 633 € sind als automatischer Switch vorbereitet (Mindestlohn- und Minijob-Rechner). Am Stichtag live gegenprüfen, dass sie tatsächlich greifen. Brutto-Netto-, Midijob- und Nettolohn-Optimierer-Rechner rechnen dagegen bewusst mit dem Stand 2026, bis der Termin midijob-parameter-2027 erledigt ist (SV_RECHENSTAND in lib/berechnungen/brutto-netto.ts).',
     quelle: 'lib/berechnungen/mindestlohn.ts',
+  },
+  {
+    id: 'midijob-parameter-2027',
+    titel: 'Midijob 2027: Faktor F und SV-Rechenstand umstellen',
+    datum: '2026-12-01',
+    vorlaufTage: 0,
+    bereich: 'Gesetzeswerte',
+    was: 'Faktor F 2027 aus der BMAS-Bekanntmachung im Bundesanzeiger übernehmen (§ 20 Abs. 2a SGB IV: 28 Prozent geteilt durch den Gesamtsozialversicherungsbeitragssatz 2027, bekannt zu geben bis 31.12.2026). In lib/berechnungen/midijob-parameter.ts den Bucket MIDIJOB_2027 anlegen (G 633, OG 2.000, F neu, gueltigAb 2027-01-01) und getAktuelleMidijobParameter auf die Jahreskaskade umstellen. Erst wenn auch Zusatzbeitrag 2027, BBG 2027 (Termin sv-rechengroessen-2027-verfahren) und Lohnsteuer-PAP 2027 übernommen sind, SV_RECHENSTAND in lib/berechnungen/brutto-netto.ts auf 2027 setzen, damit Minijob-Grenze, Faktor F und Beitragssätze aus demselben Jahr stammen. Danach scripts/verify-midijob-p1.ts und die Texte im Midijob-Block von lib/rechner-config/finanzen.ts (Faktor F, Beispiele) nachziehen. Dabei auch den Beitragszuschlag für Kinderlose in der Pflegeversicherung 2027 prüfen: Laut Presse plant das Pflegeneuordnungsgesetz (Kabinett 30.09.2026) 0,9 statt 0,6 Punkte; er fließt nicht in Faktor F ein, wohl aber in lib/berechnungen/pflegeversicherung.ts und brutto-netto.ts. Ist F am 01.12. noch nicht bekannt gegeben, um eine Woche verschieben. Einmaltermin: nach Erledigung entfernen.',
+    quelle: 'Welle 166',
   },
   {
     id: 'audit-juni',

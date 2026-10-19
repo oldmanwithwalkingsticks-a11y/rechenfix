@@ -7,13 +7,13 @@
 //  2. Steuerklassen-Faktor × 1,15 entfernt — LSt via berechneLohnsteuerJahr
 //  3. Soli-Schwellen-Bug — Soli via berechneSoli (nutzt Milderungszone)
 //
-// Plus: Trennung BE_gesamt vs. BE_AN (§ 20a Abs. 2 vs. Abs. 2a SGB IV),
+// Plus: Trennung BE_gesamt vs. BE_AN (§ 20 Abs. 2a Satz 1 vs. Satz 6 SGB IV),
 // die in 115a noch nicht sauber umgesetzt war (Einzelfunktion hat BE_gesamt
 // gerechnet, aber als "BE_AN" bezeichnet → AN-Vorteil überschätzt).
 //
 // Externe Oracle-Quellen:
-//  - § 20a Abs. 2 + 2a SGB IV (gesetze-im-internet.de)
-//  - § 163 Abs. 10 SGB VI (Rentenanspruch trotz reduzierter BE)
+//  - § 20 Abs. 2 und 2a SGB IV (gesetze-im-internet.de)
+//  - § 70 Abs. 1a SGB VI (Entgeltpunkte aus dem tatsächlichen Entgelt)
 //  - BMAS-Bekanntmachung Faktor F 2026 (gemeinsames Rundschreiben der
 //    SV-Spitzenverbände, GKV-Spitzenverband/DRV Bund/BA)
 //  - DRV-Übergangsbereichsrechner als Oracle für MJ-02 (Karsten manuell)
@@ -63,24 +63,24 @@ const cases: Fall[] = [];
   cases.push({
     name: 'PARAMS OG = 2.000 (konstant seit 01.01.2023)',
     actual: params.obergrenzeOG, expected: 2000,
-    quelle: '§ 20a Abs. 1 SGB IV',
+    quelle: '§ 20 Abs. 2 SGB IV',
   });
 
   // Abgeleitete Formel-Konstanten — verhindern den F×OG/F×G-Bug strukturell
   cases.push({
     name: 'FORMEL faktorGesamt = (OG − F×G) / (OG − G) ≈ 1,145937',
     actual: f.faktorGesamt, expected: 1.145937, tol: 0.00001,
-    quelle: '§ 20a Abs. 2 SGB IV — Linearform',
+    quelle: '§ 20 Abs. 2a Satz 1 SGB IV — Linearform',
   });
   cases.push({
     name: 'FORMEL faktorAN = OG / (OG − G) ≈ 1,431639',
     actual: f.faktorAN, expected: 1.431639, tol: 0.00001,
-    quelle: '§ 20a Abs. 2a SGB IV — F-unabhängig',
+    quelle: '§ 20 Abs. 2a Satz 6 SGB IV — F-unabhängig',
   });
   cases.push({
     name: 'FORMEL konstanteAN = faktorAN × G ≈ 863,278',
     actual: f.konstanteAN, expected: 863.278, tol: 0.001,
-    quelle: '§ 20a Abs. 2a SGB IV',
+    quelle: '§ 20 Abs. 2a Satz 6 SGB IV',
   });
 }
 
@@ -93,12 +93,12 @@ cases.push({
   name: 'MJ-01 AE = 603,01 (UG): BE_gesamt ≈ 399,13 (= F × G)',
   actual: berechneBemessungsgrundlageGesamt(603.01), expected: 399.1257 + 0.0115,
   tol: 0.05, // kleine Abweichung durch AE=603,01 > G=603
-  quelle: '§ 20a Abs. 2 SGB IV, AE knapp über G',
+  quelle: '§ 20 Abs. 2a Satz 1 SGB IV, AE knapp über G',
 });
 cases.push({
   name: 'MJ-01 AE = 603,01: BE_AN ≈ 0 (AN zahlt faktisch nichts)',
   actual: berechneBemessungsgrundlageAN(603.01), expected: 0.0143, tol: 0.01,
-  quelle: '§ 20a Abs. 2a SGB IV — BE_AN startet bei AE = G mit 0',
+  quelle: '§ 20 Abs. 2a Satz 6 SGB IV — BE_AN startet bei AE = G mit 0',
 });
 
 // MJ-02: Mitte — Oracle-Check gegen DRV
@@ -112,7 +112,7 @@ cases.push({
 cases.push({
   name: 'MJ-02 AE = 1.500: BE_AN = 1.284,18 (Oracle DRV)',
   actual: berechneBemessungsgrundlageAN(1500), expected: 1284.18, tol: 0.01,
-  quelle: '§ 20a Abs. 2a SGB IV — Oracle DRV-Rechner',
+  quelle: '§ 20 Abs. 2a Satz 6 SGB IV — Oracle DRV-Rechner',
 });
 // Strukturell: BE_AN < BE_gesamt (AN-Vorteil)
 cases.push({
@@ -196,7 +196,7 @@ cases.push({
 }
 
 // ============================================================================
-// GRUPPE 5: MJ-AG — AG-Anteil = Gesamtbeitrag − AN-Anteil (§ 20a-Logik)
+// GRUPPE 5: MJ-AG — AG-Anteil = Gesamtbeitrag − AN-Anteil (§ 20 Abs. 2a SGB IV)
 // ============================================================================
 
 // An der Untergrenze: Gesamtbeitrag ≈ F × G × 0.4 ≈ 160 €, AN-Anteil ≈ 0

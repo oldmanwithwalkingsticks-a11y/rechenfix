@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneBruttoNetto } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, berechneArbeitgeberSvMonat } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -12,8 +12,8 @@ import CrossLink from '@/components/ui/CrossLink';
 
 type StKl = 1 | 2 | 3 | 4 | 5 | 6;
 
-// Pauschaler AG-SV-Anteil (grob ~20 %): KV 7,3 + Zusatz 0,85 + RV 9,3 + ALV 1,3 + PV 1,8
-const AG_SV_QUOTE = 0.2035;
+// W166: AG-SV-Anteil der Erhöhung exakt aus berechneArbeitgeberSvMonat (vorher pauschal 20,35 %
+// mit veraltetem Zusatzbeitrag; 2026 regulär 21,15 %, im Midijob- und Minijob-Bereich abweichend).
 
 interface Option {
   id: string;
@@ -58,7 +58,9 @@ export default function NettolohnOptimiererRechner() {
   );
 
   const nettoDiffBrutto = Math.max(0, neu.nettoMonat - alt.nettoMonat);
-  const agKostenBrutto = betrag * (1 + AG_SV_QUOTE);
+  const agKostenBrutto = betrag
+    + berechneArbeitgeberSvMonat(bruttoAlt + betrag, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT)
+    - berechneArbeitgeberSvMonat(bruttoAlt, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT);
 
   const optionen: Option[] = useMemo(() => {
     const cap = (grenze: number) => Math.min(betrag, grenze);

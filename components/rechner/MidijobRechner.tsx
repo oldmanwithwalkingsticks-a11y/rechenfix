@@ -20,6 +20,8 @@ import {
 import { getAktuelleMidijobParameter } from '@/lib/berechnungen/midijob-parameter';
 import {
   berechneBruttoNetto,
+  berechneArbeitgeberSvMonat,
+  SV_RECHENSTAND,
   KV_BASISSATZ_AN_2026,
   RV_SATZ_AN_2026,
   AV_SATZ_AN_2026,
@@ -28,14 +30,13 @@ import {
   KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026,
   KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
 } from '@/lib/berechnungen/sv-parameter';
-import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from '@/lib/berechnungen/pflegeversicherung';
+import { pvAnteilAn2026 } from '@/lib/berechnungen/pflegeversicherung';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
-// MIDIJOB_UNTERGRENZE wird NICHT modul-scope konstant gehalten — sonst
-// würde der via Stichtag-Switch (01.01.2027 → 633,01 €) neuer Wert erst
-// nach Redeploy greifen. Stattdessen bei jedem Render neu via
-// getMidijobUntergrenze() aus lib/berechnungen/midijob-uebergang.ts.
+// Die Untergrenze kommt bei jedem Render aus getMidijobUntergrenze(). W166: zum Stichtag
+// SV_RECHENSTAND aus brutto-netto.ts, damit Grenze, Faktor F und Beitragssätze aus demselben
+// Jahr stammen; der Wechsel auf 2027 läuft über den Termin midijob-parameter-2027.
 const MIDIJOB_OBERGRENZE = MIDIJOB_OBERGRENZE_MONAT;
 
 // SV-Grundsätze 2026 aus SSOT-Libs (ohne PV — wird über pvAnteilAn2026 geholt,
@@ -55,7 +56,8 @@ export default function MidijobRechner() {
   const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
   const [anzahlKinder, setAnzahlKinder] = useState<number>(0);
 
-  const untergrenze = getMidijobUntergrenze();
+  // W166: Untergrenze zum Rechenstand der Brutto-Netto-Berechnung (2026), nicht zum heutigen Datum.
+  const untergrenze = getMidijobUntergrenze(SV_RECHENSTAND);
 
   const ergebnis = useMemo(() => {
     const b = parseDeutscheZahl(brutto) || 0;
@@ -66,23 +68,14 @@ export default function MidijobRechner() {
     // Entgeltpunkte der Rente kommen aus dem tatsächlichen Entgelt (§ 70 Abs. 1a SGB VI).
     // AG trägt Gesamtbeitrag − AN-Anteil (im Übergangsbereich > halbe Last).
     const imBereich = b >= untergrenze && b <= MIDIJOB_OBERGRENZE;
-    const beGesamt = imBereich ? berechneBemessungsgrundlageGesamt(b) : b;
-    const beAn = imBereich ? berechneBemessungsgrundlageAN(b) : b;
+    const beGesamt = imBereich ? Math.round(berechneBemessungsgrundlageGesamt(b, SV_RECHENSTAND) * 100) / 100 : b;
+    const beAn = imBereich ? Math.round(berechneBemessungsgrundlageAN(b, SV_RECHENSTAND) * 100) / 100 : b;
 
     // PV-AN-Satz inkl. Kinderlos-Zuschlag / Kinderabschlag nach § 55/59 SGB XI.
     // Annahme anzahlKinder = 0 → kinderlos (Zuschlag, Alter > 23). Ab Kind 2
     // greift Kinderabschlag 0,25 pp pro Kind (bis Kind 5 gedeckelt).
     const pvAnSatz = pvAnteilAn2026(anzahlKinder, true, false);
     const anSvSatz = SV_AN_OHNE_PV + pvAnSatz;
-
-    // AG-Satz: paritätischer halber Beitrag ohne Kinderlos-Zuschlag
-    // (§ 59 Abs. 5 SGB XI: Zuschlag trägt ausschließlich AN).
-    // PV-Abschläge bei Kindern wirken ebenfalls nur AN-seitig (§ 55 Abs. 3),
-    // AG-PV-Satz ist konstant PV_BASIS_SATZ_2026 = 1,8 %.
-    const agSvSatz = SV_AN_OHNE_PV + PV_BASIS_SATZ_2026;
-    const gesamtSvSatz = anSvSatz + agSvSatz;
-
-    const gesamtSv = beGesamt * gesamtSvSatz;
 
     // W163: Arbeitnehmeranteil, Lohnsteuer, Soli und Kirchensteuer aus der zentralen
     // Brutto-Netto-Berechnung (SSOT). Sie rechnet im Übergangsbereich je Zweig mit BE_AN,
@@ -105,9 +98,11 @@ export default function MidijobRechner() {
       abrechnungszeitraum: 'monat',
     });
     const anSv = bn.sozialabgabenGesamt;
-    // § 20 Abs. 2a SGB IV: AG trägt Gesamtbeitrag − AN-Anteil (= deutlich mehr als
-    // die Hälfte bei niedrigem AE, weil BE_AN ≪ BE_gesamt in dem Bereich)
-    const agSv = Math.max(0, gesamtSv - anSv);
+    // § 20 Abs. 2a SGB IV: Der Gesamtbeitrag je Zweig kommt aus BE_gesamt (halber Satz, gerundet,
+    // verdoppelt), der AG trägt Gesamtbeitrag − AN-Anteil (= deutlich mehr als die Hälfte bei
+    // niedrigem AE). Der PV-Zuschlag für Kinderlose belastet nur den AN. W166: zentral berechnet.
+    const agSv = berechneArbeitgeberSvMonat(b, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT);
+    const gesamtSv = Math.round((agSv + anSv) * 100) / 100;
     const lohnsteuer = bn.lohnsteuer;
     const soli = bn.solidaritaet;
     const kiSt = bn.kirchensteuer;
@@ -122,7 +117,7 @@ export default function MidijobRechner() {
   }, [brutto, klasse, kirchensteuer, bundesland, anzahlKinder, untergrenze]);
 
   // F-Faktor dynamisch aus Parameter-Lib lesen (ändert sich jährlich)
-  const midijobParams = getAktuelleMidijobParameter();
+  const midijobParams = getAktuelleMidijobParameter(SV_RECHENSTAND);
   const fFaktorAnzeige = midijobParams.faktorF.toLocaleString('de-DE', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
   const jahrAnzeige = midijobParams.gueltigAb.getFullYear();
 
@@ -323,7 +318,7 @@ export default function MidijobRechner() {
         </table>
         {ergebnis.imBereich && (
           <p className="px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700">
-            F-Faktor <strong>{fFaktorAnzeige}</strong> für {jahrAnzeige} — jährlich neu von den SV-Spitzenverbänden festgesetzt (§ 20a Abs. 2 SGB IV, gemeinsames Rundschreiben GKV-Spitzenverband / DRV Bund / BA).
+            F-Faktor <strong>{fFaktorAnzeige}</strong> für {jahrAnzeige} — jährlich vom Bundesarbeitsministerium im Bundesanzeiger bekannt gegeben (§ 20 Abs. 2a SGB IV).
           </p>
         )}
       </div>

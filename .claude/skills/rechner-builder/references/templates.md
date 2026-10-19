@@ -314,7 +314,7 @@ export const BBG_KV_JAHR_2026 = 69_750;
 export const BBG_KV_MONAT_2026 = 5_812.50;
 
 // Mindestlohn ab 01.01.2026: 13,90 €/h. Ab 01.01.2027: 14,60 €/h.
-// Stand: 09.05.2026. Quelle: 6. Mindestlohnanpassungsverordnung (BMAS).
+// Stand: 19.10.2026. Quelle: Fünfte Mindestlohnanpassungsverordnung (MiLoV5) vom 05.11.2025.
 // Stichtag-Switch via getAktuellerMindestlohn() in mindestlohn.ts.
 export const MINDESTLOHN_2026 = 13.90;
 export const MINDESTLOHN_2027 = 14.60;

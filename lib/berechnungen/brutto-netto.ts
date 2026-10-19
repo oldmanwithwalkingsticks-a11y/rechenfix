@@ -1,5 +1,5 @@
 import { berechneLohnsteuerMitZuschlaegenJahr, monatsanteilPAP, kirchensteuerAusBmg } from './lohnsteuer';
-import { pvAnteilAn2026 } from './pflegeversicherung';
+import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from './pflegeversicherung';
 import { istImUebergangsbereich, berechneBemessungsgrundlageAN, berechneBemessungsgrundlageGesamt } from './midijob-uebergang';
 import { getMinijobGrenzeMonat } from './mindestlohn';
 
@@ -127,6 +127,12 @@ export const AV_SATZ_AN_2026 = 0.013;         // § 341 SGB III: 2,6 % hälftig
 // (§ 168 Abs. 1 Nr. 1b SGB VI), wie in minijob.ts. Entfällt bei Befreiung (§ 6 Abs. 1b SGB VI). Die
 // Mindestbemessungsgrundlage für Entgelte unter 175 € ist nicht abgebildet.
 export const RV_EIGENANTEIL_MINIJOB_2026 = 0.036;
+
+// W166: Rechenstand der Sozialversicherung. Minijob-Grenze und Übergangsbereich werden zum selben
+// Stichtag bestimmt wie alle übrigen Werte dieser Datei (Lohnsteuer-PAP, BBG und Beitragssätze 2026).
+// Ohne diesen Stichtag würde ab 01.01.2027 die Minijob-Grenze 633 € gelten, während Faktor F,
+// BE-Formeln und alle Sätze noch von 2026 sind. Umstellung auf 2027 im Termin midijob-parameter-2027.
+export const SV_RECHENSTAND = new Date('2026-07-01');
 // Alias für interne Verwendung
 const BBG_KV = BBG_KV_MONAT;
 const BBG_RV = BBG_RV_MONAT;
@@ -162,10 +168,10 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   //  - Lohnsteuer und Vorsorgepauschale bleiben unberührt: Der Übergangsbereich ist steuerlich
   //    unbeachtlich.
   // Einmalzahlungen (Weihnachtsgeld) rechnen unten weiter mit den regulären Sätzen.
-  const minijob = brutto > 0 && brutto <= getMinijobGrenzeMonat();
-  const uebergang = istImUebergangsbereich(brutto);
-  const beAn = uebergang ? Math.round(berechneBemessungsgrundlageAN(brutto) * 100) / 100 : brutto;
-  const beGesamt = uebergang ? Math.round(berechneBemessungsgrundlageGesamt(brutto) * 100) / 100 : brutto;
+  const minijob = brutto > 0 && brutto <= getMinijobGrenzeMonat(SV_RECHENSTAND);
+  const uebergang = istImUebergangsbereich(brutto, SV_RECHENSTAND);
+  const beAn = uebergang ? Math.round(berechneBemessungsgrundlageAN(brutto, SV_RECHENSTAND) * 100) / 100 : brutto;
+  const beGesamt = uebergang ? Math.round(berechneBemessungsgrundlageGesamt(brutto, SV_RECHENSTAND) * 100) / 100 : brutto;
 
   let krankenversicherung: number;
   if (eingabe.kvArt === 'privat') {
@@ -296,6 +302,40 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     abzuegeProzent: brutto > 0 ? Math.round((gesamtAbzuege / brutto) * 1000) / 10 : 0,
     weihnachtsgeld: weihnachtsgeldErgebnis,
   };
+}
+
+/**
+ * W166: Arbeitgeberanteil zur Sozialversicherung für ein Monatsentgelt, gesetzlich krankenversichert,
+ * Rechenstand 2026, ohne Umlagen (U1, U2, Insolvenzgeld) und ohne Unfallversicherung.
+ *  - Minijob (gewerblich): Pauschalbeiträge KV 13 % (§ 249b SGB V) und RV 15 % (§ 168 Abs. 1 Nr. 1b SGB VI).
+ *  - Übergangsbereich: Gesamtbeitrag je Zweig aus BE_gesamt (halber Satz, auf Cent gerundet, verdoppelt)
+ *    minus Arbeitnehmeranteil je Zweig aus BE_AN; der PV-Zuschlag für Kinderlose belastet nur den
+ *    Arbeitnehmer (§ 20 Abs. 2a SGB IV; DRV, Übergangsbereich). Prüfanker lohn-info.de: AE 1.000 €,
+ *    Zusatzbeitrag 3,0 % → 241,62 €.
+ *  - sonst: halbe Beitragssätze bis zur jeweiligen Beitragsbemessungsgrenze.
+ */
+export function berechneArbeitgeberSvMonat(bruttoMonat: number, kvZusatzbeitragProzent: number): number {
+  const r = (x: number) => Math.round(x * 100) / 100;
+  if (bruttoMonat <= 0) return 0;
+  if (bruttoMonat <= getMinijobGrenzeMonat(SV_RECHENSTAND)) {
+    return r(bruttoMonat * 0.13) + r(bruttoMonat * 0.15);
+  }
+  const halbKv = KV_BASISSATZ_AN_2026 + kvZusatzbeitragProzent / 200;
+  if (istImUebergangsbereich(bruttoMonat, SV_RECHENSTAND)) {
+    const g = r(berechneBemessungsgrundlageGesamt(bruttoMonat, SV_RECHENSTAND));
+    const a = r(berechneBemessungsgrundlageAN(bruttoMonat, SV_RECHENSTAND));
+    const kv = r(g * halbKv) * 2 - (r(a * KV_BASISSATZ_AN_2026) + r(a * (kvZusatzbeitragProzent / 200)));
+    const pv = r(g * PV_BASIS_SATZ_2026) * 2 - r(a * PV_BASIS_SATZ_2026);
+    const rv = r(g * RV_SATZ_AN_2026) * 2 - r(a * RV_SATZ_AN_2026);
+    const av = r(g * AV_SATZ_AN_2026) * 2 - r(a * AV_SATZ_AN_2026);
+    return r(kv + pv + rv + av);
+  }
+  const kvBasis = Math.min(bruttoMonat, BBG_KV);
+  const rvBasis = Math.min(bruttoMonat, BBG_RV);
+  return r(
+    r(kvBasis * KV_BASISSATZ_AN_2026) + r(kvBasis * (kvZusatzbeitragProzent / 200)) + r(kvBasis * PV_BASIS_SATZ_2026)
+    + r(rvBasis * RV_SATZ_AN_2026) + r(rvBasis * AV_SATZ_AN_2026),
+  );
 }
 
 /**

@@ -1,14 +1,14 @@
 /**
- * Übergangsbereich Midijob nach § 20a SGB IV.
+ * Übergangsbereich Midijob nach § 20 Abs. 2 und 2a SGB IV.
  *
  * Gilt für regelmäßiges Arbeitsentgelt über der Geringfügigkeitsgrenze G
  * bis zur Obergrenze OG (2.000 €/Monat seit 01.01.2023).
  *
  * Seit 01.10.2022 gibt es ZWEI getrennte Bemessungsgrundlagen:
- *  - **BE_gesamt** (§ 20a Abs. 2 SGB IV) — für den Gesamtbeitrag und für
- *    RV-Entgeltpunkte (§ 163 Abs. 10 SGB VI: volle Ansprüche trotz
- *    reduzierter AN-Belastung).
- *  - **BE_AN** (§ 20a Abs. 2a SGB IV) — für den Arbeitnehmer-Beitragsanteil.
+ *  - **BE_gesamt** (§ 20 Abs. 2a Satz 1 SGB IV) — für den Gesamtbeitrag und den
+ *    PV-Zuschlag für Kinderlose. Die Entgeltpunkte der Rente kommen aus dem
+ *    tatsächlichen Entgelt (§ 70 Abs. 1a SGB VI, seit 01.07.2019).
+ *  - **BE_AN** (§ 20 Abs. 2a Satz 6 SGB IV) — für den Arbeitnehmer-Beitragsanteil.
  *    Startet an der Untergrenze mit 0 und steigt linear auf OG.
  *
  * Der Arbeitgeber trägt den Differenzbetrag (Gesamtbeitrag − AN-Anteil),
@@ -19,10 +19,9 @@
  * Formel-Konstanten werden aus den Parametern abgeleitet — verhindert
  * die „F × OG statt F × G"-Verdrehung strukturell.
  *
- * Quelle: § 20a SGB IV, gemeinsame Rundschreiben der SV-Spitzenverbände.
+ * Quelle: § 20 Abs. 2 und 2a SGB IV, gemeinsame Rundschreiben der SV-Spitzenverbände.
  */
 
-import { getMinijobGrenzeMonat } from './mindestlohn';
 import {
   getAktuelleMidijobParameter,
   getBeitragsFormeln,
@@ -30,28 +29,30 @@ import {
 } from './midijob-parameter';
 
 /**
- * Obergrenze Übergangsbereich (konstant seit 01.01.2023, § 20a SGB IV).
+ * Obergrenze Übergangsbereich (konstant seit 01.01.2023, § 20 Abs. 2 SGB IV).
  * Re-export für Abwärts-Kompatibilität mit bestehenden Konsumenten.
  */
 export const MIDIJOB_OBERGRENZE_MONAT = 2_000;
 
 /**
- * F-Faktor § 20a Abs. 2 SGB IV für 2026. Re-export aus der Parameter-Lib
+ * F-Faktor § 20 Abs. 2a SGB IV für 2026. Re-export aus der Parameter-Lib
  * für Abwärts-Kompatibilität — neue Konsumenten sollten direkt
  * `getAktuelleMidijobParameter().faktorF` verwenden.
  */
 export const FAKTOR_F_2026 = getAktuelleMidijobParameter(new Date('2026-06-15')).faktorF;
 
 /**
- * Untergrenze des Midijob-Übergangsbereichs = Minijob-Grenze + 0,01 €.
- * Dynamisch via Stichtag-Switch (Minijob-Grenze 603 € in 2026, 633 € ab 2027).
+ * Untergrenze des Midijob-Übergangsbereichs = Geringfügigkeitsgrenze G + 0,01 €.
+ * W166: G kommt aus demselben Parameter-Bucket wie Faktor F, damit Grenze und Formeln
+ * nie aus verschiedenen Jahren stammen (vorher getMinijobGrenzeMonat: ab 01.01.2027
+ * 633 € mit F und G = 603 € aus 2026). Ein neuer Bucket MIDIJOB_2027 hebt G auf 633 €.
  *
  * Achtung: Die UG ist die Eintritts-Schwelle (AE > Minijob-Grenze). In den
- * § 20a-Formeln selbst wird aber die Geringfügigkeitsgrenze G (ohne +0,01)
+ * Formeln des § 20 Abs. 2a selbst wird aber die Geringfügigkeitsgrenze G (ohne +0,01)
  * verwendet — siehe `getBeitragsFormeln`.
  */
 export function getMidijobUntergrenze(stichtag: Date = new Date()): number {
-  return getMinijobGrenzeMonat(stichtag) + 0.01;
+  return getAktuelleMidijobParameter(stichtag).geringfuegigkeitsgrenzeG + 0.01;
 }
 
 /**
@@ -68,7 +69,7 @@ export function istImUebergangsbereich(
 
 /**
  * Berechnet die beitragspflichtige Gesamt-Bemessungsgrundlage `BE_gesamt`
- * nach § 20a Abs. 2 SGB IV.
+ * nach § 20 Abs. 2a Satz 1 SGB IV.
  *
  * Formel: `BE_gesamt = faktorGesamt × AE − konstanteGesamt`
  * mit `faktorGesamt = (OG − F × G) / (OG − G)` und
@@ -80,7 +81,7 @@ export function istImUebergangsbereich(
  *
  * Wird für:
  *  - Gesamtbeitrags-Berechnung (AN + AG)
- *  - RV-Entgeltpunkte nach § 163 Abs. 10 SGB VI (voller Rentenanspruch)
+ *  - PV-Zuschlag für Kinderlose (trägt der AN allein)
  *
  * @returns BE_gesamt in Euro, oder NaN außerhalb des Übergangsbereichs.
  */
@@ -96,7 +97,7 @@ export function berechneBemessungsgrundlageGesamt(
 
 /**
  * Berechnet die reduzierte AN-Bemessungsgrundlage `BE_AN`
- * nach § 20a Abs. 2a SGB IV (seit 01.10.2022).
+ * nach § 20 Abs. 2a Satz 6 SGB IV (seit 01.10.2022).
  *
  * Formel: `BE_AN = faktorAN × AE − konstanteAN`
  * mit `faktorAN = OG / (OG − G)` und `konstanteAN = faktorAN × G`

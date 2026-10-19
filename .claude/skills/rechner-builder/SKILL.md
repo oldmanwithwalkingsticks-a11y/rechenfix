@@ -152,7 +152,7 @@ Verify-im-Kopf-Runde vor dem Commit spart den Build-Break. Ad-hoc-Prüfung:
 **Vor dem Code-Schreiben** identifizieren: Welche gesetzlichen Vorgaben beeinflussen den Rechner? Typische Domänen:
 
 - **Steuerrecht** — EStG (§ 9, § 32a, § 38b, § 66, § 101 etc.), UStG, SolzG, KraftStG, ErbStG, GrEStG
-- **Sozialversicherungsrecht** — SGB II (Bürgergeld), SGB III (ALG I), SGB IV (Versicherungspflicht, Midijob § 20a), SGB V (KV), SGB VI (RV, Witwenrente, Rentenwert § 68), SGB IX (Schwerbehinderung)
+- **Sozialversicherungsrecht** — SGB II (Bürgergeld), SGB III (ALG I), SGB IV (Versicherungspflicht, Midijob § 20 Abs. 2 und 2a), SGB V (KV), SGB VI (RV, Witwenrente, Rentenwert § 68), SGB IX (Schwerbehinderung)
 - **Arbeitsrecht** — BUrlG (Urlaub), ArbZG (Arbeitszeit), MuSchG (Mutterschutz), BEEG (Eltern­geld + Elternzeit), KSchG (Kündigungsschutz), MiLoG (Mindestlohn), BGB §§ 622/626 (Kündigungs­frist)
 - **Mietrecht / Bauen** — BGB §§ 556d–558e (Miet­preis­bremse, Mieterhöhung), WoGG (Wohngeld), EEG (Einspeise­vergütung), GEG (Gebäude­energie), KostBRÄG (Notar/Anwalt)
 - **Verkehrsrecht** — StVG, KraftStG (§ 3d Elektro, § 9 CO₂-Staffel), StVZO

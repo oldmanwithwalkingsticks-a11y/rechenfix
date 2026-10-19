@@ -3652,7 +3652,7 @@ export const finanzenRechner: RechnerConfig[] = [
     // W19-Goldstandard (YMYL): minijob-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
     // Leitformat „statistik" (4× dominant). Werte aus SSOT gespiegelt (Stand 06/2026):
     // MINIJOB_GRENZE_MONAT=603 € (Mindestlohn 13,90 € × 130/3, § 8 SGB IV); 2027 ≈ 633 €
-    // (Mindestlohn 14,60 €); MIDIJOB_OBERGRENZE=2.000 € (§ 20a SGB IV); AG-Pauschalen
+    // (Mindestlohn 14,60 €); MIDIJOB_OBERGRENZE=2.000 € (§ 20 Abs. 2 SGB IV); AG-Pauschalen
     // gewerblich 15/13/2/1,6 % ≈ 31,6 %, Privathaushalt 5/5/2/1,6/0,72 % ≈ 14,3 %
     // (lib/berechnungen/minijob.ts); RV-Eigenanteil 3,6 %; Rentenpunkt = 51.944 €
     // Durchschnittsentgelt (§ 69 SGB VI) → 0,14 EP/Jahr. Kein Autorenblock. erklaerung Fallback.
@@ -4642,7 +4642,7 @@ export const finanzenRechner: RechnerConfig[] = [
         werte: [
           { label: 'Untergrenze (Minijob-Grenze + 0,01)', wert: '603,01 €', hinweis: 'an Mindestlohn 13,90 € gekoppelt' },
           { label: 'Obergrenze', wert: '2.000 €', hinweis: 'unverändert seit 2023' },
-          { label: 'Faktor F 2026', wert: '0,6619', hinweis: 'jährlich vom BMAS festgesetzt' },
+          { label: 'Faktor F 2026', wert: '0,6619', hinweis: 'jährlich vom BMAS bekannt gegeben' },
           { label: 'AN-SV-Satz (kinderlos)', wert: '21,15 % + 0,6 %', hinweis: 'auf die reduzierte AN-Grundlage, Pflege-Zuschlag auf die Gesamt-Grundlage' },
         ],
       },
@@ -4666,11 +4666,11 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Wer zahlt was? Der Arbeitgeber trägt mehr (Brutto 1.000 €)',
         schritte: [
-          { label: 'Gesamtbeitrag SV (AN + AG)', formel: 'BE_gesamt 854,06 × 42,9 %', ergebnis: '366,39 €' },
+          { label: 'Gesamtbeitrag SV (AN + AG)', formel: 'je Zweig halber Satz auf BE_gesamt 854,06, gerundet, verdoppelt; dazu 0,6 % Pflege-Zuschlag', ergebnis: '366,38 €' },
           { label: 'davon Arbeitnehmer-Anteil', formel: 'BE_AN 568,36 × 21,15 % + BE_gesamt 854,06 × 0,6 %', ergebnis: '125,33 €' },
-          { label: 'davon Arbeitgeber-Anteil', formel: '366,39 − 125,33', ergebnis: '241,06 €' },
+          { label: 'davon Arbeitgeber-Anteil', formel: '366,38 − 125,33', ergebnis: '241,05 €' },
         ],
-        fazit: 'In einer regulären Beschäftigung teilen sich Arbeitnehmer und Arbeitgeber die Sozialbeiträge etwa hälftig. Im Übergangsbereich ist das anders: Bei 1.000 € Brutto trägt der Arbeitnehmer nur 125,33 €, der Arbeitgeber dagegen 241,06 € — fast das Doppelte. Der Grund ist die reduzierte Arbeitnehmer-Bemessungsgrundlage; den vollen Gesamtbeitrag (auf Basis der höheren Gesamt-Bemessungsgrundlage) muss trotzdem jemand aufbringen, und das ist der Arbeitgeber. So bleibt der volle Versicherungsschutz finanziert, ohne den Arbeitnehmer zu belasten. Mit steigendem Verdienst gleicht sich das Verhältnis an: Bei 2.000 € tragen beide Seiten wieder den gleichen halben Beitrag — der besondere Arbeitgeber-Anteil ist dann aufgebraucht. Für den Arbeitgeber ist ein Midijob im unteren Bereich also etwas teurer als ein gleich bezahlter regulärer Job, weil er den AN-Rabatt mitfinanziert; gewollt ist das als Anreiz, solche Stellen überhaupt anzubieten.',
+        fazit: 'In einer regulären Beschäftigung teilen sich Arbeitnehmer und Arbeitgeber die Sozialbeiträge etwa hälftig. Im Übergangsbereich ist das anders: Bei 1.000 € Brutto trägt der Arbeitnehmer nur 125,33 €, der Arbeitgeber dagegen 241,05 € — fast das Doppelte. Der Grund ist die reduzierte Arbeitnehmer-Bemessungsgrundlage; den vollen Gesamtbeitrag (auf Basis der höheren Gesamt-Bemessungsgrundlage) muss trotzdem jemand aufbringen, und das ist der Arbeitgeber. So bleibt der volle Versicherungsschutz finanziert, ohne den Arbeitnehmer zu belasten. Mit steigendem Verdienst gleicht sich das Verhältnis an: Bei 2.000 € tragen beide Seiten wieder den gleichen halben Beitrag — der besondere Arbeitgeber-Anteil ist dann aufgebraucht. Für den Arbeitgeber ist ein Midijob im unteren Bereich also etwas teurer als ein gleich bezahlter regulärer Job, weil er den AN-Rabatt mitfinanziert; gewollt ist das als Anreiz, solche Stellen überhaupt anzubieten.',
       },
       {
         typ: 'text',
@@ -5208,7 +5208,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'nettolohn-optimierer',
-    letzteAktualisierung: '2026-06-25',
+    letzteAktualisierung: '2026-10-19',
     titel: 'Nettolohn-Optimierer',
     beschreibung: 'Nettolohn optimieren: Vergleich Gehaltserhöhung vs. steuerfreie Sachbezüge — was bringt mehr Netto?',
     kategorie: 'Finanzen',
@@ -5223,7 +5223,7 @@ export const finanzenRechner: RechnerConfig[] = [
     // 200-€-Budget-Vergleich AN-Netto/AG-Kosten · Brutto→Netto-Quote), grenzt sich von
     // gehaltserhoehung (vergleich) und steuererstattung (beispielrechnung) ab. Alle Netto-
     // Werte aus berechneBruttoNetto reproduziert (Resolver-Check 25.06.2026, nach W147 neu gemessen, 3.500 €, StKl I):
-    // +200 € brutto → +109,75 € netto (Quote ~55 %); AG-Kosten 200 € × 1,2035 = 240,70 €.
+    // +200 € brutto → +109,75 € netto (Quote ~55 %); AG-Kosten 200 € + 21,15 % AG-SV = 242,30 € (W166, berechneArbeitgeberSvMonat).
     // Bausteine 2026: Sachbezug 50 € (§ 8 Abs. 2 EStG, FREIGRENZE), Jobticket 63 € (§ 3 Nr. 15),
     // Essenszuschuss 115,05 € (7,67 €/Tag × 15, 16. SvEV — GEFIXT f013478), Internet 50 €
     // (§ 40 Abs. 2, 25 % pauschal AG), BAV 302 € (§ 3 Nr. 63, mindert spätere Rente).
@@ -5232,7 +5232,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum steuerfreie Bausteine die Gehaltserhöhung schlagen',
-        html: `<p>Eine Brutto-Gehaltserhöhung fühlt sich gut an — bis die Abrechnung kommt. Wer in Steuerklasse I rund 3.500 € verdient, hat eine <strong>Grenzbelastung von etwa 45 %</strong> aus Lohnsteuer, Soli und Sozialabgaben. Von 200 € Brutto-Erhöhung bleiben so nur rund <strong>109 € netto</strong> übrig; der Rest geht an Finanzamt und Sozialkassen. Zusätzlich zahlt der Arbeitgeber etwa 20 % Arbeitgeber-Sozialabgaben obendrauf — das Budget wird doppelt belastet.</p><p>Genau hier setzen <strong>steuerfreie Sachbezüge</strong> an. Zahlt der Arbeitgeber statt Brutto einen steuerfreien Baustein, kommt der Betrag fast ungeschmälert bei Ihnen an — und der Arbeitgeber spart die Sozialabgaben gleich mit. Ein Deutschlandticket-Zuschuss von 63 € bringt also 63 € netto, nicht etwa die Hälfte.</p><p>Dieser Rechner vergleicht sechs gängige Bausteine parallel und zeigt für Ihr Budget, welcher netto am meisten bringt. Die exakte Abgabenlast Ihres Gehalts liefert der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
+        html: `<p>Eine Brutto-Gehaltserhöhung fühlt sich gut an — bis die Abrechnung kommt. Wer in Steuerklasse I rund 3.500 € verdient, hat eine <strong>Grenzbelastung von etwa 45 %</strong> aus Lohnsteuer, Soli und Sozialabgaben. Von 200 € Brutto-Erhöhung bleiben so nur rund <strong>109 € netto</strong> übrig; der Rest geht an Finanzamt und Sozialkassen. Zusätzlich zahlt der Arbeitgeber gut 21 % Arbeitgeber-Sozialabgaben obendrauf — das Budget wird doppelt belastet.</p><p>Genau hier setzen <strong>steuerfreie Sachbezüge</strong> an. Zahlt der Arbeitgeber statt Brutto einen steuerfreien Baustein, kommt der Betrag fast ungeschmälert bei Ihnen an — und der Arbeitgeber spart die Sozialabgaben gleich mit. Ein Deutschlandticket-Zuschuss von 63 € bringt also 63 € netto, nicht etwa die Hälfte.</p><p>Dieser Rechner vergleicht sechs gängige Bausteine parallel und zeigt für Ihr Budget, welcher netto am meisten bringt. Die exakte Abgabenlast Ihres Gehalts liefert der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
       },
       {
         typ: 'tabelle',
@@ -5265,7 +5265,7 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'AG-Budget', formel: 'Arbeitgeber stellt bereit', ergebnis: '200 €/Monat' },
           { label: 'Variante A: Brutto-Erhöhung', formel: 'Netto(3.700 €) − Netto(3.500 €), StKl I', ergebnis: '+109,75 € netto' },
           { label: 'Variante B: Essenszuschuss', formel: '7,67 € × 15 Tage, steuerfrei', ergebnis: '+115,05 € netto' },
-          { label: 'AG-Kosten Variante A', formel: '200 € × 1,2035 (AG-SV-Anteil)', ergebnis: '240,70 €' },
+          { label: 'AG-Kosten Variante A', formel: '200 € + 21,15 % AG-SV-Anteil', ergebnis: '242,30 €' },
           { label: 'AG-Kosten Variante B', formel: 'kein AG-SV-Anteil', ergebnis: '115,05 €' },
         ],
         fazit: 'Bei 200 € Budget bringt der Essenszuschuss 115,05 € netto — rund 5 € mehr als die Brutto-Erhöhung (109,75 €) — und kostet den Arbeitgeber mit 115,05 € weniger als die Hälfte. Steuerfreie Bausteine gewinnen also auf beiden Seiten: mehr Netto für Sie, weniger Kosten für den Arbeitgeber.',
@@ -5276,7 +5276,7 @@ export const finanzenRechner: RechnerConfig[] = [
         kopf: ['Option', 'kommt netto an', 'kostet den AG', 'Rang'],
         zeilen: [
           ['Essenszuschuss', '115,05 €', '115,05 €', '1'],
-          ['Brutto-Gehaltserhöhung', '109,75 €', '240,70 €', '2'],
+          ['Brutto-Gehaltserhöhung', '109,75 €', '242,30 €', '2'],
           ['Jobticket 63 €', '63,00 €', '63,00 €', '3'],
           ['Sachbezug 50 €', '50,00 €', '50,00 €', '4'],
           ['Internet-Pauschale 50 €', '50,00 €', '50,00 €', '4'],
@@ -5287,7 +5287,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum die Brutto-Erhöhung den Arbeitgeber doppelt kostet',
-        html: `<p>Der Kostenvorteil steuerfreier Bausteine zeigt sich besonders aus Arbeitgebersicht. Eine <strong>Brutto-Gehaltserhöhung</strong> belastet den Arbeitgeber doppelt: Er zahlt nicht nur die Erhöhung selbst, sondern zusätzlich rund 20 % Arbeitgeber-Sozialabgaben. Aus 200 € Brutto-Erhöhung werden so <strong>240,70 €</strong> echte Kosten — bei denen beim Arbeitnehmer aber nur rund 110 € netto ankommen.</p><p>Ein steuerfreier Baustein kennt diesen Aufschlag nicht: 115 € Essenszuschuss kosten den Arbeitgeber genau 115 € — und kommen voll beim Arbeitnehmer an. Für dieselbe Netto-Wirkung zahlt der Arbeitgeber also deutlich weniger.</p><p>Das macht steuerfreie Extras zu einem starken Argument in der Gehaltsverhandlung: Sie sind für beide Seiten günstiger. Viele Arbeitgeber sind hier flexibler als bei der Bruttoerhöhung, gerade weil sie selbst Sozialabgaben sparen.</p>`,
+        html: `<p>Der Kostenvorteil steuerfreier Bausteine zeigt sich besonders aus Arbeitgebersicht. Eine <strong>Brutto-Gehaltserhöhung</strong> belastet den Arbeitgeber doppelt: Er zahlt nicht nur die Erhöhung selbst, sondern zusätzlich gut 21 % Arbeitgeber-Sozialabgaben. Aus 200 € Brutto-Erhöhung werden so <strong>242,30 €</strong> echte Kosten — bei denen beim Arbeitnehmer aber nur rund 110 € netto ankommen.</p><p>Ein steuerfreier Baustein kennt diesen Aufschlag nicht: 115 € Essenszuschuss kosten den Arbeitgeber genau 115 € — und kommen voll beim Arbeitnehmer an. Für dieselbe Netto-Wirkung zahlt der Arbeitgeber also deutlich weniger.</p><p>Das macht steuerfreie Extras zu einem starken Argument in der Gehaltsverhandlung: Sie sind für beide Seiten günstiger. Viele Arbeitgeber sind hier flexibler als bei der Bruttoerhöhung, gerade weil sie selbst Sozialabgaben sparen.</p>`,
       },
       {
         typ: 'tabelle',
@@ -7098,7 +7098,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'steuerklassen-vergleich-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-19',
     titel: 'Steuerklassen-Vergleich-Rechner',
     beschreibung: 'Steuerklassen-Kombinationen vergleichen: III/V, V/III und IV/IV mit Faktor — welche Wahl bringt das höchste monatliche Netto?',
     kategorie: 'Finanzen',

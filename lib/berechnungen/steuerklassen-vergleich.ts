@@ -1,11 +1,6 @@
 import { berechneEStGrund, berechneSoli, WK_PAUSCHALE_AN_2026, GRUNDFREIBETRAG_2026, SA_PAUSCHALE_2026 } from './einkommensteuer';
-import {
-  KV_BASISSATZ_AN_2026,
-  RV_SATZ_AN_2026,
-  AV_SATZ_AN_2026,
-  BBG_KV_MONAT,
-  BBG_RV_MONAT,
-} from './brutto-netto';
+import { berechneBruttoNetto } from './brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
 
 export type Steuerklasse = 1 | 3 | 4 | 5;
 
@@ -99,17 +94,27 @@ function berechneLohnsteuerByKlasse(bruttoJahr: number, sk: Steuerklasse): numbe
   }
 }
 
-// Sozialversicherungsbeiträge 2026 (AN-Anteil, bis BBG) — Konstanten aus brutto-netto.ts.
-// Zusatzbeitrag-Durchschnitt 2,9 % hart verdrahtet (typisch-Szenario); präzise Rechnung
-// würde berechneBruttoNetto-Konsumation erfordern.
+// Sozialversicherungsbeiträge 2026 (AN-Anteil), Zusatzbeitrag-Durchschnitt 2,9 % (typisch-Szenario).
+// W166: Sozialabgaben über die zentrale Brutto-Netto-Berechnung, damit Minijob und Übergangsbereich
+// (Partner mit bis zu 2.000 € im Monat) richtig zählen. PV wie bisher ohne Kinderstaffel und ohne
+// Kinderlosenzuschlag (kinderUnter25: 1 → 1,8 %); die Steuerklasse wirkt nicht auf die Sozialabgaben.
 function berechneSvJahr(bruttoJahr: number): number {
-  const bbgKV = BBG_KV_MONAT * 12;
-  const bbgRV = BBG_RV_MONAT * 12;
-  const kv = Math.min(bruttoJahr, bbgKV) * (KV_BASISSATZ_AN_2026 + 0.0145); // + 1,45 % Ø-Zusatz AN-Anteil
-  const pv = Math.min(bruttoJahr, bbgKV) * 0.018;                           // PV Basis (Staffel ignoriert für Vergleich)
-  const rv = Math.min(bruttoJahr, bbgRV) * RV_SATZ_AN_2026;
-  const av = Math.min(bruttoJahr, bbgRV) * AV_SATZ_AN_2026;
-  return kv + pv + rv + av;
+  if (bruttoJahr <= 0) return 0;
+  const bn = berechneBruttoNetto({
+    bruttoMonat: bruttoJahr / 12,
+    steuerklasse: 1,
+    kirchensteuer: false,
+    kirchensteuersatz: 9,
+    kinderfreibetraege: 0,
+    kinderUnter25: 1,
+    bundesland: '',
+    kvArt: 'gesetzlich',
+    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+    kvPrivatBeitrag: 0,
+    rvBefreit: false,
+    abrechnungszeitraum: 'monat',
+  });
+  return bn.sozialabgabenGesamt * 12;
 }
 
 // Soli auf Lohnsteuer — zentrale berechneSoli handhabt Freigrenze + Milderungszone.
