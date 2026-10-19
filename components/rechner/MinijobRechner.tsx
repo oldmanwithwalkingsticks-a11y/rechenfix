@@ -183,7 +183,7 @@ export default function MinijobRechner() {
                 <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.verdienst)} €</td>
               </tr>
               <tr>
-                <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">RV-Eigenanteil (3,6 %)</td>
+                <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">RV-Eigenanteil ({art === 'gewerblich' ? '3,6' : '13,6'} %{ergebnis.verdienst > 0 && ergebnis.verdienst < 175 ? ', Beitrag mindestens aus 175 €' : ''})</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">{ergebnis.rvEigenanteil > 0 ? `−${fmtEuro(ergebnis.rvEigenanteil)} €` : '—'}</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
               </tr>
@@ -203,13 +203,13 @@ export default function MinijobRechner() {
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agLohnsteuer)} €</td>
               </tr>
               <tr>
-                <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Umlagen (U1, U2, Insolvenz)</td>
+                <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">{art === 'gewerblich' ? 'Umlagen (U1, U2, Insolvenzgeld)' : 'Umlagen (U1, U2)'}</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agUmlagen)} €</td>
               </tr>
               {ergebnis.agUnfallversicherung > 0 && (
                 <tr>
-                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Unfallversicherung</td>
+                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Unfallversicherung (1,6 %)</td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agUnfallversicherung)} €</td>
                 </tr>

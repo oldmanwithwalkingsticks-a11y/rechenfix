@@ -59,8 +59,8 @@ export default function NettolohnOptimiererRechner() {
 
   const nettoDiffBrutto = Math.max(0, neu.nettoMonat - alt.nettoMonat);
   const agKostenBrutto = betrag
-    + berechneArbeitgeberSvMonat(bruttoAlt + betrag, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT)
-    - berechneArbeitgeberSvMonat(bruttoAlt, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT);
+    + berechneArbeitgeberSvMonat(bruttoAlt + betrag, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT, steuerklasse)
+    - berechneArbeitgeberSvMonat(bruttoAlt, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT, steuerklasse);
 
   const optionen: Option[] = useMemo(() => {
     const cap = (grenze: number) => Math.min(betrag, grenze);

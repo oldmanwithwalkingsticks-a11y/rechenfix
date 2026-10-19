@@ -1,6 +1,7 @@
 import { berechneLohnsteuerMitZuschlaegenJahr, monatsanteilPAP, kirchensteuerAusBmg } from './lohnsteuer';
 import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from './pflegeversicherung';
-import { istImUebergangsbereich, berechneBemessungsgrundlageAN, berechneBemessungsgrundlageGesamt } from './midijob-uebergang';
+import { istImUebergangsbereich, berechneBemessungsgrundlageAN, berechneBemessungsgrundlageGesamt, getMidijobUntergrenze, MIDIJOB_OBERGRENZE_MONAT } from './midijob-uebergang';
+import { getAktuelleMidijobParameter } from './midijob-parameter';
 import { getMinijobGrenzeMonat } from './mindestlohn';
 
 export interface BruttoNettoEingabe {
@@ -56,7 +57,14 @@ export interface BruttoNettoErgebnis {
   nettoProStunde: number;
   abzuegeProzent: number;
   weihnachtsgeld?: WeihnachtsgeldErgebnis;
+  /**
+   * W167: Zone der Sozialversicherung nach dem regelmäßigen Monatsentgelt (laufendes Brutto plus ein
+   * Zwölftel des Weihnachtsgelds). 'regulaer' auch bei Steuerklasse VI im Bereich bis 2.000 €.
+   */
+  svZone: SvZone;
 }
+
+export type SvZone = 'minijob' | 'uebergang' | 'regulaer';
 
 export const BUNDESLAENDER = [
   { kuerzel: 'BW', name: 'Baden-Württemberg', kirchensteuersatz: 8 as const },
@@ -124,9 +132,13 @@ export const KV_BASISSATZ_AN_2026 = 0.073;    // § 241 SGB V: 14,6 % hälftig
 export const RV_SATZ_AN_2026 = 0.093;         // § 158 SGB VI: 18,6 % hälftig
 export const AV_SATZ_AN_2026 = 0.013;         // § 341 SGB III: 2,6 % hälftig
 // Minijob (gewerblich): RV-Eigenanteil des Arbeitnehmers = 18,6 % Beitragssatz − 15 % Arbeitgeberanteil
-// (§ 168 Abs. 1 Nr. 1b SGB VI), wie in minijob.ts. Entfällt bei Befreiung (§ 6 Abs. 1b SGB VI). Die
-// Mindestbemessungsgrundlage für Entgelte unter 175 € ist nicht abgebildet.
+// (§ 168 Abs. 1 Nr. 1b SGB VI), wie in minijob.ts. Entfällt bei Befreiung (§ 6 Abs. 1b SGB VI).
 export const RV_EIGENANTEIL_MINIJOB_2026 = 0.036;
+// W167: Mindestbeitragsbemessungsgrundlage in der RV des Minijobs (§ 163 Abs. 8 SGB VI). Der volle
+// Beitrag von 18,6 % wird mindestens aus 175 € berechnet (32,55 €); der Arbeitgeber zahlt 15 % des
+// tatsächlichen Entgelts, den Rest der Arbeitnehmer. Ab 175 € ergibt das genau 3,6 %.
+// Beispiel Minijob-Zentrale (FAQ 54): 150 € → Arbeitgeber 22,50 €, Arbeitnehmer 10,05 €.
+export const RV_MINDESTBEMESSUNG_MINIJOB = 175;
 
 // W166: Rechenstand der Sozialversicherung. Minijob-Grenze und Übergangsbereich werden zum selben
 // Stichtag bestimmt wie alle übrigen Werte dieser Datei (Lohnsteuer-PAP, BBG und Beitragssätze 2026).
@@ -160,40 +172,23 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   // Sozialabgaben
   // W163: Sonderzonen nach SGB IV.
   //  - Minijob (bis zur Geringfügigkeitsgrenze, § 8 Abs. 1a SGB IV): Der Arbeitnehmer trägt nur den
-  //    RV-Eigenanteil von 3,6 % (entfällt bei Befreiung). KV, PV und AV zahlt allein der Arbeitgeber.
+  //    RV-Eigenanteil (W167: mit Mindestbemessung 175 €, § 163 Abs. 8 SGB VI; entfällt bei Befreiung).
+  //    KV, PV und AV zahlt allein der Arbeitgeber.
   //  - Übergangsbereich (§ 20 Abs. 2a SGB IV, Geringfügigkeitsgrenze + 0,01 € bis 2.000 €): Der
   //    Arbeitnehmeranteil je Zweig wird aus der reduzierten Bemessungsgrundlage BE_AN (Satz 6)
   //    berechnet. Der PV-Zuschlag für Kinderlose wird abweichend aus BE_gesamt (Satz 1) berechnet
   //    und vom Arbeitnehmer allein getragen (DRV, Übergangsbereich; lohn-info.de, Beispiel 2026).
   //  - Lohnsteuer und Vorsorgepauschale bleiben unberührt: Der Übergangsbereich ist steuerlich
   //    unbeachtlich.
-  // Einmalzahlungen (Weihnachtsgeld) rechnen unten weiter mit den regulären Sätzen.
-  const minijob = brutto > 0 && brutto <= getMinijobGrenzeMonat(SV_RECHENSTAND);
-  const uebergang = istImUebergangsbereich(brutto, SV_RECHENSTAND);
-  const beAn = uebergang ? Math.round(berechneBemessungsgrundlageAN(brutto, SV_RECHENSTAND) * 100) / 100 : brutto;
-  const beGesamt = uebergang ? Math.round(berechneBemessungsgrundlageGesamt(brutto, SV_RECHENSTAND) * 100) / 100 : brutto;
-
-  let krankenversicherung: number;
-  if (eingabe.kvArt === 'privat') {
-    krankenversicherung = eingabe.kvPrivatBeitrag;
-  } else if (minijob) {
-    krankenversicherung = 0;
-  } else {
-    const kvBrutto = Math.min(beAn, BBG_KV);
-    const kvBasis = Math.round(kvBrutto * 0.073 * 100) / 100;
-    const kvZusatz = Math.round(kvBrutto * (eingabe.kvZusatzbeitrag / 200) * 100) / 100;
-    krankenversicherung = kvBasis + kvZusatz;
-  }
-
-  const rvBrutto = Math.min(beAn, bbgRv);
-  const rentenversicherung = eingabe.rvBefreit
-    ? 0
-    : minijob
-    ? Math.round(brutto * RV_EIGENANTEIL_MINIJOB_2026 * 100) / 100
-    : Math.round(rvBrutto * 0.093 * 100) / 100;
-
-  const avBrutto = Math.min(beAn, bbgRv);
-  const arbeitslosenversicherung = minijob ? 0 : Math.round(avBrutto * 0.013 * 100) / 100;
+  // W167: Die Zone richtet sich nach dem regelmäßigen Monatsentgelt. Ein Weihnachtsgeld, das sicher
+  // jedes Jahr gezahlt wird, zählt mit einem Zwölftel mit (Geringfügigkeits-Richtlinien B 2.2.1;
+  // Gemeinsames Rundschreiben Übergangsbereich vom 20.12.2022, Ziffer 4.2.1). Steuerklasse VI heißt,
+  // es gibt einen Hauptjob: Für den Übergangsbereich zählen dann alle versicherungspflichtigen Entgelte
+  // zusammen (§ 20 Abs. 2 Halbsatz 2 SGB IV). Der Rechner nimmt an, dass die Summe über 2.000 € liegt,
+  // und rechnet die vollen Sätze. Ein erster Minijob neben dem Hauptjob bleibt Minijob (§ 8 Abs. 2
+  // Satz 1 SGB IV).
+  const wgBrutto = eingabe.weihnachtsgeld ?? 0;
+  const svZone = bestimmeSvZone(brutto + wgBrutto / 12, eingabe.steuerklasse);
 
   // PV-AN-Satz nach § 55 Abs. 3 SGB XI — Kinderlos-Zuschlag UND Kinderabschlag (2.–5. Kind).
   // Anzahl berücksichtigungsfähiger Kinder unter 25: bevorzugt das explizite Feld;
@@ -203,16 +198,12 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   // Zuschlag für Kinderlose getrennt, weil er im Übergangsbereich aus BE_gesamt berechnet wird
   // (pvAnteilAn2026 mit hatKindGehabt = true liefert denselben Satz ohne Zuschlag).
   const pvZuschlag = pvSatz - pvAnteilAn2026(kinderUnter25, true, true);
-  let pflegeversicherung: number;
-  if (minijob) {
-    pflegeversicherung = 0;
-  } else if (uebergang) {
-    pflegeversicherung = Math.round(beAn * (pvSatz - pvZuschlag) * 100) / 100
-      + Math.round(beGesamt * pvZuschlag * 100) / 100;
-  } else {
-    const pvBrutto = Math.min(brutto, BBG_KV);
-    pflegeversicherung = Math.round(pvBrutto * pvSatz * 100) / 100;
-  }
+
+  const lfd = anSvMonat(brutto, svZone, eingabe, pvSatz, pvZuschlag);
+  const krankenversicherung = lfd.kv;
+  const rentenversicherung = lfd.rv;
+  const arbeitslosenversicherung = lfd.av;
+  const pflegeversicherung = lfd.pv;
 
   const steuernGesamt = lohnsteuer + solidaritaet + kirchensteuer;
   const sozialabgabenGesamt = krankenversicherung + rentenversicherung + arbeitslosenversicherung + pflegeversicherung;
@@ -221,7 +212,6 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
 
   // Weihnachtsgeld-Berechnung
   let weihnachtsgeldErgebnis: WeihnachtsgeldErgebnis | undefined;
-  const wgBrutto = eingabe.weihnachtsgeld ?? 0;
 
   if (wgBrutto > 0) {
     // Steuer auf den sonstigen Bezug wie im PAP (MSONST): Jahreslohnsteuer mit WG minus ohne WG.
@@ -245,26 +235,39 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
       ? kirchensteuerAusBmg(wgLohnsteuer, kstSatz)
       : 0;
 
-    // SV-Beiträge auf Weihnachtsgeld (reguläre Sätze, BBG beachten)
+    // SV-Beiträge auf das Weihnachtsgeld (W167).
+    //  - Regulär: Einmalzahlung bis zur anteiligen Jahres-BBG (§ 23a Abs. 3 SGB IV), Auszahlung im
+    //    Dezember angenommen: Jahres-BBG minus laufendes beitragspflichtiges Jahresentgelt.
+    //  - Minijob und Übergangsbereich: Die Einmalzahlung gehört in den Auszahlungsmonat (§ 23a Abs. 1
+    //    Satz 3 SGB IV). Beitrag = Beitrag aus (laufend + Weihnachtsgeld) minus Beitrag aus dem laufenden
+    //    Entgelt. Im Übergangsbereich gilt die Formel, solange der Monat 2.000 € nicht übersteigt;
+    //    darüber die allgemeinen Regeln (Gemeinsames Rundschreiben vom 20.12.2022, Ziffer 4.3.3.3).
     let wgKV: number;
-    if (eingabe.kvArt === 'privat') {
-      wgKV = 0; // PKV: kein zusätzlicher Beitrag
+    let wgRV: number;
+    let wgAV: number;
+    let wgPV: number;
+    if (svZone === 'regulaer') {
+      const restKv = Math.max(0, 12 * BBG_KV - 12 * Math.min(brutto, BBG_KV));
+      const restRv = Math.max(0, 12 * bbgRv - 12 * Math.min(brutto, bbgRv));
+      const kvBasisWg = Math.min(wgBrutto, restKv);
+      const rvBasisWg = Math.min(wgBrutto, restRv);
+      wgKV = eingabe.kvArt === 'privat'
+        ? 0 // PKV: kein zusätzlicher Beitrag
+        : Math.round(kvBasisWg * 0.073 * 100) / 100 + Math.round(kvBasisWg * (eingabe.kvZusatzbeitrag / 200) * 100) / 100;
+      wgRV = eingabe.rvBefreit ? 0 : Math.round(rvBasisWg * 0.093 * 100) / 100;
+      wgAV = Math.round(rvBasisWg * 0.013 * 100) / 100;
+      // PV auf WG: gleiche Staffel nach § 55 Abs. 3 SGB XI wie beim Monatsbrutto
+      wgPV = Math.round(kvBasisWg * pvSatz * 100) / 100;
     } else {
-      const kvBrutto = Math.min(wgBrutto, Math.max(0, BBG_KV * 12 - brutto * 12) > 0 ? wgBrutto : Math.max(0, BBG_KV - brutto));
-      const kvBasis = Math.round(kvBrutto * 0.073 * 100) / 100;
-      const kvZusatz = Math.round(kvBrutto * (eingabe.kvZusatzbeitrag / 200) * 100) / 100;
-      wgKV = kvBasis + kvZusatz;
+      const monat = brutto + wgBrutto;
+      const zoneMonat: SvZone = svZone === 'uebergang' && monat > MIDIJOB_OBERGRENZE_MONAT ? 'regulaer' : svZone;
+      const mit = anSvMonat(monat, zoneMonat, eingabe, pvSatz, pvZuschlag);
+      const r = (x: number) => Math.round(x * 100) / 100;
+      wgKV = eingabe.kvArt === 'privat' ? 0 : r(mit.kv - lfd.kv);
+      wgRV = r(mit.rv - lfd.rv);
+      wgAV = r(mit.av - lfd.av);
+      wgPV = r(mit.pv - lfd.pv);
     }
-
-    const wgRvBrutto = Math.min(wgBrutto, Math.max(0, bbgRv - brutto));
-    const wgRV = eingabe.rvBefreit ? 0 : Math.round(wgRvBrutto * 0.093 * 100) / 100;
-
-    const wgAvBrutto = Math.min(wgBrutto, Math.max(0, bbgRv - brutto));
-    const wgAV = Math.round(wgAvBrutto * 0.013 * 100) / 100;
-
-    // PV auf WG: gleiche Staffel nach § 55 Abs. 3 SGB XI wie beim Monatsbrutto
-    const wgPvBrutto = Math.min(wgBrutto, Math.max(0, BBG_KV - brutto));
-    const wgPV = Math.round(wgPvBrutto * pvSatz * 100) / 100;
 
     const wgAbzuege = wgLohnsteuer + wgSolidaritaet + wgKirchensteuer + wgKV + wgRV + wgAV + wgPV;
     const wgNetto = Math.round((wgBrutto - wgAbzuege) * 100) / 100;
@@ -301,6 +304,68 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     nettoProStunde: Math.round(nettoMonat / 160 * 100) / 100,
     abzuegeProzent: brutto > 0 ? Math.round((gesamtAbzuege / brutto) * 1000) / 10 : 0,
     weihnachtsgeld: weihnachtsgeldErgebnis,
+    svZone,
+  };
+}
+
+function bestimmeSvZone(regelEntgelt: number, steuerklasse: number): SvZone {
+  if (regelEntgelt <= 0) return 'regulaer';
+  if (regelEntgelt <= getMinijobGrenzeMonat(SV_RECHENSTAND)) return 'minijob';
+  if (steuerklasse !== 6 && regelEntgelt <= MIDIJOB_OBERGRENZE_MONAT) return 'uebergang';
+  return 'regulaer';
+}
+
+/**
+ * W167: Arbeitnehmeranteile eines Monats für ein Entgelt in einer festen Zone (laufender Monat oder
+ * Auszahlungsmonat des Weihnachtsgelds).
+ *  - minijob: nur RV, Gesamtbeitrag 18,6 % aus mindestens 175 € minus 15 % Arbeitgeberanteil.
+ *  - uebergang: BE_AN je Zweig, PV-Zuschlag aus BE_gesamt. Liegt das Monatsentgelt unter der
+ *    Untergrenze (nur möglich, wenn das Weihnachtsgeld die Zone hebt), gilt BE = Entgelt × F, und der
+ *    Arbeitnehmer trägt nur den PV-Zuschlag (Gemeinsames Rundschreiben vom 20.12.2022, Ziffer 4.3.3.2).
+ *  - regulaer: halbe Sätze bis zur monatlichen BBG.
+ */
+function anSvMonat(
+  ae: number,
+  zone: SvZone,
+  eingabe: BruttoNettoEingabe,
+  pvSatz: number,
+  pvZuschlag: number,
+): { kv: number; rv: number; av: number; pv: number } {
+  const r = (x: number) => Math.round(x * 100) / 100;
+  const privat = eingabe.kvArt === 'privat';
+  const kvHalb = (basis: number) => r(basis * 0.073) + r(basis * (eingabe.kvZusatzbeitrag / 200));
+  if (ae <= 0) return { kv: privat ? eingabe.kvPrivatBeitrag : 0, rv: 0, av: 0, pv: 0 };
+
+  if (zone === 'minijob') {
+    const rv = eingabe.rvBefreit
+      ? 0
+      : Math.max(0, r(Math.max(ae, RV_MINDESTBEMESSUNG_MINIJOB) * 0.186) - r(ae * 0.15));
+    return { kv: privat ? eingabe.kvPrivatBeitrag : 0, rv, av: 0, pv: 0 };
+  }
+
+  if (zone === 'uebergang' && ae < getMidijobUntergrenze(SV_RECHENSTAND)) {
+    const be = r(ae * getAktuelleMidijobParameter(SV_RECHENSTAND).faktorF);
+    return { kv: privat ? eingabe.kvPrivatBeitrag : 0, rv: 0, av: 0, pv: r(be * pvZuschlag) };
+  }
+
+  if (zone === 'uebergang' && istImUebergangsbereich(ae, SV_RECHENSTAND)) {
+    const beAn = r(berechneBemessungsgrundlageAN(ae, SV_RECHENSTAND));
+    const beGesamt = r(berechneBemessungsgrundlageGesamt(ae, SV_RECHENSTAND));
+    return {
+      kv: privat ? eingabe.kvPrivatBeitrag : kvHalb(Math.min(beAn, BBG_KV)),
+      rv: eingabe.rvBefreit ? 0 : r(Math.min(beAn, BBG_RV) * 0.093),
+      av: r(Math.min(beAn, BBG_RV) * 0.013),
+      pv: r(beAn * (pvSatz - pvZuschlag)) + r(beGesamt * pvZuschlag),
+    };
+  }
+
+  const kvBasis = Math.min(ae, BBG_KV);
+  const rvBasis = Math.min(ae, BBG_RV);
+  return {
+    kv: privat ? eingabe.kvPrivatBeitrag : kvHalb(kvBasis),
+    rv: eingabe.rvBefreit ? 0 : r(rvBasis * 0.093),
+    av: r(rvBasis * 0.013),
+    pv: r(kvBasis * pvSatz),
   };
 }
 
@@ -312,16 +377,22 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
  *    minus Arbeitnehmeranteil je Zweig aus BE_AN; der PV-Zuschlag für Kinderlose belastet nur den
  *    Arbeitnehmer (§ 20 Abs. 2a SGB IV; DRV, Übergangsbereich). Prüfanker lohn-info.de: AE 1.000 €,
  *    Zusatzbeitrag 3,0 % → 241,62 €.
- *  - sonst: halbe Beitragssätze bis zur jeweiligen Beitragsbemessungsgrenze.
+ *  - sonst: halbe Beitragssätze bis zur jeweiligen Beitragsbemessungsgrenze; ebenso bei Steuerklasse VI
+ *    (W167, Zweitjob: alle versicherungspflichtigen Entgelte zählen zusammen, § 20 Abs. 2 SGB IV).
  */
-export function berechneArbeitgeberSvMonat(bruttoMonat: number, kvZusatzbeitragProzent: number): number {
+export function berechneArbeitgeberSvMonat(
+  bruttoMonat: number,
+  kvZusatzbeitragProzent: number,
+  steuerklasse?: number,
+): number {
   const r = (x: number) => Math.round(x * 100) / 100;
   if (bruttoMonat <= 0) return 0;
   if (bruttoMonat <= getMinijobGrenzeMonat(SV_RECHENSTAND)) {
     return r(bruttoMonat * 0.13) + r(bruttoMonat * 0.15);
   }
   const halbKv = KV_BASISSATZ_AN_2026 + kvZusatzbeitragProzent / 200;
-  if (istImUebergangsbereich(bruttoMonat, SV_RECHENSTAND)) {
+  // W167: Steuerklasse VI (Zweitjob) ohne Übergangsbereich, wie in berechneBruttoNetto.
+  if (steuerklasse !== 6 && istImUebergangsbereich(bruttoMonat, SV_RECHENSTAND)) {
     const g = r(berechneBemessungsgrundlageGesamt(bruttoMonat, SV_RECHENSTAND));
     const a = r(berechneBemessungsgrundlageAN(bruttoMonat, SV_RECHENSTAND));
     const kv = r(g * halbKv) * 2 - (r(a * KV_BASISSATZ_AN_2026) + r(a * (kvZusatzbeitragProzent / 200)));

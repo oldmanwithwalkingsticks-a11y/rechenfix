@@ -32,7 +32,9 @@ import {
 } from '@/lib/berechnungen/sv-parameter';
 import { pvAnteilAn2026 } from '@/lib/berechnungen/pflegeversicherung';
 
-type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
+// W167: ohne Steuerklasse VI. Beim Zweitjob zählen für den Übergangsbereich alle versicherungspflichtigen
+// Entgelte zusammen (§ 20 Abs. 2 Halbsatz 2 SGB IV); mit Hauptjob über 2.000 € gibt es keinen Midijob.
+type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V';
 
 // Die Untergrenze kommt bei jedem Render aus getMidijobUntergrenze(). W166: zum Stichtag
 // SV_RECHENSTAND aus brutto-netto.ts, damit Grenze, Faktor F und Beitragssätze aus demselben
@@ -45,8 +47,8 @@ const KV_AN_GESAMT = KV_BASISSATZ_AN_2026 + KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_202
 const SV_AN_OHNE_PV = RV_SATZ_AN_2026 + KV_AN_GESAMT + AV_SATZ_AN_2026;
 
 // Mapping Römisch → Numerisch für berechneBruttoNetto (§ 39b EStG PAP).
-const KLASSE_NUM: Record<Steuerklasse, 1 | 2 | 3 | 4 | 5 | 6> = {
-  I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6,
+const KLASSE_NUM: Record<Steuerklasse, 1 | 2 | 3 | 4 | 5> = {
+  I: 1, II: 2, III: 3, IV: 4, V: 5,
 };
 
 export default function MidijobRechner() {
@@ -151,7 +153,7 @@ export default function MidijobRechner() {
           Steuerklasse
         </h2>
         <div className="flex flex-wrap gap-2">
-          {(['I', 'II', 'III', 'IV', 'V', 'VI'] as const).map(k => (
+          {(['I', 'II', 'III', 'IV', 'V'] as const).map(k => (
             <button
               key={k}
               onClick={() => setKlasse(k)}
@@ -161,6 +163,9 @@ export default function MidijobRechner() {
             </button>
           ))}
         </div>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+          Steuerklasse VI fehlt bewusst: Beim Zweitjob zählen für den Übergangsbereich alle versicherungspflichtigen Jobs zusammen (§ 20 Abs. 2 SGB IV). Liegt der Hauptjob schon über 2.000 €, gibt es keinen Midijob-Vorteil. Für den Zweitjob rechnet der Brutto-Netto-Rechner mit Steuerklasse 6.
+        </p>
       </div>
 
       {/* 3: Kinder unter 25 (für PV-Kinderabschlag und Kinderlos-Zuschlag) */}
@@ -330,7 +335,7 @@ export default function MidijobRechner() {
           <p className="text-xs text-blue-800 dark:text-blue-300 leading-relaxed">
             <strong>Volle SV-Ansprüche trotz reduzierter Beiträge:</strong> Im Übergangsbereich
             zahlen Sie weniger AN-SV, behalten aber die <strong>vollen Ansprüche</strong> auf
-            Krankengeld, Arbeitslosengeld und Rente. Die Rentenpunkte werden seit Juli 2019
+            Krankengeld, Arbeitslosengeld und Rente (§ 47 Abs. 1 SGB V, § 151 Abs. 1 SGB III). Die Rentenpunkte werden seit Juli 2019
             aus dem tatsächlichen Arbeitsentgelt berechnet, nicht aus einer der reduzierten
             Bemessungsgrundlagen (§ 70 Abs. 1a SGB VI). Der Arbeitgeber trägt den Differenzbetrag zwischen
             Gesamtbeitrag und Ihrem AN-Anteil.

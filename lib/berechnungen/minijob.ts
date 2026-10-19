@@ -61,6 +61,20 @@ function rund2(n: number): number {
   return Math.round(n * 100) / 100;
 }
 
+// W167: Umlagen und Unfallversicherung 2026 laut Minijob-Zentrale („Minijob-Beiträge 2026", 16.12.2025):
+// U1 0,80 % (gesenkt von 1,1 %), U2 0,22 %, Insolvenzgeldumlage 0,15 % (nur gewerblich),
+// Unfallversicherung im Privathaushalt 1,6 %. Gewerblich kommt der Beitrag zur Berufsgenossenschaft
+// dazu; er hängt von Branche und Gefahrtarif ab und ist hier nicht enthalten.
+const UMLAGE_U1_2026 = 0.008;
+const UMLAGE_U2_2026 = 0.0022;
+const INSOLVENZGELDUMLAGE_2026 = 0.0015;
+const UNFALLVERSICHERUNG_PRIVATHAUSHALT_2026 = 0.016;
+// RV im Minijob: voller Beitrag 18,6 % (§ 158 SGB VI), mindestens aus 175 € (§ 163 Abs. 8 SGB VI).
+// Der Arbeitgeber trägt 15 % (gewerblich) bzw. 5 % (Privathaushalt) des tatsächlichen Entgelts, den
+// Rest der Minijobber (§ 168 Abs. 1 Nr. 1b und 1c SGB VI): ab 175 € also 3,6 % bzw. 13,6 %.
+const RV_BEITRAGSSATZ_2026 = 0.186;
+const RV_MINDESTBEMESSUNG = 175;
+
 function getStatus(verdienst: number): JobStatus {
   if (verdienst <= MINIJOB_GRENZE) return 'minijob';
   if (verdienst <= MIDIJOB_OBERGRENZE) return 'midijob';
@@ -78,13 +92,13 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
     agRv = rund2(verdienst * 0.15);   // 15% RV
     agKv = rund2(verdienst * 0.13);   // 13% KV
     agLst = rund2(verdienst * 0.02);  // 2% pauschale Lohnsteuer
-    agUml = rund2(verdienst * 0.016); // U1 + U2 + Insolvenz
+    agUml = rund2(rund2(verdienst * UMLAGE_U1_2026) + rund2(verdienst * UMLAGE_U2_2026) + rund2(verdienst * INSOLVENZGELDUMLAGE_2026));
   } else {
     agRv = rund2(verdienst * 0.05);           // 5% RV
     agKv = rund2(verdienst * 0.05);           // 5% KV
     agLst = rund2(verdienst * 0.02);          // 2% Pauschsteuer
-    agUml = rund2(verdienst * 0.016);         // U1/U2
-    agUnfall = rund2(verdienst * 0.0072);     // 0,72% Unfallversicherung
+    agUml = rund2(rund2(verdienst * UMLAGE_U1_2026) + rund2(verdienst * UMLAGE_U2_2026)); // keine Insolvenzgeldumlage
+    agUnfall = rund2(verdienst * UNFALLVERSICHERUNG_PRIVATHAUSHALT_2026);
   }
 
   const agAbgabenGesamt = rund2(agRv + agKv + agLst + agUml + agUnfall);
@@ -92,9 +106,9 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
   const agAufschlagProzent = verdienst > 0 ? rund2((agAbgabenGesamt / verdienst) * 100) : 0;
 
   // === ARBEITNEHMER-ABGABEN ===
-  // AN-Eigenanteil zur RV: 18,6% gesamt − 15% AG-Pauschale = 3,6%
-  const rvEigenanteil = (status === 'minijob' && rentenversicherungspflicht)
-    ? rund2(verdienst * 0.036)
+  // AN-Eigenanteil zur RV: voller Beitrag (mindestens aus 175 €) minus AG-Pauschale (W167)
+  const rvEigenanteil = (status === 'minijob' && rentenversicherungspflicht && verdienst > 0)
+    ? Math.max(0, rund2(rund2(Math.max(verdienst, RV_MINDESTBEMESSUNG) * RV_BEITRAGSSATZ_2026) - agRv))
     : 0;
 
   const nettoAN = rund2(verdienst - rvEigenanteil);

@@ -29,7 +29,7 @@ import {
 } from '../lib/berechnungen/midijob-parameter';
 import { berechneLohnsteuerJahr } from '../lib/berechnungen/lohnsteuer';
 import { berechneSoli } from '../lib/berechnungen/einkommensteuer';
-import { KV_BASISSATZ_AN_2026, RV_SATZ_AN_2026, AV_SATZ_AN_2026, berechneBruttoNetto } from '../lib/berechnungen/brutto-netto';
+import { KV_BASISSATZ_AN_2026, RV_SATZ_AN_2026, AV_SATZ_AN_2026, berechneBruttoNetto, berechneArbeitgeberSvMonat } from '../lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 } from '../lib/berechnungen/sv-parameter';
 import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from '../lib/berechnungen/pflegeversicherung';
 
@@ -332,6 +332,56 @@ cases.push({
     name: 'BN-REG AE=2.000, ZB 2,9 %, kinderlos: AN-SV = 435,00 € (Ende Übergangsbereich)',
     actual: bn(2000, 0, { kvZusatzbeitrag: 2.9 }).sozialabgabenGesamt, expected: 435.00, tol: 0.001,
     quelle: '2.000 × 21,75 %',
+  });
+}
+
+// W167: Sonderfälle. Mindestbemessung 175 € im Minijob, Steuerklasse VI ohne Übergangsbereich,
+// Weihnachtsgeld in der Jahresbetrachtung und im Auszahlungsmonat, Arbeitgeberanteil bei Steuerklasse VI.
+{
+  const bn = (b: number, extra: Partial<Parameters<typeof berechneBruttoNetto>[0]> = {}) =>
+    berechneBruttoNetto({
+      bruttoMonat: b, steuerklasse: 1, kirchensteuer: false, kirchensteuersatz: 9,
+      kinderfreibetraege: 0, kinderUnter25: 0, bundesland: '', kvArt: 'gesetzlich',
+      kvZusatzbeitrag: 2.9, kvPrivatBeitrag: 0, rvBefreit: false, abrechnungszeitraum: 'monat', ...extra,
+    });
+  const wgSv = (x: ReturnType<typeof berechneBruttoNetto>) => {
+    const w = x.weihnachtsgeld!;
+    return Math.round((w.krankenversicherung + w.rentenversicherung + w.arbeitslosenversicherung + w.pflegeversicherung) * 100) / 100;
+  };
+  cases.push({
+    name: 'W167-MINI AE=150: AN-RV = 10,05 € (Mindestbemessung 175 €)',
+    actual: bn(150).sozialabgabenGesamt, expected: 10.05, tol: 0.001,
+    quelle: '§ 163 Abs. 8 SGB VI; Minijob-Zentrale FAQ 54: 32,55 − 22,50',
+  });
+  cases.push({
+    name: 'W167-STKL6 AE=1.500, Steuerklasse VI: AN-SV = 326,25 € (volle Sätze)',
+    actual: bn(1500, { steuerklasse: 6 }).sozialabgabenGesamt, expected: 326.25, tol: 0.001,
+    quelle: '§ 20 Abs. 2 Halbsatz 2 SGB IV: alle Entgelte zusammen',
+  });
+  cases.push({
+    name: 'W167-STKL6 AE=1.500, Steuerklasse VI: AG-SV = 317,25 €',
+    actual: berechneArbeitgeberSvMonat(1500, 2.9, 6), expected: 317.25, tol: 0.001,
+    quelle: 'halbe Sätze ohne Kinderlosenzuschlag: 1.500 × 21,15 %',
+  });
+  cases.push({
+    name: 'W167-WG AE=1.900 + WG 2.200: Zone regulär, laufend AN-SV = 413,25 €',
+    actual: bn(1900, { weihnachtsgeld: 2200 }).sozialabgabenGesamt, expected: 413.25, tol: 0.001,
+    quelle: 'Rundschreiben 20.12.2022, 4.2.1: (1.900 × 12 + 2.200) ÷ 12 = 2.083,33 €',
+  });
+  cases.push({
+    name: 'W167-WG AE=1.500 + WG 1.500: Midijob bleibt, WG-SV = 652,50 − 280,17',
+    actual: wgSv(bn(1500, { weihnachtsgeld: 1500 })), expected: 372.33, tol: 0.001,
+    quelle: 'Auszahlungsmonat 3.000 € > 2.000 €: allgemeine Regeln (4.3.3.3)',
+  });
+  cases.push({
+    name: 'W167-WG AE=1.000 + WG 1.000: Monat 2.000 € im Übergangsbereich, WG-SV = 309,67 €',
+    actual: wgSv(bn(1000, { weihnachtsgeld: 1000 })), expected: 309.67, tol: 0.001,
+    quelle: '435,00 aus 2.000 € minus 125,33 aus 1.000 €',
+  });
+  cases.push({
+    name: 'W167-WG AE=550 + WG 500: Minijob bleibt, WG-RV = 37,80 − 19,80',
+    actual: wgSv(bn(550, { weihnachtsgeld: 500 })), expected: 18.00, tol: 0.001,
+    quelle: '550 × 12 + 500 = 7.100 € ≤ 7.236 €; Monat 1.050 €: 195,30 − 157,50',
   });
 }
 

@@ -624,12 +624,17 @@ export default function BruttoNettoRechner() {
                 </tr>
               </tbody>
             </table>
-            {/* W163: Hinweis für Minijob und Übergangsbereich (Sozialabgaben nach § 8 / § 20 Abs. 2a SGB IV) */}
+            {/* W163: Hinweis für Minijob und Übergangsbereich (Sozialabgaben nach § 8 / § 20 Abs. 2a SGB IV).
+                W167: nach der Zone der Berechnung (Weihnachtsgeld zählt mit einem Zwölftel, Steuerklasse 6 ohne Übergangsbereich). */}
             {ergebnis.bruttoMonat > 0 && ergebnis.bruttoMonat <= MIDIJOB_OBERGRENZE_MONAT && (
               <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
-                {ergebnis.bruttoMonat <= getMinijobGrenzeMonat(SV_RECHENSTAND)
-                  ? 'Minijob: Sie zahlen nur den Eigenanteil zur Rentenversicherung (3,6 %), bei Befreiung nichts. Kranken-, Pflege- und Arbeitslosenversicherung trägt der Arbeitgeber pauschal. Die Lohnsteuer ist hier nach Steuerklasse gerechnet; oft zahlt stattdessen der Arbeitgeber 2 % Pauschalsteuer.'
-                  : 'Midijob (Übergangsbereich bis 2.000 €): Ihre Sozialabgaben werden auf eine reduzierte Bemessungsgrundlage berechnet (§ 20 Abs. 2a SGB IV), den Rest trägt der Arbeitgeber. Die Aufteilung zeigt der Midijob-Rechner.'}
+                {ergebnis.svZone === 'minijob'
+                  ? 'Minijob: Sie zahlen nur den Eigenanteil zur Rentenversicherung (3,6 %; unter 175 € Verdienst mehr, weil der Beitrag mindestens aus 175 € berechnet wird), bei Befreiung nichts. Kranken-, Pflege- und Arbeitslosenversicherung trägt der Arbeitgeber pauschal. Die Lohnsteuer ist hier nach Steuerklasse gerechnet; oft zahlt stattdessen der Arbeitgeber 2 % Pauschalsteuer.'
+                  : ergebnis.svZone === 'uebergang'
+                  ? 'Midijob (Übergangsbereich bis 2.000 €): Ihre Sozialabgaben werden auf eine reduzierte Bemessungsgrundlage berechnet (§ 20 Abs. 2a SGB IV), den Rest trägt der Arbeitgeber. Die Aufteilung zeigt der Midijob-Rechner.'
+                  : steuerklasse === 6
+                  ? `Steuerklasse 6 (Zweitjob): Für den Übergangsbereich zählen alle versicherungspflichtigen Jobs zusammen (§ 20 Abs. 2 SGB IV). Der Rechner nimmt an, dass Ihr Hauptjob die Summe über 2.000 € hebt, und rechnet die vollen Sätze. Ein erster Minijob bis ${getMinijobGrenzeMonat(SV_RECHENSTAND)} € neben dem Hauptjob bleibt ein Minijob.`
+                  : 'Mit dem Weihnachtsgeld liegt Ihr regelmäßiger Verdienst über 2.000 € im Monat (Jahresverdienst geteilt durch 12). Deshalb gilt der Übergangsbereich nicht, auch nicht in den übrigen Monaten, und es gelten die vollen Sätze.'}
               </p>
             )}
           </div>
