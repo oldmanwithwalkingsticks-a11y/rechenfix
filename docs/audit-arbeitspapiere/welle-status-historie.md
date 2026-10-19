@@ -6,6 +6,115 @@
 
 ---
 
+## 19.10.2026 — Welle 167: Minijob und Übergangsbereich, Sonderfälle — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Offene Punkte 2 (Weihnachtsgeld), 3 (Steuerklasse VI) und 7 (175-€-Mindestbemessung) aus dem
+Historienblock von Welle 163, dazu Befunde aus der Recherche vom 19.10.2026. Der Punkt „Krankengeld/ALG
+unverifiziert“ ist mit § 47 Abs. 1 Satz 8 SGB V und § 151 Abs. 1 SGB III belegt.
+
+**Befunde:**
+1. **Weihnachtsgeld im Mini- und Midijob** (Punkt 2): `berechneBruttoNetto` belastete das Weihnachtsgeld immer
+   mit vollen Sätzen.
+   - Zone: Ein Weihnachtsgeld, das sicher jedes Jahr kommt, zählt mit einem Zwölftel zum regelmäßigen Entgelt
+     (Geringfügigkeits-Richtlinien vom 05.01.2026, B 2.2.1; Rundschreiben Übergangsbereich vom 20.12.2022,
+     Ziffer 4.2.1). Beispiel 1.900 € × 12 + 2.200 € = 2.083,33 € im Monat: kein Midijob, auch nicht in den
+     übrigen Monaten.
+   - Auszahlungsmonat: Die Einmalzahlung gehört in den Monat der Zahlung (§ 23a Abs. 1 Satz 3 SGB IV); im
+     Übergangsbereich gilt die Formel, solange der Monat 2.000 € nicht übersteigt, darüber die allgemeinen
+     Regeln (Ziffer 4.3.3.3); im Minijob zählt nur die RV.
+   - Unter der Untergrenze bei Zone Übergangsbereich: BE = Entgelt × F, der Arbeitnehmer zahlt nur den
+     PV-Zuschlag (Ziffer 4.3.3.2).
+   - Regulär, zweiter Fehler: Die KV nahm beim Weihnachtsgeld die Jahres-BBG, PV, RV und AV die Monats-BBG. Bei
+     3.500 € + 3.500 € kam die PV auf 55,50 € statt 84,00 €. Richtig ist die anteilige Jahres-BBG (§ 23a Abs. 3
+     SGB IV), bei Auszahlung im Dezember Jahres-BBG minus laufendes Jahresentgelt.
+2. **Steuerklasse VI** (Punkt 3): Beim Zweitjob zählen für den Übergangsbereich alle versicherungspflichtigen
+   Entgelte zusammen (§ 20 Abs. 2 Halbsatz 2 SGB IV); ein erster Minijob neben dem Hauptjob bleibt Minijob
+   (§ 8 Abs. 2 Satz 1 SGB IV). 1.500 € in Klasse VI kosten den Arbeitnehmer jetzt 326,25 € statt 280,17 €,
+   den Arbeitgeber 317,25 €.
+3. **Mindestbemessung 175 €** (Punkt 7): Im Minijob ist die beitragspflichtige Einnahme mindestens 175 € (§ 163
+   Abs. 8 SGB VI); voller Beitrag mindestens 32,55 €, der Arbeitgeber zahlt 15 % bzw. 5 % des tatsächlichen
+   Entgelts, den Rest der Minijobber. 150 € → Arbeitgeber 22,50 €, Minijobber 10,05 € statt 5,40 €
+   (Minijob-Zentrale, FAQ 54).
+4. **Minijob im Privathaushalt und Umlagen** (`minijob.ts`): Eigenanteil RV im Privathaushalt 13,6 % statt
+   3,6 %; Umlagen 2026 U1 0,80 % (gesenkt von 1,1 %), U2 0,22 %, Insolvenzgeldumlage 0,15 % nur gewerblich
+   statt pauschal 1,6 % in beiden Arten; Unfallversicherung im Privathaushalt 1,6 % statt 0,72 %. Bei 603 €:
+   gewerblich Arbeitgeber-Gesamtkosten 790,95 € statt 793,55 € (+31,17 % statt +31,6 %), Umlagen 7,05 € statt
+   9,65 €; Privathaushalt Aufschlag 14,62 % statt 14,3 %, Eigenanteil 82,01 € statt 21,71 €, Netto 520,99 €.
+5. **Texte:**
+   - Midijob: „der Arbeitgeber gleicht die Differenz aus“ als Begründung der vollen Entgeltpunkte (regelt das
+     Gesetz); „Mutterschaftsgeld … am tatsächlichen Bruttolohn“ (richtet sich nach dem Nettolohn, § 24i SGB V);
+     „Vor 2022 …“ (richtig: bis Juni 2019, in der Gleitzone, mit Verzichtsmöglichkeit); Belege für Krankengeld
+     und ALG ergänzt.
+   - Minijob: Befreiung „lässt sich nicht widerrufen“ (seit 01.07.2026 einmal aufhebbar, § 6 Abs. 6 SGB VI);
+     zweiter Minijob „voll beitragspflichtig“ (die AV bleibt frei, § 27 Abs. 2 SGB III); gelegentliches
+     Überschreiten „solange der Jahreswert gewahrt bleibt“ (höchstens zwei Monate, je bis zur Höhe der Grenze,
+     § 8 Abs. 1b SGB IV); „≈ 633 €“ für 2027 ohne „≈“; „keine (außer 3,6 % RV optional)“ zweimal umgedreht;
+     „(~20 %)“ → rund 21 %; „bei Mindestlohn max. 10,8 Std./Woche“ → 10,0.
+
+**Belege** (aus dem Prompt, in der Chat-Sitzung vom 19.10.2026 geprüft, nicht in diesem Lauf; die Zahlen
+bestätigen hier Probe, Lib-Prüfung und die Verify-Skripte):
+- § 8 Abs. 1b und Abs. 2, § 20 Abs. 2, § 23a SGB IV.
+- § 6 Abs. 6, § 163 Abs. 8, § 168 Abs. 1 Nr. 1b und 1c SGB VI.
+- § 24i und § 47 SGB V.
+- § 27 Abs. 2 und § 151 SGB III.
+- Geringfügigkeits-Richtlinien vom 05.01.2026.
+- Gemeinsames Rundschreiben Übergangsbereich vom 20.12.2022, Ziffern 4.2.1 und 4.3.3.
+- Minijob-Zentrale: Magazin vom 16.12.2025 (Umlagen) und vom 12.01.2026 (Aufhebung der Befreiung), FAQ 54.
+
+**Änderungen** (42 Ersetzungen in 8 Dateien, Vorlage `_lokal/welle167-minijob-midijob-sonderfaelle.mjs`,
+nicht committet; Rechenprobe `_lokal/welle167-probe.mjs`, Lib-Prüfung `_lokal/welle167-lib.mts`):
+- **`lib/berechnungen/brutto-netto.ts`, 11:** Typ `SvZone` und Ergebnisfeld `svZone`; `bestimmeSvZone`
+  (regelmäßiges Entgelt = Brutto + Weihnachtsgeld ÷ 12, Klasse VI ohne Übergangsbereich); `anSvMonat` mit den
+  Arbeitnehmeranteilen je Zone (Minijob mit 175-€-Regel, Übergangsbereich mit Ziffer 4.3.3.2 unter der
+  Untergrenze, regulär); Weihnachtsgeld regulär mit anteiliger Jahres-BBG, sonst Beitrag (laufend + WG) minus
+  Beitrag (laufend); `RV_MINDESTBEMESSUNG_MINIJOB = 175`; `berechneArbeitgeberSvMonat(…, steuerklasse?)` ohne
+  Übergangsbereich bei Klasse VI. Lohnsteuer auf das Weihnachtsgeld unverändert.
+- **`lib/berechnungen/minijob.ts`, 4:** Umlagen U1 0,8 %, U2 0,22 %, Insolvenzgeld 0,15 % (nur gewerblich) und
+  Unfallversicherung Privathaushalt 1,6 % als Konstanten; Eigenanteil = voller Beitrag 18,6 % (mindestens aus
+  175 €) minus AG-Pauschale.
+- **`components/rechner/BruttoNettoRechner.tsx`, 1:** Hinweis nach `svZone`, neue Texte für Klasse VI und für
+  „Weihnachtsgeld hebt über 2.000 €“.
+- **`components/rechner/MidijobRechner.tsx`, 5:** Steuerklassen I bis V, Satz „Steuerklasse VI fehlt bewusst …“;
+  Paragrafen für Krankengeld und ALG im Info-Kasten.
+- **`components/rechner/MinijobRechner.tsx`, 3:** Zeilen „RV-Eigenanteil (3,6 %)“ bzw. „(13,6 %)“, Umlagen je
+  Art, „Unfallversicherung (1,6 %)“.
+- **`components/rechner/NettolohnOptimiererRechner.tsx`, 1:** gibt die Steuerklasse an
+  `berechneArbeitgeberSvMonat`.
+- **`lib/rechner-config/finanzen.ts`, 15:** Minijob-Block mit Beispiel (793,55 → 790,95 €, +31,6 → +31,2 %,
+  10,8 → 10,0 Std./Woche), Kommentar, Tabellen (gewerblich 15/13/2/1,6 → 15/13/2/1,17; Privathaushalt
+  5/5/2/1,6/0,72 → 5/5/2/1,02/1,6; 14,3 → 14,6 %; Umlagen 9,65 → 7,05 €; AG-Abgaben 190,55 → 187,95 €),
+  Statistik („≈ 633 €“ und „≈ 7.596 €“ ohne „≈“, Bekanntmachung im Bundesanzeiger), FAQ und RV-Abschnitt
+  (13,6 % / 82,01 € im Privathaushalt, Aufhebung der Befreiung seit 01.07.2026, zweiter Minijob ohne AV,
+  Überschreiten nach § 8 Abs. 1b); Midijob-Absatz zu den Leistungen; `letzteAktualisierung` von Brutto-Netto-
+  (`2026-05-21`) und Minijob-Rechner (`2026-06-17`) → `2026-10-19`.
+- **`scripts/verify-midijob-p1.ts`, 2:** sieben neue Fälle W167-… (34 → 41).
+
+**Bewusst nicht geändert:** `midijob-parameter.ts`, `midijob-uebergang.ts`; Kurzarbeitergeld (Welle 168);
+Nebenjob-Rechner (Welle 171); `lib/social/` und `public/social-posts/` (Minijob-Kachel in Welle 169); die
+Lohnsteuer auf das Weihnachtsgeld. Der Beitrag zur Berufsgenossenschaft im gewerblichen Minijob bleibt nicht
+enthalten, die Texte sagen das jetzt.
+
+**Gates:**
+- Phase 0 an `cedce5f`: `git status` leer, oben im Log `cedce5f` und `bae1048` (Welle 166).
+  `SV_RECHENSTAND` `brutto-netto.ts:9`; `svZone` keine Ausgabe; `verdienst * 0.016` `minijob.ts:2`; „793,55“
+  4; „RV optional“ 2.
+- Phase 1: „OK — 42 Ersetzungen in 8 Dateien.“, Exit 0; geändert genau die 8 Dateien.
+- Phase 2: Probe 20× OK, Exit 0; Lib-Prüfung 18× OK, Exit 0 (darunter „3.500 € ohne WG: unverändert:
+  2.333,25“); `verify-midijob-p1` 41/41; `verify-bruttonetto-zuschlaege` 6552 Rasterfälle ohne Abweichung;
+  `verify-steuerklassen-vergleich` 21/21. Zusätzlich als Regressionsprobe die Lib-Prüfungen von Welle 165
+  (15× OK) und Welle 166 (10× OK). Greps: `svZone` `BruttoNettoRechner.tsx:2` und `brutto-netto.ts:6`;
+  `RV_MINDESTBEMESSUNG_MINIJOB` `brutto-netto.ts:2`; `verdienst * 0.016`, `0.0072`, „793,55“, „RV optional“,
+  „lässt sich nicht widerrufen“, „Vor 2022“ und `letzteAktualisierung: 'HEUTE'` keine Ausgabe; „790,95“ 4;
+  „Steuerklasse VI fehlt bewusst“ `MidijobRechner.tsx:1`.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen
+  (affiliate-stats, KaffeeWasserRechner); `check-metadescription` und `check-jahreswerte` grün. Im gebauten
+  HTML: `/finanzen/minijob-rechner` „790,95“ 6×, „13,6 %“ 4×, „793,55“ und „0,72“ fehlen;
+  `/finanzen/midijob-rechner` „Steuerklasse VI fehlt bewusst“ 1×, „§ 24i SGB V“ 2×, „Vor 2022“ fehlt.
+
+**Commits:** A `3a8b936` (die 8 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 166: Übergangsbereich einheitlich — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Offene Punkte 4, 5, 6 und 9 aus dem Historienblock von Welle 163, dazu drei Befunde beim Bau der
