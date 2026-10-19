@@ -25,11 +25,23 @@ Aufruf:
   python scripts/social-image-builder.py
   python scripts/social-image-builder.py --slug bmi-rechner   (nur ein Slug)
   python scripts/social-image-builder.py --skip-existing      (nur fehlende)
+  python scripts/social-image-builder.py --from-config --stale   (nur veraltete, Welle 172)
+  python scripts/social-image-builder.py --from-config --check   (nur melden, Exit 1 bei veralteten)
+  (jeweils mit --vertical für die TikTok-Hochformate)
+
+Manifest (Welle 172): lib/social/kacheln-manifest.json hält je Bild die
+Eingaben (Emoji, Eyebrow, Titelzeilen, Headline, Farben, Layout-Kennung)
+und den SHA-256 der Datei. Jeder Renderlauf trägt dort ein, was er
+geschrieben hat. --stale und --check vergleichen Manifest, Datei und die
+aktuellen Eingaben aus captions.json und dem Snapshot.
 
 ENV-Overrides für Font-Pfade (Linux/Windows-Unterschiede):
   SOCIAL_FONT_BOLD   = absoluter Pfad zur Bold-TTF
   SOCIAL_FONT_REG    = absoluter Pfad zur Regular-TTF
   SOCIAL_FONT_EMOJI  = absoluter Pfad zur Color-Emoji-TTF
+  SOCIAL_FONT_EMOJI_FALLBACK = Ersatz-Font für Emojis, die dem Emoji-Font fehlen
+                     (Default: .fonts/NotoColorEmoji.ttf im Repo, gitignored;
+                     unter Linux /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf)
   SOCIAL_BOLT_PNG    = absoluter Pfad zur Bolt-PNG (Default: public/bolt-footer.png)
 
 Dependencies:  pip install Pillow
@@ -48,6 +60,7 @@ try:
     _sys.stderr.reconfigure(encoding="utf-8")
 except AttributeError:
     pass
+import hashlib
 import json
 import os
 import sys
@@ -195,15 +208,17 @@ def measure(draw, text, font):
     return bbox[2] - bbox[0], bbox[3] - bbox[1]
 
 
-def render_emoji(emoji_char, target_size, emoji_font_path):
-    """Render a color emoji at the given pixel size."""
+def _emoji_font(emoji_font_path):
     # Noto Color Emoji rendert nur in 109px; bei Windows seguiemj
     # können andere Größen verwendet werden. 109 als sicherer Default.
     try:
-        font = ImageFont.truetype(emoji_font_path, 109)
+        return ImageFont.truetype(emoji_font_path, 109)
     except Exception:
         # Fallback für Windows (seguiemj erwartet andere Größen)
-        font = ImageFont.truetype(emoji_font_path, 96)
+        return ImageFont.truetype(emoji_font_path, 96)
+
+
+def _emoji_kachel(emoji_char, font):
     tile = Image.new("RGBA", (140, 140), (0, 0, 0, 0))
     td = ImageDraw.Draw(tile)
     try:
@@ -211,6 +226,54 @@ def render_emoji(emoji_char, target_size, emoji_font_path):
     except Exception:
         # Manche Fonts unterstützen kein embedded_color
         td.text((0, 0), emoji_char, font=font)
+    return tile
+
+
+# Ein Zeichen, das in keinem Font vorkommt (Private Use, Ebene 16). Sieht ein
+# Emoji genauso aus wie dieses Zeichen, hat der Font es nicht: Pillow zeichnet
+# dann das Ersatz-Kästchen („Tofu“).
+_KEIN_ZEICHEN = "\U0010FFFD"
+
+
+def _fehlt_im_font(emoji_char, font) -> bool:
+    return _emoji_kachel(emoji_char, font).tobytes() == _emoji_kachel(_KEIN_ZEICHEN, font).tobytes()
+
+
+def _emoji_ersatz_font() -> str | None:
+    env = os.environ.get("SOCIAL_FONT_EMOJI_FALLBACK")
+    kandidaten = ([env] if env else []) + [
+        str(Path(__file__).resolve().parent.parent / ".fonts" / "NotoColorEmoji.ttf"),
+        "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf",
+    ]
+    for k in kandidaten:
+        if Path(k).is_file():
+            return k
+    return None
+
+
+def render_emoji(emoji_char, target_size, emoji_font_path):
+    """Render a color emoji at the given pixel size."""
+    # Welle 172: Segoe UI Emoji unter Windows 10 kennt z. B. 🫁, 🛞 und 🪵 nicht und
+    # zeichnete ein leeres Kästchen. Deshalb der Reihe nach: Emoji-Font, Ersatz-Font
+    # (Noto Color Emoji), für einfache Zeichen wie „%“ der fette Textfont. Kennt
+    # keiner das Zeichen, bricht der Slug ab statt ein Kästchen zu zeichnen.
+    kandidaten = [emoji_font_path]
+    ersatz = _emoji_ersatz_font()
+    for k in (ersatz, get_fonts()[0]):
+        if k and k not in kandidaten:
+            kandidaten.append(k)
+    tile = None
+    for pfad in kandidaten:
+        font = _emoji_font(pfad)
+        if not _fehlt_im_font(emoji_char, font):
+            tile = _emoji_kachel(emoji_char, font)
+            break
+    if tile is None:
+        raise RuntimeError(
+            f"Zeichen {emoji_char!r} fehlt in "
+            + ", ".join(Path(k).name for k in kandidaten)
+            + (" — Ersatz-Font .fonts/NotoColorEmoji.ttf fehlt" if not ersatz else "")
+        )
     bbox = tile.getbbox()
     if bbox:
         tile = tile.crop(bbox)
@@ -500,6 +563,76 @@ def render_post_vertical(spec, fonts, bolt_png_path):
 
 
 # ============================================================
+# Manifest (Welle 172): aus welchen Eingaben ist welches Bild entstanden?
+# ============================================================
+# Ändert sich das Layout eines Renderers, die passende Kennung hochzählen.
+# Dann gelten alle Bilder dieses Formats als veraltet und --stale erzeugt sie neu.
+LAYOUT_QUADRAT = "quadrat-1"
+LAYOUT_HOCHFORMAT = "hochformat-1"
+MANIFEST_REL = Path("lib") / "social" / "kacheln-manifest.json"
+MANIFEST_HINWEIS = (
+    "Erzeugt von scripts/social-image-builder.py und scripts/build-tiktok-videos.mjs. "
+    "Nicht von Hand ändern."
+)
+
+
+def bild_eingaben(spec: dict, vertical: bool) -> dict:
+    """Alles, was ins Bild einfließt, außer den Fonts des Rechners."""
+    eingaben = {
+        "layout": LAYOUT_HOCHFORMAT if vertical else LAYOUT_QUADRAT,
+        "emoji": spec["emoji"],
+        "eyebrow": spec["eyebrow"],
+        "zeilen": list(spec["lines"]),
+        "headline": spec["highlight"],
+    }
+    if not vertical:
+        # Das Hochformat hat feste TikTok-Farben, das Quadrat die Kategoriefarben.
+        eingaben["hintergrund"] = list(spec["bg"])
+        eingaben["akzent"] = list(spec["accent"])
+    return eingaben
+
+
+def datei_sha256(pfad: Path) -> str:
+    return hashlib.sha256(pfad.read_bytes()).hexdigest()
+
+
+def manifest_laden(project_root: Path) -> dict:
+    pfad = project_root / MANIFEST_REL
+    manifest = {}
+    if pfad.is_file():
+        with open(pfad, encoding="utf-8") as f:
+            manifest = json.load(f)
+    manifest["hinweis"] = MANIFEST_HINWEIS
+    manifest.setdefault("version", 1)
+    for bereich in ("quadrat", "hochformat", "videos"):
+        manifest.setdefault(bereich, {})
+    return manifest
+
+
+def manifest_schreiben(project_root: Path, manifest: dict) -> None:
+    # Gleiches Format wie in build-tiktok-videos.mjs: sortierte Schlüssel,
+    # zwei Leerzeichen Einzug, UTF-8, LF, Zeilenumbruch am Ende.
+    text = json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    with open(project_root / MANIFEST_REL, "w", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+
+
+def veraltet_grund(eintrag: dict | None, eingaben: dict, out_path: Path) -> str | None:
+    """None, wenn das Bild zu den aktuellen Eingaben passt, sonst der Grund."""
+    if not out_path.is_file():
+        return "Bild fehlt"
+    if not eintrag:
+        return "nicht im Manifest"
+    if eintrag.get("sha256") != datei_sha256(out_path):
+        return "Bilddatei passt nicht zum Manifest"
+    alt = eintrag.get("eingaben") or {}
+    geaendert = [k for k in sorted(set(alt) | set(eingaben)) if alt.get(k) != eingaben.get(k)]
+    if geaendert:
+        return "geändert: " + ", ".join(geaendert)
+    return None
+
+
+# ============================================================
 # Drift-Check (vor Build)
 # ============================================================
 def verify_repo_state(targets: list, farben: dict, snapshot: dict) -> bool:
@@ -555,6 +688,17 @@ def main():
         action="store_true",
         help="Slug-Liste aus rechner-config (alle 205) statt queue.json — "
         "für neue Rechner, die noch nicht in der Queue sind.",
+    )
+    parser.add_argument(
+        "--stale",
+        action="store_true",
+        help="Nur Bilder erzeugen, die fehlen oder nicht mehr zu ihren Eingaben "
+        "passen (Manifest lib/social/kacheln-manifest.json).",
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Nichts erzeugen, nur veraltete Bilder melden. Exit 1, wenn eines veraltet ist.",
     )
     args = parser.parse_args()
 
@@ -633,8 +777,13 @@ def main():
         renderer = render_post
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    manifest = manifest_laden(project_root)
+    eintraege = manifest["hochformat" if args.vertical else "quadrat"]
+
     ok = 0
     skipped = 0
+    aktuell = 0
+    veraltet: list[tuple[str, str]] = []
     failed: list[str] = []
 
     for slug in targets:
@@ -646,17 +795,42 @@ def main():
         if spec is None:
             failed.append(slug)
             continue
+        eingaben = bild_eingaben(spec, args.vertical)
+        if args.stale or args.check:
+            grund = veraltet_grund(eintraege.get(slug), eingaben, out_path)
+            if grund is None:
+                aktuell += 1
+                continue
+            if args.check:
+                veraltet.append((slug, grund))
+                continue
         try:
             img = renderer(spec, fonts, bolt_png)
             img.save(out_path, "PNG", optimize=True)
+            eintraege[slug] = {"eingaben": eingaben, "sha256": datei_sha256(out_path)}
             print(f"  ✓ {slug:35} → {out_path.relative_to(project_root)}")
             ok += 1
         except Exception as exc:
             print(f"  ✗ {slug:35} {type(exc).__name__}: {exc}", file=sys.stderr)
             failed.append(slug)
 
+    if args.check:
+        for slug, grund in veraltet:
+            print(f"  ✗ {slug:35} {grund}")
+        print(f"\nAktuell:  {aktuell}")
+        print(f"Veraltet: {len(veraltet)}")
+        print(f"Failed:   {len(failed)}")
+        if veraltet or failed:
+            sys.exit(1)
+        return
+
+    if ok:
+        manifest_schreiben(project_root, manifest)
+
     print(f"\nGenerated: {ok}")
     print(f"Skipped:   {skipped}")
+    if args.stale:
+        print(f"Aktuell:   {aktuell}")
     print(f"Failed:    {len(failed)}")
     if failed:
         print(f"Failed-Slugs: {', '.join(failed)}")

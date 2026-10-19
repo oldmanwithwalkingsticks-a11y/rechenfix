@@ -183,6 +183,20 @@ Output: `public/social-posts/<slug>.png` pro Eintrag in queue.json. Layout 1080�
 git add public/social-posts/ && git commit -m "feat(social): images <N> slugs"
 ```
 
+**Seit Welle 172** trägt der Builder jedes Bild mit seinen Eingaben und dem SHA-256 in
+`lib/social/kacheln-manifest.json` ein. Nach Änderungen an Captions oder Rechner-Titeln nur noch die
+veralteten Bilder und Videos erzeugen und danach prüfen (Ablauf und Regeln: `CLAUDE.md`, Abschnitt
+„Social-Post-Bilder“):
+
+```bash
+python scripts/social-image-builder.py --from-config --stale
+python scripts/social-image-builder.py --from-config --vertical --stale
+node scripts/build-tiktok-videos.mjs --stale
+python scripts/social-image-builder.py --from-config --check            # Veraltet: 0
+python scripts/social-image-builder.py --from-config --vertical --check # Veraltet: 0
+node scripts/build-tiktok-videos.mjs --check                            # Veraltet: 0
+```
+
 ### Verify vor Deploy
 
 ```bash

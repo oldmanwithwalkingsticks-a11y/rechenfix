@@ -953,24 +953,45 @@ Pro Sub-Welle:
 
 Lokale Ablage: `docs/welle<N>/`
 
-## Social-Post-Bilder (`public/social-posts/`)
+## Social-Post-Bilder (`public/social-posts/`, `public/social-videos-src/`, `public/social-videos/`)
 
-Die 160 PNG-Dateien in `public/social-posts/` sind **erzeugte Artefakte**. Sie entstehen lokal
-aus `scripts/social-image-builder.py` und beziehen die große Zahlenzeile aus dem Feld
-`socialHeadline` in `lib/social/captions.json`. Der Cron `/api/cron/social-post` erzeugt keine
-Bilder — er postet ausschließlich die im Repo liegenden Dateien, die Vercel ausliefert.
+Die Kacheln in `public/social-posts/` (Instagram, Facebook), die Hochformate in
+`public/social-videos-src/` und die Videos in `public/social-videos/` (TikTok), je eine Datei pro
+Rechner, sind **erzeugte Artefakte**. Sie entstehen lokal aus `scripts/social-image-builder.py` und
+`scripts/build-tiktok-videos.mjs`. Eyebrow und große Zahlenzeile kommen aus `socialEyebrow` und
+`socialHeadline` in `lib/social/captions.json`, Titel, Emoji und Kategorie aus `lib/rechner-config`.
+Die Crons `/api/cron/social-post` und `/api/cron/social-post-tiktok` erzeugen keine Bilder — sie
+posten ausschließlich die im Repo liegenden Dateien, die Vercel ausliefert.
 
-Daraus folgen drei Regeln:
+`lib/social/kacheln-manifest.json` (seit Welle 172) hält je Datei die Eingaben und den SHA-256.
+Beide Skripte tragen jede erzeugte Datei dort ein; `--stale` erzeugt nur, was fehlt oder nicht mehr
+passt, `--check` meldet es nur (Exit 1).
 
-1. **Wird `socialHeadline` oder ein anderes bildwirksames Feld in `lib/social/captions.json`
-   geändert, müssen die betroffenen Bilder in derselben Welle neu erzeugt und mitcommittet
-   werden.** Sonst liefert die Website Kacheln aus, die nicht mehr zu ihrer eigenen Datenquelle
-   passen. Genau das ist bei `autokosten-rechner` und `kalorienrechner` passiert.
-2. **Bilder in `public/social-posts/` werden nur in einer eigenen, dafür vorgesehenen Welle neu
-   erzeugt und committet** — nie beiläufig als Nebenprodukt einer anderen Arbeit.
-3. **Nach jedem lokalen Lauf des Bildgenerators gehört ein `git status --short` dazu.** Was dort
+Daraus folgen vier Regeln:
+
+1. **Ändert eine Welle `lib/social/captions.json` oder Titel, Emoji oder Kategorie eines Rechners,
+   laufen in derselben Welle:**
+   ```
+   npx tsx scripts/dump-rechner-data.ts
+   python scripts/social-image-builder.py --from-config --stale
+   python scripts/social-image-builder.py --from-config --vertical --stale
+   node scripts/build-tiktok-videos.mjs --stale
+   python scripts/social-image-builder.py --from-config --check
+   python scripts/social-image-builder.py --from-config --vertical --check
+   node scripts/build-tiktok-videos.mjs --check
+   ```
+   Alle drei `--check` müssen „Veraltet: 0“ melden. Bilder, Videos und `kacheln-manifest.json`
+   werden mitcommittet. Sonst liefert die Website Kacheln aus, die nicht mehr zu ihrer eigenen
+   Datenquelle passen: Bis Welle 172 zeigten deshalb 136 Kacheln alte Headlines oder Eyebrows.
+2. **Bilder und Videos werden nur in einer Welle erzeugt und committet, die das ausdrücklich
+   vorsieht** — nie beiläufig als Nebenprodukt einer anderen Arbeit.
+3. **Nach jedem lokalen Lauf der Generatoren gehört ein `git status --short` dazu.** Was dort
    erscheint, wird bewusst committet oder verworfen. Liegenlassen ist die schlechteste Variante,
    weil die Dateien beim nächsten weiten `git add` unbemerkt mitrutschen.
+4. **Python auf Karstens Rechner:** `G:/Python314/python.exe` (mit Pillow) statt `python`; das
+   `python` im PATH gehört zu Inkscape. Emojis, die Segoe UI Emoji nicht kennt (🫁, 🛞, 🪵), zeichnet
+   der Builder aus `.fonts/NotoColorEmoji.ttf` (gitignored). Fehlt die Datei, bricht er für diesen
+   Rechner ab, statt ein leeres Kästchen zu zeichnen.
 
 Für Wellen allgemein gilt daraus abgeleitet: Am Ende einer Welle darf `git status --short` nichts
 außer `lib/rechner-config/client-data.ts` zeigen. Taucht etwas anderes auf, ist das ein Befund
