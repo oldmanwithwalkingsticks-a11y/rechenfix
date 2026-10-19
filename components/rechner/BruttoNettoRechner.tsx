@@ -12,6 +12,8 @@ import SchnellCheck from '@/components/rechner/SchnellCheck';
 import WasserfallSvg from '@/components/rechner/WasserfallSvg';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
+import { getMinijobGrenzeMonat } from '@/lib/berechnungen/mindestlohn';
+import { MIDIJOB_OBERGRENZE_MONAT } from '@/lib/berechnungen/midijob-uebergang';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 const TABELLEN_WERTE = [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000];
@@ -20,7 +22,7 @@ const STATIC_FAQ: { frage: string; antwort: string }[] = [
   {
     frage: 'Wie viel Netto bleibt von meinem Brutto?',
     antwort:
-      'Das hängt von Steuerklasse, Bundesland, Kirchensteuerpflicht und Krankenversicherung ab. Als Faustregel: In Steuerklasse 1 bleiben bei 3.500 € brutto rund 60–67 % als Netto übrig (ca. 2.300 €). Bei höheren Gehältern sinkt der Netto-Anteil durch die progressive Lohnsteuer. Bei niedrigen Einkommen kann er bei knapp 75 % liegen.',
+      'Das hängt von Steuerklasse, Bundesland, Kirchensteuerpflicht und Krankenversicherung ab. Als Faustregel: In Steuerklasse 1 bleiben bei 3.500 € brutto rund 60–67 % als Netto übrig (ca. 2.300 €). Bei höheren Gehältern sinkt der Netto-Anteil durch die progressive Lohnsteuer. Bei niedrigen Einkommen ist er höher: Bei 2.000 € brutto sind es knapp 74 %, im Midijob-Bereich darunter noch mehr, weil die Sozialabgaben dort reduziert sind (1.500 €: rund 81 %).',
   },
   {
     frage: 'Welche Steuerklasse habe ich?',
@@ -30,7 +32,7 @@ const STATIC_FAQ: { frage: string; antwort: string }[] = [
   {
     frage: 'Was zählt zu den Sozialabgaben?',
     antwort:
-      'Vier Pflichtbeiträge: Krankenversicherung (paritätisch 7,3 % plus halber Zusatzbeitrag), Rentenversicherung (paritätisch 9,3 %), Arbeitslosenversicherung (paritätisch 1,3 %) und Pflegeversicherung (paritätisch 1,8 %, plus 0,6 % Kinderlosenzuschlag, den nur Sie tragen). Arbeitgeber und Arbeitnehmer teilen sich die Beiträge — Ihr Arbeitnehmer-Anteil liegt 2026 bei rund 21 % vom Brutto.',
+      'Vier Pflichtbeiträge: Krankenversicherung (paritätisch 7,3 % plus halber Zusatzbeitrag), Rentenversicherung (paritätisch 9,3 %), Arbeitslosenversicherung (paritätisch 1,3 %) und Pflegeversicherung (paritätisch 1,8 %, plus 0,6 % Kinderlosenzuschlag, den nur Sie tragen). Arbeitgeber und Arbeitnehmer teilen sich die Beiträge — Ihr Arbeitnehmer-Anteil liegt 2026 bei rund 21 % vom Brutto. Unter 2.000 € brutto (Midijob) ist er niedriger, im Minijob zahlen Sie nur 3,6 % zur Rentenversicherung.',
   },
   {
     frage: 'Was ist die Beitragsbemessungsgrenze?',
@@ -622,6 +624,14 @@ export default function BruttoNettoRechner() {
                 </tr>
               </tbody>
             </table>
+            {/* W163: Hinweis für Minijob und Übergangsbereich (Sozialabgaben nach § 8 / § 20 Abs. 2a SGB IV) */}
+            {ergebnis.bruttoMonat > 0 && ergebnis.bruttoMonat <= MIDIJOB_OBERGRENZE_MONAT && (
+              <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
+                {ergebnis.bruttoMonat <= getMinijobGrenzeMonat()
+                  ? 'Minijob: Sie zahlen nur den Eigenanteil zur Rentenversicherung (3,6 %), bei Befreiung nichts. Kranken-, Pflege- und Arbeitslosenversicherung trägt der Arbeitgeber pauschal. Die Lohnsteuer ist hier nach Steuerklasse gerechnet; oft zahlt stattdessen der Arbeitgeber 2 % Pauschalsteuer.'
+                  : 'Midijob (Übergangsbereich bis 2.000 €): Ihre Sozialabgaben werden auf eine reduzierte Bemessungsgrundlage berechnet (§ 20 Abs. 2a SGB IV), den Rest trägt der Arbeitgeber. Die Aufteilung zeigt der Midijob-Rechner.'}
+              </p>
+            )}
           </div>
 
           {/* Weihnachtsgeld-Ergebnis */}
@@ -786,13 +796,13 @@ export default function BruttoNettoRechner() {
                 <li><strong className="text-gray-800 dark:text-gray-100">Lohnsteuer</strong> — abhängig von Steuerklasse, Bundesland und Freibeträgen</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag</strong> — nur bei höheren Einkommen (2026: ab rund 92.400 € Jahresbrutto in Steuerklasse 1 ohne Kinder)</li>
                 <li><strong className="text-gray-800 dark:text-gray-100">Kirchensteuer</strong> — 8 % (Bayern, Baden-Württemberg) bzw. 9 % (übrige Bundesländer) auf die Lohnsteuer, nur bei Kirchenzugehörigkeit</li>
-                <li><strong className="text-gray-800 dark:text-gray-100">Sozialabgaben</strong> — Kranken-, Pflege-, Renten- und Arbeitslosenversicherung, in Summe rund 21 % vom Brutto (Arbeitnehmer-Anteil)</li>
+                <li><strong className="text-gray-800 dark:text-gray-100">Sozialabgaben</strong> — Kranken-, Pflege-, Renten- und Arbeitslosenversicherung, in Summe rund 21 % vom Brutto (Arbeitnehmer-Anteil, unter 2.000 € brutto weniger)</li>
               </ol>
               <p>
                 <strong className="text-gray-800 dark:text-gray-100">Formel:</strong> Netto = Brutto − Lohnsteuer − Soli − Kirchensteuer − Sozialabgaben
               </p>
               <p>
-                <strong className="text-gray-800 dark:text-gray-100">Beispiel:</strong> Bei 4.000 € Brutto in Steuerklasse 1 (ledig, kinderlos, NRW, ohne Kirchensteuer) bleiben rund <strong className="text-gray-800 dark:text-gray-100">2.606 € Netto</strong> übrig — also etwa 65 % des Brutto. Die Quote sinkt mit höherem Einkommen, weil die Lohnsteuer progressiv steigt, und kann bei niedrigen Gehältern bei knapp 75 % liegen.
+                <strong className="text-gray-800 dark:text-gray-100">Beispiel:</strong> Bei 4.000 € Brutto in Steuerklasse 1 (ledig, kinderlos, NRW, ohne Kirchensteuer) bleiben rund <strong className="text-gray-800 dark:text-gray-100">2.606 € Netto</strong> übrig — also etwa 65 % des Brutto. Die Quote sinkt mit höherem Einkommen, weil die Lohnsteuer progressiv steigt. Bei 2.000 € brutto sind es knapp 74 %, im Midijob-Bereich darunter noch mehr.
               </p>
 
               <h3 className="text-base font-bold text-gray-800 dark:text-gray-100 mt-6 mb-3">Alle Abzüge im Detail (2026)</h3>
@@ -861,7 +871,7 @@ export default function BruttoNettoRechner() {
                 <strong className="text-gray-800 dark:text-gray-100">Steuerklasse falsch angegeben.</strong> Verheiratete sind nicht automatisch in Klasse 4. Wer 3/5 gewählt hat, hat in der höheren Klasse mehr Netto, in der niedrigeren weniger. Welche Klasse Sie tatsächlich haben, steht oben rechts auf Ihrer Lohnabrechnung.
               </li>
               <li>
-                <strong className="text-gray-800 dark:text-gray-100">Sozialabgaben unterschätzt.</strong> Viele rechnen mit pauschal 20 %. Tatsächlich liegt der Arbeitnehmer-Anteil 2026 bei rund 21 % — abhängig vom Krankenkassen-Zusatzbeitrag und mit zusätzlich 0,6 % Aufschlag für Kinderlose ab 23 Jahren.
+                <strong className="text-gray-800 dark:text-gray-100">Sozialabgaben unterschätzt.</strong> Viele rechnen mit pauschal 20 %. Tatsächlich liegt der Arbeitnehmer-Anteil 2026 ab 2.000 € brutto bei rund 21 % — abhängig vom Krankenkassen-Zusatzbeitrag und mit zusätzlich 0,6 % Aufschlag für Kinderlose ab 23 Jahren.
               </li>
               <li>
                 <strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag pauschal abgezogen.</strong> Seit 2021 zahlen rund 90 % der Steuerzahler keinen Soli mehr. Erst ab einer Jahres-Lohnsteuer von 20.350 € (Single 2026) bzw. 40.700 € (gemeinsam) wird er fällig — in Steuerklasse 1 ohne Kinder bei rund 92.400 € Jahresbrutto, und auch dann zunächst gleitend statt sofort mit vollen 5,5 %.

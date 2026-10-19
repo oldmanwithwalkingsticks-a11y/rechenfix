@@ -50,7 +50,7 @@ const faq = [
   },
   {
     frage: 'Welche Sparquote ist bei 2.000 Euro brutto realistisch?',
-    antwort: 'Solo in einer günstigen Stadt wie Chemnitz: Netto SK1 ca. 1.485 €, Warmmiete 50 m² ~520 €. Verbleibt für Lebenshaltung 965 €, Lebenshaltung Solo Minimum ca. 570 €. Theoretisches Sparpotenzial 0-395 €, realistisch 0-50 € pro Monat. Empfehlung: Notgroschen-Aufbau hat absolute Priorität (3 Monatsgehälter auf dem Tagesgeldkonto), Altersvorsorge zunächst zweitrangig.',
+    antwort: 'Solo in einer günstigen Stadt wie Chemnitz: Netto SK1 ca. 1.477 €, Warmmiete 50 m² ~520 €. Verbleibt für Lebenshaltung 957 €, Lebenshaltung Solo Minimum ca. 570 €. Theoretisches Sparpotenzial 0-387 €, realistisch 0-50 € pro Monat. Empfehlung: Notgroschen-Aufbau hat absolute Priorität (3 Monatsgehälter auf dem Tagesgeldkonto), Altersvorsorge zunächst zweitrangig.',
   },
   {
     frage: 'Wo liegt 2.000 Euro brutto im deutschen Lohngefüge?',
@@ -100,7 +100,7 @@ const spezifischerContent = (
 
       <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mt-4">Was bleibt Solo in Chemnitz</h3>
       <p>
-        Nach Lohnsteuer und Sozialabgaben (Steuerklasse 1, kinderlos, GKV, ohne Kirchensteuer) bleiben rund 1.485 € netto. Bei einer 50-m²-Wohnung in mittlerer Chemnitzer Lage mit Warmmiete ~520 € (370 € kalt + 150 € Nebenkosten) verbleiben etwa 965 € für Lebenshaltung. Lebenshaltung Solo Minimum nach Destatis-Verbrauchsstichprobe: ~570 €. Theoretisches Sparpotenzial bis ~395 € — realistisch eher 0-50 €.
+        Nach Lohnsteuer und Sozialabgaben (Steuerklasse 1, kinderlos, GKV, ohne Kirchensteuer) bleiben rund 1.477 € netto. Bei einer 50-m²-Wohnung in mittlerer Chemnitzer Lage mit Warmmiete ~520 € (370 € kalt + 150 € Nebenkosten) verbleiben etwa 957 € für Lebenshaltung. Lebenshaltung Solo Minimum nach Destatis-Verbrauchsstichprobe: ~570 €. Theoretisches Sparpotenzial bis ~387 € — realistisch eher 0-50 €.
       </p>
 
       <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mt-4">Erwerbstätigen-Freibetrag § 11b SGB II — wichtig für Aufstocker</h3>

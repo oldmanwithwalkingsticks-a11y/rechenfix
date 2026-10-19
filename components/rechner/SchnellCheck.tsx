@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import { BBG_KV_MONAT } from '@/lib/berechnungen/brutto-netto';
-import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
+import { MINDESTLOHN, getMinijobGrenzeMonat } from '@/lib/berechnungen/mindestlohn';
 
 interface SchnellCheckProps {
   brutto: number;
@@ -71,8 +71,8 @@ export default function SchnellCheck({
       });
     }
 
-    // Keine Kinder und implizit über 23 → PV-Zuschlag
-    if (kinder === 0) {
+    // Keine Kinder und implizit über 23 → PV-Zuschlag (im Minijob zahlt der AN keine PV, W163)
+    if (kinder === 0 && brutto > getMinijobGrenzeMonat()) {
       tipps.push({
         id: 'pvzuschlag',
         text: 'Ohne Kinder und ab 23 Jahren zahlen Sie einen PV-Zuschlag von 0,6%. Mit Kindernachweis entfällt dieser.',

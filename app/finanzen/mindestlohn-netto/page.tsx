@@ -200,7 +200,7 @@ export default function Page() {
                 <strong className="text-gray-800 dark:text-gray-100">Alleinerziehende in Steuerklasse 2</strong> profitieren vom Entlastungsbetrag und behalten ca. {fmt(ergebnisse[1].ergebnis.nettoMonat)} € netto. Am wenigsten bleibt in Steuerklasse 6, die für Zweit- und Nebenjobs gilt — hier entfallen sämtliche Freibeträge, sodass nur ca. {fmt(ergebnisse[5].ergebnis.nettoMonat)} € netto übrig bleiben.
               </p>
               <p>
-                Der Mindestlohn wurde 2015 mit 8,50 € eingeführt und seitdem mehrfach erhöht. Nach der Anhebung auf 12,41 € (2024) und 12,82 € (2025) folgte zum 1. Januar 2026 die bisher <strong className="text-gray-800 dark:text-gray-100">größte Einzelerhöhung</strong> auf {STUNDENLOHN.toLocaleString('de-DE')} €. Zum 1. Januar 2027 steigt er laut Vierter Mindestlohnanpassungsverordnung weiter auf 14,60 € pro Stunde.
+                Der Mindestlohn wurde 2015 mit 8,50 € eingeführt und seitdem mehrfach erhöht. Nach der Anhebung auf 12,41 € (2024) und 12,82 € (2025) folgte zum 1. Januar 2026 ein Sprung um <strong className="text-gray-800 dark:text-gray-100">1,08 €</strong> auf 13,90 € — größer war nur die gesetzliche Anhebung von 10,45 € auf 12 € im Oktober 2022. Zum 1. Januar 2027 steigt er laut Fünfter Mindestlohnanpassungsverordnung weiter auf 14,60 € pro Stunde.
               </p>
               <p>
                 <strong className="text-gray-800 dark:text-gray-100">Wichtig:</strong> Wer vom Mindestlohn lebt und ergänzende Sozialleistungen wie <strong className="text-gray-800 dark:text-gray-100">Wohngeld</strong> oder <strong className="text-gray-800 dark:text-gray-100">Kinderzuschlag</strong> beantragen möchte, sollte sein exaktes Nettogehalt kennen. Nutzen Sie dafür unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit individuellen Einstellungen für Bundesland, Kirchensteuer und Krankenversicherung.
@@ -236,7 +236,7 @@ export default function Page() {
               {[
                 { href: '/finanzen/brutto-netto-rechner', label: 'Brutto-Netto-Rechner', desc: 'Individuell berechnen' },
                 { href: '/finanzen/brutto-netto-tabelle', label: 'Brutto-Netto-Tabelle', desc: '1.500 € bis 10.000 €' },
-                { href: '/finanzen/2000-euro-brutto-netto', label: '2.000 € brutto netto', desc: 'Knapp über Mindestlohn' },
+                { href: '/finanzen/2000-euro-brutto-netto', label: '2.000 € brutto netto', desc: 'Netto in allen Steuerklassen' },
                 { href: '/finanzen/stundenlohn-rechner', label: 'Stundenlohnrechner', desc: 'Stundenlohn ermitteln' },
               ].map(link => (
                 <Link

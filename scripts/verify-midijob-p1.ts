@@ -29,7 +29,7 @@ import {
 } from '../lib/berechnungen/midijob-parameter';
 import { berechneLohnsteuerJahr } from '../lib/berechnungen/lohnsteuer';
 import { berechneSoli } from '../lib/berechnungen/einkommensteuer';
-import { KV_BASISSATZ_AN_2026, RV_SATZ_AN_2026, AV_SATZ_AN_2026 } from '../lib/berechnungen/brutto-netto';
+import { KV_BASISSATZ_AN_2026, RV_SATZ_AN_2026, AV_SATZ_AN_2026, berechneBruttoNetto } from '../lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 } from '../lib/berechnungen/sv-parameter';
 import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from '../lib/berechnungen/pflegeversicherung';
 
@@ -269,21 +269,22 @@ cases.push({
   });
 }
 
-// Konkrete €-Beträge für Testfall aus Analyse-Report (AE = 1.500, 0 Kinder):
-// AN-SV = 279,31 €, gesamtSv = 612,20 €, agSv = 332,89 €
+// Konkrete €-Beträge für Testfall aus Analyse-Report (AE = 1.500, 0 Kinder).
+// W163: Der PV-Zuschlag für Kinderlose (0,6 %) bemisst sich an BE_gesamt, nicht an BE_AN
+// (§ 20 Abs. 2a SGB IV; DRV, Übergangsbereich). AN-SV = 1.284,18 × 21,15 % + 1.427,03 × 0,6 %.
 {
   const beGesamt = berechneBemessungsgrundlageGesamt(1500);
   const beAn = berechneBemessungsgrundlageAN(1500);
   const anSvSatzTest = SV_AN_OHNE_PV + pvAnteilAn2026(0, true, false);
   const gesamtSvSatzTest = anSvSatzTest + agSvSatz;
-  const anSv = beAn * anSvSatzTest;
+  const anSv = beAn * (anSvSatzTest - 0.006) + beGesamt * 0.006;
   const gesamtSv = beGesamt * gesamtSvSatzTest;
   const agSv = gesamtSv - anSv;
 
   cases.push({
-    name: 'MJ-AG-RECHT AE=1.500 0 Kind: AN-SV = 279,31 € (unverändert)',
-    actual: anSv, expected: 279.31, tol: 0.02,
-    quelle: 'BE_AN 1.284,18 × 21,75 % — keine Regression',
+    name: 'MJ-AG-RECHT AE=1.500 0 Kind: AN-SV = 280,16 € (Zuschlag aus BE_gesamt)',
+    actual: anSv, expected: 280.16, tol: 0.02,
+    quelle: 'BE_AN 1.284,18 × 21,15 % + BE_gesamt 1.427,03 × 0,6 % (W163)',
   });
   cases.push({
     name: 'MJ-AG-RECHT AE=1.500 0 Kind: gesamtSv = 612,20 € (vorher 620,76 €)',
@@ -291,9 +292,46 @@ cases.push({
     quelle: 'BE_gesamt 1.427,03 × 42,9 % — 8,56 € weniger als 125a-Stand',
   });
   cases.push({
-    name: 'MJ-AG-RECHT AE=1.500 0 Kind: agSv = 332,89 € (vorher 341,45 €)',
-    actual: agSv, expected: 332.89, tol: 0.02,
-    quelle: 'Gesamt − AN — Kinderlos-Zuschlag nicht mehr verdoppelt',
+    name: 'MJ-AG-RECHT AE=1.500 0 Kind: agSv = 332,04 €',
+    actual: agSv, expected: 332.04, tol: 0.02,
+    quelle: 'Gesamt − AN; der Zuschlag belastet nur den AN (W163)',
+  });
+}
+
+// W163: berechneBruttoNetto gegen das Rechenbeispiel von lohn-info.de (Übergangsbereich 2026):
+// AE 1.000 €, Zusatzbeitrag 3,0 %, 1 Kind → AN-Anteil 120,50 € (KV 50,02 + PV 10,23 + RV 52,86 +
+// AV 7,39); kinderlos zusätzlich 854,06 × 0,6 % = 5,12 € → 125,62 €. Minijob 500 €: nur RV 3,6 %.
+{
+  const bn = (b: number, k: number, extra: Partial<Parameters<typeof berechneBruttoNetto>[0]> = {}) =>
+    berechneBruttoNetto({
+      bruttoMonat: b, steuerklasse: 1, kirchensteuer: false, kirchensteuersatz: 9,
+      kinderfreibetraege: k, kinderUnter25: k, bundesland: '', kvArt: 'gesetzlich',
+      kvZusatzbeitrag: 3.0, kvPrivatBeitrag: 0, rvBefreit: false, abrechnungszeitraum: 'monat', ...extra,
+    });
+  cases.push({
+    name: 'BN-MIDI AE=1.000, ZB 3,0 %, 1 Kind: AN-SV = 120,50 €',
+    actual: bn(1000, 1).sozialabgabenGesamt, expected: 120.50, tol: 0.001,
+    quelle: 'lohn-info.de, Beitragsberechnung im Übergangsbereich 2026, Beispiel',
+  });
+  cases.push({
+    name: 'BN-MIDI AE=1.000, ZB 3,0 %, kinderlos: AN-SV = 125,62 €',
+    actual: bn(1000, 0).sozialabgabenGesamt, expected: 125.62, tol: 0.001,
+    quelle: 'lohn-info.de: Zuschlag 854,06 × 0,6 % = 5,12 € aus BE_gesamt',
+  });
+  cases.push({
+    name: 'BN-MINI AE=500: AN-SV = 18,00 € (RV 3,6 %)',
+    actual: bn(500, 0).sozialabgabenGesamt, expected: 18.00, tol: 0.001,
+    quelle: '§ 168 Abs. 1 Nr. 1b SGB VI: 18,6 % − 15 % AG',
+  });
+  cases.push({
+    name: 'BN-MINI AE=500, RV befreit: AN-SV = 0 €',
+    actual: bn(500, 0, { rvBefreit: true }).sozialabgabenGesamt, expected: 0, tol: 0.001,
+    quelle: '§ 6 Abs. 1b SGB VI',
+  });
+  cases.push({
+    name: 'BN-REG AE=2.000, ZB 2,9 %, kinderlos: AN-SV = 435,00 € (Ende Übergangsbereich)',
+    actual: bn(2000, 0, { kvZusatzbeitrag: 2.9 }).sozialabgabenGesamt, expected: 435.00, tol: 0.001,
+    quelle: '2.000 × 21,75 %',
   });
 }
 

@@ -6,10 +6,8 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { berechneLohnsteuerJahr } from '@/lib/berechnungen/lohnsteuer';
 import {
-  berechneSoli,
-  berechneKirchensteuerByBundesland,
+  kirchensteuersatzFuer,
   BUNDESLAENDER,
   type Bundesland,
 } from '@/lib/berechnungen/einkommensteuer';
@@ -21,11 +19,15 @@ import {
 } from '@/lib/berechnungen/midijob-uebergang';
 import { getAktuelleMidijobParameter } from '@/lib/berechnungen/midijob-parameter';
 import {
+  berechneBruttoNetto,
   KV_BASISSATZ_AN_2026,
   RV_SATZ_AN_2026,
   AV_SATZ_AN_2026,
 } from '@/lib/berechnungen/brutto-netto';
-import { KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 } from '@/lib/berechnungen/sv-parameter';
+import {
+  KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026,
+  KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+} from '@/lib/berechnungen/sv-parameter';
 import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from '@/lib/berechnungen/pflegeversicherung';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
@@ -41,19 +43,10 @@ const MIDIJOB_OBERGRENZE = MIDIJOB_OBERGRENZE_MONAT;
 const KV_AN_GESAMT = KV_BASISSATZ_AN_2026 + KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026;
 const SV_AN_OHNE_PV = RV_SATZ_AN_2026 + KV_AN_GESAMT + AV_SATZ_AN_2026;
 
-// Mapping Römisch → Numerisch für berechneLohnsteuerJahr (§ 39b EStG PAP).
+// Mapping Römisch → Numerisch für berechneBruttoNetto (§ 39b EStG PAP).
 const KLASSE_NUM: Record<Steuerklasse, 1 | 2 | 3 | 4 | 5 | 6> = {
   I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6,
 };
-
-// Monatslohnsteuer über zentrale LSt-Lib (§ 39b EStG PAP 2026) —
-// kein erfundener Steuerklassen-Faktor für V/VI mehr. Jahresfreibetrag 0,
-// weil Midijob-Rechner keinen ELStAM-Freibetrag modelliert.
-function lohnsteuerMonat(brutto: number, klasse: Steuerklasse): number {
-  const jahr = Math.max(0, brutto * 12);
-  const lstJahr = berechneLohnsteuerJahr(jahr, KLASSE_NUM[klasse], 0);
-  return Math.max(0, lstJahr / 12);
-}
 
 export default function MidijobRechner() {
   const [brutto, setBrutto] = useState('1200');
@@ -67,9 +60,10 @@ export default function MidijobRechner() {
   const ergebnis = useMemo(() => {
     const b = parseDeutscheZahl(brutto) || 0;
 
-    // Zwei separate Bemessungsgrundlagen nach § 20a SGB IV (seit 01.10.2022):
-    //  - BE_gesamt (Abs. 2): für Gesamtbeitrag und RV-Entgeltpunkte § 163 SGB VI
-    //  - BE_AN (Abs. 2a): für AN-Beitragsanteil (startet bei UG mit 0)
+    // Zwei separate Bemessungsgrundlagen nach § 20 Abs. 2a SGB IV (seit 01.10.2022):
+    //  - BE_gesamt (Satz 1): für den Gesamtbeitrag und den PV-Zuschlag für Kinderlose
+    //  - BE_AN (Satz 6): für den AN-Beitragsanteil (startet bei UG mit 0)
+    // Entgeltpunkte der Rente kommen aus dem tatsächlichen Entgelt (§ 70 Abs. 1a SGB VI).
     // AG trägt Gesamtbeitrag − AN-Anteil (im Übergangsbereich > halbe Last).
     const imBereich = b >= untergrenze && b <= MIDIJOB_OBERGRENZE;
     const beGesamt = imBereich ? berechneBemessungsgrundlageGesamt(b) : b;
@@ -89,23 +83,35 @@ export default function MidijobRechner() {
     const gesamtSvSatz = anSvSatz + agSvSatz;
 
     const gesamtSv = beGesamt * gesamtSvSatz;
-    const anSv = beAn * anSvSatz;
-    // § 20a SGB IV: AG trägt Gesamtbeitrag − AN-Anteil (= deutlich mehr als
+
+    // W163: Arbeitnehmeranteil, Lohnsteuer, Soli und Kirchensteuer aus der zentralen
+    // Brutto-Netto-Berechnung (SSOT). Sie rechnet im Übergangsbereich je Zweig mit BE_AN,
+    // den PV-Zuschlag für Kinderlose aber mit BE_gesamt (§ 20 Abs. 2a SGB IV, DRV), und die
+    // Lohnsteuer nach PAP 2026 mit derselben Vorsorgepauschale wie der Brutto-Netto-Rechner.
+    // Unter der Geringfügigkeitsgrenze trägt der Arbeitnehmer nur den RV-Eigenanteil.
+    // Kinderfreibeträge bleiben wie bisher unberücksichtigt (wirken nur auf Soli und KiSt).
+    const bn = berechneBruttoNetto({
+      bruttoMonat: b,
+      steuerklasse: KLASSE_NUM[klasse],
+      kirchensteuer,
+      kirchensteuersatz: kirchensteuersatzFuer(bundesland),
+      kinderfreibetraege: 0,
+      kinderUnter25: anzahlKinder,
+      bundesland: '',
+      kvArt: 'gesetzlich',
+      kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+      kvPrivatBeitrag: 0,
+      rvBefreit: false,
+      abrechnungszeitraum: 'monat',
+    });
+    const anSv = bn.sozialabgabenGesamt;
+    // § 20 Abs. 2a SGB IV: AG trägt Gesamtbeitrag − AN-Anteil (= deutlich mehr als
     // die Hälfte bei niedrigem AE, weil BE_AN ≪ BE_gesamt in dem Bereich)
     const agSv = Math.max(0, gesamtSv - anSv);
-
-    const lohnsteuer = lohnsteuerMonat(b, klasse);
-
-    // Soli nach § 4 SolzG mit Freigrenze + Milderungszone — nicht mehr harte
-    // 1.000-€-Monats-Schwelle. splitting=false, weil Midijob-Modell
-    // Einzelbetrachtung ist (Partner-zvE nicht vom Rechner erfasst).
-    const lstJahr = lohnsteuer * 12;
-    const soli = berechneSoli(lstJahr, false, 2026) / 12;
-
-    // KiSt je Bundesland (8 % BY/BW, 9 % sonst) — § 51a EStG + Landes-KiStG.
-    const kiSt = kirchensteuer ? berechneKirchensteuerByBundesland(lohnsteuer, bundesland) : 0;
-
-    const netto = b - anSv - lohnsteuer - soli - kiSt;
+    const lohnsteuer = bn.lohnsteuer;
+    const soli = bn.solidaritaet;
+    const kiSt = bn.kirchensteuer;
+    const netto = bn.nettoMonat;
 
     // Vergleich: Reguläre Beschäftigung (AN-SV auf volles Brutto, halber Satz)
     const anSvRegulaer = b * anSvSatz;
@@ -247,7 +253,7 @@ export default function MidijobRechner() {
               <>
                 <tr className="bg-gray-50 dark:bg-gray-700/30">
                   <td colSpan={2} className="px-4 py-1.5 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
-                    Bemessungsgrundlagen § 20a SGB IV
+                    Bemessungsgrundlagen § 20 Abs. 2a SGB IV
                   </td>
                 </tr>
                 <tr>
@@ -322,16 +328,16 @@ export default function MidijobRechner() {
         )}
       </div>
 
-      {/* § 163 Abs. 10 SGB VI — Info-Hinweis: Volle Rentenansprüche trotz reduzierter BE */}
+      {/* § 70 Abs. 1a SGB VI — Info-Hinweis: Volle Rentenansprüche trotz reduzierter BE */}
       {ergebnis.imBereich && (
         <div className="mb-6 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 px-4 py-3 flex gap-2 items-start">
           <span className="text-blue-600 dark:text-blue-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
           <p className="text-xs text-blue-800 dark:text-blue-300 leading-relaxed">
             <strong>Volle SV-Ansprüche trotz reduzierter Beiträge:</strong> Im Übergangsbereich
             zahlen Sie weniger AN-SV, behalten aber die <strong>vollen Ansprüche</strong> auf
-            Krankengeld, Arbeitslosengeld und Rente (§ 163 Abs. 10 SGB VI).
-            Die Rentenpunkte werden auf Basis der Gesamt-Bemessungsgrundlage gutgeschrieben,
-            nicht auf der AN-BE. Der Arbeitgeber trägt den Differenzbetrag zwischen
+            Krankengeld, Arbeitslosengeld und Rente. Die Rentenpunkte werden seit Juli 2019
+            aus dem tatsächlichen Arbeitsentgelt berechnet, nicht aus einer der reduzierten
+            Bemessungsgrundlagen (§ 70 Abs. 1a SGB VI). Der Arbeitgeber trägt den Differenzbetrag zwischen
             Gesamtbeitrag und Ihrem AN-Anteil.
           </p>
         </div>

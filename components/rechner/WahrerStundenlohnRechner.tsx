@@ -42,7 +42,7 @@ function Eingabefeld({ id, label, value, onChange, suffix, type = 'text', inputM
           max={max}
           className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
         />
-        {suffix && <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">{suffix}</span>}
+        {suffix && <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">{suffix}</span>}
       </div>
     </div>
   );
@@ -112,7 +112,7 @@ export default function WahrerStundenlohnRechner() {
           {/* Vergleich: Offiziell vs. Wahr */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700">
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Offizieller Netto-Stundenlohn</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Offizieller Netto-Stundenlohn</p>
               <p className="text-3xl sm:text-4xl font-extrabold text-gray-600 dark:text-gray-400">
                 {formatEuro(ergebnis.offiziellerStundenlohn)} €
               </p>
@@ -125,7 +125,7 @@ export default function WahrerStundenlohnRechner() {
               <p className="text-4xl sm:text-5xl font-extrabold text-red-600 dark:text-red-400">
                 {formatEuro(ergebnis.wahrerStundenlohn)} €
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 {formatEuro(ergebnis.tatsaechlichesNetto)} € &divide; {ergebnis.tatsaechlicheStundenMonat.toFixed(0)} h
               </p>
             </div>
@@ -136,7 +136,7 @@ export default function WahrerStundenlohnRechner() {
             <p className="text-lg text-gray-700 dark:text-gray-300">
               Sie verdienen <strong className="text-red-600 dark:text-red-400">wirklich {formatEuro(ergebnis.differenzStundenlohn)} € weniger</strong> pro Stunde als Sie denken.
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               Das sind <strong>{ergebnis.differenzProzent.toFixed(0)} %</strong> weniger &ndash; oder <strong>{formatEuro(ergebnis.jahresverlust)} € pro Jahr</strong>.
             </p>
           </div>
@@ -222,7 +222,7 @@ export default function WahrerStundenlohnRechner() {
                 <>Ihr wahrer Stundenlohn liegt <strong>auf den Cent gleichauf</strong>.</>
               )}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               Verglichen wird Ihr Netto je tats&auml;chlicher Stunde mit dem Netto je bezahlter Mindestlohn-Stunde, beides Steuerklasse I ohne Kinder. Arbeitsweg und Kosten des Mindestlohn-Jobs sind nicht eingerechnet.
             </p>
           </div>

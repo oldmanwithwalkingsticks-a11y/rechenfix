@@ -104,7 +104,7 @@ Dank Prompts 87/88/91 greifen folgende Anpassungen automatisch — **kein manuel
 | 01.07.2026 | Pfändungs-Grundfreibetrag | 1.555,00 € → 1.587,40 € | BGBl. 2026 I Nr. 80 |
 | 01.07.2026 | Pfändungs-Zuschlag 1. Unterhalt | 585,23 € → 597,42 € | BGBl. 2026 I Nr. 80 |
 | 01.07.2026 | Pfändungs-Zuschlag 2.–5. Unterhalt | 326,04 € → 332,83 € | BGBl. 2026 I Nr. 80 |
-| 01.01.2027 | Mindestlohn | 13,90 € → 14,60 € | Vierte MiLoV |
+| 01.01.2027 | Mindestlohn | 13,90 € → 14,60 € | Fünfte MiLoV |
 | 01.01.2027 | Minijob-Grenze | 603 € → 633 € | automatisch via Kopplung |
 
 **Kontroll-Termine:**

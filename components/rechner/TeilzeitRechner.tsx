@@ -251,7 +251,7 @@ export default function TeilzeitRechner() {
           {ergebnis.bruttoDifferenzProzent > ergebnis.nettoDifferenzProzent && (
             <div className="bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl p-4 mb-6">
               <p className="text-green-800 dark:text-green-300 text-sm">
-                <strong>Progressionsvorteil:</strong> Ihr Netto sinkt nur um <strong>{fmtDez(ergebnis.nettoDifferenzProzent)} %</strong> — obwohl Ihr Brutto um <strong>{fmtDez(ergebnis.bruttoDifferenzProzent)} %</strong> sinkt. Durch die niedrigere Steuerlast bei Teilzeit behalten Sie pro verdientem Euro mehr Netto.
+                <strong>Progressionsvorteil:</strong> Ihr Netto sinkt nur um <strong>{fmtDez(ergebnis.nettoDifferenzProzent)} %</strong> — obwohl Ihr Brutto um <strong>{fmtDez(ergebnis.bruttoDifferenzProzent)} %</strong> sinkt. Durch die niedrigere Steuerlast bei Teilzeit — und unter 2.000 € brutto durch die reduzierten Sozialabgaben im Midijob-Bereich — behalten Sie pro verdientem Euro mehr Netto.
               </p>
             </div>
           )}

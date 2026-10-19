@@ -1,5 +1,7 @@
 import { berechneLohnsteuerMitZuschlaegenJahr, monatsanteilPAP, kirchensteuerAusBmg } from './lohnsteuer';
 import { pvAnteilAn2026 } from './pflegeversicherung';
+import { istImUebergangsbereich, berechneBemessungsgrundlageAN, berechneBemessungsgrundlageGesamt } from './midijob-uebergang';
+import { getMinijobGrenzeMonat } from './mindestlohn';
 
 export interface BruttoNettoEingabe {
   bruttoMonat: number;
@@ -121,6 +123,10 @@ export const BBG_RV_MONAT = 8450;      // · 101.400 €/Jahr
 export const KV_BASISSATZ_AN_2026 = 0.073;    // § 241 SGB V: 14,6 % hälftig
 export const RV_SATZ_AN_2026 = 0.093;         // § 158 SGB VI: 18,6 % hälftig
 export const AV_SATZ_AN_2026 = 0.013;         // § 341 SGB III: 2,6 % hälftig
+// Minijob (gewerblich): RV-Eigenanteil des Arbeitnehmers = 18,6 % Beitragssatz − 15 % Arbeitgeberanteil
+// (§ 168 Abs. 1 Nr. 1b SGB VI), wie in minijob.ts. Entfällt bei Befreiung (§ 6 Abs. 1b SGB VI). Die
+// Mindestbemessungsgrundlage für Entgelte unter 175 € ist nicht abgebildet.
+export const RV_EIGENANTEIL_MINIJOB_2026 = 0.036;
 // Alias für interne Verwendung
 const BBG_KV = BBG_KV_MONAT;
 const BBG_RV = BBG_RV_MONAT;
@@ -146,29 +152,61 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     : 0;
 
   // Sozialabgaben
+  // W163: Sonderzonen nach SGB IV.
+  //  - Minijob (bis zur Geringfügigkeitsgrenze, § 8 Abs. 1a SGB IV): Der Arbeitnehmer trägt nur den
+  //    RV-Eigenanteil von 3,6 % (entfällt bei Befreiung). KV, PV und AV zahlt allein der Arbeitgeber.
+  //  - Übergangsbereich (§ 20 Abs. 2a SGB IV, Geringfügigkeitsgrenze + 0,01 € bis 2.000 €): Der
+  //    Arbeitnehmeranteil je Zweig wird aus der reduzierten Bemessungsgrundlage BE_AN (Satz 6)
+  //    berechnet. Der PV-Zuschlag für Kinderlose wird abweichend aus BE_gesamt (Satz 1) berechnet
+  //    und vom Arbeitnehmer allein getragen (DRV, Übergangsbereich; lohn-info.de, Beispiel 2026).
+  //  - Lohnsteuer und Vorsorgepauschale bleiben unberührt: Der Übergangsbereich ist steuerlich
+  //    unbeachtlich.
+  // Einmalzahlungen (Weihnachtsgeld) rechnen unten weiter mit den regulären Sätzen.
+  const minijob = brutto > 0 && brutto <= getMinijobGrenzeMonat();
+  const uebergang = istImUebergangsbereich(brutto);
+  const beAn = uebergang ? Math.round(berechneBemessungsgrundlageAN(brutto) * 100) / 100 : brutto;
+  const beGesamt = uebergang ? Math.round(berechneBemessungsgrundlageGesamt(brutto) * 100) / 100 : brutto;
+
   let krankenversicherung: number;
   if (eingabe.kvArt === 'privat') {
     krankenversicherung = eingabe.kvPrivatBeitrag;
+  } else if (minijob) {
+    krankenversicherung = 0;
   } else {
-    const kvBrutto = Math.min(brutto, BBG_KV);
+    const kvBrutto = Math.min(beAn, BBG_KV);
     const kvBasis = Math.round(kvBrutto * 0.073 * 100) / 100;
     const kvZusatz = Math.round(kvBrutto * (eingabe.kvZusatzbeitrag / 200) * 100) / 100;
     krankenversicherung = kvBasis + kvZusatz;
   }
 
-  const rvBrutto = Math.min(brutto, bbgRv);
-  const rentenversicherung = eingabe.rvBefreit ? 0 : Math.round(rvBrutto * 0.093 * 100) / 100;
+  const rvBrutto = Math.min(beAn, bbgRv);
+  const rentenversicherung = eingabe.rvBefreit
+    ? 0
+    : minijob
+    ? Math.round(brutto * RV_EIGENANTEIL_MINIJOB_2026 * 100) / 100
+    : Math.round(rvBrutto * 0.093 * 100) / 100;
 
-  const avBrutto = Math.min(brutto, bbgRv);
-  const arbeitslosenversicherung = Math.round(avBrutto * 0.013 * 100) / 100;
+  const avBrutto = Math.min(beAn, bbgRv);
+  const arbeitslosenversicherung = minijob ? 0 : Math.round(avBrutto * 0.013 * 100) / 100;
 
   // PV-AN-Satz nach § 55 Abs. 3 SGB XI — Kinderlos-Zuschlag UND Kinderabschlag (2.–5. Kind).
   // Anzahl berücksichtigungsfähiger Kinder unter 25: bevorzugt das explizite Feld;
   // Fallback für Abwärtskompatibilität aus `kinderfreibetraege` (ganzzahlig gerundet).
-  const pvBrutto = Math.min(brutto, BBG_KV);
   const kinderUnter25 = eingabe.kinderUnter25 ?? Math.floor(eingabe.kinderfreibetraege);
   const pvSatz = pvAnteilAn2026(kinderUnter25);
-  const pflegeversicherung = Math.round(pvBrutto * pvSatz * 100) / 100;
+  // Zuschlag für Kinderlose getrennt, weil er im Übergangsbereich aus BE_gesamt berechnet wird
+  // (pvAnteilAn2026 mit hatKindGehabt = true liefert denselben Satz ohne Zuschlag).
+  const pvZuschlag = pvSatz - pvAnteilAn2026(kinderUnter25, true, true);
+  let pflegeversicherung: number;
+  if (minijob) {
+    pflegeversicherung = 0;
+  } else if (uebergang) {
+    pflegeversicherung = Math.round(beAn * (pvSatz - pvZuschlag) * 100) / 100
+      + Math.round(beGesamt * pvZuschlag * 100) / 100;
+  } else {
+    const pvBrutto = Math.min(brutto, BBG_KV);
+    pflegeversicherung = Math.round(pvBrutto * pvSatz * 100) / 100;
+  }
 
   const steuernGesamt = lohnsteuer + solidaritaet + kirchensteuer;
   const sozialabgabenGesamt = krankenversicherung + rentenversicherung + arbeitslosenversicherung + pflegeversicherung;

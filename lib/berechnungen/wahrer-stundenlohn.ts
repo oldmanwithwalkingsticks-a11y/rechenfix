@@ -41,8 +41,8 @@ export interface WahrerStundenlohnErgebnis {
 // Netto über die zentrale Brutto-Netto-Berechnung (PAP 2026, § 32a EStG, SV-Sätze 2026) mit festen
 // Annahmen: Steuerklasse I, keine Kinder, keine Kirchensteuer, gesetzlich versichert mit dem
 // durchschnittlichen Zusatzbeitrag. Ersetzt seit Welle 162 die frühere Pauschal-Schätzung, die u. a.
-// einen Soli ab 81 € Lohnsteuer im Monat abzog. Übergangsbereich (Midijob) bildet berechneBruttoNetto
-// nicht ab.
+// einen Soli ab 81 € Lohnsteuer im Monat abzog. Minijob und Übergangsbereich (Midijob) bildet
+// berechneBruttoNetto seit Welle 163 ab.
 function nettoStandard(brutto: number): number {
   if (brutto <= 0) return 0;
   return berechneBruttoNetto({
