@@ -225,7 +225,7 @@ export default function NebenjobRechner() {
               </div>
               {kirchensteuer === 'ja' && (
                 <div className="flex justify-between px-4 py-2.5">
-                  <span className="text-gray-600 dark:text-gray-400">− Kirchensteuer (9 %)</span>
+                  <span className="text-gray-600 dark:text-gray-400">− Kirchensteuer ({kistSatzProzent} %)</span>
                   <span className="tabular-nums text-red-600 dark:text-red-400">
                     {ergebnis.nebenjobKirchensteuer > 0
                       ? `−${fmt(ergebnis.nebenjobKirchensteuer)} €`
@@ -247,6 +247,25 @@ export default function NebenjobRechner() {
                   {fmt(ergebnis.nebenjobNettoMonat)} €
                 </span>
               </div>
+              {/* W171: geschätzte Nachzahlung oder Erstattung aus der Pflicht-Steuererklärung (Klasse VI) */}
+              {ergebnis.steuerNachErklaerungJahr !== 0 && (
+                <>
+                  <div className="flex justify-between px-4 py-2.5">
+                    <span className="text-gray-600 dark:text-gray-400">
+                      Steuererklärung, geschätzt: {ergebnis.steuerNachErklaerungJahr > 0 ? 'Nachzahlung' : 'Erstattung'} im Jahr
+                    </span>
+                    <span className={`tabular-nums ${ergebnis.steuerNachErklaerungJahr > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+                      {ergebnis.steuerNachErklaerungJahr > 0 ? '−' : '+'}{fmt(Math.abs(ergebnis.steuerNachErklaerungJahr))} €
+                    </span>
+                  </div>
+                  <div className="flex justify-between px-4 py-3 font-semibold">
+                    <span className="text-gray-800 dark:text-gray-200">Netto-Zuwachs nach der Steuererklärung</span>
+                    <span className="tabular-nums text-gray-800 dark:text-gray-200">
+                      {fmt(ergebnis.nettoZuwachsNachErklaerungJahr)} € im Jahr ({fmt(ergebnis.nettoZuwachsNachErklaerungJahr / 12)} € im Monat)
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -275,6 +294,9 @@ export default function NebenjobRechner() {
                   { label: 'Netto-Zuwachs / Monat', wert: `+ ${fmt(ergebnis.nettoZuwachsMonat)} €` },
                   { label: 'Netto-Zuwachs / Jahr', wert: `+ ${fmt(ergebnis.nettoZuwachsJahr)} €` },
                   { label: 'Steuerbelastung Nebenjob', wert: `${ergebnis.steuerbelastungNebenjob.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %` },
+                  ...(ergebnis.steuerNachErklaerungJahr !== 0
+                    ? [{ label: 'Netto-Zuwachs nach Steuererklärung / Jahr', wert: `${fmt(ergebnis.nettoZuwachsNachErklaerungJahr)} €` }]
+                    : []),
                 ],
               },
             ]}
@@ -286,7 +308,7 @@ export default function NebenjobRechner() {
               hauptjobBrutto: `${fmt(parseDeutscheZahl(hauptjobBrutto))} €`,
               nebenjobArt: ergebnis.artLabel,
               nebenjobBrutto: `${fmt(parseDeutscheZahl(nebenjobBrutto))} €/Monat`,
-              kirchensteuer: kirchensteuer === 'ja' ? 'Ja (9 %)' : 'Nein',
+              kirchensteuer: kirchensteuer === 'ja' ? `Ja (${kistSatzProzent} %)` : 'Nein',
             }}
             ergebnis={{
               hauptjobNetto: `${fmt(ergebnis.hauptjobNettoMonat)} €`,
@@ -295,6 +317,7 @@ export default function NebenjobRechner() {
               nettoZuwachsMonat: `+${fmt(ergebnis.nettoZuwachsMonat)} €`,
               nettoZuwachsJahr: `+${fmt(ergebnis.nettoZuwachsJahr)} €`,
               steuerbelastungNebenjob: `${ergebnis.steuerbelastungNebenjob.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %`,
+              steuerNachErklaerungJahr: `${fmt(ergebnis.steuerNachErklaerungJahr)} € (positiv = Nachzahlung)`,
               hinweis: ergebnis.hinweis,
             }}
           />
