@@ -6,6 +6,81 @@
 
 ---
 
+## 19.10.2026 — Welle 170: Nettolohn-Optimierer — Pauschalsteuer bei Essensmarken und Internet, bAV-Grenzen 2026, Social-Kachel — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Beim Abgleich der Social-Captions für Welle 169 fielen im Nettolohn-Optimierer drei Rechtsfehler auf.
+Recherche am 19.10.2026 im Gesetzestext (EStG Stand 29.06.2026, SvEV Stand 16.01.2026). Prompt Fassung 2:
+Bildgenerator mit `G:/Python314/python.exe`.
+
+**Befunde:**
+1. **Essensmarken:** Rechner und Texte nannten „bis 7,67 €/Arbeitstag steuerfrei“ und setzten die
+   Arbeitgeberkosten gleich dem Zuschuss. Die Marke darf den Sachbezugswert um höchstens 3,10 € übersteigen
+   (BMF-Schreiben vom 18.01.2019, Tz. 1 c); der Sachbezugswert 2026 beträgt 4,57 €/Tag (§ 2 Abs. 1 Satz 2 Nr. 2
+   und Abs. 6 SvEV: 137 € ÷ 30). Diese 4,57 € sind steuerpflichtiger geldwerter Vorteil, wenn der Arbeitnehmer
+   nichts zuzahlt; der Arbeitgeber kann sie pauschal mit 25 % versteuern (§ 40 Abs. 2 Satz 1 Nr. 1 EStG), dann
+   sind sie sozialversicherungsfrei (§ 1 Abs. 1 Satz 1 Nr. 3 SvEV) und für den Arbeitnehmer abgabenfrei.
+   Arbeitgeberkosten bei 15 Tagen 115,05 € → **133,13 €** (115,05 € + 25 % auf 68,55 € = 17,14 € + Soli 0,94 €).
+   „15 Tage“ ist die Vereinfachungsregel aus R 8.1 Abs. 7 Nr. 4 a LStR, keine gesetzliche Obergrenze.
+2. **Internet-Pauschale:** „steuerfrei“, Kosten 50 €. Richtig: pauschale Lohnsteuer 25 %, die der Arbeitgeber
+   übernimmt (§ 40 Abs. 2 Satz 1 Nr. 5 und Abs. 3 EStG), sozialversicherungsfrei. Kosten 50 € → **63,18 €**
+   (50 € + 12,50 € + 0,68 € Soli).
+3. **bAV:** „bis 302 €/Monat steuer- und SV-frei“ (4 % der BBG 2024). 2026 bei BBG RV 101.400 € (§ 4 Abs. 1
+   SVBezGrV 2026): steuerfrei 8 % = **676 €/Monat** (§ 3 Nr. 63 EStG), sozialversicherungsfrei 4 % = **338 €/Monat**
+   (§ 1 Abs. 1 Satz 1 Nr. 9 SvEV). Dieselbe falsche Zahl stand in einer FAQ des Gehaltserhöhung-Rechners.
+4. **Social-Caption `nettolohn-optimierer`:** „Brutto-Erhöhung ~200 € → nur 105 € netto“, „Essenszuschuss: 144,60 €
+   steuerfrei“, „Jobticket: bis 230 € steuerfrei“, „200 € als Essenszuschuss statt Brutto bringen 40 € mehr
+   netto“, Headline „+ 40 € netto“ → Brutto +200 € → 109,75 € netto bei 242,30 € Arbeitgeberkosten;
+   Essensmarken 115,05 € netto bei 133,13 €; Ticket 63 €, Gutschein 50 €; Ticket, Gutschein und Essensmarken
+   zusammen 228 € netto für 246,13 € Arbeitgeberkosten. Headline „228 € statt 110 € netto“, neues Bild.
+- **Kleinere Korrekturen:** „rund 105 bis 120 € netto“ → rund 110 € (bei 3.500 €); Deutschlandticket: der Zuschuss
+  mindert die Entfernungspauschale (§ 3 Nr. 15 Satz 3 EStG); Vergleichstabelle „steuerfrei, endgültig“ → „für
+  Sie abgabenfrei, endgültig“.
+
+**Belege** (aus dem Prompt, in der Chat-Sitzung vom 19.10.2026 im Gesetzestext geprüft, nicht in diesem Lauf;
+die Beträge 133,13 € und 63,18 € sind hier aus der Formel der Komponente nachgerechnet):
+- § 3 Nr. 15 und Nr. 63, § 8 Abs. 2, § 40 Abs. 2 und 3 EStG.
+- § 1 und § 2 SvEV.
+- § 4 SVBezGrV 2026.
+- BMF-Schreiben vom 18.01.2019.
+- R 8.1 Abs. 7 LStR.
+
+**Änderungen** (21 Ersetzungen und 2 Datumszeilen = 23 in 3 Dateien, Vorlage
+`_lokal/welle170-nettolohn-optimierer.mjs`, nicht committet; dazu das neu erzeugte Bild):
+- **`components/rechner/NettolohnOptimiererRechner.tsx`:** Helfer `mitPauschalsteuer` (25 % Lohnsteuer, Soli
+  5,5 % mit abgeschnittenen Cent-Bruchteilen, § 4 SolzG; Kirchensteuer auf die Pauschalsteuer nicht
+  eingerechnet); Essensmarken mit Pauschalsteuer auf den Sachbezugswert-Anteil (4,57/7,67); Internet mit
+  Pauschalsteuer; bAV-Deckel 302 → 676 €; vier Beschreibungstexte (Deutschlandticket mit Hinweis auf die
+  Entfernungspauschale).
+- **`lib/rechner-config/finanzen.ts`:** Nettolohn-Optimierer mit Beispiel, Kommentar, Übersichtstabelle,
+  Beispielrechnung, 200-€-Tabelle (Essensmarken 115,05 → 133,13 €, Internet 50,00 → 63,18 € AG-Kosten), drei
+  Textabschnitten, Statistik (bAV 302 → 676 €, SV-frei 338 €), Vergleich, drei FAQ und Quellen (neu § 40 EStG);
+  Gehaltserhöhung eine FAQ; `letzteAktualisierung` von `nettolohn-optimierer` und `gehaltserhoehung-rechner`
+  → `2026-10-19` (Nettolohn-Optimierer stand seit Welle 166 schon darauf).
+- **`lib/social/captions.json`:** Eintrag `nettolohn-optimierer`, beide Captions und `socialHeadline`.
+- **`public/social-posts/nettolohn-optimierer.png`** neu erzeugt: „GEHALTSHACK / Nettolohn-Optimierer / 228 €
+  statt 110 € netto“, angesehen.
+
+**Bewusst nicht geändert:** die Brutto-Erhöhung (Wellen 166 und 167), andere Captions und Bilder, der
+Nebenjob-Rechner (Welle 171). Lesende Suche nach der alten bAV-Grenze: Außer dem neuen Kommentar („vorher 302 €
+= Wert 2024“) nennt kein Text in `lib`, `components` oder `app` mehr 302 € für die bAV; die übrigen Treffer
+für „302 €“ betreffen Nebenjob-Netto, Rechtsschutz und BAföG.
+
+**Gates:**
+- Phase 0 an `4002949`: `git status` leer, oben im Log `4002949` und `b94ddee` (Welle 169). „Bis 302“
+  `NettolohnOptimiererRechner.tsx:1`, `agKosten: cap(115.05)` `NettolohnOptimiererRechner.tsx:1`, „+ 40 € netto“
+  `captions.json:1`.
+- Phase 1: „OK — 23 Ersetzungen in 3 Dateien.“, Exit 0, „JSON ok“; geändert genau die 3 Dateien.
+- Phase 2: Greps „Bis 302“ keine Ausgabe; `mitPauschalsteuer` `NettolohnOptimiererRechner.tsx:3`; „133,13“
+  `finanzen.ts:6` und `captions.json:2`; „676 €“ `NettolohnOptimiererRechner.tsx:1` und `finanzen.ts:5`;
+  „228 € statt 110 € netto“ `captions.json:1`. Bildgenerator „Generated: 1“, „Skipped: 0“, „Failed: 0“;
+  `git status` zusätzlich nur das PNG. `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei
+  bekannten Warnungen; im gebauten HTML von `/finanzen/nettolohn-optimierer` „133,13“ 9×, „676 €“ 6×, „Bis
+  302“ fehlt; in `/finanzen/gehaltserhoehung-rechner` kein „302 €“.
+
+**Commits:** A `72bc1b6` (die 3 Dateien und das Bild). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 169: Social-Kacheln nach den Wellen 165 bis 168 — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Die Wellen 165 bis 168 haben Zahlen geändert, die in `lib/social/captions.json` stehen. Beim
