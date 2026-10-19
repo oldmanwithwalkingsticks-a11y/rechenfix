@@ -6,6 +6,88 @@
 
 ---
 
+## 19.10.2026 — Welle 171: Nebenjob-Rechner auf den zentralen Libs — Minijob mit RV, Klasse VI nach PAP mit Nachzahlung, Texte, Social-Kachel — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Beim Abgleich der Minijob-Texte für Welle 167 fiel auf, dass `lib/berechnungen/nebenjob.ts` mit eigenen
+Pauschalen rechnete und die Texte des Nebenjob-Rechners darauf aufbauten. Prompt Fassung 2: Bildgenerator mit
+`G:/Python314/python.exe`.
+
+**Befunde:**
+1. **Hauptjob-Netto:** eigene Schätzung ohne Vorsorgepauschale, 3.500 € → 2.118,58 €. Richtig
+   (`berechneBruttoNetto`, PAP 2026): **2.333,25 €**.
+2. **Minijob:** „Keine Steuern und keine Sozialversicherungsbeiträge, Netto = Brutto“. Pflicht ist der
+   RV-Eigenanteil von 3,6 % (§ 168 Abs. 1 Nr. 1b SGB VI), Befreiung nur auf Antrag (§ 6 Abs. 1b SGB VI). 450 € →
+   **433,80 €** statt 450 €. Über 603 € rechnete der Rechner trotzdem „Minijob“ (800 € → 800 € netto); jetzt wie
+   Steuerkarte.
+3. **Steuerkarte (Klasse VI):** pauschal 25 % Lohnsteuer und 20,4 % SV, 450 € → 245,70 €. Richtig: Lohnsteuer nach
+   PAP 2026 in Klasse VI (50,25 € bei 450 €); bis 603 € ist der zweite Job sozialversicherungsrechtlich ein Minijob,
+   also nur 3,6 % RV (§ 8 Abs. 2 Satz 1 SGB IV); Ergebnis **383,55 €** im Monat. Die Texte sagten „oft eine
+   Erstattung“ und „Lohnsteuer in Klasse VI bewusst hoch angesetzt“. Bei 3.500 € Hauptjob hält Klasse VI zu wenig
+   ein; die Pflichtveranlagung (§ 46 Abs. 2 Nr. 2 EStG) bringt eine Nachzahlung, 953 € im Jahr bei 450 €, 1.597 €
+   bei 1.000 €. Der Rechner zeigt diese Schätzung jetzt mit an.
+4. **Selbstständig:** zvE ohne Vorsorgeaufwendungen, dadurch zu hoch; jetzt mit RV-, KV- (ohne 4 %
+   Krankengeldanteil) und PV-Anteil des Arbeitnehmers (§ 10 Abs. 1 Nr. 2 und 3 EStG). Härteausgleich nur „bis 410 €
+   steuerfrei“; jetzt zusätzlich der gemilderte Abzug bis 820 € (§ 46 Abs. 3 und 5 EStG, § 70 EStDV). 450 € →
+   315,33 € statt 302,17 €.
+5. **Kleinkram:** Kirchensteuer-Zeile und KI-Erklärung zeigten immer „9 %“, auch in Bayern und Baden-Württemberg.
+6. **Social-Caption `nebenjob-rechner`:** „Minijob 450 € → 450 €“, „Steuerkarte ~250 €“, „~44 % abgezogen“, „2.400 €
+   weniger im Jahr“, Headline „+ 250 € netto“ → 433,80 € / 383,55 € / nach der Steuererklärung rund 304 €,
+   Nachzahlung rund 950 €, gut 1.500 € im Jahr. Headline „434 € statt 304 €“, neues Bild.
+
+**Neue Werte** (Hauptjob 3.500 €, Klasse I, kinderlos, ohne Kirchensteuer):
+
+| Nebenjob | Minijob | Steuerkarte im Monat | nach Steuererklärung | selbstständig |
+|---|---|---|---|---|
+| 450 € | 433,80 € | 383,55 € | ≈ 304 € | 315,33 € |
+| 600 € | 578,40 € | 511,40 € | ≈ 404 € | 418,58 € |
+| 1.000 € | – | 670,75 € | ≈ 538 € | 689,33 € |
+| 1.500 € | – | 999,17 € | ≈ 797 € | 1.018,42 € |
+
+**Belege** (aus dem Prompt, in der Chat-Sitzung vom 19.10.2026 geprüft, nicht in diesem Lauf; die Zahlen
+bestätigen hier Probe und Lib-Prüfung):
+- § 8 Abs. 2 SGB IV.
+- § 6 Abs. 1b und § 168 Abs. 1 Nr. 1b SGB VI.
+- § 10 Abs. 1 Nr. 2 und 3, § 46 Abs. 2 bis 5 EStG.
+- § 70 EStDV.
+
+**Grenze der Rechnung:** Bei einem Steuerkarten-Job bis 603 € rechnet der PAP die Vorsorgepauschale wie bei einem
+regulären Job; die Lohnsteuer in Klasse VI liegt dort etwas zu niedrig.
+
+**Änderungen** (28 Ersetzungen in 4 Dateien, Vorlage `_lokal/welle171-nebenjob.mjs`, nicht committet;
+Rechenprobe `_lokal/welle171-probe.mjs`, Lib-Prüfung `_lokal/welle171-lib.mts`; dazu das neu erzeugte Bild):
+- **`lib/berechnungen/nebenjob.ts`, 7:** Hauptjob über `berechneBruttoNetto`; Minijob über `berechneMinijob`
+  (RV-Eigenanteil), über der Minijob-Grenze (`getMinijobGrenzeMonat(SV_RECHENSTAND)`) wie Steuerkarte;
+  Steuerkarte über `berechneBruttoNetto` mit Klasse 6 plus geschätzte Nachzahlung (neue Felder
+  `steuerNachErklaerungJahr`, `nettoZuwachsNachErklaerungJahr`); selbstständig mit Vorsorgeaufwendungen und
+  `haerteausgleich()`; Kirchensteuersatz über `kirchensteuersatzFuer`. Die eigene Schätzfunktion
+  `berechneHauptjobNetto` mit hartkodierten BBG entfällt.
+- **`components/rechner/NebenjobRechner.tsx`, 5:** zwei neue Zeilen in der Aufschlüsselung (Nachzahlung oder
+  Erstattung, Netto-Zuwachs nach der Steuererklärung), PDF-Zeile und KI-Feld, Kirchensteuersatz je Bundesland.
+- **`lib/rechner-config/finanzen.ts`, Block `nebenjob-rechner`, 15:** Beispiel, vier FAQ, sieben Textabschnitte,
+  Vergleiche, Tabelle, Statistik, Checkliste, Infoboxen; Quelle § 46 EStG; `letzteAktualisierung` → `2026-10-19`.
+- **`lib/social/captions.json`, 1:** Eintrag `nebenjob-rechner`, beide Captions und `socialHeadline`.
+- **`public/social-posts/nebenjob-rechner.png`** neu erzeugt: „NEBENJOB / Nebenjob-Rechner / 434 € statt 304 €“,
+  angesehen.
+
+**Bewusst nicht geändert:** `brutto-netto.ts`, `minijob.ts`, die Lohnsteuer-Libs, andere Captions und Bilder. Ein
+Verify-Skript für `nebenjob.ts` gibt es nicht; einziger Abnehmer der Lib ist `NebenjobRechner.tsx`.
+
+**Gates:**
+- Phase 0 an `56b7e2a`: `git status` leer, oben im Log `56b7e2a` und `72bc1b6` (Welle 170). „0.204“
+  `nebenjob.ts:1`, „245,70“ `finanzen.ts:4`, „+ 250 € netto“ `captions.json:1`.
+- Phase 1: „OK — 28 Ersetzungen in 4 Dateien.“, Exit 0, „JSON ok“; geändert genau die 4 Dateien.
+- Phase 2: Probe 8× OK, Exit 0; Lib-Prüfung 16× OK, Exit 0 (Klasse VI 450 €: Lohnsteuer 50,25 €, netto
+  383,55 €, Nachzahlung 953,00 €, nach Erklärung 304,13 €/Monat; 1.000 €: Nachzahlung 1.597,00 €; Härteausgleich
+  300 / 600 / 900 → 300 / 220 / 0). Greps: „245,70“, `nebenjobBrutto * 0.25` und „oft eine Erstattung“ keine
+  Ausgabe; „433,80“ `finanzen.ts:7` und `captions.json:2`; `steuerNachErklaerungJahr` `NebenjobRechner.tsx:6`
+  und `nebenjob.ts:5`. Bildgenerator „Generated: 1“, „Skipped: 0“, „Failed: 0“; `git status` zusätzlich nur das
+  PNG. `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen; im gebauten HTML
+  von `/finanzen/nebenjob-rechner` „433,80“ 15×, „Pflichtveranlagung“ 4×, „245,70“ fehlt.
+
+**Commits:** A `d396d13` (die 4 Dateien und das Bild). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 170: Nettolohn-Optimierer — Pauschalsteuer bei Essensmarken und Internet, bAV-Grenzen 2026, Social-Kachel — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Beim Abgleich der Social-Captions für Welle 169 fielen im Nettolohn-Optimierer drei Rechtsfehler auf.
