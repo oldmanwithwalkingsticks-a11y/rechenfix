@@ -6,6 +6,112 @@
 
 ---
 
+## 19.10.2026 — Welle 166: Übergangsbereich einheitlich — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Offene Punkte 4, 5, 6 und 9 aus dem Historienblock von Welle 163, dazu drei Befunde beim Bau der
+Welle (3, 5 und die Datumslogik in Befund 1).
+
+**Befunde:**
+1. **Datumsmischung ab 01.01.2027** (offener Punkt 4): `getMinijobGrenzeMonat()` springt am 01.01.2027 per
+   Datum auf 633 €, `midijob-parameter.ts` kennt aber nur 2026 (G = 603, F = 0,6619), und alle Beitragssätze
+   und der Lohnsteuer-PAP in `brutto-netto.ts` sind Stand 2026. Ab Neujahr wären Grenze und Formeln aus
+   verschiedenen Jahren gemischt worden.
+2. **Arbeitgeberanteil** (offener Punkt 5): Der Nettolohn-Optimierer rechnete die Arbeitgeberkosten pauschal
+   mit `AG_SV_QUOTE = 0.2035` (alter Zusatzbeitrag, ohne Midijob- und Minijob-Regel); 2026 sind es regulär
+   21,15 %, 200 € brutto kosten den Arbeitgeber 242,30 € statt 240,70 €. `berechneSvJahr` im
+   Steuerklassen-Vergleich rechnete mit vollen Sätzen; ein Partner mit 20.000 € im Jahr (1.666,67 € im Monat,
+   Übergangsbereich) zahlt 322,07 € statt 352,50 € im Monat.
+3. **Midijob-Beispiel „Wer zahlt was“:** Gesamtbeitrag mit einem Satz auf BE_gesamt (366,39 €). Amtlich wird je
+   Zweig der halbe Satz gerundet und verdoppelt: 366,38 €, davon Arbeitgeber 241,05 € (statt 241,06 €).
+4. **Paragrafen** (offener Punkt 6): Kommentare in `midijob-parameter.ts`, `midijob-uebergang.ts` und
+   `verify-midijob-p1.ts` nannten „§ 20a SGB IV“ (richtig § 20 Abs. 2 und 2a, Satz 1 BE_gesamt, Satz 6 BE_AN)
+   und § 163 Abs. 10 SGB VI für die Entgeltpunkte (richtig § 70 Abs. 1a SGB VI, seit 01.07.2019); dazu ein
+   Code-Kommentar im Minijob-Block, die Tabellen in `CLAUDE.md` und `rechenfix-projekt-referenz.md` sowie
+   `.claude/skills/rechner-builder/SKILL.md`.
+5. **Faktor F:** Der Midijob-Rechner schrieb „jährlich neu von den SV-Spitzenverbänden festgesetzt (§ 20a Abs. 2
+   SGB IV …)“, die Statistik im Config-Block „jährlich vom BMAS festgesetzt“. Richtig: Das BMAS gibt F im
+   Bundesanzeiger bekannt (§ 20 Abs. 2a SGB IV).
+6. **Skill** (offener Punkt 9): `.claude/skills/rechner-builder/references/templates.md` nannte die
+   „6. Mindestlohnanpassungsverordnung“; richtig ist die Fünfte (MiLoV5 vom 05.11.2025).
+
+**Belege** (aus dem Prompt, in der Chat-Sitzung vom 19.10.2026 geprüft, nicht in diesem Lauf; die Zahlen
+bestätigen hier Probe, Lib-Prüfung und die Verify-Skripte):
+- § 20 Abs. 2 und 2a SGB IV.
+- § 70 Abs. 1a SGB VI.
+- lohn-info.de, Übergangsbereich 2026: AE 1.000 €, Zusatzbeitrag 3,0 % → Arbeitgeber 241,62 €.
+- § 1 MiLoV5 vom 05.11.2025.
+
+**Änderungen** (65 Ersetzungen in 15 Dateien, Vorlage `_lokal/welle166-sv-uebergang.mjs`, nicht committet;
+Rechenprobe `_lokal/welle166-probe.mjs`, Lib-Prüfung `_lokal/welle166-lib.mts`):
+- **`lib/berechnungen/brutto-netto.ts`, 4:** neue Konstante `SV_RECHENSTAND = 2026-07-01`; Minijob-Grenze und
+  Übergangsbereich in `berechneBruttoNetto` zu diesem Stichtag; neuer Helfer
+  `berechneArbeitgeberSvMonat(brutto, zusatzbeitrag)` (Minijob 13 % + 15 %; Übergangsbereich Gesamtbeitrag je
+  Zweig aus BE_gesamt minus AN-Anteil je Zweig aus BE_AN; sonst halbe Sätze bis BBG); Import
+  `PV_BASIS_SATZ_2026`.
+- **`lib/berechnungen/midijob-uebergang.ts`, 9:** `getMidijobUntergrenze` aus `geringfuegigkeitsgrenzeG` des
+  Buckets statt aus `mindestlohn.ts` (Import entfällt); Paragrafen in den Kommentaren.
+- **`lib/berechnungen/midijob-parameter.ts`, 8, und `scripts/verify-midijob-p1.ts`, 10:** nur Kommentare und
+  Quellenangaben, keine Sollwerte. Ein `163 Abs. 10` bleibt in `midijob-parameter.ts` (BE_gesamt in der RV,
+  richtig).
+- **`lib/berechnungen/steuerklassen-vergleich.ts`, 2:** `berechneSvJahr` über `berechneBruttoNetto`
+  (`kinderUnter25: 1`, PV wie bisher ohne Staffel), Importe angepasst.
+- **`components/rechner/MidijobRechner.tsx`, 8:** Untergrenze, BE und Parameter zum `SV_RECHENSTAND`, BE auf
+  Cent gerundet; AG-Anteil aus `berechneArbeitgeberSvMonat`, Gesamtbeitrag = AG + AN; `agSvSatz` und
+  `gesamtSvSatz` entfallen; F-Faktor-Satz „vom Bundesarbeitsministerium im Bundesanzeiger bekannt gegeben
+  (§ 20 Abs. 2a SGB IV)“.
+- **`components/rechner/NettolohnOptimiererRechner.tsx`, 3:** `AG_SV_QUOTE` entfällt; AG-Kosten = Erhöhung +
+  AG-SV(alt + Erhöhung) − AG-SV(alt).
+- **`components/rechner/BruttoNettoRechner.tsx`, 2, und `SchnellCheck.tsx`, 2:**
+  `getMinijobGrenzeMonat(SV_RECHENSTAND)`.
+- **`lib/rechner-config/finanzen.ts`, 11:** Midijob 366,39 → 366,38 € und AG 241,06 → 241,05 €, Rechenweg „je
+  Zweig halber Satz auf BE_gesamt, gerundet, verdoppelt“, „festgesetzt“ → „bekannt gegeben“;
+  Nettolohn-Optimierer 240,70 → 242,30 € und „× 1,2035“ → „+ 21,15 % AG-SV“, „etwa/rund 20 %“ → „gut 21 %“;
+  Kommentar im Minijob-Block § 20a → § 20 Abs. 2; `letzteAktualisierung` von Nettolohn-Optimierer
+  (`2026-06-25`) und Steuerklassen-Vergleich (`2026-06-22`) → `2026-10-19`, Midijob stand schon darauf.
+- **`lib/termine.ts`, 1:** neuer Termin `midijob-parameter-2027` am 01.12.2026 (Faktor F 2027 aus der
+  BMAS-Bekanntmachung, Bucket `MIDIJOB_2027` mit G 633 €, `SV_RECHENSTAND` erst nach Zusatzbeitrag, BBG und PAP
+  2027 umstellen, PV-Zuschlag 2027 prüfen); Text von `switch-wirksamkeit-2027` ergänzt.
+- **Doku und Skill:** `CLAUDE.md` (2, Tabellen; der Eintrag zu Prompt 115a bleibt als Historie),
+  `rechenfix-projekt-referenz.md` (1), `.claude/skills/rechner-builder/SKILL.md` (1),
+  `.claude/skills/rechner-builder/references/templates.md` (1, Fünfte MiLoV).
+
+**Bewusst nicht geändert:** `mindestlohn.ts`, `minijob.ts` (Mindestlohn- und Minijob-Rechner wechseln weiter
+automatisch am 01.01.2027); Weihnachtsgeld, Steuerklasse VI und die 175-€-Mindestbemessung (Welle 167);
+Kurzarbeitergeld (Welle 168); `lib/social/` und `public/social-posts/`.
+
+**Hinweis Skill:** Der Skill `rechner-builder` ist im Repo geändert (`SKILL.md`, `templates.md`). Karsten muss
+ihn in der Skills-Verwaltung von Claude.ai von Hand nachziehen. Beim Commit fiel auf: `.claude/skills` steht in
+`.gitignore`, die Dateien von `rechner-builder` und `blog-builder` sind trotzdem in diesem Repo versioniert;
+`git add` meldet die Pfade als ignoriert, nimmt die getrackten Dateien aber auf. Unter `.claude/skills/` liegt
+zusätzlich das eigene Repo `rechenfix-skills`; es führt `rechner-builder` nicht, sein Status blieb sauber.
+
+**Gates:**
+- Phase 0 an `b77da1d`: `git status` leer, oben im Log `b77da1d` und `3dec819` (Welle 165). `§ 20a`:
+  `SKILL.md:1`, `CLAUDE.md:4`, `MidijobRechner.tsx:1`, `midijob-parameter.ts:9`, `midijob-uebergang.ts:9`,
+  `finanzen.ts:1`, `rechenfix-projekt-referenz.md:2`, `verify-midijob-p1.ts:10`; `AG_SV_QUOTE`
+  `NettolohnOptimiererRechner.tsx:2`; `366,39` 2; `SV_RECHENSTAND` keine Ausgabe;
+  „6. Mindestlohnanpassungsverordnung“ `templates.md:1`.
+- Phase 1: „OK — 65 Ersetzungen in 15 Dateien.“, Exit 0; geändert genau die 15 Dateien.
+- Phase 2: Probe 12× OK, Exit 0 (366,38 / 241,05 / 241,62 / 242,30 / 322,07, dazu Minijob-AG 140,00 €,
+  AG-SV-Satz 21,15 %). Lib-Prüfung 10× OK, Exit 0 (Netto-Plus 109,75 €, Rechenstand 2026-07-01,
+  Midijob-Untergrenze am 01.03.2027 603,01, Minijob-Grenze am selben Tag 633,00). `verify-midijob-p1` 34/34,
+  `verify-steuerklassen-vergleich` 21/21, `verify-bruttonetto-zuschlaege` grün (6552 Rasterfälle),
+  `verify-termine` 12/12; `check-termine --heute 2026-12-01` listet „midijob-parameter-2027 — in 0 Tagen
+  (2026-12-01)“. Greps: `§ 20a` nur `CLAUDE.md:1` (Historie Prompt 115a); `163 Abs. 10`
+  `midijob-parameter.ts:1`; `AG_SV_QUOTE`, „240,70“, „jährlich vom BMAS festgesetzt“,
+  „6. Mindestlohnanpassungsverordnung“ und `letzteAktualisierung: 'HEUTE'` keine Ausgabe; „242,30“ 4;
+  „366,38“ 2; `berechneArbeitgeberSvMonat` `MidijobRechner.tsx:2`, `NettolohnOptimiererRechner.tsx:4`,
+  `brutto-netto.ts:1`, `finanzen.ts:1`; `midijob-parameter-2027` `termine.ts:2`.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen
+  (affiliate-stats, KaffeeWasserRechner); `check-metadescription` und `check-jahreswerte` grün, dieselben vier
+  Blog-Wortzahl-Hinweise wie zuvor. Im gebauten HTML: `/finanzen/nettolohn-optimierer` „242,30“ 7×, „240,70“
+  fehlt; `/finanzen/midijob-rechner` „366,38“ 4×, „Bundesarbeitsministerium im Bundesanzeiger“ 1×, „366,39“ und
+  „Spitzenverbänden festgesetzt“ fehlen.
+
+**Commits:** A `bae1048` (die 15 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 165: Wahrer Stundenlohn — echte Arbeitstage — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Offener Punkt 1 aus Welle 163: `ARBEITSTAGE_MONAT = 21,7` in
