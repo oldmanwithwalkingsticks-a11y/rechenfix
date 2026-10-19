@@ -10,6 +10,11 @@ function formatEuro(n: number): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+// Auf Cent runden; -0 wird zu 0, damit nie „-0,00 €“ erscheint.
+function aufCent(n: number): number {
+  return Math.round(n * 100) / 100 || 0;
+}
+
 function Eingabefeld({ id, label, value, onChange, suffix, type = 'text', inputMode = 'decimal' as const, min, max }: {
   id: string;
   label: string;
@@ -71,6 +76,8 @@ export default function WahrerStundenlohnRechner() {
     });
   }, [brutto, stunden, pendel, fahrt, essen, kleidung, ueberstunden]);
 
+  const abstandMl = ergebnis ? aufCent(ergebnis.abstandMindestlohnNetto) : 0;
+
   function ergebnisText(): string {
     if (!ergebnis) return '';
     return [
@@ -82,7 +89,7 @@ export default function WahrerStundenlohnRechner() {
       '',
       `Versteckte Kosten pro Monat: ${formatEuro(ergebnis.abzuegeMonat)} €`,
       `Versteckte Arbeitszeit: +${ergebnis.pendelzeitStundenMonat.toFixed(0)}h Pendeln, +${ergebnis.ueberstundenMonat.toFixed(0)}h Überstunden`,
-      `Wahrer Stundenlohn vs. Mindestlohn: ${ergebnis.uebermindestlohn >= 0 ? '+' : ''}${formatEuro(ergebnis.uebermindestlohn)} €`,
+      `Mindestlohn-Job netto je bezahlter Stunde: ${formatEuro(ergebnis.mindestlohnNettoStunde)} € (Abstand ${abstandMl > 0 ? '+' : ''}${formatEuro(abstandMl)} €)`,
     ].join('\n');
   }
 
@@ -148,7 +155,7 @@ export default function WahrerStundenlohnRechner() {
                   <div key={i} className={`px-4 py-3 ${i < 2 ? 'border-b border-gray-100 dark:border-gray-700' : ''}`}>
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
-                      <span className="text-sm font-semibold text-gray-900 dark:text-white">{item.wert.toFixed(1)} h/Monat</span>
+                      <span className="text-sm font-semibold text-gray-900 dark:text-white">{item.wert.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h/Monat</span>
                     </div>
                     <div className="w-full h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div className={`h-full ${item.farbe} rounded-full`} style={{ width: `${anteil}%` }} />
@@ -159,7 +166,7 @@ export default function WahrerStundenlohnRechner() {
               <div className="px-4 py-3 bg-gray-50 dark:bg-gray-750 border-t border-gray-200 dark:border-gray-600">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-gray-900 dark:text-white">Tats&auml;chliche Stunden gesamt</span>
-                  <span className="text-sm font-bold text-primary-600 dark:text-primary-400">{ergebnis.tatsaechlicheStundenMonat.toFixed(1)} h/Monat</span>
+                  <span className="text-sm font-bold text-primary-600 dark:text-primary-400">{ergebnis.tatsaechlicheStundenMonat.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h/Monat</span>
                 </div>
               </div>
             </div>
@@ -196,26 +203,28 @@ export default function WahrerStundenlohnRechner() {
             </div>
           </div>
 
-          {/* Mindestlohn-Vergleich */}
+          {/* Mindestlohn-Vergleich: netto gegen netto (Welle 162) */}
           <div className={`rounded-xl p-4 border ${
-            ergebnis.uebermindestlohn > 5
+            abstandMl > 1
               ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700/30'
-              : ergebnis.uebermindestlohn > 0
+              : abstandMl >= -1
               ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700/30'
               : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700/30'
           }`}>
-            <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Vergleich mit Mindestlohn ({formatEuro(MINDESTLOHN)} €/h)</p>
-            {ergebnis.uebermindestlohn > 0 ? (
-              <p className="text-sm text-gray-700 dark:text-gray-300">
-                Ihr wahrer Stundenlohn liegt <strong>{formatEuro(ergebnis.uebermindestlohn)} €</strong> &uuml;ber dem Mindestlohn.
-                {ergebnis.uebermindestlohn < 3 && ' Das ist erstaunlich knapp!'}
-              </p>
-            ) : (
-              <p className="text-sm text-red-700 dark:text-red-300">
-                <strong>Achtung:</strong> Ihr wahrer Stundenlohn liegt <strong>unter</strong> dem Mindestlohn!
-                Pr&uuml;fen Sie, ob Pendelzeit und versteckte Kosten im Verh&auml;ltnis stehen.
-              </p>
-            )}
+            <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Vergleich mit dem Mindestlohn ({formatEuro(MINDESTLOHN)} € brutto je Stunde)</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Ein Job zum Mindestlohn mit {parse(stunden).toLocaleString('de-DE')} Stunden pro Woche bringt netto <strong>{formatEuro(ergebnis.mindestlohnNettoStunde)} €</strong> je bezahlter Stunde.{' '}
+              {abstandMl > 0 ? (
+                <>Ihr wahrer Stundenlohn liegt <strong>{formatEuro(abstandMl)} €</strong> dar&uuml;ber.</>
+              ) : abstandMl < 0 ? (
+                <>Ihr wahrer Stundenlohn liegt <strong>{formatEuro(-abstandMl)} €</strong> darunter.</>
+              ) : (
+                <>Ihr wahrer Stundenlohn liegt <strong>auf den Cent gleichauf</strong>.</>
+              )}
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Verglichen wird Ihr Netto je tats&auml;chlicher Stunde mit dem Netto je bezahlter Mindestlohn-Stunde, beides Steuerklasse I ohne Kinder. Arbeitsweg und Kosten des Mindestlohn-Jobs sind nicht eingerechnet.
+            </p>
           </div>
 
           {/* Tipp */}
@@ -224,7 +233,7 @@ export default function WahrerStundenlohnRechner() {
             <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1 list-disc list-inside">
               <li>Homeoffice-Tage reduzieren Pendelzeit und Fahrtkosten</li>
               <li>&Uuml;berstunden dokumentieren und verg&uuml;ten lassen oder abfeiern</li>
-              <li>Meal-Prep statt Kantine spart bis zu 150 € pro Monat</li>
+              <li>Mittagessen von zu Hause statt Kantine senkt die Essenskosten</li>
               <li>Fahrgemeinschaften oder Jobticket nutzen</li>
             </ul>
           </div>
@@ -256,7 +265,7 @@ export default function WahrerStundenlohnRechner() {
           <AiExplain
             rechnerName="Wahrer Stundenlohn Rechner"
             eingaben={{ bruttoMonatlich: parse(brutto), arbeitsstundenWoche: parse(stunden), pendelzeitMinuten: parse(pendel), fahrtkostenMonat: parse(fahrt), essenProTag: parse(essen), kleidungMonat: parse(kleidung), ueberstundenWoche: parse(ueberstunden) }}
-            ergebnis={{ offiziellerStundenlohn: ergebnis.offiziellerStundenlohn, wahrerStundenlohn: ergebnis.wahrerStundenlohn, differenzProzent: ergebnis.differenzProzent, uebermindestlohn: ergebnis.uebermindestlohn, tatsaechlichesNetto: ergebnis.tatsaechlichesNetto }}
+            ergebnis={{ offiziellerStundenlohn: ergebnis.offiziellerStundenlohn, wahrerStundenlohn: ergebnis.wahrerStundenlohn, differenzProzent: ergebnis.differenzProzent, mindestlohnNettoStunde: ergebnis.mindestlohnNettoStunde, abstandMindestlohnNetto: ergebnis.abstandMindestlohnNetto, tatsaechlichesNetto: ergebnis.tatsaechlichesNetto }}
           />
         </div>
       )}

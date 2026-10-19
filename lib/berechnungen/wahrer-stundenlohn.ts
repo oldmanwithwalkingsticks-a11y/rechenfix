@@ -1,5 +1,6 @@
 import { MINDESTLOHN } from './mindestlohn';
-import { GRUNDFREIBETRAG_2026 } from './einkommensteuer';
+import { berechneBruttoNetto } from './brutto-netto';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
 import { WOCHEN_PRO_MONAT } from './_helpers';
 
 export interface WahrerStundenlohnEingabe {
@@ -32,43 +33,39 @@ export interface WahrerStundenlohnErgebnis {
   // Vergleich
   differenzStundenlohn: number;
   differenzProzent: number;
-  uebermindestlohn: number;
+  mindestlohnNettoStunde: number;   // Netto je bezahlter Stunde bei Mindestlohn, gleiche Vertragsstunden
+  abstandMindestlohnNetto: number;  // wahrer Stundenlohn minus mindestlohnNettoStunde
   jahresverlust: number;
 }
 
-// Vereinfachte Netto-Schätzung (Steuerklasse 1, keine Kinder, keine Kirchensteuer)
-function schaetzeNetto(brutto: number): number {
+// Netto über die zentrale Brutto-Netto-Berechnung (PAP 2026, § 32a EStG, SV-Sätze 2026) mit festen
+// Annahmen: Steuerklasse I, keine Kinder, keine Kirchensteuer, gesetzlich versichert mit dem
+// durchschnittlichen Zusatzbeitrag. Ersetzt seit Welle 162 die frühere Pauschal-Schätzung, die u. a.
+// einen Soli ab 81 € Lohnsteuer im Monat abzog. Übergangsbereich (Midijob) bildet berechneBruttoNetto
+// nicht ab.
+function nettoStandard(brutto: number): number {
   if (brutto <= 0) return 0;
-  // Vereinfachte Abzüge: ~Sozialversicherung 20,95 % (2026) + Lohnsteuer progressiv
-  const svBeitrag = brutto * 0.2095; // AN-Anteil KV 8,75 % + PV 2,4 % + RV 9,3 % + AV 1,3 %
-  const zuVersteuern = Math.max(0, brutto * 12 - GRUNDFREIBETRAG_2026) / 12; // Grundfreibetrag zentral
-  let lohnsteuer = 0;
-  if (zuVersteuern > 0) {
-    // Progressive Schätzung
-    if (brutto <= 1800) {
-      lohnsteuer = zuVersteuern * 0.08;
-    } else if (brutto <= 2800) {
-      lohnsteuer = zuVersteuern * 0.16;
-    } else if (brutto <= 4000) {
-      lohnsteuer = zuVersteuern * 0.22;
-    } else if (brutto <= 6000) {
-      lohnsteuer = zuVersteuern * 0.28;
-    } else {
-      lohnsteuer = zuVersteuern * 0.33;
-    }
-  }
-  // Näherung: Soli-Schwelle als Monats-Proxy (81 € LSt/M ≈ 972 €/Jahr, weit unter
-  // echter § 4 SolzG-Freigrenze 20.350 €/Jahr). Für "wahrer Stundenlohn"-Schätzung
-  // ausreichend — präzise Milderungszone würde berechneBruttoNetto verlangen.
-  const soli = lohnsteuer > 81 ? (lohnsteuer - 81) * 0.055 : 0;
-  return Math.max(0, brutto - svBeitrag - lohnsteuer - soli);
+  return berechneBruttoNetto({
+    bruttoMonat: brutto,
+    steuerklasse: 1,
+    kirchensteuer: false,
+    kirchensteuersatz: 9,
+    kinderfreibetraege: 0,
+    kinderUnter25: 0,
+    bundesland: '',
+    kvArt: 'gesetzlich',
+    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+    kvPrivatBeitrag: 0,
+    rvBefreit: false,
+    abrechnungszeitraum: 'monat',
+  }).nettoMonat;
 }
 
 const ARBEITSTAGE_MONAT = 21.7; // Durchschnitt
 const WOCHEN_MONAT = WOCHEN_PRO_MONAT;
 
 export function berechneWahrenStundenlohn(eingabe: WahrerStundenlohnEingabe): WahrerStundenlohnErgebnis {
-  const nettoMonatlich = schaetzeNetto(eingabe.bruttoMonatlich);
+  const nettoMonatlich = nettoStandard(eingabe.bruttoMonatlich);
 
   // Vertragliche Stunden pro Monat
   const vertragsstundenMonat = eingabe.arbeitsstundenWoche * WOCHEN_MONAT;
@@ -88,7 +85,10 @@ export function berechneWahrenStundenlohn(eingabe: WahrerStundenlohnEingabe): Wa
   // Vergleiche
   const differenzStundenlohn = offiziellerStundenlohn - wahrerStundenlohn;
   const differenzProzent = (differenzStundenlohn / offiziellerStundenlohn) * 100;
-  const uebermindestlohn = wahrerStundenlohn - MINDESTLOHN;
+  // Mindestlohn-Vergleich netto gegen netto: Netto je bezahlter Stunde eines Jobs zum gesetzlichen
+  // Mindestlohn mit denselben Vertragsstunden und denselben Annahmen wie oben.
+  const mindestlohnNettoStunde = nettoStandard(MINDESTLOHN * vertragsstundenMonat) / vertragsstundenMonat;
+  const abstandMindestlohnNetto = wahrerStundenlohn - mindestlohnNettoStunde;
   const jahresverlust = differenzStundenlohn * tatsaechlicheStundenMonat * 12;
 
   return {
@@ -106,7 +106,8 @@ export function berechneWahrenStundenlohn(eingabe: WahrerStundenlohnEingabe): Wa
     wahrerStundenlohn,
     differenzStundenlohn,
     differenzProzent,
-    uebermindestlohn,
+    mindestlohnNettoStunde,
+    abstandMindestlohnNetto,
     jahresverlust,
   };
 }
