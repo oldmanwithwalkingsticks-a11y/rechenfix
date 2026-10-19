@@ -206,6 +206,7 @@ Alle jahresabhängigen und gesetzlich definierten Werte liegen in `lib/berechnun
 | `rente.ts` **(erweitert, 04/2026)** | Aktueller Rentenwert § 68 SGB VI | `RENTENWERT`, `getAktuellerRentenwert(stichtag)` |
 | `pfaendung.ts` **(erweitert, 04/2026)** | § 850c ZPO mit Stichtag-Switch | `getAktuellePfaendungsParameter(stichtag)`, `PFAENDUNG_2025`, `PFAENDUNG_2026` |
 | `minijob.ts`, `midijob.ts` | Geringfügigkeitsgrenze, Übergangsbereich | aus `mindestlohn.ts` abgeleitet |
+| `kurzarbeitergeld.ts` **(neu, Welle 168)** | §§ 105, 106, 153 SGB III: pauschaliertes Netto (20 % SV-Pauschale, Lohnsteuer, Soli, keine Kirchensteuer, Entgelte auf 20 € gerundet), echtes Netto über `berechneBruttoNetto` mit `regelEntgeltMonat` = Soll-Entgelt | `berechneKurzarbeitergeld(...)`, `pauschaliertesNettoKug(entgelt, sk)`, `rundeKugEntgelt`, `KUG_SV_PAUSCHALE` |
 | `midijob-uebergang.ts` **(neu, Prompt 115a)** | § 20 Abs. 2a SGB IV BE-Formel Midijob | `berechneBemessungsgrundlageAN`, `MIDIJOB_OBERGRENZE_MONAT`, `FAKTOR_F_2026`, `getMidijobUntergrenze` |
 | `steuerprogression.ts` | Grenz-/Durchschnittssteuersatz | nutzt `einkommensteuer.ts` |
 | `kfz-steuer.ts`, `balkon-solar.ts`, `waermepumpe.ts` | Domänen-spezifisch | |

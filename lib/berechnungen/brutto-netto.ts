@@ -24,6 +24,12 @@ export interface BruttoNettoEingabe {
   rvBefreit: boolean;
   abrechnungszeitraum: 'monat' | 'jahr';
   weihnachtsgeld?: number; // Brutto-Weihnachtsgeld (0 = keins)
+  /**
+   * W168: regelmäßiges Monatsentgelt für die Zone der Sozialversicherung, wenn es vom Brutto dieses
+   * Monats abweicht. Bei Kurzarbeit bleibt das Soll-Entgelt maßgeblich; ein vorübergehend niedriges
+   * Ist-Entgelt macht keinen Minijob oder Midijob. Fehlt das Feld: Brutto plus ein Zwölftel Weihnachtsgeld.
+   */
+  regelEntgeltMonat?: number;
 }
 
 export interface WeihnachtsgeldErgebnis {
@@ -188,7 +194,7 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   // und rechnet die vollen Sätze. Ein erster Minijob neben dem Hauptjob bleibt Minijob (§ 8 Abs. 2
   // Satz 1 SGB IV).
   const wgBrutto = eingabe.weihnachtsgeld ?? 0;
-  const svZone = bestimmeSvZone(brutto + wgBrutto / 12, eingabe.steuerklasse);
+  const svZone = bestimmeSvZone(eingabe.regelEntgeltMonat ?? brutto + wgBrutto / 12, eingabe.steuerklasse);
 
   // PV-AN-Satz nach § 55 Abs. 3 SGB XI — Kinderlos-Zuschlag UND Kinderabschlag (2.–5. Kind).
   // Anzahl berücksichtigungsfähiger Kinder unter 25: bevorzugt das explizite Feld;

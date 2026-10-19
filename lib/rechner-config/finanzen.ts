@@ -4869,7 +4869,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'kurzarbeitergeld-rechner',
-    letzteAktualisierung: '2026-06-23',
+    letzteAktualisierung: '2026-10-19',
     titel: 'Kurzarbeitergeld-Rechner',
     beschreibung: 'Kurzarbeitergeld berechnen: KuG-Höhe basierend auf Ihrem Gehalt und der Arbeitszeitreduzierung.',
     kategorie: 'Finanzen',
@@ -4878,16 +4878,16 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Kurzarbeitergeld kostenlos berechnen: 60 % bzw. 67 % der Nettoentgeltdifferenz — mit Soll-/Ist-Vergleich und Verlustanzeige.',
     keywords: ['kurzarbeitergeld rechner', 'kug rechner', 'kurzarbeitergeld berechnen', 'kurzarbeit rechner', 'nettoentgeltdifferenz', 'kug höhe', 'kurzarbeit 60 prozent', 'kurzarbeit 67 prozent'],
     icon: '⏱️',
-    beispiel: 'Soll-Brutto 3.500 €, Ist-Brutto 1.750 € (50 % Kurzarbeit), Steuerklasse I, kein Kind → Soll-Netto ca. 2.353 €, Ist-Netto ca. 1.336 € → Differenz 1.017 € → KuG 60 % = 610 €/Monat → Gesamteinkommen 1.946 € (statt 2.353 €, Verlust 407 €).',
+    beispiel: 'Soll-Brutto 3.500 €, Ist-Brutto 1.750 € (50 % Kurzarbeit), Steuerklasse I, kein Kind → pauschaliertes Netto 2.388,42 € aus 3.500 € und 1.359,92 € aus 1.760 € (auf 20 € gerundet) → Differenz 1.028,50 € → KuG 60 % = 617,10 €/Monat → Gesamteinkommen 1.942,14 € (echtes Ist-Netto 1.325,04 € plus KuG) statt 2.333,25 €, Verlust 391,11 €.',
     // W19-Goldstandard (YMYL): kurzarbeitergeld-rechner auf volle Tiefe (12 Bausteine,
     // ~1.560 W), Leitformat „beispielrechnung" (3× dominant). SSOT ist die Component
-    // KurzarbeitergeldRechner.tsx (keine Lib): KuG = (Soll-Netto − Ist-Netto) × 60 %/67 %
-    // (§ 105 SGB III); Netto = Brutto − 21 % SV-Pauschale − berechneLohnsteuerJahr(PAP 2026).
-    // Alle Beispielwerte mit der echten Lohnsteuer-Lib (StKl I, 2026) nachgerechnet
-    // (Pflicht-Vorprüfung c1-Lehre): Soll-Netto 2.353 / Ist-Netto 1.336 / Diff 1.017 /
-    // KuG 610 / Gesamt 1.946 / Verlust 407. Stale Netto-Anker (vorher 2.260/1.240/1.852,
-    // Abw. >2 %) in beispiel-Feld UND erklaerung-Beispielabsatz in diesem Commit
-    // auf Component-Wert korrigiert. §§ 95/104/105 SGB III; Progressionsvorbehalt § 32b EStG.
+    // W168: SSOT ist lib/berechnungen/kurzarbeitergeld.ts. KuG = Differenz der pauschalierten
+    // Nettobeträge × 60 %/67 % (§ 105 SGB III); pauschaliertes Netto = Entgelt (auf 20 € gerundet,
+    // § 106 Abs. 1 Satz 5) − 20 % SV-Pauschale − Lohnsteuer − Soli, ohne Kirchensteuer (§ 153 Abs. 1).
+    // Vorher 21 % Pauschale (gilt nur bis 2018), Kirchensteuer abgezogen, Soli und Rundung fehlten.
+    // Gesamteinkommen = echtes Netto aus dem Ist-Brutto (berechneBruttoNetto, SV-Zone nach dem
+    // Soll-Entgelt) + KuG. Beispielwerte StKl I, 2026: pauschal 2.388,42 / 1.359,92, Diff 1.028,50,
+    // KuG 617,10, echtes Netto 2.333,25 / 1.325,04, Gesamt 1.942,14, Verlust 391,11.
     contentBloecke: [
       {
         typ: 'text',
@@ -4898,14 +4898,14 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Beispiel: 50 % Kurzarbeit (Steuerklasse I, kein Kind)',
         schritte: [
-          { label: 'Soll-Netto aus 3.500 € Brutto', formel: '3.500 € − 21 % SV − Lohnsteuer', ergebnis: '≈ 2.353 €' },
-          { label: 'Ist-Netto aus 1.750 € Brutto (50 % Kurzarbeit)', formel: '1.750 € − 21 % SV − Lohnsteuer', ergebnis: '≈ 1.336 €' },
-          { label: 'Nettoentgeltdifferenz', formel: '2.353 € − 1.336 €', ergebnis: '1.017 €' },
-          { label: 'Kurzarbeitergeld (60 % ohne Kind)', formel: '1.017 € × 60 %', ergebnis: '610 €' },
-          { label: 'Gesamteinkommen', formel: '1.336 € Ist-Netto + 610 € KuG', ergebnis: '1.946 €' },
-          { label: 'Verlust gegenüber normalem Netto', formel: '2.353 € − 1.946 €', ergebnis: '−407 € (17,3 %)' },
+          { label: 'Pauschaliertes Netto aus 3.500 € Soll-Entgelt', formel: '3.500 € − 20 % SV-Pauschale − Lohnsteuer', ergebnis: '2.388,42 €' },
+          { label: 'Pauschaliertes Netto aus dem Ist-Entgelt', formel: '1.750 € → 1.760 € (auf 20 € gerundet) − 20 % − Lohnsteuer', ergebnis: '1.359,92 €' },
+          { label: 'Nettoentgeltdifferenz', formel: '2.388,42 € − 1.359,92 €', ergebnis: '1.028,50 €' },
+          { label: 'Kurzarbeitergeld (60 % ohne Kind)', formel: '1.028,50 € × 60 %', ergebnis: '617,10 €' },
+          { label: 'Gesamteinkommen', formel: '1.325,04 € echtes Netto aus 1.750 € + 617,10 € KuG', ergebnis: '1.942,14 €' },
+          { label: 'Verlust gegenüber normalem Netto', formel: '2.333,25 € − 1.942,14 €', ergebnis: '−391,11 € (16,8 %)' },
         ],
-        fazit: 'Das KuG bemisst sich an der Netto-Entgeltdifferenz, nicht am Brutto. Bei 50 % Kurzarbeit bleiben rund 1.946 € statt 2.353 € — etwa 83 % des gewohnten Nettos. Die 60 % wirken nur auf die Differenz, deshalb fällt der tatsächliche Verlust mit ~17 % geringer aus, als die „50 % weniger arbeiten" vermuten lassen. Genau diese Werte zeigt der Rechner für Ihr eigenes Soll- und Ist-Brutto an, sodass Sie den verbleibenden monatlichen Spielraum realistisch einschätzen können.',
+        fazit: 'Das KuG bemisst sich an der Differenz zweier pauschalierter Nettobeträge, nicht am Brutto und nicht am eigenen Netto. Bei 50 % Kurzarbeit bleiben rund 1.942 € statt 2.333 € — gut 83 % des gewohnten Nettos. Die 60 % wirken nur auf die Differenz, deshalb fällt der tatsächliche Verlust mit knapp 17 % geringer aus, als die „50 % weniger arbeiten" vermuten lassen. Genau diese Werte zeigt der Rechner für Ihr eigenes Soll- und Ist-Brutto an, sodass Sie den verbleibenden monatlichen Spielraum realistisch einschätzen können.',
       },
       {
         typ: 'infobox',
@@ -4917,39 +4917,39 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Dasselbe Beispiel mit Kind (67 % statt 60 %)',
         schritte: [
-          { label: 'Nettoentgeltdifferenz (wie oben)', formel: '2.353 € − 1.336 €', ergebnis: '1.017 €' },
-          { label: 'Kurzarbeitergeld (67 % mit Kind)', formel: '1.017 € × 67 %', ergebnis: '682 €' },
-          { label: 'Gesamteinkommen', formel: '1.336 € Ist-Netto + 682 € KuG', ergebnis: '2.018 €' },
-          { label: 'Verlust gegenüber normalem Netto', formel: '2.353 € − 2.018 €', ergebnis: '−336 € (14,3 %)' },
+          { label: 'Nettoentgeltdifferenz (wie oben, Kinder zählen hier nicht)', formel: '2.388,42 € − 1.359,92 €', ergebnis: '1.028,50 €' },
+          { label: 'Kurzarbeitergeld (67 % mit Kind)', formel: '1.028,50 € × 67 %', ergebnis: '689,10 €' },
+          { label: 'Gesamteinkommen', formel: '1.333,46 € echtes Netto aus 1.750 € (ohne PV-Zuschlag) + 689,10 € KuG', ergebnis: '2.022,56 €' },
+          { label: 'Verlust gegenüber normalem Netto', formel: '2.348,17 € − 2.022,56 €', ergebnis: '−325,61 € (13,9 %)' },
         ],
-        fazit: 'Bei identischem Gehalt und Ausfall, aber mit Kind, steigt das KuG von 610 € auf 682 € — der Verlust sinkt von ~17 % auf ~14 %. Allein der Kind-Eintrag auf der Lohnsteuerkarte bringt hier 72 € mehr pro Monat. Über zwölf Monate Kurzarbeit summiert sich dieser Unterschied auf rund 860 €, weshalb ein korrekt hinterlegter Kinderfreibetrag auf der Lohnsteuerkarte hier bares Geld wert ist und vor Beginn der Kurzarbeit geprüft werden sollte.',
+        fazit: 'Bei identischem Gehalt und Ausfall, aber mit Kind, steigt das KuG von 617,10 € auf 689,10 € — der Verlust sinkt von knapp 17 % auf knapp 14 %. Allein der höhere Satz bringt hier 72 € mehr pro Monat; dazu kommt, dass Eltern keinen Zuschlag zur Pflegeversicherung zahlen. Über zwölf Monate Kurzarbeit summiert sich der Unterschied beim KuG auf 864 €, weshalb ein korrekt hinterlegter Kinderfreibetrag auf der Lohnsteuerkarte hier bares Geld wert ist und vor Beginn der Kurzarbeit geprüft werden sollte.',
       },
       {
         typ: 'tabelle',
         titel: 'Kurzarbeitergeld nach Ausfall-Grad (Soll-Brutto 3.500 €, StKl I, ohne Kind)',
         kopf: ['Arbeitsausfall', 'Ist-Netto', 'KuG (60 %)', 'Gesamteinkommen', 'Verlust'],
         zeilen: [
-          ['25 %', '≈ 1.857 €', '298 €', '≈ 2.155 €', '−198 € (8,4 %)'],
-          ['50 %', '≈ 1.336 €', '610 €', '≈ 1.946 €', '−407 € (17,3 %)'],
-          ['75 %', '≈ 691 €', '997 €', '≈ 1.689 €', '−664 € (28,3 %)'],
-          ['100 % (Kurzarbeit Null)', '0 €', '1.412 €', '≈ 1.412 €', '−941 € (40,0 %)'],
+          ['25 %', '≈ 1.841 €', '305 €', '≈ 2.146 €', '−187 € (8,0 %)'],
+          ['50 %', '≈ 1.325 €', '617 €', '≈ 1.942 €', '−391 € (16,8 %)'],
+          ['75 %', '≈ 685 €', '1.011 €', '≈ 1.695 €', '−638 € (27,3 %)'],
+          ['100 % (Kurzarbeit Null)', '0 €', '1.433 €', '≈ 1.433 €', '−900 € (38,6 %)'],
         ],
-        fussnote: 'Je höher der Arbeitsausfall, desto größer die Netto-Entgeltdifferenz und damit das KuG — der prozentuale Einkommensverlust wächst aber überproportional, weil das KuG nur 60 % der Differenz ersetzt. Bei „Kurzarbeit Null" (100 % Ausfall) entfällt das Ist-Netto vollständig, das KuG ersetzt dann 60 % des kompletten Soll-Nettos. Die Ist-Netto-Werte beruhen auf demselben Pauschalverfahren wie das Soll-Netto (21 % SV-Pauschale + Lohnsteuer). Werte mit der KuG-Logik der Component berechnet, Stand 2026.',
+        fussnote: 'Je höher der Arbeitsausfall, desto größer die Netto-Entgeltdifferenz und damit das KuG — der prozentuale Einkommensverlust wächst aber überproportional, weil das KuG nur 60 % der Differenz ersetzt. Bei „Kurzarbeit Null" (100 % Ausfall) entfällt das Ist-Netto vollständig, das KuG ersetzt dann 60 % des pauschalierten Soll-Nettos. Ist-Netto ist das echte Netto aus dem reduzierten Brutto; das KuG kommt aus der Differenz der pauschalierten Nettobeträge (20 % SV-Pauschale, Lohnsteuer, Soli; Entgelte auf 20 € gerundet, § 106 und § 153 SGB III). Werte mit der Rechner-Logik berechnet, Stand 2026.',
       },
       {
         typ: 'text',
         titel: 'Wie das pauschalierte Netto bestimmt wird',
-        html: `<p>Für das KuG zählt nicht das individuell exakte Netto, sondern ein <strong>pauschaliertes Netto</strong> nach der amtlichen KuG-Tabelle. Vereinfacht wird das Brutto um einen pauschalen <strong>Sozialversicherungs-Anteil von rund 21 %</strong> und um die <strong>Lohnsteuer</strong> (nach dem Programmablaufplan 2026, § 39b EStG) gekürzt. Soll- und Ist-Netto entstehen so aus demselben Verfahren, nur mit unterschiedlichem Brutto — das ist der Grund, warum dieser Rechner sowohl das volle Gehalt als auch das reduzierte Gehalt abfragt.</p><p>Weil die Lohnsteuer von der <strong>Steuerklasse</strong> abhängt, beeinflusst diese auch die Höhe des KuG: Eine günstigere Steuerklasse bedeutet ein höheres Netto und damit eine größere Differenz, auf die die 60 bzw. 67 % wirken. Ein Steuerklassenwechsel kurz vor der Kurzarbeit kann das KuG also beeinflussen — die Agentur für Arbeit prüft solche Wechsel allerdings auf Missbrauch, und ein Wechsel allein zur KuG-Optimierung wird in der Regel nicht anerkannt. Aus dem gleichen Grund variiert das KuG zweier Kolleg:innen mit identischem Brutto, wenn sie unterschiedliche Steuerklassen haben. Das eigene Nettogehalt als Ausgangsbasis lässt sich mit dem <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a> bestimmen.</p>`,
+        html: `<p>Für das KuG zählt nicht das individuell exakte Netto, sondern ein <strong>pauschaliertes Netto</strong> nach § 153 SGB III. Soll- und Ist-Entgelt werden zuerst auf den nächsten durch 20 teilbaren Euro-Betrag gerundet (§ 106 Abs. 1 SGB III), dann um eine <strong>Sozialversicherungspauschale von 20 %</strong>, die <strong>Lohnsteuer</strong> nach dem Programmablaufplan 2026 und den Solidaritätszuschlag gekürzt. Kirchensteuer und Kinderfreibeträge spielen dabei keine Rolle. Soll- und Ist-Netto entstehen so aus demselben Verfahren, nur mit unterschiedlichem Brutto — das ist der Grund, warum dieser Rechner sowohl das volle Gehalt als auch das reduzierte Gehalt abfragt. Was am Monatsende auf dem Konto ankommt, ist dagegen Ihr echtes Netto aus dem Ist-Entgelt plus das KuG; der Rechner zeigt beides getrennt.</p><p>Weil die Lohnsteuer von der <strong>Steuerklasse</strong> abhängt, beeinflusst diese auch die Höhe des KuG: Eine günstigere Steuerklasse bedeutet ein höheres Netto und damit eine größere Differenz, auf die die 60 bzw. 67 % wirken. Maßgeblich ist die jeweils eingetragene Steuerklasse; die Sonderregeln zum Steuerklassenwechsel, die beim Arbeitslosengeld gelten, sind beim KuG ausdrücklich ausgenommen (§ 106 Abs. 1 Satz 6 SGB III). Aus dem gleichen Grund variiert das KuG zweier Kolleg:innen mit identischem Brutto, wenn sie unterschiedliche Steuerklassen haben. Das eigene Nettogehalt als Ausgangsbasis lässt sich mit dem <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a> bestimmen.</p>`,
       },
       {
         typ: 'beispielrechnung',
         titel: 'Einfluss der Steuerklasse (Soll 3.500 € / Ist 1.750 €, ohne Kind)',
         schritte: [
-          { label: 'Steuerklasse I — KuG aus Differenz 1.017 €', formel: '1.017 € × 60 %', ergebnis: '610 €' },
-          { label: 'Steuerklasse III — höheres Netto, Differenz 1.268 €', formel: '1.268 € × 60 %', ergebnis: '761 €' },
-          { label: 'Steuerklasse V — niedrigeres Netto, Differenz 813 €', formel: '813 € × 60 %', ergebnis: '488 €' },
+          { label: 'Steuerklasse I — KuG aus Differenz 1.028,50 €', formel: '1.028,50 € × 60 %', ergebnis: '617,10 €' },
+          { label: 'Steuerklasse III — höheres Netto, Differenz 1.277,50 €', formel: '1.277,50 € × 60 %', ergebnis: '766,50 €' },
+          { label: 'Steuerklasse V — niedrigeres Netto, Differenz 826,08 €', formel: '826,08 € × 60 %', ergebnis: '495,65 €' },
         ],
-        fazit: 'Bei gleichem Brutto und gleichem Ausfall schwankt das KuG je nach Steuerklasse erheblich — von 488 € (StKl V) über 610 € (StKl I) bis 761 € (StKl III). Grund ist die unterschiedlich hohe Lohnsteuer, die das pauschalierte Netto und damit die Differenz verändert. Bei Ehepaaren lohnt deshalb ein Blick auf die Steuerklassen-Kombination — wobei ein Wechsel allein zur KuG-Optimierung von der Agentur für Arbeit nicht anerkannt wird. Wichtig: Die Steuerklasse verändert nur die Verteilung über das Jahr, nicht die endgültige Jahressteuer; ein scheinbar höheres KuG durch eine günstige Steuerklasse kann sich später über die Steuererklärung teilweise ausgleichen.',
+        fazit: 'Bei gleichem Brutto und gleichem Ausfall schwankt das KuG je nach Steuerklasse erheblich — von 495,65 € (StKl V) über 617,10 € (StKl I) bis 766,50 € (StKl III). Grund ist die unterschiedlich hohe Lohnsteuer, die das pauschalierte Netto und damit die Differenz verändert. Bei Ehepaaren lohnt deshalb ein Blick auf die Steuerklassen-Kombination. Das KuG selbst ist steuerfrei und wird nicht nachträglich verrechnet; über den Progressionsvorbehalt erhöht es aber den Steuersatz auf die übrigen Einkünfte des Jahres.',
       },
       {
         typ: 'infobox',
@@ -4990,27 +4990,29 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Satz mit Kind', wert: '67 %', hinweis: 'mind. ein Kind auf der Lohnsteuerkarte (ELStAM)' },
           { label: 'Regel-Bezugsdauer', wert: 'bis 12 Monate', hinweis: '§ 104 SGB III, per Rechtsverordnung verlängerbar (Corona bis 24)' },
           { label: 'Bemessungsgrundlage', wert: 'Soll-Netto − Ist-Netto', hinweis: 'die Differenz der Nettobeträge, nicht das Brutto' },
-          { label: 'Sozialversicherung', wert: 'voll erhalten', hinweis: 'AG führt die Beiträge auf das Ausfall-Entgelt ab — keine Rentenlücke' },
+          { label: 'Sozialversicherung', wert: 'bleibt bestehen', hinweis: 'Beiträge auf 80 % des Ausfalls trägt der Arbeitgeber allein' },
           { label: 'Steuererklärungs-Pflicht ab', wert: '410 €/Jahr', hinweis: 'Lohnersatz mit Progressionsvorbehalt (§ 32b EStG)' },
         ],
       },
       {
         typ: 'text',
         titel: 'Kurzarbeit federt ab — ersetzt aber nicht das volle Gehalt',
-        html: `<p>Kurzarbeitergeld sichert den Arbeitsplatz und einen großen Teil des Einkommens, gleicht den Verdienstausfall aber <strong>nicht vollständig</strong> aus — je nach Ausfall-Grad bleibt eine Lücke von rund 10 bis 40 Prozent. Wer laufende Fixkosten wie Miete oder Kreditraten hat, sollte diese Lücke früh kennen. Ein wichtiger Vorteil bleibt dabei im Hintergrund erhalten: Die <strong>Sozialversicherung</strong> läuft weiter, der Arbeitgeber führt die Beiträge auf das ausgefallene Entgelt ab — es entsteht also <strong>keine Rentenlücke</strong> und kein Verlust des Krankenversicherungsschutzes, und auch der spätere Arbeitslosengeld-Anspruch bleibt geschützt.</p><p>Wer die genaue Höhe wissen will, sollte zuerst sein <a href="/finanzen/brutto-netto-rechner">Nettogehalt</a> als Ausgangsbasis bestimmen, denn dieses Netto ist die Grundlage der Differenz-Berechnung. Folgt nach der Kurzarbeit doch eine Kündigung, wird das <a href="/finanzen/arbeitslosengeld-rechner">Arbeitslosengeld</a> aus dem vollen Normalgehalt berechnet, nicht aus dem reduzierten Kurzarbeits-Gehalt (§ 151 SGB III) — Kurzarbeit wird so nicht zum Nachteil. Sinnvoll ist außerdem ein finanzieller Puffer, der die Monate mit reduziertem Einkommen überbrückt. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Sozial- oder Steuerberatung; verbindlich ist die Abrechnung der Agentur für Arbeit.</p>`,
+        html: `<p>Kurzarbeitergeld sichert den Arbeitsplatz und einen großen Teil des Einkommens, gleicht den Verdienstausfall aber <strong>nicht vollständig</strong> aus — je nach Ausfall-Grad bleibt eine Lücke von rund 8 bis 39 Prozent. Wer laufende Fixkosten wie Miete oder Kreditraten hat, sollte diese Lücke früh kennen. Ein wichtiger Vorteil bleibt dabei im Hintergrund erhalten: Die <strong>Sozialversicherung</strong> läuft weiter: Für den Ausfall gelten 80 % des Unterschieds zwischen Soll- und Ist-Entgelt als beitragspflichtig, und diese Beiträge zur Kranken-, Pflege- und Rentenversicherung trägt der Arbeitgeber allein (§ 163 Abs. 6 und § 168 Abs. 1 Nr. 1a SGB VI, § 232a Abs. 2 SGB V). Der Krankenversicherungsschutz bleibt bestehen, die <strong>Rentenlücke ist klein</strong> (für 20 % des Ausfalls entstehen keine Rentenpunkte), und auch der spätere Arbeitslosengeld-Anspruch bleibt geschützt.</p><p>Ihr eigenes <a href="/finanzen/brutto-netto-rechner">Nettogehalt</a> zeigt der Brutto-Netto-Rechner; für die Höhe des KuG zählt aber nicht dieses Netto, sondern das pauschalierte. Folgt nach der Kurzarbeit doch eine Kündigung, wird das <a href="/finanzen/arbeitslosengeld-rechner">Arbeitslosengeld</a> aus dem vollen Normalgehalt berechnet, nicht aus dem reduzierten Kurzarbeits-Gehalt (§ 151 SGB III) — Kurzarbeit wird so nicht zum Nachteil. Sinnvoll ist außerdem ein finanzieller Puffer, der die Monate mit reduziertem Einkommen überbrückt. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Sozial- oder Steuerberatung; verbindlich ist die Abrechnung der Agentur für Arbeit.</p>`,
       },
     ],
     faq: [
       { frage: 'Wie hoch ist das Kurzarbeitergeld?', antwort: 'Das KuG beträgt 60 % der Nettoentgeltdifferenz (Soll-Netto minus Ist-Netto). Mit mindestens einem Kind auf der Lohnsteuerkarte sind es 67 %. Die Berechnung erfolgt pauschaliert nach der KuG-Tabelle der Agentur für Arbeit — maßgeblich ist die Differenz zwischen pauschaliertem Soll-Netto und Ist-Netto.' },
       { frage: 'Wie lange wird Kurzarbeitergeld gezahlt?', antwort: 'Die Regelbezugsdauer beträgt 12 Monate. In wirtschaftlichen Ausnahmesituationen (z. B. während Corona) kann die Bundesregierung per Verordnung auf bis zu 24 Monate verlängern. Nach Ablauf läuft das Arbeitsverhältnis normal weiter oder es folgt regulär ALG I.' },
       { frage: 'Muss ich Kurzarbeitergeld selbst beantragen?', antwort: 'Nein — Kurzarbeit wird vom Arbeitgeber bei der Agentur für Arbeit angemeldet und beantragt. Sie als Beschäftigte müssen nichts tun. Der Arbeitgeber rechnet das KuG zusammen mit dem reduzierten Gehalt ab und zahlt es Ihnen aus. Die Agentur für Arbeit erstattet dem Arbeitgeber den Betrag.' },
-      { frage: 'Was passiert mit den Sozialversicherungsbeiträgen?', antwort: 'Die Sozialversicherungsbeiträge bleiben während der Kurzarbeit in voller Höhe erhalten. Der Arbeitgeber übernimmt die Beiträge auf das ausgefallene Entgelt teilweise pauschal. Sie bleiben also krankenversichert, rentenversichert und haben keine Rentenlücke — Kurzarbeit mindert Ihre spätere Rente nicht.' },
+      { frage: 'Was passiert mit den Sozialversicherungsbeiträgen?', antwort: 'Der Versicherungsschutz bleibt bestehen. Auf das reduzierte Ist-Entgelt zahlen Sie wie gewohnt Ihren Anteil. Für den Ausfall gelten 80 % des Unterschieds zwischen Soll- und Ist-Entgelt als beitragspflichtig; diese Beiträge zur Kranken-, Pflege- und Rentenversicherung trägt der Arbeitgeber allein (§ 163 Abs. 6 und § 168 Abs. 1 Nr. 1a SGB VI, § 232a Abs. 2 SGB V). Auf das Kurzarbeitergeld selbst fallen keine Abzüge an. Die spätere Rente fällt nur wenig niedriger aus, weil für 20 % des Ausfalls keine Rentenpunkte entstehen.' },
       { frage: 'Bekomme ich nach Kurzarbeit mehr Arbeitslosengeld?', antwort: 'Ja — falls Sie nach Ende der Kurzarbeit doch gekündigt werden und ALG I beantragen, wird das ALG aus Ihrem letzten Normalgehalt berechnet, nicht aus dem reduzierten Kurzarbeits-Gehalt. Das ist in § 151 SGB III geregelt und soll Kurzarbeit nicht zum Nachteil werden lassen.' },
       { frage: 'Kann ich während der Kurzarbeit nebenher arbeiten?', antwort: 'Ein bereits vor der Kurzarbeit bestehender Nebenjob bleibt anrechnungsfrei. Ein neuer Nebenjob während der Kurzarbeit wird dagegen voll auf das KuG angerechnet und mindert es entsprechend. Besser: Nutzen Sie die Zeit für eine geförderte Weiterbildung nach § 82 SGB III.' },
     ],
     quellen: [
       { titel: '§ 95 SGB III — Anspruch auf Kurzarbeitergeld', url: 'https://www.gesetze-im-internet.de/sgb_3/__95.html', hinweis: 'erheblicher, vorübergehender Arbeitsausfall mit Entgeltausfall; betriebliche Voraussetzungen.' },
       { titel: '§ 105 SGB III — Höhe des Kurzarbeitergeldes', url: 'https://www.gesetze-im-internet.de/sgb_3/__105.html', hinweis: '60 % bzw. 67 % der Nettoentgeltdifferenz (Soll-Netto − Ist-Netto).' },
+      { titel: '§ 106 SGB III — Nettoentgeltdifferenz', url: 'https://www.gesetze-im-internet.de/sgb_3/__106.html', hinweis: 'Soll- und Ist-Entgelt, Rundung auf 20 €, pauschaliertes Netto nach § 153.' },
+      { titel: '§ 153 SGB III — Leistungsentgelt', url: 'https://www.gesetze-im-internet.de/sgb_3/__153.html', hinweis: 'Sozialversicherungspauschale 20 %, Lohnsteuer und Solidaritätszuschlag, keine Kirchensteuer.' },
       { titel: '§ 104 SGB III — Bezugsdauer', url: 'https://www.gesetze-im-internet.de/sgb_3/__104.html', hinweis: 'Regelbezugsdauer bis 12 Monate, per Rechtsverordnung verlängerbar.' },
       { titel: '§ 32b EStG — Progressionsvorbehalt', url: 'https://www.gesetze-im-internet.de/estg/__32b.html', hinweis: 'KuG ist steuerfrei, erhöht aber den Steuersatz auf die übrigen Einkünfte.' },
     ],

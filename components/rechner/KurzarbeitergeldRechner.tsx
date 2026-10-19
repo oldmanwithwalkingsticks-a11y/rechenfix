@@ -6,28 +6,17 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { berechneLohnsteuerJahr } from '@/lib/berechnungen/lohnsteuer';
 import { BUNDESLAENDER } from '@/lib/berechnungen/einkommensteuer';
+import { berechneKurzarbeitergeld } from '@/lib/berechnungen/kurzarbeitergeld';
 
 type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
-// Pauschaler SV-Abzug (~21 %) für die KuG-Nettoberechnung. Steuer läuft
-// über die zentrale 2026-Lohnsteuer-Lib (§ 39b EStG, PAP 2026).
-const SV_PAUSCHALE = 0.21;
-
+// W168: Rechnung in lib/berechnungen/kurzarbeitergeld.ts (§§ 105, 106, 153 SGB III): pauschaliertes
+// Netto mit 20 % SV-Pauschale, Lohnsteuer und Soli, ohne Kirchensteuer, Entgelte auf 20 € gerundet.
+// Kirchensteuer und Bundesland wirken nur auf das echte Netto (Soll und Ist).
 const SK_MAP: Record<Steuerklasse, 1 | 2 | 3 | 4 | 5 | 6> = {
   'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5, 'VI': 6,
 };
-
-function nettoAus(brutto: number, sk: Steuerklasse, kirchensteuerSatz: number): number {
-  if (brutto <= 0) return 0;
-  const jahresBrutto = brutto * 12;
-  const sv = brutto * SV_PAUSCHALE;
-  const steuerJahr = berechneLohnsteuerJahr(jahresBrutto, SK_MAP[sk], 0);
-  const steuerMonat = steuerJahr / 12;
-  const kirchensteuer = steuerMonat * kirchensteuerSatz;
-  return Math.max(0, brutto - sv - steuerMonat - kirchensteuer);
-}
 
 const LAENDER_8_PROZENT = ['Bayern', 'Baden-Württemberg'];
 
@@ -41,20 +30,15 @@ export default function KurzarbeitergeldRechner() {
 
   const sB = parseDeutscheZahl(sollBrutto);
   const iB = parseDeutscheZahl(istBrutto);
-  const kstSatz = kirchensteuer ? (LAENDER_8_PROZENT.includes(bundesland) ? 0.08 : 0.09) : 0;
+  const kstSatz: 8 | 9 = LAENDER_8_PROZENT.includes(bundesland) ? 8 : 9;
 
   const ergebnis = useMemo(() => {
-    if (sB <= 0 || iB < 0 || iB > sB) return null;
-    const sollNetto = nettoAus(sB, steuerklasse, kstSatz);
-    const istNetto = nettoAus(iB, steuerklasse, kstSatz);
-    const differenz = Math.max(0, sollNetto - istNetto);
-    const satz = mitKind ? 0.67 : 0.60;
-    const kug = differenz * satz;
-    const gesamtEinkommen = istNetto + kug;
-    const verlust = Math.max(0, sollNetto - gesamtEinkommen);
-    const verlustProzent = sollNetto > 0 ? (verlust / sollNetto) * 100 : 0;
-    return { sollNetto, istNetto, differenz, satz, kug, gesamtEinkommen, verlust, verlustProzent };
-  }, [sB, iB, steuerklasse, mitKind, kstSatz]);
+    const r = berechneKurzarbeitergeld({
+      sollBrutto: sB, istBrutto: iB, steuerklasse: SK_MAP[steuerklasse], mitKind, kirchensteuer, kirchensteuersatz: kstSatz,
+    });
+    if (!r) return null;
+    return { ...r, sollNetto: r.nettoSoll, istNetto: r.nettoIst };
+  }, [sB, iB, steuerklasse, mitKind, kirchensteuer, kstSatz]);
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fmtP = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -124,8 +108,8 @@ export default function KurzarbeitergeldRechner() {
           >
             {BUNDESLAENDER.map(b => <option key={b} value={b}>{b}</option>)}
           </select>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            Nur für Kirchensteuer-Satz relevant (Bayern/BW 8 %, sonst 9 %).
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            Nur für den Kirchensteuer-Satz Ihres echten Nettos (Bayern/BW 8 %, sonst 9 %). Das Kurzarbeitergeld selbst rechnet ohne Kirchensteuer.
           </p>
         </div>
         <div>
@@ -164,16 +148,12 @@ export default function KurzarbeitergeldRechner() {
             </div>
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Normales Netto (Soll-Netto)</span>
+                <span className="text-gray-600 dark:text-gray-400">Normales Netto (aus dem Soll-Brutto)</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.sollNetto)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Netto während Kurzarbeit (Ist-Netto)</span>
+                <span className="text-gray-600 dark:text-gray-400">Netto aus dem Ist-Brutto</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.istNetto)} €</span>
-              </div>
-              <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Nettoentgeltdifferenz</span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.differenz)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">+ Kurzarbeitergeld ({(ergebnis.satz * 100).toLocaleString('de-DE')} %)</span>
@@ -188,6 +168,30 @@ export default function KurzarbeitergeldRechner() {
                 <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.verlust)} € ({fmtP(ergebnis.verlustProzent)} %)</span>
               </div>
             </div>
+          </div>
+
+          {/* W168: KuG-Berechnung mit pauschalierten Nettobeträgen (§ 106, § 153 SGB III) */}
+          <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden mb-4">
+            <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
+              <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">So entsteht das Kurzarbeitergeld</p>
+            </div>
+            <div className="divide-y divide-gray-100 dark:divide-gray-700">
+              <div className="flex justify-between px-4 py-3 text-sm">
+                <span className="text-gray-600 dark:text-gray-400">Pauschaliertes Netto aus {fmt(ergebnis.sollGerundet)} € Soll-Entgelt</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.pauschalNettoSoll)} €</span>
+              </div>
+              <div className="flex justify-between px-4 py-3 text-sm">
+                <span className="text-gray-600 dark:text-gray-400">Pauschaliertes Netto aus {fmt(ergebnis.istGerundet)} € Ist-Entgelt</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.pauschalNettoIst)} €</span>
+              </div>
+              <div className="flex justify-between px-4 py-3 text-sm">
+                <span className="text-gray-600 dark:text-gray-400">Nettoentgeltdifferenz × {(ergebnis.satz * 100).toLocaleString('de-DE')} %</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.differenz)} € → {fmt(ergebnis.kug)} €</span>
+              </div>
+            </div>
+            <p className="px-4 py-3 text-xs text-gray-600 dark:text-gray-400">
+              Soll- und Ist-Entgelt auf volle 20 € gerundet; pauschaliertes Netto = Entgelt minus 20 % Sozialversicherungspauschale, Lohnsteuer und Solidaritätszuschlag, ohne Kirchensteuer (§ 106 Abs. 1 und § 153 Abs. 1 SGB III).
+            </p>
           </div>
 
           {/* Balkenvergleich */}
@@ -221,7 +225,7 @@ export default function KurzarbeitergeldRechner() {
           {/* Disclaimer */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-3">
             <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
-              <strong>Hinweis:</strong> Vereinfachte Pauschal-Berechnung nach KuG-Tabelle. Maßgeblich ist die Abrechnung der Agentur für Arbeit. Die Sozialversicherungsbeiträge werden vom Arbeitgeber pauschal übernommen.
+              <strong>Hinweis:</strong> Das Kurzarbeitergeld folgt dem Pauschalverfahren der Agentur für Arbeit; gegenüber ihrer Kug-Tabelle sind Abweichungen um wenige Cent möglich, maßgeblich ist die Abrechnung. Das echte Netto rechnet mit durchschnittlichem Zusatzbeitrag. Auf das Kurzarbeitergeld selbst fallen keine Abzüge an; die Sozialbeiträge für den Ausfall (aus 80 % des Unterschieds zwischen Soll- und Ist-Entgelt) trägt der Arbeitgeber allein.
             </p>
           </div>
 
@@ -258,10 +262,12 @@ export default function KurzarbeitergeldRechner() {
               steuerklasse,
               mitKind,
               bundesland,
+              kirchensteuer,
             }}
             ergebnis={{
               kug: ergebnis.kug,
               satz: ergebnis.satz,
+              nettoentgeltdifferenz: ergebnis.differenz,
               sollNetto: ergebnis.sollNetto,
               istNetto: ergebnis.istNetto,
               gesamtEinkommen: ergebnis.gesamtEinkommen,
