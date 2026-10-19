@@ -150,6 +150,9 @@ export const RV_MINDESTBEMESSUNG_MINIJOB = 175;
 // Stichtag bestimmt wie alle übrigen Werte dieser Datei (Lohnsteuer-PAP, BBG und Beitragssätze 2026).
 // Ohne diesen Stichtag würde ab 01.01.2027 die Minijob-Grenze 633 € gelten, während Faktor F,
 // BE-Formeln und alle Sätze noch von 2026 sind. Umstellung auf 2027 im Termin midijob-parameter-2027.
+// W173: Auch der Wahrer-Stundenlohn-Rechner nimmt Feiertage und Mindestlohn aus diesem Jahr. Beim
+// Umstellen dort die Beispielwerte im Block wahrer-stundenlohn (finanzen.ts) und den Eintrag
+// wahrer-stundenlohn in lib/social/captions.json neu rechnen, danach Bilder nach CLAUDE.md.
 export const SV_RECHENSTAND = new Date('2026-07-01');
 // Alias für interne Verwendung
 const BBG_KV = BBG_KV_MONAT;

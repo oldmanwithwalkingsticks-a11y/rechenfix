@@ -1,5 +1,5 @@
-import { MINDESTLOHN } from './mindestlohn';
-import { berechneBruttoNetto } from './brutto-netto';
+import { getAktuellerMindestlohn } from './mindestlohn';
+import { berechneBruttoNetto, SV_RECHENSTAND } from './brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
 import { WOCHEN_PRO_MONAT } from './_helpers';
 import { anzahlBundesweiterFeiertageMoBisFr } from './feiertage';
@@ -25,6 +25,7 @@ export interface WahrerStundenlohnErgebnis {
   vertragsstundenMonat: number;
 
   // Tatsächlich
+  rechenjahr: number;               // Jahr der Feiertage und des Mindestlohns (W173: = SV_RECHENSTAND)
   arbeitstageJahr: number;
   arbeitstageMonat: number;
   feiertageMoBisFr: number;
@@ -43,6 +44,7 @@ export interface WahrerStundenlohnErgebnis {
   // Vergleich
   differenzStundenlohn: number;
   differenzProzent: number;
+  mindestlohnBrutto: number;        // gesetzlicher Mindestlohn im Rechenjahr
   mindestlohnNettoStunde: number;   // Netto je bezahlter Stunde bei Mindestlohn, gleiche Vertragsstunden
   abstandMindestlohnNetto: number;  // wahrer Stundenlohn minus mindestlohnNettoStunde
   jahresverlust: number;
@@ -81,9 +83,13 @@ export const ARBEITSTAGE_WOCHE_STANDARD = 5;
 // Mo–Fr fallen (bei weniger als fünf Arbeitstagen anteilig). Landesfeiertage zieht der Rechner
 // nicht ab, wie der Freelancer-Stundensatz-Rechner. Bis Welle 164 galten pauschal 21,7 Tage im
 // Monat (= 260 Tage Montag bis Freitag / 12), also ohne Urlaub und Feiertage.
+// W173: Feiertage und Mindestlohn kommen aus demselben Jahr wie Lohnsteuer und Sozialabgaben
+// (SV_RECHENSTAND in brutto-netto.ts). Vorher nahm der Rechner das laufende Jahr: Ab 01.01.2027 hätte er
+// Feiertage 2027 und Mindestlohn 14,60 € mit Steuer und Beiträgen 2026 gemischt, und die Beispieltexte
+// in finanzen.ts hätten nicht mehr gestimmt. Gewechselt wird alles zusammen mit SV_RECHENSTAND.
 export function berechneWahrenStundenlohn(
   eingabe: WahrerStundenlohnEingabe,
-  jahr: number = new Date().getFullYear(),
+  jahr: number = SV_RECHENSTAND.getFullYear(),
 ): WahrerStundenlohnErgebnis {
   const nettoMonatlich = nettoStandard(eingabe.bruttoMonatlich);
 
@@ -117,7 +123,8 @@ export function berechneWahrenStundenlohn(
   const differenzProzent = (differenzStundenlohn / offiziellerStundenlohn) * 100;
   // Mindestlohn-Vergleich netto gegen netto: Netto je bezahlter Stunde eines Jobs zum gesetzlichen
   // Mindestlohn mit denselben Vertragsstunden und denselben Annahmen wie oben.
-  const mindestlohnNettoStunde = nettoStandard(MINDESTLOHN * vertragsstundenMonat) / vertragsstundenMonat;
+  const mindestlohnBrutto = getAktuellerMindestlohn(new Date(jahr, 6, 1));
+  const mindestlohnNettoStunde = nettoStandard(mindestlohnBrutto * vertragsstundenMonat) / vertragsstundenMonat;
   const abstandMindestlohnNetto = wahrerStundenlohn - mindestlohnNettoStunde;
   const jahresverlust = differenzStundenlohn * tatsaechlicheStundenMonat * 12;
 
@@ -125,6 +132,7 @@ export function berechneWahrenStundenlohn(
     nettoMonatlich,
     offiziellerStundenlohn,
     vertragsstundenMonat,
+    rechenjahr: jahr,
     arbeitstageJahr,
     arbeitstageMonat,
     feiertageMoBisFr,
@@ -141,6 +149,7 @@ export function berechneWahrenStundenlohn(
     wahrerStundenlohn,
     differenzStundenlohn,
     differenzProzent,
+    mindestlohnBrutto,
     mindestlohnNettoStunde,
     abstandMindestlohnNetto,
     jahresverlust,
