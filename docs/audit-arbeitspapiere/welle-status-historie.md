@@ -6,6 +6,118 @@
 
 ---
 
+## 19.10.2026 — Welle 162: Wahrer-Stundenlohn-Rechner — Netto nach PAP 2026, Mindestlohn netto gegen netto — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Faktencheck vor der Aufnahme von Video 2 „Wahrer Stundenlohn“; der Bildschirmteil des Videos zeigt
+`/finanzen/wahrer-stundenlohn` live. Lehre aus Video 1: Zahlen vor der Aufnahme gegen Primärquellen prüfen.
+
+**Befunde:**
+1. **Netto:** `schaetzeNetto` in `lib/berechnungen/wahrer-stundenlohn.ts` zog die SV pauschal mit 20,95 % ab
+   (der Kommentar daneben nannte 8,75 + 2,4 + 9,3 + 1,3 = 21,75 %), schätzte die Lohnsteuer in fünf linearen
+   Stufen und zog Soli schon ab 81 € Lohnsteuer im Monat ab, obwohl die Freigrenze nach § 3 SolzG bei
+   20.350 € Jahressteuer liegt. Bei 3.500 € brutto ergab das 2.197,69 € statt **2.333,25 €** (Lohnsteuer
+   405,50 €, SV 761,25 €, Soli 0 €), eine Abweichung von 135,56 € im Monat.
+2. **Mindestlohn:** Die Komponente verglich den wahren Stundenlohn (netto, nach Kosten, je tatsächlicher
+   Stunde) mit dem **Brutto**-Mindestlohn von 13,90 €. Bei den Startwerten erschien deshalb ein roter Kasten
+   „Achtung: … unter dem Mindestlohn!“. Ein Job zum Mindestlohn mit 40 Stunden bringt netto 9,90 € je
+   bezahlter Stunde.
+3. **Texte:** Config, FAQ und `contentBloecke` trugen die alten Schätzwerte 2.200 €, 12,70 €, 11,30 €,
+   10,58 €, 1.926 €, 9,25 € und „fast 30 Prozent“, SV „≈ 20,95 %“ in den Blöcken und „ca. 20,4 %“ in der FAQ,
+   dazu unbelegte Spannen („oft +30-50%“, „oft um 30-40%“, „200 bis 400 Euro“, „bis zu 150 €“).
+4. **Anzeige:** Die Zeit-Tabelle zeigte Stunden mit `toFixed(1)`, also mit Dezimalpunkt („21.7 h/Monat“,
+   „208.0 h/Monat“), sichtbar in der Bildschirmaufnahme.
+5. **Quelle:** „§ 1 MiLoG: Höhe des Mindestlohns“ nannte 13,90 €; in § 1 Abs. 2 MiLoG stehen 12 €. Die 13,90 €
+   stehen in § 1 der Fünften Mindestlohnanpassungsverordnung (MiLoV5) vom 05.11.2025: 13,90 € ab
+   01.01.2026, 14,60 € ab 01.01.2027.
+
+**Belege** (geprüft in der Chat-Sitzung vom 19.10.2026, nicht in diesem Lauf; die Zahlen bestätigen hier
+die unabhängige Probe und `berechneBruttoNetto`):
+- § 32a EStG in der Fassung ab VZ 2026.
+- Vorsorgepauschale ab 2026: Teilbetrag Arbeitslosenversicherung nur, soweit KV, PV und AV zusammen 1.900 €
+  nicht übersteigen (BMF-Schreiben vom 14.08.2025; umgesetzt im Programmablaufplan 2026, BMF-Schreiben vom
+  12.11.2025).
+- Beitragssätze 2026: KV 14,6 % plus Ø-Zusatzbeitrag 2,9 %, PV 3,6 % plus 0,6 % kinderlos, RV 18,6 %,
+  AV 2,6 %.
+- Mindestlohn 13,90 € (§ 1 MiLoV5 vom 05.11.2025).
+
+**Änderungen** (42 Ersetzungen in 3 Dateien, Vorlage `_lokal/welle162-wahrer-stundenlohn-v2.mjs`, nicht
+committet; Rechenprobe `_lokal/welle162-probe-v2.mjs`):
+- **Lib, 6:** Imports (`GRUNDFREIBETRAG_2026` entfällt, neu `berechneBruttoNetto` und
+  `KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT`); `schaetzeNetto` → `nettoStandard` über
+  `berechneBruttoNetto` (Steuerklasse 1, ohne Kirchensteuer, 0 Kinder, `kinderUnter25: 0`, `bundesland: ''`,
+  gesetzlich, Ø-Zusatzbeitrag); Aufruf; `uebermindestlohn` → `mindestlohnNettoStunde` (Netto bei Mindestlohn
+  × Vertragsstunden ÷ Vertragsstunden) und `abstandMindestlohnNetto` in Interface, Berechnung und Rückgabe.
+- **Komponente, 8:** Hilfsfunktion `aufCent` (−0 wird 0); `abstandMl` nach dem `useMemo`; Ergebnistext für
+  Kopieren und PDF; Mindestlohn-Kasten netto gegen netto (grün über 1 €, gelb von −1 € bis 1 €, rot darunter;
+  „darüber“, „darunter“ oder „auf den Cent gleichauf“, dazu ein Satz zur Methode); Tipp „Meal-Prep … bis zu
+  150 €“ ohne Zahl; Zeit-Tabelle und Gesamtstunden mit Dezimalkomma; Felder der KI-Erklärung.
+- **Config `finanzen.ts`, nur Block `wahrer-stundenlohn`, 28:**
+  - `metaTitle` „real oft ein Fünftel weniger“ → „im Beispiel 26 % weniger“; `metaDescription` „oft um bis
+    zu 30 %“ → „im Beispiel um 26 %“ (148 Zeichen); `beispiel` „ca. 13 € / ca. 9 €“ → „13,46 € / 9,90 €“.
+  - FAQ Netto-Methode: Schätzung mit „ca. 20,4 %“ → Berechnung wie im Brutto-Netto-Rechner, 21,75 %,
+    2.333,25 € netto, Übergangsbereich 603,01 bis 2.000 € offen genannt. FAQ Ursachen: „oft +30-50%“ und
+    „oft um 30-40%“ → 173 → 208 h (+20 %), 273,60 € Kosten, 13,46 → 9,90 €. FAQ Hebel: „bis zu 150 €/Monat“
+    gestrichen.
+  - Vergleichstabelle 12,70 / 9–10 €/h → 13,46 / 9,90 €/h.
+  - Schritte Brutto → Netto: SV 20,95 % / −733 € → 21,75 % / −761,25 €; Lohnsteuer ≈ −570 € → −405,50 €
+    (PAP 2026, kein Soli); Netto ≈ 2.200 € → 2.333,25 €; Netto-Stundenlohn ≈ 12,70 € → ≈ 13,46 €; Fazit
+    entsprechend.
+  - Pendeln: 2.200 € ÷ 195 h ≈ 11,30 € → 2.333,25 € ÷ 195 h ≈ 11,96 €. Überstunden: ≈ 10,58 € → ≈ 11,22 €,
+    Fazit „gut 10,50“ → „gut 11,20“.
+  - Kosten: „200 bis 400 Euro“ → „im Standardbeispiel gut 270 Euro“; Essen −174 € → −173,60 €; bereinigtes
+    Netto ≈ 1.926 € → 2.059,65 €; wahrer Stundenlohn ≈ 9,25 € → ≈ 9,90 €; „fast 30 Prozent“ → „gut einem
+    Viertel“, Schlusssatz zum Mindestlohn netto gegen netto.
+  - Hinweiskasten und Methoden-Absatz: „vereinfachte Schätzung“ → dieselbe Berechnung wie der
+    Brutto-Netto-Rechner (Programmablaufplan Lohnsteuer 2026) mit festen Annahmen.
+  - Quellen: „§ 1 MiLoG“ → „§ 1 MiLoV5“ (`gesetze-im-internet.de/milov5/BJNR10C0A0025.html`); § 32a mit
+    neuem Hinweistext; neu „BMF: Programmablaufplan für den Lohnsteuerabzug 2026“ mit derselben URL wie beim
+    Brutto-Netto-Rechner.
+  - `letzteAktualisierung` `2026-06-21` → `2026-10-19`.
+
+**Bewusst nicht geändert:**
+- `ARBEITSTAGE_MONAT = 21,7` zählt Urlaub und Feiertage als Pendel- und Essenstage mit. Das ist eine
+  Modellfrage für eine eigene Welle.
+- `berechneBruttoNetto` bildet den Übergangsbereich 603,01 bis 2.000 € nicht ab: Bei 1.500 € brutto sind es
+  326,25 € SV, also 21,75 % flach. Das betrifft auch den Brutto-Netto-Rechner und ist ein eigener Befund für
+  eine eigene Welle. Die FAQ nennt die Grenze jetzt offen.
+- `jahresverlust` bleibt (offizieller minus wahrer Stundenlohn) × tatsächliche Stunden × 12.
+- Im Mindestlohn-Netto-Rechner heißt die Verordnung für 2026 noch „Vierte MiLoV“ (`finanzen.ts`,
+  Statistik-Block um Zeile 910), an anderer Stelle „5. MiLoV“. Das ist ein eigener Befund für eine eigene
+  Welle.
+- Ebenfalls unverändert: `lib/berechnungen/brutto-netto.ts`, `lib/ki-rechner/tools.ts` (das Tool
+  `berechne_wahrer_stundenlohn` zeigt keine Mindestlohn-Felder an und ruft die Lib unverändert auf), alle
+  anderen Rechner-Einträge in `finanzen.ts`.
+
+**Nebenbefund:** Der Methodensatz im neuen Mindestlohn-Kasten steht in `text-gray-500` (dunkel
+`text-gray-400`), wie schon vier ältere Stellen der Komponente (Z. 45, 115, 128, 139 nach Commit A). Die
+Farbregel in `CLAUDE.md` verlangt auf hellem Grund mindestens `text-gray-600`. Nicht geändert, weil die
+Vorlage es so vorgibt; offen für eine kleine Folgekorrektur der ganzen Komponente.
+
+**Gates:**
+- Phase 0 an `00872d5`: `git status` leer, `git diff --stat` über die drei Dateien leer. `schaetzeNetto`
+  `wahrer-stundenlohn.ts:2`; `uebermindestlohn` `WahrerStundenlohnRechner.tsx:7` und
+  `wahrer-stundenlohn.ts:3`; `letzteAktualisierung: '2026-06-21'` 2, „Netto (Beispiel)', formel:
+  'vereinfachte Schätzung'“ 2, „ca. 20,4 %“ 1, `toFixed(1)` 2.
+- Phase 1: „OK — 42 Ersetzungen in 3 Dateien.“, Exit 0; geändert genau `WahrerStundenlohnRechner.tsx`,
+  `wahrer-stundenlohn.ts`, `finanzen.ts`.
+- Phase 2: Probe ohne Lib 14× OK, Exit 0. Gegen `berechneWahrenStundenlohn` (Wegwerfdatei mit `npx tsx`):
+  Fall A (3500 / 40 / 60 / 100 / 8 / 0 / 3) `nettoMonatlich` 2.333,25, `offiziellerStundenlohn` 13,46,
+  `tatsaechlichesNetto` 2.059,65, `wahrerStundenlohn` 9,90, `differenzProzent` 26, `jahresverlust` 8.888,38,
+  `mindestlohnNettoStunde` 9,90, Abstand auf Cent 0. Fall B (Pendelzeit 120) `wahrerStundenlohn` 8,97,
+  `differenzProzent` 33, Abstand auf Cent −0,94. Greps: `schaetzeNetto` und `uebermindestlohn` keine
+  Ausgabe; `abstandMindestlohnNetto` Komponente 2, Lib 3; „2.333,25“ 10; `letzteAktualisierung:
+  '2026-06-21'` 1 (ein anderer Rechner); „ca. 20,4 %“, „bis zu 150 €“ und `toFixed(1)` keine Ausgabe;
+  `milov5/BJNR10C0A0025` 1.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten wie Welle 161, Lint 0 Fehler, die zwei bekannten
+  Warnungen. `check-metadescription`: „216 Felder in 11 Dateien geprueft, alle <= 155 Zeichen“, die neue
+  Beschreibung hat 148 Zeichen; `check-jahreswerte` grün; keine neuen Warnungen in der Prebuild-Kette. Im
+  gebauten HTML von `/finanzen/wahrer-stundenlohn` steht „2.333,25 € netto“ 4× und „13,46“ 15×, „ca. 20,4 %“
+  und „12,70 Euro“ fehlen.
+
+**Commits:** A `928fe3c` (die drei Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 161: Raucher-Rechner — Schachtelpreis 2026 nach BMF, FAQ-Beträge, Termin Tabaksteuer 2027 — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Video 1 „Was Rauchen WIRKLICH kostet“. Die Behauptung „9,20 € Durchschnittspreis“ wurde vor
