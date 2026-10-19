@@ -6,6 +6,138 @@
 
 ---
 
+## 19.10.2026 — Welle 163: Minijob und Übergangsbereich im Brutto-Netto, Midijob-Rechner, Mindestlohn-Verordnung — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Nebenbefunde aus dem Faktencheck für Video 2 und aus Welle 162, ergänzt um einen Auswirkungs-Scan
+über alle Konsumenten von `berechneBruttoNetto`. Prompt Fassung 2 auf Basis `a16d872`.
+
+**Befunde:**
+1. **Brutto-Netto:** `berechneBruttoNetto` rechnete für jedes Brutto die vollen Arbeitnehmer-Sozialabgaben.
+   - Minijob (bis 603 €): richtig ist nur der RV-Eigenanteil von 3,6 % (§ 168 Abs. 1 Nr. 1b SGB VI), bei
+     Befreiung nichts. Bei 500 € zog der Rechner 108,75 € statt 18,00 € ab.
+   - Übergangsbereich (603,01 bis 2.000 €): Arbeitnehmeranteil je Zweig aus BE_AN (§ 20 Abs. 2a Satz 6
+     SGB IV), PV-Zuschlag für Kinderlose aus BE_gesamt (Satz 1). Bei 1.000 € zog der Rechner 218,00 € statt
+     125,33 € ab.
+   - Konsumenten: Brutto-Netto-Rechner, Brutto-Netto-Tabelle (Zeile 1.500 €), Teilzeit, Überstunden,
+     Gehaltserhöhung, Nettolohn-Optimierer, wahrer Stundenlohn (Mindestlohn-Vergleich bei Teilzeit),
+     KI-Rechner. Ab 2.000 € ändert sich nichts.
+2. **Midijob-Rechner:** PV-Zuschlag für Kinderlose aus BE_AN statt BE_gesamt; Lohnsteuer ohne
+   Vorsorge-Eingaben (bei 2.000 € kinderlos 91,08 € statt 88,16 €).
+3. **Midijob-Texte:** Beispielzahlen aus der alten Rechnung; Rente „Seit 2022 … § 163 Abs. 10 SGB VI“ falsch
+   (Entgeltpunkte seit 01.07.2019 aus dem tatsächlichen Entgelt, § 70 Abs. 1a SGB VI), ebenso im Hinweis des
+   Rechners; „etwa dem halben Regelsatz“ beschreibt die alte Gleitzone; Minijob „außer optional RV“ verdreht
+   die Regel; „§ 20a SGB IV“ statt § 20 Abs. 2 und 2a, die Quelle `sgb_4/__20a.html` ist nicht abrufbar.
+4. **Mindestlohn:** `finanzen.ts` und `rechenfix-projekt-referenz.md` nannten für 13,90 € und 14,60 € die
+   „Vierte MiLoV“ statt der Fünften (MiLoV5 vom 05.11.2025). `mindestlohn-netto/page.tsx`: „Vierte
+   Mindestlohnanpassungsverordnung“; 2026 als „bisher größte Einzelerhöhung“ (+1,08 € gegenüber +1,55 € im
+   Oktober 2022); dynamische Variable statt 13,90 € im Satz über 2026; Untertitel „Knapp über Mindestlohn“
+   für 2.000 €.
+5. **Folgetexte:** Brutto-Netto-Rechner „rund 21 % vom Brutto“ (3 Stellen) und „knapp 75 %“ (2) gelten nur ab
+   2.000 €; Brutto-Netto-Tabelle „prozentual gleich“ und „progressive Steuer“ für die niedrige Quote bei
+   1.500 €; Gehaltserhöhung „Geringes Einkommen … ~65–75 % netto, niedrige Grenzbelastung“ (im Midijob-Bereich
+   bleiben von +100 € nur 50 bis 69 €); SchnellCheck-PV-Tipp auch im Minijob; Teilzeit-Satz nennt nur die
+   Steuer; Seite 2.000 € brutto „ca. 1.485 €“ statt 1.476,84 € (war schon vor dieser Welle falsch).
+6. **Kontrast:** `WahrerStundenlohnRechner.tsx` setzte an fünf Stellen Text auf hellem Grund in
+   `text-gray-500`; CLAUDE.md verlangt mindestens `text-gray-600` (Nebenbefund aus Welle 162).
+
+**Belege** (geprüft in der Chat-Sitzung vom 19.10.2026, nicht in diesem Lauf; die Zahlen bestätigen hier
+die unabhängige Probe, `verify-midijob-p1` und `berechneBruttoNetto`):
+- § 20 Abs. 2 und 2a SGB IV.
+- DRV, Übergangsbereich: Zuschlag für Kinderlose aus der reduzierten beitragspflichtigen Einnahme nach Satz 1.
+- lohn-info.de, Beitragsberechnung im Übergangsbereich 2026: Beispiel 1.000 € mit 120,50 € (mit Kind) bzw.
+  125,62 € (kinderlos), Zusatzbeitrag 3,0 %.
+- § 168 Abs. 1 Nr. 1b SGB VI, § 6 Abs. 1b SGB VI, § 70 Abs. 1a SGB VI.
+- § 1 MiLoV5 vom 05.11.2025.
+
+**Änderungen** (60 Ersetzungen in 13 Dateien, Vorlage `_lokal/welle163-midijob-minijob-v2.mjs`, nicht
+committet; Rechenprobe `_lokal/welle163-probe.mjs`):
+- **`lib/berechnungen/brutto-netto.ts`, 5:** Importe aus `midijob-uebergang` und `mindestlohn` (kein Zyklus,
+  beide importieren `brutto-netto` nicht); neu `RV_EIGENANTEIL_MINIJOB_2026 = 0.036`; Minijob: KV, PV, AV 0,
+  RV 3,6 %, bei `rvBefreit` 0; Übergangsbereich: KV, RV, AV und PV-Grundanteil aus BE_AN, PV-Zuschlag aus
+  BE_gesamt, beide auf Cent gerundet. Lohnsteuer, Soli, Kirchensteuer und Weihnachtsgeld-Zweig unverändert.
+  Netto: 500 € 391,25 → 482,00 €; 1.000 € 782,00 → 874,67 €; 1.500 € → 1.210,58 €; 2.000 € 1.476,84 € und
+  3.500 € 2.333,25 € unverändert.
+- **`components/rechner/MidijobRechner.tsx`, 9:** AN-SV, Lohnsteuer, Soli und Kirchensteuer aus
+  `berechneBruttoNetto` (Kirchensteuersatz über `kirchensteuersatzFuer`); `lohnsteuerMonat` und ungenutzte
+  Importe entfallen; Renten-Hinweis mit § 70 Abs. 1a SGB VI.
+- **`components/rechner/BruttoNettoRechner.tsx`, 7:** Hinweis unter der Aufschlüsselung bei Brutto ≤ 2.000 €
+  (Minijob bzw. Midijob); „rund 21 %“ und „knapp 75 %“ auf „ab 2.000 €“ bzw. „bei 2.000 € brutto“ präzisiert.
+- **`lib/rechner-config/finanzen.ts`, 19:**
+  - Midijob-Block: Satz 21,75 % → 21,15 % auf BE_AN plus 0,6 % auf BE_gesamt; 1.300 € 217,03 / 1.082,97 →
+    218,23 / 1.081,77 €; 700 € 30,20 / 669,80 → 32,43 / 667,57; 1.000 € 123,62 / 876,38 → 125,33 / 874,67,
+    AG 242,77 → 241,06 €; 1.700 € 341,59 / 1.319,83 → 342,11 / 1.321,31; 2.000 € Netto 1.473,92 → 1.476,84;
+    603,01 € Netto 603,01 → 600,62 (kinderlos, PV-Zuschlag 2,39 €); Lohnsteuer „oberhalb von rund 1.300“ →
+    „ab gut 1.400“; Gleitzonen-Satz, Minijob-Satz und Rente (§ 163 Abs. 10 → § 70 Abs. 1a, „2022“ → „1. Juli
+    2019“); Quellen: § 20 statt § 20a (URL `sgb_4/__20.html`), § 70 SGB VI statt § 163, neu DRV
+    Übergangsbereich; `letzteAktualisierung` `2026-06-22` → `2026-10-19`.
+  - Mindestlohn-Statistik und Kommentar: Vierte → Fünfte MiLoV (vom 05.11.2025).
+  - Minijob-Block: zwei Normzitate § 20a → § 20 Abs. 2.
+  - Gehaltserhöhung: „Geringes Einkommen (nahe Grundfreibetrag), ~65–75 %, niedrige Grenzbelastung“ →
+    „Midijob-Bereich (603,01–2.000 €), ~50–69 %, hohe Grenzbelastung“.
+  - Wahrer Stundenlohn: Satz zum Übergangsbereich aus Welle 162 → „rechnet er mit den reduzierten
+    Arbeitnehmerbeiträgen, beim Minijob nur mit dem Rentenbeitrag von 3,6 %“.
+- **`components/rechner/WahrerStundenlohnRechner.tsx`, 5:** fünfmal `text-gray-500` → `text-gray-600` auf
+  hellem Grund, `dark:`-Klassen unverändert.
+- **`scripts/verify-midijob-p1.ts`, 5:** drei Sollwerte für den Zuschlag aus BE_gesamt (280,16 / 612,20 /
+  332,04 €); neue Fälle für `berechneBruttoNetto`: lohn-info 120,50 und 125,62 €, Minijob 18,00 €, befreit
+  0 €, 2.000 € = 435,00 €.
+- **Seiten:** `2000-euro-brutto-netto` (2) Chemnitz 1.485 / 965 / ~395 → 1.477 / 957 / ~387 €;
+  `mindestlohn-netto` (2) „ein Sprung um 1,08 € auf 13,90 €“, Hinweis auf Oktober 2022, Fünfte MiLoV,
+  Untertitel „Netto in allen Steuerklassen“; `brutto-netto-tabelle` (1) Abzüge im Midijob-Bereich reduziert,
+  Sozialabgaben „ab 2.000 €“ prozentual gleich.
+- **Übrige:** `SchnellCheck.tsx` (2) PV-Tipp nur oberhalb der Minijob-Grenze; `TeilzeitRechner.tsx` (1)
+  Progressionsvorteil nennt die reduzierten Sozialabgaben; `wahrer-stundenlohn.ts` (1) Kommentar;
+  `rechenfix-projekt-referenz.md` (1) Fünfte MiLoV.
+
+**Bewusst nicht geändert** (offene Punkte für spätere Wellen):
+- Weihnachtsgeld im Mini- und Midijob wird weiter mit vollen Sätzen belastet.
+- Steuerklasse VI (Zweitjob) bekommt die Midijob-Regel, obwohl beim Übergangsbereich alle Beschäftigungen
+  zusammen zählen (§ 20 Abs. 2 SGB IV).
+- Ab 01.01.2027 steigt die Minijob-Grenze per Datum auf 633 €, `midijob-parameter.ts` kennt aber nur 2026
+  (G = 603, F = 0,6619). Vor dem Jahreswechsel braucht es einen Bucket 2027 mit dem F-Faktor aus der
+  BMAS-Bekanntmachung.
+- `steuerklassen-vergleich.ts` (`berechneSvJahr`) und die AG-Quote im Nettolohn-Optimierer rechnen ohne
+  Midijob-Regel.
+- Kommentare in `midijob-parameter.ts` und `midijob-uebergang.ts` nennen noch § 163 Abs. 10 für
+  Entgeltpunkte; ein Kommentar im Minijob-Block nennt § 20a.
+- Mindestbemessungsgrundlage 175 € in der RV des Minijobs ist nicht abgebildet.
+- Kurzarbeitergeld: Die Config rechnet mit 21 % SV-Pauschale; nach Angabe des Scans nennt § 153 SGB III 20 %.
+  Noch nicht verifiziert.
+- `.claude/skills/rechner-builder/references/templates.md` nennt eine „6. Mindestlohnanpassungsverordnung“.
+  Das betrifft das Repo `rechenfix-skills`.
+- Ebenfalls unverändert: `midijob-parameter.ts`, `midijob-uebergang.ts`, `minijob.ts`,
+  `steuerklassen-vergleich.ts`, `lib/social/captions.json` und `public/social-posts/` (Welle 164),
+  `ARBEITSTAGE_MONAT`.
+
+**Gates:**
+- Phase 0 an `a16d872`: `git status` leer, `git diff --stat` ab `a16d872` über die 13 Dateien leer. Greps:
+  `abstandMindestlohnNetto` `wahrer-stundenlohn.ts:3`; `istImUebergangsbereich` keine Ausgabe; `§ 20a SGB IV`
+  `MidijobRechner.tsx:3` und `finanzen.ts:5`; `Vierte MiLoV` `finanzen.ts:3` und
+  `rechenfix-projekt-referenz.md:1`; `217,03` 4; „größte Einzelerhöhung“ 1; `1.485` 2; „knapp 75 %“ 2;
+  `text-gray-500 dark:text-gray-400` 5.
+- Phase 1: „OK — 60 Ersetzungen in 13 Dateien.“, Exit 0; geändert genau die 13 Dateien.
+- Phase 2: Probe 25× OK, Exit 0; `verify-midijob-p1` „Ergebnis: 34/34 grün, 0 rot.“, Exit 0;
+  `verify-bruttonetto-zuschlaege` „6552 Rasterfälle ohne Abweichung, 11 Referenzfälle“, Exit 0. Gegen
+  `berechneBruttoNetto` (Wegwerfdatei mit `npx tsx`, StKl 1, ZB 2,9): 500 € 18,00 / 482,00 (KV, PV, AV 0,00);
+  1.000 € 125,33 / 874,67 (KV 49,73, PV 15,35, RV 52,86, AV 7,39); 1.500 € 280,17 / 1.210,58; 2.000 €
+  435,00 / 1.476,84; 3.500 € 761,25 / 2.333,25. 1.000 € mit ZB 3,0 und einem Kind 120,50; 500 € mit
+  `rvBefreit` 0,00. Die 14 Greps wie Soll: `istImUebergangsbereich` 2; `§ 20a SGB IV` nur `finanzen.ts:1`
+  (Code-Kommentar im Minijob-Block); `Vierte MiLoV`, `217,03`, `163 Abs. 10`, `lohnsteuerMonat`, „größte
+  Einzelerhöhung“, `1.485`, „knapp 75 %“, `letzteAktualisierung: 'HEUTE'` und `text-gray-500
+  dark:text-gray-400` keine Ausgabe; `218,23` 4; `§ 70 Abs. 1a SGB VI` `MidijobRechner.tsx:3` und
+  `finanzen.ts:3`; `getMinijobGrenzeMonat` `BruttoNettoRechner.tsx:2` und `SchnellCheck.tsx:2`.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten wie Welle 162, Lint 0 Fehler, die zwei bekannten
+  Warnungen (affiliate-stats, KaffeeWasserRechner). `check-metadescription` und `check-jahreswerte` grün;
+  `check-blog-wortzahl --warnung` mit denselben vier Blog-Hinweisen wie in Welle 162. Im gebauten HTML:
+  `/finanzen/midijob-rechner` „218,23“ 8×, „1.012,74“ 2×, „§ 70 Abs. 1a“ 7×, „217,03“ fehlt;
+  `/finanzen/mindestlohn-netto` „Fünfter Mindestlohnanpassungsverordnung“ 2×, „größte Einzelerhöhung“ fehlt;
+  `/finanzen/2000-euro-brutto-netto` „1.477“ 6×, „1.485“ fehlt; `/finanzen/wahrer-stundenlohn` „rechnet er mit
+  den reduzierten“ 4×.
+
+**Commits:** A `d7c31eb` (die 13 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 162: Wahrer-Stundenlohn-Rechner — Netto nach PAP 2026, Mindestlohn netto gegen netto — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Faktencheck vor der Aufnahme von Video 2 „Wahrer Stundenlohn“; der Bildschirmteil des Videos zeigt
