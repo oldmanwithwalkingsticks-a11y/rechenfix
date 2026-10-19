@@ -6,6 +6,72 @@
 
 ---
 
+## 19.10.2026 — Welle 173: Wahrer Stundenlohn — Feiertage und Mindestlohn aus dem Rechenjahr — ✅ ABGESCHLOSSEN 19.10.2026
+
+**Anlass:** Hinweis zum Jahreswechsel im Bericht und in der Historie zu Welle 165 (`b77da1d`). Die Komponente rief
+`berechneWahrenStundenlohn` ohne Jahr auf, die Lib nahm `new Date().getFullYear()`; den Mindestlohn las sie aus
+`MINDESTLOHN`, ebenfalls tagesaktuell. Gemessen in Welle 165 bei den Startwerten, Netto und Mindestlohn auf Stand
+2026: 2026 7 Feiertage von Montag bis Freitag, 223 Arbeitstage, 10,27 €; 2027 5, 225, 10,25 €; 2028 8, 222,
+10,28 €.
+
+**Befund:** Ab 01.01.2027 hätte der Rechner Jahre gemischt: Feiertage 2027 (225 Arbeitstage) und Mindestlohn
+14,60 €, aber Lohnsteuer und Sozialabgaben weiter von 2026, weil `SV_RECHENSTAND` erst im Termin
+`midijob-parameter-2027` umgestellt wird (Welle 166). Bei den Startwerten 10,25 € statt 10,27 €; der
+Mindestlohn-Kasten wäre von „0,36 € darüber“ auf „0,06 € darunter“ gesprungen, weil 14,60 € mit Steuer und
+Beiträgen 2026 gerechnet worden wären (10,31 € netto je Stunde). Die Texte in `finanzen.ts` (223 Tage, „2026: 7“,
+13,90 €, 10,27 €) hätten nicht mehr zum Rechner gepasst.
+
+**Entscheidung:** Der Rechner nimmt Feiertage und Mindestlohn aus demselben Jahr wie Lohnsteuer und
+Sozialabgaben, also aus `SV_RECHENSTAND`. Gewechselt wird alles zusammen, mit Texten und Caption, im Termin
+`midijob-parameter-2027`; dasselbe Prinzip wie in Welle 166 für Minijob-Grenze und Faktor F. Wer ein anderes
+Jahr will, übergibt es weiter als zweites Argument.
+
+**Änderungen** (14 Ersetzungen und 1 Datumszeile = 15 in 5 Dateien, Vorlage
+`_lokal/welle173-wahrer-stundenlohn-rechenjahr.mjs`, nicht committet; Lib-Prüfung `_lokal/welle173-lib.mts`):
+- **`lib/berechnungen/wahrer-stundenlohn.ts`, 7:** Vorgabejahr `SV_RECHENSTAND.getFullYear()` statt laufendes
+  Jahr; Mindestlohn über `getAktuellerMindestlohn(new Date(jahr, 6, 1))` statt `MINDESTLOHN`; neue Ergebnisfelder
+  `rechenjahr` und `mindestlohnBrutto`; Kommentar W173.
+- **`components/rechner/WahrerStundenlohnRechner.tsx`, 3:** kein Import von `MINDESTLOHN` mehr;
+  Kastenüberschrift „Vergleich mit dem Mindestlohn 2026 (13,90 € brutto je Stunde)“ aus dem Ergebnis;
+  Erklärsatz „bundesweite Feiertage, die 2026 auf Montag bis Freitag fallen“.
+- **`lib/rechner-config/finanzen.ts`, 1:** Satz im Methodik-Absatz, dass Steuer, Sozialabgaben, Mindestlohn und
+  Feiertage aus demselben Rechenjahr stammen. `letzteAktualisierung` auf heute gesetzt; sie stand schon auf
+  `2026-10-19`, die Zeile ist im Diff unverändert.
+- **`lib/berechnungen/brutto-netto.ts`, 1:** Kommentar an `SV_RECHENSTAND`, dass der Wahrer-Stundenlohn-Rechner
+  mitwechselt und seine Beispieltexte und die Caption dann neu gerechnet werden.
+- **`lib/termine.ts`, 2:** `switch-wirksamkeit-2027` nennt den Rechner bei denen, die mit Stand 2026
+  weiterrechnen; `midijob-parameter-2027` bekommt die Nacharbeit (Werte im Block `wahrer-stundenlohn`, Eintrag in
+  `captions.json`, Bilder und Video nach `CLAUDE.md`).
+
+**Nebeneffekt** (aus dem Code abgeleitet, nicht gemessen): Vorgerendertes HTML und Rechnung im Browser hängen nicht
+mehr vom Datum ab. Vorher konnten die beim Build vorgerenderten Werte und die Rechnung im Browser über den
+Jahreswechsel auseinanderlaufen, bis zum nächsten Deploy.
+
+**Bewusst nicht geändert:** `SV_RECHENSTAND` selbst, `mindestlohn.ts`, `feiertage.ts`, `captions.json`, Bilder
+und Videos, die Beispielwerte im Block `wahrer-stundenlohn` (sie bleiben 2026 und stimmen jetzt bis zur
+Umstellung).
+
+**Gates:**
+- Phase 0 an `6df7274`: `git status` leer, oben `6df7274` und `13869e7` (Welle 172).
+  `jahr: number = new Date().getFullYear()` `wahrer-stundenlohn.ts:1`; `MINDESTLOHN`
+  `WahrerStundenlohnRechner.tsx:2`; `mindestlohnBrutto` und „Wahrer-Stundenlohn-Rechner“ in `termine.ts` keine
+  Ausgabe.
+- Phase 1: „OK — 15 Ersetzungen in 5 Dateien.“, Exit 0; geändert genau die 5 Dateien.
+- Phase 2: Lib-Prüfung mit der Uhr auf dem 15.01.2027 14× OK, „Alle Werte OK“, Exit 0 (ohne Jahr: Rechenjahr
+  2026, 7 Feiertage, 223 Arbeitstage, Mindestlohn 13,90 €, 10,27 €, Mindestlohn netto 9,90 €, Abstand 0,36 €; mit
+  2027 ausdrücklich: 5 Feiertage, 225 Arbeitstage, 14,60 €; bei 120 Minuten 9,40 € und −0,50 €). Greps:
+  `new Date().getFullYear()` und `MINDESTLOHN` keine Ausgabe; `mindestlohnBrutto`
+  `WahrerStundenlohnRechner.tsx:1` und `wahrer-stundenlohn.ts:4`; „Wahrer-Stundenlohn-Rechner“ `termine.ts:2`;
+  „demselben Rechenjahr“ `finanzen.ts:1`. `verify-termine` 12/12 grün, `check-termine` ohne Meldung.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen. Im gebauten
+  HTML von `/finanzen/wahrer-stundenlohn` „10,27“ 13× und „demselben Rechenjahr“ 2×; die Kastenüberschrift steht
+  als „Vergleich mit dem Mindestlohn 2026 (13,90 € brutto je Stunde)“ (mit den Kommentarmarken von React), der
+  Satz „Feiertage, die 2026 auf Montag bis Freitag fallen“ ist da.
+
+**Commits:** A `3bc7a7d` (die 5 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 19.10.2026 — Welle 172: Social-Kacheln und TikTok-Videos auf den Stand ihrer Datenquelle, Manifest gegen neue Abweichungen — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Offener Befund aus Welle 164 (Historie `7253c8e`): 141 Kacheln zeigten nicht den Stand von
