@@ -15,10 +15,19 @@ export interface MwstRueckerstattungErgebnis {
   mindestbetragErreicht: boolean;
 }
 
+// W185: vorher Global Blue 3,50 € + 1,5 % und Planet 4,00 € + 2 % des MwSt-Anteils (500 € → 75,13 € = 15,0 %).
+// Belegte Abzüge liegen weit höher: SRF Kassensturz, 19.03.2025 („Mehrwertsteuer-Rückerstattung mit happigen
+// Gebühren“): Global Blue behielt rund 25 % (399 € MwSt → 297 €), Planet rund 25 % (790 € → 596 €) — beides Einkäufe
+// in Deutschland. Reiseportale nennen für 19-%-Waren 9–13 % des Kaufpreises als tatsächliche Erstattung.
+// Die Erstattungstabellen der Anbieter sind gestaffelt und nicht öffentlich abrufbar; angesetzt wird deshalb für
+// beide Anbieter ein Richtwert von 25 % der MwSt (≈ 12 % des Kaufpreises bei 19 %), im UI als Richtwert gekennzeichnet.
+// https://www.srf.ch/sendungen/kassensturz-espresso/kassensturz/mehrwertsteuer-rueckerstattung-mit-happigen-gebuehren-die-kundschaft-aergert-s
+export const DIENSTLEISTER_ABZUG_PROZENT = 25;
+
 const GEBUEHREN: Record<string, { fix: number; prozent: number; label: string }> = {
   'keine': { fix: 0, prozent: 0, label: 'Keine (direkt beim Händler)' },
-  'global-blue': { fix: 3.5, prozent: 1.5, label: 'Global Blue (~3,50 € + 1,5 %)' },
-  'planet': { fix: 4, prozent: 2, label: 'Planet (~4,00 € + 2 %)' },
+  'global-blue': { fix: 0, prozent: DIENSTLEISTER_ABZUG_PROZENT, label: 'Global Blue (Richtwert ~25 % der MwSt)' },
+  'planet': { fix: 0, prozent: DIENSTLEISTER_ABZUG_PROZENT, label: 'Planet (Richtwert ~25 % der MwSt)' },
 };
 
 const MINDESTBETRAG = 50.01;

@@ -2958,7 +2958,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'dm-euro-rechner',
-    letzteAktualisierung: '2026-07-31',
+    letzteAktualisierung: '2026-10-20',
     titel: 'DM-Euro-Rechner',
     beschreibung: 'D-Mark und andere Altwährungen der Eurozone zum unwiderruflich festgelegten Kurs umrechnen — 21 Währungen, amtliche Rundungsregeln.',
     kategorie: 'Alltag',
@@ -2974,8 +2974,10 @@ export const alltagRechner: RechnerConfig[] = [
         antwort: 'Man teilt den D-Mark-Betrag durch 1,95583. 100 DM ergeben also 100 ÷ 1,95583 = 51,13 €. Der Kurs ist unwiderruflich festgelegt und ändert sich nicht — das Ergebnis ist damit exakt, nicht nur ungefähr.',
       },
       {
+        // W185: vorher „Wer durch zwei teilt, liegt rund 2,3 Prozent zu niedrig“ — 1,95583 ÷ 2 = 0,97792, also 2,21 %.
+        // Die 2,3 % der Bundesbank (Monatsbericht 01/2004) betreffen die Gegenrichtung (Euro-Preis × 2 = +2,26 %).
         frage: 'Stimmt die Faustregel „D-Mark durch zwei"?',
-        antwort: 'Nur ungefähr, und sie führt systematisch in die Irre. Der echte Kurs ist 1,95583, nicht 2,0. Wer durch zwei teilt, liegt rund 2,3 Prozent zu niedrig; wer umgekehrt einen Euro-Preis verdoppelt, um ihn „in Mark" zu prüfen, kommt rund 2,26 Prozent zu hoch heraus. Die Deutsche Bundesbank hat genau diesen Fehler benannt und beziffert.',
+        antwort: 'Nur ungefähr, und sie führt systematisch in die Irre. Der echte Kurs ist 1,95583, nicht 2,0. Wer durch zwei teilt, liegt rund 2,2 Prozent zu niedrig; wer umgekehrt einen Euro-Preis verdoppelt, um ihn „in Mark" zu prüfen, kommt rund 2,26 Prozent zu hoch heraus. Diesen zweiten Fehler hat die Deutsche Bundesbank benannt und mit rund 2,3 Prozent beziffert.',
       },
       {
         frage: 'Kann ich D-Mark heute noch umtauschen?',
@@ -3077,7 +3079,8 @@ export const alltagRechner: RechnerConfig[] = [
           ['100 DM', '51,13 €', '50,00 €'],
           ['1.000 DM', '511,29 €', '500,00 €'],
         ],
-        fussnote: 'Die Faustregel unterschätzt den Euro-Wert durchgängig um rund 2,3 Prozent. Je höher der Betrag, desto größer der absolute Unterschied.',
+        // W185: vorher „um rund 2,3 Prozent“ — Halbieren ergibt 2,21 % zu wenig (z. B. 50,00 statt 51,13 €).
+        fussnote: 'Die Faustregel unterschätzt den Euro-Wert durchgängig um rund 2,2 Prozent. Je höher der Betrag, desto größer der absolute Unterschied.',
       },
       {
         typ: 'text',
@@ -3104,7 +3107,8 @@ export const alltagRechner: RechnerConfig[] = [
         typ: 'checkliste',
         titel: 'Beim Umtausch beachten',
         punkte: [
-          'D-Mark-Betrag durch 1,95583 teilen — nicht durch 2. Die Faustregel liegt rund 2,3 Prozent daneben.',
+          // W185: vorher „rund 2,3 Prozent daneben“ (das ist die Gegenrichtung Euro × 2); Halbieren: 2,2 % zu niedrig.
+          'D-Mark-Betrag durch 1,95583 teilen — nicht durch 2. Die Faustregel liegt rund 2,2 Prozent zu niedrig.',
           'Umtausch nur bei der Deutschen Bundesbank (Filiale oder Post über Mainz), gebührenfrei und ohne Frist.',
           'Scheine und Münzen werden beide angenommen; auch alte, längst eingezogene Serien.',
           'DDR-Mark und Bargeld der sowjetischen Besatzungszone sind vom Umtausch ausgeschlossen.',

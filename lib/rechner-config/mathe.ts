@@ -1628,7 +1628,7 @@ export const matheRechner: RechnerConfig[] = [
   },
   {
     slug: 'binaer-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Binär-Rechner',
     beschreibung: 'Zahlen zwischen Dezimal, Binär, Oktal und Hexadezimal live umrechnen — mit Rechenweg und ASCII-Code.',
     kategorie: 'Mathe & Schule',
@@ -1653,7 +1653,8 @@ export const matheRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist der Unterschied zwischen Bit und Byte?',
-        antwort: 'Ein **Bit** ist die kleinste Informationseinheit — eine einzige 0 oder 1. Ein **Byte** besteht aus 8 Bit und kann Werte von 0 bis 255 (binär: 00000000 bis 11111111) darstellen. Ein Byte reicht für ein ASCII-Zeichen. 1 Kilobyte (KB) = 1024 Byte (streng: Kibibyte), 1 Megabyte (MB) = 1024 KB usw.',
+        // W185: vorher „1 Kilobyte (KB) = 1024 Byte (streng: Kibibyte)“ — IEC 80000-13: 1 KiB = 1.024 Byte, 1 kB = 1.000 Byte.
+        antwort: 'Ein **Bit** ist die kleinste Informationseinheit — eine einzige 0 oder 1. Ein **Byte** besteht aus 8 Bit und kann Werte von 0 bis 255 (binär: 00000000 bis 11111111) darstellen. Ein Byte reicht für ein ASCII-Zeichen. 1 Kibibyte (KiB) = 1.024 Byte, 1 Mebibyte (MiB) = 1.024 KiB usw. Umgangssprachlich heißen sie oft „Kilobyte“ und „Megabyte“; nach den SI-Vorsätzen sind 1 kB aber genau 1.000 Byte und 1 MB 1.000.000 Byte.',
       },
       {
         frage: 'Wie berechne ich ASCII-Codes?',
@@ -2044,7 +2045,7 @@ export const matheRechner: RechnerConfig[] = [
   },
   {
     slug: 'gleichungsrechner',
-    letzteAktualisierung: '2026-06-25',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Gleichungslöser',
     beschreibung: 'Lineare und quadratische Gleichungen lösen — mit vollständigem Rechenweg, Mitternachtsformel und Parabel-Grafik.',
     kategorie: 'Mathe & Schule',
@@ -2053,7 +2054,8 @@ export const matheRechner: RechnerConfig[] = [
     metaDescription: 'Gleichungen lösen: Lineare und quadratische Gleichungen mit vollständigem Rechenweg und Parabel-Grafik.',
     keywords: ['gleichungsrechner', 'gleichungen lösen', 'lineare gleichung', 'quadratische gleichung', 'mitternachtsformel', 'pq-formel', 'nullstellen berechnen', 'diskriminante'],
     icon: '📝',
-    beispiel: 'Linear: 2x + 5 = 11 → x = (11 − 5) / 2 = 3. Quadratisch: x² − 5x + 6 = 0 → x₁ = 2, x₂ = 3 (Diskriminante = 1).',
+    // W185: vorher „x₁ = 2, x₂ = 3“ — der Rechner (x₁ = (−b + √D) ÷ 2a) und die Beispielrechnung nennen x₁ = 3, x₂ = 2.
+    beispiel: 'Linear: 2x + 5 = 11 → x = (11 − 5) / 2 = 3. Quadratisch: x² − 5x + 6 = 0 → x₁ = 3, x₂ = 2 (Diskriminante = 1).',
     // W19-Goldstandard: gleichungsrechner (Gleichungslöser) auf volle Tiefe (~1.560 W, 15 Bausteine).
     // Leitformat „Gegenüberstellung" — 3 vergleich dominant (linear vs. quadratisch · Mitternachts-
     // vs. pq-Formel · Mitternachtsformel vs. Vieta-Faktorisierung), grenzt sich von prozentuale-
@@ -2547,7 +2549,7 @@ export const matheRechner: RechnerConfig[] = [
   },
   {
     slug: 'potenz-rechner',
-    letzteAktualisierung: '2026-06-25',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Potenz-Rechner',
     beschreibung: 'Potenzen, Wurzeln und Logarithmen berechnen mit Rechenweg und Potenzgesetzen.',
     kategorie: 'Mathe & Schule',
@@ -2578,7 +2580,8 @@ export const matheRechner: RechnerConfig[] = [
           { label: 'In Etappen rechnen', formel: '2⁵ = 32, dann 32 × 32', ergebnis: '1.024' },
           { label: 'Ergebnis', formel: '2¹⁰', ergebnis: '1.024' },
         ],
-        fazit: '2¹⁰ ergibt 1.024 — die wohl wichtigste Zweierpotenz, denn sie definiert das Kilobyte (1 KB = 1.024 Byte). Der Exponent zählt die Multiplikationen: zehn Faktoren 2 ergeben 1.024. Wer die Zweierpotenzen kennt, rechnet in der Informatik deutlich schneller.',
+        // W185: vorher „definiert das Kilobyte (1 KB = 1.024 Byte)“ — nach IEC 80000-13 ist 1 KiB = 1.024 Byte, 1 kB = 1.000 Byte.
+        fazit: '2¹⁰ ergibt 1.024 — die wohl wichtigste Zweierpotenz, denn sie definiert das Kibibyte (1 KiB = 1.024 Byte; ein Kilobyte, 1 kB, sind dagegen 1.000 Byte). Der Exponent zählt die Multiplikationen: zehn Faktoren 2 ergeben 1.024. Wer die Zweierpotenzen kennt, rechnet in der Informatik deutlich schneller.',
       },
       {
         typ: 'text',
@@ -2678,13 +2681,16 @@ export const matheRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Anwendungen: von Zinseszins bis Bytes',
-        html: `<p>Potenzen, Wurzeln und Logarithmen stecken in vielen Alltags- und Fachbereichen. Beim <strong>Zinseszins</strong> wächst Kapital exponentiell: K = K₀ × (1 + p/100)ⁿ — und der Logarithmus verrät, wann sich der Betrag verdoppelt. Bei 5 % Zinsen sind das rund 14,2 Jahre.</p><p>In der <strong>Informatik</strong> sind Speichergrößen Zweierpotenzen: 1 KB = 2¹⁰ = 1.024 Byte, 1 MB = 2²⁰, 1 GB = 2³⁰. Auch Bildschirmauflösungen folgen diesem Muster, weil Computer binär arbeiten. In Physik und Chemie macht die <strong>wissenschaftliche Notation</strong> (a × 10ⁿ) riesige und winzige Zahlen handhabbar — etwa die Lichtgeschwindigkeit 3 × 10⁸ m/s.</p><p>In der <strong>Geometrie</strong> schließlich sind Flächen Quadrat- und Volumina Kubikfunktionen: Verdoppelt man die Kante eines Würfels, verachtfacht sich sein Volumen.</p>`,
+        // W185: vorher „1 KB = 2¹⁰ = 1.024 Byte, 1 MB = 2²⁰, 1 GB = 2³⁰“ — Binärpräfixe nach IEC 80000-13 (wie datenmengen-umrechner).
+        // W185: vorher „Auch Bildschirmauflösungen folgen diesem Muster“ (falsch, z. B. 1920 × 1080); jetzt Farbtiefe 2⁸ = 256.
+        html: `<p>Potenzen, Wurzeln und Logarithmen stecken in vielen Alltags- und Fachbereichen. Beim <strong>Zinseszins</strong> wächst Kapital exponentiell: K = K₀ × (1 + p/100)ⁿ — und der Logarithmus verrät, wann sich der Betrag verdoppelt. Bei 5 % Zinsen sind das rund 14,2 Jahre.</p><p>In der <strong>Informatik</strong> werden Speichergrößen oft in Zweierpotenzen angegeben: 1 KiB = 2¹⁰ = 1.024 Byte, 1 MiB = 2²⁰, 1 GiB = 2³⁰ — im Unterschied zu 1 kB = 1.000 Byte nach den SI-Vorsätzen. Auch Farbtiefen folgen diesem Muster: 8 Bit je Farbkanal ergeben 2⁸ = 256 Abstufungen. In Physik und Chemie macht die <strong>wissenschaftliche Notation</strong> (a × 10ⁿ) riesige und winzige Zahlen handhabbar — etwa die Lichtgeschwindigkeit 3 × 10⁸ m/s.</p><p>In der <strong>Geometrie</strong> schließlich sind Flächen Quadrat- und Volumina Kubikfunktionen: Verdoppelt man die Kante eines Würfels, verachtfacht sich sein Volumen.</p>`,
       },
       {
         typ: 'statistik',
         titel: 'Merkwerte für Schule und Studium',
         werte: [
-          { label: '2¹⁰', wert: '1.024', hinweis: '= 1 Kilobyte (Informatik)' },
+          // W185: vorher „= 1 Kilobyte (Informatik)“; IEC 80000-13: 1.024 Byte = 1 Kibibyte.
+          { label: '2¹⁰', wert: '1.024', hinweis: '= 1 Kibibyte (KiB) in der Informatik' },
           { label: '12²', wert: '144', hinweis: 'größte Quadratzahl im kleinen Einmaleins' },
           { label: 'a⁰', wert: '1', hinweis: 'für jedes a ≠ 0' },
           { label: 'natürliche Basis e', wert: '≈ 2,718', hinweis: 'Basis des natürlichen Logarithmus ln' },

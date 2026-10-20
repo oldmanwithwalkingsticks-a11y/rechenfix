@@ -57,15 +57,20 @@ export default function PhotovoltaikRechner() {
     const nettoErtrag = berechnePvErtrag({ kwp: kwpWert, ausrichtung, neigung });
 
     // Eigenverbrauchsquote
-    let quote: number;
+    let quoteRoh: number;
     if (mitSpeicher) {
-      quote = Math.min(0.75, 0.6 + (parseDeutscheZahl(speicherKwh) || 0) * 0.015);
+      quoteRoh = Math.min(0.75, 0.6 + (parseDeutscheZahl(speicherKwh) || 0) * 0.015);
     } else {
-      if (nettoErtrag === 0) quote = 0;
-      else quote = Math.min(0.4, Math.max(0.25, 0.3 * (verb / nettoErtrag)));
+      if (nettoErtrag === 0) quoteRoh = 0;
+      else quoteRoh = Math.min(0.4, Math.max(0.25, 0.3 * (verb / nettoErtrag)));
     }
 
-    const eigenverbrauch = nettoErtrag * quote;
+    // W185: vorher konnte der Eigenverbrauch den Jahresverbrauch übersteigen (Startwerte mit 8-kWh-Speicher:
+    // 6.182 kWh × 72 % = 4.451 kWh bei 4.000 kWh Verbrauch). Deckel über den Autarkiegrad: höchstens 70 % des
+    // Verbrauchs mit Speicher, 40 % ohne (HTW Berlin: 20–33 % ohne, 40–66 % mit 6-kWh-Speicher; VZ RLP 45 %).
+    const autarkieMax = mitSpeicher ? 0.7 : 0.4;
+    const eigenverbrauch = Math.min(nettoErtrag * quoteRoh, verb * autarkieMax);
+    const quote = nettoErtrag > 0 ? eigenverbrauch / nettoErtrag : 0;
     const einspeisung = Math.max(0, nettoErtrag - eigenverbrauch);
     const rest = Math.max(0, verb - eigenverbrauch);
 

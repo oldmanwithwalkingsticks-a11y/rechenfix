@@ -2735,15 +2735,19 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Wohngeld berechnen: Anspruch und voraussichtliche Höhe nach Wohngeld-Plus-Gesetz 2026 ✓ Mietstufe ✓ Heizkostenpauschale ✓ KI-Erklärung.',
     keywords: ['wohngeld rechner', 'wohngeld berechnen', 'wohngeld 2026', 'wohngeld anspruch', 'wohngeld höhe', 'wohngeld plus', 'wohngeld mietstufe', 'wohngeldantrag', 'mietzuschuss berechnen', 'wohngeld einkommensgrenze'],
     icon: '🏠',
-    beispiel: '2-Personen-Haushalt, 2.000 € brutto, 600 € Kaltmiete, Mietstufe III → Bereinigtes Einkommen: ca. 1.400 € | Berücksichtigte Miete: 551 € (Höchstbetrag) + 142,60 € Heizkosten + 24,80 € Klima = 718,40 € | Geschätztes Wohngeld: ca. 296 €/Monat.',
+    // W185: vorher „Bereinigtes Einkommen: ca. 1.400 € | Geschätztes Wohngeld: ca. 296 €“ aus der stillgelegten
+    // Lib-Pauschale (Brutto × 0,7 ohne Werbungskosten). Nach §§ 14, 16 WoGG: (24.000 − 1.230) × 0,7 ÷ 12 =
+    // 1.328,25 €; Anlage 2/3 (2 Pers.: a 0,03, b 3,571E-4, c 3,040E-5), M 718,40 → z4 = 326,79 → 327 €.
+    beispiel: '2-Personen-Haushalt, ein Verdiener mit 2.000 € brutto (steuer-, kranken- und rentenversicherungspflichtig), 600 € Bruttokaltmiete, Mietstufe III → Einkommen: (2.000 € − 102,50 € Werbungskostenpauschale) × 70 % = 1.328,25 € | Berücksichtigte Miete: 551 € (Höchstbetrag) + 142,60 € Heizkosten + 24,80 € Klima = 718,40 € | Wohngeld nach Anlage 2 WoGG: rund 327 €/Monat (Schätzung, verbindlich ist der BMWSB-Wohngeldrechner).',
     faq: [
       {
         frage: 'Habe ich Anspruch auf Wohngeld?',
         antwort: 'Anspruch auf Wohngeld haben Mieter und Eigentümer mit geringem Einkommen, die keine anderen Sozialleistungen (Grundsicherungsgeld, Sozialhilfe, BAföG mit Wohnkosten) beziehen. Die Einkommensgrenze hängt von der Haushaltsgröße und Mietstufe ab. Seit dem Wohngeld-Plus-Gesetz haben deutlich mehr Haushalte Anspruch — prüfen Sie es mit unserem Rechner.',
       },
       {
+        // W185: vorher „erhält geschätzt rund 296 € monatlich“ (ohne Werbungskostenabzug); jetzt 327 € bzw. 245 € (20 %).
         frage: 'Wie hoch ist das Wohngeld 2026?',
-        antwort: 'Die Höhe hängt von Haushaltsgröße, Einkommen, Miete und Mietstufe ab. Seit dem Wohngeld-Plus-Gesetz liegt das durchschnittliche Wohngeld bei etwa 370 € pro Monat. Ein 2-Personen-Haushalt mit 2.000 € Bruttoeinkommen und 600 € Miete in Mietstufe III erhält geschätzt rund 296 € monatlich.',
+        antwort: 'Die Höhe hängt von Haushaltsgröße, Einkommen, Miete und Mietstufe ab. Ende 2025 lag der durchschnittliche Wohngeldanspruch laut Statistischem Bundesamt bei 296 € im Monat (rund 1,3 Millionen Haushalte). Ein 2-Personen-Haushalt mit einem Verdiener (2.000 € brutto, steuer-, kranken- und rentenversicherungspflichtig) und 600 € Bruttokaltmiete in Mietstufe III kommt nach der Formel der Anlage 2 WoGG auf rund 327 € monatlich. Fällt keine Einkommensteuer an, sinkt der Pauschalabzug von 30 auf 20 Prozent und das Wohngeld auf rund 245 €. Verbindlich rechnet der Wohngeldrechner des BMWSB.',
       },
       {
         frage: 'Was ist die Mietstufe und wo finde ich meine?',
@@ -2765,7 +2769,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'bafoeg-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'BAföG-Rechner',
     beschreibung: 'BAföG berechnen: Anspruch und voraussichtliche Höhe der Ausbildungsförderung für Studierende und Schüler.',
     kategorie: 'Finanzen',
@@ -2906,8 +2910,11 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'infobox',
         variante: 'tipp',
-        titel: 'Ausblick: geplante Erhöhung zum WS 2026/27 (noch nicht beschlossen)',
-        text: 'Ausblick (geplant, noch nicht beschlossen): Für das Wintersemester 2026/27 ist eine Erhöhung der Wohnpauschale von 380 € auf 440 € im Gespräch, womit der Höchstsatz auf rund 1.052 € steigen würde. Stand Mitte 2026 liegt dazu jedoch kein verabschiedetes Gesetz vor; eine Verschiebung auf einen späteren Zeitpunkt gilt als wahrscheinlich. Verbindlich gilt weiterhin der Höchstsatz von 992 € — dieser Rechner verwendet die aktuell geltenden Werte. Wer plant, sollte die offizielle Ankündigung des Bundesbildungsministeriums abwarten, bevor er mit höheren Sätzen kalkuliert. Sobald eine Erhöhung im Bundesgesetzblatt verkündet ist, werden die Werte in diesem Rechner zeitnah aktualisiert — bis dahin gelten bewusst die niedrigeren, rechtssicheren Beträge.',
+        // W185: vorher „geplante Erhöhung zum WS 2026/27 … Höchstsatz rund 1.052 € … Stand Mitte 2026“. Das WS 2026/27
+        // läuft ohne Erhöhung; Regierungsentwurf 30. BAföGÄndG (BT-Drs. 21/8405, 1. Lesung 15.10.2026, an die
+        // Ausschüsse überwiesen): Wohnpauschale 440 € zum SoSe 2027, Bedarfssatz 503 € zum WS 2027/28 (bundestag.de, KW 42).
+        titel: 'Ausblick: BAföG-Reform ab 2027 geplant (noch nicht beschlossen)',
+        text: 'Ausblick (geplant, noch nicht beschlossen): Der Regierungsentwurf des 30. BAföG-Änderungsgesetzes (BT-Drs. 21/8405, erste Lesung im Bundestag am 15.10.2026) sieht vor, die Wohnpauschale zum Sommersemester 2027 von 380 € auf 440 € und den Bedarfssatz für Studierende zum Wintersemester 2027/28 auf 503 € anzuheben. Für das laufende Wintersemester 2026/27 ändert sich nichts. Verbindlich gilt weiterhin der Höchstsatz von 992 € — dieser Rechner verwendet die aktuell geltenden Werte. Wer plant, sollte die offizielle Ankündigung des Bundesbildungsministeriums abwarten, bevor er mit höheren Sätzen kalkuliert. Sobald eine Erhöhung im Bundesgesetzblatt verkündet ist, werden die Werte in diesem Rechner zeitnah aktualisiert — bis dahin gelten bewusst die niedrigeren, rechtssicheren Beträge.',
       },
     ],
     quellen: [
@@ -2915,6 +2922,8 @@ export const finanzenRechner: RechnerConfig[] = [
       { titel: '§ 13a BAföG — Kranken- und Pflegeversicherungszuschlag', url: 'https://www.gesetze-im-internet.de/baf_g/__13a.html', hinweis: 'KV-Zuschlag 102 € + PV-Zuschlag 35 € für selbst Versicherte → Höchstsatz 992 €.' },
       { titel: '§ 25 BAföG — Freibeträge vom Einkommen der Eltern', url: 'https://www.gesetze-im-internet.de/baf_g/__25.html', hinweis: 'Elternfreibeträge 2.415 € (verheiratet) / 1.605 € (alleinstehend); Anrechnungsquote.' },
       { titel: '§ 29 BAföG — Freibeträge vom Vermögen', url: 'https://www.gesetze-im-internet.de/baf_g/__29.html', hinweis: 'Vermögensfreibetrag 15.000 € (unter 30 J.) bzw. 45.000 € (ab 30 J.).' },
+      // W185: Beleg für die Ausblick-Box ergänzt.
+      { titel: 'Deutscher Bundestag — 30. BAföG-Änderungsgesetz, erste Lesung (KW 42/2026)', url: 'https://www.bundestag.de/dokumente/textarchiv/2026/kw42-de-bafoeg-1223582', hinweis: 'Regierungsentwurf BT-Drs. 21/8405, am 15.10.2026 an die Ausschüsse überwiesen, noch nicht beschlossen.' },
     ],
   },
   {
@@ -5250,7 +5259,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'nettolohn-optimierer',
-    letzteAktualisierung: '2026-10-19',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Nettolohn-Optimierer',
     beschreibung: 'Nettolohn optimieren: Vergleich Gehaltserhöhung vs. steuerfreie Sachbezüge — was bringt mehr Netto?',
     kategorie: 'Finanzen',
@@ -5275,7 +5284,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum steuerfreie Bausteine die Gehaltserhöhung schlagen',
-        html: `<p>Eine Brutto-Gehaltserhöhung fühlt sich gut an — bis die Abrechnung kommt. Wer in Steuerklasse I rund 3.500 € verdient, hat eine <strong>Grenzbelastung von etwa 45 %</strong> aus Lohnsteuer, Soli und Sozialabgaben. Von 200 € Brutto-Erhöhung bleiben so nur rund <strong>109 € netto</strong> übrig; der Rest geht an Finanzamt und Sozialkassen. Zusätzlich zahlt der Arbeitgeber gut 21 % Arbeitgeber-Sozialabgaben obendrauf — das Budget wird doppelt belastet.</p><p>Genau hier setzen <strong>steuerfreie Sachbezüge</strong> an. Zahlt der Arbeitgeber statt Brutto einen steuerfreien oder von ihm pauschal versteuerten Baustein, kommt der Betrag ungeschmälert bei Ihnen an — und der Arbeitgeber spart die Sozialabgaben gleich mit. Ein Deutschlandticket-Zuschuss von 63 € bringt also 63 € netto, nicht etwa die Hälfte.</p><p>Dieser Rechner vergleicht sechs gängige Bausteine parallel und zeigt für Ihr Budget, welcher netto am meisten bringt. Die exakte Abgabenlast Ihres Gehalts liefert der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
+        // W185: vorher „rund 109 € netto“ — 109,75 € gerundet ist 110 €, so steht es auch an den anderen Stellen der Seite.
+        html: `<p>Eine Brutto-Gehaltserhöhung fühlt sich gut an — bis die Abrechnung kommt. Wer in Steuerklasse I rund 3.500 € verdient, hat eine <strong>Grenzbelastung von etwa 45 %</strong> aus Lohnsteuer, Soli und Sozialabgaben. Von 200 € Brutto-Erhöhung bleiben so nur knapp <strong>110 € netto</strong> (109,75 €) übrig; der Rest geht an Finanzamt und Sozialkassen. Zusätzlich zahlt der Arbeitgeber gut 21 % Arbeitgeber-Sozialabgaben obendrauf — das Budget wird doppelt belastet.</p><p>Genau hier setzen <strong>steuerfreie Sachbezüge</strong> an. Zahlt der Arbeitgeber statt Brutto einen steuerfreien oder von ihm pauschal versteuerten Baustein, kommt der Betrag ungeschmälert bei Ihnen an — und der Arbeitgeber spart die Sozialabgaben gleich mit. Ein Deutschlandticket-Zuschuss von 63 € bringt also 63 € netto, nicht etwa die Hälfte.</p><p>Dieser Rechner vergleicht sechs gängige Bausteine parallel und zeigt für Ihr Budget, welcher netto am meisten bringt. Die exakte Abgabenlast Ihres Gehalts liefert der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
       },
       {
         typ: 'tabelle',
@@ -5990,7 +6000,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'mwst-rueckerstattung-rechner',
-    letzteAktualisierung: '2026-06-25',
+    letzteAktualisierung: '2026-10-20',
     titel: 'MwSt-Rückerstattungs-Rechner',
     beschreibung: 'Tax-Free-Shopping berechnen: MwSt-Erstattung für Nicht-EU-Touristen beim Einkauf in Deutschland.',
     kategorie: 'Finanzen',
@@ -5999,13 +6009,17 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'MwSt-Rückerstattung berechnen: Erstattungsbetrag, Dienstleister-Gebühren und effektive Ersparnis beim Tax-Free-Shopping in Deutschland. Kostenlos.',
     keywords: ['mwst rückerstattung rechner', 'tax free shopping deutschland', 'mehrwertsteuer erstattung touristen', 'tax refund germany', 'global blue rechner', 'umsatzsteuer rückerstattung', 'tax free rechner'],
     icon: '🧾',
-    beispiel: 'Beispiel: 500 € Einkauf, 19 % MwSt → 79,83 € MwSt-Anteil, abzgl. Global-Blue-Gebühr (4,70 €) = 75,13 € Erstattung (15,0 % Ersparnis)',
+    // W185: vorher „abzgl. Global-Blue-Gebühr (4,70 €) = 75,13 € Erstattung (15,0 % Ersparnis)“ aus dem Modell
+    // 3,50 € + 1,5 %. Lib jetzt Richtwert 25 % der MwSt (SRF Kassensturz 03/2025): 500 €/19 %/GB oder Planet →
+    // 19,96 € Abzug, 59,87 € (11,97 %); /ohne 79,83 €; 100 € → 11,97 €; 200 € → 23,95 €; 1.000 € → 119,75 €;
+    // 2.000 € → 239,50 €.
+    beispiel: 'Beispiel: 500 € Einkauf, 19 % MwSt → 79,83 € MwSt-Anteil, abzgl. Global-Blue-Gebühr (Richtwert rund 25 % = 19,96 €) = 59,87 € Erstattung (12,0 % Ersparnis)',
     // W19-Goldstandard: mwst-rueckerstattung-rechner auf volle Tiefe (~1.560 W, 15 Bausteine).
     // Thema = Tax-Free-Shopping (MwSt-Erstattung für Nicht-EU-Touristen), NICHT Unternehmens-USt.
     // Leitformat „Prozess-Checkliste" — 3 checkliste-Bausteine dominant (Berechtigung · Ablauf am
     // Flughafen · Ausschlüsse), grenzt sich von mwst-rechner (tabelle) und steuererstattung
     // (beispielrechnung) ab. ALLE Erstattungswerte aus lib/berechnungen/mwst-rueckerstattung.ts
-    // reproduziert (Lib-Resolver-Check 25.06.2026): 500 €/19 %/GB → 75,13 € (15,0 %); /Planet
+    // reproduziert (Lib-Resolver-Check 25.06.2026, Gebührenmodell überholt durch W185, siehe oben): 500 €/19 %/GB → 75,13 € (15,0 %); /Planet
     // 74,24 €; /ohne 79,83 € (15,97 %); 1.000 € → 153,77 €; 200 € → 27,95 €; 2.000 € → 311,04 €.
     // YMYL (§ 6 Abs. 3a UStG / Zoll, Stand 2026): Mindestbetrag 50,01 € (seit 2020), Nicht-EU-
     // Wohnsitz, Zollstempel Pflicht, Ausfuhr binnen 3 Monaten. erklaerung bleibt Fallback.
@@ -6013,7 +6027,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Was ist Tax-Free-Shopping?',
-        html: `<p><strong>Tax-Free-Shopping</strong> bedeutet: Wer seinen ständigen Wohnsitz außerhalb der EU hat, kann sich beim Einkauf in Deutschland die enthaltene <strong>Mehrwertsteuer</strong> erstatten lassen. Rechtlich handelt es sich um eine steuerfreie <strong>Ausfuhrlieferung</strong> (§ 6 Abs. 3a UStG): Die Ware wird ins Nicht-EU-Ausland gebracht und dort verbraucht, also fällt die deutsche Umsatzsteuer letztlich nicht an.</p><p>Bei 19 % Regelsteuersatz steckt im Bruttopreis ein MwSt-Anteil von rund <strong>15,97 %</strong> — so viel ist maximal erstattungsfähig. Den Einkauf bezahlen Sie zunächst voll inklusive Steuer; die Erstattung erhalten Sie erst nach der Ausreise, sobald der Zoll die Ausfuhr bestätigt hat.</p><p>Wickeln Sie die Erstattung über einen Dienstleister wie Global Blue oder Planet ab, ziehen diese ein Bearbeitungsentgelt ab — deshalb liegt die effektive Erstattung meist bei 14–15 % statt der vollen 15,97 %. Dieser Rechner zeigt für Ihren Kaufbetrag, Steuersatz und Anbieter den konkreten Erstattungsbetrag.</p>`,
+        html: `<p><strong>Tax-Free-Shopping</strong> bedeutet: Wer seinen ständigen Wohnsitz außerhalb der EU hat, kann sich beim Einkauf in Deutschland die enthaltene <strong>Mehrwertsteuer</strong> erstatten lassen. Rechtlich handelt es sich um eine steuerfreie <strong>Ausfuhrlieferung</strong> (§ 6 Abs. 3a UStG): Die Ware wird ins Nicht-EU-Ausland gebracht und dort verbraucht, also fällt die deutsche Umsatzsteuer letztlich nicht an.</p><p>Bei 19 % Regelsteuersatz steckt im Bruttopreis ein MwSt-Anteil von rund <strong>15,97 %</strong> — so viel ist maximal erstattungsfähig. Den Einkauf bezahlen Sie zunächst voll inklusive Steuer; die Erstattung erhalten Sie erst nach der Ausreise, sobald der Zoll die Ausfuhr bestätigt hat.</p><p>Wickeln Sie die Erstattung über einen Dienstleister wie Global Blue oder Planet ab, ziehen diese ein Bearbeitungsentgelt ab — laut Verbraucherberichten rund ein Viertel der Mehrwertsteuer. Deshalb liegt die effektive Erstattung meist um 12 % statt der vollen 15,97 %. Dieser Rechner zeigt für Ihren Kaufbetrag, Steuersatz und Anbieter den konkreten Erstattungsbetrag.</p>`,
       },
       {
         typ: 'checkliste',
@@ -6035,25 +6049,25 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'beispielrechnung',
         titel: 'Beispiel: 500 € Einkauf, 19 %, Global Blue',
+        // W185: vorher Fixgebühr 3,50 € + 1,5 % = 4,70 € → 75,13 € (15,0 %); jetzt Richtwert 25 % der MwSt.
         schritte: [
           { label: 'MwSt-Anteil herausrechnen', formel: '500 € − (500 € ÷ 1,19)', ergebnis: '79,83 €' },
-          { label: 'Fixgebühr Global Blue', formel: 'pauschal', ergebnis: '3,50 €' },
-          { label: 'Prozentgebühr', formel: '79,83 € × 1,5 %', ergebnis: '1,20 €' },
-          { label: 'Gebühren gesamt', formel: '3,50 € + 1,20 €', ergebnis: '4,70 €' },
-          { label: 'Netto-Erstattung', formel: '79,83 € − 4,70 €', ergebnis: '75,13 €' },
+          { label: 'Servicegebühr Global Blue (Richtwert)', formel: '79,83 € × 25 %', ergebnis: '19,96 €' },
+          { label: 'Netto-Erstattung', formel: '79,83 € − 19,96 €', ergebnis: '59,87 €' },
         ],
-        fazit: 'Von 500 € Einkauf bei 19 % MwSt erhalten Sie über Global Blue 75,13 € zurück — eine effektive Ersparnis von 15,0 %. Ohne Dienstleister (direkt beim Händler) wären es die vollen 79,83 € (16,0 %), über Planet 74,24 € (14,8 %).',
+        fazit: 'Von 500 € Einkauf bei 19 % MwSt erhalten Sie über Global Blue nach dem Richtwert rund 59,87 € zurück — eine effektive Ersparnis von 12,0 %. Ohne Dienstleister (direkt beim Händler) wären es die vollen 79,83 € (16,0 %); für Planet gilt derselbe Richtwert. Die genaue Gebühr steht in der Erstattungstabelle auf dem Tax-Free-Formular.',
       },
       {
         typ: 'tabelle',
         titel: 'Erstattung nach Erstattungsweg (500 €, 19 %)',
         kopf: ['Erstattungsweg', 'Gebühr', 'Erstattung', 'Effektiv'],
         zeilen: [
+          // W185: vorher Global Blue 4,70 € / 75,13 € / 15,0 % und Planet 5,60 € / 74,24 € / 14,8 % (Fix- plus Prozentgebühr).
           ['Direkt beim Händler', '0,00 €', '79,83 €', '16,0 %'],
-          ['Global Blue', '4,70 €', '75,13 €', '15,0 %'],
-          ['Planet', '5,60 €', '74,24 €', '14,8 %'],
+          ['Global Blue (Richtwert)', '19,96 €', '59,87 €', '12,0 %'],
+          ['Planet (Richtwert)', '19,96 €', '59,87 €', '12,0 %'],
         ],
-        fussnote: 'Beispiel: 500 € Einkauf, 19 % MwSt. Gebühren je Anbieter (Global Blue ~3,50 € + 1,5 %, Planet ~4,00 € + 2,0 %); die tatsächlichen Konditionen hängen vom Vertrag des Händlers ab.',
+        fussnote: 'Beispiel: 500 € Einkauf, 19 % MwSt. Die Gebühr der Dienstleister ist ein Richtwert von rund 25 % der MwSt: Laut SRF Kassensturz (März 2025) behielten Global Blue und Planet bei Einkäufen in Deutschland jeweils rund ein Viertel der Mehrwertsteuer ein. Die Anbieter staffeln die Gebühr nach Kaufbetrag; verbindlich ist die Erstattungstabelle auf dem Tax-Free-Formular.',
       },
       {
         typ: 'vergleich',
@@ -6061,9 +6075,9 @@ export const finanzenRechner: RechnerConfig[] = [
         spalteA: 'Global Blue',
         spalteB: 'Planet',
         zeilen: [
-          { kriterium: 'Fixgebühr', a: '~3,50 €', b: '~4,00 €' },
-          { kriterium: 'Prozentgebühr', a: '~1,5 % des MwSt-Anteils', b: '~2,0 % des MwSt-Anteils' },
-          { kriterium: 'Erstattung bei 500 €', a: '75,13 €', b: '74,24 €' },
+          // W185: vorher Fixgebühr ~3,50 / ~4,00 €, Prozentgebühr ~1,5 / ~2,0 %, Erstattung 75,13 / 74,24 €.
+          { kriterium: 'Servicegebühr', a: 'Richtwert ~25 % des MwSt-Anteils, nach Betrag gestaffelt', b: 'Richtwert ~25 % des MwSt-Anteils, nach Betrag gestaffelt' },
+          { kriterium: 'Erstattung bei 500 €', a: 'rund 60 € (Richtwert)', b: 'rund 60 € (Richtwert)' },
           { kriterium: 'Verbreitung', a: 'Marktführer, Schalter an allen großen Flughäfen', b: 'zweitgrößter Anbieter, viele Flughäfen' },
           { kriterium: 'Auszahlung', a: 'bar, Kreditkarte, Alipay/WeChat', b: 'bar, Kreditkarte' },
         ],
@@ -6118,13 +6132,14 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Erstattung nach Kaufbetrag (19 %, Global Blue)',
         kopf: ['Kaufbetrag (brutto)', 'MwSt-Anteil', 'Erstattung', 'Effektiv'],
         zeilen: [
-          ['100 €', '15,97 €', '12,23 €', '12,2 %'],
-          ['200 €', '31,93 €', '27,95 €', '14,0 %'],
-          ['500 €', '79,83 €', '75,13 €', '15,0 %'],
-          ['1.000 €', '159,66 €', '153,77 €', '15,4 %'],
-          ['2.000 €', '319,33 €', '311,04 €', '15,6 %'],
+          // W185: vorher 12,23 / 27,95 / 75,13 / 153,77 / 311,04 € (Modell 3,50 € + 1,5 %); jetzt Richtwert 25 % der MwSt.
+          ['100 €', '15,97 €', '11,97 €', '12,0 %'],
+          ['200 €', '31,93 €', '23,95 €', '12,0 %'],
+          ['500 €', '79,83 €', '59,87 €', '12,0 %'],
+          ['1.000 €', '159,66 €', '119,75 €', '12,0 %'],
+          ['2.000 €', '319,33 €', '239,50 €', '12,0 %'],
         ],
-        fussnote: '19 % MwSt, Erstattung über Global Blue (~3,50 € + 1,5 %). Je höher der Kaufbetrag, desto näher liegt die effektive Erstattung an den maximal möglichen 15,97 %, weil die Fixgebühr anteilig kaum noch ins Gewicht fällt.',
+        fussnote: '19 % MwSt, Erstattung über Global Blue mit dem Richtwert von rund 25 % Abzug. Der Rechner setzt den Abzug proportional an, deshalb bleibt die effektive Erstattung bei 12,0 %. In den echten, nach Kaufbetrag gestaffelten Erstattungstabellen der Anbieter fällt der Abzug bei kleinen Beträgen anteilig oft höher aus.',
       },
       {
         typ: 'text',
@@ -6145,7 +6160,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Tipps für die maximale Erstattung',
-        html: `<p>Mit ein paar Kniffen holen Sie das Maximum heraus. <strong>Bündeln Sie Einkäufe</strong> bei wenigen Händlern, um den Mindestbetrag von 50,01 € sicher zu überschreiten — viele kleine Belege unter der Grenze bringen nichts. <strong>Setzen Sie auf hochpreisige Waren</strong> zum Regelsatz: Bei Elektronik oder Designermode bringt die prozentuale Erstattung absolut am meisten.</p><p>Wo möglich, lohnt die <strong>direkte Händlererstattung</strong>: Erstattet das Geschäft selbst, sparen Sie die Dienstleistergebühr und erhalten die vollen 15,97 %. Große Beträge zahlen sich besonders aus, weil die Fixgebühr dann kaum ins Gewicht fällt — bei 2.000 € Einkauf bleiben über Global Blue rund 311 € (15,6 %), bei 100 € nur 12,23 € (12,2 %).</p><p>Und planen Sie Zeit ein: Der Zoll- und Erstattungsprozess am Flughafen kostet in der Hauptsaison schnell eine halbe bis ganze Stunde extra.</p>`,
+        html: `<p>Mit ein paar Kniffen holen Sie das Maximum heraus. <strong>Bündeln Sie Einkäufe</strong> bei wenigen Händlern, um den Mindestbetrag von 50,01 € sicher zu überschreiten — viele kleine Belege unter der Grenze bringen nichts. <strong>Setzen Sie auf hochpreisige Waren</strong> zum Regelsatz: Bei Elektronik oder Designermode bringt die prozentuale Erstattung absolut am meisten.</p><p>Wo möglich, lohnt die <strong>direkte Händlererstattung</strong>: Erstattet das Geschäft selbst, sparen Sie die Dienstleistergebühr und erhalten die vollen 15,97 %. Große Beträge zahlen sich absolut aus, und in den gestaffelten Erstattungstabellen ist der Abzug bei kleinen Belegen anteilig oft noch höher — nach dem Richtwert bleiben bei 2.000 € Einkauf über Global Blue rund 240 €, bei 100 € rund 12 €.</p><p>Und planen Sie Zeit ein: Der Zoll- und Erstattungsprozess am Flughafen kostet in der Hauptsaison schnell eine halbe bis ganze Stunde extra.</p>`,
       },
       {
         typ: 'text',
@@ -6162,7 +6177,7 @@ export const finanzenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Wie viel MwSt bekomme ich beim Tax-Free-Shopping zurück?',
-        antwort: 'Bei 19 % MwSt können Sie maximal 15,97 % des Kaufpreises zurückerhalten (die im Bruttobetrag enthaltene MwSt). Bei Nutzung eines Dienstleisters wie Global Blue oder Planet werden davon Gebühren abgezogen, sodass die effektive Erstattung bei ca. 14–15 % liegt. Bei 7 % MwSt sind es maximal 6,54 %.',
+        antwort: 'Bei 19 % MwSt können Sie maximal 15,97 % des Kaufpreises zurückerhalten (die im Bruttobetrag enthaltene MwSt). Bei Nutzung eines Dienstleisters wie Global Blue oder Planet werden davon Gebühren abgezogen — laut Verbraucherberichten rund ein Viertel der MwSt —, sodass die effektive Erstattung meist um 12 % liegt. Bei 7 % MwSt sind es maximal 6,54 %.',
       },
       {
         frage: 'Was ist der Mindestbetrag für Tax-Free-Shopping?',
@@ -6174,7 +6189,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist der Unterschied zwischen Global Blue und Planet?',
-        antwort: 'Beides sind Dienstleister, die die MwSt-Erstattung am Flughafen abwickeln. Global Blue ist der Marktführer mit den meisten Schaltern und etwas niedrigeren Gebühren (~3,50 € + 1,5 %). Planet (ehem. Premier Tax Free) ist der zweitgrößte Anbieter (~4 € + 2 %). Welchen Dienstleister Sie nutzen, hängt davon ab, mit wem der Händler zusammenarbeitet.',
+        antwort: 'Beides sind Dienstleister, die die MwSt-Erstattung am Flughafen abwickeln. Global Blue ist der Marktführer mit den meisten Schaltern, Planet (ehem. Premier Tax Free) der zweitgrößte Anbieter. Beide behalten eine nach Kaufbetrag gestaffelte Servicegebühr ein — laut Verbraucherberichten rund ein Viertel der MwSt; der Rechner setzt für beide diesen Richtwert an. Welchen Dienstleister Sie nutzen, hängt davon ab, mit wem der Händler zusammenarbeitet.',
       },
       {
         frage: 'Muss ich die Ware am Flughafen vorzeigen?',
@@ -6187,6 +6202,8 @@ export const finanzenRechner: RechnerConfig[] = [
     ],
     quellen: [
       { titel: '§ 6 UStG: Ausfuhrlieferungen (Abs. 3a Wertgrenze 50 €)', url: 'https://www.gesetze-im-internet.de/ustg_1980/__6.html' },
+      // W185: Beleg für den Gebühren-Richtwert ergänzt (vorher ohne Quelle, 3,50 € + 1,5 % bzw. 4,00 € + 2 %).
+      { titel: 'SRF Kassensturz: Mehrwertsteuer-Rückerstattung mit happigen Gebühren (19.03.2025)', url: 'https://www.srf.ch/sendungen/kassensturz-espresso/kassensturz/mehrwertsteuer-rueckerstattung-mit-happigen-gebuehren-die-kundschaft-aergert-s', hinweis: 'Einkäufe in Deutschland: Global Blue behielt rund 25 % (399 € MwSt → 297 €), Planet rund 25 % (790 € → 596 €). Grundlage des Richtwerts 25 % der MwSt.' },
       { titel: 'Zoll: Tax-free einkaufen — Verfahren & Voraussetzungen', url: 'https://www.zoll.de/DE/Privatpersonen/Reisen/Reisen-nach-Deutschland-aus-einem-nicht-eu-Staat/Zoll-und-Steuern/Tax-free-einkaufen/tax-free-einkaufen_node.html', hinweis: 'Mindestbetrag 50,01 €, Nicht-EU-Wohnsitz, Zollstempel, Ausfuhr binnen 3 Monaten (Stand 2026).' },
     ],
   },

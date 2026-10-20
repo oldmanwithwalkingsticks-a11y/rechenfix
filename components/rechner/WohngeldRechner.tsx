@@ -237,6 +237,11 @@ export default function WohngeldRechner() {
                     <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Höchstbetrag Mietstufe {mietstufe}</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(ergebnis.hoechstbetragMiete)} €</td>
                   </tr>
+                  {/* W185: Klimakomponente erhöht den Höchstbetrag (§ 12 Abs. 7 WoGG), vorher als Zuschlag auf die Miete gezeigt */}
+                  <tr>
+                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">+ Klimakomponente (erhöht den Höchstbetrag)</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro2(ergebnis.klimaKomponente)} €</td>
+                  </tr>
                   <tr>
                     <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Berücksichtigte Miete</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(ergebnis.beruecksichtigteMiete)} €</td>
@@ -247,10 +252,6 @@ export default function WohngeldRechner() {
                       <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro2(ergebnis.heizkostenZuschlag)} €</td>
                     </tr>
                   )}
-                  <tr>
-                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">+ Klimakomponente</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro2(ergebnis.klimaKomponente)} €</td>
-                  </tr>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 font-medium">
                     <td className="px-4 py-2.5 text-gray-800 dark:text-gray-200">= Zu berücksichtigende Miete</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro2(ergebnis.gesamtMiete)} €</td>

@@ -105,18 +105,19 @@ const FORMEL_TESTS: Array<{
   },
   {
     // 2P 1900 Brutto 750 III. Y = 1900×0,7 = 1330, Y_min 2P = 679 → 1330
-    // M = min(750, 551) = 551, M_min 2P = 67 → 551
-    // z1 = 0,03 + 0,0003571·551 + 0,00003040·1330 = 0,03 + 0,196762 + 0,040432 = 0,267194
-    // z2 = 0,267194 × 1330 = 355,37
-    // z3 = 551 − 355,37 = 195,63
-    // z4 = 1,15 × 195,63 = 224,98 → 225
+    // W185: vorher M = 551 (ohne Klimakomponente) → 225 €. § 12 Abs. 7 WoGG erhöht den Höchstbetrag um 24,80 € (2 P.).
+    // M = min(750, 551 + 24,80) = 575,80, M_min 2P = 67 → 575,80 (Heizkostenkomponente hier abgeschaltet)
+    // z1 = 0,03 + 0,0003571·575,80 + 0,00003040·1330 = 0,03 + 0,205618 + 0,040432 = 0,276050
+    // z2 = 0,276050 × 1330 = 367,15
+    // z3 = 575,80 − 367,15 = 208,65
+    // z4 = 1,15 × 208,65 = 239,95 → 240
     name: '2P 1.900 € Brutto 750 € Miete III (Gesetzesnachrechnung)',
     input: {
       haushaltsmitglieder: 2, bruttoEinkommen: 1900, miete: 750, mietstufe: 'III',
       heizkostenpauschale: false, freibetragSchwerbehindert: false,
       freibetragAlleinerziehend: false, freibetragErwerbstaetig: false,
     },
-    sollWohngeld: 225,
+    sollWohngeld: 240,
     tolerance: 1,
     quelle: 'Manuell aus Anlage 2 + 3 WoGG',
   },

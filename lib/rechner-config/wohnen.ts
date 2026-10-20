@@ -167,7 +167,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'nebenkosten-rechner',
-    letzteAktualisierung: '2026-06-14',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Nebenkostenrechner',
     beschreibung: 'Mietnebenkosten berechnen: Alle Posten von Heizung bis Müll — mit Warmmiete und Kosten pro m².',
     kategorie: 'Wohnen & Energie',
@@ -183,8 +183,10 @@ export const wohnenRechner: RechnerConfig[] = [
         antwort: 'Zu den umlagefähigen Nebenkosten gehören: Heizkosten, Warmwasser, Kaltwasser/Abwasser, Müllentsorgung, Grundsteuer, Gebäudeversicherung, Hausmeister, Treppenhausreinigung, Gartenpflege, Aufzug, Schornsteinfeger und Straßenreinigung. Nicht umlagefähig sind Verwaltungskosten, Reparaturen und Instandhaltung.',
       },
       {
+        // W185: vorher Betriebskostenspiegel 2023 (2,51 / 3,15 €/m², Heizung 1,00–1,50 €/m²);
+        // jetzt DMB-Spiegel Abrechnungsjahr 2024, veröffentlicht 18.12.2025 (mieterbund.de).
         frage: 'Wie hoch sind normale Nebenkosten pro m²?',
-        antwort: 'Laut Betriebskostenspiegel 2023 des Deutschen Mieterbunds (aktuellster verfügbarer Stand) liegen die durchschnittlichen Nebenkosten in Deutschland bei 2,51 €/m² und Monat (umgelegte Posten im Schnitt). Bei voller Ausnutzung aller umlagefähigen Kostenarten sind bis zu 3,15 €/m² möglich. Heizkosten machen mit ca. 1,00–1,50 €/m² den größten Anteil aus. Regional und je nach Gebäudezustand schwanken die Werte zwischen 2,00 und 4,50 €/m².',
+        antwort: 'Laut Betriebskostenspiegel des Deutschen Mieterbunds für das Abrechnungsjahr 2024 (veröffentlicht im Dezember 2025, aktuellster verfügbarer Stand) liegen die durchschnittlichen Nebenkosten in Deutschland bei 2,67 €/m² und Monat (umgelegte Posten im Schnitt). Fallen alle umlagefähigen Kostenarten an, sind bis zu 3,68 €/m² möglich. Heizung und Warmwasser machen mit durchschnittlich 1,32 €/m² (in der Spitze 2,18 €/m²) den größten Anteil aus. Regional und je nach Gebäudezustand schwanken die Werte zwischen 2,00 und 4,50 €/m².',
       },
       {
         frage: 'Was ist der Unterschied zwischen Kaltmiete und Warmmiete?',
@@ -245,7 +247,8 @@ export const wohnenRechner: RechnerConfig[] = [
           { label: 'Monatliche Nebenkosten gesamt', formel: '100 + 37 + 34 + 24', ergebnis: '195 €' },
           { label: 'Pro Quadratmeter (÷ 70 m²)', formel: '195 € ÷ 70 m²', ergebnis: '2,79 €/m²' },
         ],
-        fazit: 'Die Wohnung kommt auf 195 € Nebenkosten im Monat, also 2.340 € im Jahr. Mit 2,79 €/m² liegt sie leicht über dem Mieterbund-Durchschnitt von 2,51 €/m², aber unter dem Vollausnutzungs-Wert von 3,15 €/m² — ein plausibler Bereich. Bei 700 € Kaltmiete ergibt sich eine Warmmiete von 895 € (12,79 €/m²); die Nebenkosten machen damit rund 22 % der Warmmiete aus. Der Rechner zeigt diese komplette Aufschlüsselung automatisch, sobald die Einzelposten eingetragen sind. Der Quadratmeterwert ist dabei die wichtigste Vergleichsgröße: Erst er macht Wohnungen unterschiedlicher Größe vergleichbar und zeigt, ob die eigene Belastung im üblichen Rahmen liegt. Wichtig ist, beim Vergleich nur die umlagefähigen Posten gegenüberzustellen — die monatliche Vorauszahlung im Mietvertrag kann höher oder niedriger angesetzt sein als die später tatsächlich abgerechneten Kosten.',
+        // W185: vorher Vergleich mit 2,51 / 3,15 €/m² (Spiegel 2023), jetzt 2,67 / 3,68 €/m² (Abrechnungsjahr 2024).
+        fazit: 'Die Wohnung kommt auf 195 € Nebenkosten im Monat, also 2.340 € im Jahr. Mit 2,79 €/m² liegt sie leicht über dem Mieterbund-Durchschnitt von 2,67 €/m², aber deutlich unter dem Wert von 3,68 €/m², wenn alle Kostenarten anfallen — ein plausibler Bereich. Bei 700 € Kaltmiete ergibt sich eine Warmmiete von 895 € (12,79 €/m²); die Nebenkosten machen damit rund 22 % der Warmmiete aus. Der Rechner zeigt diese komplette Aufschlüsselung automatisch, sobald die Einzelposten eingetragen sind. Der Quadratmeterwert ist dabei die wichtigste Vergleichsgröße: Erst er macht Wohnungen unterschiedlicher Größe vergleichbar und zeigt, ob die eigene Belastung im üblichen Rahmen liegt. Wichtig ist, beim Vergleich nur die umlagefähigen Posten gegenüberzustellen — die monatliche Vorauszahlung im Mietvertrag kann höher oder niedriger angesetzt sein als die später tatsächlich abgerechneten Kosten.',
       },
       {
         typ: 'text',
@@ -255,10 +258,11 @@ export const wohnenRechner: RechnerConfig[] = [
       {
         typ: 'statistik',
         titel: 'Durchschnittliche Nebenkosten in Deutschland',
+        // W185: vorher 2,51 €/m² / bis 3,15 €/m² (Spiegel 2023) und Heizung 1,00–1,50 €/m².
         werte: [
-          { label: 'Durchschnitt (umgelegt)', wert: '2,51 €/m²', hinweis: 'Mieterbund-Betriebskostenspiegel 2023' },
-          { label: 'Bei voller Ausnutzung', wert: 'bis 3,15 €/m²' },
-          { label: 'Anteil Heizung & Warmwasser', wert: '1,00–1,50 €/m²' },
+          { label: 'Durchschnitt (umgelegt)', wert: '2,67 €/m²', hinweis: 'Mieterbund-Betriebskostenspiegel, Abrechnungsjahr 2024' },
+          { label: 'Bei voller Ausnutzung', wert: 'bis 3,68 €/m²' },
+          { label: 'Anteil Heizung & Warmwasser', wert: '1,32 €/m²', hinweis: 'Durchschnitt, in der Spitze 2,18 €/m²' },
           { label: 'Regionale Spanne', wert: '2,00–4,50 €/m²', hinweis: 'je nach Lage und Gebäude' },
         ],
       },
@@ -349,6 +353,12 @@ export const wohnenRechner: RechnerConfig[] = [
         titel: '§ 556 BGB: Vereinbarungen über Betriebskosten',
         url: 'https://www.gesetze-im-internet.de/bgb/__556.html',
         hinweis: 'Abrechnungsfrist 12 Monate und Einwendungsfrist des Mieters.',
+      },
+      // W185: Quelle für die Quadratmeter-Werte ergänzt (vorher ohne Beleg).
+      {
+        titel: 'Deutscher Mieterbund: Betriebskostenspiegel (Abrechnungsjahr 2024)',
+        url: 'https://www.mieterbund.de/betriebskostenspiegel/',
+        hinweis: 'Veröffentlicht 18.12.2025: Ø 2,67 €/m² und Monat, bis 3,68 €/m² bei allen Kostenarten, Heizung und Warmwasser Ø 1,32 €/m².',
       },
     ],
     affiliate: [
@@ -2130,11 +2140,15 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Photovoltaik berechnen: Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation ✓ Mit/ohne Speicher ✓ CO₂-Ersparnis ✓ KI-Erklärung.',
     keywords: ['photovoltaik rechner', 'pv rechner', 'solaranlage berechnen', 'einspeisevergütung 2026', 'photovoltaik amortisation', 'solarrechner', 'pv ertrag berechnen', 'batteriespeicher rechner'],
     icon: '☀️',
-    beispiel: 'Eine 8 kWp-Anlage auf einem Süddach (30°) erzeugt ca. 6.800 kWh pro Jahr. Bei 30 % Eigenverbrauch und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026) entstehen ca. 673 € Ersparnis plus rund 367 € Einspeisung (7,70 ct/kWh bei Inbetriebnahme ab 01.08.2026) = ca. 1.040 € Jahresertrag.',
+    // W185: Annahme Jahresverbrauch 6.800 kWh ergänzt — erst damit setzt PhotovoltaikRechner.tsx 30 % an
+    // (quote = 0,3 × Verbrauch ÷ Ertrag, begrenzt auf 25–40 %); beim Startwert 4.000 kWh sind es 25 %.
+    beispiel: 'Eine 8 kWp-Anlage auf einem Süddach (30°) erzeugt ca. 6.800 kWh pro Jahr. Bei 6.800 kWh Jahresverbrauch (30 % Eigenverbrauch; beim Startwert 4.000 kWh rechnet der Rechner mit 25 %) und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026) entstehen ca. 673 € Ersparnis plus rund 367 € Einspeisung (7,70 ct/kWh bei Inbetriebnahme ab 01.08.2026) = ca. 1.040 € Jahresertrag.',
     faq: [
       {
+        // W185: vorher „Ost-/West 720–800 kWh/kWp (85 %)“ und „3.200 kWh (Nord steil)“; pv-ertragsmodell.ts:
+        // 850 × 0,85 = 723; Minimum Nord × flach = 8 × 850 × 0,65 × 0,87 = 3.845 (Nord sehr steil 4.022).
         frage: 'Wie viel Strom produziert eine PV-Anlage?',
-        antwort: 'In Deutschland liefert eine PV-Anlage typischerweise 400–1.000 kWh pro kWp und Jahr — stark abhängig von Ausrichtung, Neigung und Verschattung. Süd-Dächer mit 25–35° Neigung erreichen das Optimum (rund 850 kWh/kWp inkl. Performance Ratio 0,85), Nord-Dächer kommen auf rund 553 kWh/kWp (65 % des Optimums), Ost-/West-Dächer auf rund 720–800 kWh/kWp (85 %). Eine 8-kWp-Anlage erzeugt damit zwischen 3.200 kWh (Nord steil) und 6.800 kWh (Süd optimal) pro Jahr. Unser Rechner berücksichtigt Ihre konkrete Ausrichtung und Neigung über die Faktoren-Tabelle (Quelle: Mertens, „Photovoltaik", Hanser Verlag).',
+        antwort: 'In Deutschland liefert eine PV-Anlage typischerweise 400–1.000 kWh pro kWp und Jahr — stark abhängig von Ausrichtung, Neigung und Verschattung. Süd-Dächer mit 25–35° Neigung erreichen das Optimum (rund 850 kWh/kWp inkl. Performance Ratio 0,85), Nord-Dächer kommen auf rund 553 kWh/kWp (65 % des Optimums), Ost-/West-Dächer auf rund 723 kWh/kWp (85 %). Eine 8-kWp-Anlage erzeugt damit zwischen rund 3.850 kWh (Nord, flach) und 6.800 kWh (Süd optimal) pro Jahr. Unser Rechner berücksichtigt Ihre konkrete Ausrichtung und Neigung über die Faktoren-Tabelle (Quelle: Mertens, „Photovoltaik", Hanser Verlag).',
       },
       {
         frage: 'Was kostet eine Photovoltaik-Anlage 2026?',
@@ -2180,13 +2194,14 @@ export const wohnenRechner: RechnerConfig[] = [
         titel: '8-kWp-Anlage auf einem Süddach (30°)',
         schritte: [
           { label: 'Jahresertrag', formel: '8 kWp × 850 kWh × 1,00 × 1,00', ergebnis: '6.800 kWh' },
-          { label: 'Eigenverbrauch (30 %)', formel: '6.800 kWh × 0,30', ergebnis: '2.040 kWh' },
+          // W185: Verbrauchsannahme 6.800 kWh im Label ergänzt (vorher nur „30 %“, Rechner-Start 4.000 kWh → 25 %).
+          { label: 'Eigenverbrauch (30 % bei 6.800 kWh Jahresverbrauch)', formel: '6.800 kWh × 0,30', ergebnis: '2.040 kWh' },
           { label: 'Stromkosten-Ersparnis', formel: '2.040 kWh × 33 ct', ergebnis: '673 €' },
           { label: 'Einspeisung (70 %)', formel: '4.760 kWh × 7,70 ct', ergebnis: '367 €' },
           { label: 'Jahres-Nutzen gesamt', formel: '673 € + 367 €', ergebnis: '1.040 €' },
           { label: 'CO₂-Einsparung', formel: '6.800 kWh × 0,38 kg', ergebnis: '≈ 2,6 t' },
         ],
-        fazit: 'Die 8-kWp-Anlage liefert auf einem optimal ausgerichteten Süddach rund 6.800 kWh im Jahr. Bei einer typischen Eigenverbrauchsquote von 30 % ohne Speicher nutzt der Haushalt davon 2.040 kWh selbst und spart so 673 € Stromkosten. Die übrigen 4.760 kWh fließen ins Netz und bringen 367 € Einspeisevergütung — zusammen rund 1.040 € Nutzen pro Jahr. Deutlich sichtbar: Der kleinere, selbst genutzte Anteil bringt mehr Geld als die größere eingespeiste Menge. Ein Batteriespeicher oder eine Wärmepumpe würde die Eigenverbrauchsquote anheben und den Jahres-Nutzen weiter steigern.',
+        fazit: 'Die 8-kWp-Anlage liefert auf einem optimal ausgerichteten Süddach rund 6.800 kWh im Jahr. Verbraucht der Haushalt ebenfalls rund 6.800 kWh im Jahr (etwa mit Wärmepumpe oder E-Auto), setzt der Rechner ohne Speicher eine Eigenverbrauchsquote von 30 % an: Der Haushalt nutzt 2.040 kWh selbst und spart so 673 € Stromkosten. Die übrigen 4.760 kWh fließen ins Netz und bringen 367 € Einspeisevergütung — zusammen rund 1.040 € Nutzen pro Jahr. Beim Startwert des Rechners von 4.000 kWh Verbrauch sind es 25 %: 1.700 kWh × 33 ct = 561 € Ersparnis plus 5.100 kWh × 7,70 ct = 393 € Einspeisung, zusammen rund 954 €. Deutlich sichtbar: Der kleinere, selbst genutzte Anteil bringt mehr Geld als die größere eingespeiste Menge. Ein Batteriespeicher oder eine Wärmepumpe würde die Eigenverbrauchsquote anheben und den Jahres-Nutzen weiter steigern.',
       },
       {
         typ: 'tabelle',
@@ -2225,9 +2240,12 @@ export const wohnenRechner: RechnerConfig[] = [
         titel: 'Amortisations-Szenarien (8 kWp, grobe Richtwerte)',
         kopf: ['Szenario', 'Investition', 'Jahres-Nutzen', 'Amortisation'],
         zeilen: [
-          ['Ohne Speicher (30 % Eigenverbrauch)', '~10.000 €', '~1.043 €', '~10–12 Jahre'],
-          ['Mit 8-kWh-Speicher (65 % Eigenverbrauch)', '~16.000 €', '~1.600 €', '~11–13 Jahre'],
-          ['Volleinspeisung', '~9.500 €', '~840 €', '~11–13 Jahre'],
+          // W185: vorher ~1.043 € / ~840 € (EEG-Sätze 7,78 / 12,34 ct bis 31.07.2026); jetzt 7,70 / 12,22 ct wie im Beispiel.
+          ['Ohne Speicher (30 % Eigenverbrauch)', '~10.000 €', '~1.040 €', '~10–12 Jahre'],
+          // W185: vorher „65 % Eigenverbrauch“ / „~1.600 €“. Rechner: 0,6 + 8 × 0,015 = 72 %, gedeckelt auf 70 % Autarkie
+          // bei 6.800 kWh Verbrauch → 4.760 kWh × 33 ct + 2.040 kWh × 7,70 ct = 1.727,88 €.
+          ['Mit 8-kWh-Speicher (70 % Eigenverbrauch)', '~16.000 €', '~1.730 €', '~11–13 Jahre'],
+          ['Volleinspeisung', '~9.500 €', '~830 €', '~11–13 Jahre'],
         ],
         fussnote: 'Schlüsselfertige Anlagen kosten 2026 rund 1.100–1.500 € je kWp inklusive Montage; ein Batteriespeicher schlägt mit 700–1.000 € je kWh zu Buche. Seit 2023 entfällt auf Kauf und Installation bis 30 kWp die Mehrwertsteuer (0 % USt), die genannten Preise sind also Nettopreise. Die Szenarien sind grobe Richtwerte: Der Speicher erhöht den Eigenverbrauch und damit den Jahres-Nutzen, verlängert aber wegen der Zusatzkosten die Amortisation leicht. Bei einer Lebensdauer von 25–30 Jahren bleibt nach der Amortisation eine lange Gewinnphase. Die Amortisation verkürzt sich, wenn die Strompreise steigen, und verlängert sich bei sinkenden Preisen oder geringer Eigenverbrauchsquote. Die tatsächlichen Werte hängen von Strompreis, Eigenverbrauchsquote, Förderung und Angebotspreis ab — holen Sie für eine belastbare Rechnung mindestens zwei Angebote ein.',
       },
@@ -2278,7 +2296,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'dachflaechen-rechner',
-    letzteAktualisierung: '2026-06-27',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Dachflächen-Rechner',
     beschreibung: 'Dachfläche berechnen: Satteldach, Pultdach, Walmdach oder Flachdach — mit Material- und PV-Potenzial.',
     kategorie: 'Wohnen & Energie',
@@ -2302,8 +2320,9 @@ export const wohnenRechner: RechnerConfig[] = [
         antwort: 'Je nach Modell: 10–15 Ziegel/m². Doppel-S-Pfannen liegen bei 10,5/m², Frankfurter Pfannen bei 10,2/m², Biberschwanzziegel bei 34/m² (wegen kleinerem Format). Plus 5 % Verschnitt. Fragen Sie den Baustoffhandel nach dem exakten Verlegewert für Ihr gewähltes Modell — Hersteller geben diesen an.',
       },
       {
+        // W185: vorher „→ ~12 kWp“; DachflaechenRechner.tsx: 70 m² ÷ 5,5 m²/kWp = 12,7 kWp (Anzeige „12,7 kWp“).
         frage: 'Wie groß kann meine PV-Anlage auf diesem Dach werden?',
-        antwort: 'Faustregel: Pro kWp benötigen Sie rund 5–5,5 m² Modulfläche. Bei Schrägdächern sind etwa 70 % der Fläche nutzbar (Abstände zu Rand, Kamin, Dachfenstern). Bei 100 m² Dachfläche ergibt das ca. 70 m² nutzbar → ~12 kWp Anlagengröße. Der spezifische Jahresertrag beträgt in Deutschland bei optimaler Süd-Ausrichtung rund 850 kWh pro kWp (inkl. Performance Ratio 0,85 nach VDI 6002). Unser Rechner zeigt das PV-Potenzial automatisch — mit dem vollständigen Faktor-Modell für Ihre Ausrichtung und Neigung arbeitet der Photovoltaik-Rechner.',
+        antwort: 'Faustregel: Pro kWp benötigen Sie rund 5–5,5 m² Modulfläche. Bei Schrägdächern sind etwa 70 % der Fläche nutzbar (Abstände zu Rand, Kamin, Dachfenstern). Bei 100 m² Dachfläche ergibt das ca. 70 m² nutzbar → rund 12,7 kWp Anlagengröße (bei 5,5 m² je kWp, so rechnet auch der Rechner). Der spezifische Jahresertrag beträgt in Deutschland bei optimaler Süd-Ausrichtung rund 850 kWh pro kWp (inkl. Performance Ratio 0,85 nach VDI 6002). Unser Rechner zeigt das PV-Potenzial automatisch — mit dem vollständigen Faktor-Modell für Ihre Ausrichtung und Neigung arbeitet der Photovoltaik-Rechner.',
       },
       {
         frage: 'Was ist der Dachüberstand und warum wichtig?',
@@ -2434,7 +2453,8 @@ export const wohnenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Wie viel Solarstrom das Dach liefern kann',
-        html: `<p>Aus der Dachfläche lässt sich grob abschätzen, wie groß eine <strong>PV-Anlage</strong> werden kann. Als Faustregel braucht ein Kilowatt-Peak rund 5 bis 7 m² Modulfläche. Nutzbar ist allerdings nicht das ganze Dach: Bei Schrägdächern rechnet man mit etwa 70 % der Fläche, bei Flachdächern wegen der Aufständerung und der Verschattungsabstände nur mit rund 50 %. Hinzu kommen Mindestabstände zu Rand, First, Kamin und Dachfenstern.</p><p>Ein optimal nach Süden ausgerichtetes Dach mit 30 bis 35° Neigung liefert in Deutschland rund 850 kWh pro kWp und Jahr. Der Wert dieses Rechners ist aber bewusst nur eine <strong>grobe Potenzial-Schätzung</strong> — die genaue Auslegung mit Ausrichtung, Neigung und Verschattung übernimmt der <a href="/wohnen/photovoltaik-rechner">Photovoltaik-Rechner</a> mit dem vollständigen Faktor-Modell. Wer ohnehin das Dach saniert, sollte die PV-Frage gleich mitdenken: Module und neue Eindeckung in einem Zug zu montieren, spart Gerüst und Arbeitszeit. Ob sich die Anlage am Ende lohnt, hängt von Eigenverbrauch, Speicher und Einspeisevergütung ab — Faktoren, die der spezialisierte Rechner berücksichtigt.</p>`,
+        // W185: vorher „rund 5 bis 7 m² Modulfläche“; FAQ nennt 5–5,5 m², das Bauteil rechnet fest mit 5,5 m² je kWp.
+        html: `<p>Aus der Dachfläche lässt sich grob abschätzen, wie groß eine <strong>PV-Anlage</strong> werden kann. Als Faustregel braucht ein Kilowatt-Peak rund 5 bis 5,5 m² Modulfläche; dieser Rechner setzt 5,5 m² an. Nutzbar ist allerdings nicht das ganze Dach: Bei Schrägdächern rechnet man mit etwa 70 % der Fläche, bei Flachdächern wegen der Aufständerung und der Verschattungsabstände nur mit rund 50 %. Hinzu kommen Mindestabstände zu Rand, First, Kamin und Dachfenstern.</p><p>Ein optimal nach Süden ausgerichtetes Dach mit 30 bis 35° Neigung liefert in Deutschland rund 850 kWh pro kWp und Jahr. Der Wert dieses Rechners ist aber bewusst nur eine <strong>grobe Potenzial-Schätzung</strong> — die genaue Auslegung mit Ausrichtung, Neigung und Verschattung übernimmt der <a href="/wohnen/photovoltaik-rechner">Photovoltaik-Rechner</a> mit dem vollständigen Faktor-Modell. Wer ohnehin das Dach saniert, sollte die PV-Frage gleich mitdenken: Module und neue Eindeckung in einem Zug zu montieren, spart Gerüst und Arbeitszeit. Ob sich die Anlage am Ende lohnt, hängt von Eigenverbrauch, Speicher und Einspeisevergütung ab — Faktoren, die der spezialisierte Rechner berücksichtigt.</p>`,
       },
       {
         typ: 'infobox',
@@ -2911,7 +2931,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'poolkosten-rechner',
-    letzteAktualisierung: '2026-06-27',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Poolkosten-Rechner',
     beschreibung: 'Jährliche Betriebskosten für Pool: Wasser, Strom, Chemie und Wartung — mit Heizung und Abdeckung.',
     kategorie: 'Wohnen & Energie',
@@ -2931,8 +2951,9 @@ export const wohnenRechner: RechnerConfig[] = [
         antwort: 'Ja — wenn Sie die Saison verlängern möchten. Eine Poolwärmepumpe mit COP 5 erzeugt aus 1 kWh Strom etwa 5 kWh Wärme, das ist deutlich effizienter als Elektroheizstab (COP 1) oder Gas. Mit einer Abdeckung können Sie die Heizkosten nochmal um 30 % senken. Günstiger und völlig kostenfrei im Betrieb ist allerdings eine Solarheizung — sie braucht aber genügend Dach- oder Terrassenfläche und funktioniert nur bei Sonnenschein.',
       },
       {
+        // W185: vorher „rund 250–400 € Chemie“; Rechner: 40 m³ × 7,50 €/m³ = 300 €, mit Abdeckung × 0,80 = 240 €.
         frage: 'Wie viel Chlor brauche ich für meinen Pool?',
-        antwort: 'Als Richtwert: 1–3 g Chlor pro m³ Wasser pro Woche, bei starker Nutzung oder Hitze mehr. Wichtiger als die Menge ist der freie Chlorgehalt von 0,3–0,6 mg/l — mit Teststreifen oder digitalem Messgerät kontrollieren. Parallel muss der pH-Wert zwischen 7,0 und 7,4 liegen, sonst wirkt das Chlor nicht richtig. Ein gut gepflegter 40-m³-Pool kommt mit rund 250–400 € Chemie pro Saison aus.',
+        antwort: 'Als Richtwert: 1–3 g Chlor pro m³ Wasser pro Woche, bei starker Nutzung oder Hitze mehr. Wichtiger als die Menge ist der freie Chlorgehalt von 0,3–0,6 mg/l — mit Teststreifen oder digitalem Messgerät kontrollieren. Parallel muss der pH-Wert zwischen 7,0 und 7,4 liegen, sonst wirkt das Chlor nicht richtig. Ein gut gepflegter 40-m³-Pool kommt mit rund 240–300 € Chemie pro Saison aus (mit bzw. ohne Abdeckung, bei starker Nutzung mehr).',
       },
       {
         frage: 'Wie lange muss die Filterpumpe täglich laufen?',
@@ -2996,7 +3017,9 @@ export const wohnenRechner: RechnerConfig[] = [
         titel: 'Was die Abdeckung spart',
         werte: [
           { label: 'Chemie', wert: '−20 %', hinweis: '300 € → 240 € im Beispiel' },
-          { label: 'Heizkosten', wert: '−30 %', hinweis: 'z. B. 220 € → 154 € mit Wärmepumpe; weniger Wärmeverlust nachts' },
+          // W185: vorher 220 € → 154 € (32 ct/kWh); PoolkostenRechner.tsx rechnet mit der SSOT 37 ct:
+          // 40 m³, Mai–Sep: 4,5 kWh × 153 = 688,5 kWh × 0,37 = 254,75 € → × 0,70 = 178,32 €.
+          { label: 'Heizkosten', wert: '−30 %', hinweis: 'z. B. 255 € → 178 € mit Wärmepumpe; weniger Wärmeverlust nachts' },
           { label: 'Verdunstung', wert: 'bis −90 %', hinweis: 'deutlich weniger Wasser nachfüllen' },
           { label: 'Filterlaufzeit', wert: 'kürzer', hinweis: 'weniger Laub und Schmutz im Wasser' },
           { label: 'Sicherheit', wert: 'zusätzlich', hinweis: 'feste Abdeckungen schützen Kinder und Tiere' },
@@ -3014,7 +3037,8 @@ export const wohnenRechner: RechnerConfig[] = [
         kopf: ['Heizart', 'Effizienz / Kosten', 'Hinweis'],
         zeilen: [
           ['Keine Heizung', '0 € Betrieb', 'kürzere Badesaison, ab ca. Juni warm'],
-          ['Wärmepumpe', 'effizient (COP ~5), ~220 €/Saison im Beispiel', 'die beliebteste Lösung'],
+          // W185: vorher „~220 €/Saison im Beispiel“ (32 ct, ohne Abdeckung); Beispiel hat Abdeckung → 178 €, ohne 255 €.
+          ['Wärmepumpe', 'effizient (COP ~5), im Beispiel ~178 €/Saison mit Abdeckung (ohne ~255 €)', 'die beliebteste Lösung'],
           ['Elektro-Direktheizung', 'teuer (COP 1, 1 kWh Strom = 1 kWh Wärme)', 'nur für kurzes Aufheizen'],
           ['Solarabsorber', 'Betrieb nahezu 0 €', 'wetterabhängig, braucht Fläche'],
         ],
@@ -3754,7 +3778,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'beton-rechner',
-    letzteAktualisierung: '2026-06-27',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Beton-Rechner',
     beschreibung: 'Betonmenge berechnen: Kubikmeter und benötigte Säcke für Fundament, Bodenplatte und Pfosten.',
     kategorie: 'Wohnen & Energie',
@@ -3770,8 +3794,11 @@ export const wohnenRechner: RechnerConfig[] = [
         antwort: 'Berechnen Sie Länge × Breite × Tiefe. Ein Streifenfundament von 6 × 0,3 × 0,8 m benötigt 1,44 m³ Beton. Mit 10 % Zuschlag: 1,58 m³. Das sind etwa 3.800 kg — hier ist Lieferbeton die richtige Wahl. Für ein einzelnes Pfosten-Punktfundament (30 cm Durchmesser, 80 cm tief) reichen ca. 2 Säcke à 25 kg.',
       },
       {
+        // W185: vorher „Ab etwa 0,5 m³ … als Lieferbeton 80–120 € plus Anfahrt“. Preislisten 2026 (Siemsen,
+        // Heidelberg Materials): C20/25–C25/30 rund 180–215 €/m³ netto, unter 7,5 m³ Differenz × 24–25 €/m³.
+        // Modell der Lib (195 € + 25 € Mindermenge, × 1,19): 1 m³ 425,43 € vs. 84 Säcke 546 €; 0,5 m³ 324,28 € vs. 273 €.
         frage: 'Ab wann lohnt sich Lieferbeton?',
-        antwort: 'Ab etwa 0,5 m³ (ca. 42 Säcke à 25 kg). Der Preisunterschied ist erheblich: 0,5 m³ kosten als Sackware 250–340 €, als Lieferbeton 80–120 € plus Anfahrt (50–80 €). Zudem sparen Sie Stunden Mischarbeit. Die Mindestbestellmenge liegt bei vielen Anbietern bei 0,5–1 m³.',
+        antwort: 'Rechnerisch ab etwa 0,7 m³ (rund 60 Säcke à 25 kg). Transportbeton der Klassen C20/25 bis C25/30 kostet laut Preislisten 2026 rund 180–215 € je m³ netto. Bei Kleinmengen kommt ein Mindermengenzuschlag hinzu: Unter 7,5 m³ je Fahrzeug berechnen viele Werke die fehlende Menge mit rund 25 € je m³. 1 m³ Lieferbeton kostet so rund 425 € inklusive MwSt., als Sackware (84 Säcke à 6,50 €) rund 546 €. Bei 0,5 m³ ist die Sackware mit rund 273 € dagegen günstiger als Lieferbeton (rund 324 €). Dazu kommt die gesparte Mischarbeit; eine Betonpumpe oder die Anfahrt außerhalb des Liefergebiets kosten extra.',
       },
       {
         frage: 'Wie viel wiegt ein Kubikmeter Beton?',
@@ -3802,9 +3829,10 @@ export const wohnenRechner: RechnerConfig[] = [
           { label: 'Gewicht', formel: '0,99 × 2.400 kg/m³', ergebnis: '2.376 kg' },
           { label: 'Säcke à 25 kg', formel: '0,99 ÷ 0,012 m³/Sack', ergebnis: '83 Säcke' },
           { label: 'Sackware-Kosten', formel: '83 × 6,50 €', ergebnis: '≈ 539 €' },
-          { label: 'Lieferbeton', formel: '0,99 × 100 €/m³', ergebnis: '≈ 99 €' },
+          // W185: vorher „0,99 × 100 €/m³ ≈ 99 €“; Listenpreis 2026 + Mindermengenzuschlag, brutto (lib/berechnungen/beton.ts).
+          { label: 'Lieferbeton (inkl. MwSt.)', formel: '(0,99 × 195 € + 6,51 m³ Mindermenge × 25 €) × 1,19', ergebnis: '≈ 423 €' },
         ],
-        fazit: 'Für eine Bodenplatte von 3 × 2 m in 15 cm Dicke ergeben sich 0,9 m³, mit 10 % Zuschlag 0,99 m³ und damit rund 2,4 Tonnen Beton. Wichtig ist die Säckezahl: Sie wird über das Volumen gerechnet, nicht über das Gewicht. Ein 25-kg-Sack ergibt etwa 0,012 m³, also braucht man 0,99 ÷ 0,012 ≈ 83 Säcke — über das Gewicht (2.376 ÷ 25) käme man fälschlich auf 96. Sackware ist hier mit rund 539 € zudem viel teurer als Lieferbeton (~99 € plus Anfahrt).',
+        fazit: 'Für eine Bodenplatte von 3 × 2 m in 15 cm Dicke ergeben sich 0,9 m³, mit 10 % Zuschlag 0,99 m³ und damit rund 2,4 Tonnen Beton. Wichtig ist die Säckezahl: Sie wird über das Volumen gerechnet, nicht über das Gewicht. Ein 25-kg-Sack ergibt etwa 0,012 m³, also braucht man 0,99 ÷ 0,012 ≈ 83 Säcke — über das Gewicht (2.376 ÷ 25) käme man fälschlich auf 96. Sackware ist hier mit rund 539 € zudem teurer als Lieferbeton: Selbst mit Mindermengenzuschlag kostet der knappe Kubikmeter aus dem Werk rund 423 € inklusive MwSt.',
       },
       {
         typ: 'tabelle',
@@ -3851,12 +3879,14 @@ export const wohnenRechner: RechnerConfig[] = [
         spalteA: 'Sackware / Selbstmischen',
         spalteB: 'Transportbeton (Lieferbeton)',
         zeilen: [
-          { kriterium: 'Lohnt sich', a: 'kleine Mengen bis ~0,5 m³', b: 'ab etwa 1 m³ aufwärts' },
-          { kriterium: 'Kosten', a: 'Sack 6,50–9,50 €, selbst gemischt ~40–80 €/m³', b: '~90–170 €/m³ plus Anfahrt' },
+          // W185: vorher „~90–170 €/m³ plus Anfahrt“, Grenzen 0,5 / 1 / 0,8 m³; jetzt Preislisten 2026 mit
+          // Mindermengenzuschlag — Break-even laut Lib bei rund 0,66 m³ (25-kg-Säcke) bzw. 0,75 m³ (40-kg-Säcke).
+          { kriterium: 'Lohnt sich', a: 'kleine Mengen bis ~0,7 m³', b: 'ab etwa 0,7 m³ aufwärts' },
+          { kriterium: 'Kosten', a: 'Sack 6,50–9,50 €, selbst gemischt ~40–80 €/m³', b: '~180–215 €/m³ netto, unter 7,5 m³ plus ~25 € je fehlendem m³' },
           { kriterium: 'Aufwand', a: 'von Hand oder Mischer, körperlich', b: 'fertig geliefert, schnell verbaut' },
           { kriterium: 'Qualität', a: 'schwankt mit Sorgfalt beim Mischen', b: 'werksgleich, definierte Festigkeitsklasse' },
-          { kriterium: 'Break-even', a: 'bis ~0,8 m³ meist günstiger', b: 'ab ~0,8–1 m³ günstiger' },
-          { kriterium: 'Mindestmenge', a: 'keine, sackweise frei', b: 'oft 0,5–1 m³ Mindestbestellung' },
+          { kriterium: 'Break-even', a: 'bis ~0,7 m³ meist günstiger', b: 'ab ~0,7 m³ günstiger' },
+          { kriterium: 'Mindestmenge', a: 'keine, sackweise frei', b: 'Kleinmengen möglich, unter 7,5 m³ mit Mindermengenzuschlag' },
           { kriterium: 'Lagerung', a: 'Säcke trocken lagern, sonst Klumpen', b: 'sofort verarbeiten, keine Lagerung' },
         ],
       },
@@ -3899,7 +3929,8 @@ export const wohnenRechner: RechnerConfig[] = [
         punkte: [
           'Die passende Festigkeitsklasse wählen — bei tragenden Teilen nach statischer Vorgabe.',
           'Volumen je Bauteil berechnen und 5 bis 10 % Zuschlag für Schalung und Schwund aufschlagen.',
-          'Den Bezugsweg festlegen: Sackware für kleine, Lieferbeton ab etwa 1 m³.',
+          // W185: vorher „Lieferbeton ab etwa 1 m³“; Break-even laut Rechner rund 0,7 m³.
+          'Den Bezugsweg festlegen: Sackware für kleine Mengen, Lieferbeton ab etwa 0,7 m³ — der Rechner vergleicht beide Wege.',
           'Bei Fundamenten die Frosttiefe (mindestens 80 cm) und eine Schotterschicht einplanen.',
           'Bei tragenden Bauteilen und größeren Flächen die Bewehrung nach Statik einlegen.',
           'Das Wetter prüfen: nicht unter +5 °C und nicht bei starker Hitze betonieren.',
@@ -3924,7 +3955,10 @@ export const wohnenRechner: RechnerConfig[] = [
     quellen: [
       { titel: 'DIN EN 206 / DIN 1045-2 (Beton)', hinweis: 'Festigkeitsklassen C8/10 (Mager), C20/25 (Standard privat), C25/30 (EFH-Fundament/WU); Nennfestigkeit nach 28 Tagen. Tragende Bauteile statisch zu bemessen.' },
       { titel: 'Trockenbeton-Ergiebigkeit (Hersteller/Praxis)', hinweis: '40-kg-Sack ≈ 17–20 L, 25-kg-Sack ≈ 10–14 L Frischbeton; ~60 Säcke/m³ (40 kg). Ergiebigkeit ±15 % herstellerabhängig, Sack-Etikett maßgeblich.' },
-      { titel: 'Beton-Methodik', hinweis: 'Volumen Quader L×B×H bzw. Zylinder π×(D/2)²×H; Gewicht = Volumen × 2.400 kg/m³; Säcke = Volumen mit Zuschlag ÷ Sack-Volumen (25 kg = 0,012 m³). Richtwerte, keine Statikberatung.' },
+      { titel: 'Beton-Methodik', hinweis: 'Volumen Quader L×B×H bzw. Zylinder π×(D/2)²×H; Gewicht = Volumen × 2.400 kg/m³; Säcke = Volumen mit Zuschlag ÷ Sack-Volumen (25 kg = 0,012 m³). Lieferbeton = (Volumen × 195 € + Mindermenge bis 7,5 m³ × 25 €) × 1,19. Richtwerte, keine Statikberatung.' },
+      // W185: Belege für den Lieferbetonpreis ergänzt (vorher ohne Quelle, 100 €/m³).
+      { titel: 'Siemsen — Preisliste 2026 Transportbeton und Betonpumpen', url: 'https://www.siemsen.de/fileadmin/content/Preisliste_2026_Transportbeton_und_Betonpumpen.pdf', hinweis: 'Gültig ab 01.01.2026, netto: C20/25 F3 0/16 181,50 €/m³, C25/30 185,00–187,50 €/m³; unter 7,5 m³ je fehlendem m³ 25 €.' },
+      { titel: 'Heidelberg Materials — Preisliste Beton Nordrhein-Westfalen 2026', url: 'https://www.heidelbergmaterials.de/system/files/2025-09/Preisliste%20Heidelberg%20Materials%20Beton_Nordrhein-Westfalen_2026.pdf', hinweis: 'Gültig ab 01.10.2025, netto: C20/25 208–210 €/m³, C25/30 213 €/m³ zzgl. Pflichtzuschläge; unter 7,5 m³ Differenz × 25 €/m³.' },
     ],
   },
   {
@@ -4093,7 +4127,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'balkon-solar-rechner',
-    letzteAktualisierung: '2026-06-28',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Balkon-Solar-Rechner',
     beschreibung: 'Balkon-Solaranlage berechnen: Ertrag, Eigenverbrauch und Amortisation für 600W/800W Balkonkraftwerke.',
     kategorie: 'Wohnen & Energie',
@@ -4183,8 +4217,10 @@ export const wohnenRechner: RechnerConfig[] = [
         kopf: ['Ausrichtung', 'Faktor', 'Ertrag', 'Eigenverbrauchs-Ersparnis'],
         zeilen: [
           ['Süd', '100 %', '684 kWh', '~67,65 €'],
-          ['Süd-West / Süd-Ost', '85 %', '581 kWh', '~57,50 €'],
-          ['West / Ost', '70 %', '479 kWh', '~47,40 €'],
+          // W185: vorher ~57,50 € / ~47,40 €; balkon-solar.ts rundet erst die Eigenverbrauchs-kWh:
+          // round(581 × 0,3) = 174 kWh × 33 ct = 57,42 €; round(479 × 0,3) = 144 kWh × 33 ct = 47,52 €.
+          ['Süd-West / Süd-Ost', '85 %', '581 kWh', '~57,40 €'],
+          ['West / Ost', '70 %', '479 kWh', '~47,50 €'],
           ['Nord', '60 %', '410 kWh', '~40,60 €'],
         ],
         fussnote: 'Die Werte gelten für eine 800-Watt-Anlage mit aufgeständerten Modulen (Faktor 0,9). Frei auf einem Flachdach oder im Garten optimal ausgerichtet (Faktor 1,0) liegt der Ertrag noch etwas höher, senkrecht an der Brüstung (Faktor 0,7) entsprechend niedriger. Süd liefert den höchsten Jahresertrag, doch West- und Ost-Anlagen erzeugen ihren Strom morgens und abends — also dann, wenn viele Haushalte tatsächlich Strom brauchen. Dadurch kann die Eigenverbrauchsquote bei Ost-West höher liegen und den geringeren Spitzenertrag teilweise ausgleichen. Selbst ein Nord-Balkon lohnt bei guter Aufständerung noch. Die Ersparnis ist mit 33 ct/kWh und 30 % Eigenverbrauch gerechnet; Verschattung und Wetter sind nicht berücksichtigt. Schon ein Geländer, ein Nachbarbalkon oder ein Baum, der über die Mittagsstunden Schatten wirft, kann den Ertrag deutlich drücken — ein verschattungsfreier Standort ist daher wichtiger als die letzte Stufe der idealen Ausrichtung.',

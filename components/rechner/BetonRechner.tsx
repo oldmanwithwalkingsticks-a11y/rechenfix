@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneBeton } from '@/lib/berechnungen/beton';
+import { berechneBeton, LIEFERBETON_PREIS_NETTO, LIEFERBETON_MINDERMENGE_M3 } from '@/lib/berechnungen/beton';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -174,8 +174,13 @@ export default function BetonRechner() {
           {ergebnis.empfehlungLieferbeton && (
             <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-4">
               <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-1">💡 Lieferbeton empfohlen</p>
+              {/* W185: vorher „Ab 0,5 m³ … (80–120 €/m³)“; jetzt Listenpreis 2026 inkl. MwSt. und Mindermengenzuschlag
+                  (lib/berechnungen/beton.ts), die Box erscheint nur, wenn Lieferbeton tatsächlich günstiger ist. */}
               <p className="text-sm text-blue-700 dark:text-blue-400">
-                Ab 0,5 m³ ist Lieferbeton oft günstiger und bequemer: ca. <strong>{fmt(ergebnis.kostenLieferbeton)} €</strong> (80–120 €/m³) statt {fmt(ergebnis.kostenSaecke)} € für {ergebnis.anzahlSaecke} Säcke.
+                Lieferbeton ist hier günstiger und bequemer: ca. <strong>{fmt(ergebnis.kostenLieferbeton)} €</strong> inkl. MwSt.
+                {' '}(rund {LIEFERBETON_PREIS_NETTO} €/m³ netto
+                {ergebnis.mindermengenZuschlagBrutto > 0 && <> plus {fmt(ergebnis.mindermengenZuschlagBrutto)} € Mindermengenzuschlag unter {LIEFERBETON_MINDERMENGE_M3.toLocaleString('de-DE')} m³</>})
+                {' '}statt {fmt(ergebnis.kostenSaecke)} € für {ergebnis.anzahlSaecke} Säcke. Anfahrt außerhalb des Liefergebiets und Pumpe kosten extra.
               </p>
             </div>
           )}

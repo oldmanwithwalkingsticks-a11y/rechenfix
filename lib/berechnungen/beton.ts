@@ -9,7 +9,11 @@ export interface BetonErgebnis {
   volumenProSack: number;
   anzahlSaecke: number;
   kostenSaecke: number;
+  /** Lieferbeton brutto (inkl. 19 % USt), inkl. Mindermengenzuschlag unter 7,5 m³. */
   kostenLieferbeton: number;
+  /** Davon Mindermengenzuschlag brutto (0 ab 7,5 m³). */
+  mindermengenZuschlagBrutto: number;
+  /** true, wenn Lieferbeton günstiger ist als die Sackware. */
   empfehlungLieferbeton: boolean;
   rechenweg: string[];
 }
@@ -17,7 +21,20 @@ export interface BetonErgebnis {
 const DICHTE = 2400; // kg/m³
 const SACK_VOLUMEN: Record<number, number> = { 25: 0.012, 40: 0.019 };
 const SACK_PREIS: Record<number, number> = { 25: 6.5, 40: 9.5 };
-const LIEFERBETON_PREIS = 100; // €/m³
+// W185: vorher LIEFERBETON_PREIS = 100 €/m³ ohne Kleinmengen- und Steueraufschlag (Seite: „80–120 €/m³“),
+// Empfehlung pauschal ab 0,5 m³. Transportbeton-Preislisten 2026, C20/25–C25/30, Konsistenz F3, netto:
+//   - Siemsen, Preisliste 2026 (ab 01.01.2026), C20/25 F3 0/16 181,50 €, C25/30 185,00–187,50 €
+//     https://www.siemsen.de/fileadmin/content/Preisliste_2026_Transportbeton_und_Betonpumpen.pdf
+//   - Heidelberg Materials NRW bzw. Hamburg-Bremen 2026 (ab 01.10.2025), C20/25 208–210 €, C25/30 213 €
+//     (inkl. Frachtanteil), zzgl. Pflichtzuschläge Energie/Logistik 1,50 + Maut 5,00 + Nachhaltigkeit ab 5,50 €/m³
+//     https://www.heidelbergmaterials.de/system/files/2025-09/Preisliste%20Heidelberg%20Materials%20Beton_Nordrhein-Westfalen_2026.pdf
+//   - Mindermenge: beide Listen berechnen unter 7,5 m³ je Fahrzeug die Differenz zu 7,5 m³ mit 24–25 €/m³.
+// Angesetzt: 195 €/m³ netto (Mitte der Spanne), 25 €/m³ Mindermengenzuschlag, 19 % USt — die Sackpreise oben
+// sind Baumarkt-Bruttopreise, verglichen wird deshalb brutto. Anfahrt außerhalb des Liefergebiets und Pumpe nicht enthalten.
+export const LIEFERBETON_PREIS_NETTO = 195; // €/m³
+export const LIEFERBETON_MINDERMENGE_M3 = 7.5; // m³ je Fahrzeug
+export const LIEFERBETON_MINDERMENGE_ZUSCHLAG_NETTO = 25; // € je fehlendem m³ bis 7,5 m³
+export const LIEFERBETON_UST = 0.19;
 
 // W184: Rechenweg vorher mit rohen Zahlen und toFixed(3) („2.5 × 0.15 = 0.375 m³“), jetzt de-DE („2,5 × 0,15 = 0,375 m³“)
 const fz = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 3 });
@@ -76,7 +93,18 @@ export function berechneBeton(
 
   const sackPreis = SACK_PREIS[sackgroesseKg] || 6.5;
   const kostenSaecke = Math.round(anzahlSaecke * sackPreis * 100) / 100;
-  const kostenLieferbeton = Math.round(volumenMitZuschlag * LIEFERBETON_PREIS * 100) / 100;
+  // W185: Listenpreis + Mindermengenzuschlag, brutto (vorher V × 100 €/m³).
+  const fehlmenge = Math.max(0, LIEFERBETON_MINDERMENGE_M3 - volumenMitZuschlag);
+  const mindermengeNetto = fehlmenge * LIEFERBETON_MINDERMENGE_ZUSCHLAG_NETTO;
+  const lieferNetto = volumenMitZuschlag * LIEFERBETON_PREIS_NETTO + mindermengeNetto;
+  const kostenLieferbeton = Math.round(lieferNetto * (1 + LIEFERBETON_UST) * 100) / 100;
+  const mindermengenZuschlagBrutto = Math.round(mindermengeNetto * (1 + LIEFERBETON_UST) * 100) / 100;
+  const de2 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  rechenweg.push(
+    fehlmenge > 0
+      ? `Lieferbeton = (${volumenMitZuschlag.toLocaleString('de-DE', { maximumFractionDigits: 3 })} m³ × ${LIEFERBETON_PREIS_NETTO} € + Mindermenge ${fehlmenge.toLocaleString('de-DE', { maximumFractionDigits: 3 })} m³ × ${LIEFERBETON_MINDERMENGE_ZUSCHLAG_NETTO} €) × 1,19 ≈ ${de2(kostenLieferbeton)} €`
+      : `Lieferbeton = ${volumenMitZuschlag.toLocaleString('de-DE', { maximumFractionDigits: 3 })} m³ × ${LIEFERBETON_PREIS_NETTO} € × 1,19 ≈ ${de2(kostenLieferbeton)} €`,
+  );
 
   return {
     form,
@@ -90,7 +118,9 @@ export function berechneBeton(
     anzahlSaecke,
     kostenSaecke,
     kostenLieferbeton,
-    empfehlungLieferbeton: volumenMitZuschlag >= 0.5,
+    mindermengenZuschlagBrutto,
+    // W185: vorher pauschal ab 0,5 m³; mit Mindermengenzuschlag lohnt Lieferbeton erst ab rund 0,7 m³ (25-kg-Säcke).
+    empfehlungLieferbeton: kostenLieferbeton < kostenSaecke,
     rechenweg,
   };
 }

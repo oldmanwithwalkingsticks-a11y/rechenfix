@@ -55,7 +55,7 @@ export interface WohngeldErgebnis {
   beruecksichtigteMiete: number;
   heizkostenZuschlag: number;
   klimaKomponente: number;
-  gesamtMiete: number; // berücksichtigte Miete + Heizkosten + Klima
+  gesamtMiete: number; // berücksichtigte Miete (höchstens Höchstbetrag + Klimakomponente) + Heizkostenkomponente
   mietbelastungOhne: number; // % vom Einkommen für Miete ohne Wohngeld
   mietbelastungMit: number;  // % mit Wohngeld
   freibetraege: number;
@@ -210,19 +210,18 @@ export function berechneWohngeld(eingabe: WohngeldEingabe): WohngeldErgebnis | n
   const bereinigtesEinkommen = Math.max(0, rund2(bruttoEinkommen - pauschalAbzug - freibetraege));
 
   // === HÖCHSTBETRAG DER MIETE ===
+  // W185: vorher Klimakomponente zusätzlich auf die Miete addiert (auch unter dem Höchstbetrag) und an das
+  // heizkostenpauschale-Flag gekoppelt. § 12 Abs. 7 WoGG: Die Klimakomponente erhöht den Höchstbetrag nach Abs. 1.
+  const klimaKomponente = getKlimakomponente(personen);
   const hoechstbetragMiete = getHoechstbetrag(personen, mietstufe);
-  const beruecksichtigteMiete = Math.min(miete, hoechstbetragMiete);
+  const beruecksichtigteMiete = Math.min(miete, hoechstbetragMiete + klimaKomponente);
 
   // === ZUSCHLÄGE ===
-  // § 12 Abs. 6 WoGG: Heizkostenkomponente als monatlicher Zuschlag.
-  // § 12 Abs. 7 WoGG: Klimakomponente als Aufschlag zur Heizkostenkomponente —
-  // greift nur, wenn Heizkosten überhaupt als Wohnkosten anerkannt werden.
-  // In der Lib gekoppelt: Klima nur bei aktivem heizkostenpauschale-Flag.
+  // § 12 Abs. 6 WoGG: Heizkostenkomponente als monatlicher Zuschlag zur berücksichtigten Miete.
   const heizkostenZuschlag = heizkostenpauschale ? getHeizkostenpauschale(personen) : 0;
-  const klimaKomponente = heizkostenpauschale ? getKlimakomponente(personen) : 0;
 
   // === GESAMTMIETE ===
-  const gesamtMiete = rund2(beruecksichtigteMiete + heizkostenZuschlag + klimaKomponente);
+  const gesamtMiete = rund2(beruecksichtigteMiete + heizkostenZuschlag);
 
   // === WOHNGELD-BERECHNUNG nach § 19 WoGG + Anlage 3 ===
   const koeff = getKoeffizienten(personen);

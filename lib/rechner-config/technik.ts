@@ -500,7 +500,7 @@ export const technikRechner: RechnerConfig[] = [
   },
   {
     slug: 'powerbank-rechner',
-    letzteAktualisierung: '2026-06-30',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Powerbank-Rechner',
     beschreibung: 'Powerbank-Ladungen berechnen: Wie oft lädt eine Powerbank Ihr Handy oder Tablet? Mit nutzbarer statt aufgedruckter Kapazität.',
     kategorie: 'Technik',
@@ -512,8 +512,10 @@ export const technikRechner: RechnerConfig[] = [
     beispiel: '20.000 mAh × 0,65 = 13.000 mAh nutzbar ÷ 5.000 mAh Handy = 2,6 volle Ladungen.',
     faq: [
       {
+        // W185: vorher „Bei der Spannungswandlung gehen rund 35 Prozent als Wärme und Wandlerverlust verloren“.
+        // E = Q × U: 20.000 mAh × 3,7 V = 14.800 mAh × 5 V (keine Verluste); Aufwärtswandler ~85–93 % → 0,74 × 0,88 ≈ 0,65.
         frage: 'Warum lädt eine 20.000-mAh-Powerbank mein 5.000-mAh-Handy nicht 4-mal?',
-        antwort: 'Weil die aufgedruckte Kapazität für die Zellspannung von 3,7 Volt gilt, das Handy aber über 5 Volt geladen wird. Bei der Spannungswandlung gehen rund 35 Prozent als Wärme und Wandlerverlust verloren. Aus 20.000 mAh werden so nur rund 13.000 mAh nutzbar — das reicht für etwa 2,6 statt 4 volle Ladungen.',
+        antwort: 'Weil die aufgedruckte Kapazität für die Zellspannung von 3,7 Volt gilt, das Handy aber über 5 Volt geladen wird. Auf 5 Volt umgerechnet entsprechen 20.000 mAh nur noch 14.800 mAh (× 3,7 ÷ 5) — rund ein Viertel weniger, ohne dass dabei Energie verloren geht. Echte Verluste als Wärme entstehen im Spannungswandler: gut 10 Prozent. Zusammen ergibt das 0,74 × rund 0,88 ≈ 0,65. Aus 20.000 mAh werden so nur rund 13.000 mAh nutzbar — das reicht für etwa 2,6 statt 4 volle Ladungen.',
       },
       {
         frage: 'Was ist der Unterschied zwischen aufgedruckter und nutzbarer Kapazität?',
@@ -558,7 +560,9 @@ export const technikRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Die mAh-Falle',
-        text: 'Aufgedruckte 20.000 mAh klingen nach vier vollen Handyladungen — tatsächlich sind es nur etwa 2,6. Der Trick steckt in der Spannung: Die Kapazitätsangabe gilt für die Akkuzellen mit 3,7 Volt, geladen wird das Handy aber über 5 Volt am USB-Anschluss. Beim Hochwandeln der Spannung gehen rund 35 Prozent der Energie verloren. Von 20.000 mAh bleiben so real nur rund 13.000 mAh übrig. Deshalb darf man niemals die aufgedruckte Kapazität direkt durch den Handy-Akku teilen — das überschätzt die Ladungen um etwa die Hälfte. Wer ehrlich plant, rechnet mit dem nutzbaren Wert von 60 bis 70 Prozent der Nennkapazität. Hersteller geben die größere Zahl an, weil sie auf dem Datenblatt eindrucksvoller wirkt. Seriöse Tests bestätigen diesen Bereich quer durch alle Marken: Egal ob günstiges No-Name-Modell oder Markengerät, am Ende kommen nur selten mehr als zwei Drittel der aufgedruckten Energie beim Handy an. Unterschiede gibt es vor allem in der zweiten Nachkommastelle, nicht in der Größenordnung. Manche Anbieter drucken inzwischen zusätzlich die nutzbare Kapazität oder die Wattstunden auf — ein Blick darauf erspart die Umrechnung. Steht nur die Nennkapazität in mAh auf dem Gehäuse, ist die Faustregel „mal 0,65" der sicherste Weg zu einer ehrlichen Erwartung. Wer mehrere Geräte über mehrere Tage versorgen will, sollte diese Reserve von vornherein einplanen, statt sich auf die optimistische Zahl auf der Verpackung zu verlassen.',
+        // W185: vorher „Beim Hochwandeln der Spannung gehen rund 35 Prozent der Energie verloren“ (≈ 26 % sind reine
+        // mAh-Umrechnung auf 5 V ohne Energieverlust, gut 10 % Wandlerverlust).
+        text: 'Aufgedruckte 20.000 mAh klingen nach vier vollen Handyladungen — tatsächlich sind es nur etwa 2,6. Der Trick steckt in der Spannung: Die Kapazitätsangabe gilt für die Akkuzellen mit 3,7 Volt, geladen wird das Handy aber über 5 Volt am USB-Anschluss. Rechnet man die Kapazität auf 5 Volt um, schrumpft die mAh-Zahl um rund ein Viertel, obwohl die Energie gleich bleibt; beim Hochwandeln selbst gehen zusätzlich gut 10 Prozent als Wärme verloren. Von 20.000 mAh bleiben so real nur rund 13.000 mAh übrig. Deshalb darf man niemals die aufgedruckte Kapazität direkt durch den Handy-Akku teilen — das überschätzt die Ladungen um etwa die Hälfte. Wer ehrlich plant, rechnet mit dem nutzbaren Wert von 60 bis 70 Prozent der Nennkapazität. Hersteller geben die größere Zahl an, weil sie auf dem Datenblatt eindrucksvoller wirkt. Seriöse Tests bestätigen diesen Bereich quer durch alle Marken: Egal ob günstiges No-Name-Modell oder Markengerät, am Ende kommen nur selten mehr als zwei Drittel der aufgedruckten Energie beim Handy an. Unterschiede gibt es vor allem in der zweiten Nachkommastelle, nicht in der Größenordnung. Manche Anbieter drucken inzwischen zusätzlich die nutzbare Kapazität oder die Wattstunden auf — ein Blick darauf erspart die Umrechnung. Steht nur die Nennkapazität in mAh auf dem Gehäuse, ist die Faustregel „mal 0,65" der sicherste Weg zu einer ehrlichen Erwartung. Wer mehrere Geräte über mehrere Tage versorgen will, sollte diese Reserve von vornherein einplanen, statt sich auf die optimistische Zahl auf der Verpackung zu verlassen.',
       },
       {
         typ: 'beispielrechnung',

@@ -1,5 +1,6 @@
 import type { RechnerConfig } from './types';
 import { VPI_AKTUELL, VPI_JAHRESDURCHSCHNITTE } from '@/lib/berechnungen/vpi';
+import { berechneFreelancerStundensatz } from '@/lib/berechnungen/freelancer-stundensatz';
 
 // Zugewinnausgleich-Beispiel (W180): Werte aus der VPI-SSOT, damit Texte und Rechner nach jedem
 // monatlichen VPI-Update übereinstimmen (vorher fest „Stand Mai 2026, VPI 125,0"). Heirat 2010,
@@ -24,6 +25,17 @@ const ZG_AV1_ERBE = ZG_AV1 + ZG_ERBE;
 const ZG_AUSGLEICH_ERBE = Math.round(ZG_Z2 / 2);
 /** Jahresdurchschnitt aus der VPI-SSOT als Text, z. B. „88,1“ (W180: vorher fest im Text). */
 const ZG_VJ = (jahr: number) => fmtZ(VPI_JAHRESDURCHSCHNITTE[jahr], 1);
+
+// W185: Beispiel des freelancer-stundensatz-rechner mit den Startwerten von FreelancerStundensatzRechner.tsx
+// über die Lib gerechnet (vorher fest „1.200 Std → 56,43 €/Std“, Tagessatz 339 €). Die Arbeitstage hängen an
+// den bundesweiten Feiertagen Mo–Fr des laufenden Jahres, wie im Rechner. 2026: 5 × 52 − 30 − 10 − 7 = 213 Tage
+// × 6 Std = 1.278 Std; 3.950 ÷ 0,7 × 12 = 67.714,29 € ÷ 1.278 = 52,98 €/Std, Tagessatz 317,91 €.
+const FL = berechneFreelancerStundensatz({
+  nettoWunsch: 3000, arbeitstageProWoche: 5, urlaubstage: 30, krankheitstage: 10, produktiveStunden: 6,
+  krankenversicherung: 450, rentenvorsorge: 300, betriebsausgaben: 200, steuersatz: 30, kleinunternehmer: false,
+});
+const FL_STD = fmtZ(FL.fakturierbareStundenJahr);
+const FL_SATZ = fmtZ(FL.stundensatzNetto, 2);
 
 export const arbeitRechner: RechnerConfig[] = [
   {
@@ -1105,7 +1117,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'freelancer-stundensatz-rechner',
-    letzteAktualisierung: '2026-06-29',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Freelancer-Stundensatz-Rechner',
     beschreibung: 'Freelancer-Stundensatz berechnen: Vom Wunsch-Netto zum nötigen Stundensatz inkl. Steuern, Versicherungen und Betriebskosten.',
     kategorie: 'Arbeit & Recht',
@@ -1114,7 +1126,8 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Stundensatz für Freelancer berechnen: Vom Wunsch-Netto über Versicherungen und Steuern zum nötigen Stundensatz ✓ Tagessatz ✓ KI-Erklärung.',
     keywords: ['freelancer stundensatz rechner', 'stundensatz berechnen freelancer', 'stundensatz selbstständige', 'freelancer stundensatz kalkulation', 'selbstständig stundensatz', 'freiberufler stundensatz', 'stundensatz berechnen', 'tagessatz freelancer', 'freelancer honorar', 'stundensatz kalkulator'],
     icon: '🖥️',
-    beispiel: 'Beispiel: 3.000 € Netto-Wunsch + 450 € KV + 300 € Rente + 200 € Betrieb = 3.950 € ÷ 0,7 = 5.643 €/Monat × 12 = 67.714 € ÷ 1.200 Std = 56,43 €/Std netto.',
+    // W185: vorher „÷ 1.200 Std = 56,43 €/Std“; jetzt Stunden und Satz aus den Startwerten (FL, siehe Dateikopf).
+    beispiel: `Beispiel: 3.000 € Netto-Wunsch + 450 € KV + 300 € Rente + 200 € Betrieb = 3.950 € ÷ 0,7 = 5.643 €/Monat × 12 = 67.714 € ÷ ${FL_STD} Std (${FL.arbeitstageJahr} Arbeitstage × 6 Std) = ${FL_SATZ} €/Std netto.`,
     faq: [
       {
         frage: 'Wie berechne ich meinen Stundensatz als Freelancer?',
@@ -1156,9 +1169,12 @@ export const arbeitRechner: RechnerConfig[] = [
           { label: 'Netto-Bedarf', formel: '3.000 + 950', ergebnis: '3.950 €/Monat' },
           { label: 'Steuer einrechnen', formel: '3.950 ÷ (1 − 0,30)', ergebnis: '5.643 €/Monat' },
           { label: 'Jahresbedarf', formel: '5.643 × 12', ergebnis: '67.714 €/Jahr' },
-          { label: 'Stundensatz netto', formel: '67.714 ÷ 1.200 fakturierbare Std', ergebnis: '56,43 €/Std' },
+          // W185: Stunden-Schritt ergänzt und Satz aus den Startwerten (vorher fest 1.200 Std → 56,43 €/Std).
+          { label: 'Fakturierbare Stunden', formel: `${FL.arbeitstageJahr} Arbeitstage × 6 Std`, ergebnis: `${FL_STD} Std/Jahr` },
+          { label: 'Stundensatz netto', formel: `67.714 ÷ ${FL_STD} fakturierbare Std`, ergebnis: `${FL_SATZ} €/Std` },
         ],
-        fazit: 'Aus 3.000 € Wunsch-Netto wird bei 30 % Steuersatz und rund 1.200 fakturierbaren Jahresstunden ein Netto-Stundensatz von 56,43 €. Bei Regelbesteuerung kommen darauf noch 19 % Umsatzsteuer, die für Geschäftskunden ein durchlaufender Posten ist. Der Tagessatz ergibt sich aus Stundensatz × produktive Stunden pro Tag — bei sechs Stunden also rund 339 €. Diese drei Zahlen — Stundensatz netto, Stundensatz brutto und Tagessatz — sollten in jedem Angebot zueinander passen.',
+        // W185: vorher „rund 1.200 fakturierbaren Jahresstunden … 56,43 € … rund 339 €“.
+        fazit: `Aus 3.000 € Wunsch-Netto wird bei 30 % Steuersatz und ${FL_STD} fakturierbaren Jahresstunden ein Netto-Stundensatz von ${FL_SATZ} €. Die Stunden entsprechen den Startwerten des Rechners: fünf Arbeitstage pro Woche, 30 Urlaubs- und 10 Krankheitstage sowie die bundesweiten Feiertage ergeben ${FL.arbeitstageJahr} Arbeitstage mit je sechs produktiven Stunden. Bei Regelbesteuerung kommen darauf noch 19 % Umsatzsteuer, die für Geschäftskunden ein durchlaufender Posten ist. Der Tagessatz ergibt sich aus Stundensatz × produktive Stunden pro Tag — bei sechs Stunden also rund ${fmtZ(FL.tagessatzNetto)} €. Diese drei Zahlen — Stundensatz netto, Stundensatz brutto und Tagessatz — sollten in jedem Angebot zueinander passen.`,
       },
       {
         typ: 'text',
@@ -1635,7 +1651,8 @@ export const arbeitRechner: RechnerConfig[] = [
         punkte: [
           'Betriebsgröße prüfen: § 8 TzBfG gilt erst ab mehr als 15 Arbeitnehmern.',
           'Beschäftigungsdauer prüfen: Anspruch erst nach mehr als 6 Monaten.',
-          'Antrag spätestens 3 Monate vor dem gewünschten Beginn schriftlich stellen.',
+          // W185: vorher „schriftlich“; § 8 Abs. 2 TzBfG verlangt seit 01.01.2019 nur Textform.
+          'Antrag spätestens 3 Monate vor dem gewünschten Beginn in Textform stellen (eine E-Mail genügt, § 8 Abs. 2 TzBfG).',
           'Gewünschte Stundenzahl und Verteilung auf die Wochentage angeben.',
           'Auswirkung auf Netto, Rente und Sonderzahlungen vorab durchrechnen.',
           'Bei Wunsch auf Rückkehr: Brückenteilzeit (§ 9a TzBfG) prüfen.',
@@ -1646,8 +1663,9 @@ export const arbeitRechner: RechnerConfig[] = [
       {
         typ: 'infobox',
         variante: 'tipp',
-        titel: 'Antrag drei Monate vorher — und schriftlich',
-        text: 'Der Teilzeitantrag nach § 8 TzBfG muss spätestens drei Monate vor dem gewünschten Beginn beim Arbeitgeber eingehen. Stellen Sie ihn immer schriftlich und nennen Sie sowohl den Umfang der Reduzierung als auch die gewünschte Verteilung der Arbeitszeit auf die Wochentage — beides ist Teil des Antrags. Reagiert der Arbeitgeber nicht spätestens einen Monat vor dem gewünschten Beginn schriftlich ablehnend, gilt die Teilzeit nach dem Gesetz automatisch als festgelegt (Zustimmungsfiktion). Eine datierte schriftliche Antragstellung sichert diese Frist ab und dient im Streitfall als Nachweis.',
+        // W185: vorher „und schriftlich“ / „schriftlich ablehnend“; § 8 Abs. 2 und 5 TzBfG: Textform (Antrag und Ablehnung).
+        titel: 'Antrag drei Monate vorher — in Textform',
+        text: 'Der Teilzeitantrag nach § 8 TzBfG muss spätestens drei Monate vor dem gewünschten Beginn beim Arbeitgeber eingehen, und zwar in Textform — eine E-Mail genügt (§ 8 Abs. 2 TzBfG). Nennen Sie den Umfang der Reduzierung und möglichst auch die gewünschte Verteilung der Arbeitszeit auf die Wochentage. Lehnt der Arbeitgeber nicht spätestens einen Monat vor dem gewünschten Beginn in Textform ab, gilt die Teilzeit nach dem Gesetz automatisch als festgelegt (Zustimmungsfiktion, § 8 Abs. 5 TzBfG). Ein datierter Antrag mit Zugangsnachweis sichert diese Frist ab und dient im Streitfall als Nachweis.',
       },
       {
         typ: 'infobox',
@@ -2499,7 +2517,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'unterhaltsrechner',
-    letzteAktualisierung: '2026-06-29',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Unterhaltsrechner',
     beschreibung: 'Kindesunterhalt nach Düsseldorfer Tabelle 2026 berechnen — mit Kindergeld-Verrechnung, Höherstufung und Elternunterhalt-Abschnitt.',
     kategorie: 'Arbeit & Recht',
@@ -2564,7 +2582,10 @@ export const arbeitRechner: RechnerConfig[] = [
           ['3. Stufe', '12–17 Jahre', '653 €'],
           ['4. Stufe', 'ab 18 Jahre', '698 €'],
         ],
-        fussnote: 'Diese Beträge sind der Mindestunterhalt der Einkommensgruppe 1 (bis 2.100 € Netto, 100 %). Sie beruhen auf der 7. Mindestunterhaltsverordnung vom 15.11.2024 (BGBl. 2024 I Nr. 359). Mit jeder höheren Einkommensgruppe steigt der Betrag prozentual. Beim Übergang in die nächste Altersstufe gilt der höhere Betrag nach § 1612a Abs. 3 BGB bereits für den ganzen Monat des Geburtstags, nicht erst ab dem Folgemonat. Der Betrag der vierten Stufe (ab 18) gilt für volljährige Kinder unabhängig vom genauen Alter.',
+        // W185: vorher „Sie beruhen auf der 7. Mindestunterhaltsverordnung vom 15.11.2024“ — die gibt es nicht
+        // (MinUhV vom 03.12.2015, zuletzt geändert durch die Siebte Änderungsverordnung), und sie regelt nur die Stufen 1–3;
+        // 698 € (ab 18) setzt die DT 2026 selbst fest (Anm. II: „für die 1., 2. und 3. Altersstufe“).
+        fussnote: 'Diese Beträge sind die Richtsätze der Einkommensgruppe 1 (bis 2.100 € Netto, 100 %). Für die ersten drei Stufen entsprechen sie dem Mindestunterhalt nach § 1612a Abs. 1 BGB, den die Mindestunterhaltsverordnung in der Fassung der Siebten Änderungsverordnung (7. MUVÄndV) vom 15.11.2024 (BGBl. 2024 I Nr. 359) festlegt; den Betrag der vierten Stufe setzt die Düsseldorfer Tabelle selbst fest. Mit jeder höheren Einkommensgruppe steigt der Betrag prozentual. Beim Übergang in die nächste Altersstufe gilt der höhere Betrag nach § 1612a Abs. 3 BGB bereits für den ganzen Monat des Geburtstags, nicht erst ab dem Folgemonat. Der Betrag der vierten Stufe (ab 18) gilt für volljährige Kinder unabhängig vom genauen Alter.',
       },
       {
         typ: 'text',
@@ -2613,7 +2634,8 @@ export const arbeitRechner: RechnerConfig[] = [
           ['Minderjährige (erwerbstätig)', '1.450 €', '520 €'],
           ['Minderjährige (nicht erwerbstätig)', '1.200 €', '520 €'],
           ['Nicht-privilegiert Volljährige', '1.750 €', '650 €'],
-          ['Elternunterhalt (pflichtiges Kind)', '2.650 €', '—'],
+          // W185: vorher Wohnkosten „—“; DT 2026 Anm. D.I: 2.650 € einschließlich 1.000 € Warmmiete.
+          ['Elternunterhalt (pflichtiges Kind)', '2.650 €', '1.000 €'],
         ],
         fussnote: 'Der Selbstbehalt sichert das Existenzminimum des Pflichtigen. Gegenüber minderjährigen und privilegiert volljährigen Kindern ist er am niedrigsten, weil deren Unterhalt im Rang vorgeht; gegenüber nicht-privilegiert volljährigen Kindern liegt er höher. Für den Elternunterhalt — also Unterhalt erwachsener Kinder für ihre Eltern — gilt seit dem BGH-Beschluss XII ZB 6/24 ein Mindestselbstbehalt von 2.650 €. Wer höhere tatsächliche Wohnkosten nachweist, kann eine Anhebung des Selbstbehalts geltend machen, soweit günstigerer Wohnraum nicht zumutbar ist.',
       },
@@ -2670,7 +2692,9 @@ export const arbeitRechner: RechnerConfig[] = [
     beispiel: 'Kind geboren 15.01.2026 → Mutterschutz bis 12.03.2026 → Mutter nimmt 12 Monate Elternzeit ab 13.03.2026 → Anmeldung bis spätestens 22.01.2026 → Ende 12.03.2027. Vater 2 Monate Elternzeit ab Geburt: möglich, Basiselterngeld gibt es aber nur für einen Monat parallel zur Mutter.',
     faq: [
       { frage: 'Wie lange kann ich Elternzeit nehmen?', antwort: 'Jeder Elternteil hat Anspruch auf bis zu 36 Monate Elternzeit pro Kind, nutzbar bis zum 8. Geburtstag des Kindes. Bis zu 24 Monate davon können zwischen dem 3. und 8. Geburtstag genommen werden — ohne Zustimmung des Arbeitgebers, sofern rechtzeitig angemeldet.' },
-      { frage: 'Wann muss ich die Elternzeit anmelden?', antwort: 'Die Anmeldung muss schriftlich erfolgen: 7 Wochen vor Beginn, wenn die Elternzeit in den ersten 3 Lebensjahren liegt; 13 Wochen vor Beginn, wenn sie zwischen dem 3. und 8. Geburtstag liegt. Die Anmeldung ist für die ersten 2 Jahre verbindlich.' },
+      // W185: vorher „Die Anmeldung muss schriftlich erfolgen“ ohne Ausnahme; § 16 Abs. 1 BEEG verlangt seit
+      // 01.05.2025 (BEG IV) Textform – für Geburten ab 01.05.2025, sonst Schriftform (§ 28 Abs. 1b) – und lässt bei dringenden Gründen eine kürzere Frist zu.
+      { frage: 'Wann muss ich die Elternzeit anmelden?', antwort: 'Für Kinder, die ab dem 01.05.2025 geboren oder zur Adoption aufgenommen wurden, genügt die Textform, also auch eine E-Mail; für früher geborene Kinder bleibt es bei der Schriftform mit eigenhändiger Unterschrift (§ 28 Abs. 1b BEEG). Die Fristen: 7 Wochen vor Beginn, wenn die Elternzeit in den ersten 3 Lebensjahren liegt; 13 Wochen vor Beginn, wenn sie zwischen dem 3. und 8. Geburtstag liegt. Bei dringenden Gründen ist ausnahmsweise eine angemessene kürzere Frist möglich (§ 16 Abs. 1 BEEG). Die Anmeldung ist für die ersten 2 Jahre verbindlich.' },
       { frage: 'Kann ich während der Elternzeit arbeiten?', antwort: 'Ja, Sie dürfen bis zu 32 Stunden pro Woche arbeiten — beim eigenen oder einem anderen Arbeitgeber, ohne aus dem Elternzeit-Status zu fallen (32 h seit BEEG-Reform 01.09.2021, vorher 30 h). Einen klagbaren Anspruch auf Elternzeit-Teilzeit nach § 15 Abs. 6 BEEG haben Sie für 15–32 Stunden pro Woche, wenn der Betrieb mehr als 15 Arbeitnehmer hat und Sie dort seit mindestens 6 Monaten beschäftigt sind — der Arbeitgeber kann dann nur aus dringenden betrieblichen Gründen ablehnen.' },
       { frage: 'Wie wird der Mutterschutz auf die Elternzeit angerechnet?', antwort: 'Die 8 Wochen (bzw. 12 Wochen bei Früh-/Mehrlingsgeburt) Mutterschutz nach der Geburt werden vollständig auf die Elternzeit der Mutter angerechnet. Die Elternzeit der Mutter beginnt frühestens nach Ende des Mutterschutzes. Für den Vater gibt es diese Anrechnung nicht — seine Elternzeit kann direkt ab Geburt beginnen.' },
       { frage: 'Habe ich während der Elternzeit Kündigungsschutz?', antwort: 'Ja, nach § 18 BEEG besteht ein besonderer Kündigungsschutz ab Anmeldung der Elternzeit (frühestens 8 Wochen vor Beginn, bei Elternzeit zwischen dem 3. und 8. Geburtstag frühestens 14 Wochen) bis zum Ende der Elternzeit. Eine Kündigung ist nur in absoluten Ausnahmefällen mit Zustimmung der zuständigen Landesbehörde zulässig — auch in der Probezeit und unabhängig von der Betriebsgröße.' },
@@ -2717,8 +2741,10 @@ export const arbeitRechner: RechnerConfig[] = [
       {
         typ: 'checkliste',
         titel: 'Elternzeit richtig anmelden',
+        // W185: vorher „Schriftlich … eine E-Mail genügt der Form nicht, es braucht eine eigenhändige Unterschrift“
+        // (bis 30.04.2025 richtig); seit 01.05.2025 Textform nach § 16 Abs. 1 BEEG.
         punkte: [
-          'Schriftlich beim Arbeitgeber anmelden — eine E-Mail genügt der Form nicht, es braucht eine eigenhändige Unterschrift.',
+          'Form beachten: Für Kinder, die ab dem 01.05.2025 geboren wurden, genügt die Textform (z. B. eine E-Mail, § 16 Abs. 1 BEEG); für früher geborene Kinder bleibt die Schriftform mit eigenhändiger Unterschrift (§ 28 Abs. 1b BEEG).',
           'Die Frist von sieben Wochen vor Beginn in den ersten drei Lebensjahren einhalten.',
           'Die Frist von 13 Wochen vor Beginn für Elternzeit zwischen dem 3. und 8. Geburtstag beachten.',
           'Verbindlich festlegen, für welche Zeiträume der ersten zwei Jahre Elternzeit genommen wird.',
@@ -2752,7 +2778,8 @@ export const arbeitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Häufige Stolperfallen bei der Planung',
-        html: `<p>Ein paar Fehler tauchen immer wieder auf. Der häufigste ist die <strong>versäumte Anmeldefrist</strong>: Wer die sieben Wochen verpasst, verschiebt den Beginn der Elternzeit entsprechend nach hinten, weil die Frist nicht verkürzbar ist. Ebenso heikel ist eine <strong>zu starre Festlegung</strong> der ersten zwei Jahre — sie bindet, und spätere Wünsche brauchen die Zustimmung des Arbeitgebers.</p><p>Unterschätzt wird oft, dass <strong>Elternzeit und Elterngeld unterschiedliche Fristen und Logiken</strong> haben: Die Elternzeit meldet man beim Arbeitgeber an, das Elterngeld beantragt man bei der Elterngeldstelle, und beim Geld zählen Lebensmonate des Kindes, nicht Kalendermonate. Auch der <strong>zweite Elternteil</strong> sollte früh einsteigen, weil sich Partnermonate sonst kaum noch unterbringen lassen. Wer hier sauber plant, verschenkt weder Freistellung noch Geld.</p>`,
+        // W185: vorher „weil die Frist nicht verkürzbar ist“ — § 16 Abs. 1 Satz 3 BEEG lässt bei dringenden Gründen eine kürzere Frist zu.
+        html: `<p>Ein paar Fehler tauchen immer wieder auf. Der häufigste ist die <strong>versäumte Anmeldefrist</strong>: Wer die sieben Wochen verpasst, verschiebt den Beginn der Elternzeit in der Regel entsprechend nach hinten; eine kürzere Frist ist nur ausnahmsweise bei dringenden Gründen möglich (§ 16 Abs. 1 BEEG). Ebenso heikel ist eine <strong>zu starre Festlegung</strong> der ersten zwei Jahre — sie bindet, und spätere Wünsche brauchen die Zustimmung des Arbeitgebers.</p><p>Unterschätzt wird oft, dass <strong>Elternzeit und Elterngeld unterschiedliche Fristen und Logiken</strong> haben: Die Elternzeit meldet man beim Arbeitgeber an, das Elterngeld beantragt man bei der Elterngeldstelle, und beim Geld zählen Lebensmonate des Kindes, nicht Kalendermonate. Auch der <strong>zweite Elternteil</strong> sollte früh einsteigen, weil sich Partnermonate sonst kaum noch unterbringen lassen. Wer hier sauber plant, verschenkt weder Freistellung noch Geld.</p>`,
       },
       {
         typ: 'infobox',
@@ -2763,11 +2790,12 @@ export const arbeitRechner: RechnerConfig[] = [
       {
         typ: 'checkliste',
         titel: 'Elternzeit planen — Schritt für Schritt',
+        // W185: vorher „schriftlich … anmelden“; Textform für Geburten ab 01.05.2025 (§ 16 Abs. 1, § 28 Abs. 1b BEEG).
         punkte: [
           'Den voraussichtlichen Geburtstermin und das Ende des Mutterschutzes ermitteln.',
           'Die Aufteilung mit dem Partner abstimmen — gleichzeitig, nacheinander oder abwechselnd.',
           'Mindestens zwei Partnermonate einplanen, um die vollen 14 Monate Elterngeld zu sichern — Basiselterngeld höchstens einen Monat gleichzeitig mit dem anderen Elternteil.',
-          'Die Elternzeit schriftlich und fristgerecht beim Arbeitgeber anmelden.',
+          'Die Elternzeit fristgerecht beim Arbeitgeber anmelden — in Textform (z. B. per E-Mail) bei Geburt ab 01.05.2025, sonst schriftlich mit Unterschrift.',
           'Den verbindlichen Festlegungszeitraum für die ersten zwei Jahre bestimmen.',
           'Das Elterngeld separat beantragen (Rückwirkung nur drei Monate).',
           'Mit dem Arbeitgeber klären, ob der Jahresurlaub gekürzt wird (§ 17 BEEG).',

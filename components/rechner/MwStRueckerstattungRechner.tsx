@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneMwstRueckerstattung } from '@/lib/berechnungen/mwst-rueckerstattung';
+import { berechneMwstRueckerstattung, DIENSTLEISTER_ABZUG_PROZENT } from '@/lib/berechnungen/mwst-rueckerstattung';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
@@ -58,11 +58,12 @@ export default function MwstRueckerstattungRechner() {
             onChange={e => setGebuehrenTyp(e.target.value as GebuehrenTyp)}
             className="input-field"
           >
+            {/* W185: vorher „Global Blue (~3,50 € + 1,5 %)“ / „Planet (~4,00 € + 2 %)“ — belegte Abzüge liegen bei rund 25 % der MwSt. */}
             <option value="keine">Keine Gebühr (direkt beim Händler)</option>
-            <option value="global-blue">Global Blue (~3,50 € + 1,5 %)</option>
-            <option value="planet">Planet (~4,00 € + 2 %)</option>
+            <option value="global-blue">Global Blue (Richtwert ~{DIENSTLEISTER_ABZUG_PROZENT} % der MwSt)</option>
+            <option value="planet">Planet (Richtwert ~{DIENSTLEISTER_ABZUG_PROZENT} % der MwSt)</option>
           </select>
-          <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Dienstleister-Gebühren werden von der MwSt-Erstattung abgezogen</p>
+          <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Dienstleister-Gebühren werden von der MwSt-Erstattung abgezogen. Die genaue Höhe steht in der Erstattungstabelle auf dem Tax-Free-Formular.</p>
         </div>
       </div>
 
@@ -116,14 +117,17 @@ export default function MwstRueckerstattungRechner() {
                 <span className="text-gray-600 dark:text-gray-400">MwSt-Anteil ({mwstSatz} %)</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.mwstAnteil)} €</span>
               </div>
+              {/* W185: Fixgebühr-Zeile nur noch, wenn eine Fixgebühr anfällt (Modell jetzt rein prozentual, Richtwert). */}
               {ergebnis.gebuehrenGesamt > 0 && (
                 <>
+                  {ergebnis.fixgebuehr > 0 && (
+                    <div className="flex justify-between px-4 py-3 text-sm">
+                      <span className="text-gray-600 dark:text-gray-400">Fixgebühr ({gebuehrenTyp === 'global-blue' ? 'Global Blue' : 'Planet'})</span>
+                      <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.fixgebuehr)} €</span>
+                    </div>
+                  )}
                   <div className="flex justify-between px-4 py-3 text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Fixgebühr ({gebuehrenTyp === 'global-blue' ? 'Global Blue' : 'Planet'})</span>
-                    <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.fixgebuehr)} €</span>
-                  </div>
-                  <div className="flex justify-between px-4 py-3 text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Prozentuale Gebühr</span>
+                    <span className="text-gray-600 dark:text-gray-400">Servicegebühr {gebuehrenTyp === 'global-blue' ? 'Global Blue' : 'Planet'} (Richtwert ~{DIENSTLEISTER_ABZUG_PROZENT} % der MwSt)</span>
                     <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.prozentgebuehr)} €</span>
                   </div>
                 </>
@@ -146,10 +150,10 @@ export default function MwstRueckerstattungRechner() {
             </p>
           </div>
 
-          {/* Hinweis */}
+          {/* Hinweis — W185: vorher „Die tatsächlichen Gebühren können je nach Dienstleister variieren.“ */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
             <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
-              <strong>Hinweis:</strong> Nur für Nicht-EU-Bürger bei Ausfuhr im persönlichen Reisegepäck innerhalb von 3 Monaten nach Kauf. Der Zoll am Flughafen muss den Ausfuhrschein abstempeln. Mindestbetrag 50,01 € pro Händler pro Tag. Lebensmittel und Dienstleistungen sind ausgeschlossen. Die tatsächlichen Gebühren können je nach Dienstleister variieren.
+              <strong>Hinweis:</strong> Nur für Nicht-EU-Bürger bei Ausfuhr im persönlichen Reisegepäck innerhalb von 3 Monaten nach Kauf. Der Zoll am Flughafen muss den Ausfuhrschein abstempeln. Mindestbetrag 50,01 € pro Händler pro Tag. Lebensmittel und Dienstleistungen sind ausgeschlossen. Die Gebühr der Dienstleister ist ein Richtwert (Verbraucherberichte: rund ein Viertel der MwSt); sie ist gestaffelt und bei kleinen Beträgen anteilig oft höher.
             </p>
           </div>
 

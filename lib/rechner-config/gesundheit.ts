@@ -1723,7 +1723,9 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'Alkohol-Abbau berechnen: Maximaler Promillewert, Abbauzeit, 0,5 ‰-Grenze ✓ Widmark-Formel ✓ Dynamische Getränke ✓ Mit KI-Erklärung.',
     keywords: ['alkohol abbau rechner', 'promille abbau', 'wann bin ich wieder nüchtern', 'widmark formel', 'alkohol fahrtauglich', 'promille berechnen', 'blutalkohol rechner'],
     icon: '🍺',
-    beispiel: 'Beispiel: Mann, 80 kg, 3 Bier (0,5 l, 5 %) = 60 g Alkohol → 60 / (80 × 0,68) = 60 / 54,4 ≈ 1,10 ‰. Abbau auf 0,0 ‰ nach ca. 7,3 Stunden.',
+    // W185: vorher „Abbau auf 0,0 ‰ nach ca. 7,3 Stunden“ ohne Bezugspunkt. AlkoholAbbauRechner.tsx zählt ab dem
+    // Spitzenwert (peak = Trinkende + 60 Min.): 1,103 ÷ 0,15 = 7,35 h, ab Trinkende 8,35 h (gut 8 Stunden).
+    beispiel: 'Beispiel: Mann, 80 kg, 3 Bier (0,5 l, 5 %) = 60 g Alkohol → 60 / (80 × 0,68) = 60 / 54,4 ≈ 1,10 ‰. Abbau auf 0,0 ‰ ca. 7,3 Stunden nach dem Spitzenwert (60 Min. nach Trinkende), nach dem letzten Getränk also gut 8 Stunden.',
     // W19-Goldstandard (SENSIBEL): alkohol-abbau-rechner auf volle Tiefe (16 Bausteine,
     // ~1.560 W), Leitformat „tabelle" 4× dominant. STRENGE Schutzauflage: KEINE Fahrfreigabe-
     // Formulierung, KEINE „schneller nüchtern"-Methode (Mythen nur entkräftet), Restalkohol
@@ -1765,7 +1767,8 @@ export const gesundheitRechner: RechnerConfig[] = [
           { label: 'Körperwasser (Mann, 80 kg)', formel: '80 × 0,68', ergebnis: '54,4' },
           { label: 'Maximaler Promillewert (Peak)', formel: '40 g ÷ 54,4', ergebnis: '≈ 0,74 ‰' },
         ],
-        fazit: 'Zwei Bier bringen einen 80 kg schweren Mann auf rund 0,74 ‰ im Peak — bereits über der 0,5-‰-Grenze. Der Wert gilt frisch nach dem Trinken; mit jeder Stunde sinkt er um etwa 0,15 ‰. Die Schätzung ist individuell sehr variabel.',
+        // W185: vorher „Der Wert gilt frisch nach dem Trinken“; der Rechner setzt den Spitzenwert 60 Min. nach Trinkende an.
+        fazit: 'Zwei Bier bringen einen 80 kg schweren Mann auf rund 0,74 ‰ im Peak — bereits über der 0,5-‰-Grenze. Diesen Spitzenwert setzt der Rechner 60 Minuten nach dem letzten Getränk an (Resorption); ab dann sinkt er mit jeder Stunde um etwa 0,15 ‰ — auf 0 ‰ also knapp 5 Stunden nach dem Spitzenwert, rund 6 Stunden nach dem letzten Getränk. Die Schätzung ist individuell sehr variabel.',
       },
       {
         typ: 'tabelle',
@@ -1784,7 +1787,8 @@ export const gesundheitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Restalkohol am Morgen — die unterschätzte Gefahr',
-        html: `<p>Wer abends viel trinkt, hat am nächsten Morgen oft noch <strong>Restalkohol</strong> im Blut — auch wenn er sich längst „nüchtern" fühlt. Der Grund ist der langsame, konstante Abbau: Pro Stunde verschwinden nur etwa 0,1 bis 0,15 ‰, und der Körper beginnt erst, wenn das Trinken beendet ist.</p><p>Ein Rechenbeispiel: Wer um Mitternacht bei 1,2 ‰ liegt, hat selbst nach sieben Stunden Schlaf am Morgen noch <strong>deutlich über 0 ‰</strong> — je nach Person genug, um die 0,5-‰-Grenze zu überschreiten. Das morgendliche Gefühl täuscht: Die Müdigkeit verschwindet, der Alkohol nicht.</p><p>Besonders tückisch ist, dass der reale Abbau oft <strong>langsamer</strong> verläuft als die optimistische Schätzung. Deshalb ist gerade die Fahrt zur Arbeit am Morgen nach einem feuchtfröhlichen Abend ein unterschätztes Risiko. Im Zweifel gilt auch hier: nicht ans Steuer, sondern Bahn, Bus oder Fahrgemeinschaft nutzen.</p>`,
+        // W185: vorher „der Körper beginnt erst, wenn das Trinken beendet ist“ — der Abbau läuft schon während des Trinkens; der Spitzenwert liegt rund 1 h nach dem letzten Glas.
+        html: `<p>Wer abends viel trinkt, hat am nächsten Morgen oft noch <strong>Restalkohol</strong> im Blut — auch wenn er sich längst „nüchtern" fühlt. Der Grund ist der langsame, konstante Abbau: Pro Stunde verschwinden nur etwa 0,1 bis 0,15 ‰. Abgebaut wird zwar schon während des Trinkens, doch solange noch Alkohol aus Magen und Darm ins Blut übergeht, steigt der Wert weiter — bis etwa eine Stunde nach dem letzten Glas.</p><p>Ein Rechenbeispiel: Wer um Mitternacht bei 1,2 ‰ liegt, hat selbst nach sieben Stunden Schlaf am Morgen noch <strong>deutlich über 0 ‰</strong> — je nach Person genug, um die 0,5-‰-Grenze zu überschreiten. Das morgendliche Gefühl täuscht: Die Müdigkeit verschwindet, der Alkohol nicht.</p><p>Besonders tückisch ist, dass der reale Abbau oft <strong>langsamer</strong> verläuft als die optimistische Schätzung. Deshalb ist gerade die Fahrt zur Arbeit am Morgen nach einem feuchtfröhlichen Abend ein unterschätztes Risiko. Im Zweifel gilt auch hier: nicht ans Steuer, sondern Bahn, Bus oder Fahrgemeinschaft nutzen.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -1794,7 +1798,8 @@ export const gesundheitRechner: RechnerConfig[] = [
           { label: 'Optimistisch (0,15 ‰/h)', formel: '0,8 ÷ 0,15', ergebnis: '≈ 5,3 Std.' },
           { label: 'Vorsichtig (0,1 ‰/h)', formel: '0,8 ÷ 0,1', ergebnis: '≈ 8,0 Std.' },
         ],
-        fazit: 'Ein Startwert von 0,8 ‰ braucht je nach Person grob 5 bis 8 Stunden, bis er auf etwa 0 ‰ gesunken ist — eine grobe Orientierung, KEINE Fahrfreigabe. Real dauert es oft länger; eine berechnete Uhrzeit bedeutet nie „ab dann darf ich fahren".',
+        // W185: Bezugspunkt ergänzt (ab dem Spitzenwert; seit dem letzten Getränk rund eine Stunde mehr).
+        fazit: 'Ein Startwert von 0,8 ‰ braucht je nach Person grob 5 bis 8 Stunden, bis er auf etwa 0 ‰ gesunken ist — gerechnet ab dem Spitzenwert; seit dem letzten Getränk kommt rund eine Stunde Aufnahme hinzu. Eine grobe Orientierung, KEINE Fahrfreigabe. Real dauert es oft länger; eine berechnete Uhrzeit bedeutet nie „ab dann darf ich fahren".',
       },
       {
         typ: 'tabelle',
@@ -1898,8 +1903,9 @@ export const gesundheitRechner: RechnerConfig[] = [
     ],
     faq: [
       {
+        // W185: Bezugspunkt ergänzt (vorher nur „Bei einem Peak von 1,0 ‰ … 6 bis 7 Stunden“, ohne Trinkende-Bezug).
         frage: 'Wie schnell baut der Körper Alkohol ab?',
-        antwort: 'Die durchschnittliche Abbaurate liegt bei 0,1 bis 0,2 ‰ pro Stunde, im Mittel 0,15 ‰/h. Der Abbau erfolgt in der Leber und ist linear — weder Kaffee, kalte Dusche noch Bewegung beschleunigen den Prozess. Bei einem Peak von 1,0 ‰ dauert es also etwa 6 bis 7 Stunden bis zur Nüchternheit.',
+        antwort: 'Die durchschnittliche Abbaurate liegt bei 0,1 bis 0,2 ‰ pro Stunde, im Mittel 0,15 ‰/h. Der Abbau erfolgt in der Leber und ist linear — weder Kaffee, kalte Dusche noch Bewegung beschleunigen den Prozess. Bei einem Peak von 1,0 ‰ dauert es also ab dem Spitzenwert etwa 6 bis 7 Stunden bis zur Nüchternheit. Weil der Spitzenwert erst rund 60 Minuten nach dem letzten Getränk erreicht ist, sind es ab Trinkende etwa 7 bis 8 Stunden.',
       },
       {
         frage: 'Was ist die Widmark-Formel?',

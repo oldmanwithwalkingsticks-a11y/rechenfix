@@ -6,9 +6,11 @@
  *     https://www.gesetze-im-internet.de/betrkv/__2.html
  *   - BetrKV § 1 Abs. 2 (Nicht-umlegbare Kosten: Verwaltung, Reparaturen,
  *     Instandhaltung)
- *   - Mieterbund-Betriebskostenspiegel 2023 (letzter veröffentlichter Stand,
- *     gepflegt in Welle-3-M6 + 148c): 2,51 €/qm Durchschnitt, 3,15 €/qm
- *     voll-Last → reine Konfig-Erklärtext-Cross-Check, NICHT Lib-modelliert
+ *   - Mieterbund-Betriebskostenspiegel, Abrechnungsjahr 2024 (veröffentlicht
+ *     18.12.2025, https://www.mieterbund.de/betriebskostenspiegel/):
+ *     2,67 €/qm Durchschnitt, 3,68 €/qm bei allen Kostenarten
+ *     → reine Konfig-Erklärtext-Cross-Check, NICHT Lib-modelliert
+ *     (W185: vorher Spiegel 2023 mit 2,51 / 3,15 €/qm)
  *
  * L-35-Disziplin (verschärft bei nebenkosten — Hot-Spot):
  *   Die Lib ist ein **reiner Summen-Rechner** mit user-eingegebenen Posten-
@@ -167,29 +169,30 @@ cases.push(
 
 // === Cluster E: Round-Trip Mieterbund-Werte (Konfig-Cross-Check, KEIN Lib-Test) ===
 //
-// Mieterbund-2023-Durchschnitt: 2,51 €/qm. Bei 65 qm → 163,15 € erwartet.
-// Wenn ein User die einzelnen Posten so eingibt, dass nebenkostenMonat = 163 €
-// resultiert, sollte nebenkostenProQm ≈ 2,51 sein:
-//   163 / 65 = 2,5076923... → round 2,51 ✓
+// W185: auf den Spiegel für das Abrechnungsjahr 2024 umgestellt (vorher 2023: 163/65 ≈ 2,51 und 252/80 = 3,15).
+// Mieterbund-Durchschnitt (Abrechnungsjahr 2024): 2,67 €/qm. Bei 60 qm → 160,20 € erwartet.
+// Wenn ein User die einzelnen Posten so eingibt, dass nebenkostenMonat = 160 €
+// resultiert, sollte nebenkostenProQm ≈ 2,67 sein:
+//   60 + 19 + 25 + 18 + 15 + 8 + 15 = 160; 160 / 60 = 2,6666... → round 2,67 ✓
 
 const e1 = calc({
-  kaltmiete: 600, wohnflaeche: 65,
-  heizkosten: 60, warmwasser: 20, wasser: 25, muell: 20,
+  kaltmiete: 600, wohnflaeche: 60,
+  heizkosten: 60, warmwasser: 19, wasser: 25, muell: 18,
   grundsteuer: 15, versicherung: 8, hauswart: 15, sonstige: 0,
 });
 cases.push(
-  { name: 'E-01 Round-Trip Mieterbund Ø: 163/65 ≈ 2,51 €/qm',   actual: e1!.nebenkostenProQm, expected: 2.51, tolerance: 0.01 },
+  { name: 'E-01 Round-Trip Mieterbund Ø: 160/60 ≈ 2,67 €/qm',   actual: e1!.nebenkostenProQm, expected: 2.67, tolerance: 0.01 },
 );
 
-// Mieterbund-2023-Voll-Last: 3,15 €/qm. Bei 80 qm → 252 € erwartet.
-//   252 / 80 = 3,15 exakt
+// Mieterbund, alle Kostenarten (Abrechnungsjahr 2024): 3,68 €/qm. Bei 100 qm → 368 € erwartet.
+//   160 + 58 + 45 + 30 + 25 + 15 + 25 + 10 = 368; 368 / 100 = 3,68 exakt
 const e2 = calc({
-  kaltmiete: 800, wohnflaeche: 80,
-  heizkosten: 90, warmwasser: 30, wasser: 35, muell: 25,
-  grundsteuer: 20, versicherung: 12, hauswart: 25, sonstige: 15,
+  kaltmiete: 1000, wohnflaeche: 100,
+  heizkosten: 160, warmwasser: 58, wasser: 45, muell: 30,
+  grundsteuer: 25, versicherung: 15, hauswart: 25, sonstige: 10,
 });
 cases.push(
-  { name: 'E-02 Round-Trip Mieterbund Voll: 252/80 = 3,15 €/qm', actual: e2!.nebenkostenProQm, expected: 3.15, tolerance: 0.005 },
+  { name: 'E-02 Round-Trip Mieterbund alle Kostenarten: 368/100 = 3,68 €/qm', actual: e2!.nebenkostenProQm, expected: 3.68, tolerance: 0.005 },
 );
 
 // === Cluster F: Edge - Null-Returns ===

@@ -13,6 +13,11 @@ const STAND_DE = datumDe(SPRITPREISE_REFERENZ.stand);
 // Haushaltsstrompreis in €/kWh aus der zentralen SSOT (dort in ct gefuehrt).
 const STROM = STROMPREIS_2026.durchschnitt_bdew / 100;
 
+// W185: Beispiel des spritkosten-rechner (250 km, 7,5 l/100 km) rechnet mit dem
+// SSOT-Preis, mit dem auch der Rechner startet (vorher fest 1,65 €/l → 30,94 €).
+// Rundung wie berechneSpritkosten (Math.round auf Cent).
+const SK_KOSTEN = Math.round((250 / 100) * 7.5 * SPRITPREISE_REFERENZ.superE10 * 100) / 100;
+
 // Ganze Euro mit deutschem Tausenderpunkt. Bewusst ohne toLocaleString:
 // bei knapper ICU-Ausstattung faellt das auf englische Trennzeichen zurueck.
 const eurT = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -37,7 +42,7 @@ const akAnteil = (n: number) => Math.round((n / AK_GESAMT) * 100);
 export const autoRechner: RechnerConfig[] = [
   {
     slug: 'spritkosten-rechner',
-    letzteAktualisierung: '2026-06-10',
+    letzteAktualisierung: '2026-10-20',
     zeigtAuthorBio: true,
     titel: 'Spritkostenrechner',
     beschreibung: 'Spritkosten und Fahrtkosten berechnen: Benzinverbrauch, Kosten pro Kilometer und Gesamtkosten für jede Strecke.',
@@ -47,7 +52,8 @@ export const autoRechner: RechnerConfig[] = [
     metaDescription: 'Spritkosten berechnen: Benzinkosten und Fahrtkosten sofort ermitteln — mit Hin- und Rückfahrt, Kosten pro km und KI-Erklärung. Kostenlos.',
     keywords: ['spritkostenrechner', 'spritkosten berechnen', 'fahrtkosten rechner', 'benzinkosten', 'kosten pro km', 'tankkosten berechnen'],
     icon: '⛽',
-    beispiel: 'Beispiel: 250 km bei 7,5 L/100km und 1,65 €/L = (250 ÷ 100) × 7,5 × 1,65 = 30,94 €',
+    // W185: vorher fest 1,65 €/L = 30,94 €; jetzt SSOT-Preis (SPRITPREISE_REFERENZ.superE10).
+    beispiel: `Beispiel: 250 km bei 7,5 L/100km und ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/L = (250 ÷ 100) × 7,5 × ${eur(SPRITPREISE_REFERENZ.superE10, 3)} = ${eur(SK_KOSTEN)} €`,
     // W19-Pilot → Goldstandard (~1.500 W): Modulare Content-Bausteine. Benzin/Diesel-Werte
     // aus SPRITPREISE_REFERENZ (ADAC-Bundesschnitt, Stand laut SPRITPREISE_REFERENZ.stand) zur Build-Zeit eingesetzt.
     // Strom-Vergleich: Haushaltsstrompreis aus STROMPREIS_2026.durchschnitt_bdew

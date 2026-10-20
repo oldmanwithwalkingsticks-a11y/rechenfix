@@ -312,8 +312,10 @@ export default function WohngeldErklaerseite() {
                   rechnerischen Wohngeldbetrag.
                 </li>
                 <li>
+                  {/* W185: vorher „auf den nächsten vollen Eurobetrag aufgerundet“; Anlage 3 Nr. 3 WoGG rundet kaufmännisch. */}
                   Rechenschritte und Rundungen nach § 19 Abs. 2 WoGG in Verbindung mit Anlage 3.
-                  Der errechnete Betrag wird auf den nächsten vollen Eurobetrag aufgerundet.
+                  Der errechnete Betrag wird kaufmännisch auf volle Euro gerundet (unter 0,50 €
+                  ab, ab 0,50 € auf).
                 </li>
               </ol>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-3">
@@ -426,12 +428,20 @@ export default function WohngeldErklaerseite() {
                 Beispielrechnung
               </h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                {/* W185: vorher „rund 215 € (Wert nach offiziellem BMWSB-Wohngeldrechner)“ — der Wert entsprach
+                    exakt der stillgelegten Lib-Formel (Y = 1.400 × 0,7 = 980 €, M = 500 € ohne Heizkostenkomponente).
+                    Nach §§ 14, 16 WoGG (LSt bei 1.400 € StKl I laut berechneBruttoNetto = 0 → 20 %):
+                    Y = (16.800 − 1.230) × 0,8 ÷ 12 = 1.038 €; M = 500 + 110,40 = 610,40 €
+                    (Klimakomponente erhöht nur den Höchstbetrag 511 €); 1 Pers.: a 0,04, b 4,797E-4, c 4,080E-5
+                    → z4 = 254,13 → 254 €. */}
                 Ein Single-Haushalt in Mietstufe IV mit 1.400 € Bruttoeinkommen aus
-                nichtselbständiger Arbeit und einer Kaltmiete von 500 € hat 2026 einen
-                Wohngeldanspruch von rund <strong>215 €</strong> monatlich (Wert nach offiziellem
-                BMWSB-Wohngeldrechner, Stand 06.07.2026). Vom Bruttoeinkommen werden dabei die
-                Werbungskostenpauschale und die Pauschalabzüge abgezogen, sodass das
-                wohngeldrechtliche Einkommen deutlich niedriger liegt als die 1.400 €. Dieser Wert
+                nichtselbständiger Arbeit und einer Bruttokaltmiete von 500 € kommt 2026 nach der
+                Formel der Anlage 2 auf ein Wohngeld von rund <strong>254 €</strong> monatlich. Vom
+                Jahresbrutto (16.800 €) gehen die Werbungskostenpauschale von 1.230 € und 20 Prozent
+                Pauschalabzug für Kranken- und Rentenversicherung ab — Einkommensteuer fällt bei
+                diesem Lohn nicht an. Das wohngeldrechtliche Einkommen liegt damit bei 1.038 € im
+                Monat. Angesetzt werden die Miete von 500 € (unter dem Höchstbetrag von 511 €) und
+                die Heizkostenkomponente von 110,40 €, zusammen 610,40 €. Dieser Wert
                 dient nur der <strong>Orientierung</strong>; verbindlich ist allein das Ergebnis des
                 offiziellen BMWSB-Wohngeldrechners für Ihre konkrete Konstellation.
               </p>
