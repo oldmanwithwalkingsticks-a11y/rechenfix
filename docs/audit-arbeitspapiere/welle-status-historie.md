@@ -6,6 +6,108 @@
 
 ---
 
+## 20.10.2026 — Welle 181: veraltete Beispiel- und FAQ-Texte aus der Caption-Prüfung; Mietpreisbremse — Rückforderung ab Mietbeginn; Alkohol-Abbau ohne Resorptionsdefizit — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Caption-Prüfung. Viele Seiten zeigten Beispiel- oder FAQ-Zahlen, die ihr eigener Rechner mit denselben
+Eingaben nicht liefert. Die Rechner stimmen, die Texte waren veraltet. Ausnahmen sind zwei Rechnerfehler
+(Mietpreisbremse, Alkohol-Abbau). Die Captions bleiben in dieser Welle unverändert.
+
+**Quellen** (in diesem Lauf nicht erneut am Normtext geprüft; Werte aus der Vorlage):
+- **§ 556g Abs. 2 BGB** (Fassung seit 01.04.2020): Rückforderung zu viel gezahlter Miete nur nach Rüge in Textform.
+  Rügt der Mieter innerhalb von 30 Monaten nach Beginn des Mietverhältnisses und ist es bei Zugang der Rüge nicht
+  beendet, gilt die Rückforderung ab Mietbeginn; sonst ab Zugang der Rüge.
+
+**Zwei Rechnerfehler:**
+
+| Rechner | vorher | jetzt | Grundlage |
+|---|---|---|---|
+| Mietpreisbremse: Hinweis im Rechner, FAQ, Checkliste, Rechenbeispiel, Fazit | „Erst ab dem Zeitpunkt der Rüge … rückwirkend vor der Rüge leider nicht“ | Rüge in Textform; **innerhalb von 30 Monaten nach Mietbeginn** und bei laufendem Vertrag zurück **ab Mietbeginn**, sonst ab Zugang der Rüge | § 556g Abs. 2 BGB, seit 01.04.2020 |
+| Alkohol-Abbau, Startwerte (Mann 80 kg, 3 Bier 0,5 l, Beginn 20:00, 3 Std.) | Spitzenwert **0,99 ‰** (Widmark × 0,9), nüchtern 06:37 | **1,10 ‰** wie Promillerechner und Seitentext, nüchtern **07:21** | Widmark ohne Resorptionsdefizit, der vorsichtigere Wert |
+
+Der Mietpreisbremse-Rechner selbst rechnet nur Überzahlung je Monat und Jahr, keinen Zeitraum ab Rüge; korrigiert
+sind Hinweis und Texte. Das Rechenbeispiel heißt jetzt „Über 3 Jahre“ statt „Über 3 Jahre (ab Rüge)“.
+
+**Texte neu gerechnet** (Rechner unverändert; alt → neu):
+- **Stundenlohn** (`finanzen.ts`): Monatsstunden mit 52 ÷ 12 wie der Rechner statt 4,33: 3.500 € ÷ 173,33 Std =
+  **20,19 €** (vorher 173,2 Std, 20,21 €). Tabelle Wochen- zu Monatsstunden zweistellig (40 Std → 173,33).
+  Netto-Erklärtext (20 €/Std, 3.467 € brutto statt 3.464 €): Stkl. I rund 2.315 € statt 2.350 € (Sozialabgaben
+  21,75 % kinderlos statt 21,15 %), etwa 13,36 €/Std. statt 13,57 €; Stkl. III rund 2.608 € statt 2.600 €.
+  Netto-FAQ (3.500 € brutto): rund 2.333 € statt 2.350 €, 13,46 €/Std. statt 13,57 €. Effektiver Stundenlohn
+  (220 statt 260 Arbeitstage, 10 Feiertage): 23,86 € statt ca. 22,80 €. Eine FAQ nennt 20,21 € bewusst weiter als
+  Ergebnis des gerundeten Faktors 4,33.
+- **Arbeitslosengeld** (`finanzen.ts`): **1.412 €** im Monat statt 1.420 €, 16.945 € gesamt statt rund 17.000 €
+  (Beispiel und FAQ).
+- **Sparrechner** (`finanzen.ts`): **15.848 €** (3.848 € Zinsen, jährliche Zinsgutschrift) statt 15.528 €
+  (3.528 €).
+- **Gehaltsvergleich** (`finanzen.ts`): mehr als ca. **44 %** der Vergleichsgruppe (Median 3.641 €) statt 55 %.
+- **Kredit** (`finanzen.ts`): Rate **192,86 €** statt 192,80 €, Zinsen 1.572 € statt 1.568 €.
+- **Wohngeld** (`finanzen.ts`): Höchstbetrag **551 €** statt 575 €, berücksichtigte Miete **718,40 €** statt
+  742,40 €, geschätztes Wohngeld ca. 296 € statt 200–250 € (Beispiel und FAQ).
+- **Kindergeld** (`finanzen.ts`): Steuerersparnis Freibetrag ca. 4.336 € statt 4.700 €; Kindergeld um 1.880 €/Jahr
+  günstiger.
+- **Teilzeit** (`arbeit.ts`): ca. **1.841 €** netto statt 1.890 €.
+- **Überstunden** (`arbeit.ts`): **126,20 €** statt 126,19 €.
+- **Kalorien** (`gesundheit.ts`): Grundumsatz 1.370 kcal, Gesamtumsatz 1.884 kcal (vorher 1.354 / 1.862).
+- **Idealgewicht** (`gesundheit.ts`): Creff **65,7 kg** statt 66,0 kg, BMI-Spanne 57,8–74,9 kg statt 57,8–72,3 kg.
+- **Körperfett** (`gesundheit.ts`): 16,4 % (Fitness) statt 18,3 % (Durchschnittlich).
+- **Kochzeit** (`kochen.ts`): Ei wachsweich 6:30 Min (Richtwert 6–7) statt 7 Min, Brokkoli 6–7 Min statt 5–7.
+- **Nährwert** (`kochen.ts`): Fett 6,6 g statt 6,5 g, Mehl pro Portion rund 218 kcal statt 217 kcal.
+- **Baufinanzierung** (`wohnen.ts`): Rate **1.477 €** statt 1.476 € (5 Stellen).
+- **E-Auto-Ladekosten, Stromverbrauch** (`technik.ts`): Beispiel, FAQ, Erklärtext und Infobox aus der
+  Strompreis-SSOT statt fest 34/35 ct; heute 0,37 €/kWh: 18 × 0,37 = 6,66 €/100 km; 365 kWh × 0,37 € ≈ 135 €/Jahr
+  (vorher 128 €).
+- **Reisekosten** (`alltag.ts`): Beispiel aus der Spritpreis-SSOT; heute 2,126 €/l: Anreise 178,82 € statt
+  152,50 €, gesamt 1.858,82 € statt 1.832,50 €.
+
+**Änderungen** (46 Ersetzungen plus 20 Datumszeilen = 66 in 10 Dateien, Vorlage
+`_lokal/welle181-beispieltexte.mjs`, nicht committet):
+- **`components/rechner/AlkoholAbbauRechner.tsx`:** `promilleMax` ohne Faktor 0,9, mit Kommentar.
+- **`components/rechner/MietpreisbremseRechner.tsx`:** Hinweis zur Rüge (Textform, 30 Monate, ab Mietbeginn).
+- **`lib/berechnungen/mietpreisbremse.ts`:** nur der Kommentar zu § 556g BGB.
+- **`lib/rechner-config/`** `alltag.ts`, `arbeit.ts`, `finanzen.ts`, `gesundheit.ts`, `kochen.ts`, `technik.ts`,
+  `wohnen.ts`: die Texte oben; `gesundheit.ts` auch der Kommentar zum Alkohol-Abbau.
+- **`letzteAktualisierung`** → `2026-10-20` für die 20 Seiten.
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187); alle Libs außer dem
+Kommentar in `mietpreisbremse.ts`.
+
+**Vermerk:** Die zugehörigen Captions folgen in Welle 187.
+
+**Abweichungen und Funde:**
+- **Live-Probe 3 bis 5 prüfen Texte aus dem Feld `beispiel`, das die Seiten nicht ausgeben** (seit Welle 101; es
+  speist nur Caption-Builder und Datendump). „173,33 Std = 20,19 € Stundenlohn“, „Rate: 1.477 €/Monat“ und
+  „365 kWh/Jahr × 0,37 € ≈ 135 €/Jahr“ stehen nur dort; im gebauten HTML je 0×. Sichtbar sind dieselben Werte
+  an anderer Stelle: Stundenlohn in der FAQ („3.500 € ÷ 173,33 = 20,19 € Stundenlohn“), Baufinanzierung im
+  Rechenbeispiel und Erklärtext („Monatsrate von 1.477 €“), Stromverbrauch in der Gerätetabelle (Wäschetrockner
+  365 kWh → 135 €) und im Text („37 Cent“). Auch bei den übrigen Seiten ist der neue `beispiel`-Satz selbst nicht
+  sichtbar; er wirkt über die Captions (Welle 187).
+- **Alkohol-Abbau und Zeitumstellung:** Der Rechner setzt „heute 20:00 Uhr“ und addiert echte Minuten. Das ist
+  richtig, weil der Abbau nach vergangener Zeit läuft, aber die angezeigte Uhrzeit verschiebt sich in den
+  Umstellungsnächten um eine Stunde. Nachgerechnet mit `TZ=Europe/Berlin`: am 20.10. nüchtern 07:21, am Samstag
+  24.10. (Umstellung auf Winterzeit) 06:21, am 28.03.2026 (Sommerzeit) 08:21. Die Live-Probe also nicht am 24.10.
+  machen.
+- Datum: Die Vorlage setzt „heute“ in Berliner Zeit (`Intl.DateTimeFormat`, `timeZone: 'Europe/Berlin'`). Lauf unter
+  Windows in deutscher Zeit, Ergebnisse wie im Linux-Probelauf.
+
+**Gates:**
+- Phase 0 an `94bb789`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `94bb789` und `192c32b`
+  (Welle 180). Greps: „* 0.9; // Resorptionsdefizit“ `AlkoholAbbauRechner.tsx:1`; „rückwirkend vor der Rüge leider
+  nicht“ `MietpreisbremseRechner.tsx:1`; „20,21 €“ `finanzen.ts:5`; „1.476 €“ `wohnen.ts:5`.
+- Phase 1: „OK — 66 Ersetzungen in 10 Dateien.“, Exit 0; `git status` die 10 Dateien.
+- Phase 2: `verify-mietpreisbremse` 29/29, `verify-arbeitslosengeld` 60/60, `verify-wohngeld-p1` 42/42,
+  `verify-kindergeld` 32/32, je Exit 0. Greps: „* 0.9; // Resorptionsdefizit“ keine Ausgabe; „const promilleMax =
+  gesamtAlk / (gew * r);“ `AlkoholAbbauRechner.tsx:1`; „rückwirkend vor der Rüge leider nicht“ keine Ausgabe;
+  „innerhalb von 30 Monaten“ `MietpreisbremseRechner.tsx:1`, `mietpreisbremse.ts:1`, `wohnen.ts:3`; „20,21 €“
+  `finanzen.ts:1` (gewollt); „1.477 €“ `wohnen.ts:5`. `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler,
+  die zwei bekannten Warnungen; `git status` danach nur die 10 Dateien. Im gebauten HTML von
+  `/finanzen/stundenlohn-rechner` „= 20,19 € Stundenlohn“ 4×; `/wohnen/mietpreisbremse-rechner` „innerhalb von
+  30 Monaten nach Mietbeginn“ 3×, „rückwirkend vor der Rüge leider nicht“ 0×; `/wohnen/baufinanzierung-rechner`
+  „1.477 €“ 8×.
+
+**Commits:** A `ebaae4b` (die 10 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 180: Verbraucherpreisindex — September 2026, Jahresdurchschnitte 1995 bis 2025 nach Destatis; Zugewinnausgleich-Texte aus der SSOT; Indexmiete — Beispiel-VPI richtig benannt, Textform — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Caption-Prüfung. Die Zugewinnausgleich-Caption rechnete mit „VPI 125,0, Stand Mai 2026“. Dabei zeigte
