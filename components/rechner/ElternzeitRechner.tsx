@@ -4,31 +4,24 @@ import { useState, useMemo, useEffect } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import {
   berechneElternzeit,
-  MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT,
+  vorschlagBeginnP1,
 } from '@/lib/berechnungen/elternzeit';
+import { isoLokal } from '@/lib/datum-lokal';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 
-function toIso(d: Date): string {
-  return d.toISOString().slice(0, 10);
-}
-
+// W189: vorher toISOString() (UTC). Kurz nach Mitternacht (bis 01:00 Uhr MEZ bzw. 02:00 Uhr MESZ)
+// stand ein Tag zu früh im Feld: am 20.10.2026 um 00:30 Uhr der 19.07.2026 statt des 20.07.2026.
 function defaultGeburt(): string {
   const d = new Date();
   d.setMonth(d.getMonth() - 3);
-  return toIso(d);
+  return isoLokal(d);
 }
 
 function fmtKurz(d: Date): string {
   return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
-
-function addTage(d: Date, t: number): Date {
-  const r = new Date(d);
-  r.setDate(r.getDate() + t);
-  return r;
 }
 
 export default function ElternzeitRechner() {
@@ -48,11 +41,9 @@ export default function ElternzeitRechner() {
   // Default-Vorschläge basierend auf Geburt (UI-Display für Date-Inputs)
   const effP1Beginn = useMemo(() => {
     if (p1Beginn) return p1Beginn;
-    if (!geburt) return '';
-    const g = new Date(geburt);
-    if (isNaN(g.getTime())) return '';
-    // Tag nach dem Ende des Mutterschutzes (W179: vorher der letzte Mutterschutztag)
-    return toIso(addTage(g, MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT + 1));
+    // Tag nach dem Ende des Mutterschutzes (W179: vorher der letzte Mutterschutztag).
+    // W189: vorher hier mit new Date(geburt) und toISOString() berechnet, siehe vorschlagBeginnP1.
+    return vorschlagBeginnP1(geburt);
   }, [geburt, p1Beginn]);
 
   const effP2Beginn = useMemo(() => {

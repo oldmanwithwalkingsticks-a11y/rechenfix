@@ -167,7 +167,9 @@ export const BAFOEG_AB_2026_01_01: BafoegParameter = {
   ...BAFOEG_AB_2024_08_01,
   freibetraege: { ...BAFOEG_AB_2024_08_01.freibetraege, eigenesEinkommen: 389 },
   quelle: "wie 01.08.2024; § 23 Abs. 1 S. 1 Nr. 1 BAföG: 389 € ab 01.01.2026 (BGBl. 2025 I Nr. 279)",
-  gueltigAb: new Date("2026-01-01"),
+  // W189: vorher new Date("2026-01-01") = UTC-Mitternacht, in Deutschland 01:00 Uhr; am 01.01.2026
+  // bis 01:00 Uhr galt noch der Freibetrag 353 €. Stichtage als lokale Mitternacht (CLAUDE.md, Stichtag-Switch).
+  gueltigAb: new Date(2026, 0, 1),
 };
 
 /**

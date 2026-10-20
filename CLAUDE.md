@@ -282,6 +282,16 @@ export const WERT = getAktuellerWert();
 
 **Regel:** Bei jedem neuen unterjährigen Wechsel dieses Pattern anwenden — nicht einen nackten Kommentar "// TODO: Wert zum 01.07. ändern" hinterlegen.
 
+### Kalenderdaten in Ortszeit (seit Welle 189)
+
+Datumsfelder liefern `YYYY-MM-DD`. `new Date('2026-07-01')` ist UTC-Mitternacht, in Deutschland 01:00 bzw. 02:00 Uhr. Vergleiche mit lokaler Mitternacht (Stichtage `new Date(j, m, t)`, Kalenderzellen, der 15. und der Monatsletzte) kippen dann um einen Tag, und das nur in deutscher Zeit, nicht auf Vercel oder in der CI (UTC).
+
+- Parsen nur mit `parseIsoLokal` aus `lib/datum-lokal.ts`, ausgeben mit `isoLokal`. Nie `toISOString()` für ein Kalenderdatum (Startwerte, Feldwerte, Vergleiche).
+- Stichtage und `gueltigAb` als `new Date(j, m, t)`.
+- Monate addieren mit `addMonateLokal` (Monatsende gekappt, § 188 Abs. 3 BGB), den letzten Tag einer Monatsfrist mit `fristEndeMonate` bestimmen. Nie `setMonth` auf einem Kalenderdatum: 31.05. + 1 Monat wird sonst der 01.07.
+- Tage über den Kalender addieren (`new Date(j, m, t + n)`), nicht über `n × 86.400.000 ms`: über die Zeitumstellung landet das auf 23:00 Uhr des Vortags.
+- Prüfskripte zu Datumsrechnern auch mit `TZ=Europe/Berlin` laufen lassen; neue Fälle gehören in `scripts/verify-datum-zeitzone.ts`, das die Zeitzone selbst setzt.
+
 ### SSOT-Parameter-Lib-Muster (seit Prompt 121)
 
 Parameter-Libs folgen einem einheitlichen Muster: **Typ-Interface + ein Bucket pro Stichtag + `getAktuelle…Parameter(stichtag)`-Getter**. Dieses Muster existiert für `mindestlohn.ts`, `rente.ts`, `pfaendung.ts`, `bafoeg-parameter.ts`, `buergergeld-parameter.ts`. Bei jedem neuen rechtsstands-abhängigen Parameter-Set wird das Muster angewendet.
@@ -711,7 +721,7 @@ Reihenfolge nach Freigabe: erst 85 (Warning wegräumen), dann 68 (CMP dazu).
 - **110** — AdSense-Basis-Loader in `<head>` für Crawl-Erkennung ✅
 - **111** — Welle 1 Stufe 3 P1-Pass: Elterngeld 175k-Grenze + Ersatzrate aus Netto vor Geburt + 2770-Deckel; Minijob Rentenpunkte-Divisor SSOT `DURCHSCHNITTSENTGELT_2026` ✅
 - **111a** — UX-Polish: 2.770-€-Deckel-Hinweis im Elterngeld-Aufschlüsselungsblock (kontextabhängig) ✅
-- **112** — Welle 1 Stufe 3 P2-Pass: Mutterschutz-Minijob-Familienvers., Kündigungsfrist-Fristende (BAG 10 AZR 64/17), Teilzeit-Vollzeit-Tage-Input + § 5 Abs. 2 BUrlG-Rundung (Teilzeit + Urlaubstage), Minijob Stichtag-Switch `MINDESTLOHN`; Bonus: Rentenrechner-SEO auf 2026er Werte ✅
+- **112** — Welle 1 Stufe 3 P2-Pass: Mutterschutz-Minijob-Familienvers., Kündigungsfrist-Fristende (BAG 10 AZR 64/17; in Welle 189 zurückgenommen, maßgeblich ist der Zugang der Kündigung), Teilzeit-Vollzeit-Tage-Input + § 5 Abs. 2 BUrlG-Rundung (Teilzeit + Urlaubstage), Minijob Stichtag-Switch `MINDESTLOHN`; Bonus: Rentenrechner-SEO auf 2026er Werte ✅
 - **113** — Stufe 3 Abschluss: SSOT-Cleanup (`_helpers.ts` neu mit `rundeBuRlGKonform` + `WOCHEN_PRO_MONAT`, `BUNDESLAENDER`-Dedup) + P3-Polish (Elterngeld-Plus-Block, Mutterschutz-Hint, Kündigungsfrist-Kommentar, Minijob-FAQ); Welle 1 Stufe 3 formal abgeschlossen ✅
 - **114** — Welle 1 Stufe 4a Audit (Spezial-Steuer, 8 Rechner, Bericht + Testfälle in `docs/audit-arbeitspapiere/`, kein Code-Fix): 6 P1 + 12 P2 + 11 P3; MidijobRechner als Hot Spot (BE-Formel falsch, Steuerklassen-Faktor × 1,15 erfunden, Soli-Wiederholungs-Bug); Erbschaft+Schenkung § 19 Abs. 3-Härtefall fehlt ✅
 - **115a** — Midijob komplett saniert: neue SSOT-Lib `midijob-uebergang.ts` (§ 20a SGB IV, Stichtag-Switch für UG); BE-Formel gefixt (P1), LSt via `berechneLohnsteuerJahr` statt × 1,15 (P1), Soli via `berechneSoli` (P1); SV-SSOT-Imports, PV 1,7→1,8 %, PV-Kinderabschlag-Input, KiSt-Bundesland-Dropdown ✅

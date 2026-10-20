@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
+import { addMonateAnteilig } from '@/lib/datum-lokal';
 
 // ────────────────────────────────────────────────────────────────────────────
 // Daten
@@ -253,10 +254,12 @@ function toDateString(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
+// W189: vorher setMonth(getMonth() + months). JavaScript schneidet dort Nachkommastellen ab:
+// Hackfleisch in Alufolie (1 × 0,8 Monate) war „haltbar bis“ zum Einfriertag selbst (noch 0 Tage),
+// Hähnchen vakuumiert (9 × 1,5 = 13,5) nur 13 Monate; am Monatsende lief es zudem über
+// (31.01. + 1 Monat = 03.03.). Jetzt Rest zu 30 Tagen je Monat, Monatsende gekappt.
 function addMonths(date: Date, months: number): Date {
-  const result = new Date(date);
-  result.setMonth(result.getMonth() + months);
-  return result;
+  return addMonateAnteilig(date, months);
 }
 
 function daysBetween(a: Date, b: Date): number {

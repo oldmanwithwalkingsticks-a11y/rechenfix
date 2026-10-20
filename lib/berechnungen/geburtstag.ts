@@ -164,7 +164,10 @@ export function berechneGeburtstag(geburtsdatumStr: string): GeburtstagErgebnis 
   ];
 
   for (const ms of meilensteinTage) {
-    const datum = new Date(geburt.getTime() + ms.tage * 86400000);
+    // W189: vorher geburt.getTime() + tage × 86.400.000 ms. Bei Geburt in der Sommerzeit und
+    // Meilenstein in der Winterzeit landete das auf 23:00 Uhr des Vortags: Startwert 15.06.1990 →
+    // „10.000 Tage“ am 30.10.2017 statt am 31.10.2017. Jetzt Kalendertage in Ortszeit.
+    const datum = new Date(geburt.getFullYear(), geburt.getMonth(), geburt.getDate() + ms.tage);
     if (datum.getFullYear() <= geburt.getFullYear() + 120) {
       meilensteine.push({
         label: ms.label,

@@ -1,3 +1,5 @@
+import { parseIsoLokal, addMonateLokal, fristEndeMonate } from '../datum-lokal';
+
 export type Kuendiger = 'arbeitnehmer' | 'arbeitgeber';
 
 export interface KuendigungsfristEingabe {
@@ -29,10 +31,10 @@ function addDays(date: Date, days: number): Date {
   return r;
 }
 
+// W189: vorher setMonth — 31.05. + 1 Monat lief auf den 01.07. über und die Frist „zum Monatsende“
+// endete erst am 31.07. statt am 30.06. (§ 188 Abs. 3 BGB: fehlt der Tag, endet die Frist am Monatsletzten)
 function addMonths(date: Date, months: number): Date {
-  const r = new Date(date);
-  r.setMonth(r.getMonth() + months);
-  return r;
+  return addMonateLokal(date, months);
 }
 
 function endOfMonth(date: Date): Date {
@@ -154,62 +156,19 @@ function getAgFrist(zugehoerigkeitJahre: number): AgFrist {
   };
 }
 
-/**
- * Ermittelt die zutreffende AG-Frist nach § 622 Abs. 2 BGB unter Berücksichtigung
- * der Betriebszugehörigkeit **zum Fristende** (BAG 10 AZR 64/17), nicht zum
- * Kündigungsdatum.
- *
- * Algorithmus: Lookahead-Suche. Für jede gesetzliche Stufe wird getestet, ob
- * die Betriebszugehörigkeit am Fristende der jeweiligen Stufe deren Schwelle
- * erreicht. Höchste Stufe, die diesen Test besteht, gewinnt.
- *
- * Gibt `stufeErhoeht: true` zurück, wenn die Stufe höher ausfällt als bei
- * naiver Betrachtung zum Kündigungsdatum (für UI-Hinweis).
- */
-const AG_STUFEN: { schwelleJahre: number; berechne: (d: Date) => Date; fristText: string; rechtsgrundlage: string }[] = [
-  { schwelleJahre: 2,  berechne: (d) => nextEndOfMonth(addMonths(d, 1)), fristText: '1 Monat zum Monatsende',  rechtsgrundlage: '§ 622 Abs. 2 Satz 1 Nr. 1 BGB' },
-  { schwelleJahre: 5,  berechne: (d) => nextEndOfMonth(addMonths(d, 2)), fristText: '2 Monate zum Monatsende', rechtsgrundlage: '§ 622 Abs. 2 Satz 1 Nr. 2 BGB' },
-  { schwelleJahre: 8,  berechne: (d) => nextEndOfMonth(addMonths(d, 3)), fristText: '3 Monate zum Monatsende', rechtsgrundlage: '§ 622 Abs. 2 Satz 1 Nr. 3 BGB' },
-  { schwelleJahre: 10, berechne: (d) => nextEndOfMonth(addMonths(d, 4)), fristText: '4 Monate zum Monatsende', rechtsgrundlage: '§ 622 Abs. 2 Satz 1 Nr. 4 BGB' },
-  { schwelleJahre: 12, berechne: (d) => nextEndOfMonth(addMonths(d, 5)), fristText: '5 Monate zum Monatsende', rechtsgrundlage: '§ 622 Abs. 2 Satz 1 Nr. 5 BGB' },
-  { schwelleJahre: 15, berechne: (d) => nextEndOfMonth(addMonths(d, 6)), fristText: '6 Monate zum Monatsende', rechtsgrundlage: '§ 622 Abs. 2 Satz 1 Nr. 6 BGB' },
-  { schwelleJahre: 20, berechne: (d) => nextEndOfMonth(addMonths(d, 7)), fristText: '7 Monate zum Monatsende', rechtsgrundlage: '§ 622 Abs. 2 Satz 1 Nr. 7 BGB' },
-];
-
-function getAgFristZumFristende(
-  beschaeftigtSeit: Date,
-  kuendigungsDatum: Date,
-): { frist: AgFrist; letzterArbeitstag: Date; stufeErhoeht: boolean } {
-  const jahreZumKuendigung = calcBetriebszugehoerigkeit(beschaeftigtSeit, kuendigungsDatum).jahre;
-  const naiveFrist = getAgFrist(jahreZumKuendigung);
-
-  // Start mit Grundfrist (unter 2 Jahren)
-  let besteFrist: AgFrist = {
-    fristText: '4 Wochen zum 15. oder zum Monatsende',
-    rechtsgrundlage: '§ 622 Abs. 1 BGB',
-    berechne: (d) => nextFifteenthOrEndOfMonth(addDays(d, 28)),
-  };
-
-  for (const stufe of AG_STUFEN) {
-    const kandidatEnde = stufe.berechne(kuendigungsDatum);
-    const kandidatJahre = calcBetriebszugehoerigkeit(beschaeftigtSeit, kandidatEnde).jahre;
-    if (kandidatJahre >= stufe.schwelleJahre) {
-      besteFrist = { fristText: stufe.fristText, rechtsgrundlage: stufe.rechtsgrundlage, berechne: stufe.berechne };
-    } else {
-      break; // höhere Stufen sind per Definition unerreichbar
-    }
-  }
-
-  const letzterArbeitstag = besteFrist.berechne(kuendigungsDatum);
-  const stufeErhoeht = besteFrist.fristText !== naiveFrist.fristText;
-  return { frist: besteFrist, letzterArbeitstag, stufeErhoeht };
-}
+// W189: vorher Lookahead zum Fristende („BAG 10 AZR 64/17“, das Urteil ist nicht auffindbar): Erreichte die
+// Betriebszugehörigkeit während der laufenden Frist die nächste Stufe, galt die längere Frist. Maßgeblich ist aber
+// die Dauer des Arbeitsverhältnisses beim Zugang der Kündigung. Beschäftigt seit 30.11.2021, Zugang 01.09.2026:
+// 4 volle Jahre → 1 Monat zum Monatsende = 31.10.2026 (vorher 2 Monate = 30.11.2026).
 
 export function berechneKuendigungsfrist(eingabe: KuendigungsfristEingabe): KuendigungsfristErgebnis | null {
   if (!eingabe.beschaeftigtSeit || !eingabe.kuendigungsDatum) return null;
 
-  const beschaeftigtSeit = new Date(eingabe.beschaeftigtSeit);
-  const kuendigungsDatum = new Date(eingabe.kuendigungsDatum);
+  // W189: vorher new Date(iso) = UTC-Mitternacht, in Deutschland 01:00/02:00 Uhr. Der 15. und der
+  // Monatsletzte (lokale Mitternacht) lagen dann „vor“ dem Fristende: Zugang 17.09.2026 ergab den
+  // 31.10. statt den 15.10.2026, Zugang 31.01.2026 nach 20 Jahren (7 Monate) den 31.10. statt den 31.08.2026.
+  const beschaeftigtSeit = parseIsoLokal(eingabe.beschaeftigtSeit);
+  const kuendigungsDatum = parseIsoLokal(eingabe.kuendigungsDatum);
 
   if (isNaN(beschaeftigtSeit.getTime()) || isNaN(kuendigungsDatum.getTime())) return null;
 
@@ -231,8 +190,9 @@ export function berechneKuendigungsfrist(eingabe: KuendigungsfristEingabe): Kuen
     kuendigungsFristText = `${eingabe.individuelleFristWochen} Wochen (vertraglich/tariflich)`;
     rechtsgrundlage = 'Arbeits- oder Tarifvertrag';
   } else if (eingabe.probezeit) {
-    // Prüfe ob noch in Probezeit
-    const probezeitEnde = addMonths(beschaeftigtSeit, eingabe.probezeitDauer);
+    // Prüfe ob noch in Probezeit. Letzter Probezeittag nach § 187 Abs. 2, § 188 Abs. 2 BGB: Beginn
+    // 01.02., 6 Monate → 31.07. W189: vorher der gleichnamige Tag (01.08.) mit <=, also einen Tag zu lang.
+    const probezeitEnde = fristEndeMonate(beschaeftigtSeit, eingabe.probezeitDauer);
     if (kuendigungsDatum <= probezeitEnde) {
       istProbezeit = true;
       letzterArbeitstag = addDays(kuendigungsDatum, 14);
@@ -241,13 +201,10 @@ export function berechneKuendigungsfrist(eingabe: KuendigungsfristEingabe): Kuen
     } else {
       // Probezeit vorbei → normale Fristen
       if (eingabe.kuendiger === 'arbeitgeber') {
-        const result = getAgFristZumFristende(beschaeftigtSeit, kuendigungsDatum);
-        letzterArbeitstag = result.letzterArbeitstag;
-        kuendigungsFristText = result.frist.fristText;
-        rechtsgrundlage = result.frist.rechtsgrundlage;
-        if (result.stufeErhoeht) {
-          warnhinweise.push('Hinweis: Sie erreichen während der Kündigungsfrist eine höhere Stufe der Betriebszugehörigkeit. Die längere Frist nach BAG 10 AZR 64/17 wurde berücksichtigt.');
-        }
+        const frist = getAgFrist(zugehoerigkeit.jahre);
+        letzterArbeitstag = frist.berechne(kuendigungsDatum);
+        kuendigungsFristText = frist.fristText;
+        rechtsgrundlage = frist.rechtsgrundlage;
       } else {
         letzterArbeitstag = nextFifteenthOrEndOfMonth(addDays(kuendigungsDatum, 28));
         kuendigungsFristText = '4 Wochen zum 15. oder zum Monatsende';
@@ -255,13 +212,10 @@ export function berechneKuendigungsfrist(eingabe: KuendigungsfristEingabe): Kuen
       }
     }
   } else if (eingabe.kuendiger === 'arbeitgeber') {
-    const result = getAgFristZumFristende(beschaeftigtSeit, kuendigungsDatum);
-    letzterArbeitstag = result.letzterArbeitstag;
-    kuendigungsFristText = result.frist.fristText;
-    rechtsgrundlage = result.frist.rechtsgrundlage;
-    if (result.stufeErhoeht) {
-      warnhinweise.push('Hinweis: Sie erreichen während der Kündigungsfrist eine höhere Stufe der Betriebszugehörigkeit. Die längere Frist nach BAG 10 AZR 64/17 wurde berücksichtigt.');
-    }
+    const frist = getAgFrist(zugehoerigkeit.jahre);
+    letzterArbeitstag = frist.berechne(kuendigungsDatum);
+    kuendigungsFristText = frist.fristText;
+    rechtsgrundlage = frist.rechtsgrundlage;
   } else {
     // Arbeitnehmer: immer 4 Wochen zum 15./Monatsende
     letzterArbeitstag = nextFifteenthOrEndOfMonth(addDays(kuendigungsDatum, 28));

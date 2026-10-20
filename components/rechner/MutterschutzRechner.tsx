@@ -8,9 +8,12 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { isoLokal } from '@/lib/datum-lokal';
 
+// W189: vorher toISOString() (UTC). Kurz nach Mitternacht (bis 01:00 Uhr MEZ bzw. 02:00 Uhr MESZ)
+// war der Startwert einen Tag zu früh: am 20.10.2026 um 00:30 Uhr ET 11.01.2027 statt 12.01.2027.
 function toIso(d: Date): string {
-  return d.toISOString().slice(0, 10);
+  return isoLokal(d);
 }
 
 function defaultET(): string {

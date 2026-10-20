@@ -6,6 +6,8 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
+import { isoLokal } from '@/lib/datum-lokal';
+import { berechneZyklen, zyklusTagesArt, type ZyklusTagesArt } from '@/lib/berechnungen/zyklus';
 
 type Modus = 1 | 3 | 6;
 
@@ -23,19 +25,11 @@ function fmtShort(d: Date): string {
   return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
+// W189: vorher toISOString() (UTC). Kurz nach Mitternacht (bis 01:00 Uhr MEZ bzw. 02:00 Uhr MESZ)
+// stand ein Tag zu früh im Feld: am 20.10.2026 um 00:30 Uhr der 05.10.2026 statt des 06.10.2026.
 function defaultStart(): string {
   const d = addDays(new Date(), -14);
-  return d.toISOString().slice(0, 10);
-}
-
-type DayKind = 'period' | 'fertile' | 'ovulation' | 'normal';
-
-function buildCycle(start: Date, laenge: number) {
-  const eisprung = addDays(start, laenge - 14);
-  const fruchtbarVon = addDays(eisprung, -5);
-  const fruchtbarBis = addDays(eisprung, 1);
-  const naechstePeriode = addDays(start, laenge);
-  return { periodenBeginn: start, eisprung, fruchtbarVon, fruchtbarBis, naechstePeriode };
+  return isoLokal(d);
 }
 
 export default function ZyklusRechner() {
@@ -66,15 +60,10 @@ export default function ZyklusRechner() {
 
   const ergebnis = useMemo(() => {
     const l = Math.max(21, Math.min(35, parseInt(laenge) || 28));
-    const start = new Date(startDatum);
-    if (isNaN(start.getTime())) return null;
-
-    const anzahl = modus;
-    const zyklen = [];
-    for (let i = 0; i < anzahl; i++) {
-      const zStart = addDays(start, l * i);
-      zyklen.push(buildCycle(zStart, l));
-    }
+    // W189: vorher new Date(startDatum) (UTC-Mitternacht = 01:00/02:00 Uhr deutscher Zeit); der erste
+    // Periodentag und der erste fruchtbare Tag blieben im Kalender unmarkiert, siehe lib/berechnungen/zyklus.ts
+    const zyklen = berechneZyklen(startDatum, l, modus);
+    if (!zyklen) return null;
     return { laenge: l, zyklen };
   }, [startDatum, laenge, modus]);
 
@@ -92,16 +81,9 @@ export default function ZyklusRechner() {
     return monate.slice(0, modus === 1 ? 2 : modus === 3 ? 4 : 7);
   }, [ergebnis, modus]);
 
-  function getDayKind(date: Date): DayKind {
+  function getDayKind(date: Date): ZyklusTagesArt {
     if (!ergebnis) return 'normal';
-    for (const z of ergebnis.zyklen) {
-      // Perioden-Ende: Tag 1 = periodenBeginn, Tag N = Beginn + (N-1).
-      const periodenEnde = addDays(z.periodenBeginn, periodenTage - 1);
-      if (date >= z.periodenBeginn && date <= periodenEnde) return 'period';
-      if (date.toDateString() === z.eisprung.toDateString()) return 'ovulation';
-      if (date >= z.fruchtbarVon && date <= z.fruchtbarBis) return 'fertile';
-    }
-    return 'normal';
+    return zyklusTagesArt(date, ergebnis.zyklen, periodenTage);
   }
 
   const heute = new Date();

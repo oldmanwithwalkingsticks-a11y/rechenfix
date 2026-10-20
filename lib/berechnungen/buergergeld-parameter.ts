@@ -233,7 +233,10 @@ export const BUERGERGELD_2026_H2: BuergergeldParameter = {
   einkommensfreibetrag: EINKOMMENSFREIBETRAG_2026,
   mehrbedarfe: MEHRBEDARFE_2026,
   quelle: "13. Gesetz zur Änderung des SGB II (BGBl. 2026 I Nr. 107 v. 22.04.2026), § 12 Abs. 2 SGB II n.F.; Regelsätze unverändert durch § 28a-Besitzschutz",
-  gueltigAb: new Date("2026-07-01"),
+  // W189: vorher new Date("2026-07-01") = UTC-Mitternacht, in Deutschland 02:00 Uhr. Der Stichtag
+  // aus dem Monatsfeld ist lokale Mitternacht (parseMonat): „Juli 2026“ lag davor und lieferte noch
+  // Bürgergeld mit dem alten Schonvermögen statt Grundsicherungsgeld.
+  gueltigAb: new Date(2026, 6, 1),
 };
 
 /**

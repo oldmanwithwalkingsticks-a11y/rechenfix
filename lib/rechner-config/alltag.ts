@@ -2258,7 +2258,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'geburtstag-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Geburtstags-Rechner',
     beschreibung: 'Geburtstag berechnen: Alter in Tagen, Stunden und Minuten, Wochentag der Geburt, Sternzeichen und nächster runder Geburtstag.',
     kategorie: 'Alltag',

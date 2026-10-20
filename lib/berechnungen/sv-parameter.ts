@@ -29,15 +29,16 @@ export const KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT = 2.9;
  * Prozentwert erwartet (Lib halbiert intern). Diese Konstante ist für
  * Anzeige-Texte und direkte Dezimalrechnungen außerhalb der Tarif-Lib gedacht.
  */
+export const KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 =
+  KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT / 200;
+
+// W189: vorher zwischen dem JSDoc von KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 und der Konstante (Welle 178)
 /**
  * Ermäßigter allgemeiner Beitragssatz der GKV (§ 243 SGB V) für Mitglieder ohne Anspruch auf Krankengeld,
  * z. B. freiwillig versicherte hauptberuflich Selbständige und beherrschende Gesellschafter-Geschäftsführer,
  * solange sie keine Wahlerklärung für Krankengeld abgeben (§ 44 Abs. 2 SGB V; dann 14,6 %).
  */
 export const KV_ERMAESSIGTER_BEITRAGSSATZ_2026 = 0.14;
-
-export const KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 =
-  KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT / 200;
 
 /**
  * Jahresarbeitsentgeltgrenze (Versicherungspflichtgrenze) 2026 nach § 6 Abs. 6

@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { berechneLebenszeit, type LebenszeitErgebnis } from '@/lib/berechnungen/lebenszeit';
 import { useMounted } from '@/lib/hooks/useMounted';
+// W189: max des Datumsfelds vorher new Date().toISOString() (UTC): kurz nach Mitternacht (bis 01:00 Uhr
+// MEZ bzw. 02:00 Uhr MESZ) war der heutige Tag gesperrt, am 20.10.2026 um 00:30 Uhr max = 19.10.2026.
+import { isoLokal } from '@/lib/datum-lokal';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -106,7 +109,7 @@ export default function LebenszeitRechner() {
             type="date"
             value={geburtsdatum}
             onChange={e => setGeburtsdatum(e.target.value)}
-            max={mounted ? new Date().toISOString().split('T')[0] : undefined}
+            max={mounted ? isoLokal(new Date()) : undefined}
             className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           />
         </div>

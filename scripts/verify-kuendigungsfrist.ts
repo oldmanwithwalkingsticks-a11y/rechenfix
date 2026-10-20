@@ -7,12 +7,13 @@
  *     - Abs. 1: Grundfrist 4 Wochen zum 15. oder Monatsende
  *     - Abs. 2: Staffel nach Betriebszugehörigkeit (1/2/3/4/5/6/7 Mon)
  *     - Abs. 3: Probezeit-Frist 2 Wochen
- *   - BAG 10 AZR 64/17 v. 25.04.2018: Stufe der § 622 Abs. 2-Frist bestimmt
- *     sich nach Betriebszugehörigkeit zum Fristende, nicht zum Kündigungs-
- *     datum (Lookahead-Algorithmus).
+ *   - Maßgeblich für die Stufe nach Abs. 2 ist die Dauer des Arbeitsverhältnisses
+ *     beim Zugang der Kündigung („bestanden hat“), nicht am Ende der Frist.
+ *     W189: vorher Lookahead zum Fristende mit Verweis auf „BAG 10 AZR 64/17“;
+ *     das Urteil ist nicht auffindbar, Cluster C prüft jetzt die Zugangsregel.
  *
- * Lib-Befund: Die Lib modelliert NUR § 622 BGB (Abs. 1, 2, 3) + BAG-
- * Lookahead + abweichende Vertragsfrist. Sie modelliert NICHT:
+ * Lib-Befund: Die Lib modelliert NUR § 622 BGB (Abs. 1, 2, 3) + abweichende
+ * Vertragsfrist. Sie modelliert NICHT:
  *   - § 169 SGB IX (Schwerbehinderten-Mindestfrist)
  *   - § 113 InsO (Insolvenz-Höchstfrist)
  *   - § 4 KSchG (3-Wochen-Klagefrist)
@@ -105,9 +106,7 @@ cases.push(
 // === Cluster B: § 622 Abs. 2 BGB Staffel — AG-Fristen ===
 //
 // Manuell:
-//   2018-01-01 → 2025-06-15: 7 J 5 Mon, naive = Stufe 5J = 2 Mon
-//     Lookahead: Stufe 8 J (3 Mon) bei nextEndOfMonth(2025-06-15 + 3M) = 2025-09-30,
-//     dort jahre = 7 (immer noch <8) → break. Beste = Stufe 5J = 2 Mon zum EOM.
+//   2018-01-01 → 2025-06-15: 7 J 5 Mon beim Zugang → Stufe 5J = 2 Mon zum EOM.
 //     berechne: nextEndOfMonth(addMonths(2025-06-15, 2)) = nextEndOfMonth(2025-08-15) = 2025-08-31.
 //   2010-01-01 → 2025-06-15: 15 J 5 Mon → Stufe 15J = 6 Mon zum EOM
 //     berechne: nextEndOfMonth(addMonths(2025-06-15, 6)) = 2025-12-31.
@@ -141,24 +140,30 @@ cases.push(
   { name: 'B-04: § 622 Abs. 2 Satz 1 Nr. 1',                      actual: b4!.rechtsgrundlage,            expected: '§ 622 Abs. 2 Satz 1 Nr. 1 BGB' },
 );
 
-// === Cluster C: BAG 10 AZR 64/17 Lookahead-Stufenerhöhung ===
+// === Cluster C: Stufe nach der Betriebszugehörigkeit beim Zugang (W189) ===
 //
-// 2020-09-01 → 2025-08-15: naive 4 J 11 Mon → Stufe < 5J = 1 Mon
-// Lookahead Stufe 5J (2 Mon): nextEndOfMonth(addMonths(2025-08-15, 2)) = 2025-10-31.
-//   Bei 2025-10-31: 5 J 1 Mon → ≥ 5J → trifft → besteFrist = Stufe 5J.
-// Lookahead Stufe 8J (3 Mon): bei 2025-11-30, jahre = 5 → < 8 → break.
-// Resultat: 2 Mon zum EOM = 2025-10-31, stufeErhoeht.
+// 2020-09-01 → Zugang 2025-08-15: 4 J 11 Mon → Stufe 2 J = 1 Mon zum Monatsende = 2025-09-30.
+//   Die 5 Jahre werden erst während der Frist erreicht (01.09.2025); das verlängert die Frist nicht.
+//   W189: vorher Lookahead zum Fristende → 2 Mon = 2025-10-31.
+// Zugang 2025-08-31: 4 J 11 Mon → 1 Mon → 2025-09-30 (letzter Tag vor der 5-Jahres-Grenze).
+// Zugang 2025-09-01: 5 J 0 Mon → Stufe 5 J = 2 Mon zum Monatsende = 2025-11-30.
 
 const c1 = calc({ kuendiger: 'arbeitgeber', beschaeftigtSeit: '2020-09-01', kuendigungsDatum: '2025-08-15' });
+const c2 = calc({ kuendiger: 'arbeitgeber', beschaeftigtSeit: '2020-09-01', kuendigungsDatum: '2025-08-31' });
+const c3 = calc({ kuendiger: 'arbeitgeber', beschaeftigtSeit: '2020-09-01', kuendigungsDatum: '2025-09-01' });
 cases.push(
-  { name: 'C-01 Lookahead naiv-4-Mon → Stufe 5J: letzterArbeitstag = 31.10.', actual: isoDate(c1!.letzterArbeitstag), expected: '2025-10-31' },
-  { name: 'C-01 Rechtsgrundlage = Stufe 5J (Nr. 2)',              actual: c1!.rechtsgrundlage, expected: '§ 622 Abs. 2 Satz 1 Nr. 2 BGB' },
+  { name: 'C-01 4 J 11 Mon beim Zugang: 1 Mon zum EOM = 30.09.',     actual: isoDate(c1!.letzterArbeitstag), expected: '2025-09-30' },
+  { name: 'C-01 Rechtsgrundlage = Stufe 2 J (Nr. 1)',               actual: c1!.rechtsgrundlage, expected: '§ 622 Abs. 2 Satz 1 Nr. 1 BGB' },
+  { name: 'C-02 Zugang am Tag vor 5 Jahren: 30.09.',                actual: isoDate(c2!.letzterArbeitstag), expected: '2025-09-30' },
+  { name: 'C-03 Zugang am 5-Jahres-Tag: 2 Mon zum EOM = 30.11.',    actual: isoDate(c3!.letzterArbeitstag), expected: '2025-11-30' },
+  { name: 'C-03 Rechtsgrundlage = Stufe 5 J (Nr. 2)',               actual: c3!.rechtsgrundlage, expected: '§ 622 Abs. 2 Satz 1 Nr. 2 BGB' },
 );
 
 // === Cluster D: § 622 Abs. 3 Probezeit ===
 //
 // beschaeftigtSeit 2025-01-01, probezeit=true, dauer=6, kuendigungsDatum 2025-04-15:
-//   probezeitEnde = 2025-07-01. 2025-04-15 ≤ 2025-07-01 → istProbezeit = true.
+//   letzter Probezeittag = 2025-06-30 (W189: vorher der gleichnamige Tag 2025-07-01).
+//   2025-04-15 ≤ 2025-06-30 → istProbezeit = true. Grenzfälle und Monatsenden: verify-datum-zeitzone.ts.
 //   letzterArbeitstag = 2025-04-15 + 14 Tage = 2025-04-29.
 
 const d1 = calc({
@@ -175,7 +180,7 @@ cases.push(
 );
 
 // Probezeit vorbei → normale 4-Wochen-Frist (AN)
-//   beschaeftigtSeit 2024-06-01, dauer=6 → Probezeitende 2024-12-01.
+//   beschaeftigtSeit 2024-06-01, dauer=6 → letzter Probezeittag 2024-11-30.
 //   kuendigungsDatum 2025-06-15 > Probezeitende → normale 4-Wo-Frist (jahre=1, AN-Pfad)
 const d2 = calc({
   kuendiger: 'arbeitnehmer',

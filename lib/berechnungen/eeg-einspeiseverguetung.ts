@@ -16,6 +16,8 @@
  * Inbetriebnahme der Anlage.
  */
 
+import { parseIsoLokal } from '../datum-lokal';
+
 export interface EegSatz {
   /** Bis 10 kWp, Teileinspeisung (Eigenverbrauch + Überschuss-Einspeisung) */
   bis10kWp_teil: number;
@@ -77,11 +79,13 @@ const SAETZE: EegBucket[] = [
 ];
 
 export function getEegSatz(stichtag: Date = new Date()): EegSatz & { prognose: boolean } {
-  // Buckets absteigend nach gueltigAb durchsuchen, ersten ≤ Stichtag nehmen
+  // Buckets absteigend nach gueltigAb durchsuchen, ersten ≤ Stichtag nehmen.
+  // W189: vorher new Date(gueltigAb) = UTC-Mitternacht, in Deutschland 01:00/02:00 Uhr: am 01.08.2026
+  // bis 02:00 Uhr zeigte der Photovoltaik-Rechner noch 7,78 statt 7,70 ct/kWh. Jetzt lokale Mitternacht.
   const sorted = [...SAETZE].sort(
-    (a, b) => new Date(b.gueltigAb).getTime() - new Date(a.gueltigAb).getTime(),
+    (a, b) => parseIsoLokal(b.gueltigAb).getTime() - parseIsoLokal(a.gueltigAb).getTime(),
   );
-  const aktuell = sorted.find(s => stichtag >= new Date(s.gueltigAb));
+  const aktuell = sorted.find(s => stichtag >= parseIsoLokal(s.gueltigAb));
   if (!aktuell) {
     // Stichtag liegt vor dem ältesten Bucket — Fallback auf ältesten
     const fallback = sorted[sorted.length - 1];

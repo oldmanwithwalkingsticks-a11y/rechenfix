@@ -33,6 +33,8 @@
  *   ab 01.04.2024 nur für höchstens einen Monat gleichzeitig (§ 4 Abs. 6 BEEG).
  */
 
+import { isoLokal } from '../datum-lokal';
+
 export const MAX_ELTERNZEIT_MONATE = 36;
 export const MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT = 56; // 8 Wochen, MuSchG § 3 Abs. 2 Standard
 export const ANMELDEFRIST_TAGE_VOR_3_GEBURTSTAG = 49; // 7 Wochen, BEEG § 16 Abs. 1 Satz 1
@@ -104,6 +106,20 @@ function addTage(d: Date, t: number): Date {
 function parseDatum(s: string): Date {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
   return m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : new Date(NaN);
+}
+
+/**
+ * Vorschlag für das Feld „Beginn“ von Partner 1: Tag nach dem Ende des Mutterschutzes
+ * (Geburt + 57 Tage) als 'YYYY-MM-DD'; '' bei leerer oder ungültiger Geburt.
+ * W189: vorher in ElternzeitRechner.tsx mit new Date(iso) (UTC-Mitternacht), setDate und
+ * toISOString(). In deutscher Zeit lag der Vorschlag einen Tag zu früh, sobald die Umstellung auf
+ * die Sommerzeit dazwischen lag (Geburt 15.02.2026 → 12.04. statt 13.04.2026), und mit ihm
+ * Ende, Anmeldefrist und Kündigungsschutz von Partner 1.
+ */
+export function vorschlagBeginnP1(geburt: string): string {
+  const g = parseDatum(geburt);
+  if (isNaN(g.getTime())) return '';
+  return isoLokal(addTage(g, MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT + 1));
 }
 
 export function berechneElternzeit(input: ElternzeitInput): ElternzeitErgebnis | null {

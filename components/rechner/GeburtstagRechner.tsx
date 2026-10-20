@@ -3,6 +3,9 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { berechneGeburtstag } from '@/lib/berechnungen/geburtstag';
 import { useMounted } from '@/lib/hooks/useMounted';
+// W189: max des Datumsfelds vorher new Date().toISOString() (UTC): kurz nach Mitternacht (bis 01:00 Uhr
+// MEZ bzw. 02:00 Uhr MESZ) war der heutige Tag gesperrt, am 20.10.2026 um 00:30 Uhr max = 19.10.2026.
+import { isoLokal } from '@/lib/datum-lokal';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -65,7 +68,7 @@ export default function GeburtstagRechner() {
           type="date"
           value={geburtsdatum}
           onChange={ev => setGeburtsdatum(ev.target.value)}
-          max={mounted ? new Date().toISOString().split('T')[0] : undefined}
+          max={mounted ? isoLokal(new Date()) : undefined}
           className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm min-h-[48px]"
         />
       </div>

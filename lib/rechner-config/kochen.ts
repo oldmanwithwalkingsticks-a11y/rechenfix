@@ -1968,7 +1968,7 @@ export const kochenRechner: RechnerConfig[] = [
   },
   {
     slug: 'gefrierdauer-rechner',
-    letzteAktualisierung: '2026-06-26',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Gefrierdauer-Rechner',
     beschreibung: 'Wie lange ist Tiefkühlkost haltbar? Einfriedatum eingeben und Haltbarkeitsdatum mit Ampel-Anzeige berechnen.',
     kategorie: 'Kochen & Ernährung',

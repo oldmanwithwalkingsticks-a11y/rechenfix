@@ -7,6 +7,7 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { isoLokal } from '@/lib/datum-lokal';
 
 function fmtDatum(d: Date): string {
   return d.toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
@@ -16,8 +17,11 @@ function fmtDatumKurz(d: Date): string {
   return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
+// W189: vorher toISOString() (UTC). Kurz nach Mitternacht (bis 01:00 Uhr MEZ bzw. 02:00 Uhr MESZ)
+// lagen die drei Startwerte einen Tag zu früh: am 20.10.2026 um 00:30 Uhr letzte Periode 10.08.
+// statt 11.08.2026.
 function toIsoDate(d: Date): string {
-  return d.toISOString().slice(0, 10);
+  return isoLokal(d);
 }
 
 function defaultPeriodeDatum(): string {

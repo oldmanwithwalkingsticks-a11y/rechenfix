@@ -18,6 +18,8 @@
  *  ausgeführt, um kein stilles Verhaltens-Change einzuführen.
  */
 
+import { isoLokal } from '../datum-lokal';
+
 // ---------- Shared Helpers ----------
 
 /**
@@ -445,14 +447,18 @@ export function berechneSsw(eingabe: SswEingabe): SswErgebnis {
   };
 }
 
+// W189: vorher toISOString() (UTC). Kurz nach Mitternacht (bis 01:00 Uhr MEZ bzw. 02:00 Uhr MESZ)
+// lagen beide Startwerte einen Tag zu früh (20.10.2026, 00:30 Uhr: 13.07.2026 statt 14.07.2026 und
+// 19.04.2027 statt 20.04.2027), bei einem auf lokale Mitternacht gesetzten `heute` sogar immer.
+
 /** Default: heute minus 14 Wochen als ISO-Datum */
 export function defaultPeriodeDatum(heute: Date = new Date()): string {
   const d = addDays(heute, -14 * 7);
-  return d.toISOString().slice(0, 10);
+  return isoLokal(d);
 }
 
 /** Default Geburtstermin: heute + 26 Wochen */
 export function defaultTerminDatum(heute: Date = new Date()): string {
   const d = addDays(heute, 26 * 7);
-  return d.toISOString().slice(0, 10);
+  return isoLokal(d);
 }

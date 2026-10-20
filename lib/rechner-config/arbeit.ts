@@ -1279,7 +1279,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'kuendigungsfrist-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Kündigungsfrist-Rechner',
     beschreibung: 'Gesetzliche Kündigungsfrist berechnen: Für Arbeitnehmer und Arbeitgeber, mit frühestmöglichem Austrittsdatum und relevanten Fristen.',
     kategorie: 'Arbeit & Recht',
@@ -1293,7 +1293,8 @@ export const arbeitRechner: RechnerConfig[] = [
     // ~1.560 W), Leitformat „beispielrechnung" 5× dominant. SSOT aus kuendigungsfrist.ts /
     // § 622 BGB gespiegelt: Grundfrist 4 Wo zum 15./Monatsende (Abs. 1); AG-Staffel Abs. 2
     // 2/5/8/10/12/15/20 J → 1/2/3/4/5/6/7 Monate zum Monatsende (NUR AG-Kündigung); AN immer
-    // Grundfrist; Probezeit 2 Wo (Abs. 3). BAG 10 AZR 64/17: BZ zum Fristende maßgeblich.
+    // Grundfrist; Probezeit 2 Wo (Abs. 3). BZ beim Zugang der Kündigung maßgeblich (W189: vorher
+    // „zum Fristende, BAG 10 AZR 64/17“; das Urteil ist nicht auffindbar).
     // Beispiele lib-exakt (10.03→15.04; AG 12 J 15.06→30.11; AN 12 J 15.06→15.07; Probezeit
     // 10.02→24.02). Keine Rechtsberatung; AG-Staffel NICHT auf AN angewandt. erklaerung Fallback.
     contentBloecke: [
@@ -1326,7 +1327,7 @@ export const arbeitRechner: RechnerConfig[] = [
           ['ab 15 Jahre', '6 Monate zum Monatsende', '§ 622 Abs. 2 Nr. 6'],
           ['ab 20 Jahre', '7 Monate zum Monatsende', '§ 622 Abs. 2 Nr. 7'],
         ],
-        fussnote: 'Diese verlängerten Fristen gelten NUR für die Kündigung durch den Arbeitgeber. Maßgeblich ist die Betriebszugehörigkeit zum Fristende (BAG 10 AZR 64/17). Ab 2 Jahren endet die Frist stets zum Monatsende, nicht mehr zum 15. Die längste gesetzliche Frist sind 7 Monate zum Monatsende ab 20 Jahren Betriebszugehörigkeit — eine im Februar zugegangene Kündigung endet dann erst zum 30. September.',
+        fussnote: 'Diese verlängerten Fristen gelten NUR für die Kündigung durch den Arbeitgeber. Maßgeblich ist die Betriebszugehörigkeit an dem Tag, an dem die Kündigung zugeht. Ab 2 Jahren endet die Frist stets zum Monatsende, nicht mehr zum 15. Die längste gesetzliche Frist sind 7 Monate zum Monatsende ab 20 Jahren Betriebszugehörigkeit — eine im Februar zugegangene Kündigung endet dann erst zum 30. September.',
       },
       {
         typ: 'beispielrechnung',
@@ -1406,8 +1407,8 @@ export const arbeitRechner: RechnerConfig[] = [
       },
       {
         typ: 'text',
-        titel: 'BAG: Betriebszugehörigkeit zum Fristende zählt',
-        html: `<p>Eine Feinheit der AG-Staffel sorgt regelmäßig für Streit: Maßgeblich für die Stufe ist nicht die Betriebszugehörigkeit am <strong>Kündigungstag</strong>, sondern die am <strong>Ende der Kündigungsfrist</strong>. Das hat das Bundesarbeitsgericht klargestellt (BAG 10 AZR 64/17).</p><p>Praktisch heißt das: Wer eine Stufengrenze — etwa die 10-Jahres-Marke — erst <strong>während</strong> der laufenden Frist erreicht, profitiert bereits von der höheren Stufe. Kündigt der Arbeitgeber jemanden, der in zwei Monaten zehn Jahre voll hat, dann gilt nicht die 3-Monats-Frist (8 Jahre), sondern die 4-Monats-Frist (10 Jahre) — weil die zehn Jahre innerhalb der Frist erreicht werden.</p><p>Der Rechner berücksichtigt das automatisch: Er prüft für jede Stufe, ob die Schwelle bis zum jeweiligen Fristende erreicht wird, und wählt die höchste zutreffende. So wird niemand um eine längere Frist gebracht, nur weil die Kündigung kurz vor einem Dienstjubiläum ausgesprochen wurde.</p>`,
+        titel: 'Maßgeblich ist der Zugang der Kündigung',
+        html: `<p>Eine Feinheit der AG-Staffel sorgt regelmäßig für Streit: Welche Stufe gilt, richtet sich nach der Betriebszugehörigkeit an dem Tag, an dem die Kündigung <strong>zugeht</strong>, nicht nach der am <strong>Ende der Kündigungsfrist</strong>. Das Gesetz fragt, ob das Arbeitsverhältnis zwei, fünf, acht oder mehr Jahre „bestanden hat“, und zwar im Zeitpunkt der Kündigung.</p><p>Praktisch heißt das: Wer eine Stufengrenze — etwa die 10-Jahres-Marke — erst <strong>während</strong> der laufenden Frist erreicht, bekommt dadurch keine längere Frist. Beispiel: beschäftigt seit 1. Juni 2016, die Kündigung des Arbeitgebers geht am 10. März 2026 zu. Das sind 9 Jahre und 9 Monate, also gelten 3 Monate zum Monatsende: Ende am 30. Juni 2026. Die zehn Jahre am 1. Juni 2026 ändern daran nichts. Geht die Kündigung erst am 1. Juni 2026 zu, gelten 4 Monate zum Monatsende bis zum 31. Oktober 2026.</p><p>Der Rechner zählt die Betriebszugehörigkeit deshalb bis zum Tag des Zugangs. Kündigt ein Arbeitgeber gezielt kurz vor einer Stufengrenze, nur um die längere Frist zu vermeiden, kann das im Einzelfall gegen Treu und Glauben verstoßen; das klärt eine Fachanwältin oder ein Fachanwalt für Arbeitsrecht.</p>`,
       },
       {
         typ: 'text',
@@ -1419,7 +1420,7 @@ export const arbeitRechner: RechnerConfig[] = [
         titel: 'Kündigungsfrist korrekt bestimmen',
         punkte: [
           'Wer kündigt? Die AG-Staffel gilt nur bei Kündigung durch den Arbeitgeber.',
-          'Betriebszugehörigkeit bestimmen — und zwar bis zum voraussichtlichen Fristende.',
+          'Betriebszugehörigkeit bis zu dem Tag bestimmen, an dem die Kündigung zugeht.',
           'Zuerst Tarif- und Arbeitsvertrag prüfen (gehen der Grundregel vor).',
           'Probezeit? Dann 2 Wochen, ohne festen 15.-/Monatsende-Termin.',
           'Frist ab dem Zugang der Kündigung rechnen, nicht ab dem Briefdatum.',
@@ -2359,7 +2360,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'arbeitstage-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Arbeitstage-Rechner',
     beschreibung: 'Arbeitstage pro Monat, Jahr oder Zeitraum berechnen — mit Feiertagen nach Bundesland und individueller Wochenarbeitszeit.',
     kategorie: 'Arbeit & Recht',
@@ -2694,7 +2695,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'elternzeit-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Elternzeit-Rechner',
     beschreibung: 'Elternzeit berechnen: Anspruch, Aufteilung zwischen Partnern, Fristen und Meldetermine.',
     kategorie: 'Arbeit & Recht',

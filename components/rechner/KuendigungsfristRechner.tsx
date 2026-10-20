@@ -8,9 +8,12 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
+import { isoLokal } from '@/lib/datum-lokal';
 
+// W189: vorher toISOString() (UTC). Kurz nach Mitternacht (bis 01:00 Uhr MEZ bzw. 02:00 Uhr MESZ)
+// stand im Feld „Kündigungsdatum“ noch das gestrige Datum, am 20.10.2026 um 00:30 Uhr der 19.10.2026.
 function toIso(d: Date): string {
-  return d.toISOString().slice(0, 10);
+  return isoLokal(d);
 }
 
 function defaultBeschaeftigtSeit(): string {

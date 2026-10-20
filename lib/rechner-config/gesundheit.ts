@@ -1603,7 +1603,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'zyklusrechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Zyklusrechner',
     beschreibung: 'Eisprung, fruchtbares Fenster und nächste Periode berechnen — mit Kalenderansicht für 1, 3 oder 6 Zyklen.',
     kategorie: 'Gesundheit',

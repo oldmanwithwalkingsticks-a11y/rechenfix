@@ -688,7 +688,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'buergergeld-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-21',
     quellen: [
       { titel: '§ 20 SGB II: Regelbedarf zur Sicherung des Lebensunterhalts', url: 'https://www.gesetze-im-internet.de/sgb_2/__20.html' },
       { titel: '§ 22 SGB II: Bedarfe für Unterkunft und Heizung', url: 'https://www.gesetze-im-internet.de/sgb_2/__22.html' },

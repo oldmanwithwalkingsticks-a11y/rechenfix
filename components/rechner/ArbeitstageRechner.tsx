@@ -4,7 +4,8 @@ import { useState, useMemo } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-import { getFeiertage, type Feiertag, type Bundesland } from '@/lib/berechnungen/feiertage';
+import { zaehleArbeitstageZeitraum, type Bundesland } from '@/lib/berechnungen/feiertage';
+import { parseIsoLokal } from '@/lib/datum-lokal';
 
 type Modus = 'monat' | 'zeitraum' | 'jahr';
 
@@ -31,38 +32,6 @@ const MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'A
 
 const JAHR_OPTIONEN = ['2024', '2025', '2026', '2027', '2028', '2029', '2030'];
 
-function countArbeitstage(start: Date, end: Date, bl: Bundesland, arbeitstageProWoche: number[]) {
-  // Feiertage aller berührten Jahre vorab in Map cachen (Modus 'zeitraum'
-  // kann Jahresgrenzen überschreiten)
-  const feiertageMap = new Map<string, Feiertag>();
-  for (let j = start.getFullYear(); j <= end.getFullYear(); j++) {
-    for (const f of getFeiertage(j, bl)) {
-      const key = `${f.datum.getFullYear()}-${f.datum.getMonth()}-${f.datum.getDate()}`;
-      feiertageMap.set(key, f);
-    }
-  }
-
-  let at = 0;
-  let wt = 0;
-  let ft = 0;
-  const feiertageListe: { datum: string; name: string }[] = [];
-  const d = new Date(start);
-  while (d <= end) {
-    const tag = d.getDay(); // 0=So 1=Mo…6=Sa
-    const istArbeitswerktag = arbeitstageProWoche.includes(tag);
-    if (tag !== 0 && tag !== 6) wt++;
-    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
-    const fe = feiertageMap.get(key);
-    if (fe && tag !== 0 && tag !== 6) {
-      ft++;
-      feiertageListe.push({ datum: d.toLocaleDateString('de-DE'), name: fe.name });
-    }
-    if (istArbeitswerktag && !fe) at++;
-    d.setDate(d.getDate() + 1);
-  }
-  return { arbeitstage: at, werktage: wt, feiertage: ft, feiertageListe };
-}
-
 export default function ArbeitstageRechner() {
   const [modus, setModus] = useState<Modus>('monat');
   const [bl, setBl] = useState<Bundesland>('nw');
@@ -83,11 +52,14 @@ export default function ArbeitstageRechner() {
       start = new Date(j, 0, 1);
       end = new Date(j, 11, 31);
     } else {
-      start = new Date(von);
-      end = new Date(bis);
+      // W189: vorher new Date(von/bis) = UTC-Mitternacht (01:00/02:00 Uhr deutscher Zeit). Lag der
+      // Beginn in der Sommer- und das Ende in der Winterzeit, fiel der letzte Tag heraus:
+      // 01.10.–30.10.2026 ergab 21 statt 22 Arbeitstage.
+      start = parseIsoLokal(von);
+      end = parseIsoLokal(bis);
       if (end < start) end = start;
     }
-    return countArbeitstage(start, end, bl, tage);
+    return zaehleArbeitstageZeitraum(start, end, bl, tage);
   }, [modus, jahr, monat, von, bis, bl, tage]);
 
   const toggleTag = (t: number) => setTage(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t].sort());

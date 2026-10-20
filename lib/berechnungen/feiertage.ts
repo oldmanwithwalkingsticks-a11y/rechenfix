@@ -181,3 +181,42 @@ export function anzahlBundesweiterFeiertageMoBisFr(jahr: number): number {
     return wt !== 0 && wt !== 6;
   }).length;
 }
+
+/**
+ * Arbeitstage (gewählte Wochentage ohne Feiertage), Werktage Mo–Fr und Feiertage Mo–Fr von `start`
+ * bis `end`, beide einschließlich. `start` und `end` als lokale Mitternacht (z. B. `parseIsoLokal`):
+ * Mit `new Date('YYYY-MM-DD')` (01:00/02:00 Uhr deutscher Zeit) fiel der letzte Tag heraus, wenn der
+ * Zeitraum aus der Sommer- in die Winterzeit reichte.
+ * W189: unverändert aus ArbeitstageRechner.tsx herausgezogen (dort `countArbeitstage`).
+ */
+export function zaehleArbeitstageZeitraum(start: Date, end: Date, bl: Bundesland, arbeitstageProWoche: number[]) {
+  // Feiertage aller berührten Jahre vorab in Map cachen (Modus 'zeitraum'
+  // kann Jahresgrenzen überschreiten)
+  const feiertageMap = new Map<string, Feiertag>();
+  for (let j = start.getFullYear(); j <= end.getFullYear(); j++) {
+    for (const f of getFeiertage(j, bl)) {
+      const key = `${f.datum.getFullYear()}-${f.datum.getMonth()}-${f.datum.getDate()}`;
+      feiertageMap.set(key, f);
+    }
+  }
+
+  let at = 0;
+  let wt = 0;
+  let ft = 0;
+  const feiertageListe: { datum: string; name: string }[] = [];
+  const d = new Date(start);
+  while (d <= end) {
+    const tag = d.getDay(); // 0=So 1=Mo…6=Sa
+    const istArbeitswerktag = arbeitstageProWoche.includes(tag);
+    if (tag !== 0 && tag !== 6) wt++;
+    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    const fe = feiertageMap.get(key);
+    if (fe && tag !== 0 && tag !== 6) {
+      ft++;
+      feiertageListe.push({ datum: d.toLocaleDateString('de-DE'), name: fe.name });
+    }
+    if (istArbeitswerktag && !fe) at++;
+    d.setDate(d.getDate() + 1);
+  }
+  return { arbeitstage: at, werktage: wt, feiertage: ft, feiertageListe };
+}
