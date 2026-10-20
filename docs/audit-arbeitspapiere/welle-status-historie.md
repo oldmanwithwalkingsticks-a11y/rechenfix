@@ -6,6 +6,139 @@
 
 ---
 
+## 20.10.2026 — Welle 187: Restbefunde der dritten und vierten Caption-Prüfung — Rechner, Seitentexte, Captions, Social-Kacheln und TikTok-Videos — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:**
+- **Dritte Caption-Prüfung:** alle 206 Captions gegen den Stand nach Welle 186. Ergebnis: 153 OK, 51 Fehler, 2 unklar
+  und rund 50 Seitenbefunde (Rechner oder Seitentext falsch).
+- **Vierte Prüfung:** die 74 Captions der Rechner, die in dieser Welle neu rechnen. Ergebnis: 49 OK, 24 Fehler,
+  1 unklar und 6 weitere Seitenbefunde.
+- Alle Seitenbefunde sind korrigiert, außer den unten begründeten; die Captions stehen danach auf dem neuen Stand der
+  Rechner. **Die Verweise der Wellen 177 bis 186 auf „Captions folgen in Welle 187“ sind damit erledigt.**
+
+**Rechnerkorrekturen** (Auszug; Kommentare `// W187:` im Code nennen jeweils den alten Stand; Werte aus der Vorlage,
+in diesem Lauf nicht erneut an Gesetz und Quellen geprüft):
+
+| Bereich | Was | Neuer Startwert bzw. Beleg |
+|---|---|---|
+| Schenkungs-/Erbschaftsteuer | Erwerb auf volle 100 € abgerundet (§ 10 Abs. 1 S. 6 ErbStG) | 700.050 €, Kind 3 J.: Erwerb 248.000 €, Steuer 27.280 € |
+| Steuererstattung | Werbungskosten nur über 1.230 €, Pendeltage ohne Homeoffice, ESt-Differenz statt Grenzsatz; § 35a höchstens bis zur tariflichen ESt | Startwerte ca. 11 € (Werbungskosten 1.269 €) |
+| Splitting | Eingabe ist das zvE je Partner (vorher Brutto mit nur 1.266 € Abzug) | 55.000 + 25.000 €: Vorteil 779 €; Infobox max. Vorteil rund 19.470 € |
+| Pendlerpauschale | Ersparnis nur über dem Arbeitnehmer-Pauschbetrag, Obergrenze als Zusatzzeile | 301,00 €, bis zu 731,50 € |
+| Einkommensteuer, Steuerprogression | Texte: Soli ab etwa 75.000 € zvE, Spitzensteuersatz 69.879 € | — |
+| Kfz-Steuer | drei Zeiträume (bis 06/2009, 07/2009–2020 mit CO₂-Schwelle 120/110/95 g, ab 2021) | 2015, 1.498 ccm, 128 g: 96 € |
+| GmbH-Geschäftsführer | beherrschend und sozialversicherungsfrei ab 50 % Anteil (BSG B 12 KR 13/17 R), E-Dienstwagen 0,25 % bis 100.000 € Listenpreis | — |
+| Rente | Besteuerungsanteil 84 % (2026) + 0,5 je Jahr; KV/PV des Rentners; Gehaltsentwicklung relativ zum Durchschnittsentgelt, Startwert 0 % | 38,00 EP, 1.615,86 € brutto, ca. 1.341 € netto |
+| Sparplan | Einzahlung am Monatsanfang, jährliche und monatliche Verzinsung | 15.502,25 € / monatlich 15.592,93 € |
+| Arbeitslosengeld | Tagesentgelt ÷ 365, SV-Pauschale 20 %, Lohnsteuer-Tagestabelle, keine Kirchensteuer | 1.417 €/Monat, 17.003 € |
+| Gehaltsvergleich | Basis-Median 4.120 € | Kaufmännisch, NRW, 35–44: 32 %, Median 4.166 € |
+| BAföG / AFBG | Freibeträge, Sozialpauschale, Splitting der Eltern; AFBG-Kinderbetreuungszuschlag | Start 855 €; AFBG 1.019 € = 442 + 380 + 102 + 35 + 60 |
+| Währung | EZB-Referenzkurse 19.10.2026, ohne BGN und RUB, 27 Währungen | 100 € = 112,25 $ |
+| Elterngeld | Ersatzrate über 1.200 € | 1.240 € → 65 %, 806 € |
+| Führerschein, Autokosten | Prüfungsgebühren 24,99 / 129,83 €, Texte Wertverlust | 3.102 €, Zeile „12 × 82,50 €“ |
+| Wasserbedarf, Trinkmenge | Getränkeanteil 54 % (D-A-CH), Gesamtbedarf und Trinkmenge getrennt | 75 kg: 2,6 L gesamt, 1,4 L trinken |
+| Körperfett, WHR, FFMI, Schwangerschaft-Gewicht | Kategorien, Grenzwert WHR 0,90, Zwillinge | 178/81/38: 13,2 % Athletisch |
+| Sonnenschutz | Tabelle gilt für UV 8, nur Verkürzung | 15 Min. / 4 Std. 30 Min. / 2 Std. 15 Min. |
+| kW/PS | Faktor 0,73549875 | 150 PS = 110,32 kW |
+| Bußgeld | Lkw nach BKatV Tabelle 1a, Punkte nach FeV Anlage 13 | Lkw innerorts 26 km/h: 235 €, 2 Punkte, 1 Monat |
+| Schritte | Kalorien = MET × kg × Stunden (2024 Adult Compendium: 3,0 / 3,8 / 5,5) | 8.000 Schritte: 331 kcal (vorher 392) |
+| SSW, Geburtstermin, Kündigungsfrist | Tagesdifferenz über die Sommerzeit-Umstellung (vorher einen Tag zu wenig) | LMP 01.03.2026, heute 09.06.2026: 14+2 |
+| Alkoholgehalt | Standardglas 10 g ≈ 0,25 l Bier (vorher 0,33 l = 13 g); DGE 2024 | — |
+| Unterhalt (Düsseldorfer Tabelle 2026) | Gruppen 6–15 mit 128–200 %, Zahlbetrag ohne zweite Aufrundung | 512,50 € (vorher 513 €) |
+| Scheidungskosten | keine Einigungsgebühr (VV RVG Nr. 1000 Anm. Abs. 5), Versorgungsausgleich § 50 FamGKG je Anrecht | Wert 18.000 €, 3.203 €, 1.602 € pro Person |
+| Grundsteuer | Bundesmodell nach §§ 252–257 BewG (Anlagen 36 bis 41), Länder, Mietniveaustufe, Miteigentumsanteil | Startwerte 268 €/Jahr (Anteil 250/1.000); 1.000/1.000: 290,15 € |
+| Wohngeld | Texte: Rechner des BMWSB genau, verbindlich nur der Bescheid; Klima- und Heizkostenkomponente | — |
+| weitere | Geburtstag, Lebenszeit, Lebenserwartung 78,8/83,4, Schuhgrößen, Zucker, Auflösung 64:27, Powerbank, Acre, Zufallszahl (crypto) | — |
+
+**Captions und Bilder:** `lib/social/captions.json` mit 188 geänderten Captions, davon 90 mit neuer Headline oder
+neuem Eyebrow. Genau diese 90 Kacheln (`public/social-posts/`), 90 Hochformate (`public/social-videos-src/`) und 90
+TikTok-Videos (`public/social-videos/`) sind neu erzeugt, dazu `lib/social/kacheln-manifest.json`.
+
+**Änderungen** (743 Ersetzungen in 86 Dateien plus 14 neue Dateien, Vorlage `_lokal/welle187-captions-rechner.mjs`,
+Gegenprobe `_lokal/welle187-lib.mts`, beide nicht committet):
+- 30 Komponenten, 31 Libs, `lib/ki-rechner/tools.ts`, 10 Config-Dateien, `lib/social/captions.json`,
+  `app/finanzen/wohngeld-rechner/page.tsx`, 12 geänderte und 14 neue Prüfskripte (`verify:alle` zählt danach 83).
+- `letzteAktualisierung` → `2026-10-20` bei den 50 Rechnern, deren Seite sich ändert.
+
+**Bewusst nicht geändert:** `queue.json`, `kategorie-farben.json`, die Cron-Routen, die KV-Einträge
+(`social:done:*`, `social:posted:*`), `components/rechner/WohngeldRechner.tsx` (stillgelegt, die Seite ist statisch).
+
+**Bewusst offen geblieben:**
+- **Gehaltsvergleich:** Berufs-, Länder- und Altersfaktoren bleiben ein Modell. GENESIS 62361 (Verdiensterhebung
+  April 2025) war nicht abrufbar; belegt ist nur der Basis-Median 4.120 €. Die Seite nennt das Modell.
+- **BAföG:** Kirchensteuer und Soli der Eltern werden nicht abgezogen. Bei getrennten Eltern zählt nur Elternteil 1,
+  gerechnet wird mit dem Tarif 2026 statt dem vorletzten Kalenderjahr. Das sind Modellgrenzen; die Seite nennt das
+  vorletzte Kalenderjahr und den Aktualisierungsantrag.
+- **Währung:** EZB-Referenzkurse vom 19.10.2026 aus der Veröffentlichung der Bundesbank (ecb.europa.eu war nicht
+  erreichbar). Die Kurse sind statisch und datiert.
+- **Steuererstattung:** Kirchensteuer und Soli auf die Erstattung sind nicht eingerechnet (Bundesland und Freigrenze
+  unbekannt); die Hinweisbox sagt es. Handwerkerleistungen (§ 35a Abs. 3, 1.200 €) sind kein eigener Posten.
+- **Pendlerpauschale:** Der Höchstbetrag von 4.500 € ohne eigenen Pkw ist nicht abgebildet; der Rechner nimmt einen
+  eigenen Pkw an.
+- **Scheidungskosten:** Die Folgesachen Zugewinn (+20 %) und Unterhalt (+15 %) bleiben Schätzwerte; gesetzlich zählen
+  die Forderung bzw. der Jahresbetrag (§§ 35, 51 FamGKG). Die Seite kennzeichnet sie, Haushaltssachen sind nicht
+  abgebildet.
+- **Grundsteuer:** Hamburg, Hessen und Niedersachsen sind nicht modelliert; ebenfalls nicht Garagen, Nutzflächen
+  anderer Art, Teilflächen, Verlängerung der Restnutzungsdauer und das Sachwertverfahren. Seite und Hinweisbox nennen
+  diese Lücken. Startwert Miteigentumsanteil 250/1.000, weil eine Wohnung mit dem ganzen 400-m²-Grundstück
+  unrealistisch ist.
+- **Düsseldorfer Tabelle:** Das Original-PDF war nicht abrufbar. Alle 60 Tabellenbeträge folgen der Regel
+  ⌈Mindestbedarf × Prozentsatz⌉ und stimmen mit den Primärwerten im Befund.
+- **Sonnenschutz:** UV 8 als Bezug der Eigenschutzzeit-Tabelle ist eine gekennzeichnete Annahme. Die Quellen (SSK
+  1997, BfS) nennen nur „Mittagssonne im Sommer“; unter UV 8 verlängert der Rechner nicht.
+- **Schwangerschaft-Gewicht:** Für Zwillinge gibt es keine IOM-Wochenraten. Die Ampel rechnet mit Einlingsraten, ein
+  Hinweis ist ergänzt.
+- **Schritte in Kilometer:** Joggen 7,0 und Laufen 9,8 MET bleiben (die Compendium-Seite zum Laufen war nicht
+  abrufbar); Gehen ist auf 3,8 angeglichen.
+- **Herzfrequenz-Zonen:** Die Komponente nennt Zone 2 weiter „Fettverbrennung“, die übliche Bezeichnung; FAQ und
+  Caption stellen die Kalorienbilanz klar.
+- **Schuhgrößen:** Die cm-Spalte (Innenlänge) und die Faustformel zur Fußlänge unterscheiden sich um rund 0,3 cm,
+  weil sie verschiedene Bezugsgrößen haben.
+- **Zufallszahl:** Zahlen, Würfel und Münze nutzen bewusst `Math.random`; nur der Passwort-Modus braucht `crypto` und
+  hat es.
+- **Zugewinnausgleich:** Die Caption hängt am monatlichen VPI und nennt jetzt „VPI-Stand September 2026“. Bei einem
+  neuen VPI-Stand muss sie mitgezogen werden, wenn sich die Rundung ändert.
+
+**Abweichungen und Funde:**
+- **SSW auch außerhalb deutscher Zeit nachgestellt:** Die Gegenprobe prüft die Sommerzeit-Korrektur nur in deutscher
+  Zeit. Zusätzlich mit Systemzeit Europe/Berlin, UTC, America/New_York und Australia/Sydney: LMP 01.03.2026 → 09.06.2026
+  überall SSW 14+2 (noch 25+5), LMP 01.10. → 01.12.2026 überall 8+5. Die Lib rechnet mit lokaler Mitternacht und
+  rundet jetzt (`Math.round` statt `Math.floor`).
+- **`verify:alle` zusätzlich mit `TZ=UTC`** wie die CI: in Phase 0 69/69, in Phase 2 83/83.
+- **Emojis oben angeschnitten:** Auf den Kacheln ist das Emoji am oberen Rand flach abgeschnitten (Dachspitze beim
+  Grundsteuer-Haus, obere Sonnenstrahlen). Das ist in den alten Kacheln aus `HEAD` genau so, also kein Fehler dieser
+  Welle; für eine spätere Bild-Welle vermerkt.
+- Datum: Die Vorlage setzt „heute“ in Berliner Zeit. Lauf unter Windows in deutscher Zeit.
+
+**Gates:**
+- Phase 0 an `60e041c`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `60e041c` und `8a46071`
+  (Welle 186); `git ls-files scripts/verify-rente.ts scripts/verify-bussgeld.ts` keine Ausgabe. `verify:alle`
+  „Prüfskripte: 69/69 grün.“, Exit 0. Pillow `12.2.0`, „Noto da“, „Snapshot (206 Rechner)“. Kacheln, Hochformate
+  und Videos `--check` je Exit 0: „Aktuell: 206“, „Veraltet: 0“ bzw. „Aktuell: 206 · Veraltet: 0“.
+- Phase 1: „OK — 743 Ersetzungen in 86 Dateien, 14 neue Dateien.“, Exit 0; `git status` 100 Zeilen, davon 14 neu,
+  Datei für Datei gegen die Liste im Prompt abgeglichen.
+- Phase 2: `verify:alle` „Prüfskripte: 83/83 grün.“, Exit 0. Gegenprobe Exit 0, „Alle Werte OK“, 66 × „OK“, keine
+  FEHL-Zeile. `npm run lint` Exit 0, keine Zeile „problems“. `npm run build` Rückgabewert 0, 271 Seiten.
+- Phase 3: „Snapshot (206 Rechner)“. `--check` Kacheln und Hochformate je Exit 1 mit „Aktuell: 116“, „Veraltet: 90“,
+  „Failed: 0“; je 90 Zeilen „geändert“. `--stale` Kacheln und Hochformate je Exit 0, „Generated: 90“, „Aktuell: 116“,
+  „Failed: 0“. Videos danach `--check` Exit 1, „Aktuell: 116 · Veraltet: 90“. Videos `--stale` im Hintergrund:
+  „Rendered: 90 · Skipped: 0 · Aktuell: 116 · Failed: 0“, „exit 0“.
+- Phase 4: `--check` Kacheln, Hochformate und Videos je Exit 0, „Aktuell: 206“, „Veraltet: 0“ bzw. „Aktuell: 206 ·
+  Veraltet: 0“. `git status` je 90 Dateien in `public/social-posts`, `public/social-videos-src`, `public/social-videos`;
+  übrige 101 (die 100 aus Phase 1 und `lib/social/kacheln-manifest.json`). Angesehen: `grundsteuer-rechner.png`
+  „SEIT 2025“, „Grundsteuer-Rechner“, „268 € / Jahr“; `arbeitslosengeld-rechner.png` „≈ 1.417 € / Monat“;
+  `sonnenschutz-rechner.png` „4 Std. 30 Min. geschützt“ in einer Zeile; `social-videos-src/rentenrechner.png`
+  schwarzer Grund, „RENTEN-CHECK“, „1.341 € Netto-Rente“; `waehrungsrechner.mp4` per `ffprobe` 6,0 s, 1080 × 1920,
+  H.264, Einzelbild bei 1,5 s „SCHNELL UMGERECHNET“, „112,25 $“ (abgespielt habe ich es nicht).
+- Phase 5: `npm run build` Rückgabewert 0, 271 Seiten (Lint im `prebuild` ohne Probleme).
+- Phase 6: Commit A mit den Pfaden aus dem Prompt, `git diff --cached --name-only` 100 und gleich der Liste;
+  Commit B 271, danach `git status` leer.
+
+**Commits:** A `498957e` (die 100 Dateien), B `ee93f3c` (Manifest und je 90 Kacheln, Hochformate und Videos, 271
+Dateien). C ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 186 (Fassung 2): sieben rote Prüfskripte grün, Sammel-Gate `npm run verify:alle`, GitHub Actions, tsx fest, zwei ESLint-Warnungen — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:**
