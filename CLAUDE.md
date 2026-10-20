@@ -929,6 +929,15 @@ Bei Gesundheits-/Finanz-/Familien-Themen: keine wertende Sprache, Verweis auf Fa
 - `lib/rechner-config/client-data.ts` ist auto-generiertes File (Datums-Stempel-Drift) — **NICHT mit-committen**
 - Vor `git add` immer `git status` prüfen, ob client-data.ts dirty ist
 - Atomic-Commits: ein Sub-Wellen-Commit, prägnante Message
+- **Getrackte Skills unter `.claude/skills/`:** `rechner-builder` und `blog-builder` sind versioniert,
+  liegen aber unter der Ignore-Regel `.claude/skills/` (darunter das private Skill-Repo für peter-ki
+  und susanne-recht, Begründung in `.gitignore`). `git add <pfad>` nimmt geänderte Dateien dort zwar
+  auf, endet aber mit Exit 1 und bricht `&&`-Ketten ab (Welle 166). Deshalb
+  `git add -u -- .claude/skills/rechner-builder .claude/skills/blog-builder`; eine neue Datei in
+  diesen beiden Skills braucht `git add -f`. Das private Repo darunter nie anfassen.
+- **Skill-Kopie in Claude.ai:** Ändert eine Welle `SKILL.md` oder eine Referenzdatei von
+  `rechner-builder` oder `blog-builder`, muss Karsten den Skill in Claude.ai nachziehen. Der Bericht
+  der Welle nennt die geänderten Skill-Dateien ausdrücklich.
 
 ### Pre-Phase-Pflicht
 
