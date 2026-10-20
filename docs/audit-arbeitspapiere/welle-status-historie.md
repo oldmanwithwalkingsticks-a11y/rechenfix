@@ -6,6 +6,101 @@
 
 ---
 
+## 20.10.2026 — Welle 178: GmbH-Geschäftsführer — KV/PV beim beherrschenden GGF; Erbschaftsteuer — Versorgungsfreibetrag ohne Altersangabe und mit 27 Jahren — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Caption-Prüfung. Die Captions beider Rechner stimmten nicht, weil die Rechner selbst falsch rechneten.
+Die Captions bleiben in dieser Welle unverändert.
+
+**Rechtslage** (in diesem Lauf nicht erneut an den Normtexten geprüft; Werte aus der Vorlage):
+- **§ 243 SGB V:** ermäßigter Beitragssatz 14,0 % für Mitglieder ohne Anspruch auf Krankengeld, etwa den freiwillig
+  versicherten beherrschenden GGF.
+- **§ 44 Abs. 2 SGB V:** Mit Wahlerklärung für Krankengeld gilt der allgemeine Satz von 14,6 %.
+- **§ 10 Abs. 1 Nr. 3 EStG:** Beiträge zur Basis-Kranken- und Pflegeversicherung sind als Vorsorgeaufwendungen voll
+  abziehbar, ohne den Deckel von 7.000 €, mit dem der Rechner bisher rechnete.
+- **§ 17 Abs. 2 Nr. 5 ErbStG:** letzte Stufe des Versorgungsfreibetrags für Kinder „bis zur Vollendung des
+  27. Lebensjahres“, also bis 26 Jahre; ab dem 27. Geburtstag 0 €.
+
+**GmbH-Geschäftsführer-Rechner** (Startwerte 6.000 € brutto im Monat, Grundtarif, kinderlos, ohne Kirchensteuer):
+
+| | vorher | jetzt |
+|---|---|---|
+| beherrschend + GKV | kein KV/PV-Beitrag abgezogen: **4.451 €** netto | freiwilliger Vollbeitrag 14,0 % + 2,9 % Zusatzbeitrag, PV 3,6 % + 0,6 % kinderlos, bis BBG 69.750 €: **11.787,75 € + 2.929,50 €** im Jahr, Jahresnetto 44.545,75 € → **3.712 €** |
+| Vorgabe Zusatzbeitrag | 1,7 % | **2,9 %** (`KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT`) |
+| Feld Zusatzbeitrag | nur nicht beherrschend | bei jeder GKV-Wahl |
+| Vorsorge beherrschend + PKV | höchstens 7.000 € | voller PKV-Beitrag: PKV 650 € → zvE **62.970 €**, ESt **15.394 €**, **4.067 €** (vorher 4.041 €) |
+| Vorsorge nicht beherrschend + PKV | ohne PKV-Beitrag | mit PKV-Beitrag |
+| nicht beherrschend + GKV, 2,9 % | — | **3.647 €** |
+
+**Erbschaftsteuer-Rechner** (`versorgungsfbKind`):
+
+| | vorher | jetzt |
+|---|---|---|
+| Kind, Alter leer | 52.000 € (Höchstbetrag für bis 5 Jahre) | **0 €** (Kind 27 oder älter, der häufigste Fall) |
+| Kind, 27 Jahre | 10.300 € (`<= 27`) | **0 €** (`< 27`) |
+| 500.000 €, Kind, Alter leer | 3.360 € Steuer | **11.000 €** |
+| 500.000 €, Kind, 27 Jahre | 9.867 € | **11.000 €** |
+| 500.000 €, Kind, 3 / 26 Jahre | 3.360 / 9.867 € | unverändert |
+
+**Grenze der Rechnung:** Der PKV-Beitrag zählt ganz als Basisabsicherung. Anteile für Wahlleistungen und
+Krankentagegeld wären nach § 10 Abs. 1 Nr. 3 EStG nicht abziehbar; der Rechner überschätzt die Vorsorge dann
+leicht und das Netto entsprechend.
+
+**Änderungen** (28 Ersetzungen und 2 Datumszeilen = 30 in 6 Dateien, Vorlage
+`_lokal/welle178-gmbh-gf-erbschaftsteuer.mjs`, nicht committet; Lib-Prüfung `_lokal/welle178-lib.mts`):
+- **`lib/berechnungen/sv-parameter.ts`:** neu `KV_ERMAESSIGTER_BEITRAGSSATZ_2026 = 0.14` mit Verweis auf § 243 und
+  § 44 Abs. 2 SGB V.
+- **`components/rechner/GmbhGfRechner.tsx`:** beherrschend + GKV mit KV 14,0 % + Zusatzbeitrag und PV voll
+  (`pvAnteilAn2026` + `PV_BASIS_SATZ_2026`); Vorsorge = RV + KV + PV + PKV ohne Deckel; Vorgabe Zusatzbeitrag aus
+  `sv-parameter.ts`; Feld Zusatzbeitrag bei jeder GKV-Wahl; Zeilen „GKV freiwillig (voller Beitrag)“ und
+  „Pflegeversicherung (voller Beitrag)“; PKV-Hinweis je nach Status; Infobox beherrschend.
+- **`lib/rechner-config/finanzen.ts`, Block `gmbh-geschaeftsfuehrer-rechner`:** Beispiel, Rechenbeispiel (zvE,
+  ESt, Netto), Fazit, Erklärtexte, FAQ, Kennzahl „SV-Ersparnis beherrschend 10,6 %“ (RV 9,3 % + ALV 1,3 %), Quelle
+  § 243 SGB V.
+- **`lib/berechnungen/erbschaftsteuer.ts`:** `versorgungsfbKind` ohne Alter 0 €, letzte Stufe `< 27`.
+- **`components/rechner/ErbschaftsteuerRechner.tsx`:** Platzhalter „leer = 27 Jahre oder älter (kein
+  Versorgungsfreibetrag)“, Staffel-Hinweis 21–26 J.
+- **`lib/rechner-config/finanzen.ts`, Block `erbschaftsteuer-rechner`:** Beispiel „Kind (bis 5 Jahre) … Ein Kind ab
+  27 Jahren zahlt 33.000 €“, Erklärtext zur Staffel.
+- **`scripts/verify-erbst-haertefall.ts`:** ER-01/02 mit 3 Jahren, neu ER-05 bis ER-07.
+- **`letzteAktualisierung`** → `2026-10-20` für `erbschaftsteuer-rechner` und `gmbh-geschaeftsfuehrer-rechner`.
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187); `brutto-netto.ts`,
+`pflegeversicherung.ts`.
+
+**Vermerk:** Die zugehörigen Captions folgen in Welle 187.
+
+**Abweichungen und Funde:**
+- **HTML-Sollwert nicht erreichbar:** „Ein Kind ab 27 Jahren zahlt 33.000 €“ steht nicht im gebauten HTML von
+  `/finanzen/erbschaftsteuer-rechner`, und zwar nicht wegen des Codes: Das Feld `beispiel` wird seit Welle 101 auf
+  keiner Rechnerseite ausgegeben (auch das GmbH-Beispiel „≈ 4.067 €“ fehlt im HTML und RSC). Der Satz steht in
+  `finanzen.ts` und im gebauten Konfigurations-Chunk. `beispiel` lesen nur `scripts/social-caption-builder.ts`
+  („Beispiel: …“) und `scripts/dump-rechner-data.ts`; für Welle 187 relevant. Kein STOP-Grund nach dem Prompt.
+- **`sv-parameter.ts`:** Die neue Konstante steht zwischen dem JSDoc von `KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026` und
+  dieser Konstante; der alte Kommentar hängt dadurch frei. Rein kosmetisch, nicht von Hand korrigiert, weil spätere
+  Vorlagen auf dem genauen Text aufsetzen. Für eine spätere Welle.
+
+**Gates:**
+- Phase 0 an `23d77fd`: `git status` leer, oben `23d77fd` und `200ed8b` (Welle 177). Greps: „useState('1.7')“ und
+  „Math.min(pkvJahr, 7000)“ je `GmbhGfRechner.tsx:1`; „if (alter === undefined) return 52000;“ und „if (alter <= 27)
+  return 10300;“ je `erbschaftsteuer.ts:1`; `KV_ERMAESSIGTER_BEITRAGSSATZ_2026` keine Ausgabe.
+  `verify-erbst-haertefall` 16/16.
+- Phase 1: „OK — 30 Ersetzungen in 6 Dateien.“, Exit 0; geändert genau die 6 Dateien.
+- Phase 2: Lib-Prüfung 13× OK, „Alle Werte OK“, Exit 0 (ermäßigter Satz 0,14; Zusatzbeitrag 2,90; GmbH-GF
+  beherrschend + GKV 3.712,15 €, PKV 650 € 4.067,17 €, nicht beherrschend + GKV 3.646,99 €; Versorgungsfreibetrag
+  ohne Alter 0, 5 J. 52.000, 26 J. 10.300, 27 J. 0; ErbSt 500.000 € Kind ohne Alter 11.000, 3 J. 3.360, 26 J. 9.867,
+  27 J. 11.000). `verify-erbst-haertefall` 19/19. Greps: „useState('1.7')“, „Math.min(pkvJahr, 7000)“ und „if (alter
+  === undefined) return 52000;“ keine Ausgabe; `KV_ERMAESSIGTER_BEITRAGSSATZ_2026` `GmbhGfRechner.tsx:2` und
+  `sv-parameter.ts:1`; „4.067 €“ `finanzen.ts:4`; „3.712 €“ `finanzen.ts:3`. `npm run build` Rückgabewert 0,
+  271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen. Im gebauten HTML von
+  `/finanzen/gmbh-geschaeftsfuehrer-rechner` „GKV freiwillig (voller Beitrag)“, „Pflegeversicherung (voller
+  Beitrag)“, „11.787,75 €“, „2.929,50 €“, „Jahresnetto 44.545,75 €“, „3.712 €“ 3×, „4.451“ fehlt; in
+  `/finanzen/erbschaftsteuer-rechner` „leer = 27 Jahre oder älter (kein Versorgungsfreibetrag)“ 1×, „Ein Kind ab
+  27 Jahren zahlt 33.000 €“ fehlt (siehe oben).
+
+**Commits:** A `3ac0428` (die 6 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 177: sechs Rechenfehler aus der Caption-Prüfung — Spenden, Zinsen, Stromvergleich, EEG, Backzeit, Zucker — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Bei der Prüfung aller 206 Social-Captions gegen die Rechner passten sechs Captions nicht zum Rechner,
