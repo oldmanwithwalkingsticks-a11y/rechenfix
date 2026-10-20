@@ -6,6 +6,114 @@
 
 ---
 
+## 20.10.2026 — Welle 180: Verbraucherpreisindex — September 2026, Jahresdurchschnitte 1995 bis 2025 nach Destatis; Zugewinnausgleich-Texte aus der SSOT; Indexmiete — Beispiel-VPI richtig benannt, Textform — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Caption-Prüfung. Die Zugewinnausgleich-Caption rechnete mit „VPI 125,0, Stand Mai 2026“. Dabei zeigte
+sich: `VPI_AKTUELL` stand noch auf Mai 2026, und `VPI_JAHRESDURCHSCHNITTE` war bis auf 2020 durchgehend falsch
+(2019 lag mit 101,1 sogar über 2020). Kein Skript prüfte die Jahresreihe. Zwei Prüfskripte
+(`verify-zugewinnausgleich`, `verify-wohnen-p1`) waren seit März 2026 rot, ohne dass es auffiel, weil `prebuild`
+sie nicht ausführt. Die Captions bleiben in dieser Welle unverändert.
+
+**Quellen** (in diesem Lauf nicht erneut an Destatis und den Normtexten geprüft; Werte aus der Vorlage):
+- **Destatis Tabelle 61111-0001** (Verbraucherpreisindex, 2020 = 100), 2021–2025 auch Destatis-Basisdaten
+  **vpi141a**, Stand 13.10.2026.
+- **Destatis PM Nr. 364 vom 13.10.2026:** VPI September 2026 126,6, +3,3 % zum Vorjahresmonat.
+- **§ 1376 BGB:** Das Anfangsvermögen wird mit dem VPI auf den Endstichtag hochgerechnet (Faktor = VPI Ende ÷ VPI
+  Heirat), privilegierter Erwerb (§ 1374 Abs. 2 BGB) ab dem Erwerbsjahr.
+- **§ 557b Abs. 3 BGB:** Die Änderung der Indexmiete ist in Textform zu erklären (auch per E-Mail), nicht
+  schriftlich.
+
+**VPI** (2020 = 100):
+
+| | vorher | jetzt |
+|---|---|---|
+| `VPI_AKTUELL` | Mai 2026: 125,0 (+2,6 %) | **September 2026: 126,6 (+3,3 %)**, PM Nr. 364 vom 13.10.2026 |
+| 2000 | 76,7 | **75,5** |
+| 2010 | 89,5 | **88,1** |
+| 2018 | 99,7 | **98,1** |
+| 2019 | 101,1 (über 2020) | **99,5** |
+| 2024 | 121,9 | **119,3** |
+| 2025 | 124,6 | **121,9** |
+| alle Jahre 1995–2025 | | neu nach Destatis, lückenlos, streng steigend |
+
+**Zugewinnausgleich** (Startwerte: Heirat 2010, Ende 2026, Anfangsvermögen 15.000 / 5.000 €, Endvermögen
+80.000 / 120.000 €):
+
+| | vorher (fest im Text) | jetzt (aus der SSOT) |
+|---|---|---|
+| Index-Faktor | 125,0 ÷ 89,5 = 1,397 | 126,6 ÷ 88,1 = **1,437** |
+| Anfangsvermögen P1 / P2 indexiert | 20.950 € / 6.983 € | **21.555 € / 7.185 €** |
+| Zugewinn P1 / P2 | 59.050 € / 113.017 € | **58.445 € / 112.815 €** |
+| Ausgleichsanspruch | 26.983 € | **27.185 €** |
+| Erbe 2018 (50.000 €), indexiert | 62.688 € (÷ 99,7), Ausgleich 56.508 € | **64.526 €** (÷ 98,1), Ausgleich dann **56.408 €** |
+
+**Wirkung:** Der Zugewinnausgleich-Rechner rechnet für jedes Heiratsjahr mit dem richtigen Index. Beispiel Heirat
+2010: Faktor 1,437 statt 1,415 (126,6 ÷ 89,5 mit der alten Reihe). Beispiel-, FAQ- und Rechenbeispiel-Texte des
+Blocks `zugewinnausgleich-rechner` rechnen jetzt mit `VPI_AKTUELL` und `VPI_JAHRESDURCHSCHNITTE`, auch die
+Jahreswerte im Text („÷ 88,1“, „VPI 98,1“). Damit stimmen Text und Rechner nach jedem VPI-Update wieder überein.
+
+**Indexmiete:** Die Beispielwerte heißen jetzt richtig: 117,4 ist Dezember 2023, 125,8 ist August 2026. Vorher stand
+„Stand März 2026“; der März 2026 lag bei 124,5. Die Mieterhöhung muss nach § 557b Abs. 3 BGB nur in Textform erklärt
+werden, nicht schriftlich: korrigiert in FAQ, Erklärtexten, Checkliste und im Rechnerhinweis.
+
+**Änderungen** (30 Ersetzungen plus 2 Datumszeilen = 32 in 7 Dateien, Vorlage `_lokal/welle180-vpi-zugewinn.mjs`,
+nicht committet):
+- **`lib/berechnungen/vpi.ts`:** `VPI_AKTUELL` September 2026 (126,6, +3,3 %), Jahresreihe 1995–2025 neu nach
+  Destatis, Stand- und Quellenkommentar.
+- **`lib/rechner-config/arbeit.ts`** (`zugewinnausgleich-rechner`): Beispiel, FAQ, Rechenbeispiele und Erklärtexte
+  aus der VPI-SSOT über Hilfskonstanten `ZG_*` und den Formatierer `fmtZ`; neue Hilfsfunktion `ZG_VJ(jahr)` für die
+  Jahreswerte im Text.
+- **`lib/rechner-config/wohnen.ts`** (`indexmiete-rechner`): Beispiel-VPI mit Monat benannt; Textform in FAQ,
+  Erklärtexten und Checkliste.
+- **`components/rechner/IndexmieteRechner.tsx`:** Hinweis „in Textform (z. B. per E-Mail) … (§ 557b Abs. 3 BGB)“.
+- **`scripts/check-jahreswerte.mjs`:** warnt, wenn `VPI_AKTUELL.monat` älter als 75 Tage ist (gezählt ab
+  Monatsanfang; mit September 2026 also ab 15.11.2026, falls der Oktoberwert bis dahin fehlt).
+- **`scripts/verify-wohnen-p1.ts`:** VPI September 2026, VPI 2025 = 121,9.
+- **`scripts/verify-zugewinnausgleich.ts`:** Sollwerte für 12 Jahre nach Destatis, neuer Fall „lückenlos 1995–2025
+  und streng steigend“, Indexierungsfälle aus `VPI_AKTUELL`, „kurze Ehe < 5 %“ jetzt mit Heirat 2025 (2024 ergibt
+  6,1 %); 36 statt 28 Fälle. Gegen den Stand vor dieser Welle rot: `verify-zugewinnausgleich` 21 von 36,
+  `verify-wohnen-p1` 4 von 58.
+- **`letzteAktualisierung`** → `2026-10-20` für `zugewinnausgleich-rechner` (`arbeit.ts`) und `indexmiete-rechner`
+  (`wohnen.ts`).
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187); `indexmiete.ts`;
+`ZugewinnausgleichRechner.tsx`.
+
+**Vermerk:** Die zugehörige Caption folgt in Welle 187. Die VPI-Werte im Rechner erscheinen noch mit Punkt
+(„75.5 → 126.6“); das korrigiert Welle 184.
+
+**Abweichungen und Funde:**
+- **Live-Probe Punkt 3 kann so nicht greifen:** „Index-Faktor ≈ 1,437 nach Destatis-VPI, Stand September 2026“ und
+  „Ausgleichsanspruch ca. 27.185 €“ stehen nur im Config-Feld `beispiel`. Das Feld wird auf den Rechnerseiten nicht
+  ausgegeben (seit Welle 101; es speist nur `scripts/social-caption-builder.ts` und `scripts/dump-rechner-data.ts`).
+  Im gebauten HTML von `/arbeit/zugewinnausgleich-rechner` und in `.next/static` je 0×. Sichtbar sind dieselben Werte
+  in FAQ und Rechenbeispielen („Index ≈ 1,437“, „etwa 27.185 €“). Der Indexmiete-Beispielsatz ist ebenso unsichtbar;
+  „117,4 (Dezember 2023)“ und „125,8 (August 2026)“ stehen dort aber auch in FAQ und Rechenbeispiel.
+- **Prüflücke bleibt offen:** `prebuild` führt `verify-zugewinnausgleich` und `verify-wohnen-p1` weiterhin nicht
+  aus. Ein falscher Jahreswert fiele wieder erst bei einem Handlauf auf; neu ist nur die Altersschwelle für
+  `VPI_AKTUELL.monat`.
+- Datumsprüfung: Die Vorlage setzt „heute“ über `Intl.DateTimeFormat` mit `timeZone: 'Europe/Berlin'`; kein
+  UTC-Versatz. Lauf unter Windows in deutscher Zeit, Ergebnisse wie im Linux-Probelauf.
+
+**Gates:**
+- Phase 0 an `9b1e599`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `9b1e599` und `b5a541d`
+  (Welle 179). Greps: „2010: 89.5“ `vpi.ts:1`; „÷ 89,5“ `arbeit.ts:3`; „Stand März 2026“ `wohnen.ts:4`;
+  „schriftlich erklär“ `IndexmieteRechner.tsx:1`, `wohnen.ts:3`. Bekannt rot: `verify-zugewinnausgleich` 19/28
+  (9 FAIL), `verify-wohnen-p1` 55/58 (3 FAIL).
+- Phase 1: „OK — 32 Ersetzungen in 7 Dateien.“, Exit 0; `git status` die 7 Dateien.
+- Phase 2: `verify-zugewinnausgleich` 36/36, Exit 0; `verify-wohnen-p1` 58/58, Exit 0; `check-jahreswerte` Exit 0,
+  keine VPI-Warnung. Greps: „2010: 88.1“ `vpi.ts:1`; „2025: 121.9“ `vpi.ts:1`; „÷ 89,5“ keine Ausgabe; „ZG_VJ(“
+  `arbeit.ts:6`; „Stand März 2026“ keine Ausgabe; „schriftlich erklär“ keine Ausgabe; „in Textform“
+  `IndexmieteRechner.tsx:1`, `wohnen.ts:10`. `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei
+  bekannten Warnungen; `git status` danach nur die 7 Dateien. Im gebauten HTML von `/arbeit/zugewinnausgleich-rechner`
+  „Index ≈ 1,437“ 4×, „indexiert 21.555 €“ 4×, „etwa 27.185 €“ 2×, „126,6 ÷ 88,1“ 6×, „89,5“ 0×; in
+  `/wohnen/indexmiete-rechner` „117,4 (Dezember 2023)“ 4×, „125,8 (August 2026)“ 8×, „in Textform (z. B. per
+  E-Mail)“ 1×, „Stand März 2026“ 0×.
+
+**Commits:** A `192c32b` (die 7 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 179: Urlaubstage — Teilurlaub nur nach § 5 Abs. 1 BUrlG; Elternzeit — Beginn, Enddaten, Anmeldefrist, Kündigungsschutz, paralleles Basiselterngeld — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Caption-Prüfung. Die Caption zum Urlaubstage-Rechner („Eintritt 01.04. → volle 18 Tage“) widersprach dem
