@@ -73,23 +73,23 @@ cases.push(
   { name: 'A-06 PARTNERMONATE_MINDEST (§ 4 Abs. 4)',           actual: PARTNERMONATE_MINDEST,                  expected: 2, tolerance: 0 },
 );
 
-// === Cluster B: Default-Beginn (P1 = Geburt + 56d, P2 = Geburt) ===
+// === Cluster B: Default-Beginn (P1 = Tag nach Mutterschutz-Ende, P2 = Geburt) ===
 //
-// Geburt 2025-01-15:
-//   Default p1B = 2025-01-15 + 56 Tage = 2025-03-12
+// Geburt 2025-01-15 (Mi), Mutterschutz bis 2025-03-12 (Mi, 8 Wochen):
+//   Default p1B = 2025-03-13 (W179: vorher 2025-03-12, der letzte Mutterschutztag)
 //   Default p2B = 2025-01-15
-//   p1Mon=12 → p1E = 2025-03-12 + 12 Mon = 2026-03-12
-//   p2Mon=2  → p2E = 2025-01-15 + 2 Mon  = 2025-03-15
+//   p1Mon=12 → p1E = letzter Tag = 2026-03-12
+//   p2Mon=2  → p2E = letzter Tag = 2025-03-14 (W179: vorher 2025-03-15)
 //   gesamtMonate = 14, achterGeburtstag = 2033-01-15
 
 const b1 = calc({ geburt: '2025-01-15' });
 cases.push(
-  { name: 'B-01 Default p1B = Geburt + 56d',          actual: isoDateLocal(b1!.p1B),               expected: '2025-03-12' },
+  { name: 'B-01 Default p1B = Tag nach Mutterschutz',  actual: isoDateLocal(b1!.p1B),               expected: '2025-03-13' },
   { name: 'B-01 Default p2B = Geburt',                actual: isoDateLocal(b1!.p2B),               expected: '2025-01-15' },
   { name: 'B-01 p1Mon = 12',                          actual: b1!.p1Mon,                            expected: 12, tolerance: 0 },
   { name: 'B-01 p2Mon = 2',                           actual: b1!.p2Mon,                            expected: 2, tolerance: 0 },
-  { name: 'B-01 p1E = p1B + 12 Mon',                  actual: isoDateLocal(b1!.p1E),               expected: '2026-03-12' },
-  { name: 'B-01 p2E = p2B + 2 Mon',                   actual: isoDateLocal(b1!.p2E),               expected: '2025-03-15' },
+  { name: 'B-01 p1E = letzter Tag nach 12 Mon',        actual: isoDateLocal(b1!.p1E),               expected: '2026-03-12' },
+  { name: 'B-01 p2E = letzter Tag nach 2 Mon',         actual: isoDateLocal(b1!.p2E),               expected: '2025-03-14' },
   { name: 'B-01 gesamtMonate = 14',                   actual: b1!.gesamtMonate,                    expected: 14, tolerance: 0 },
   { name: 'B-01 achterGeburtstag = Geburt + 8 J',     actual: isoDateLocal(b1!.achterGeburtstag),  expected: '2033-01-15' },
   { name: 'B-01 mutterschutzEnde = Geburt + 56 d',    actual: isoDateLocal(b1!.mutterschutzEnde),  expected: '2025-03-12' },
@@ -99,38 +99,39 @@ cases.push(
 //
 // Geburt 2025-01-15, dritter Geburtstag 2028-01-15.
 //
+// Die 7 Wochen laufen bis zum Tag vor Beginn; Zugang spätestens am Tag davor = Beginn − 50 Tage
+// (W179: vorher Beginn − 49 Tage).
 // Beide Beginne vor 3. Geburtstag (Default-Szenario):
-//   anmeldungP1 = 2025-03-12 - 49d = 2025-01-22
-//     (12.03 - 12d = 28.02; - 28d = 31.01; - 9d = 22.01)
-//   anmeldungP2 = 2025-01-15 - 49d = 2024-11-27
+//   anmeldungP1 = 2025-03-13 - 50d = 2025-01-22
+//   anmeldungP2 = 2025-01-15 - 50d = 2024-11-26
 
 const c1 = calc({ geburt: '2025-01-15' });
 cases.push(
-  { name: 'C-01 anmeldungP1 = p1B - 49d (vor 3. Geburtstag)', actual: isoDateLocal(c1!.anmeldungP1), expected: '2025-01-22' },
-  { name: 'C-01 anmeldungP2 = p2B - 49d (vor 3. Geburtstag)', actual: isoDateLocal(c1!.anmeldungP2), expected: '2024-11-27' },
+  { name: 'C-01 anmeldungP1 = p1B - 50d (vor 3. Geburtstag)', actual: isoDateLocal(c1!.anmeldungP1), expected: '2025-01-22' },
+  { name: 'C-01 anmeldungP2 = p2B - 50d (vor 3. Geburtstag)', actual: isoDateLocal(c1!.anmeldungP2), expected: '2024-11-26' },
 );
 
-// Beginn nach 3. Geburtstag → -91d (13 Wochen):
+// Beginn nach 3. Geburtstag → 13 Wochen, Zugang bis Beginn − 92 Tage:
 // Geburt 2025-01-15, p1B 2030-06-01 (>>3. Geburtstag 2028-01-15)
-// anmeldungP1 = 2030-06-01 - 91d = 2030-03-02
-//   (01.06 - 1d = 31.05; - 31d = 30.04; - 30d = 31.03; - 29d = 02.03)
+// anmeldungP1 = 2030-06-01 - 92d = 2030-03-01
 const c2 = calc({ geburt: '2025-01-15', p1Beginn: '2030-06-01', p1Monate: 6 });
 cases.push(
-  { name: 'C-02 anmeldungP1 = p1B - 91d (nach 3. Geburtstag)', actual: isoDateLocal(c2!.anmeldungP1), expected: '2030-03-02' },
+  { name: 'C-02 anmeldungP1 = p1B - 92d (nach 3. Geburtstag)', actual: isoDateLocal(c2!.anmeldungP1), expected: '2030-03-01' },
+  { name: 'C-02 kSchutzBeginnP1 = p1B - 98d (14 Wochen, § 18)', actual: isoDateLocal(c2!.kSchutzBeginnP1), expected: '2030-02-23' },
+  { name: 'C-02 p1E = letzter Tag nach 6 Mon',                  actual: isoDateLocal(c2!.p1E),             expected: '2030-11-30' },
 );
 
 // === Cluster D: § 18 — Kündigungsschutz (8 Wochen vor Beginn bis Ende) ===
 //
-// p1B = 2025-03-12 → kSchutzBeginnP1 = 2025-03-12 - 56d = 2025-01-15
-//   (12.03 - 12d = 28.02; - 28d = 31.01; - 16d = 15.01)
+// p1B = 2025-03-13 → kSchutzBeginnP1 = 2025-03-13 - 56d = 2025-01-16
 // kSchutzEndeP1 = p1E = 2026-03-12
 
 const d1 = calc({ geburt: '2025-01-15' });
 cases.push(
-  { name: 'D-01 kSchutzBeginnP1 = p1B - 56d',         actual: isoDateLocal(d1!.kSchutzBeginnP1), expected: '2025-01-15' },
+  { name: 'D-01 kSchutzBeginnP1 = p1B - 56d',         actual: isoDateLocal(d1!.kSchutzBeginnP1), expected: '2025-01-16' },
   { name: 'D-01 kSchutzEndeP1 = p1E',                 actual: isoDateLocal(d1!.kSchutzEndeP1),   expected: '2026-03-12' },
   { name: 'D-01 kSchutzBeginnP2 = p2B - 56d',         actual: isoDateLocal(d1!.kSchutzBeginnP2), expected: '2024-11-20' },
-  { name: 'D-01 kSchutzEndeP2 = p2E',                 actual: isoDateLocal(d1!.kSchutzEndeP2),   expected: '2025-03-15' },
+  { name: 'D-01 kSchutzEndeP2 = p2E',                 actual: isoDateLocal(d1!.kSchutzEndeP2),   expected: '2025-03-14' },
 );
 
 // === Cluster E: § 4 Abs. 4 BEEG — Partnermonate-Bonus ===
@@ -152,7 +153,7 @@ cases.push(
 //
 // Geburt 2025-01-15, mutterschutzEnde = 2025-03-12.
 //
-// F-01: Default-Szenario → p1B = 2025-03-12 (= mutterschutzEnde),
+// F-01: Default-Szenario → p1B = 2025-03-13 (Tag nach mutterschutzEnde),
 //       p2B = 2025-01-15 (< mutterschutzEnde) → ueberlappung = true (wegen P2)
 // F-02: P1 vor mutterschutzEnde → ueberlappung = true
 // F-03: Beide nach mutterschutzEnde → ueberlappung = false
@@ -189,17 +190,33 @@ cases.push(
 // === Cluster H: Custom-Beginn statt Default ===
 //
 // Geburt 2025-01-15, p1Beginn 2025-06-01, p1Mon 18:
-//   p1E = 2025-06-01 + 18 Mon = 2026-12-01
-//   anmeldungP1 = 2025-06-01 - 49d = 2025-04-13
-//     (01.06 - 1d = 31.05; -30d = 01.05; -18d = 13.04)
+//   p1E = letzter Tag = 2026-11-30
+//   anmeldungP1 = 2025-06-01 - 50d = 2025-04-12
 //   kSchutzBeginnP1 = 2025-06-01 - 56d = 2025-04-06
 
 const h1 = calc({ geburt: '2025-01-15', p1Beginn: '2025-06-01', p1Monate: 18 });
 cases.push(
   { name: 'H-01 Custom p1B: respektiert',             actual: isoDateLocal(h1!.p1B), expected: '2025-06-01' },
-  { name: 'H-01 Custom p1E = p1B + 18 Mon',           actual: isoDateLocal(h1!.p1E), expected: '2026-12-01' },
-  { name: 'H-01 Custom anmeldungP1 = p1B - 49d',      actual: isoDateLocal(h1!.anmeldungP1), expected: '2025-04-13' },
+  { name: 'H-01 Custom p1E = letzter Tag nach 18 Mon', actual: isoDateLocal(h1!.p1E), expected: '2026-11-30' },
+  { name: 'H-01 Custom anmeldungP1 = p1B - 50d',      actual: isoDateLocal(h1!.anmeldungP1), expected: '2025-04-12' },
   { name: 'H-01 Custom kSchutzBeginnP1 = p1B - 56d',  actual: isoDateLocal(h1!.kSchutzBeginnP1), expected: '2025-04-06' },
+);
+
+// === Cluster J: W179 — Monatsende und paralleles Basiselterngeld ===
+//
+// Beginn 31.01., 1 Monat → Ende 28.02. (§ 188 Abs. 3 BGB, kein Überlauf in den März)
+// Default 2026 (P2 = 2 Monate ab Geburt, Mutter in Mutterschutz) → basisParallelHinweis = true
+// P2 ab 13. Lebensmonat (15.01.2027) → kein Hinweis
+const j1 = calc({ geburt: '2026-01-31', p1Beginn: '2026-03-31', p1Monate: 1, p2Monate: 0 });
+const j2 = calc({ geburt: '2026-01-15' });
+const j3 = calc({ geburt: '2026-01-15', p2Beginn: '2027-01-15' });
+cases.push(
+  { name: 'J-01 Beginn 31.03., 1 Monat → Ende 30.04.',   actual: isoDateLocal(j1!.p1E), expected: '2026-04-30' },
+  { name: 'J-02 Default 2026: Mutter ab 13.03.2026',      actual: isoDateLocal(j2!.p1B), expected: '2026-03-13' },
+  { name: 'J-02 Default 2026: Anmeldung bis 22.01.2026',  actual: isoDateLocal(j2!.anmeldungP1), expected: '2026-01-22' },
+  { name: 'J-02 Default 2026: Ende 12.03.2027',           actual: isoDateLocal(j2!.p1E), expected: '2027-03-12' },
+  { name: 'J-02 Default: 2 Monate parallel → Hinweis',    actual: j2!.basisParallelHinweis ? 1 : 0, expected: 1, tolerance: 0 },
+  { name: 'J-03 P2 ab 13. Lebensmonat → kein Hinweis',    actual: j3!.basisParallelHinweis ? 1 : 0, expected: 0, tolerance: 0 },
 );
 
 // === Cluster I: Edge — Null-Returns ===

@@ -51,7 +51,8 @@ export default function ElternzeitRechner() {
     if (!geburt) return '';
     const g = new Date(geburt);
     if (isNaN(g.getTime())) return '';
-    return toIso(addTage(g, MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT));
+    // Tag nach dem Ende des Mutterschutzes (W179: vorher der letzte Mutterschutztag)
+    return toIso(addTage(g, MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT + 1));
   }, [geburt, p1Beginn]);
 
   const effP2Beginn = useMemo(() => {
@@ -218,7 +219,15 @@ export default function ElternzeitRechner() {
           {!ergebnis.partnermonateOk && (
             <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-3">
               <p className="text-xs text-amber-800 dark:text-amber-300">
-                <strong>Partnermonate:</strong> Für die vollen 14 Monate Elterngeld muss jeder Partner mindestens 2 Monate Elternzeit nehmen. Sonst gibt es nur 12 Monate.
+                <strong>Partnermonate:</strong> Für die vollen 14 Monate Basiselterngeld muss jeder Elternteil mindestens 2 Monate Elterngeld beziehen — in der Regel mit Elternzeit. Sonst gibt es höchstens 12 Monate.
+              </p>
+            </div>
+          )}
+
+          {ergebnis.basisParallelHinweis && (
+            <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-3">
+              <p className="text-xs text-amber-800 dark:text-amber-300">
+                <strong>Elterngeld gleichzeitig:</strong> Elternzeit dürfen beide Eltern gleichzeitig nehmen. Basiselterngeld gibt es bei Geburten ab dem 1. April 2024 aber nur für höchstens einen Lebensmonat gleichzeitig, und nur in den ersten zwölf Lebensmonaten; die Monate mit Mutterschaftsleistungen zählen als Basiselterngeld-Monate der Mutter (Ausnahmen u. a. bei Früh- und Mehrlingsgeburten). Den zweiten Partnermonat also nicht parallel legen — etwa in den 13. oder 14. Lebensmonat — oder ElterngeldPlus wählen.
               </p>
             </div>
           )}

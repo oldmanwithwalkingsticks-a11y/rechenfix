@@ -16,7 +16,7 @@ import { AffiliateBox } from '@/components/AffiliateBox';
 type Modus = 'anspruch' | 'resturlaub';
 
 const fmtZahl = (n: number) =>
-  n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 1 });
+  n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 
 export default function UrlaubstageRechner() {
   const [modus, setModus] = useState<Modus>('anspruch');
@@ -29,6 +29,7 @@ export default function UrlaubstageRechner() {
   const [teilzeit, setTeilzeit] = useState(false);
   const [teilzeitTage, setTeilzeitTage] = useState('3');
   const [schwerbehindert, setSchwerbehindert] = useState(false);
+  const [zwoelftelung, setZwoelftelung] = useState(false);
 
   // Modus 2: Resturlaub
   const [urlaubstageProJahr, setUrlaubstageProJahr] = useState('30');
@@ -44,7 +45,8 @@ export default function UrlaubstageRechner() {
     teilzeit,
     teilzeitTage: parseInt(teilzeitTage, 10) || 0,
     schwerbehindert,
-  }), [vertraglicheTage, arbeitstageProWoche, beschaeftigungsBeginn, beschaeftigungsEnde, teilzeit, teilzeitTage, schwerbehindert]);
+    zwoelftelungMehrurlaub: zwoelftelung,
+  }), [vertraglicheTage, arbeitstageProWoche, beschaeftigungsBeginn, beschaeftigungsEnde, teilzeit, teilzeitTage, schwerbehindert, zwoelftelung]);
 
   const resturlaubEingabe: ResturlaubEingabe = useMemo(() => ({
     urlaubstageProJahr: parseInt(urlaubstageProJahr, 10) || 0,
@@ -131,8 +133,19 @@ export default function UrlaubstageRechner() {
             </div>
           </div>
           <p className="text-xs text-gray-600 dark:text-gray-500 mb-4">
-            Leer lassen = volles Kalenderjahr. Bei Eintritt/Austritt im laufenden Jahr wird der Urlaub anteilig berechnet (§ 5 BUrlG).
+            Leer lassen = Beschäftigung im ganzen Jahr. Teilurlaub (ein Zwölftel je vollem Monat) gibt es nur bei Eintritt ab 1. Juli, bei Austritt vor Ablauf der sechsmonatigen Wartezeit oder bei Austritt bis 30. Juni (§ 5 Abs. 1 BUrlG). Sonst besteht der volle Jahresurlaub.
           </p>
+          {(beschaeftigungsBeginn || beschaeftigungsEnde) && (
+            <label className="flex items-start gap-2 mb-4 text-sm text-gray-700 dark:text-gray-300">
+              <input
+                type="checkbox"
+                checked={zwoelftelung}
+                onChange={e => setZwoelftelung(e.target.checked)}
+                className="w-5 h-5 mt-0.5"
+              />
+              <span>Arbeitsvertrag kürzt den Mehrurlaub über dem gesetzlichen Minimum bei Ein- oder Austritt anteilig (Zwölftelungsklausel)</span>
+            </label>
+          )}
 
           {/* Teilzeit */}
           <div className="flex items-center gap-3 mb-3">
@@ -193,13 +206,16 @@ export default function UrlaubstageRechner() {
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
                   ≈ {fmtZahl(anspruchErgebnis.wochen)} Wochen Urlaub
                 </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                  {anspruchErgebnis.regel}{anspruchErgebnis.anteiligMonate !== null || beschaeftigungsBeginn || beschaeftigungsEnde ? ` · Kalenderjahr ${anspruchErgebnis.rechenjahr}` : ''}
+                </p>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesetzl. Minimum</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
-                    {anspruchErgebnis.gesetzlichMinimum} Tage
+                    {fmtZahl(anspruchErgebnis.gesetzlichMinimum)} Tage
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
@@ -249,11 +265,11 @@ export default function UrlaubstageRechner() {
 
               <AffiliateBox programId="hansemerkur" context="urlaub" />
 
-              {anspruchErgebnis.ueberMinimum < 0 && (
+              {anspruchErgebnis.vertragUnterMinimum && (
                 <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4">
                   <p className="text-sm text-red-800 dark:text-red-300 flex gap-2">
                     <span className="shrink-0">⚠️</span>
-                    <span>Der berechnete Urlaub liegt unter dem gesetzlichen Minimum von {anspruchErgebnis.gesetzlichMinimum} Tagen bei einer {arbeitstageProWoche}-Tage-Woche. Der Arbeitgeber muss mindestens den gesetzlichen Mindesturlaub gewähren.</span>
+                    <span>Die vertraglichen Urlaubstage liegen unter dem gesetzlichen Mindesturlaub (24 Werktage, bei einer {arbeitstageProWoche}-Tage-Woche {arbeitstageProWoche === 6 ? 24 : 20} Arbeitstage, bei Teilzeit anteilig). Es gilt der gesetzliche Anspruch (§ 13 BUrlG) — damit rechnet der Rechner.</span>
                   </p>
                 </div>
               )}
@@ -294,7 +310,7 @@ export default function UrlaubstageRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Kündigungsdatum</label>
+              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Austrittsdatum (letzter Tag)</label>
               <input
                 type="date"
                 value={kuendigungsDatum}
@@ -329,6 +345,9 @@ export default function UrlaubstageRechner() {
                   {resturlaubErgebnis.vollerAnspruch
                     ? 'Voller Jahresanspruch (Austritt in 2. Jahreshälfte)'
                     : 'Anteiliger Anspruch (Austritt in 1. Jahreshälfte)'}
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                  Vorausgesetzt, das Arbeitsverhältnis hat beim Austritt länger als sechs Monate bestanden. Sonst gilt Teilurlaub (§ 5 Abs. 1 b BUrlG) — dafür den Modus „Urlaubsanspruch berechnen“ mit Eintritt und Austritt nutzen.
                 </p>
               </div>
 
@@ -398,7 +417,7 @@ export default function UrlaubstageRechner() {
           {!resturlaubErgebnis && kuendigungsDatum && (
             <div className="bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/30 rounded-xl p-4 mt-4">
               <p className="text-sm text-yellow-800 dark:text-yellow-300">
-                Bitte geben Sie ein gültiges Kündigungsdatum und positive Urlaubstage ein.
+                Bitte geben Sie ein gültiges Austrittsdatum und positive Urlaubstage ein.
               </p>
             </div>
           )}

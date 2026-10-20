@@ -8,15 +8,18 @@
 /**
  * § 5 Abs. 2 BUrlG-konforme Rundung von Urlaubstagen.
  * Bruchteile ≥ 0,5 Tag werden auf den nächsten ganzen Tag aufgerundet,
- * Bruchteile < 0,5 Tag werden abgerundet.
+ * kleinere Bruchteile bleiben stehen (auf zwei Nachkommastellen): Abrunden
+ * ist ohne Rechtsgrundlage unzulässig (BAG, 23.01.2018, 9 AZR 200/17).
+ * W179: vorher wurden Bruchteile < 0,5 abgerundet.
  *
  * Gesetzestext: „Bruchteile von Urlaubstagen, die mindestens einen halben
  * Tag ergeben, sind auf volle Urlaubstage aufzurunden."
  */
 export function rundeBuRlGKonform(tage: number): number {
-  const ganz = Math.floor(tage);
-  const rest = tage - ganz;
-  return rest >= 0.5 ? ganz + 1 : ganz;
+  const t = Math.round(tage * 1e6) / 1e6; // Gleitkomma-Reste (z. B. 13,4999999) glätten
+  const ganz = Math.floor(t);
+  const rest = t - ganz;
+  return rest >= 0.5 ? ganz + 1 : Math.round(t * 100) / 100;
 }
 
 /**

@@ -161,7 +161,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'urlaubstage-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Urlaubstage-Rechner',
     beschreibung: 'Urlaubsanspruch berechnen: Gesetzlicher und vertraglicher Urlaub, Teilzeit, Schwerbehinderung & Resturlaub bei Kündigung.',
     kategorie: 'Arbeit & Recht',
@@ -170,7 +170,7 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Urlaubstage berechnen: Gesetzlicher & vertraglicher Urlaub, Teilzeit, Schwerbehinderung und Resturlaub bei Kündigung — kostenlos.',
     keywords: ['urlaubstage rechner', 'urlaubsanspruch berechnen', 'resturlaub kündigung', 'urlaubsanspruch teilzeit', 'gesetzlicher mindesturlaub', 'zusatzurlaub schwerbehinderung', 'urlaubsabgeltung'],
     icon: '🏖️',
-    beispiel: '30 Urlaubstage, 3 von 5 Tagen Teilzeit, Eintritt am 01.04.: 30 × 3/5 × 9/12 = 13,5 → 14 Tage (aufgerundet nach § 5 Abs. 2 BUrlG).',
+    beispiel: '30 Urlaubstage, 3 von 5 Tagen Teilzeit, Eintritt am 01.04.: Die Wartezeit endet noch im selben Jahr, daher voller Anspruch 30 × 3/5 = 18 Tage. Eintritt am 01.08.: Teilurlaub 18 × 5/12 = 7,5 → 8 Tage (aufgerundet nach § 5 Abs. 2 BUrlG).',
     faq: [
       {
         frage: 'Wie viele Urlaubstage stehen mir gesetzlich zu?',
@@ -182,19 +182,19 @@ export const arbeitRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was passiert mit meinem Urlaub bei Kündigung?',
-        antwort: 'Bei Ausscheiden in der 1. Jahreshälfte erhalten Sie anteilig 1/12 pro Monat. Bei Ausscheiden in der 2. Jahreshälfte haben Sie Anspruch auf den vollen Jahresurlaub. Nicht genommener Urlaub muss finanziell abgegolten werden (§ 7 Abs. 4 BUrlG).',
+        antwort: 'Bei Ausscheiden in der 1. Jahreshälfte (bis 30. Juni) erhalten Sie anteilig 1/12 pro vollem Monat. Bei Ausscheiden in der 2. Jahreshälfte haben Sie Anspruch auf den vollen Jahresurlaub, wenn das Arbeitsverhältnis länger als sechs Monate bestanden hat; sonst ebenfalls 1/12 pro vollem Monat (§ 5 Abs. 1 BUrlG). Maßgeblich ist der letzte Tag des Arbeitsverhältnisses, nicht der Tag der Kündigung. Nicht genommener Urlaub muss finanziell abgegolten werden (§ 7 Abs. 4 BUrlG).',
       },
       {
         frage: 'Wie viel Zusatzurlaub gibt es bei Schwerbehinderung?',
-        antwort: 'Schwerbehinderte Menschen (GdB ≥ 50) erhalten 5 zusätzliche Urlaubstage pro Jahr bei einer 5-Tage-Woche (§ 208 SGB IX). Bei Teilzeit wird der Zusatzurlaub proportional zur Wochenarbeitszeit berechnet.',
+        antwort: 'Schwerbehinderte Menschen (GdB ≥ 50) erhalten eine zusätzliche Arbeitswoche Urlaub: 5 Tage bei einer 5-Tage-Woche, 6 Tage bei einer 6-Tage-Woche (§ 208 SGB IX). Bei Teilzeit richtet sich der Zusatzurlaub nach den Arbeitstagen pro Woche, bei einer 3-Tage-Woche also 3 Tage.',
       },
       {
         frage: 'Wann entsteht der volle Urlaubsanspruch?',
-        antwort: 'Der volle Urlaubsanspruch entsteht nach einer Wartezeit von 6 Monaten (§ 4 BUrlG). Vorher hat der Arbeitnehmer nur einen anteiligen Anspruch von 1/12 pro vollem Beschäftigungsmonat.',
+        antwort: 'Der volle Jahresurlaub entsteht, wenn das Arbeitsverhältnis länger als sechs Monate besteht (Wartezeit, § 4 BUrlG). Wer bis zum 30. Juni eintritt, erfüllt die Wartezeit noch im selben Jahr und hat dann Anspruch auf den vollen Jahresurlaub. Wer ab dem 1. Juli eintritt, bekommt für das Eintrittsjahr ein Zwölftel je vollem Beschäftigungsmonat (§ 5 Abs. 1 a BUrlG; BAG, 17.11.2015, 9 AZR 179/15). Vertraglicher Mehrurlaub folgt denselben Regeln, wenn der Arbeitsvertrag ihn nicht ausdrücklich anteilig kürzt.',
       },
       {
         frage: 'Wird der Urlaub auf halbe Tage gerundet?',
-        antwort: 'Nein — der Rechner rundet § 5 Abs. 2 BUrlG-konform auf ganze Urlaubstage. Bruchteile ab einem halben Tag werden auf den nächsten ganzen Tag aufgerundet, kleinere Bruchteile abgerundet. Beispiel: 13,5 Tage → 14 Tage. Eine Rundung auf halbe Tage ist eine vertragliche Kulanzregelung mancher Arbeitgeber, gesetzlich nicht vorgeschrieben.',
+        antwort: 'Nein. Bruchteile ab einem halben Tag werden auf den nächsten ganzen Tag aufgerundet (§ 5 Abs. 2 BUrlG), etwa 7,5 → 8 Tage. Kleinere Bruchteile dürfen nicht abgerundet werden — sie bleiben als Bruchteil bestehen und werden zum Beispiel stundenweise gewährt (BAG, 23.01.2018, 9 AZR 200/17). Der Rechner zeigt sie deshalb mit Nachkommastellen an. Eine Rundung auf halbe Tage ist eine vertragliche Kulanzregelung mancher Arbeitgeber, gesetzlich nicht vorgeschrieben.',
       },
     ],
     contentBloecke: [
@@ -239,17 +239,18 @@ export const arbeitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Anteiliger Urlaub bei Ein- und Austritt unterm Jahr',
-        html: `<p>Wer nicht das ganze Kalenderjahr beschäftigt ist, hat in der Regel nur einen <strong>anteiligen</strong> Urlaubsanspruch. Nach § 5 BUrlG gilt die <strong>Zwölftelung</strong>: Für jeden vollen Beschäftigungsmonat gibt es ein Zwölftel des Jahresurlaubs. Drei volle Monate ergeben also drei Zwölftel des Jahresanspruchs.</p><p>Der <strong>volle</strong> Jahresanspruch entsteht erst nach der <strong>Wartezeit von sechs Monaten</strong> (§ 4 BUrlG). Beim Austritt unterscheidet das Gesetz nach dem Zeitpunkt: Wer in der <strong>ersten Jahreshälfte</strong> (bis 30. Juni) ausscheidet, bekommt anteilig ein Zwölftel pro Monat; wer in der <strong>zweiten Jahreshälfte</strong> (ab Juli) ausscheidet und die Wartezeit erfüllt hat, behält den vollen Jahresurlaub (§ 5 Abs. 1 BUrlG). Bruchteile von mindestens einem halben Tag werden zugunsten des Arbeitnehmers auf volle Tage aufgerundet (§ 5 Abs. 2 BUrlG), kleinere abgerundet. Als voller Monat zählt dabei jeder Beschäftigungsmonat, der vollständig im Arbeitsverhältnis liegt; angebrochene Monate bleiben außer Betracht. Der Rechner bildet diese Zwölftelung ab — Sonderfälle der Rechtsprechung kann er nicht ersetzen.</p>`,
+        html: `<p>Wer nicht das ganze Kalenderjahr beschäftigt ist, hat nicht automatisch nur einen anteiligen Urlaubsanspruch. Entscheidend ist die <strong>Wartezeit</strong>: Der volle Jahresurlaub entsteht, sobald das Arbeitsverhältnis länger als <strong>sechs Monate</strong> besteht (§ 4 BUrlG). Wer bis zum 30. Juni eintritt, erfüllt sie noch im selben Jahr und bekommt den vollen Jahresurlaub. Nur in drei Fällen gilt die <strong>Zwölftelung</strong> nach § 5 Abs. 1 BUrlG — ein Zwölftel des Jahresurlaubs je vollem Beschäftigungsmonat: bei Eintritt ab dem 1. Juli für das Eintrittsjahr, bei Austritt vor erfüllter Wartezeit und bei Austritt in der <strong>ersten Jahreshälfte</strong> (bis 30. Juni). Wer in der <strong>zweiten Jahreshälfte</strong> ausscheidet und die Wartezeit erfüllt hat, behält den vollen Jahresurlaub.</p><p>Bruchteile von mindestens einem halben Tag werden zugunsten des Arbeitnehmers auf volle Tage aufgerundet (§ 5 Abs. 2 BUrlG); kleinere Bruchteile bleiben bestehen und dürfen nicht abgerundet werden (BAG, 23.01.2018, 9 AZR 200/17). Als voller Monat zählt jeder Monatszeitraum, der vollständig im Arbeitsverhältnis liegt — bei Eintritt am 15. April also 15. April bis 14. Mai usw.; angebrochene Monate bleiben außer Betracht. Vertraglicher Mehrurlaub folgt denselben Regeln, sofern der Arbeitsvertrag ihn nicht ausdrücklich anteilig kürzt (Zwölftelungsklausel) — auch das bildet der Rechner ab. Sonderfälle der Rechtsprechung kann er nicht ersetzen.</p>`,
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Eintritt im Mai: Zwölftelung des Jahresurlaubs',
+        titel: 'Eintritt im Mai oder im August: voller Urlaub oder Zwölftelung',
         schritte: [
           { label: 'Jahresurlaub bei Vollzeit', formel: '30 Tage', ergebnis: '30 Tage' },
-          { label: 'Volle Beschäftigungsmonate (Mai–Dezember)', formel: '8 Monate', ergebnis: '8/12' },
-          { label: 'Anteiliger Anspruch (Zwölftelung)', formel: '30 ÷ 12 × 8', ergebnis: '20 Tage' },
+          { label: 'Eintritt 01.05.: Wartezeit endet 31.10.', formel: '§ 4 BUrlG', ergebnis: 'voller Anspruch 30 Tage' },
+          { label: 'Eintritt 01.08.: Wartezeit endet erst im Folgejahr', formel: '30 ÷ 12 × 5 volle Monate', ergebnis: '12,5 → 13 Tage' },
+          { label: 'Eintritt 01.05., Vertrag zwölftelt den Mehrurlaub', formel: '20 + 10 ÷ 12 × 8', ergebnis: '26,67 → 27 Tage' },
         ],
-        fazit: 'Bei Eintritt am 1. Mai sind bis Jahresende acht volle Monate beschäftigt — anteilig also 30 ÷ 12 × 8 = 20 Tage. So rechnet der Rechner. Wichtig zu wissen: Sobald die sechsmonatige Wartezeit erfüllt ist (hier ab November), kann nach der Rechtsprechung für ein Eintrittsjahr in der ersten Jahreshälfte sogar der volle Jahresanspruch entstehen. Der tatsächliche Anspruch kann daher höher liegen als die reine Zwölftelung; im Zweifel lohnt der Blick in den Arbeitsvertrag oder eine arbeitsrechtliche Beratung. Dies ist keine Rechtsberatung.',
+        fazit: 'Bei Eintritt am 1. Mai ist die sechsmonatige Wartezeit am 31. Oktober erfüllt; danach entsteht der volle Jahresurlaub von 30 Tagen — eine Zwölftelung gibt es nicht. Bei Eintritt am 1. August endet die Wartezeit erst im Folgejahr, deshalb gilt § 5 Abs. 1 a BUrlG: fünf volle Monate ergeben 30 ÷ 12 × 5 = 12,5 Tage, aufgerundet 13. Sieht der Arbeitsvertrag ausdrücklich vor, dass der Mehrurlaub über den gesetzlichen 20 Tagen im Eintrittsjahr anteilig gekürzt wird, bleiben bei Eintritt im Mai 20 + 10 × 8/12 = 26,67, aufgerundet 27 Tage. So rechnet der Rechner. Dies ist keine Rechtsberatung.',
       },
       {
         typ: 'beispielrechnung',
@@ -259,7 +260,7 @@ export const arbeitRechner: RechnerConfig[] = [
           { label: 'Austritt 31.08. → zweite Jahreshälfte (ab Juli)', formel: '§ 5 Abs. 1 BUrlG', ergebnis: 'voller Anspruch 30 Tage' },
           { label: 'Bereits genommen', formel: '30 − 12', ergebnis: '18 Resturlaubstage' },
         ],
-        fazit: 'Wer in der zweiten Jahreshälfte ausscheidet und die sechsmonatige Wartezeit erfüllt hat, behält den vollen Jahresurlaub — hier 30 Tage. Nach Abzug der bereits genommenen 12 Tage bleiben 18 Resturlaubstage. Wären sie nicht mehr nehmbar, müssten sie nach § 7 Abs. 4 BUrlG in Geld abgegolten werden. Bei Austritt in der ersten Jahreshälfte (bis Juni) gilt dagegen die Zwölftelung. Der Rechner entscheidet anhand des Austrittsmonats automatisch — die Wartezeit-Voraussetzung für den vollen Anspruch sollte man im Einzelfall prüfen. Ein häufiger Irrtum: Der volle Anspruch bei Austritt in der zweiten Jahreshälfte bedeutet nicht, dass der Arbeitgeber den Urlaub kürzen darf, weil das Arbeitsverhältnis ja endet — das Gesetz gewährt ihn bewusst ungekürzt. Umgekehrt kann der Arbeitgeber verlangen, dass offener Urlaub vor dem Austritt genommen wird, statt ihn auszuzahlen.',
+        fazit: 'Wer in der zweiten Jahreshälfte ausscheidet und die sechsmonatige Wartezeit erfüllt hat, behält den vollen Jahresurlaub — hier 30 Tage. Nach Abzug der bereits genommenen 12 Tage bleiben 18 Resturlaubstage. Wären sie nicht mehr nehmbar, müssten sie nach § 7 Abs. 4 BUrlG in Geld abgegolten werden. Bei Austritt in der ersten Jahreshälfte (bis Juni) gilt dagegen die Zwölftelung. Der Rechner entscheidet im Modus Resturlaub anhand des Austrittsmonats und setzt die erfüllte Wartezeit voraus; im Modus Urlaubsanspruch prüft er sie, wenn Sie Eintritt und Austritt angeben. Ein häufiger Irrtum: Der volle Anspruch bei Austritt in der zweiten Jahreshälfte bedeutet nicht, dass der Arbeitgeber den Urlaub kürzen darf, weil das Arbeitsverhältnis ja endet — das Gesetz gewährt ihn bewusst ungekürzt. Umgekehrt kann der Arbeitgeber verlangen, dass offener Urlaub vor dem Austritt genommen wird, statt ihn auszuzahlen.',
       },
       {
         typ: 'text',
@@ -290,8 +291,8 @@ export const arbeitRechner: RechnerConfig[] = [
           'Arbeits- oder Tarifvertrag prüfen: Wie viele Urlaubstage sind vereinbart? (mindestens das gesetzliche Minimum)',
           'Arbeitstage pro Woche festhalten — sie bestimmen die Umrechnung zwischen Werk- und Arbeitstagen.',
           'Bei Teilzeit den Anteil der Wochenarbeitstage einrechnen (proportionale Umrechnung).',
-          'Bei Ein- oder Austritt unterm Jahr die vollen Beschäftigungsmonate zählen (Zwölftelung, § 5 BUrlG).',
-          'Schwerbehinderung mit GdB ≥ 50? Dann 5 Zusatztage (5-Tage-Woche) berücksichtigen.',
+          'Bei Eintritt ab 1. Juli, Austritt vor Ablauf der Wartezeit oder Austritt bis 30. Juni die vollen Beschäftigungsmonate zählen (Zwölftelung, § 5 BUrlG); sonst gilt der volle Jahresurlaub.',
+          'Schwerbehinderung mit GdB ≥ 50? Dann eine zusätzliche Arbeitswoche berücksichtigen (5 Tage bei 5-Tage-Woche, 6 bei 6-Tage-Woche).',
           'Resturlaub vor Jahresende einplanen — sonst droht Verfall (außer der Arbeitgeber hat nicht hingewiesen).',
           'Bei Kündigung: nicht genommenen Urlaub abgelten lassen (§ 7 Abs. 4 BUrlG).',
         ],
@@ -1447,7 +1448,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'teilzeit-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Teilzeit-Rechner',
     beschreibung: 'Teilzeitgehalt berechnen: Brutto, geschätztes Netto, Stundenlohn und Urlaubstage bei Reduzierung der Arbeitszeit.',
     kategorie: 'Arbeit & Recht',
@@ -1549,7 +1550,7 @@ export const arbeitRechner: RechnerConfig[] = [
           { label: 'In Wochen umgerechnet', formel: '18 Tage ÷ 3 Tage/Woche', ergebnis: '6 Wochen frei' },
           { label: 'Vollzeit zum Vergleich', formel: '30 Tage ÷ 5 Tage/Woche', ergebnis: '6 Wochen frei' },
         ],
-        fazit: 'Wer bei 30 Urlaubstagen (Vollzeit, 5-Tage-Woche) auf eine 3-Tage-Woche wechselt, hat Anspruch auf 18 Urlaubstage. Das klingt nach weniger, ist aber derselbe Erholungswert: 18 Tage bei drei Arbeitstagen pro Woche ergeben sechs freie Wochen — genau wie 30 Tage bei fünf Arbeitstagen. Maßgeblich sind die Arbeitstage, nicht die Stunden. Wer weiterhin an fünf Tagen arbeitet (nur kürzer), behält die vollen 30 Urlaubstage. Das gilt auch für den gesetzlichen Mindesturlaub: Die 20 Werktage bei einer 5-Tage-Woche (24 bei 6-Tage-Woche) nach dem Bundesurlaubsgesetz rechnen sich genauso anteilig auf die tatsächlichen Arbeitstage um. Tarif- oder Arbeitsvertrag können darüber hinaus mehr Urlaub vorsehen.',
+        fazit: 'Wer bei 30 Urlaubstagen (Vollzeit, 5-Tage-Woche) auf eine 3-Tage-Woche wechselt, hat Anspruch auf 18 Urlaubstage. Das klingt nach weniger, ist aber derselbe Erholungswert: 18 Tage bei drei Arbeitstagen pro Woche ergeben sechs freie Wochen — genau wie 30 Tage bei fünf Arbeitstagen. Maßgeblich sind die Arbeitstage, nicht die Stunden. Wer weiterhin an fünf Tagen arbeitet (nur kürzer), behält die vollen 30 Urlaubstage. Das gilt auch für den gesetzlichen Mindesturlaub: Die 24 Werktage nach dem Bundesurlaubsgesetz (20 Arbeitstage bei einer 5-Tage-Woche, 24 bei einer 6-Tage-Woche) rechnen sich genauso anteilig auf die tatsächlichen Arbeitstage um. Tarif- oder Arbeitsvertrag können darüber hinaus mehr Urlaub vorsehen.',
       },
       {
         typ: 'beispielrechnung',
@@ -2632,7 +2633,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'elternzeit-rechner',
-    letzteAktualisierung: '2026-06-29',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Elternzeit-Rechner',
     beschreibung: 'Elternzeit berechnen: Anspruch, Aufteilung zwischen Partnern, Fristen und Meldetermine.',
     kategorie: 'Arbeit & Recht',
@@ -2641,14 +2642,14 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Elternzeit kostenlos berechnen: Anspruch bis zum 8. Geburtstag, Aufteilung zwischen Partnern, Anmeldefristen und Kündigungsschutz.',
     keywords: ['elternzeit rechner', 'elternzeit berechnen', 'elternzeit anmelden', 'elternzeit fristen', 'elternzeit dauer', 'elternzeit partnermonate', 'kündigungsschutz elternzeit', 'elternzeit aufteilen'],
     icon: '👶',
-    beispiel: 'Kind geboren 15.01.2026 → Mutter nimmt 12 Monate Elternzeit (ab 12.03.2026 nach Mutterschutz) → Anmeldung bis spätestens 22.01.2026 → Ende 12.03.2027 → Vater 2 Monate parallel → volle 14 Monate Elterngeld.',
+    beispiel: 'Kind geboren 15.01.2026 → Mutterschutz bis 12.03.2026 → Mutter nimmt 12 Monate Elternzeit ab 13.03.2026 → Anmeldung bis spätestens 22.01.2026 → Ende 12.03.2027. Vater 2 Monate Elternzeit ab Geburt: möglich, Basiselterngeld gibt es aber nur für einen Monat parallel zur Mutter.',
     faq: [
       { frage: 'Wie lange kann ich Elternzeit nehmen?', antwort: 'Jeder Elternteil hat Anspruch auf bis zu 36 Monate Elternzeit pro Kind, nutzbar bis zum 8. Geburtstag des Kindes. Bis zu 24 Monate davon können zwischen dem 3. und 8. Geburtstag genommen werden — ohne Zustimmung des Arbeitgebers, sofern rechtzeitig angemeldet.' },
       { frage: 'Wann muss ich die Elternzeit anmelden?', antwort: 'Die Anmeldung muss schriftlich erfolgen: 7 Wochen vor Beginn, wenn die Elternzeit in den ersten 3 Lebensjahren liegt; 13 Wochen vor Beginn, wenn sie zwischen dem 3. und 8. Geburtstag liegt. Die Anmeldung ist für die ersten 2 Jahre verbindlich.' },
       { frage: 'Kann ich während der Elternzeit arbeiten?', antwort: 'Ja, Sie dürfen bis zu 32 Stunden pro Woche arbeiten — beim eigenen oder einem anderen Arbeitgeber, ohne aus dem Elternzeit-Status zu fallen (32 h seit BEEG-Reform 01.09.2021, vorher 30 h). Einen klagbaren Anspruch auf Elternzeit-Teilzeit nach § 15 Abs. 6 BEEG haben Sie für 15–32 Stunden pro Woche, wenn der Betrieb mehr als 15 Arbeitnehmer hat und Sie dort seit mindestens 6 Monaten beschäftigt sind — der Arbeitgeber kann dann nur aus dringenden betrieblichen Gründen ablehnen.' },
       { frage: 'Wie wird der Mutterschutz auf die Elternzeit angerechnet?', antwort: 'Die 8 Wochen (bzw. 12 Wochen bei Früh-/Mehrlingsgeburt) Mutterschutz nach der Geburt werden vollständig auf die Elternzeit der Mutter angerechnet. Die Elternzeit der Mutter beginnt frühestens nach Ende des Mutterschutzes. Für den Vater gibt es diese Anrechnung nicht — seine Elternzeit kann direkt ab Geburt beginnen.' },
-      { frage: 'Habe ich während der Elternzeit Kündigungsschutz?', antwort: 'Ja, nach § 18 BEEG besteht ein besonderer Kündigungsschutz ab Anmeldung der Elternzeit (frühestens 8 Wochen vor Beginn) bis zum Ende der Elternzeit. Eine Kündigung ist nur in absoluten Ausnahmefällen mit Zustimmung der zuständigen Landesbehörde zulässig — auch in der Probezeit und unabhängig von der Betriebsgröße.' },
-      { frage: 'Was sind Partnermonate?', antwort: 'Für die vollen 14 Monate Basiselterngeld muss jeder Elternteil mindestens 2 Monate Elternzeit nehmen (die sogenannten Partnermonate). Nimmt nur ein Elternteil Elternzeit, gibt es maximal 12 Monate Elterngeld. Die Elternzeit kann auch länger dauern, aber ab dem 15. Monat unbezahlt.' },
+      { frage: 'Habe ich während der Elternzeit Kündigungsschutz?', antwort: 'Ja, nach § 18 BEEG besteht ein besonderer Kündigungsschutz ab Anmeldung der Elternzeit (frühestens 8 Wochen vor Beginn, bei Elternzeit zwischen dem 3. und 8. Geburtstag frühestens 14 Wochen) bis zum Ende der Elternzeit. Eine Kündigung ist nur in absoluten Ausnahmefällen mit Zustimmung der zuständigen Landesbehörde zulässig — auch in der Probezeit und unabhängig von der Betriebsgröße.' },
+      { frage: 'Was sind Partnermonate?', antwort: 'Für die vollen 14 Monate Basiselterngeld muss jeder Elternteil mindestens 2 Monate Elterngeld beziehen, in der Regel mit Elternzeit (die sogenannten Partnermonate). Nimmt nur ein Elternteil Elternzeit, gibt es maximal 12 Monate Elterngeld. Bei Geburten ab dem 1. April 2024 können Eltern Basiselterngeld nur für höchstens einen Monat gleichzeitig beziehen, und nur in den ersten zwölf Lebensmonaten (Ausnahmen u. a. bei Früh- und Mehrlingsgeburten). Die Elternzeit kann auch länger dauern, aber ab dem 15. Monat unbezahlt.' },
       {
         frage: 'Wird mein Urlaub während der Elternzeit gekürzt?',
         antwort: 'Der Arbeitgeber darf den Erholungsurlaub für jeden vollen Kalendermonat Elternzeit um ein Zwölftel kürzen (§ 17 Abs. 1 BEEG). Es ist ein Wahlrecht des Arbeitgebers, kein Automatismus — er muss die Kürzung gegenüber dem Arbeitnehmer ausdrücklich erklären. Übt der Arbeitgeber das Recht nicht aus, bleibt der volle Urlaubsanspruch bestehen. Die Kürzung greift nur bei vollen Kalendermonaten Elternzeit; angefangene Monate bleiben unberührt.',
@@ -2680,13 +2681,13 @@ export const arbeitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Dauer und Aufteilung der Elternzeit',
-        html: `<p>Die bis zu 36 Monate lassen sich flexibel verteilen. Jeder Elternteil darf seine Elternzeit in <strong>bis zu drei Abschnitten</strong> nehmen (§ 16 Abs. 1 BEEG); einen dritten Abschnitt kann der Arbeitgeber nur aus dringenden betrieblichen Gründen ablehnen, wenn er zwischen dem 3. und 8. Geburtstag liegt. Beide Elternteile können die Elternzeit <strong>gleichzeitig, nacheinander oder abwechselnd</strong> nehmen — das eröffnet viele Modelle.</p><p>Ein verbreitetes Muster: Die Mutter nimmt das erste Jahr, der Vater zwei Monate parallel oder im Anschluss. Wann genau die Elternzeit starten kann, hängt am Geburtstermin und am Mutterschutz; den voraussichtlichen Termin schätzt der <a href="/gesundheit/geburtstermin-rechner">Geburtstermin-Rechner</a>. Wer früh plant, kann Abschnitte und Partnermonate so legen, dass Freistellung und Elterngeld optimal zusammenpassen. Auch ein Wechsel zwischen den Eltern mitten im Jahr ist möglich — wichtig ist nur, dass die Übergänge lückenlos angemeldet sind, damit weder Freistellung noch Kündigungsschutz unterbrochen werden.</p>`,
+        html: `<p>Die bis zu 36 Monate lassen sich flexibel verteilen. Jeder Elternteil darf seine Elternzeit in <strong>bis zu drei Abschnitten</strong> nehmen (§ 16 Abs. 1 BEEG); einen dritten Abschnitt kann der Arbeitgeber nur aus dringenden betrieblichen Gründen ablehnen, wenn er zwischen dem 3. und 8. Geburtstag liegt. Beide Elternteile können die Elternzeit <strong>gleichzeitig, nacheinander oder abwechselnd</strong> nehmen — das eröffnet viele Modelle.</p><p>Ein verbreitetes Muster: Die Mutter nimmt das erste Jahr, der Vater zwei Monate — Elternzeit dürfen beide gleichzeitig nehmen, Basiselterngeld gibt es aber nur für einen Monat parallel, der andere Partnermonat liegt deshalb meist im Anschluss. Wann genau die Elternzeit starten kann, hängt am Geburtstermin und am Mutterschutz; den voraussichtlichen Termin schätzt der <a href="/gesundheit/geburtstermin-rechner">Geburtstermin-Rechner</a>. Wer früh plant, kann Abschnitte und Partnermonate so legen, dass Freistellung und Elterngeld optimal zusammenpassen. Auch ein Wechsel zwischen den Eltern mitten im Jahr ist möglich — wichtig ist nur, dass die Übergänge lückenlos angemeldet sind, damit weder Freistellung noch Kündigungsschutz unterbrochen werden.</p>`,
       },
       {
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Beispiel-Fristenkette: Geburt am 15.01.2026',
-        text: 'An einem konkreten Fall wird die Mechanik deutlich. Das Kind kommt am 15. Januar 2026 zur Welt. Der Mutterschutz dauert acht Wochen nach der Geburt, also bis zum 12. März 2026 — erst danach kann die Elternzeit der Mutter beginnen. Nimmt sie zwölf Monate, endet ihre Elternzeit am 12. März 2027. Die Anmeldung beim Arbeitgeber muss sieben Wochen vor Beginn vorliegen, hier also spätestens am 22. Januar 2026. Der Vater kann seine Elternzeit dagegen bereits ab der Geburt nehmen; nimmt er zwei Monate parallel, sichert das die vollen 14 Monate Elterngeld. Bei einer Früh- oder Mehrlingsgeburt verlängert sich der Mutterschutz auf zwölf Wochen, der Elternzeitbeginn der Mutter verschiebt sich entsprechend nach hinten. Wichtig: Maßgeblich ist immer der tatsächliche Geburtstag, nicht der errechnete Termin — verschiebt sich die Geburt, verschieben sich auch Mutterschutz-Ende und Elternzeit-Beginn mit.',
+        text: 'An einem konkreten Fall wird die Mechanik deutlich. Das Kind kommt am 15. Januar 2026 zur Welt. Der Mutterschutz dauert acht Wochen nach der Geburt, also bis zum 12. März 2026 — die Elternzeit der Mutter kann frühestens am 13. März 2026 beginnen. Nimmt sie zwölf Monate, endet ihre Elternzeit am 12. März 2027. Die Anmeldung beim Arbeitgeber muss sieben Wochen vor Beginn vorliegen, hier also spätestens am 22. Januar 2026. Der Vater kann seine Elternzeit dagegen bereits ab der Geburt nehmen, auch gleichzeitig mit der Mutter. Beim Elterngeld gilt aber: Für Geburten ab dem 1. April 2024 gibt es Basiselterngeld nur für höchstens einen Monat gleichzeitig, und die Mutterschutz-Monate zählen als Basiselterngeld-Monate der Mutter. Zwei Monate parallel direkt nach der Geburt sichern die 14 Monate Elterngeld deshalb nicht — den zweiten Partnermonat legt man etwa in den 13. oder 14. Lebensmonat. Bei einer Früh- oder Mehrlingsgeburt verlängert sich der Mutterschutz auf zwölf Wochen, der Elternzeitbeginn der Mutter verschiebt sich entsprechend nach hinten. Wichtig: Maßgeblich ist immer der tatsächliche Geburtstag, nicht der errechnete Termin — verschiebt sich die Geburt, verschieben sich auch Mutterschutz-Ende und Elternzeit-Beginn mit.',
       },
       {
         typ: 'checkliste',
@@ -2710,13 +2711,13 @@ export const arbeitRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Partnermonate für die vollen 14 Monate Elterngeld',
-        text: 'Elternzeit und Elterngeld sind getrennt, hängen aber zusammen. Für die vollen 14 Monate Basiselterngeld muss jeder Elternteil mindestens zwei Monate beanspruchen — das sind die sogenannten Partnermonate (§ 4 Abs. 4 BEEG). Nimmt nur ein Elternteil Elternzeit, gibt es höchstens zwölf Monate Elterngeld. Die Elternzeit selbst darf länger laufen als der Elterngeld-Bezug; ab dem 15. Monat ist sie dann unbezahlt, der Freistellungs- und Kündigungsschutz bleibt aber bestehen. Alleinerziehende können die vollen 14 Monate auch allein ausschöpfen. Wie hoch das Elterngeld im Einzelfall ausfällt und welche Variante (Basis, Plus, Partnerschaftsbonus) sich lohnt, gehört in die separate Elterngeld-Planung. Eltern sollten die Partnermonate früh festlegen, weil sie sich am Ende des Bezugszeitraums oft nicht mehr nachholen lassen.',
+        text: 'Elternzeit und Elterngeld sind getrennt, hängen aber zusammen. Für die vollen 14 Monate Basiselterngeld muss jeder Elternteil mindestens zwei Monate beanspruchen — das sind die sogenannten Partnermonate (§ 4 Abs. 4 BEEG). Nimmt nur ein Elternteil Elternzeit, gibt es höchstens zwölf Monate Elterngeld. Seit Geburten ab dem 1. April 2024 darf Basiselterngeld nur noch für höchstens einen Monat gleichzeitig bezogen werden, und nur in den ersten zwölf Lebensmonaten (Ausnahmen u. a. bei Früh- und Mehrlingsgeburten). Die Elternzeit selbst darf länger laufen als der Elterngeld-Bezug; ab dem 15. Monat ist sie dann unbezahlt, der Freistellungs- und Kündigungsschutz bleibt aber bestehen. Alleinerziehende können die vollen 14 Monate auch allein ausschöpfen. Wie hoch das Elterngeld im Einzelfall ausfällt und welche Variante (Basis, Plus, Partnerschaftsbonus) sich lohnt, gehört in die separate Elterngeld-Planung. Eltern sollten die Partnermonate früh festlegen, weil sie sich am Ende des Bezugszeitraums oft nicht mehr nachholen lassen.',
       },
       {
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Kündigungsschutz nach § 18 BEEG',
-        text: 'Während der Elternzeit gilt ein besonderer Kündigungsschutz. Er beginnt mit der Anmeldung, frühestens jedoch acht Wochen vor dem Beginn der Elternzeit, und endet mit deren Ablauf (§ 18 BEEG). In dieser Zeit darf der Arbeitgeber nur in absoluten Ausnahmefällen kündigen — etwa bei einer Betriebsstilllegung — und auch dann nur mit Zustimmung der zuständigen obersten Landesbehörde. Der Schutz gilt unabhängig von der Betriebsgröße und sogar während der Probezeit. Nach dem Ende der Elternzeit besteht ein Anspruch auf Rückkehr an den gleichen oder einen gleichwertigen Arbeitsplatz: nicht zwingend derselbe Schreibtisch, aber vergleichbare Aufgaben, Bezahlung und Standort. Wer das Arbeitsverhältnis selbst beenden will, kann zum Ende der Elternzeit mit einer verkürzten Frist von drei Monaten kündigen.',
+        text: 'Während der Elternzeit gilt ein besonderer Kündigungsschutz. Er beginnt mit der Anmeldung, frühestens jedoch acht Wochen vor dem Beginn der Elternzeit (zwischen dem 3. und 8. Geburtstag frühestens 14 Wochen), und endet mit deren Ablauf (§ 18 BEEG). In dieser Zeit darf der Arbeitgeber nur in absoluten Ausnahmefällen kündigen — etwa bei einer Betriebsstilllegung — und auch dann nur mit Zustimmung der zuständigen obersten Landesbehörde. Der Schutz gilt unabhängig von der Betriebsgröße und sogar während der Probezeit. Nach dem Ende der Elternzeit besteht ein Anspruch auf Rückkehr an den gleichen oder einen gleichwertigen Arbeitsplatz: nicht zwingend derselbe Schreibtisch, aber vergleichbare Aufgaben, Bezahlung und Standort. Wer das Arbeitsverhältnis selbst beenden will, kann zum Ende der Elternzeit mit einer verkürzten Frist von drei Monaten kündigen.',
       },
       {
         typ: 'text',
@@ -2740,7 +2741,7 @@ export const arbeitRechner: RechnerConfig[] = [
         punkte: [
           'Den voraussichtlichen Geburtstermin und das Ende des Mutterschutzes ermitteln.',
           'Die Aufteilung mit dem Partner abstimmen — gleichzeitig, nacheinander oder abwechselnd.',
-          'Mindestens zwei Partnermonate einplanen, um die vollen 14 Monate Elterngeld zu sichern.',
+          'Mindestens zwei Partnermonate einplanen, um die vollen 14 Monate Elterngeld zu sichern — Basiselterngeld höchstens einen Monat gleichzeitig mit dem anderen Elternteil.',
           'Die Elternzeit schriftlich und fristgerecht beim Arbeitgeber anmelden.',
           'Den verbindlichen Festlegungszeitraum für die ersten zwei Jahre bestimmen.',
           'Das Elterngeld separat beantragen (Rückwirkung nur drei Monate).',

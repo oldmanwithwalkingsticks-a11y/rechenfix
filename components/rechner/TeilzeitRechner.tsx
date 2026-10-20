@@ -238,9 +238,9 @@ export default function TeilzeitRechner() {
                 <tr>
                   <td className="py-3 pr-3 text-gray-700 dark:text-gray-300 font-medium">Urlaubstage</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{nUrlaubstage}</td>
-                  <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{ergebnis.urlaubstageTeilzeit}</td>
+                  <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{ergebnis.urlaubstageTeilzeit.toLocaleString('de-DE', { maximumFractionDigits: 2 })}</td>
                   <td className="py-3 pl-3 text-right font-semibold text-gray-500 dark:text-gray-400">
-                    {ergebnis.urlaubstageTeilzeit === nUrlaubstage ? '—' : `−${nUrlaubstage - ergebnis.urlaubstageTeilzeit}`}
+                    {ergebnis.urlaubstageTeilzeit === nUrlaubstage ? '—' : `−${(nUrlaubstage - ergebnis.urlaubstageTeilzeit).toLocaleString('de-DE', { maximumFractionDigits: 2 })}`}
                   </td>
                 </tr>
               </tbody>
