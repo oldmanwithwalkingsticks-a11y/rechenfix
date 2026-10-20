@@ -6,6 +6,46 @@
 
 ---
 
+## 20.10.2026 — Welle 175: Nettolohn-Optimierer — Bedingung je Option in der Vergleichstabelle sichtbar — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Karstens Live-Probe zu Welle 170. Erwartet war „bAV steuerfrei bis 676 €“ im Rechner; die Zeile
+erschien nicht. Ursache: Jede Option in `NettolohnOptimiererRechner.tsx` hat ein Feld `beschreibung`, die
+Komponente zeigte es nirgends an, seit dem ersten Commit `a6d95fc` (15.04.2026). Damit sahen Nutzer die
+Bedingungen nicht, die Welle 170 gerade korrigiert hatte: Pauschalsteuer des Arbeitgebers bei Essensmarken und
+Internet, Jobticket mindert die Entfernungspauschale, bAV-Grenzen 676 € und 338 €. Die Zahlen im Rechner
+stimmten; der Fehler lag in der Live-Probe, die einen nie angezeigten Text erwartet hat.
+
+**Änderung** (3 Ersetzungen in 1 Datei, Vorlage `_lokal/welle175-nettolohn-optimierer-hinweise.mjs`, nicht
+committet):
+- Die Vergleichstabelle „Vergleich aller Optionen“ zeigt unter jedem Optionsnamen die `beschreibung` in kleiner
+  grauer Schrift (`text-[11px]`, `text-gray-500`, dunkel `text-gray-400`). `beschreibung` ist ein Pflichtfeld,
+  leere Zeilen entstehen nicht.
+- Der Zusatz „(fließt in Rente)“ entfällt, weil die bAV-Beschreibung das sagt; mit ihm entfällt das Feld `rente`
+  (Interface und bAV-Option).
+
+**Bewusst nicht geändert:** die Texte der Beschreibungen (Welle 170), Berechnung, Balkendiagramm, `finanzen.ts`,
+Caption und Bild.
+
+**Nebenbefund:** Die neue Zeile steht in `text-gray-500` wie zuvor der Zusatz „(fließt in Rente)“. Die
+Farbregel in `CLAUDE.md` verlangt auf hellem Grund mindestens `text-gray-600` (vgl. Welle 163, Befund 6). Der
+Kontrast von Gray-500 auf Weiß liegt bei rund 4,8 : 1 und erfüllt WCAG AA auch bei 11 px; die strengere Hausregel
+nicht. Nicht geändert, weil die Vorlage es so vorgibt; offen für eine kleine Folgekorrektur.
+
+**Hinweis:** Live-Probe 1 aus Welle 170, Punkt „bAV steuerfrei bis 676 €“, ist mit dieser Welle erfüllt.
+
+**Gates:**
+- Phase 0 an `b1591d5`: `git status` leer, oben `b1591d5` und `ac106cc` (Welle 174). `o.rente`
+  `NettolohnOptimiererRechner.tsx:1`, `{o.beschreibung}` keine Ausgabe.
+- Phase 1: „OK — 3 Ersetzungen in 1 Dateien.“, Exit 0; `git status` nur `NettolohnOptimiererRechner.tsx`.
+  Greps `o.rente` und `rente?: boolean` keine Ausgabe, `{o.beschreibung}` `NettolohnOptimiererRechner.tsx:1`.
+  `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen. Im gebauten HTML von
+  `/finanzen/nettolohn-optimierer` „Mindert die Entfernungspauschale“ 1× und „SV-frei bis 338 €/Monat“ 1× (beide
+  nur in den Beschreibungen, also tatsächlich angezeigt), „(fließt in Rente)“ fehlt.
+
+**Commits:** A `8cff554` (die eine Datei). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 174: CLAUDE.md — getrackte Skills unter dem ignorierten `.claude/skills/` — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Befund beim Commit von Welle 166 (Historie `cedce5f`). `rechner-builder` und `blog-builder` sind
