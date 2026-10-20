@@ -6,6 +6,106 @@
 
 ---
 
+## 20.10.2026 — Welle 184: Anzeige und Formate — kein englischer Dezimalpunkt mehr; Uhrzeit mit Sommerzeit, Tage, Primzahl, Laufband, Backform, Pflegegeld, Minijob, USV, Handykosten — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Zweite Caption-Prüfung. Viele Rechner zeigten Zahlen mit englischem Dezimalpunkt („6.5 %“, „VPI 75.5“,
+„+12.5%“), dazu neun Rechner mit falscher Rechnung oder irreführender Beschriftung. Die Captions folgen in
+Welle 187.
+
+**Zahlenformat:** rund 45 Stellen in Anzeige, Kopier- und PDF-Texten, Diagrammen und Lib-Rechenwegen jetzt mit
+`toLocaleString('de-DE', …)` bzw. den vorhandenen Format-Helfern. Beispiele:
+
+| Rechner | vorher | jetzt |
+|---|---|---|
+| Grunderwerbsteuer | „6.5 %“ | „6,5 %“ |
+| Zugewinnausgleich | „VPI 75.5 → 126.6“, Faktor „1.437“ | „VPI 88,1 → 126,6“, „1,437“ |
+| **Wahrer Stundenlohn** | „2.333,25 € netto ÷ 173 h“ (2.333,25 ÷ 173 = 13,49 ≠ 13,46 €) | „÷ **173,33 h**“ und „2.084,58 € ÷ **203,07 h**“ wie die Einblendungen in Video 2; Seiten-Rechenbeispiel ebenso |
+| Gehaltsvergleich | „(+12.5%)“ | „(+12,5 %)“ |
+| Gewerbesteuer, kW/PS, BMI | „3.5 %“, „1.35962“, „18.5–25“ | Komma |
+| Diagramme der Seitentexte | „0.4 €“ | „0,40 €“ |
+
+**Prüfweg Zahlenformat** (laut Vorlage): TypeScript-Typanalyse aller Interpolationen in `components/rechner/*.tsx`
+(1.244 Stellen), dazu `lib/berechnungen`. Werte, die nur an die KI-Erklärung gehen, bleiben unverändert, weil sie
+nicht sichtbar sind.
+
+**Rechner:**
+
+| Rechner | vorher | jetzt | Grundlage |
+|---|---|---|---|
+| **Uhrzeit**, Zeitzonen | feste Offsets (MEZ/MESZ immer UTC+1): 20.10.2026 12:00 Berlin = **20:00** Tokio | IANA-Zeitzonendatenbank mit Datumsfeld: **19:00**; 27.10.2026 Berlin → New York −5 h; ungültige Uhrzeit am Umstellungstag erkannt | Richtlinie 2000/84/EG; 15 U.S.C. § 260a |
+| **Tage** | Umschalter „Ohne Start-/Endtag“ rechnet die Differenz | „Ohne Starttag (Differenz)“ | § 187 Abs. 1 BGB |
+| **Primzahl** | „kein Teiler bis √97 ≈ 9“ | „√97 ≈ 9,85“ | |
+| **Laufband** | „+3 % Tempo je Steigungsprozent“ (ohne Quelle) neben ACSM-Mehraufwand; 10 km/h bei 2 % → 10,60 km/h | ein Modell: ACSM-Laufgleichung, ebene Straße ≈ 1 % Steigung: **10,43 km/h** (5:45 min/km), 0 % → 9,57 km/h | ACSM; Jones & Doust 1996 |
+| **Backform** | Kastenform: Höhe ungenutzt, nur Fläche; Beispiel 148 g, Anzeige 150 g | Volumen gerechnet (30 × 11 × 7 = 2.310 cm³), Kasten → Kasten über das Volumen; „rund 150 g (rechnerisch 148 g)“ | |
+| **Pflegegeld** | zwei Zeilen „bis 3.539 €“ für Verhinderungs- und Kurzzeitpflege | eine Zeile „gemeinsamer Jahresbetrag, zusammen bis 3.539 €“ | § 42a SGB XI |
+| **Minijob** (gewerblich) | „Arbeitgeber-Gesamtkosten“ ohne BG-Beitrag | „Arbeitgeberkosten (ohne Beitrag zur Berufsgenossenschaft)“; Privathaushalt unverändert | |
+| **USV** | Laufzeit als echte Laufzeit | „rechnerischer Höchstwert“ mit Datenblatt-Beispiel (12 statt 27 Min. bei halber Last) | |
+| **Handykosten** | monatlich kündbar mit gekauftem Gerät: Jahreskosten **7.320 €** (Gerät 12-mal) | **720 €**; neues Feld „Anschlussgebühr (einmalig)“, auf die Laufzeit umgelegt | |
+
+**Grenzen der Rechnung:** USV ohne lastabhängigen Abschlag (kein allgemein belegter Faktor); Laufband nach ACSM für
+Laufen.
+
+**Video 2:** Die Bildschirmaufnahme (Teil 3) erst nach dieser Welle machen; dann stimmen Formelzeilen und
+Einblendungen überein.
+
+**Änderungen** (237 Ersetzungen plus 10 Datumszeilen = 247 in 62 Dateien plus 7 neue Dateien, Vorlage
+`_lokal/welle184-anzeige-formate.mjs`, Gegenprobe `_lokal/welle184-lib.mts`, beide nicht committet):
+- **Neu:** `lib/berechnungen/zeitzonen.ts`, `laufband-steigung.ts`, `backform.ts`; Prüfskripte `verify-zeitzonen.ts`
+  (36), `verify-laufband-steigung.ts` (16), `verify-backform.ts` (14), `verify-handykosten.ts` (16).
+- **47 Komponenten** in `components/rechner/` (Zahlenformat und die neun Rechner), **9 Libs** (`beton.ts`,
+  `dreisatz.ts`, `handykosten.ts`, `idealgewicht.ts`, `pendlerpauschale.ts`, `primzahl.ts`, `quadratmeter.ts`,
+  `steuererstattung.ts`, `urlaubstage.ts`) und **6 Config-Dateien** (`alltag.ts`, `finanzen.ts`, `kochen.ts`,
+  `mathe.ts`, `sport.ts`, `technik.ts`).
+- **`letzteAktualisierung`** → `2026-10-20` für uhrzeitrechner, handykosten-rechner, tagerechner, backform-umrechner,
+  primzahl-rechner, laufband-steigung-rechner, usv-laufzeit-rechner, wahrer-stundenlohn, pflegegeld-rechner,
+  minijob-rechner.
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187); `scripts/verify-pflegegeld.ts`
+(Welle 186).
+
+**Vermerk:** Die zugehörigen Captions folgen in Welle 187. Laut Vorlage sind von allen 67 Prüfskripten danach 7 rot,
+dieselben wie vor dieser Welle (Welle 186); in diesem Lauf nicht alle 67 nachgezählt.
+
+**Abweichungen und Funde:**
+- **Lib-Gegenprobe 18 statt 19 × „OK“:** Die Prüfdatei `welle184-lib.mts` enthält nur 18 `pruefe()`-Aufrufe
+  (Zeitzonen 5, Laufband 4, Backform 4, Handykosten 3, Primzahl 2), alle OK, „Alle Werte OK“, Exit 0. Der Sollwert
+  „19“ im Prompt (auch „19 Werte“ in der Einleitung) ist verzählt. Keine STOP-Bedingung.
+- **Zeitzonen und Tage unabhängig von der Systemzeit:** `zeitzonen.ts` rechnet nur über `Date.UTC` und
+  `Intl.DateTimeFormat` mit fester `timeZone`. Nachgestellt mit Systemzeit Europe/Berlin, UTC, America/New_York und
+  Asia/Tokyo: Tokio 19:00, New York am 27.10. 07:00 und am 20.10. 06:00, 02:30 am 29.03.2026 als ungültig erkannt;
+  Tagerechner 364 bzw. 365 Tage fürs Jahr, 181 Tage vom 01.01. bis 01.07. (über die Umstellung). `verify-zeitzonen`
+  bleibt auch unter UTC, America/Los_Angeles und Australia/Sydney 36/36.
+- Datum: Die Vorlage setzt „heute“ in Berliner Zeit. Lauf unter Windows in deutscher Zeit.
+
+**Gates:**
+- Phase 0 an `e510088`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `e510088` und `ffaa4b1`
+  (Welle 183). Greps: „({bl.satz} %)“ `GrunderwerbsteuerRechner.tsx:1`; „indexFaktor.toFixed(3)“
+  `ZugewinnausgleichRechner.tsx:1`; „vertragsstundenMonat.toFixed(0)“ `WahrerStundenlohnRechner.tsx:1`; „offset: 1 }“
+  `UhrzeitRechner.tsx:1`; „1 + 0.03 * “ `LaufbandSteigungRechner.tsx:2`; „{ergebnis.differenzProzent}%“
+  `GehaltsvergleichRechner.tsx:1`; `git ls-files` der drei neuen Libs keine Ausgabe.
+- Phase 1: „OK — 247 Ersetzungen in 62 Dateien, 7 neue Dateien.“, Exit 0; `git status` 62 geänderte und 7 neue
+  Dateien, gegen die Liste im Prompt abgeglichen: genau die 69.
+- Phase 2: Lib-Gegenprobe 18 × „OK“ (siehe oben), „Alle Werte OK“, Exit 0. Prüfskripte, je Exit 0: zeitzonen 36/36,
+  laufband-steigung 16/16, backform 14/14, handykosten 16/16, urlaubstage 24/24, pendlerpauschale 34/34,
+  zugewinnausgleich 36/36, zahlenformat 29/29. Greps: sechsmal keine Ausgabe, dann „formatStunden2(“
+  `WahrerStundenlohnRechner.tsx:3`, „formel: '2.333,25 € ÷ 173,33 h'“ `finanzen.ts:1`, „laufendeMonatskosten * 12“
+  `handykosten.ts:1`, „gemeinsamer Jahresbetrag (§ 42a SGB XI)“ `PflegegeldRechner.tsx:2`. `npm run build`
+  Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen; `git status` danach nur die 69 Dateien.
+- HTML-Befund (gezählt nach Entfernen der React-Trenner `<!-- -->`; „÷ 203,07 h“ und „zusammen bis 3.539 €“ stehen
+  nur so am Stück): `/finanzen/wahrer-stundenlohn` „÷ 173,33 h“ 3×, „÷ 203,07 h“ 1×, „40 h × 52 ÷ 12“ 2×, „÷ 173 h“
+  0×; `/wohnen/grunderwerbsteuer-rechner` „6,5 %“ 33×, „6.5 %“ 0×; `/finanzen/minijob-rechner` „ohne Beitrag zur
+  Berufsgenossenschaft“ 1×; `/finanzen/pflegegeld-rechner` „zusammen bis 3.539 €“ 1×; `/technik/usv-laufzeit-rechner`
+  „rechnerischer Höchstwert“ 3×; `/sport/laufband-steigung-rechner` „10,43“ 12×, „9,57“ 3×;
+  `/kochen/backform-umrechner` „2.310“ 2×; `/mathe/primzahl-rechner` „9,85“ 5×; `/alltag/handykosten-rechner`
+  „Anschlussgebühr“ 13×; `/alltag/tagerechner` „Ohne Starttag (Differenz)“ 1×. Zusätzlich aus der Live-Probe schon im
+  HTML: „(-9,2 %)“ (Gehaltsvergleich, „-9.2%“ 0×), „VPI 88,1 → 126,6“ (Zugewinnausgleich; der in Welle 180 vermerkte
+  Punkt ist damit behoben), „1,35962“ (kW/PS), „790,95 €“ (Minijob), „58,3“ (USV), „Bayern (3,5 %)“, „13,46 €“ und
+  „10,27 €“ (Wahrer Stundenlohn).
+
+**Commits:** A `aa915d0` (die 69 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 183: Arbeit und Soziales — Steuerklassen-Vergleich, Grundsicherungsgeld, Kurzarbeitergeld, Midijob, Riester, AfA, Krankengeld, Elterngeld — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Zweite Caption-Prüfung. Acht Rechner aus Arbeit und Soziales rechneten selbst falsch oder hatten falsche
