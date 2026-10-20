@@ -3474,7 +3474,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'erbschaftsteuer-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Erbschaftsteuer-Rechner',
     beschreibung: 'Erbschaftsteuer und Schenkungsteuer berechnen: Freibetrag, Steuersatz und Steuerlast nach Verwandtschaftsgrad.',
     kategorie: 'Finanzen',
@@ -3483,7 +3483,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Erbschaftsteuer berechnen: Freibetrag, Steuersatz und Steuerlast nach Verwandtschaftsgrad ✓ Schenkungsteuer ✓ 10-Jahres-Regel ✓ KI-Erklärung.',
     keywords: ['erbschaftsteuer rechner', 'erbschaftssteuer 2026', 'schenkungsteuer rechner', 'erbschaftssteuer freibetrag', 'freibetrag kind', 'freibetrag ehepartner', 'erbschaftsteuer steuerklasse', 'erbschaft berechnen', '10 jahre schenkung', 'familienheim'],
     icon: '🏛️',
-    beispiel: 'Kind erbt 700.000 € → Freibetrag 400.000 € − 52.000 € Versorgung = 248.000 € steuerpfl. Erwerb → Steuerklasse I, 11 % → ca. 27.280 € Erbschaftsteuer → Netto: 672.720 €.',
+    beispiel: 'Kind (bis 5 Jahre) erbt 700.000 € → Freibetrag 400.000 € + 52.000 € Versorgung → 248.000 € steuerpfl. Erwerb → Steuerklasse I, 11 % → ca. 27.280 € Erbschaftsteuer → Netto: 672.720 €. Ein Kind ab 27 Jahren zahlt 33.000 €.',
     faq: [
       {
         frage: 'Wie hoch ist der Freibetrag bei einer Erbschaft?',
@@ -3572,7 +3572,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Der Versorgungsfreibetrag (§ 17 ErbStG)',
-        html: `<p>Neben dem persönlichen Freibetrag gibt es bei einer <strong>Erbschaft</strong> (nicht bei einer Schenkung) einen zusätzlichen <strong>Versorgungsfreibetrag</strong> für die engsten Hinterbliebenen. Der überlebende <strong>Ehepartner</strong> erhält 256.000 € extra, <strong>Kinder</strong> einen altersabhängigen Betrag, der mit zunehmendem Alter sinkt.</p><p>Die Staffel reicht von 52.000 € (Kind bis 5 Jahre) über 41.000 € (6–10 J.), 30.700 € (11–15 J.), 20.500 € (16–20 J.) bis 10.300 € (21–27 J.); ab 27 Jahren entfällt der Versorgungsfreibetrag für Kinder ganz. Hintergrund ist der Versorgungsgedanke: Wer früh einen Elternteil verliert, soll stärker entlastet werden. Beim Ehepartner wird der Freibetrag um den Kapitalwert steuerfreier Versorgungsbezüge (etwa einer Witwenrente) gekürzt — diese Kürzung bildet der Rechner vereinfacht nicht ab und setzt den vollen Betrag an. In der Praxis bedeutet das: Ein Ehepartner kann zusätzlich zum persönlichen Freibetrag von 500.000 € noch einmal bis zu 256.000 € steuerfrei erhalten, sodass selbst größere Erbschaften oft ganz oder weitgehend steuerfrei bleiben. Wer das genaue Ergebnis braucht, gibt im Rechner bei einem Kind das Alter an — dann greift die exakte Staffel statt des Höchstbetrags.</p>`,
+        html: `<p>Neben dem persönlichen Freibetrag gibt es bei einer <strong>Erbschaft</strong> (nicht bei einer Schenkung) einen zusätzlichen <strong>Versorgungsfreibetrag</strong> für die engsten Hinterbliebenen. Der überlebende <strong>Ehepartner</strong> erhält 256.000 € extra, <strong>Kinder</strong> einen altersabhängigen Betrag, der mit zunehmendem Alter sinkt.</p><p>Die Staffel reicht von 52.000 € (Kind bis 5 Jahre) über 41.000 € (6–10 J.), 30.700 € (11–15 J.), 20.500 € (16–20 J.) bis 10.300 € (21–26 J., also bis zur Vollendung des 27. Lebensjahres); ab 27 Jahren entfällt der Versorgungsfreibetrag für Kinder ganz. Hintergrund ist der Versorgungsgedanke: Wer früh einen Elternteil verliert, soll stärker entlastet werden. Beim Ehepartner wird der Freibetrag um den Kapitalwert steuerfreier Versorgungsbezüge (etwa einer Witwenrente) gekürzt — diese Kürzung bildet der Rechner vereinfacht nicht ab und setzt den vollen Betrag an. In der Praxis bedeutet das: Ein Ehepartner kann zusätzlich zum persönlichen Freibetrag von 500.000 € noch einmal bis zu 256.000 € steuerfrei erhalten, sodass selbst größere Erbschaften oft ganz oder weitgehend steuerfrei bleiben. Wer das genaue Ergebnis braucht, gibt im Rechner bei einem Kind das Alter an — dann greift die exakte Staffel statt des Höchstbetrags.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -4200,7 +4200,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'gmbh-geschaeftsfuehrer-rechner',
-    letzteAktualisierung: '2026-06-25',
+    letzteAktualisierung: '2026-10-20',
     titel: 'GmbH-Geschäftsführer-Rechner',
     beschreibung: 'Netto-Gehalt des GmbH-Geschäftsführers berechnen: Mit Sozialversicherungsfreiheit, Firmenwagen, PKV und Einkommensteuer.',
     kategorie: 'Finanzen',
@@ -4209,7 +4209,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'GmbH-Geschäftsführer-Gehalt berechnen ✓ Beherrschend SV-frei ✓ Firmenwagen ✓ PKV ✓ Einkommensteuer 2026 ✓ Mit KI-Erklärung.',
     keywords: ['gmbh geschäftsführer rechner', 'ggf gehalt netto', 'gesellschafter geschäftsführer', 'geschäftsführer brutto netto', 'gmbh gf sv frei', 'firmenwagen 1 prozent regelung', 'gmbh gehalt 2026'],
     icon: '🏢',
-    beispiel: 'Beherrschender GGF mit 6.000 € brutto/Monat, PKV-versichert (650 €), SV-frei ≈ 4.040 € netto/Monat nach ESt + PKV. Mit Firmenwagen (Listenpreis 45.000 €, 20 km): +720 € geldwerter Vorteil/Monat.',
+    beispiel: 'Beherrschender GGF mit 6.000 € brutto/Monat, PKV-versichert (650 €), SV-frei ≈ 4.067 € netto/Monat nach ESt + PKV. Freiwillig gesetzlich versichert (voller Beitrag, ohne Krankengeld) ≈ 3.712 €. Mit Firmenwagen (Listenpreis 45.000 €, 20 km): +720 € geldwerter Vorteil/Monat.',
     // W19-Goldstandard: gmbh-geschaeftsfuehrer-rechner auf volle Tiefe (~1.560 W, 15 Bausteine).
     // Leitformat „Gestaltungs-Checkliste" — 3 checkliste dominant (beherrschend? · GKV/PKV ·
     // Vergütung gestalten), grenzt sich von afa (vergleich) und gewerbe-/kapitalertragsteuer
@@ -4218,6 +4218,10 @@ export const finanzenRechner: RechnerConfig[] = [
     // Netto ~4.040 €/Monat (Soli 0, da ESt < 20.350 €); Firmenwagen 45.000 €/20 km → 720 €/Monat
     // gwV (Config-beispiel von 540 €/4.200 € auf 720 €/4.040 € korrigiert). § 32a EStG 2026:
     // GFB 12.348 €, 42 % ab 69.878 €. erklaerung bleibt Fallback.
+    // W178: Vorsorge ohne 7.000-€-Deckel (Basis-KV/PV voll, § 10 Abs. 1 Nr. 3 EStG) → PKV 650 €:
+    // zvE 62.970 €, ESt 15.394 €, Netto 4.067 €. Beherrschend + GKV jetzt mit vollem freiwilligem
+    // Beitrag (14,0 % + 2,9 % + PV 4,2 % bis BBG = 1.226 €/Monat) → 3.712 € (vorher 4.451 € ohne KV/PV).
+    // Nicht beherrschend, GKV 2,9 %: 3.647 €.
     contentBloecke: [
       {
         typ: 'text',
@@ -4239,13 +4243,13 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'SV-Freiheit: Chance und Risiko zugleich',
-        html: `<p>Als <strong>beherrschender GGF</strong> gilt, wer mehr als 50 % der Geschäftsanteile hält oder durch eine Sperrminorität alle Beschlüsse blockieren kann. Ein solcher Geschäftsführer ist kein abhängig Beschäftigter im Sinne des § 7 SGB IV und damit <strong>sozialversicherungsfrei</strong>: keine Pflichtbeiträge zur Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung.</p><p>Die <strong>Chance</strong> ist erheblich: Der Arbeitnehmer-Anteil von rund 20 % des Bruttos entfällt komplett, das Netto steigt entsprechend. Aus 6.000 € brutto bleibt deutlich mehr übrig als bei einem normalen Angestellten.</p><p>Die <strong>Kehrseite</strong>: Es entstehen keine Ansprüche auf gesetzliche Rente oder Arbeitslosengeld. Der GGF muss Kranken- und Altersvorsorge selbst organisieren — typischerweise über eine PKV und private oder betriebliche Vorsorge. Wie groß die Versorgungslücke ohne gesetzliche Rente ist, zeigt der <a href="/finanzen/rentenrechner">Rentenrechner</a>.</p>`,
+        html: `<p>Als <strong>beherrschender GGF</strong> gilt, wer mehr als 50 % der Geschäftsanteile hält oder durch eine Sperrminorität alle Beschlüsse blockieren kann. Ein solcher Geschäftsführer ist kein abhängig Beschäftigter im Sinne des § 7 SGB IV und damit <strong>sozialversicherungsfrei</strong>: keine Pflichtbeiträge zur Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung.</p><p>Die <strong>Chance</strong>: Renten- und Arbeitslosenversicherung entfallen — beim Angestellten zusammen 10,6 % des Bruttos bis zur Beitragsbemessungsgrenze. Kranken- und Pflegeversicherung muss der GGF dagegen weiter bezahlen, und zwar ohne Arbeitgeberanteil: freiwillig gesetzlich den vollen Beitrag, privat den PKV-Tarif. Wie viel mehr Netto bleibt, entscheidet deshalb vor allem die Krankenversicherung. Bei 6.000 € brutto sind es mit einer PKV für 650 € rund 4.070 € netto, freiwillig gesetzlich versichert rund 3.710 € — ein nicht beherrschender GGF kommt wie ein Angestellter auf rund 3.650 €.</p><p>Die <strong>Kehrseite</strong>: Es entstehen keine Ansprüche auf gesetzliche Rente oder Arbeitslosengeld. Der GGF muss Kranken- und Altersvorsorge selbst organisieren — typischerweise über eine PKV und private oder betriebliche Vorsorge. Wie groß die Versorgungslücke ohne gesetzliche Rente ist, zeigt der <a href="/finanzen/rentenrechner">Rentenrechner</a>.</p>`,
       },
       {
         typ: 'infobox',
         variante: 'warnung',
         titel: 'SV-Freiheit bedeutet Eigenverantwortung',
-        text: 'Die Sozialversicherungsfreiheit des beherrschenden GGF ist Chance und Risiko zugleich. Chance: Der AN-Anteil von rund 20 % entfällt, das Netto steigt deutlich. Risiko: Es entstehen keine Ansprüche auf gesetzliche Rente, Arbeitslosengeld oder Krankengeld. Wer die ersparten Beiträge nicht konsequent in private oder betriebliche Vorsorge umleitet, steht im Alter ohne Absicherung da. Verbindlich ist der SV-Status erst nach einem Statusfeststellungsverfahren bei der Clearingstelle der Deutschen Rentenversicherung.',
+        text: 'Die Sozialversicherungsfreiheit des beherrschenden GGF ist Chance und Risiko zugleich. Chance: Renten- und Arbeitslosenversicherungsbeiträge entfallen; mit einer günstigen PKV steigt das Netto spürbar, freiwillig gesetzlich versichert dagegen kaum, weil der volle KV- und PV-Beitrag selbst zu zahlen ist. Risiko: Es entstehen keine Ansprüche auf gesetzliche Rente, Arbeitslosengeld oder Krankengeld. Wer die ersparten Beiträge nicht konsequent in private oder betriebliche Vorsorge umleitet, steht im Alter ohne Absicherung da. Verbindlich ist der SV-Status erst nach einem Statusfeststellungsverfahren bei der Clearingstelle der Deutschen Rentenversicherung.',
       },
       {
         typ: 'text',
@@ -4270,22 +4274,22 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: '6.000 € GGF-Gehalt: Netto-Berechnung',
         schritte: [
           { label: 'Jahresbrutto', formel: '6.000 € × 12', ergebnis: '72.000 €' },
-          { label: 'zu versteuern (− WK − Vorsorge)', formel: '72.000 − 1.230 − 7.000', ergebnis: '63.770 €' },
-          { label: 'Einkommensteuer (Grundtarif)', formel: '§ 32a EStG 2026', ergebnis: '15.712 €' },
           { label: 'PKV-Beitrag', formel: '650 € × 12', ergebnis: '7.800 €' },
-          { label: 'Netto pro Monat', formel: '(72.000 − 15.712 − 7.800) ÷ 12', ergebnis: '≈ 4.040 €' },
+          { label: 'zu versteuern (− WK − PKV als Vorsorge)', formel: '72.000 − 1.230 − 7.800', ergebnis: '62.970 €' },
+          { label: 'Einkommensteuer (Grundtarif)', formel: '§ 32a EStG 2026', ergebnis: '15.394 €' },
+          { label: 'Netto pro Monat', formel: '(72.000 − 15.394 − 7.800) ÷ 12', ergebnis: '≈ 4.067 €' },
         ],
-        fazit: 'Als beherrschender, SV-freier GGF bleiben von 6.000 € brutto rund 4.040 € netto pro Monat — bei einer Abgabenquote von rund 33 % (Einkommensteuer + PKV; kein Soli, da die Steuer unter der Freigrenze liegt). Ein sozialversicherungspflichtiger Angestellter mit gleichem Brutto käme durch RV/AV/KV/PV auf eine höhere Abgabenquote, hätte dafür aber gesetzliche Renten- und Arbeitslosenansprüche. Mit aktiviertem Firmenwagen (45.000 €, 20 km) käme der geldwerte Vorteil von 720 €/Monat hinzu — er erhöht das zu versteuernde Einkommen und senkt das Netto entsprechend.',
+        fazit: 'Als beherrschender, SV-freier GGF bleiben von 6.000 € brutto rund 4.067 € netto pro Monat — bei einer Abgabenquote von rund 32 % (Einkommensteuer + PKV; kein Soli, da die Steuer unter der Freigrenze liegt). Freiwillig gesetzlich versichert wären es rund 3.712 €, weil Kranken- und Pflegeversicherung dann mit vollem Beitrag bis zur Beitragsbemessungsgrenze anfallen (rund 1.226 € im Monat). Ein sozialversicherungspflichtiger Angestellter mit gleichem Brutto käme durch RV/AV/KV/PV auf eine höhere Abgabenquote, hätte dafür aber gesetzliche Renten- und Arbeitslosenansprüche. Mit aktiviertem Firmenwagen (45.000 €, 20 km) käme der geldwerte Vorteil von 720 €/Monat hinzu — er erhöht das zu versteuernde Einkommen und senkt das Netto entsprechend.',
       },
       {
         typ: 'text',
         titel: 'Beherrschend vs. nicht-beherrschend im Netto',
-        html: `<p>Der SV-Status macht im Netto einen großen Unterschied. Bei <strong>6.000 € brutto</strong> zahlt ein <strong>nicht-beherrschender</strong> GGF wie ein normaler Angestellter den vollen Arbeitnehmer-Anteil zur Sozialversicherung — Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung zusammen rund 20 % bis zu den Beitragsbemessungsgrenzen.</p><p>Der <strong>beherrschende</strong> GGF spart diese Beiträge vollständig und hat dadurch spürbar mehr Netto auf dem Konto. Der Haken ist nicht sichtbar, aber real: Während der Angestellte mit jedem Beitragsmonat Rentenpunkte und einen Anspruch auf Arbeitslosengeld sammelt, baut der SV-freie GGF <strong>keinerlei gesetzliche Ansprüche</strong> auf.</p><p>Ein fairer Vergleich rechnet die ersparten Beiträge deshalb nicht als reinen Gewinn, sondern als <strong>Eigenvorsorge-Budget</strong>: Wer die rund 20 % konsequent in eine private oder betriebliche Altersvorsorge steckt, steht am Ende besser da — wer sie verkonsumiert, riskiert eine Versorgungslücke.</p>`,
+        html: `<p>Der SV-Status macht im Netto einen großen Unterschied. Bei <strong>6.000 € brutto</strong> zahlt ein <strong>nicht-beherrschender</strong> GGF wie ein normaler Angestellter den vollen Arbeitnehmer-Anteil zur Sozialversicherung — Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung zusammen rund 20 % bis zu den Beitragsbemessungsgrenzen.</p><p>Der <strong>beherrschende</strong> GGF spart die Renten- und Arbeitslosenversicherung. Kranken- und Pflegeversicherung zahlt er selbst — in der GKV als freiwilliges Mitglied sogar den vollen Beitrag statt nur des Arbeitnehmeranteils. Spürbar mehr Netto bleibt daher vor allem mit einer günstigen PKV. Der Haken ist nicht sichtbar, aber real: Während der Angestellte mit jedem Beitragsmonat Rentenpunkte und einen Anspruch auf Arbeitslosengeld sammelt, baut der SV-freie GGF <strong>keinerlei gesetzliche Ansprüche</strong> auf.</p><p>Ein fairer Vergleich rechnet die ersparten Beiträge deshalb nicht als reinen Gewinn, sondern als <strong>Eigenvorsorge-Budget</strong>: Wer die ersparten Renten- und Arbeitslosenbeiträge von rund 10,6 % konsequent in eine private oder betriebliche Altersvorsorge steckt, steht am Ende besser da — wer sie verkonsumiert, riskiert eine Versorgungslücke.</p>`,
       },
       {
         typ: 'text',
         titel: 'Netto-Berechnung: Steuer statt Sozialabgaben',
-        html: `<p>Die Netto-Berechnung des SV-freien GGF ist im Grunde eine reine <strong>Einkommensteuer-Rechnung</strong>. Auf das zu versteuernde Einkommen — Bruttogehalt plus geldwerte Vorteile, abzüglich Werbungskostenpauschale und abziehbarer Vorsorgeaufwendungen — wird die Einkommensteuer nach dem Grundtarif (§ 32a EStG) berechnet.</p><p>Hinzu kommt der <strong>Solidaritätszuschlag</strong> von 5,5 %, der erst ab einer Einkommensteuer von 20.350 € (Grundtarif) greift — bei höheren GGF-Gehältern also regelmäßig. Kirchenmitglieder zahlen zusätzlich 8 % (Bayern, Baden-Württemberg) bzw. 9 % Kirchensteuer auf die Einkommensteuer.</p><p>Anders als beim Angestellten fehlen die Sozialabgaben — dafür trägt der beherrschende GGF den <strong>PKV-Beitrag</strong> in voller Höhe selbst. Dieser ist als Sonderausgabe teilweise abziehbar und senkt so die Steuerlast etwas.</p>`,
+        html: `<p>Die Netto-Berechnung des SV-freien GGF ist im Grunde eine reine <strong>Einkommensteuer-Rechnung</strong>. Auf das zu versteuernde Einkommen — Bruttogehalt plus geldwerte Vorteile, abzüglich Werbungskostenpauschale und abziehbarer Vorsorgeaufwendungen — wird die Einkommensteuer nach dem Grundtarif (§ 32a EStG) berechnet.</p><p>Hinzu kommt der <strong>Solidaritätszuschlag</strong> von 5,5 %, der erst ab einer Einkommensteuer von 20.350 € (Grundtarif) greift — bei höheren GGF-Gehältern also regelmäßig. Kirchenmitglieder zahlen zusätzlich 8 % (Bayern, Baden-Württemberg) bzw. 9 % Kirchensteuer auf die Einkommensteuer.</p><p>Anders als beim Angestellten fehlen die Pflichtbeiträge — dafür trägt der beherrschende GGF seine Kranken- und Pflegeversicherung in voller Höhe selbst, als <strong>PKV-Beitrag</strong> oder als freiwilligen GKV-Beitrag. Der Teil für die Basisabsicherung ist als Sonderausgabe abziehbar (§ 10 Abs. 1 Nr. 3 EStG) und senkt so die Steuerlast; der Rechner setzt den Beitrag vereinfacht voll an.</p>`,
       },
       {
         typ: 'text',
@@ -4358,7 +4362,7 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Grundfreibetrag 2026', wert: '12.348 €', hinweis: '§ 32a EStG, steuerfrei' },
           { label: 'Spitzensteuersatz 42 %', wert: 'ab 69.878 €', hinweis: 'zu versteuerndes Einkommen' },
           { label: 'Firmenwagen 1-%-Regel', wert: '1 % + 0,03 %/km', hinweis: 'vom Bruttolistenpreis, monatlich' },
-          { label: 'SV-Ersparnis beherrschend', wert: '~20 %', hinweis: 'entfallender AN-Anteil, aber keine Ansprüche' },
+          { label: 'SV-Ersparnis beherrschend', wert: '10,6 %', hinweis: 'RV + ALV (AN-Anteil) entfallen, KV/PV zahlt er selbst; keine Ansprüche' },
           { label: 'PKV-Wechsel (JAEG)', wert: '77.400 €', hinweis: '6.450 €/Monat, nur nicht-beherrschende GGF' },
         ],
       },
@@ -4372,7 +4376,7 @@ export const finanzenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Wann ist ein GmbH-Geschäftsführer sozialversicherungsfrei?',
-        antwort: 'Sozialversicherungsfrei sind beherrschende Gesellschafter-Geschäftsführer — also solche, die mehr als 50 % der Geschäftsanteile halten oder durch eine Sperrminorität Beschlüsse blockieren können. In diesem Fall entfallen die Beiträge zur gesetzlichen Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung vollständig. Die Feststellung erfolgt durch die Clearingstelle der Deutschen Rentenversicherung Bund.',
+        antwort: 'Sozialversicherungsfrei sind beherrschende Gesellschafter-Geschäftsführer — also solche, die mehr als 50 % der Geschäftsanteile halten oder durch eine Sperrminorität Beschlüsse blockieren können. In diesem Fall entfallen die Pflichtbeiträge zur gesetzlichen Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung vollständig. Kranken- und pflegeversichert sein muss er trotzdem — freiwillig gesetzlich mit vollem Beitrag oder privat. Die Feststellung erfolgt durch die Clearingstelle der Deutschen Rentenversicherung Bund.',
       },
       {
         frage: 'Wie funktioniert die 1-%-Regelung beim Firmenwagen?',
@@ -4380,7 +4384,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Lohnt sich die PKV für Geschäftsführer?',
-        antwort: 'Für beherrschende GGF ist die PKV fast immer sinnvoll, da sie ohnehin SV-frei sind. Vorteile: bessere Leistungen, Beitragsrückerstattung, im Alter abziehbare Beiträge. Nachteile: Beiträge steigen im Alter, Rückkehr in GKV ist kaum möglich. Für nicht-beherrschende GGF gilt die Versicherungspflichtgrenze (2026: 77.400 €/Jahr bzw. 6.450 €/Monat) — erst darüber ist der Wechsel in die PKV möglich.',
+        antwort: 'Für beherrschende GGF ist die PKV oft attraktiv: Sie sind nicht versicherungspflichtig und müssten in der GKV den vollen Beitrag ohne Arbeitgeberanteil tragen. Vorteile: bessere Leistungen, Beitragsrückerstattung, im Alter abziehbare Beiträge. Nachteile: Beiträge steigen im Alter, Rückkehr in GKV ist kaum möglich. Für nicht-beherrschende GGF gilt die Versicherungspflichtgrenze (2026: 77.400 €/Jahr bzw. 6.450 €/Monat) — erst darüber ist der Wechsel in die PKV möglich.',
       },
       {
         frage: 'Was ist eine verdeckte Gewinnausschüttung (vGA)?',
@@ -4394,6 +4398,7 @@ export const finanzenRechner: RechnerConfig[] = [
     quellen: [
       { titel: '§ 32a EStG: Einkommensteuertarif 2026', url: 'https://www.gesetze-im-internet.de/estg/__32a.html' },
       { titel: '§ 8 EStG: Geldwerter Vorteil Firmenwagen (1-%-Regel)', url: 'https://www.gesetze-im-internet.de/estg/__8.html' },
+      { titel: '§ 243 SGB V: Ermäßigter Beitragssatz', url: 'https://www.gesetze-im-internet.de/sgb_5/__243.html', hinweis: '14,0 % für Mitglieder ohne Anspruch auf Krankengeld, etwa freiwillig versicherte beherrschende GGF ohne Wahlerklärung (§ 44 Abs. 2 SGB V).' },
       { titel: '§ 7 SGB IV: Beschäftigung & sozialversicherungsrechtlicher Status', url: 'https://www.gesetze-im-internet.de/sgb_4/__7.html', hinweis: 'Beherrschende Gesellschafter-Geschäftsführer (> 50 % oder Sperrminorität) sind sozialversicherungsfrei (st. Rspr. BSG); verbindlich nur per Statusfeststellungsverfahren der DRV-Clearingstelle.' },
     ],
   },

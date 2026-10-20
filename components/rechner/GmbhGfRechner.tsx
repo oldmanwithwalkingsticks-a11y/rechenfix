@@ -23,7 +23,11 @@ import {
   RV_SATZ_AN_2026,
   AV_SATZ_AN_2026,
 } from '@/lib/berechnungen/brutto-netto';
-import { pvAnteilAn2026 } from '@/lib/berechnungen/pflegeversicherung';
+import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from '@/lib/berechnungen/pflegeversicherung';
+import {
+  KV_ERMAESSIGTER_BEITRAGSSATZ_2026,
+  KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+} from '@/lib/berechnungen/sv-parameter';
 
 const fmtEur = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 const fmt0 = (n: number) => Math.round(n).toLocaleString('de-DE') + ' €';
@@ -33,7 +37,7 @@ export default function GmbhGfRechner() {
   const [beherrschend, setBeherrschend] = useState(true);
   const [splitting, setSplitting] = useState(false);
   const [kv, setKv] = useState<'gkv' | 'pkv'>('gkv');
-  const [kvZusatz, setKvZusatz] = useState('1.7');
+  const [kvZusatz, setKvZusatz] = useState(String(KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT));
   const [pkvBeitrag, setPkvBeitrag] = useState('650');
   const [kirche, setKirche] = useState(false);
   const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
@@ -71,11 +75,17 @@ export default function GmbhGfRechner() {
     let anKv = 0, anPv = 0, anRv = 0, anAv = 0;
 
     if (beherrschend) {
-      // Beherrschender GGF: SV-frei (Standard). Keine gesetzlichen Abgaben.
+      // Beherrschender GGF: SV-frei, keine Pflichtbeiträge zu RV und ALV. Kranken- und Pflegeversicherung
+      // bleiben Pflicht: in der GKV als freiwilliges Mitglied mit vollem Beitrag (ermäßigter Satz 14,0 %
+      // ohne Krankengeld, § 243 SGB V, plus voller Zusatzbeitrag) und voller Pflegeversicherung — einen
+      // gesetzlichen Arbeitgeberzuschuss gibt es nicht. In der PKV steckt beides im eingegebenen Beitrag.
+      // W178: vorher wurde bei GKV gar kein Beitrag abgezogen (6.000 € → 4.451 € netto).
       anRv = 0;
       anAv = 0;
-      anKv = 0;
-      anPv = 0;
+      if (kv === 'gkv') {
+        anKv = kvBasis * (KV_ERMAESSIGTER_BEITRAGSSATZ_2026 + kvZusatzSatz);
+        anPv = kvBasis * (pvAnSatz + PV_BASIS_SATZ_2026);
+      }
     } else {
       // Nicht-beherrschend: normaler AN-Anteil aus zentralen Konstanten
       if (kv === 'gkv') {
@@ -93,8 +103,11 @@ export default function GmbhGfRechner() {
 
     // Werbungskostenpauschale (§ 9a Nr. 1 EStG) + Sonderausgaben (vereinfacht)
     const werbungskosten = WK_PAUSCHALE_AN_2026;
-    // Vorsorgepauschale grob: Summe der SV-Beiträge oder geschätzt
-    const vorsorge = beherrschend ? Math.min(pkvJahr, 7000) : (anRv + anKv + anPv);
+    // Vorsorgeaufwendungen: Basis-Kranken- und Pflegeversicherung voll abziehbar (§ 10 Abs. 1 Nr. 3 EStG),
+    // beim nicht beherrschenden GGF zusätzlich der RV-Arbeitnehmeranteil (§ 10 Abs. 1 Nr. 2, Abs. 3 EStG).
+    // Vereinfachung: Der PKV-Beitrag gilt ganz als Basisabsicherung. W178: vorher beim beherrschenden GGF
+    // pauschal höchstens 7.000 € und beim nicht beherrschenden ohne den PKV-Beitrag.
+    const vorsorge = anRv + anKv + anPv + pkvJahr;
 
     const zvE = Math.max(0, steuerBruttoJahr - werbungskosten - vorsorge);
     // ESt nach § 32a EStG: Grundtarif oder Splittingtarif (verheiratet Zusammen)
@@ -179,7 +192,7 @@ export default function GmbhGfRechner() {
           />
         </div>
 
-        {kv === 'gkv' && !beherrschend && (
+        {kv === 'gkv' && (
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">KV-Zusatzbeitrag</label>
             <NummerEingabe value={kvZusatz} onChange={setKvZusatz} einheit="%" />
@@ -193,7 +206,9 @@ export default function GmbhGfRechner() {
             </label>
             <NummerEingabe value={pkvBeitrag} onChange={setPkvBeitrag} einheit="€" />
             <p id="gmbhgf-pkv-hint" className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-              PKV-Beiträge variieren individuell (Alter, Tarif, Selbstbehalt). Typische Bandbreite: 400–1.000 € pro Monat. Tragen Sie Ihren tatsächlichen KV-Beitrag ein — die Pflegepflichtversicherung wird separat berechnet.
+              {beherrschend
+                ? 'PKV-Beiträge variieren individuell (Alter, Tarif, Selbstbehalt). Typische Bandbreite: 400–1.000 € pro Monat. Tragen Sie Ihren Gesamtbeitrag für Kranken- und Pflegepflichtversicherung ein — als beherrschender GGF zahlen Sie ihn ohne gesetzlichen Arbeitgeberzuschuss.'
+                : 'PKV-Beiträge variieren individuell (Alter, Tarif, Selbstbehalt). Typische Bandbreite: 400–1.000 € pro Monat. Tragen Sie Ihren tatsächlichen KV-Beitrag ein — die Pflegepflichtversicherung wird separat berechnet.'}
             </p>
           </div>
         )}
@@ -268,8 +283,8 @@ export default function GmbhGfRechner() {
           {ergebnis.kirchensteuer > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Kirchensteuer</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.kirchensteuer)}</span></div>}
           {ergebnis.anRv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Rentenversicherung (AN)</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anRv)}</span></div>}
           {ergebnis.anAv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Arbeitslosenvers. (AN)</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anAv)}</span></div>}
-          {ergebnis.anKv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">GKV (AN)</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anKv)}</span></div>}
-          {ergebnis.anPv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Pflegeversicherung (AN)</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anPv)}</span></div>}
+          {ergebnis.anKv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">{beherrschend ? 'GKV freiwillig (voller Beitrag)' : 'GKV (AN)'}</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anKv)}</span></div>}
+          {ergebnis.anPv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">{beherrschend ? 'Pflegeversicherung (voller Beitrag)' : 'Pflegeversicherung (AN)'}</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anPv)}</span></div>}
           {ergebnis.pkvJahr > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">PKV-Beitrag (geschätzt)</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.pkvJahr)}</span></div>}
           <div className="border-t border-gray-200 dark:border-gray-600 mt-2 pt-2 flex justify-between font-bold">
             <span className="text-gray-800 dark:text-gray-100">= Jahresnetto</span>
@@ -280,7 +295,7 @@ export default function GmbhGfRechner() {
 
       {beherrschend && (
         <div className="mb-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-4 text-sm text-green-800 dark:text-green-200">
-          <strong>Beherrschender GGF:</strong> sozialversicherungsfrei. Sie müssen sich eigenständig um Kranken-, Pflege- und Altersvorsorge kümmern (häufig PKV + private/bAV).
+          <strong>Beherrschender GGF:</strong> sozialversicherungsfrei — keine Pflichtbeiträge zu Renten- und Arbeitslosenversicherung. Kranken-, Pflege- und Altersvorsorge organisieren Sie selbst (häufig PKV + private/bAV). Freiwillig gesetzlich versichert zahlen Sie den vollen Beitrag ohne Arbeitgeberanteil; gerechnet wird mit dem ermäßigten Satz von 14,0 % ohne Krankengeld (mit Krankengeld-Wahlerklärung 14,6 %) plus Zusatzbeitrag und Pflegeversicherung, bis zur Beitragsbemessungsgrenze.
         </div>
       )}
 

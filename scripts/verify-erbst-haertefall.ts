@@ -29,20 +29,26 @@ cases.push(
 );
 
 // --- ErbSt-Regressions ---
-const erb = (wert: number, vw: any, vorsch = 0) =>
+// W178: ohne Altersangabe gibt es keinen Versorgungsfreibetrag mehr. Die Regressionsfälle ER-01/02
+// rechnen deshalb ausdrücklich mit einem Kind bis 5 Jahre (52.000 €, wie vorher als Vorgabe).
+const erb = (wert: number, vw: any, vorsch = 0, alterKind?: number) =>
   berechneErbschaftsteuer({
     erwerbsart: 'erbschaft',
     wert,
     verwandtschaft: vw,
     vorschenkungen: vorsch,
     selbstgenutzteImmobilie: false,
+    alterKind,
   }).steuerbetrag;
 
 cases.push(
-  { name: 'ER-01: Erbschaft 500k Kind',                           actual: erb(500_000,   'kind'),      expected: 3_360 },
-  { name: 'ER-02a: Erbschaft 750k Kind (stpfl. 298k)',            actual: erb(750_000,   'kind'),      expected: 32_780 },
-  { name: 'ER-02b: Erbschaft 752.001 Kind (stpfl. 300.001, HF)',  actual: erb(752_001,   'kind'),      expected: 33_001 },
+  { name: 'ER-01: Erbschaft 500k Kind (3 J.)',                    actual: erb(500_000,   'kind', 0, 3), expected: 3_360 },
+  { name: 'ER-02a: Erbschaft 750k Kind (3 J., stpfl. 298k)',      actual: erb(750_000,   'kind', 0, 3), expected: 32_780 },
+  { name: 'ER-02b: Erbschaft 752.001 Kind (3 J., 300.001, HF)',   actual: erb(752_001,   'kind', 0, 3), expected: 33_001 },
   { name: 'ER-03: Erbschaft 1,5M Ehepartner',                     actual: erb(1_500_000, 'ehepartner'), expected: 141_360 },
+  { name: 'ER-05: Erbschaft 500k Kind ohne Alter → kein Vers.-FB', actual: erb(500_000,  'kind'),       expected: 11_000 },
+  { name: 'ER-06: Erbschaft 700k Kind 26 J. → 10.300 € Vers.-FB',  actual: erb(700_000,  'kind', 0, 26), expected: 31_867 },
+  { name: 'ER-07: Erbschaft 700k Kind 27 J. → kein Vers.-FB',      actual: erb(700_000,  'kind', 0, 27), expected: 33_000 },
 );
 
 // --- SchenkSt-Regressions ---

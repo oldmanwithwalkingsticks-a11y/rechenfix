@@ -112,11 +112,11 @@ export default function ErbschaftsteuerRechner() {
             <NummerEingabe
               value={alterKindRaw}
               onChange={setAlterKindRaw}
-              placeholder="bei Leerlassen: 52.000 € (Höchstbetrag)"
+              placeholder="leer = 27 Jahre oder älter (kein Versorgungsfreibetrag)"
               einheit="Jahre"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              § 17 Abs. 2 ErbStG-Staffel: bis 5 J. 52k € · 6–10 J. 41k € · 11–15 J. 30,7k € · 16–20 J. 20,5k € · 21–27 J. 10,3k € · ab 27 J. 0 €.
+              § 17 Abs. 2 ErbStG-Staffel: bis 5 J. 52k € · 6–10 J. 41k € · 11–15 J. 30,7k € · 16–20 J. 20,5k € · 21–26 J. 10,3k € · ab 27 J. 0 €. Ohne Angabe rechnet der Rechner ohne Versorgungsfreibetrag.
             </p>
           </div>
         )}

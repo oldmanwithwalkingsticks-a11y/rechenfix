@@ -26,22 +26,27 @@ export interface ErbschaftsteuerEingabe {
    * Alter des Kindes bei Erbfall (nur relevant bei verwandtschaft
    * 'kind' oder 'enkel-eltern-tot' UND erwerbsart 'erbschaft').
    * Wenn gesetzt, greift die altersabhängige Staffel nach § 17 Abs. 2
-   * ErbStG. Wenn nicht gesetzt (undefined), pauschale 52.000 €.
+   * ErbStG. Wenn nicht gesetzt (undefined): kein Versorgungsfreibetrag
+   * (Kind 27 Jahre oder älter, der häufigste Fall). W178: vorher pauschal
+   * 52.000 €, der Höchstbetrag für Kinder bis 5 Jahre.
    */
   alterKind?: number;
 }
 
 /**
- * Versorgungsfreibetrag Kinder § 17 Abs. 2 ErbStG — altersabhängige Staffel.
- * Bei nicht gesetztem Alter wird der Höchstbetrag (52.000 €) verwendet.
+ * Versorgungsfreibetrag Kinder § 17 Abs. 2 ErbStG — altersabhängige Staffel,
+ * Alter in vollendeten Lebensjahren am Todestag. Die letzte Stufe gilt „bis zur
+ * Vollendung des 27. Lebensjahres", ab dem 27. Geburtstag entfällt der Freibetrag.
+ * Ohne Altersangabe: 0 € (W178: vorher 52.000 €; ≤ 27 statt < 27 gab mit 27 Jahren
+ * noch 10.300 €).
  */
 export function versorgungsfbKind(alter: number | undefined): number {
-  if (alter === undefined) return 52000;
+  if (alter === undefined) return 0;
   if (alter <= 5) return 52000;
   if (alter <= 10) return 41000;
   if (alter <= 15) return 30700;
   if (alter <= 20) return 20500;
-  if (alter <= 27) return 10300;
+  if (alter < 27) return 10300;
   return 0;
 }
 
