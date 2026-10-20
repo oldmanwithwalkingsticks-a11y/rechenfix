@@ -6,6 +6,105 @@
 
 ---
 
+## 20.10.2026 — Welle 185: Seitentexte aus der Caption-Prüfung; Rechnerfehler bei Beton, MwSt-Rückerstattung und Photovoltaik — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Zweite Caption-Prüfung. Viele Seitentexte waren sachlich falsch, veraltet oder passten nicht zum eigenen
+Rechner; bei Beton, MwSt-Rückerstattung und Photovoltaik rechnete der Rechner selbst falsch. Die Captions folgen in
+Welle 187.
+
+**Rechner** (Werte und Quellen aus der Vorlage, in diesem Lauf nicht erneut an den Quellen geprüft):
+
+| Rechner | vorher | jetzt | Grundlage |
+|---|---|---|---|
+| **Beton** (3 × 2 × 0,15 m + 10 %) | Lieferbeton 100 €/m³, Empfehlung ab 0,5 m³: **99 €** | 195 €/m³ netto + 25 € je fehlendem m³ bis 7,5 m³, × 1,19: **423,40 €** (Säcke 539,50 €); Empfehlung nur, wenn günstiger (ab rund 0,7 m³) | Preislisten 2026 Siemsen, Heidelberg Materials |
+| **MwSt-Rückerstattung** (500 €, 19 %) | Global Blue 3,50 € + 1,5 %: **75,13 €** (15,0 %) | Richtwert 25 % der MwSt: **59,87 €** (12,0 %), im Rechner als Richtwert gekennzeichnet | SRF Kassensturz 19.03.2025 (zwei Fälle aus Deutschland, je rund 25 %) |
+| **Photovoltaik** mit Speicher (Startwerte) | Eigenverbrauch 6.182 kWh × 72 % = **4.451 kWh** bei 4.000 kWh Verbrauch | höchstens 70 % des Jahresverbrauchs mit Speicher (40 % ohne): **2.800 kWh**; ohne Speicher Startwerte unverändert | HTW Berlin (20–33 % ohne, 40–66 % mit 6-kWh-Speicher), VZ RLP |
+| **Wohngeld**, Lib (nicht angezeigt) | Klimakomponente zusätzlich auf die Miete, auch unter dem Höchstbetrag | erhöht nur den Höchstbetrag; `verify-wohngeld-p1` Fall 2 P./1.900 €/750 € 225 → **240 €** | § 12 Abs. 7 WoGG |
+
+**Seitentexte:**
+
+| Seite | vorher | jetzt | Grundlage |
+|---|---|---|---|
+| Nebenkosten | Betriebskostenspiegel 2,51 / 3,15 €/m² | Abrechnungsjahr 2024: **2,67 / 3,68 €/m²**, Heizung 1,32 €/m² | DMB 18.12.2025 |
+| Spritkosten (Beispiel) | 1,65 €/l | aus der Spritpreis-SSOT (2,126 €/l → 39,86 €) | |
+| Elternzeit | „schriftlich“, „Frist nicht verkürzbar“ | Textform für Geburten ab 01.05.2025, sonst Schriftform; kürzere Frist bei dringenden Gründen | § 16 Abs. 1, § 28 Abs. 1b BEEG |
+| Teilzeit | „schriftlich stellen“, „schriftlich ablehnend“ | Antrag und Ablehnung in **Textform** | § 8 Abs. 2, 5 TzBfG |
+| Photovoltaik | 30 % ohne Annahme; Tabelle alte EEG-Sätze; Speicher 65 % / 1.600 € | „bei 6.800 kWh Jahresverbrauch“; 7,70 / 12,22 ct; Speicher **70 % / ~1.730 €** | |
+| Wohngeld | Beispiel 296 € aus stillgelegter Formel, Erklärseite 215 € „nach BMWSB“; „aufgerundet“; Ø „370 €“ | nach §§ 14, 16 WoGG und Anlage 2: **327 €** bzw. **254 €**; kaufmännisch gerundet; Ø **296 €** | WoGG Anlagen 1–3; Destatis 25.09.2026 |
+| Alkohol-Abbau | „nach ca. 7,3 Stunden“; „Abbau beginnt erst nach dem Trinken“ | ab dem Spitzenwert, nach dem letzten Getränk gut 8 Stunden; Abbau schon während des Trinkens | |
+| DM-Euro | „durch zwei: 2,3 % zu niedrig“ | **2,2 %** (2,3 % ist die Gegenrichtung) | |
+| Unterhalt | „7. Mindestunterhaltsverordnung“, alle vier Beträge; Elternunterhalt Wohnkosten „—“ | MinUhV i. d. F. der Siebten Änderungsverordnung, nur Stufen 1–3; **1.000 €** | DT 2026 |
+| Pool | Heizung 220 € → 154 €; Chemie 250–400 € | **255 € → 178 €** (SSOT 37 ct); 240–300 € | |
+| Dachflächen, Balkon-Solar | ~12 kWp; 57,50 / 47,40 € | **12,7 kWp**; 57,40 / 47,50 € | |
+| BAföG | Ausblick WS 2026/27 | Reform ab SoSe 2027 / WS 2027/28 (BT-Drs. 21/8405, noch nicht beschlossen) | |
+| Freelancer | 1.200 Std → 56,43 €/Std | über die Lib: 2026 **1.278 Std → 52,98 €/Std** | |
+| Powerbank | „35 % Wandlerverlust“ | ≈ 26 % reine Umrechnung auf 5 V, gut 10 % echter Verlust | |
+| Nettolohn-Optimierer | „rund 109 €“ | „knapp 110 € (109,75 €)“ | |
+| Gleichung, Potenz, Binär | x₁/x₂ vertauscht; „1 KB = 1.024 Byte“; „Bildschirmauflösungen folgen Zweierpotenzen“ | x₁ = 3, x₂ = 2; KiB/kB nach IEC 80000-13; Farbtiefe 2⁸ = 256 | |
+
+**Grenzen der Rechnung:** Beton ohne Anfahrt außerhalb des Liefergebiets und ohne Pumpe; MwSt-Rückerstattung als
+Richtwert (die Anbietertabellen sind nicht öffentlich); PV-Autarkiegrenzen als Obergrenze, kein Lastprofil.
+
+**Änderungen** (87 Ersetzungen plus 21 Datumszeilen = 108 in 18 Dateien plus 2 neue Dateien, Vorlage
+`_lokal/welle185-seitentexte.mjs`, Gegenprobe `_lokal/welle185-lib.mts`, beide nicht committet):
+- **Neu:** `scripts/verify-beton.ts` (13 Fälle), `scripts/verify-mwst-rueckerstattung.ts` (12 Fälle).
+- **Libs:** `beton.ts` (Preisliste, Mindermengenzuschlag), `mwst-rueckerstattung.ts` (25-%-Richtwert), `wohngeld.ts`
+  (Klimakomponente nur auf den Höchstbetrag).
+- **Komponenten:** `BetonRechner.tsx`, `MwStRueckerstattungRechner.tsx`, `PhotovoltaikRechner.tsx` (`autarkieMax`
+  70/40 %), `WohngeldRechner.tsx`; Erklärseite `app/finanzen/wohngeld-rechner/page.tsx`.
+- **Texte** in `lib/rechner-config/` `alltag.ts`, `arbeit.ts`, `auto.ts`, `finanzen.ts`, `gesundheit.ts`, `mathe.ts`,
+  `technik.ts`, `wohnen.ts`.
+- **Prüfskripte:** `verify-nebenkosten.ts`, `verify-wohngeld-p1.ts` (Fall 2 neu 240 €).
+- **`letzteAktualisierung`** → `2026-10-20` für die 21 Slugs der beiden Tabellen.
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187);
+`scripts/verify-unterhalt-component.ts`, `scripts/verify-wohnen-block-b.ts` (Welle 186).
+
+**Vermerk:** Die zugehörigen Captions folgen in Welle 187 (u. a. Beton „80–120 €/m³“). Laut Vorlage sind von allen 69
+Prüfskripten danach 7 rot, dieselben wie vor dieser Welle (Welle 186); in diesem Lauf nicht alle 69 nachgezählt.
+
+**Abweichungen und Funde:**
+- **Die zwei bekannten roten Prüfskripte** prüfen nur alte Formulierungen: `verify-unterhalt-component` 18/23 (vorher
+  17/23; grün geworden ist „7. MUVÄndV als Rechtsquelle benannt“, rot bleiben die Beträge 486/558/653/698 € und
+  „2.000 € Selbstbehalt Elternunterhalt“), `verify-wohnen-block-b` 36/45 (Dachflächen 10.200 kWh, Mertens-Quelle,
+  Eigenverbrauchsanteil; Pool Filterstrom, Chemie, Gesamt, „typischerweise 8 h“; Balkon-Solar „Nord = 60 %“).
+- **Freelancer-Beispiel hängt am Build-Jahr:** Die Config rechnet über `berechneFreelancerStundensatz` ohne
+  Jahresangabe, also mit `new Date().getFullYear()`, wie der Rechner. „1.278 Std“ und „52,98 €“ gelten für Builds im
+  Jahr 2026; ein Build 2027 rechnet mit den Feiertagen 2027. Die Feiertagsrechnung arbeitet durchgehend in Ortszeit
+  und ist damit unabhängig von der Zeitzone.
+- **Build zweimal gelaufen:** Während des ersten Builds habe ich für den Vorher-Vergleich von
+  `verify-unterhalt-component` kurz `git stash` / `git stash pop` benutzt. Weil der Build dabei kurz die alten
+  Dateien gelesen haben könnte, zählt nur der zweite, saubere Build (Werte unten). Die beiden älteren Stash-Einträge
+  vom 08.06.2026 blieben unberührt.
+- Datum: Die Vorlage setzt „heute“ in Berliner Zeit. Lauf unter Windows in deutscher Zeit.
+
+**Gates:**
+- Phase 0 an `a818d87`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `a818d87` und `aa915d0`
+  (Welle 184). Greps: siebenmal `…:1` (`wohnen.ts`, `beton.ts`, `mwst-rueckerstattung.ts`, `arbeit.ts`, `arbeit.ts`,
+  `page.tsx`, `finanzen.ts`). `verify-wohngeld-p1` 42/42, `verify-nebenkosten` 29/29.
+- Phase 1: „OK — 108 Ersetzungen in 18 Dateien, 2 neue Dateien.“, Exit 0; `git status` gegen die Liste im Prompt
+  abgeglichen: genau die 20.
+- Phase 2: Lib-Gegenprobe 14 × „OK“, „Alle Werte OK“, Exit 0. Prüfskripte, je Exit 0: beton 13/13,
+  mwst-rueckerstattung 12/12, nebenkosten 29/29, wohngeld-p1 42/42, elternzeit 52/52, pv-ertragsmodell 33/33; bekannt
+  rot (Exit 1, erlaubt): unterhalt-component 18/23, wohnen-block-b 36/45. Greps: siebenmal keine Ausgabe, dann
+  `wohngeld.ts:1`, `PhotovoltaikRechner.tsx:1`, `arbeit.ts:3`, `finanzen.ts:4`. `npm run build` (zweiter, sauberer
+  Lauf) Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen; `git status` danach nur die 20
+  Dateien.
+- HTML-Befund (alle Texte stehen auch im Rohtext am Stück): `/wohnen/nebenkosten-rechner` „2,67 €/m²“ 10×,
+  „2,51 €/m²“ 0×; `/finanzen/wohngeld-rechner` „254 €“ 2×, „kaufmännisch“ 2×, „215 €“ 0×; `/wohnen/beton-rechner`
+  „Lieferbeton ist hier günstiger“ 1×, „423,40“ 2×, „80–120 €/m³“ 0×; `/finanzen/mwst-rueckerstattung-rechner`
+  „59,87 €“ 10×, „Richtwert“ 34×, „75,13 €“ 0×; `/arbeit/elternzeit-rechner` „§ 28 Abs. 1b BEEG“ 6×, „nicht
+  verkürzbar“ 0×; `/arbeit/teilzeit-rechner` „in Textform“ 8×, „immer schriftlich“ 0×;
+  `/gesundheit/alkohol-abbau-rechner` „ab Trinkende etwa 7 bis 8 Stunden“ 4×, „Abgebaut wird zwar schon während des
+  Trinkens“ 2×; `/wohnen/photovoltaik-rechner` „6.800 kWh Jahresverbrauch“, „70 % Eigenverbrauch“, „~1.730 €“ je
+  2×; `/arbeit/freelancer-stundensatz-rechner` „1.278“ und „52,98“ je 6×; `/arbeit/unterhaltsrechner` „Siebten
+  Änderungsverordnung“ 2×, „7. Mindestunterhaltsverordnung“ 0×; `/mathe/potenz-rechner` „Kibibyte“ 4×, „Farbtiefen“
+  2×.
+
+**Commits:** A `6a9c552` (die 20 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 184: Anzeige und Formate — kein englischer Dezimalpunkt mehr; Uhrzeit mit Sommerzeit, Tage, Primzahl, Laufband, Backform, Pflegegeld, Minijob, USV, Handykosten — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Zweite Caption-Prüfung. Viele Rechner zeigten Zahlen mit englischem Dezimalpunkt („6.5 %“, „VPI 75.5“,
