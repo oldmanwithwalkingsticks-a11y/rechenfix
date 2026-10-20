@@ -6,6 +6,97 @@
 
 ---
 
+## 20.10.2026 — Welle 186 (Fassung 2): sieben rote Prüfskripte grün, Sammel-Gate `npm run verify:alle`, GitHub Actions, tsx fest, zwei ESLint-Warnungen — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:**
+- **Prüfskripte über Monate rot:** `prebuild` führt nur drei `verify-*`-Skripte aus. Sieben Skripte waren rot, ohne
+  dass es auffiel. Jeder rote Fall wurde gegen Gesetz bzw. Rechner geprüft (laut Vorlage): **Die Rechner stimmen.**
+  Die Skripte prüften veraltete Werte oder Strings aus Feldern, die Welle 102 entfernt hat (`formel`/`erklaerung`),
+  bzw. Beispiele, die spätere Wellen neu gerechnet haben.
+- **Prüflücke aus dem Bericht zu Welle 180** (Historie `94bb789`): „`prebuild` führt `verify-zugewinnausgleich` und
+  `verify-wohnen-p1` weiterhin nicht aus. Ein falscher Jahreswert fiele wieder erst bei einem Handlauf auf.“ Ein Gate,
+  das nur Wellen aufrufen, prüft weder Einzeländerungen außerhalb einer Welle noch Stichtage ohne Code-Änderung.
+- **`tsx` fehlte in `package.json`:** `npx tsx` lud ihn bei Bedarf in den npm-Cache, auch Vercel im `prebuild` jedes
+  Mal die neueste Version. Fassung 1 dieser Welle hätte `verify-alle.mjs` deshalb mit 0/69 gestoppt; sie liegt in
+  `_lokal/_ueberholt/` und wurde nicht ausgeführt.
+
+**Die sieben Prüfskripte:**
+
+| Skript | vorher | jetzt | Grund |
+|---|---|---|---|
+| `verify-bafoeg-p1` | 4/5 | 5/5 | Sollwert 262 → 276 € (Lib und Seite seit Welle 160) |
+| `verify-ehegattenunterhalt-component` | 2/4 | 4/4 | Strings aus entfernten Feldern → FAQ und Infobox (DT 2026: 1.600 / 1.475 €) |
+| `verify-pflegegeld` | 12/63 | 63/63 | Beträge 2025/2026 (Pflegegeld 347/599/800/990 €, Sachleistung 796/1.497/1.859/2.299 €, Entlastung 131 €, gemeinsamer Jahresbetrag Verhinderungs-/Kurzzeitpflege 3.539 € nach § 42a SGB XI, Hilfsmittel 42 €, Wohnraum 4.180 €) |
+| `verify-steuerprogression` | 46/48 | 48/48 | Kurvenpunkte 151 / Tabellenzeilen 30 (Rechner seit Welle 177 bis 300.000 €) |
+| `verify-taxi-smoke` | 1 Abweichung | 0 | G6 rechnete mit „heute“; seit 01.06.2026 gilt in Köln die neue Tarifphase → Stichtag 31.05.2026 |
+| `verify-unterhalt-component` | 18/23 | 23/23 | Mindestbedarf als Tabellenzeilen 486/558/653/698 €; Selbstbehalt Elternunterhalt 2.650 € (DT 2026) |
+| `verify-wohnen-block-b` | 36/45 | 45/45 | Dachflächen-, Pool- und Balkon-Solar-Texte nach Welle 148/185 (850 kWh/kWp, Filterstrom 272 €, Chemie 240 €, Gesamt 1.114 €, Nord 60 %) |
+
+**Änderungen** (37 Ersetzungen in 11 Dateien plus 2 neue Dateien, Vorlage `_lokal/welle186-pruefskripte-v2.mjs`,
+nicht committet; dazu `npm install` für `tsx`):
+- **Neu `scripts/verify-alle.mjs`:** alle `scripts/verify-*.ts`, bis 4 parallel, je höchstens 5 Minuten, Exit 1 bei
+  Rot, am Ende die roten mit ihren Fehlerzeilen. Aufruf `npm run verify:alle` (neues npm-Skript) oder mit Filter
+  `node scripts/verify-alle.mjs elternzeit urlaub`. Bricht mit einem klaren Hinweis ab, wenn `tsx` in `node_modules`
+  fehlt.
+- **Neu `.github/workflows/pruefskripte.yml`:** `npm ci --ignore-scripts` und `npm run verify:alle`, je einmal mit
+  `TZ=Europe/Berlin` und `TZ=UTC`; bei jedem Push auf `main` (außer `docs/**` und `*.md`), täglich um 04:17 UTC und
+  von Hand. Ein roter Lauf blockiert kein Deploy; GitHub meldet ihn per E-Mail. `vercel.json` überspringt `.github/**`
+  schon im `ignoreCommand`.
+- **`tsx` als feste devDependency `4.23.15`** (vom 20.09.2026), eingetragen von `npm install --save-dev --save-exact`,
+  damit `package-lock.json` von npm selbst kommt.
+- **Die sieben Prüfskripte** nach der Tabelle oben.
+- **ESLint:** `KaffeeWasserRechner.tsx` (unnötige Abhängigkeit `modus` aus `useMemo`; die Rechnung liest
+  `effModus`), `app/admin/affiliate-stats/page.tsx` (`KI_LABELS` jetzt außerhalb der Komponente).
+- **`CLAUDE.md`:** neuer Abschnitt „Prüfskripte: `npm run verify:alle` und GitHub Actions (seit Welle 186)“ vor
+  „Architektur-Notes“.
+- Keine Datumszeilen: Keine Seite ändert sich.
+
+**Neue Regeln:**
+- `npm run verify:alle` gehört in Phase 0 und Phase 2 jeder Welle und vor jeden Commit an Rechenlogik, Rechnern,
+  Texten oder Prüfskripten, auch außerhalb von Wellen.
+- GitHub Actions läuft bei jedem Push und täglich; ein roter Lauf hat Vorrang.
+- Rot nur mit Begründung im Prompt.
+
+**Bewusst offen geblieben:**
+- **Nicht in `prebuild`:** Der Vercel-Build bleibt so schnell wie bisher, und ein Prüfskript, das an einem Stichtag
+  rot wird, blockiert kein dringendes Deploy. Die CI meldet es trotzdem am selben Tag.
+- **Kein Deploy-Stopp bei roter CI:** Vercel baut unabhängig von GitHub Actions. Ein Stopp bräuchte „Required checks“
+  mit Branch-Schutz; das passt nicht zum Arbeitsweg mit direkten Pushes auf `main`.
+- **Lockfile-Metadaten:** Welche Zeilen npm außer den 28 neuen Paketen umschreibt, hängt von der npm-Version ab;
+  geprüft wird nur, dass kein Paket wegfällt. Hier (npm 11.11.0, Probelauf npm 10.9.4) kamen nur Zeilen hinzu.
+
+**Abweichungen und Funde:**
+- **Unter Windows genauso grün:** `verify:alle` lief hier in Systemzeit Europe/Berlin (69/69, 14 s) und zusätzlich
+  mit `TZ=UTC` wie die CI (69/69). Der Start über `process.execPath` und den Pfad zu `tsx/dist/cli.mjs` funktioniert
+  auch unter Windows.
+- **`npm audit`** meldet 9 Schwachstellen (2 moderate, 7 high) im bestehenden Baum; laut Prompt kein Abbruchgrund,
+  nicht angefasst.
+- **Ältere Stash-Einträge:** Im Repo liegen zwei Stashes vom 08.06.2026 (main und fix/critical-css); unberührt.
+
+**Gates:**
+- Phase 0 an `eca1185`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `eca1185` und `6a9c552`
+  (Welle 185). `git ls-files scripts/verify-alle.mjs .github` und `git grep '"tsx"' package.json` keine Ausgabe. In
+  `_lokal` nur `welle186-pruefskripte-v2-prompt.md` und `welle186-pruefskripte-v2.mjs` (Fassung 1 in `_ueberholt`).
+  Die sieben Skripte rot, genau so: bafoeg-p1 4/5, ehegattenunterhalt-component 2/4, pflegegeld 12/63,
+  steuerprogression 46/48, taxi-smoke eine Zeile „DIFF G6 Koeln heute 10km Tag (Phase 1): fahrpreis=33.9 €“,
+  unterhalt-component 18/23, wohnen-block-b 36/45. Kein `node_modules/tsx`.
+- Phase 1: „OK — 37 Ersetzungen in 11 Dateien, 2 neue Dateien.“, Exit 0. `npm install --save-dev --save-exact
+  tsx@4.23.15` Exit 0 („added 3 packages“). `git diff package.json` genau zwei neue Zeilen (`"verify:alle": "node
+  scripts/verify-alle.mjs",`, `"tsx": "4.23.15",`), keine entfernte. Lockfile: 28 neue Pakete (26 × `@esbuild/…`,
+  `esbuild`, `tsx`), entfernt `0`; insgesamt 504 Zeilen hinzu, 0 entfernt. `node_modules/tsx/dist/cli.mjs` vorhanden,
+  `npx tsx --version` „tsx v4.23.15“. `git status --short` 14 Zeilen (12 × ` M`, `?? .github/`,
+  `?? scripts/verify-alle.mjs`).
+- Phase 2: `npm run verify:alle` „Prüfskripte: 69/69 grün.“, Exit 0 (mit `TZ=UTC` ebenso). `npm run lint` Exit 0,
+  keine Zeile „problems“ (vorher „2 problems (0 errors, 2 warnings)“). Greps: `package.json:1`, `package.json:1`, `1`,
+  `1`. `npm run build` Rückgabewert 0, 271 Seiten; der Lint im `prebuild` meldet ebenfalls keine Probleme mehr;
+  `git status` danach 14 Zeilen. Commit A: `git add -u` plus die zwei neuen Dateien, `git diff --cached --name-only`
+  14.
+
+**Commits:** A `8a46071` (die 14 Dateien). B ist dieser Doku-Commit. Die Live-Probe (Actions-Seite,
+Benachrichtigungen, Kaffee-Wasser-Rechner) macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 185: Seitentexte aus der Caption-Prüfung; Rechnerfehler bei Beton, MwSt-Rückerstattung und Photovoltaik — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Zweite Caption-Prüfung. Viele Seitentexte waren sachlich falsch, veraltet oder passten nicht zum eigenen
