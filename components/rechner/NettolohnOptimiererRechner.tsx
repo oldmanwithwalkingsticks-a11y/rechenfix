@@ -21,7 +21,6 @@ interface Option {
   beschreibung: string;
   nettoZugewinn: number;
   agKosten: number;
-  rente?: boolean;
 }
 
 export default function NettolohnOptimiererRechner() {
@@ -113,7 +112,6 @@ export default function NettolohnOptimiererRechner() {
         beschreibung: '2026 steuerfrei bis 676 €/Monat, SV-frei bis 338 €/Monat (8 % bzw. 4 % der RV-Beitragsbemessungsgrenze) — fließt in die Rente, heute 0 € netto.',
         nettoZugewinn: 0,
         agKosten: cap(676),
-        rente: true,
       },
     ];
   }, [betrag, nettoDiffBrutto, agKostenBrutto]);
@@ -231,7 +229,8 @@ export default function NettolohnOptimiererRechner() {
                     <td className="px-3 py-2.5 text-gray-500 dark:text-gray-400 tabular-nums">{i + 1}</td>
                     <td className="px-3 py-2.5 text-gray-800 dark:text-gray-200">
                       {o.label}
-                      {o.rente && <span className="block text-[11px] font-normal text-gray-500 dark:text-gray-400">(fließt in Rente)</span>}
+                      {/* W175: Bedingung je Option sichtbar (vorher nur im Datenobjekt, nie angezeigt) */}
+                      <span className="block text-[11px] font-normal leading-snug text-gray-500 dark:text-gray-400 mt-0.5">{o.beschreibung}</span>
                     </td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400">+{fmt2(o.nettoZugewinn)} €</td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">{fmt2(o.agKosten)} €</td>
