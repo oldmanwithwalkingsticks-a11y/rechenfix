@@ -39,6 +39,12 @@ export interface VorsorgeParams {
    * Default false (bestehende Konsumenten unverändert).
    */
   pvKinderlosZuschlag?: boolean;
+  /**
+   * W176: true, wenn der Arbeitnehmer in der Arbeitslosenversicherung versicherungsfrei ist (Minijob,
+   * § 27 Abs. 2 SGB III). Dann kein Teilbetrag AV (BMF-Schreiben vom 14.08.2025, Rn. 22; PAP-Eingang
+   * ALV = 1). Default false.
+   */
+  avFrei?: boolean;
 }
 
 export interface LohnsteuerErgebnis {

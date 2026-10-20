@@ -912,6 +912,8 @@ export interface VorsorgeParams {
   rvBefreit?: boolean;
   /** PV-Kinderlos-Zuschlag (+0,6 pp) aktivieren. Default false, analog zum BMF-Steuerrechner-Default. */
   pvKinderlosZuschlag?: boolean;
+  /** W176: true, wenn in der Arbeitslosenversicherung versicherungsfrei (z. B. Minijob) → ALV = 1. */
+  avFrei?: boolean;
 }
 
 /**
@@ -953,7 +955,7 @@ export function berechneLohnsteuerPAP2026(params: {
     PVA: new Decimal(pvaAbschlaege),
     PVZ: pvz,
     PVS: 0,
-    ALV: 0,
+    ALV: vorsorge.avFrei ? 1 : 0,
     PKPV: kvPrivat ? new Decimal((vorsorge.kvPrivatBeitragJahr ?? 0) / 12).times(100) : new Decimal(0),
     PKPVAGZ: new Decimal(0),
     af: 1,

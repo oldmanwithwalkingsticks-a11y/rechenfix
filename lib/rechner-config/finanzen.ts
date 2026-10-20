@@ -3,7 +3,7 @@ import type { RechnerConfig } from './types';
 export const finanzenRechner: RechnerConfig[] = [
   {
     slug: 'brutto-netto-rechner',
-    letzteAktualisierung: '2026-10-19',
+    letzteAktualisierung: '2026-10-20',
     zeigtAuthorBio: true,
     titel: 'Brutto-Netto-Rechner',
     beschreibung: 'Nettogehalt berechnen: Mit Steuerklasse, Bundesland, Kirchensteuer, KV und allen Sozialabgaben.',
@@ -6453,7 +6453,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'nebenjob-rechner',
-    letzteAktualisierung: '2026-10-19',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Nebenjob-Rechner',
     beschreibung: 'Nebenjob-Steuer berechnen: Auswirkung eines Nebenjobs auf Steuern und Sozialversicherung neben dem Hauptjob.',
     kategorie: 'Finanzen',
@@ -6462,7 +6462,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Nebenjob-Steuer berechnen: Netto-Zuwachs durch Minijob, Steuerkarte oder selbstständigen Nebenjob ermitteln — kostenlos mit KI-Erklärung.',
     keywords: ['nebenjob rechner', 'nebenjob steuer', 'nebenjob steuern', 'minijob neben hauptjob', 'steuerklasse 6', 'nebenverdienst steuer', 'nebenjob netto', 'zweiter job steuer', 'nebeneinkünfte steuer'],
     icon: '💼',
-    beispiel: 'Hauptjob 3.500 € brutto, Nebenjob 450 €: als Minijob 433,80 € netto (nur 3,6 % RV-Eigenanteil). Auf Steuerkarte (Klasse VI) 383,55 € im Monat, nach der Steuererklärung rund 304 €.',
+    beispiel: 'Hauptjob 3.500 € brutto, Nebenjob 450 €: als Minijob 433,80 € netto (nur 3,6 % RV-Eigenanteil). Auf Steuerkarte (Klasse VI) 376,72 € im Monat, nach der Steuererklärung rund 304 €.',
     faq: [
       {
         frage: 'Wie viel darf ich im Nebenjob verdienen, ohne Steuern zu zahlen?',
@@ -6497,9 +6497,9 @@ export const finanzenRechner: RechnerConfig[] = [
         spalteA: 'Minijob (bis 603 €)',
         spalteB: 'Steuerkarte (Steuerklasse VI)',
         zeilen: [
-          { kriterium: 'Lohnsteuer', a: '0 € (2 % pauschal beim Arbeitgeber)', b: '50,25 € (Klasse VI)' },
+          { kriterium: 'Lohnsteuer', a: '0 € (2 % pauschal beim Arbeitgeber)', b: '57,08 € (Klasse VI)' },
           { kriterium: 'Sozialversicherung (AN)', a: '16,20 € (3,6 % RV)', b: '16,20 € (bis 603 € ebenfalls nur RV)' },
-          { kriterium: 'Netto vom 450-€-Nebenjob', a: '433,80 €', b: '383,55 €, nach der Steuererklärung rund 304 €' },
+          { kriterium: 'Netto vom 450-€-Nebenjob', a: '433,80 €', b: '376,72 €, nach der Steuererklärung rund 304 €' },
           { kriterium: 'Abgabenbelastung', a: '3,6 %', b: '14,8 %, nach der Steuererklärung rund 32 %' },
           { kriterium: 'Voraussetzung', a: 'nur EIN Minijob neben dem Hauptjob', b: 'für jeden weiteren Job' },
         ],
@@ -6519,7 +6519,7 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Minijob netto', formel: '450 € − 3,6 % RV-Eigenanteil (16,20 €)', ergebnis: '433,80 €' },
           { label: 'Haushaltsnetto gesamt', formel: '2.333,25 + 433,80', ergebnis: '2.767,05 €' },
         ],
-        fazit: 'Der Minijob neben dem Hauptjob ist für den Arbeitnehmer steuerfrei; vom 450-€-Nebenverdienst geht nur der RV-Eigenanteil von 16,20 € ab, und es bleiben 433,80 €. Das Haushaltsnetto steigt auf 2.767,05 €. Wichtig: Pro Person bleibt nur EIN Minijob neben dem Hauptjob abgabenarm; ein zweiter wird mit dem Hauptjob zusammengerechnet und ist dann beitragspflichtig. Von der Rentenversicherung kann man sich auf Antrag befreien lassen, dann kommen die vollen 450 € an. Würde derselbe Nebenverdienst über Steuerkarte laufen, blieben im Monat 383,55 € und nach der Steuererklärung rund 304 € — rund 130 € weniger als beim Minijob.',
+        fazit: 'Der Minijob neben dem Hauptjob ist für den Arbeitnehmer steuerfrei; vom 450-€-Nebenverdienst geht nur der RV-Eigenanteil von 16,20 € ab, und es bleiben 433,80 €. Das Haushaltsnetto steigt auf 2.767,05 €. Wichtig: Pro Person bleibt nur EIN Minijob neben dem Hauptjob abgabenarm; ein zweiter wird mit dem Hauptjob zusammengerechnet und ist dann beitragspflichtig. Von der Rentenversicherung kann man sich auf Antrag befreien lassen, dann kommen die vollen 450 € an. Würde derselbe Nebenverdienst über Steuerkarte laufen, blieben im Monat 376,72 € und nach der Steuererklärung rund 304 € — rund 130 € weniger als beim Minijob.',
       },
       {
         typ: 'statistik',
@@ -6539,10 +6539,10 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'tabelle',
         titel: 'Nebenjob-Netto: Minijob vs. Steuerkarte (Hauptjob 3.500 €)',
-        kopf: ['Nebenjob brutto', 'als Minijob', 'auf Steuerkarte (SK VI)', 'Belastung SK VI'],
+        kopf: ['Nebenjob brutto', 'als Minijob', 'auf Steuerkarte (SK VI)', 'SK VI nach der Steuererklärung'],
         zeilen: [
-          ['450 €', '433,80 €', '383,55 €', '≈ 304 €'],
-          ['600 €', '578,40 €', '511,40 €', '≈ 404 €'],
+          ['450 €', '433,80 €', '376,72 €', '≈ 304 €'],
+          ['600 €', '578,40 €', '502,24 €', '≈ 404 €'],
           ['1.000 €', 'nicht möglich (> 603 €)', '670,75 €', '≈ 538 €'],
           ['1.500 €', 'nicht möglich (> 603 €)', '999,17 €', '≈ 797 €'],
         ],
@@ -6556,7 +6556,7 @@ export const finanzenRechner: RechnerConfig[] = [
         zeilen: [
           { kriterium: 'Sozialversicherung', a: 'meist keine (Ausnahmen z. B. selbstständige Lehrkräfte)', b: 'über 603 € volle AN-Beiträge (21,75 %), darunter 3,6 % RV' },
           { kriterium: 'Besteuerung', a: 'persönlicher Steuersatz auf den Gewinn', b: 'im Monat Klasse VI, endgültig persönlicher Steuersatz' },
-          { kriterium: 'Netto aus 450 € (Hauptjob 3.500 €)', a: '315,33 €', b: '383,55 €, nach der Steuererklärung ≈ 304 €' },
+          { kriterium: 'Netto aus 450 € (Hauptjob 3.500 €)', a: '315,33 €', b: '376,72 €, nach der Steuererklärung ≈ 304 €' },
           { kriterium: 'Netto aus 1.000 €', a: '689,33 €', b: '670,75 €, nach der Steuererklärung ≈ 538 €' },
           { kriterium: 'Steuerfreigrenze', a: '410 €/Jahr Härteausgleich, bis 820 € gemildert', b: 'keine — Steuer ab dem ersten Euro' },
           { kriterium: 'Risiko', a: 'Scheinselbstständigkeit beachten', b: 'Nachzahlung nach der Steuererklärung' },
@@ -6591,7 +6591,7 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Stand 2026 — Schätzung, keine Steuerberatung',
-        text: 'Dieser Rechner schätzt den Netto-Zuwachs eines Nebenjobs neben einem Hauptjob (Steuerklasse I, kinderlos) mit den 2026 geltenden Werten (Minijob-Grenze 603 €, Sozialversicherungs-Sätze 2026). Die Lohnsteuer in Klasse VI folgt dem Programmablaufplan 2026; die Nachzahlung aus der Steuererklärung ist eine Schätzung mit dem Grundtarif, Pauschbeträgen und den Vorsorgebeiträgen aus dem Lohn. Das Ergebnis ist eine Orientierung und ersetzt keine Steuerberatung. Maßgeblich sind die Lohnabrechnung und der Steuerbescheid. Wer mehrere Jobs kombiniert, sollte die Auswirkungen mit dem Brutto-Netto-Rechner und gegebenenfalls einer Beratung prüfen. Auch die Beiträge zur Kranken- und Pflegeversicherung können bei der selbstständigen Variante je nach Status abweichen — der Rechner unterstellt hier, dass der Hauptjob die Versicherungspflicht abdeckt.',
+        text: 'Dieser Rechner schätzt den Netto-Zuwachs eines Nebenjobs neben einem Hauptjob (Steuerklasse I, kinderlos) mit den 2026 geltenden Werten (Minijob-Grenze 603 €, Sozialversicherungs-Sätze 2026). Die Lohnsteuer in Klasse VI folgt dem Programmablaufplan 2026, bis 603 € ohne Teilbetrag für Kranken- und Pflegeversicherung in der Vorsorgepauschale, weil im Minijob kein Arbeitnehmerbeitrag anfällt (BMF-Schreiben vom 14.08.2025); die Nachzahlung aus der Steuererklärung ist eine Schätzung mit dem Grundtarif, Pauschbeträgen und den Vorsorgebeiträgen aus dem Lohn. Das Ergebnis ist eine Orientierung und ersetzt keine Steuerberatung. Maßgeblich sind die Lohnabrechnung und der Steuerbescheid. Wer mehrere Jobs kombiniert, sollte die Auswirkungen mit dem Brutto-Netto-Rechner und gegebenenfalls einer Beratung prüfen. Auch die Beiträge zur Kranken- und Pflegeversicherung können bei der selbstständigen Variante je nach Status abweichen — der Rechner unterstellt hier, dass der Hauptjob die Versicherungspflicht abdeckt.',
       },
       {
         typ: 'infobox',

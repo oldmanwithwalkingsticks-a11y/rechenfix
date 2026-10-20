@@ -629,7 +629,7 @@ export default function BruttoNettoRechner() {
             {ergebnis.bruttoMonat > 0 && ergebnis.bruttoMonat <= MIDIJOB_OBERGRENZE_MONAT && (
               <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
                 {ergebnis.svZone === 'minijob'
-                  ? 'Minijob: Sie zahlen nur den Eigenanteil zur Rentenversicherung (3,6 %; unter 175 € Verdienst mehr, weil der Beitrag mindestens aus 175 € berechnet wird), bei Befreiung nichts. Kranken-, Pflege- und Arbeitslosenversicherung trägt der Arbeitgeber pauschal. Die Lohnsteuer ist hier nach Steuerklasse gerechnet; oft zahlt stattdessen der Arbeitgeber 2 % Pauschalsteuer.'
+                  ? 'Minijob: Sie zahlen nur den Eigenanteil zur Rentenversicherung (3,6 %; unter 175 € Verdienst mehr, weil der Beitrag mindestens aus 175 € berechnet wird), bei Befreiung nichts. Kranken-, Pflege- und Arbeitslosenversicherung trägt der Arbeitgeber pauschal. Die Lohnsteuer ist hier nach Steuerklasse gerechnet, in der Vorsorgepauschale nur mit dem Rentenbeitrag, weil Sie zu Kranken-, Pflege- und Arbeitslosenversicherung nichts zahlen; oft zahlt stattdessen der Arbeitgeber 2 % Pauschalsteuer.'
                   : ergebnis.svZone === 'uebergang'
                   ? 'Midijob (Übergangsbereich bis 2.000 €): Ihre Sozialabgaben werden auf eine reduzierte Bemessungsgrundlage berechnet (§ 20 Abs. 2a SGB IV), den Rest trägt der Arbeitgeber. Die Aufteilung zeigt der Midijob-Rechner.'
                   : steuerklasse === 6

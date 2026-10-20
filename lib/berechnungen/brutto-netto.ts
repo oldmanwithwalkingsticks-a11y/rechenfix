@@ -165,7 +165,19 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   }
 
   const bbgRv = BBG_RV;
-  const vorsorgeParams = buildVorsorgeParams(eingabe);
+  const wgBrutto = eingabe.weihnachtsgeld ?? 0;
+  const svZone = bestimmeSvZone(eingabe.regelEntgeltMonat ?? brutto + wgBrutto / 12, eingabe.steuerklasse);
+  // W176: Im Minijob zahlt der Arbeitnehmer keinen Beitrag zur Kranken-, Pflege- und
+  // Arbeitslosenversicherung. Bei Lohnsteuer nach den individuellen Merkmalen (Steuerkarte statt
+  // Pauschalsteuer) entfallen deshalb diese Teilbeträge der Vorsorgepauschale (BMF-Schreiben vom
+  // 14.08.2025 zur Vorsorgepauschale ab 2026): KV und PV nach Rn. 16 (PAP: PKV = 1 ohne Beitrag), AV nach
+  // Rn. 22, weil der Minijob in der Arbeitslosenversicherung versicherungsfrei ist (§ 27 Abs. 2 SGB III;
+  // PAP: ALV = 1). Der Teilbetrag RV bleibt typisiert und entfällt bei Befreiung (Rn. 11, rvBefreit =
+  // KRV 1). Wirkt nur in den Klassen V und VI; in I bis IV liegt ein Minijob unter dem Grundfreibetrag.
+  // Vorher rechnete der PAP hier die Teilbeträge wie bei einem regulären Job, die Lohnsteuer lag zu niedrig.
+  const vorsorgeParams = svZone === 'minijob'
+    ? { ...buildVorsorgeParams(eingabe), kvArt: 'privat' as const, kvPrivatBeitragJahr: 0, pvKinderlosZuschlag: false, avFrei: true }
+    : buildVorsorgeParams(eingabe);
 
   // Lohnsteuer, Soli, Kirchensteuer — Monatswerte wie im PAP bei monatlichem Lohnzahlungszeitraum.
   // Kinderfreibeträge wirken nur auf Soli und Kirchensteuer (§ 51a Abs. 2a EStG, § 3 Abs. 2a SolzG),
@@ -196,8 +208,6 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
   // zusammen (§ 20 Abs. 2 Halbsatz 2 SGB IV). Der Rechner nimmt an, dass die Summe über 2.000 € liegt,
   // und rechnet die vollen Sätze. Ein erster Minijob neben dem Hauptjob bleibt Minijob (§ 8 Abs. 2
   // Satz 1 SGB IV).
-  const wgBrutto = eingabe.weihnachtsgeld ?? 0;
-  const svZone = bestimmeSvZone(eingabe.regelEntgeltMonat ?? brutto + wgBrutto / 12, eingabe.steuerklasse);
 
   // PV-AN-Satz nach § 55 Abs. 3 SGB XI — Kinderlos-Zuschlag UND Kinderabschlag (2.–5. Kind).
   // Anzahl berücksichtigungsfähiger Kinder unter 25: bevorzugt das explizite Feld;

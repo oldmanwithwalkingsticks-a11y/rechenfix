@@ -4,6 +4,8 @@
 // Teil 1 — Raster: berechneBruttoNetto und berechneLohnsteuer müssen auf den Cent dasselbe liefern wie
 //          die PAP-Klasse bei monatlichem Lohnzahlungszeitraum (LZZ = 2), mit Kinderfreibeträgen (ZKF),
 //          Kirchensteuer (R = 1) und PV-Merkmalen (PVZ/PVA) wie im Rechner. Prüft die Verdrahtung.
+//          W176: Bis zur Minijob-Grenze ohne Teilbeträge KV/PV und AV (PKV = 1, ALV = 1; BMF-Schreiben vom
+//          14.08.2025, Rn. 16 und 22).
 // Teil 2 — Referenzfälle: unabhängig aus den Gesetzestexten gerechnet (§ 32a, § 39b Abs. 2, § 51a Abs. 2a
 //          EStG; §§ 3, 4 SolzG; § 55 SGB XI; SV-Rechengrößen 2026; Zusatzbeitrag 2,9 %), nicht mit dieser Lib.
 //          Dieselben Fälle stehen in Blogartikel 20. Dazu der Sollwert aus verify-tarif-2026.ts (405,50 €).
@@ -15,18 +17,19 @@
 import Decimal from 'decimal.js';
 import { readFileSync } from 'fs';
 import { LohnsteuerPAP2026 } from '../lib/berechnungen/_lohnsteuer-pap-2026';
-import { berechneBruttoNetto } from '../lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, SV_RECHENSTAND } from '../lib/berechnungen/brutto-netto';
+import { getMinijobGrenzeMonat } from '../lib/berechnungen/mindestlohn';
 import { berechneLohnsteuer } from '../lib/berechnungen/lohnsteuer';
 
 type SK = 1 | 2 | 3 | 4 | 5 | 6;
 const fehler: string[] = [];
 
-function papMonat(stkl: SK, monat: number, kinderUnter25: number, zkf: number) {
+function papMonat(stkl: SK, monat: number, kinderUnter25: number, zkf: number, minijob = false) {
   const p = new LohnsteuerPAP2026();
   p.setEingaben({
     LZZ: 2, STKL: stkl, R: 1, RE4: new Decimal(monat).times(100), ZKF: new Decimal(zkf), LZZFREIB: new Decimal(0),
-    KRV: 0, KVZ: new Decimal(2.9), PKV: 0, PVA: new Decimal(Math.max(0, Math.min(4, kinderUnter25 - 1))),
-    PVZ: kinderUnter25 === 0 ? 1 : 0, PVS: 0, ALV: 0, PKPV: new Decimal(0), PKPVAGZ: new Decimal(0), af: 1, f: 1.0,
+    KRV: 0, KVZ: new Decimal(2.9), PKV: minijob ? 1 : 0, PVA: new Decimal(Math.max(0, Math.min(4, kinderUnter25 - 1))),
+    PVZ: kinderUnter25 === 0 ? 1 : 0, PVS: 0, ALV: minijob ? 1 : 0, PKPV: new Decimal(0), PKPVAGZ: new Decimal(0), af: 1, f: 1.0,
   } as unknown as Parameters<LohnsteuerPAP2026['setEingaben']>[0]);
   p.main();
   const o = p.getOutput();
@@ -55,8 +58,9 @@ for (const stkl of [1, 2, 3, 4, 5, 6] as SK[]) {
       faelle++;
       const p = papMonat(stkl, m, k, zkf);
       const l = bn(stkl, m, k, zkf);
-      if (l.lohnsteuer !== p.lst || l.solidaritaet !== p.soli || l.kirchensteuer !== p.kist) {
-        fehler.push(`Brutto-Netto Kl.${stkl} ${m} € Kinder ${k}/ZKF ${zkf}: ${l.lohnsteuer}/${l.solidaritaet}/${l.kirchensteuer} statt ${p.lst}/${p.soli}/${p.kist}`);
+      const pBn = m <= getMinijobGrenzeMonat(SV_RECHENSTAND) ? papMonat(stkl, m, k, zkf, true) : p;
+      if (l.lohnsteuer !== pBn.lst || l.solidaritaet !== pBn.soli || l.kirchensteuer !== pBn.kist) {
+        fehler.push(`Brutto-Netto Kl.${stkl} ${m} € Kinder ${k}/ZKF ${zkf}: ${l.lohnsteuer}/${l.solidaritaet}/${l.kirchensteuer} statt ${pBn.lst}/${pBn.soli}/${pBn.kist}`);
       }
       const t = berechneLohnsteuer({ brutto: m, steuerklasse: stkl, kirchensteuer: true, kirchensteuersatz: 9, kinderfreibetraege: zkf, kinderUnter25: k, jahresfreibetrag: 0, zeitraum: 'monat' });
       if (t.lohnsteuerMonat !== p.lst || t.solidaritaetszuschlagMonat !== p.soli || t.kirchensteuerMonat !== p.kist) {
@@ -80,6 +84,11 @@ const referenz: [string, ReturnType<typeof bn>, Soll][] = [
   ['Kl. I, 12.000 €, kinderlos', bn(1, 12000, 0, 0), { lst: 3472.75, soli: 191.0, kist: 312.54, pv: 139.5 }],
   ['Kl. III, 12.000 €, 2 Kinder, Zähler 2', bn(3, 12000, 2, 2), { lst: 2578.5, soli: 0, kist: 176.47, pv: 90.09 }],
   ['Kl. I, 3.500 €, kinderlos, ohne KiSt (Soll verify-tarif-2026)', bn(1, 3500, 0, 0, false), { lst: 405.5, soli: 0, kist: 0, pv: 84.0, netto: 2333.25 }],
+  // W176: Minijob auf Steuerkarte, Klasse VI. Vorsorgepauschale nur Teilbetrag RV 9,3 % × 5.400 € = 502,20 €,
+  // aufgerundet 503 €; kein Teilbetrag KV/PV (BMF 14.08.2025, Rn. 16); Klasse VI ohne Pauschbeträge.
+  // zvE 4.897 €, § 39b Abs. 2 Satz 7 EStG mindestens 14 %: 685,58 € → 685 € im Jahr → 57,08 € im Monat.
+  // KiSt 9 % → 5,13 €; RV-Eigenanteil 18,6 % − 15 % = 3,6 % → 16,20 €; Netto 450 − 57,08 − 5,13 − 16,20.
+  ['Kl. VI, 450 €, Minijob neben dem Hauptjob', bn(6, 450, 0, 0), { lst: 57.08, soli: 0, kist: 5.13, pv: 0, netto: 371.59 }],
 ];
 for (const [name, r, s] of referenz) {
   const pruefe = (feld: string, ist: number, soll: number) => {
