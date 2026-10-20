@@ -6,6 +6,86 @@
 
 ---
 
+## 20.10.2026 — Welle 176: Minijob auf Steuerkarte — Vorsorgepauschale ohne Kranken-, Pflege- und Arbeitslosenversicherung — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** „Grenze der Rechnung“ im Historienblock von Welle 171 (`ec73e6a`): Bei einem Job auf Steuerkarte bis
+603 € rechnete der PAP die Vorsorgepauschale wie bei einem regulären Job; die Lohnsteuer in Klasse VI lag dort zu
+niedrig. Das betraf `berechneBruttoNetto` überall in der Minijob-Zone, in den Klassen V und VI; in I bis IV liegt
+ein Minijob unter dem Grundfreibetrag.
+
+**Rechtslage** (BMF-Schreiben vom 14.08.2025 zur Vorsorgepauschale ab 2026, in der Chat-Sitzung am 19.10.2026
+geprüft, nicht in diesem Lauf):
+- **Rn. 16:** Für geringfügig Beschäftigte mit Lohnsteuer nach den individuellen Merkmalen ist kein Teilbetrag
+  für die gesetzliche Krankenversicherung anzusetzen, wenn kein Arbeitnehmeranteil zu zahlen ist; im PAP
+  `PKV` = 1 ohne Beitrag, damit auch ohne Pflegeversicherung.
+- **Rn. 22:** Der Teilbetrag Arbeitslosenversicherung gilt nur für Versicherte nach SGB III; der Minijob ist dort
+  versicherungsfrei (§ 27 Abs. 2 SGB III), im PAP `ALV` = 1.
+- **Rn. 11:** Der Teilbetrag Rentenversicherung bleibt typisiert; er entfällt nur, wenn allein der pauschale
+  Arbeitgeberbeitrag gezahlt wird, also bei Befreiung (`rvBefreit` → `KRV` = 1, schon verdrahtet).
+
+**Werte** (Hauptjob 3.500 €, Klasse I, kinderlos, ohne Kirchensteuer):
+
+| | vorher | jetzt |
+|---|---|---|
+| Klasse VI, 450 €: Lohnsteuer | 50,25 € | **57,08 €** |
+| Nebenjob 450 € auf Steuerkarte, im Monat | 383,55 € | **376,72 €** |
+| Nachzahlung im Jahr | 953,00 € | **871,04 €** |
+| Nebenjob 600 € auf Steuerkarte, im Monat | 511,40 € | **502,24 €** |
+| Nachzahlung 600 € im Jahr | 1.291,00 € | **1.181,08 €** |
+| Klasse V, 600 €: Lohnsteuer | 51,16 € | **61,33 €** |
+| nach der Steuererklärung (450 / 600 €) | 304,13 / 403,82 € | unverändert |
+
+Unabhängig nachgerechnet, Klasse VI 450 €: Vorsorgepauschale nur RV 9,3 % × 5.400 € = 502,20 €, aufgerundet
+503 €; zu versteuern 4.897 €; davon mindestens 14 % nach § 39b Abs. 2 Satz 7 EStG = 685,58 €, abgerundet 685 €;
+Lohnsteuer 685 € ÷ 12 = 57,08 € im Monat. Das Ergebnis nach der Steuererklärung hängt nicht vom Abzug im Monat
+ab; Headline „434 € statt 304 €“ und Bild bleiben deshalb unverändert.
+
+**Spaltenkopf:** In der Tabelle „Nebenjob-Netto: Minijob vs. Steuerkarte“ hieß die letzte Spalte noch „Belastung SK
+VI“, obwohl dort seit Welle 171 das Netto nach der Steuererklärung steht. Neu: „SK VI nach der Steuererklärung“.
+
+**Änderungen** (18 Ersetzungen und 2 Datumszeilen = 20 in 7 Dateien, Vorlage
+`_lokal/welle176-minijob-vorsorgepauschale.mjs`, nicht committet; Lib-Prüfung `_lokal/welle176-lib.mts`):
+- **`lib/berechnungen/brutto-netto.ts`, 2:** `svZone` wird vor der Lohnsteuer bestimmt; in der Minijob-Zone
+  Vorsorgepauschale ohne Teilbeträge KV/PV und AV (`kvArt` 'privat' ohne Beitrag, ohne PV-Zuschlag,
+  `avFrei: true`); Kommentar mit den Randziffern.
+- **`lib/berechnungen/_lohnsteuer-pap-2026.ts`, 2, und `lib/berechnungen/lohnsteuer.ts`, 1:** neuer
+  Vorsorge-Parameter `avFrei` (PAP `ALV` = 1), vorher stand `ALV` fest auf 0. `lohnsteuer.ts` reicht das
+  Vorsorge-Objekt unverändert an `berechneLohnsteuerPAP2026` weiter; der Parameter kommt damit im PAP an.
+- **`scripts/verify-bruttonetto-zuschlaege.ts`, 5:** Raster bis zur Minijob-Grenze gegen den PAP mit `PKV` = 1 und
+  `ALV` = 1; neuer unabhängiger Referenzfall Klasse VI, 450 € (Lohnsteuer 57,08 €, KiSt 5,13 €, Netto 371,59 €).
+- **`lib/rechner-config/finanzen.ts`, Block `nebenjob-rechner`, 6:** 450 € und 600 € auf Steuerkarte neu,
+  Spaltenkopf, Satz zur Vorsorgepauschale im Hinweis; `letzteAktualisierung` von `brutto-netto-rechner` und
+  `nebenjob-rechner` → `2026-10-20`.
+- **`lib/social/captions.json`, 1:** 376,72 € und „Nachzahlung von rund 870 €“, je Instagram und Facebook.
+- **`components/rechner/BruttoNettoRechner.tsx`, 1:** Der Minijob-Hinweis sagt, dass die Vorsorgepauschale nur
+  den Rentenbeitrag enthält.
+
+**Bewusst nicht geändert:** `berechneVorsorgepauschale2026` in `lohnsteuer.ts`, der Lohnsteuer-Rechner (er kennt
+keine Minijob-Zone), Bilder und Videos (Headline unverändert).
+
+**Vermerk:** Die „Grenze der Rechnung“ aus Welle 171 ist behoben.
+
+**Gates:**
+- Phase 0 an `62334c1`: `git status` leer, oben `62334c1` und `8cff554` (Welle 175). `avFrei` keine Ausgabe;
+  „383,55“ `finanzen.ts:5` und `captions.json:2`; „'Belastung SK VI']“ `finanzen.ts:1`.
+- Phase 1: „OK — 20 Ersetzungen in 7 Dateien.“, Exit 0, „JSON ok“; geändert genau die 7 Dateien.
+- Phase 2: Lib-Prüfung 20× OK, „Alle Werte OK“, Exit 0 (Klasse VI 450 € 57,08 € in Lib und unabhängig, mit
+  RV-Befreiung 63,00 €; Klasse VI 600 € 76,16 €; Klasse V 600 € 61,33 €; unverändert Klasse I 450 € 0,00 €,
+  Klasse VI 1.000 € 111,75 €, Klasse I 3.500 € 2.333,25 €, Minijob 433,80 €, Steuerkarte 1.000 € 670,75 €).
+  `verify-bruttonetto-zuschlaege` „6552 Rasterfälle ohne Abweichung, 12 Referenzfälle“; `verify-midijob-p1`
+  41/41; `verify-steuerklassen-vergleich` 21/21; `verify-kurzarbeitergeld` 15/15. Zusätzlich als
+  Regressionsprobe, weil der PAP-Port geändert ist: `verify-lohnsteuer-pap` 20/20 an den BMF-Stützpunkten,
+  `verify-lohnsteuer-regression`, `verify-lohnsteuer-vvi` und `verify-tarif-2026` mit Exit 0. Greps: `avFrei`
+  `_lohnsteuer-pap-2026.ts:2`, `brutto-netto.ts:1`, `lohnsteuer.ts:1`; „383,55“ keine Ausgabe; „376,72“
+  `finanzen.ts:5` und `captions.json:2`; „rund 870 €“ `captions.json:2`; „SK VI nach der Steuererklärung“
+  `finanzen.ts:1`. Bilder-Check: dreimal „Aktuell: 206“, „Veraltet: 0“, Exit 0. `npm run build` Rückgabewert 0,
+  271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen; im gebauten HTML von `/finanzen/nebenjob-rechner`
+  „376,72“ 8×, „SK VI nach der Steuererklärung“ 2×, „383,55“ fehlt.
+
+**Commits:** A `1061e10` (die 7 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 175: Nettolohn-Optimierer — Bedingung je Option in der Vergleichstabelle sichtbar — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Karstens Live-Probe zu Welle 170. Erwartet war „bAV steuerfrei bis 676 €“ im Rechner; die Zeile
