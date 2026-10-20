@@ -6,6 +6,111 @@
 
 ---
 
+## 20.10.2026 — Welle 179: Urlaubstage — Teilurlaub nur nach § 5 Abs. 1 BUrlG; Elternzeit — Beginn, Enddaten, Anmeldefrist, Kündigungsschutz, paralleles Basiselterngeld — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Caption-Prüfung. Die Caption zum Urlaubstage-Rechner („Eintritt 01.04. → volle 18 Tage“) widersprach dem
+Rechner, und der Rechner war falsch. Beim Nachrechnen zeigten sich im Elternzeit-Rechner fünf Datumsfehler. Die
+Captions bleiben in dieser Welle unverändert.
+
+**Rechtslage** (in diesem Lauf nicht erneut an den Normtexten und Urteilen geprüft; Werte aus der Vorlage):
+- **§ 3 BUrlG:** 24 Werktage; bei 5-Tage-Woche 20, bei 6-Tage-Woche 24 Arbeitstage, bei Teilzeit anteilig.
+- **§ 4 BUrlG:** voller Urlaub erstmals nach sechsmonatigem Bestehen des Arbeitsverhältnisses.
+- **§ 5 Abs. 1 BUrlG:** Teilurlaub (ein Zwölftel je vollem Monat) nur, wenn die Wartezeit im Eintrittsjahr nicht
+  mehr endet (a), bei Austritt vor erfüllter Wartezeit (b) oder bei Austritt in der ersten Jahreshälfte nach
+  erfüllter Wartezeit (c). **§ 5 Abs. 2:** Bruchteile ab einem halben Tag aufrunden.
+- **BAG, 17.11.2015, 9 AZR 179/15:** Eintritt am 01.07. → Teilurlaub 6/12. **BAG, 23.01.2018, 9 AZR 200/17:**
+  Bruchteile unter 0,5 Tag dürfen nicht abgerundet werden.
+- **§ 208 SGB IX:** Zusatzurlaub eine Arbeitswoche (5 Tage bei 5-Tage-Woche, entsprechend mehr oder weniger).
+- **§§ 187, 188 BGB:** Fristbeginn und -ende; volle Monate nur bis zum Tag vor dem gleichnamigen Tag.
+- **§ 3 Abs. 2 MuSchG:** Mutterschutz 8 Wochen nach der Entbindung (Geburt 15.01.2026 → bis 12.03.2026).
+- **§ 4 Abs. 6 BEEG:** Basiselterngeld bei Geburten ab 01.04.2024 höchstens einen Lebensmonat gleichzeitig.
+  **§ 16 Abs. 1 BEEG:** Anmeldung 7 Wochen (bis 3. Geburtstag) bzw. 13 Wochen vor Beginn. **§ 18 Abs. 1 BEEG:**
+  Kündigungsschutz frühestens 8 Wochen (bis 3. Geburtstag) bzw. 14 Wochen (3. bis 8. Geburtstag) vor Beginn.
+
+**Urlaubstage-Rechner** (30 Tage, 5-Tage-Woche; Modus „Urlaubsanspruch“ in `urlaubstage.ts` neu geschrieben):
+
+| Fall | vorher | jetzt | Grundlage |
+|---|---|---|---|
+| Eintritt 01.04., Teilzeit 3 Tage | **14** (gezwölftelt) | **18**, kein Teilurlaub | Wartezeit endet 30.09., Vollurlaub (§ 4) |
+| Eintritt 01.07. | 15 | 15 | § 5 Abs. 1 a, 6/12; BAG 9 AZR 179/15 |
+| Eintritt 01.08., 3 Tage | 8 | 8 | 7,5 → 8 (§ 5 Abs. 2) |
+| Austritt 15.03. | **8** (3 Monate) | **5** (2 volle Monate) | §§ 187, 188 BGB |
+| Austritt 15.03.: gesetzliches Minimum | 20 | **3,33** | BAG 9 AZR 200/17 |
+| 6-Tage-Woche: gesetzliches Minimum | 20 | **24** | § 3 BUrlG |
+| Zwölftelungsklausel, Eintritt 01.05. | — | **27** (20 + 10 × 8/12) | neue Option: Vertrag kürzt nur den Mehrurlaub |
+| Schwerbehindert, 6-Tage-Woche, 3 Tage | 18 | 18 | § 208 SGB IX |
+
+**Elternzeit-Rechner** (Geburt 15.01.2026, Mutter 12 Monate, Partner 2 Monate ab Geburt):
+
+| | vorher | jetzt | Grundlage |
+|---|---|---|---|
+| Elternzeit der Mutter ab | 12.03.2026 (letzter Mutterschutztag) | **13.03.2026** | § 3 Abs. 2 MuSchG |
+| Ende Partner | 15.03.2026 | **14.03.2026** | §§ 187 Abs. 2, 188 Abs. 2 BGB |
+| Anmeldung Partner bis | 27.11.2025 | **26.11.2025** | 7 Wochen vor Beginn, Zugang am Tag davor (§ 16 Abs. 1 BEEG) |
+| Kündigungsschutz ab 3. Geburtstag | 8 Wochen vor Beginn | **14 Wochen** | § 18 Abs. 1 Satz 2 Nr. 2 BEEG |
+| paralleles Basiselterngeld | kein Hinweis | Hinweis bei mehr als einem Monat Überschneidung in den ersten 12 Lebensmonaten | § 4 Abs. 6 BEEG |
+
+**Grenze der Rechnung:** Der Hinweis zum parallelen Basiselterngeld prüft grob (Überschneidung der Partnerzeit mit
+Mutterschutz und Elternzeit der Mutter in den ersten 12 Lebensmonaten länger als ein Monat). Die Ausnahmen
+(Frühgeburt, Mehrlinge, Behinderung) rechnet der Rechner nicht.
+
+**Änderungen** (56 Ersetzungen und 4 Datumszeilen = 60 in 9 Dateien plus 1 neue Datei, Vorlage
+`_lokal/welle179-urlaubstage-elternzeit.mjs`, nicht committet):
+- **`lib/berechnungen/urlaubstage.ts`:** Modus „Urlaubsanspruch“ neu: Rechenjahr, Wartezeit nach § 4, Teilurlaub
+  nur nach § 5 Abs. 1 a–c, volle Monate über `fristEnde`/`volleMonate` (§§ 187, 188 BGB), Zusatzurlaub nach
+  Arbeitstagen, Option `zwoelftelungMehrurlaub`, neue Felder `rechenjahr`, `teilurlaub`, `regel`,
+  `vertragUnterMinimum`. Resturlaub: Datum ist der letzte Arbeitstag, volle Monate.
+- **`lib/berechnungen/_helpers.ts`:** `rundeBuRlGKonform` rundet ab 0,5 auf und lässt kleinere Bruchteile auf zwei
+  Nachkommastellen stehen (vorher abgerundet). Einziger weiterer Nutzer ist `teilzeit.ts`.
+- **`components/rechner/UrlaubstageRechner.tsx`:** Häkchen Zwölftelungsklausel, Regelzeile, Warnung bei Vertrag
+  unter Minimum, Feld „Austrittsdatum (letzter Tag)“, Hinweis auf § 5 Abs. 1 b.
+- **`components/rechner/TeilzeitRechner.tsx`:** Urlaubstage mit Dezimalstellen im deutschen Format.
+- **`lib/berechnungen/elternzeit.ts`:** lokale Datumsrechnung, `endeNachMonaten` statt `addMonate`, Beginn Mutter
+  am Tag nach dem Mutterschutz, Anmeldung einen Tag früher, `KUENDIGUNGSSCHUTZ_TAGE_VOR_BEGINN_NACH_3_GEBURTSTAG`
+  (98 Tage), neues Feld `basisParallelHinweis`.
+- **`components/rechner/ElternzeitRechner.tsx`:** Vorschlag Beginn `MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT + 1`,
+  Partnermonate-Text, gelber Hinweis zum parallelen Basiselterngeld.
+- **`lib/rechner-config/arbeit.ts`** (urlaubstage, elternzeit, teilzeit) und **`lib/rechner-config/finanzen.ts`**
+  (elterngeld: „ab dem 1. April 2024“): Texte.
+- **`scripts/verify-urlaubstage.ts`** (neu, 24 Fälle; gegen den Stand vorher 14 rot) und
+  **`scripts/verify-elternzeit.ts`** (52 statt 44 Fälle).
+- **`letzteAktualisierung`** → `2026-10-20` für `urlaubstage-rechner`, `elternzeit-rechner`, `teilzeit-rechner`
+  (`arbeit.ts`) und `elterngeld-rechner` (`finanzen.ts`).
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187); `teilzeit.ts`,
+`indexmiete.ts`.
+
+**Vermerk:** Die zugehörige Caption folgt in Welle 187.
+
+**Fund (offen, für eine spätere Welle):** Der Elternzeit-Rechner rechnet den **vorgeschlagenen Beginn** der Mutter
+in der Komponente weiter über UTC: `new Date(geburt)` (UTC-Mitternacht), `setDate` (Ortszeit), `toISOString`
+(UTC). In deutscher Zeitzone verliert das Ergebnis einen Tag, wenn der Wechsel auf Sommerzeit dazwischen liegt:
+bei Geburten vom 01.02. bis 29.03.2026 schlägt der Rechner wieder den letzten Mutterschutztag vor (Geburt
+15.02.2026 → 12.04. statt 13.04.). Nachgestellt mit `TZ=Europe/Berlin`; in UTC (Linux-Probelauf) und bei der Geburt
+15.01. der Live-Probe tritt es nicht auf. Gegenüber vorher kein Rückschritt (vorher zwei Tage zu früh). Die Lib
+selbst rechnet richtig; betroffen sind `effP1Beginn` und `defaultGeburt` in `ElternzeitRechner.tsx`. Nicht von Hand
+korrigiert, weil spätere Vorlagen auf dem genauen Text aufsetzen.
+
+**Gates:**
+- Phase 0 an `b0d461e`: `git status` leer, oben `b0d461e` und `3ac0428` (Welle 178). `git ls-files
+  scripts/verify-urlaubstage.ts` keine Ausgabe. Greps: „function addMonate“ `elternzeit.ts:1`;
+  `zwoelftelungMehrurlaub` und `basisParallelHinweis` keine Ausgabe. `verify-elternzeit` 44/44.
+- Phase 1: „OK — 60 Ersetzungen in 9 Dateien, 1 neue Dateien.“, Exit 0; 9 geänderte Dateien und
+  `?? scripts/verify-urlaubstage.ts`.
+- Phase 2: `verify-urlaubstage` 24/24, Exit 0; `verify-elternzeit` 52/52, Exit 0. Greps: „function addMonate“ keine
+  Ausgabe; `zwoelftelungMehrurlaub` `UrlaubstageRechner.tsx:1`, `urlaubstage.ts:2` (nach `git add` zusätzlich
+  `verify-urlaubstage.ts:3`); `basisParallelHinweis` `ElternzeitRechner.tsx:1`, `elternzeit.ts:4`,
+  `verify-elternzeit.ts:3`; `KUENDIGUNGSSCHUTZ_TAGE_VOR_BEGINN_NACH_3_GEBURTSTAG` `elternzeit.ts:3`;
+  „MUTTERSCHUTZ_ENDE_TAGE_NACH_GEBURT + 1“ `ElternzeitRechner.tsx:1`; „ab dem 1. April 2024“
+  `ElternzeitRechner.tsx:1`, `arbeit.ts:3`, `finanzen.ts:1`. `npm run build` Rückgabewert 0, 271 Seiten, Lint
+  0 Fehler, die zwei bekannten Warnungen. Im gebauten HTML von `/arbeit/urlaubstage-rechner` „Teilurlaub (ein
+  Zwölftel je vollem Monat) gibt es nur bei Eintritt ab 1. Juli“ 1×; in `/arbeit/elternzeit-rechner` „mindestens
+  2 Monate Elterngeld beziehen“ 4×.
+
+**Commits:** A `b5a541d` (die 10 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 178: GmbH-Geschäftsführer — KV/PV beim beherrschenden GGF; Erbschaftsteuer — Versorgungsfreibetrag ohne Altersangabe und mit 27 Jahren — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Caption-Prüfung. Die Captions beider Rechner stimmten nicht, weil die Rechner selbst falsch rechneten.
