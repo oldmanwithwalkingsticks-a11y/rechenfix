@@ -156,12 +156,12 @@ cases.push({ name: 'BEG 30.000 €, 1 WE, nur Grund → 9.000 €', actual: bere
 // 50.000 € Investition gedeckelt auf 30.000 € (1 WE), 70 % → 21.000 €
 cases.push({ name: 'BEG 50.000 €, 1 WE, ALLE Boni → 21.000 € (Cap auf 30.000 förderfähig)', actual: berechneBegZuschuss(50_000, { klimageschwindigkeit: true, einkommen: true, effizienz: true }, 1), expected: 21_000, quelle: '30.000 × 70 % (Investitions-Cap)' });
 
-// === GRUPPE 7: VPI (Destatis März 2026) ===
+// === GRUPPE 7: VPI (Destatis September 2026, PM Nr. 364 vom 13.10.2026) ===
 
-cases.push({ name: 'VPI aktueller Monat → 2026-03', actual: VPI_AKTUELL.monat, expected: '2026-03', quelle: 'Destatis 10.04.2026' });
-cases.push({ name: 'VPI März 2026 → 125,8', actual: VPI_AKTUELL.wert, expected: 125.8, quelle: 'Destatis VPI' });
-cases.push({ name: 'VPI Veränd. Vorjahr → +2,7 %', actual: VPI_AKTUELL.veraenderungVorjahresmonat, expected: 2.7, quelle: 'Destatis' });
-cases.push({ name: 'VPI 2025 Jahresdurchschnitt → 124,6', actual: VPI_JAHRESDURCHSCHNITTE[2025], expected: 124.6, quelle: 'Destatis Jahres-VPI' });
+cases.push({ name: 'VPI aktueller Monat → 2026-09', actual: VPI_AKTUELL.monat, expected: '2026-09', quelle: 'Destatis 13.10.2026' });
+cases.push({ name: 'VPI September 2026 → 126,6', actual: VPI_AKTUELL.wert, expected: 126.6, quelle: 'Destatis VPI' });
+cases.push({ name: 'VPI Veränd. Vorjahr → +3,3 %', actual: VPI_AKTUELL.veraenderungVorjahresmonat, expected: 3.3, quelle: 'Destatis' });
+cases.push({ name: 'VPI 2025 Jahresdurchschnitt → 121,9', actual: VPI_JAHRESDURCHSCHNITTE[2025], expected: 121.9, quelle: 'Destatis vpi141a, Stand 13.10.2026' });
 cases.push({ name: 'VPI 2020 Basisjahr → 100,0', actual: VPI_JAHRESDURCHSCHNITTE[2020], expected: 100.0, quelle: 'Destatis Basisjahr' });
 
 // === Ausgabe ===

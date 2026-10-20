@@ -167,7 +167,7 @@ export default function IndexmieteRechner() {
       {/* Rechtshinweis */}
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Hinweis:</strong> Die Mieterhöhung muss vom Vermieter schriftlich erklärt und begründet werden. Die Erhöhung greift frühestens im übernächsten Monat nach Zugang der Erklärung.
+          <strong>⚠️ Hinweis:</strong> Die Mieterhöhung muss vom Vermieter in Textform (z. B. per E-Mail) erklärt und begründet werden (§ 557b Abs. 3 BGB). Die Erhöhung greift frühestens im übernächsten Monat nach Zugang der Erklärung.
         </p>
       </div>
 

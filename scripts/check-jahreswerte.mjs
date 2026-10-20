@@ -58,6 +58,15 @@ const RESET = '\x1b[0m';
       schwelle: 90,
       hinweis: 'gegen die BDEW-Strompreisanalyse abgleichen und geprueft bumpen',
     },
+    {
+      // Destatis veroeffentlicht den VPI um den 10. des Folgemonats; 'YYYY-MM' zaehlt ab Monatsanfang.
+      // 75 Tage = Monatswert plus Veroeffentlichung des Folgemonats plus Puffer.
+      datei: 'lib/berechnungen/vpi.ts',
+      feld: 'monat',
+      name: 'VPI_AKTUELL.monat',
+      schwelle: 75,
+      hinweis: 'nach der Destatis-Pressemitteilung aktualisieren (wert, veraenderungVorjahresmonat, Stand-Kommentar)',
+    },
   ];
 
   for (const q of quellen) {

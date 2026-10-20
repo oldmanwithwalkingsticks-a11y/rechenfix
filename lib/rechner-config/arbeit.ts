@@ -1,4 +1,29 @@
 import type { RechnerConfig } from './types';
+import { VPI_AKTUELL, VPI_JAHRESDURCHSCHNITTE } from '@/lib/berechnungen/vpi';
+
+// Zugewinnausgleich-Beispiel (W180): Werte aus der VPI-SSOT, damit Texte und Rechner nach jedem
+// monatlichen VPI-Update übereinstimmen (vorher fest „Stand Mai 2026, VPI 125,0"). Heirat 2010,
+// Endstichtag = Jahr des aktuellen VPI-Monats; Beträge auf volle Euro gerundet.
+const fmtZ = (n: number, d = 0) => {
+  const [g, k] = n.toFixed(d).split('.');
+  return g.replace(/\B(?=(\d{3})+$)/g, '.') + (k ? ',' + k : '');
+};
+const ZG_MONATE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+const ZG_STAND = `${ZG_MONATE[Number(VPI_AKTUELL.monat.slice(5, 7)) - 1]} ${VPI_AKTUELL.monat.slice(0, 4)}`;
+const ZG_JAHR = Number(VPI_AKTUELL.monat.slice(0, 4));
+const ZG_VPI = VPI_AKTUELL.wert;
+const ZG_F = ZG_VPI / VPI_JAHRESDURCHSCHNITTE[2010];
+const ZG_AV1 = Math.round(15000 * ZG_F);
+const ZG_Z1 = 80000 - ZG_AV1;
+const ZG_AV2 = Math.round(5000 * ZG_F);
+const ZG_Z2 = 120000 - ZG_AV2;
+const ZG_DIFF = ZG_Z2 - ZG_Z1;
+const ZG_AUSGLEICH = Math.round(ZG_DIFF / 2);
+const ZG_ERBE = Math.round(50000 * ZG_VPI / VPI_JAHRESDURCHSCHNITTE[2018]);
+const ZG_AV1_ERBE = ZG_AV1 + ZG_ERBE;
+const ZG_AUSGLEICH_ERBE = Math.round(ZG_Z2 / 2);
+/** Jahresdurchschnitt aus der VPI-SSOT als Text, z. B. „88,1“ (W180: vorher fest im Text). */
+const ZG_VJ = (jahr: number) => fmtZ(VPI_JAHRESDURCHSCHNITTE[jahr], 1);
 
 export const arbeitRechner: RechnerConfig[] = [
   {
@@ -2161,7 +2186,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'zugewinnausgleich-rechner',
-    letzteAktualisierung: '2026-06-29',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Zugewinnausgleich-Rechner',
     beschreibung: 'Zugewinnausgleich berechnen: Zugewinn beider Ehepartner und Ausgleichsanspruch bei Scheidung oder Erbfall.',
     kategorie: 'Arbeit & Recht',
@@ -2170,7 +2195,7 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Zugewinnausgleich berechnen: Zugewinn beider Partner und Ausgleichsanspruch bei Scheidung ✓ § 1373 BGB ✓ KI-Erklärung.',
     keywords: ['zugewinnausgleich rechner', 'zugewinn berechnen', 'ausgleichsanspruch scheidung', 'zugewinngemeinschaft', 'anfangsvermögen endvermögen', '§ 1373 bgb', 'privilegierter erwerb', 'zugewinnausgleich formel', 'ehevertrag zugewinn', 'vermögensauseinandersetzung'],
     icon: '⚖️',
-    beispiel: 'Heirat 2010, Scheidung 2026 (Index-Faktor ≈ 1,397 nach Destatis-VPI, Stand Mai 2026). Partner 1: Anfangsvermögen 15.000 € → indexiert 20.950 €, Endvermögen 80.000 € → Zugewinn 59.050 €. Partner 2: Anfangsvermögen 5.000 € → indexiert 6.983 €, Endvermögen 120.000 € → Zugewinn 113.017 €. Differenz 53.966 € → Ausgleichsanspruch ca. 26.983 € (Partner 2 zahlt an Partner 1). Ohne Indexierung wären die Zugewinne 5.950 € bzw. 1.983 € höher und der Ausgleich entsprechend verzerrt.',
+    beispiel: `Heirat 2010, Scheidung ${ZG_JAHR} (Index-Faktor ≈ ${fmtZ(ZG_F, 3)} nach Destatis-VPI, Stand ${ZG_STAND}). Partner 1: Anfangsvermögen 15.000 € → indexiert ${fmtZ(ZG_AV1)} €, Endvermögen 80.000 € → Zugewinn ${fmtZ(ZG_Z1)} €. Partner 2: Anfangsvermögen 5.000 € → indexiert ${fmtZ(ZG_AV2)} €, Endvermögen 120.000 € → Zugewinn ${fmtZ(ZG_Z2)} €. Differenz ${fmtZ(ZG_DIFF)} € → Ausgleichsanspruch ca. ${fmtZ(ZG_AUSGLEICH)} € (Partner 2 zahlt an Partner 1). Ohne Indexierung wären die Zugewinne ${fmtZ(ZG_AV1 - 15000)} € bzw. ${fmtZ(ZG_AV2 - 5000)} € höher und der Ausgleich entsprechend verzerrt.`,
     faq: [
       {
         frage: 'Was ist der Zugewinnausgleich?',
@@ -2178,7 +2203,7 @@ export const arbeitRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie wird der Zugewinn berechnet?',
-        antwort: 'Zugewinn = Endvermögen (am Tag des Scheidungsantrags) − indexiertes Anfangsvermögen (am Tag der Heirat, plus privilegierter Erwerb). Wichtig: Nach § 1376 BGB und ständiger Rechtsprechung (BFH BFHE 217, 248) wird das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag hochgerechnet (Faktor = VPI(End) / VPI(Heirat)). Der Zugewinn kann nie negativ werden. Aus den beiden indexierten Zugewinnen wird die Differenz gebildet, halbiert und dem Partner mit dem niedrigeren Zugewinn als Ausgleichsanspruch zugesprochen. Beispiel (Heirat 2010, Scheidung 2026, Index ≈ 1,397, Stand Mai 2026): P1 AV 15.000 → indexiert 20.950 € → Zugewinn 59.050 €. P2 AV 5.000 → indexiert 6.983 € → Zugewinn 113.017 €. Differenz 53.966 € → Ausgleich rund 26.983 € von P2 an P1.',
+        antwort: `Zugewinn = Endvermögen (am Tag des Scheidungsantrags) − indexiertes Anfangsvermögen (am Tag der Heirat, plus privilegierter Erwerb). Wichtig: Nach § 1376 BGB und ständiger Rechtsprechung (BFH BFHE 217, 248) wird das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag hochgerechnet (Faktor = VPI(End) / VPI(Heirat)). Der Zugewinn kann nie negativ werden. Aus den beiden indexierten Zugewinnen wird die Differenz gebildet, halbiert und dem Partner mit dem niedrigeren Zugewinn als Ausgleichsanspruch zugesprochen. Beispiel (Heirat 2010, Scheidung ${ZG_JAHR}, Index ≈ ${fmtZ(ZG_F, 3)}, Stand ${ZG_STAND}): P1 AV 15.000 → indexiert ${fmtZ(ZG_AV1)} € → Zugewinn ${fmtZ(ZG_Z1)} €. P2 AV 5.000 → indexiert ${fmtZ(ZG_AV2)} € → Zugewinn ${fmtZ(ZG_Z2)} €. Differenz ${fmtZ(ZG_DIFF)} € → Ausgleich rund ${fmtZ(ZG_AUSGLEICH)} € von P2 an P1.`,
       },
       {
         frage: 'Was zählt als privilegierter Erwerb?',
@@ -2205,17 +2230,17 @@ export const arbeitRechner: RechnerConfig[] = [
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Das Hauptbeispiel: Heirat 2010, Scheidung 2026',
+        titel: `Das Hauptbeispiel: Heirat 2010, Scheidung ${ZG_JAHR}`,
         schritte: [
-          { label: 'Index-Faktor (VPI 125,0 ÷ 89,5)', formel: 'VPI 2026 ÷ VPI 2010', ergebnis: '≈ 1,397' },
-          { label: 'Partner 1: AV indexiert', formel: '15.000 € × 1,397', ergebnis: '≈ 20.950 €' },
-          { label: 'Partner 1: Zugewinn', formel: '80.000 € − 20.950 €', ergebnis: '≈ 59.050 €' },
-          { label: 'Partner 2: AV indexiert', formel: '5.000 € × 1,397', ergebnis: '≈ 6.983 €' },
-          { label: 'Partner 2: Zugewinn', formel: '120.000 € − 6.983 €', ergebnis: '≈ 113.017 €' },
-          { label: 'Differenz der Zugewinne', formel: '113.017 € − 59.050 €', ergebnis: '≈ 53.966 €' },
-          { label: 'Ausgleichsanspruch', formel: '53.966 € ÷ 2', ergebnis: '≈ 26.983 €' },
+          { label: `Index-Faktor (VPI ${fmtZ(ZG_VPI, 1)} ÷ ${ZG_VJ(2010)})`, formel: `VPI ${ZG_JAHR} ÷ VPI 2010`, ergebnis: `≈ ${fmtZ(ZG_F, 3)}` },
+          { label: 'Partner 1: AV indexiert', formel: `15.000 € × ${fmtZ(ZG_F, 3)}`, ergebnis: `≈ ${fmtZ(ZG_AV1)} €` },
+          { label: 'Partner 1: Zugewinn', formel: `80.000 € − ${fmtZ(ZG_AV1)} €`, ergebnis: `≈ ${fmtZ(ZG_Z1)} €` },
+          { label: 'Partner 2: AV indexiert', formel: `5.000 € × ${fmtZ(ZG_F, 3)}`, ergebnis: `≈ ${fmtZ(ZG_AV2)} €` },
+          { label: 'Partner 2: Zugewinn', formel: `120.000 € − ${fmtZ(ZG_AV2)} €`, ergebnis: `≈ ${fmtZ(ZG_Z2)} €` },
+          { label: 'Differenz der Zugewinne', formel: `${fmtZ(ZG_Z2)} € − ${fmtZ(ZG_Z1)} €`, ergebnis: `≈ ${fmtZ(ZG_DIFF)} €` },
+          { label: 'Ausgleichsanspruch', formel: `${fmtZ(ZG_DIFF)} € ÷ 2`, ergebnis: `≈ ${fmtZ(ZG_AUSGLEICH)} €` },
         ],
-        fazit: 'Beide Zugewinne werden getrennt ermittelt: Endvermögen minus indexiertes Anfangsvermögen. Partner 2 hat mit rund 113.017 € deutlich mehr Zugewinn erzielt als Partner 1 mit rund 59.050 €. Die Hälfte der Differenz von rund 53.966 € — also etwa 26.983 € — zahlt Partner 2 an Partner 1. Die VPI-Werte haben den Stand Mai 2026 (VPI 125,0); da sich der Index laufend ändert, verschieben sich die Beträge bei einem späteren Stichtag leicht. Der tatsächliche Ausgleich hängt zudem von der genauen Vermögensaufstellung und möglichen Sonderfällen ab.',
+        fazit: `Beide Zugewinne werden getrennt ermittelt: Endvermögen minus indexiertes Anfangsvermögen. Partner 2 hat mit rund ${fmtZ(ZG_Z2)} € deutlich mehr Zugewinn erzielt als Partner 1 mit rund ${fmtZ(ZG_Z1)} €. Die Hälfte der Differenz von rund ${fmtZ(ZG_DIFF)} € — also etwa ${fmtZ(ZG_AUSGLEICH)} € — zahlt Partner 2 an Partner 1. Die VPI-Werte haben den Stand ${ZG_STAND} (VPI ${fmtZ(ZG_VPI, 1)}); da sich der Index laufend ändert, verschieben sich die Beträge bei einem späteren Stichtag leicht. Der tatsächliche Ausgleich hängt zudem von der genauen Vermögensaufstellung und möglichen Sonderfällen ab.`,
       },
       {
         typ: 'text',
@@ -2227,19 +2252,19 @@ export const arbeitRechner: RechnerConfig[] = [
         titel: 'Warum das Anfangsvermögen indexiert wird (§ 1376 BGB)',
         schritte: [
           { label: 'Anfangsvermögen nominal (2010)', formel: 'eingebracht', ergebnis: '15.000 €' },
-          { label: 'VPI bei Heirat 2010', formel: 'Destatis', ergebnis: '89,5' },
-          { label: 'VPI Endstichtag 2026', formel: 'Stand Mai 2026', ergebnis: '125,0' },
-          { label: 'Index-Faktor', formel: '125,0 ÷ 89,5', ergebnis: '≈ 1,397' },
-          { label: 'AV indexiert', formel: '15.000 € × 1,397', ergebnis: '≈ 20.950 €' },
-          { label: 'Inflationsanteil (kein Zugewinn)', formel: '20.950 € − 15.000 €', ergebnis: '≈ 5.950 €' },
+          { label: 'VPI bei Heirat 2010', formel: 'Destatis', ergebnis: ZG_VJ(2010) },
+          { label: `VPI Endstichtag ${ZG_JAHR}`, formel: `Stand ${ZG_STAND}`, ergebnis: fmtZ(ZG_VPI, 1) },
+          { label: 'Index-Faktor', formel: `${fmtZ(ZG_VPI, 1)} ÷ ${ZG_VJ(2010)}`, ergebnis: `≈ ${fmtZ(ZG_F, 3)}` },
+          { label: 'AV indexiert', formel: `15.000 € × ${fmtZ(ZG_F, 3)}`, ergebnis: `≈ ${fmtZ(ZG_AV1)} €` },
+          { label: 'Inflationsanteil (kein Zugewinn)', formel: `${fmtZ(ZG_AV1)} € − 15.000 €`, ergebnis: `≈ ${fmtZ(ZG_AV1 - 15000)} €` },
         ],
-        fazit: '15.000 € von 2010 sind 2026 nicht mehr 15.000 € wert. Ohne Indexierung würde die reine Geldentwertung von rund 5.950 € fälschlich als Zugewinn gewertet und zur Hälfte ausgeglichen. § 1376 BGB rechnet das heraus, indem das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag hochgerechnet wird: indexiertes AV = AV × VPI(Ende) ÷ VPI(Heirat). Nur der reale Vermögenszuwachs darüber hinaus zählt als Zugewinn. Maßgeblich sind die VPI-Werte des Statistischen Bundesamtes; die hier verwendeten gelten Stand Mai 2026.',
+        fazit: `15.000 € von 2010 sind ${ZG_JAHR} nicht mehr 15.000 € wert. Ohne Indexierung würde die reine Geldentwertung von rund ${fmtZ(ZG_AV1 - 15000)} € fälschlich als Zugewinn gewertet und zur Hälfte ausgeglichen. § 1376 BGB rechnet das heraus, indem das Anfangsvermögen mit dem Verbraucherpreisindex auf den Endstichtag hochgerechnet wird: indexiertes AV = AV × VPI(Ende) ÷ VPI(Heirat). Nur der reale Vermögenszuwachs darüber hinaus zählt als Zugewinn. Maßgeblich sind die VPI-Werte des Statistischen Bundesamtes; die hier verwendeten gelten Stand ${ZG_STAND}.`,
       },
       {
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'VPI-Faktoren je Heiratsjahr verstehen',
-        text: 'Der Indexierungsfaktor hängt davon ab, wie lange die Ehe gedauert hat: Je weiter die Heirat zurückliegt, desto stärker die Inflationskorrektur. Bei einer Heirat 2000 und Scheidung 2026 liegt er bei rund 1,63 (VPI 125,0 ÷ 76,7), bei Heirat 2010 bei rund 1,40 (125,0 ÷ 89,5), bei einer jüngeren Ehe ab 2020 nahe 1,0. Das Anfangsvermögen wird also umso stärker hochgerechnet, je älter die Ehe ist. Privilegierter Erwerb — etwa eine Erbschaft — wird nicht zum Heiratsjahr, sondern mit dem VPI ab seinem Erwerbsjahr indexiert. Die hier genannten Werte haben den Stand Mai 2026 (VPI 125,0); den tagesaktuellen Index veröffentlicht das Statistische Bundesamt auf destatis.de. Bei einem späteren Stichtag ändern sich die Faktoren entsprechend. Maßgeblich ist immer der Index des Monats, in dem der Scheidungsantrag zugestellt wurde, beziehungsweise der Heiratsmonat — der Rechner arbeitet vereinfacht mit Jahreswerten.',
+        text: `Der Indexierungsfaktor hängt davon ab, wie lange die Ehe gedauert hat: Je weiter die Heirat zurückliegt, desto stärker die Inflationskorrektur. Bei einer Heirat 2000 und Scheidung ${ZG_JAHR} liegt er bei rund ${fmtZ(ZG_VPI / VPI_JAHRESDURCHSCHNITTE[2000], 2)} (VPI ${fmtZ(ZG_VPI, 1)} ÷ ${ZG_VJ(2000)}), bei Heirat 2010 bei rund ${fmtZ(ZG_F, 2)} (${fmtZ(ZG_VPI, 1)} ÷ ${ZG_VJ(2010)}), bei Heirat 2020 bei rund ${fmtZ(ZG_VPI / VPI_JAHRESDURCHSCHNITTE[2020], 2)} und bei einer ganz jungen Ehe von 2024 nur noch bei rund ${fmtZ(ZG_VPI / VPI_JAHRESDURCHSCHNITTE[2024], 2)}. Das Anfangsvermögen wird also umso stärker hochgerechnet, je älter die Ehe ist. Privilegierter Erwerb — etwa eine Erbschaft — wird nicht zum Heiratsjahr, sondern mit dem VPI ab seinem Erwerbsjahr indexiert. Die hier genannten Werte haben den Stand ${ZG_STAND} (VPI ${fmtZ(ZG_VPI, 1)}); den tagesaktuellen Index veröffentlicht das Statistische Bundesamt auf destatis.de. Bei einem späteren Stichtag ändern sich die Faktoren entsprechend. Maßgeblich ist immer der Index des Monats, in dem der Scheidungsantrag zugestellt wurde, beziehungsweise der Heiratsmonat — der Rechner arbeitet vereinfacht mit Jahreswerten, für das laufende Jahr mit dem letzten veröffentlichten Monatswert.`,
       },
       {
         typ: 'text',
@@ -2251,13 +2276,13 @@ export const arbeitRechner: RechnerConfig[] = [
         titel: 'Variante: Partner 1 erbt 2018 während der Ehe',
         schritte: [
           { label: 'Erbschaft 2018 (privilegiert)', formel: '§ 1374 Abs. 2 BGB', ergebnis: '50.000 €' },
-          { label: 'Erbe indexiert (VPI 125,0 ÷ 99,7)', formel: '50.000 € × 1,254', ergebnis: '≈ 62.688 €' },
-          { label: 'Bereinigtes AV von Partner 1', formel: '20.950 € + 62.688 €', ergebnis: '≈ 83.638 €' },
-          { label: 'Partner 1: Zugewinn', formel: 'max(0; 80.000 € − 83.638 €)', ergebnis: '0 €' },
-          { label: 'Partner 2: Zugewinn (unverändert)', formel: 'wie Hauptbeispiel', ergebnis: '≈ 113.017 €' },
-          { label: 'Ausgleichsanspruch', formel: '(113.017 € − 0 €) ÷ 2', ergebnis: '≈ 56.508 €' },
+          { label: `Erbe indexiert (VPI ${fmtZ(ZG_VPI, 1)} ÷ ${ZG_VJ(2018)})`, formel: `50.000 € × ${fmtZ(ZG_VPI / VPI_JAHRESDURCHSCHNITTE[2018], 3)}`, ergebnis: `≈ ${fmtZ(ZG_ERBE)} €` },
+          { label: 'Bereinigtes AV von Partner 1', formel: `${fmtZ(ZG_AV1)} € + ${fmtZ(ZG_ERBE)} €`, ergebnis: `≈ ${fmtZ(ZG_AV1_ERBE)} €` },
+          { label: 'Partner 1: Zugewinn', formel: `max(0; 80.000 € − ${fmtZ(ZG_AV1_ERBE)} €)`, ergebnis: '0 €' },
+          { label: 'Partner 2: Zugewinn (unverändert)', formel: 'wie Hauptbeispiel', ergebnis: `≈ ${fmtZ(ZG_Z2)} €` },
+          { label: 'Ausgleichsanspruch', formel: `(${fmtZ(ZG_Z2)} € − 0 €) ÷ 2`, ergebnis: `≈ ${fmtZ(ZG_AUSGLEICH_ERBE)} €` },
         ],
-        fazit: 'Erbt ein Partner während der Ehe, zählt die Erbschaft als privilegierter Erwerb (§ 1374 Abs. 2 BGB) zum Anfangsvermögen und ist damit ausgleichsfrei. Sie wird mit dem VPI ab dem Erwerbsjahr indexiert — hier von 2018 (VPI 99,7) auf 2026. Das indexierte Erbe von rund 62.688 € hebt das bereinigte Anfangsvermögen von Partner 1 über dessen Endvermögen, sodass sein Zugewinn auf null sinkt. Folge: Partner 2 zahlt die Hälfte seines eigenen Zugewinns, hier rund 56.508 €. Die Wertsteigerung des Erbes selbst — etwa Kursgewinne auf geerbte Aktien — bliebe dagegen normaler, ausgleichspflichtiger Zugewinn.',
+        fazit: `Erbt ein Partner während der Ehe, zählt die Erbschaft als privilegierter Erwerb (§ 1374 Abs. 2 BGB) zum Anfangsvermögen und ist damit ausgleichsfrei. Sie wird mit dem VPI ab dem Erwerbsjahr indexiert — hier von 2018 (VPI ${ZG_VJ(2018)}) auf ${ZG_JAHR}. Das indexierte Erbe von rund ${fmtZ(ZG_ERBE)} € hebt das bereinigte Anfangsvermögen von Partner 1 über dessen Endvermögen, sodass sein Zugewinn auf null sinkt. Folge: Partner 2 zahlt die Hälfte seines eigenen Zugewinns, hier rund ${fmtZ(ZG_AUSGLEICH_ERBE)} €. Die Wertsteigerung des Erbes selbst — etwa Kursgewinne auf geerbte Aktien — bliebe dagegen normaler, ausgleichspflichtiger Zugewinn.`,
       },
       {
         typ: 'infobox',
@@ -2294,7 +2319,7 @@ export const arbeitRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Kurzfazit',
-        text: 'Der Zugewinnausgleich teilt den während der Ehe erzielten Vermögenszuwachs: Wer mehr Zugewinn hatte, zahlt dem anderen die Hälfte der Differenz. Das Anfangsvermögen wird nach § 1376 BGB um die Inflation bereinigt, privilegierter Erwerb wie Erbschaften bleibt ausgeglichen. Wie hoch der Anspruch wirklich ausfällt, hängt entscheidend von der Vermögensaufstellung, der Bewertung von Immobilien und Unternehmen sowie von Sonderfällen ab. Dieser Rechner liefert eine erste Orientierung mit Beispiel-VPI-Werten (Stand Mai 2026) und ersetzt keine Rechtsberatung. Für die konkrete Auseinandersetzung — besonders bei Immobilien, Unternehmen oder strittigem Anfangsvermögen — gehört der Fall in die Hände einer Fachanwältin oder eines Fachanwalts für Familienrecht. Weil oft hohe Beträge im Spiel sind und die Bewertung Spielräume lässt, zahlt sich eine sorgfältige, frühzeitige Vorbereitung der Vermögensaufstellung fast immer aus.',
+        text: `Der Zugewinnausgleich teilt den während der Ehe erzielten Vermögenszuwachs: Wer mehr Zugewinn hatte, zahlt dem anderen die Hälfte der Differenz. Das Anfangsvermögen wird nach § 1376 BGB um die Inflation bereinigt, privilegierter Erwerb wie Erbschaften bleibt vom Ausgleich ausgenommen. Wie hoch der Anspruch wirklich ausfällt, hängt entscheidend von der Vermögensaufstellung, der Bewertung von Immobilien und Unternehmen sowie von Sonderfällen ab. Dieser Rechner liefert eine erste Orientierung mit VPI-Werten von Destatis (Stand ${ZG_STAND}) und ersetzt keine Rechtsberatung. Für die konkrete Auseinandersetzung — besonders bei Immobilien, Unternehmen oder strittigem Anfangsvermögen — gehört der Fall in die Hände einer Fachanwältin oder eines Fachanwalts für Familienrecht. Weil oft hohe Beträge im Spiel sind und die Bewertung Spielräume lässt, zahlt sich eine sorgfältige, frühzeitige Vorbereitung der Vermögensaufstellung fast immer aus.`,
       },
     ],
     quellen: [

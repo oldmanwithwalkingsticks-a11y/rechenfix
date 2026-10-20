@@ -1746,7 +1746,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'indexmiete-rechner',
-    letzteAktualisierung: '2026-06-28',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Indexmiete-Rechner',
     beschreibung: 'Indexmiete berechnen: Mieterhöhung bei Indexmietvertrag basierend auf dem Verbraucherpreisindex (VPI).',
     kategorie: 'Wohnen & Energie',
@@ -1755,7 +1755,7 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Indexmiete berechnen: Mieterhöhung basierend auf dem Verbraucherpreisindex (VPI) ✓ Aktuelle VPI-Werte ✓ 12-Monats-Frist ✓ KI-Erklärung.',
     keywords: ['indexmiete rechner', 'indexmiete berechnen', 'indexmietvertrag', 'vpi mieterhöhung', 'verbraucherpreisindex miete', 'mieterhöhung indexmiete', 'indexmiete erhöhung', 'staffelmiete vs indexmiete', 'destatis vpi', 'mietanpassung'],
     icon: '📈',
-    beispiel: 'Kaltmiete 800 € · VPI bei Vertragsabschluss 117,4 · aktueller VPI 125,8 (Beispielwert, Stand März 2026) → Veränderung +7,16 % → neue Kaltmiete 857,24 € (+57,24 €/Monat, +686,88 €/Jahr).',
+    beispiel: 'Kaltmiete 800 € · VPI bei Vertragsabschluss 117,4 (Dezember 2023) · VPI bei der Anpassung 125,8 (August 2026) → Veränderung +7,16 % → neue Kaltmiete 857,24 € (+57,24 €/Monat, +686,88 €/Jahr).',
     faq: [
       {
         frage: 'Was ist eine Indexmiete?',
@@ -1763,15 +1763,15 @@ export const wohnenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie berechne ich die Indexmiete?',
-        antwort: 'Formel: Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / VPI bei Vertragsabschluss). Beispiel: Kaltmiete 800 €, VPI alt 117,4, VPI neu 125,8 (Stand März 2026) → 800 × 125,8 / 117,4 = 857,24 € (der Rechner rundet erst das Endergebnis). Die prozentuale Steigerung des VPI (+7,16 %) wird 1:1 auf die Miete übertragen. Nebenkosten sind von der Berechnung ausgenommen, sie werden separat abgerechnet.',
+        antwort: 'Formel: Neue Kaltmiete = Aktuelle Kaltmiete × (Aktueller VPI / VPI bei Vertragsabschluss). Beispiel: Kaltmiete 800 €, VPI alt 117,4 (Dezember 2023), VPI neu 125,8 (August 2026) → 800 × 125,8 / 117,4 = 857,24 € (der Rechner rundet erst das Endergebnis). Die prozentuale Steigerung des VPI (+7,16 %) wird 1:1 auf die Miete übertragen. Nebenkosten sind von der Berechnung ausgenommen, sie werden separat abgerechnet.',
       },
       {
         frage: 'Wo finde ich den aktuellen Verbraucherpreisindex?',
-        antwort: 'Der VPI wird monatlich vom Statistischen Bundesamt veröffentlicht — unter www.destatis.de im Bereich "Preise → Verbraucherpreisindex". Seit 2023 gilt das Basisjahr 2020 = 100 Punkte. Der Wert von 125,8 (Stand März 2026) bedeutet beispielsweise, dass das Preisniveau seit 2020 um 25,8 % gestiegen ist. Auch die Bundesbank und der Mieterbund informieren regelmäßig über die aktuellen VPI-Werte.',
+        antwort: 'Der VPI wird monatlich vom Statistischen Bundesamt veröffentlicht — unter www.destatis.de im Bereich "Preise → Verbraucherpreisindex". Seit 2023 gilt das Basisjahr 2020 = 100 Punkte. Der Wert von 125,8 (August 2026) bedeutet beispielsweise, dass das Preisniveau seit 2020 um 25,8 % gestiegen ist. Auch die Bundesbank und der Mieterbund informieren regelmäßig über die aktuellen VPI-Werte.',
       },
       {
         frage: 'Wie oft darf die Indexmiete erhöht werden?',
-        antwort: 'Frühestens alle 12 Monate. Zwischen zwei Mieterhöhungen aufgrund des Indexes muss mindestens ein Jahr liegen (§ 557b Abs. 2 BGB). Die Erhöhung muss außerdem vom Vermieter schriftlich erklärt und begründet werden — mit Angabe des alten und neuen VPI-Werts. Sie gilt dann frühestens im übernächsten Monat nach Zugang der Erklärung. Die gesetzliche Kappungsgrenze von 20 % in drei Jahren gilt für Indexmieten NICHT.',
+        antwort: 'Frühestens alle 12 Monate. Zwischen zwei Mieterhöhungen aufgrund des Indexes muss mindestens ein Jahr liegen (§ 557b Abs. 2 BGB). Die Erhöhung muss außerdem vom Vermieter in Textform (§ 557b Abs. 3 BGB, also auch per E-Mail) erklärt und begründet werden — mit Angabe des alten und neuen VPI-Werts. Sie gilt dann frühestens im übernächsten Monat nach Zugang der Erklärung. Die gesetzliche Kappungsgrenze von 20 % in drei Jahren gilt für Indexmieten NICHT.',
       },
       {
         frage: 'Kann die Indexmiete auch sinken?',
@@ -1788,14 +1788,14 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Indexmieterhöhung Schritt für Schritt',
         schritte: [
-          { label: 'VPI bei Vertragsabschluss', formel: 'Beispielwert', ergebnis: '117,4' },
-          { label: 'Aktueller VPI (Beispiel, März 2026)', formel: 'Beispielwert', ergebnis: '125,8' },
+          { label: 'VPI bei Vertragsabschluss', formel: 'Dezember 2023', ergebnis: '117,4' },
+          { label: 'VPI bei der Anpassung', formel: 'August 2026', ergebnis: '125,8' },
           { label: 'VPI-Veränderung', formel: '(125,8 − 117,4) ÷ 117,4 × 100', ergebnis: '+7,16 %' },
           { label: 'Neue Kaltmiete', formel: '800 € × 125,8 ÷ 117,4', ergebnis: '857,24 €' },
           { label: 'Mehrbetrag pro Monat', formel: '857,24 € − 800 €', ergebnis: '+57,24 €' },
           { label: 'Mehrbetrag pro Jahr', formel: '57,24 € × 12', ergebnis: '+686,88 €' },
         ],
-        fazit: 'Die prozentuale Veränderung des Verbraucherpreisindex wird eins zu eins auf die Kaltmiete übertragen. Im Beispiel steigt der VPI von 117,4 auf 125,8 Punkte — das sind 7,16 %. Aus 800 € Kaltmiete werden damit 857,24 €, also 57,24 € mehr im Monat und 686,88 € im Jahr. Wichtig: Der Rechner rundet erst das Endergebnis auf zwei Nachkommastellen, nicht schon den Zwischenwert — sonst entstehen kleine Abweichungen. Die hier verwendeten VPI-Zahlen sind Beispielwerte (Stand VPI März 2026 = 125,8); den tagesaktuellen Indexstand prüfen Sie für Ihre eigene Berechnung selbst auf destatis.de.',
+        fazit: 'Die prozentuale Veränderung des Verbraucherpreisindex wird eins zu eins auf die Kaltmiete übertragen. Im Beispiel steigt der VPI von 117,4 auf 125,8 Punkte — das sind 7,16 %. Aus 800 € Kaltmiete werden damit 857,24 €, also 57,24 € mehr im Monat und 686,88 € im Jahr. Wichtig: Der Rechner rundet erst das Endergebnis auf zwei Nachkommastellen, nicht schon den Zwischenwert — sonst entstehen kleine Abweichungen. Die hier verwendeten VPI-Zahlen sind Beispielwerte (Dezember 2023 = 117,4, August 2026 = 125,8); den tagesaktuellen Indexstand prüfen Sie für Ihre eigene Berechnung selbst auf destatis.de.',
       },
       {
         typ: 'infobox',
@@ -1838,7 +1838,7 @@ export const wohnenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Die Anpassungsregeln nach § 557b Abs. 2 BGB',
-        html: `<p>Eine Indexmiete darf <strong>frühestens alle zwölf Monate</strong> angepasst werden — zwischen zwei Erhöhungen muss mindestens ein Jahr liegen. Die Anpassung wirkt nicht automatisch: Der Vermieter muss sie schriftlich erklären und dabei den alten und den neuen VPI-Wert sowie die daraus folgende Mieterhöhung angeben. Eine fehlerhafte oder unvollständige Erklärung ist unwirksam. Die neue Miete gilt dann ab dem übernächsten Monat nach Zugang der Erklärung.</p><p>Während der Indexbindung sind andere Erhöhungswege gesperrt: Weder eine Anhebung auf die ortsübliche Vergleichsmiete (§ 558 BGB) noch eine Modernisierungsumlage (§ 559 BGB) ist zulässig — Ausnahme sind gesetzlich erzwungene Maßnahmen wie energetische Pflichtsanierungen. Anders als bei der Mietpreisbremse, deren Grenzen der <a href="/wohnen/mietpreisbremse-rechner">Mietpreisbremse-Rechner</a> abbildet, begrenzt bei der Indexmiete allein die Entwicklung des Preisindex die Miethöhe.</p>`,
+        html: `<p>Eine Indexmiete darf <strong>frühestens alle zwölf Monate</strong> angepasst werden — zwischen zwei Erhöhungen muss mindestens ein Jahr liegen. Die Anpassung wirkt nicht automatisch: Der Vermieter muss sie in Textform erklären und dabei den alten und den neuen VPI-Wert sowie die daraus folgende Mieterhöhung angeben. Eine fehlerhafte oder unvollständige Erklärung ist unwirksam. Die neue Miete gilt dann ab dem übernächsten Monat nach Zugang der Erklärung.</p><p>Während der Indexbindung sind andere Erhöhungswege gesperrt: Weder eine Anhebung auf die ortsübliche Vergleichsmiete (§ 558 BGB) noch eine Modernisierungsumlage (§ 559 BGB) ist zulässig — Ausnahme sind gesetzlich erzwungene Maßnahmen wie energetische Pflichtsanierungen. Anders als bei der Mietpreisbremse, deren Grenzen der <a href="/wohnen/mietpreisbremse-rechner">Mietpreisbremse-Rechner</a> abbildet, begrenzt bei der Indexmiete allein die Entwicklung des Preisindex die Miethöhe.</p>`,
       },
       {
         typ: 'infobox',
@@ -1877,7 +1877,7 @@ export const wohnenRechner: RechnerConfig[] = [
         punkte: [
           'Ist die Indexmiete im Mietvertrag ausdrücklich vereinbart? Ohne Klausel ist sie unwirksam.',
           'Liegen seit der letzten Anpassung mindestens zwölf Monate?',
-          'Ist die Erhöhung schriftlich erklärt und nennt sie den alten und den neuen VPI-Wert?',
+          'Ist die Erhöhung in Textform erklärt und nennt sie den alten und den neuen VPI-Wert?',
           'Stammen beide VPI-Werte aus derselben Indexreihe und demselben Basisjahr (2020 = 100)?',
           'Stimmt die Prozentrechnung — wurde nur der Gesamtindex verwendet, nicht ein Unterindex?',
           'Bezieht sich die Erhöhung nur auf die Kaltmiete, nicht auf die Nebenkosten?',
@@ -1888,7 +1888,7 @@ export const wohnenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Indexmiete aus Vermietersicht',
-        html: `<p>Für Vermieter ist die Indexmiete vor allem ein <strong>automatischer Inflationsausgleich</strong>: Die Miete folgt dem Preisindex, ohne dass ein Mietspiegel herangezogen oder eine Modernisierung begründet werden muss. Das spart Aufwand und vermeidet Streit über die ortsübliche Vergleichsmiete. Im Gegenzug bindet sich der Vermieter aber: Während der Indexbindung sind Erhöhungen nach § 558 und § 559 BGB ausgeschlossen, und bei einem sinkenden Index muss die Miete sogar gesenkt werden.</p><p>Pflicht ist die formgerechte Erklärung — schriftlich, mit altem und neuem VPI-Wert und unter Wahrung der zwölfmonatigen Mindestfrist. Fehlerhafte Erklärungen sind unwirksam und kosten bares Geld. Wer eine Wohnung als Kapitalanlage betrachtet, sollte die Indexmiete in die Renditebetrachtung einbeziehen; eine erste Einschätzung liefert der <a href="/wohnen/mietrendite-rechner">Mietrendite-Rechner</a>.</p>`,
+        html: `<p>Für Vermieter ist die Indexmiete vor allem ein <strong>automatischer Inflationsausgleich</strong>: Die Miete folgt dem Preisindex, ohne dass ein Mietspiegel herangezogen oder eine Modernisierung begründet werden muss. Das spart Aufwand und vermeidet Streit über die ortsübliche Vergleichsmiete. Im Gegenzug bindet sich der Vermieter aber: Während der Indexbindung sind Erhöhungen nach § 558 und § 559 BGB ausgeschlossen, und bei einem sinkenden Index muss die Miete sogar gesenkt werden.</p><p>Pflicht ist die formgerechte Erklärung — in Textform, mit altem und neuem VPI-Wert und unter Wahrung der zwölfmonatigen Mindestfrist. Fehlerhafte Erklärungen sind unwirksam und kosten bares Geld. Wer eine Wohnung als Kapitalanlage betrachtet, sollte die Indexmiete in die Renditebetrachtung einbeziehen; eine erste Einschätzung liefert der <a href="/wohnen/mietrendite-rechner">Mietrendite-Rechner</a>.</p>`,
       },
       {
         typ: 'checkliste',
@@ -1907,7 +1907,7 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'tipp',
         titel: 'Kurzfazit',
-        text: 'Die Indexmiete folgt der Inflation: In ruhigen Preisphasen steigt sie nur moderat, in Hochinflationsphasen dagegen schnell und ohne Kappungsgrenze. Für Mieter bedeutet das Planbarkeit bei stabilen Preisen, aber ein spürbares Risiko bei hoher Inflation; für Vermieter einen bequemen, aber bindenden Inflationsausgleich. Entscheidend ist in jedem Fall der korrekte VPI: Verwenden Sie den im Vertrag genannten Ausgangswert und den tagesaktuellen Monatswert von destatis.de, beide aus derselben Indexreihe. Die hier gezeigten VPI-Zahlen sind Beispielwerte (Stand März 2026) und kein tagesaktueller Live-Wert. Dieser Rechner liefert eine erste Orientierung und ersetzt keine Rechtsberatung — bei einer strittigen Mieterhöhung helfen der Deutsche Mieterbund oder eine Fachanwältin für Mietrecht.',
+        text: 'Die Indexmiete folgt der Inflation: In ruhigen Preisphasen steigt sie nur moderat, in Hochinflationsphasen dagegen schnell und ohne Kappungsgrenze. Für Mieter bedeutet das Planbarkeit bei stabilen Preisen, aber ein spürbares Risiko bei hoher Inflation; für Vermieter einen bequemen, aber bindenden Inflationsausgleich. Entscheidend ist in jedem Fall der korrekte VPI: Verwenden Sie den im Vertrag genannten Ausgangswert und den tagesaktuellen Monatswert von destatis.de, beide aus derselben Indexreihe. Die hier gezeigten VPI-Zahlen sind Beispielwerte (Dezember 2023 und August 2026) und kein tagesaktueller Live-Wert. Dieser Rechner liefert eine erste Orientierung und ersetzt keine Rechtsberatung — bei einer strittigen Mieterhöhung helfen der Deutsche Mieterbund oder eine Fachanwältin für Mietrecht.',
       },
     ],
     quellen: [
