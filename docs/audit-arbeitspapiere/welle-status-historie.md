@@ -6,6 +6,102 @@
 
 ---
 
+## 21.10.2026 — Welle 188: Kontrast nach WCAG 2.1 AA, hell und dunkel — ✅ ABGESCHLOSSEN 21.10.2026
+
+**Anlass:** Nebenbefund aus Welle 175 (Historie `62334c1`): Die neue Zeile im Nettolohn-Optimierer stand in
+`text-gray-500`, `CLAUDE.md` verlangt auf hellem Grund mindestens `text-gray-600`.
+
+**Messung** (laut Vorlage, am 20.10.2026 auf dem Stand nach Welle 187; alle 262 vorgerenderten Seiten, je hell und
+dunkel, axe-Regel `color-contrast`, axe-core 4.10, Chromium; in diesem Lauf nicht wiederholt):
+- **Hell vorher: 480 Verstöße auf 143 Seiten.** 324 davon `text-gray-500` auf `bg-blue-50` (4,4 : 1; auf
+  `bg-gray-100` laut Baseline von April nur 4,2 : 1). Dazu grüne Beträge in `text-green-600` (3,3 : 1), Rot auf roter
+  Tönung (4,4 : 1), Gelb, Orange, Text mit Deckkraft (`text-amber-700/70` u. a.) und weiße Schrift auf `-500`-Flächen
+  (Plaketten, `RadioToggleGroup` in Akzentfarbe: 2,1 : 1).
+- **Dunkel vorher: 5.507 Verstöße auf allen 262 Seiten**, vor allem aus gemeinsamen Teilen: Rechner-Zahlen in der
+  Fußzeile (`dark:text-gray-600`, 2,7 : 1), Logo „Rechen“ (`text-primary-600` ohne Dark-Variante, 2,7 : 1), „.de“,
+  „Fix gerechnet!“, Einheiten in den Eingabefeldern („€/Monat“, `text-gray-600` ohne Dark-Variante, 1,9 : 1),
+  Feedback-Knöpfe, „Anzeige“; dazu `dark:text-gray-500` an 99 Stellen und die dunklen Partnerfarben der Anzeigenbox auf
+  `dark:bg-gray-800` (1,4–3,9 : 1).
+- **Blog-Grafiken:** 549 SVG-Texte mit `fill="#9ca3af"` haben auf Weiß 2,5 : 1 (von Hand gerechnet; axe prüft
+  SVG-Text nicht). Der Skill `blog-builder` schrieb diesen Grauton vor.
+- **Nachher, gleiche Messung: hell 0, dunkel 0 Verstöße.** Eine Seite meldete im Gesamtlauf einmal Verstöße, weil das
+  CSS noch lud; drei Wiederholungen waren sauber.
+
+**Regeln** (Kommentare `// W188:` an den Einzelstellen):
+
+| Regel | Was | Stellen |
+|---|---|---|
+| R1 | helles `text-gray-500` → `text-gray-600`; fehlt im selben Klassen-String eine `dark:text-`-Farbe, kommt `dark:text-gray-400` dazu | 767 in 209 Dateien |
+| R1b | helles `text-gray-400` als Text → `text-gray-600 dark:text-gray-400` (Reifengröße „(alt)“, Leasingfaktor „(optional)“, Offline-Seite) | 3 |
+| R2 | `dark:text-gray-500` und `dark:text-gray-600` → `dark:text-gray-400` | 104 |
+| R3 | auf `dark:bg-gray-700` und dunkel getönten Karten (`dark:bg-gray-600/50`, Mietrendite, Pace-Tabellenkopf, Beschreibung in `RadioToggleGroup`) `dark:text-gray-300` | 39 |
+| R4 | Akzent-Text `-600` → `-700` (Grün, Orange, Amber/Akzent, Smaragd, Pink, Teal) | 155 |
+| R5 | helle Textfarbe ohne Dark-Variante → passende ergänzt (Grau, Primär, Rot, Grün …); nicht bei hellen Flächen ohne Dark-Variante und nicht auf farbigen Flächen | rund 200 |
+| R6 | Text mit Deckkraft (`text-amber-700/70`, `dark:text-emerald-400/60` …) → volle Farbe, hell `-800`, dunkel `-300` | 59 |
+| R7 | `dark:text-red-400` → `dark:text-red-300` (auf `gray-800`-Tönung 4,5 : 1) | 155 |
+| R8 | `text-red-600` → `text-red-700` (auf `red-50` 4,4 : 1) | 126 |
+| R9 | `text-yellow-600` → `text-yellow-800` | 5 |
+| Flächen | weiße Schrift auf `bg-*-500` → `-600`/`-700`: `RadioToggleGroup` Akzent, Mini-/Midijob-Status, Pfändung, Lieferservice, Alkohol-Abbau, Schwangerschaft-Gewicht; Partnerfarbe Teal `#0D9488` → `#0F766E` | 9 Dateien |
+| Einzelstellen | Anzeigenbox: Partnerfarbe nur hell (`text-[color:var(--marke)] dark:text-gray-100`); Backform-Beschriftung über Klassen statt `style={{ color }}`; Körperfett-Kategorien mit Dark-Varianten (auch `lib/berechnungen/koerperfett.ts`); Wahrer Stundenlohn `dark:bg-gray-750` gab es in Tailwind nicht → `dark:bg-gray-700/50`; Brutto-Netto-Balken „Sozial“; Opazität in Pflegegeld-/Rabatt-Knöpfen; Reifengröße „(neu)“ | — |
+| SVG | `app/globals.css`: `svg text[fill="#9ca3af"]` hell `#4b5563` (7,6 : 1), dunkel weiter `#9ca3af` | 1 Regel für 549 Texte |
+
+**Bewusst ausgenommen:**
+- `GefrierdauerRechner.tsx` hatte nie Dark-Varianten (helle Karten auch im Dark Mode); er bekommt nur die hellen Regeln
+  und einen Kommentar.
+- Rein dekorative Zeichen bleiben in `text-gray-300`/`-400` und stehen als Ausnahmen im Prüfskript: Pfeile, Trennpunkt,
+  leerer Stern, Doppelpunkt der Uhr, Live-Zähler auf `bg-gray-900`.
+
+**Neues Prüfskript `scripts/verify-textfarben.ts`** (läuft über `npm run verify:alle` mit, das jetzt 84 Skripte
+zählt): kein helles `text-gray-500` in `components/` und `app/`; helles `-300`/`-400` nur in den Ausnahmen;
+Ausnahmeliste aktuell; die beiden SVG-Regeln in `globals.css`; kein anderer Grauton als `#9ca3af` für SVG-Text im Blog.
+
+**`CLAUDE.md`, Abschnitt „Farb-Regeln“:** neue Regeln für Flächen mit weißer Schrift, farbige Beträge, Dark Mode und
+die axe-Gegenprobe.
+
+**Skills** (im Haupt-Repo versioniert, unter der Ignore-Regel; siehe `CLAUDE.md`, Welle 174):
+- `.claude/skills/rechner-builder/SKILL.md`: Hinweiszeile `text-gray-500` → `text-gray-600 dark:text-gray-400`.
+- `.claude/skills/blog-builder/SKILL.md`: Regel zum grauen Sekundärtext in SVG (`fill="#9ca3af"` im Markup,
+  `globals.css` setzt ihn hell auf `#4b5563`); Bildunterschrift und Datum `text-gray-500` → `text-gray-600`.
+- **Karsten zieht beide in Claude.ai nach.** Das private Skill-Repo unter `.claude/skills/` (eigenes `.git`) ignoriert
+  `blog-builder/` und `rechner-builder/` und blieb ohne Änderung.
+
+**Änderungen** (1042 Ersetzungen in 256 Dateien plus 1 neue Datei, Vorlage `_lokal/welle188-kontrast.mjs`, nicht
+committet). Keine Datumszeilen: Keine Seite ändert Inhalt oder Rechnung.
+
+**Bewusst nicht geändert:** `lib/rechner-config` (Texte und Daten), Bilder, Videos und `captions.json`,
+`tailwind.config.ts`, das private Skill-Repo unter `.claude/skills/`.
+
+**Grenzen der Messung:**
+- axe prüft den Startzustand jeder Seite. Zustände nach Eingaben, Fehlermeldungen, Hover und KI-Antworten sind nur über
+  die Regeln abgedeckt, nicht gemessen.
+- Nicht-Text-Kontrast (Symbole, Balken, Linien) ist nicht Teil dieser Welle.
+- SVG-Text ist von Hand gerechnet.
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten. Die axe-Messung selbst habe ich in diesem Lauf nicht wiederholt; geprüft sind
+  Regeln, Prüfskript und gebautes HTML.
+- `verify:alle` zusätzlich mit `TZ=UTC` wie die CI: in Phase 0 83/83, in Phase 2 84/84.
+
+**Gates:**
+- Phase 0 an `a47a2e1`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `a47a2e1` und `ee93f3c`
+  (Welle 187, Historie und Bilder); `git ls-files scripts/verify-textfarben.ts` keine Ausgabe. Greps `209`, `767`, `99`,
+  SVG-Regel in `globals.css` keine Ausgabe. `verify:alle` „Prüfskripte: 83/83 grün.“, Exit 0.
+- Phase 1: „OK — 1042 Ersetzungen in 256 Dateien, 1 neue Dateien.“, Exit 0; `git status` 257 Zeilen, neu nur
+  `?? scripts/verify-textfarben.ts`; unter `.claude` ` M .claude/skills/blog-builder/SKILL.md` und
+  ` M .claude/skills/rechner-builder/SKILL.md`; `lib/rechner-config`, `tailwind.config.ts`, `lib/social`, `public`
+  unverändert.
+- Phase 2: `verify:alle` „Prüfskripte: 84/84 grün.“, Exit 0. `verify-textfarben` sechs Häkchen, „Textfarben: 6/6 grün“,
+  Exit 0. Greps `0`, `0`, `app/globals.css:2`, `components/AffiliateBox.tsx:1`. `npm run lint` Exit 0, keine Zeile
+  „problems“. `npm run build` Rückgabewert 0, 271 Seiten (Lint im `prebuild` ohne Probleme). Im gebauten HTML
+  (264 Dateien unter `.next/server/app`) `text-gray-500` 0×, `dark:text-gray-(500|600)` 0×; auch in `.next/static`
+  keine Datei mit `text-gray-500`. `git status` danach gleich der Liste aus Phase 1.
+- Phase 3: `git add -u` plus `scripts/verify-textfarben.ts`, `git diff --cached --name-only` 257 (darin die beiden
+  Skill-Dateien), danach `git status` leer.
+
+**Commits:** A `fb5b228` (die 257 Dateien). B ist dieser Doku-Commit. Die Live-Probe (hell und dunkel) macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 187: Restbefunde der dritten und vierten Caption-Prüfung — Rechner, Seitentexte, Captions, Social-Kacheln und TikTok-Videos — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:**
