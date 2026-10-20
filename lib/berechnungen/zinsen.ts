@@ -57,16 +57,17 @@ export function berechneZinsen(eingabe: ZinsEingabe): ZinsErgebnis | null {
       kapital = kapitalAnfang + jahresRate + zinsen;
     }
 
-    zinsen = Math.round(zinsen * 100) / 100;
-    kapital = Math.round(kapital * 100) / 100;
+    // W177: Kapital ungerundet fortschreiben, gerundet wird nur die Ausgabe. Vorher wurde jedes Jahr auf
+    // den Cent gerundet; 10.000 € zu 3,5 % über 10 Jahre ergaben so 14.105,98 € statt 10.000 × 1,035¹⁰
+    // = 14.105,99 €, wie es Formel, Beispiel und Erklärtexte nennen.
     gesamtzinsen += zinsen;
 
     jahre.push({
       jahr: j,
       kapitalAnfang: Math.round(kapitalAnfang * 100) / 100,
       einzahlungen: jahresRate,
-      zinsen,
-      kapitalEnde: kapital,
+      zinsen: Math.round(zinsen * 100) / 100,
+      kapitalEnde: Math.round(kapital * 100) / 100,
     });
   }
 
@@ -74,7 +75,7 @@ export function berechneZinsen(eingabe: ZinsEingabe): ZinsErgebnis | null {
   gesamtzinsen = Math.round(gesamtzinsen * 100) / 100;
 
   return {
-    endkapital: kapital,
+    endkapital: Math.round(kapital * 100) / 100,
     gesamtzinsen,
     eigenkapital: Math.round(eigenkapital * 100) / 100,
     jahre,

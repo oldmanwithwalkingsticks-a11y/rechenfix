@@ -226,7 +226,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'zinsrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     zeigtAuthorBio: true,
     titel: 'Zinsrechner',
     beschreibung: 'Zinsen und Zinseszins berechnen: Mit Sparplan, Jahr-für-Jahr-Tabelle und Zinseszins-Vergleich.',
@@ -6300,7 +6300,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'spenden-rechner',
-    letzteAktualisierung: '2026-06-27',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Spenden-Rechner',
     beschreibung: 'Steuerersparnis durch Spenden berechnen: Wie viel bekommen Sie von Ihrer Spende über die Steuererklärung zurück?',
     kategorie: 'Finanzen',

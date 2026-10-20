@@ -47,9 +47,12 @@ export default function BackzeitRechner() {
     const tempZiel = parseDeutscheZahl(zielTemp);
     const faktor = parseDeutscheZahl(formFaktor);
 
-    // Bei Umluft: Umrechnung auf O/U-Äquivalent (+20 °C) für Vergleich
-    // Aber wenn Nutzer Umluft will, ist die Zieltemperatur bereits die Umluft-Temp
-    const tempDiff = tempOrig - tempZiel;
+    // Die Zeitanpassung richtet sich nach der Temperaturdifferenz auf Ober-/Unterhitze-Basis:
+    // Umluft-Temperatur + 20 °C entspricht O/U. W177: vorher tempOrig − tempZiel direkt — die
+    // üblichen −20 °C bei Umluft wurden so als Temperatursenkung gewertet (180 °C O/U, 45 Min →
+    // 160 °C Umluft ergab 57 statt 45 Min).
+    const tempZielAlsOU = zielHerdart === 'umluft' ? tempZiel + 20 : tempZiel;
+    const tempDiff = tempOrig - tempZielAlsOU;
 
     // Backzeit an Temperaturänderung anpassen: −10 °C → +5–8 Min, +10 °C → −5 Min
     let zeitZiel = zeitOrig + (tempDiff / 10) * 6; // 6 Min pro 10 °C Differenz

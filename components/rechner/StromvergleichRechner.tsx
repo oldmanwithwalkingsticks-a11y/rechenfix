@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneStromvergleich, HAUSHALTSGROESSEN } from '@/lib/berechnungen/stromvergleich';
+import { berechneStromvergleich, HAUSHALTSGROESSEN, GRUNDPREIS_VERGLEICH_MONAT } from '@/lib/berechnungen/stromvergleich';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -208,7 +208,7 @@ export default function StromvergleichRechner() {
             </div>
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               {HAUSHALTSGROESSEN.map(h => {
-                const typKosten = (h.verbrauch * 32 / 100) + (10 * 12);
+                const typKosten = (h.verbrauch * getStrompreis('durchschnitt_bdew') / 100) + (GRUNDPREIS_VERGLEICH_MONAT * 12);
                 return (
                   <div key={h.label} className="flex justify-between px-4 py-3 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">{h.label} ({h.verbrauch.toLocaleString('de-DE')} kWh)</span>

@@ -68,7 +68,7 @@ function berechneKiSt(est: number, kirchensteuer: boolean, bundesland: Bundeslan
  * @param splitting Splittingtarif (Verheiratete, Zusammenveranlagung)
  * @returns Marginal-Rate in Prozent (0–45)
  */
-function berechneGrenzsteuersatz(zvE: number, splitting: boolean): number {
+export function berechneGrenzsteuersatz(zvE: number, splitting: boolean): number {
   const T = TARIF_2026;
   const x = splitting ? zvE / 2 : zvE;
   if (x <= T.gfb) return 0;

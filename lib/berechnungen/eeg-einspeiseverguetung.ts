@@ -4,7 +4,7 @@
  * Rechtsgrundlage: § 48, § 49, § 53 EEG 2023.
  * Quelle: Bundesnetzagentur (BNetzA) EEG-Förderung & -Fördersätze, laufend
  *   aktualisiert · BSW-Solarwirtschaft Vergütungssätze-Übersicht 07/2025.
- * Stand: 04/2026.
+ * Stand: 10/2026 (Sätze ab 01.08.2026 von der BNetzA veröffentlicht, W177).
  *
  * Sätze werden halbjährlich um 1 % degressiv abgesenkt (§ 49 EEG 2023).
  * Schalt-Stichtage: 01.02. und 01.08. eines jeden Jahres.
@@ -48,7 +48,7 @@ interface EegBucket {
  * jüngsten Bucket ≤ Stichtag.
  */
 const SAETZE: EegBucket[] = [
-  // Aktuelles Halbjahr
+  // Inbetriebnahme 01.02.–31.07.2026
   {
     gueltigAb: '2026-02-01',
     werte: {
@@ -60,17 +60,18 @@ const SAETZE: EegBucket[] = [
       bis100kWp_voll: 10.35,
     },
   },
-  // Prognose ab 01.08.2026: planmäßige −1 %-Degression nach § 49 EEG 2023
+  // Ab 01.08.2026 (Inbetriebnahme bis 31.01.2027), Bundesnetzagentur. W177: vorher als Prognose
+  // 7,71 / 12,23 / 6,67 / 10,25 / 5,45 / 10,25 — je 0,01 ct zu hoch, weil die −1 % auf den gerundeten
+  // Vergütungssatz statt auf den ungerundeten anzulegenden Wert gerechnet waren (§ 49 EEG 2023).
   {
     gueltigAb: '2026-08-01',
-    prognose: true,
     werte: {
-      bis10kWp_teil: 7.71,
-      bis10kWp_voll: 12.23,
-      bis40kWp_teil: 6.67,
-      bis40kWp_voll: 10.25,
-      bis100kWp_teil: 5.45,
-      bis100kWp_voll: 10.25,
+      bis10kWp_teil: 7.70,
+      bis10kWp_voll: 12.22,
+      bis40kWp_teil: 6.66,
+      bis40kWp_voll: 10.24,
+      bis100kWp_teil: 5.44,
+      bis100kWp_voll: 10.24,
     },
   },
 ];

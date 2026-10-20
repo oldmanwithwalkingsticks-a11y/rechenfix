@@ -525,7 +525,7 @@ export const kochenRechner: RechnerConfig[] = [
   },
   {
     slug: 'backzeit-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Backzeit-Rechner',
     beschreibung: 'Backzeit und Temperatur anpassen: Umluft ↔ Ober-/Unterhitze, Gasmark, Formgröße, Faustregeln.',
     kategorie: 'Kochen & Ernährung',
@@ -1745,7 +1745,7 @@ export const kochenRechner: RechnerConfig[] = [
   },
   {
     slug: 'zucker-umrechner',
-    letzteAktualisierung: '2026-06-18',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Zucker-Umrechner',
     beschreibung: 'Zucker durch Honig, Ahornsirup, Stevia oder Erythrit ersetzen — mit Mengenangaben, Kalorien-Vergleich und Backtipps.',
     kategorie: 'Kochen & Ernährung',
@@ -1758,7 +1758,8 @@ export const kochenRechner: RechnerConfig[] = [
     // W19-Goldstandard: zucker-umrechner auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
     // „vergleich" 4× dominant (Zucker-vs-Honig, weiß-vs-braun, Erythrit-vs-Stevia, trocken-vs-
     // flüssig). Disjunkt zu cups/backform. Süßkraft-Faktoren aus dem Rechner gespiegelt
-    // (formel/beispiel): Honig 0,75, Stevia 0,005, Erythrit 1,3, Xylit/Kokos 1,0, Agave ~0,67.
+    // (formel/beispiel): Honig 0,75, Stevia 0,005, Erythrit 1,3, Xylit/Kokos/Ahornsirup 1,0, Agave ~0,67.
+    // Flüssigkeit: Honig 20 ml, Ahornsirup und Agave 25 ml je 100 g Ersatz (W177).
     // WELLBEING: rein Back-Eigenschaften (Süßkraft/Flüssigkeit/Bräunung/Volumen/Aroma), KEIN
     // Diät-/Abnehm-Frame, keine Gesundheitsversprechen — Erythrit/Stevia sachlich als Back-
     // Eigenschaft. erklaerung bleibt Fallback.
@@ -1786,7 +1787,7 @@ export const kochenRechner: RechnerConfig[] = [
         kopf: ['Süßungsmittel', 'Menge für 100 g Zucker', 'Backhinweis'],
         zeilen: [
           ['Honig', '~75 g (Faktor 0,75)', 'Flüssigkeit reduzieren, Ofen kühler'],
-          ['Ahornsirup', '~90–100 g (Richtwert)', 'Flüssigkeit reduzieren, kräftiges Aroma'],
+          ['Ahornsirup', '~100 g (Faktor 1,0, Richtwert)', 'süßt etwas schwächer, Flüssigkeit reduzieren, kräftiges Aroma'],
           ['Agavendicksaft', '~65–70 g', 'sehr süß, neutral, Flüssigkeit reduzieren'],
           ['Kokosblütenzucker', '~100 g (1:1)', 'karamellartig, bräunt dunkler'],
           ['Xylit', '~100 g (1:1)', 'verhält sich fast wie Zucker'],
@@ -1827,10 +1828,10 @@ export const kochenRechner: RechnerConfig[] = [
         titel: '200 g Zucker durch Ahornsirup ersetzen',
         schritte: [
           { label: 'Zuckermenge', formel: '200 g', ergebnis: '200 g' },
-          { label: 'Ahornsirup (Süßkraft ≈ Zucker, Richtwert)', formel: '≈ 1:1, etwas mehr für volle Süße', ergebnis: '≈ 180–200 g' },
+          { label: 'Ahornsirup (Richtwert 1:1 nach Gewicht)', formel: '200 g × 1,0', ergebnis: '≈ 200 g' },
           { label: 'Ahornsirup enthält ~30 % Wasser', formel: '→ übrige Flüssigkeit reduzieren', ergebnis: 'Flüssigkeit − ~50 ml' },
         ],
-        fazit: 'Ahornsirup süßt etwa wie Zucker, bringt aber rund ein Drittel Wasser mit. Für 200 g Zucker rechnet man grob 180–200 g Ahornsirup und reduziert die übrige Flüssigkeit um etwa 50 ml. Das typisch malzig-karamellige Aroma bleibt im Gebäck deutlich schmeckbar — anders als bei neutralem Zucker.',
+        fazit: 'Ahornsirup süßt pro Gramm etwas schwächer als Zucker und bringt rund ein Drittel Wasser mit. Als Richtwert ersetzt man 200 g Zucker durch etwa 200 g Ahornsirup — wer es süßer mag, nimmt etwas mehr — und reduziert die übrige Flüssigkeit um etwa 50 ml. Das typisch malzig-karamellige Aroma bleibt im Gebäck deutlich schmeckbar — anders als bei neutralem Zucker.',
       },
       {
         typ: 'vergleich',

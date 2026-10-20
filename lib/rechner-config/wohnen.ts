@@ -146,7 +146,7 @@ export const wohnenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie wirkt sich Photovoltaik-Eigenverbrauch auf die Stromkosten aus?',
-        antwort: 'Eine PV-Anlage senkt die Stromkosten in zwei Schritten: Erstens durch direkten Eigenverbrauch des erzeugten Stroms (statt Bezug aus dem Netz, gespart wird der volle Endkundenpreis von 37 ct/kWh), zweitens durch Einspeisevergütung des Überschusses (aktuell 7,78 ct/kWh für Anlagen bis 10 kWp Teilüberschuss, Stand 04/2026). Eine typische 6-kWp-Anlage in Süddeutschland erzeugt 5.500–6.500 kWh/Jahr; ohne Speicher liegt der Eigenverbrauchsanteil bei 25–35 % (etwa 1.700 kWh selbst genutzt), mit Speicher steigt er auf 60–75 % (3.500–4.500 kWh). Bei einem 4-Personen-Haushalt mit 4.000 kWh Jahresverbrauch und Speicher-Anlage decken die Anlage rund 60–70 % des eigenen Verbrauchs — Stromkosten sinken auf rund 600 € (statt 1.480 € ohne PV), zusätzlich gibt es 200–400 € Einspeisevergütung. Die Wirtschaftlichkeit hängt stark vom Speicherpreis und der Eigenverbrauchsquote ab.',
+        antwort: 'Eine PV-Anlage senkt die Stromkosten in zwei Schritten: Erstens durch direkten Eigenverbrauch des erzeugten Stroms (statt Bezug aus dem Netz, gespart wird der volle Endkundenpreis von 37 ct/kWh), zweitens durch Einspeisevergütung des Überschusses (7,70 ct/kWh für Anlagen bis 10 kWp mit Teileinspeisung bei Inbetriebnahme ab 01.08.2026). Eine typische 6-kWp-Anlage in Süddeutschland erzeugt 5.500–6.500 kWh/Jahr; ohne Speicher liegt der Eigenverbrauchsanteil bei 25–35 % (etwa 1.700 kWh selbst genutzt), mit Speicher steigt er auf 60–75 % (3.500–4.500 kWh). Bei einem 4-Personen-Haushalt mit 4.000 kWh Jahresverbrauch und Speicher-Anlage decken die Anlage rund 60–70 % des eigenen Verbrauchs — Stromkosten sinken auf rund 600 € (statt 1.480 € ohne PV), zusätzlich gibt es 200–400 € Einspeisevergütung. Die Wirtschaftlichkeit hängt stark vom Speicherpreis und der Eigenverbrauchsquote ab.',
       },
       {
         frage: 'Was sind dynamische Stromtarife und für wen lohnen sie sich?',
@@ -1403,7 +1403,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'stromvergleich-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Stromvergleich-Rechner',
     beschreibung: 'Stromanbieter vergleichen: Aktuelle Kosten berechnen, Sparpotenzial ermitteln und günstigere Tarife finden.',
     kategorie: 'Wohnen & Energie',
@@ -2108,7 +2108,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'photovoltaik-rechner',
-    letzteAktualisierung: '2026-06-28',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Photovoltaik-Rechner',
     beschreibung: 'Photovoltaik-Anlage berechnen: Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation Ihrer Solaranlage.',
     kategorie: 'Wohnen & Energie',
@@ -2117,7 +2117,7 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Photovoltaik berechnen: Ertrag, Eigenverbrauch, Einspeisevergütung und Amortisation ✓ Mit/ohne Speicher ✓ CO₂-Ersparnis ✓ KI-Erklärung.',
     keywords: ['photovoltaik rechner', 'pv rechner', 'solaranlage berechnen', 'einspeisevergütung 2026', 'photovoltaik amortisation', 'solarrechner', 'pv ertrag berechnen', 'batteriespeicher rechner'],
     icon: '☀️',
-    beispiel: 'Eine 8 kWp-Anlage auf einem Süddach (30°) erzeugt ca. 6.800 kWh pro Jahr. Bei 30 % Eigenverbrauch und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026) entstehen ca. 673 € Ersparnis plus rund 370 € Einspeisung (7,78 ct/kWh) = ca. 1.043 € Jahresertrag.',
+    beispiel: 'Eine 8 kWp-Anlage auf einem Süddach (30°) erzeugt ca. 6.800 kWh pro Jahr. Bei 30 % Eigenverbrauch und 33 ct/kWh Strompreis (Festpreis-Neuvertrag 2026) entstehen ca. 673 € Ersparnis plus rund 367 € Einspeisung (7,70 ct/kWh bei Inbetriebnahme ab 01.08.2026) = ca. 1.040 € Jahresertrag.',
     faq: [
       {
         frage: 'Wie viel Strom produziert eine PV-Anlage?',
@@ -2129,7 +2129,7 @@ export const wohnenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie hoch ist die Einspeisevergütung 2026?',
-        antwort: 'Für Anlagen mit Inbetriebnahme zwischen 01.02.2026 und 31.07.2026 beträgt die Einspeisevergütung 7,78 ct/kWh bis 10 kWp und 6,73 ct/kWh für Anteile von 10 bis 40 kWp (Teileinspeisung mit Eigenverbrauch). Bei Volleinspeisung sind es 12,34 bzw. 10,35 ct/kWh. Maßgeblich ist der Satz zum Inbetriebnahme-Zeitpunkt — er gilt 20 Jahre lang. Halbjährliche Degression um 1 % zum 01.02. und 01.08. nach § 49 EEG 2023. Aktuelle Werte: Bundesnetzagentur.',
+        antwort: 'Für Anlagen mit Inbetriebnahme zwischen 01.08.2026 und 31.01.2027 beträgt die Einspeisevergütung 7,70 ct/kWh bis 10 kWp und 6,66 ct/kWh für Anteile von 10 bis 40 kWp (Teileinspeisung mit Eigenverbrauch). Bei Volleinspeisung sind es 12,22 bzw. 10,24 ct/kWh. Für Inbetriebnahmen von Februar bis Juli 2026 galten 7,78 ct/kWh (Teil) und 12,34 ct/kWh (Voll) bis 10 kWp. Maßgeblich ist der Satz zum Inbetriebnahme-Zeitpunkt — er gilt 20 Jahre lang. Halbjährliche Degression um 1 % zum 01.02. und 01.08. nach § 49 EEG 2023. Aktuelle Werte: Bundesnetzagentur.',
       },
       {
         frage: 'Lohnt sich ein Batteriespeicher?',
@@ -2148,19 +2148,19 @@ export const wohnenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum sich Photovoltaik 2026 vor allem über den Eigenverbrauch lohnt',
-        html: `<p>Eine Photovoltaik-Anlage rechnet sich 2026 in erster Linie über den <strong>Eigenverbrauch</strong>, nicht über die Einspeisung. Jede selbst genutzte Kilowattstunde spart den vollen Haushaltsstrompreis von rund 33 ct, während für eingespeisten Überschuss nur 7,78 ct vergütet werden — der Eigenverbrauch ist also vier- bis fünfmal so wertvoll. Wer Strom dann verbraucht, wenn die Sonne scheint, holt aus derselben Anlage spürbar mehr heraus.</p><p>Dieser Rechner schätzt für Ihre Anlagengröße, Ausrichtung und Dachneigung den Jahresertrag, teilt ihn in Eigenverbrauch und Einspeisung auf und ermittelt daraus die Stromkosten-Ersparnis, die Einspeisevergütung, die CO₂-Einsparung und eine grobe Amortisationsdauer. Die nutzbare Dachfläche bestimmen Sie vorab mit dem <a href="/wohnen/dachflaechen-rechner">Dachflächen-Rechner</a>, Ihren tatsächlichen Stromverbrauch mit dem <a href="/wohnen/stromkosten-rechner">Stromkosten-Rechner</a>. Alle Werte sind Planungs-Richtwerte für die erste Orientierung — die verbindliche Auslegung übernimmt ein Fachbetrieb vor Ort. So sehen Sie auf einen Blick, ob sich die Investition für Ihr Dach und Ihren Verbrauch lohnt und welche Anlagengröße sinnvoll ist.</p>`,
+        html: `<p>Eine Photovoltaik-Anlage rechnet sich 2026 in erster Linie über den <strong>Eigenverbrauch</strong>, nicht über die Einspeisung. Jede selbst genutzte Kilowattstunde spart den vollen Haushaltsstrompreis von rund 33 ct, während für eingespeisten Überschuss nur 7,70 ct vergütet werden — der Eigenverbrauch ist also vier- bis fünfmal so wertvoll. Wer Strom dann verbraucht, wenn die Sonne scheint, holt aus derselben Anlage spürbar mehr heraus.</p><p>Dieser Rechner schätzt für Ihre Anlagengröße, Ausrichtung und Dachneigung den Jahresertrag, teilt ihn in Eigenverbrauch und Einspeisung auf und ermittelt daraus die Stromkosten-Ersparnis, die Einspeisevergütung, die CO₂-Einsparung und eine grobe Amortisationsdauer. Die nutzbare Dachfläche bestimmen Sie vorab mit dem <a href="/wohnen/dachflaechen-rechner">Dachflächen-Rechner</a>, Ihren tatsächlichen Stromverbrauch mit dem <a href="/wohnen/stromkosten-rechner">Stromkosten-Rechner</a>. Alle Werte sind Planungs-Richtwerte für die erste Orientierung — die verbindliche Auslegung übernimmt ein Fachbetrieb vor Ort. So sehen Sie auf einen Blick, ob sich die Investition für Ihr Dach und Ihren Verbrauch lohnt und welche Anlagengröße sinnvoll ist.</p>`,
       },
       {
         typ: 'tabelle',
         titel: 'Einspeisevergütung 2026 nach Anlagengröße',
         kopf: ['Anlagenteil', 'Überschuss (Teileinspeisung)', 'Volleinspeisung'],
         zeilen: [
-          ['bis 10 kWp', '7,78 ct/kWh', '12,34 ct/kWh'],
-          ['10 bis 40 kWp', '6,73 ct/kWh', '10,35 ct/kWh'],
-          ['40 bis 100 kWp', '5,50 ct/kWh', '10,35 ct/kWh'],
-          ['ab 01.08.2026 (Prognose)', 'ca. 7,70 ct/kWh', 'ca. 12,22 ct/kWh'],
+          ['bis 10 kWp', '7,70 ct/kWh', '12,22 ct/kWh'],
+          ['10 bis 40 kWp', '6,66 ct/kWh', '10,24 ct/kWh'],
+          ['40 bis 100 kWp', '5,44 ct/kWh', '10,24 ct/kWh'],
+          ['bis 10 kWp, Inbetriebnahme 01.02.–31.07.2026', '7,78 ct/kWh', '12,34 ct/kWh'],
         ],
-        fussnote: 'Die Sätze gelten für Anlagen mit Inbetriebnahme zwischen dem 01.02. und 31.07.2026 und sind ab Inbetriebnahme für 20 Jahre plus das restliche Inbetriebnahme-Jahr fest garantiert. „Überschuss" meint Teileinspeisung mit Eigenverbrauch — der Normalfall am Eigenheim. Volleinspeisung lohnt nur ohne nennenswerten Eigenverbrauch. Bei mehreren Leistungsstufen wird anteilig vergütet: Die ersten 10 kWp einer 15-kWp-Anlage erhalten 7,78 ct, die restlichen 5 kWp 6,73 ct. Nach § 49 EEG 2023 sinken die Sätze halbjährlich zum 01.02. und 01.08. um rund 1 %. Maßgeblich ist immer der Satz am Tag der Inbetriebnahme und gilt anschließend unverändert für die gesamten 20 Jahre. Die aktuellen Werte veröffentlicht die Bundesnetzagentur quartalsweise.',
+        fussnote: 'Die Sätze gelten für Anlagen mit Inbetriebnahme zwischen dem 01.08.2026 und 31.01.2027 und sind ab Inbetriebnahme für 20 Jahre plus das restliche Inbetriebnahme-Jahr fest garantiert. „Überschuss" meint Teileinspeisung mit Eigenverbrauch — der Normalfall am Eigenheim. Volleinspeisung lohnt nur ohne nennenswerten Eigenverbrauch. Bei mehreren Leistungsstufen wird anteilig vergütet: Die ersten 10 kWp einer 15-kWp-Anlage erhalten 7,70 ct, die restlichen 5 kWp 6,66 ct. Nach § 49 EEG 2023 sinken die Sätze halbjährlich zum 01.02. und 01.08. um rund 1 %. Maßgeblich ist immer der Satz am Tag der Inbetriebnahme und gilt anschließend unverändert für die gesamten 20 Jahre. Die aktuellen Werte veröffentlicht die Bundesnetzagentur quartalsweise.',
       },
       {
         typ: 'beispielrechnung',
@@ -2169,11 +2169,11 @@ export const wohnenRechner: RechnerConfig[] = [
           { label: 'Jahresertrag', formel: '8 kWp × 850 kWh × 1,00 × 1,00', ergebnis: '6.800 kWh' },
           { label: 'Eigenverbrauch (30 %)', formel: '6.800 kWh × 0,30', ergebnis: '2.040 kWh' },
           { label: 'Stromkosten-Ersparnis', formel: '2.040 kWh × 33 ct', ergebnis: '673 €' },
-          { label: 'Einspeisung (70 %)', formel: '4.760 kWh × 7,78 ct', ergebnis: '370 €' },
-          { label: 'Jahres-Nutzen gesamt', formel: '673 € + 370 €', ergebnis: '1.043 €' },
+          { label: 'Einspeisung (70 %)', formel: '4.760 kWh × 7,70 ct', ergebnis: '367 €' },
+          { label: 'Jahres-Nutzen gesamt', formel: '673 € + 367 €', ergebnis: '1.040 €' },
           { label: 'CO₂-Einsparung', formel: '6.800 kWh × 0,38 kg', ergebnis: '≈ 2,6 t' },
         ],
-        fazit: 'Die 8-kWp-Anlage liefert auf einem optimal ausgerichteten Süddach rund 6.800 kWh im Jahr. Bei einer typischen Eigenverbrauchsquote von 30 % ohne Speicher nutzt der Haushalt davon 2.040 kWh selbst und spart so 673 € Stromkosten. Die übrigen 4.760 kWh fließen ins Netz und bringen 370 € Einspeisevergütung — zusammen rund 1.043 € Nutzen pro Jahr. Deutlich sichtbar: Der kleinere, selbst genutzte Anteil bringt mehr Geld als die größere eingespeiste Menge. Ein Batteriespeicher oder eine Wärmepumpe würde die Eigenverbrauchsquote anheben und den Jahres-Nutzen weiter steigern.',
+        fazit: 'Die 8-kWp-Anlage liefert auf einem optimal ausgerichteten Süddach rund 6.800 kWh im Jahr. Bei einer typischen Eigenverbrauchsquote von 30 % ohne Speicher nutzt der Haushalt davon 2.040 kWh selbst und spart so 673 € Stromkosten. Die übrigen 4.760 kWh fließen ins Netz und bringen 367 € Einspeisevergütung — zusammen rund 1.040 € Nutzen pro Jahr. Deutlich sichtbar: Der kleinere, selbst genutzte Anteil bringt mehr Geld als die größere eingespeiste Menge. Ein Batteriespeicher oder eine Wärmepumpe würde die Eigenverbrauchsquote anheben und den Jahres-Nutzen weiter steigern.',
       },
       {
         typ: 'tabelle',
@@ -2192,7 +2192,7 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Eigenverbrauch schlägt Einspeisung',
-        text: 'Der größte Hebel für die Wirtschaftlichkeit ist die Eigenverbrauchsquote. Eine selbst genutzte Kilowattstunde spart rund 33 ct Haushaltsstrom, eine eingespeiste bringt nur 7,78 ct — der Eigenverbrauch ist gut viermal so wertvoll. Ohne Speicher liegt die Quote meist bei 25–35 %, mit einem 5–10-kWh-Batteriespeicher steigt sie auf 55–75 %, in Kombination mit Wärmepumpe oder E-Auto auf bis zu 85 %. Die Quote lässt sich auch ohne Speicher heben: Wasch- und Spülmaschine sowie Trockner tagsüber laufen lassen, das E-Auto mit Sonnenüberschuss laden und die Warmwasserbereitung in die Mittagsstunden legen. Ob sich ein Speicher rechnet, hängt vom Strompreis und Ihrem Abendverbrauch ab — als Faustregel lohnt er sich ab etwa 30 ct/kWh. Wichtig ist nicht eine möglichst große, sondern eine zum Verbrauch passende Anlage: Strom, der nur für 7,78 ct ins Netz geht, bringt wenig zusätzlichen Nutzen.',
+        text: 'Der größte Hebel für die Wirtschaftlichkeit ist die Eigenverbrauchsquote. Eine selbst genutzte Kilowattstunde spart rund 33 ct Haushaltsstrom, eine eingespeiste bringt nur 7,70 ct — der Eigenverbrauch ist gut viermal so wertvoll. Ohne Speicher liegt die Quote meist bei 25–35 %, mit einem 5–10-kWh-Batteriespeicher steigt sie auf 55–75 %, in Kombination mit Wärmepumpe oder E-Auto auf bis zu 85 %. Die Quote lässt sich auch ohne Speicher heben: Wasch- und Spülmaschine sowie Trockner tagsüber laufen lassen, das E-Auto mit Sonnenüberschuss laden und die Warmwasserbereitung in die Mittagsstunden legen. Ob sich ein Speicher rechnet, hängt vom Strompreis und Ihrem Abendverbrauch ab — als Faustregel lohnt er sich ab etwa 30 ct/kWh. Wichtig ist nicht eine möglichst große, sondern eine zum Verbrauch passende Anlage: Strom, der nur für 7,70 ct ins Netz geht, bringt wenig zusätzlichen Nutzen.',
       },
       {
         typ: 'vergleich',
@@ -2201,7 +2201,7 @@ export const wohnenRechner: RechnerConfig[] = [
         spalteB: 'Volleinspeisung',
         zeilen: [
           { kriterium: 'Prinzip', a: 'Eigenverbrauch zuerst, nur Überschuss ins Netz', b: 'der gesamte Strom wird eingespeist' },
-          { kriterium: 'Satz bis 10 kWp', a: '7,78 ct/kWh', b: '12,34 ct/kWh' },
+          { kriterium: 'Satz bis 10 kWp', a: '7,70 ct/kWh', b: '12,22 ct/kWh' },
           { kriterium: 'Wirtschaftlichkeit', a: 'meist höher durch ~33 ct Ersparnis je kWh', b: 'nur ohne nennenswerten Eigenverbrauch sinnvoll' },
           { kriterium: 'Typischer Fall', a: 'Eigenheim mit Tagesverbrauch', b: 'Zweitdach, reine Investitionsanlage' },
           { kriterium: 'Festlegung', a: 'flexibel, der Standardfall', b: 'vorab dem Netzbetreiber zu melden' },
@@ -2257,7 +2257,7 @@ export const wohnenRechner: RechnerConfig[] = [
       },
     ],
     quellen: [
-      { titel: 'Bundesnetzagentur — EEG-Fördersätze (Stand 04/2026)', hinweis: 'Einspeisevergütung bis 10 kWp 7,78 ct/kWh (Teil) / 12,34 ct (Voll), gültig 01.02.–31.07.2026; halbjährliche Degression −1 % (§ 49 EEG 2023); 20 Jahre fest ab Inbetriebnahme.' },
+      { titel: 'Bundesnetzagentur — EEG-Fördersätze (Stand 08/2026)', hinweis: 'Einspeisevergütung bis 10 kWp 7,70 ct/kWh (Teil) / 12,22 ct (Voll), gültig für Inbetriebnahme 01.08.2026–31.01.2027; halbjährliche Degression −1 % (§ 49 EEG 2023); 20 Jahre fest ab Inbetriebnahme.' },
       { titel: 'BDEW-Strompreisanalyse 04/2026', hinweis: 'Festpreis-Neuvertrag ~33 ct/kWh (Eigenverbrauchs-Ersparnis); Durchschnitt 37 ct/kWh.' },
       { titel: 'PV-Ertragsmodell (Mertens „Photovoltaik" / energie-experten, Stand 04/2026)', hinweis: 'Basisertrag 850 kWh/kWp/Jahr (Süd/optimal); Ertrag = kWp × 850 × Ausrichtungs- × Neigungsfaktor.' },
       { titel: 'EEG 2023 / Solarspitzengesetz', hinweis: 'Steuerfreiheit bis 30 kWp; Marktstammdatenregister-Pflicht; 60-%-Drosselung ohne Smart Meter; geplante EEG-Reform ab ~2027 (Stand 2026 nicht beschlossen).' },

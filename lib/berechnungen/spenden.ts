@@ -4,6 +4,7 @@ import {
   berechneKirchensteuerByBundesland,
   type Bundesland,
 } from './einkommensteuer';
+import { berechneGrenzsteuersatz } from './steuerprogression';
 
 export interface SpendenErgebnis {
   spendenbetrag: number;
@@ -30,10 +31,11 @@ export function berechneSpendenErsparnis(
   const maxAbsetzbar = Math.round(zvE * 0.2);
   const tatsaechlichAbsetzbar = Math.min(spendenbetrag, maxAbsetzbar);
 
-  // Grenzsteuersatz: finite Differenz aus zentralem § 32a-Tarif
+  // Grenzsteuersatz analytisch aus dem § 32a-Tarif (Grundtarif), wie im Steuerprogressions-Rechner.
+  // W177: Vorher (ESt(zvE) − ESt(zvE − 1)) × 100 — die ESt ist auf volle Euro abgerundet, die Differenz
+  // ist daher 0 oder 1 € und der Satz 0 % oder 100 % (bei 50.000 € zvE: 100 % statt 35 %).
   const estVoll = berechneEStGrund(zvE, 2026);
-  const estVollMinus1 = berechneEStGrund(zvE - 1, 2026);
-  const grenzsteuersatz = (estVoll - estVollMinus1) * 100;
+  const grenzsteuersatz = berechneGrenzsteuersatz(zvE, false);
 
   // ESt-Ersparnis: ESt(zvE) − ESt(zvE − absetzbar)
   const estNachSpende = berechneEStGrund(zvE - tatsaechlichAbsetzbar, 2026);

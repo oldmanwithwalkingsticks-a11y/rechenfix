@@ -112,8 +112,12 @@ cases.push({ name: 'EEG 04/2026 NICHT Prognose', actual: eeg.prognose, expected:
 
 // EEG halbjährlicher Switch zum 01.08.2026
 const eegAug = getEegSatz(new Date('2026-08-15'));
-cases.push({ name: 'EEG ab 01.08.2026 als Prognose markiert', actual: eegAug.prognose, expected: true, quelle: '§ 49 EEG 2023' });
-cases.push({ name: 'EEG 08/2026 bis 10 kWp Teil → 7,71 ct (−1 %)', actual: eegAug.bis10kWp_teil, expected: 7.71, quelle: 'planm. Degression' });
+cases.push({ name: 'EEG ab 01.08.2026 bestätigt, keine Prognose', actual: eegAug.prognose, expected: false, quelle: 'BNetzA 01.08.2026' });
+cases.push({ name: 'EEG 08/2026 bis 10 kWp Teil → 7,70 ct', actual: eegAug.bis10kWp_teil, expected: 7.70, quelle: 'BNetzA 01.08.2026' });
+cases.push({ name: 'EEG 08/2026 bis 10 kWp Voll → 12,22 ct', actual: eegAug.bis10kWp_voll, expected: 12.22, quelle: 'BNetzA 01.08.2026' });
+cases.push({ name: 'EEG 08/2026 10–40 kWp Teil → 6,66 ct', actual: eegAug.bis40kWp_teil, expected: 6.66, quelle: 'BNetzA 01.08.2026' });
+cases.push({ name: 'EEG 08/2026 10–40 kWp Voll → 10,24 ct', actual: eegAug.bis40kWp_voll, expected: 10.24, quelle: 'BNetzA 01.08.2026' });
+cases.push({ name: 'EEG 08/2026 40–100 kWp Teil → 5,44 ct', actual: eegAug.bis100kWp_teil, expected: 5.44, quelle: 'BNetzA 01.08.2026' });
 
 // Mischvergütung 8 kWp → reiner bis10-Satz
 cases.push({ name: 'EEG 8 kWp Misch (Teil) → 7,78 ct', actual: getMischVerguetung(8, 'teil', new Date('2026-04-25')), expected: 7.78, tol: 0.005, quelle: 'unter 10 kWp = bis10-Satz' });

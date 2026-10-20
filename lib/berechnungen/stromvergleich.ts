@@ -1,3 +1,16 @@
+import { getStrompreis } from './strompreis';
+
+/**
+ * Vergleichstarife aus der Strompreis-SSOT (lib/berechnungen/strompreis.ts).
+ * W177: vorher fest 32 ct + 10 € (Durchschnitt) und 28 ct + 9 € (günstigster Tarif) — Werte, die
+ * weder zum BDEW-Mittel 2026 (37 ct) noch zum typischen Festpreis-Neukundentarif (33 ct) passten,
+ * die Beispiel und FAQ dieser Seite nennen.
+ */
+export const GRUNDPREIS_VERGLEICH_MONAT = 10;
+/** Annahme für Ökostrom-Tarife: Arbeitspreis +2 ct/kWh, Grundpreis +1 €/Monat. */
+export const OEKOSTROM_AUFSCHLAG_CT = 2;
+export const OEKOSTROM_AUFSCHLAG_GRUNDPREIS = 1;
+
 export interface StromvergleichEingabe {
   verbrauchKwh: number;
   arbeitspreisCtKwh: number;
@@ -30,12 +43,15 @@ function jahreskosten(verbrauch: number, arbeitspreisCtKwh: number, grundpreisMo
 export function berechneStromvergleich(e: StromvergleichEingabe): StromvergleichErgebnis {
   const aktuellJahr = jahreskosten(e.verbrauchKwh, e.arbeitspreisCtKwh, e.grundpreisMonat);
 
-  const dsAp = e.oekostrom ? 34 : 32;
-  const dsGp = e.oekostrom ? 11 : 10;
+  const aufAp = e.oekostrom ? OEKOSTROM_AUFSCHLAG_CT : 0;
+  const aufGp = e.oekostrom ? OEKOSTROM_AUFSCHLAG_GRUNDPREIS : 0;
+
+  const dsAp = getStrompreis('durchschnitt_bdew') + aufAp;
+  const dsGp = GRUNDPREIS_VERGLEICH_MONAT + aufGp;
   const durchschnittJahr = jahreskosten(e.verbrauchKwh, dsAp, dsGp);
 
-  const gAp = e.oekostrom ? 30 : 28;
-  const gGp = e.oekostrom ? 10 : 9;
+  const gAp = getStrompreis('neukunden_festpreis') + aufAp;
+  const gGp = GRUNDPREIS_VERGLEICH_MONAT + aufGp;
   const guenstigsterJahr = jahreskosten(e.verbrauchKwh, gAp, gGp);
 
   const sparpotenzialJahr = Math.max(aktuellJahr - guenstigsterJahr, 0);

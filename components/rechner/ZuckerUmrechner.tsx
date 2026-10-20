@@ -16,7 +16,7 @@ interface Suessungsmittel {
   faktor: number;        // Menge relativ zu 100g Zucker
   kcal: number;          // pro 100g
   fluessig: boolean;
-  fluessKorrektur: number; // ml Flüssigkeitsreduktion pro 100g Ersatz
+  fluessKorrektur: number; // ml Flüssigkeitsreduktion je g Ersatz (0,2 = 20 ml je 100 g)
   backhinweis: string;
   kochhinweis: string;
 }
@@ -28,17 +28,17 @@ const SUESSUNGSMITTEL: Record<SuessKey, Suessungsmittel> = {
     faktor: 0.75,
     kcal: 304,
     fluessig: true,
-    fluessKorrektur: 0.4,  // 40% von Honigmenge als Flüssigkeitsreduktion
+    fluessKorrektur: 0.2,  // Honig enthält ~18–20 % Wasser → 20 % der Honigmenge als Flüssigkeitsreduktion (W177, vorher 40 %)
     backhinweis: 'Ofen 10–15 °C kühler stellen (Honig karamellisiert früher). Teig bleibt feuchter — Backzeit prüfen.',
     kochhinweis: 'Honig erst am Ende des Kochens hinzufügen, da Hitze Aromastoffe zerstört.',
   },
   ahornsirup: {
     name: 'Ahornsirup',
     icon: '🍁',
-    faktor: 0.75,
+    faktor: 1.0,           // Richtwert 1:1 nach Gewicht; Ahornsirup süßt etwas schwächer als Zucker (W177, vorher 0,75)
     kcal: 260,
     fluessig: true,
-    fluessKorrektur: 0.4,
+    fluessKorrektur: 0.25, // ~30 % Wasser, Faustregel 20–30 ml je 100 g (W177, vorher 40 %)
     backhinweis: 'Ähnlich wie Honig: Ofen leicht kühler, Flüssigkeit reduzieren. Ergibt eine weiche Krume.',
     kochhinweis: 'Sehr gutes Ersatzmittel beim Kochen und in Dressings — milder Karamellgeschmack.',
   },
@@ -48,7 +48,7 @@ const SUESSUNGSMITTEL: Record<SuessKey, Suessungsmittel> = {
     faktor: 0.67,
     kcal: 310,
     fluessig: true,
-    fluessKorrektur: 0.35,
+    fluessKorrektur: 0.25, // Faustregel 20–30 ml je 100 g flüssiges Süßungsmittel (W177, vorher 35 %)
     backhinweis: 'Agave ist 1,5× süßer als Zucker. Weniger verwenden, Flüssigkeit anpassen. Geringe Backtemperatur empfehlenswert.',
     kochhinweis: 'Neutral im Geschmack, gut für Saucen und Marinaden. Löst sich gut in kalten Flüssigkeiten.',
   },
