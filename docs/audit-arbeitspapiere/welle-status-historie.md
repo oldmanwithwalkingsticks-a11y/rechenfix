@@ -6,6 +6,102 @@
 
 ---
 
+## 20.10.2026 — Welle 183: Arbeit und Soziales — Steuerklassen-Vergleich, Grundsicherungsgeld, Kurzarbeitergeld, Midijob, Riester, AfA, Krankengeld, Elterngeld — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Zweite Caption-Prüfung. Acht Rechner aus Arbeit und Soziales rechneten selbst falsch oder hatten falsche
+Texte. Die Captions folgen in Welle 187.
+
+**Rechtslage** (in diesem Lauf nicht erneut an den Normtexten geprüft; Werte aus der Vorlage): § 39f, § 46 Abs. 2
+Nr. 3a, § 7 Abs. 2 und 5a, §§ 10a, 85, 86 EStG; § 11b SGB II; § 8 Abs. 1a SGB IV; 4. KugBeV vom 17.12.2025; § 20
+Abs. 2a SGB IV; § 170 SGB VI, § 347 SGB III, §§ 55, 59 SGB XI; § 4 BEEG.
+
+**Die acht Rechner** (Startwerte, soweit nicht anders genannt):
+
+| Rechner | vorher | jetzt | Grundlage |
+|---|---|---|---|
+| **Steuerklassen-Vergleich** (55.000 + 35.000 €) | Lohnsteuer mit 12 % Vorsorgepauschale und Näherung für Klasse V: III/V **4.850,33 €**, Faktor 0,98, Jahressteuer 13.374 € | PAP 2026: III/V **4.950,59 €**, IV/IV mit Faktor 4.941,09 € (Faktor **0,980**, auf drei Stellen abgeschnitten), Jahressteuer **11.140 €**; PV nach Kinder-Eingabe | § 39f EStG; PAP 2026 (`_lohnsteuer-pap-2026.ts`) |
+| Steuerklassen, Seitentexte | „mit Faktor meist freiwillig“; „Faktor gilt seit 2024 für zwei Jahre“ | Pflichtveranlagung auch mit Faktor; Zweijahresgeltung seit **2019** | § 46 Abs. 2 Nr. 3a, § 39f Abs. 1 Satz 9 EStG |
+| **Grundsicherungsgeld** (vorher Bürgergeld) | unter 25: Freibetrag 556 €, darüber nichts; ab 25 pauschal 250 €; Feld „Warmmiete“ (Heizung doppelt) | **603 €** + 30 %/10 % oberhalb 520 €/1.000 €; 250 € ab 25 nur im Freiwilligendienst; Feld „Miete inkl. Nebenkosten (ohne Heizung)“. Azubi 22 J., 800 €: **980 €** (vorher 849 €). Startwert unverändert 1.093 € | § 11b Abs. 2b, Abs. 3 Satz 4 SGB II; § 8 Abs. 1a SGB IV |
+| Grundsicherungsgeld, KI-Erklärung | „Bürgergeld-Anspruch“ | „Anspruch auf Grundsicherungsgeld (so heißt das Bürgergeld seit 01.07.2026)“ | `app/api/explain/route.ts` |
+| **Kurzarbeitergeld** | 24 Monate nur als Corona-Sonderfall | 2026 bis **24 Monate** (4. KugBeV, längstens bis 31.12.2026) | 4. KugBeV vom 17.12.2025 |
+| **Midijob** | „den Differenzbetrag trägt der Arbeitgeber“ | Arbeitgeber zahlt bei 1.500 € nur **14,78 €** mehr als regulär (332,03 statt 317,25 €); neue Zeile „zum Vergleich: AG-Anteil bei regulärer Beschäftigung“; Untergrenze 603,01 € | § 20 Abs. 2a SGB IV |
+| **Riester** | Grenzsteuersatz fest 35 %: Förderung **560 €**. Mindest- und Höchstbetrag nur einmal fürs Paar, 4 % ohne Deckel auf 2.100 € | Grenzsteuersatz automatisch aus dem Brutto (≈ 28,4 %): **455 €**. Mindest- und Höchstbetrag je Person, 4 % höchstens 2.100 €. Paar 60.000 €: volle Zulagen 350 € statt 298,78 €, Förderung 616 € statt 526 €. Alleinstehend über 52.500 €: volle Zulage | § 86 Abs. 1, § 10a Abs. 1/3, § 85 Abs. 2 EStG |
+| **AfA** | degressiv 30 % für jedes Datum vor 2028; § 7 Abs. 5a als 5 % linear über 20 Jahre | degressiv nur 01/2020–12/2022 (25 %), 04–12/2024 (20 %), 07/2025–12/2027 (30 %), sonst linear; § 7 Abs. 5a: 5 % vom Restwert mit Wechsel zur linearen AfA; PDF-Satz ohne „33.333333333333336 %“ | § 7 Abs. 2, Abs. 5a EStG |
+| **Krankengeld** (3.500 / 2.350 €, 1 Kind) | 6,15 % Abzug: **1.985 €** | RV 9,3 + ALV 1,3 + PV 1,8 = **12,4 %**: **1.853 €** (61,76 €/Tag, Verlust 21,16 %); kinderlos 13,0 %: 1.840 € | § 170 SGB VI, § 347 SGB III, §§ 55, 59 SGB XI |
+| **Elterngeld** (2.500 € netto) | „Gesamt 22.750 € über 14 Monate“ als Einzelwert | „Gesamt für Sie allein“ **19.500 €** (12 Monate); 22.750 € nur als Paar-Wert bei gleichem Netto | § 4 Abs. 3, 4 BEEG |
+
+**Grenzen der Rechnung:**
+- **Steuerklassen:** beide gesetzlich versichert, durchschnittlicher Zusatzbeitrag, über 23; Jahressteuer mit
+  Vorsorgepauschale statt tatsächlicher Vorsorgeaufwendungen.
+- **Riester „beide riestern“:** gemeinsames Brutto je zur Hälfte, Kinderzulagen bei der Mutter; Günstigerprüfung über
+  Grenzsatz × Sonderausgaben.
+- **Krankengeld:** ohne Einmalzahlungen, ohne Rundung je Zweig.
+- **Elterngeld:** Der Paar-Wert setzt gleiches Netto voraus, Partnerschaftsbonus nicht modelliert.
+
+**Änderungen** (156 Ersetzungen plus 8 Datumszeilen = 164 in 22 Dateien plus 2 neue Dateien, Vorlage
+`_lokal/welle183-arbeit-soziales.mjs`, Gegenprobe `_lokal/welle183-lib.mts`, beide nicht committet):
+- **Neu:** `lib/berechnungen/krankengeld.ts` (Abzüge RV/ALV/PV getrennt, kinderlos 13,0 %) und
+  `scripts/verify-krankengeld.ts` (17 Fälle).
+- **Geteilte Libs nur ergänzt:** `_lohnsteuer-pap-2026.ts` (`getZVE()`) und `lohnsteuer.ts` (optionaler Faktor nach
+  § 39f, zvE im Ergebnis). Der Standardpfad ist unverändert, `verify-lohnsteuer-pap` 20/20 und
+  `verify-bruttonetto-zuschlaege` grün.
+- **Libs:** `steuerklassen-vergleich.ts`, `buergergeld.ts`, `buergergeld-parameter.ts`, `riester.ts`, `afa.ts`
+  (`AFA_DEGRESSIV_FENSTER`, `degressivFenster`), `elterngeld.ts`.
+- **Komponenten:** `SteuerklassenVergleichRechner.tsx`, `BuergergeldRechner.tsx`, `MidijobRechner.tsx`,
+  `RiesterRechner.tsx`, `AfaRechner.tsx`, `KrankengeldRechner.tsx`, `ElterngeldRechner.tsx`;
+  `app/api/explain/route.ts` (KI-Erklärung).
+- **Texte** in `lib/rechner-config/finanzen.ts`.
+- **Prüfskripte:** `verify-steuerklassen-vergleich.ts`, `verify-buergergeld-p3.ts`, `verify-midijob-p1.ts`,
+  `verify-riester.ts` (61 statt 44 Fälle), `verify-afa.ts` (82 statt 59; die vier vorher roten Fälle A-06, A-07,
+  F-01, F-03 sind grün).
+- **`letzteAktualisierung`** → `2026-10-20` für steuerklassen-vergleich-rechner, buergergeld-rechner,
+  kurzarbeitergeld-rechner, midijob-rechner, riester-rechner, afa-rechner, krankengeld-rechner, elterngeld-rechner.
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187).
+
+**Vermerk:** Die zugehörigen Captions folgen in Welle 187. Laut Vorlage sind von allen 63 Prüfskripten danach noch 7
+rot, alle schon vorher und unverändert (Welle 186): bafoeg-p1, ehegattenunterhalt-component, pflegegeld,
+steuerprogression, taxi-smoke, unterhalt-component, wohnen-block-b. In diesem Lauf nicht alle 63 nachgezählt.
+
+**Abweichungen und Funde:**
+- **AfA-Fenster westlich von UTC:** `AfaRechner.tsx` liest das Anschaffungsdatum mit `new Date('JJJJ-MM-TT')` (UTC)
+  und `getMonth()`/`getFullYear()` (Ortszeit). In Berliner Zeit und in UTC treffen alle Monatsgrenzen
+  (01.01.2020 → 25 %, 01.04.2024 → 20 %, 01.07.2025 → 30 %, 01.01.2028 → linear). Bei Systemzeit westlich von UTC
+  rutscht ein Monatserster in den Vormonat: 01.07.2025 → Juni → linear statt 30 %, 01.01.2028 → Dezember 2027 →
+  30 % statt linear. Nachgestellt mit `America/New_York`. Betrifft nur Besucher mit solcher Systemzeit; die Auswertung
+  ist älter als diese Welle, wird aber jetzt monatsgenau wirksam. Nicht von Hand korrigiert.
+- **Zeitzonen-Proben unter Git Bash (Windows):** `TZ=Europe/Berlin` oder `TZ=America/New_York` vor einem Befehl
+  erreicht Node dort nicht (MSYS reicht nur `TZ=UTC` durch). Proben deshalb mit `process.env.TZ` im Skript; die
+  Berliner Proben der Wellen 181 und 182 liefen ohnehin in Systemzeit Europe/Berlin und bleiben gültig.
+- Datum: Die Vorlage setzt „heute“ in Berliner Zeit. Lauf unter Windows in deutscher Zeit.
+
+**Gates:**
+- Phase 0 an `8a652ee`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `8a652ee` und `b8e5484`
+  (Welle 182). Greps: „Math.min(bruttoJahr * 0.12, 15000)“ `steuerklassen-vergleich.ts:3`;
+  „jugendlicherFreibetrag_unter25: 556“ `buergergeld-parameter.ts:1`; „useState('35')“ `RiesterRechner.tsx:1`;
+  „0.0615“ `KrankengeldRechner.tsx:1`; „beantragt und gilt seit 2024“ `finanzen.ts:1`; `git ls-files` der zwei neuen
+  Dateien keine Ausgabe. `verify-riester` 44/44; `verify-afa` 55/59, 4 rot (A-06, A-07, F-01, F-03), wie erwartet.
+- Phase 1: „OK — 164 Ersetzungen in 22 Dateien, 2 neue Dateien.“, Exit 0; `git status` 22 geänderte und 2 neue
+  Dateien.
+- Phase 2: Lib-Gegenprobe 25 × „OK“, „Alle Werte OK“, Exit 0. Prüfskripte, je Exit 0: steuerklassen-vergleich 61/61,
+  lohnsteuer-pap 20/20, bruttonetto-zuschlaege grün (6.552 Rasterfälle), buergergeld-p2 19/19, buergergeld-p3
+  26/26, buergergeld-p4 33/33, kurzarbeitergeld 15/15, midijob-p1 46/46, riester 61/61, afa 82/82, krankengeld
+  17/17, arbeitslosengeld 60/60. Greps: fünfmal keine Ausgabe, dann „gilt seit 2019 auf Wunsch für zwei Jahre“
+  `finanzen.ts:1`, „const mindestJe = brutto.map“ `riester.ts:1`, „kugbev_4“ `finanzen.ts:1`, „Anspruch auf
+  Grundsicherungsgeld“ `route.ts:1`. `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten
+  Warnungen; `git status` danach nur die 24 Dateien.
+- HTML-Befund (gezählt nach Entfernen der React-Trenner `<!-- -->`; „Höchstes monatliches Gesamt-Netto: 4.950,59 €“,
+  „21,16 %“, „19.500,00 €“ und „253,80 €“ stehen nur so am Stück): `/finanzen/steuerklassen-vergleich-rechner`
+  „Höchstes monatliches Gesamt-Netto: 4.950,59 €“ 1×, „0,980“ 1×, „seit 2019“ 2×; `/finanzen/krankengeld-rechner`
+  „1.853 €“ 12×, „61,76 €“ 6×, „21,16 %“ 2×; `/finanzen/elterngeld-rechner` „Gesamt für Sie allein“ 1×,
+  „19.500,00 €“ 3×; `/finanzen/riester-rechner` „28,4 %“ 6×, „455 €“ 11×; `/finanzen/midijob-rechner` „253,80 €“
+  1×; `/finanzen/buergergeld-rechner` „Miete inkl. Nebenkosten (ohne Heizung)“ 1×; `/finanzen/kurzarbeitergeld-rechner`
+  „4. KugBeV“ 8×; `/finanzen/afa-rechner` „Anschaffung 07/2025–12/2027“ 8×, „5 % vom Restwert“ 2×.
+
+**Commits:** A `ffaa4b1` (die 24 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 182: Rechnerfehler aus der zweiten Caption-Prüfung — Strompreise, Mutterschutz, Gehaltsvergleich, Autokosten, Streaming, Leasing, Wärmepumpe/BEG — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Zweite Caption-Prüfung. Eine zweite, unabhängige Prüfung aller 206 Captions fand acht Rechner, die
