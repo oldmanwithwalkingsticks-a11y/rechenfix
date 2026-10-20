@@ -6,6 +6,124 @@
 
 ---
 
+## 21.10.2026 — Welle 189 (Fassung 2): Folgekorrekturen — Kalenderdaten in Ortszeit, Kündigungsfrist nach Zugang, sv-parameter-Kommentar — ✅ ABGESCHLOSSEN 21.10.2026
+
+**Anlass:**
+- **Fund aus Welle 178** (Historie `b0d461e`): Welle 178 hatte `KV_ERMAESSIGTER_BEITRAGSSATZ_2026` samt JSDoc zwischen
+  den JSDoc von `KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026` und diese Konstante gesetzt. Jetzt steht der Block darunter;
+  rein kosmetisch, keine Rechnung ändert sich.
+- **Fund aus Welle 179** (Historie `9b1e599`): Datumsfelder liefern `YYYY-MM-DD`. `new Date(iso)` ist UTC-Mitternacht,
+  in Deutschland 01:00 bzw. 02:00 Uhr; `toISOString()` gibt den UTC-Tag aus, kurz nach Mitternacht also den Vortag;
+  `setMonth` läuft am Monatsende über (31.05. + 1 Monat = 01.07.). Die Prüfskripte liefen nur in der Zeitzone der
+  Maschine und sahen das nicht.
+- **Gegenrechnung zur Kündigungsfrist** (siehe unten).
+- Fassung 1 dieser Welle liegt in `_lokal/_ueberholt/` und wurde nicht ausgeführt; Fassung 2 enthält sie vollständig.
+
+**Kalenderdaten in Ortszeit** (laut Vorlage nachgemessen am 20.10.2026 mit `TZ=Europe/Berlin`):
+
+| Rechner | Fehler vorher (Beispiel) | Jetzt |
+|---|---|---|
+| Kündigungsfrist | AN seit 01.05.2024, Zugang 17.09.2026 → 31.10.2026 (der 15. lag „vor“ dem Fristende, in jedem Monat) | 15.10.2026 |
+| Kündigungsfrist | AG seit 30.11.2021, Zugang 31.05.2026 → 31.07.2026 (`setMonth`-Überlauf, auch in UTC falsch) | 30.06.2026 (§ 188 Abs. 3 BGB) |
+| Kündigungsfrist | Probezeit 6 Monate ab 01.04.2026, Zugang 01.10.2026 → noch Probezeit, 2 Wochen | Probezeit endete 30.09.2026 (§ 187 Abs. 2, § 188 Abs. 2 BGB) → 4 Wochen, 31.10.2026 |
+| Elternzeit | Geburt 15.02.2026 → P1 ab 12.04.2026, Anmeldung bis 21.02.2026 (über die Umstellung 29.03.) | 13.04.2026, 22.02.2026 |
+| Zyklus | Start 05.10.2026: erster Periodentag und erster fruchtbarer Tag jedes Zyklus im Kalender unmarkiert | 05.–09.10. rot, 14.–18. und 20.10. fruchtbar |
+| Arbeitstage | Zeitraum 01.–30.10.2026 NRW → 21 | 22 |
+| Geburtstag | Startwert 15.06.1990: 10.000 Tage am 30.10.2017 (ms-Addition über die Umstellung) | 31.10.2017 |
+| Bürgergeld | Bezugsmonat Juli 2026 → noch Bürgergeld (Stichtag 02:00 Uhr, Monatsfeld 00:00 Uhr) | Grundsicherungsgeld |
+| Gefrierdauer | Hackfleisch Alufolie, 01.01.2026: `setMonth` schnitt 0,8 Monate auf 0 ab → „haltbar bis“ ab 01.01. (dem Einfriertag) | ab 25.01.2026 (Rest zu 30 Tagen je Monat) |
+| BAföG, EEG | Stichtage 01.01. bzw. 01.08.2026 galten erst ab 01:00/02:00 Uhr | lokale Mitternacht |
+| Startwerte | Mutterschutz, Geburtstermin, SSW, Elternzeit, Zyklus, Kündigungsfrist, `max` bei Geburtstag/Lebenszeit: kurz nach Mitternacht der Vortag | heutiges Datum |
+
+- **Neu:** `lib/datum-lokal.ts` (`parseIsoLokal`, `isoLokal`, `addMonateLokal`, `addMonateAnteilig`, `fristEndeMonate`),
+  `lib/berechnungen/zyklus.ts` (Zykluslogik aus der Komponente), `scripts/verify-datum-zeitzone.ts` (72 Fälle; setzt
+  `TZ=Europe/Berlin` selbst; gegen den Stand nach Welle 188 laut Vorlage nur 28/72). `verify:alle` zählt jetzt 85.
+- **`CLAUDE.md`:** neuer Abschnitt „Kalenderdaten in Ortszeit (seit Welle 189)“ unter dem Stichtag-Switch-Pattern.
+
+**Kündigungsfrist: welche Betriebszugehörigkeit zählt:**
+- Die Lib suchte seit Welle 112 per Lookahead die Stufe nach der Betriebszugehörigkeit **zum Fristende** und berief
+  sich auf „BAG 10 AZR 64/17“. Das Urteil ist nicht auffindbar.
+- § 622 Abs. 2 BGB fragt, ob das Arbeitsverhältnis zwei, fünf … Jahre „bestanden hat“, also im Zeitpunkt der
+  Kündigung. Fachanwaltsseiten und Ratgeber nennen den **Zugang der Kündigung** als maßgeblichen Zeitpunkt.
+- Unabhängige Gegenrechnung (laut Vorlage; AN und AG, 4 Eintrittsdaten, 400 Zugangstage ab 01.01.2026 = 3.200 Fälle):
+  mit Lookahead 94 Abweichungen, alle durch den Lookahead; danach 3.200/3.200. Beispiel: AG, seit 01.06.2016, Zugang
+  10.03.2026 (9 Jahre 9 Monate) → vorher 4 Monate bis 31.07.2026, jetzt 3 Monate bis 30.06.2026.
+- **Änderung:** Lib: Stufe nach der Betriebszugehörigkeit beim Zugang; der Hinweis „Sie erreichen während der
+  Kündigungsfrist eine höhere Stufe …“ entfällt. Seite: Fußnote, Abschnitt „Maßgeblich ist der Zugang der Kündigung“
+  (mit Beispiel und Hinweis auf Treu und Glauben), Checklistenpunkt. `verify-kuendigungsfrist.ts`: Cluster C prüft
+  die Zugangsregel, 33 statt 30 Fälle. `CLAUDE.md`: Zeile zu Welle 112 mit Vermerk „in Welle 189 zurückgenommen“.
+- Seitenbeispiel und Caption (6 Jahre, Zugang 10.03.2026 → 31.05.2026) bleiben richtig.
+
+**Änderungen** (52 Textersetzungen in 21 Dateien plus 7 Datumszeilen = 59 in 25 Dateien, dazu 3 neue Dateien; Vorlage
+`_lokal/welle189-folgekorrekturen-v2.mjs`, nicht committet). **7 Datumszeilen** `letzteAktualisierung` →
+`2026-10-21`: `kuendigungsfrist-rechner`, `arbeitstage-rechner`, `elternzeit-rechner` (arbeit.ts), `zyklusrechner`
+(gesundheit.ts), `geburtstag-rechner` (alltag.ts), `buergergeld-rechner` (finanzen.ts), `gefrierdauer-rechner`
+(kochen.ts). Keine Datumszeile für Rechner, bei denen sich nur Startwerte kurz nach Mitternacht oder Stichtage in den
+ersten zwei Stunden ändern.
+
+**Bewusst nicht geändert:** Bilder, Videos und `lib/social/captions.json`; alte Arbeitspapiere mit dem BAG-Verweis
+(`welle1-stufe3-bericht.md`, `welle1-stufe3-testfaelle.md`, `docs/audit-bundles/`) als Historie.
+
+**Bewusst offen geblieben:**
+- **Kündigungsfrist, Rechtsfrage:** Einzelne Ratgeber stellen auf den Beendigungszeitpunkt ab. Die Seite folgt dem
+  Wortlaut („bestanden hat“) und den Fachanwaltsquellen (Zugang). Ein Urteil mit Aktenzeichen ist für keine der beiden
+  Lesarten belegt. Gezielte Kündigung kurz vor einer Stufe ist nur als Hinweis auf Treu und Glauben erwähnt, nicht
+  gerechnet.
+- **Kfz-Steuer, Elektro-Befreiung:** kein Zeitzonenfehler (Berlin = UTC über 900 Erstzulassungstage gemessen). Ob die
+  Befreiung am Jahrestag oder am Tag davor endet und was bei Erstzulassung am 29.02. gilt, ist rechtlich ungeprüft.
+- **Midijob 2027:** `midijob-parameter.ts` hat nur einen Bucket, der Stichtag wird nicht verglichen. Beim Termin
+  `midijob-parameter-2027` den neuen Bucket mit `gueltigAb: new Date(2027, 0, 1)` anlegen und gegen `SV_RECHENSTAND`
+  prüfen.
+- **Kündigungsfrist, Zeitleiste:** `Math.floor` zwischen lokalen Mitternächten wirkt nur auf die Breite des
+  Fortschrittsbalkens (z. B. 64,3 % statt 63,5 %), keine Zahl.
+- **Startwerte „vor 3 Monaten/Jahren“** (Elternzeit, Kündigungsfrist): `setMonth`/`setFullYear` laufen am 29.–31.
+  über. Nur Vorbelegung, kein Ergebnis.
+- **Lebenszeit, Countdown, Alkohol-Abbau, Promille, Uhrzeit:** rechnen absichtlich in realer Zeit, die
+  Umstellungsstunde zählt mit.
+- **Mutterschutz, Indexmiete, Tage, AfA, Termine, Blog-Datum:** laut Probelauf in Deutschland richtig (gleiche Tage in
+  Berlin und UTC bzw. durchgehend UTC).
+- **Alte Arbeitspapiere** mit dem BAG-Verweis bleiben als Historie unverändert.
+
+**Abweichungen und Funde:**
+- **Gegenprobe westlich von UTC** (Systemzeit America/New_York, über Node gesetzt; nicht Teil der CI, die Berlin und
+  UTC prüft): nach dieser Welle 81/85, vor dieser Welle (Worktree an `ef7169b`) 80/84; in Asia/Tokyo 85/85.
+  - Grün geworden: `verify-kuendigungsfrist` (vorher 28/30).
+  - Schon vorher rot und unverändert: `verify-buergergeld-p3` (6; `buergergeld-parameter.ts:189` liest die
+    Minijob-Grenze mit `new Date('2026-01-01')`, `getFullYear()` ergibt westlich von UTC 2025 → 556 statt 603 €; wirkt
+    auch im Browser solcher Besucher, Zeile 189 hat diese Welle nicht geändert),
+    `verify-kfz-steuer-p1` (1; Elektro-Befreiung 14.03. statt 15.03.2034), `verify-mutterschutz` (7; alle Daten einen
+    Tag früh — die Lib liest das Geburtsdatum als UTC-Mitternacht). Das deckt sich mit „in Deutschland richtig“ oben,
+    betrifft aber Besucher mit Systemzeit westlich von UTC.
+  - **Neu rot: `verify-buergergeld-p4` (11).** Das ist ein Testartefakt, kein Seitenfehler: Das Prüfskript übergibt
+    `new Date('2026-07-01')` (UTC-Mitternacht, in New York noch der 30.06.), der Stichtag ist jetzt lokale Mitternacht
+    (`new Date(2026, 6, 1)`). Die Seite liest das Monatsfeld als lokale Mitternacht (`parseMonat` → `new Date(y,
+    m − 1, 1)`) und wählt damit in jeder Zeitzone richtig. Wer die Prüfskripte zeitzonenfest machen will, stellt die
+    Eingaben in `verify-buergergeld-p4` auf `new Date(2026, 6, 1)` um.
+- **Werkzeug:** Den Vorher-Stand habe ich in einem `git worktree` im Scratchpad geprüft (mit Verknüpfung auf
+  `node_modules`, vor dem Entfernen nur die Verknüpfung gelöscht); der Arbeitsbaum blieb unberührt.
+- `verify:alle` zusätzlich mit `TZ=UTC` wie die CI: Phase 0 84/84, Phase 2 85/85.
+
+**Gates:**
+- Phase 0 an `ef7169b`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `ef7169b` und `fb5b228`
+  (Welle 188); `git ls-files` der drei neuen Dateien keine Ausgabe. Zeile vor `export const
+  KV_ZUSATZBEITRAG_AN_DURCHSCHNITT_2026 =` eine Leerzeile. Greps `7`, `2`, `lib/berechnungen/kuendigungsfrist.ts:3`,
+  `8`. In `_lokal` nur `welle189-folgekorrekturen-v2-prompt.md` und `welle189-folgekorrekturen-v2.mjs` (Fassung 1 in
+  `_ueberholt`). `verify:alle` 84/84.
+- Phase 1: „OK — 59 Ersetzungen in 25 Dateien, 3 neue Dateien.“, Exit 0. `git status` 28 Zeilen, alle aus der Liste:
+  die 24 festen und alle vier Config-Dateien (`alltag.ts`, `finanzen.ts`, `gesundheit.ts`, `kochen.ts`), weil deren
+  Datum noch auf dem 20.10. stand. Die 7 Datumszeilen stehen auf `2026-10-21`.
+- Phase 2: `verify:alle` „Prüfskripte: 85/85 grün.“, Exit 0. „Datum/Zeitzone: 72/72 grün“, „Ergebnis: 33/33 grün,
+  0 rot.“ Zeile vor der Konstante jetzt ` */`. Greps `0`, `0`, keine Ausgabe, `3` (nur in den drei
+  `W189:`-Kommentaren), `27`, `CLAUDE.md:1`. `npm run lint` Exit 0, keine Zeile „problems“. `npm run build`
+  Rückgabewert 0, 271 Seiten. Im gebauten HTML von `/arbeit/kuendigungsfrist-rechner` „Maßgeblich ist der Zugang der
+  Kündigung“ 2×, „Ende am 30. Juni 2026“ 2× (Seitentext und eingebettete Seitendaten); „10 AZR“ in keiner HTML-Datei.
+- Phase 3: `git add -u` plus die drei neuen Dateien, `git diff --cached --name-only` 28, danach `git status` leer.
+  „W189:“ zählt nach `git add` 28 (die neuen Dateien kommen hinzu).
+
+**Commits:** A `ad3c0e7` (die 28 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 21.10.2026 — Welle 188: Kontrast nach WCAG 2.1 AA, hell und dunkel — ✅ ABGESCHLOSSEN 21.10.2026
 
 **Anlass:** Nebenbefund aus Welle 175 (Historie `62334c1`): Die neue Zeile im Nettolohn-Optimierer stand in
