@@ -1,3 +1,5 @@
+import { SPRITPREISE_REFERENZ } from './spritpreise-parameter';
+
 export type Antriebsart = 'benzin' | 'diesel' | 'elektro' | 'hybrid';
 export type FinanzierungsModus = 'bar' | 'finanziert';
 
@@ -75,11 +77,13 @@ export interface AutokostenErgebnis {
 const WERTVERLUST_NEUWAGEN = [0.24, 0.13, 0.10, 0.08, 0.06];
 const WERTVERLUST_GEBRAUCHT_RATE = 0.06;
 
+// W182: Benzin, Diesel und Hybrid aus der Spritpreis-SSOT (ADAC-Bundesschnitt). Vorher fest 1,75 / 1,65 €;
+// weil der Rechner diese Werte beim ersten Rendern per useEffect setzt, überschrieben sie den SSOT-Startwert.
 export const STANDARD_PREISE: Record<Antriebsart, number> = {
-  benzin: 1.75,
-  diesel: 1.65,
+  benzin: SPRITPREISE_REFERENZ.superE10,
+  diesel: SPRITPREISE_REFERENZ.diesel,
   elektro: 0.35,
-  hybrid: 1.75,
+  hybrid: SPRITPREISE_REFERENZ.superE10,
 };
 
 export const ANTRIEB_EINHEITEN: Record<Antriebsart, string> = {

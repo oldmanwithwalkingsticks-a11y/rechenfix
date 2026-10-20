@@ -51,7 +51,7 @@ export default function AutokostenRechner() {
 
   // Kraftstoffpreis automatisch anpassen bei Antriebswechsel
   useEffect(() => {
-    setKraftstoffpreis(STANDARD_PREISE[antrieb].toLocaleString('de-DE', { minimumFractionDigits: 2 }));
+    setKraftstoffpreis(STANDARD_PREISE[antrieb].toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 3 }));
     if (antrieb === 'elektro') {
       setVerbrauch('18');
     } else if (antrieb === 'hybrid') {

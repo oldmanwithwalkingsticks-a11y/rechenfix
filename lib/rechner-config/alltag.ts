@@ -1,5 +1,13 @@
 import type { RechnerConfig } from './types';
 import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
+import { streamingDienste } from '@/lib/berechnungen/streaming-kosten';
+
+// Streaming-Beispiel (W182): Preise aus der Rechner-Lib, damit Beispiel und Rechner übereinstimmen.
+const stPreis = (id: string, label: string) => streamingDienste.find((d) => d.id === id)!.varianten.find((v) => v.label === label)!.preis;
+const ST_NF = stPreis('netflix', 'Standard');
+const ST_SP = stPreis('spotify', 'Premium');
+const ST_DI = stPreis('disney', 'Standard');
+const ST_SUMME = Math.round((ST_NF + ST_SP + ST_DI) * 100) / 100;
 
 // Deutsche Zahlformatierung, wie in auto.ts und technik.ts.
 const eur = (n: number, dezimal = 2) => n.toFixed(dezimal).replace('.', ',');
@@ -1032,7 +1040,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'streaming-kosten-rechner',
-    letzteAktualisierung: '2026-06-17',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Streaming-Kosten-Rechner',
     beschreibung: 'Berechnen Sie Ihre monatlichen Streaming-Kosten: Netflix, Disney+, Spotify und mehr auf einen Blick.',
     kategorie: 'Alltag',
@@ -1041,7 +1049,7 @@ export const alltagRechner: RechnerConfig[] = [
     metaDescription: 'Streaming-Kosten-Rechner: Was kosten Netflix, Disney+, Spotify & Co. zusammen? Monatliche, jährliche und langfristige Kosten auf einen Blick.',
     keywords: ['streaming kosten rechner', 'streaming abos kosten', 'netflix kosten', 'disney plus kosten', 'spotify kosten', 'streaming vergleich', 'abo kosten berechnen', 'streaming ausgaben', 'was kosten meine abos', 'streaming sparen'],
     icon: '📺',
-    beispiel: 'Beispiel: Netflix Standard (13,99 €) + Spotify (11,99 €) + Disney+ (9,99 €) = 35,97 € pro Monat, 431,64 € pro Jahr.',
+    beispiel: `Beispiel: Netflix Standard (${eur(ST_NF)} €) + Spotify Premium (${eur(ST_SP)} €) + Disney+ Standard (${eur(ST_DI)} €) = ${eur(ST_SUMME)} € pro Monat, ${eurP(ST_SUMME * 12)} € pro Jahr.`,
     // W19-Goldstandard: streaming-kosten-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
     // Leitformat „statistik" (4× dominant). Logik aus lib/berechnungen/streaming-kosten.ts
     // gespiegelt: monatlich = Abo-Summe + sonstige; ×12 Jahr; ×5/×10; Arbeitsstunden =
@@ -1058,7 +1066,7 @@ export const alltagRechner: RechnerConfig[] = [
         typ: 'statistik',
         titel: 'Beispiel-Haushalt: vier Abos auf einen Blick',
         werte: [
-          { label: 'Video-Streaming', wert: '~14 €/Monat', hinweis: 'Standard-Tarif (typische Spanne 5–20 €)' },
+          { label: 'Video-Streaming', wert: '~14 €/Monat', hinweis: 'Standard-Tarif (typische Spanne 7–22 €)' },
           { label: 'Musik-Streaming', wert: '~12 €/Monat', hinweis: 'Premium-Einzeltarif' },
           { label: 'Sport-Streaming', wert: '~30 €/Monat', hinweis: 'meist der teuerste Posten' },
           { label: 'Cloud / Hörbuch', wert: '~10 €/Monat', hinweis: 'kleinere Zusatz-Abos' },
@@ -1101,13 +1109,13 @@ export const alltagRechner: RechnerConfig[] = [
         titel: 'Abo-Kategorien & typische Preisspannen',
         kopf: ['Kategorie', 'Beispiele', 'Typische Spanne €/Monat'],
         zeilen: [
-          ['Video-Streaming', 'Serien & Filme', '5–20 €'],
-          ['Musik-Streaming', 'Einzel- und Family-Tarife', '6–18 €'],
+          ['Video-Streaming', 'Serien & Filme', '7–22 €'],
+          ['Musik-Streaming', 'Einzel- und Family-Tarife', '7–22 €'],
           ['Sport-Streaming', 'Live-Sport, Bundesliga', '12–45 €'],
           ['Gaming-Abo', 'Spiele-Flatrates, Online-Dienste', '4–18 €'],
           ['Cloud & Hörbuch', 'Speicher, Hörbuch-Abos', '3–12 €'],
         ],
-        fussnote: 'Spannen je nach Tarif (mit/ohne Werbung, Einzel/Family) und Anbieter. Konkrete Preise ändern sich laufend — als Orientierung gedacht, nicht als feste Werte. Stand 06/2026.',
+        fussnote: 'Spannen je nach Tarif (mit/ohne Werbung, Einzel/Family) und Anbieter. Konkrete Preise ändern sich laufend — als Orientierung gedacht, nicht als feste Werte. Stand 10/2026.',
       },
       {
         typ: 'beispielrechnung',

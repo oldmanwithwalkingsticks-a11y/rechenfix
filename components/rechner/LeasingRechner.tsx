@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
-import { BRUTTO_FAKTOR_REGULAER, NETTO_FAKTOR_REGULAER } from '@/lib/berechnungen/mwst';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -35,9 +34,10 @@ export default function LeasingRechner() {
     const km = parseDeutscheZahl(kmProJahr);
     const satz = parseDeutscheZahl(mehrKmSatz);
 
-    const netto = faktorModus === 'faktor' ? ((lp - az) * faktor) / 100 : rateDirekt * NETTO_FAKTOR_REGULAER;
-    const brutto = netto * BRUTTO_FAKTOR_REGULAER;
-    const leasingrate = faktorModus === 'faktor' ? brutto : rateDirekt;
+    // Leasingfaktor = Bruttorate ÷ Bruttolistenpreis × 100 (Branchenkonvention, ADAC). Faktor × Bruttolistenpreis
+    // ergibt die Bruttorate direkt. W182: vorher wurde darauf noch 19 % MwSt aufgeschlagen (35.000 € × 0,85 →
+    // 354,03 € statt 297,50 €). Eine Anzahlung mindert die Rate hier vereinfacht über den Listenpreis.
+    const leasingrate = faktorModus === 'faktor' ? ((lp - az) * faktor) / 100 : rateDirekt;
 
     const summeRaten = leasingrate * lzM;
     const gesamt = az + summeRaten;

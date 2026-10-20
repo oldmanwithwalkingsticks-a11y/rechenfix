@@ -1450,7 +1450,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Gehaltsvergleich 2026: Verdienen Sie mehr oder weniger als der Durchschnitt? Nach Berufsgruppe, Bundesland und Alter vergleichen.',
     keywords: ['gehaltsvergleich', 'gehalt vergleichen', 'durchschnittsgehalt', 'gehaltscheck', 'verdiene ich genug', 'gehaltsrechner', 'gehalt deutschland', 'median gehalt', 'gehalt berufsgruppe', 'gehalt bundesland'],
     icon: '💵',
-    beispiel: 'Beispiel: 3.500 € brutto als kaufmännischer Angestellter, 35–44 Jahre, in NRW → Sie verdienen mehr als ca. 44 % der Vergleichsgruppe (Median 3.641 €).',
+    beispiel: 'Beispiel: 3.500 € brutto als kaufmännischer Angestellter, 35–44 Jahre, in NRW → Sie verdienen mehr als ca. 46 % der Vergleichsgruppe (Median 3.641 €).',
     // W19-Goldstandard: gehaltsvergleich auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
     // „vergleich" (4× dominant). Perzentil-/Median-Logik aus lib/berechnungen/gehaltsvergleich.ts
     // gespiegelt (adjustierterMedian = Median × Bundesland-Faktor × Alters-Faktor; Perzentil via
@@ -1492,10 +1492,10 @@ export const finanzenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Eingaben', formel: '3.800 € · kaufm. · NRW · 35–44 J.', ergebnis: '—' },
           { label: 'Adjustierter Median (Region × Alter)', formel: '3.400 € × 1,02 × 1,05', ergebnis: '3.641 €' },
-          { label: 'Einordnung in die Verteilung', formel: '3.800 € vs. Median 3.641 €', ergebnis: 'Perzentil 57' },
+          { label: 'Einordnung in die Verteilung', formel: '3.800 € vs. Median 3.641 €', ergebnis: 'Perzentil 55' },
           { label: 'Differenz zum Median', formel: '3.800 € − 3.641 €', ergebnis: '+159 € (+4,4 %)' },
         ],
-        fazit: 'Mit 3.800 € liegt dieses Beispiel im 57. Perzentil — über der Hälfte der Vergleichsgruppe (Median 3.641 €), aber im Mittelfeld. Zur Einordnung: das 75. Perzentil läge bei rund 4.508 €, das 90. bei 5.288 €.',
+        fazit: 'Mit 3.800 € liegt dieses Beispiel im 55. Perzentil — über der Hälfte der Vergleichsgruppe (Median 3.641 €), aber im Mittelfeld. Zur Einordnung: das 75. Perzentil läge bei rund 4.508 €, das 90. bei 5.288 €.',
       },
       {
         typ: 'text',
@@ -1531,20 +1531,20 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Gleiches Gehalt, anderes Perzentil — die Region entscheidet',
         schritte: [
           { label: 'Gleiches Gehalt & Beruf', formel: '3.200 € · Gesundheit · 25–34 J.', ergebnis: '—' },
-          { label: 'In Sachsen (Faktor 0,83)', formel: 'Median 2.390 €', ergebnis: 'Perzentil 89' },
-          { label: 'In Bayern (Faktor 1,07)', formel: 'Median 3.082 €', ergebnis: 'Perzentil 57' },
+          { label: 'In Sachsen (Faktor 0,83)', formel: 'Median 2.390 €', ergebnis: 'Perzentil 86' },
+          { label: 'In Bayern (Faktor 1,07)', formel: 'Median 3.082 €', ergebnis: 'Perzentil 55' },
         ],
-        fazit: 'Dasselbe Bruttogehalt von 3.200 € steht in Sachsen für ein Spitzeneinkommen (89. Perzentil), in Bayern nur für solides Mittelfeld (57.). Der Grund ist das regionale Median-Niveau — wer einen Umzug erwägt, muss Gehalt und Region zusammen denken.',
+        fazit: 'Dasselbe Bruttogehalt von 3.200 € steht in Sachsen für ein hohes Einkommen (86. Perzentil), in Bayern nur für solides Mittelfeld (55.). Der Grund ist das regionale Median-Niveau — wer einen Umzug erwägt, muss Gehalt und Region zusammen denken.',
       },
       {
         typ: 'beispielrechnung',
         titel: 'Gleiches Gehalt, andere Branche — der stärkste Hebel',
         schritte: [
           { label: 'Gleiches Gehalt, Region & Alter', formel: '3.500 € · NRW · 35–44 J.', ergebnis: '—' },
-          { label: 'In der Gastronomie (Median 2.570 €)', formel: '3.500 € vs. 2.570 €', ergebnis: 'Perzentil 91' },
-          { label: 'In der IT (Median 5.141 €)', formel: '3.500 € vs. 5.141 €', ergebnis: 'Perzentil 13' },
+          { label: 'In der Gastronomie (Median 2.570 €)', formel: '3.500 € vs. 2.570 €', ergebnis: 'Perzentil 89' },
+          { label: 'In der IT (Median 5.141 €)', formel: '3.500 € vs. 5.141 €', ergebnis: 'Perzentil 15' },
         ],
-        fazit: 'Mit 3.500 € gehört man in der Gastronomie zur Spitze (91. Perzentil), in der IT dagegen ans untere Ende (13.). Dieselbe Zahl, völlig andere Einordnung — die Branche ist der stärkste einzelne Hebel beim Gehalt.',
+        fazit: 'Mit 3.500 € gehört man in der Gastronomie zur Spitzengruppe (89. Perzentil), in der IT dagegen ins untere Sechstel (15.). Dieselbe Zahl, völlig andere Einordnung — die Branche ist der stärkste einzelne Hebel beim Gehalt.',
       },
       {
         typ: 'tabelle',

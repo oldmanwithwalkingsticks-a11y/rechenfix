@@ -11,6 +11,8 @@ export interface WaermepumpeEingabe {
   gaspreis: number;              // ct/kWh
   anschaffungskosten: number;    // €
   foerderungProzent: number;     // %
+  /** Obergrenze der förderfähigen Kosten (BEG: 28.000 € für die 1. Wohneinheit); fehlt sie: keine Grenze */
+  foerderfaehigeKostenMax?: number;
   jahre: number;                 // Betrachtungszeitraum
 }
 
@@ -108,7 +110,9 @@ export function berechneWaermepumpe(e: WaermepumpeEingabe): WaermepumpeErgebnis 
 
   const ersparnisJaehrlich = betriebskostenAlt - betriebskostenWp;
 
-  const foerderungEuro = e.anschaffungskosten * (e.foerderungProzent / 100);
+  // W182: Förderquote nur auf die förderfähigen Kosten (BEG-Obergrenze); vorher auf die volle Investition.
+  const foerderfaehig = Math.min(e.anschaffungskosten, e.foerderfaehigeKostenMax ?? Infinity);
+  const foerderungEuro = foerderfaehig * (e.foerderungProzent / 100);
   const nettoInvestition = e.anschaffungskosten - foerderungEuro;
 
   const amortisationJahre = ersparnisJaehrlich > 0

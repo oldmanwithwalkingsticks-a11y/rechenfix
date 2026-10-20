@@ -1,6 +1,7 @@
 import type { RechnerConfig } from './types';
 import { SPRITPREISE_REFERENZ } from '@/lib/berechnungen/spritpreise-parameter';
 import { STROMPREIS_2026 } from '@/lib/berechnungen/strompreis';
+import { berechneAutokosten } from '@/lib/berechnungen/autokosten';
 
 // Lokale Helfer für deutsche Zahlformatierung in den W19-Content-Bausteinen
 // (Komma als Dezimaltrenner). Nur in diesem Modul verwendet.
@@ -16,18 +17,21 @@ const STROM = STROMPREIS_2026.durchschnitt_bdew / 100;
 // bei knapper ICU-Ausstattung faellt das auf englische Trennzeichen zurueck.
 const eurT = (n: number) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-// Beispielfahrzeug des autokosten-rechner: 25.000 €, 15.000 km/Jahr,
-// 7 l/100 km Benzin. Nur der Kraftstoff haengt am Spritpreis, die uebrigen
-// Posten sind feste Annahmen. Anteile und Summe werden daraus gerechnet,
-// damit sie bei jeder Preisaenderung stimmig bleiben.
-const AK_KRAFTSTOFF = 150 * 7 * SPRITPREISE_REFERENZ.superE10;
-const AK_FEST = { wertverlust: 2427, versicherung: 960, wartung: 650, parken: 540, steuerTuev: 185 };
-const AK_FIX = Object.values(AK_FEST).reduce((a, b) => a + b, 0);
-// Jahressumme fuer eine beliebige Fahrleistung. Regel aus den Bestandswerten
-// rueckgerechnet und belegt: beim alten Preis von 1,75 €/l ergibt sie
-// 5.374,50 / 6.599,50 / 7.212,00 € fuer 5.000 / 15.000 / 20.000 km.
-const akJahr = (km: number) => AK_FIX + (km / 100) * 7 * SPRITPREISE_REFERENZ.superE10;
-const AK_GESAMT = akJahr(15000);
+// Beispielfahrzeug des autokosten-rechner = seine Startwerte (25.000 €, 5 Jahre, 15.000 km/Jahr,
+// 7 l/100 km Benzin zum SSOT-Spritpreis, 80 €/Monat Versicherung, 150 € Steuer, 600 € Wartung,
+// 400 € Reifen, 120 € TÜV alle 2 Jahre, 15 €/Monat Pflege), gerechnet mit der Rechner-Lib.
+// W182: vorher eigene Annahmen (Wartung 650 €, Parken 540 €, Steuer+TÜV 185 €) mit 6.599,50 € statt
+// der 6.614 € des Rechners bei 1,75 €/l; der Rechner startete wegen eines useEffect ebenfalls mit 1,75 €.
+const akErgebnis = (km: number) => berechneAutokosten({
+  kaufpreis: 25000, fahrzeugAlter: 0, haltedauer: 5, finanzierung: 'bar', monatlicheRate: 350,
+  versicherungMonat: 80, kfzSteuerJahr: 150, fahrleistungJahr: km, verbrauch: 7, antrieb: 'benzin',
+  kraftstoffpreis: SPRITPREISE_REFERENZ.superE10, wartungJahr: 600, reifenJahr: 400, tuevZweiJahre: 120,
+  parkkostenMonat: 0, waschanlagePflegeMonat: 15,
+})!;
+const akJahr = (km: number) => akErgebnis(km).gesamtJahr;
+const AK = akErgebnis(15000);
+const AK_GESAMT = AK.gesamtJahr;
+const akBlock = (label: string) => AK.kostenBloecke.find((b) => b.label === label)?.jahr ?? 0;
 const akAnteil = (n: number) => Math.round((n / AK_GESAMT) * 100);
 
 export const autoRechner: RechnerConfig[] = [
@@ -794,7 +798,7 @@ export const autoRechner: RechnerConfig[] = [
   },
   {
     slug: 'autokosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Autokosten-Rechner',
     beschreibung: 'Autokosten berechnen: Monatliche und jährliche Gesamtkosten Ihres Autos — von Versicherung über Sprit bis Wertverlust.',
     kategorie: 'Auto & Verkehr',
@@ -803,7 +807,7 @@ export const autoRechner: RechnerConfig[] = [
     metaDescription: 'Autokosten berechnen: Wertverlust, Sprit, Versicherung, Steuer, Wartung und mehr ✓ Kosten pro km ✓ Kostenaufschlüssung ✓ KI-Erklärung.',
     keywords: ['autokosten rechner', 'autokosten berechnen', 'was kostet ein auto im monat', 'autokosten pro km', 'kosten auto pro monat', 'wertverlust auto', 'unterhaltskosten auto', 'kfz kosten rechner', 'auto gesamtkosten', 'kosten pro kilometer'],
     icon: '🚗',
-    beispiel: 'Neuwagen 25.000 €, 5 Jahre Haltedauer, 15.000 km/Jahr, 7 l/100 km Benzin (1,75 €/l) → Wertverlust 202 €/Mon. | Sprit 153 €/Mon. | Versicherung 80 €/Mon. | Gesamt ca. 550 €/Monat = 0,44 €/km.',
+    beispiel: `Neuwagen 25.000 €, 5 Jahre Haltedauer, 15.000 km/Jahr, 7 l/100 km Benzin (${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l) → Wertverlust ${eurT(akBlock('Wertverlust') / 12)} €/Mon. | Sprit ${eurT(akBlock('Kraftstoff') / 12)} €/Mon. | Versicherung 80 €/Mon. | Gesamt ca. ${eurT(AK.gesamtMonat)} €/Monat = ${eur(AK.kostenProKm)} €/km.`,
     faq: [
       {
         frage: 'Wie viel kostet ein Auto im Monat?',
@@ -815,7 +819,7 @@ export const autoRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie berechne ich die Kosten pro Kilometer?',
-        antwort: 'Teilen Sie die jährlichen Gesamtkosten (inkl. Wertverlust, Sprit, Versicherung, Steuer, Wartung) durch die jährliche Fahrleistung. Beispiel: 6.850 € Jahreskosten ÷ 15.000 km = 0,46 €/km. Der Vollkosten-Kilometersatz liegt bei den meisten Autos zwischen 0,30 und 0,60 €/km.',
+        antwort: 'Teilen Sie die jährlichen Gesamtkosten (inkl. Wertverlust, Sprit, Versicherung, Steuer, Wartung) durch die jährliche Fahrleistung. Beispiel: 7.000 € Jahreskosten ÷ 15.000 km = 0,47 €/km. Der Vollkosten-Kilometersatz liegt bei den meisten Autos zwischen 0,30 und 0,60 €/km.',
       },
       {
         frage: 'Ist ein Elektroauto günstiger als ein Benziner?',
@@ -848,12 +852,12 @@ export const autoRechner: RechnerConfig[] = [
         typ: 'statistik',
         titel: 'Kostenblöcke eines Beispielfahrzeugs (25.000 €, 15.000 km/Jahr)',
         werte: [
-          { label: 'Wertverlust', wert: `${eurT(AK_FEST.wertverlust)} €/Jahr`, hinweis: `${akAnteil(AK_FEST.wertverlust)} % — der mit Abstand größte Posten` },
-          { label: 'Kraftstoff', wert: `${eurT(AK_KRAFTSTOFF)} €/Jahr`, hinweis: `${akAnteil(AK_KRAFTSTOFF)} % — 7 l/100 km zu ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l` },
-          { label: 'Versicherung', wert: '960 €/Jahr', hinweis: `${akAnteil(AK_FEST.versicherung)} % — Haftpflicht plus Kasko, je nach SF-Klasse` },
-          { label: 'Wartung & Reifen', wert: '650 €/Jahr', hinweis: `${akAnteil(AK_FEST.wartung)} % — Inspektion, Verschleiß, Reifenwechsel` },
-          { label: 'Parken & Pflege', wert: '540 €/Jahr', hinweis: `${akAnteil(AK_FEST.parken)} % — Stellplatzmiete, Waschanlage, Pflege` },
-          { label: 'Kfz-Steuer & TÜV', wert: '185 €/Jahr', hinweis: `${akAnteil(AK_FEST.steuerTuev)} % — gesetzlich, kaum beeinflussbar` },
+          { label: 'Wertverlust', wert: `${eurT(akBlock('Wertverlust'))} €/Jahr`, hinweis: `${akAnteil(akBlock('Wertverlust'))} % — der größte Posten` },
+          { label: 'Kraftstoff', wert: `${eurT(akBlock('Kraftstoff'))} €/Jahr`, hinweis: `${akAnteil(akBlock('Kraftstoff'))} % — 7 l/100 km zu ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l` },
+          { label: 'Versicherung', wert: `${eurT(akBlock('Versicherung'))} €/Jahr`, hinweis: `${akAnteil(akBlock('Versicherung'))} % — Haftpflicht plus Kasko, je nach SF-Klasse` },
+          { label: 'Wartung & Reifen', wert: `${eurT(akBlock('Wartung & Reifen'))} €/Jahr`, hinweis: `${akAnteil(akBlock('Wartung & Reifen'))} % — Inspektion, Verschleiß, Reifenwechsel` },
+          { label: 'Pflege', wert: `${eurT(akBlock('Parken & Pflege'))} €/Jahr`, hinweis: `${akAnteil(akBlock('Parken & Pflege'))} % — Waschanlage und Pflege (ohne Stellplatzmiete)` },
+          { label: 'Kfz-Steuer & TÜV', wert: `${eurT(akBlock('Kfz-Steuer') + akBlock('TÜV / HU+AU'))} €/Jahr`, hinweis: `${akAnteil(akBlock('Kfz-Steuer') + akBlock('TÜV / HU+AU'))} % — gesetzlich, kaum beeinflussbar` },
           { label: 'Gesamt', wert: `${eurT(AK_GESAMT)} €/Jahr`, hinweis: `≈ ${eurT(AK_GESAMT / 12)} €/Monat = ${eur(AK_GESAMT / 15000)} €/km bei 15.000 km Jahresfahrleistung` },
         ],
       },
@@ -881,7 +885,7 @@ export const autoRechner: RechnerConfig[] = [
           { label: 'Auf den Tag umlegen', formel: `${eurT(AK_GESAMT)} € ÷ 365`, ergebnis: `${eur(AK_GESAMT / 365)} €/Tag` },
           { label: 'Auf den Monat umlegen', formel: `${eurT(AK_GESAMT)} € ÷ 12`, ergebnis: `${eur(AK_GESAMT / 12)} €/Monat` },
         ],
-        fazit: 'Das Beispielfahrzeug kostet rund 0,44 € pro gefahrenem Kilometer, etwa 18 € pro Tag oder 550 € im Monat. Der Kilometersatz ist das fairste Vergleichsmaß, weil er Anschaffung und laufende Kosten zusammenfasst. Bei den meisten Autos liegt der Vollkosten-Kilometersatz zwischen 0,30 und 0,60 €/km — wer deutlich darüber liegt, fährt entweder wenig oder ein teures Fahrzeug. Zum Vergleich: Die steuerliche Pendlerpauschale von 0,30 €/km (ab dem 21. Kilometer 0,38 €) deckt die realen Vollkosten oft nicht ab, sondern nur einen Teil davon — ein gutes Argument, die eigenen Kosten einmal ehrlich durchzurechnen.',
+        fazit: `Das Beispielfahrzeug kostet rund ${eur(AK.kostenProKm)} € pro gefahrenem Kilometer, etwa ${eurT(AK_GESAMT / 365)} € pro Tag oder ${eurT(AK.gesamtMonat)} € im Monat. Der Kilometersatz ist das fairste Vergleichsmaß, weil er Anschaffung und laufende Kosten zusammenfasst. Bei den meisten Autos liegt der Vollkosten-Kilometersatz zwischen 0,30 und 0,60 €/km — wer deutlich darüber liegt, fährt entweder wenig oder ein teures Fahrzeug. Zum Vergleich: Die steuerliche Entfernungspauschale von 0,38 € je Entfernungskilometer (seit 2026 ab dem ersten Kilometer) gilt nur für die einfache Strecke, umgerechnet also rund 0,19 € je gefahrenem Kilometer — sie deckt die realen Vollkosten bei Weitem nicht ab. Ein gutes Argument, die eigenen Kosten einmal ehrlich durchzurechnen.`,
       },
       {
         typ: 'tabelle',
@@ -963,7 +967,7 @@ export const autoRechner: RechnerConfig[] = [
   },
   {
     slug: 'leasing-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Leasing-Rechner',
     beschreibung: 'Leasing berechnen: Leasingrate, Gesamtkosten und Vergleich Leasing vs. Finanzierung für Ihr Wunschfahrzeug.',
     kategorie: 'Auto & Verkehr',
@@ -972,11 +976,11 @@ export const autoRechner: RechnerConfig[] = [
     metaDescription: 'Leasing berechnen: Leasingrate, Gesamtkosten und Vergleich mit Finanzierung ✓ Leasingfaktor ✓ Kilometerrisiko ✓ KI-Erklärung.',
     keywords: ['leasing rechner', 'leasingrate berechnen', 'leasingfaktor', 'leasing vs finanzierung', 'auto leasing', 'leasing gesamtkosten', 'mehrkilometer leasing', 'leasing kosten'],
     icon: '🚘',
-    beispiel: 'Beispiel: 35.000 € Listenpreis, Faktor 0,85 %, 36 Monate → Netto-Rate ≈ 297,50 €, Brutto ≈ 354,03 €. Gesamtkosten ≈ 12.745 €.',
+    beispiel: 'Beispiel: 35.000 € Bruttolistenpreis, Leasingfaktor 0,85, 36 Monate → Rate 297,50 € (brutto, inkl. MwSt). Gesamtkosten ohne Anzahlung 10.710 €.',
     faq: [
       {
         frage: 'Wie berechne ich meine Leasingrate?',
-        antwort: 'Die Standard-Formel lautet: (Listenpreis − Anzahlung) × Leasingfaktor ÷ 100 = Netto-Monatsrate. Dazu kommen 19 % Mehrwertsteuer. Beispiel: 35.000 € × 0,85 % = 297,50 € netto oder rund 354 € brutto. Unser Rechner macht das automatisch und zeigt auch die Gesamtkosten.',
+        antwort: 'Die Standard-Formel lautet: Bruttolistenpreis × Leasingfaktor ÷ 100 = monatliche Rate. Beim Privatleasing sind Listenpreis und Rate beide brutto, es kommt also keine Mehrwertsteuer mehr hinzu (bei Gewerbeangeboten beide netto). Beispiel: 35.000 € × 0,85 ÷ 100 = 297,50 € im Monat. Eine Anzahlung zieht der Rechner vereinfacht vom Listenpreis ab; Angebote mit Anzahlung vergleicht man besser über den Gesamtkostenfaktor. Unser Rechner zeigt auch die Gesamtkosten.',
       },
       {
         frage: 'Was ist ein guter Leasingfaktor?',

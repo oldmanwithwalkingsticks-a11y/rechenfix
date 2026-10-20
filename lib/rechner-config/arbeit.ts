@@ -1829,7 +1829,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'mutterschutz-rechner',
-    letzteAktualisierung: '2026-06-29',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Mutterschutz-Rechner',
     beschreibung: 'Mutterschutz berechnen: Beginn, Ende, Dauer und Mutterschaftsgeld — mit allen Fristen auf einen Blick.',
     kategorie: 'Arbeit & Recht',
@@ -1906,7 +1906,7 @@ export const arbeitRechner: RechnerConfig[] = [
           { label: 'Entbindungstermin (ET)', formel: 'errechneter Termin', ergebnis: '15. August 2026' },
           { label: 'Beginn der Schutzfrist', formel: 'ET − 6 Wochen (42 Tage)', ergebnis: '4. Juli 2026' },
           { label: 'Ende der Schutzfrist', formel: 'Geburt + 8 Wochen', ergebnis: '10. Oktober 2026' },
-          { label: 'Gesamtdauer', formel: '6 + 8 Wochen', ergebnis: '14 Wochen (98 Tage)' },
+          { label: 'Gesamtdauer', formel: '6 Wochen + Entbindungstag + 8 Wochen', ergebnis: '99 Tage' },
           { label: 'Monatliches Einkommen', formel: 'Mutterschaftsgeld + Arbeitgeberzuschuss', ergebnis: '2.500 € (volles Netto)' },
         ],
         fazit: 'Bei einem errechneten Termin am 15. August 2026 läuft der Mutterschutz vom 4. Juli bis zum 10. Oktober 2026. Das bisherige Nettoeinkommen von 2.500 € bleibt über das gesetzliche Mutterschaftsgeld (max. 13 € pro Tag) und den Arbeitgeberzuschuss vollständig erhalten — es entsteht kein Einkommensverlust.',

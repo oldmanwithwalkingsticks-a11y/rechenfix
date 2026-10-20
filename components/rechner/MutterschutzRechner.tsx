@@ -41,6 +41,13 @@ const BESCHAEFTIGUNG_ARTEN: { key: Beschaeftigung; label: string }[] = [
   { key: 'selbststaendig', label: 'Selbstständig' },
 ];
 
+/** 99 Tage → „14 Wochen und 1 Tag“ (W182: vorher die Dezimalzahl gesamtWochen mit Punkt, „14.1 Wochen“). */
+function wochenText(tage: number): string {
+  const w = Math.floor(tage / 7);
+  const r = tage % 7;
+  return r ? `${w} Wochen und ${r} ${r === 1 ? 'Tag' : 'Tage'}` : `${w} Wochen`;
+}
+
 export default function MutterschutzRechner() {
   // SSG-Hydration-Guard: Geburtstermin leer initialisieren.
   const [geburtstermin, setGeburtstermin] = useState('');
@@ -196,7 +203,7 @@ export default function MutterschutzRechner() {
             </div>
             <div className="mt-3 text-center">
               <span className="text-2xl font-bold">{ergebnis.gesamtTage} Tage</span>
-              <span className="text-white/70 text-sm ml-2">({ergebnis.gesamtWochen} Wochen)</span>
+              <span className="text-white/70 text-sm ml-2">({wochenText(ergebnis.gesamtTage)})</span>
             </div>
           </div>
 
@@ -222,7 +229,7 @@ export default function MutterschutzRechner() {
               </div>
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                 <span className="text-gray-600 dark:text-gray-400">Gesamtdauer</span>
-                <span className="font-bold text-gray-800 dark:text-gray-200">{ergebnis.gesamtWochen} Wochen ({ergebnis.gesamtTage} Tage)</span>
+                <span className="font-bold text-gray-800 dark:text-gray-200">{wochenText(ergebnis.gesamtTage)} ({ergebnis.gesamtTage} Tage)</span>
               </div>
               {ergebnis.verlaengerungTage > 0 && (
                 <div className="flex justify-between text-sm">

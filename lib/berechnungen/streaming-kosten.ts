@@ -4,23 +4,32 @@ export interface StreamingDienst {
   varianten: { label: string; preis: number }[];
 }
 
+/**
+ * Listenpreise Deutschland (Monatsabo), Stand 20.10.2026. W182: Netflix (Erhöhung 04.09.2026), Disney+
+ * (Herbst 2025), Spotify (14.08.2025), YouTube Premium (Juni 2026), RTL+ (Januar 2026), Paramount+ und
+ * WOW nach den Anbieter- bzw. Preisseiten aktualisiert; vorher Stand Anfang 2025 (Netflix Standard 13,99 €,
+ * Spotify 11,99 €, Disney+ 9,99 €). Quellen: help.netflix.com/de/node/24926, disneyplus.com/de-de,
+ * spotify.com/de/premium, wowtv.de; YouTube, RTL+ und Paramount+ laut Fachpresse.
+ */
+export const STREAMING_PREISE_STAND = '2026-10-20';
+
 export const streamingDienste: StreamingDienst[] = [
   {
     id: 'netflix',
     name: 'Netflix',
     varianten: [
-      { label: 'Standard mit Werbung', preis: 4.99 },
-      { label: 'Standard', preis: 13.99 },
-      { label: 'Premium', preis: 19.99 },
+      { label: 'Standard mit Werbung', preis: 6.99 },
+      { label: 'Standard', preis: 15.99 },
+      { label: 'Premium', preis: 21.99 },
     ],
   },
   {
     id: 'disney',
     name: 'Disney+',
     varianten: [
-      { label: 'Standard mit Werbung', preis: 5.99 },
-      { label: 'Standard', preis: 9.99 },
-      { label: 'Premium', preis: 13.99 },
+      { label: 'Standard mit Werbung', preis: 6.99 },
+      { label: 'Standard', preis: 10.99 },
+      { label: 'Premium', preis: 15.99 },
     ],
   },
   {
@@ -32,8 +41,9 @@ export const streamingDienste: StreamingDienst[] = [
     id: 'spotify',
     name: 'Spotify',
     varianten: [
-      { label: 'Premium', preis: 11.99 },
-      { label: 'Family', preis: 17.99 },
+      { label: 'Premium', preis: 12.99 },
+      { label: 'Family', preis: 21.99 },
+      { label: 'Duo', preis: 17.99 },
     ],
   },
   {
@@ -48,8 +58,8 @@ export const streamingDienste: StreamingDienst[] = [
     id: 'youtube',
     name: 'YouTube Premium',
     varianten: [
-      { label: 'Einzelperson', preis: 13.99 },
-      { label: 'Family', preis: 23.99 },
+      { label: 'Einzelperson', preis: 14.99 },
+      { label: 'Family', preis: 27.99 },
     ],
   },
   {
@@ -73,22 +83,22 @@ export const streamingDienste: StreamingDienst[] = [
     id: 'wow',
     name: 'WOW',
     varianten: [
-      { label: 'Serien', preis: 7.99 },
-      { label: 'Sport', preis: 29.99 },
+      { label: 'Filme & Serien', preis: 9.98 },
+      { label: 'Live-Sport (12-Monats-Abo)', preis: 29.99 },
     ],
   },
   {
     id: 'rtlplus',
     name: 'RTL+',
     varianten: [
-      { label: 'Premium', preis: 7.99 },
-      { label: 'Max', preis: 12.99 },
+      { label: 'Premium', preis: 9.99 },
+      { label: 'Premium werbefrei', preis: 12.99 },
     ],
   },
   {
     id: 'paramount',
     name: 'Paramount+',
-    varianten: [{ label: 'Standard', preis: 7.99 }],
+    varianten: [{ label: 'Standard', preis: 9.99 }],
   },
   {
     id: 'appletv',

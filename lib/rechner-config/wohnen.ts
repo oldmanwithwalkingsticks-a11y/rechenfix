@@ -1,9 +1,20 @@
 import type { RechnerConfig } from './types';
+import { ARBEITSPREIS_DURCHSCHNITT, ARBEITSPREIS_NEUKUNDEN, typischeJahreskosten, arbeitspreisAusMischpreis } from '@/lib/berechnungen/stromvergleich';
+import { getStrompreis } from '@/lib/berechnungen/strompreis';
+
+// Stromvergleich (W182): Beispielwerte aus der Strompreis-SSOT. BDEW-Mittel und Neukundentarif sind
+// Mischpreise inkl. Grundpreis; der Rechner zerlegt sie in Arbeitspreis + 10 €/Monat.
+const SV_FMT = (n: number, d = 2) => n.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
+const SV_DS = typischeJahreskosten(2500);
+const SV_NK = Math.round((2500 * ARBEITSPREIS_NEUKUNDEN + 12000)) / 100;
+// Stromkosten-Rechner (W182): BDEW-Mittel 37 ct inkl. Grundpreis = Arbeitspreis SK_AP + 12 €/Monat.
+const SK_AP = arbeitspreisAusMischpreis(getStrompreis('durchschnitt_bdew'), 12);
+const SK = (kwh: number) => Math.round(kwh * SK_AP + 14400) / 100;
 
 export const wohnenRechner: RechnerConfig[] = [
   {
     slug: 'stromkosten-rechner',
-    letzteAktualisierung: '2026-06-11',
+    letzteAktualisierung: '2026-10-20',
     quellen: [
       { titel: 'BDEW-Strompreisanalyse 2026 (Bundesverband der Energie- und Wasserwirtschaft)', hinweis: 'Durchschnittlicher Haushaltsstrompreis 37,2 ct/kWh, Preiszusammensetzung, Referenzverbrauch 3.500 kWh/Jahr.' },
       { titel: 'Bundesnetzagentur (BNetzA): Netzentgelte und Strommarkt', url: 'https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html' },
@@ -18,14 +29,14 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Stromkosten berechnen ✓ Nach Verbrauch & Tarif ✓ Pro Tag, Monat, Jahr ✓ Mit Verbrauchstabelle ✓ Kostenlos. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['stromkosten rechner', 'stromkosten berechnen', 'stromverbrauch kosten', 'strompreis rechner', 'kwh kosten'],
     icon: '⚡',
-    beispiel: 'Beispiel: 2.500 kWh × 37 ct/kWh + 12 €/Monat Grundpreis = 1.069 € pro Jahr',
+    beispiel: `Beispiel: 2.500 kWh × ${SV_FMT(SK_AP)} ct/kWh + 12 €/Monat Grundpreis = ${SV_FMT(SK(2500), 0)} € pro Jahr (BDEW-Mittel 37 ct/kWh inkl. Grundpreis)`,
     affiliate: { programId: 'check24', context: 'strom' },
     // contentBloecke (W19): „Zusammensetzungs-Leitformat" — Preis-Anteile (kreis) +
     // Verbrauchs-Skalierung (balken) + Haushalts-Tabelle. Werte gespiegelt aus
     // lib/berechnungen/strompreis.ts (STROMPREIS_2026.durchschnitt_bdew = 37 ct).
-    // Beispiel via berechneStromkosten(3.500 kWh, 37 ct, 12 €/Mon) = 1.439 €/Jahr,
-    // ~119,92 €/Mon, effektiv 41,1 ct/kWh. Quelle BDEW-Strompreisanalyse 2026,
-    // Stand 06/2026. Preise als Durchschnitt/Spanne, kein Beratungs-YMYL.
+    // W182: Die 37 ct des BDEW enthalten den Grundpreis anteilig (3.500 kWh). Vorher wurde mit 37 ct
+    // Arbeitspreis + 12 €/Monat gerechnet (3.500 kWh: 1.439 €, „effektiv 41,1 ct“), also der Grundpreis
+    // doppelt. Jetzt Arbeitspreis SK_AP = 37 − 144 € ÷ 3.500 kWh = 32,89 ct; 3.500 kWh → 1.295 € = 37 ct.
     contentBloecke: [
       {
         typ: 'text',
@@ -47,12 +58,12 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Jahreskosten bei 3.500 kWh',
         schritte: [
-          { label: 'Arbeitspreis: 3.500 kWh × 37 ct/kWh', formel: '3.500 × 0,37 €', ergebnis: '1.295,00 €' },
+          { label: `Arbeitspreis: 3.500 kWh × ${SV_FMT(SK_AP)} ct/kWh`, formel: `3.500 × ${SV_FMT(SK_AP / 100, 4)} €`, ergebnis: `${SV_FMT(SK(3500) - 144)} €` },
           { label: 'Grundpreis: 12 €/Monat × 12 Monate', formel: '12 € × 12', ergebnis: '144,00 €' },
-          { label: 'Jahreskosten gesamt', formel: '1.295 € + 144 €', ergebnis: '1.439,00 €' },
-          { label: 'Effektiver kWh-Preis', formel: '1.439 € ÷ 3.500 kWh', ergebnis: '41,1 ct/kWh' },
+          { label: 'Jahreskosten gesamt', formel: `${SV_FMT(SK(3500) - 144)} € + 144 €`, ergebnis: `${SV_FMT(SK(3500))} €` },
+          { label: 'Effektiver kWh-Preis', formel: `${SV_FMT(SK(3500))} € ÷ 3.500 kWh`, ergebnis: `${SV_FMT(SK(3500) / 35, 1)} ct/kWh` },
         ],
-        fazit: 'Bei 3.500 kWh, einem Arbeitspreis von 37 ct/kWh und 12 €/Monat Grundpreis ergeben sich rund 1.439 € im Jahr — knapp 120 € im Monat. Der effektive kWh-Preis (41,1 ct) liegt über dem reinen Arbeitspreis, weil der Grundpreis auf jede Kilowattstunde umgelegt wird. Bei weniger Verbrauch fällt dieser Aufschlag pro kWh noch deutlicher aus — und genau deshalb lohnt es sich, beim Tarifvergleich nicht nur auf den Arbeitspreis, sondern auf diese effektive Gesamtgröße zu schauen. Ein Tarif mit niedrigerem Arbeitspreis, aber höherem Grundpreis kann unterm Strich teurer sein.',
+        fazit: `Bei 3.500 kWh, einem Arbeitspreis von ${SV_FMT(SK_AP)} ct/kWh und 12 €/Monat Grundpreis ergeben sich rund ${SV_FMT(SK(3500), 0)} € im Jahr — knapp ${SV_FMT(Math.ceil(SK(3500) / 12), 0)} € im Monat. Der effektive kWh-Preis (${SV_FMT(SK(3500) / 35, 1)} ct, das BDEW-Mittel) liegt über dem reinen Arbeitspreis, weil der Grundpreis auf jede Kilowattstunde umgelegt wird. Bei weniger Verbrauch fällt dieser Aufschlag pro kWh noch deutlicher aus — und genau deshalb lohnt es sich, beim Tarifvergleich nicht nur auf den Arbeitspreis, sondern auf diese effektive Gesamtgröße zu schauen. Ein Tarif mit niedrigerem Arbeitspreis, aber höherem Grundpreis kann unterm Strich teurer sein.`,
       },
       {
         typ: 'text',
@@ -64,24 +75,24 @@ export const wohnenRechner: RechnerConfig[] = [
         titel: 'Typischer Verbrauch nach Haushaltsgröße',
         kopf: ['Haushalt', 'Verbrauch (kWh/Jahr)', '~Kosten/Jahr'],
         zeilen: [
-          ['1 Person', '~1.500', '~699 €'],
-          ['2 Personen', '~2.500', '~1.069 €'],
-          ['3 Personen', '~3.500', '~1.439 €'],
-          ['4 Personen', '~4.250', '~1.717 €'],
+          ['1 Person', '~1.500', `~${SV_FMT(SK(1500), 0)} €`],
+          ['2 Personen', '~2.500', `~${SV_FMT(SK(2500), 0)} €`],
+          ['3 Personen', '~3.500', `~${SV_FMT(SK(3500), 0)} €`],
+          ['4 Personen', '~4.250', `~${SV_FMT(SK(4250), 0)} €`],
         ],
-        fussnote: 'Orientierungswerte, gerechnet mit 37 ct/kWh + 12 €/Monat Grundpreis. Mit elektrischer Warmwasserbereitung, Wärmepumpe oder E-Auto liegt der Verbrauch deutlich höher.',
+        fussnote: `Orientierungswerte, gerechnet mit ${SV_FMT(SK_AP)} ct/kWh + 12 €/Monat Grundpreis (zusammen das BDEW-Mittel von 37 ct/kWh bei 3.500 kWh). Mit elektrischer Warmwasserbereitung, Wärmepumpe oder E-Auto liegt der Verbrauch deutlich höher.`,
       },
       {
         typ: 'diagramm',
         variante: 'balken',
         titel: 'Stromkosten nach Verbrauch',
         daten: [
-          { label: '1.500 kWh', wert: 699, einheit: '€' },
-          { label: '2.500 kWh', wert: 1069, einheit: '€' },
-          { label: '3.500 kWh', wert: 1439, einheit: '€' },
-          { label: '4.250 kWh', wert: 1717, einheit: '€' },
+          { label: '1.500 kWh', wert: Math.round(SK(1500)), einheit: '€' },
+          { label: '2.500 kWh', wert: Math.round(SK(2500)), einheit: '€' },
+          { label: '3.500 kWh', wert: Math.round(SK(3500)), einheit: '€' },
+          { label: '4.250 kWh', wert: Math.round(SK(4250)), einheit: '€' },
         ],
-        fussnote: 'Jahreskosten bei 37 ct/kWh + 12 €/Monat Grundpreis. Der Grundpreis (144 €/Jahr) bildet den Sockel, die Kosten steigen darüber linear mit dem Verbrauch.',
+        fussnote: `Jahreskosten bei ${SV_FMT(SK_AP)} ct/kWh + 12 €/Monat Grundpreis. Der Grundpreis (144 €/Jahr) bildet den Sockel, die Kosten steigen darüber linear mit dem Verbrauch.`,
       },
       {
         typ: 'text',
@@ -122,7 +133,7 @@ export const wohnenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Wie berechnet man Stromkosten?',
-        antwort: 'Stromkosten = Verbrauch in kWh × Arbeitspreis in ct/kWh ÷ 100 + Grundpreis × 12 Monate. Beispiel: 2.500 kWh × 37 ct ÷ 100 = 925 € Arbeitspreis + 144 € Grundpreis = 1.069 € pro Jahr.',
+        antwort: `Stromkosten = Verbrauch in kWh × Arbeitspreis in ct/kWh ÷ 100 + Grundpreis × 12 Monate. Beispiel: 2.500 kWh × ${SV_FMT(SK_AP)} ct ÷ 100 = ${SV_FMT(SK(2500) - 144)} € Arbeitspreis + 144 € Grundpreis = ${SV_FMT(SK(2500))} € pro Jahr.`,
       },
       {
         frage: 'Wie viel Strom verbraucht ein 2-Personen-Haushalt?',
@@ -531,7 +542,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'heizkosten-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Heizkostenrechner',
     beschreibung: 'Heizkosten berechnen: Gas, Öl, Fernwärme, Wärmepumpe oder Pellets — mit Energieträger-Vergleich.',
     kategorie: 'Wohnen & Energie',
@@ -560,7 +571,7 @@ export const wohnenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Lohnt sich eine Wärmepumpe gegenüber Gas 2026?',
-        antwort: 'Bei Neubau oder gut gedämmtem Altbau (Heizlast unter 100 kWh/m²) ist die Wärmepumpe heute fast immer wirtschaftlicher: laufende Kosten 1.100–1.400 €/Jahr für 100 m² gegenüber 1.500–1.800 € bei Gas. Bei unsaniertem Altbau (Heizlast 200+ kWh/m²) und ohne Niedertemperatur-Heizkörper bleibt Gas oft günstiger, weil die Wärmepumpe mit hohen Vorlauftemperaturen ineffizient arbeitet (JAZ unter 3,0). Die BEG-Förderung 2026 deckt bis zu 70 % der Investitionskosten der Wärmepumpe ab (Grundförderung 30 % + Klimageschwindigkeitsbonus 20 % + Einkommensbonus bis 30 %, gedeckelt bei 30.000 € förderfähigen Kosten). Faustregel: Bei Heizungstausch nach 2026 die Wärmepumpe nur dann skippen, wenn der hydraulische Abgleich klar zeigt, dass die Vorlauftemperaturen über 55 °C liegen müssen.',
+        antwort: 'Bei Neubau oder gut gedämmtem Altbau (Heizlast unter 100 kWh/m²) ist die Wärmepumpe heute fast immer wirtschaftlicher: laufende Kosten 1.100–1.400 €/Jahr für 100 m² gegenüber 1.500–1.800 € bei Gas. Bei unsaniertem Altbau (Heizlast 200+ kWh/m²) und ohne Niedertemperatur-Heizkörper bleibt Gas oft günstiger, weil die Wärmepumpe mit hohen Vorlauftemperaturen ineffizient arbeitet (JAZ unter 3,0). Die BEG-Förderung deckt für Anträge ab 21.07.2026 bis zu 70 % der förderfähigen Kosten ab, in der niedrigsten Einkommensstufe bis zu 80 % (Grundförderung 30 % + Klimageschwindigkeitsbonus 16 % + Einkommensbonus 10 bis 40 %, förderfähig höchstens 28.000 € für die erste Wohneinheit). Faustregel: Bei Heizungstausch nach 2026 die Wärmepumpe nur dann skippen, wenn der hydraulische Abgleich klar zeigt, dass die Vorlauftemperaturen über 55 °C liegen müssen.',
       },
     ],
     contentBloecke: [
@@ -649,7 +660,7 @@ export const wohnenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Förderung und Wechsel: BEG, CO₂-Preis und hydraulischer Abgleich',
-        html: `<p>Beim Wechsel auf eine erneuerbare Heizung greift die <strong>BEG-Förderung (KfW 458)</strong>: 30 Prozent Grundförderung, dazu Klimageschwindigkeitsbonus (20 Prozent beim Tausch alter fossiler Anlagen), Einkommensbonus (30 Prozent unter 40.000 Euro zu versteuerndem Haushaltseinkommen) und Effizienzbonus (5 Prozent), gedeckelt bei 70 Prozent und maximal 30.000 Euro je Wohneinheit.</p><p>Eine 25.000-Euro-Wärmepumpe kann nach Förderung netto nur rund 7.500 Euro kosten — das verschiebt die Wirtschaftlichkeit deutlich. Hinzu kommt der nationale <strong>CO₂-Preis</strong>, der Gas und Öl Jahr für Jahr verteuert. Vor jedem Heizungstausch lohnt ein hydraulischer Abgleich; er senkt den Verbrauch um 5 bis 15 Prozent, ganz ohne neue Anlage. Aktuelle Förderkonditionen und Energieträger-Informationen veröffentlicht das BMWK (siehe Quellen). Für die langfristige Rechnung gilt: Wer heute zwischen fossiler Heizung und Wärmepumpe abwägt, sollte nicht nur die aktuellen Jahreskosten vergleichen, sondern auch die absehbare Verteuerung von Gas und Öl über den steigenden CO₂-Preis einpreisen. Genau diese Dynamik verbessert die Wirtschaftlichkeit erneuerbarer Heizsysteme mit jedem Jahr ein Stück weiter.</p>`,
+        html: `<p>Beim Wechsel auf eine erneuerbare Heizung greift die <strong>BEG-Förderung (KfW 458)</strong>: 30 Prozent Grundförderung, dazu Klimageschwindigkeitsbonus (16 Prozent beim Tausch alter fossiler Anlagen) und ein Einkommensbonus von 10 bis 40 Prozent je nach zu versteuerndem Haushaltseinkommen (bis 50.000 Euro), gedeckelt bei 70 Prozent, in der niedrigsten Einkommensstufe bei 80 Prozent, und förderfähig höchstens 28.000 Euro für die erste Wohneinheit (Anträge ab 21.07.2026).</p><p>Eine 25.000-Euro-Wärmepumpe kann nach Förderung netto nur rund 7.500 Euro (70 %) bis 5.000 Euro (80 %) kosten — das verschiebt die Wirtschaftlichkeit deutlich. Hinzu kommt der nationale <strong>CO₂-Preis</strong>, der Gas und Öl Jahr für Jahr verteuert. Vor jedem Heizungstausch lohnt ein hydraulischer Abgleich; er senkt den Verbrauch um 5 bis 15 Prozent, ganz ohne neue Anlage. Aktuelle Förderkonditionen und Energieträger-Informationen veröffentlicht das BMWK (siehe Quellen). Für die langfristige Rechnung gilt: Wer heute zwischen fossiler Heizung und Wärmepumpe abwägt, sollte nicht nur die aktuellen Jahreskosten vergleichen, sondern auch die absehbare Verteuerung von Gas und Öl über den steigenden CO₂-Preis einpreisen. Genau diese Dynamik verbessert die Wirtschaftlichkeit erneuerbarer Heizsysteme mit jedem Jahr ein Stück weiter.</p>`,
       },
       {
         typ: 'vergleich',
@@ -1412,11 +1423,11 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Stromvergleich-Rechner: Aktuelle Stromkosten berechnen und mit günstigen Tarifen vergleichen ✓ Sparpotenzial ermitteln ✓ Ökostrom ✓ KI-Erklärung.',
     keywords: ['stromvergleich rechner', 'stromanbieter vergleichen', 'stromkosten vergleich', 'strom sparen', 'günstiger strom', 'stromtarif vergleichen', 'ökostrom vergleich', 'strompreis vergleich', 'stromanbieter wechseln', 'stromvergleich 2026'],
     icon: '🔌',
-    beispiel: 'Beispiel: 2.500 kWh × 37 ct/kWh = 925 € + 120 € Grundpreis (10 €/Monat) = 1.045 €/Jahr (BDEW-Mittel). Günstigster Festpreis-Neukunden-Tarif: 945 €/Jahr → Sparpotenzial: 100 €.',
+    beispiel: `Beispiel 2.500 kWh: Das BDEW-Mittel von 37 ct/kWh enthält den Grundpreis schon anteilig; mit 10 €/Monat Grundpreis entspricht es ${SV_FMT(ARBEITSPREIS_DURCHSCHNITT)} ct/kWh Arbeitspreis → ${SV_FMT(SV_DS)} €/Jahr. Festpreis-Neukundentarif (33 ct inkl. Grundpreis = ${SV_FMT(ARBEITSPREIS_NEUKUNDEN)} ct + 10 €/Monat): ${SV_FMT(SV_NK)} €/Jahr → Sparpotenzial: ${SV_FMT(SV_DS - SV_NK, 0)} €.`,
     faq: [
       {
         frage: 'Wie hoch sind die durchschnittlichen Stromkosten pro Jahr?',
-        antwort: 'Die durchschnittlichen Stromkosten hängen vom Verbrauch ab: Ein Single-Haushalt (1.500 kWh) zahlt ca. 675 €/Jahr, ein 2-Personen-Haushalt (2.500 kWh) ca. 1.045 €/Jahr, eine Familie mit 4 Personen (4.500 kWh) ca. 1.785 €/Jahr — jeweils inkl. Grundpreis. Der BDEW-Durchschnittspreis liegt 2026 bei ca. 37 ct/kWh, Festpreis-Neukundentarife ab 33 ct/kWh.',
+        antwort: `Die durchschnittlichen Stromkosten hängen vom Verbrauch ab: Ein Single-Haushalt (1.500 kWh) zahlt ca. ${SV_FMT(typischeJahreskosten(1500), 0)} €/Jahr, ein 2-Personen-Haushalt (2.500 kWh) ca. ${SV_FMT(typischeJahreskosten(2500), 0)} €/Jahr, eine Familie mit 4 Personen (4.500 kWh) ca. ${SV_FMT(typischeJahreskosten(4500), 0)} €/Jahr — jeweils inkl. Grundpreis. Der BDEW-Durchschnittspreis liegt 2026 bei ca. 37 ct/kWh einschließlich Grundpreis (bei 3.500 kWh), Festpreis-Neukundentarife bei rund 33 ct/kWh.`,
       },
       {
         frage: 'Wie viel kann ich durch einen Stromanbieterwechsel sparen?',
@@ -1919,7 +1930,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'waermepumpen-rechner',
-    letzteAktualisierung: '2026-06-28',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Wärmepumpen-Rechner',
     beschreibung: 'Wärmepumpe berechnen: Betriebskosten, Amortisation und Kostenvergleich mit Gasheizung — lohnt sich der Umstieg?',
     kategorie: 'Wohnen & Energie',
@@ -1928,7 +1939,7 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Wärmepumpe berechnen: Betriebskosten, Amortisation und Vergleich mit Gasheizung ✓ BEG-Förderung 2026 ✓ CO₂-Ersparnis ✓ KI-Erklärung.',
     keywords: ['wärmepumpe rechner', 'wärmepumpe kosten', 'wärmepumpe amortisation', 'beg förderung 2026', 'jahresarbeitszahl jaz', 'wärmepumpe altbau', 'wärmepumpe vs gas', 'wärmepumpen stromtarif', 'heizung tauschen', 'luft wasser wärmepumpe'],
     icon: '🔥',
-    beispiel: '120 m² Altbau teilsaniert (JAZ 3,0), bisher 2.000 €/Jahr Gas (12 ct/kWh) → Heizwärmebedarf ~16.667 kWh → WP-Stromverbrauch ~5.556 kWh × 28 ct = 1.556 € + 200 € Wartung = 1.756 €/Jahr gegenüber 2.300 € Gas (inkl. Wartung) = nur ~544 € Ersparnis/Jahr. Bei 30.000 € Anschaffung und 30 % Grundförderung bleiben 21.000 € Eigenanteil → ~39 Jahre Amortisation; erst die Maximalförderung von 70 % senkt den Eigenanteil auf 9.000 € → ~17 Jahre. CO₂-Ersparnis ~1.240 kg/Jahr. Fazit: Bei aktuellen Preisen ist die Förderung der Haupthebel, nicht die laufende Ersparnis.',
+    beispiel: '120 m² Altbau teilsaniert (JAZ 3,0), bisher 2.000 €/Jahr Gas (12 ct/kWh) → Heizwärmebedarf ~16.667 kWh → WP-Stromverbrauch ~5.556 kWh × 28 ct = 1.556 € + 200 € Wartung = 1.756 €/Jahr gegenüber 2.300 € Gas (inkl. Wartung) = nur ~544 € Ersparnis/Jahr. Bei 30.000 € Anschaffung (förderfähig sind höchstens 28.000 €) und 30 % Grundförderung bleiben 21.600 € Eigenanteil → ~40 Jahre Amortisation; mit Klima- und 30-%-Einkommensbonus (70 %) sinkt der Eigenanteil auf 10.400 € → ~19 Jahre, in der 40-%-Einkommensstufe (80 %) auf 7.600 € → ~14 Jahre. CO₂-Ersparnis ~1.240 kg/Jahr. Fazit: Bei aktuellen Preisen ist die Förderung der Haupthebel, nicht die laufende Ersparnis.',
     faq: [
       {
         frage: 'Was kostet eine Wärmepumpe mit Einbau?',
@@ -1936,7 +1947,7 @@ export const wohnenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie viel Förderung bekomme ich für eine Wärmepumpe?',
-        antwort: 'Die BEG-Förderung 2026 bietet bis zu 70 % Zuschuss (Cap nach Richtlinie). Bausteine: 30 % Grundförderung, +20 % Klimageschwindigkeitsbonus (beim Austausch einer alten Heizung), +30 % Einkommensbonus (bei Haushaltseinkommen unter 40.000 € zu versteuerndem Einkommen), +5 % Effizienzbonus. Rechnerisch wären das 85 %, die Richtlinie deckelt die Summe aber bei 70 %. Die maximalen förderfähigen Kosten betragen 30.000 € pro Wohneinheit — der maximale Zuschuss liegt also bei 21.000 €. Der Antrag muss vor Vertragsunterschrift bei der KfW gestellt werden.',
+        antwort: 'Für Anträge ab 21.07.2026 gilt bei der BEG-Förderung (KfW 458): 30 % Grundförderung, +16 % Klimageschwindigkeitsbonus (Selbstnutzer, Ersatz einer funktionsfähigen Öl-, Kohle-, Gasetagen- oder Nachtspeicherheizung oder einer mindestens 20 Jahre alten Gasheizung) und ein gestaffelter Einkommensbonus nach zu versteuerndem Haushaltseinkommen: +40 % bis 30.000 €, +30 % bis 40.000 €, +10 % bis 50.000 € (mit mindestens einem minderjährigen Kind zählt das Einkommen einmalig 10.000 € niedriger). Der Effizienzbonus ist entfallen. Gedeckelt wird bei 70 %, in der 40-%-Stufe bei 80 %. Förderfähig sind höchstens 28.000 € für die erste Wohneinheit — der Zuschuss liegt also bei höchstens 19.600 € bzw. 22.400 €. Der Antrag muss vor Vertragsunterschrift bei der KfW gestellt werden; ab 01.02.2027 sind halbjährliche Kürzungen angekündigt.',
       },
       {
         frage: 'Was ist die Jahresarbeitszahl (JAZ)?',
@@ -1984,11 +1995,11 @@ export const wohnenRechner: RechnerConfig[] = [
           { label: 'WP-Betriebskosten', formel: '5.556 × 28 ct + 200 € Wartung', ergebnis: '1.756 €/Jahr' },
           { label: 'Gasheizung gesamt', formel: '2.000 € + 300 € Wartung', ergebnis: '2.300 €/Jahr' },
           { label: 'Jährliche Ersparnis', formel: '2.300 € − 1.756 €', ergebnis: '544 €' },
-          { label: 'Amortisation bei 30 % Förderung', formel: '21.000 € ÷ 544 €', ergebnis: '~39 Jahre' },
-          { label: 'Amortisation bei 70 % Förderung', formel: '9.000 € ÷ 544 €', ergebnis: '~17 Jahre' },
+          { label: 'Amortisation bei 30 % Förderung', formel: '(30.000 € − 30 % × 28.000 €) ÷ 544 €', ergebnis: '~40 Jahre' },
+          { label: 'Amortisation bei 70 % Förderung', formel: '(30.000 € − 70 % × 28.000 €) ÷ 544 €', ergebnis: '~19 Jahre' },
           { label: 'CO₂-Ersparnis', formel: 'gegenüber Gasheizung', ergebnis: '~1.240 kg/Jahr' },
         ],
-        fazit: 'Das Beispiel zeigt die ehrliche Lage 2026: Weil WP-Strom mit 28 ct gut doppelt so teuer ist wie Gas mit 12 ct, schrumpft die laufende Ersparnis trotz JAZ 3,0 auf rund 544 € im Jahr. Bei 30 % Grundförderung wäre die Anlage erst nach knapp 39 Jahren bezahlt, bei maximal 70 % Förderung nach rund 17 Jahren. Der Hauptvorteil liegt damit nicht in der laufenden Ersparnis, sondern in Förderung, CO₂-Einsparung und einer hohen JAZ.',
+        fazit: 'Das Beispiel zeigt die ehrliche Lage 2026: Weil WP-Strom mit 28 ct gut doppelt so teuer ist wie Gas mit 12 ct, schrumpft die laufende Ersparnis trotz JAZ 3,0 auf rund 544 € im Jahr. Bei 30 % Grundförderung wäre die Anlage erst nach knapp 40 Jahren bezahlt, bei 70 % Förderung nach rund 19 Jahren und in der 40-%-Einkommensstufe (80 %) nach rund 14 Jahren — gefördert werden dabei höchstens 28.000 € der 30.000 €. Der Hauptvorteil liegt damit nicht in der laufenden Ersparnis, sondern in Förderung, CO₂-Einsparung und einer hohen JAZ.',
       },
       {
         typ: 'infobox',
@@ -2010,17 +2021,17 @@ export const wohnenRechner: RechnerConfig[] = [
       },
       {
         typ: 'tabelle',
-        titel: 'BEG-Förderbausteine für Wärmepumpen 2026',
+        titel: 'BEG-Förderbausteine für Wärmepumpen (Anträge ab 21.07.2026)',
         kopf: ['Baustein', 'Höhe', 'Voraussetzung'],
         zeilen: [
           ['Grundförderung', '30 %', 'alle Antragsteller, einkommensunabhängig, Bestandsgebäude'],
-          ['Klimageschwindigkeitsbonus', '+20 %', 'Austausch fossiler Heizung, nur Selbstnutzer'],
-          ['Einkommensbonus', '+30 %', 'zu versteuerndes Haushaltseinkommen ≤ 40.000 €'],
-          ['Effizienzbonus', '+5 %', 'natürliches Kältemittel oder Wasser/Erdreich/Abwasser'],
-          ['Maximale Förderung', '70 %', 'Deckel trotz rechnerisch 85 %'],
-          ['Max. förderfähige Kosten', '30.000 €', 'je erster Wohneinheit → max. 21.000 € Zuschuss'],
+          ['Klimageschwindigkeitsbonus', '+16 %', 'Ersatz fossiler Heizung (Öl, Kohle, Gasetage, Nachtspeicher, Gas ≥ 20 Jahre), nur Selbstnutzer'],
+          ['Einkommensbonus', '+40 / +30 / +10 %', 'zu versteuerndes Haushaltseinkommen bis 30.000 / 40.000 / 50.000 €, nur Selbstnutzer'],
+          ['Effizienzbonus', 'entfallen', 'seit 21.07.2026 (vorher +5 %)'],
+          ['Maximale Förderung', '70 % bzw. 80 %', '80 % nur in der 40-%-Einkommensstufe'],
+          ['Max. förderfähige Kosten', '28.000 €', 'je erster Wohneinheit → max. 19.600 € (70 %) bzw. 22.400 € (80 %)'],
         ],
-        fussnote: 'Die Boni sind kombinierbar, rechnerisch ergäben sie bis zu 85 % — die Richtlinie deckelt die Summe aber bei 70 %. Klima- und Einkommensbonus gibt es nur für selbstnutzende Eigentümer; Vermieter erhalten die Grundförderung und gegebenenfalls den Effizienzbonus, also höchstens 35 %. Maßgeblich für den Einkommensbonus ist das zu versteuernde Haushaltsjahreseinkommen (nicht das Brutto) im Schnitt des zweiten und dritten Jahres vor Antragstellung — für einen Antrag 2026 also die Steuerbescheide 2023 und 2024. Die förderfähigen Kosten sind auf 30.000 € je erster Wohneinheit begrenzt, woraus sich der maximale Zuschuss von 21.000 € ergibt.',
+        fussnote: 'Die Boni sind kombinierbar, rechnerisch ergäben sie bis zu 86 % — die Richtlinie deckelt die Summe bei 70 %, in der 40-%-Einkommensstufe bei 80 %. Klima- und Einkommensbonus gibt es nur für selbstnutzende Eigentümer; Vermieter erhalten die Grundförderung von 30 %. Mit mindestens einem minderjährigen Kind im Haushalt zählt das Einkommen einmalig 10.000 € niedriger. Maßgeblich für den Einkommensbonus ist das zu versteuernde Haushaltsjahreseinkommen (nicht das Brutto) im Schnitt des zweiten und dritten Jahres vor Antragstellung — für einen Antrag 2026 also die Steuerbescheide 2023 und 2024. Die förderfähigen Kosten sind auf 28.000 € je erster Wohneinheit begrenzt (bis 20.07.2026: 30.000 €), woraus sich der maximale Zuschuss von 19.600 € bzw. 22.400 € ergibt. Stand: Konditionen für Anträge ab 21.07.2026; ab 01.02.2027 sind halbjährliche Kürzungen angekündigt.',
       },
       {
         typ: 'text',
@@ -2069,13 +2080,13 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'vergleich',
         titel: 'Mit 30 % gegen 70 % Förderung',
         spalteA: 'Nur Grundförderung (30 %)',
-        spalteB: 'Maximale Förderung (70 %)',
+        spalteB: 'Klima- + Einkommensbonus 30 % (70 %)',
         zeilen: [
-          { kriterium: 'Zuschuss (auf 30.000 €)', a: '9.000 €', b: '21.000 €' },
-          { kriterium: 'Eigenanteil', a: '21.000 €', b: '9.000 €' },
-          { kriterium: 'Amortisation (544 €/Jahr)', a: '~39 Jahre', b: '~17 Jahre' },
-          { kriterium: 'Voraussetzung', a: 'alle, einkommensunabhängig', b: 'Heizungstausch + Einkommen ≤ 40.000 €' },
-          { kriterium: 'Zum Vergleich: 50 %', a: '15.000 € Eigenanteil', b: '~28 Jahre Amortisation' },
+          { kriterium: 'Zuschuss (30.000 €, förderfähig 28.000 €)', a: '8.400 €', b: '19.600 €' },
+          { kriterium: 'Eigenanteil', a: '21.600 €', b: '10.400 €' },
+          { kriterium: 'Amortisation (544 €/Jahr)', a: '~40 Jahre', b: '~19 Jahre' },
+          { kriterium: 'Voraussetzung', a: 'alle, einkommensunabhängig', b: 'Selbstnutzer, Heizungstausch, zvE 30.001–40.000 €' },
+          { kriterium: 'Zum Vergleich: 80 % (zvE bis 30.000 €)', a: '7.600 € Eigenanteil', b: '~14 Jahre Amortisation' },
         ],
       },
       {
@@ -2095,13 +2106,15 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'tipp',
         titel: 'Kurz-Fazit',
-        text: 'Eine Wärmepumpe rechnet sich am besten in einem gut gedämmten Haus mit hoher Jahresarbeitszahl und maximal ausgeschöpfter Förderung. Bei den aktuellen Preisen — WP-Strom rund 28 ct gegenüber Gas 12 ct — ist die laufende Ersparnis gegenüber einer Gasheizung gering; den Ausschlag geben die BEG-Förderung von bis zu 70 %, die CO₂-Einsparung und die Unabhängigkeit von fossilen Brennstoffen. Wer den Einkommens- oder Klimageschwindigkeitsbonus nutzen kann, verbessert die Rechnung erheblich. Prüfen Sie vor der Entscheidung den Gebäudezustand, holen Sie eine Heizlastberechnung ein und vergleichen Sie mehrere Angebote. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Energieberatung; Förderkonditionen können sich ändern — maßgeblich sind die jeweils aktuellen KfW- und BAFA-Vorgaben. Eine geförderte Energieberatung durch eine eingetragene Fachkraft klärt im Einzelfall, welche Bonusstufen erreichbar sind und welche Sanierungsschritte sich zuerst lohnen.',
+        text: 'Eine Wärmepumpe rechnet sich am besten in einem gut gedämmten Haus mit hoher Jahresarbeitszahl und maximal ausgeschöpfter Förderung. Bei den aktuellen Preisen — WP-Strom rund 28 ct gegenüber Gas 12 ct — ist die laufende Ersparnis gegenüber einer Gasheizung gering; den Ausschlag geben die BEG-Förderung von bis zu 70 % (in der niedrigsten Einkommensstufe 80 %), die CO₂-Einsparung und die Unabhängigkeit von fossilen Brennstoffen. Wer den Einkommens- oder Klimageschwindigkeitsbonus nutzen kann, verbessert die Rechnung erheblich. Prüfen Sie vor der Entscheidung den Gebäudezustand, holen Sie eine Heizlastberechnung ein und vergleichen Sie mehrere Angebote. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Energieberatung; Förderkonditionen können sich ändern — maßgeblich sind die jeweils aktuellen KfW- und BAFA-Vorgaben. Eine geförderte Energieberatung durch eine eingetragene Fachkraft klärt im Einzelfall, welche Bonusstufen erreichbar sind und welche Sanierungsschritte sich zuerst lohnen.',
       },
     ],
     quellen: [
       { titel: 'KfW – Heizungsförderung für Privatpersonen – Wohngebäude (458), Merkblatt', url: 'https://www.kfw.de/inlandsfoerderung/Privatpersonen/Bestehende-Immobilie/F%C3%B6rderprodukte/Heizungsf%C3%B6rderung-f%C3%BCr-Privatpersonen-Wohngeb%C3%A4ude-(458)/' },
       { titel: 'BAFA / BMWK – Bundesförderung für effiziente Gebäude (BEG EM)', url: 'https://www.energiewechsel.de/KAENEF/Redaktion/DE/Standardartikel/Foerderprogramme/beg-em.html' },
       { titel: 'BEG EM – Richtlinie (gesetze/Bundesanzeiger, Fassung 21.12.2023)', url: 'https://www.gesetze-im-internet.de/' },
+      { titel: 'KfW – neue Konditionen der Heizungsförderung ab 21.07.2026 (Pressemitteilung)', url: 'https://www.kfw.de/%C3%9Cber-die-KfW/Newsroom/Aktuelles/Pressemitteilungen-Details_900928.html', hinweis: 'Förderfähig 28.000 €, Klimageschwindigkeitsbonus 16 %, Einkommensbonus 40/30/10 %, Effizienzbonus entfallen.' },
+      { titel: 'Verbraucherzentrale NRW – Heizungsförderung für Bestandsgebäude (Stand 14.08.2026)', url: 'https://www.verbraucherzentrale.nrw/wissen/energie/foerderprogramme/heizung-austauschen-hohe-zuschuesse-fuer-erneuerbare-energien-43298', hinweis: 'Höchstfördersatz 80 % in der niedrigsten Einkommensstufe, sonst 70 %.' },
       { titel: 'Verbraucherzentrale NRW – Marktcheck Wärmepumpen-Stromtarife (02/2026)', url: 'https://www.verbraucherzentrale.nrw/' },
       { titel: 'Bundesnetzagentur – § 14a EnWG (steuerbare Verbrauchseinrichtungen)', url: 'https://www.bundesnetzagentur.de/' },
     ],

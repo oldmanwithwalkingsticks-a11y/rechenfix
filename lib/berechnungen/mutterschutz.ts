@@ -105,7 +105,9 @@ export function berechneMutterschutz(eingabe: MutterschutzEingabe): Mutterschutz
     tageNachGeburt = nachTage;
   }
 
-  const gesamtTage = diffDays(ende, beginn);
+  // Beginn und Ende zählen beide mit: 6 Wochen vor dem Termin + Entbindungstag + 8 Wochen danach
+  // = 42 + 1 + 56 = 99 Tage (§ 3 MuSchG, § 24i Abs. 3 SGB V). W182: vorher diffDays ohne den Endtag (98).
+  const gesamtTage = diffDays(ende, beginn) + 1;
   const gesamtWochen = Math.round(gesamtTage / 7 * 10) / 10;
 
   // Mutterschaftsgeld

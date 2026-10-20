@@ -32,6 +32,7 @@ import {
   BEG_FOERDERUNG_2026,
   berechneBegFoerderquote,
   berechneBegZuschuss,
+  einkommensbonusFuerZvE,
 } from '../lib/berechnungen/beg-foerderung';
 import { VPI_AKTUELL, VPI_JAHRESDURCHSCHNITTE } from '../lib/berechnungen/vpi';
 import { berechneBaufinanzierung } from '../lib/berechnungen/baufinanzierung';
@@ -133,28 +134,35 @@ cases.push({ name: 'Strompreis Wärmepumpen-Tarif → 28 ct', actual: STROMPREIS
 cases.push({ name: 'getStrompreis() → 37 ct (Default = BDEW)', actual: getStrompreis(), expected: 37, quelle: 'Default-API' });
 cases.push({ name: 'getStrompreis(neukunden_festpreis) → 33', actual: getStrompreis('neukunden_festpreis'), expected: 33, quelle: 'Profil-API' });
 
-// === GRUPPE 6: BEG-Förderung (KfW 458, Stand 04/2026) ===
+// === GRUPPE 6: BEG-Förderung (KfW 458, Konditionen ab 21.07.2026) ===
+// W182: vorher Stand 04/2026 (30.000 €, Klima 20 %, Effizienz 5 %, Einkommen 30 %, Deckel 70 %).
+// Quelle: KfW-Pressemitteilung Juli 2026, Verbraucherzentrale NRW (14.08.2026), co2online (09.07.2026).
 
-cases.push({ name: 'BEG Grundförderung → 30 %', actual: BEG_FOERDERUNG_2026.grundfoerderung, expected: 30, quelle: '§ 12 BEG EM' });
-cases.push({ name: 'BEG Klimageschwindigkeitsbonus → 20 %', actual: BEG_FOERDERUNG_2026.klimageschwindigkeitsbonus, expected: 20, quelle: 'KfW 458' });
-cases.push({ name: 'BEG Einkommensbonus → 30 %', actual: BEG_FOERDERUNG_2026.einkommensbonus, expected: 30, quelle: 'KfW 458' });
-cases.push({ name: 'BEG Effizienzbonus → 5 %', actual: BEG_FOERDERUNG_2026.effizienzbonus, expected: 5, quelle: 'KfW 458' });
-cases.push({ name: 'BEG Max-Cap → 70 %', actual: BEG_FOERDERUNG_2026.maxGesamtfoerderung, expected: 70, quelle: 'KfW 458 Cap' });
-cases.push({ name: 'BEG Einkommensgrenze → 40.000 €', actual: BEG_FOERDERUNG_2026.einkommensgrenze, expected: 40_000, quelle: 'KfW 458' });
-cases.push({ name: 'BEG max. Kosten 1. WE → 30.000 €', actual: BEG_FOERDERUNG_2026.maxFoerderfaehigeKosten_einheit1, expected: 30_000, quelle: 'KfW 458' });
+cases.push({ name: 'BEG Grundförderung → 30 %', actual: BEG_FOERDERUNG_2026.grundfoerderung, expected: 30, quelle: 'KfW 458' });
+cases.push({ name: 'BEG Klimageschwindigkeitsbonus → 16 %', actual: BEG_FOERDERUNG_2026.klimageschwindigkeitsbonus, expected: 16, quelle: 'KfW 458 ab 21.07.2026' });
+cases.push({ name: 'BEG Max-Cap allgemein → 70 %', actual: BEG_FOERDERUNG_2026.maxGesamtfoerderung, expected: 70, quelle: 'KfW 458' });
+cases.push({ name: 'BEG Max-Cap 40-%-Stufe → 80 %', actual: BEG_FOERDERUNG_2026.maxGesamtfoerderungNiedrigesEinkommen, expected: 80, quelle: 'VZ NRW 14.08.2026' });
+cases.push({ name: 'BEG max. Kosten 1. WE → 28.000 €', actual: BEG_FOERDERUNG_2026.maxFoerderfaehigeKosten_einheit1, expected: 28_000, quelle: 'KfW 458 ab 21.07.2026' });
+
+// Einkommensbonus-Stufen (zvE Haushalt; mit minderjährigem Kind einmalig −10.000 €)
+cases.push({ name: 'BEG Einkommen 30.000 € → +40 %', actual: einkommensbonusFuerZvE(30_000, false), expected: 40, quelle: 'Stufe bis 30.000' });
+cases.push({ name: 'BEG Einkommen 30.001 € → +30 %', actual: einkommensbonusFuerZvE(30_001, false), expected: 30, quelle: 'Stufe bis 40.000' });
+cases.push({ name: 'BEG Einkommen 45.000 € → +10 %', actual: einkommensbonusFuerZvE(45_000, false), expected: 10, quelle: 'Stufe bis 50.000' });
+cases.push({ name: 'BEG Einkommen 50.001 € → 0 %', actual: einkommensbonusFuerZvE(50_001, false), expected: 0, quelle: 'über 50.000' });
+cases.push({ name: 'BEG Einkommen 40.000 € mit Kind → +40 %', actual: einkommensbonusFuerZvE(40_000, true), expected: 40, quelle: '−10.000 € je Haushalt' });
 
 // Förderquoten-Berechnung
-cases.push({ name: 'BEG nur Grund → 30 %', actual: berechneBegFoerderquote({ klimageschwindigkeit: false, einkommen: false, effizienz: false }), expected: 30, quelle: 'Grundförderung' });
-cases.push({ name: 'BEG Grund + Klima → 50 %', actual: berechneBegFoerderquote({ klimageschwindigkeit: true, einkommen: false, effizienz: false }), expected: 50, quelle: '30 + 20' });
-cases.push({ name: 'BEG Grund + Klima + Einkommen → 70 % (Cap)', actual: berechneBegFoerderquote({ klimageschwindigkeit: true, einkommen: true, effizienz: false }), expected: 70, quelle: 'Cap greift bei 80 → 70' });
-cases.push({ name: 'BEG ALLE Boni → 70 % (NICHT 85, Cap)', actual: berechneBegFoerderquote({ klimageschwindigkeit: true, einkommen: true, effizienz: true }), expected: 70, quelle: 'Cap greift bei 85 → 70' });
+cases.push({ name: 'BEG nur Grund → 30 %', actual: berechneBegFoerderquote({ klimageschwindigkeit: false, einkommensbonus: 0 }), expected: 30, quelle: 'Grundförderung' });
+cases.push({ name: 'BEG Grund + Klima → 46 %', actual: berechneBegFoerderquote({ klimageschwindigkeit: true, einkommensbonus: 0 }), expected: 46, quelle: '30 + 16' });
+cases.push({ name: 'BEG Grund + Klima + 30 % → 70 % (Cap)', actual: berechneBegFoerderquote({ klimageschwindigkeit: true, einkommensbonus: 30 }), expected: 70, quelle: '76 → 70' });
+cases.push({ name: 'BEG Grund + Klima + 40 % → 80 % (Cap)', actual: berechneBegFoerderquote({ klimageschwindigkeit: true, einkommensbonus: 40 }), expected: 80, quelle: '86 → 80' });
+cases.push({ name: 'BEG Grund + 10 % → 40 %', actual: berechneBegFoerderquote({ klimageschwindigkeit: false, einkommensbonus: 10 }), expected: 40, quelle: '30 + 10' });
 
-// Zuschuss-Beispiel: 30.000 € Investition, 1 WE, 70 % → 21.000 €
-cases.push({ name: 'BEG 30.000 €, 1 WE, ALLE Boni → 21.000 €', actual: berechneBegZuschuss(30_000, { klimageschwindigkeit: true, einkommen: true, effizienz: true }, 1), expected: 21_000, quelle: '30.000 × 70 %' });
-// 30.000 € Investition, 1 WE, nur Grund 30 % → 9.000 €
-cases.push({ name: 'BEG 30.000 €, 1 WE, nur Grund → 9.000 €', actual: berechneBegZuschuss(30_000, { klimageschwindigkeit: false, einkommen: false, effizienz: false }, 1), expected: 9_000, quelle: '30.000 × 30 %' });
-// 50.000 € Investition gedeckelt auf 30.000 € (1 WE), 70 % → 21.000 €
-cases.push({ name: 'BEG 50.000 €, 1 WE, ALLE Boni → 21.000 € (Cap auf 30.000 förderfähig)', actual: berechneBegZuschuss(50_000, { klimageschwindigkeit: true, einkommen: true, effizienz: true }, 1), expected: 21_000, quelle: '30.000 × 70 % (Investitions-Cap)' });
+// Zuschuss-Beispiele, 1 WE
+cases.push({ name: 'BEG 30.000 €, Klima + 40 % → 22.400 € (28.000 × 80 %)', actual: berechneBegZuschuss(30_000, { klimageschwindigkeit: true, einkommensbonus: 40 }, 1), expected: 22_400, quelle: 'max. Zuschuss 1. WE' });
+cases.push({ name: 'BEG 30.000 €, Klima + 30 % → 19.600 € (28.000 × 70 %)', actual: berechneBegZuschuss(30_000, { klimageschwindigkeit: true, einkommensbonus: 30 }, 1), expected: 19_600, quelle: '28.000 × 70 %' });
+cases.push({ name: 'BEG 30.000 €, nur Grund → 8.400 €', actual: berechneBegZuschuss(30_000, { klimageschwindigkeit: false, einkommensbonus: 0 }, 1), expected: 8_400, quelle: '28.000 × 30 %' });
+cases.push({ name: 'BEG 20.000 €, Klima → 9.200 € (unter der Obergrenze)', actual: berechneBegZuschuss(20_000, { klimageschwindigkeit: true, einkommensbonus: 0 }, 1), expected: 9_200, quelle: '20.000 × 46 %' });
 
 // === GRUPPE 7: VPI (Destatis September 2026, PM Nr. 364 vom 13.10.2026) ===
 

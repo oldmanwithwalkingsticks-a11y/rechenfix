@@ -1,16 +1,16 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneStromvergleich, HAUSHALTSGROESSEN, GRUNDPREIS_VERGLEICH_MONAT } from '@/lib/berechnungen/stromvergleich';
+import { berechneStromvergleich, HAUSHALTSGROESSEN, ARBEITSPREIS_DURCHSCHNITT, typischeJahreskosten } from '@/lib/berechnungen/stromvergleich';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
-import { getStrompreis } from '@/lib/berechnungen/strompreis';
 
-const ARBEITSPREIS_DEFAULT = String(getStrompreis('durchschnitt_bdew'));
+// W182: Startwert = BDEW-Mittel als Arbeitspreis (37 ct inkl. Grundpreis = 33,57 ct + 10 €/Monat)
+const ARBEITSPREIS_DEFAULT = ARBEITSPREIS_DURCHSCHNITT.toLocaleString('de-DE');
 
 export default function StromvergleichRechner() {
   const [verbrauch, setVerbrauch] = useState('2500');
@@ -208,7 +208,7 @@ export default function StromvergleichRechner() {
             </div>
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               {HAUSHALTSGROESSEN.map(h => {
-                const typKosten = (h.verbrauch * getStrompreis('durchschnitt_bdew') / 100) + (GRUNDPREIS_VERGLEICH_MONAT * 12);
+                const typKosten = typischeJahreskosten(h.verbrauch);
                 return (
                   <div key={h.label} className="flex justify-between px-4 py-3 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">{h.label} ({h.verbrauch.toLocaleString('de-DE')} kWh)</span>
@@ -222,7 +222,7 @@ export default function StromvergleichRechner() {
           {/* Hinweis */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
             <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
-              <strong>Hinweis:</strong> Die Vergleichswerte basieren auf Durchschnittspreisen des deutschen Strommarkts 2026. Tatsächliche Tarife können je nach Region, Anbieter und Vertragsbedingungen abweichen. Für ein verbindliches Angebot nutzen Sie einen Stromvergleichsrechner mit PLZ-Suche.
+              <strong>Hinweis:</strong> Die Vergleichswerte basieren auf Durchschnittspreisen des deutschen Strommarkts 2026: BDEW-Mittel 37 ct/kWh und Festpreis-Neukundentarife rund 33 ct/kWh, jeweils einschließlich Grundpreis bei 3.500 kWh — hier zerlegt in Arbeitspreis plus 10 €/Monat Grundpreis. Tatsächliche Tarife können je nach Region, Anbieter und Vertragsbedingungen abweichen. Für ein verbindliches Angebot nutzen Sie einen Stromvergleichsrechner mit PLZ-Suche.
             </p>
           </div>
 

@@ -12,7 +12,9 @@ import { getStrompreis } from '@/lib/berechnungen/strompreis';
 import {
   BEG_FOERDERUNG_2026,
   berechneBegFoerderquote,
+  begHoechstsatz,
   BEG_LAUTSTAERKE_HINWEIS_2026,
+  type EinkommensbonusProzent,
 } from '@/lib/berechnungen/beg-foerderung';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -39,8 +41,8 @@ export default function WaermepumpeRechner() {
   const [strompreis, setStrompreis] = useState(String(getStrompreis('waermepumpen_tarif')));
   // F1: BEG-Boni-Schalter — Förderquote berechnet sich daraus dynamisch
   const [boniKlima, setBoniKlima] = useState(false);
-  const [boniEinkommen, setBoniEinkommen] = useState(false);
-  const [boniEffizienz, setBoniEffizienz] = useState(false);
+  // W182: Einkommensbonus seit 21.07.2026 gestaffelt (40/30/10 %), Effizienzbonus entfallen
+  const [boniEinkommen, setBoniEinkommen] = useState<EinkommensbonusProzent>(0);
   const [gaspreis, setGaspreis] = useState('12');
   const [anschaffung, setAnschaffung] = useState('30000');
   const [foerderung, setFoerderung] = useState('30');
@@ -67,6 +69,7 @@ export default function WaermepumpeRechner() {
       gaspreis: parseDeutscheZahl(gaspreis),
       anschaffungskosten: parseDeutscheZahl(anschaffung),
       foerderungProzent: parseDeutscheZahl(foerderung),
+      foerderfaehigeKostenMax: BEG_FOERDERUNG_2026.maxFoerderfaehigeKosten_einheit1,
       jahre: parseInt(jahre, 10) || 20,
     }),
     [wohnflaecheEffektiv, daemmstandard, alteHeizung, heizkostenBekannt, heizkostenAktuell, strompreis, gaspreis, anschaffung, foerderung, jahre],
@@ -225,7 +228,7 @@ export default function WaermepumpeRechner() {
           BEG-Förderung 2026
         </h2>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-          Grundförderung {BEG_FOERDERUNG_2026.grundfoerderung} % erhält jeder Antragsteller. Boni sind kombinierbar — gedeckelt bei {BEG_FOERDERUNG_2026.maxGesamtfoerderung} %.
+          Konditionen für Anträge ab 21.07.2026: Grundförderung {BEG_FOERDERUNG_2026.grundfoerderung} % für jeden Antragsteller. Boni sind kombinierbar — gedeckelt bei {BEG_FOERDERUNG_2026.maxGesamtfoerderung} %, in der 40-%-Einkommensstufe bei {BEG_FOERDERUNG_2026.maxGesamtfoerderungNiedrigesEinkommen} %. Gefördert werden höchstens {BEG_FOERDERUNG_2026.maxFoerderfaehigeKosten_einheit1.toLocaleString('de-DE')} € Kosten (1. Wohneinheit).
         </p>
         <fieldset className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-3">
           <legend className="px-2 text-xs text-gray-600 dark:text-gray-400">Boni nach KfW 458</legend>
@@ -234,51 +237,41 @@ export default function WaermepumpeRechner() {
               type="checkbox"
               checked={boniKlima}
               onChange={(e) => {
-                const next = { klimageschwindigkeit: e.target.checked, einkommen: boniEinkommen, effizienz: boniEffizienz };
+                const next = { klimageschwindigkeit: e.target.checked, einkommensbonus: boniEinkommen };
                 setBoniKlima(e.target.checked);
                 setFoerderung(String(berechneBegFoerderquote(next)));
               }}
               className="mt-1 min-w-[20px] min-h-[20px]"
             />
             <span className="text-xs text-gray-700 dark:text-gray-300">
-              <strong>Klimageschwindigkeitsbonus +{BEG_FOERDERUNG_2026.klimageschwindigkeitsbonus} %</strong> — Tausch alte fossile Heizung (Öl, Gas, Kohle).
+              <strong>Klimageschwindigkeitsbonus +{BEG_FOERDERUNG_2026.klimageschwindigkeitsbonus} %</strong> — nur Selbstnutzer: Ersatz einer funktionsfähigen Öl-, Kohle-, Gasetagen- oder Nachtspeicherheizung oder einer mindestens 20 Jahre alten Gasheizung.
             </span>
           </label>
-          <label className="flex items-start gap-2 mb-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={boniEinkommen}
-              onChange={(e) => {
-                const next = { klimageschwindigkeit: boniKlima, einkommen: e.target.checked, effizienz: boniEffizienz };
-                setBoniEinkommen(e.target.checked);
-                setFoerderung(String(berechneBegFoerderquote(next)));
-              }}
-              className="mt-1 min-w-[20px] min-h-[20px]"
-            />
-            <span className="text-xs text-gray-700 dark:text-gray-300">
-              <strong>Einkommensbonus +{BEG_FOERDERUNG_2026.einkommensbonus} %</strong> — Brutto-Haushaltseinkommen unter {BEG_FOERDERUNG_2026.einkommensgrenze.toLocaleString('de-DE')} €.
-            </span>
+          <label className="block mb-1 text-xs text-gray-700 dark:text-gray-300">
+            <strong>Einkommensbonus</strong> — nur Selbstnutzer, nach zu versteuerndem Haushaltseinkommen (mit mindestens einem minderjährigen Kind zählt es {BEG_FOERDERUNG_2026.kinderMinderungZvE.toLocaleString('de-DE')} € niedriger):
           </label>
-          <label className="flex items-start gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={boniEffizienz}
-              onChange={(e) => {
-                const next = { klimageschwindigkeit: boniKlima, einkommen: boniEinkommen, effizienz: e.target.checked };
-                setBoniEffizienz(e.target.checked);
-                setFoerderung(String(berechneBegFoerderquote(next)));
-              }}
-              className="mt-1 min-w-[20px] min-h-[20px]"
-            />
-            <span className="text-xs text-gray-700 dark:text-gray-300">
-              <strong>Effizienzbonus +{BEG_FOERDERUNG_2026.effizienzbonus} %</strong> — natürliches Kältemittel (z. B. Propan R290), Wasser/Erdreich/Abwasser als Wärmequelle.
-            </span>
-          </label>
+          <select
+            value={boniEinkommen}
+            onChange={(e) => {
+              const stufe = Number(e.target.value) as EinkommensbonusProzent;
+              setBoniEinkommen(stufe);
+              setFoerderung(String(berechneBegFoerderquote({ klimageschwindigkeit: boniKlima, einkommensbonus: stufe })));
+            }}
+            className="w-full mb-2 px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+          >
+            <option value={0}>kein Einkommensbonus (zvE über 50.000 €)</option>
+            <option value={10}>+10 % — zvE 40.001 bis 50.000 €</option>
+            <option value={30}>+30 % — zvE 30.001 bis 40.000 €</option>
+            <option value={40}>+40 % — zvE bis 30.000 € (Deckel 80 %)</option>
+          </select>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Den Effizienzbonus (+5 %) gibt es für Anträge ab 21.07.2026 nicht mehr.
+          </p>
         </fieldset>
         <NummerEingabe value={foerderung} onChange={setFoerderung} placeholder="30" einheit="%" />
-        {parseInt(foerderung, 10) >= BEG_FOERDERUNG_2026.maxGesamtfoerderung && (
+        {parseInt(foerderung, 10) >= begHoechstsatz(boniEinkommen) && (
           <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
-            ⓘ Maximalförderung erreicht (Cap bei {BEG_FOERDERUNG_2026.maxGesamtfoerderung} % nach BEG-Richtlinie).
+            ⓘ Maximalförderung erreicht (Deckel bei {begHoechstsatz(boniEinkommen)} % nach BEG-Richtlinie).
           </p>
         )}
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
@@ -381,7 +374,7 @@ export default function WaermepumpeRechner() {
       {/* Förderungs-Box */}
       <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
         <p className="text-blue-800 dark:text-blue-300 text-sm">
-          <strong>💰 Ihre Förderung:</strong> {foerderung} % = {fmtEuro(ergebnis.foerderungEuro)} € Zuschuss. Eigenanteil: {fmtEuro(ergebnis.nettoInvestition)} €.
+          <strong>💰 Ihre Förderung:</strong> {foerderung} % von {fmtEuro(Math.min(parseDeutscheZahl(anschaffung), BEG_FOERDERUNG_2026.maxFoerderfaehigeKosten_einheit1))} € förderfähigen Kosten = {fmtEuro(ergebnis.foerderungEuro)} € Zuschuss. Eigenanteil: {fmtEuro(ergebnis.nettoInvestition)} €.
         </p>
       </div>
 

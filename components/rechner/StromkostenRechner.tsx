@@ -9,6 +9,7 @@ import AiExplain from '@/components/rechner/AiExplain';
 import StromSpartipp from '@/components/rechner/StromSpartipp';
 import CrossLink from '@/components/ui/CrossLink';
 import { getStrompreis } from '@/lib/berechnungen/strompreis';
+import { arbeitspreisAusMischpreis } from '@/lib/berechnungen/stromvergleich';
 
 const SCHNELLWAHL = [
   { label: '1 Person', kwh: '1500' },
@@ -17,7 +18,9 @@ const SCHNELLWAHL = [
   { label: '4 Personen', kwh: '4500' },
 ];
 
-const STROMPREIS_DEFAULT = String(getStrompreis('durchschnitt_bdew'));
+// W182: Startwert = BDEW-Mittel (37 ct inkl. Grundpreis) als Arbeitspreis bei 12 €/Monat Grundpreis: 32,89 ct.
+// Vorher 37 ct + 12 € — der Grundpreis war damit doppelt enthalten (2.500 kWh: 1.069 € statt 966 €).
+const STROMPREIS_DEFAULT = arbeitspreisAusMischpreis(getStrompreis('durchschnitt_bdew'), 12).toLocaleString('de-DE');
 
 export default function StromkostenRechner() {
   const [verbrauch, setVerbrauch] = useState('2500');

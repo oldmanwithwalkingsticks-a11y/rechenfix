@@ -85,8 +85,9 @@ const b1 = calc({ geburtstermin: '2025-09-01' });
 cases.push(
   { name: 'B-01 ET 01.09.: ende = 27.10. (8 Wo nach)',          actual: isoDateLocal(b1!.ende), expected: '2025-10-27' },
   { name: 'B-01: tageNachGeburt = 56',                          actual: b1!.tageNachGeburt,     expected: 56 },
-  { name: 'B-01: gesamtTage = 98',                              actual: b1!.gesamtTage,         expected: 98 },
-  { name: 'B-01: gesamtWochen = 14',                            actual: b1!.gesamtWochen,       expected: 14, tolerance: 0.05 },
+  // W182: Beginn und Ende zählen mit (42 + Entbindungstag + 56 = 99, § 24i Abs. 3 SGB V); vorher 98.
+  { name: 'B-01: gesamtTage = 99 (42 + 1 + 56)',                actual: b1!.gesamtTage,         expected: 99 },
+  { name: 'B-01: gesamtWochen = 14,1',                          actual: b1!.gesamtWochen,       expected: 14.1, tolerance: 0.05 },
 );
 
 // Frühgeburt → 12 Wochen nach (84 Tage):
@@ -101,7 +102,7 @@ cases.push(
 // Mehrlinge: gleiche 12-Wo-Logik wie Frühgeburt:
 const b3 = calc({ geburtstermin: '2025-09-01', geburtsArt: 'mehrlingsgeburt' });
 cases.push(
-  { name: 'B-03 Mehrlinge ohne tatsächliche Geburt: gesamtTage = 42+84',  actual: b3!.gesamtTage, expected: 126 },
+  { name: 'B-03 Mehrlinge ohne tatsächliche Geburt: gesamtTage = 42+1+84',  actual: b3!.gesamtTage, expected: 127 },
 );
 
 // === Cluster C: § 3 Abs. 2 Satz 4 MuSchG — Frühgeburt-Vortage werden hinten angehängt ===
