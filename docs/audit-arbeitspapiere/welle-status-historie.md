@@ -6,6 +6,39 @@
 
 ---
 
+## 20.10.2026 — Welle 174: CLAUDE.md — getrackte Skills unter dem ignorierten `.claude/skills/` — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Befund beim Commit von Welle 166 (Historie `cedce5f`). `rechner-builder` und `blog-builder` sind
+versioniert, liegen aber unter der Ignore-Regel `.claude/skills/`. Die Regel ist gewollt (Commit `2e60446`):
+Darunter liegt das private Skill-Repo für peter-ki und susanne-recht, dieses Repo ist öffentlich. Folge:
+`git add <pfad>` nimmt geänderte Skill-Dateien zwar auf, endet aber mit Exit 1 und bricht `&&`-Ketten ab; in
+Welle 166 stand die Commit-Kette deshalb nach dem `git add` still, obwohl alle 15 Dateien vorgemerkt waren.
+Nachgemessen in der Chat-Sitzung am 19.10.2026 auf einem frischen Klon: Mit Dateipfad und mit Ordner Exit 1, mit
+`git add -u -- .claude/skills` Exit 0, die Datei ist in beiden Fällen vorgemerkt.
+
+**Änderung** (1 Ersetzung in 1 Datei, Vorlage `_lokal/welle174-skills-git-add.mjs`, nicht committet): zwei Punkte
+im Abschnitt „Working-Tree-Disziplin“ von `CLAUDE.md`.
+- **Commit-Regel:** `git add -u -- .claude/skills/rechner-builder .claude/skills/blog-builder` für diese Skills,
+  `git add -f` für neue Dateien darin, das private Repo darunter nie anfassen.
+- **Claude.ai-Kopie:** Ändert eine Welle `SKILL.md` oder eine Referenzdatei von `rechner-builder` oder
+  `blog-builder`, muss Karsten den Skill in Claude.ai nachziehen; der Bericht der Welle nennt die geänderten
+  Skill-Dateien ausdrücklich.
+
+**Bewusst nicht geändert:** `.gitignore`, `.claude/skills/`. Die Ignore-Regel bleibt, wie sie ist.
+
+**Gates:**
+- Phase 0 an `1eb1a86`: `git status` leer, oben `1eb1a86` und `3bc7a7d` (Welle 173). „Getrackte Skills“ in
+  `CLAUDE.md` keine Ausgabe; `git check-ignore -v --no-index .claude/skills/rechner-builder/SKILL.md` →
+  `.gitignore:148:.claude/skills/` und der Dateipfad.
+- Phase 1: „OK — 1 Ersetzungen in 1 Dateien.“, Exit 0; `git status` nur `CLAUDE.md`;
+  „git add -u -- .claude/skills/rechner-builder“ `CLAUDE.md:1`; `check-wellenhistorie` Exit 0. Kein Build, die
+  Welle ändert nur Markdown.
+
+**Commits:** A `ac106cc` (`CLAUDE.md`). B ist dieser Doku-Commit. Keine Live-Probe, die Welle ändert nichts auf
+der Website.
+
+---
+
 ## 19.10.2026 — Welle 173: Wahrer Stundenlohn — Feiertage und Mindestlohn aus dem Rechenjahr — ✅ ABGESCHLOSSEN 19.10.2026
 
 **Anlass:** Hinweis zum Jahreswechsel im Bericht und in der Historie zu Welle 165 (`b77da1d`). Die Komponente rief
