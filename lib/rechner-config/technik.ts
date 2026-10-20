@@ -1534,7 +1534,7 @@ export const technikRechner: RechnerConfig[] = [
   },
   {
     slug: 'eauto-ladekosten-rechner',
-    letzteAktualisierung: '2026-06-30',
+    letzteAktualisierung: '2026-10-20',
     titel: 'E-Auto-Ladekosten-Rechner',
     beschreibung: 'E-Auto-Ladekosten berechnen: Was kostet das Laden pro 100 km, pro Vollladung und pro Jahr — je Ladeort, plus Verbrenner-Vergleich.',
     kategorie: 'Technik',
@@ -1543,7 +1543,7 @@ export const technikRechner: RechnerConfig[] = [
     metaDescription: 'E-Auto-Ladekosten berechnen: Was kostet das Laden pro 100 km, pro Vollladung und pro Jahr je Ladeort? Mit Benziner-Vergleich.',
     keywords: ['e-auto ladekosten', 'kosten pro 100 km elektroauto', 'wallbox vs schnelllader kosten', 'e-auto vs benziner kosten', 'elektroauto stromkosten', 'ladekosten berechnen', 'kosten vollladung e-auto', 'strompreis laden'],
     icon: '💶',
-    beispiel: '18 kWh/100 km an der Wallbox (0,34 €/kWh): 18 × 0,34 = 6,12 €/100 km (Richtwert).',
+    beispiel: `18 kWh/100 km an der Wallbox (${ladepreisDe(LADEPREISE.wallbox)} €/kWh): 18 × ${ladepreisDe(LADEPREISE.wallbox)} = ${eur(EK_VERBRAUCH * LADEPREISE.wallbox)} €/100 km (Richtwert).`,
     faq: [
       {
         frage: 'Was kostet eine Vollladung beim E-Auto?',
@@ -2021,7 +2021,7 @@ export const technikRechner: RechnerConfig[] = [
   },
   {
     slug: 'stromverbrauch-geraete-rechner',
-    letzteAktualisierung: '2026-06-19',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Stromverbrauch-Rechner für Geräte',
     beschreibung: 'Stromverbrauch und -kosten einzelner Geräte berechnen: Watt × Nutzungszeit, Standby und Gerätevergleich.',
     kategorie: 'Technik',
@@ -2030,7 +2030,7 @@ export const technikRechner: RechnerConfig[] = [
     metaDescription: 'Stromverbrauch einzelner Geräte berechnen: Watt × Stunden = kWh, Kosten pro Jahr ✓ Standby ✓ Gerätevergleich ✓ Strompreis frei wählbar.',
     keywords: ['stromverbrauch rechner', 'geräte stromverbrauch', 'watt in kwh', 'stromkosten gerät', 'standby verbrauch', 'kwh berechnen', 'stromfresser', 'stromverbrauch berechnen'],
     icon: '⚡',
-    beispiel: 'PC 200 W, 5 h/Tag: 200 × 5 ÷ 1.000 = 1 kWh/Tag → 365 kWh/Jahr × 0,35 € ≈ 128 €/Jahr.',
+    beispiel: `PC 200 W, 5 h/Tag: 200 × 5 ÷ 1.000 = 1 kWh/Tag → 365 kWh/Jahr × ${SG_PREIS_DE} € ≈ ${sgEuro(365)} €/Jahr.`,
     faq: [
       {
         frage: 'Wie berechne ich den Stromverbrauch eines Geräts?',
@@ -2038,7 +2038,7 @@ export const technikRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie viel kostet 1 kWh Strom?',
-        antwort: 'Der Strompreis liegt 2026 im Schnitt bei rund 35 Cent pro Kilowattstunde, variiert aber je nach Tarif und Region. Ihren genauen Preis finden Sie auf der letzten Stromabrechnung — tragen Sie ihn für realistische Kosten in den Rechner ein.',
+        antwort: `Der Strompreis liegt 2026 im Schnitt bei rund ${STROMPREIS_2026.durchschnitt_bdew} Cent pro Kilowattstunde (BDEW-Mittel, Stand ${STAND_STROM}), variiert aber je nach Tarif und Region. Ihren genauen Preis finden Sie auf der letzten Stromabrechnung — tragen Sie ihn für realistische Kosten in den Rechner ein.`,
       },
       {
         frage: 'Wie viel kostet Standby im Jahr?',
@@ -2057,7 +2057,7 @@ export const technikRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Stromverbrauch eines Geräts berechnen (Watt × Zeit)',
-        html: `<p>Der Stromverbrauch eines Geräts ergibt sich aus zwei Größen: seiner <strong>Leistung in Watt (W)</strong> und der <strong>Nutzungsdauer</strong>. Multipliziert man beides und teilt durch 1.000, erhält man den Verbrauch in <strong>Kilowattstunden (kWh)</strong> — der Einheit, nach der Strom abgerechnet wird. Die Formel lautet: <strong>kWh = Watt × Stunden ÷ 1.000</strong>.</p><p>Ein Gerät mit 200 Watt, das 5 Stunden am Tag läuft, verbraucht also 200 × 5 ÷ 1.000 = 1 kWh pro Tag, über das Jahr rund 365 kWh. Die <strong>Kosten</strong> ergeben sich, indem man die kWh mit dem <strong>Strompreis</strong> multipliziert — bei rund 35 Cent pro kWh sind das etwa 128 Euro im Jahr. Die Leistung steht auf dem <strong>Typenschild</strong> des Geräts oder im Datenblatt. Anders als ein Haushalts-Stromrechner betrachtet dieser Rechner gezielt <strong>einzelne Geräte</strong> — ideal, um Stromfresser aufzuspüren und gegeneinander zu vergleichen. Wer den Gesamtverbrauch des Haushalts wissen will, addiert die Einzelwerte oder nutzt den Stromkosten-Rechner; wer den Beitrag eines bestimmten Geräts kennen möchte, ist hier richtig.</p>`,
+        html: `<p>Der Stromverbrauch eines Geräts ergibt sich aus zwei Größen: seiner <strong>Leistung in Watt (W)</strong> und der <strong>Nutzungsdauer</strong>. Multipliziert man beides und teilt durch 1.000, erhält man den Verbrauch in <strong>Kilowattstunden (kWh)</strong> — der Einheit, nach der Strom abgerechnet wird. Die Formel lautet: <strong>kWh = Watt × Stunden ÷ 1.000</strong>.</p><p>Ein Gerät mit 200 Watt, das 5 Stunden am Tag läuft, verbraucht also 200 × 5 ÷ 1.000 = 1 kWh pro Tag, über das Jahr rund 365 kWh. Die <strong>Kosten</strong> ergeben sich, indem man die kWh mit dem <strong>Strompreis</strong> multipliziert — bei rund ${STROMPREIS_2026.durchschnitt_bdew} Cent pro kWh sind das etwa ${sgEuro(365)} Euro im Jahr. Die Leistung steht auf dem <strong>Typenschild</strong> des Geräts oder im Datenblatt. Anders als ein Haushalts-Stromrechner betrachtet dieser Rechner gezielt <strong>einzelne Geräte</strong> — ideal, um Stromfresser aufzuspüren und gegeneinander zu vergleichen. Wer den Gesamtverbrauch des Haushalts wissen will, addiert die Einzelwerte oder nutzt den Stromkosten-Rechner; wer den Beitrag eines bestimmten Geräts kennen möchte, ist hier richtig.</p>`,
       },
       {
         typ: 'statistik',
@@ -2171,7 +2171,7 @@ export const technikRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Strompreis als Eingabe — die Werte sind Orientierung',
-        text: 'Die Kostenangaben dieses Rechners hängen direkt vom Strompreis ab, den Sie eingeben. Als Voreinstellung dienen rund 35 Cent pro Kilowattstunde — Ihr tatsächlicher Preis steht auf der letzten Stromabrechnung und kann je nach Tarif und Region spürbar abweichen. Setzen Sie diesen Wert ein, um realistische Zahlen zu erhalten. Auch die Geräteleistung und die Nutzungsdauer sind Schätzwerte: Viele Geräte verbrauchen je nach Betriebszustand sehr unterschiedlich, ein Kühlschrank etwa nur, während der Verdichter läuft. Für eine genaue Messung hilft eine Messsteckdose. Die genannten Verbrauchswerte sind typische Richtwerte und kein Ersatz für die Angaben auf dem Typenschild. Auch der Strompreis ändert sich über die Jahre — eine Rechnung von heute kann morgen schon anders ausfallen. Für langfristige Vergleiche lohnt es sich daher, eher den kWh-Verbrauch als die Euro-Kosten im Blick zu behalten.',
+        text: `Die Kostenangaben dieses Rechners hängen direkt vom Strompreis ab, den Sie eingeben. Als Voreinstellung dienen rund ${STROMPREIS_2026.durchschnitt_bdew} Cent pro Kilowattstunde — Ihr tatsächlicher Preis steht auf der letzten Stromabrechnung und kann je nach Tarif und Region spürbar abweichen. Setzen Sie diesen Wert ein, um realistische Zahlen zu erhalten. Auch die Geräteleistung und die Nutzungsdauer sind Schätzwerte: Viele Geräte verbrauchen je nach Betriebszustand sehr unterschiedlich, ein Kühlschrank etwa nur, während der Verdichter läuft. Für eine genaue Messung hilft eine Messsteckdose. Die genannten Verbrauchswerte sind typische Richtwerte und kein Ersatz für die Angaben auf dem Typenschild. Auch der Strompreis ändert sich über die Jahre — eine Rechnung von heute kann morgen schon anders ausfallen. Für langfristige Vergleiche lohnt es sich daher, eher den kWh-Verbrauch als die Euro-Kosten im Blick zu behalten.`,
       },
     ],
     quellen: [

@@ -72,7 +72,9 @@ export default function AlkoholAbbauRechner() {
       }
     }
 
-    const promilleMax = (gesamtAlk / (gew * r)) * 0.9; // Resorptionsdefizit 10 %
+    // Widmark ohne Resorptionsdefizit — wie Promillerechner (lib/berechnungen/promille.ts) und die Texte
+    // dieser Seite; der höhere, vorsichtigere Wert. W181: vorher × 0,9 (10 % Resorptionsdefizit).
+    const promilleMax = gesamtAlk / (gew * r);
     const abbauRate = 0.15;
 
     // Zeitberechnung

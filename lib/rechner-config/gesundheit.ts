@@ -521,7 +521,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'kalorienrechner',
-    letzteAktualisierung: '2026-06-11',
+    letzteAktualisierung: '2026-10-20',
     quellen: [
       { titel: 'Mifflin MD, St Jeor ST et al. (1990): A new predictive equation for resting energy expenditure', hinweis: 'Grundlage der heute gebräuchlichsten BMR-Schätzformel für gesunde Erwachsene (American Journal of Clinical Nutrition).' },
       { titel: 'Deutsche Gesellschaft für Ernährung (DGE): Referenzwerte Energiezufuhr', url: 'https://www.dge.de/wissenschaft/referenzwerte/energie/' },
@@ -534,7 +534,7 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'Kalorienbedarf berechnen: Grundumsatz und Gesamtumsatz mit der Mifflin-St Jeor-Formel ✓ Aktivitätslevel ✓ Makronährstoffe ✓ KI-Erklärung.',
     keywords: ['kalorienrechner', 'kalorienbedarf berechnen', 'grundumsatz berechnen', 'gesamtumsatz', 'mifflin st jeor', 'kalorienverbrauch', 'kcal rechner', 'täglicher kalorienbedarf'],
     icon: '🍎',
-    beispiel: 'Beispiel: Frau, 30 Jahre, 165 cm, 65 kg, leicht aktiv → Grundumsatz = 1.354 kcal → Gesamtumsatz = 1.862 kcal',
+    beispiel: 'Beispiel: Frau, 30 Jahre, 165 cm, 65 kg, leicht aktiv → Grundumsatz = 1.370 kcal → Gesamtumsatz = 1.884 kcal',
     // contentBloecke (W19): „Bedarf-verstehen-Leitformat" — bewusst nüchtern bei
     // sensiblem Thema (Disordered-Eating-Prävention): KEINE Defizit-/Diät-Anleitung,
     // Fokus auf Energiebedarf verstehen. Prägend: vergleich (Grund- vs. Gesamtumsatz)
@@ -826,7 +826,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'idealgewicht-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Idealgewicht-Rechner',
     beschreibung: 'Idealgewicht berechnen nach verschiedenen Formeln: Broca, Creff und BMI-basiert — mit persönlicher Idealgewicht-Spanne.',
     kategorie: 'Gesundheit',
@@ -835,7 +835,7 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'Idealgewicht berechnen: Broca-Formel, Creff-Formel und BMI-basierte Spanne ✓ Altersangepasst ✓ Körperbau ✓ KI-Erklärung.',
     keywords: ['idealgewicht berechnen', 'idealgewicht rechner', 'broca formel', 'creff formel', 'normalgewicht berechnen', 'idealgewicht frau', 'idealgewicht mann', 'idealgewicht nach alter'],
     icon: '⚖️',
-    beispiel: 'Frau, 30 Jahre, 170 cm, normal → Broca: 59,5 kg | Creff: 66,0 kg | BMI-Spanne: 57,8–72,3 kg',
+    beispiel: 'Frau, 30 Jahre, 170 cm, normal → Broca: 59,5 kg | Creff: 65,7 kg | BMI-Spanne: 57,8–74,9 kg',
     faq: [
       {
         frage: 'Wie berechne ich mein Idealgewicht?',
@@ -1137,7 +1137,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'koerperfett-rechner',
-    letzteAktualisierung: '2026-06-14',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Körperfettrechner',
     beschreibung: 'Körperfettanteil schätzen mit der Navy-Methode: KFA in Prozent basierend auf Körpermaßen, mit Einordnung und Vergleich.',
     kategorie: 'Gesundheit',
@@ -1146,7 +1146,7 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'Körperfettanteil berechnen: Navy-Methode mit Bauchumfang und Halsumfang ✓ Einordnung ✓ Vergleichswerte ✓ KI-Erklärung.',
     keywords: ['körperfettrechner', 'körperfettanteil berechnen', 'kfa rechner', 'navy methode körperfett', 'körperfett messen', 'body fat calculator', 'körperfettanteil mann', 'körperfettanteil frau', 'körperfett prozent', 'fettmasse berechnen'],
     icon: '📏',
-    beispiel: 'Mann, 178 cm, Bauchumfang 85 cm, Halsumfang 38 cm → KFA ≈ 18,3% (Durchschnittlich)',
+    beispiel: 'Mann, 178 cm, Bauchumfang 85 cm, Halsumfang 38 cm → KFA ≈ 16,4 % (Fitness)',
     faq: [
       {
         frage: 'Wie messe ich für die US-Navy-Methode richtig?',
@@ -1714,7 +1714,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'alkohol-abbau-rechner',
-    letzteAktualisierung: '2026-06-18',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Alkohol-Abbau-Rechner',
     beschreibung: 'Maximale Promille, Abbauzeit und wann Sie wieder nüchtern sind — berechnet nach der Widmark-Formel.',
     kategorie: 'Gesundheit',
@@ -1729,7 +1729,9 @@ export const gesundheitRechner: RechnerConfig[] = [
     // Formulierung, KEINE „schneller nüchtern"-Methode (Mythen nur entkräftet), Restalkohol
     // prominent, 0,0 ‰ für Fahranfänger benannt, Widmark als Näherung. Werte aus
     // lib/berechnungen/promille.ts gespiegelt: g = mengeL×%×0,8×10; r 0,68/0,55; reine
-    // Widmark ohne Magen-Darm-Abschlag; Abbau ~0,15 ‰/h, Zonen 0,3/0,5/1,1.
+    // Widmark ohne Magen-Darm-Abschlag; Abbau ~0,15 ‰/h, Zonen 0,3/0,5/1,1. W181: Der Rechner rechnete
+    // mit 10 % Resorptionsdefizit (× 0,9) und zeigte damit niedrigere Werte als Texte und Promillerechner;
+    // er rechnet jetzt ebenfalls ohne Abschlag (vorsichtiger Wert).
     // Beispiele lib-exakt (2 Bier Mann 80 kg = 0,74 ‰; gleiche Menge Frau 60 kg = 1,21 ‰).
     // Keine Rechtsberatung. erklaerung bleibt Fallback.
     contentBloecke: [

@@ -354,7 +354,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'ueberstunden-rechner',
-    letzteAktualisierung: '2026-06-18',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Überstunden-Rechner',
     beschreibung: 'Überstunden berechnen: Pro Woche, Monat und Jahr mit Vergütung, Zuschlag und Stundenlohn-Ermittlung.',
     kategorie: 'Arbeit & Recht',
@@ -363,7 +363,7 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Überstunden berechnen ✓ Pro Woche, Monat & Jahr ✓ Vergütung mit Zuschlag ✓ Stundenlohn ermitteln. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['überstunden rechner', 'überstunden berechnen', 'überstundenvergütung', 'überstundenzuschlag', 'stundenlohn berechnen', 'minusstunden', 'mehrarbeit berechnen'],
     icon: '⏰',
-    beispiel: '45 Std. tatsächlich, 40 Std. vertraglich → 5 Überstunden/Woche. Bei 3.500 € Gehalt und 25% Zuschlag: 5 × 25,24 € = 126,19 € brutto.',
+    beispiel: '45 Std. tatsächlich, 40 Std. vertraglich → 5 Überstunden/Woche. Bei 3.500 € Gehalt und 25% Zuschlag: 5 × 25,24 € = 126,20 € brutto.',
     // W19-Goldstandard: ueberstunden-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
     // Leitformat „beispielrechnung" 4× dominant. Werte aus lib/berechnungen/ueberstunden.ts
     // gespiegelt: Überstunden = tatsächlich − vertraglich; proMonat × 4,33; Stundenlohn =
@@ -1482,7 +1482,7 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Teilzeitgehalt berechnen: Brutto, Netto, Stundenlohn und Urlaubstage bei reduzierter Arbeitszeit ✓ Steuerklasse ✓ Vergleich Vollzeit ✓ KI-Erklärung.',
     keywords: ['teilzeit rechner', 'teilzeitgehalt berechnen', 'gehalt bei teilzeit', 'teilzeit netto', 'teilzeit brutto', 'stundenlohn teilzeit', 'urlaubstage teilzeit', 'teilzeit berechnen'],
     icon: '⏰',
-    beispiel: '3.500 € Vollzeit bei 40h → 30h Teilzeit = 2.625 € Brutto, ca. 1.890 € Netto (Stkl. I, NRW)',
+    beispiel: '3.500 € Vollzeit bei 40h → 30h Teilzeit = 2.625 € Brutto, ca. 1.841 € Netto (Stkl. I, NRW)',
     faq: [
       {
         frage: 'Wie berechne ich mein Gehalt bei Teilzeit?',

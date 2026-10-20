@@ -870,7 +870,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'baufinanzierung-rechner',
-    letzteAktualisierung: '2026-06-28',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Baufinanzierungs-Rechner',
     beschreibung: 'Baufinanzierung berechnen: Monatsrate, Gesamtkosten, Restschuld und Tilgungsplan für Ihre Immobilienfinanzierung.',
     kategorie: 'Wohnen & Energie',
@@ -879,7 +879,7 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Baufinanzierung berechnen: Monatsrate, Kaufnebenkosten, Restschuld und Tilgungsplan ✓ Alle Bundesländer ✓ Sondertilgung ✓ KI-Erklärung.',
     keywords: ['baufinanzierung rechner', 'baufinanzierung berechnen', 'immobilienkredit rechner', 'hypothekenrechner', 'monatsrate immobilie', 'tilgungsplan', 'restschuld berechnen', 'immobilienfinanzierung', 'hauskauf rechner', 'baukredit rechner'],
     icon: '🏗️',
-    beispiel: 'Kaufpreis 350.000 €, 70.000 € EK, NRW, 3,5% Zins, 2% Tilgung: → Nebenkosten: 42.245 €, Darlehen: 322.245 €, Rate: 1.476 €/Monat, Restschuld nach 15 J.: ca. 195.000 €.',
+    beispiel: 'Kaufpreis 350.000 €, 70.000 € EK, NRW, 3,5% Zins, 2% Tilgung: → Nebenkosten: 42.245 €, Darlehen: 322.245 €, Rate: 1.477 €/Monat, Restschuld nach 15 J.: ca. 195.000 €.',
     faq: [
       {
         frage: 'Wie hoch sollte die monatliche Rate maximal sein?',
@@ -922,10 +922,10 @@ export const wohnenRechner: RechnerConfig[] = [
           { label: 'Kaufnebenkosten gesamt', formel: '22.750 + 7.000 + 12.495', ergebnis: '42.245 €' },
           { label: 'Gesamtkosten', formel: '350.000 € + 42.245 €', ergebnis: '392.245 €' },
           { label: 'Darlehensbetrag', formel: '392.245 € − 70.000 € EK', ergebnis: '322.245 €' },
-          { label: 'Monatsrate (3,5 % Zins + 2 % Tilgung)', formel: '322.245 × 5,5 % ÷ 12', ergebnis: '1.476 €' },
+          { label: 'Monatsrate (3,5 % Zins + 2 % Tilgung)', formel: '322.245 × 5,5 % ÷ 12', ergebnis: '1.477 €' },
           { label: 'Restschuld nach 15 Jahren', formel: 'aus dem Tilgungsplan', ergebnis: '~195.000 €' },
         ],
-        fazit: 'Das Beispiel zeigt eindrücklich, wie stark die Kaufnebenkosten ins Gewicht fallen: Grunderwerbsteuer, Notar und Makler summieren sich in NRW auf 42.245 € — Geld, das Banken nur ungern mitfinanzieren und das deshalb aus Eigenkapital kommen sollte. Nach Abzug der Nebenkosten vom Eigenkapital von 70.000 € bleibt ein Darlehensbedarf von 322.245 €. Bei 3,5 % Sollzins und 2 % Anfangstilgung ergibt sich daraus eine Monatsrate von 1.476 €. Nach 15 Jahren Zinsbindung bleibt eine Restschuld von etwa 195.000 €, die anschließend weiterfinanziert werden muss.',
+        fazit: 'Das Beispiel zeigt eindrücklich, wie stark die Kaufnebenkosten ins Gewicht fallen: Grunderwerbsteuer, Notar und Makler summieren sich in NRW auf 42.245 € — Geld, das Banken nur ungern mitfinanzieren und das deshalb aus Eigenkapital kommen sollte. Nach Abzug der Nebenkosten vom Eigenkapital von 70.000 € bleibt ein Darlehensbedarf von 322.245 €. Bei 3,5 % Sollzins und 2 % Anfangstilgung ergibt sich daraus eine Monatsrate von 1.477 €. Nach 15 Jahren Zinsbindung bleibt eine Restschuld von etwa 195.000 €, die anschließend weiterfinanziert werden muss.',
       },
       {
         typ: 'tabelle',
@@ -976,10 +976,10 @@ export const wohnenRechner: RechnerConfig[] = [
         titel: 'Wie die Anfangstilgung die Laufzeit verändert',
         schritte: [
           { label: '1 % Anfangstilgung', formel: 'Rate 1.208 €/Monat', ergebnis: '~40 Jahre' },
-          { label: '2 % Anfangstilgung', formel: 'Rate 1.476 €/Monat', ergebnis: '~28 Jahre' },
+          { label: '2 % Anfangstilgung', formel: 'Rate 1.477 €/Monat', ergebnis: '~28 Jahre' },
           { label: '3 % Anfangstilgung', formel: 'Rate 1.745 €/Monat', ergebnis: '~22 Jahre' },
         ],
-        fazit: 'Am Beispieldarlehen von 322.245 € bei 3,5 % Sollzins zeigt sich der Hebel der Anfangstilgung: Mit nur 1 % Tilgung beträgt die Rate zwar bequeme 1.208 €, die Rückzahlung zieht sich aber über rund 40 Jahre und kostet über die Laufzeit am meisten Zinsen. Mit 2 % Tilgung steigt die Rate auf 1.476 €, die Laufzeit sinkt auf etwa 28 Jahre. Bei 3 % sind es 1.745 € Rate und nur noch rund 22 Jahre. KfW und Verbraucherzentralen empfehlen mindestens 2 % Anfangstilgung. Durch die Annuität steigt der Tilgungsanteil ohnehin von Jahr zu Jahr automatisch an, weil der Zinsanteil mit sinkender Restschuld kleiner wird. Eine höhere Anfangstilgung bedeutet damit nicht nur schnellere Schuldenfreiheit, sondern über die Laufzeit auch deutlich geringere Gesamtzinskosten.',
+        fazit: 'Am Beispieldarlehen von 322.245 € bei 3,5 % Sollzins zeigt sich der Hebel der Anfangstilgung: Mit nur 1 % Tilgung beträgt die Rate zwar bequeme 1.208 €, die Rückzahlung zieht sich aber über rund 40 Jahre und kostet über die Laufzeit am meisten Zinsen. Mit 2 % Tilgung steigt die Rate auf 1.477 €, die Laufzeit sinkt auf etwa 28 Jahre. Bei 3 % sind es 1.745 € Rate und nur noch rund 22 Jahre. KfW und Verbraucherzentralen empfehlen mindestens 2 % Anfangstilgung. Durch die Annuität steigt der Tilgungsanteil ohnehin von Jahr zu Jahr automatisch an, weil der Zinsanteil mit sinkender Restschuld kleiner wird. Eine höhere Anfangstilgung bedeutet damit nicht nur schnellere Schuldenfreiheit, sondern über die Laufzeit auch deutlich geringere Gesamtzinskosten.',
       },
       {
         typ: 'text',
@@ -2742,7 +2742,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'mietpreisbremse-rechner',
-    letzteAktualisierung: '2026-06-28',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Mietpreisbremse-Rechner',
     beschreibung: 'Mietpreisbremse prüfen: Ist Ihre Miete zulässig und wie viel können Sie zurückfordern?',
     kategorie: 'Wohnen & Energie',
@@ -2763,7 +2763,7 @@ export const wohnenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Kann ich zu viel gezahlte Miete zurückfordern?',
-        antwort: 'Ja, aber nur ab dem Zeitpunkt, zu dem Sie den Vermieter schriftlich gerügt haben. Rückwirkend für die Zeit vor der Rüge können Sie nichts zurückfordern. Die Rüge sollte qualifiziert sein — also den konkreten Verstoß gegen § 556d BGB benennen und die geforderte Reduzierung beziffern.',
+        antwort: 'Ja, wenn Sie den Verstoß vorher in Textform gerügt haben (§ 556g Abs. 2 BGB). Rügen Sie innerhalb von 30 Monaten nach Beginn des Mietverhältnisses und läuft der Mietvertrag noch, können Sie die zu viel gezahlte Miete seit Mietbeginn zurückverlangen (für Mietverträge ab dem 1. April 2020). Rügen Sie später oder ist das Mietverhältnis schon beendet, gibt es nur die Miete zurück, die nach Zugang der Rüge fällig wurde. Die Rüge sollte qualifiziert sein — also den konkreten Verstoß gegen § 556d BGB benennen und die geforderte Reduzierung beziffern.',
       },
       {
         frage: 'Wann greift die Mietpreisbremse nicht?',
@@ -2846,7 +2846,7 @@ export const wohnenRechner: RechnerConfig[] = [
           'Greift eine Ausnahme — Neubau, umfassende Modernisierung, höhere Vormiete, möbliert oder auf Zeit?',
           'Stammt die Vergleichsmiete aus dem richtigen Mietspiegel-Feld (Lage, Baujahr, Größe, Ausstattung)?',
           'Eine qualifizierte Rüge nach § 556g BGB in Textform an den Vermieter senden.',
-          'Bedenken: Die Rückforderung wirkt erst ab Zugang der Rüge, nicht rückwirkend.',
+          'Fristen beachten: Innerhalb von 30 Monaten nach Mietbeginn gerügt, gibt es die Überzahlung seit Vertragsbeginn zurück; danach nur ab Zugang der Rüge.',
           'Bei Unsicherheit den örtlichen Mieterverein oder eine Mietrechtsberatung einschalten.',
           'Belege sammeln — Mietvertrag, Mietspiegel-Auszug und Schriftverkehr für eine spätere Rüge bereithalten.',
         ],
@@ -2854,7 +2854,7 @@ export const wohnenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Auskunftsanspruch und Rüge nach § 556g BGB',
-        html: `<p>Die Mietpreisbremse wirkt <strong>nicht automatisch</strong>. Wer zu viel zahlt, muss selbst aktiv werden. § 556g BGB gibt Mietern dafür zwei Werkzeuge: zum einen einen <strong>Auskunftsanspruch</strong> — der Vermieter muss auf Verlangen Auskunft über die Vormiete oder einen geltend gemachten Ausnahmegrund geben. Zum anderen die <strong>Rüge</strong>: eine Erklärung in Textform, die den Verstoß gegen § 556d BGB benennt und die Herabsetzung auf die zulässige Miete fordert.</p><p>Entscheidend ist der Zeitpunkt: Zu viel gezahlte Miete kann erst <strong>ab Zugang der Rüge</strong> zurückgefordert werden, eine Rückwirkung auf die Zeit davor gibt es nicht. Je früher Sie rügen, desto mehr sparen Sie. Eine automatische Rückzahlung erfolgt nicht — bei Streit hilft der Mieterverein oder eine Anwältin für Mietrecht, notfalls vor Gericht. Eine Mietrechtsschutzversicherung kann die Kosten abdecken.</p>`,
+        html: `<p>Die Mietpreisbremse wirkt <strong>nicht automatisch</strong>. Wer zu viel zahlt, muss selbst aktiv werden. § 556g BGB gibt Mietern dafür zwei Werkzeuge: zum einen einen <strong>Auskunftsanspruch</strong> — der Vermieter muss auf Verlangen Auskunft über die Vormiete oder einen geltend gemachten Ausnahmegrund geben. Zum anderen die <strong>Rüge</strong>: eine Erklärung in Textform, die den Verstoß gegen § 556d BGB benennt und die Herabsetzung auf die zulässige Miete fordert.</p><p>Entscheidend ist der Zeitpunkt: Rügen Sie innerhalb von <strong>30 Monaten nach Beginn des Mietverhältnisses</strong> und besteht der Mietvertrag noch, können Sie die zu viel gezahlte Miete <strong>rückwirkend seit Mietbeginn</strong> zurückverlangen (§ 556g Abs. 2 BGB, für Mietverträge ab dem 1. April 2020). Bei einer späteren Rüge oder nach dem Auszug gibt es nur die Miete zurück, die nach Zugang der Rüge fällig wurde. Je früher Sie rügen, desto mehr sichern Sie sich. Eine automatische Rückzahlung erfolgt nicht — bei Streit hilft der Mieterverein oder eine Anwältin für Mietrecht, notfalls vor Gericht. Eine Mietrechtsschutzversicherung kann die Kosten abdecken.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -2862,15 +2862,15 @@ export const wohnenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Überhöhung pro Monat', formel: '780 € − 715 €', ergebnis: '65 €' },
           { label: 'Pro Jahr', formel: '65 € × 12', ergebnis: '780 €' },
-          { label: 'Über 3 Jahre (ab Rüge)', formel: '780 € × 3', ergebnis: '2.340 €' },
+          { label: 'Über 3 Jahre', formel: '780 € × 3', ergebnis: '2.340 €' },
           { label: 'Niedrigere Miete dauerhaft', formel: '780 € → 715 €', ergebnis: '−65 €/Monat' },
         ],
-        fazit: 'Am Hauptbeispiel zeigt sich, warum sich die Prüfung lohnt: 65 € Überhöhung im Monat summieren sich auf 780 € im Jahr und über drei Jahre auf 2.340 € — und das nur ab dem Zeitpunkt der Rüge. Zusätzlich sinkt die laufende Miete dauerhaft auf den zulässigen Wert von 715 €, was über die gesamte restliche Mietzeit wirkt. Weil die Rückforderung erst ab Rüge greift, ist schnelles Handeln bares Geld wert. Die Werte gelten unter der Annahme, dass die Bremse am Ort gilt und keine Ausnahme einschlägig ist; ob die Rüge am Ende durchgreift, hängt vom Einzelfall ab.',
+        fazit: 'Am Hauptbeispiel zeigt sich, warum sich die Prüfung lohnt: 65 € Überhöhung im Monat summieren sich auf 780 € im Jahr und über drei Jahre auf 2.340 €. Wer innerhalb von 30 Monaten nach Mietbeginn rügt, bekommt die Überzahlung seit Vertragsbeginn zurück; wer später rügt, nur ab Zugang der Rüge. Zusätzlich sinkt die laufende Miete dauerhaft auf den zulässigen Wert von 715 €, was über die gesamte restliche Mietzeit wirkt. Schnelles Handeln ist also bares Geld wert. Die Werte gelten unter der Annahme, dass die Bremse am Ort gilt und keine Ausnahme einschlägig ist; ob die Rüge am Ende durchgreift, hängt vom Einzelfall ab.',
       },
       {
         typ: 'text',
         titel: 'Mietpreisbremse aus Vermietersicht',
-        html: `<p>Auch für Vermieter lohnt der Blick auf die Bremse — vor allem, um <strong>Rückforderungen zu vermeiden</strong>. Wer in einem ausgewiesenen Gebiet neu vermietet, sollte die zulässige Höchstmiete vorab aus dem Mietspiegel berechnen und Ausnahmen sauber dokumentieren. Besonders wichtig: Will man sich auf eine höhere Vormiete berufen (§ 556e BGB), muss der neue Mieter vor Vertragsschluss in Textform darüber informiert werden — fehlt dieser Nachweis, entfällt der Bestandsschutz.</p><p>Fehlerhafte oder fehlende Angaben führen dazu, dass Mieter zu viel gezahlte Miete ab Rüge zurückverlangen können. Ein sauberer Mietspiegel-Bezug schafft Rechtssicherheit. Wer eine Wohnung als Kapitalanlage betrachtet, sollte die zulässige Miete in die Renditeplanung einbeziehen; eine erste Einschätzung liefert der <a href="/wohnen/mietrendite-rechner">Mietrendite-Rechner</a>. Wer die zulässige Miete von Anfang an korrekt ansetzt, vermeidet nicht nur Rückforderungen, sondern auch das Risiko, dass die Wohnung wegen einer offensichtlich überhöhten Miete schwerer zu vermieten ist.</p>`,
+        html: `<p>Auch für Vermieter lohnt der Blick auf die Bremse — vor allem, um <strong>Rückforderungen zu vermeiden</strong>. Wer in einem ausgewiesenen Gebiet neu vermietet, sollte die zulässige Höchstmiete vorab aus dem Mietspiegel berechnen und Ausnahmen sauber dokumentieren. Besonders wichtig: Will man sich auf eine höhere Vormiete berufen (§ 556e BGB), muss der neue Mieter vor Vertragsschluss in Textform darüber informiert werden — fehlt dieser Nachweis, entfällt der Bestandsschutz.</p><p>Fehlerhafte oder fehlende Angaben führen dazu, dass Mieter zu viel gezahlte Miete nach einer Rüge zurückverlangen können — bei einer Rüge in den ersten 30 Monaten sogar rückwirkend ab Mietbeginn. Ein sauberer Mietspiegel-Bezug schafft Rechtssicherheit. Wer eine Wohnung als Kapitalanlage betrachtet, sollte die zulässige Miete in die Renditeplanung einbeziehen; eine erste Einschätzung liefert der <a href="/wohnen/mietrendite-rechner">Mietrendite-Rechner</a>. Wer die zulässige Miete von Anfang an korrekt ansetzt, vermeidet nicht nur Rückforderungen, sondern auch das Risiko, dass die Wohnung wegen einer offensichtlich überhöhten Miete schwerer zu vermieten ist.</p>`,
       },
       {
         typ: 'infobox',
@@ -2882,7 +2882,7 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'tipp',
         titel: 'Kurzfazit',
-        text: 'Die Mietpreisbremse begrenzt die Miete bei Neuvermietung auf höchstens 10 % über der ortsüblichen Vergleichsmiete — aber nur in Gebieten mit gültiger Landesverordnung und nur, wenn Sie aktiv werden. Prüfen Sie zuerst, ob Ihr Ort erfasst ist, dann die Vergleichsmiete im Mietspiegel und mögliche Ausnahmen. Liegt ein Verstoß vor, hilft eine qualifizierte Rüge in Textform; zurückfordern lässt sich nur ab dem Zugang der Rüge. Die Verlängerung gilt bis Ende 2029. Dieser Rechner liefert eine erste Orientierung und ersetzt keine Rechtsberatung — bei einer strittigen Mieterhöhung sind der Deutsche Mieterbund, ein örtlicher Mieterverein oder eine Fachanwältin für Mietrecht die richtigen Ansprechpartner. Eine Mitgliedschaft im Mieterverein ist mit rund 50 bis 90 € im Jahr günstig und liefert Musterbriefe, Beratung und Rückhalt im Streitfall.',
+        text: 'Die Mietpreisbremse begrenzt die Miete bei Neuvermietung auf höchstens 10 % über der ortsüblichen Vergleichsmiete — aber nur in Gebieten mit gültiger Landesverordnung und nur, wenn Sie aktiv werden. Prüfen Sie zuerst, ob Ihr Ort erfasst ist, dann die Vergleichsmiete im Mietspiegel und mögliche Ausnahmen. Liegt ein Verstoß vor, hilft eine qualifizierte Rüge in Textform; zurückfordern lässt sich die Überzahlung seit Mietbeginn, wenn Sie innerhalb von 30 Monaten rügen, sonst ab Zugang der Rüge. Die Verlängerung gilt bis Ende 2029. Dieser Rechner liefert eine erste Orientierung und ersetzt keine Rechtsberatung — bei einer strittigen Mieterhöhung sind der Deutsche Mieterbund, ein örtlicher Mieterverein oder eine Fachanwältin für Mietrecht die richtigen Ansprechpartner. Eine Mitgliedschaft im Mieterverein ist mit rund 50 bis 90 € im Jahr günstig und liefert Musterbriefe, Beratung und Rückhalt im Streitfall.',
       },
     ],
     quellen: [

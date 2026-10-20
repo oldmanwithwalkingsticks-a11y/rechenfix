@@ -9,8 +9,9 @@
  *     miete bleibt die alte Miete zulässig — Bestandsschutz)
  *   - § 556f BGB (Ausnahmen: Erstbezug nach 01.10.2014, umfassende Modernisierung
  *     mit Investition ≥ 1/3 eines vergleichbaren Neubaus)
- *   - § 556g BGB (qualifizierter Auskunftsanspruch des Mieters; Rückforderungs-
- *     wirkung erst ab Rüge, keine Rückwirkung)
+ *   - § 556g BGB (qualifizierter Auskunftsanspruch des Mieters; Rückforderung nur
+ *     nach Rüge — innerhalb von 30 Monaten nach Mietbeginn und bei laufendem Vertrag
+ *     rückwirkend ab Mietbeginn, sonst ab Zugang der Rüge; Abs. 2 seit 01.04.2020, W181)
  *
  * Stand: 2026 (Mietpreisbremse-Verlängerung bis 31.12.2029 durch das Gesetz zur
  * Änderung der Regelungen über die zulässige Miethöhe bei Mietbeginn,

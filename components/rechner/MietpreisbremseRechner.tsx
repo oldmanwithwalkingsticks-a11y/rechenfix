@@ -165,7 +165,7 @@ export default function MietpreisbremseRechner() {
         <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
           <p className="font-semibold text-blue-800 dark:text-blue-300 text-sm mb-1">So gehen Sie vor</p>
           <p className="text-blue-800 dark:text-blue-300 text-sm">
-            Sie müssen den Vermieter <strong>schriftlich rügen</strong> (am besten per Einschreiben). Erst <strong>ab dem Zeitpunkt der Rüge</strong> können Sie die Differenz einfordern — rückwirkend vor der Rüge leider nicht. Eine qualifizierte Rüge nennt den konkreten Verstoß gegen § 556d BGB und die Höhe der geforderten Rückzahlung.
+            Sie müssen den Vermieter <strong>in Textform rügen</strong> (am besten nachweisbar, etwa per Einschreiben). Rügen Sie <strong>innerhalb von 30 Monaten nach Mietbeginn</strong> und läuft der Vertrag noch, können Sie die Differenz <strong>seit Mietbeginn</strong> zurückverlangen; bei einer späteren Rüge oder nach dem Auszug nur für die Zeit nach Zugang der Rüge (§ 556g Abs. 2 BGB, Mietverträge ab 1. April 2020). Eine qualifizierte Rüge nennt den konkreten Verstoß gegen § 556d BGB und die Höhe der geforderten Rückzahlung.
           </p>
         </div>
       )}

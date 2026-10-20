@@ -538,7 +538,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'arbeitslosengeld-rechner',
-    letzteAktualisierung: '2026-06-11',
+    letzteAktualisierung: '2026-10-20',
     quellen: [
       { titel: '§ 149 SGB III: Höhe des Arbeitslosengeldes (60/67 %)', url: 'https://www.gesetze-im-internet.de/sgb_3/__149.html' },
       { titel: '§ 142 SGB III: Anwartschaftszeit', url: 'https://www.gesetze-im-internet.de/sgb_3/__142.html' },
@@ -553,7 +553,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Arbeitslosengeld berechnen: ALG-I-Höhe, Bezugsdauer und Auszahlung ✓ 60 %/67 % ✓ Steuerklasse ✓ KI-Erklärung.',
     keywords: ['arbeitslosengeld rechner', 'alg 1 rechner', 'alg i 2026', 'arbeitslosengeld berechnen', 'bezugsdauer alg', 'leistungsentgelt', 'sperrzeit'],
     icon: '💶',
-    beispiel: '3.500 € Brutto, Steuerklasse I, ohne Kind, 24 Monate Beschäftigung (Alter 40): ca. 1.420 € ALG I/Monat für 12 Monate = rund 17.000 € Gesamtanspruch.',
+    beispiel: '3.500 € Brutto, Steuerklasse I, ohne Kind, 24 Monate Beschäftigung (Alter 40): ca. 1.412 € ALG I/Monat für 12 Monate = rund 16.945 € Gesamtanspruch.',
     // contentBloecke (W19): eigenständiges „Voraussetzungs- & Staffelungs-Leitformat" —
     // dominant tabelle (Bezugsdauer-Staffel § 147) + beispielrechnung + checkliste. Werte
     // gespiegelt aus lib/berechnungen/arbeitslosengeld.ts: Satz 60 %/67 % (§ 149),
@@ -666,7 +666,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
     ],
     faq: [
-      { frage: 'Wie hoch ist das Arbeitslosengeld I?', antwort: 'Das ALG I beträgt 60 % des pauschalierten Netto (Leistungsentgelt) bzw. 67 % mit mindestens einem Kind. Grundlage ist das Durchschnittsbrutto der letzten 12 Monate. Bei 3.500 € Brutto und Steuerklasse I ergeben sich etwa 1.420 €/Monat. Nutzen Sie unseren Rechner für Ihren individuellen Wert.' },
+      { frage: 'Wie hoch ist das Arbeitslosengeld I?', antwort: 'Das ALG I beträgt 60 % des pauschalierten Netto (Leistungsentgelt) bzw. 67 % mit mindestens einem Kind. Grundlage ist das Durchschnittsbrutto der letzten 12 Monate. Bei 3.500 € Brutto und Steuerklasse I ergeben sich etwa 1.412 €/Monat. Nutzen Sie unseren Rechner für Ihren individuellen Wert.' },
       { frage: 'Wie lange bekomme ich ALG I?', antwort: 'Die Bezugsdauer richtet sich nach Beschäftigungsdauer und Alter: 12 Monate Beschäftigung ergeben 6 Monate ALG, 24 Monate Beschäftigung 12 Monate ALG. Ältere Arbeitnehmer erhalten länger: ab 50 Jahre bis zu 15 Monate, ab 55 bis zu 18 Monate, ab 58 sogar bis zu 24 Monate.' },
       { frage: 'Wird eine Abfindung auf das ALG I angerechnet?', antwort: 'Grundsätzlich nicht — solange die ordentliche Kündigungsfrist eingehalten wird. Wird die Kündigungsfrist verkürzt (z. B. im Aufhebungsvertrag), ruht das ALG bis zum fiktiven regulären Kündigungstermin (§ 158 SGB III). Steuerlich profitieren Abfindungen von der Fünftelregelung.' },
       { frage: 'Was passiert bei Eigenkündigung?', antwort: 'Bei Eigenkündigung oder Aufhebungsvertrag ohne wichtigen Grund verhängt die Arbeitsagentur eine Sperrzeit von 12 Wochen. In dieser Zeit wird kein ALG gezahlt und die Gesamtanspruchsdauer verkürzt sich um bis zu ein Viertel. Ein wichtiger Grund (z. B. Mobbing, gesundheitliche Gründe) muss nachgewiesen werden.' },
@@ -837,7 +837,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'stundenlohn-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     zeigtAuthorBio: true,
     titel: 'Stundenlohnrechner',
     beschreibung: 'Stundenlohn aus Monatsgehalt berechnen oder umgekehrt — mit Mindestlohn-Vergleich und effektivem Stundenlohn.',
@@ -847,7 +847,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Stundenlohn berechnen ✓ Aus Monatsgehalt oder umgekehrt ✓ Vergleich mit Mindestlohn ✓ Kostenlos & sofort. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['stundenlohn rechner', 'stundenlohn berechnen', 'gehalt in stundenlohn', 'monatsgehalt berechnen', 'stundenlohnrechner', 'mindestlohn 2026'],
     icon: '🕐',
-    beispiel: 'Beispiel: 3.500 € Monatsgehalt / (40 Std × 4,33) = 20,21 € Stundenlohn',
+    beispiel: 'Beispiel: 3.500 € Monatsgehalt / (40 Std × 52 ÷ 12 = 173,33 Std) = 20,19 € Stundenlohn',
     affiliate: { programId: 'lexware', context: 'stundenlohn' },
     // W19-Goldstandard: stundenlohn-rechner auf volle Tiefe (~1.500 W, 10 Bausteine), Leitformat
     // „Vergleich & Einordnung" — 2 Vergleiche + Statistik dominant, KEIN Diagramm. Mindestlohn-Reihe
@@ -859,16 +859,16 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Was der Stundenlohn wirklich aussagt',
-        html: `<p>Der Stundenlohn beantwortet eine einfache, aber entscheidende Frage: Wie viel Geld verdienen Sie für eine Stunde Ihrer Arbeitszeit? Anders als das Monatsgehalt, das die dahinterstehende Arbeitszeit verschleiert, macht der Stundenlohn Jobs unmittelbar vergleichbar. 3.500 € bei einer 40-Stunden-Woche und 3.500 € bei einer 35-Stunden-Woche klingen gleich — pro Stunde liegen jedoch Welten dazwischen.</p><p>Berechnet wird der Stundenlohn aus dem Bruttogehalt und den monatlichen Arbeitsstunden. Diese ergeben sich aus den Wochenstunden multipliziert mit dem Faktor <strong>4,33</strong> — dem Durchschnitt von 52 Wochen geteilt durch 12 Monate. Ein Monat hat also im Schnitt 4,33 Arbeitswochen, nicht 4; wer mit 4 rechnet, überschätzt den Stundenlohn um rund 8 %.</p><p>Wichtig ist die Unterscheidung zwischen <strong>brutto und netto</strong>. Der Brutto-Stundenlohn ist die ehrlichste Größe, um Stellenangebote zu vergleichen, weil er unabhängig von der persönlichen Steuersituation ist. Der Netto-Stundenlohn zeigt dagegen, was am Ende tatsächlich auf dem Konto landet — und der hängt stark von Steuerklasse, Kinderzahl und Krankenkasse ab. Wer Angebote vergleicht, sollte immer dieselbe Größe verwenden: brutto mit brutto oder netto mit netto, niemals gemischt.</p><p>Ein konkretes Beispiel zeigt, warum das Monatsgehalt allein trügt: Job A bietet 3.800 € im Monat bei 40 Wochenstunden, Job B 3.400 € bei 32 Stunden. Job A klingt besser — pro Stunde liegt jedoch Job B vorn (3.800 ÷ 173,2 = 21,94 € gegen 3.400 ÷ 138,6 = 24,53 €). Erst der Stundenlohn macht solche Angebote ehrlich vergleichbar. Das gilt besonders beim Wechsel zwischen Vollzeit und Teilzeit, bei unbezahlten Überstunden und über Branchengrenzen hinweg, wo sich Arbeitszeiten und Zusatzleistungen stark unterscheiden.</p>`,
+        html: `<p>Der Stundenlohn beantwortet eine einfache, aber entscheidende Frage: Wie viel Geld verdienen Sie für eine Stunde Ihrer Arbeitszeit? Anders als das Monatsgehalt, das die dahinterstehende Arbeitszeit verschleiert, macht der Stundenlohn Jobs unmittelbar vergleichbar. 3.500 € bei einer 40-Stunden-Woche und 3.500 € bei einer 35-Stunden-Woche klingen gleich — pro Stunde liegen jedoch Welten dazwischen.</p><p>Berechnet wird der Stundenlohn aus dem Bruttogehalt und den monatlichen Arbeitsstunden. Diese ergeben sich aus den Wochenstunden multipliziert mit dem Faktor <strong>52 ÷ 12 = 4,33…</strong> — dem Durchschnitt von 52 Wochen geteilt durch 12 Monate. Ein Monat hat also im Schnitt rund 4,33 Arbeitswochen, nicht 4; wer mit 4 rechnet, überschätzt den Stundenlohn um rund 8 %. Der Rechner nimmt den genauen Bruch 52 ÷ 12, bei 40 Wochenstunden also 173,33 Stunden im Monat.</p><p>Wichtig ist die Unterscheidung zwischen <strong>brutto und netto</strong>. Der Brutto-Stundenlohn ist die ehrlichste Größe, um Stellenangebote zu vergleichen, weil er unabhängig von der persönlichen Steuersituation ist. Der Netto-Stundenlohn zeigt dagegen, was am Ende tatsächlich auf dem Konto landet — und der hängt stark von Steuerklasse, Kinderzahl und Krankenkasse ab. Wer Angebote vergleicht, sollte immer dieselbe Größe verwenden: brutto mit brutto oder netto mit netto, niemals gemischt.</p><p>Ein konkretes Beispiel zeigt, warum das Monatsgehalt allein trügt: Job A bietet 3.800 € im Monat bei 40 Wochenstunden, Job B 3.400 € bei 32 Stunden. Job A klingt besser — pro Stunde liegt jedoch Job B vorn (3.800 ÷ 173,33 = 21,92 € gegen 3.400 ÷ 138,67 = 24,52 €). Erst der Stundenlohn macht solche Angebote ehrlich vergleichbar. Das gilt besonders beim Wechsel zwischen Vollzeit und Teilzeit, bei unbezahlten Überstunden und über Branchengrenzen hinweg, wo sich Arbeitszeiten und Zusatzleistungen stark unterscheiden.</p>`,
       },
       {
         typ: 'beispielrechnung',
         titel: 'Monatsgehalt in Stundenlohn umrechnen',
         schritte: [
-          { label: 'Monatsstunden = Wochenstunden × 4,33', formel: '40 × 4,33', ergebnis: '173,2 Std.' },
-          { label: 'Stundenlohn = Monatsgehalt ÷ Stunden', formel: '3.500 € ÷ 173,2', ergebnis: '20,21 €/Std.' },
+          { label: 'Monatsstunden = Wochenstunden × 52 ÷ 12', formel: '40 × 52 ÷ 12', ergebnis: '173,33 Std.' },
+          { label: 'Stundenlohn = Monatsgehalt ÷ Stunden', formel: '3.500 € ÷ 173,33', ergebnis: '20,19 €/Std.' },
         ],
-        fazit: 'Dasselbe Gehalt bei 35 Std./Woche: 3.500 € ÷ (35 × 4,33) = 23,09 €/Std. Gleiche Zahl auf dem Vertrag, anderer Stundenlohn — genau deshalb ist der Stundenlohn die ehrlichere Vergleichsgröße.',
+        fazit: 'Dasselbe Gehalt bei 35 Std./Woche: 3.500 € ÷ (35 × 52 ÷ 12 = 151,67) = 23,08 €/Std. Gleiche Zahl auf dem Vertrag, anderer Stundenlohn — genau deshalb ist der Stundenlohn die ehrlichere Vergleichsgröße.',
       },
       {
         typ: 'vergleich',
@@ -886,7 +886,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Welche Abzüge den Netto-Stundenlohn senken',
-        html: `<p>Vom Brutto-Stundenlohn bleibt netto nur ein Teil übrig, weil zwei Blöcke abgezogen werden: Sozialabgaben und Lohnsteuer. Die <strong>Sozialversicherungsbeiträge</strong> teilen sich Arbeitgeber und Arbeitnehmer grundsätzlich je zur Hälfte. Für Arbeitnehmer fallen 2026 an: Rentenversicherung 9,3 % (von insgesamt 18,6 %), Arbeitslosenversicherung 1,3 % (von 2,6 %), Krankenversicherung 7,3 % plus den halben Zusatzbeitrag von durchschnittlich rund 1,45 % sowie Pflegeversicherung 1,8 %. Kinderlose über 23 Jahre zahlen bei der Pflege einen Zuschlag und kommen auf 2,4 %. In Summe sind das rund 21 % allein an Sozialabgaben.</p><p>Dazu kommt die <strong>Lohnsteuer</strong> samt Solidaritätszuschlag und gegebenenfalls Kirchensteuer. Wie hoch sie ausfällt, hängt von der Steuerklasse, der Kinderzahl und der Höhe des Einkommens ab — und genau deshalb kann derselbe Bruttolohn zu sehr unterschiedlichen Nettobeträgen führen. Eine alleinstehende Person in Steuerklasse I zahlt deutlich mehr als ein Verheirateter in Klasse III mit Kindern. Als grobe Faustregel bleiben vom Brutto-Stundenlohn etwa 60 bis 75 % netto übrig.</p><p>Konkret durchgerechnet: Ein Brutto-Stundenlohn von 20 € ergibt bei 40 Wochenstunden 3.464 € im Monat. Davon gehen rund 733 € Sozialabgaben ab (21,15 % Arbeitnehmer-Anteil), dazu kommt die Lohnsteuer. In Steuerklasse I bleiben so rund 2.350 € netto — das entspricht etwa 13,57 € pro Stunde. Eine verheiratete Person in Steuerklasse III käme bei gleichem Brutto auf rund 2.600 € netto, also etwa 15 € pro Stunde. Derselbe Bruttolohn, fast 1,50 € Unterschied pro Stunde — allein durch die Steuerklasse. Wer seinen Netto-Stundenlohn realistisch einschätzen will, kommt um den Blick auf die eigene Steuersituation nicht herum.</p><p>Ein oft übersehener Faktor ist der <strong>Zusatzbeitrag der Krankenkasse</strong>: Er liegt 2026 im Durchschnitt bei rund 2,9 %, schwankt zwischen den einzelnen Kassen aber um mehrere Zehntelprozentpunkte. Da Arbeitnehmer die Hälfte davon tragen, macht ein Kassenwechsel beim Netto-Stundenlohn einen kleinen, aber realen Unterschied. Wer auf jeden Euro schaut, sollte auch diesen Posten im Blick behalten — über ein ganzes Arbeitsjahr summieren sich schon kleine Beitragsunterschiede spürbar.</p>`,
+        html: `<p>Vom Brutto-Stundenlohn bleibt netto nur ein Teil übrig, weil zwei Blöcke abgezogen werden: Sozialabgaben und Lohnsteuer. Die <strong>Sozialversicherungsbeiträge</strong> teilen sich Arbeitgeber und Arbeitnehmer grundsätzlich je zur Hälfte. Für Arbeitnehmer fallen 2026 an: Rentenversicherung 9,3 % (von insgesamt 18,6 %), Arbeitslosenversicherung 1,3 % (von 2,6 %), Krankenversicherung 7,3 % plus den halben Zusatzbeitrag von durchschnittlich rund 1,45 % sowie Pflegeversicherung 1,8 %. Kinderlose über 23 Jahre zahlen bei der Pflege einen Zuschlag und kommen auf 2,4 %. In Summe sind das rund 21 % allein an Sozialabgaben.</p><p>Dazu kommt die <strong>Lohnsteuer</strong> samt Solidaritätszuschlag und gegebenenfalls Kirchensteuer. Wie hoch sie ausfällt, hängt von der Steuerklasse, der Kinderzahl und der Höhe des Einkommens ab — und genau deshalb kann derselbe Bruttolohn zu sehr unterschiedlichen Nettobeträgen führen. Eine alleinstehende Person in Steuerklasse I zahlt deutlich mehr als ein Verheirateter in Klasse III mit Kindern. Als grobe Faustregel bleiben vom Brutto-Stundenlohn etwa 60 bis 75 % netto übrig.</p><p>Konkret durchgerechnet: Ein Brutto-Stundenlohn von 20 € ergibt bei 40 Wochenstunden 3.467 € im Monat. Davon gehen rund 754 € Sozialabgaben ab (21,75 % Arbeitnehmer-Anteil, kinderlos), dazu kommt die Lohnsteuer. In Steuerklasse I bleiben so rund 2.315 € netto — das entspricht etwa 13,36 € pro Stunde. Eine verheiratete Person in Steuerklasse III käme bei gleichem Brutto auf rund 2.608 € netto, also etwa 15,05 € pro Stunde. Derselbe Bruttolohn, fast 1,70 € Unterschied pro Stunde — allein durch die Steuerklasse. Wer seinen Netto-Stundenlohn realistisch einschätzen will, kommt um den Blick auf die eigene Steuersituation nicht herum.</p><p>Ein oft übersehener Faktor ist der <strong>Zusatzbeitrag der Krankenkasse</strong>: Er liegt 2026 im Durchschnitt bei rund 2,9 %, schwankt zwischen den einzelnen Kassen aber um mehrere Zehntelprozentpunkte. Da Arbeitnehmer die Hälfte davon tragen, macht ein Kassenwechsel beim Netto-Stundenlohn einen kleinen, aber realen Unterschied. Wer auf jeden Euro schaut, sollte auch diesen Posten im Blick behalten — über ein ganzes Arbeitsjahr summieren sich schon kleine Beitragsunterschiede spürbar.</p>`,
       },
       {
         typ: 'vergleich',
@@ -894,8 +894,8 @@ export const finanzenRechner: RechnerConfig[] = [
         spalteA: 'Vollzeit (40 h)',
         spalteB: 'Teilzeit (20 h)',
         zeilen: [
-          { kriterium: 'Monatsstunden (× 4,33)', a: '173,2', b: '86,6' },
-          { kriterium: 'Monatsbrutto', a: '3.118 €', b: '1.559 €' },
+          { kriterium: 'Monatsstunden (× 52 ÷ 12)', a: '173,33', b: '86,67' },
+          { kriterium: 'Monatsbrutto', a: '3.120 €', b: '1.560 €' },
           { kriterium: 'Stundenlohn', a: '18,00 €', b: '18,00 €' },
           { kriterium: 'Urlaub & Lohnfortzahlung', a: 'voll', b: 'anteilig (pro Stunde gleich)' },
           { kriterium: 'Sozialversicherung', a: 'voll pflichtig', b: 'pflichtig über Minijob-Grenze (603 €)' },
@@ -913,24 +913,24 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         typ: 'tabelle',
-        titel: 'Wochenstunden → Monatsstunden (Faktor 4,33)',
-        kopf: ['Wochenstunden', 'Monatsstunden (× 4,33)'],
+        titel: 'Wochenstunden → Monatsstunden (Faktor 52 ÷ 12)',
+        kopf: ['Wochenstunden', 'Monatsstunden (× 52 ÷ 12)'],
         zeilen: [
-          ['10', '43,3'],
-          ['15', '65,0'],
-          ['20', '86,6'],
-          ['25', '108,3'],
-          ['30', '129,9'],
-          ['35', '151,6'],
-          ['38,5', '166,7'],
-          ['40', '173,2'],
+          ['10', '43,33'],
+          ['15', '65,00'],
+          ['20', '86,67'],
+          ['25', '108,33'],
+          ['30', '130,00'],
+          ['35', '151,67'],
+          ['38,5', '166,83'],
+          ['40', '173,33'],
         ],
-        fussnote: 'Faktor 4,33 = 52 Wochen ÷ 12 Monate. Das Monatsgehalt geteilt durch die Monatsstunden ergibt den Stundenlohn.',
+        fussnote: 'Faktor 52 Wochen ÷ 12 Monate = 4,33… (der Rechner nimmt den genauen Bruch). Das Monatsgehalt geteilt durch die Monatsstunden ergibt den Stundenlohn.',
       },
       {
         typ: 'text',
         titel: 'Brutto-Stundenlohn ist nicht gleich Verdienst pro geleisteter Stunde',
-        html: `<p>Der berechnete Brutto-Stundenlohn geht von der vertraglich vereinbarten Arbeitszeit aus. Der tatsächliche Verdienst pro <strong>real geleisteter</strong> Stunde kann jedoch deutlich darunter liegen — nämlich dann, wenn Sie mehr Zeit aufwenden, als bezahlt wird.</p><p>Ein Beispiel: Bei einem 40-Stunden-Vertrag mit 3.500 € brutto liegt der rechnerische Stundenlohn bei 20,21 €. Leisten Sie regelmäßig fünf unbezahlte Überstunden pro Woche, arbeiten Sie faktisch 45 Stunden — der reale Stundenlohn sinkt auf 3.500 ÷ (45 × 4,33) = 17,96 €. Aus 20,21 € werden also knapp 18 €, ohne dass sich am Gehalt etwas ändert.</p><p>Auch andere Zeiten drücken den wahren Satz: unbezahlte Pausen, die faktisch Anwesenheit bedeuten, lange Fahrt- oder Rüstzeiten, Rufbereitschaft und ständige Erreichbarkeit nach Feierabend oder Pflicht-Weiterbildung in der Freizeit. Wer seinen echten Stundenlohn kennen will, sollte all diese Zeiten gegen das Gehalt rechnen — nicht nur die vertraglich vereinbarten Stunden.</p><p>Auch der Arbeitsweg zählt: Wer täglich zweimal 30 Minuten unbezahlt pendelt, wendet pro Woche fünf zusätzliche Stunden auf. Beim 40-Stunden-Vertrag mit rechnerisch 20,21 € sinkt der reale Satz dann auf 3.500 ÷ (45 × 4,33) = 17,96 € — die Fahrzeit drückt ihn also genauso wie unbezahlte Überstunden. Noch deutlicher wird es bei der Rufbereitschaft: Wer rund um die Uhr erreichbar sein muss, aber nur die aktiven Einsätze vergütet bekommt, hat einen weit niedrigeren realen Stundenlohn, als der Vertrag vermuten lässt. Vor einer Gehaltsverhandlung lohnt es sich, all diese unbezahlten Zeiten zusammenzurechnen und dem Bruttogehalt gegenüberzustellen.</p>`,
+        html: `<p>Der berechnete Brutto-Stundenlohn geht von der vertraglich vereinbarten Arbeitszeit aus. Der tatsächliche Verdienst pro <strong>real geleisteter</strong> Stunde kann jedoch deutlich darunter liegen — nämlich dann, wenn Sie mehr Zeit aufwenden, als bezahlt wird.</p><p>Ein Beispiel: Bei einem 40-Stunden-Vertrag mit 3.500 € brutto liegt der rechnerische Stundenlohn bei 20,19 €. Leisten Sie regelmäßig fünf unbezahlte Überstunden pro Woche, arbeiten Sie faktisch 45 Stunden — der reale Stundenlohn sinkt auf 3.500 ÷ (45 × 52 ÷ 12 = 195) = 17,95 €. Aus 20,19 € werden also knapp 18 €, ohne dass sich am Gehalt etwas ändert.</p><p>Auch andere Zeiten drücken den wahren Satz: unbezahlte Pausen, die faktisch Anwesenheit bedeuten, lange Fahrt- oder Rüstzeiten, Rufbereitschaft und ständige Erreichbarkeit nach Feierabend oder Pflicht-Weiterbildung in der Freizeit. Wer seinen echten Stundenlohn kennen will, sollte all diese Zeiten gegen das Gehalt rechnen — nicht nur die vertraglich vereinbarten Stunden.</p><p>Auch der Arbeitsweg zählt: Wer täglich zweimal 30 Minuten unbezahlt pendelt, wendet pro Woche fünf zusätzliche Stunden auf. Beim 40-Stunden-Vertrag mit rechnerisch 20,19 € sinkt der reale Satz dann auf 3.500 ÷ 195 = 17,95 € — die Fahrzeit drückt ihn also genauso wie unbezahlte Überstunden. Noch deutlicher wird es bei der Rufbereitschaft: Wer rund um die Uhr erreichbar sein muss, aber nur die aktiven Einsätze vergütet bekommt, hat einen weit niedrigeren realen Stundenlohn, als der Vertrag vermuten lässt. Vor einer Gehaltsverhandlung lohnt es sich, all diese unbezahlten Zeiten zusammenzurechnen und dem Bruttogehalt gegenüberzustellen.</p>`,
       },
       {
         typ: 'text',
@@ -940,7 +940,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Stundenlohn in der Gehaltsverhandlung nutzen',
-        html: `<p>Der Stundenlohn ist ein starkes Argument in der Gehaltsverhandlung, weil er die eigene Leistung messbar macht. Statt allgemein „mehr Gehalt" zu fordern, lässt sich konkret argumentieren: „Mein Stundenlohn liegt bei 19,80 € — der Median für meine Position und Region liegt laut Entgeltatlas bei 23 €." Solche Zahlen sind schwerer beiseitezuwischen als das vage Gefühl, unterbezahlt zu sein, und sie verlagern das Gespräch von der Emotion auf eine sachliche Ebene.</p><p>Auch bei einer angebotenen Arbeitszeitänderung hilft der Stundenlohn als Maßstab: Wird aus einer 40- eine 35-Stunden-Woche, sollte das Monatsgehalt im Verhältnis sinken — der Stundenlohn aber gleich bleiben. Sinkt er, wird die Teilzeit relativ schlechter bezahlt, und genau das ist Verhandlungsspielraum. Umgekehrt lohnt es sich, bei einer Gehaltserhöhung auch unbezahlte Mehrarbeit anzusprechen: Wer faktisch 45 statt 40 Stunden arbeitet, dessen realer Stundenlohn ist längst gesunken — ein sachliches Argument für eine Anpassung nach oben.</p><p>Wichtig bei jedem Vergleich bleibt die saubere Bezugsgröße: brutto mit brutto, dieselbe Wochenstundenzahl als Basis und der Faktor 4,33 für die Umrechnung. Wer mit konsistenten Zahlen in die Verhandlung geht, wirkt vorbereitet — und das zahlt sich oft schon für sich genommen aus.</p>`,
+        html: `<p>Der Stundenlohn ist ein starkes Argument in der Gehaltsverhandlung, weil er die eigene Leistung messbar macht. Statt allgemein „mehr Gehalt" zu fordern, lässt sich konkret argumentieren: „Mein Stundenlohn liegt bei 19,80 € — der Median für meine Position und Region liegt laut Entgeltatlas bei 23 €." Solche Zahlen sind schwerer beiseitezuwischen als das vage Gefühl, unterbezahlt zu sein, und sie verlagern das Gespräch von der Emotion auf eine sachliche Ebene.</p><p>Auch bei einer angebotenen Arbeitszeitänderung hilft der Stundenlohn als Maßstab: Wird aus einer 40- eine 35-Stunden-Woche, sollte das Monatsgehalt im Verhältnis sinken — der Stundenlohn aber gleich bleiben. Sinkt er, wird die Teilzeit relativ schlechter bezahlt, und genau das ist Verhandlungsspielraum. Umgekehrt lohnt es sich, bei einer Gehaltserhöhung auch unbezahlte Mehrarbeit anzusprechen: Wer faktisch 45 statt 40 Stunden arbeitet, dessen realer Stundenlohn ist längst gesunken — ein sachliches Argument für eine Anpassung nach oben.</p><p>Wichtig bei jedem Vergleich bleibt die saubere Bezugsgröße: brutto mit brutto, dieselbe Wochenstundenzahl als Basis und der Faktor 52 ÷ 12 (rund 4,33) für die Umrechnung. Wer mit konsistenten Zahlen in die Verhandlung geht, wirkt vorbereitet — und das zahlt sich oft schon für sich genommen aus.</p>`,
       },
       {
         typ: 'checkliste',
@@ -970,7 +970,7 @@ export const finanzenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Wie berechne ich meinen Stundenlohn?',
-        antwort: 'Teilen Sie Ihr monatliches Bruttogehalt durch die Anzahl der Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das 40 × 4,33 = 173,2 Stunden. Beispiel: 3.500 € ÷ 173,2 = 20,21 € Stundenlohn.',
+        antwort: 'Teilen Sie Ihr monatliches Bruttogehalt durch die Anzahl der Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das 40 × 52 ÷ 12 = 173,33 Stunden. Beispiel: 3.500 € ÷ 173,33 = 20,19 € Stundenlohn.',
       },
       {
         frage: 'Wie hoch ist der Mindestlohn 2026?',
@@ -982,19 +982,19 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Warum wird mit 4,33 Wochen gerechnet?',
-        antwort: 'Ein Jahr hat 52 Wochen, verteilt auf 12 Monate. 52 ÷ 12 = 4,333 Wochen pro Monat im Durchschnitt. Da die Monate unterschiedlich lang sind (28–31 Tage), ist 4,33 der korrekte Durchschnittswert für die Umrechnung von Wochen- auf Monatswerte.',
+        antwort: 'Ein Jahr hat 52 Wochen, verteilt auf 12 Monate. 52 ÷ 12 = 4,333 Wochen pro Monat im Durchschnitt. Da die Monate unterschiedlich lang sind (28–31 Tage), ist das der richtige Durchschnittswert für die Umrechnung von Wochen- auf Monatswerte. Der Rechner nimmt den genauen Bruch; mit dem gerundeten Faktor 4,33 ergäben sich kleine Abweichungen (bei 3.500 € und 40 Stunden 20,21 € statt 20,19 €).',
       },
       {
         frage: 'Wie rechne ich Teilzeit-Gehalt in Stundenlohn um?',
-        antwort: 'Die Formel ist dieselbe wie bei Vollzeit: Stundenlohn = Monatsgehalt ÷ (Wochenstunden × 4,33). Bei 20 Stunden Teilzeit und 1.800 € Gehalt: 1.800 ÷ (20 × 4,33) = 1.800 ÷ 86,6 = 20,79 € pro Stunde. Der Stundenlohn sollte bei gleicher Tätigkeit unabhängig von der Arbeitszeit identisch sein.',
+        antwort: 'Die Formel ist dieselbe wie bei Vollzeit: Stundenlohn = Monatsgehalt ÷ (Wochenstunden × 52 ÷ 12). Bei 20 Stunden Teilzeit und 1.800 € Gehalt: 1.800 ÷ (20 × 52 ÷ 12) = 1.800 ÷ 86,67 = 20,77 € pro Stunde. Der Stundenlohn sollte bei gleicher Tätigkeit unabhängig von der Arbeitszeit identisch sein.',
       },
       {
         frage: 'Was ist der Unterschied zwischen nominalem und effektivem Stundenlohn?',
-        antwort: 'Der nominale Stundenlohn rechnet das Monatsgehalt durch alle bezahlten Wochenstunden (40 × 4,33 = 173,2 Std./Monat) — das ist der Wert, den unser Rechner standardmäßig liefert. Der effektive Stundenlohn berücksichtigt zusätzlich, dass Sie Urlaub und Feiertage bezahlt bekommen, ohne in dieser Zeit zu arbeiten. Bei 30 Urlaubstagen plus etwa 9 bundesweit-relevanten Feiertagen (Mo–Fr, je nach Bundesland 7 bis 13) fallen rund 6 Arbeitswochen weg. Der effektive Stundenlohn liegt damit etwa 13 % höher als der nominale: Aus 20,21 €/Std. nominal werden ca. 22,80 €/Std. effektiv. Diese Sicht ist beim Vergleich mit Freelancern, Honorarkräften oder bei Jobs ohne bezahlten Urlaub wichtig.',
+        antwort: 'Der nominale Stundenlohn rechnet das Monatsgehalt durch alle bezahlten Wochenstunden (40 × 52 ÷ 12 = 173,33 Std./Monat) — das ist der Wert, den unser Rechner standardmäßig liefert. Der effektive Stundenlohn berücksichtigt zusätzlich, dass Sie Urlaub und Feiertage bezahlt bekommen, ohne in dieser Zeit zu arbeiten. Mit den Vorgaben des Rechners — 30 Urlaubstage und 10 Feiertage (2026 fallen bundesweit sieben Feiertage auf Montag bis Freitag, in Ländern mit zusätzlichen Feiertagen bis zu neun; die Vorgabe lässt sich anpassen) — bleiben von 260 Arbeitstagen 220, also gut 15 % weniger. Der effektive Stundenlohn liegt damit rund 18 % höher als der nominale: Aus 20,19 €/Std. nominal werden 23,86 €/Std. effektiv. Diese Sicht ist beim Vergleich mit Freelancern, Honorarkräften oder bei Jobs ohne bezahlten Urlaub wichtig.',
       },
       {
         frage: 'Wie berechne ich den Netto-Stundenlohn?',
-        antwort: 'Erst Brutto-Monatsgehalt mit unserem Brutto-Netto-Rechner ins Netto umrechnen (abhängig von Steuerklasse, Bundesland, Kirchenzugehörigkeit, Krankenkassen-Zusatzbeitrag und Kinderzahl), dann Netto-Monatsgehalt durch (Wochenstunden × 4,33) teilen. Beispiel: 3.500 € brutto in Steuerklasse I, NRW, ohne Kirche ergeben rund 2.350 € netto. Bei 40 Wochenstunden: 2.350 ÷ 173,2 = 13,57 € Netto-Stundenlohn. Faustregel: Bei mittleren Einkommen liegt der Netto-Stundenlohn etwa 30–45 % unter dem Brutto-Stundenlohn. Bei niedrigen Einkommen nahe dem Mindestlohn ist der Abstand kleiner (rund 20–25 %), bei sehr hohen Einkommen größer.',
+        antwort: 'Erst Brutto-Monatsgehalt mit unserem Brutto-Netto-Rechner ins Netto umrechnen (abhängig von Steuerklasse, Bundesland, Kirchenzugehörigkeit, Krankenkassen-Zusatzbeitrag und Kinderzahl), dann Netto-Monatsgehalt durch (Wochenstunden × 52 ÷ 12) teilen. Beispiel: 3.500 € brutto in Steuerklasse I, NRW, ohne Kirche ergeben rund 2.333 € netto. Bei 40 Wochenstunden: 2.333 ÷ 173,33 = 13,46 € Netto-Stundenlohn. Faustregel: Bei mittleren Einkommen liegt der Netto-Stundenlohn etwa 30–45 % unter dem Brutto-Stundenlohn. Bei niedrigen Einkommen nahe dem Mindestlohn ist der Abstand kleiner (rund 20–25 %), bei sehr hohen Einkommen größer.',
       },
       {
         frage: 'Welche Branchen haben höhere Mindestlöhne als 13,90 €/Std.?',
@@ -1009,7 +1009,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'sparrechner',
-    letzteAktualisierung: '2026-06-17',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Sparrechner',
     beschreibung: 'Sparplan berechnen mit Zinseszins: Monatliche Sparrate, Dynamik und Jahr-für-Jahr-Entwicklung.',
     kategorie: 'Finanzen',
@@ -1018,7 +1018,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Sparplan berechnen ✓ Mit Zinseszins-Effekt ✓ Monatliche Sparrate ✓ Jahr-für-Jahr-Tabelle ✓ Kostenlos. Jetzt Sparziel berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['sparrechner', 'sparplan rechner', 'sparplan berechnen', 'zinseszins rechner', 'etf sparplan rechner', 'sparrate berechnen', 'vermögensaufbau'],
     icon: '🐖',
-    beispiel: 'Beispiel: 100 € monatlich bei 5% Rendite über 10 Jahre → 15.528 € Endkapital (12.000 € eingezahlt + 3.528 € Zinsen)',
+    beispiel: 'Beispiel: 100 € monatlich bei 5% Rendite über 10 Jahre → 15.848 € Endkapital (12.000 € eingezahlt + 3.848 € Zinsen, jährliche Zinsgutschrift)',
     // W19-Goldstandard: sparrechner auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
     // „beispielrechnung" (5× dominant) + 1 gestapeltes Diagramm. Fokus RATENSPAREN
     // (monatliche Rate) — disjunkt zu zinsrechner (Einmalanlage). Alle Endkapital-Werte
@@ -1441,7 +1441,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'gehaltsvergleich',
-    letzteAktualisierung: '2026-06-17',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Gehaltsvergleich',
     beschreibung: 'Vergleichen Sie Ihr Gehalt mit dem Durchschnitt Ihrer Berufsgruppe, Ihres Bundeslandes und Ihrer Altersgruppe.',
     kategorie: 'Finanzen',
@@ -1450,7 +1450,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Gehaltsvergleich 2026: Verdienen Sie mehr oder weniger als der Durchschnitt? Nach Berufsgruppe, Bundesland und Alter vergleichen.',
     keywords: ['gehaltsvergleich', 'gehalt vergleichen', 'durchschnittsgehalt', 'gehaltscheck', 'verdiene ich genug', 'gehaltsrechner', 'gehalt deutschland', 'median gehalt', 'gehalt berufsgruppe', 'gehalt bundesland'],
     icon: '💵',
-    beispiel: 'Beispiel: 3.500 € brutto als kaufmännischer Angestellter, 35–44 Jahre, in NRW → Sie verdienen mehr als ca. 55 % der Vergleichsgruppe.',
+    beispiel: 'Beispiel: 3.500 € brutto als kaufmännischer Angestellter, 35–44 Jahre, in NRW → Sie verdienen mehr als ca. 44 % der Vergleichsgruppe (Median 3.641 €).',
     // W19-Goldstandard: gehaltsvergleich auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
     // „vergleich" (4× dominant). Perzentil-/Median-Logik aus lib/berechnungen/gehaltsvergleich.ts
     // gespiegelt (adjustierterMedian = Median × Bundesland-Faktor × Alters-Faktor; Perzentil via
@@ -2005,7 +2005,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'kreditrechner',
-    letzteAktualisierung: '2026-06-11',
+    letzteAktualisierung: '2026-10-20',
     quellen: [
       { titel: '§ 6 PAngV: Effektiver Jahreszins (Pflichtangabe für Verbraucherkredite)', url: 'https://www.gesetze-im-internet.de/pangv_2022/__6.html' },
       { titel: '§ 6a PAngV: Repräsentatives Beispiel (Zweidrittelzins)', url: 'https://www.gesetze-im-internet.de/pangv_2022/__6a.html' },
@@ -2020,7 +2020,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Kreditrate berechnen: Monatsrate, Gesamtkosten und Tilgungsplan für Ihren Kredit ✓ Sondertilgung ✓ Effektiver Jahreszins ✓ KI-Erklärung.',
     keywords: ['kreditrechner', 'kreditrate berechnen', 'tilgungsrechner', 'kredit berechnen', 'annuitätenrechner', 'ratenkreditrechner'],
     icon: '🏦',
-    beispiel: '10.000 € Kredit bei 5,9% Sollzins auf 60 Monate → Monatsrate: 192,80 €, Gesamtzins: ca. 1.568 €',
+    beispiel: '10.000 € Kredit bei 5,9% Sollzins auf 60 Monate → Monatsrate: 192,86 €, Gesamtzins: ca. 1.572 €',
     // contentBloecke (W19): eigenständiges „Kosten-Mechanik-Leitformat" — prägend
     // statistik (Zinsniveau 2026) + ZWEI Tabellen (Tilgungsplan-Auszug + Bonität-
     // Zinsspanne), kein vergleich, kein Diagramm. Beispielwerte aus
@@ -2719,7 +2719,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'wohngeld-rechner',
-    letzteAktualisierung: '2026-07-06',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Wohngeld-Rechner',
     beschreibung: 'Wohngeld berechnen: Prüfen Sie Ihren Anspruch und die voraussichtliche Höhe des Wohngelds nach dem Wohngeld-Plus-Gesetz 2026.',
     kategorie: 'Finanzen',
@@ -2728,7 +2728,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Wohngeld berechnen: Anspruch und voraussichtliche Höhe nach Wohngeld-Plus-Gesetz 2026 ✓ Mietstufe ✓ Heizkostenpauschale ✓ KI-Erklärung.',
     keywords: ['wohngeld rechner', 'wohngeld berechnen', 'wohngeld 2026', 'wohngeld anspruch', 'wohngeld höhe', 'wohngeld plus', 'wohngeld mietstufe', 'wohngeldantrag', 'mietzuschuss berechnen', 'wohngeld einkommensgrenze'],
     icon: '🏠',
-    beispiel: '2-Personen-Haushalt, 2.000 € brutto, 600 € Kaltmiete, Mietstufe III → Bereinigtes Einkommen: ca. 1.400 € | Berücksichtigte Miete: 575 € + 142,60 € Heizkosten + 24,80 € Klima = 742,40 € | Geschätztes Wohngeld: ca. 200–250 €/Monat.',
+    beispiel: '2-Personen-Haushalt, 2.000 € brutto, 600 € Kaltmiete, Mietstufe III → Bereinigtes Einkommen: ca. 1.400 € | Berücksichtigte Miete: 551 € (Höchstbetrag) + 142,60 € Heizkosten + 24,80 € Klima = 718,40 € | Geschätztes Wohngeld: ca. 296 €/Monat.',
     faq: [
       {
         frage: 'Habe ich Anspruch auf Wohngeld?',
@@ -2736,7 +2736,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie hoch ist das Wohngeld 2026?',
-        antwort: 'Die Höhe hängt von Haushaltsgröße, Einkommen, Miete und Mietstufe ab. Seit dem Wohngeld-Plus-Gesetz liegt das durchschnittliche Wohngeld bei etwa 370 € pro Monat. Ein 2-Personen-Haushalt mit 2.000 € Bruttoeinkommen und 600 € Miete in Mietstufe III erhält geschätzt 200–250 € monatlich.',
+        antwort: 'Die Höhe hängt von Haushaltsgröße, Einkommen, Miete und Mietstufe ab. Seit dem Wohngeld-Plus-Gesetz liegt das durchschnittliche Wohngeld bei etwa 370 € pro Monat. Ein 2-Personen-Haushalt mit 2.000 € Bruttoeinkommen und 600 € Miete in Mietstufe III erhält geschätzt rund 296 € monatlich.',
       },
       {
         frage: 'Was ist die Mietstufe und wo finde ich meine?',
@@ -3084,7 +3084,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'kindergeld-rechner',
-    letzteAktualisierung: '2026-06-17',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Kindergeld-Rechner',
     beschreibung: 'Kindergeld 2026 berechnen und Günstigerprüfung: Kindergeld oder Kinderfreibetrag — was lohnt sich für Ihr Einkommen?',
     kategorie: 'Finanzen',
@@ -3093,7 +3093,7 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Kindergeld 2026: 259 € pro Kind ✓ Günstigerprüfung Kindergeld vs. Kinderfreibetrag ✓ ab wann lohnt sich der Freibetrag ✓ KI-Erklärung.',
     keywords: ['kindergeld rechner', 'kindergeld 2026', 'kindergeld berechnen', 'kinderfreibetrag', 'günstigerprüfung', 'kindergeld höhe', '259 euro kindergeld', 'kinderfreibetrag 2026', 'kindergeld steuer', 'familienkasse'],
     icon: '👶',
-    beispiel: 'Familie, zwei Kinder, 60.000 € Brutto, Zusammenveranlagung → Kindergeld: 518 €/Monat = 6.216 €/Jahr | Steuerersparnis Freibetrag: ca. 4.700 € → Kindergeld ist günstiger.',
+    beispiel: 'Familie, zwei Kinder, 60.000 € Brutto, Zusammenveranlagung → Kindergeld: 518 €/Monat = 6.216 €/Jahr | Steuerersparnis Freibetrag: ca. 4.336 € → Kindergeld ist um 1.880 €/Jahr günstiger.',
     // W19-Goldstandard (YMYL): kindergeld-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
     // Leitformat „Tabellen-Nachschlagewerk" (4 Tabellen dominant). Alle Beträge gegen
     // Primärquelle geprüft (Stand 06/2026): § 66 EStG = 259 €/Monat (2026); § 32 Abs. 6 EStG =

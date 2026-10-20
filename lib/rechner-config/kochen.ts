@@ -698,7 +698,7 @@ export const kochenRechner: RechnerConfig[] = [
   },
   {
     slug: 'kochzeit-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Kochzeit-Rechner',
     beschreibung: 'Kochzeit für Ei, Nudeln, Reis, Kartoffeln und Gemüse: Sorten-Datenbank mit Schritt-für-Schritt-Anleitungen.',
     kategorie: 'Kochen & Ernährung',
@@ -707,7 +707,7 @@ export const kochenRechner: RechnerConfig[] = [
     metaDescription: 'Kochzeit berechnen: perfektes Ei (weich/wachsweich/hart), Nudeln al dente, Reis, Kartoffeln und Gemüse — mit Anleitung und Höhenlage. Kostenlos.',
     keywords: ['kochzeit rechner', 'eier kochen minuten', 'nudeln kochzeit', 'reis kochzeit', 'kartoffeln kochen', 'gemüse garzeit', 'ei weich wachsweich hart', 'al dente', 'perfektes ei'],
     icon: '⏱️',
-    beispiel: 'Ei Größe M, aus Kühlschrank, wachsweich: 7 Min ab Siedebeginn. Spaghetti al dente: 8–10 Min. Basmati-Reis: 10 Min kochen + 10 Min quellen. Brokkoli dämpfen: 5–7 Min.',
+    beispiel: 'Ei Größe M, aus Kühlschrank, wachsweich: 6:30 Min ab Siedebeginn (Richtwert 6–7 Min). Spaghetti al dente: 8–10 Min. Basmati-Reis: 10 Min kochen + 10 Min quellen. Brokkoli dämpfen: 6–7 Min.',
     faq: [
       {
         frage: 'Wie lange muss ein Ei kochen für wachsweich?',
@@ -1568,7 +1568,7 @@ export const kochenRechner: RechnerConfig[] = [
   },
   {
     slug: 'naehrwert-rechner',
-    letzteAktualisierung: '2026-06-26',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Nährwert-Rechner',
     beschreibung: 'Nährwerte pro Portion berechnen: Kalorien, Protein, KH und Fett für selbst gekochte Rezepte — mit 47 Lebensmitteln.',
     kategorie: 'Kochen & Ernährung',
@@ -1577,11 +1577,11 @@ export const kochenRechner: RechnerConfig[] = [
     metaDescription: 'Nährwerte pro Portion berechnen: Kalorien, Protein, Kohlenhydrate und Fett für Rezepte — mit 47 Lebensmitteln und Makro-Verteilung. Kostenlos.',
     keywords: ['nährwert rechner', 'kalorien pro portion berechnen', 'makronährstoffe berechnen', 'rezept kalorien', 'nährwerte selbst kochen', 'kaloriengehalt rezept', 'protein fett kohlenhydrate', 'nährwerttabelle lebensmittel'],
     icon: '🥗',
-    beispiel: 'Pfannkuchen (4 Portionen): 250 g Mehl (870 kcal), 2 Eier = 120 g (186 kcal), 300 ml Milch (192 kcal) = 1.248 kcal gesamt ÷ 4 = 312 kcal pro Portion, davon 12,6 g Protein, 48,9 g KH, 6,5 g Fett.',
+    beispiel: 'Pfannkuchen (4 Portionen): 250 g Mehl (870 kcal), 2 Eier = 120 g (186 kcal), 300 ml Milch (192 kcal) = 1.248 kcal gesamt ÷ 4 = 312 kcal pro Portion, davon 12,6 g Protein, 48,9 g KH, 6,6 g Fett.',
     faq: [
       {
         frage: 'Wie berechne ich die Kalorien meines Rezepts?',
-        antwort: 'Für jede Zutat: Menge (g) × Kalorien pro 100 g ÷ 100. Dann alle Zutaten summieren. Durch die Portionszahl teilen = Kalorien pro Portion. Unser Rechner macht das automatisch für 47 Lebensmittel. Beispiel: 250 g Weizenmehl (348 kcal/100g) = 870 kcal. Bei 4 Portionen = 217 kcal nur aus dem Mehl.',
+        antwort: 'Für jede Zutat: Menge (g) × Kalorien pro 100 g ÷ 100. Dann alle Zutaten summieren. Durch die Portionszahl teilen = Kalorien pro Portion. Unser Rechner macht das automatisch für 47 Lebensmittel. Beispiel: 250 g Weizenmehl (348 kcal/100g) = 870 kcal. Bei 4 Portionen = rund 218 kcal nur aus dem Mehl.',
       },
       {
         frage: 'Ändern sich Kalorien beim Kochen?',
@@ -1647,13 +1647,13 @@ export const kochenRechner: RechnerConfig[] = [
           { label: 'Gesamt', formel: '870 + 186 + 192', ergebnis: '1.248 kcal' },
           { label: 'Pro Portion (÷ 4)', formel: '1.248 ÷ 4', ergebnis: '312 kcal' },
         ],
-        fazit: 'Pro Portion stecken im Pfannkuchen rund 312 kcal mit 12,6 g Protein, 48,9 g Kohlenhydraten und 6,5 g Fett. Jede Zutat wird einzeln auf ihre Menge skaliert, summiert und durch die Portionszahl geteilt — genau diese drei Schritte nimmt der Rechner automatisch ab.',
+        fazit: 'Pro Portion stecken im Pfannkuchen rund 312 kcal mit 12,6 g Protein, 48,9 g Kohlenhydraten und 6,6 g Fett. Jede Zutat wird einzeln auf ihre Menge skaliert, summiert und durch die Portionszahl geteilt — genau diese drei Schritte nimmt der Rechner automatisch ab.',
       },
       {
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'kcal-Wert und Makro-Summe dürfen leicht abweichen',
-        text: 'Kleine Eigenheit der Nährwert-Datenbanken: Rechnet man die gerundeten Makros mit den Atwater-Faktoren nach (12,6 × 4 + 48,9 × 4 + 6,5 × 9 ≈ 305 kcal), kommt man nicht exakt auf die ausgewiesenen 312 kcal. Das ist kein Fehler — der kcal-Brennwert und die einzelnen Makro-Gehalte werden unabhängig voneinander gemessen und gerundet. Kleine Abweichungen zwischen kcal direkt und kcal aus Makros sind deshalb normal, auch auf jeder Lebensmittelverpackung.',
+        text: 'Kleine Eigenheit der Nährwert-Datenbanken: Rechnet man die gerundeten Makros mit den Atwater-Faktoren nach (12,6 × 4 + 48,9 × 4 + 6,6 × 9 ≈ 305 kcal), kommt man nicht exakt auf die ausgewiesenen 312 kcal. Das ist kein Fehler — der kcal-Brennwert und die einzelnen Makro-Gehalte werden unabhängig voneinander gemessen und gerundet. Kleine Abweichungen zwischen kcal direkt und kcal aus Makros sind deshalb normal, auch auf jeder Lebensmittelverpackung.',
       },
       {
         typ: 'text',

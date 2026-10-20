@@ -3714,7 +3714,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'reisekosten-rechner',
-    letzteAktualisierung: '2026-06-27',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Reisekosten-Rechner',
     beschreibung: 'Reisekosten berechnen: Gesamtbudget für Anreise, Unterkunft, Essen und Aktivitäten planen.',
     kategorie: 'Alltag & Leben',
@@ -3723,7 +3723,7 @@ export const alltagRechner: RechnerConfig[] = [
     metaDescription: 'Reisekosten kostenlos berechnen — Anreise, Unterkunft, Verpflegung und Aktivitäten. Budget pro Person und Tag mit Kostenaufteilung.',
     keywords: ['reisekosten rechner', 'urlaub budget', 'reisebudget planen', 'urlaubskosten', 'reise kosten berechnen', 'urlaub kosten pro tag'],
     icon: '✈️',
-    beispiel: '7 Nächte, 2 Personen, Auto (500 km): Anreise 152,50 €, Unterkunft 560 €, Verpflegung 800 €, Aktivitäten 320 € = 1.832,50 € (916,25 €/Pers.).',
+    beispiel: `7 Nächte, 2 Personen, Auto (500 km, ${eur(SPRITPREISE_REFERENZ.superE10, 3)} €/l): Anreise ${eur(RK_ANREISE)} €, Unterkunft 560 €, Verpflegung 800 €, Aktivitäten 320 € = ${eurP(RK_GESAMT)} € (${eur(RK_GESAMT / 2)} €/Pers.).`,
     faq: [
       {
         frage: 'Wie genau ist die Berechnung?',
