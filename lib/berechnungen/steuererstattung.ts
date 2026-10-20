@@ -107,7 +107,8 @@ export function berechneSteuererstattung(e: SteuererstattungEingabe): Steuererst
       betrag: pendlerpauschale > PAUSCHBETRAG && werbungskostenGesamt === pendlerpauschale + homeofficePauschale + e.beruflicheAusgaben
         ? pendlerpauschale * grenzsteuersatz * (werbungskostenUeberPauschbetrag / Math.max(werbungskostenGesamt - PAUSCHBETRAG, werbungskostenGesamt))
         : pendlerpauschale > 0 ? (pendlerpauschale / Math.max(werbungskostenGesamt, 1)) * steuerersparnisWerbungskosten : 0,
-      info: `${e.entfernungKm} km × ${e.arbeitstage} Tage`,
+      // W184: km vorher roh („12.5 km“), jetzt de-DE
+      info: `${e.entfernungKm.toLocaleString('de-DE', { maximumFractionDigits: 1 })} km × ${e.arbeitstage} Tage`,
     });
   }
 

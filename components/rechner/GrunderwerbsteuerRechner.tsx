@@ -27,6 +27,8 @@ export default function GrunderwerbsteuerRechner() {
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: vorher Steuersatz roh interpoliert („6.5 %“), jetzt de-DE („6,5 %“)
+  const fmtSatz = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   return (
     <div>
@@ -43,7 +45,7 @@ export default function GrunderwerbsteuerRechner() {
           className="w-full text-sm bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-800 dark:text-gray-200"
         >
           {BUNDESLAENDER.map(bl => (
-            <option key={bl.key} value={bl.key}>{bl.name} ({bl.satz} %)</option>
+            <option key={bl.key} value={bl.key}>{bl.name} ({fmtSatz(bl.satz)} %)</option>
           ))}
         </select>
       </div>
@@ -91,7 +93,7 @@ export default function GrunderwerbsteuerRechner() {
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(parseDeutscheZahl(kaufpreis))} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Grunderwerbsteuer ({ergebnis.steuersatz} %, {ergebnis.bundeslandName})</span>
+                <span className="text-gray-600 dark:text-gray-400">Grunderwerbsteuer ({fmtSatz(ergebnis.steuersatz)} %, {ergebnis.bundeslandName})</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.grunderwerbsteuer)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
@@ -149,7 +151,7 @@ export default function GrunderwerbsteuerRechner() {
                   {BUNDESLAENDER.map(bl => (
                     <tr key={bl.key} className={bundesland === bl.key ? 'bg-primary-50/50 dark:bg-primary-500/5' : ''}>
                       <td className="px-4 py-2 text-gray-600 dark:text-gray-400">{bl.name}</td>
-                      <td className="px-4 py-2 text-right font-medium text-gray-800 dark:text-gray-200">{bl.satz} %</td>
+                      <td className="px-4 py-2 text-right font-medium text-gray-800 dark:text-gray-200">{fmtSatz(bl.satz)} %</td>
                     </tr>
                   ))}
                 </tbody>

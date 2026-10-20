@@ -11,6 +11,8 @@ import CrossLink from '@/components/ui/CrossLink';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const fmt3 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+// W184: vorher roh interpoliert (englischer Dezimalpunkt, z. B. „kg (2.4 t)“), jetzt de-DE
+const fmtT = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
 export default function BetonRechner() {
   const [form, setForm] = useState('rechteck');
@@ -153,7 +155,7 @@ export default function BetonRechner() {
               <div>
                 <p className="text-white/70 text-sm mb-1">Gewicht</p>
                 <p className="text-2xl sm:text-3xl font-bold">{ergebnis.gewichtKg.toLocaleString('de-DE')}</p>
-                <p className="text-white/60 text-xs">kg ({ergebnis.gewichtTonnen} t)</p>
+                <p className="text-white/60 text-xs">kg ({fmtT(ergebnis.gewichtTonnen)} t)</p>
               </div>
               <div>
                 <p className="text-white/70 text-sm mb-1">Säcke ({ergebnis.sackgroesseKg} kg)</p>

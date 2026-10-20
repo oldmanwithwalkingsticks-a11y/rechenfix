@@ -10,6 +10,9 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 
+// W184: vorher Rahmenhöhe/Zoll/Toleranz roh („53.4“, „21.1"“), jetzt de-DE („53,4“)
+const fmt1 = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 1 });
+
 export default function FahrradRahmenRechner() {
   const [koerpergroesse, setKoerpergroesse] = useState('178');
   const [schrittlaenge, setSchrittlaenge] = useState('');
@@ -59,11 +62,11 @@ export default function FahrradRahmenRechner() {
             <p className="text-white/70 text-sm mb-1 text-center">{ergebnis.fahrradtypLabel} — Empfohlene Rahmenhöhe</p>
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <p className="text-3xl sm:text-4xl font-bold">{ergebnis.rahmenhoeheCm}</p>
+                <p className="text-3xl sm:text-4xl font-bold">{fmt1(ergebnis.rahmenhoeheCm)}</p>
                 <p className="text-white/60 text-xs">cm</p>
               </div>
               <div>
-                <p className="text-3xl sm:text-4xl font-bold">{ergebnis.rahmenhoehZoll}&quot;</p>
+                <p className="text-3xl sm:text-4xl font-bold">{fmt1(ergebnis.rahmenhoehZoll)}&quot;</p>
                 <p className="text-white/60 text-xs">Zoll</p>
               </div>
               <div>
@@ -72,7 +75,7 @@ export default function FahrradRahmenRechner() {
               </div>
             </div>
             <p className="text-white/60 text-xs text-center mt-2">
-              Toleranzbereich: {ergebnis.toleranzMin}–{ergebnis.toleranzMax} cm
+              Toleranzbereich: {fmt1(ergebnis.toleranzMin)}–{fmt1(ergebnis.toleranzMax)} cm
             </p>
           </div>
 
@@ -84,13 +87,13 @@ export default function FahrradRahmenRechner() {
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Körpergröße</span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">{ergebnis.koerpergroesse} cm</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{fmt1(ergebnis.koerpergroesse)} cm</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">
-                  Schrittlänge {ergebnis.schrittlaengeGeschaetzt && <span className="text-gray-600 dark:text-gray-400">(geschätzt: {ergebnis.koerpergroesse} × 0,47)</span>}
+                  Schrittlänge {ergebnis.schrittlaengeGeschaetzt && <span className="text-gray-600 dark:text-gray-400">(geschätzt: {fmt1(ergebnis.koerpergroesse)} × 0,47)</span>}
                 </span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">{ergebnis.schrittlaenge} cm</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{fmt1(ergebnis.schrittlaenge)} cm</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Fahrradtyp-Faktor ({ergebnis.fahrradtypLabel})</span>
@@ -100,7 +103,7 @@ export default function FahrradRahmenRechner() {
               </div>
               <div className="flex justify-between px-4 py-3 text-sm font-bold">
                 <span className="text-gray-700 dark:text-gray-200">Rahmenhöhe</span>
-                <span className="text-primary-600 dark:text-primary-400">{ergebnis.rahmenhoeheCm} cm / {ergebnis.rahmenhoehZoll}&quot;</span>
+                <span className="text-primary-600 dark:text-primary-400">{fmt1(ergebnis.rahmenhoeheCm)} cm / {fmt1(ergebnis.rahmenhoehZoll)}&quot;</span>
               </div>
             </div>
           </div>
@@ -138,7 +141,7 @@ export default function FahrradRahmenRechner() {
           />
 
           <ErgebnisAktionen
-            ergebnisText={`${ergebnis.fahrradtypLabel}: Rahmenhöhe ${ergebnis.rahmenhoeheCm} cm (${ergebnis.rahmenhoehZoll}"), Größe ${ergebnis.buchstabengroesse} (±2 cm)`}
+            ergebnisText={`${ergebnis.fahrradtypLabel}: Rahmenhöhe ${fmt1(ergebnis.rahmenhoeheCm)} cm (${fmt1(ergebnis.rahmenhoehZoll)}"), Größe ${ergebnis.buchstabengroesse} (±2 cm)`}
             seitenTitel="Fahrrad-Rahmengröße-Rechner"
           />
 

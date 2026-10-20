@@ -29,6 +29,11 @@ const systemOptionen: { key: Notensystem; label: string }[] = [
   { key: 'uni', label: 'Uni (1,0–5,0)' },
 ];
 
+// W184: Prozent-/Punktwerte vorher roh („87.5 %“, „37.5 Punkte“), jetzt de-DE („87,5 %“)
+function fmtZahl(n: number): string {
+  return n.toLocaleString('de-DE', { maximumFractionDigits: 1 });
+}
+
 function farbKlasse(farbe: 'gruen' | 'gelb' | 'rot') {
   if (farbe === 'gruen') return 'text-green-600 dark:text-green-400';
   if (farbe === 'gelb') return 'text-yellow-600 dark:text-yellow-400';
@@ -196,13 +201,13 @@ export default function NotenschluesselRechner() {
                   {noteErgebnis.note}
                 </p>
                 <p className="text-lg font-medium text-gray-600 dark:text-gray-300 mt-1 capitalize">{noteErgebnis.bezeichnung}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{noteErgebnis.prozent} %</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{fmtZahl(noteErgebnis.prozent)} %</p>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Ergebnis</p>
-                  <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{noteErgebnis.prozent} %</p>
+                  <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtZahl(noteErgebnis.prozent)} %</p>
                 </div>
                 <div className={`rounded-xl p-4 text-center ${
                   noteErgebnis.bestanden
@@ -224,7 +229,7 @@ export default function NotenschluesselRechner() {
               <CrossLink href="/mathe/durchschnitt-rechner" emoji="🧮" text="Notendurchschnitt berechnen" />
 
               <ErgebnisAktionen
-                ergebnisText={`Note: ${noteErgebnis.note} (${noteErgebnis.bezeichnung}) - ${noteErgebnis.prozent} % - ${noteErgebnis.bestanden ? 'Bestanden' : 'Nicht bestanden'}`}
+                ergebnisText={`Note: ${noteErgebnis.note} (${noteErgebnis.bezeichnung}) - ${fmtZahl(noteErgebnis.prozent)} % - ${noteErgebnis.bestanden ? 'Bestanden' : 'Nicht bestanden'}`}
                 seitenTitel="Notenschlüssel"
               />
 
@@ -308,7 +313,7 @@ export default function NotenschluesselRechner() {
               <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden" id="notentabelle">
                 <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50 print:bg-white">
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                    Notenschlüssel — {parseDeutscheZahl(sMaximum)} Punkte
+                    Notenschlüssel — {fmtZahl(parseDeutscheZahl(sMaximum))} Punkte
                   </p>
                 </div>
                 <div className="overflow-x-auto">
@@ -324,8 +329,8 @@ export default function NotenschluesselRechner() {
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                       {schluesselTabelle.map(z => (
                         <tr key={z.punkte} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
-                          <td className="px-4 py-2 font-medium text-gray-800 dark:text-gray-200">{z.punkte}</td>
-                          <td className="px-4 py-2 text-gray-600 dark:text-gray-400">{z.prozent} %</td>
+                          <td className="px-4 py-2 font-medium text-gray-800 dark:text-gray-200">{fmtZahl(z.punkte)}</td>
+                          <td className="px-4 py-2 text-gray-600 dark:text-gray-400">{fmtZahl(z.prozent)} %</td>
                           <td className={`px-4 py-2 font-bold ${notenFarbe(z.note)}`}>{z.note}</td>
                           <td className="px-4 py-2 text-gray-600 dark:text-gray-400 capitalize">{z.bezeichnung}</td>
                         </tr>
@@ -336,7 +341,7 @@ export default function NotenschluesselRechner() {
               </div>
 
               <ErgebnisAktionen
-                ergebnisText={`Notenschlüssel für ${parseDeutscheZahl(sMaximum)} Punkte (${sSystem === 'schule' ? 'Schulnoten' : sSystem === 'ihk' ? 'IHK' : 'Uni'}, ${sSchluessel})`}
+                ergebnisText={`Notenschlüssel für ${fmtZahl(parseDeutscheZahl(sMaximum))} Punkte (${sSystem === 'schule' ? 'Schulnoten' : sSystem === 'ihk' ? 'IHK' : 'Uni'}, ${sSchluessel})`}
                 seitenTitel="Notenschlüssel"
               />
             </div>
@@ -400,7 +405,7 @@ export default function NotenschluesselRechner() {
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamtgewichtung</p>
-                  <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{durchschnittErgebnis.gesamtGewichtung}</p>
+                  <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtZahl(durchschnittErgebnis.gesamtGewichtung)}</p>
                 </div>
               </div>
 

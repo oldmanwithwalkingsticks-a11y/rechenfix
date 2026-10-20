@@ -144,7 +144,9 @@ export default function BruttoNettoRechner() {
   }), [bruttoNum, steuerklasse, kirchensteuer, kstSatz, kinder, kinderUnter25, bundesland, kvArt, kvZusatzbeitragNum, kvPrivatBeitragNum, rvBefreit, abrechnungszeitraum, weihnachtsgeldWert]);
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const pct = (n: number, base: number) => base > 0 ? ((n / base) * 100).toFixed(1) : '0.0';
+  // W184: vorher toFixed(1) („62.5%“) bzw. roh („35.2%“), jetzt de-DE („62,5%“)
+  const pct = (n: number, base: number) => (base > 0 ? (n / base) * 100 : 0).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const fmtPct = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
   const skLabel = (sk: number) => {
     const labels: Record<number, string> = { 1: 'SK1', 2: 'SK2', 3: 'SK3', 4: 'SK4', 5: 'SK5', 6: 'SK6' };
@@ -666,7 +668,7 @@ export default function BruttoNettoRechner() {
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Abzüge</p>
                       <p className="text-lg font-bold text-red-600 dark:text-red-400">{fmt(wg.abzuege)} €</p>
-                      <p className="text-xs text-gray-600">{wgAbzuegePct}%</p>
+                      <p className="text-xs text-gray-600">{fmtPct(wgAbzuegePct)}%</p>
                     </div>
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Netto</p>
@@ -674,14 +676,14 @@ export default function BruttoNettoRechner() {
                     </div>
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Eff. Steuersatz</p>
-                      <p className="text-lg font-bold text-amber-700 dark:text-amber-300">{effektiverSteuersatz}%</p>
+                      <p className="text-lg font-bold text-amber-700 dark:text-amber-300">{fmtPct(effektiverSteuersatz)}%</p>
                     </div>
                   </div>
 
                   {/* Hinweis Progression */}
                   {effektiverSteuersatz > regelSteuersatz && (
                     <div className="bg-amber-100 dark:bg-amber-500/20 rounded-lg px-4 py-2.5 mb-4 text-sm text-amber-800 dark:text-amber-200">
-                      <strong>Hinweis:</strong> Der effektive Steuersatz auf das Weihnachtsgeld ({effektiverSteuersatz}%) ist höher als auf Ihr reguläres Gehalt ({regelSteuersatz}%). Das liegt an der Steuerprogression — die Sonderzahlung wird zum Jahresgehalt addiert und fällt damit in eine höhere Steuerzone.
+                      <strong>Hinweis:</strong> Der effektive Steuersatz auf das Weihnachtsgeld ({fmtPct(effektiverSteuersatz)}%) ist höher als auf Ihr reguläres Gehalt ({fmtPct(regelSteuersatz)}%). Das liegt an der Steuerprogression — die Sonderzahlung wird zum Jahresgehalt addiert und fällt damit in eine höhere Steuerzone.
                     </div>
                   )}
 
@@ -993,7 +995,8 @@ export default function BruttoNettoRechner() {
 
 function Zeile({ label, wert, hervorgehoben = false, brutto }: { label: string; wert: number; hervorgehoben?: boolean; brutto?: number }) {
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const prozent = brutto && brutto > 0 ? ((Math.abs(wert) / brutto) * 100).toFixed(1) : null;
+  // W184: vorher toFixed(1) („14.2%“), jetzt de-DE
+  const prozent = brutto && brutto > 0 ? ((Math.abs(wert) / brutto) * 100).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : null;
   return (
     <tr className={hervorgehoben ? 'font-semibold text-gray-800 dark:text-gray-100' : 'text-gray-600 dark:text-gray-400'}>
       <td className="py-1.5">{label}</td>

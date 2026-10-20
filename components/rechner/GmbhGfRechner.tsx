@@ -31,13 +31,15 @@ import {
 
 const fmtEur = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 const fmt0 = (n: number) => Math.round(n).toLocaleString('de-DE') + ' €';
+// W184: Abgabenquote vorher toFixed(1) („38.4 %“) und KV-Zusatzbeitrag-Vorbelegung per String() („2.9“), jetzt de-DE
+const fmtQuote = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 export default function GmbhGfRechner() {
   const [brutto, setBrutto] = useState('6000'); // Monatsgehalt
   const [beherrschend, setBeherrschend] = useState(true);
   const [splitting, setSplitting] = useState(false);
   const [kv, setKv] = useState<'gkv' | 'pkv'>('gkv');
-  const [kvZusatz, setKvZusatz] = useState(String(KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT));
+  const [kvZusatz, setKvZusatz] = useState(KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT.toLocaleString('de-DE'));
   const [pkvBeitrag, setPkvBeitrag] = useState('650');
   const [kirche, setKirche] = useState(false);
   const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
@@ -264,7 +266,7 @@ export default function GmbhGfRechner() {
         <p className="text-white/80 text-sm mb-1">Ihr Netto / Monat</p>
         <p className="text-5xl font-bold">{fmt0(ergebnis.nettoMonat)}</p>
         <p className="text-white/80 text-sm mt-2">
-          Jahresnetto: <strong>{fmt0(ergebnis.nettoJahr)}</strong> · Abgabenquote: <strong>{ergebnis.quote.toFixed(1)} %</strong>
+          Jahresnetto: <strong>{fmt0(ergebnis.nettoJahr)}</strong> · Abgabenquote: <strong>{fmtQuote(ergebnis.quote)} %</strong>
         </p>
       </div>
 
@@ -310,7 +312,7 @@ export default function GmbhGfRechner() {
       <AffiliateBox programId="lexware" context="gmbh" />
 
       <ErgebnisAktionen
-        ergebnisText={`GmbH-GF-Gehalt: ${fmt0(ergebnis.nettoMonat)} netto/Monat bei ${brutto} € brutto (${ergebnis.quote.toFixed(1)} % Abgabenquote)`}
+        ergebnisText={`GmbH-GF-Gehalt: ${fmt0(ergebnis.nettoMonat)} netto/Monat bei ${brutto} € brutto (${fmtQuote(ergebnis.quote)} % Abgabenquote)`}
         seitenTitel="GmbH-Geschäftsführer-Rechner"
         pdfDaten={[
           {
@@ -320,7 +322,7 @@ export default function GmbhGfRechner() {
               { label: 'Netto pro Monat', wert: `${fmt0(ergebnis.nettoMonat)}`, highlight: true },
               { label: 'Netto pro Jahr', wert: `${fmt0(ergebnis.nettoJahr)}` },
               { label: 'Einkommensteuer', wert: `${fmtEur(ergebnis.est)}` },
-              { label: 'Abgabenquote', wert: `${ergebnis.quote.toFixed(1)} %` },
+              { label: 'Abgabenquote', wert: `${fmtQuote(ergebnis.quote)} %` },
             ],
           },
         ]}

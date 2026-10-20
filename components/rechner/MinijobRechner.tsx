@@ -55,6 +55,13 @@ export default function MinijobRechner() {
   }, [verdienst, art, stunden]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: gewerblich enthalten die AG-Kosten den Beitrag zur Berufsgenossenschaft (gesetzliche
+  // Unfallversicherung) nicht — vorher hieß das Ergebnis trotzdem „Gesamtkosten“. Im Privathaushalt
+  // ist die Unfallversicherung (1,6 %) enthalten.
+  const ohneBg = art === 'gewerblich';
+  const agKostenLabel = ohneBg ? 'Arbeitgeberkosten (ohne Beitrag zur Berufsgenossenschaft)' : 'Arbeitgeber-Gesamtkosten';
+  // W184: Prozent und Stunden vorher roh im Kopier-/PDF-Text („+31.17%“, „10.01 h“), jetzt de-DE
+  const fmtZ = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   const statusLabel =
     ergebnis.status === 'minijob' ? { text: 'Minijob ✓', color: 'bg-green-500' } :
@@ -142,7 +149,7 @@ export default function MinijobRechner() {
         <p className="text-white/80 text-sm mb-1">Netto für Arbeitnehmer</p>
         <p className="text-5xl font-bold">{fmtEuro(ergebnis.nettoAN)} €</p>
         <p className="text-white/80 text-sm mt-1">
-          Arbeitgeber-Gesamtkosten: <strong>{fmtEuro(ergebnis.agGesamtkosten)} €</strong>
+          {agKostenLabel}: <strong>{fmtEuro(ergebnis.agGesamtkosten)} €</strong>
         </p>
       </div>
 
@@ -215,7 +222,7 @@ export default function MinijobRechner() {
                 </tr>
               )}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-bold">
-                <td className="px-4 py-3 text-blue-800 dark:text-blue-300">= Netto / Gesamtkosten</td>
+                <td className="px-4 py-3 text-blue-800 dark:text-blue-300">= Netto / {ohneBg ? 'AG-Kosten ohne BG-Beitrag' : 'Gesamtkosten'}</td>
                 <td className="px-4 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtEuro(ergebnis.nettoAN)} €</td>
                 <td className="px-4 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtEuro(ergebnis.agGesamtkosten)} €</td>
               </tr>
@@ -223,7 +230,11 @@ export default function MinijobRechner() {
           </table>
         </div>
         <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/30 text-xs text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700">
-          <strong>💡 Gesamtkosten Arbeitgeber:</strong> Ihr Minijob kostet den Arbeitgeber insgesamt {fmtEuro(ergebnis.agGesamtkosten)} € — das sind {ergebnis.agAufschlagProzent.toLocaleString('de-DE')} % Aufschlag auf den Bruttoverdienst.
+          {ohneBg ? (
+            <><strong>💡 Kosten Arbeitgeber:</strong> Ihr Minijob kostet den Arbeitgeber {fmtEuro(ergebnis.agGesamtkosten)} € — das sind {ergebnis.agAufschlagProzent.toLocaleString('de-DE')} % Aufschlag auf den Bruttoverdienst. Hinzu kommt der Beitrag zur Berufsgenossenschaft (gesetzliche Unfallversicherung), der je nach Branche unterschiedlich hoch ist und hier nicht enthalten ist.</>
+          ) : (
+            <><strong>💡 Gesamtkosten Arbeitgeber:</strong> Ihr Minijob kostet den Arbeitgeber insgesamt {fmtEuro(ergebnis.agGesamtkosten)} € — das sind {ergebnis.agAufschlagProzent.toLocaleString('de-DE')} % Aufschlag auf den Bruttoverdienst.</>
+          )}
         </div>
       </div>
 
@@ -275,7 +286,7 @@ export default function MinijobRechner() {
       <CrossLink href="/arbeit/teilzeit-rechner" emoji="📅" text="Teilzeit-Rechner: Gehalt bei reduzierter Arbeitszeit" />
 
       <ErgebnisAktionen
-        ergebnisText={`Minijob ${fmtEuro(ergebnis.verdienst)} € (${art}): Netto ${fmtEuro(ergebnis.nettoAN)} € | RV-Eigenanteil ${fmtEuro(ergebnis.rvEigenanteil)} € | AG-Gesamtkosten ${fmtEuro(ergebnis.agGesamtkosten)} € (+${ergebnis.agAufschlagProzent}%)`}
+        ergebnisText={`Minijob ${fmtEuro(ergebnis.verdienst)} € (${art}): Netto ${fmtEuro(ergebnis.nettoAN)} € | RV-Eigenanteil ${fmtEuro(ergebnis.rvEigenanteil)} € | ${ohneBg ? 'AG-Kosten ohne BG-Beitrag' : 'AG-Gesamtkosten'} ${fmtEuro(ergebnis.agGesamtkosten)} € (+${fmtZ(ergebnis.agAufschlagProzent)} %)`}
         seitenTitel="Minijob-Rechner"
         pdfDaten={[
           {
@@ -285,14 +296,14 @@ export default function MinijobRechner() {
               { label: 'Netto (Arbeitnehmer)', wert: `${fmtEuro(ergebnis.nettoAN)} €`, highlight: true },
               { label: 'RV-Eigenanteil', wert: `- ${fmtEuro(ergebnis.rvEigenanteil)} €` },
               { label: 'Stundenlohn', wert: ergebnis.stundenlohn !== null ? `${fmtEuro(ergebnis.stundenlohn)} €` : 'n/a' },
-              { label: 'Max. Stunden pro Woche', wert: `${ergebnis.maxStundenProWoche} h` },
+              { label: 'Max. Stunden pro Woche', wert: `${fmtZ(ergebnis.maxStundenProWoche)} h` },
             ],
           },
           {
             titel: 'Arbeitgeber-Kosten',
             zeilen: [
-              { label: 'AG-Gesamtkosten', wert: `${fmtEuro(ergebnis.agGesamtkosten)} €` },
-              { label: 'Aufschlag', wert: `+ ${ergebnis.agAufschlagProzent} %` },
+              { label: ohneBg ? 'AG-Kosten (ohne Beitrag zur Berufsgenossenschaft)' : 'AG-Gesamtkosten', wert: `${fmtEuro(ergebnis.agGesamtkosten)} €` },
+              { label: 'Aufschlag', wert: `+ ${fmtZ(ergebnis.agAufschlagProzent)} %` },
             ],
           },
         ]}
@@ -310,7 +321,7 @@ export default function MinijobRechner() {
           status: ergebnis.status,
           nettoAN: `${fmtEuro(ergebnis.nettoAN)} €`,
           rvEigenanteil: `${fmtEuro(ergebnis.rvEigenanteil)} €`,
-          agGesamtkosten: `${fmtEuro(ergebnis.agGesamtkosten)} €`,
+          agGesamtkosten: `${fmtEuro(ergebnis.agGesamtkosten)} €${ohneBg ? ' (ohne Beitrag zur Berufsgenossenschaft)' : ''}`,
           agAufschlag: `${ergebnis.agAufschlagProzent} %`,
           stundenlohn: ergebnis.stundenlohn !== null ? `${fmtEuro(ergebnis.stundenlohn)} €` : 'n/a',
         }}

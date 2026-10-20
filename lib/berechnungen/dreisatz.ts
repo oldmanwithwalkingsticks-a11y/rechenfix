@@ -23,9 +23,10 @@ export function berechneDreisatz(eingabe: DreisatzEingabe): DreisatzErgebnis | n
       b2: Math.round(b2 * 10000) / 10000,
       zwischenschritt: Math.round(zwischenschritt * 10000) / 10000,
       schritte: [
-        `${a1} entspricht ${b1}`,
-        `1 entspricht ${b1} \u00F7 ${a1} = ${fmt(zwischenschritt)}`,
-        `${a2} entspricht ${fmt(zwischenschritt)} \u00D7 ${a2} = ${fmt(b2)}`,
+        // W184: Eingaben vorher roh („2.5 entspricht 7.5“), jetzt über fmt() de-DE
+        `${fmt(a1)} entspricht ${fmt(b1)}`,
+        `1 entspricht ${fmt(b1)} \u00F7 ${fmt(a1)} = ${fmt(zwischenschritt)}`,
+        `${fmt(a2)} entspricht ${fmt(zwischenschritt)} \u00D7 ${fmt(a2)} = ${fmt(b2)}`,
       ],
     };
   } else {
@@ -36,9 +37,9 @@ export function berechneDreisatz(eingabe: DreisatzEingabe): DreisatzErgebnis | n
       b2: Math.round(b2 * 10000) / 10000,
       zwischenschritt: Math.round(zwischenschritt * 10000) / 10000,
       schritte: [
-        `${a1} entspricht ${b1}`,
-        `1 entspricht ${b1} \u00D7 ${a1} = ${fmt(zwischenschritt)}`,
-        `${a2} entspricht ${fmt(zwischenschritt)} \u00F7 ${a2} = ${fmt(b2)}`,
+        `${fmt(a1)} entspricht ${fmt(b1)}`,
+        `1 entspricht ${fmt(b1)} \u00D7 ${fmt(a1)} = ${fmt(zwischenschritt)}`,
+        `${fmt(a2)} entspricht ${fmt(zwischenschritt)} \u00F7 ${fmt(a2)} = ${fmt(b2)}`,
       ],
     };
   }

@@ -101,6 +101,9 @@ export default function ZugewinnausgleichRechner() {
   ]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  // W184: vorher VPI roh („VPI 75.5 → 126.6“) und Faktor per toFixed(3) („× 1.677“), jetzt de-DE
+  const fmtVpi = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const fmtFaktor = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
 
   const maxZugewinn = Math.max(ergebnis.zugewinnP1, ergebnis.zugewinnP2, 1);
 
@@ -126,7 +129,7 @@ export default function ZugewinnausgleichRechner() {
           <p className="text-xs text-gray-500 dark:text-gray-400">
             Für die Indexierung des Anfangsvermögens nach § 1376 BGB. Verfügbarer VPI-Bereich: {VPI_JAHR_MIN}–{VPI_JAHR_MAX}.
             {!ergebnis.vpiFehler && ergebnis.indexFaktor !== 1 && (
-              <> Index-Faktor {ergebnis.indexFaktor.toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 })} (VPI {ergebnis.vpiHeirat} → {ergebnis.vpiEnde}).</>
+              <> Index-Faktor {fmtFaktor(ergebnis.indexFaktor)} (VPI {fmtVpi(ergebnis.vpiHeirat)} → {fmtVpi(ergebnis.vpiEnde)}).</>
             )}
           </p>
           {ergebnis.vpiFehler && (
@@ -228,7 +231,7 @@ export default function ZugewinnausgleichRechner() {
               </tr>
               {ergebnis.indexFaktor !== 1 && (
                 <tr>
-                  <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">↳ indexiert auf {ergebnis.ende} (× {ergebnis.indexFaktor.toFixed(3)})</td>
+                  <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">↳ indexiert auf {ergebnis.ende} (× {fmtFaktor(ergebnis.indexFaktor)})</td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.aP1Indexiert)} €</td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(ergebnis.aP2Indexiert)} €</td>
                 </tr>

@@ -9,6 +9,18 @@ function formatEuro(n: number): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+// W184: vorher Stunden per toFixed(0) („÷ 173 h“ neben 13,46 € — rechnerisch 173,33 h). Jetzt de-DE:
+// Formelzeilen unter den Ergebniskästen mit 2 Nachkommastellen (formatStunden2: „÷ 173,33 h“,
+// „÷ 203,07 h“ — mit 1 Stelle ergäbe 2.084,58 ÷ 203,1 = 10,26 statt angezeigter 10,27 €),
+// übrige Stundenangaben (Kopiertext, PDF) mit 1 Nachkommastelle (formatStunden).
+function formatStunden(n: number): string {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+}
+
+function formatStunden2(n: number): string {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 // Auf Cent runden; -0 wird zu 0, damit nie „-0,00 €“ erscheint.
 function aufCent(n: number): number {
   return Math.round(n * 100) / 100 || 0;
@@ -91,7 +103,7 @@ export default function WahrerStundenlohnRechner() {
       `Differenz: -${formatEuro(ergebnis.differenzStundenlohn)} €/h (${ergebnis.differenzProzent.toFixed(0)}% weniger)`,
       '',
       `Versteckte Kosten pro Monat: ${formatEuro(ergebnis.abzuegeMonat)} €`,
-      `Versteckte Arbeitszeit: +${ergebnis.pendelzeitStundenMonat.toFixed(0)}h Pendeln, +${ergebnis.ueberstundenMonat.toFixed(0)}h Überstunden`,
+      `Versteckte Arbeitszeit: +${formatStunden(ergebnis.pendelzeitStundenMonat)} h Pendeln, +${formatStunden(ergebnis.ueberstundenMonat)} h Überstunden`,
       `Mindestlohn-Job netto je bezahlter Stunde: ${formatEuro(ergebnis.mindestlohnNettoStunde)} € (Abstand ${abstandMl > 0 ? '+' : ''}${formatEuro(abstandMl)} €)`,
     ].join('\n');
   }
@@ -122,7 +134,7 @@ export default function WahrerStundenlohnRechner() {
                 {formatEuro(ergebnis.offiziellerStundenlohn)} €
               </p>
               <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
-                {formatEuro(ergebnis.nettoMonatlich)} € netto &divide; {ergebnis.vertragsstundenMonat.toFixed(0)} h
+                {formatEuro(ergebnis.nettoMonatlich)} € netto &divide; {formatStunden2(ergebnis.vertragsstundenMonat)} h
               </p>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/30 dark:to-orange-900/20 rounded-2xl border border-red-200 dark:border-red-700/30">
@@ -131,7 +143,7 @@ export default function WahrerStundenlohnRechner() {
                 {formatEuro(ergebnis.wahrerStundenlohn)} €
               </p>
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                {formatEuro(ergebnis.tatsaechlichesNetto)} € &divide; {ergebnis.tatsaechlicheStundenMonat.toFixed(0)} h
+                {formatEuro(ergebnis.tatsaechlichesNetto)} € &divide; {formatStunden2(ergebnis.tatsaechlicheStundenMonat)} h
               </p>
             </div>
           </div>
@@ -262,9 +274,9 @@ export default function WahrerStundenlohnRechner() {
                 titel: 'Grundlage der Berechnung',
                 zeilen: [
                   { label: 'Tatsächliches Netto pro Monat', wert: `${formatEuro(ergebnis.tatsaechlichesNetto)} €` },
-                  { label: 'Tatsächliche Stunden pro Monat', wert: `${ergebnis.tatsaechlicheStundenMonat.toFixed(0)} h` },
-                  { label: 'davon Pendelzeit', wert: `${ergebnis.pendelzeitStundenMonat.toFixed(0)} h` },
-                  { label: 'davon Überstunden', wert: `${ergebnis.ueberstundenMonat.toFixed(0)} h` },
+                  { label: 'Tatsächliche Stunden pro Monat', wert: `${formatStunden(ergebnis.tatsaechlicheStundenMonat)} h` },
+                  { label: 'davon Pendelzeit', wert: `${formatStunden(ergebnis.pendelzeitStundenMonat)} h` },
+                  { label: 'davon Überstunden', wert: `${formatStunden(ergebnis.ueberstundenMonat)} h` },
                   { label: 'Arbeitstage im Jahr', wert: `${ergebnis.arbeitstageJahr.toLocaleString('de-DE', { maximumFractionDigits: 1 })}` },
                 ],
               },

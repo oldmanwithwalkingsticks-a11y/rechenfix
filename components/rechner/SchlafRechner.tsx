@@ -9,6 +9,9 @@ import SchlafTipp from '@/components/rechner/SchlafTipp';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 
+// W184: Schlafstunden/Jahre vorher roh („7.5 Std.“, „26.7 Jahre“), jetzt de-DE („7,5 Std.“)
+const fmtStd = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 1 });
+
 const SCHNELLWAHL_ZEITEN = ['05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30'];
 
 const BEWERTUNG_FARBEN: Record<string, { bg: string; text: string; label: string; icon: string }> = {
@@ -140,7 +143,7 @@ export default function SchlafRechner() {
                       </span>
                     )}
                     <p className="text-2xl sm:text-3xl font-extrabold mt-1">{sz.uhrzeit}</p>
-                    <p className="text-white/70 text-xs mt-1">{sz.schlafstunden} Std. · {sz.zyklen} Zyklen</p>
+                    <p className="text-white/70 text-xs mt-1">{fmtStd(sz.schlafstunden)} Std. · {sz.zyklen} Zyklen</p>
                     <span className={`inline-block mt-2 px-2 py-0.5 rounded-full text-[10px] font-semibold ${style.bg} ${style.text}`}>
                       {style.icon} {style.label}
                     </span>
@@ -201,7 +204,7 @@ export default function SchlafRechner() {
               <ul className="space-y-2.5 text-sm text-gray-600 dark:text-gray-400">
                 <li className="flex items-start gap-2">
                   <span className="text-lg leading-tight">🛏️</span>
-                  <span>Sie verbringen ca. <strong className="text-gray-800 dark:text-gray-200">{ergebnis.jahreImSchlaf} Jahre</strong> Ihres Lebens im Schlaf</span>
+                  <span>Sie verbringen ca. <strong className="text-gray-800 dark:text-gray-200">{fmtStd(ergebnis.jahreImSchlaf)} Jahre</strong> Ihres Lebens im Schlaf</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-lg leading-tight">⏰</span>
@@ -254,7 +257,7 @@ export default function SchlafRechner() {
           <CrossLink href="/gesundheit/kalorienrechner" emoji="🔥" text="Kalorienbedarf und Schlaf — Zusammenhang" />
 
           <ErgebnisAktionen
-            ergebnisText={`Aufwachzeit ${aufwachzeit} Uhr: Ideale Schlafenszeiten: ${ergebnis.schlafzeiten.map(s => `${s.uhrzeit} (${s.schlafstunden} Std.)`).join(', ')}. Empfohlen für ${empfohlen.label}: ${empfohlen.min}–${empfohlen.max} Stunden.`}
+            ergebnisText={`Aufwachzeit ${aufwachzeit} Uhr: Ideale Schlafenszeiten: ${ergebnis.schlafzeiten.map(s => `${s.uhrzeit} (${fmtStd(s.schlafstunden)} Std.)`).join(', ')}. Empfohlen für ${empfohlen.label}: ${empfohlen.min}–${empfohlen.max} Stunden.`}
             seitenTitel="Schlafrechner"
           />
 

@@ -357,7 +357,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'tagerechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     zeigtAuthorBio: true,
     titel: 'Tagerechner',
     beschreibung: 'Tage zwischen zwei Daten berechnen: Kalendertage, Arbeitstage, Wochen und Monate auf einen Blick.',
@@ -1724,7 +1724,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'handykosten-rechner',
-    letzteAktualisierung: '2026-06-27',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Handykosten-Rechner',
     beschreibung: 'Handykosten berechnen: Effektive Monatskosten, Jahreskosten und Kostenaufschlüsselung für Ihren Mobilfunkvertrag.',
     kategorie: 'Alltag',
@@ -1764,7 +1764,8 @@ export const alltagRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Echte gegen scheinbare Handykosten',
-        html: `<p>Was ein Handy wirklich im Monat kostet, lässt sich selten an einer einzigen Zahl ablesen. Neben dem reinen <strong>Tarifpreis</strong> stecken in den Gesamtkosten oft eine versteckte <strong>Geräterate</strong>, kostenpflichtige Zusatzoptionen und einmalige Gebühren. Erst wenn man diese Bausteine zusammenrechnet, wird die effektive Monatsbelastung sichtbar.</p><p>Dieser Rechner macht genau das: Er addiert den Tarif, die Zusatzoptionen und den auf die Laufzeit verteilten Gerätepreis zu den <strong>effektiven Monatskosten</strong> und rechnet sie aufs Jahr hoch. So wird vergleichbar, was sonst hinter „nur 1 Euro Zuzahlung"-Angeboten verschwimmt. Es geht dabei nicht um Verzicht, sondern um Klarheit: Wer seine echten Kosten kennt, erkennt schnell, ob ein Tarif zum eigenen Nutzungsverhalten passt. Wie viele <strong>Arbeitsstunden</strong> hinter dem Handyvertrag stehen, zeigt ergänzend der <a href="/finanzen/stundenlohn-rechner">Stundenlohn-Rechner</a> — eine überraschend greifbare Perspektive auf laufende Fixkosten. Gerade weil die Beträge klein wirken, lohnt der Blick auf die Jahressumme: 45 € im Monat sind über zwei Jahre bereits mehr als 1.000 €, oft mehr als das Gerät neu gekostet hat.</p>`,
+        // W184: Anschlussgebühr ergänzt (Rechner hat jetzt ein Feld „Anschlussgebühr (einmalig)“)
+        html: `<p>Was ein Handy wirklich im Monat kostet, lässt sich selten an einer einzigen Zahl ablesen. Neben dem reinen <strong>Tarifpreis</strong> stecken in den Gesamtkosten oft eine versteckte <strong>Geräterate</strong>, kostenpflichtige Zusatzoptionen und einmalige Gebühren. Erst wenn man diese Bausteine zusammenrechnet, wird die effektive Monatsbelastung sichtbar.</p><p>Dieser Rechner macht genau das: Er addiert den Tarif, die Zusatzoptionen sowie den auf die Laufzeit verteilten Gerätepreis und eine einmalige Anschlussgebühr zu den <strong>effektiven Monatskosten</strong> und rechnet sie aufs Jahr hoch. So wird vergleichbar, was sonst hinter „nur 1 Euro Zuzahlung"-Angeboten verschwimmt. Es geht dabei nicht um Verzicht, sondern um Klarheit: Wer seine echten Kosten kennt, erkennt schnell, ob ein Tarif zum eigenen Nutzungsverhalten passt. Wie viele <strong>Arbeitsstunden</strong> hinter dem Handyvertrag stehen, zeigt ergänzend der <a href="/finanzen/stundenlohn-rechner">Stundenlohn-Rechner</a> — eine überraschend greifbare Perspektive auf laufende Fixkosten. Gerade weil die Beträge klein wirken, lohnt der Blick auf die Jahressumme: 45 € im Monat sind über zwei Jahre bereits mehr als 1.000 €, oft mehr als das Gerät neu gekostet hat.</p>`,
       },
       {
         typ: 'vergleich',
@@ -2552,7 +2553,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'uhrzeitrechner',
-    letzteAktualisierung: '2026-06-26',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Uhrzeitrechner',
     beschreibung: 'Uhrzeiten berechnen: Zeitdifferenz, Stunden addieren/subtrahieren und Zeitzonen umrechnen.',
     kategorie: 'Alltag',
@@ -2573,11 +2574,11 @@ export const alltagRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie viele Stunden Zeitverschiebung hat New York?',
-        antwort: 'New York liegt in der Zeitzone EST (Eastern Standard Time, UTC−5). Zur deutschen MEZ (UTC+1) beträgt die Zeitverschiebung 6 Stunden — in Deutschland ist es also 6 Stunden später als in New York. In der Sommerzeit sind es weiterhin 6 Stunden (beide Länder nutzen Sommerzeit).',
+        antwort: 'New York liegt in der Zeitzone EST (Eastern Standard Time, UTC−5). Zur deutschen MEZ (UTC+1) beträgt die Zeitverschiebung 6 Stunden — in Deutschland ist es also 6 Stunden später als in New York. In der Sommerzeit sind es meist ebenfalls 6 Stunden, weil beide Länder umstellen. Ausnahme sind die Wochen, in denen die USA schon (ab dem zweiten Sonntag im März) oder noch (bis zum ersten Sonntag im November) Sommerzeit haben, Europa aber nicht: Dann sind es 5 Stunden. Der Rechner berücksichtigt das über das Datum.', // W184: Ausnahmewochen ergänzt, Rechner rechnet jetzt datumsgenau
       },
       {
         frage: 'Was ist der Unterschied zwischen MEZ und MESZ?',
-        antwort: 'MEZ (Mitteleuropäische Zeit) gilt von Ende Oktober bis Ende März und entspricht UTC+1. MESZ (Mitteleuropäische Sommerzeit) gilt von Ende März bis Ende Oktober und entspricht UTC+2. Beim Wechsel wird die Uhr um eine Stunde vor- bzw. zurückgestellt. Der Rechner arbeitet standardmäßig mit MEZ (UTC+1).',
+        antwort: 'MEZ (Mitteleuropäische Zeit) gilt von Ende Oktober bis Ende März und entspricht UTC+1. MESZ (Mitteleuropäische Sommerzeit) gilt von Ende März bis Ende Oktober und entspricht UTC+2. Beim Wechsel wird die Uhr um eine Stunde vor- bzw. zurückgestellt. Der Rechner erkennt am eingegebenen Datum automatisch, ob MEZ oder MESZ gilt.', // W184: vorher „arbeitet standardmäßig mit MEZ (UTC+1)“ (Rechner rechnete fest UTC+1)
       },
       {
         frage: 'Wie rechne ich Stunden und Minuten in Dezimal um?',
@@ -2659,12 +2660,12 @@ export const alltagRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Sommerzeit verschiebt die Offsets',
-        text: 'Die häufigste Falle bei Zeitzonen ist die Sommerzeit. Die im Rechner hinterlegten Offsets sind Standardzeit-Werte. Im Sommer verschieben sich viele Zonen um eine Stunde: Berlin wird zu MESZ (UTC+2), New York zu EDT (UTC−4). Weil Europa und die USA an leicht unterschiedlichen Terminen umstellen, kann die Differenz zwischen zwei Städten für ein bis zwei Wochen im Jahr sogar um eine Stunde abweichen. Nicht jedes Land kennt überhaupt eine Sommerzeit — Indien, China und Dubai stellen nie um.',
+        text: 'Die häufigste Falle bei Zeitzonen ist die Sommerzeit. Im Sommer verschieben sich viele Zonen um eine Stunde: Berlin wird zu MESZ (UTC+2), New York zu EDT (UTC−4). Weil Europa und die USA an leicht unterschiedlichen Terminen umstellen, kann die Differenz zwischen zwei Städten für ein bis zwei Wochen im Jahr sogar um eine Stunde abweichen. Nicht jedes Land kennt überhaupt eine Sommerzeit — Indien, China und Dubai stellen nie um. Der Rechner berücksichtigt all das automatisch für das eingegebene Datum.', // W184: vorher „Die im Rechner hinterlegten Offsets sind Standardzeit-Werte.“
       },
       {
         typ: 'text',
         titel: 'Zeitzonen, UTC und Sommerzeit (DST)',
-        html: `<p>Alle Zeitzonen beziehen sich auf die <strong>Koordinierte Weltzeit (UTC)</strong>. Eine Zone wird als Offset angegeben: Berlin ist im Winter UTC+1, Tokio UTC+9. Beim Umrechnen normiert man die Quellzeit erst auf UTC (Quell-Offset abziehen) und addiert dann den Ziel-Offset.</p><p>Komplizierter wird es durch die <strong>Sommerzeit (DST)</strong>. In der EU gilt sie vom letzten Sonntag im März bis zum letzten Sonntag im Oktober; die Uhr springt dann eine Stunde vor. Dadurch verändert sich der Offset einer Zone je nach Jahreszeit — und damit auch die Differenz zwischen zwei Orten. Genau das ist ein häufiger Grund für verpasste internationale Termine.</p><p>Weil nicht alle Länder umstellen und die Termine variieren, arbeitet der Rechner bewusst mit den <strong>Standardzeiten</strong> und einem separaten Sommerzeit-Schalter. Wer bis zu einem festen Termin herunterzählen will, kombiniert ihn mit dem <a href="/alltag/countdown">Countdown-Rechner</a>.</p>`,
+        html: `<p>Alle Zeitzonen beziehen sich auf die <strong>Koordinierte Weltzeit (UTC)</strong>. Eine Zone wird als Offset angegeben: Berlin ist im Winter UTC+1, Tokio UTC+9. Beim Umrechnen normiert man die Quellzeit erst auf UTC (Quell-Offset abziehen) und addiert dann den Ziel-Offset.</p><p>Komplizierter wird es durch die <strong>Sommerzeit (DST)</strong>. In der EU gilt sie vom letzten Sonntag im März bis zum letzten Sonntag im Oktober; die Uhr springt dann eine Stunde vor. Dadurch verändert sich der Offset einer Zone je nach Jahreszeit — und damit auch die Differenz zwischen zwei Orten. Genau das ist ein häufiger Grund für verpasste internationale Termine.</p><p>Weil nicht alle Länder umstellen und die Termine variieren, rechnet der Rechner <strong>mit dem Datum</strong>: Er wendet die Umstellungsregeln jeder Zone aus der IANA-Zeitzonendatenbank an und wählt Sommer- oder Winterzeit automatisch. Wer bis zu einem festen Termin herunterzählen will, kombiniert ihn mit dem <a href="/alltag/countdown">Countdown-Rechner</a>.</p>`,
       },
       {
         typ: 'text',
@@ -2734,8 +2735,9 @@ export const alltagRechner: RechnerConfig[] = [
       {
         typ: 'infobox',
         variante: 'hinweis',
-        titel: 'Standard-Offsets — Sommerzeit gegenprüfen',
-        text: 'Der Rechner arbeitet mit den Standard-Offsets der Zeitzonen; die Sommerzeit wird über ein separates Feld berücksichtigt. Weil Umstellungstermine zwischen Ländern variieren und sich politisch ändern können, sollten Sie bei kritischen internationalen Terminen die aktuelle Ortszeit gegenprüfen. Für die rechtsverbindliche Erfassung von Arbeitszeit gilt die Zeiterfassung des Arbeitgebers, nicht diese Überschlagsrechnung. Auch Sonderfälle wie die seltenen Halbstunden- oder Dreiviertelstunden-Zonen (etwa Nepal mit UTC+5:45) sind nicht alle hinterlegt. Die Ergebnisse dienen der Orientierung im Alltag.',
+        titel: 'Sommerzeit nach Datum — kritische Termine gegenprüfen',
+        // W184: vorher „arbeitet mit den Standard-Offsets …; die Sommerzeit wird über ein separates Feld berücksichtigt“ (gab es nicht)
+        text: 'Der Rechner wendet die Sommerzeitregeln der IANA-Zeitzonendatenbank auf das eingegebene Datum an. Weil Umstellungstermine zwischen Ländern variieren und sich politisch ändern können, sollten Sie bei kritischen internationalen Terminen die aktuelle Ortszeit gegenprüfen. Für die rechtsverbindliche Erfassung von Arbeitszeit gilt die Zeiterfassung des Arbeitgebers, nicht diese Überschlagsrechnung. Auch Sonderfälle wie die seltenen Halbstunden- oder Dreiviertelstunden-Zonen (etwa Nepal mit UTC+5:45) sind nicht alle hinterlegt. Die Ergebnisse dienen der Orientierung im Alltag.',
       },
     ],
     quellen: [

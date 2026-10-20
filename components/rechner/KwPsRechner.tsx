@@ -21,6 +21,8 @@ export default function KwPsRechner() {
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: Umrechnungsfaktor vorher roh („Faktor: 1.35962“, „× 0.7355“), jetzt de-DE
+  const fmtFaktor = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 4, maximumFractionDigits: 5 });
 
   return (
     <div>
@@ -68,7 +70,7 @@ export default function KwPsRechner() {
                   className="inline-block px-3 py-1 rounded-lg text-sm font-semibold"
                   style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
                 >
-                  Faktor: {richtung === 'kw-zu-ps' ? KW_ZU_PS : PS_ZU_KW}
+                  Faktor: {fmtFaktor(richtung === 'kw-zu-ps' ? KW_ZU_PS : PS_ZU_KW)}
                 </span>
               </div>
             </div>
@@ -79,8 +81,8 @@ export default function KwPsRechner() {
             <p className="font-semibold text-accent-700 dark:text-accent-400 text-sm mb-1">Rechenweg</p>
             <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
               {richtung === 'kw-zu-ps'
-                ? `${fmt(nWert)} kW × ${KW_ZU_PS} = ${fmt(ergebnis.ergebnisWert)} PS`
-                : `${fmt(nWert)} PS × ${PS_ZU_KW} = ${fmt(ergebnis.ergebnisWert)} kW`}
+                ? `${fmt(nWert)} kW × ${fmtFaktor(KW_ZU_PS)} = ${fmt(ergebnis.ergebnisWert)} PS`
+                : `${fmt(nWert)} PS × ${fmtFaktor(PS_ZU_KW)} = ${fmt(ergebnis.ergebnisWert)} kW`}
             </p>
           </div>
 

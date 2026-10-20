@@ -1667,7 +1667,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'wahrer-stundenlohn',
-    letzteAktualisierung: '2026-10-19',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Wahrer Stundenlohn Rechner',
     beschreibung: 'Was verdienen Sie wirklich pro Stunde? Berechnen Sie Ihren wahren Stundenlohn inklusive Pendelzeit, Fahrtkosten und Überstunden.',
     kategorie: 'Finanzen',
@@ -1722,7 +1722,8 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'minus Sozialabgaben (21,75 %)', formel: '3.500 € × 21,75 %', ergebnis: '− 761,25 €' },
           { label: 'minus Lohnsteuer (StKl I)', formel: 'PAP 2026, kein Soli', ergebnis: '− 405,50 €' },
           { label: 'Netto', formel: 'Brutto − SV − Steuer', ergebnis: '2.333,25 €' },
-          { label: 'Netto-Stundenlohn bei 40 h/Woche', formel: '2.333,25 € ÷ 173 h', ergebnis: '≈ 13,46 €' },
+          // W184: vorher „÷ 173 h“ (2.333,25 ÷ 173 = 13,49); der Rechner teilt durch 40 × 52 ÷ 12 = 173,33 h.
+          { label: 'Netto-Stundenlohn bei 40 h/Woche', formel: '2.333,25 € ÷ 173,33 h', ergebnis: '≈ 13,46 €' },
         ],
         fazit: 'Schon der Schritt von Brutto zu Netto verändert den Stundenlohn deutlich. Von 3.500 Euro brutto bleiben nach Sozialabgaben (21,75 Prozent Arbeitnehmeranteil) und 405,50 Euro Lohnsteuer in Steuerklasse I ohne Kinder und Kirchensteuer 2.333,25 Euro netto; ein Solidaritätszuschlag fällt bei diesem Gehalt nicht an. Geteilt durch rund 173 Monatsstunden (40 Stunden pro Woche) ergibt das einen Netto-Stundenlohn von etwa 13,46 Euro — der Brutto-Stundenlohn von gut 20 Euro ist also nur die halbe Wahrheit. Die genaue Steuerlast hängt von Steuerklasse, Kirchenzugehörigkeit, Kinderfreibeträgen und Bundesland ab; feste Eurobeträge lassen sich daraus nicht allgemein ableiten. Dieser Netto-Stundenlohn ist aber erst der Ausgangspunkt — der wahre Stundenlohn liegt nochmals darunter, sobald unbezahlte Zeit und berufsbedingte Kosten hinzukommen. Schon hier zeigt sich: Der Brutto-Stundenlohn taugt nicht als Maßstab fürs eigene Budget.',
       },
@@ -1749,9 +1750,10 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Mit 1 Stunde Pendeln pro Tag',
         schritte: [
           { label: 'Netto (Beispiel)', formel: 'StKl I, 2026', ergebnis: '2.333,25 €' },
-          { label: 'Vertragsstunden/Monat', formel: '40 h × 4,33', ergebnis: '173 h' },
+          // W184: vorher „40 h × 4,33 = 173 h“; der Rechner rechnet 52 Wochen ÷ 12 Monate.
+          { label: 'Vertragsstunden/Monat', formel: '40 h × 52 ÷ 12', ergebnis: '173,33 h' },
           { label: 'Pendelzeit/Monat', formel: '60 Min/Tag × 18,58 Arbeitstage', ergebnis: '+ 18,6 h' },
-          { label: 'Gesamtzeit', formel: '173,3 + 18,6', ergebnis: '≈ 192 h' },
+          { label: 'Gesamtzeit', formel: '173,33 + 18,58', ergebnis: '≈ 192 h' },
           { label: 'Lohn pro echter Stunde', formel: '2.333,25 € ÷ 192 h', ergebnis: '≈ 12,16 €' },
         ],
         fazit: 'Eine Stunde Pendeln am Tag — also je 30 Minuten pro Strecke — addiert über den Monat rund 19 unbezahlte Stunden. Die Gesamtzeit für den Job steigt damit von 173 auf etwa 192 Stunden, während das Netto gleich bleibt. Der Lohn pro tatsächlich investierter Stunde sinkt dadurch von 13,46 auf rund 12,16 Euro, ganz ohne dass Kosten berücksichtigt wären. Wer 45 Minuten pro Strecke fährt, verliert noch mehr. Das macht deutlich, warum Wohnortwahl und Arbeitsweg den realen Verdienst stärker beeinflussen als viele denken: Eine Gehaltserhöhung kann durch einen längeren Pendelweg rechnerisch teilweise aufgezehrt werden. Gerechnet wird mit 223 Arbeitstagen im Jahr, also rund 18,6 im Monat: 5 Tage × 52 Wochen, abzüglich 30 Urlaubstagen (der Standard in den meisten Tarifverträgen; gesetzlich sind es bei einer 5-Tage-Woche mindestens 20) und der 7 bundesweiten Feiertage, die 2026 auf Montag bis Freitag fallen. Im Urlaub und an Feiertagen fährt niemand zur Arbeit — bezahlt sind diese Tage trotzdem.',
@@ -3321,7 +3323,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'pflegegeld-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Pflegegeld-Rechner',
     beschreibung: 'Pflegegeld berechnen: Leistungen der Pflegeversicherung nach Pflegegrad — Pflegegeld, Pflegesachleistung und Kombinationsleistung.',
     kategorie: 'Finanzen',
@@ -3644,7 +3646,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'minijob-rechner',
-    letzteAktualisierung: '2026-10-19',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Minijob-Rechner',
     beschreibung: 'Minijob-Abgaben berechnen: Verdienst, Abgaben für Arbeitgeber und Arbeitnehmer sowie Übergang zum Midijob.',
     kategorie: 'Finanzen',

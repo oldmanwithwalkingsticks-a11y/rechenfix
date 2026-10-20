@@ -50,6 +50,9 @@ export interface QuadratmeterErgebnis {
   inHektar: number;
 }
 
+// W184: Maße im Label vorher roh („Rechteck 4.5 × 3.2 m“), jetzt de-DE („Rechteck 4,5 × 3,2 m“)
+const fz = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 3 });
+
 function umrechnenNachMeter(wert: number, einheit: Einheit): number {
   if (einheit === 'cm') return wert / 100;
   if (einheit === 'mm') return wert / 1000;
@@ -65,7 +68,7 @@ export function berechneEinzelflaeche(eingabe: FlaechenEingabe, einheit: Einheit
       return {
         flaeche: l * b,
         umfang: 2 * (l + b),
-        label: `Rechteck ${eingabe.laenge} × ${eingabe.breite} ${einheit}`,
+        label: `Rechteck ${fz(eingabe.laenge)} × ${fz(eingabe.breite)} ${einheit}`,
       };
     }
     case 'kreis': {
@@ -74,7 +77,7 @@ export function berechneEinzelflaeche(eingabe: FlaechenEingabe, einheit: Einheit
       return {
         flaeche: Math.PI * r * r,
         umfang: 2 * Math.PI * r,
-        label: `Kreis r = ${eingabe.radius} ${einheit}`,
+        label: `Kreis r = ${fz(eingabe.radius)} ${einheit}`,
       };
     }
     case 'dreieck': {
@@ -84,7 +87,7 @@ export function berechneEinzelflaeche(eingabe: FlaechenEingabe, einheit: Einheit
       return {
         flaeche: (g * h) / 2,
         umfang: null,
-        label: `Dreieck ${eingabe.grundseite} × ${eingabe.hoehe} ${einheit}`,
+        label: `Dreieck ${fz(eingabe.grundseite)} × ${fz(eingabe.hoehe)} ${einheit}`,
       };
     }
     case 'lform': {
@@ -96,7 +99,7 @@ export function berechneEinzelflaeche(eingabe: FlaechenEingabe, einheit: Einheit
       return {
         flaeche: l1 * b1 + l2 * b2,
         umfang: null,
-        label: `L-Form (${eingabe.r1Laenge}×${eingabe.r1Breite} + ${eingabe.r2Laenge}×${eingabe.r2Breite}) ${einheit}`,
+        label: `L-Form (${fz(eingabe.r1Laenge)}×${fz(eingabe.r1Breite)} + ${fz(eingabe.r2Laenge)}×${fz(eingabe.r2Breite)}) ${einheit}`,
       };
     }
     case 'trapez': {
@@ -107,7 +110,7 @@ export function berechneEinzelflaeche(eingabe: FlaechenEingabe, einheit: Einheit
       return {
         flaeche: ((a + c) / 2) * h,
         umfang: null,
-        label: `Trapez a=${eingabe.seiteA}, c=${eingabe.seiteC}, h=${eingabe.hoehe} ${einheit}`,
+        label: `Trapez a=${fz(eingabe.seiteA)}, c=${fz(eingabe.seiteC)}, h=${fz(eingabe.hoehe)} ${einheit}`,
       };
     }
   }

@@ -13,6 +13,8 @@ import CrossLink from '@/components/ui/CrossLink';
 import { getStrompreis } from '@/lib/berechnungen/strompreis';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// W184: vorher roh interpoliert (englischer Dezimalpunkt, z. B. „0.8 kWp“, „23.4 %“, „Amortisation 6.2 Jahre“), jetzt de-DE
+const fmtZ = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 const STROMPREIS_DEFAULT = String(getStrompreis('neukunden_festpreis'));
 
 // Solarpaket I (16.05.2024), § 8 Abs. 5a EEG 2023 i.V.m. VDE-AR-N 4105:
@@ -182,7 +184,7 @@ export default function BalkonSolarRechner() {
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Anlagenleistung</span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">{ergebnis.leistungWatt} W ({ergebnis.leistungKwp} kWp)</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{ergebnis.leistungWatt} W ({fmtZ(ergebnis.leistungKwp)} kWp)</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Ausrichtung × Aufstellung</span>
@@ -202,7 +204,7 @@ export default function BalkonSolarRechner() {
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Deckung des Stromverbrauchs</span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">{ergebnis.deckungsgradProzent} %</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{fmtZ(ergebnis.deckungsgradProzent)} %</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm font-bold">
                 <span className="text-gray-700 dark:text-gray-200">Gewinn über 20 Jahre</span>
@@ -233,7 +235,7 @@ export default function BalkonSolarRechner() {
           <CrossLink href="/wohnen/stromvergleich-rechner" emoji="🔌" text="Stromanbieter vergleichen" />
 
           <ErgebnisAktionen
-            ergebnisText={`Balkonkraftwerk ${ergebnis.leistungWatt} W: ${ergebnis.jahresertragKwh.toLocaleString('de-DE')} kWh/Jahr, ${fmt(ergebnis.jaehrlicheErsparnis)} € Ersparnis/Jahr, Amortisation ${ergebnis.amortisationJahre} Jahre`}
+            ergebnisText={`Balkonkraftwerk ${ergebnis.leistungWatt} W: ${ergebnis.jahresertragKwh.toLocaleString('de-DE')} kWh/Jahr, ${fmt(ergebnis.jaehrlicheErsparnis)} € Ersparnis/Jahr, Amortisation ${fmtZ(ergebnis.amortisationJahre)} Jahre`}
             seitenTitel="Balkon-Solar-Rechner"
           />
 

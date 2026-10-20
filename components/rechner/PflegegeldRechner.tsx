@@ -209,18 +209,16 @@ export default function PflegegeldRechner() {
                 <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.entlastungsbetrag)} €</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.entlastungsbetrag * 12)} €</td>
               </tr>
+              {/* W184: vorher zwei Zeilen „Verhinderungspflege bis 3.539 €“ und „Kurzzeitpflege bis 3.539 €“ —
+                  seit 01.07.2025 ein gemeinsamer Jahresbetrag (§ 42a SGB XI), also zusammen höchstens 3.539 € */}
               {ergebnis.verhinderungspflegeJahr > 0 && (
                 <tr>
-                  <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">Verhinderungspflege</td>
+                  <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300">
+                    Verhinderungs- und Kurzzeitpflege
+                    <span className="block text-xs text-gray-500 dark:text-gray-400">gemeinsamer Jahresbetrag (§ 42a SGB XI), für beide zusammen</span>
+                  </td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 whitespace-nowrap">—</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums whitespace-nowrap">bis {fmtEuro(ergebnis.verhinderungspflegeJahr)} €</td>
-                </tr>
-              )}
-              {ergebnis.kurzzeitpflegeJahr > 0 && (
-                <tr>
-                  <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">Kurzzeitpflege</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 whitespace-nowrap">—</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums whitespace-nowrap">bis {fmtEuro(ergebnis.kurzzeitpflegeJahr)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums whitespace-nowrap">zusammen bis {fmtEuro(ergebnis.verhinderungspflegeJahr)} €</td>
                 </tr>
               )}
               <tr>
@@ -294,8 +292,8 @@ export default function PflegegeldRechner() {
             titel: 'Weitere Leistungsansprüche (jährlich)',
             wertSpalte: 'Betrag / Jahr',
             zeilen: [
-              { label: 'Verhinderungspflege', wert: `${fmtEuro(ergebnis.verhinderungspflegeJahr)} €` },
-              { label: 'Kurzzeitpflege', wert: `${fmtEuro(ergebnis.kurzzeitpflegeJahr)} €` },
+              // W184: vorher je eine Zeile mit 3.539 € — gemeinsamer Jahresbetrag nach § 42a SGB XI
+              { label: 'Verhinderungs- und Kurzzeitpflege (gemeinsamer Jahresbetrag, § 42a SGB XI)', wert: ergebnis.verhinderungspflegeJahr > 0 ? `zusammen bis ${fmtEuro(ergebnis.verhinderungspflegeJahr)} €` : '—' },
             ],
           },
         ]}
@@ -312,8 +310,7 @@ export default function PflegegeldRechner() {
           hauptLeistungMonat: `${ergebnis.hauptLeistungMonat} €`,
           hauptLeistungJahr: `${ergebnis.hauptLeistungJahr} €`,
           entlastungsbetrag: `${ergebnis.entlastungsbetrag} €`,
-          verhinderungspflege: `bis ${ergebnis.verhinderungspflegeJahr} €/Jahr`,
-          kurzzeitpflege: `bis ${ergebnis.kurzzeitpflegeJahr} €/Jahr`,
+          verhinderungsUndKurzzeitpflege: ergebnis.verhinderungspflegeJahr > 0 ? `zusammen bis ${fmtEuro(ergebnis.verhinderungspflegeJahr)} €/Jahr (gemeinsamer Jahresbetrag § 42a SGB XI)` : 'kein Anspruch (erst ab Pflegegrad 2)',
         }}
       />
 

@@ -161,11 +161,11 @@ export default function KreditRechner() {
               <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-green-400 dark:bg-green-500 inline-block" />
-                  Kreditsumme ({kreditsummeAnteil.toFixed(1)}%)
+                  Kreditsumme ({kreditsummeAnteil.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%){/* W184: vorher toFixed(1) („72.4%“) */}
                 </span>
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-orange-400 dark:bg-orange-500 inline-block" />
-                  Zinskosten ({(100 - kreditsummeAnteil).toFixed(1)}%)
+                  Zinskosten ({(100 - kreditsummeAnteil).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%)
                 </span>
               </div>
             </div>

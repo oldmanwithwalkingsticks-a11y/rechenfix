@@ -22,6 +22,8 @@ export default function HandykostenRechner() {
   const [hatRaten, setHatRaten] = useState(false);
   const [monatlicheRate, setMonatlicheRate] = useState('');
   const [zusatzoptionen, setZusatzoptionen] = useState('0');
+  // W184: Anschlussgebühr ergänzt (FAQ versprach Einmalgebühren, der Rechner kannte keine)
+  const [anschlussgebuehr, setAnschlussgebuehr] = useState('0');
   const [datenvolumen, setDatenvolumen] = useState('10');
   const [aktuellerAnbieter, setAktuellerAnbieter] = useState('');
 
@@ -37,8 +39,9 @@ export default function HandykostenRechner() {
       zusatzoptionen: parseDeutscheZahl(zusatzoptionen),
       datenvolumen: parseDeutscheZahl(datenvolumen),
       aktuellerAnbieter: parseDeutscheZahl(aktuellerAnbieter),
+      anschlussgebuehr: parseDeutscheZahl(anschlussgebuehr) || 0,
     });
-  }, [tarifpreis, laufzeit, geraetepreis, hatRaten, monatlicheRate, zusatzoptionen, datenvolumen, aktuellerAnbieter]);
+  }, [tarifpreis, laufzeit, geraetepreis, hatRaten, monatlicheRate, zusatzoptionen, datenvolumen, aktuellerAnbieter, anschlussgebuehr]);
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -131,6 +134,15 @@ export default function HandykostenRechner() {
             </label>
             <NummerEingabe value={datenvolumen} onChange={setDatenvolumen} einheit="GB" placeholder="10" />
           </div>
+        </div>
+
+        {/* Anschlussgebühr (einmalig) */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Anschlussgebühr (einmalig)
+          </label>
+          <NummerEingabe value={anschlussgebuehr} onChange={setAnschlussgebuehr} einheit="€" placeholder="0" />
+          <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">wird auf die Vertragslaufzeit umgelegt (bei „monatlich kündbar“ im ersten Monat)</p>
         </div>
 
         {/* Vergleich mit aktuellem Anbieter */}
@@ -287,6 +299,7 @@ export default function HandykostenRechner() {
               ratenzahlung: hatRaten,
               monatlicheRateEuro: hatRaten ? parseDeutscheZahl(monatlicheRate) : 0,
               zusatzoptionenEuro: parseDeutscheZahl(zusatzoptionen),
+              anschlussgebuehrEuro: parseDeutscheZahl(anschlussgebuehr) || 0,
               datenvolumenGb: parseDeutscheZahl(datenvolumen),
             }}
             ergebnis={{

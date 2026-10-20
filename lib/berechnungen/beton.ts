@@ -19,6 +19,10 @@ const SACK_VOLUMEN: Record<number, number> = { 25: 0.012, 40: 0.019 };
 const SACK_PREIS: Record<number, number> = { 25: 6.5, 40: 9.5 };
 const LIEFERBETON_PREIS = 100; // €/m³
 
+// W184: Rechenweg vorher mit rohen Zahlen und toFixed(3) („2.5 × 0.15 = 0.375 m³“), jetzt de-DE („2,5 × 0,15 = 0,375 m³“)
+const fz = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 3 });
+const f3 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+
 export function berechneBeton(
   form: 'rechteck' | 'rund' | 'lform',
   masse: {
@@ -38,14 +42,14 @@ export function berechneBeton(
     const h = masse.hoehe || 0;
     if (l <= 0 || b <= 0 || h <= 0) return null;
     volumenRoh = l * b * h;
-    rechenweg.push(`Volumen = ${l} × ${b} × ${h} = ${(volumenRoh).toFixed(3)} m³`);
+    rechenweg.push(`Volumen = ${fz(l)} × ${fz(b)} × ${fz(h)} = ${f3(volumenRoh)} m³`);
   } else if (form === 'rund') {
     const d = masse.durchmesser || 0;
     const h = masse.hoehe || 0;
     if (d <= 0 || h <= 0) return null;
     const r = d / 2;
     volumenRoh = Math.PI * r * r * h;
-    rechenweg.push(`Volumen = π × (${d}/2)² × ${h} = ${volumenRoh.toFixed(3)} m³`);
+    rechenweg.push(`Volumen = π × (${fz(d)}/2)² × ${fz(h)} = ${f3(volumenRoh)} m³`);
   } else {
     // L-Form: zwei Schenkel
     const l1l = masse.l1Laenge || 0;
@@ -55,20 +59,20 @@ export function berechneBeton(
     const d = masse.lDicke || 0;
     if (l1l <= 0 || l1b <= 0 || l2l <= 0 || l2b <= 0 || d <= 0) return null;
     volumenRoh = (l1l * l1b + l2l * l2b) * d;
-    rechenweg.push(`Volumen = (${l1l} × ${l1b} + ${l2l} × ${l2b}) × ${d} = ${volumenRoh.toFixed(3)} m³`);
+    rechenweg.push(`Volumen = (${fz(l1l)} × ${fz(l1b)} + ${fz(l2l)} × ${fz(l2b)}) × ${fz(d)} = ${f3(volumenRoh)} m³`);
   }
 
   const zuschlag = volumenRoh * (zuschlagProzent / 100);
   const volumenMitZuschlag = volumenRoh + zuschlag;
-  rechenweg.push(`+ ${zuschlagProzent} % Zuschlag = ${volumenMitZuschlag.toFixed(3)} m³`);
+  rechenweg.push(`+ ${fz(zuschlagProzent)} % Zuschlag = ${f3(volumenMitZuschlag)} m³`);
 
   const gewichtKg = Math.round(volumenMitZuschlag * DICHTE);
   const gewichtTonnen = Math.round(gewichtKg / 10) / 100;
-  rechenweg.push(`Gewicht = ${volumenMitZuschlag.toFixed(3)} × ${DICHTE} = ${gewichtKg.toLocaleString('de-DE')} kg`);
+  rechenweg.push(`Gewicht = ${f3(volumenMitZuschlag)} × ${DICHTE.toLocaleString('de-DE')} = ${gewichtKg.toLocaleString('de-DE')} kg`);
 
   const volumenProSack = SACK_VOLUMEN[sackgroesseKg] || 0.012;
   const anzahlSaecke = Math.ceil(volumenMitZuschlag / volumenProSack);
-  rechenweg.push(`Säcke (${sackgroesseKg} kg) = ${volumenMitZuschlag.toFixed(3)} ÷ ${volumenProSack} ≈ ${anzahlSaecke} Stück`);
+  rechenweg.push(`Säcke (${sackgroesseKg} kg) = ${f3(volumenMitZuschlag)} ÷ ${f3(volumenProSack)} ≈ ${anzahlSaecke} Stück`);
 
   const sackPreis = SACK_PREIS[sackgroesseKg] || 6.5;
   const kostenSaecke = Math.round(anzahlSaecke * sackPreis * 100) / 100;

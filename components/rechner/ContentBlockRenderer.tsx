@@ -33,6 +33,20 @@ export default function ContentBlockRenderer({ bloecke }: { bloecke: ContentBloc
  *  identisch zu den FAQ/Quellen-Boxen). .card setzt KEIN Padding → p-5 md:p-6 bleibt explizit. */
 const KACHEL = 'card p-5 md:p-6';
 
+// W184: Diagrammwerte vorher roh gerendert („0.4 €“, „18.9 %“, „494308 €“), jetzt de-DE
+// („0,40 €“, „18,9 %“, „494.308 €“). Hat eine Euro-Reihe Cent-Beträge, zeigen alle Werte
+// der Reihe zwei Nachkommastellen („0,40 € … 2,00 €“).
+type DiagrammWert = { wert: number; einheit?: string };
+function centReihe(daten: DiagrammWert[]): boolean {
+  return daten.some((d) => d.einheit === '€' && !Number.isInteger(d.wert));
+}
+function fmtWert(n: number, einheit: string | undefined, cent: boolean): string {
+  if (einheit === '€' && cent) {
+    return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  return n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
+}
+
 /** Block-Überschrift im Marken-Ton — steht ÜBER der Kachel (W19.0f), groß. */
 function BlockTitel({ children }: { children: React.ReactNode }) {
   return (
@@ -296,7 +310,7 @@ function Balken({
               dominantBaseline="middle"
               className="fill-gray-800 dark:fill-gray-100 font-semibold"
             >
-              {d.wert}
+              {fmtWert(d.wert, d.einheit, centReihe(daten))}
               {d.einheit ? ` ${d.einheit}` : ''}
             </text>
           </g>
@@ -362,7 +376,7 @@ function KreisDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagram
               </svg>
               <span className="text-gray-700 dark:text-gray-300">{dd.label}</span>
               <span className="ml-auto pl-4 font-semibold text-gray-800 dark:text-gray-100 tabular-nums">
-                {dd.wert}{dd.einheit ? ` ${dd.einheit}` : ' %'}
+                {fmtWert(dd.wert, dd.einheit, centReihe(daten))}{dd.einheit ? ` ${dd.einheit}` : ' %'}
               </span>
             </li>
           ))}
@@ -405,7 +419,7 @@ function LinienDiagramm({ block }: { block: Extract<ContentBlock, { typ: 'diagra
             <circle cx={x} cy={y} r={4} className="fill-primary-600 dark:fill-primary-300" />
             <text x={labelX} y={y - 10} fontSize={12} textAnchor={anchor}
               className="fill-gray-800 dark:fill-gray-100 font-semibold">
-              {d[i].wert}{d[i].einheit ? ` ${d[i].einheit}` : ''}
+              {fmtWert(d[i].wert, d[i].einheit, centReihe(d))}{d[i].einheit ? ` ${d[i].einheit}` : ''}
             </text>
             <text x={labelX} y={H - 14} fontSize={12} textAnchor={anchor}
               className="fill-gray-500 dark:fill-gray-400">

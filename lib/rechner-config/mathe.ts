@@ -2240,7 +2240,7 @@ export const matheRechner: RechnerConfig[] = [
   },
   {
     slug: 'primzahl-rechner',
-    letzteAktualisierung: '2026-06-14',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Primzahl-Rechner',
     beschreibung: 'Primzahlen prüfen und finden: Ist eine Zahl prim? Primfaktorzerlegung und Primzahlen in einem Bereich.',
     kategorie: 'Mathe & Schule',
@@ -2249,7 +2249,8 @@ export const matheRechner: RechnerConfig[] = [
     metaDescription: 'Primzahl-Rechner: Primzahl-Check, Primfaktorzerlegung mit Rechenweg und Primzahlen im Bereich kostenlos berechnen. Für Schule und Studium.',
     keywords: ['primzahl rechner', 'primzahlen', 'primfaktorzerlegung', 'ist primzahl', 'primzahl prüfen', 'primzahlen liste', 'sieb des eratosthenes', 'faktorzerlegung'],
     icon: '🔢',
-    beispiel: 'Beispiel: 360 = 2³ × 3² × 5 (Primfaktorzerlegung) | 97 ist eine Primzahl (kein Teiler bis √97 ≈ 9) | Zwischen 1 und 100 gibt es 25 Primzahlen',
+    // W184: vorher „√97 ≈ 9“ (abgeschnitten statt gerundet)
+    beispiel: 'Beispiel: 360 = 2³ × 3² × 5 (Primfaktorzerlegung) | 97 ist eine Primzahl (kein Teiler bis √97 ≈ 9,85) | Zwischen 1 und 100 gibt es 25 Primzahlen',
     faq: [
       {
         frage: 'Wie erkenne ich, ob eine Zahl eine Primzahl ist?',

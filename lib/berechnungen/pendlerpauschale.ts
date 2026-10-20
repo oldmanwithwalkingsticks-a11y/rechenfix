@@ -46,11 +46,12 @@ export function berechnePendlerpauschale(eingabe: PendlerEingabe): PendlerErgebn
 
   const aufschluesselung: { label: string; wert: string }[] = [
     {
-      label: `Pendlerpauschale: ${km} km × 0,38 € × ${arbeitstageProJahr} Tage`,
+      // W184: km vorher roh („12.5 km“), jetzt de-DE
+      label: `Pendlerpauschale: ${km.toLocaleString('de-DE', { maximumFractionDigits: 1 })} km × 0,38 € × ${arbeitstageProJahr} Tage`,
       wert: fmtEuro(pauschaleGesamt),
     },
     {
-      label: `Steuerersparnis (${grenzsteuersatz}% Grenzsteuersatz)`,
+      label: `Steuerersparnis (${grenzsteuersatz.toLocaleString('de-DE', { maximumFractionDigits: 2 })}% Grenzsteuersatz)`,
       wert: fmtEuro(steuerersparnis),
     },
   ];

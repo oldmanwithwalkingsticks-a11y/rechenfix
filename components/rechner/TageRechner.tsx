@@ -95,7 +95,9 @@ export default function TageRechner() {
           legend="Zählweise"
           srOnlyLegend
           options={[
-            { value: 'ohne', label: 'Ohne Start-/Endtag' },
+            // W184: vorher „Ohne Start-/Endtag“ — gerechnet wird aber die Differenz (Endtag zählt mit,
+            // z. B. 01.01.–31.12.2026 = 364; ohne beide Randtage wären es 363), vgl. § 187 Abs. 1 BGB
+            { value: 'ohne', label: 'Ohne Starttag (Differenz)' },
             { value: 'mit', label: 'Start + Endtag mitzählen' },
           ]}
           value={mitzaehlen ? 'mit' : 'ohne'}

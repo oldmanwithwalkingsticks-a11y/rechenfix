@@ -152,11 +152,11 @@ export default function ZinsRechner() {
               <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-primary-400 dark:bg-primary-500 inline-block" />
-                  Eigenkapital ({eigenkapitalAnteil.toFixed(1)}%)
+                  Eigenkapital ({eigenkapitalAnteil.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%){/* W184: vorher toFixed(1) („80.1%“) */}
                 </span>
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-green-400 dark:bg-green-500 inline-block" />
-                  Zinsen ({(100 - eigenkapitalAnteil).toFixed(1)}%)
+                  Zinsen ({(100 - eigenkapitalAnteil).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%)
                 </span>
               </div>
             </div>

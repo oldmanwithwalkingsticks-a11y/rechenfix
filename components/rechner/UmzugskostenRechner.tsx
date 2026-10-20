@@ -63,6 +63,8 @@ export default function UmzugskostenRechner() {
   );
 
   const fmt = (n: number) => Math.round(n).toLocaleString('de-DE');
+  // W184: Wohnfläche/Entfernung vorher roh aus der Eingabe („65.5 m²“), jetzt de-DE
+  const fmtZ = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   return (
     <div>
@@ -207,7 +209,7 @@ export default function UmzugskostenRechner() {
               {art === 'firma' ? (
                 <>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Basiskosten ({nWohnungsgroesse} m² × {ergebnis.kostenProQm} €)</span>
+                    <span className="text-gray-600 dark:text-gray-400">Basiskosten ({fmtZ(nWohnungsgroesse)} m² × {ergebnis.kostenProQm} €)</span>
                     <span className="font-semibold text-gray-800 dark:text-gray-200">{fmt(ergebnis.basiskosten)} €</span>
                   </div>
                   {ergebnis.etagenzuschlag > 0 && (
@@ -248,7 +250,7 @@ export default function UmzugskostenRechner() {
                     <span className="font-semibold text-gray-800 dark:text-gray-200">{fmt(ergebnis.transporterMiete)} €</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Km-Kosten ({nEntfernung} km × 2 × 0,35 €)</span>
+                    <span className="text-gray-600 dark:text-gray-400">Km-Kosten ({fmtZ(nEntfernung)} km × 2 × 0,35 €)</span>
                     <span className="font-semibold text-gray-800 dark:text-gray-200">{fmt(ergebnis.kmKosten)} €</span>
                   </div>
                   <div className="flex justify-between text-sm">
@@ -382,7 +384,7 @@ export default function UmzugskostenRechner() {
           <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📋" text="Nebenkosten der neuen Wohnung" />
 
           <ErgebnisAktionen
-            ergebnisText={`Umzugskosten (${nWohnungsgroesse} m², ${nEntfernung} km, ${art === 'firma' ? 'Umzugsfirma' : 'selbst organisiert'}): ca. ${fmt(ergebnis.gesamtkosten)} €${art === 'firma' && ergebnis.vergleichSelbst ? ` | Selbst: ca. ${fmt(ergebnis.vergleichSelbst)} €` : ''}`}
+            ergebnisText={`Umzugskosten (${fmtZ(nWohnungsgroesse)} m², ${fmtZ(nEntfernung)} km, ${art === 'firma' ? 'Umzugsfirma' : 'selbst organisiert'}): ca. ${fmt(ergebnis.gesamtkosten)} €${art === 'firma' && ergebnis.vergleichSelbst ? ` | Selbst: ca. ${fmt(ergebnis.vergleichSelbst)} €` : ''}`}
             seitenTitel="Umzugskosten-Rechner"
           />
 

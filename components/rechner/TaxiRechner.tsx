@@ -125,7 +125,7 @@ export default function TaxiRechner() {
               {ergebnis.wartekosten > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
                   <span className="text-gray-600 dark:text-gray-400">
-                    Wartezeit ({ergebnis.wartezeit} Min.)
+                    Wartezeit ({ergebnis.wartezeit.toLocaleString('de-DE', { maximumFractionDigits: 1 })} Min.){/* W184: vorher roh („2.5 Min.“) */}
                   </span>
                   <span className="font-medium text-gray-800 dark:text-gray-200">
                     {fmt(ergebnis.wartekosten)} €

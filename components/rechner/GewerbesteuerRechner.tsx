@@ -219,7 +219,8 @@ export default function GewerbesteuerRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">× Steuermesszahl</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{ergebnis.steuermesszahl} %</td>
+                {/* W184: vorher roh („3.5 %“), jetzt fmtProzent („3,5 %“) */}
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtProzent(ergebnis.steuermesszahl)} %</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">= Steuermessbetrag</td>

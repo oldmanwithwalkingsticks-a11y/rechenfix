@@ -102,6 +102,7 @@ const ST_PROZ: Record<Triebmittel, number> = {
 
 const fmt = (n: number, d = 1): string =>
   n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: d });
+// W184: Salz- und Hefe-Prozente vorher roh („1.5 %“), jetzt über fmt() („1,5 %“)
 
 export default function BrotbackRechner() {
   const [brotTyp, setBrotTyp] = useState<BrotTyp>('misch');
@@ -249,7 +250,7 @@ export default function BrotbackRechner() {
           <div className="bg-white/10 rounded-xl p-3 text-center">
             <p className="text-white/70 text-xs mb-1">🧂 Salz</p>
             <p className="text-xl font-bold">{fmt(ergebnis.salzMenge, 1)} g</p>
-            <p className="text-white/70 text-xs">{rezept.salz} %</p>
+            <p className="text-white/70 text-xs">{fmt(rezept.salz)} %</p>
           </div>
           {ergebnis.asg > 0 && (
             <div className="bg-white/10 rounded-xl p-3 text-center">
@@ -344,12 +345,12 @@ export default function BrotbackRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2.5">Salz</td>
-                <td className="px-4 py-2.5 text-right tabular-nums">{rezept.salz} %</td>
+                <td className="px-4 py-2.5 text-right tabular-nums">{fmt(rezept.salz)} %</td>
               </tr>
               {triebmittel !== 'sauerteig' && (
                 <tr>
                   <td className="px-4 py-2.5">Frischhefe</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums">{HEFE_PROZ[triebmittel]} %</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums">{fmt(HEFE_PROZ[triebmittel])} %</td>
                 </tr>
               )}
               {triebmittel !== 'hefe' && (

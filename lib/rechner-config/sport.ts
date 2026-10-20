@@ -1023,7 +1023,7 @@ export const sportRechner: RechnerConfig[] = [
   },
   {
     slug: 'laufband-steigung-rechner',
-    letzteAktualisierung: '2026-07-01',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Laufband-Steigung-Rechner',
     beschreibung: 'Laufband-Tempo in ein Outdoor-Äquivalent umrechnen: Wie schnell läufst du bei gegebener Band-Geschwindigkeit und Steigung auf der Straße?',
     kategorie: 'Sport & Fitness',
@@ -1032,7 +1032,9 @@ export const sportRechner: RechnerConfig[] = [
     metaDescription: 'Laufband-Steigung umrechnen: Band-Tempo plus Steigung ergibt das Outdoor-Äquivalent auf ebener Straße — mit Pace-Tabelle und Rechenweg.',
     keywords: ['laufband steigung', 'laufband pace outdoor', 'treadmill äquivalent', '1 prozent steigung laufband', 'grade adjusted pace', 'laufband tempo straße', 'laufband umrechnen', 'incline laufband'],
     icon: '🏃',
-    beispiel: '10 km/h bei 2 % Steigung: 10 × (1 + 0,03 × 2) = 10,60 km/h ≈ 5:40 min/km auf der Straße.',
+    // W184: Modell vereinheitlicht (vorher Faustregel +3 % je Steigungsprozent, 0 % = Straße; jetzt
+    // ACSM-Laufgleichung mit Straße ≈ 1 % nach Jones & Doust, lib/berechnungen/laufband-steigung.ts)
+    beispiel: '10 km/h bei 2 % Steigung: 10 × (0,2 + 0,9 × 0,02) ÷ 0,209 = 10,43 km/h ≈ 5:45 min/km auf ebener Straße.',
     faq: [
       {
         frage: 'Warum sollte ich 1 % Steigung einstellen?',
@@ -1044,7 +1046,7 @@ export const sportRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie genau ist die Umrechnung?',
-        antwort: 'Sie ist ein gut belegter Richtwert für mittlere Laufgeschwindigkeiten (etwa 8 bis 16 km/h). Die Faustregel „1 % Steigung ≈ 3 % Mehraufwand" stammt aus sportwissenschaftlichen Studien. Bei sehr steilen Steigungen, beim Gehen oder bei ungewöhnlicher Laufökonomie weicht der reale Aufwand ab. Betrachten Sie das Ergebnis als Orientierung, nicht als Labormessung.',
+        antwort: 'Sie ist ein gut belegter Richtwert für mittlere Laufgeschwindigkeiten (etwa 8 bis 16 km/h). Der Rechner kombiniert die ACSM-Laufgleichung für den Energiebedarf mit dem Befund von Jones & Doust (1996), dass 1 % Steigung dem Laufen auf ebener Straße entspricht. Daraus folgt: Jedes Steigungsprozent über 1 % bringt rund 4,3 % mehr Straßentempo, 0 % liegt rund 4,3 % darunter. Bei sehr steilen Steigungen, beim Gehen oder bei ungewöhnlicher Laufökonomie weicht der reale Aufwand ab. Betrachten Sie das Ergebnis als Orientierung, nicht als Labormessung.',
       },
       {
         frage: 'Welche Steigung für welches Training?',
@@ -1071,11 +1073,12 @@ export const sportRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: '10 km/h bei 2 % Steigung',
         schritte: [
-          { label: 'Steigungs-Zuschlag', formel: '1 + 0,03 × 2', ergebnis: '1,06' },
-          { label: 'Outdoor-Geschwindigkeit', formel: '10 km/h × 1,06', ergebnis: '10,60 km/h' },
-          { label: 'In Pace umrechnen', formel: '60 ÷ 10,60', ergebnis: '5:40 min/km' },
+          { label: 'Aufwand auf dem Band (ACSM)', formel: '0,2 + 0,9 × 0,02', ergebnis: '0,218' },
+          { label: 'Aufwand ebene Straße (≈ Band bei 1 %)', formel: '0,2 + 0,9 × 0,01', ergebnis: '0,209' },
+          { label: 'Outdoor-Geschwindigkeit', formel: '10 km/h × 0,218 ÷ 0,209', ergebnis: '10,43 km/h' },
+          { label: 'In Pace umrechnen', formel: '60 ÷ 10,43', ergebnis: '5:45 min/km' },
         ],
-        fazit: 'Wer auf dem Laufband 10 km/h bei 2 % Steigung läuft, leistet so viel wie bei 10,60 km/h auf ebener Straße — eine Pace von rund 5:40 statt der angezeigten 6:00 min/km. Der Zuschlag von 6 % (zweimal 3 % je Steigungsprozent) klingt klein, macht über eine ganze Trainingseinheit aber einen spürbaren Unterschied im Aufwand. Umgekehrt heißt das: Wer draußen 5:40 min/km laufen kann, sollte sich vom Laufband bei 0 % nicht täuschen lassen — dort müsste er für denselben Reiz etwas schneller stellen. Der Zuschlag ist bewusst konservativ angesetzt und deckt vor allem den fehlenden Luftwiderstand und die Bandunterstützung ab; bei sehr hohem Tempo, wo der Luftwiderstand stark zunimmt, darf man die Steigung ruhig etwas großzügiger wählen, um den Straßenaufwand realistisch abzubilden.',
+        fazit: 'Wer auf dem Laufband 10 km/h bei 2 % Steigung läuft, leistet so viel wie bei 10,43 km/h auf ebener Straße — eine Pace von rund 5:45 statt der angezeigten 6:00 min/km. Der Zuschlag von gut 4 % (das erste Prozent gleicht nur den fehlenden Luftwiderstand aus, erst das zweite macht das Band härter als die Straße) klingt klein, macht über eine ganze Trainingseinheit aber einen spürbaren Unterschied im Aufwand. Umgekehrt heißt das: Wer draußen 5:45 min/km laufen kann, sollte sich vom Laufband bei 0 % nicht täuschen lassen — dort müsste er für denselben Reiz etwas schneller stellen. Die Rechnung gilt für mittleres Lauftempo; bei sehr hohem Tempo, wo der Luftwiderstand stark zunimmt, darf man die Steigung ruhig etwas großzügiger wählen, um den Straßenaufwand realistisch abzubilden.',
       },
       {
         typ: 'vergleich',
@@ -1095,17 +1098,17 @@ export const sportRechner: RechnerConfig[] = [
         titel: '10 km/h Band → Outdoor-Äquivalent je Steigung',
         kopf: ['Steigung', 'Outdoor-Äquivalent', 'Pace'],
         zeilen: [
-          ['0 %', '10,00 km/h', '6:00 min/km'],
-          ['1 %', '10,30 km/h', '5:50 min/km'],
-          ['2 %', '10,60 km/h', '5:40 min/km'],
-          ['4 %', '11,20 km/h', '5:21 min/km'],
-          ['6 %', '11,80 km/h', '5:05 min/km'],
-          ['8 %', '12,40 km/h', '4:50 min/km'],
-          ['10 %', '13,00 km/h', '4:37 min/km'],
-          ['12 %', '13,60 km/h', '4:25 min/km'],
-          ['15 %', '14,50 km/h', '4:08 min/km'],
+          ['0 %', '9,57 km/h', '6:16 min/km'],
+          ['1 %', '10,00 km/h', '6:00 min/km'],
+          ['2 %', '10,43 km/h', '5:45 min/km'],
+          ['4 %', '11,29 km/h', '5:19 min/km'],
+          ['6 %', '12,15 km/h', '4:56 min/km'],
+          ['8 %', '13,01 km/h', '4:37 min/km'],
+          ['10 %', '13,88 km/h', '4:19 min/km'],
+          ['12 %', '14,74 km/h', '4:04 min/km'],
+          ['15 %', '16,03 km/h', '3:45 min/km'],
         ],
-        fussnote: 'Outdoor-Äquivalent für ein Band-Tempo von 10 km/h bei steigender Neigung. Schon 2 % verwandeln die angezeigten 6:00 min/km in ein Straßen-Tempo von 5:40 — bei 8 % läuft man effektiv fast 4:50 min/km. Die Werte gelten für mittlere Geschwindigkeiten; bei sehr steilen Einstellungen wird ein Teil der Leistung in Höhenarbeit und Muskelkraft umgesetzt, sodass die reine Pace-Umrechnung dann nur noch ein grober Anhaltspunkt ist. Für ein anderes Band-Tempo skaliert die Tabelle proportional: Bei 12 km/h Band wären die Outdoor-Werte je Steigung entsprechend um den Faktor 1,2 höher. Der prozentuale Zuschlag pro Steigungsprozent bleibt dabei immer gleich, unabhängig von der Grundgeschwindigkeit.',
+        fussnote: 'Outdoor-Äquivalent für ein Band-Tempo von 10 km/h bei steigender Neigung. Bei 0 % ist das Band leichter als die Straße (6:16 statt 6:00 min/km), 1 % entspricht der Straße, 2 % ergeben 5:45 — bei 8 % läuft man effektiv rund 4:37 min/km. Die Werte gelten für mittlere Geschwindigkeiten; bei sehr steilen Einstellungen wird ein Teil der Leistung in Höhenarbeit und Muskelkraft umgesetzt, sodass die reine Pace-Umrechnung dann nur noch ein grober Anhaltspunkt ist. Für ein anderes Band-Tempo skaliert die Tabelle proportional: Bei 12 km/h Band wären die Outdoor-Werte je Steigung entsprechend um den Faktor 1,2 höher. Der prozentuale Zuschlag pro Steigungsprozent bleibt dabei immer gleich, unabhängig von der Grundgeschwindigkeit.',
       },
       {
         typ: 'text',
@@ -1130,7 +1133,7 @@ export const sportRechner: RechnerConfig[] = [
         titel: 'Umgekehrt: welches Band-Tempo für 5:00 min/km?',
         schritte: [
           { label: 'Ziel-Outdoor-Tempo', formel: '5:00 min/km entspricht', ergebnis: '12 km/h' },
-          { label: 'Band-Tempo bei 3 % Steigung', formel: '12 ÷ (1 + 0,03 × 3)', ergebnis: '≈ 11,0 km/h' },
+          { label: 'Band-Tempo bei 3 % Steigung', formel: '12 × 0,209 ÷ (0,2 + 0,9 × 0,03)', ergebnis: '≈ 11,0 km/h' },
         ],
         fazit: 'Manchmal will man das umgekehrte Problem lösen: Welches Band-Tempo entspricht einem gewünschten Straßen-Tempo? Um auf dem Laufband bei 3 % Steigung so hart wie bei 5:00 min/km (12 km/h) auf der Straße zu laufen, stellt man rund 11,0 km/h ein. Man teilt das Ziel-Tempo also durch den Steigungs-Zuschlag. So lässt sich ein Straßen-Trainingsplan sauber aufs Laufband übertragen, ohne die Intensität aus Versehen zu erhöhen oder zu senken. Das ist besonders praktisch, wenn ein Trainingsplan konkrete Straßen-Paces vorgibt und man wegen Wetter oder Dunkelheit aufs Band ausweichen muss — man rechnet das Zieltempo einmal um und trifft die vorgesehene Belastung exakt. Ohne diese Umrechnung würde man auf 0 % zu leicht und bei zu hoher Steigung zu hart trainieren.',
       },
@@ -1162,7 +1165,7 @@ export const sportRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Grenzen der Umrechnung',
-        html: `<p>Die Formel ist ein gut belegter Richtwert für <strong>mittlere Laufgeschwindigkeiten</strong>, etwa im Bereich von 8 bis 16 km/h. In diesem Fenster stimmt die Faustregel „1 % Steigung ≈ 3 % Mehraufwand" gut mit Messwerten überein. Außerhalb davon wird sie ungenauer.</p><p>Bei sehr <strong>steilen Steigungen</strong> und beim <strong>Gehen</strong> gelten andere physiologische Modelle — dort verschiebt sich das Verhältnis von horizontaler zu vertikaler Arbeit, und die lineare Umrechnung überschätzt oder unterschätzt den Aufwand. Auch die individuelle <strong>Laufökonomie</strong> spielt eine Rolle: Zwei Läufer mit gleichem Tempo können unterschiedlich viel Energie verbrauchen. Hinzu kommen Faktoren, die keine Formel erfasst — die Kalibrierung des konkreten Laufbands, die Raumtemperatur und die eigene Tagesform. Wer sein reines Renntempo für ein Ziel umrechnen möchte, kombiniert diesen Rechner sinnvoll mit dem <a href="/sport/pace-rechner">Pace-Rechner</a>. Das Outdoor-Äquivalent bleibt damit eine belastbare Orientierung, aber keine auf die Sekunde genaue Messung. Am verlässlichsten ist der Vergleich, wenn man dasselbe, kalibrierte Laufband konsequent mit gleicher Steigung nutzt — dann sind zumindest die eigenen Werte über die Zeit gut vergleichbar.</p>`,
+        html: `<p>Die Formel ist ein gut belegter Richtwert für <strong>mittlere Laufgeschwindigkeiten</strong>, etwa im Bereich von 8 bis 16 km/h. In diesem Fenster wurden die ACSM-Laufgleichung und der 1-%-Befund von Jones & Doust gemessen. Außerhalb davon wird die Umrechnung ungenauer.</p><p>Bei sehr <strong>steilen Steigungen</strong> und beim <strong>Gehen</strong> gelten andere physiologische Modelle — dort verschiebt sich das Verhältnis von horizontaler zu vertikaler Arbeit, und die lineare Umrechnung überschätzt oder unterschätzt den Aufwand. Auch die individuelle <strong>Laufökonomie</strong> spielt eine Rolle: Zwei Läufer mit gleichem Tempo können unterschiedlich viel Energie verbrauchen. Hinzu kommen Faktoren, die keine Formel erfasst — die Kalibrierung des konkreten Laufbands, die Raumtemperatur und die eigene Tagesform. Wer sein reines Renntempo für ein Ziel umrechnen möchte, kombiniert diesen Rechner sinnvoll mit dem <a href="/sport/pace-rechner">Pace-Rechner</a>. Das Outdoor-Äquivalent bleibt damit eine belastbare Orientierung, aber keine auf die Sekunde genaue Messung. Am verlässlichsten ist der Vergleich, wenn man dasselbe, kalibrierte Laufband konsequent mit gleicher Steigung nutzt — dann sind zumindest die eigenen Werte über die Zeit gut vergleichbar.</p>`,
       },
       {
         typ: 'text',
@@ -1173,11 +1176,11 @@ export const sportRechner: RechnerConfig[] = [
     quellen: [
       {
         titel: 'Jones & Doust (1996), Journal of Sports Sciences',
-        hinweis: '1 % Laufband-Steigung gleicht den Energiekostenunterschied zur ebenen Straße bei mittlerem Tempo aus; je 1 % Steigung ≈ +3 % Stoffwechselkosten.',
+        hinweis: '1 % Laufband-Steigung gleicht den Energiekostenunterschied zur ebenen Straße bei 10,5–18 km/h aus; der Rechner setzt deshalb ebene Straße = Band bei 1 %.',
       },
       {
         titel: 'ACSM Metabolic Equations (Laufen)',
-        hinweis: 'VO2 = 3,5 + 0,2·v + 0,9·v·Steigung (v in m/min); Grundlage für den Mehraufwand-Vergleich. Werte sind Richtwerte.',
+        hinweis: 'VO2 = 3,5 + 0,2·v + 0,9·v·Steigung (v in m/min); Grundlage für Outdoor-Äquivalent und Mehraufwand. Werte sind Richtwerte.',
       },
     ],
   },

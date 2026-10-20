@@ -64,6 +64,8 @@ export default function MakronaehrstoffeRechner() {
 
   const fmt0 = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 0 });
   const fmt1 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  // W184: eigene Makro-Anteile vorher roh („27.5 %“), jetzt de-DE
+  const fmtP = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 1 });
 
   return (
     <div>
@@ -117,17 +119,17 @@ export default function MakronaehrstoffeRechner() {
               <div>
                 <p className="text-white/80 text-xs uppercase tracking-wide mb-1">Protein</p>
                 <p className="text-4xl font-bold">{fmt0(ergebnis.proteinG)} g</p>
-                <p className="text-white/70 text-xs mt-1">{anteile.p} % · {fmt0(ergebnis.proteinG * 4)} kcal</p>
+                <p className="text-white/70 text-xs mt-1">{fmtP(anteile.p)} % · {fmt0(ergebnis.proteinG * 4)} kcal</p>
               </div>
               <div>
                 <p className="text-white/80 text-xs uppercase tracking-wide mb-1">Kohlenhydrate</p>
                 <p className="text-4xl font-bold">{fmt0(ergebnis.khG)} g</p>
-                <p className="text-white/70 text-xs mt-1">{anteile.k} % · {fmt0(ergebnis.khG * 4)} kcal</p>
+                <p className="text-white/70 text-xs mt-1">{fmtP(anteile.k)} % · {fmt0(ergebnis.khG * 4)} kcal</p>
               </div>
               <div>
                 <p className="text-white/80 text-xs uppercase tracking-wide mb-1">Fett</p>
                 <p className="text-4xl font-bold">{fmt0(ergebnis.fettG)} g</p>
-                <p className="text-white/70 text-xs mt-1">{anteile.f} % · {fmt0(ergebnis.fettG * 9)} kcal</p>
+                <p className="text-white/70 text-xs mt-1">{fmtP(anteile.f)} % · {fmt0(ergebnis.fettG * 9)} kcal</p>
               </div>
             </div>
             <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
@@ -149,7 +151,7 @@ export default function MakronaehrstoffeRechner() {
           <div className="bg-accent-50 dark:bg-accent-700/20 border border-accent-200 dark:border-accent-600/40 rounded-xl p-4 mb-6">
             <p className="font-semibold text-accent-700 dark:text-accent-400 text-sm mb-1">Rechenweg (Beispiel Protein)</p>
             <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
-              {fmt0(nKcal)} × {anteile.p} % ÷ 4 kcal/g = {fmt0(ergebnis.proteinG)} g Protein
+              {fmt0(nKcal)} × {fmtP(anteile.p)} % ÷ 4 kcal/g = {fmt0(ergebnis.proteinG)} g Protein
             </p>
             <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
               (Kohlenhydrate ÷ 4, Fett ÷ 9 — Atwater-Faktoren)
@@ -192,7 +194,7 @@ export default function MakronaehrstoffeRechner() {
           <AffiliateBox programId="gymbeam" context="makros" />
 
           <ErgebnisAktionen
-            ergebnisText={`Makros bei ${fmt0(nKcal)} kcal (${anteile.p}/${anteile.k}/${anteile.f}): Protein ${fmt0(ergebnis.proteinG)} g, Kohlenhydrate ${fmt0(ergebnis.khG)} g, Fett ${fmt0(ergebnis.fettG)} g. Orientierungswerte.`}
+            ergebnisText={`Makros bei ${fmt0(nKcal)} kcal (${fmtP(anteile.p)}/${fmtP(anteile.k)}/${fmtP(anteile.f)}): Protein ${fmt0(ergebnis.proteinG)} g, Kohlenhydrate ${fmt0(ergebnis.khG)} g, Fett ${fmt0(ergebnis.fettG)} g. Orientierungswerte.`}
             seitenTitel="Makronährstoffe-Rechner"
           />
           <AiExplain

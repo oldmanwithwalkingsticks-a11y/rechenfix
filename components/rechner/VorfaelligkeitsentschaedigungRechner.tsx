@@ -42,10 +42,12 @@ export default function VorfaelligkeitsentschaedigungRechner() {
 
   const fmtEuro = (n: number) =>
     n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+  // W184: Restlaufzeit vorher roh aus der Eingabe („4.5 Jahre“), jetzt de-DE
+  const fmtJahre = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   const ergebnis = result.keineVfe
     ? `Keine Vorfälligkeitsentschädigung: Marktzins (${result.markt.toLocaleString('de-DE')} %) liegt über dem Vertragszins (${result.alt.toLocaleString('de-DE')} %) — die Bank hat keinen Zinsnachteil.`
-    : `Vorfälligkeitsentschädigung (geschätzt): ${fmtEuro(result.vfe)} + ${fmtEuro(BEARBEITUNG)} Bearbeitung = ${fmtEuro(result.gesamt)}. Basis: Restschuld ${fmtEuro(result.rs)}, Zinsmarge ${result.zinsmarge.toLocaleString('de-DE', { maximumFractionDigits: 2 })} %, Restlaufzeit ${result.rl} Jahre.`;
+    : `Vorfälligkeitsentschädigung (geschätzt): ${fmtEuro(result.vfe)} + ${fmtEuro(BEARBEITUNG)} Bearbeitung = ${fmtEuro(result.gesamt)}. Basis: Restschuld ${fmtEuro(result.rs)}, Zinsmarge ${result.zinsmarge.toLocaleString('de-DE', { maximumFractionDigits: 2 })} %, Restlaufzeit ${fmtJahre(result.rl)} Jahre.`;
 
   return (
     <div>
@@ -103,7 +105,7 @@ export default function VorfaelligkeitsentschaedigungRechner() {
           ) : (
             <>
               <li>2. Jährlicher Zinsverlust = {fmtEuro(result.rs)} × {result.zinsmarge.toLocaleString('de-DE', { maximumFractionDigits: 2 })} % = {fmtEuro(result.jaehrlicherVerlust)}</li>
-              <li>3. Über {result.rl} Jahre × Faktor 0,85 (ersparte Verwaltung + Risiko) = {fmtEuro(result.vfe)}</li>
+              <li>3. Über {fmtJahre(result.rl)} Jahre × Faktor 0,85 (ersparte Verwaltung + Risiko) = {fmtEuro(result.vfe)}</li>
               <li>4. + Bearbeitungsgebühr {fmtEuro(BEARBEITUNG)} → Gesamt {fmtEuro(result.gesamt)}</li>
             </>
           )}

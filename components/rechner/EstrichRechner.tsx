@@ -10,6 +10,8 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// W184: vorher roh interpoliert (englischer Dezimalpunkt, z. B. „12.5 m² × 50 mm“), jetzt de-DE
+const fmtZ = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
 export default function EstrichRechner() {
   const [material, setMaterial] = useState<'estrich' | 'putz'>('estrich');
@@ -77,7 +79,7 @@ export default function EstrichRechner() {
       {ergebnis && (
         <>
           <div className="result-box mb-4">
-            <p className="text-white/70 text-sm mb-2 text-center">{ergebnis.materialTypLabel} — {ergebnis.flaeche} m² × {ergebnis.dickeMm} mm</p>
+            <p className="text-white/70 text-sm mb-2 text-center">{ergebnis.materialTypLabel} — {fmtZ(ergebnis.flaeche)} m² × {fmtZ(ergebnis.dickeMm)} mm</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
               <div>
                 <p className="text-white/70 text-sm mb-1">Volumen</p>
@@ -110,7 +112,7 @@ export default function EstrichRechner() {
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Fläche × Dicke</span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">{ergebnis.flaeche} m² × {ergebnis.dickeMm} mm = {ergebnis.volumen.toLocaleString('de-DE', { minimumFractionDigits: 2 })} m³</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">{fmtZ(ergebnis.flaeche)} m² × {fmtZ(ergebnis.dickeMm)} mm = {ergebnis.volumen.toLocaleString('de-DE', { minimumFractionDigits: 2 })} m³</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">× Dichte ({ergebnis.materialTypLabel})</span>
@@ -132,7 +134,7 @@ export default function EstrichRechner() {
           <CrossLink href="/wohnen/laminat-rechner" emoji="🪵" text="Laminatbedarf berechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`${ergebnis.materialTypLabel}: ${ergebnis.flaeche} m² × ${ergebnis.dickeMm} mm = ${ergebnis.gewichtKg.toLocaleString('de-DE')} kg, ${ergebnis.anzahlSaecke} Säcke (~${fmt(ergebnis.kostenGesamt)} €)`}
+            ergebnisText={`${ergebnis.materialTypLabel}: ${fmtZ(ergebnis.flaeche)} m² × ${fmtZ(ergebnis.dickeMm)} mm = ${ergebnis.gewichtKg.toLocaleString('de-DE')} kg, ${ergebnis.anzahlSaecke} Säcke (~${fmt(ergebnis.kostenGesamt)} €)`}
             seitenTitel="Estrich-Rechner"
           />
 

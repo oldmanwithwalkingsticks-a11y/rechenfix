@@ -64,6 +64,8 @@ export default function TeilzeitRechner() {
 
   const fmt = (n: number) => Math.round(n).toLocaleString('de-DE');
   const fmtDez = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: Stunden-Eingaben vorher roh („38.5 Std.“), jetzt de-DE („38,5 Std.“)
+  const fmtStd = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   return (
     <div>
@@ -207,8 +209,8 @@ export default function TeilzeitRechner() {
               <tbody>
                 <tr className="border-b border-gray-100 dark:border-gray-700">
                   <td className="py-3 pr-3 text-gray-700 dark:text-gray-300 font-medium">Wochenstunden</td>
-                  <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{nVollzeitStunden} Std.</td>
-                  <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{nTeilzeitStunden} Std.</td>
+                  <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmtStd(nVollzeitStunden)} Std.</td>
+                  <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmtStd(nTeilzeitStunden)} Std.</td>
                   <td className="py-3 pl-3 text-right font-semibold text-orange-600 dark:text-orange-400">
                     −{fmtDez(nVollzeitStunden - nTeilzeitStunden)} Std.
                   </td>
@@ -330,7 +332,7 @@ export default function TeilzeitRechner() {
           <AffiliateBox programId="wiso" context="teilzeit" />
 
           <ErgebnisAktionen
-            ergebnisText={`Teilzeit (${nTeilzeitStunden} von ${nVollzeitStunden} Std.): Brutto ${fmt(ergebnis.teilzeitBrutto)} € → Netto ca. ${fmt(ergebnis.teilzeitNetto)} €/Monat | Differenz zu Vollzeit: −${fmt(ergebnis.nettoDifferenz)} €/Monat (−${fmt(ergebnis.jahresNettoDifferenz)} €/Jahr)`}
+            ergebnisText={`Teilzeit (${fmtStd(nTeilzeitStunden)} von ${fmtStd(nVollzeitStunden)} Std.): Brutto ${fmt(ergebnis.teilzeitBrutto)} € → Netto ca. ${fmt(ergebnis.teilzeitNetto)} €/Monat | Differenz zu Vollzeit: −${fmt(ergebnis.nettoDifferenz)} €/Monat (−${fmt(ergebnis.jahresNettoDifferenz)} €/Jahr)`}
             seitenTitel="Teilzeit-Rechner"
           />
 

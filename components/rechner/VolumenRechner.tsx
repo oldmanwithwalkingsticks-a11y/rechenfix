@@ -9,6 +9,10 @@ import CrossLink from '@/components/ui/CrossLink';
 
 type Koerper = 'quader' | 'zylinder' | 'kugel' | 'kegel' | 'pyramide' | 'prisma' | 'halbkugel';
 
+// W184: Rechenweg vorher mit rohen JS-Zahlen und toFixed(2) („π × 2.5² × 10 = 196.35“), jetzt de-DE („π × 2,5² × 10 = 196,35“)
+const fz = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 6 });
+const v2 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
 const KOERPER: { id: Koerper; emoji: string; name: string }[] = [
   { id: 'quader', emoji: '📦', name: 'Quader/Würfel' },
   { id: 'zylinder', emoji: '🥫', name: 'Zylinder' },
@@ -61,7 +65,7 @@ export default function VolumenRechner() {
       diagonale = Math.sqrt(a * a + b * b + c * c);
       formelV = 'V = a × b × c';
       formelO = 'O = 2(ab + ac + bc)';
-      rechnungV = `${a} × ${b} × ${c} = ${volumen}`;
+      rechnungV = `${fz(a)} × ${fz(b)} × ${fz(c)} = ${volumen.toLocaleString('de-DE', { maximumFractionDigits: 2 })}`;
     } else if (koerper === 'zylinder') {
       const r = parseDeutscheZahl(zr);
       const h = parseDeutscheZahl(zh);
@@ -69,14 +73,14 @@ export default function VolumenRechner() {
       oberflaeche = 2 * PI * r * (r + h);
       formelV = 'V = π × r² × h';
       formelO = 'O = 2πr(r + h)';
-      rechnungV = `π × ${r}² × ${h} = ${volumen.toFixed(2)}`;
+      rechnungV = `π × ${fz(r)}² × ${fz(h)} = ${v2(volumen)}`;
     } else if (koerper === 'kugel') {
       const r = parseDeutscheZahl(kr);
       volumen = (4 / 3) * PI * r * r * r;
       oberflaeche = 4 * PI * r * r;
       formelV = 'V = (4/3) × π × r³';
       formelO = 'O = 4πr²';
-      rechnungV = `(4/3) × π × ${r}³ = ${volumen.toFixed(2)}`;
+      rechnungV = `(4/3) × π × ${fz(r)}³ = ${v2(volumen)}`;
     } else if (koerper === 'kegel') {
       const r = parseDeutscheZahl(ker);
       const h = parseDeutscheZahl(keh);
@@ -85,7 +89,7 @@ export default function VolumenRechner() {
       oberflaeche = PI * r * (r + s);
       formelV = 'V = (1/3) × π × r² × h';
       formelO = 'O = πr(r + √(r²+h²))';
-      rechnungV = `(1/3) × π × ${r}² × ${h} = ${volumen.toFixed(2)}`;
+      rechnungV = `(1/3) × π × ${fz(r)}² × ${fz(h)} = ${v2(volumen)}`;
     } else if (koerper === 'pyramide') {
       const a = parseDeutscheZahl(pa);
       const h = parseDeutscheZahl(ph);
@@ -94,7 +98,7 @@ export default function VolumenRechner() {
       oberflaeche = a * a + 2 * a * m;
       formelV = 'V = (1/3) × a² × h';
       formelO = 'O = a² + 2a × √((a/2)² + h²)';
-      rechnungV = `(1/3) × ${a}² × ${h} = ${volumen.toFixed(2)}`;
+      rechnungV = `(1/3) × ${fz(a)}² × ${fz(h)} = ${v2(volumen)}`;
     } else if (koerper === 'prisma') {
       const a = parseDeutscheZahl(pra);
       const hd = parseDeutscheZahl(prhd);
@@ -105,14 +109,14 @@ export default function VolumenRechner() {
       oberflaeche = a * hd + (a + 2 * schenkel) * l;
       formelV = 'V = (a × h_d / 2) × l';
       formelO = 'O = a·h_d + (a + 2√((a/2)² + h_d²)) × l';
-      rechnungV = `((${a} × ${hd}) / 2) × ${l} = ${volumen.toFixed(2)}`;
+      rechnungV = `((${fz(a)} × ${fz(hd)}) / 2) × ${fz(l)} = ${v2(volumen)}`;
     } else if (koerper === 'halbkugel') {
       const r = parseDeutscheZahl(kr);
       volumen = (2 / 3) * PI * r * r * r;
       oberflaeche = 3 * PI * r * r;
       formelV = 'V = (2/3) × π × r³';
       formelO = 'O = 3πr²';
-      rechnungV = `(2/3) × π × ${r}³ = ${volumen.toFixed(2)}`;
+      rechnungV = `(2/3) × π × ${fz(r)}³ = ${v2(volumen)}`;
     }
 
     // Liter-Umrechnung: cm³ → /1000, m³ → ×1000, mm³ → /1_000_000

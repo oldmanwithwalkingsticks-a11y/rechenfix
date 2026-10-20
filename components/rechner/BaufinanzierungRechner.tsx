@@ -53,6 +53,8 @@ export default function BaufinanzierungRechner() {
 
   const fmt = (n: number) => Math.round(n).toLocaleString('de-DE');
   const fmtDez = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: vorher GrESt-Satz roh („6.5%“) und EK-Quote per toFixed(1) („17.9%“), jetzt de-DE
+  const fmtProz = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   // EK-Quote Bewertung
   const ekQuote = nKaufpreis > 0 ? (nEigenkapital / (nebenkostenEin ? nKaufpreis * 1.12 : nKaufpreis)) * 100 : 0;
@@ -77,7 +79,7 @@ export default function BaufinanzierungRechner() {
           <NummerEingabe value={eigenkapital} onChange={setEigenkapital} placeholder="z.B. 70000" einheit="€" />
           {nKaufpreis > 0 && (
             <p className={`mt-1 text-xs font-medium ${ekBewertung.farbe}`}>
-              Eigenkapitalquote: {ekQuote.toFixed(1)}% — {ekBewertung.text}
+              Eigenkapitalquote: {ekQuote.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% — {ekBewertung.text}
             </p>
           )}
         </div>
@@ -93,7 +95,7 @@ export default function BaufinanzierungRechner() {
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
           >
             {BUNDESLAENDER.map(bl => (
-              <option key={bl.key} value={bl.key}>{bl.label} ({bl.satz}%)</option>
+              <option key={bl.key} value={bl.key}>{bl.label} ({fmtProz(bl.satz)}%)</option>
             ))}
           </select>
         </div>

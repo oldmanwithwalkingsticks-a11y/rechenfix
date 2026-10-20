@@ -9,6 +9,8 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 
 const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// W184: Restwert-%, Alter und Zustandsfaktor vorher roh („62.5 %“, „× 0.75“), jetzt de-DE
+const fmtZ = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
 export default function ZeitwertRechner() {
   const [neupreis, setNeupreis] = useState('1000');
@@ -110,7 +112,7 @@ export default function ZeitwertRechner() {
               <p className="text-white/70 text-sm mb-1">Geschätzter Zeitwert</p>
               <p className="text-4xl sm:text-5xl font-bold">{fmt(ergebnis.zeitwertBereinigt)} €</p>
               <p className="text-white/70 text-sm mt-1">
-                {ergebnis.restwertProzent} % des Neupreises von {fmt(ergebnis.neupreis)} €
+                {fmtZ(ergebnis.restwertProzent)} % des Neupreises von {fmt(ergebnis.neupreis)} €
               </p>
             </div>
           </div>
@@ -130,12 +132,12 @@ export default function ZeitwertRechner() {
                 <span className="font-medium text-gray-800 dark:text-gray-200">−{fmt(ergebnis.jaehrlicherWertverlust)} €/Jahr</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Zeitwert nach {ergebnis.alter} {ergebnis.alter === 1 ? 'Jahr' : 'Jahren'} (linear)</span>
+                <span className="text-gray-600 dark:text-gray-400">Zeitwert nach {fmtZ(ergebnis.alter)} {ergebnis.alter === 1 ? 'Jahr' : 'Jahren'} (linear)</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.zeitwertLinear)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Zustandsabzug ({ergebnis.zustandLabel})</span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">× {ergebnis.zustandsfaktor}</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">× {fmtZ(ergebnis.zustandsfaktor)}</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm font-bold">
                 <span className="text-gray-700 dark:text-gray-200">Zeitwert (zustandsbereinigt)</span>
@@ -180,7 +182,7 @@ export default function ZeitwertRechner() {
               ))}
             </div>
             <p className="text-xs text-gray-600 dark:text-gray-400 text-center mt-2">
-              Jahr (hervorgehoben: aktuelles Alter {ergebnis.alter} {ergebnis.alter === 1 ? 'Jahr' : 'Jahre'})
+              Jahr (hervorgehoben: aktuelles Alter {fmtZ(ergebnis.alter)} {ergebnis.alter === 1 ? 'Jahr' : 'Jahre'})
             </p>
           </div>
 
@@ -211,7 +213,7 @@ export default function ZeitwertRechner() {
           <CrossLink href="/auto/autokosten-rechner" emoji="🚗" text="Autokosten und Wertverlust berechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`Zeitwert: ${fmt(ergebnis.zeitwertBereinigt)} € (${ergebnis.restwertProzent} % von ${fmt(ergebnis.neupreis)} €, ${ergebnis.alter} Jahre, Zustand: ${ergebnis.zustandLabel})`}
+            ergebnisText={`Zeitwert: ${fmt(ergebnis.zeitwertBereinigt)} € (${fmtZ(ergebnis.restwertProzent)} % von ${fmt(ergebnis.neupreis)} €, ${fmtZ(ergebnis.alter)} Jahre, Zustand: ${ergebnis.zustandLabel})`}
             seitenTitel="Zeitwert-Rechner"
           />
 

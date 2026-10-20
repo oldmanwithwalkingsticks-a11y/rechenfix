@@ -166,7 +166,8 @@ export default function GehaltsvergleichRechner() {
                   ? 'text-green-600 dark:text-green-400'
                   : 'text-red-600 dark:text-red-400'
               }`}>
-                ({ergebnis.differenzProzent >= 0 ? '+' : ''}{ergebnis.differenzProzent}%)
+                {/* W184: vorher roh „{differenzProzent}%“ („+12.5%“), jetzt de-DE mit 1 Nachkommastelle */}
+                ({ergebnis.differenzProzent >= 0 ? '+' : ''}{ergebnis.differenzProzent.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %)
               </p>
             </div>
           </div>

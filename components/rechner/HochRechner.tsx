@@ -27,6 +27,8 @@ const LABEL: Record<Eingabe, string> = {
 };
 
 const fmtEur = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+// W184: Stunden vorher toFixed(1) („173.3 h“), jetzt de-DE („173,3 h“)
+const fmtStd = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 export default function HochRechner() {
   const [eingabe, setEingabe] = useState<Eingabe>('stunde');
@@ -127,7 +129,7 @@ export default function HochRechner() {
           ))}
         </div>
         <p className="text-xs text-gray-500 mt-3">
-          Arbeitsstunden pro Monat: {ergebnis.stdMonat.toFixed(1)} h · pro Tag: {ergebnis.stdTag.toFixed(1)} h
+          Arbeitsstunden pro Monat: {fmtStd(ergebnis.stdMonat)} h · pro Tag: {fmtStd(ergebnis.stdTag)} h
         </p>
       </div>
 

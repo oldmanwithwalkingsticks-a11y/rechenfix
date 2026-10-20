@@ -32,6 +32,9 @@ export default function SpendenRechner() {
 
   const fmt = (n: number) =>
     n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: vorher Förderquote per toFixed(1) im Teilen-/PDF-Text („35.0 %“), jetzt de-DE („35,0 %“)
+  const fmt1 = (n: number) =>
+    n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
   return (
     <div>
@@ -230,7 +233,7 @@ export default function SpendenRechner() {
           />
 
           <ErgebnisAktionen
-            ergebnisText={`Spende: ${fmt(ergebnis.spendenbetrag)} € → Steuerersparnis: ${fmt(ergebnis.steuerersparnisGesamt)} € (Grenzsteuersatz: ${ergebnis.grenzsteuersatz.toFixed(0)} %, Effektive Kosten: ${fmt(ergebnis.effektiveKosten)} €, Förderquote: ${ergebnis.foerderquote.toFixed(1)} %)`}
+            ergebnisText={`Spende: ${fmt(ergebnis.spendenbetrag)} € → Steuerersparnis: ${fmt(ergebnis.steuerersparnisGesamt)} € (Grenzsteuersatz: ${ergebnis.grenzsteuersatz.toFixed(0)} %, Effektive Kosten: ${fmt(ergebnis.effektiveKosten)} €, Förderquote: ${fmt1(ergebnis.foerderquote)} %)`}
             seitenTitel="Spenden-Rechner"
             pdfDaten={[
               {
@@ -241,7 +244,7 @@ export default function SpendenRechner() {
                   { label: 'Steuerersparnis gesamt', wert: `${fmt(ergebnis.steuerersparnisGesamt)} €`, highlight: true },
                   { label: 'Effektive Kosten der Spende', wert: `${fmt(ergebnis.effektiveKosten)} €` },
                   { label: 'Grenzsteuersatz', wert: `${ergebnis.grenzsteuersatz.toFixed(0)} %` },
-                  { label: 'Förderquote', wert: `${ergebnis.foerderquote.toFixed(1)} %` },
+                  { label: 'Förderquote', wert: `${fmt1(ergebnis.foerderquote)} %` },
                 ],
               },
             ]}

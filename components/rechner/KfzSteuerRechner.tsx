@@ -35,6 +35,8 @@ export default function KfzSteuerRechner() {
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: CO₂-Eingabe vorher roh („118.5 g/km“), jetzt de-DE
+  const fmtCo2 = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 1 });
 
   const antriebsarten: { key: Antriebsart; label: string; icon: string }[] = [
     { key: 'benzin', label: 'Benzin', icon: '⛽' },
@@ -180,7 +182,7 @@ export default function KfzSteuerRechner() {
                     </tr>
                     {zulassung === 'nach-2009' && (
                       <tr className="text-gray-600 dark:text-gray-400">
-                        <td className="py-2">CO₂-Komponente ({nCo2 > 95 ? `${nCo2} − 95 = ${Math.round(nCo2 - 95)} g/km` : 'unter Freibetrag'})</td>
+                        <td className="py-2">CO₂-Komponente ({nCo2 > 95 ? `${fmtCo2(nCo2)} − 95 = ${Math.round(nCo2 - 95)} g/km` : 'unter Freibetrag'})</td>
                         <td className="py-2 text-right font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.co2Betrag)} €</td>
                       </tr>
                     )}
@@ -240,7 +242,7 @@ export default function KfzSteuerRechner() {
                   { label: 'CO₂-Komponente', wert: `${fmt(ergebnis.co2Betrag)} €` },
                   { label: 'Kfz-Steuer pro Jahr', wert: `${fmt(ergebnis.jahresSteuer)} €`, highlight: true },
                   { label: 'Kfz-Steuer pro Monat', wert: `${fmt(ergebnis.monatsSteuer)} €` },
-                  { label: 'CO₂-Ausstoß (Eingabe)', wert: `${nCo2} g/km` },
+                  { label: 'CO₂-Ausstoß (Eingabe)', wert: `${fmtCo2(nCo2)} g/km` },
                 ],
               },
             ] : undefined}

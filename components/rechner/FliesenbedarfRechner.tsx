@@ -61,6 +61,8 @@ export default function FliesenbedarfRechner() {
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fmt0 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const fmt1 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  // W184: eigene Fliesenmaße vorher roh („7.5 × 15 cm“), jetzt de-DE
+  const fmtMass = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 1 });
 
   return (
     <div>
@@ -179,7 +181,7 @@ export default function FliesenbedarfRechner() {
             </div>
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Fliesen ({flieseMasse.laenge} × {flieseMasse.breite} cm)</span>
+                <span className="text-gray-600 dark:text-gray-400">Fliesen ({fmtMass(flieseMasse.laenge)} × {fmtMass(flieseMasse.breite)} cm)</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt0(ergebnis.anzahlFliesen)} Stück</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
@@ -224,7 +226,7 @@ export default function FliesenbedarfRechner() {
           <CrossLink href="/wohnen/malerkosten-rechner" emoji="🎨" text="Malerkosten berechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`Fliesenbedarf: ${fmt0(ergebnis.anzahlFliesen)} Fliesen (${flieseMasse.laenge}×${flieseMasse.breite} cm) für ${fmt1(berechneteFlaeche)} m² | Kleber: ${ergebnis.kleberSaecke} Säcke (25 kg) | Fugenmasse: ${ergebnis.fugenmassGebinde} Gebinde (5 kg) | Materialkosten: ${fmt(ergebnis.gesamtkosten)} €`}
+            ergebnisText={`Fliesenbedarf: ${fmt0(ergebnis.anzahlFliesen)} Fliesen (${fmtMass(flieseMasse.laenge)}×${fmtMass(flieseMasse.breite)} cm) für ${fmt1(berechneteFlaeche)} m² | Kleber: ${ergebnis.kleberSaecke} Säcke (25 kg) | Fugenmasse: ${ergebnis.fugenmassGebinde} Gebinde (5 kg) | Materialkosten: ${fmt(ergebnis.gesamtkosten)} €`}
             seitenTitel="Fliesenbedarf-Rechner"
           />
 

@@ -15,6 +15,13 @@ import CrossLink from '@/components/ui/CrossLink';
  * - Wh aus Akku: Spannung(V) × Kapazität(Ah)
  * - VA → W: Scheinleistung(VA) × Leistungsfaktor (PF 0,6 ältere / 0,9–1,0 moderne USV)
  * Wirkungsgrad-Default 0,9 deckt Wechselrichter-/Wandlerverluste ab.
+ *
+ * W184: Ergebnis vorher als „Überbrückungszeit“ ohne Einschränkung. Die lineare Formel kennt
+ * keinen lastabhängigen Kapazitätsverlust (Peukert, Abschaltspannung, Alterung) und überschätzt
+ * reale Bleiakku-USV deutlich: 1500-VA-USV mit 24 V/9 Ah laut Herstellerdatenblatt bei halber
+ * Last (≈ 432 W) 12,3 min, Formel 27 min; bei Volllast (865 W) 3,7 min, Formel 13,5 min.
+ * Ein pauschaler Abschlag ließe sich nicht belegen (hängt von Akku-Typ, Modell, Alter,
+ * Temperatur ab) — deshalb jetzt ausdrücklich als rechnerischer Höchstwert gekennzeichnet.
  */
 
 const LAST_STUFEN = [50, 100, 200, 400, 600];
@@ -142,7 +149,7 @@ export default function UsvLaufzeitRechner() {
           <div className="result-box mb-6">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
               <div>
-                <p className="text-white/80 text-sm mb-1">Überbrückungszeit</p>
+                <p className="text-white/80 text-sm mb-1">Überbrückungszeit (rechnerischer Höchstwert)</p>
                 <p className="text-5xl font-bold">{formatZeit(ergebnis.laufzeit)}</p>
               </div>
               <div className="sm:text-right space-y-1">
@@ -172,6 +179,13 @@ export default function UsvLaufzeitRechner() {
             </p>
           </div>
 
+          {/* W184: Hinweis Höchstwert */}
+          <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
+            <p className="text-amber-800 dark:text-amber-300 text-sm">
+              <strong>Rechnerischer Höchstwert:</strong> Die Formel geht davon aus, dass der Akku seine volle Kapazität abgibt. Reale USV mit Bleiakku schaffen oft deutlich weniger, vor allem bei hoher Last: Bei hohem Entladestrom sinkt die nutzbare Kapazität (Peukert-Effekt), dazu kommen Abschaltspannung, Akku-Alter und Temperatur. Beispiel: Eine 1500-VA-USV mit 24-V-/9-Ah-Akku (216 Wh) hält laut Herstellerdatenblatt bei halber Last (rund 430 W) etwa 12 Minuten — rechnerisch wären es rund 27. Verlässlich ist die Laufzeitkurve im Datenblatt Ihres Modells.
+            </p>
+          </div>
+
           {/* Last-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Laufzeit dieser USV bei verschiedenen Lasten</h2>
@@ -181,7 +195,7 @@ export default function UsvLaufzeitRechner() {
                   <tr className="border-b border-gray-200 dark:border-gray-600">
                     <th className="text-left py-2 pr-4 font-semibold text-gray-700 dark:text-gray-300">Last</th>
                     <th className="text-left py-2 pr-4 font-semibold text-gray-700 dark:text-gray-300">Beispiel</th>
-                    <th className="text-left py-2 font-semibold text-gray-700 dark:text-gray-300">Laufzeit</th>
+                    <th className="text-left py-2 font-semibold text-gray-700 dark:text-gray-300">Laufzeit (rechnerisch, max.)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -206,13 +220,13 @@ export default function UsvLaufzeitRechner() {
           <CrossLink href="/technik/netzteil-watt-rechner" emoji="🔌" text="PC-Netzteil-Wattzahl berechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`USV mit ${fmt0(ergebnis.kapazitaet)} Wh überbrückt bei ${fmt0(ergebnis.last)} W Last rund ${formatZeit(ergebnis.laufzeit)}`}
+            ergebnisText={`USV mit ${fmt0(ergebnis.kapazitaet)} Wh überbrückt bei ${fmt0(ergebnis.last)} W Last rechnerisch höchstens ${formatZeit(ergebnis.laufzeit)} (real je nach Akku und Last oft deutlich weniger)`}
             seitenTitel="USV-Laufzeit-Rechner"
           />
           <AiExplain
             rechnerName="USV-Laufzeit-Rechner"
             eingaben={{ kapazitaetWh: Math.round(ergebnis.kapazitaet), lastW: Math.round(ergebnis.last), wirkungsgrad: nWirkungsgrad }}
-            ergebnis={{ laufzeitMinuten: Number(ergebnis.laufzeit.toFixed(1)) }}
+            ergebnis={{ laufzeitMinutenRechnerischMax: Number(ergebnis.laufzeit.toFixed(1)), hinweis: 'rechnerischer Höchstwert ohne Peukert-Effekt; reale Bleiakku-USV oft deutlich darunter, vor allem bei hoher Last' }}
           />
         </>
       ) : (

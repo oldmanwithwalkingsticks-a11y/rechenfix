@@ -22,6 +22,9 @@ const SYSTEM_OPTIONEN = [
   { value: 'ects', label: 'ECTS-Grade' },
 ];
 
+// W184: GPA vorher toFixed(2) („3.70“), jetzt de-DE („3,70“)
+const fmtGpa = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
 function notenFarbe(nd: number): string {
   if (nd <= 2.0) return 'text-green-700 dark:text-green-400';
   if (nd <= 3.5) return 'text-amber-700 dark:text-amber-400';
@@ -83,7 +86,7 @@ export default function NotenInternationalRechner() {
   }, [highlightNote]);
 
   const ergebnisText = ergebnis
-    ? `Deutsche Note: ${ergebnis.deutscheNote.toLocaleString('de-DE', { minimumFractionDigits: 1 })} (${ergebnis.bewertung}) | GPA: ${ergebnis.gpa.toFixed(2)} | UK: ${ergebnis.ukClassification} | ECTS: ${ergebnis.ectsGrade}`
+    ? `Deutsche Note: ${ergebnis.deutscheNote.toLocaleString('de-DE', { minimumFractionDigits: 1 })} (${ergebnis.bewertung}) | GPA: ${fmtGpa(ergebnis.gpa)} | UK: ${ergebnis.ukClassification} | ECTS: ${ergebnis.ectsGrade}`
     : '';
 
   return (
@@ -193,7 +196,7 @@ export default function NotenInternationalRechner() {
               <div className="bg-white/90 dark:bg-gray-800/60 rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1 font-medium">GPA (USA)</p>
                 <p className={`text-2xl font-extrabold ${notenFarbe(ergebnis.deutscheNote)}`}>
-                  {ergebnis.gpa.toFixed(2)}
+                  {fmtGpa(ergebnis.gpa)}
                 </p>
               </div>
               <div className="bg-white/90 dark:bg-gray-800/60 rounded-xl p-3 text-center">
@@ -253,7 +256,7 @@ export default function NotenInternationalRechner() {
                             <span className="ml-2 text-xs font-medium text-primary-600 dark:text-primary-400" aria-label="aktuelle Auswahl">←</span>
                           )}
                         </td>
-                        <td className="px-4 py-2 text-gray-700 dark:text-gray-300">{z.gpa.toFixed(2)}</td>
+                        <td className="px-4 py-2 text-gray-700 dark:text-gray-300">{fmtGpa(z.gpa)}</td>
                         <td className="px-4 py-2 text-gray-700 dark:text-gray-300">{z.ukClassification}</td>
                         <td className="px-4 py-2 font-semibold text-gray-800 dark:text-gray-200">{z.ectsGrade}</td>
                         <td className="px-4 py-2 text-gray-600 dark:text-gray-400 capitalize">{z.bewertung}</td>

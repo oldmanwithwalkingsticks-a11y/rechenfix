@@ -35,7 +35,8 @@ export function pruefePrimzahl(zahl: number): PrimCheckErgebnis {
       return { zahl: n, istPrim: false, begruendung: `${n} ist durch ${i} teilbar (${n} ÷ ${i} = ${n / i}).`, kleinsteTeilbarkeit: i };
     }
   }
-  const wurzel = Math.floor(Math.sqrt(n));
+  // W184: vorher Math.floor mit „≈“ („√97 ≈ 9“ — abgeschnitten, nicht gerundet), jetzt gerundet de-DE („√97 ≈ 9,85“)
+  const wurzel = Math.sqrt(n).toLocaleString('de-DE', { maximumFractionDigits: 2 });
   return { zahl: n, istPrim: true, begruendung: `${n} ist eine Primzahl — kein Teiler bis √${n} ≈ ${wurzel} gefunden.`, kleinsteTeilbarkeit: null };
 }
 

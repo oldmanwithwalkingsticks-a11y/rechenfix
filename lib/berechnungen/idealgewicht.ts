@@ -79,11 +79,12 @@ export function berechneIdealgewicht(eingabe: IdealgewichtEingabe): Idealgewicht
     statusFarbe = 'green';
   } else if (gewicht > gewichtOben) {
     differenzOben = round1(gewicht - gewichtOben);
-    statusText = `${differenzOben} kg über dem Idealbereich`;
+    // W184: vorher roh („3.5 kg über …“), jetzt de-DE („3,5 kg über …“)
+    statusText = `${differenzOben.toLocaleString('de-DE')} kg über dem Idealbereich`;
     statusFarbe = 'orange';
   } else {
     differenzUnten = round1(gewichtUnten - gewicht);
-    statusText = `${differenzUnten} kg unter dem Idealbereich`;
+    statusText = `${differenzUnten.toLocaleString('de-DE')} kg unter dem Idealbereich`;
     statusFarbe = 'orange';
   }
 

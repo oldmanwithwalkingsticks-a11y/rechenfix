@@ -173,7 +173,8 @@ export default function BmiRechner() {
                   }`}
                 >
                   <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: k.farbe }} />
-                  <span>{k.label} ({k.min}–{k.max === 60 ? '40+' : k.max})</span>
+                  {/* W184: vorher Grenzen roh („18.5–25“), jetzt de-DE („18,5–25“) */}
+                  <span>{k.label} ({fmt(k.min)}–{k.max === 60 ? '40+' : fmt(k.max)})</span>
                 </div>
               ))}
             </div>

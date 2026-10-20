@@ -44,6 +44,7 @@ export default function WasserbedarfRechner() {
     [nGewicht, aktivitaet, nSportMinuten, heiss, schwangerStillend],
   );
 
+  // W184: Gewicht in „Basisbedarf (… kg ×“ vorher roh („72.5 kg“), jetzt fmt()
   const fmt = (n: number) => n.toLocaleString('de-DE');
 
   return (
@@ -150,7 +151,7 @@ export default function WasserbedarfRechner() {
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Basisbedarf ({nGewicht} kg × {aktivitaet === 'kaum' ? '30' : aktivitaet === 'leicht' ? '35' : aktivitaet === 'maessig' ? '40' : aktivitaet === 'sehr' ? '45' : '50'} ml/kg)</span>
+                <span className="text-gray-600 dark:text-gray-400">Basisbedarf ({fmt(nGewicht)} kg × {aktivitaet === 'kaum' ? '30' : aktivitaet === 'leicht' ? '35' : aktivitaet === 'maessig' ? '40' : aktivitaet === 'sehr' ? '45' : '50'} ml/kg)</span>
                 <span className="font-semibold text-gray-800 dark:text-gray-200">{fmt(ergebnis.basisbedarf)} ml</span>
               </div>
               {ergebnis.sportZuschlag > 0 && (

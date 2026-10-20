@@ -99,6 +99,8 @@ export default function KapitalertragsteuerRechner() {
     n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fmt0 = (n: number) =>
     n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  // W184: effektiver Steuersatz vorher toFixed(2) („26.38 %“), jetzt de-DE („26,38 %“)
+  const satzText = ergebnis.effektiverSatz.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
     <div>
@@ -256,7 +258,7 @@ export default function KapitalertragsteuerRechner() {
         <p className="text-white/90 text-sm mb-1">Netto-Ertrag nach Steuern</p>
         <p className="text-5xl font-bold">{fmt0(ergebnis.nettoErtrag)} €</p>
         <p className="text-white/90 text-sm mt-1">
-          Steuerlast: <strong>{fmt0(ergebnis.steuerGesamt)} €</strong> · effektiver Steuersatz: <strong>{ergebnis.effektiverSatz.toFixed(2)} %</strong>
+          Steuerlast: <strong>{fmt0(ergebnis.steuerGesamt)} €</strong> · effektiver Steuersatz: <strong>{satzText} %</strong>
         </p>
       </div>
 
@@ -327,7 +329,7 @@ export default function KapitalertragsteuerRechner() {
       <CrossLink href="/finanzen/steuererstattung-rechner" emoji="📄" text="Steuererstattungs-Rechner: Wie viel kommt vom Finanzamt zurück?" />
 
       <ErgebnisAktionen
-        ergebnisText={`Kapitalertragsteuer: Bei ${fmt0(nErtrag)} € ${art.label} = ${fmt0(ergebnis.steuerGesamt)} € Steuern (effektiv ${ergebnis.effektiverSatz.toFixed(2)} %) → Netto ${fmt0(ergebnis.nettoErtrag)} €`}
+        ergebnisText={`Kapitalertragsteuer: Bei ${fmt0(nErtrag)} € ${art.label} = ${fmt0(ergebnis.steuerGesamt)} € Steuern (effektiv ${satzText} %) → Netto ${fmt0(ergebnis.nettoErtrag)} €`}
         seitenTitel="Kapitalertragsteuer-Rechner"
         pdfDaten={[
           {
@@ -343,7 +345,7 @@ export default function KapitalertragsteuerRechner() {
             titel: 'Ergebnis',
             zeilen: [
               { label: 'Netto-Ertrag', wert: `${fmt(ergebnis.nettoErtrag)} €`, highlight: true },
-              { label: 'Effektiver Steuersatz', wert: `${ergebnis.effektiverSatz.toFixed(2)} %` },
+              { label: 'Effektiver Steuersatz', wert: `${satzText} %` },
             ],
           },
         ]}

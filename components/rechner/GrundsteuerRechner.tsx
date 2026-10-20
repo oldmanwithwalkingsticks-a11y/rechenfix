@@ -40,6 +40,8 @@ export default function GrundsteuerRechner() {
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const fmtEuro2 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: Hebesatz vorher roh aus der Eingabe („475.5 %“), jetzt de-DE
+  const fmtHebesatz = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   return (
     <div>
@@ -158,7 +160,7 @@ export default function GrundsteuerRechner() {
               <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro2(ergebnis.messbetrag)} €</td>
             </tr>
             <tr>
-              <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">× Hebesatz {parseDeutscheZahl(hebesatz)} %</td>
+              <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">× Hebesatz {fmtHebesatz(parseDeutscheZahl(hebesatz))} %</td>
               <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro2(ergebnis.grundsteuerJahr)} €</td>
             </tr>
             <tr className="bg-blue-50 dark:bg-blue-500/10 font-bold">
@@ -180,7 +182,7 @@ export default function GrundsteuerRechner() {
       <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📊" text="Nebenkosten berechnen" />
 
       <ErgebnisAktionen
-        ergebnisText={`Grundsteuer 2026 (${modell === 'bund' ? 'Bundesmodell' : modell === 'bayern' ? 'Bayern' : 'BW'}): ${fmtEuro(ergebnis.grundsteuerJahr)} €/Jahr | Grundsteuerwert ${fmtEuro(ergebnis.grundsteuerwert)} € | Messbetrag ${fmtEuro2(ergebnis.messbetrag)} € × Hebesatz ${parseDeutscheZahl(hebesatz)} %`}
+        ergebnisText={`Grundsteuer 2026 (${modell === 'bund' ? 'Bundesmodell' : modell === 'bayern' ? 'Bayern' : 'BW'}): ${fmtEuro(ergebnis.grundsteuerJahr)} €/Jahr | Grundsteuerwert ${fmtEuro(ergebnis.grundsteuerwert)} € | Messbetrag ${fmtEuro2(ergebnis.messbetrag)} € × Hebesatz ${fmtHebesatz(parseDeutscheZahl(hebesatz))} %`}
         seitenTitel="Grundsteuer-Rechner"
       />
 

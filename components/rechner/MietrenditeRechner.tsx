@@ -278,7 +278,7 @@ export default function MietrenditeRechner() {
                 <span className="font-semibold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.kaufpreis)} €</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Kaufnebenkosten ({nKaufnebenkostenProzent}%)</span>
+                <span className="text-gray-600 dark:text-gray-400">Kaufnebenkosten ({nKaufnebenkostenProzent.toLocaleString('de-DE', { maximumFractionDigits: 2 })}%){/* W184: vorher roh („10.5%“) */}</span>
                 <span className="font-semibold text-gray-800 dark:text-gray-200">+{fmtEuro(ergebnis.kaufnebenkosten)} €</span>
               </div>
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">

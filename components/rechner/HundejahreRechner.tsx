@@ -128,9 +128,9 @@ export default function HundejahreRechner() {
         <div className="space-y-1.5 text-sm">
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Alter Hund</span><span className="font-medium">{fmt(ergebnis.alter)} Jahre</span></div>
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Entspricht Mensch</span><span className="font-medium">{fmt(ergebnis.menschJahre)} Jahre</span></div>
-          <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Durchschnittliche Lebenserwartung</span><span className="font-medium">ca. {ergebnis.le} Jahre</span></div>
+          <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Durchschnittliche Lebenserwartung</span><span className="font-medium">ca. {fmt(ergebnis.le)} Jahre</span></div>
           {ergebnis.verbleibend > 0 && (
-            <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Verbleibend (statistisch)</span><span className="font-medium">ca. {ergebnis.verbleibend} Jahre</span></div>
+            <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Verbleibend (statistisch)</span>{/* W184: vorher roh (Alter 5,5 → „ca. 7.5 Jahre“), jetzt fmt() */}<span className="font-medium">ca. {fmt(ergebnis.verbleibend)} Jahre</span></div>
           )}
         </div>
       </div>

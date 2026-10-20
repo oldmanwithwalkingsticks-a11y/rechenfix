@@ -6,32 +6,21 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import {
+  outdoorAequivalentKmh, mehraufwandGegenStrasseProzent, aufwandsfaktor, AUFWANDSFAKTOR_STRASSE,
+  paceAusKmh as paceStr,
+} from '@/lib/berechnungen/laufband-steigung';
 
 /**
  * Laufband-Steigung-Rechner (Sport-Kategorie).
  *
- * Inline-Logik (keine separate lib/berechnungen-Datei), quellenverifiziert:
- * - Outdoor-Äquiv. Geschwindigkeit (km/h) = Band(km/h) × (1 + 0,03 × Steigung%)  [Jones & Doust 1996]
- * - Pace (min/km) = 60 ÷ Geschwindigkeit(km/h)
- * - ACSM-VO2 (v in m/min): 3,5 + 0,2·v + 0,9·v·(Steigung%/100) — für den relativen Mehraufwand.
+ * W184: vorher Tempo nach Faustregel „Band × (1 + 0,03 × Steigung), 0 % = Straße“, Mehraufwand
+ * aber nach ACSM gegen 0 % Band (10 km/h, 2 %: Tempo +6 %, Mehraufwand +8 %), Seite: 1 % = Straße.
+ * Jetzt ein Modell (lib/berechnungen/laufband-steigung.ts): ACSM-Laufgleichung, ebene Straße
+ * ≈ Band bei 1 % (Jones & Doust 1996) → Outdoor = Band × (0,2 + 0,9·G) ÷ 0,209.
  */
 
 const STEIGUNG_STUFEN = [0, 1, 2, 4, 6, 8, 10, 12, 15];
-
-function paceStr(kmh: number): string {
-  if (!isFinite(kmh) || kmh <= 0) return '—';
-  const sekProKm = 3600 / kmh;
-  const m = Math.floor(sekProKm / 60);
-  const s = Math.round(sekProKm - m * 60);
-  if (s === 60) return `${m + 1}:00`;
-  return `${m}:${String(s).padStart(2, '0')}`;
-}
-
-// ACSM-VO2 (ml/kg/min) für horizontales Laufband (v in m/min, grade dezimal).
-function acsmVo2(kmh: number, gradePct: number): number {
-  const v = (kmh * 1000) / 60; // m/min
-  return 3.5 + 0.2 * v + 0.9 * v * (gradePct / 100);
-}
 
 export default function LaufbandSteigungRechner() {
   const [band, setBand] = useState('10');
@@ -43,17 +32,18 @@ export default function LaufbandSteigungRechner() {
   const ergebnis = useMemo(() => {
     if (nBand <= 0) return null;
     const grade = Math.max(0, nSteigung);
-    const outKmh = nBand * (1 + 0.03 * grade);
-    // Mehraufwand: ACSM-VO2 mit Steigung vs. flach bei Band-Tempo.
-    const vo2Steigung = acsmVo2(nBand, grade);
-    const vo2Flach = acsmVo2(nBand, 0);
-    const mehraufwandPct = vo2Flach > 0 ? (vo2Steigung / vo2Flach - 1) * 100 : 0;
+    const outKmh = outdoorAequivalentKmh(nBand, grade);
+    // Mehraufwand gegenüber ebener Straße bei gleichem Tempo (Straße = Band bei 1 %)
+    const mehraufwandPct = mehraufwandGegenStrasseProzent(nBand, grade);
     return { outKmh, mehraufwandPct, grade };
   }, [nBand, nSteigung]);
 
   const fmt1 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
   const fmt2 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fmt0 = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 0 });
+  const fmtG = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 1 });
+  const fmt3 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+  const fmtVz = (n: number) => `${Math.round(n) > 0 ? '+' : Math.round(n) < 0 ? '−' : '±'}${fmt0(Math.abs(n))}`;
 
   return (
     <div>
@@ -82,7 +72,7 @@ export default function LaufbandSteigungRechner() {
                   Pace {paceStr(ergebnis.outKmh)} min/km
                 </span>
                 <span className="block text-white/80 text-sm">
-                  Band: {fmt1(nBand)} km/h @ {fmt0(ergebnis.grade)} % · Mehraufwand ~{fmt0(ergebnis.mehraufwandPct)} %
+                  Band: {fmt1(nBand)} km/h @ {fmtG(ergebnis.grade)} % · Aufwand ggü. Straße ~{fmtVz(ergebnis.mehraufwandPct)} %
                 </span>
               </div>
             </div>
@@ -92,7 +82,10 @@ export default function LaufbandSteigungRechner() {
           <div className="bg-accent-50 dark:bg-accent-700/20 border border-accent-200 dark:border-accent-600/40 rounded-xl p-4 mb-6">
             <p className="font-semibold text-accent-700 dark:text-accent-400 text-sm mb-1">Rechenweg</p>
             <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
-              {fmt1(nBand)} × (1 + 0,03 × {fmt0(ergebnis.grade)}) = {fmt2(ergebnis.outKmh)} km/h
+              Band: 0,2 + 0,9 × {fmtG(ergebnis.grade)} % = {fmt3(aufwandsfaktor(ergebnis.grade))} · Straße (≈ Band bei 1 %): {fmt3(AUFWANDSFAKTOR_STRASSE)}
+            </p>
+            <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
+              {fmt1(nBand)} × {fmt3(aufwandsfaktor(ergebnis.grade))} ÷ {fmt3(AUFWANDSFAKTOR_STRASSE)} = {fmt2(ergebnis.outKmh)} km/h
             </p>
             <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
               60 ÷ {fmt2(ergebnis.outKmh)} = {paceStr(ergebnis.outKmh)} min/km
@@ -113,7 +106,7 @@ export default function LaufbandSteigungRechner() {
                 </thead>
                 <tbody>
                   {STEIGUNG_STUFEN.map((g) => {
-                    const o = nBand * (1 + 0.03 * g);
+                    const o = outdoorAequivalentKmh(nBand, g);
                     const aktiv = Math.round(ergebnis.grade) === g;
                     return (
                       <tr key={g} className={`border-b border-gray-100 dark:border-gray-600/50 ${aktiv ? 'bg-primary-50 dark:bg-primary-500/10 font-bold' : ''}`}>
@@ -127,7 +120,7 @@ export default function LaufbandSteigungRechner() {
               </table>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              Bezogen auf {fmt1(nBand)} km/h Band-Geschwindigkeit. Faustregel: je 1 % Steigung rund 3 % mehr Aufwand.
+              Bezogen auf {fmt1(nBand)} km/h Band-Geschwindigkeit. Modell: ACSM-Laufgleichung, ebene Straße ≈ 1 % Steigung (Jones &amp; Doust 1996) — je Steigungsprozent rund 4,3 % mehr Straßentempo, 0 % liegt rund 4,3 % unter der Straße. Richtwert für etwa 8–16 km/h.
             </p>
           </div>
 
@@ -135,7 +128,7 @@ export default function LaufbandSteigungRechner() {
           <CrossLink href="/sport/kalorienverbrauch-rechner" emoji="🔥" text="Kalorienverbrauch beim Laufen" />
 
           <ErgebnisAktionen
-            ergebnisText={`Laufband ${fmt1(nBand)} km/h @ ${fmt0(ergebnis.grade)} % Steigung entspricht ${fmt2(ergebnis.outKmh)} km/h auf der Straße (Pace ${paceStr(ergebnis.outKmh)} min/km)`}
+            ergebnisText={`Laufband ${fmt1(nBand)} km/h @ ${fmtG(ergebnis.grade)} % Steigung entspricht rechnerisch ${fmt2(ergebnis.outKmh)} km/h auf ebener Straße (Pace ${paceStr(ergebnis.outKmh)} min/km)`}
             seitenTitel="Laufband-Steigung-Rechner"
           />
           <AiExplain

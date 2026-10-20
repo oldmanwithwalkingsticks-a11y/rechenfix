@@ -6,8 +6,7 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
-
-type FormTyp = 'rund' | 'rechteckig' | 'kasten';
+import { berechneBackform, zutatUmgerechnet, type FormTyp, type BackformMasse } from '@/lib/berechnungen/backform';
 
 interface FormState {
   typ: FormTyp;
@@ -20,15 +19,17 @@ interface FormState {
 const fmt = (n: number, d = 0): string =>
   n.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
 
-function berechneFlaeche(f: FormState): number {
-  const d = parseDeutscheZahl(f.durchmesser);
-  const l = parseDeutscheZahl(f.laenge);
-  const b = parseDeutscheZahl(f.breite);
-  switch (f.typ) {
-    case 'rund':        return Math.PI * (d / 2) ** 2;
-    case 'rechteckig':  return l * b;
-    case 'kasten':      return l * b;
-  }
+// W184: vorher wurde die Höhe der Kastenform abgefragt, aber nie verwendet (Seite versprach
+// „Kastenform-Volumen“). Rechnung jetzt in lib/berechnungen/backform.ts: Volumen L × B × H,
+// Kastenform → Kastenform skaliert über das Volumen, sonst über die Bodenfläche.
+function zuMassen(f: FormState): BackformMasse {
+  return {
+    typ: f.typ,
+    durchmesser: parseDeutscheZahl(f.durchmesser),
+    laenge: parseDeutscheZahl(f.laenge),
+    breite: parseDeutscheZahl(f.breite),
+    hoehe: parseDeutscheZahl(f.hoehe),
+  };
 }
 
 function formBeschreibung(f: FormState): string {
@@ -48,9 +49,8 @@ export default function BackformUmrechner() {
   });
 
   const ergebnis = useMemo(() => {
-    const flaecheOrig = berechneFlaeche(original);
-    const flaecheZiel = berechneFlaeche(ziel);
-    const faktor = flaecheOrig > 0 ? flaecheZiel / flaecheOrig : 1;
+    const { flaecheOrig, flaecheZiel, volumenOrig, volumenZiel, nachVolumen, gemischtMitKasten, faktor } =
+      berechneBackform(zuMassen(original), zuMassen(ziel));
 
     // Prozentuale Abweichung
     const abweichung = Math.abs(faktor - 1) * 100;
@@ -65,7 +65,7 @@ export default function BackformUmrechner() {
       backzeitHinweis = 'Formen sind ähnlich groß — Backzeit und Temperatur bleiben unverändert.';
     }
 
-    return { flaecheOrig, flaecheZiel, faktor, abweichung, backzeitHinweis };
+    return { flaecheOrig, flaecheZiel, volumenOrig, volumenZiel, nachVolumen, gemischtMitKasten, faktor, abweichung, backzeitHinweis };
   }, [original, ziel]);
 
   // Zutaten-Beispiele mit Faktor umgerechnet
@@ -76,6 +76,9 @@ export default function BackformUmrechner() {
     { name: 'Eier',    original: 4,   einheit: 'Stück' },
     { name: 'Milch',   original: 150, einheit: 'ml' },
   ];
+
+  const groesse = (flaeche: number, volumen: number | null) =>
+    `${fmt(flaeche)} cm²${volumen !== null ? `, ${fmt(volumen)} cm³` : ''}`;
 
   // SVG-Größenvergleich
   const maxFlaeche = Math.max(ergebnis.flaecheOrig, ergebnis.flaecheZiel, 1);
@@ -107,7 +110,14 @@ export default function BackformUmrechner() {
         <p className="text-white/80 text-sm mb-1">Umrechnungsfaktor</p>
         <p className="text-5xl font-bold">× {fmt(ergebnis.faktor, 2).replace(',00', '')}</p>
         <p className="text-white/90 text-sm mt-2">
-          {formBeschreibung(original)} ({fmt(ergebnis.flaecheOrig)} cm²) → {formBeschreibung(ziel)} ({fmt(ergebnis.flaecheZiel)} cm²)
+          {formBeschreibung(original)} ({groesse(ergebnis.flaecheOrig, ergebnis.volumenOrig)}) → {formBeschreibung(ziel)} ({groesse(ergebnis.flaecheZiel, ergebnis.volumenZiel)})
+        </p>
+        <p className="text-white/70 text-xs mt-1">
+          {ergebnis.nachVolumen
+            ? 'Faktor aus dem Volumen (Länge × Breite × Höhe), weil beide Formen Kastenformen sind.'
+            : ergebnis.gemischtMitKasten
+              ? 'Faktor aus der Bodenfläche bei gleicher Teighöhe — zwischen Kastenform und flacher Form geht die Höhe der Kastenform nicht ein.'
+              : 'Faktor aus der Bodenfläche bei gleicher Teighöhe.'}
         </p>
       </div>
 
@@ -136,13 +146,12 @@ export default function BackformUmrechner() {
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               {beispiele.map(b => {
-                const neu = b.original * ergebnis.faktor;
-                const neuGerundet = b.einheit === 'Stück' ? Math.round(neu) : Math.round(neu / 5) * 5;
+                const neuGerundet = zutatUmgerechnet(b.original, ergebnis.faktor, b.einheit);
                 return (
                   <tr key={b.name}>
                     <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">{b.name}</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400 whitespace-nowrap">{b.original} {b.einheit}</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-primary-700 dark:text-primary-300 font-semibold whitespace-nowrap">{b.einheit === 'Stück' ? neuGerundet : neuGerundet} {b.einheit}</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-primary-700 dark:text-primary-300 font-semibold whitespace-nowrap">{neuGerundet} {b.einheit}</td>
                   </tr>
                 );
               })}
@@ -199,7 +208,7 @@ export default function BackformUmrechner() {
       <CrossLink href="/mathe/flaechenrechner" emoji="📐" text="Flächenrechner" />
 
       <ErgebnisAktionen
-        ergebnisText={`Backform-Umrechner: ${formBeschreibung(original)} (${fmt(ergebnis.flaecheOrig)} cm²) → ${formBeschreibung(ziel)} (${fmt(ergebnis.flaecheZiel)} cm²) | Faktor × ${fmt(ergebnis.faktor, 2)}`}
+        ergebnisText={`Backform-Umrechner: ${formBeschreibung(original)} (${groesse(ergebnis.flaecheOrig, ergebnis.volumenOrig)}) → ${formBeschreibung(ziel)} (${groesse(ergebnis.flaecheZiel, ergebnis.volumenZiel)}) | Faktor × ${fmt(ergebnis.faktor, 2)} (${ergebnis.nachVolumen ? 'Volumen' : 'Bodenfläche'})`}
         seitenTitel="Backform-Umrechner"
       />
 
@@ -212,6 +221,8 @@ export default function BackformUmrechner() {
         ergebnis={{
           flaecheOriginal: `${fmt(ergebnis.flaecheOrig)} cm²`,
           flaecheZiel: `${fmt(ergebnis.flaecheZiel)} cm²`,
+          ...(ergebnis.nachVolumen ? { volumenOriginal: `${fmt(ergebnis.volumenOrig!)} cm³`, volumenZiel: `${fmt(ergebnis.volumenZiel!)} cm³` } : {}),
+          faktorBasis: ergebnis.nachVolumen ? 'Volumen' : 'Bodenfläche',
           faktor: `× ${fmt(ergebnis.faktor, 2)}`,
           abweichung: `${fmt(ergebnis.abweichung)} %`,
         }}

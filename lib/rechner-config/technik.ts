@@ -1251,7 +1251,7 @@ export const technikRechner: RechnerConfig[] = [
   },
   {
     slug: 'usv-laufzeit-rechner',
-    letzteAktualisierung: '2026-06-30',
+    letzteAktualisierung: '2026-10-20',
     titel: 'USV-Laufzeit-Rechner',
     beschreibung: 'USV-Laufzeit berechnen: Wie lange überbrückt eine USV einen Stromausfall bei gegebener Last? Mit VA-zu-Watt-Umrechnung und Akku-Kapazität.',
     kategorie: 'Technik',
@@ -1260,7 +1260,9 @@ export const technikRechner: RechnerConfig[] = [
     metaDescription: 'USV-Laufzeit berechnen: Wie lange überbrückt eine USV den Stromausfall bei gegebener Last? Mit VA-zu-Watt-Umrechnung und Rechenweg.',
     keywords: ['usv laufzeit', 'ups laufzeit berechnen', 'va in watt', 'überbrückungszeit usv', 'usv akku laufzeit', 'usv dimensionieren', 'unterbrechungsfreie stromversorgung laufzeit', 'usv watt'],
     icon: '🔋',
-    beispiel: '216-Wh-USV bei 200 W: 216 × 0,9 ÷ 200 × 60 = 58,3 min Überbrückung.',
+    // W184: Laufzeiten als rechnerischer Höchstwert gekennzeichnet (lineare Formel ohne Peukert-Effekt;
+    // Datenblatt 1500-VA-USV 24 V/9 Ah: halbe Last 12,3 min statt rechnerisch 27 min)
+    beispiel: '216-Wh-USV bei 200 W: 216 × 0,9 ÷ 200 × 60 = rechnerisch höchstens 58,3 min Überbrückung.',
     faq: [
       {
         frage: 'Was bedeutet VA bei einer USV?',
@@ -1268,7 +1270,7 @@ export const technikRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie lange hält eine USV bei Stromausfall?',
-        antwort: 'Das hängt von Akku-Kapazität und Last ab. Eine typische 1500-VA-Tower-USV mit rund 216 Wh überbrückt bei 200 W Last etwa 58 Minuten, bei 600 W nur noch rund 19 Minuten. USV sind meist nicht für stundenlangen Betrieb gedacht, sondern für die Zeit bis zum geordneten Herunterfahren oder zum Überbrücken kurzer Ausfälle.',
+        antwort: 'Das hängt von Akku-Kapazität und Last ab. Rechnerisch überbrückt eine typische 1500-VA-Tower-USV mit rund 216 Wh bei 200 W Last höchstens etwa 58 Minuten, bei 600 W rund 19 Minuten. Reale Geräte mit Bleiakku liegen oft deutlich darunter, vor allem bei hoher Last: Laut Herstellerdatenblatt hält eine solche USV (24 V, 9 Ah) bei halber Last (rund 430 W) etwa 12 Minuten statt rechnerisch 27, bei Volllast knapp 4 statt 13,5 Minuten. Verlässlich ist die Laufzeitkurve des Herstellers. USV sind meist nicht für stundenlangen Betrieb gedacht, sondern für die Zeit bis zum geordneten Herunterfahren oder zum Überbrücken kurzer Ausfälle.',
       },
       {
         frage: 'Wofür braucht man eine USV?',
@@ -1276,7 +1278,7 @@ export const technikRechner: RechnerConfig[] = [
       },
       {
         frage: 'Warum fällt die Laufzeit bei doppelter Last nicht genau auf die Hälfte?',
-        antwort: 'Grob gilt: doppelte Last, halbe Laufzeit. Bei hoher Last sinkt jedoch zusätzlich der nutzbare Akku-Wirkungsgrad (Peukert-Effekt), sodass die Laufzeit etwas stärker fällt als rein rechnerisch. Bei sehr niedriger Last spielen dagegen die Grundverluste der USV-Elektronik eine größere Rolle. Die Berechnung liefert daher eine gute Näherung, keinen Laborwert.',
+        antwort: 'Grob gilt: doppelte Last, halbe Laufzeit. Bei hoher Last sinkt jedoch zusätzlich die nutzbare Akku-Kapazität (Peukert-Effekt), sodass die Laufzeit deutlich stärker fällt als rein rechnerisch. Bei sehr niedriger Last spielen dagegen die Grundverluste der USV-Elektronik eine größere Rolle. Die Berechnung liefert daher einen rechnerischen Höchstwert, keinen Laborwert.',
       },
       {
         frage: 'Wie groß muss meine USV sein?',
@@ -1308,7 +1310,7 @@ export const technikRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum die Laufzeit nicht-linear fällt',
-        html: `<p>Die Grundregel ist einfach: <strong>doppelte Last, halbe Laufzeit</strong>. Wer statt 100 W plötzlich 200 W anschließt, halbiert die Überbrückungszeit ungefähr. Diese umgekehrte Proportionalität steckt direkt in der Formel und macht den größten Teil des Effekts aus.</p><p>In der Praxis fällt die Laufzeit bei hoher Last aber sogar <strong>etwas stärker</strong> als rein rechnerisch. Der Grund ist der <strong>Peukert-Effekt</strong>: Je höher der Entladestrom, desto geringer die effektiv nutzbare Akku-Kapazität — ein Bleiakku gibt unter starker Belastung anteilig weniger Energie ab als bei sanfter Entladung. Bei sehr niedriger Last dagegen machen sich die konstanten <strong>Grundverluste</strong> der USV-Elektronik stärker bemerkbar. Beide Effekte sind in einer einfachen Rechnung nicht exakt abbildbar, weshalb die hier ausgegebene Laufzeit eine gute Näherung ist und reale Geräte je nach Akku-Typ und Alter etwas darunter liegen können. Für die Dimensionierung gilt deshalb: lieber etwas großzügiger rechnen und einen Puffer einplanen, als die berechnete Zeit als garantierten Wert zu betrachten.</p>`,
+        html: `<p>Die Grundregel ist einfach: <strong>doppelte Last, halbe Laufzeit</strong>. Wer statt 100 W plötzlich 200 W anschließt, halbiert die Überbrückungszeit ungefähr. Diese umgekehrte Proportionalität steckt direkt in der Formel und macht den größten Teil des Effekts aus.</p><p>In der Praxis fällt die Laufzeit bei hoher Last aber <strong>deutlich stärker</strong> als rein rechnerisch. Der Grund ist der <strong>Peukert-Effekt</strong>: Je höher der Entladestrom, desto geringer die effektiv nutzbare Akku-Kapazität — ein Bleiakku gibt unter starker Belastung anteilig weniger Energie ab als bei sanfter Entladung. Bei sehr niedriger Last dagegen machen sich die konstanten <strong>Grundverluste</strong> der USV-Elektronik stärker bemerkbar. Beide Effekte sind in einer einfachen Rechnung nicht exakt abbildbar, weshalb die hier ausgegebene Laufzeit ein rechnerischer Höchstwert ist: Reale Geräte liegen je nach Akku-Typ, Alter und Last oft deutlich darunter — eine 1500-VA-USV mit 24 V/9 Ah schafft laut Datenblatt bei halber Last etwa 12 statt rechnerisch 27 Minuten. Für die Dimensionierung gilt deshalb: lieber etwas großzügiger rechnen und einen Puffer einplanen, als die berechnete Zeit als garantierten Wert zu betrachten.</p>`,
       },
       {
         typ: 'tabelle',
@@ -1321,7 +1323,7 @@ export const technikRechner: RechnerConfig[] = [
           ['400 W', 'starker PC', '29,2 min'],
           ['600 W', 'Gaming-PC', '19,4 min'],
         ],
-        fussnote: 'Überbrückungszeit einer 216-Wh-USV (Wirkungsgrad 0,9) bei steigender Last. Schön sichtbar ist die umgekehrte Proportionalität: Jede Verdopplung der Last halbiert die Laufzeit. Eine sparsame Netzwerk-Last von 50 W lässt sich fast vier Stunden überbrücken, ein stromhungriger Gaming-PC dagegen nur knapp 20 Minuten. Wer lange Laufzeiten braucht, schließt deshalb nur die wirklich kritischen, sparsamen Geräte an. Soll die USV nicht nur den geordneten Shutdown sichern, sondern längere Ausfälle überbrücken, führt am Ende kein Weg an einem größeren Akku oder einem zusätzlichen Akkupack vorbei — die reine VA-Klasse hilft dabei nicht weiter.',
+        fussnote: 'Rechnerische Höchstwerte für eine 216-Wh-USV (Wirkungsgrad 0,9) bei steigender Last; reale Bleiakku-USV liegen vor allem bei hoher Last deutlich darunter. Schön sichtbar ist die umgekehrte Proportionalität: Jede Verdopplung der Last halbiert die Laufzeit. Eine sparsame Netzwerk-Last von 50 W lässt sich fast vier Stunden überbrücken, ein stromhungriger Gaming-PC dagegen nur knapp 20 Minuten. Wer lange Laufzeiten braucht, schließt deshalb nur die wirklich kritischen, sparsamen Geräte an. Soll die USV nicht nur den geordneten Shutdown sichern, sondern längere Ausfälle überbrücken, führt am Ende kein Weg an einem größeren Akku oder einem zusätzlichen Akkupack vorbei — die reine VA-Klasse hilft dabei nicht weiter.',
       },
       {
         typ: 'beispielrechnung',
@@ -1382,6 +1384,10 @@ export const technikRechner: RechnerConfig[] = [
       {
         titel: 'Scheinleistung, Wirkleistung & Leistungsfaktor',
         hinweis: 'USV-Angaben in VA (Scheinleistung); nutzbare Wirkleistung in Watt = VA × Leistungsfaktor (cos φ).',
+      },
+      {
+        titel: 'Herstellerdatenblatt 1500-VA-USV mit 24-V-/9-Ah-Akku (z. B. APC Back-UPS Pro BR1500G-GR)',
+        hinweis: 'Typische Überbrückung bei halber Last 12,3 min, bei Volllast (865 W) 3,7 min — deutlich unter der linearen Rechnung (27 bzw. 13,5 min).',
       },
       {
         titel: 'USV-Topologien (VFD/VI/VFI nach IEC 62040-3)',

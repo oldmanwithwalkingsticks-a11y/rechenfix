@@ -101,7 +101,8 @@ export function berechneUrlaubsanspruch(e: UrlaubsanspruchEingabe): Urlaubsanspr
   aufschluesselung.push({ label: 'Vertraglicher Anspruch', wert: tage(e.vertraglicheTage) });
   if (teilzeitFaktor !== null) {
     aufschluesselung.push({
-      label: `Teilzeit-Umrechnung (${e.teilzeitTage}/${e.arbeitstageProWoche} Tage)`,
+      // W184: vorher roh („2.5/5 Tage“), jetzt de-DE
+      label: `Teilzeit-Umrechnung (${e.teilzeitTage.toLocaleString('de-DE', { maximumFractionDigits: 2 })}/${e.arbeitstageProWoche.toLocaleString('de-DE', { maximumFractionDigits: 2 })} Tage)`,
       wert: tage(Math.round(vertraglichJahr * 100) / 100),
     });
   }
@@ -242,7 +243,7 @@ export function berechneResturlaub(e: ResturlaubEingabe): ResturlaubErgebnis | n
     // Voller Anspruch
     anspruch = e.urlaubstageProJahr;
     vollerAnspruch = true;
-    aufschluesselung.push({ label: 'Jahresurlaub (voller Anspruch)', wert: `${anspruch} Tage` });
+    aufschluesselung.push({ label: 'Jahresurlaub (voller Anspruch)', wert: tage(anspruch) }); // W184: vorher `${anspruch} Tage` roh („27.5 Tage“)
   }
 
   aufschluesselung.push({ label: 'Bereits genommen', wert: `−${tage(e.bereitsGenommen)}` });

@@ -55,6 +55,8 @@ export default function MwStRechner() {
   }, [zeilen]);
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // W184: eigener Steuersatz vorher roh („5.5%“ in Anzeige, Kopier-Text und PDF), jetzt de-DE („5,5%“)
+  const satzText = aktiverSatz.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   async function handleCopy() {
     if (!ergebnis) return;
@@ -76,7 +78,7 @@ export default function MwStRechner() {
   function handleShare() {
     if (!ergebnis) return;
     const richtungText = tab === 'netto-brutto' ? 'Netto → Brutto' : 'Brutto → Netto';
-    const text = `${richtungText}: ${fmt(tab === 'netto-brutto' ? ergebnis.netto : ergebnis.brutto)} € → ${fmt(tab === 'netto-brutto' ? ergebnis.brutto : ergebnis.netto)} € (${aktiverSatz}% MwSt: ${fmt(ergebnis.mwstBetrag)} €) — berechnet auf rechenfix.de/finanzen/mwst-rechner`;
+    const text = `${richtungText}: ${fmt(tab === 'netto-brutto' ? ergebnis.netto : ergebnis.brutto)} € → ${fmt(tab === 'netto-brutto' ? ergebnis.brutto : ergebnis.netto)} € (${satzText}% MwSt: ${fmt(ergebnis.mwstBetrag)} €) — berechnet auf rechenfix.de/finanzen/mwst-rechner`;
     if (navigator.share) {
       navigator.share({ title: 'MwSt-Berechnung', text });
     } else {
@@ -141,7 +143,7 @@ export default function MwStRechner() {
     // WinAnsi-sicher: der jsPDF-Standardfont (Helvetica) kennt U+2192 nicht
     // und rendert Ersatzzeichen. Im PDF daher "zu" statt "→".
     const richtung = tab === 'netto-brutto' ? 'Netto zu Brutto' : 'Brutto zu Netto';
-    doc.text(`Berechnung: ${richtung}   |   MwSt-Satz: ${aktiverSatz} %`, randX, y);
+    doc.text(`Berechnung: ${richtung}   |   MwSt-Satz: ${satzText} %`, randX, y);
     y += 6;
 
     autoTable(doc, {
@@ -149,7 +151,7 @@ export default function MwStRechner() {
       head: [['Position', 'Betrag']],
       body: [
         ['Nettobetrag', `${fmt(ergebnis.netto)} €`],
-        [`Mehrwertsteuer (${aktiverSatz} %)`, `+ ${fmt(ergebnis.mwstBetrag)} €`],
+        [`Mehrwertsteuer (${satzText} %)`, `+ ${fmt(ergebnis.mwstBetrag)} €`],
         [{ content: 'Bruttobetrag', styles: { fontStyle: 'bold' } }, { content: `${fmt(ergebnis.brutto)} €`, styles: { fontStyle: 'bold', textColor: [21, 128, 61] } }],
       ],
       theme: 'striped',
@@ -286,7 +288,7 @@ export default function MwStRechner() {
                     <p className="text-xl font-bold">{fmt(ergebnis.netto)} &euro;</p>
                   </div>
                   <div>
-                    <p className="text-white/70 text-xs mb-1">MwSt ({aktiverSatz}%)</p>
+                    <p className="text-white/70 text-xs mb-1">MwSt ({satzText}%)</p>
                     <p className="text-xl font-bold text-accent-300">+ {fmt(ergebnis.mwstBetrag)} &euro;</p>
                   </div>
                   <div>

@@ -11,6 +11,11 @@ function formatZahl(n: number): string {
   return Math.round(n).toLocaleString('de-DE');
 }
 
+// W184: vorher toFixed(1) bzw. roh („26.7 Jahre“, „78.5 Jahre“, „45.3%“), jetzt de-DE
+function formatZahl1(n: number): string {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+}
+
 function FaktKarte({ icon, label, wert, einheit, farbe = 'primary' }: {
   icon: string;
   label: string;
@@ -78,12 +83,12 @@ export default function LebenszeitRechner() {
       `Gelebte Tage: ${formatZahl(ergebnis.gesamtTage)}`,
       `Gelebte Stunden: ${formatZahl(ergebnis.gesamtStunden)}`,
       `Herzschläge: ca. ${formatZahl(ergebnis.herzschlaege)}`,
-      `Davon geschlafen: ca. ${ergebnis.jahreGeschlafen.toFixed(1)} Jahre`,
+      `Davon geschlafen: ca. ${formatZahl1(ergebnis.jahreGeschlafen)} Jahre`,
       `Smartphone-Zeit: ca. ${formatZahl(ergebnis.stundenSmartphone)} Stunden`,
-      `Statistische Lebenserwartung: ${ergebnis.lebenserwartung} Jahre`,
+      `Statistische Lebenserwartung: ${formatZahl1(ergebnis.lebenserwartung)} Jahre`,
       `Verbleibende Tage: ca. ${formatZahl(ergebnis.verbleibendeTage)}`,
       `Verbleibende Wochenenden: ca. ${formatZahl(ergebnis.verbleibendeWochenenden)}`,
-      `Lebenszeit gelebt: ${ergebnis.prozentGelebt.toFixed(1)}%`,
+      `Lebenszeit gelebt: ${formatZahl1(ergebnis.prozentGelebt)}%`,
     ];
     return lines.join('\n');
   }
@@ -159,14 +164,14 @@ export default function LebenszeitRechner() {
               <FaktKarte
                 icon="😴"
                 label="Davon geschlafen"
-                wert={`ca. ${ergebnis.jahreGeschlafen.toFixed(1)}`}
+                wert={`ca. ${formatZahl1(ergebnis.jahreGeschlafen)}`}
                 einheit="Jahre"
                 farbe="blue"
               />
               <FaktKarte
                 icon="🍽️"
                 label="Mit Essen verbracht"
-                wert={`ca. ${ergebnis.jahreEssen.toFixed(1)}`}
+                wert={`ca. ${formatZahl1(ergebnis.jahreEssen)}`}
                 einheit="Jahre"
                 farbe="amber"
               />
@@ -180,7 +185,7 @@ export default function LebenszeitRechner() {
               <FaktKarte
                 icon="💼"
                 label="Mit Arbeit verbracht"
-                wert={`ca. ${ergebnis.jahreArbeit.toFixed(1)}`}
+                wert={`ca. ${formatZahl1(ergebnis.jahreArbeit)}`}
                 einheit="Jahre"
                 farbe="green"
               />
@@ -207,14 +212,14 @@ export default function LebenszeitRechner() {
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-4">
               <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
                 <span>Lebenserwartung ({geschlecht === 'maennlich' ? 'Männer' : 'Frauen'} in DE):</span>
-                <span className="font-semibold text-gray-900 dark:text-white">{ergebnis.lebenserwartung} Jahre</span>
+                <span className="font-semibold text-gray-900 dark:text-white">{formatZahl1(ergebnis.lebenserwartung)} Jahre</span>
               </div>
 
               {/* Fortschrittsbalken */}
               <div>
                 <div className="flex items-center justify-between text-sm mb-1">
                   <span className="text-gray-600 dark:text-gray-400">Ihre Lebenszeit</span>
-                  <span className="font-bold text-primary-600 dark:text-primary-400">{ergebnis.prozentGelebt.toFixed(1)}%</span>
+                  <span className="font-bold text-primary-600 dark:text-primary-400">{formatZahl1(ergebnis.prozentGelebt)}%</span>
                 </div>
                 <div className="w-full h-5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div
@@ -224,7 +229,7 @@ export default function LebenszeitRechner() {
                 </div>
                 <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
                   <span>Geburt</span>
-                  <span>{ergebnis.lebenserwartung} Jahre</span>
+                  <span>{formatZahl1(ergebnis.lebenserwartung)} Jahre</span>
                 </div>
               </div>
 

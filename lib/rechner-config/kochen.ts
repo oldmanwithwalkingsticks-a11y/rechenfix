@@ -356,7 +356,7 @@ export const kochenRechner: RechnerConfig[] = [
   },
   {
     slug: 'backform-umrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Backform-Umrechner',
     beschreibung: 'Backform umrechnen: Rund ↔ eckig ↔ Kasten, Teigmenge anpassen, Flächenvergleich mit Umrechnungsfaktor.',
     kategorie: 'Kochen & Ernährung',
@@ -365,11 +365,12 @@ export const kochenRechner: RechnerConfig[] = [
     metaDescription: 'Backform umrechnen: von 26 auf 20 cm Springform, rund in eckig, Kastenform-Volumen. Teigmenge und Faktor automatisch — kostenlos mit KI-Erklärung.',
     keywords: ['backform umrechner', 'springform umrechnen', '26 cm in 20 cm', 'rund in eckig backform', 'kastenform umrechnen', 'backform größen', 'teigmenge anpassen', 'backform faktor', 'backform vergleich'],
     icon: '🎂',
-    beispiel: 'Springform 26 cm → 20 cm: Fläche 531 cm² → 314 cm², Faktor 0,59. Bei 250 g Mehl Original → 148 g für die kleinere Form. Kastenform 30×11 cm → 2310 cm³ Volumen (bei 7 cm Höhe).',
+    // W184: vorher „→ 148 g“ (UI rundet auf 5 g: 150 g) und „2310 cm³“ (Rechner rechnete kein Volumen; jetzt L × B × H)
+    beispiel: 'Springform 26 cm → 20 cm: Fläche 531 cm² → 314 cm², Faktor 0,59. Bei 250 g Mehl Original → rund 150 g für die kleinere Form (rechnerisch 148 g). Kastenform 30 × 11 cm, 7 cm hoch → 2.310 cm³ Volumen.',
     faq: [
       {
         frage: 'Wie rechne ich von 26 cm auf 20 cm Springform um?',
-        antwort: 'Fläche 26 cm = 531 cm², Fläche 20 cm = 314 cm². Faktor: 314 ÷ 531 = 0,59. Alle Zutaten mit 0,59 multiplizieren: 250 g Mehl → 148 g, 150 g Zucker → 89 g, 4 Eier → 2,4 (auf 2 runden und etwas mehr Flüssigkeit). Backzeit um 5–10 Minuten verlängern.',
+        antwort: 'Fläche 26 cm = 531 cm², Fläche 20 cm = 314 cm². Faktor: 314 ÷ 531 = 0,59. Alle Zutaten mit 0,59 multiplizieren: 250 g Mehl → rund 150 g (rechnerisch 148 g), 150 g Zucker → rund 90 g (89 g), 4 Eier → 2,4 (auf 2 runden und etwas mehr Flüssigkeit). Die Backzeit bleibt weitgehend gleich, weil der Teig gleich hoch steht — eher 2–5 Minuten kürzer, weil weniger Masse.', // W184: vorher „Backzeit um 5–10 Minuten verlängern“ (Widerspruch zu FAQ 2 und Rechner-Hinweis)
       },
       {
         frage: 'Muss ich die Backzeit anpassen?',
