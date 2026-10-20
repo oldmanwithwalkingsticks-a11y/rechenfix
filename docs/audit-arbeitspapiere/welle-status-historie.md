@@ -6,6 +6,78 @@
 
 ---
 
+## 20.10.2026 — Welle 177: sechs Rechenfehler aus der Caption-Prüfung — Spenden, Zinsen, Stromvergleich, EEG, Backzeit, Zucker — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Bei der Prüfung aller 206 Social-Captions gegen die Rechner passten sechs Captions nicht zum Rechner,
+weil der Rechner selbst falsch rechnete. Diese Welle korrigiert die Rechner; die Captions bleiben unverändert.
+
+| Rechner | vorher | Ursache | jetzt |
+|---|---|---|---|
+| Spenden, Startwerte (500 €, 50.000 € zvE) | Grenzsteuersatz 100 % | (ESt(zvE) − ESt(zvE − 1)) × 100; die ESt ist auf volle Euro abgerundet, die Differenz daher 0 oder 1 € | **35 %** (35,12 %) aus `berechneGrenzsteuersatz` in `steuerprogression.ts`, analytisch; Ersparnis unverändert 175 € |
+| Zinsen, Startwerte (10.000 €, 3,5 %, 10 Jahre) | 14.105,98 € | Kapital jedes Jahr auf den Cent gerundet | **14.105,99 €** = 10.000 × 1,035¹⁰, Zinsen 4.105,99 €; ungerundet fortgeschrieben, nur die Ausgabe gerundet |
+| Stromvergleich, Startwerte (2.500 kWh, 37 ct, 10 €) | Vergleich fest 32 ct + 10 € (920 €) und 28 ct + 9 € (808 €), Sparpotenzial 237 €; Haushaltstabelle mit 32 ct | feste Zahlen, keine SSOT | aus `strompreis.ts`: Durchschnitt **37 ct** + 10 € = 1.045 €, günstigster Normaltarif **33 ct** + 10 € = **945 €**, Sparpotenzial **100 €**; Ökostrom +2 ct und +1 € (1.007 €); Tabelle 1 Person **675 €** |
+| EEG / Photovoltaik, ab 01.08.2026 | Prognose 7,71 / 12,23 / 6,67 / 10,25 / 5,45 / 10,25 ct | −1 % auf den gerundeten Satz statt auf den ungerundeten anzulegenden Wert | BNetzA **7,70 / 12,22 / 6,66 / 10,24 / 5,44 / 10,24 ct**, ohne `prognose`; PV-Beispiel Einspeisung **367 €** (vorher 370 €), Nutzen **1.040 €** (vorher 1.043 €) |
+| Backzeit, Startwerte (180 °C O/U, 45 Min → 160 °C Umluft) | 57 Min | Umluft −20 °C als Temperatursenkung gewertet | **45 Min**; Differenz auf O/U-Basis (Umluft + 20 °C), wie Beispiel und FAQ der Seite |
+| Zucker | Ahornsirup Faktor 0,75; Flüssigkeit 40 % (Agave 35 %) der Ersatzmenge | — | Ahornsirup **1,0**; Flüssigkeit je g Ersatz: Honig **0,2**, Ahornsirup und Agave **0,25** (Faustregel 20–30 ml je 100 g) |
+
+**Quellen** (Werte aus der Vorlage, in diesem Lauf nicht erneut gegen die Quellen geprüft):
+- § 32a EStG 2026 (Grundtarif) für den Grenzsteuersatz.
+- Bundesnetzagentur, EEG-Fördersätze für Inbetriebnahme 01.08.2026–31.01.2027.
+- BDEW-Strompreis 2026 aus `lib/berechnungen/strompreis.ts` (Durchschnitt 37 ct, Festpreis-Neukunden 33 ct; SSOT
+  unverändert).
+
+**Änderungen** (31 Ersetzungen und 6 Datumszeilen = 37 in 12 Dateien, Vorlage
+`_lokal/welle177-rechenfehler-sechs.mjs`, nicht committet; Lib-Prüfung `_lokal/welle177-lib.mts`):
+- **`lib/berechnungen/steuerprogression.ts`:** `berechneGrenzsteuersatz` exportiert.
+- **`lib/berechnungen/spenden.ts`:** Grenzsteuersatz über `berechneGrenzsteuersatz(zvE, false)` statt finiter
+  Differenz.
+- **`lib/berechnungen/zinsen.ts`:** Kapital und Zinsen ungerundet fortgeschrieben; gerundet werden Jahreszeilen und
+  Endkapital.
+- **`lib/berechnungen/stromvergleich.ts` und `components/rechner/StromvergleichRechner.tsx`:** Vergleichstarife
+  aus `getStrompreis('durchschnitt_bdew')` und `getStrompreis('neukunden_festpreis')`, neue Konstanten
+  `GRUNDPREIS_VERGLEICH_MONAT` (10 €) und Ökostrom-Aufschlag (2 ct, 1 €); Haushaltstabelle mit dem BDEW-Satz.
+- **`lib/berechnungen/eeg-einspeiseverguetung.ts`:** Sätze ab 01.08.2026 nach BNetzA, `prognose` entfernt, Stand
+  10/2026.
+- **`lib/rechner-config/wohnen.ts`:** Photovoltaik-Rechner (Beispiel, FAQ, Tabelle, Fußnote, Rechenbeispiel,
+  Hinweis, Vergleich, Quelle) auf die Sätze ab 01.08.2026; die Tabelle behält die Zeile „Inbetriebnahme
+  01.02.–31.07.2026“ mit 7,78 / 12,34 ct, die FAQ den Vergleichssatz. FAQ im `stromkosten-rechner` auf 7,70 ct.
+- **`components/rechner/BackzeitRechner.tsx`:** `tempZielAlsOU` (Umluft + 20 °C) vor der Differenz.
+- **`components/rechner/ZuckerUmrechner.tsx` und `lib/rechner-config/kochen.ts`:** Faktoren wie oben; Tabelle und
+  Rechenbeispiel Ahornsirup (200 g Zucker → ≈ 200 g Ahornsirup).
+- **`scripts/verify-wohnen-p1.ts`:** EEG ab 01.08.2026 bestätigt statt Prognose, fünf Sätze geprüft.
+- **`letzteAktualisierung`** → `2026-10-20` für `spenden-rechner`, `zinsrechner` (`finanzen.ts`),
+  `stromvergleich-rechner`, `photovoltaik-rechner` (`wohnen.ts`), `backzeit-rechner`, `zucker-umrechner`
+  (`kochen.ts`).
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187); `strompreis.ts`.
+
+**Vermerk:** Die zugehörigen Captions folgen in Welle 187.
+
+**Gates:**
+- Phase 0 an `6b816eb`: `git status` leer, oben `6b816eb` und `1061e10` (Welle 176). Greps:
+  „berechneEStGrund(zvE - 1, 2026)“ `spenden.ts:1`; „prognose: true“ `eeg-einspeiseverguetung.ts:1`;
+  „h.verbrauch * 32 / 100“ `StromvergleichRechner.tsx:1`; „const tempDiff = tempOrig - tempZiel;“
+  `BackzeitRechner.tsx:1`; „fluessKorrektur: 0.4“ `ZuckerUmrechner.tsx:2`; „7,78 ct“ `wohnen.ts:10`.
+- Phase 1: „OK — 37 Ersetzungen in 12 Dateien.“, Exit 0; geändert genau die 12 Dateien.
+- Phase 2: Lib-Prüfung 15× OK, „Alle Werte OK“, Exit 0 (Grenzsteuersatz 50.000 € 35,12 % in Lib und unabhängig,
+  30.000 € 28,19 %; Endkapital 14.105,99 € in Lib und unabhängig, Zinsen 4.105,99 €; Strom 1.045 / 1.045 / 945 €,
+  Sparpotenzial 100 €, Ökostrom 1.007 €; EEG 10/2026 7,70 / 12,22 ct ohne Prognose, 04/2026 unverändert 7,78 ct).
+  `verify-wohnen-p1` 55/58: rot nur die drei VPI-Fälle (vorher schon rot, 51/54; behebt Welle 180), alle EEG-Fälle
+  grün. `verify-steuerprogression` 46/48: rot nur F-01 und F-02 (Länge der Kurven- und Tabellendaten, vorher schon
+  rot; behebt Welle 186). `verify-pv-ertragsmodell` 33/33. Greps: „berechneEStGrund(zvE - 1, 2026)“ und
+  „prognose: true“ keine Ausgabe; „const tempZielAlsOU“ `BackzeitRechner.tsx:1`; „fluessKorrektur: 0.25“
+  `ZuckerUmrechner.tsx:2`; „export function berechneGrenzsteuersatz“ `steuerprogression.ts:1`; „7,78 ct“
+  `wohnen.ts:2` (Tabellenzeile 01.02.–31.07.2026 und Vergleichssatz in der FAQ); „7,70 ct“ `wohnen.ts:10`.
+  `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die zwei bekannten Warnungen. Im gebauten HTML:
+  `/finanzen/spenden-rechner` „persönlicher Grenzsteuersatz 35 %“ mit 175,00 € Ersparnis, kein „100 %“ im Text;
+  `/finanzen/zinsrechner` „14.105,99“ 2×, „14.105,98“ fehlt; `/wohnen/stromvergleich-rechner` „945,00 €/Jahr“ und
+  „1 Person (1.500 kWh) ca. 675,00 €/Jahr“; `/wohnen/photovoltaik-rechner` „7,70 ct/kWh“ 11×, „12,22 ct/kWh“ 4×;
+  `/kochen/backzeit-rechner` „Angepasste Backzeit 45 Min“, „57 Min“ fehlt.
+
+**Commits:** A `200ed8b` (die 12 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 176: Minijob auf Steuerkarte — Vorsorgepauschale ohne Kranken-, Pflege- und Arbeitslosenversicherung — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** „Grenze der Rechnung“ im Historienblock von Welle 171 (`ec73e6a`): Bei einem Job auf Steuerkarte bis
