@@ -16,6 +16,10 @@ import {
   rechenwegDezimalZuBruch,
   rechenwegBruchZuDezimal,
   rechenwegVergleich,
+  bruecheDazwischen,
+  rechenwegDazwischen,
+  mediantText,
+  DAZWISCHEN_MAX,
   type Operation,
   type Bruch,
   type BruchRechenErgebnis,
@@ -25,6 +29,7 @@ import {
   type OperandQuelle,
   type RechenwegSchritt,
   type DezimalAnzeige,
+  type DazwischenErgebnis,
 } from '@/lib/berechnungen/bruchrechnung';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -32,7 +37,7 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
-type Tab = 'rechnen' | 'kuerzen' | 'dezimal' | 'vergleichen';
+type Tab = 'rechnen' | 'kuerzen' | 'dezimal' | 'vergleichen' | 'dazwischen';
 
 /** Null als BigInt — Zähler, Nenner und ganze Teile sind seit W154 BigInt. */
 const NULL = BigInt(0);
@@ -217,6 +222,8 @@ const tabOptionen: { key: Tab; label: string }[] = [
   { key: 'kuerzen', label: 'Kürzen' },
   { key: 'dezimal', label: 'Dezimal ↔ Bruch' },
   { key: 'vergleichen', label: 'Vergleichen' },
+  // W190: Nutzerfeedback 20.10.2026 („welche Zahlen liegen zwischen einem Neuntel und einem Elftel“)
+  { key: 'dazwischen', label: 'Brüche dazwischen' },
 ];
 
 const operationen: Operation[] = ['+', '-', '×', '÷'];
@@ -252,6 +259,13 @@ export default function BruchRechner() {
   const [vn1, setVn1] = useState('3');
   const [vz2, setVz2] = useState('3');
   const [vn2, setVn2] = useState('4');
+
+  // Tab 5: Brüche dazwischen (W190)
+  const [wz1, setWz1] = useState('1');
+  const [wn1, setWn1] = useState('3');
+  const [wz2, setWz2] = useState('1');
+  const [wn2, setWn2] = useState('2');
+  const [wAnzahl, setWAnzahl] = useState('3');
 
   // Ergebnis Tab 1
   const rechnung = useMemo<Pruefung<{ o1: OperandOk; o2: OperandOk; ergebnis: BruchRechenErgebnis }>>(() => {
@@ -315,6 +329,29 @@ export default function BruchRechner() {
     return e ? { ok: true, e, b1: { zaehler: z1v, nenner: n1v }, b2: { zaehler: z2v, nenner: n2v } } : { ok: false, fehler: 'Diese Brüche lassen sich nicht vergleichen.' };
   }, [vz1, vn1, vz2, vn2]);
   const vergleichErgebnis = vergleich4.ok ? vergleich4.e : null;
+
+  // Ergebnis Tab 5
+  const dazwischen5 = useMemo<Pruefung<{ e: DazwischenErgebnis }>>(() => {
+    const z1w = ganzzahl(wz1);
+    const n1w = ganzzahl(wn1);
+    const z2w = ganzzahl(wz2);
+    const n2w = ganzzahl(wn2);
+    const anzahl = ganzzahl(wAnzahl);
+    if (z1w === null || n1w === null || z2w === null || n2w === null) return { ok: false, fehler: HINWEIS_ZN };
+    if (n1w === NULL || n2w === NULL) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
+    if (anzahl === null || anzahl < BigInt(1) || anzahl > BigInt(DAZWISCHEN_MAX)) {
+      return { ok: false, fehler: `Anzahl bitte als ganze Zahl von 1 bis ${DAZWISCHEN_MAX} eingeben.` };
+    }
+    const b1: Bruch = { zaehler: z1w, nenner: n1w };
+    const b2: Bruch = { zaehler: z2w, nenner: n2w };
+    if (vergleicheBrueche(b1, b2)?.zeichen === '=') {
+      return { ok: false, fehler: 'Beide Brüche sind gleich groß — dazwischen liegt kein Bruch.' };
+    }
+    const e = bruecheDazwischen(b1, b2, Number(anzahl));
+    return e ? { ok: true, e } : { ok: false, fehler: 'Für diese Brüche lässt sich nichts berechnen.' };
+  }, [wz1, wn1, wz2, wn2, wAnzahl]);
+  const dazwischenErgebnis = dazwischen5.ok ? dazwischen5.e : null;
+  const rechenweg5 = useMemo(() => (dazwischenErgebnis ? rechenwegDazwischen(dazwischenErgebnis) : []), [dazwischenErgebnis]);
 
 
   return (
@@ -531,6 +568,63 @@ export default function BruchRechner() {
 
               {/* Die frühere Dezimalzeile steht jetzt als letzter Schritt „Kontrolle“ im Rechenweg (W152). */}
               <Rechenweg schritte={rechenwegVergleich(vergleich4.b1, vergleich4.b2, vergleichErgebnis)} />
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Tab 5: Brüche dazwischen (W190) */}
+      {tab === 'dazwischen' && (
+        <div>
+          <div className="flex flex-wrap items-end justify-center gap-4 mb-4">
+            <BruchEingabe zaehler={wz1} setZaehler={setWz1} nenner={wn1} setNenner={setWn1} label="Bruch 1" />
+            <div className="pb-4 text-sm font-medium text-gray-600 dark:text-gray-400">und</div>
+            <BruchEingabe zaehler={wz2} setZaehler={setWz2} nenner={wn2} setNenner={setWn2} label="Bruch 2" />
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
+            <label htmlFor="bruch-dazwischen-anzahl" className="text-sm text-gray-600 dark:text-gray-400">Wie viele Brüche dazwischen? (1 bis {DAZWISCHEN_MAX})</label>
+            <div className="w-20">
+              <NummerEingabe id="bruch-dazwischen-anzahl" value={wAnzahl} onChange={setWAnzahl} placeholder="3" />
+            </div>
+          </div>
+
+          {!dazwischen5.ok && <Hinweis text={dazwischen5.fehler} />}
+
+          {dazwischenErgebnis && (
+            <div className="space-y-4">
+              <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
+                <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-3">
+                  {dazwischenErgebnis.brueche.length === 1 ? 'Ein Bruch dazwischen' : `${dazwischenErgebnis.brueche.length} Brüche dazwischen`}
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-3 text-2xl font-extrabold text-primary-700 dark:text-primary-300">
+                  <BruchAnzeige zaehler={dazwischenErgebnis.kleiner.zaehler} nenner={dazwischenErgebnis.kleiner.nenner} className="text-lg font-semibold text-gray-600 dark:text-gray-400" />
+                  {dazwischenErgebnis.brueche.map((b, i) => (
+                    <span key={i} className="inline-flex items-center min-w-0 max-w-full">
+                      <span className="text-lg text-gray-600 dark:text-gray-400 mx-1">&lt;</span>
+                      {b.gekuerzt.nenner === BigInt(1)
+                        ? <span className="mx-1 min-w-0 break-all">{String(b.gekuerzt.zaehler)}</span>
+                        : <BruchAnzeige zaehler={b.gekuerzt.zaehler} nenner={b.gekuerzt.nenner} />}
+                    </span>
+                  ))}
+                  <span className="text-lg text-gray-600 dark:text-gray-400 mx-1">&lt;</span>
+                  <BruchAnzeige zaehler={dazwischenErgebnis.groesser.zaehler} nenner={dazwischenErgebnis.groesser.nenner} className="text-lg font-semibold text-gray-600 dark:text-gray-400" />
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
+                  Zwischen zwei verschiedenen Brüchen liegen unendlich viele weitere. Mit einer größeren Anzahl findet der Rechner mehr davon.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                <span className="font-semibold">Schneller Weg für einen Bruch:</span> Zähler plus Zähler, Nenner plus Nenner.{' '}
+                <span className="font-mono text-xs [overflow-wrap:anywhere]">{mediantText(dazwischenErgebnis)}</span> liegt immer zwischen beiden Brüchen.
+              </div>
+
+              <Rechenweg schritte={rechenweg5} />
+
+              <ErgebnisAktionen
+                ergebnisText={`Brüche zwischen ${dazwischenErgebnis.kleiner.zaehler}/${dazwischenErgebnis.kleiner.nenner} und ${dazwischenErgebnis.groesser.zaehler}/${dazwischenErgebnis.groesser.nenner}: ${dazwischenErgebnis.brueche.map(b => (b.gekuerzt.nenner === BigInt(1) ? String(b.gekuerzt.zaehler) : `${b.gekuerzt.zaehler}/${b.gekuerzt.nenner}`)).join(', ')}`}
+                seitenTitel="Bruchrechner"
+              />
             </div>
           )}
         </div>

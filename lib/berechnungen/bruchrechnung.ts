@@ -2,7 +2,7 @@
  * Bruchrechnung für den Bruchrechner — durchgehend exakt mit BigInt (W154).
  *
  * Invariante: Zähler, Nenner, ganze Teile, kgV, GGT, Erweiterungsfaktoren und Zwischenwerte
- * sind BigInt, in allen vier Reitern und im Rechenweg. Eingaben kommen als Text und werden ohne
+ * sind BigInt, in allen fünf Reitern und im Rechenweg (fünfter Reiter „Brüche dazwischen“ seit W190). Eingaben kommen als Text und werden ohne
  * Umweg über eine Gleitkommazahl in BigInt überführt. Bis W153 war das Number: Ab
  * Number.MAX_SAFE_INTEGER (9007199254740991) rundete die Rechnung still, und
  * 999999999/1000000000 − 999999998/999999999 ergab 0 statt 1/999999999000000000.
@@ -282,6 +282,85 @@ export function vergleicheBrueche(b1: Bruch, b2: Bruch): VergleichErgebnis | nul
   };
 }
 
+// --- Tab 5: Brüche dazwischen (W190) ---
+//
+// Anlass: Nutzerfeedback 20.10.2026 („welche Zahlen liegen zwischen einem Neuntel und einem
+// Elftel“). Schulweg: beide Brüche auf den Hauptnenner bringen; liegen zwischen den Zählern nicht
+// genug ganze Zahlen, beide mit demselben Faktor weiter erweitern. Die Zähler dazwischen ergeben
+// die gesuchten Brüche, danach gekürzt.
+
+/** Höchstzahl der Brüche, die der Reiter „Brüche dazwischen“ auflistet. */
+export const DAZWISCHEN_MAX = 20;
+
+export interface BruchRohGekuerzt {
+  /** Auf dem gemeinsamen Nenner, wie im Rechenweg. */
+  roh: Bruch;
+  gekuerzt: Bruch;
+}
+
+export interface DazwischenErgebnis {
+  /** Die Eingaben der Größe nach, Nenner positiv (nicht gekürzt, damit der Rechenweg die Eingabe zeigt). */
+  kleiner: Bruch;
+  groesser: Bruch;
+  /** true, wenn der erste eingegebene Bruch der größere war. */
+  getauscht: boolean;
+  /** kgV der Nenner und die beiden Zähler darauf. */
+  hauptnenner: bigint;
+  zaehlerKlein: bigint;
+  zaehlerGross: bigint;
+  /** Zusätzlicher Faktor für beide Brüche, damit zwischen den Zählern genug ganze Zahlen liegen; 1 = keiner. */
+  faktor: bigint;
+  /** Die gesuchten Brüche, aufsteigend: die nächsten Zähler über dem kleineren Bruch. */
+  brueche: BruchRohGekuerzt[];
+  /** (Zähler + Zähler)/(Nenner + Nenner): liegt bei positiven Nennern immer zwischen beiden Brüchen. */
+  mediant: BruchRohGekuerzt;
+}
+
+function nennerPositiv(b: Bruch): Bruch {
+  return b.nenner < B0 ? { zaehler: -b.zaehler, nenner: -b.nenner } : b;
+}
+
+/**
+ * `anzahl` Brüche zwischen b1 und b2 (Reihenfolge der Eingabe egal). null bei Nenner 0, gleich
+ * großen Brüchen oder einer Anzahl außerhalb 1 bis DAZWISCHEN_MAX.
+ *
+ * Mit Hauptnenner h und den Zählern a < c darauf liegen k·(c − a) − 1 ganze Zahlen zwischen k·a
+ * und k·c. Der kleinste Faktor k mit k·(c − a) − 1 ≥ anzahl ist ⌈(anzahl + 1)/(c − a)⌉.
+ * Gewählt werden die Zähler k·a + 1 bis k·a + anzahl über dem Nenner k·h.
+ */
+export function bruecheDazwischen(b1: Bruch, b2: Bruch, anzahl: number): DazwischenErgebnis | null {
+  if (b1.nenner === B0 || b2.nenner === B0) return null;
+  if (!Number.isInteger(anzahl) || anzahl < 1 || anzahl > DAZWISCHEN_MAX) return null;
+  const v = vergleicheBrueche(b1, b2);
+  if (!v || v.zeichen === '=') return null;
+
+  const getauscht = v.zeichen === '>';
+  const kleiner = nennerPositiv(getauscht ? b2 : b1);
+  const groesser = nennerPositiv(getauscht ? b1 : b2);
+  const hn = v.gleichnamig.hauptnenner;
+  const zk = getauscht ? v.gleichnamig.zaehler2 : v.gleichnamig.zaehler1;
+  const zg = getauscht ? v.gleichnamig.zaehler1 : v.gleichnamig.zaehler2;
+
+  const n = BigInt(anzahl);
+  const abstand = zg - zk; // > 0
+  const faktor = (n + abstand) / abstand; // = ⌈(n + 1)/abstand⌉ für abstand ≥ 1
+  const nenner = hn * faktor;
+  const start = zk * faktor;
+  const brueche: BruchRohGekuerzt[] = [];
+  for (let i = B1; i <= n; i++) {
+    const roh: Bruch = { zaehler: start + i, nenner };
+    brueche.push({ roh, gekuerzt: kuerzen(roh) });
+  }
+  const mediantRoh: Bruch = { zaehler: kleiner.zaehler + groesser.zaehler, nenner: kleiner.nenner + groesser.nenner };
+
+  return {
+    kleiner, groesser, getauscht,
+    hauptnenner: hn, zaehlerKlein: zk, zaehlerGross: zg,
+    faktor, brueche,
+    mediant: { roh: mediantRoh, gekuerzt: kuerzen(mediantRoh) },
+  };
+}
+
 // --- Dezimalanzeige ---
 
 const MINUS = '−';
@@ -364,6 +443,11 @@ function klammer(x: bigint): string {
 function bruchText(b: Bruch): string {
   const negativ = b.zaehler !== B0 && (b.zaehler < B0) !== (b.nenner < B0);
   return `${negativ ? MINUS : ''}${betrag(b.zaehler)}/${betrag(b.nenner)}`;
+}
+
+/** Wie bruchText(), Nenner 1 als ganze Zahl: 0/1 → „0“, −3/1 → „−3“ (W190). */
+function bruchOderGanz(b: Bruch): string {
+  return b.nenner === B1 ? zahl(b.zaehler) : bruchText(b);
 }
 
 /** Bruch als zweiter Operand: negative Brüche in Klammern. */
@@ -592,4 +676,83 @@ export function rechenwegVergleich(b1: Bruch, b2: Bruch, e: VergleichErgebnis): 
     schritte.push({ titel: 'Kontrolle', rechnung });
   }
   return schritte;
+}
+
+/**
+ * Reiter „Brüche dazwischen“ (W190): ordnen, gleichnamig machen, bei Bedarf weiter erweitern,
+ * Zähler dazwischen wählen, kürzen, Dezimalwerte als Kontrolle.
+ */
+export function rechenwegDazwischen(e: DazwischenErgebnis): RechenwegSchritt[] {
+  const k = e.kleiner;
+  const g = e.groesser;
+  const hn = e.hauptnenner;
+  const schritte: RechenwegSchritt[] = [];
+
+  if (e.getauscht) {
+    schritte.push({ titel: 'Der Größe nach ordnen', rechnung: `${bruchText(g)} > ${bruchText(k)} → gesucht sind Brüche zwischen ${bruchText(k)} und ${bruchText(g)}` });
+  }
+  if (k.nenner === g.nenner) {
+    schritte.push({ titel: 'Gleiche Nenner — kein Erweitern nötig', rechnung: `${bruchText(k)} und ${bruchText(g)}` });
+  } else {
+    schritte.push({ titel: 'Hauptnenner bestimmen', rechnung: `kgV(${k.nenner}, ${g.nenner}) = ${hn}` });
+    const erweitern: [Bruch, bigint, string][] = [
+      [k, e.zaehlerKlein, 'Kleineren'],
+      [g, e.zaehlerGross, 'Größeren'],
+    ];
+    for (const [b, z, welcher] of erweitern) {
+      const f = hn / b.nenner;
+      if (f === B1) continue;
+      schritte.push({
+        titel: `${welcher} Bruch mit ${f} erweitern`,
+        rechnung: `${bruchText(b)} = (${zahl(b.zaehler)} × ${f})/(${b.nenner} × ${f}) = ${bruchText({ zaehler: z, nenner: hn })}`,
+      });
+    }
+  }
+
+  const anzahl = e.brueche.length;
+  const f = e.faktor;
+  const nenner = hn * f;
+  const unten = e.zaehlerKlein * f;
+  const oben = e.zaehlerGross * f;
+  if (f > B1) {
+    const platz = e.zaehlerGross - e.zaehlerKlein - B1;
+    const liegt = platz === B0
+      ? `liegt keine ganze Zahl`
+      : platz === B1 ? `liegt nur eine ganze Zahl` : `liegen nur ${platz} ganze Zahlen`;
+    schritte.push({
+      titel: `Platz schaffen: beide Brüche mit ${f} erweitern`,
+      rechnung: `Zwischen ${zahl(e.zaehlerKlein)} und ${zahl(e.zaehlerGross)} ${liegt}, gebraucht ${anzahl === 1 ? 'wird 1' : `werden ${anzahl}`} → ${bruchText({ zaehler: e.zaehlerKlein, nenner: hn })} = ${bruchText({ zaehler: unten, nenner })} und ${bruchText({ zaehler: e.zaehlerGross, nenner: hn })} = ${bruchText({ zaehler: oben, nenner })}`,
+    });
+  }
+  schritte.push({
+    titel: anzahl === 1 ? 'Einen Zähler dazwischen wählen' : 'Zähler dazwischen wählen',
+    rechnung: `${[unten, ...e.brueche.map(b => b.roh.zaehler), oben].map(zahl).join(' < ')} → ${e.brueche.map(b => bruchText(b.roh)).join(', ')}`,
+  });
+
+  const kuerzbar = e.brueche.filter(b => b.gekuerzt.nenner !== b.roh.nenner);
+  if (kuerzbar.length > 0) {
+    schritte.push({ titel: 'Kürzen', rechnung: kuerzbar.map(b => `${bruchText(b.roh)} = ${bruchOderGanz(b.gekuerzt)}`).join(', ') });
+  }
+
+  // Kontrolle mit den angezeigten Dezimalwerten; nur wenn sie auf sechs Stellen echt steigen
+  const reihe = [k, ...e.brueche.map(b => b.gekuerzt), g];
+  const anzeigen = reihe.map(b => dezimalAnzeige(b));
+  if (anzeigen.every(a => a !== null)) {
+    const a = anzeigen as DezimalAnzeige[];
+    const steigend = a.every((x, i) => i === 0 || a[i - 1].millionstel < x.millionstel);
+    schritte.push({
+      titel: 'Kontrolle',
+      rechnung: steigend
+        ? reihe.map((b, i) => (b.nenner === B1 ? zahl(b.zaehler) : `${bruchText(b)} ${a[i].zeichen} ${a[i].wert}`)).join(' < ')
+        : 'Die Brüche liegen so dicht beieinander, dass sie sich auf sechs Nachkommastellen nicht unterscheiden; exakt zeigen es die Zähler oben.',
+    });
+  }
+  return schritte;
+}
+
+/** Hinweiszeile zum Mediant: (Zähler + Zähler)/(Nenner + Nenner), bei Bedarf gekürzt. */
+export function mediantText(e: DazwischenErgebnis): string {
+  const m = e.mediant;
+  const gekuerzt = m.gekuerzt.nenner !== m.roh.nenner ? ` = ${bruchOderGanz(m.gekuerzt)}` : '';
+  return `(${zahl(e.kleiner.zaehler)} + ${klammer(e.groesser.zaehler)})/(${e.kleiner.nenner} + ${e.groesser.nenner}) = ${bruchText(m.roh)}${gekuerzt}`;
 }

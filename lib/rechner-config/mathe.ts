@@ -3,14 +3,14 @@ import type { RechnerConfig } from './types';
 export const matheRechner: RechnerConfig[] = [
   {
     slug: 'bruchrechner',
-    letzteAktualisierung: '2026-09-30',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Bruchrechner',
-    beschreibung: 'Brüche berechnen: Addieren, subtrahieren, multiplizieren, dividieren. Mit Rechenweg, Kürzen und Umrechnung.',
+    beschreibung: 'Brüche berechnen: Addieren, subtrahieren, multiplizieren, dividieren. Mit Rechenweg, Kürzen, Umrechnung und Brüchen dazwischen.',
     kategorie: 'Mathe & Schule',
     kategorieSlug: 'mathe',
     metaTitle: 'Bruchrechner — Brüche berechnen & kürzen',
     metaDescription: 'Bruchrechner ✓ Addieren, subtrahieren, multiplizieren, dividieren ✓ Kürzen ✓ Mit Rechenweg ✓ Kostenlos. Jetzt Brüche berechnen! ✓ Mit KI-Erklärung.',
-    keywords: ['bruchrechner', 'brüche berechnen', 'bruch kürzen', 'bruchrechnung', 'brüche addieren', 'brüche multiplizieren', 'dezimalzahl in bruch', 'dezimalzahl mal bruch'],
+    keywords: ['bruchrechner', 'brüche berechnen', 'bruch kürzen', 'bruchrechnung', 'brüche addieren', 'brüche multiplizieren', 'dezimalzahl in bruch', 'dezimalzahl mal bruch', 'brüche zwischen zwei brüchen'],
     icon: '🔢',
     beispiel: '1/3 + 2/5: Hauptnenner 15 → 5/15 + 6/15 = 11/15. Multiplikation: 2/3 × 3/4 = 6/12 = 1/2. Mit Dezimalzahl: 0,75 × 2/3 = 3/4 × 2/3 = 1/2.',
     faq: [
@@ -41,6 +41,11 @@ export const matheRechner: RechnerConfig[] = [
       {
         frage: 'Wie dividiert man durch einen Bruch?',
         antwort: 'Man multipliziert mit dem Kehrwert des zweiten Bruchs. Den Kehrwert erhält man, indem Zähler und Nenner getauscht werden. Beispiel: 3/4 ÷ 2/5 = 3/4 × 5/2 = 15/8.',
+      },
+      {
+        // W190: Nutzerfeedback 20.10.2026
+        frage: 'Wie finde ich Brüche zwischen zwei Brüchen?',
+        antwort: 'Beide Brüche auf den Hauptnenner bringen und die Zähler dazwischen nehmen. Zwischen 1/11 und 1/9: Hauptnenner 99 ergibt 9/99 und 11/99, dazwischen liegt 10/99. Werden mehr Brüche gebraucht, als Zähler dazwischen passen, erweitert man beide weiter, etwa mit 2: 18/198 und 22/198, dazwischen 19/198, 20/198 = 10/99 und 21/198 = 7/66. Schneller Weg für einen Bruch: Zähler plus Zähler, Nenner plus Nenner, also (1 + 1)/(11 + 9) = 2/20 = 1/10. Im Rechner erledigt das der Reiter „Brüche dazwischen“, mit Rechenweg.',
       },
     ],
     contentBloecke: [
@@ -148,6 +153,19 @@ export const matheRechner: RechnerConfig[] = [
           ['Scheinbruch', 'Zähler ist Vielfaches des Nenners, ergibt ganze Zahl', '6/3 = 2'],
         ],
         fussnote: 'Gemischte Zahl und unechter Bruch sind nur zwei Schreibweisen desselben Werts. Für Multiplikation und Division wandelt man gemischte Zahlen zuerst in unechte Brüche um; als Endergebnis gibt man oft wieder die anschaulichere gemischte Zahl an — mit vollständig gekürztem Bruchanteil. Ein Scheinbruch ist ein Sonderfall des unechten Bruchs, bei dem die Division ohne Rest aufgeht und eine ganze Zahl entsteht.',
+      },
+      {
+        // W190: Nutzerfeedback 20.10.2026; Rechnung wie bruecheDazwischen() mit Anzahl 2
+        typ: 'beispielrechnung',
+        titel: 'Brüche zwischen zwei Brüchen finden: zwischen 1/11 und 1/9',
+        schritte: [
+          { label: 'Hauptnenner bestimmen (kgV der Nenner 11 und 9)', formel: 'kgV(11, 9) = 99', ergebnis: 'Hauptnenner 99' },
+          { label: 'Beide Brüche erweitern', formel: '1/11 = 9/99, 1/9 = 11/99', ergebnis: 'Zähler 9 und 11' },
+          { label: 'Zähler dazwischen nehmen', formel: '9 < 10 < 11', ergebnis: '10/99' },
+          { label: 'Für zwei Brüche: beide mit 2 erweitern', formel: '9/99 = 18/198, 11/99 = 22/198', ergebnis: '19/198 und 20/198' },
+          { label: 'Kürzen', formel: '20/198 = (20÷2)/(198÷2)', ergebnis: '19/198 und 10/99' },
+        ],
+        fazit: 'Zwischen 1/11 ≈ 0,0909 und 1/9 ≈ 0,1111 liegen also zum Beispiel 19/198 ≈ 0,0960 und 10/99 ≈ 0,1010. Mit dem Hauptnenner allein passt nur ein Zähler zwischen 9 und 11; wer mehr Brüche braucht, erweitert beide weiter. Mit 3 liegen schon fünf Zähler dazwischen (28/297 bis 32/297). Zwischen zwei verschiedenen Brüchen gibt es immer unendlich viele weitere. Für genau einen Bruch geht es noch schneller: Zähler plus Zähler, Nenner plus Nenner. (1 + 1)/(11 + 9) = 2/20 = 1/10 liegt zwischen 1/11 und 1/9, und das klappt bei positiven Nennern immer.',
       },
       {
         typ: 'checkliste',
