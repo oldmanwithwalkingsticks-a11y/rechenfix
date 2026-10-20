@@ -80,7 +80,8 @@ export default function KaffeeWasserRechner() {
       const tassen = wasser / 250;
       return { ratio, wert: wasser, tassen };
     }
-  }, [menge, methode, modus, staerke, effModus, istEspresso]);
+    // W186: „modus“ aus den Abhängigkeiten entfernt — die Rechnung liest nur effModus (ESLint exhaustive-deps).
+  }, [menge, methode, staerke, effModus, istEspresso]);
 
   const eingabeMenge = parseDeutscheZahl(menge);
   const einheit = istEspresso ? 'g' : effModus === 'wasser' ? 'ml' : 'g';

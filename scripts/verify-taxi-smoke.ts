@@ -12,8 +12,9 @@ const tests: Test[] = [
   { label: 'G3 Berlin 10km Tag 0min', r: berechneTaxi('berlin', 10, false, 0), soll: 29.40, sollTrink: 32.34 },
   { label: 'G4 Hamburg 10km Tag 5min', r: berechneTaxi('hamburg', 10, false, 5), soll: 33.97 },
   { label: 'G5 Muenchen 10km Tag 0min', r: berechneTaxi('muenchen', 10, false, 0), soll: 32.90 },
-  // G6: heute (24.04.2026 < 2026-06-01) → Phase 1 aktiv
-  { label: 'G6 Koeln heute 10km Tag (Phase 1)', r: berechneTaxi('koeln', 10, false, 0), soll: 29.70, sollStand: '2022-09-01' },
+  // G6: 31.05.2026, letzter Tag vor der 9. ÄndVO zum Kölner Taxitarif → Phase 1. W186: vorher „heute“ —
+  // seit dem 01.06.2026 galt dadurch die neue Phase und der Fall war rot.
+  { label: 'G6 Koeln 31.05.2026 10km Tag (Phase 1)', r: berechneTaxi('koeln', 10, false, 0, new Date('2026-05-31T12:00:00')), soll: 29.70, sollStand: '2022-09-01' },
   // G7: 02.06.2026 → Phase 2: einheitlicher km 2,90 €
   { label: 'G7 Koeln 2026-06-02 10km Tag (Phase 2)', r: berechneTaxi('koeln', 10, false, 0, new Date('2026-06-02T12:00:00')), soll: 33.90, sollStand: '2026-06-01' },
   // G8: 02.03.2027 → Phase 3: Grundpreis 5,00 €, km 3,00 €

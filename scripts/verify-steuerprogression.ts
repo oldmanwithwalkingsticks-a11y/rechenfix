@@ -195,13 +195,13 @@ cases.push(
 
 // === Cluster F: KurvenDaten + tabelleDaten ===
 //
-// kurvenDaten: 0 bis 200.000 in 2.000er-Schritten → 101 Punkte (0, 2k, 4k, ..., 200k)
-// tabelleDaten: 10.000 bis 200.000 in 10.000er-Schritten → 20 Zeilen
+// kurvenDaten: 0 bis 300.000 (PLOT_MAX_EINKOMMEN, Welle 11) in 2.000er-Schritten → 151 Punkte
+// tabelleDaten: 10.000 bis 300.000 in 10.000er-Schritten → 30 Zeilen. W186: vorher 200.000 (101 / 20).
 
 const f1 = berechneSteuerprogression(50_000, false, false);
 cases.push(
-  { name: 'F-01 kurvenDaten-length = 101 (0 bis 200k in 2k-Schritten)', actual: f1!.kurvenDaten.length, expected: 101, tolerance: 0 },
-  { name: 'F-02 tabelleDaten-length = 20 (10k bis 200k in 10k)',         actual: f1!.tabelleDaten.length, expected: 20, tolerance: 0 },
+  { name: 'F-01 kurvenDaten-length = 151 (0 bis 300k in 2k-Schritten)', actual: f1!.kurvenDaten.length, expected: 151, tolerance: 0 },
+  { name: 'F-02 tabelleDaten-length = 30 (10k bis 300k in 10k)',         actual: f1!.tabelleDaten.length, expected: 30, tolerance: 0 },
   { name: 'F-03 kurvenDaten[0].einkommen = 0',                           actual: f1!.kurvenDaten[0].einkommen, expected: 0 },
   { name: 'F-04 kurvenDaten[100].einkommen = 200.000',                   actual: f1!.kurvenDaten[100].einkommen, expected: 200000 },
   { name: 'F-05 tabelleDaten[0].einkommen = 10.000',                     actual: f1!.tabelleDaten[0].einkommen, expected: 10000 },

@@ -22,6 +22,7 @@
     "lint:energiepreise": "node scripts/check-energiepreise.mjs",
     "lint:wellenhistorie": "node scripts/check-wellenhistorie.mjs",
     "lint:contentbloecke": "node scripts/check-contentbloecke-pflicht.mjs",
+    "verify:alle": "node scripts/verify-alle.mjs",
     "audit:bundle": "npx tsx scripts/build-audit-bundle.ts",
     "longtail:diff": "node scripts/longtail-diff-check.mjs"
   },
@@ -55,6 +56,7 @@
     "postcss": "^8",
     "sharp": "^0.35.5",
     "tailwindcss": "^3.4.1",
+    "tsx": "4.23.15",
     "typescript": "^5"
   },
   "overrides": {

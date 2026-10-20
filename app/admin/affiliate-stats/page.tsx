@@ -69,6 +69,15 @@ interface SocialStatus {
   tiktokNaechsterTakttag?: string;
 }
 
+// W186: KI_LABELS vorher innerhalb der Komponente (ESLint react-hooks/exhaustive-deps: fehlende Abhängigkeit von useMemo).
+const KI_LABELS: Record<string, string> = {
+  'erklaerung': 'Fix erklärt',
+  'ki-rechner': 'KI-Rechner',
+  'was-waere-wenn': 'Was wäre wenn…?',
+  'strom-spartipp': 'KI-Spartipp Strom',
+  'schlaf-tipp': 'Schlaf-Tipp',
+};
+
 const AUTH_STORAGE_KEY = 'rf_admin_stats_token';
 
 function getMonatKey(t: number) {
@@ -230,14 +239,6 @@ export default function AffiliateStatsPage() {
   const pdfs = useMemo(() => allePdfs.filter(p => isImMonat(p.t, monat)), [allePdfs, monat]);
 
   const kiEreignisse = useMemo(() => alleKi.filter(k => isImMonat(k.t, monat)), [alleKi, monat]);
-
-  const KI_LABELS: Record<string, string> = {
-    'erklaerung': 'Fix erklärt',
-    'ki-rechner': 'KI-Rechner',
-    'was-waere-wenn': 'Was wäre wenn…?',
-    'strom-spartipp': 'KI-Spartipp Strom',
-    'schlaf-tipp': 'Schlaf-Tipp',
-  };
 
   const nachKiFunktion = useMemo(() => {
     const map = new Map<string, { ok: number; fehler: number; letzter: number }>();

@@ -58,8 +58,9 @@ cases.push({
   quelle: '149c — vertauschte Achse raus',
 });
 cases.push({
-  name: 'arbeit.ts: "1.600 € erwerbstätig / 1.475 € nicht erwerbstätig" in formel',
-  actual: arbeitTs.includes('1.600 € erwerbstätig / 1.475 € nicht erwerbstätig'),
+  // W186: Das formel-Feld gibt es seit Welle 102 nicht mehr; geprüft wird die FAQ zum Selbstbehalt.
+  name: 'arbeit.ts: FAQ nennt 1.600 € (erwerbstätig) / 1.475 € (nicht erwerbstätig)',
+  actual: arbeitTs.includes('1.600 € wenn er erwerbstätig ist, 1.475 € wenn er nicht erwerbstätig ist'),
   expected: true,
   quelle: '149c — neue Achse',
 });
@@ -70,8 +71,9 @@ cases.push({
   quelle: '149c — erfundene Begründung gestrichen',
 });
 cases.push({
-  name: 'arbeit.ts: Erklärtext nennt "nicht zwischen Trennungs- und nachehelicher Phase, sondern nach Erwerbstätigkeit"',
-  actual: arbeitTs.includes('nicht** zwischen Trennungs- und nachehelicher Phase, sondern nach Erwerbstätigkeit'),
+  // W186: Das erklaerung-Feld gibt es seit Welle 102 nicht mehr; geprüft wird die Infobox.
+  name: 'arbeit.ts: Infobox: Unterscheidung nach Erwerbstätigkeit, nicht nach Trennungs-/Scheidungsphase',
+  actual: arbeitTs.includes('Die Unterscheidung verläuft entlang der Erwerbstätigkeit, nicht entlang der Trennungs- oder Scheidungsphase'),
   expected: true,
   quelle: '149c — neue Erklärung',
 });

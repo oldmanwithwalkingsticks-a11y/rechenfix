@@ -629,6 +629,13 @@ Neue Einträge in `WHITELIST` (Rechner-Drifts) **und** `META_WHITELIST` (Meta-Ro
 
 Bei jeder neuen statischen Route unter `app/<route>/page.tsx` (oder `app/<route>/<sub>/page.tsx`) muss der Eintrag in `META_ROUTES` (`scripts/slug-drift-scan.mjs`) ergänzt werden — sonst bricht der Build, sobald die Route irgendwo intern verlinkt wird. Format: Pfad ohne führenden Slash, Single- oder Two-Segment-Strings (Exact-Match, kein Prefix-Wildcard). Pflege-Disziplin analog zur SSOT-Slug-Pflege in `lib/rechner-config/*.ts`.
 
+### Prüfskripte: `npm run verify:alle` und GitHub Actions (seit Welle 186)
+
+- `npm run verify:alle` (`scripts/verify-alle.mjs`) führt alle `scripts/verify-*.ts` aus, bis zu vier parallel, Exit 1 bei Rot. `prebuild` startet nur wenige davon; bis Welle 186 liefen die übrigen nur von Hand, und zehn waren über Monate unbemerkt rot.
+- **Pflicht:** Vor jedem Commit, der Rechenlogik (`lib/`), Rechner-Komponenten, Rechner-Texte (`lib/rechner-config/`) oder Prüfskripte ändert, muss `npm run verify:alle` grün sein. Das gilt auch für Einzeländerungen außerhalb einer Welle, etwa einen neuen VPI-Monatswert.
+- **GitHub Actions** (`.github/workflows/pruefskripte.yml`): `verify:alle` läuft bei jedem Push auf `main` (außer reinen Doku-Änderungen) und täglich um 04:17 UTC, je einmal mit `TZ=Europe/Berlin` und `TZ=UTC`. Der tägliche Lauf fängt Stichtage, an denen sich ein Wert ohne Code-Änderung ändert. Ein roter Lauf blockiert kein Deploy; GitHub meldet ihn per E-Mail an Karsten. Ein roter Lauf hat Vorrang vor neuer Arbeit.
+- `tsx` ist feste devDependency mit exakter Version. `verify-alle.mjs` startet ihn aus `node_modules` und bricht mit einem Hinweis ab, wenn er fehlt; `npx tsx` im `prebuild` nimmt dieselbe Version, statt bei jedem Build die neueste zu laden. Ein Update von `tsx` ist eine eigene Änderung mit `npm install --save-dev --save-exact tsx@<Version>` und anschließendem `verify:alle`.
+
 ## Architektur-Notes (dokumentierte technische Schulden)
 
 ### Zirkulärer Import brutto-netto ↔ lohnsteuer

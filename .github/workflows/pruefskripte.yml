@@ -1,0 +1,39 @@
+# Welle 186: alle Prüfskripte (npm run verify:alle) bei jedem Push auf main und täglich,
+# je einmal in deutscher Zeit und in UTC. Ein roter Lauf blockiert kein Deploy (Vercel baut
+# unabhängig davon); GitHub meldet ihn per E-Mail. Siehe CLAUDE.md, Abschnitt „Prüfskripte“.
+name: Prüfskripte
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+  schedule:
+    # täglich 04:17 UTC = 06:17 Uhr MESZ bzw. 05:17 Uhr MEZ; fängt Stichtage ohne Code-Änderung
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify:alle (${{ matrix.tz }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        tz: [Europe/Berlin, UTC]
+    env:
+      TZ: ${{ matrix.tz }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      # Ohne Installationsskripte: Die Prüfskripte brauchen weder ffmpeg noch exiftool.
+      - run: npm ci --ignore-scripts
+      - run: npm run verify:alle

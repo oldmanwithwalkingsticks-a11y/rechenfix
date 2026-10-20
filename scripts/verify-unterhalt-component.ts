@@ -125,25 +125,29 @@ cases.push({
 
 cases.push({
   name: 'arbeit.ts: DT-Mindestbedarf 1. Altersstufe 486 € erwähnt',
-  actual: arbeitTs.includes('486 € (1. Altersstufe'),
+  // W186: vorher Fließtext „486 € (1. Altersstufe“ (formel-Feld, seit Welle 102 entfernt); jetzt Tabellenzeile.
+  actual: arbeitTs.includes("['1. Stufe', '0–5 Jahre', '486 €']"),
   expected: true,
   quelle: 'M6 + 7. MUVÄndV 15.11.2024',
 });
 cases.push({
   name: 'arbeit.ts: DT-Mindestbedarf 2. Altersstufe 558 € erwähnt',
-  actual: arbeitTs.includes('558 € (2. Altersstufe'),
+  // W186: vorher Fließtext „558 € (2. Altersstufe“ (formel-Feld, seit Welle 102 entfernt); jetzt Tabellenzeile.
+  actual: arbeitTs.includes("['2. Stufe', '6–11 Jahre', '558 €']"),
   expected: true,
   quelle: 'M6 + 7. MUVÄndV',
 });
 cases.push({
   name: 'arbeit.ts: DT-Mindestbedarf 3. Altersstufe 653 € erwähnt',
-  actual: arbeitTs.includes('653 € (3. Altersstufe'),
+  // W186: vorher Fließtext „653 € (3. Altersstufe“ (formel-Feld, seit Welle 102 entfernt); jetzt Tabellenzeile.
+  actual: arbeitTs.includes("['3. Stufe', '12–17 Jahre', '653 €']"),
   expected: true,
   quelle: 'M6 + 7. MUVÄndV',
 });
 cases.push({
   name: 'arbeit.ts: DT-Mindestbedarf 4. Altersstufe 698 € erwähnt (M6-Ergänzung)',
-  actual: arbeitTs.includes('698 € (4. Altersstufe'),
+  // W186: vorher Fließtext „698 € (4. Altersstufe“ (formel-Feld, seit Welle 102 entfernt); jetzt Tabellenzeile.
+  actual: arbeitTs.includes("['4. Stufe', 'ab 18 Jahre', '698 €']"),
   expected: true,
   quelle: 'M6 4. Altersstufe ergänzt',
 });
@@ -166,8 +170,9 @@ cases.push({
   quelle: '§ 94 Abs. 1a SGB XII',
 });
 cases.push({
-  name: 'arbeit.ts: 2.000 € Selbstbehalt Elternunterhalt erwähnt',
-  actual: arbeitTs.includes('Selbstbehalt von 2.000 €'),
+  // W186: vorher 2.000 € (DT bis 2025); DT 2026 Anm. D.I: 2.650 € einschließlich 1.000 € Warmmiete.
+  name: 'arbeit.ts: 2.650 € Selbstbehalt Elternunterhalt erwähnt',
+  actual: arbeitTs.includes('Selbstbehalt von 2.650 €'),
   expected: true,
   quelle: 'DT 2026 Elternunterhalt',
 });

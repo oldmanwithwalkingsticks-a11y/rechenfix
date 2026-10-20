@@ -54,11 +54,12 @@ const cases: Fall[] = [
     expectedBafoeg: 534 + 102 + 35,
     tol: 1,
   },
-  // Schüler bei Eltern, unverändert
+  // Schüler bei Eltern: § 12 Abs. 1 Nr. 1 BAföG, 276 € seit 01.08.2024 (29. BAföGÄndG). W186: vorher 262 €
+  // (Stand 2022) — der Test war seit August 2024 rot.
   {
     name: 'Schule bei Eltern, familienvers.',
     input: { ...baseInput, ausbildung: 'schule', wohnsituation: 'eltern' },
-    expectedBafoeg: 262,
+    expectedBafoeg: 276,
     tol: 1,
   },
 ];

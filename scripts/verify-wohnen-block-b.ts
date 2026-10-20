@@ -79,8 +79,9 @@ cases.push({
   quelle: 'P2.1 — neue Mertens-Konsistenz',
 });
 cases.push({
-  name: 'dachflaechen-Block: "10.200 kWh/Jahr" im Beispiel',
-  actual: dachflBlock.includes('10.200 kWh/Jahr'),
+  // W186: vorher „10.200 kWh/Jahr“ im Beispiel (nicht mehr im Text); der PV-Text rechnet mit 850 kWh/kWp.
+  name: 'dachflaechen-Block: PV-Text rechnet mit "rund 850 kWh pro kWp und Jahr"',
+  actual: dachflBlock.includes('liefert in Deutschland rund 850 kWh pro kWp und Jahr'),
   expected: true,
   quelle: 'P2.1 — 12 kWp × 850 = 10.200',
 });
@@ -91,14 +92,16 @@ cases.push({
   quelle: 'P2.1 — VDI 6002 Quellenhinweis',
 });
 cases.push({
-  name: 'dachflaechen-Block: "Eigenverbrauchsanteil" im Erklärtext',
-  actual: dachflBlock.includes('Eigenverbrauchsanteil'),
+  // W186: vorher Wort „Eigenverbrauchsanteil“; der EV-Hinweis steht heute mit anderem Wortlaut im Text.
+  name: 'dachflaechen-Block: EV-Hinweis im Erklärtext',
+  actual: dachflBlock.includes('hängt von Eigenverbrauch, Speicher und Einspeisevergütung ab'),
   expected: true,
   quelle: 'P3.5 — EV-Hinweis bei PV-Beispielrechnung',
 });
 cases.push({
+  // W186: vorher „Konrad Mertens“; die Quelle steht heute als „PV-Ertragsmodell (Mertens/energie-experten, …)“.
   name: 'dachflaechen-Block: Mertens-Quelle im Erklärtext',
-  actual: dachflBlock.includes('Konrad Mertens'),
+  actual: dachflBlock.includes('PV-Ertragsmodell (Mertens/energie-experten, Stand 04/2026)'),
   expected: true,
   quelle: 'P2.1 — Quellenangabe',
 });
@@ -133,35 +136,39 @@ cases.push({
   quelle: 'P3.1 — alter 32-ct-Wert raus',
 });
 cases.push({
-  name: 'poolkosten-Block: "Filterstrom ≈ 270 €" im Beispiel',
-  actual: poolBlock.includes('Filterstrom ≈ 270 €'),
+  // W186: vorher „≈ 270 €“ (Rechenfehler 271,80); 0,6 × 8 × 153 × 0,37 = 271,73 → 272.
+  name: 'poolkosten-Block: "Filterstrom ≈ 272 €" im Beispiel',
+  actual: poolBlock.includes('Filterstrom ≈ 272 €'),
   expected: true,
-  quelle: 'P3.1 — 0,6 kW × 8 h × 153 d × 37 ct = 271,80',
+  quelle: 'P3.1 — 0,6 kW × 8 h × 153 d × 37 ct = 271,73 → 272',
 });
 cases.push({
-  name: 'poolkosten-Block: kein "Chemie ≈ 240 €" mehr',
-  actual: poolBlock.includes('Chemie ≈ 240 €'),
-  expected: false,
-  quelle: 'P3.3 — alter Untergrenzwert raus',
-});
-cases.push({
-  name: 'poolkosten-Block: "Chemie ≈ 325 €" im Beispiel',
+  // W186: vorher umgekehrt (240 € raus, 325 € rein); das Bauteil rechnet 40 m³ × 7,50 €/m³ × 0,80 = 240 €.
+  name: 'poolkosten-Block: kein "Chemie ≈ 325 €" (8-€/m³-Annahme widerspricht Bauteil 7,50 €/m³ × 0,80)',
   actual: poolBlock.includes('Chemie ≈ 325 €'),
-  expected: true,
-  quelle: 'P3.3 — Mittelwert 8 €/m³ × 40 m³',
+  expected: false,
+  quelle: 'PoolkostenRechner.tsx: 40 × 7,50 × 0,80 = 240 €',
 });
 cases.push({
-  name: 'poolkosten-Block: "Gesamt ≈ 1.195 €/Jahr" im Beispiel',
-  actual: poolBlock.includes('Gesamt ≈ 1.195 €/Jahr'),
+  name: 'poolkosten-Block: "Chemie ≈ 240 €" im Beispiel',
+  actual: poolBlock.includes('Chemie ≈ 240 €'),
   expected: true,
-  quelle: 'P3.1 — 190+270+325+410=1.195',
+  quelle: 'Bauteil: 40 m³ × 7,50 €/m³ × 0,80 (Abdeckung) = 240 €',
+});
+cases.push({
+  // W186: vorher 1.195 € (190 + 270 + 325 + 410).
+  name: 'poolkosten-Block: "Gesamt ≈ 1.114 €/Jahr" im Beispiel',
+  actual: poolBlock.includes('Gesamt ≈ 1.114 €/Jahr'),
+  expected: true,
+  quelle: '192 + 272 + 240 + 410 = 1.114 (exakt 1.113,73)',
 });
 
 // === GRUPPE 5: P3.2 — Pumpenlaufzeit-Konsistenz ===
 
 cases.push({
-  name: 'poolkosten-Block: "(typischerweise 8 h)" im Erklärtext',
-  actual: poolBlock.includes('(typischerweise 8 h)'),
+  // W186: vorher „(typischerweise 8 h)“; Wortlaut heute ausgeschrieben.
+  name: 'poolkosten-Block: "typischerweise rund acht Stunden am Tag" im Erklärtext',
+  actual: poolBlock.includes('typischerweise rund acht Stunden am Tag'),
   expected: true,
   quelle: 'P3.2 — Mittelwert benannt',
 });
@@ -349,8 +356,9 @@ cases.push({
   quelle: '148b P2.1 — Konfig folgt Lib',
 });
 cases.push({
-  name: 'balkon-solar-Block: "Nord = 60 %" im Erklärtext',
-  actual: blockOf('balkon-solar-rechner').includes('Nord = 60 %'),
+  // W186: vorher Fließtext „Nord = 60 %“; der Faktor steht heute in der Ausrichtungstabelle.
+  name: 'balkon-solar-Block: Nord 60 % in der Ausrichtungstabelle',
+  actual: blockOf('balkon-solar-rechner').includes("['Nord', '60 %', '410 kWh'"),
   expected: true,
   quelle: '148b P2.1 — Konfig konsistent zu Lib',
 });
