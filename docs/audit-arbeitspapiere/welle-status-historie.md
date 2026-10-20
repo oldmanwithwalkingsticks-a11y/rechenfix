@@ -6,6 +6,97 @@
 
 ---
 
+## 20.10.2026 — Welle 182: Rechnerfehler aus der zweiten Caption-Prüfung — Strompreise, Mutterschutz, Gehaltsvergleich, Autokosten, Streaming, Leasing, Wärmepumpe/BEG — ✅ ABGESCHLOSSEN 20.10.2026
+
+**Anlass:** Zweite Caption-Prüfung. Eine zweite, unabhängige Prüfung aller 206 Captions fand acht Rechner, die
+selbst falsch rechneten oder veraltete Werte hatten. Die Captions folgen in Welle 187.
+
+**Die acht Rechner** (Startwerte; Werte und Quellen aus der Vorlage, in diesem Lauf nicht erneut an den Quellen
+geprüft):
+
+| Rechner | vorher | jetzt | Grund | Quelle |
+|---|---|---|---|---|
+| **Stromvergleich** | Vergleichstarife 37 ct + 10 € und 33 ct + 10 € (Welle 177) | **33,57 ct + 10 €** und **29,57 ct + 10 €**; Startwert Arbeitspreis 33,57 ct → Durchschnitt **959,25 €**, Neukunden **859,25 €**, Sparpotenzial **100 €** | 37 ct und 33 ct sind Mischpreise **inkl.** Grundpreis bei 3.500 kWh; Welle 177 zählte den Grundpreis doppelt. Neu: `arbeitspreisAusMischpreis` = Mischpreis − 120 € ÷ 3.500 kWh | BDEW-Strompreisanalyse 04/2026 (SSOT `strompreis.ts`) |
+| **Stromkosten** | 37 ct + 12 €: 2.500 kWh **1.069 €**, 3.500 kWh 1.439 € („effektiv 41,1 ct“) | **32,89 ct** + 12 €: **966,25 €**; 3.500 kWh **1.295,15 € = 37,0 ct** | wie oben; Beispiel, Rechenbeispiel, Haushaltstabelle, Diagramm und FAQ aus der SSOT | wie oben |
+| **Mutterschutz** | ET 15.08.2026: **98 Tage**, „14.1 Wochen“ | **99 Tage**, „14 Wochen und 1 Tag“; 2.500 € netto → **8.250 €** | 42 Tage + Entbindungstag + 56 Tage; vorher ohne den letzten Tag. Mehrlinge ohne tatsächliche Geburt 127 statt 126 Tage | § 3 MuSchG, § 24i Abs. 3 SGB V |
+| **Gehaltsvergleich** | 3.500 € (alle, NRW, 35–44) **38. Perzentil**; kaufm. 2.800/3.500/4.200 € → 22/44/70 | **41.**; kaufm. **26/46/67** | Φ(x) ohne Division durch √2: Φ(0,6745) = 0,787 statt 0,75 — 2.800 € lag über P25 und trotzdem im 22. Perzentil. Texte neu: 46 %, 55., 86./55., 89./15. | Standardnormalverteilung, Φ(x) = ½ (1 + erf(x/√2)) |
+| **Autokosten** | Kraftstoff **1,75 €/l** → 551 €/Monat, 0,44 €/km | SSOT **2,126 €/l** → **584 €/Monat**, **0,47 €/km** | `useEffect` setzte beim ersten Rendern `STANDARD_PREISE` (1,75 €) über den SSOT-Startwert; Standardpreise jetzt aus `spritpreise-parameter.ts`. Texte über die Lib mit den Startwerten der Komponente; Entfernungspauschale 2026 korrigiert (0,38 € ab dem 1. km) | ADAC-Bundesschnitt 07.10.2026 (SSOT `spritpreise-parameter.ts`) |
+| **Streaming** | Netflix 13,99 €, Spotify 11,99 €, Disney+ 9,99 € → 35,97 € | **15,99 / 12,99 / 10,99 € → 39,97 €**, 479,64 €/Jahr | veraltete Preise | Anbieterpreise Stand 20.10.2026 (Netflix 04.09.2026, Disney+ Herbst 2025, Spotify 14.08.2025, YouTube Juni 2026, RTL+, Paramount+, WOW) |
+| **Leasing** | 35.000 €, Faktor 0,85 → **354,03 €** | **297,50 €**, 36 Monate 10.710 € | Leasingfaktor = Bruttorate ÷ Bruttolistenpreis × 100; vorher kamen noch 19 % MwSt dazu | ADAC, Branchenkonvention |
+| **Wärmepumpe/BEG** | 30.000 € förderfähig, Klima 20 %, Effizienz 5 %, Einkommen 30 %, Deckel 70 %; Förderquote auf die ganze Investition | Anträge ab **21.07.2026**: **28.000 €**, Klima **16 %**, Einkommen **40/30/10 %** (zvE bis 30/40/50 Tsd. €, mit Kind −10.000 €), Deckel **70 %**, in der 40-%-Stufe **80 %**, **kein Effizienzbonus**; Quote nur auf die förderfähigen Kosten. Startwerte 30.000 €, 30 %: **8.400 €** Zuschuss, **21.600 €** Eigenanteil | neue Konditionen der BEG EM | KfW-Pressemitteilung Juli 2026, Verbraucherzentrale NRW (14.08.2026), co2online (09.07.2026) |
+
+**Vermerk Welle 177:** Die Stromvergleich-Korrektur von Welle 177 war nur halb richtig: Sie setzte die
+Vergleichstarife auf 37 ct und 33 ct je kWh und schlug den Grundpreis noch einmal auf, obwohl beide Werte Mischpreise
+inklusive Grundpreis sind. Hier vollständig korrigiert, für Stromvergleich und Stromkosten.
+
+**Änderungen** (78 Ersetzungen plus 9 Datumszeilen = 87 in 20 Dateien, Vorlage
+`_lokal/welle182-rechnerfehler.mjs`, Gegenprobe `_lokal/welle182-lib.mts`, beide nicht committet):
+- **Libs:** `stromvergleich.ts` (`arbeitspreisAusMischpreis`, `ARBEITSPREIS_DURCHSCHNITT`, `ARBEITSPREIS_NEUKUNDEN`,
+  `typischeJahreskosten`), `mutterschutz.ts` (`gesamtTage` + 1), `gehaltsvergleich.ts` (Φ mit √2),
+  `autokosten.ts` (`STANDARD_PREISE` aus der Spritpreis-SSOT), `streaming-kosten.ts` (Preise),
+  `beg-foerderung.ts` (Konditionen ab 21.07.2026, `einkommensbonusFuerZvE`, Deckel 80 % in der 40-%-Stufe, Feld und
+  Logik Effizienzbonus entfernt), `waermepumpe.ts` (Quote auf die förderfähigen Kosten).
+- **Komponenten:** `StromvergleichRechner.tsx`, `StromkostenRechner.tsx`, `MutterschutzRechner.tsx` (Wochentext),
+  `AutokostenRechner.tsx` (setzt beim ersten Rendern weiter `STANDARD_PREISE`, jetzt der SSOT-Wert, mit bis zu drei
+  Nachkommastellen: 2,126), `LeasingRechner.tsx` (Rate = (Listenpreis − Anzahlung) × Faktor ÷ 100, ohne
+  MwSt-Aufschlag),
+  `WaermepumpeRechner.tsx` (Einkommensstufen, Hinweis „Effizienzbonus entfallen“).
+- **Texte** in `lib/rechner-config/` `alltag.ts`, `arbeit.ts`, `auto.ts`, `finanzen.ts`, `wohnen.ts`.
+- **Prüfskripte:** `verify-mutterschutz.ts` (99 und 127 Tage), `verify-wohnen-p1.ts` (BEG-Fälle neu, 63 statt 58).
+- **`letzteAktualisierung`** → `2026-10-20` für stromvergleich-rechner, stromkosten-rechner, waermepumpen-rechner,
+  heizkosten-rechner, mutterschutz-rechner, gehaltsvergleich, autokosten-rechner, leasing-rechner,
+  streaming-kosten-rechner (sieben Zeilen geändert, zwei standen seit Welle 181 schon auf heute).
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, Bilder und Videos (Welle 187); `strompreis.ts` und
+`spritpreise-parameter.ts` (SSOT-Werte unverändert).
+
+**Bewusst offen:** E-Auto-, Geräte- und PV-Texte rechnen mit dem Mischpreis 37 ct je kWh. Für die Kosten je
+zusätzlicher kWh wäre der Arbeitspreis (≈ 33 ct) genauer, die Abweichung liegt bei rund 10 %. Bleibt als Näherung
+und ist in den Texten als Durchschnittspreis benannt.
+
+**Termine:**
+- **01.02.2027:** BEG-Degression (Kostenobergrenze −750 €, Klimageschwindigkeitsbonus −4 Punkte je Halbjahr).
+- **Spotify-Preisrunde** beobachten (in den Niederlanden bereits erhöht).
+- Beide stehen nur hier; in `lib/termine.ts` sind sie noch nicht eingetragen.
+
+**Vermerk:** Die zugehörigen Captions folgen in Welle 187.
+
+**Abweichungen und Funde:**
+- **Grep 8 („effizienzbonus“, mit `-i`) weicht vom Sollwert ab:** statt keiner Ausgabe `WaermepumpeRechner.tsx:2`
+  und `beg-foerderung.ts:2`. Alle vier Treffer schreibt die Vorlage selbst: zwei Kommentare und der sichtbare Hinweis
+  „Den Effizienzbonus (+5 %) gibt es für Anträge ab 21.07.2026 nicht mehr.“ Feld `effizienzbonus`, Logik
+  `boni.effizienz` und der Testfall sind entfernt; ohne `-i` liefert der Grep keine Ausgabe. Der Sollwert ist
+  vermutlich ohne `-i` gemessen. Keine STOP-Bedingung; nicht von Hand geändert.
+- **Mutterschutz und Zeitumstellung:** nachgerechnet in Berliner Zeit und in UTC für ET 15.08.2026, 20.03.2026,
+  30.10.2026 und 28.03.2027 (Schutzfristen über beide Umstellungen): überall 99 Tage, gleiche Daten. `diffDays`
+  rundet, die Anzeige läuft über `toLocaleDateString`.
+- Datum: Die Vorlage setzt „heute“ in Berliner Zeit. Lauf unter Windows in deutscher Zeit.
+
+**Gates:**
+- Phase 0 an `5351ae8`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `5351ae8` und `ebaae4b`
+  (Welle 181). Greps: „const gesamtTage = diffDays(ende, beginn);“ `mutterschutz.ts:1`; „Math.exp(-absX * absX /
+  2)“ `gehaltsvergleich.ts:1`; „benzin: 1.75,“ `autokosten.ts:1`; „preis: 13.99“ `streaming-kosten.ts:3`; „const
+  brutto = netto * BRUTTO_FAKTOR_REGULAER;“ `LeasingRechner.tsx:1`; „maxFoerderfaehigeKosten_einheit1: 30_000“
+  `beg-foerderung.ts:1`. `verify-mutterschutz` 35/35, `verify-wohnen-p1` 58/58.
+- Phase 1: „OK — 87 Ersetzungen in 20 Dateien.“, Exit 0; `git status` die 20 Dateien.
+- Phase 2: Lib-Gegenprobe 25 × „OK“, „Alle Werte OK“, Exit 0. `verify-mutterschutz` 35/35, `verify-wohnen-p1`
+  63/63, je Exit 0. Greps 1 bis 5 keine Ausgabe; 6 `beg-foerderung.ts:1`; 7 `StromkostenRechner.tsx:1`,
+  `stromvergleich.ts:3`, `wohnen.ts:1`; 8 siehe oben. `npm run build` Rückgabewert 0, 271 Seiten, Lint 0 Fehler, die
+  zwei bekannten Warnungen; `git status` danach nur die 20 Dateien.
+- HTML-Befund (gezählt nach Entfernen der React-Trenner `<!-- -->`, die zwischen Text und eingesetzten Werten stehen;
+  im Rohtext greifen „959,25 €/Jahr“, „859,25 €/Jahr“, „ca. 623,55 €/Jahr“ und der Förderbox-Satz deshalb nicht):
+  `/wohnen/stromvergleich-rechner` `value="33,57"` 1×, „959,25 €/Jahr“ 3×, „859,25 €/Jahr“ 1×, „1 Person
+  (1.500 kWh)“ und „ca. 623,55 €/Jahr“ als Nachbarzellen derselben Zeile; `/wohnen/stromkosten-rechner` „966,25 €“
+  4×, „32,89“ 13×, „1.069 €“ 0×; `/arbeit/mutterschutz-rechner` „99 Tage“ 8×; `/finanzen/gehaltsvergleich`
+  „Perzentil 55“ 4×, „Perzentil 86“, „Perzentil 89“, „Perzentil 15“ je 2×; `/auto/autokosten-rechner` „584 €“ 4×,
+  „0,47 €/km“ 10×, „2,126“ 13×; `/auto/leasing-rechner` „297,50 €“ 4×, „354,03 €“ 0×;
+  `/wohnen/waermepumpen-rechner` „von 28.000 € förderfähigen Kosten = 8.400 € Zuschuss. Eigenanteil: 21.600 €“ 1×,
+  „Effizienzbonus +5“ 0×.
+
+**Commits:** A `b8e5484` (die 20 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 20.10.2026 — Welle 181: veraltete Beispiel- und FAQ-Texte aus der Caption-Prüfung; Mietpreisbremse — Rückforderung ab Mietbeginn; Alkohol-Abbau ohne Resorptionsdefizit — ✅ ABGESCHLOSSEN 20.10.2026
 
 **Anlass:** Caption-Prüfung. Viele Seiten zeigten Beispiel- oder FAQ-Zahlen, die ihr eigener Rechner mit denselben
