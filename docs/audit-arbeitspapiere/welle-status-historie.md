@@ -6,6 +6,82 @@
 
 ---
 
+## 21.10.2026 — Welle 190: Bruchrechner — neuer Reiter „Brüche dazwischen“ — ✅ ABGESCHLOSSEN 21.10.2026
+
+**Anlass:** Nutzerfeedback vom 20.10.2026, 15:01 Uhr, zu `/mathe/bruchrechner`: „ich wollte berechnen welche zahlen
+zwischen einem neuntel und einem elftel liegen. ich hätte nur zwei zahlen für meine matheaufgabe gebraucht“. Der
+Rechner konnte rechnen, kürzen, umrechnen und vergleichen, aber keine Brüche dazwischen finden.
+
+**Änderung:**
+- **Lib** `lib/berechnungen/bruchrechnung.ts` (alles BigInt wie die übrigen Reiter):
+  - `bruecheDazwischen(b1, b2, anzahl)` geht den Schulweg: Die Eingabe-Reihenfolge ist egal; beide Brüche kommen auf
+    den Hauptnenner; liegen zwischen den Zählern zu wenige ganze Zahlen, werden beide Brüche mit dem kleinsten
+    passenden Faktor ⌈(Anzahl + 1)/(Zählerabstand)⌉ erweitert; die Zähler direkt über dem kleineren Bruch ergeben die
+    gesuchten Brüche, danach gekürzt. `null` bei gleich großen Brüchen, bei Nenner 0 und bei einer Anzahl außerhalb von
+    1 bis 20 (`DAZWISCHEN_MAX`).
+  - Dazu der Mediant (Zähler + Zähler)/(Nenner + Nenner); er liegt bei positiven Nennern immer dazwischen.
+  - `rechenwegDazwischen()` (ordnen, Hauptnenner, erweitern, Platz schaffen, Zähler wählen, kürzen, Kontrolle mit
+    Dezimalwerten) und `mediantText()` für die Hinweiszeile.
+- **Komponente** `components/rechner/BruchRechner.tsx`: fünfter Reiter „Brüche dazwischen“. Eingaben: zwei Brüche und
+  „Wie viele Brüche dazwischen? (1 bis 20)“ in einer eigenen Zeile mit `<label>`. Startwerte 1/3, 1/2, Anzahl 3 →
+  1/3 < 3/8 < 5/12 < 11/24 < 1/2. Darunter Mediant-Zeile, Rechenweg, Kopieren/PDF; Hinweise bei gleich großen
+  Brüchen, Nenner 0 und ungültiger Anzahl.
+- **Seite** `lib/rechner-config/mathe.ts`: Beschreibung „… und Brüchen dazwischen“, Keyword „brüche zwischen zwei
+  brüchen“, neue FAQ „Wie finde ich Brüche zwischen zwei Brüchen?“, neue Beispielrechnung „Brüche zwischen zwei Brüchen
+  finden: zwischen 1/11 und 1/9“ vor der Fehler-Checkliste, `letzteAktualisierung` → `2026-10-21`.
+- **Prüfskript** `scripts/verify-bruchrechnung.ts`: 11 neue Fälle mit Sollwerten von Hand (u. a. 1/11–1/9 → 19/198,
+  10/99; vertauschte Eingabe; negative Brüche; Ergebnis 0; gleich große Brüche; Anzahl 0 und 21; Nenner 0; ein Fall
+  mit sechsstelligen Nennern und Anzahl 20 nur über Eigenschaften), dazu Rechenweg und Mediant für 1/11–1/9.
+- **Messung laut Vorlage** (20.10.2026, Linux): Zufallsprüfung mit 20.000 Fällen (Zähler −20 bis 20, Nenner ±1 bis
+  ±30, Anzahl 1 bis 20) immer echt aufsteigend zwischen beiden Brüchen, Mediant dazwischen, Faktor minimal. axe
+  `color-contrast` auf dem neuen Reiter hell und dunkel, Breite 1100 und 390 px: 0 Verstöße, kein seitliches
+  Überlaufen.
+
+Vorlage `_lokal/welle190-bruchrechner-dazwischen.mjs` (19 Textersetzungen und 1 Datumszeile = 20 in 4 Dateien), nicht
+committet.
+
+**Bewusst nicht geändert:** Caption, Kachel und Video des Bruchrechners; die Kategorie-Einleitung in
+`lib/rechner-config/index.ts`.
+
+**Bewusst offen geblieben:**
+- **Eingabe nur als Bruch:** Der neue Reiter nimmt Zähler und Nenner. Gemischte Zahlen und Dezimalzahlen wie im Reiter
+  „Brüche rechnen“ gibt es hier nicht; ganze Zahlen gehen als n/1. Die Aufgabe kommt in der Schule mit Brüchen.
+- **Auswahl der Brüche:** Der Rechner nimmt die Zähler direkt über dem kleineren Bruch, nicht gleichmäßig verteilte.
+  So bleibt der Rechenweg der aus dem Unterricht; der Mediant zeigt einen zweiten Weg.
+- **Höchstens 20 Brüche:** genug für jede Schulaufgabe; darüber werden Ergebniszeile und Rechenweg unlesbar.
+- **Keine KI-Erklärung im neuen Reiter:** wie bei „Kürzen“, „Dezimal ↔ Bruch“ und „Vergleichen“; nur „Brüche rechnen“
+  hat eine.
+- **Caption, Kachel und Video** des Bruchrechners bleiben unverändert; sie zeigen weiter die Grundrechenarten.
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- **Eigene Zufallsprüfung** (zusätzlich zur Vorlage, fester Startwert, größerer Bereich: Zähler ±1.000, Nenner ±1 bis
+  ±500, Anzahl 1 bis 20, 20.000 Fälle): 0 Fehler. Geprüft: Ordnung und `getauscht`, Anzahl, jeder Bruch echt über dem
+  vorigen und unter dem größeren, gekürzt (ggT 1, Null als 0/1) und gleich der Rohform, Mediant echt dazwischen,
+  Hauptnenner Vielfaches beider Nenner, Faktor = max(1, ⌈(Anzahl + 1)/Zählerabstand⌉). `null` bei Nenner 0, Anzahl 0,
+  21 und 1,5 sowie bei 3/4 und 6/8. 1/11–1/9 mit Anzahl 2: 19/198, 10/99, Faktor 2, Mediant 1/10.
+- Die axe-Messung habe ich in diesem Lauf nicht wiederholt.
+- `verify:alle` zusätzlich mit `TZ=UTC` wie die CI: Phase 0 und Phase 2 je 85/85.
+
+**Gates:**
+- Phase 0 an `6a823a6`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `6a823a6` und `ad3c0e7`
+  (Welle 189). Beide `git grep` ohne Ausgabe. „Bruchrechnung grün: 16 Texteingaben, 9 Ganzzahlfelder,
+  3 Rechenbeispiele.“ `verify:alle` 85/85.
+- Phase 1: „OK — 20 Ersetzungen in 4 Dateien.“, Exit 0; `git status` genau ` M components/rechner/BruchRechner.tsx`,
+  ` M lib/berechnungen/bruchrechnung.ts`, ` M lib/rechner-config/mathe.ts`, ` M scripts/verify-bruchrechnung.ts`.
+- Phase 2: `verify:alle` „Prüfskripte: 85/85 grün.“, Exit 0. „Bruchrechnung grün: 16 Texteingaben, 9 Ganzzahlfelder,
+  3 Rechenbeispiele, 11 Fälle „Brüche dazwischen“ mit Rechenweg und Mediant.“ `bruecheDazwischen`:
+  `BruchRechner.tsx:2`, `bruchrechnung.ts:1`, `mathe.ts:1`, `verify-bruchrechnung.ts:6`. `W190`: `BruchRechner.tsx:3`,
+  `bruchrechnung.ts:4`, `mathe.ts:2`, `verify-bruchrechnung.ts:2`. FAQ `mathe.ts:1`. `npm run lint` Exit 0, keine Zeile
+  „problems“. `npm run build` Rückgabewert 0, 271 Seiten. Im gebauten HTML von `/mathe/bruchrechner`
+  „Brüche zwischen zwei Brüchen finden: zwischen 1/11 und 1/9“ 2×, „Wie finde ich Brüche zwischen zwei Brüchen?“ 4×,
+  „21/198 = 7/66“ 4×.
+- Phase 3: `git add -u`, `git diff --cached --name-only` 4.
+
+**Commits:** A `00feb64` (die 4 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 21.10.2026 — Welle 189 (Fassung 2): Folgekorrekturen — Kalenderdaten in Ortszeit, Kündigungsfrist nach Zugang, sv-parameter-Kommentar — ✅ ABGESCHLOSSEN 21.10.2026
 
 **Anlass:**
