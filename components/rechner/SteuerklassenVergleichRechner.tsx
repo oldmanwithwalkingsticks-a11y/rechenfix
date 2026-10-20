@@ -144,6 +144,10 @@ export default function SteuerklassenVergleichRechner() {
             <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
+        {/* W183: Die Kinder-Eingabe wirkt jetzt auch auf die Pflegeversicherung (vorher ohne Kinderlosenzuschlag). */}
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+          Gilt auch für die Pflegeversicherung: 0 = kinderlos (Zuschlag 0,6 %), ab 2 Kindern Abschlag.
+        </p>
       </div>
 
       {/* === ERGEBNIS === */}
@@ -179,8 +183,13 @@ export default function SteuerklassenVergleichRechner() {
                   <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">
                     {k.name === ergebnis.empfehlung && <span className="mr-1">⭐</span>}
                     {k.name}
+                    {/* W183: vorher toString() (0,98 statt 0,980); Faktor 1 heißt: kein Faktor nach § 39f. */}
                     {k.faktor !== undefined && (
-                      <span className="text-xs text-gray-500 ml-1">(Faktor {k.faktor.toString().replace('.', ',')})</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">
+                        {k.faktor < 1
+                          ? `(Faktor ${k.faktor.toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 })})`
+                          : '(kein Faktor unter 1)'}
+                      </span>
                     )}
                   </td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro0(k.lohnsteuer1Monat)} €</td>
@@ -236,7 +245,8 @@ export default function SteuerklassenVergleichRechner() {
 
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Hinweis:</strong> Diese Berechnung ist vereinfacht (Lohnsteuertabelle 2026, pauschale Vorsorgepauschale, ohne Kinderzuschläge in der Pflegeversicherung). Für exakte Werte nutzen Sie den offiziellen Abgabenrechner des BMF. Die Wahl III/V lohnt sich typischerweise ab ca. 60:40-Gehaltsverhältnis; IV/IV mit Faktor ist fast immer die stressfreiste Option.
+          {/* W183: vorher „vereinfacht (Lohnsteuertabelle 2026, pauschale Vorsorgepauschale, ohne Kinderzuschläge in der Pflegeversicherung)“. */}
+          <strong>⚠️ Hinweis:</strong> Lohnsteuer, Soli und Kirchensteuer nach dem amtlichen Programmablaufplan 2026, Faktor nach § 39f EStG (drei Nachkommastellen, abgeschnitten). Annahmen: beide gesetzlich versichert mit durchschnittlichem Zusatzbeitrag 2,9 %, Jahressteuer nach Splittingtarif mit Pauschbeträgen und Vorsorgepauschale. Bei III/V und beim Faktorverfahren ist die Steuererklärung Pflicht. Die Wahl III/V lohnt sich typischerweise ab ca. 60:40-Gehaltsverhältnis; IV/IV mit Faktor ist fast immer die stressfreiste Option.
         </p>
       </div>
 

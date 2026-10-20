@@ -13,6 +13,8 @@
  * der Reform wirken im Leistungs-/Vermittlungsrecht, nicht in diesen Bemessungs-Parametern.
  */
 
+import { getMinijobGrenzeMonat } from './mindestlohn';
+
 /**
  * Schonvermögen-Modus: H1 (Bürgergeld bis 30.06.2026) kennt pauschale
  * Karenzzeit-Freibeträge pro Person; H2 (Grundsicherungsgeld ab 01.07.2026,
@@ -81,15 +83,18 @@ export interface BuergergeldParameter {
     /** Quote Stufe 3: 10 % des Betrags über 1.000 bis 1.200/1.500 € */
     stufe3Quote: number;
     /**
-     * § 11b Abs. 2b SGB II (seit 01.01.2023): erhöhter Freibetrag für
+     * § 11b Abs. 2b Satz 1 SGB II (seit 01.01.2023): erhöhter Grundabsetzbetrag für
      * Schüler/Azubis/Studenten/Freiwilligendienstler UNTER 25 Jahren in Höhe
-     * der Minijob-Grenze (2026: 556 €/Monat). Einkommen bis zu dieser Grenze
-     * ist vollständig anrechnungsfrei.
+     * der Minijob-Grenze nach § 8 Abs. 1a SGB IV (2026: 603 €/Monat) statt 100 €.
+     * Zusätzlich gilt der Erwerbstätigenfreibetrag nach § 11b Abs. 3 ohne die
+     * 20-%-Stufe (Abs. 3 Satz 4): 30 % von 520–1.000 €, 10 % von 1.000–1.200/1.500 €.
+     * W183: vorher 556 € (Minijob-Grenze 2025) und „bis zur Grenze anrechnungsfrei, darüber voll“.
      */
     jugendlicherFreibetrag_unter25: number;
     /**
-     * § 11b Abs. 2b SGB II: Freibetrag für dieselben Statusgruppen AB 25 Jahren
-     * in Höhe von 250 €/Monat.
+     * § 11b Abs. 2b Satz 3 SGB II: AB 25 Jahren nur im Freiwilligendienst (Satz 1 Nr. 3)
+     * 250 €/Monat statt der Minijob-Grenze. Schüler, Azubis und Studierende ab 25
+     * bekommen den regulären Freibetrag (W183: vorher auch für sie 250 €).
      */
     jugendlicherFreibetrag_ab25: number;
   };
@@ -180,7 +185,8 @@ const EINKOMMENSFREIBETRAG_2026 = {
   stufe3ObergrenzeMitKind: 1500,
   stufe3Quote: 0.10,
   // § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag (2026-Werte)
-  jugendlicherFreibetrag_unter25: 556, // Minijob-Grenze § 8 Abs. 1a SGB IV
+  // W183: vorher fest 556 € (Minijob-Grenze 2025); jetzt aus der SSOT, 13,90 € × 130 / 3 aufgerundet = 603 €.
+  jugendlicherFreibetrag_unter25: getMinijobGrenzeMonat(new Date('2026-01-01')), // Minijob-Grenze § 8 Abs. 1a SGB IV
   jugendlicherFreibetrag_ab25: 250,
 };
 

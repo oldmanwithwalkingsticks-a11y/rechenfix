@@ -386,6 +386,30 @@ cases.push({
 }
 
 // ============================================================================
+// GRUPPE W183: Seitentext „Arbeitgeber trägt die Differenz“ — Zahlen des Beispiels 1.500 €
+// Regulär (von Hand): AG 1.500 × 21,15 % = 317,25 €, AN 1.500 × 21,75 % = 326,25 €, zusammen 643,50 €.
+// Der Arbeitgeber zahlt im Midijob nur 14,78 € mehr; die AN-Ersparnis (46,08 €) ist größer, weil auch
+// der Gesamtbeitrag aus BE_gesamt berechnet wird (612,20 € statt 643,50 €).
+// ============================================================================
+{
+  const zb = 2.9; // durchschnittlicher Zusatzbeitrag 2026 in % (wie im Rechner)
+  const ag = berechneArbeitgeberSvMonat(1500, zb);
+  const agRegulaer = berechneArbeitgeberSvMonat(1500, zb, 6); // Klasse VI: ohne Übergangsbereich
+  const an = berechneBruttoNetto({
+    bruttoMonat: 1500, steuerklasse: 1, kirchensteuer: false, kirchensteuersatz: 9,
+    kinderfreibetraege: 0, kinderUnter25: 0, bundesland: '', kvArt: 'gesetzlich',
+    kvZusatzbeitrag: zb, kvPrivatBeitrag: 0, rvBefreit: false, abrechnungszeitraum: 'monat',
+  }).sozialabgabenGesamt;
+  cases.push(
+    { name: 'W183 AG-Anteil regulär 1.500 € = 317,25 € (von Hand)', actual: agRegulaer, expected: 317.25, tol: 0.001, quelle: '1.500 × (7,3 + 1,45 + 1,8 + 9,3 + 1,3) %' },
+    { name: 'W183 AG-Anteil Midijob 1.500 € = 332,03 €',             actual: ag, expected: 332.03, tol: 0.001, quelle: '§ 20 Abs. 2a SGB IV, BE_gesamt 1.427,03 / BE_AN 1.284,18' },
+    { name: 'W183 AG zahlt 14,78 € mehr als regulär',                 actual: Math.round((ag - agRegulaer) * 100) / 100, expected: 14.78, tol: 0.001, quelle: '332,03 − 317,25' },
+    { name: 'W183 AN-Ersparnis 46,08 € > AG-Mehrbetrag',              actual: Math.round((1500 * 0.2175 - an) * 100) / 100, expected: 46.08, tol: 0.001, quelle: '326,25 − 280,17' },
+    { name: 'W183 Gesamtbeitrag 612,20 € statt 643,50 €',             actual: Math.round((ag + an) * 100) / 100, expected: 612.20, tol: 0.001, quelle: '332,03 + 280,17' },
+  );
+}
+
+// ============================================================================
 // LAUF
 // ============================================================================
 

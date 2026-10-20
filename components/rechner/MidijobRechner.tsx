@@ -104,6 +104,9 @@ export default function MidijobRechner() {
     // verdoppelt), der AG trägt Gesamtbeitrag − AN-Anteil (= deutlich mehr als die Hälfte bei
     // niedrigem AE). Der PV-Zuschlag für Kinderlose belastet nur den AN. W166: zentral berechnet.
     const agSv = berechneArbeitgeberSvMonat(b, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT);
+    // W183: Vergleichswert AG-Anteil einer regulären Stelle mit demselben Brutto (halbe Sätze). Die
+    // Funktion rechnet bei Steuerklasse VI ohne Übergangsbereich — genau diese Rechnung brauchen wir hier.
+    const agSvRegulaer = berechneArbeitgeberSvMonat(b, KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT, 6);
     const gesamtSv = Math.round((agSv + anSv) * 100) / 100;
     const lohnsteuer = bn.lohnsteuer;
     const soli = bn.solidaritaet;
@@ -115,7 +118,7 @@ export default function MidijobRechner() {
     const nettoRegulaer = b - anSvRegulaer - lohnsteuer - soli - kiSt;
     const ersparnis = netto - nettoRegulaer;
 
-    return { b, beGesamt, beAn, imBereich, gesamtSv, anSv, agSv, lohnsteuer, soli, kiSt, netto, nettoRegulaer, ersparnis };
+    return { b, beGesamt, beAn, imBereich, gesamtSv, anSv, agSv, agSvRegulaer, lohnsteuer, soli, kiSt, netto, nettoRegulaer, ersparnis };
   }, [brutto, klasse, kirchensteuer, bundesland, anzahlKinder, untergrenze]);
 
   // F-Faktor dynamisch aus Parameter-Lib lesen (ändert sich jährlich)
@@ -297,8 +300,9 @@ export default function MidijobRechner() {
             {ergebnis.imBereich && (
               <>
                 <tr className="bg-gray-50 dark:bg-gray-700/30">
+                  {/* W183: vorher „Arbeitgeber-Seite (Differenzbetrag)“ — der AG gleicht die AN-Ersparnis nicht aus. */}
                   <td colSpan={2} className="px-4 py-1.5 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
-                    Arbeitgeber-Seite (Differenzbetrag)
+                    Arbeitgeber-Seite
                   </td>
                 </tr>
                 <tr>
@@ -310,6 +314,12 @@ export default function MidijobRechner() {
                     davon AG-Anteil (= Gesamtbeitrag − AN-Anteil)
                   </td>
                   <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.agSv)} €</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2 pl-8 text-xs text-gray-500 dark:text-gray-400">
+                    zum Vergleich: AG-Anteil bei regulärer Beschäftigung
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.agSvRegulaer)} €</td>
                 </tr>
               </>
             )}
@@ -337,8 +347,10 @@ export default function MidijobRechner() {
             zahlen Sie weniger AN-SV, behalten aber die <strong>vollen Ansprüche</strong> auf
             Krankengeld, Arbeitslosengeld und Rente (§ 47 Abs. 1 SGB V, § 151 Abs. 1 SGB III). Die Rentenpunkte werden seit Juli 2019
             aus dem tatsächlichen Arbeitsentgelt berechnet, nicht aus einer der reduzierten
-            Bemessungsgrundlagen (§ 70 Abs. 1a SGB VI). Der Arbeitgeber trägt den Differenzbetrag zwischen
-            Gesamtbeitrag und Ihrem AN-Anteil.
+            Bemessungsgrundlagen (§ 70 Abs. 1a SGB VI). Der Arbeitgeber trägt den Rest des Gesamtbeitrags
+            und damit etwas mehr als bei einer regulären Stelle; der größere Teil Ihrer Ersparnis entsteht,
+            weil auch der Gesamtbeitrag aus einer reduzierten Bemessungsgrundlage berechnet wird.
+            {/* W183: vorher „Der Arbeitgeber trägt den Differenzbetrag zwischen Gesamtbeitrag und Ihrem AN-Anteil.“ */}
           </p>
         </div>
       )}

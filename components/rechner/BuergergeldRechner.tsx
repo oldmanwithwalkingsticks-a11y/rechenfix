@@ -283,13 +283,16 @@ export default function BuergergeldRechner() {
 
       {/* Unterkunftskosten */}
       <div className="grid grid-cols-2 gap-3 mb-4">
+        {/* W183: vorher „Warmmiete“ — das Feld wird zu den Heizkosten addiert, die Heizung zählte doppelt. */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Warmmiete</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Miete inkl. Nebenkosten (ohne Heizung)</label>
           <NummerEingabe value={warmmiete} onChange={setWarmmiete} placeholder="z. B. 450" einheit="€" />
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Kaltmiete + kalte Nebenkosten (Bruttokaltmiete)</p>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Heizkosten</label>
           <NummerEingabe value={heizkosten} onChange={setHeizkosten} placeholder="z. B. 80" einheit="€" />
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Abschlag für Heizung (und Warmwasser)</p>
         </div>
       </div>
 
@@ -322,11 +325,14 @@ export default function BuergergeldRechner() {
         </summary>
         <div className="px-4 pb-4 pt-1 space-y-3 border-t border-gray-100 dark:border-gray-700">
           <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed italic">
+            {/* W183: vorher „statt der üblichen Stufen-Regelung“ und 250 € für alle ab 25. */}
             § 11b Abs. 2b SGB II: Für Schüler/Azubis/Studierende/Freiwilligendienstler unter
-            25 Jahren gilt ein erhöhter Erwerbstätigen-Freibetrag in Höhe der Minijob-Grenze
-            ({params.einkommensfreibetrag.jugendlicherFreibetrag_unter25} €/Monat, 2026) statt
-            der üblichen Stufen-Regelung. Für über-25-Jährige in denselben Situationen:{' '}
-            {params.einkommensfreibetrag.jugendlicherFreibetrag_ab25} €/Monat.
+            25 Jahren bleibt statt 100 € ein Betrag in Höhe der Minijob-Grenze anrechnungsfrei
+            ({params.einkommensfreibetrag.jugendlicherFreibetrag_unter25} €/Monat, 2026); oberhalb von
+            520 € kommen 30 % (bis 1.000 €) und 10 % (bis 1.200 €, mit Kind 1.500 €) dazu.
+            Ab 25 gilt das nur im Freiwilligendienst mit{' '}
+            {params.einkommensfreibetrag.jugendlicherFreibetrag_ab25} €/Monat; Schüler, Azubis und
+            Studierende ab 25 erhalten den regulären Freibetrag.
             Ferienjobs von Schülern sind zusätzlich vollständig anrechnungsfrei
             (§ 11a Abs. 7 SGB II) — diesen Sonderfall deckt der Rechner NICHT ab;
             bei Ferienjobs als Einkommen 0 € angeben.
@@ -362,8 +368,8 @@ export default function BuergergeldRechner() {
                 className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
               />
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Unter 25 → Freibetrag {params.einkommensfreibetrag.jugendlicherFreibetrag_unter25} €/Monat.
-                Ab 25 → {params.einkommensfreibetrag.jugendlicherFreibetrag_ab25} €/Monat.
+                Unter 25 → Grundfreibetrag {params.einkommensfreibetrag.jugendlicherFreibetrag_unter25} €/Monat.
+                Ab 25 → im Freiwilligendienst {params.einkommensfreibetrag.jugendlicherFreibetrag_ab25} €/Monat, sonst regulär.
               </p>
             </div>
           )}
@@ -619,7 +625,8 @@ export default function BuergergeldRechner() {
                 <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Kosten der Unterkunft</p>
               </div>
               <div className="flex justify-between px-4 py-2.5 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Warmmiete + Heizkosten</span>
+                {/* W183: vorher „Warmmiete + Heizkosten“ */}
+                <span className="text-gray-600 dark:text-gray-400">Miete inkl. Nebenkosten + Heizkosten</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.unterkunftskosten)} €</span>
               </div>
 
@@ -640,7 +647,12 @@ export default function BuergergeldRechner() {
                     <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(parseDeutscheZahl(einkommen))} €</span>
                   </div>
                   <div className="flex justify-between px-4 py-2 text-sm">
-                    <span className="pl-4 text-xs text-gray-600 dark:text-gray-400">abzgl. Freibetrag § 11b Abs. 2b SGB II</span>
+                    {/* W183: ab 25 gilt Abs. 2b nur im Freiwilligendienst, sonst der reguläre Freibetrag. */}
+                    <span className="pl-4 text-xs text-gray-600 dark:text-gray-400">
+                      {(parseInt(jugendlicherAlter) || 0) >= 25 && jugendlicherStatus !== 'freiwilligendienst'
+                        ? 'abzgl. Freibetrag § 11b Abs. 2 und 3 SGB II (regulär, ab 25)'
+                        : 'abzgl. Freibetrag § 11b Abs. 2b und 3 SGB II'}
+                    </span>
                     <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.freibetragEinkommen)} €</span>
                   </div>
                   <div className="flex justify-between px-4 py-2.5 text-sm">
@@ -732,7 +744,8 @@ export default function BuergergeldRechner() {
             eingaben={{
               bedarfsgemeinschaft: bg,
               anzahlKinder: kinder.length,
-              warmmiete: parseDeutscheZahl(warmmiete),
+              // W183: vorher Schlüssel „warmmiete“ — gemeint ist die Miete ohne Heizung.
+              mieteInklNebenkostenOhneHeizung: parseDeutscheZahl(warmmiete),
               heizkosten: parseDeutscheZahl(heizkosten),
               einkommen: parseDeutscheZahl(einkommen),
               vermoegen: parseDeutscheZahl(vermoegen),

@@ -47,6 +47,8 @@ export default function AfaRechner() {
       startJahr: ergebnis.startJahr,
       gwgOk: ergebnis.gwgOk,
       degressivGesperrt: ergebnis.degressivGesperrt,
+      degMax: ergebnis.degressivMaxProzent,
+      wechselJahr: ergebnis.wechselJahr,
     };
   }, [kosten, nutzungsdauer, methode, degSatz, datum]);
 
@@ -55,10 +57,11 @@ export default function AfaRechner() {
   const fmtEuro2 = (n: number) =>
     n.toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 });
 
+  // W183: vorher „Degressiv (27.2727…%)“ als rohe JS-Zahl und „Wohngebäude (5 % linear …)“.
   const labelMethode =
     result.methode === 'linear' ? 'Linear' :
-    result.methode === 'degressiv' ? `Degressiv (${result.degSatzNum}%)` :
-    result.methode === 'wohngebaeude-5' ? 'Wohngebäude (5 % linear, § 7 Abs. 5a EStG)' :
+    result.methode === 'degressiv' ? `Degressiv (${result.degSatzNum.toLocaleString('de-DE', { maximumFractionDigits: 2 })} %)` :
+    result.methode === 'wohngebaeude-5' ? 'Wohngebäude (5 % vom Restwert, § 7 Abs. 5a EStG)' :
     result.methode === 'sammelposten' ? 'Sammelposten-Pool (20 % über 5 Jahre, § 6 Abs. 2a EStG)' :
     'GWG (Sofortabschreibung)';
 
@@ -75,7 +78,8 @@ export default function AfaRechner() {
           ? `GWG-Sofortabschreibung: ${fmtEuro(result.k)} im Jahr ${result.startJahr}.`
           : `GWG nicht möglich — Anschaffungskosten über 800 € netto.`)
       : result.methode === 'wohngebaeude-5'
-      ? `AfA (${labelMethode}): ${fmtEuro(afaTypisch)} pro Jahr, ${fmtEuro(afaTypisch / 12)} pro Monat. Anschaffung ${fmtEuro(result.k)}, Laufzeit 20 Jahre.`
+      // W183: vorher „… pro Jahr …, Laufzeit 20 Jahre“ (5 % linear).
+      ? `AfA (${labelMethode}): ${fmtEuro(afaTypisch)} im ersten vollen Jahr, danach 5 % vom jeweiligen Restwert${result.wechselJahr ? `, ab ${result.wechselJahr} linear über die Restnutzungsdauer` : ''}. Herstellungskosten ${fmtEuro(result.k)}, abgeschrieben bis ${result.rows[result.rows.length - 1]?.jahr ?? result.startJahr}.`
       : result.methode === 'sammelposten'
       ? (result.gwgOk
           ? `AfA (${labelMethode}): ${fmtEuro(afaTypisch)} pro Jahr über 5 Jahre. Anschaffung ${fmtEuro(result.k)}.`
@@ -130,7 +134,8 @@ export default function AfaRechner() {
         </div>
         {methode === 'wohngebaeude-5' && (
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
-            5 % p. a. linear für neue Mietwohngebäude mit Bauantrag zwischen 01.10.2023 und 30.09.2029 (§ 7 Abs. 5a EStG). Voraussetzung: Effizienzhaus-Standards nach Förderrichtlinien. Die Nutzungsdauer-Eingabe wirkt hier nicht — der Plan läuft gesetzlich 20 Jahre.
+            {/* W183: vorher „5 % p. a. linear … Bauantrag … Effizienzhaus-Standards … 20 Jahre“. */}
+            5 % vom jeweiligen Restwert (degressiv) für Wohngebäude, deren Herstellung nach dem 30.09.2023 und vor dem 01.10.2029 begonnen hat (Baubeginnsanzeige) oder die in diesem Zeitraum gekauft wurden (§ 7 Abs. 5a EStG). Einen Effizienzhaus-Standard verlangt die Vorschrift nicht — das gilt nur für die Sonder-AfA nach § 7b. Der Rechner wechselt zur linearen AfA (Restwert durch Restnutzungsdauer, Basis 33⅓ Jahre nach § 7 Abs. 4), sobald diese höher ist. Die Nutzungsdauer-Eingabe wirkt hier nicht.
           </p>
         )}
         {methode === 'sammelposten' && (
@@ -146,6 +151,11 @@ export default function AfaRechner() {
             Degressiver Satz (max. 30 %, höchstens 3× linearer Satz)
           </label>
           <NummerEingabe value={degSatz} onChange={setDegSatz} placeholder="30" einheit="%" />
+          {/* W183: Höchstsätze der früheren Fenster */}
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            Anschaffung 07/2025–12/2027: höchstens 3× linear und 30 %; 04–12/2024: 2× und 20 %; 2020–2022: 2,5× und 25 %.
+            {result.degMax > 0 && ` Für Ihr Datum gilt höchstens ${result.degMax} %.`}
+          </p>
         </div>
       )}
 
@@ -166,14 +176,16 @@ export default function AfaRechner() {
       {/* Warn-Banner: Degressive AfA ab Anschaffungsjahr 2028 nicht zulässig */}
       {result.degressivGesperrt && (
         <div className="mb-4 p-3 rounded-xl border border-amber-300 bg-amber-50 dark:border-amber-700 dark:bg-amber-900/20">
+          {/* W183: vorher nur ab 2028 gesperrt; jetzt jedes Datum außerhalb der Fenster. */}
           <p className="text-sm font-bold text-amber-800 dark:text-amber-200 mb-1">
-            ⚠️ Degressive AfA nicht mehr zulässig
+            ⚠️ Degressive AfA für dieses Anschaffungsdatum nicht zulässig
           </p>
           <p className="text-xs text-amber-700 dark:text-amber-300">
-            Nach § 7 Abs. 2 EStG n.F. (Investitionssofortprogramm) ist die degressive AfA für
-            bewegliche Wirtschaftsgüter nur für Anschaffungen vom 01.07.2025 bis 31.12.2027 zulässig.
-            Für Ihr Anschaffungsdatum wird automatisch linear gerechnet. Um degressiv zu reaktivieren,
-            setzen Sie das Anschaffungsdatum in dieses Fenster (bis 31.12.2027).
+            Nach § 7 Abs. 2 EStG (Investitionssofortprogramm) ist die degressive AfA für
+            bewegliche Wirtschaftsgüter derzeit nur für Anschaffungen vom 01.07.2025 bis 31.12.2027 zulässig;
+            frühere Fenster galten vom 01.04. bis 31.12.2024 (20 %) und 2020 bis 2022 (25 %).
+            Für Ihr Anschaffungsdatum wird automatisch linear gerechnet. Ältere Fassungen (etwa 2009/2010)
+            bildet der Rechner nicht ab.
           </p>
         </div>
       )}
@@ -259,7 +271,8 @@ export default function AfaRechner() {
               { label: 'Nutzungsdauer', wert: `${result.nd} Jahre` },
               { label: 'Jährliche AfA', wert: `${fmtEuro(result.jaehrlich)}`, highlight: true },
               { label: 'AfA im Erstjahr', wert: `${fmtEuro(result.anteilErstjahr)}` },
-              { label: 'Linearer AfA-Satz', wert: `${result.linSatz} %` },
+              // W183: vorher roh `${result.linSatz} %` (100 ÷ 3 → „33.333333333333336 %“)
+              { label: 'Linearer AfA-Satz', wert: `${result.linSatz.toLocaleString('de-DE', { maximumFractionDigits: 2 })} %` },
             ],
           },
         ]}

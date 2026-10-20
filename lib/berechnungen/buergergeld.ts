@@ -24,7 +24,7 @@ export type JugendlicherStatusKategorie =
   | 'freiwilligendienst';
 
 export interface JugendlicherStatusEingabe {
-  /** Alter des Antragstellers (entscheidet über 556 € vs. 250 € Freibetrag). */
+  /** Alter des Antragstellers: unter 25 Minijob-Grenze (2026: 603 €), ab 25 nur im Freiwilligendienst 250 €. */
   alter: number;
   status: JugendlicherStatusKategorie;
 }
@@ -47,6 +47,11 @@ export interface MehrbedarfEingabe {
 export interface BuergergeldEingabe {
   bedarfsgemeinschaft: Bedarfsgemeinschaft;
   kinder: KindEintrag[];
+  /**
+   * Miete inklusive Nebenkosten, aber OHNE Heizung (Bruttokaltmiete). Der Feldname ist historisch;
+   * die Lib addiert `heizkosten` dazu (§ 22 Abs. 1 SGB II). W183: vorher in der UI „Warmmiete“
+   * beschriftet, wodurch die Heizkosten doppelt zählten.
+   */
   warmmiete: number;
   heizkosten: number;
   einkommen: number;
@@ -55,8 +60,9 @@ export interface BuergergeldEingabe {
   mehrbedarfe?: MehrbedarfEingabe;
   /**
    * Optional: § 11b Abs. 2b SGB II — Jugendlichen-Status. Wenn gesetzt und
-   * `status !== 'none'`, wird der Einkommensfreibetrag durch den
-   * Jugendlichen-Freibetrag ersetzt (556 €/Monat unter 25, 250 €/Monat ab 25).
+   * `status !== 'none'`, gilt statt des Grundfreibetrags von 100 € die Minijob-Grenze
+   * (2026: 603 €/Monat, unter 25) bzw. 250 €/Monat (ab 25, nur Freiwilligendienst),
+   * plus 30 %/10 % nach § 11b Abs. 3 SGB II oberhalb 520 €/1.000 €.
    * Ferienjobs von Schülern sind zusätzlich vollständig anrechnungsfrei
    * (§ 11a Abs. 7 SGB II) — das deckt die Lib NICHT ab; bei Ferienjobs als
    * Einkommen 0 € angeben.
@@ -131,21 +137,38 @@ function rund2(n: number): number {
 }
 
 /**
- * § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag.
- * Ersetzt den regulären Stufen-Freibetrag, wenn der Antragsteller in einer
- * der vier Status-Gruppen (Schüler/Azubi/Student/Freiwilligendienst) ist.
- * Freibetrag: 556 € bis unter 25 J., 250 € ab 25 J.
+ * § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag (Schüler/Azubi/Student/Freiwilligendienst).
+ *  - Satz 1: unter 25 statt der 100 € (Abs. 1 Nr. 3–5) die Minijob-Grenze (2026: 603 €).
+ *  - Satz 3: ab 25 nur im Freiwilligendienst (Satz 1 Nr. 3) 250 €; Schüler, Azubis und
+ *    Studierende ab 25 fallen nicht unter Abs. 2b → regulärer Freibetrag.
+ *  - Abs. 3 Satz 4: In diesen Fällen entfällt nur die 20-%-Stufe (Satz 2 Nr. 1); 30 % von
+ *    520–1.000 € und 10 % von 1.000–1.200 € (mit Kind 1.500 €) kommen dazu.
+ * Text: https://www.gesetze-im-internet.de/sgb_2/__11b.html
+ * W183: vorher min(Einkommen, 556 € bzw. 250 €) — ohne Abs. 3, 250 € für alle ab 25.
  */
 function berechneJugendlicherFreibetrag(
   brutto: number,
   alter: number,
+  status: JugendlicherStatusKategorie,
+  hatKinder: boolean,
   params: BuergergeldParameter,
 ): number {
   if (brutto <= 0) return 0;
-  const fb = alter < 25
-    ? params.einkommensfreibetrag.jugendlicherFreibetrag_unter25
-    : params.einkommensfreibetrag.jugendlicherFreibetrag_ab25;
-  return Math.min(brutto, fb);
+  if (alter >= 25 && status !== 'freiwilligendienst') {
+    return berechneEinkommensFreibetrag(brutto, hatKinder, params);
+  }
+  const fb = params.einkommensfreibetrag;
+  const grund = alter < 25 ? fb.jugendlicherFreibetrag_unter25 : fb.jugendlicherFreibetrag_ab25;
+  let freibetrag = Math.min(brutto, grund);
+  if (brutto > fb.stufe1Obergrenze) {
+    freibetrag += (Math.min(brutto, fb.stufe2Obergrenze) - fb.stufe1Obergrenze) * fb.stufe2QuoteOhneKind;
+  }
+  const stufe3Obergrenze = hatKinder ? fb.stufe3ObergrenzeMitKind : fb.stufe3ObergrenzeOhneKind;
+  if (brutto > fb.stufe2Obergrenze) {
+    freibetrag += (Math.min(brutto, stufe3Obergrenze) - fb.stufe2Obergrenze) * fb.stufe3Quote;
+  }
+  // Abgesetzt werden kann höchstens das Einkommen selbst.
+  return rund2(Math.min(brutto, freibetrag));
 }
 
 function berechneEinkommensFreibetrag(
@@ -317,6 +340,7 @@ export function berechneBuergergeld(eingabe: BuergergeldEingabe): BuergergeldErg
     : { schwangerschaft: 0, alleinerziehend: 0, behinderung: 0, ernaehrung: 0, atypisch: 0, warmwasser: 0, gesamt: 0 };
 
   // Unterkunftskosten (KdU) — Angemessenheitsprüfung erfolgt außerhalb der Lib (§ 22 SGB II)
+  // `warmmiete` ist die Miete ohne Heizung (siehe BuergergeldEingabe), Heizkosten kommen dazu.
   const unterkunftskosten = warmmiete + heizkosten;
 
   // Gesamtbedarf
@@ -327,7 +351,7 @@ export function berechneBuergergeld(eingabe: BuergergeldEingabe): BuergergeldErg
   const jugendlicher = eingabe.jugendlicherStatus;
   const freibetragEinkommen = jugendlicher && jugendlicher.status !== 'none'
     // § 11b Abs. 2b SGB II — Jugendlichen-Pfad (Schüler/Azubi/Student/Freiwilligendienst)
-    ? rund2(berechneJugendlicherFreibetrag(einkommen, jugendlicher.alter, params))
+    ? rund2(berechneJugendlicherFreibetrag(einkommen, jugendlicher.alter, jugendlicher.status, hatKinder, params))
     // Regulärer Stufen-Freibetrag
     : berechneEinkommensFreibetrag(einkommen, hatKinder, params);
   const anrechenbareEinkommen = Math.max(0, einkommen - freibetragEinkommen);

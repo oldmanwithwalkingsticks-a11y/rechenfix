@@ -7,41 +7,33 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
-import { BBG_KV_MONAT } from '@/lib/berechnungen/brutto-netto';
-
-// Beitragsbemessungsgrenze KV 2026 — zentrale SSOT aus brutto-netto.ts
-const BBG_MONAT = BBG_KV_MONAT;
+import { berechneKrankengeld } from '@/lib/berechnungen/krankengeld';
 
 export default function KrankengeldRechner() {
   const [brutto, setBrutto] = useState('3500');
   const [netto, setNetto] = useState('2350');
   const [kinder, setKinder] = useState(true);
+  // W183: Kinder unter 25 für den PV-Abschlag ab dem 2. Kind (§ 55 Abs. 3 SGB XI).
+  const [kinderUnter25, setKinderUnter25] = useState('1');
   const [versicherung, setVersicherung] = useState<'gesetzlich' | 'privat'>('gesetzlich');
 
+  // W183: Rechnung in lib/berechnungen/krankengeld.ts. Vorher inline mit 6,15 % (kinderlos 6,45 %)
+  // Abzug — nur die Hälfte des Versichertenanteils; richtig RV 9,3 % + ALV 1,3 % + PV 1,8 % (+ 0,6 %).
   const ergebnis = useMemo(() => {
-    const br = Math.min(parseDeutscheZahl(brutto), BBG_MONAT);
-    const ne = parseDeutscheZahl(netto);
-
-    const brTag = br / 30;
-    const neTag = ne / 30;
-
-    // 70% Brutto, gedeckelt auf 90% Netto
-    const krankengeldBrutto = Math.min(0.7 * brTag, 0.9 * neTag);
-
-    // SV-Abzüge: RV 4,65 + ALV 0,65 + PV 0,85 (+ 0,3 kinderlos)
-    const svSatz = kinder ? 0.0615 : 0.0645;
-    const krankengeldNetto = krankengeldBrutto * (1 - svSatz);
-
-    const krankengeldNettoMonat = krankengeldNetto * 30;
-    const verlust = ne - krankengeldNettoMonat;
-    const verlustProzent = ne > 0 ? (verlust / ne) * 100 : 0;
-
+    const r = berechneKrankengeld({
+      bruttoMonat: parseDeutscheZahl(brutto),
+      nettoMonat: parseDeutscheZahl(netto),
+      hatKinder: kinder,
+      kinderUnter25: parseInt(kinderUnter25, 10) || 0,
+    });
     return {
-      brTag, neTag, krankengeldBrutto, krankengeldNetto,
-      krankengeldNettoMonat, verlust, verlustProzent,
-      svSatz: svSatz * 100,
+      ...r,
+      neTag: r.nettoTag,
+      krankengeldNetto: r.krankengeldNettoTag,
     };
-  }, [brutto, netto, kinder]);
+  }, [brutto, netto, kinder, kinderUnter25]);
+  const fmtProzent = (n: number) =>
+    (n * 100).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
 
   const fmt = (n: number) =>
     n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -71,6 +63,26 @@ export default function KrankengeldRechner() {
             onChange={(v) => setKinder(v === 'ja')}
           />
         </div>
+        {kinder && (
+          <div>
+            <label htmlFor="krankengeld-kinder-unter25" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+              Davon Kinder unter 25 Jahren (Pflegeversicherung)
+            </label>
+            <select
+              id="krankengeld-kinder-unter25"
+              value={kinderUnter25}
+              onChange={e => setKinderUnter25(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
+            >
+              <option value="0">keine (alle Kinder 25 oder älter)</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 oder mehr</option>
+            </select>
+          </div>
+        )}
         <div>
           <RadioToggleGroup
             name="krankengeld-versicherung"
@@ -98,6 +110,11 @@ export default function KrankengeldRechner() {
             <p className="text-5xl font-bold">{fmt(ergebnis.krankengeldNettoMonat)} €</p>
             <p className="text-white/80 text-sm mt-1">
               {fmt2(ergebnis.krankengeldNetto)} € / Tag · Einkommensverlust: {fmt(ergebnis.verlust)} € ({fmt2(ergebnis.verlustProzent)} %)
+            </p>
+            {/* W183: Abzüge sichtbar machen (vorher nicht angezeigt, intern 6,15 %). */}
+            <p className="text-white/80 text-xs mt-2">
+              Brutto-Krankengeld {fmt2(ergebnis.krankengeldBruttoTag)} € / Tag, davon ab {fmtProzent(ergebnis.svSatz)} %
+              (Rente {fmtProzent(ergebnis.rvSatz)} %, Arbeitslosen {fmtProzent(ergebnis.avSatz)} %, Pflege {fmtProzent(ergebnis.pvSatz)} %)
             </p>
           </div>
 
@@ -177,12 +194,13 @@ export default function KrankengeldRechner() {
         eingaben={{
           Bruttogehalt: `${fmt(parseDeutscheZahl(brutto))} €`,
           Nettogehalt: `${fmt(parseDeutscheZahl(netto))} €`,
-          Kinder: kinder ? 'Ja' : 'Nein',
+          Kinder: kinder ? `Ja (${kinderUnter25} unter 25)` : 'Nein',
           Versicherung: versicherung,
         }}
         ergebnis={versicherung === 'gesetzlich' ? {
           'Krankengeld Netto/Monat': `${fmt(ergebnis.krankengeldNettoMonat)} €`,
           'Krankengeld Netto/Tag': `${fmt2(ergebnis.krankengeldNetto)} €`,
+          'Abzüge vom Krankengeld': `${fmtProzent(ergebnis.svSatz)} % (RV, ALV, PV)`,
           Einkommensverlust: `${fmt(ergebnis.verlust)} € (${fmt2(ergebnis.verlustProzent)} %)`,
         } : {
           Hinweis: 'Privat Versicherte: Krankentagegeld je nach PKV-Tarif',

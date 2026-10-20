@@ -40,6 +40,7 @@ import {
   RIESTER_FOERDERQUOTE_GRUEN,
   RIESTER_FOERDERQUOTE_GELB,
   berechneRiester,
+  schaetzeGrenzsteuersatz2026,
 } from '../lib/berechnungen/riester';
 
 type TestCase = {
@@ -167,11 +168,40 @@ const d3 = berechneRiester({
   vorjahresBrutto: 100000, familienstand: 'beide-partner', kinderAnzahl: 4,
   kinderAb2008: [true, true, true, true], eigenbeitrag: 0, grenzsteuersatz: 0.35,
 });
-//   personen=2, grundzulagen=350; kinderzulagen=4×300=1200; zulagenGesamt=1550
-//   vierProzent=4000; min(4000-1550, 2100-1550) = min(2450, 550) = 550 (Höchstbetrag-Cap)
-//   max(60, 550) = 550
+// W183: vorher 550 € (Mindest- und Höchstbetrag einmal für das Paar). § 86 Abs. 1 / § 10a Abs. 3 EStG: je Person.
+//   Je Partner 50.000 € Vorjahresbrutto, Kinderzulagen bei der Mutter (§ 85 Abs. 2 EStG):
+//   Mutter: min(2.000, 2.100) − (175 + 4 × 300) = 2.000 − 1.375 = 625 €
+//   Vater:  min(2.000, 2.100) − 175 = 1.825 €
+//   optimal = 625 + 1.825 = 2.450 €; Sonderausgaben je 2.000 € (Beitrag + Zulagen) → 4.000 €
 cases.push(
-  { name: 'D-03 brutto=100k/2P/4K: optimalerEB = 550 € (Höchstbetrag-Cap)',  actual: d3!.optimalerEigenbeitrag, expected: 550 },
+  { name: 'D-03 brutto=100k/2P/4K: optimalerEB = 2.450 € (625 + 1.825, je Person)',  actual: d3!.optimalerEigenbeitrag, expected: 2450, tolerance: 0.01 },
+  { name: 'D-03: Sonderausgaben = 4.000 € (2 × 2.000)',                            actual: d3!.sonderausgaben, expected: 4000, tolerance: 0.01 },
+  { name: 'D-03: effektiveZulagen = 1.550 € (voll)',                                actual: d3!.effektiveZulagen, expected: 1550, tolerance: 0.01 },
+);
+
+// D-04 (W183): Alleinstehend 60.000 € — 4 % = 2.400 €, gedeckelt auf 2.100 € (§ 86 Abs. 1 Satz 2 EStG)
+//   mindest = 2.100 − 175 = 1.925 €; volle Zulage (vorher wegen fehlendem Deckel 175 × 1.925/2.225 = 151,40 €)
+const d4 = berechneRiester({
+  vorjahresBrutto: 60000, familienstand: 'alleinstehend', kinderAnzahl: 0,
+  kinderAb2008: [], eigenbeitrag: 0, grenzsteuersatz: 0.35,
+});
+cases.push(
+  { name: 'D-04 alleinstehend 60k: mindestEigenbeitrag = 1.925 € (4 % auf 2.100 € gedeckelt)', actual: d4!.mindestEigenbeitrag, expected: 1925, tolerance: 0.01 },
+  { name: 'D-04: effektiveZulagen = 175 € (voll)',                                             actual: d4!.effektiveZulagen, expected: 175, tolerance: 0.01 },
+  { name: 'D-04: Sonderausgaben = 2.100 €',                                                    actual: d4!.sonderausgaben, expected: 2100, tolerance: 0.01 },
+);
+
+// D-05 (W183): beide riestern, 60.000 € gemeinsam, 0 Kinder — je 30.000 €: 1.200 − 175 = 1.025 €
+//   optimal 2.050 €, volle Zulagen 350 € (vorher 298,78 €), Sonderausgaben 2 × 1.200 = 2.400 €
+const d5 = berechneRiester({
+  vorjahresBrutto: 60000, familienstand: 'beide-partner', kinderAnzahl: 0,
+  kinderAb2008: [], eigenbeitrag: 0, grenzsteuersatz: 0.2566,
+});
+cases.push(
+  { name: 'D-05 beide 60k: optimalerEB = 2.050 € (2 × 1.025)',   actual: d5!.optimalerEigenbeitrag, expected: 2050, tolerance: 0.01 },
+  { name: 'D-05: effektiveZulagen = 350 € (voll)',                actual: d5!.effektiveZulagen, expected: 350, tolerance: 0.01 },
+  { name: 'D-05: Sonderausgaben = 2.400 € (2 × 1.200)',           actual: d5!.sonderausgaben, expected: 2400, tolerance: 0.01 },
+  { name: 'D-05: Gesamtförderung = 2.400 × 25,66 % = 615,84 €',   actual: d5!.gesamtfoerderung, expected: 615.84, tolerance: 0.01 },
 );
 
 // === Cluster E: Zulagen-Kürzung pro rata bei Unterzahlung ===
@@ -311,6 +341,39 @@ const i3 = berechneRiester({
 });
 cases.push(
   { name: 'I-03 EB-Eingabe = 0 → Auto-Optimum greift (eigenbeitrag = optimalerEigenbeitrag)',  actual: i3!.eigenbeitrag, expected: i3!.optimalerEigenbeitrag, tolerance: 0.01 },
+);
+
+// === Cluster J (W183): Startwert Grenzsteuersatz aus dem Brutto ===
+//
+// Vorher stand die Component fest auf 35 %. Sollwerte hier von Hand:
+//   zvE = Brutto − 1.230 − 36 − Vorsorgepauschale (PAP 2026: RV 9,3 %, KV 7,0 % + 1,45 %,
+//   PV 1,8 % bzw. kinderlos 2,4 %; in Cent abgeschnitten, Summe aufgerundet)
+//   Grenzsteuersatz § 32a EStG 2026, Zone 3: (2 × 173,10 × z + 2.397) / 10.000, z = (x − 17.799) / 10.000
+const vspHand = (b: number, pv: number) => Math.ceil((Math.floor(b * 9.3) + Math.floor(b * (8.45 + pv))) / 100);
+const grenzZone3 = (x: number) => (2 * 173.10 * ((x - 17799) / 10000) + 2397) / 10000;
+// 40.000 €, ohne Kind: VSP = ⌈3.720 + 4.340⌉ = 8.060 → zvE 30.674 → 28,427 %
+const j1Soll = grenzZone3(40000 - 1266 - vspHand(40000, 2.4));
+// 40.000 €, 1 Kind: VSP = 3.720 + 4.100 = 7.820 → zvE 30.914 → 28,510 %
+const j2Soll = grenzZone3(40000 - 1266 - vspHand(40000, 1.8));
+// beide riestern, 60.000 € je zur Hälfte: zvE je 30.000 − 1.266 − 6.045 = 22.689 → Splitting x = 22.689
+const j3Soll = grenzZone3(30000 - 1266 - vspHand(30000, 2.4));
+cases.push(
+  { name: 'J-01 40.000 € ledig ohne Kind: Grenzsteuersatz ≈ 28,43 %',      actual: schaetzeGrenzsteuersatz2026(40000, 'alleinstehend', 0), expected: j1Soll, tolerance: 0.00001 },
+  { name: 'J-01 Sollwert von Hand = 0,28427',                               actual: j1Soll, expected: 0.28427, tolerance: 0.00001 },
+  { name: 'J-02 40.000 € ledig, 1 Kind: Grenzsteuersatz ≈ 28,51 %',        actual: schaetzeGrenzsteuersatz2026(40000, 'alleinstehend', 1), expected: j2Soll, tolerance: 0.00001 },
+  { name: 'J-03 60.000 € beide riestern: Splitting ≈ 25,66 %',             actual: schaetzeGrenzsteuersatz2026(60000, 'beide-partner', 0), expected: j3Soll, tolerance: 0.00001 },
+  { name: 'J-04 ein-partner 20.000 € (Splitting, Partner ohne Einkommen) = 0', actual: schaetzeGrenzsteuersatz2026(20000, 'ein-partner', 0), expected: 0, tolerance: 0 },
+);
+// Beispiel der Seite (40.000 €, 1 Kind, Satz geschätzt): 1.600 € × 28,51 % = 456 € < 475 € Zulagen
+// → kein Zusatzvorteil, Förderung 475 €, Quote 475 / 1.125 = 42,22 % (vorher mit 35 %: 560 €, 49,78 %)
+const j5 = berechneRiester({
+  vorjahresBrutto: 40000, familienstand: 'alleinstehend', kinderAnzahl: 1,
+  kinderAb2008: [true], eigenbeitrag: 0, grenzsteuersatz: schaetzeGrenzsteuersatz2026(40000, 'alleinstehend', 1),
+});
+cases.push(
+  { name: 'J-05 Beispiel 40k/1 Kind: Zusatzvorteil = 0',                    actual: j5!.zusatzlicherSteuervorteil, expected: 0, tolerance: 0.01 },
+  { name: 'J-05 Beispiel 40k/1 Kind: Gesamtförderung = 475 €',              actual: j5!.gesamtfoerderung, expected: 475, tolerance: 0.01 },
+  { name: 'J-05 Beispiel 40k/1 Kind: Förderquote = 42,22 %',                actual: j5!.foerderquote, expected: 42.22, tolerance: 0.01 },
 );
 
 // === Ausgabe ===

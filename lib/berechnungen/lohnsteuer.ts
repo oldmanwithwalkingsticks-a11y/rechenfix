@@ -195,8 +195,10 @@ export function berechneLohnsteuerMitZuschlaegenJahr(
   jahresfreibetrag: number,
   kinderfreibetraege: number,
   vorsorge?: VorsorgeParams,
-): { lstJahr: number; soliJahr: number; kistBmgJahr: number } {
-  if (bruttoJahr <= 0) return { lstJahr: 0, soliJahr: 0, kistBmgJahr: 0 };
+  // W183: optionaler Faktor nach § 39f EStG (nur Klasse IV) und zvE im Ergebnis; vorher ohne beides.
+  faktor?: number,
+): { lstJahr: number; soliJahr: number; kistBmgJahr: number; zvE: number } {
+  if (bruttoJahr <= 0) return { lstJahr: 0, soliJahr: 0, kistBmgJahr: 0, zvE: 0 };
   return berechneLohnsteuerPAP2026({
     jahresBrutto: bruttoJahr,
     steuerklasse: sk,
@@ -204,6 +206,7 @@ export function berechneLohnsteuerMitZuschlaegenJahr(
     kinderfreibetraege,
     religion: 1, // nur damit der PAP die Bemessungsgrundlage BK befüllt
     vorsorge,
+    faktor,
   });
 }
 

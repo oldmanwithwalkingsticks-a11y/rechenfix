@@ -11,8 +11,17 @@
  *     zugelassen für Anschaffungen 01.07.2025–31.12.2027, Satz höchstens
  *     3× linear bzw. 30 % p. a.; ab Anschaffungsjahr 2028 NICHT mehr
  *     zulässig — Fallback auf Linear-Methode)
- *   - § 7 Abs. 5a EStG (Sonder-AfA neue Mietwohngebäude: 5 % linear p. a.,
- *     Bauantrag 01.10.2023–30.09.2029, Effizienzhaus-Standards Voraussetzung)
+ *     W183: Frühere Fenster, die für Altanschaffungen weiter gelten, jetzt ebenfalls
+ *     (`AFA_DEGRESSIV_FENSTER`): 01.01.2020–31.12.2022 2,5× / 25 % (Zweites und Viertes
+ *     Corona-Steuerhilfegesetz), 01.04.2024–31.12.2024 2× / 20 % (Wachstumschancengesetz).
+ *     Außerhalb der Fenster linear; vorher galt jedes Datum vor 2028 als zulässig mit 30 %.
+ *     Ältere Fenster (2009/2010, bis 2007) bildet die Lib nicht ab.
+ *   - § 7 Abs. 5a EStG (degressive AfA für Wohngebäude: 5 % vom jeweiligen
+ *     Buchwert (Restwert), Baubeginn bzw. Kaufvertrag 01.10.2023–30.09.2029,
+ *     ohne Effizienzhaus-Voraussetzung; Wechsel zur linearen AfA nach § 7 Abs. 4
+ *     zulässig, dann Restwert ÷ Restnutzungsdauer, Satz 7 und 8).
+ *     W183: vorher 5 % linear von den Herstellungskosten über 20 Jahre und
+ *     „Bauantrag“/„Effizienzhaus-Standards“ als Voraussetzung (gilt nur für § 7b).
  *   - § 6 Abs. 2 EStG (GWG-Sofortabschreibung: ≤ 800 € netto im Anschaffungs-
  *     jahr voll abschreibbar)
  *   - § 6 Abs. 2a EStG (Sammelposten-Pool: WG mit 250,01 € bis 1.000 € netto
@@ -41,12 +50,19 @@
  *     Abnutzung) NICHT modelliert
  *   - **AfA-Tabellen-Werte BMF** NICHT als Default-Liste in der Lib;
  *     User-Eingabe-Pattern (E5 Variante a)
- *   - **Effizienzhaus-Standards-Check** für § 7 Abs. 5a (Voraussetzung)
- *     NICHT modelliert; Lib geht von erfüllter Voraussetzung aus
+ *   - **Baubeginn-Fenster** für § 7 Abs. 5a (01.10.2023–30.09.2029) NICHT
+ *     geprüft; die Lib geht davon aus, dass es erfüllt ist
  */
 
-/** § 7 Abs. 5a EStG — Sonder-AfA-Satz für Wohngebäude (5 % linear). */
+/** § 7 Abs. 5a Satz 4 EStG — degressiver Satz für Wohngebäude: 5 % vom jeweiligen Restwert. */
 export const WOHNGEBAEUDE_SATZ_PROZENT = 5;
+
+/**
+ * § 7 Abs. 4 Satz 1 Nr. 2 Buchst. a EStG — Wohngebäude, fertiggestellt nach dem 31.12.2022:
+ * 3 % linear, also typisierte Nutzungsdauer 33⅓ Jahre. Grundlage der Restnutzungsdauer beim
+ * Wechsel von § 7 Abs. 5a zur linearen AfA (Satz 8). W183: neu.
+ */
+export const WOHNGEBAEUDE_NUTZUNGSDAUER_JAHRE = 100 / 3;
 
 /** § 6 Abs. 2a EStG — Untergrenze Sammelposten-Pool (€ netto, exklusiv). */
 export const SAMMELPOSTEN_MIN = 250.01;
@@ -70,6 +86,22 @@ export const AFA_DEGRESSIV_MAX_PROZENT = 30;
  * Anschaffungsjahr (2028) nicht mehr (Fallback auf Linear).
  */
 export const AFA_DEGRESSIV_STICHTAG_JAHR_GESPERRT = 2028;
+
+/**
+ * W183: Anschaffungsfenster der degressiven AfA nach § 7 Abs. 2 EStG in den jeweiligen Fassungen
+ * (Anschaffung von/bis als JJJJMM, jeweils einschließlich). Vorher prüfte die Lib nur die Obergrenze 2028.
+ */
+export const AFA_DEGRESSIV_FENSTER: ReadonlyArray<{ von: number; bis: number; faktor: number; maxProzent: number; fassung: string }> = [
+  { von: 202001, bis: 202212, faktor: 2.5, maxProzent: 25, fassung: 'Zweites/Viertes Corona-Steuerhilfegesetz' },
+  { von: 202404, bis: 202412, faktor: 2, maxProzent: 20, fassung: 'Wachstumschancengesetz' },
+  { von: 202507, bis: (AFA_DEGRESSIV_STICHTAG_JAHR_GESPERRT - 1) * 100 + 12, faktor: 3, maxProzent: AFA_DEGRESSIV_MAX_PROZENT, fassung: 'Investitionssofortprogramm' },
+];
+
+/** W183: Fenster nach § 7 Abs. 2 EStG für einen Anschaffungsmonat, sonst undefined (dann linear). */
+export function degressivFenster(startJahr: number, startMonat: number) {
+  const jm = startJahr * 100 + startMonat;
+  return AFA_DEGRESSIV_FENSTER.find(f => jm >= f.von && jm <= f.bis);
+}
 
 /** Trivial-kalendarisch für pro-rata-Erstjahres-Regel. */
 const MONATE_PRO_JAHR = 12;
@@ -114,7 +146,7 @@ export interface AfaErgebnis {
   nutzungsdauerJahre: number;
   /**
    * Effektive Methode nach Stichtag-Cut. Identisch zur Eingabe-Methode,
-   * außer bei Degressiv ab 2026 → Fallback auf Linear.
+   * außer bei Degressiv außerhalb der Fenster nach § 7 Abs. 2 EStG → Fallback auf Linear.
    */
   methodeEffektiv: AfaMethode;
   /** Jahr-für-Jahr-AfA-Plan. */
@@ -145,15 +177,23 @@ export interface AfaErgebnis {
   gwgOk: boolean;
   /**
    * Degressiv durch Stichtag-Cut auf Linear gefallback?
-   * (true wenn `methode === 'degressiv' && startJahr >= 2028`).
+   * (true wenn `methode === 'degressiv'` und der Anschaffungsmonat in keinem Fenster von
+   * `AFA_DEGRESSIV_FENSTER` liegt; W183: vorher nur `startJahr >= 2028`).
    */
   degressivGesperrt: boolean;
+  /**
+   * W183: Höchstsatz des Fensters (% p. a.) bei degressiver AfA nach § 7 Abs. 2 EStG
+   * (25, 20 oder 30); 0, wenn keine degressive AfA.
+   */
+  degressivMaxProzent: number;
+  /** W183: Jahr, ab dem degressiv/Wohngebäude in die lineare AfA wechselt (undefined: kein Wechsel). */
+  wechselJahr?: number;
 }
 
 /**
  * Berechnet einen AfA-Plan nach gewählter Methode mit pro-rata-Erstjahres-
- * Regel und Stichtag-Cut für Degressiv ab Anschaffungsjahr 2028
- * (Investitionssofortprogramm-Fenster: 01.07.2025–31.12.2027).
+ * Regel und Stichtag-Cut für Degressiv außerhalb der Anschaffungsfenster
+ * (2020–2022, 04–12/2024, 07/2025–12/2027; `AFA_DEGRESSIV_FENSTER`).
  *
  * Reine Wert-Funktion: keine Validierung negativer Werte (Component clampt
  * Eingabe-Felder via `parseDeutscheZahl || 0`).
@@ -166,10 +206,11 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
   const restMonate = 13 - startMonat;
   const anteilErstjahr = restMonate / MONATE_PRO_JAHR;
 
-  // Stichtag-Cut Degressiv § 7 Abs. 2 EStG n.F.
-  const degressivGesperrt =
-    eingabe.methode === 'degressiv' && startJahr >= AFA_DEGRESSIV_STICHTAG_JAHR_GESPERRT;
+  // Stichtag-Cut Degressiv § 7 Abs. 2 EStG: nur im Anschaffungsfenster (W183: vorher nur Obergrenze 2028).
+  const fenster = degressivFenster(startJahr, startMonat);
+  const degressivGesperrt = eingabe.methode === 'degressiv' && !fenster;
   const methodeEffektiv: AfaMethode = degressivGesperrt ? 'linear' : eingabe.methode;
+  const degressivMaxProzent = methodeEffektiv === 'degressiv' && fenster ? fenster.maxProzent : 0;
 
   const rows: JahresRow[] = [];
 
@@ -199,6 +240,7 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
       startJahr,
       gwgOk: sammelOk,
       degressivGesperrt,
+      degressivMaxProzent,
     };
   }
 
@@ -220,6 +262,7 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
       startJahr,
       gwgOk: k <= AFA_GWG_SCHWELLE_NETTO,
       degressivGesperrt,
+      degressivMaxProzent,
     };
   }
 
@@ -252,12 +295,18 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
       startJahr,
       gwgOk: true,
       degressivGesperrt,
+      degressivMaxProzent,
     };
   }
 
-  // Wohngebäude-Sonder-AfA § 7 Abs. 5a EStG
+  // Wohngebäude § 7 Abs. 5a EStG: 5 % vom jeweiligen Restwert (Satz 4), im ersten Jahr zeitanteilig
+  // (Satz 5). Wechsel zur linearen AfA, sobald Restwert ÷ Restnutzungsdauer (33⅓ Jahre nach § 7 Abs. 4
+  // Satz 1 Nr. 2a abzüglich der abgelaufenen Zeit) höher ist (Satz 7 und 8) — ab etwa dem 15. Jahr.
+  // W183: vorher 5 % linear von den Herstellungskosten über 20 Jahre.
   if (methodeEffektiv === 'wohngebaeude-5') {
-    const jaehrlich = k * (WOHNGEBAEUDE_SATZ_PROZENT / 100);
+    const satz = WOHNGEBAEUDE_SATZ_PROZENT / 100;
+    // Typischer Jahresbetrag: AfA eines vollen ersten Jahres (5 % der Herstellungskosten).
+    const jaehrlich = k * satz;
     let kum = 0;
     let rest = k;
     const erstAfa = Math.min(jaehrlich * anteilErstjahr, rest);
@@ -265,12 +314,22 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
     rest -= erstAfa;
     rows.push({ jahr: startJahr, afa: erstAfa, kumuliert: kum, restwert: rest });
     let jahr = startJahr + 1;
+    let restJahre = WOHNGEBAEUDE_NUTZUNGSDAUER_JAHRE - anteilErstjahr;
+    let wechselJahr: number | undefined;
     while (rest > 0.01 && rows.length < MAX_PLAN_JAHRE) {
-      const afa = Math.min(jaehrlich, rest);
+      const deg = rest * satz;
+      const lin = rest / Math.max(1, restJahre);
+      let afa = deg;
+      if (wechselJahr !== undefined || lin > deg) {
+        afa = lin;
+        wechselJahr ??= jahr;
+      }
+      afa = Math.min(afa, rest);
       kum += afa;
       rest -= afa;
       rows.push({ jahr, afa, kumuliert: kum, restwert: rest });
       jahr++;
+      restJahre -= 1;
     }
     return {
       anschaffungskosten: k,
@@ -284,13 +343,18 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
       startJahr,
       gwgOk: true,
       degressivGesperrt,
+      degressivMaxProzent,
+      wechselJahr,
     };
   }
 
   // Degressiv-AfA § 7 Abs. 2 EStG (mit Wechsel zu Linear, wenn günstiger)
   const linSatz = 100 / nd;
-  // § 7 Abs. 2 EStG n.F.: höchstens 3× linearer Satz, gedeckelt auf 30 %.
-  const degNum = Math.min(eingabe.degressivSatzProzent, 3 * linSatz, AFA_DEGRESSIV_MAX_PROZENT);
+  // § 7 Abs. 2 EStG: höchstens Faktor × linearer Satz und Höchstsatz des Fensters
+  // (07/2025–12/2027: 3× / 30 %; 04–12/2024: 2× / 20 %; 2020–2022: 2,5× / 25 %).
+  // W183: vorher immer 3× / 30 %.
+  const f = fenster ?? AFA_DEGRESSIV_FENSTER[AFA_DEGRESSIV_FENSTER.length - 1];
+  const degNum = Math.min(eingabe.degressivSatzProzent, f.faktor * linSatz, f.maxProzent);
   let rest = k;
   let kum = 0;
   const ersteAfa = Math.min(rest * (degNum / 100) * anteilErstjahr, rest);
@@ -300,6 +364,7 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
   let jahr = startJahr + 1;
   let restJahre = nd - anteilErstjahr;
   let inLinear = false;
+  let wechselJahr: number | undefined;
   while (rest > 0.01 && rows.length < MAX_PLAN_JAHRE) {
     const deg = rest * (degNum / 100);
     const lin = rest / Math.max(1, restJahre);
@@ -307,6 +372,7 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
     if (inLinear || lin > deg) {
       afa = lin;
       inLinear = true;
+      wechselJahr ??= jahr;
     }
     afa = Math.min(afa, rest);
     kum += afa;
@@ -328,5 +394,7 @@ export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
     startJahr,
     gwgOk: true,
     degressivGesperrt,
+    degressivMaxProzent,
+    wechselJahr,
   };
 }

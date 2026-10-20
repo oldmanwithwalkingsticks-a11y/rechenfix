@@ -27,8 +27,17 @@ export interface ElterngeldEingabe {
 
 export interface ElterngeldErgebnis {
   monatlich: number;
+  /**
+   * monatlich × bezugsMonate (14 bzw. 28, inklusive Partnermonate). Stimmt nur, wenn beide Eltern
+   * dasselbe Netto hatten — die Partnermonate richten sich nach dem Einkommen des anderen Elternteils.
+   */
   gesamt: number;
+  /** Paar zusammen: 14 (Basis) bzw. 28 (Plus) Monate mit Partnermonaten (§ 4 Abs. 3 BEEG). */
   bezugsMonate: number;
+  /** W183: höchstens 12 (Basis) bzw. 24 (Plus) Monate für einen Elternteil (§ 4 Abs. 4 Satz 1 BEEG). */
+  bezugsMonateEinElternteil: number;
+  /** W183: monatlich × bezugsMonateEinElternteil — was ein Elternteil allein höchstens erhält. */
+  gesamtEinElternteil: number;
   basisBetrag: number;
   geschwisterbonusBetrag: number;
   mehrlingszuschlag: number;
@@ -89,6 +98,8 @@ export function berechneElterngeld(eingabe: ElterngeldEingabe): ElterngeldErgebn
       monatlich: 0,
       gesamt: 0,
       bezugsMonate: variante === 'plus' ? 28 : 14,
+      bezugsMonateEinElternteil: variante === 'plus' ? 24 : 12,
+      gesamtEinElternteil: 0,
       basisBetrag: 0,
       geschwisterbonusBetrag: 0,
       mehrlingszuschlag: 0,
@@ -142,14 +153,20 @@ export function berechneElterngeld(eingabe: ElterngeldEingabe): ElterngeldErgebn
 
   // Bezugsdauer
   const bezugsMonate = istPlus ? 28 : 14;
+  // W183: Ein Elternteil höchstens 12 Monatsbeträge Basiselterngeld (§ 4 Abs. 4 Satz 1 BEEG), als Plus 24.
+  // Vorher zeigte der Rechner nur den Paar-Wert monatlich × 14 als „Gesamt-Elterngeld“.
+  const bezugsMonateEinElternteil = istPlus ? 24 : 12;
 
-  // Gesamtes Elterngeld
+  // Gesamtes Elterngeld (Paar mit Partnermonaten, gleiches Netto beider angenommen)
   const gesamt = Math.round(monatlich * bezugsMonate * 100) / 100;
+  const gesamtEinElternteil = Math.round(monatlich * bezugsMonateEinElternteil * 100) / 100;
 
   return {
     monatlich,
     gesamt,
     bezugsMonate,
+    bezugsMonateEinElternteil,
+    gesamtEinElternteil,
     basisBetrag: Math.round(basisBetrag * 100) / 100,
     geschwisterbonusBetrag: Math.round(geschwisterbonusBetrag * 100) / 100,
     mehrlingszuschlag,

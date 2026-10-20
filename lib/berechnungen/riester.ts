@@ -46,7 +46,43 @@
  *     `lohnsteuer.ts` / `steuerprogression.ts`. Reflektiert die
  *     Approximations-Praxis der Component, nicht die volle § 10a EStG-
  *     Berechnung des Finanzamts
+ *   - W183: Für den Startwert gibt es `schaetzeGrenzsteuersatz2026` (aus dem
+ *     Vorjahresbrutto geschätzt). Vorher stand die Component fest auf 35 %, was
+ *     zu 40.000 € Brutto nicht passt (ledig rund 28,5 %).
  */
+
+import { berechneLohnsteuerMitZuschlaegenJahr } from './lohnsteuer';
+import { berechneGrenzsteuersatz } from './steuerprogression';
+import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
+
+/**
+ * W183: Grenzsteuersatz 2026 (Dezimalwert, ohne Soli und Kirchensteuer), geschätzt aus dem
+ * Vorjahresbrutto eines gesetzlich versicherten Arbeitnehmers. Das zvE kommt aus dem PAP 2026
+ * (Arbeitnehmer-Pauschbetrag 1.230 €, Sonderausgaben-Pauschbetrag 36 €, Vorsorgepauschale mit
+ * durchschnittlichem Zusatzbeitrag; ohne Kinder mit PV-Zuschlag), der Satz aus § 32a EStG.
+ *  - alleinstehend: Grundtarif.
+ *  - ein-partner: Splittingtarif, Partner ohne eigenes Einkommen (mittelbar förderberechtigt).
+ *  - beide-partner: Splittingtarif, Brutto als gemeinsames Einkommen, je zur Hälfte verdient.
+ */
+export function schaetzeGrenzsteuersatz2026(
+  vorjahresBrutto: number,
+  familienstand: RiesterFamilienstand,
+  kinderAnzahl: number,
+): number {
+  if (vorjahresBrutto <= 0) return 0;
+  const vorsorge = {
+    kvArt: 'gesetzlich' as const,
+    kvZusatzbeitragProzent: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+    kinderUnter25: kinderAnzahl,
+    pvKinderlosZuschlag: kinderAnzahl === 0,
+  };
+  const zvE = (brutto: number) => Math.max(0, berechneLohnsteuerMitZuschlaegenJahr(brutto, 1, 0, 0, vorsorge).zvE);
+  if (familienstand === 'alleinstehend') {
+    return berechneGrenzsteuersatz(zvE(vorjahresBrutto), false) / 100;
+  }
+  const zvEPaar = familienstand === 'beide-partner' ? 2 * zvE(vorjahresBrutto / 2) : zvE(vorjahresBrutto);
+  return berechneGrenzsteuersatz(zvEPaar, true) / 100;
+}
 
 /** § 84 EStG — Grundzulage pro förderberechtigter Person (€/Jahr seit 2018). */
 export const RIESTER_GRUNDZULAGE = 175;
@@ -115,16 +151,16 @@ export interface RiesterErgebnis {
    * (`zulagenGesamt × min(1, eigenbeitrag/mindestEigenbeitrag)`).
    */
   effektiveZulagen: number;
-  /** Optimaler Eigenbeitrag für volle Zulage (4 % VJ-Brutto − Zulagen, mind. Sockel). */
+  /** Optimaler Eigenbeitrag für volle Zulage (je Person min(4 % VJ-Brutto, 2.100 €) − Zulagen, mind. Sockel). */
   optimalerEigenbeitrag: number;
   /**
    * Tatsächlich verwendeter Eigenbeitrag. Wenn Eingabe > 0: Eingabe;
    * sonst optimalerEigenbeitrag (Auto-Optimierung).
    */
   eigenbeitrag: number;
-  /** Mindest-Eigenbeitrag für volle Zulage (max(Sockel, 4 % − Zulagen)). */
+  /** Mindest-Eigenbeitrag für volle Zulage (je Person max(Sockel, min(4 %, 2.100 €) − Zulagen), summiert). */
   mindestEigenbeitrag: number;
-  /** Sonderausgabenabzug (min(2.100 €, eigenbeitrag + effektiveZulagen)). */
+  /** Sonderausgabenabzug (je Person min(2.100 €, Eigenbeitrag + Zulagen), summiert). */
   sonderausgaben: number;
   /** Steuerersparnis durch Sonderausgabenabzug (× Grenzsteuersatz). */
   steuerersparnis: number;
@@ -167,29 +203,42 @@ export function berechneRiester(eingabe: RiesterEingabe): RiesterErgebnis | null
 
   const zulagenGesamt = grundzulagen + kinderzulagen;
 
-  // Optimaler Eigenbeitrag: 4 % des Vorjahres-Brutto − Zulagen, mind. Sockel,
-  // max. 2.100 € − Zulagen
+  // W183: vorher Mindest- und Höchstbetrag nur einmal für den ganzen Haushalt und der 4-%-Betrag ohne
+  // Deckel auf 2.100 €. Folgen: Bei „beide riestern“ wurden Zulagen gekürzt (60.000 €: 298,78 statt 350 €),
+  // und Alleinstehende über 52.500 € Brutto erreichten mit dem „optimalen“ Beitrag nie die volle Zulage.
+  // § 86 Abs. 1 EStG: Mindesteigenbeitrag je Zulageberechtigtem = 4 % der eigenen Vorjahreseinnahmen,
+  // höchstens 2.100 €, abzüglich der eigenen Zulagen, mindestens 60 € Sockel. § 10a Abs. 1/3 EStG:
+  // Höchstbetrag 2.100 € je unmittelbar begünstigtem Ehegatten. Modell für „beide riestern“: das Brutto ist
+  // das gemeinsame Vorjahresbrutto, je zur Hälfte verdient (wie schaetzeGrenzsteuersatz2026); die
+  // Kinderzulagen erhält die Mutter (§ 85 Abs. 2 Satz 1 EStG).
+  const brutto = personen === 2 ? [b / 2, b / 2] : [b];
+  const zulagenJe = personen === 2
+    ? [RIESTER_GRUNDZULAGE + kinderzulagen, RIESTER_GRUNDZULAGE]
+    : [zulagenGesamt];
   const vierProzent = b * RIESTER_MINDESTBEITRAG_PROZENT;
-  const optimalerEigenbeitrag = Math.max(
-    RIESTER_SOCKEL_BEITRAG,
-    Math.min(vierProzent - zulagenGesamt, RIESTER_HOECHSTBETRAG - zulagenGesamt),
+  const mindestJe = brutto.map((x, i) =>
+    Math.max(RIESTER_SOCKEL_BEITRAG, Math.min(x * RIESTER_MINDESTBEITRAG_PROZENT, RIESTER_HOECHSTBETRAG) - zulagenJe[i]),
   );
+  // Optimaler Eigenbeitrag = Mindesteigenbeitrag (mehr bringt keine Zulage; der Sonderausgabenabzug ist
+  // bei 2.100 € inkl. Zulagen gedeckelt).
+  const optimalerEigenbeitrag = mindestJe.reduce((a, x) => a + x, 0);
+  const mindestEigenbeitrag = optimalerEigenbeitrag;
 
-  // Genutzter Eigenbeitrag: bei Eingabe = 0 → optimal, sonst Eingabe
+  // Genutzter Eigenbeitrag: bei Eingabe = 0 → optimal, sonst Eingabe (bei Paaren im Verhältnis der
+  // Mindesteigenbeiträge aufgeteilt)
   const eigenbeitrag = eingabe.eigenbeitrag > 0 ? eingabe.eigenbeitrag : optimalerEigenbeitrag;
 
   // Voller Zulagenanspruch nur bei Eigenbeitrag ≥ Mindest. Bei Unterzahlung
-  // pro-rata-Kürzung (Vereinfachung der Component).
-  const mindestEigenbeitrag = Math.max(
-    RIESTER_SOCKEL_BEITRAG,
-    vierProzent - zulagenGesamt,
-  );
+  // pro-rata-Kürzung (§ 86 Abs. 1 Satz 6 EStG).
   const zulagenQuote =
     mindestEigenbeitrag > 0 ? Math.min(1, eigenbeitrag / mindestEigenbeitrag) : 1;
   const effektiveZulagen = zulagenGesamt * zulagenQuote;
 
-  // Sonderausgabenabzug: Eigenbeitrag + Zulagen, max. Höchstbetrag
-  const sonderausgaben = Math.min(RIESTER_HOECHSTBETRAG, eigenbeitrag + effektiveZulagen);
+  // Sonderausgabenabzug je Person: eigener Beitrag + eigene Zulagen, höchstens 2.100 €
+  const sonderausgaben = mindestJe.reduce((summe, m, i) => {
+    const ebJe = mindestEigenbeitrag > 0 ? eigenbeitrag * (m / mindestEigenbeitrag) : eigenbeitrag / personen;
+    return summe + Math.min(RIESTER_HOECHSTBETRAG, ebJe + zulagenJe[i] * zulagenQuote);
+  }, 0);
   const steuerersparnis = sonderausgaben * eingabe.grenzsteuersatz;
 
   // Günstigerprüfung: nur Zusatz-Vorteil ggü. Zulage

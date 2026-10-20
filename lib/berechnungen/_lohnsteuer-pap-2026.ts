@@ -391,6 +391,15 @@ export class LohnsteuerPAP2026 {
     };
   }
 
+  /**
+   * W183: zu versteuerndes Jahreseinkommen (ZVE, Euro) des letzten Laufs, kein amtlicher
+   * PAP-Ausgang. Gebraucht für Y im Faktorverfahren (§ 39f Abs. 1 EStG). Nach main() mit ZKF > 0
+   * ist es der Wert nach Abzug der Kinderfreibeträge; für Y deshalb mit ZKF = 0 rechnen.
+   */
+  public getZVE(): Decimal {
+    return this.ZVE;
+  }
+
   /** MAIN-Einstieg, identisch zum XML-Original */
   public main(): void {
     this.MPARA();
@@ -931,7 +940,9 @@ export function berechneLohnsteuerPAP2026(params: {
   kinderfreibetraege?: number;
   religion?: 0 | 1;
   vorsorge?: VorsorgeParams;
-}): { lstJahr: number; soliJahr: number; kistBmgJahr: number } {
+  /** W183: Faktor nach § 39f EStG (drei Nachkommastellen, nur Klasse IV); fehlt er, gilt 1. */
+  faktor?: number;
+}): { lstJahr: number; soliJahr: number; kistBmgJahr: number; zvE: number } {
   const pap = new LohnsteuerPAP2026();
   const vorsorge = params.vorsorge ?? {};
   const kvPrivat = vorsorge.kvArt === 'privat';
@@ -959,7 +970,8 @@ export function berechneLohnsteuerPAP2026(params: {
     PKPV: kvPrivat ? new Decimal((vorsorge.kvPrivatBeitragJahr ?? 0) / 12).times(100) : new Decimal(0),
     PKPVAGZ: new Decimal(0),
     af: 1,
-    f: 1.0,
+    // W183: vorher fest 1.0; jetzt optional der Faktor des Faktorverfahrens (PAP: LSTJAHR = ST × f).
+    f: params.faktor ?? 1.0,
   });
   pap.main();
   const out = pap.getOutput();
@@ -968,5 +980,7 @@ export function berechneLohnsteuerPAP2026(params: {
     soliJahr: out.SOLZLZZ.div(100).toNumber(),
     // Bemessungsgrundlage der Kirchensteuer (JBMG, mit Kinderfreibeträgen) — nur bei religion=1 befüllt.
     kistBmgJahr: out.BK.div(100).toNumber(),
+    // W183: zvE des Laufs (für Y nach § 39f EStG), mit Kinderfreibeträgen nach deren Abzug.
+    zvE: pap.getZVE().toNumber(),
   };
 }

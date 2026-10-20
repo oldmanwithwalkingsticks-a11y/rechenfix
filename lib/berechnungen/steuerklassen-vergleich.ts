@@ -1,5 +1,6 @@
-import { berechneEStGrund, berechneSoli, WK_PAUSCHALE_AN_2026, GRUNDFREIBETRAG_2026, SA_PAUSCHALE_2026 } from './einkommensteuer';
+import { berechneEStMitSplitting } from './einkommensteuer';
 import { berechneBruttoNetto } from './brutto-netto';
+import { berechneLohnsteuerMitZuschlaegenJahr, monatsanteilPAP, kirchensteuerAusBmg, type VorsorgeParams } from './lohnsteuer';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from './sv-parameter';
 
 export type Steuerklasse = 1 | 3 | 4 | 5;
@@ -41,100 +42,107 @@ export interface SteuerklassenVergleichErgebnis {
   bruttoGesamt: number;
 }
 
-// Faktoren für Lohnsteuer nach Steuerklasse (vereinfacht, relativ zu SK1)
-// Basis: SK1 entspricht § 32a EStG Grundtabelle (Jahresbetrachtung)
-function berechneLohnsteuerSK1Jahr(bruttoJahr: number): number {
-  if (bruttoJahr <= 0) return 0;
-  // Arbeitnehmer-Pauschbetrag (1.230 €) + Sonderausgaben (36 €) + Vorsorgepauschale (vereinfacht 12 %)
-  const werbungskosten = WK_PAUSCHALE_AN_2026;
-  const sonderausgaben = SA_PAUSCHALE_2026;
-  const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
-  const zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
-  return berechneEStGrund(zvE, 2026);
+// W183: vorher eigene Näherung — Vorsorgepauschale pauschal 12 % (max. 15.000 €), Klasse V über
+// „ESt(zvE + Grundfreibetrag) − ESt(Grundfreibetrag)“, Faktor ohne Abschneiden und mit derselben
+// 12-%-Pauschale. Jetzt: Lohnsteuer, Soli und Kirchensteuer aus dem amtlichen PAP 2026
+// (_lohnsteuer-pap-2026.ts über lohnsteuer.ts), Faktorverfahren nach § 39f EStG.
+// Sozialabgaben wie bisher aus berechneBruttoNetto (Minijob, Übergangsbereich).
+// Annahmen: beide gesetzlich versichert, durchschnittlicher Zusatzbeitrag, rentenversicherungspflichtig,
+// älter als 23; die Kinderfreibeträge gelten für gemeinsame Kinder.
+
+const ZUSATZBEITRAG = KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT;
+
+// W183: Kinder für die Pflegeversicherung aus der Kinder-Eingabe; vorher immer kinderUnter25 = 1
+// (kein Kinderlosenzuschlag). 0 Kinderfreibeträge → kinderlos, Zuschlag 0,6 % (§ 55 Abs. 3 SGB XI);
+// 0,5 oder 1 → ein Kind; ab 2 Kindern Abschlag 0,25 % je Kind (2. bis 5. Kind).
+function kinderUnter25Aus(kinderfreibetraege: number): number {
+  return kinderfreibetraege > 0 ? Math.max(1, Math.floor(kinderfreibetraege)) : 0;
 }
 
-// SK3: Doppelter Grundfreibetrag, sehr niedrige LSt
-function berechneLohnsteuerSK3Jahr(bruttoJahr: number): number {
-  if (bruttoJahr <= 0) return 0;
-  const werbungskosten = WK_PAUSCHALE_AN_2026;
-  const sonderausgaben = SA_PAUSCHALE_2026;
-  const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
-  const zvE = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
-  // Splitting-Effekt: ESt auf halbes zvE, mal 2
-  const halb = Math.floor(zvE / 2);
-  return berechneEStGrund(halb, 2026) * 2;
-}
-
-// SK5: Kein Grundfreibetrag, stark erhöhte LSt
-function berechneLohnsteuerSK5Jahr(bruttoJahr: number): number {
-  if (bruttoJahr <= 0) return 0;
-  const werbungskosten = WK_PAUSCHALE_AN_2026;
-  const sonderausgaben = SA_PAUSCHALE_2026;
-  const vorsorgepauschale = Math.min(bruttoJahr * 0.12, 15000);
-  const bruttoNachAbzug = Math.max(0, bruttoJahr - werbungskosten - sonderausgaben - vorsorgepauschale);
-
-  // Näherungsformel SK5: Differenz der Splittingsteuer zwischen (bruttoNachAbzug + 40.000) und 40.000,
-  // aber kein Grundfreibetrag — vereinfachte Approximation via "SK4 × 1,55"-Faktor
-  // Genauer: SK5-Tabelle orientiert sich an der Annahme, dass der Partner viel verdient
-  const estOhneGF = berechneEStGrund(bruttoNachAbzug + GRUNDFREIBETRAG_2026, 2026) - berechneEStGrund(GRUNDFREIBETRAG_2026, 2026);
-  return Math.max(estOhneGF, bruttoNachAbzug * 0.14);
-}
-
-// SK4 = SK1 (beide gleichgestellt in der Tabelle)
-function berechneLohnsteuerSK4Jahr(bruttoJahr: number): number {
-  return berechneLohnsteuerSK1Jahr(bruttoJahr);
-}
-
-function berechneLohnsteuerByKlasse(bruttoJahr: number, sk: Steuerklasse): number {
-  switch (sk) {
-    case 1: return berechneLohnsteuerSK1Jahr(bruttoJahr);
-    case 3: return berechneLohnsteuerSK3Jahr(bruttoJahr);
-    case 4: return berechneLohnsteuerSK4Jahr(bruttoJahr);
-    case 5: return berechneLohnsteuerSK5Jahr(bruttoJahr);
+// Vorsorgepauschale wie in berechneBruttoNetto (buildVorsorgeParams, W147/W176): Kinderlosenzuschlag
+// in der PV, im Minijob ohne KV-, PV- und AV-Teilbetrag. scripts/verify-steuerklassen-vergleich.ts
+// vergleicht III/V und V/III mit berechneBruttoNetto, damit beide Stellen gleich bleiben.
+function vorsorgeFuer(minijob: boolean, kinderUnter25: number): VorsorgeParams {
+  if (minijob) {
+    return { kvArt: 'privat', kvZusatzbeitragProzent: ZUSATZBEITRAG, kinderUnter25, kvPrivatBeitragJahr: 0, rvBefreit: false, pvKinderlosZuschlag: false, avFrei: true };
   }
+  return { kvArt: 'gesetzlich', kvZusatzbeitragProzent: ZUSATZBEITRAG, kinderUnter25, kvPrivatBeitragJahr: 0, rvBefreit: false, pvKinderlosZuschlag: kinderUnter25 === 0 };
 }
 
-// Sozialversicherungsbeiträge 2026 (AN-Anteil), Zusatzbeitrag-Durchschnitt 2,9 % (typisch-Szenario).
-// W166: Sozialabgaben über die zentrale Brutto-Netto-Berechnung, damit Minijob und Übergangsbereich
-// (Partner mit bis zu 2.000 € im Monat) richtig zählen. PV wie bisher ohne Kinderstaffel und ohne
-// Kinderlosenzuschlag (kinderUnter25: 1 → 1,8 %); die Steuerklasse wirkt nicht auf die Sozialabgaben.
-function berechneSvJahr(bruttoJahr: number): number {
-  if (bruttoJahr <= 0) return 0;
+interface PersonWerte {
+  lstJahrPAP: number;   // Jahreslohnsteuer laut PAP (für X im Faktorverfahren)
+  zvE: number;          // zvE ohne Kinderfreibeträge (für Y im Faktorverfahren)
+  lstMonat: number;
+  soliMonat: number;
+  kistMonat: number;
+  svMonat: number;
+  nettoMonat: number;
+}
+
+function berechnePerson(
+  bruttoJahr: number,
+  sk: Steuerklasse,
+  kirchensteuer: boolean,
+  e: SteuerklassenVergleichEingabe,
+  faktor?: number,
+): PersonWerte {
+  if (bruttoJahr <= 0) {
+    return { lstJahrPAP: 0, zvE: 0, lstMonat: 0, soliMonat: 0, kistMonat: 0, svMonat: 0, nettoMonat: 0 };
+  }
+  const kinderUnter25 = kinderUnter25Aus(e.kinderfreibetraege);
+  // Kinderfreibeträge zählen in den Klassen III und IV (§ 38b Abs. 2 EStG), nicht in V.
+  const zkf = sk === 5 ? 0 : e.kinderfreibetraege;
+
+  // Sozialabgaben (Arbeitnehmeranteil) — die Steuerklasse wirkt nicht darauf.
   const bn = berechneBruttoNetto({
     bruttoMonat: bruttoJahr / 12,
-    steuerklasse: 1,
+    steuerklasse: sk,
     kirchensteuer: false,
-    kirchensteuersatz: 9,
-    kinderfreibetraege: 0,
-    kinderUnter25: 1,
+    kirchensteuersatz: e.kirchensteuersatz,
+    kinderfreibetraege: zkf,
+    kinderUnter25,
     bundesland: '',
     kvArt: 'gesetzlich',
-    kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT,
+    kvZusatzbeitrag: ZUSATZBEITRAG,
     kvPrivatBeitrag: 0,
     rvBefreit: false,
     abrechnungszeitraum: 'monat',
   });
-  return bn.sozialabgabenGesamt * 12;
+  const vorsorge = vorsorgeFuer(bn.svZone === 'minijob', kinderUnter25);
+
+  // Ohne Kinderfreibeträge und ohne Faktor: Jahreslohnsteuer und zvE für § 39f EStG.
+  const basis = berechneLohnsteuerMitZuschlaegenJahr(bruttoJahr, sk, 0, 0, vorsorge);
+  // Einbehalt im Monat: Lohnsteuer, Soli und Kirchensteuer wie im PAP bei monatlichem Lohnzahlungszeitraum.
+  const j = berechneLohnsteuerMitZuschlaegenJahr(bruttoJahr, sk, 0, zkf, vorsorge, faktor);
+  const lstMonat = monatsanteilPAP(j.lstJahr);
+  const soliMonat = monatsanteilPAP(j.soliJahr);
+  const kistMonat = kirchensteuer ? kirchensteuerAusBmg(monatsanteilPAP(j.kistBmgJahr), e.kirchensteuersatz) : 0;
+  const svMonat = bn.sozialabgabenGesamt;
+  const nettoMonat = Math.round((bruttoJahr / 12 - lstMonat - soliMonat - kistMonat - svMonat) * 100) / 100;
+
+  return { lstJahrPAP: basis.lstJahr, zvE: Math.max(0, basis.zvE), lstMonat, soliMonat, kistMonat, svMonat, nettoMonat };
 }
 
-// Soli auf Lohnsteuer — zentrale berechneSoli handhabt Freigrenze + Milderungszone.
-// Bei SK 3 oder 5 gilt Splittingtarif-Freigrenze (das Paar ist zusammenveranlagt).
-function berechneSoliJahr(lohnsteuerJahr: number, isSK3or5: boolean): number {
-  return berechneSoli(lohnsteuerJahr, isSK3or5, 2026);
-}
-
-function berechneKiStJahr(lohnsteuerJahr: number, kirchensteuer: boolean, satz: 8 | 9): number {
-  if (!kirchensteuer) return 0;
-  return lohnsteuerJahr * (satz / 100);
-}
-
-// Splitting-ESt des Paares (für Faktorverfahren und Nachzahlung/Erstattung)
-function berechneSplittingEStPaar(brutto1: number, brutto2: number): number {
-  const zvE1 = Math.max(0, brutto1 - WK_PAUSCHALE_AN_2026 - 36 - Math.min(brutto1 * 0.12, 15000));
-  const zvE2 = Math.max(0, brutto2 - WK_PAUSCHALE_AN_2026 - 36 - Math.min(brutto2 * 0.12, 15000));
-  const zvEGesamt = zvE1 + zvE2;
-  const halb = Math.floor(zvEGesamt / 2);
-  return berechneEStGrund(halb, 2026) * 2;
+/**
+ * Faktorverfahren nach § 39f Abs. 1 EStG: Faktor = Y : X, drei Nachkommastellen ohne Rundung,
+ * nur wenn kleiner als 1.
+ *  - Y: Einkommensteuer beider Ehegatten nach dem Splittingverfahren (§ 32a Abs. 5 EStG) mit den
+ *    Abzugsbeträgen des § 39b Abs. 2 EStG (Arbeitnehmer-Pauschbetrag, Sonderausgaben-Pauschbetrag,
+ *    Vorsorgepauschale) — also auf die Summe der zvE aus dem PAP in Klasse IV.
+ *  - X: Summe der Jahreslohnsteuer beider Ehegatten in Klasse IV.
+ * Liefert auch Y, damit Nachzahlung und Erstattung auf dieselbe Jahressteuer bezogen sind.
+ */
+function berechneFaktor(e: SteuerklassenVergleichEingabe): { faktor: number; y: number } {
+  const p1 = berechnePerson(e.bruttoJahr1, 4, false, e);
+  const p2 = berechnePerson(e.bruttoJahr2, 4, false, e);
+  const y = berechneEStMitSplitting(p1.zvE + p2.zvE, true, 2026);
+  const x = p1.lstJahrPAP + p2.lstJahrPAP;
+  // Klasse IV (und damit der Faktor) setzt voraus, dass beide Ehegatten Arbeitslohn beziehen
+  // (§ 38b Abs. 1 Satz 2 Nr. 4 EStG). Ohne zweiten Lohn bleibt es beim Faktor 1.
+  if (x <= 0 || e.bruttoJahr1 <= 0 || e.bruttoJahr2 <= 0) return { faktor: 1, y };
+  // W183: vorher Math.min(1, Y / X) ungekürzt; jetzt auf drei Stellen abgeschnitten.
+  const faktor = Math.floor((y * 1000) / x) / 1000;
+  return { faktor: Math.min(1, faktor), y };
 }
 
 function berechneKombination(
@@ -142,56 +150,35 @@ function berechneKombination(
   sk1: Steuerklasse,
   sk2: Steuerklasse,
   name: string,
+  splitting: { faktor: number; y: number },
   mitFaktor = false,
 ): KombinationErgebnis {
-  let lst1 = berechneLohnsteuerByKlasse(e.bruttoJahr1, sk1);
-  let lst2 = berechneLohnsteuerByKlasse(e.bruttoJahr2, sk2);
+  // Faktor kleiner 1 wird im PAP auf die Lohnsteuer angewendet; bei 1 bleibt es bei IV/IV.
+  const faktor = mitFaktor ? splitting.faktor : undefined;
+  const p1 = berechnePerson(e.bruttoJahr1, sk1, e.kirchensteuer1, e, faktor);
+  const p2 = berechnePerson(e.bruttoJahr2, sk2, e.kirchensteuer2, e, faktor);
 
-  let faktor: number | undefined;
-  const splittingESt = berechneSplittingEStPaar(e.bruttoJahr1, e.bruttoJahr2);
-
-  if (mitFaktor) {
-    const summeLst = lst1 + lst2;
-    faktor = summeLst > 0 ? Math.min(1, splittingESt / summeLst) : 1;
-    lst1 = lst1 * faktor;
-    lst2 = lst2 * faktor;
-  }
-
-  const isSK3or5_1 = sk1 === 3 || sk1 === 5;
-  const isSK3or5_2 = sk2 === 3 || sk2 === 5;
-
-  const soli1 = berechneSoliJahr(lst1, isSK3or5_1);
-  const soli2 = berechneSoliJahr(lst2, isSK3or5_2);
-  const kist1 = berechneKiStJahr(lst1, e.kirchensteuer1, e.kirchensteuersatz);
-  const kist2 = berechneKiStJahr(lst2, e.kirchensteuer2, e.kirchensteuersatz);
-
-  const sv1 = berechneSvJahr(e.bruttoJahr1);
-  const sv2 = berechneSvJahr(e.bruttoJahr2);
-
-  const netto1Jahr = e.bruttoJahr1 - lst1 - soli1 - kist1 - sv1;
-  const netto2Jahr = e.bruttoJahr2 - lst2 - soli2 - kist2 - sv2;
-  const nettoGesamtJahr = netto1Jahr + netto2Jahr;
-  const nettoGesamtMonat = nettoGesamtJahr / 12;
-
-  const summeLstTatsaechlich = lst1 + lst2;
-  const differenzZurSplitting = summeLstTatsaechlich - splittingESt;
+  const nettoGesamtMonat = p1.nettoMonat + p2.nettoMonat;
+  // Über das Jahr einbehaltene Lohnsteuer = zwölf Monatsbeträge.
+  const summeLstTatsaechlich = (p1.lstMonat + p2.lstMonat) * 12;
+  const differenzZurSplitting = summeLstTatsaechlich - splitting.y;
 
   return {
     name,
     sk1,
     sk2,
-    lohnsteuer1Monat: Math.round(lst1 / 12 * 100) / 100,
-    lohnsteuer2Monat: Math.round(lst2 / 12 * 100) / 100,
+    lohnsteuer1Monat: p1.lstMonat,
+    lohnsteuer2Monat: p2.lstMonat,
     lohnsteuerGesamtJahr: Math.round(summeLstTatsaechlich * 100) / 100,
-    soli1Monat: Math.round(soli1 / 12 * 100) / 100,
-    soli2Monat: Math.round(soli2 / 12 * 100) / 100,
-    kist1Monat: Math.round(kist1 / 12 * 100) / 100,
-    kist2Monat: Math.round(kist2 / 12 * 100) / 100,
-    netto1Monat: Math.round(netto1Jahr / 12 * 100) / 100,
-    netto2Monat: Math.round(netto2Jahr / 12 * 100) / 100,
+    soli1Monat: p1.soliMonat,
+    soli2Monat: p2.soliMonat,
+    kist1Monat: p1.kistMonat,
+    kist2Monat: p2.kistMonat,
+    netto1Monat: p1.nettoMonat,
+    netto2Monat: p2.nettoMonat,
     nettoGesamtMonat: Math.round(nettoGesamtMonat * 100) / 100,
-    nettoGesamtJahr: Math.round(nettoGesamtJahr * 100) / 100,
-    faktor: faktor !== undefined ? Math.round(faktor * 1000) / 1000 : undefined,
+    nettoGesamtJahr: Math.round(nettoGesamtMonat * 12 * 100) / 100,
+    faktor,
     differenzZurSplitting: Math.round(differenzZurSplitting * 100) / 100,
   };
 }
@@ -199,9 +186,10 @@ function berechneKombination(
 export function berechneSteuerklassenVergleich(
   e: SteuerklassenVergleichEingabe,
 ): SteuerklassenVergleichErgebnis {
-  const k1 = berechneKombination(e, 3, 5, 'III/V');
-  const k2 = berechneKombination(e, 5, 3, 'V/III');
-  const k3 = berechneKombination(e, 4, 4, 'IV/IV mit Faktor', true);
+  const splitting = berechneFaktor(e);
+  const k1 = berechneKombination(e, 3, 5, 'III/V', splitting);
+  const k2 = berechneKombination(e, 5, 3, 'V/III', splitting);
+  const k3 = berechneKombination(e, 4, 4, 'IV/IV mit Faktor', splitting, true);
 
   const kombinationen = [k1, k2, k3];
 
@@ -211,7 +199,8 @@ export function berechneSteuerklassenVergleich(
   return {
     kombinationen,
     empfehlung: beste.name,
-    jahressteuerSplitting: Math.round(berechneSplittingEStPaar(e.bruttoJahr1, e.bruttoJahr2) * 100) / 100,
+    // Jahressteuer nach dem Splittingtarif mit den Abzugsbeträgen des Lohnsteuerabzugs (Y nach § 39f EStG).
+    jahressteuerSplitting: splitting.y,
     bruttoJahr1: e.bruttoJahr1,
     bruttoJahr2: e.bruttoJahr2,
     bruttoGesamt: e.bruttoJahr1 + e.bruttoJahr2,

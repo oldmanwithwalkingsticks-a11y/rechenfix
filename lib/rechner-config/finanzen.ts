@@ -406,7 +406,8 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Elterngeld 2026 berechnen ✓ Basiselterngeld & ElterngeldPlus ✓ Mit Geschwisterbonus ✓ Sofort-Ergebnis. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['elterngeld rechner', 'elterngeld berechnen', 'elterngeld 2026', 'basiselterngeld', 'elterngeld plus', 'elterngeldrechner', 'geschwisterbonus'],
     icon: '👶',
-    beispiel: 'Beispiel: 2.500 € Netto → 2.500 × 65% = 1.625 € Basiselterngeld/Monat → 22.750 € über 14 Monate',
+    // W183: vorher „→ 22.750 € über 14 Monate“ — ein Elternteil allein bekommt höchstens 12 Monatsbeträge.
+    beispiel: 'Beispiel: 2.500 € Netto → 2.500 × 65 % = 1.625 € Basiselterngeld/Monat → 19.500 € in 12 Monaten für einen Elternteil; mit 2 Partnermonaten 22.750 €, wenn der andere Elternteil ebenfalls 2.500 € netto hatte',
     // contentBloecke (W19): eigenständiges „Varianten- & Entscheidungs-Leitformat" —
     // dominant vergleich + beispielrechnung + tabelle (Basis vs. Plus vs. Bonus). Werte
     // gespiegelt aus lib/berechnungen/elterngeld.ts (Einkommensgrenze 175.000 €,
@@ -677,7 +678,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'buergergeld-rechner',
-    letzteAktualisierung: '2026-06-16',
+    letzteAktualisierung: '2026-10-20',
     quellen: [
       { titel: '§ 20 SGB II: Regelbedarf zur Sicherung des Lebensunterhalts', url: 'https://www.gesetze-im-internet.de/sgb_2/__20.html' },
       { titel: '§ 22 SGB II: Bedarfe für Unterkunft und Heizung', url: 'https://www.gesetze-im-internet.de/sgb_2/__22.html' },
@@ -692,7 +693,8 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Bürgergeld 2026 berechnen ✓ Aktuelle Regelsätze ✓ Mit Einkommen & Vermögen ✓ Für Alleinstehende & Familien. Jetzt prüfen! ✓ Mit KI-Erklärung.',
     keywords: ['bürgergeld rechner', 'bürgergeld 2026', 'bürgergeld berechnen', 'regelsatz 2026', 'bürgergeld anspruch', 'hartz 4 rechner', 'jobcenter'],
     icon: '🏛️',
-    beispiel: 'Beispiel: Alleinstehend, 450 € Warmmiete, 80 € Heizkosten → 563 € + 530 € = 1.093 € Bürgergeld/Monat',
+    // W183: vorher „450 € Warmmiete, 80 € Heizkosten … Bürgergeld/Monat“ — Warmmiete enthält die Heizung schon.
+    beispiel: 'Beispiel: Alleinstehend, 450 € Miete inkl. Nebenkosten (ohne Heizung), 80 € Heizkosten → 563 € + 530 € = 1.093 € Grundsicherungsgeld/Monat (bis 30.06.2026 Bürgergeld)',
     // contentBloecke (W19): eigenständiges „Regelbedarf- & Reform-Leitformat" —
     // dominant tabelle (Regelbedarfsstufen) + beispielrechnung (Gesamtbedarf) +
     // vergleich (Bürgergeld H1 bis 30.06.2026 vs. Grundsicherungsgeld H2 ab
@@ -755,7 +757,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Wie Einkommen und Vermögen angerechnet werden',
-        html: `<p>Eigenes <strong>Einkommen</strong> wird grundsätzlich auf den Bedarf angerechnet — aber nicht vollständig. Nach § 11b SGB II bleiben vom Erwerbseinkommen Freibeträge anrechnungsfrei: die ersten <strong>100 Euro</strong> pauschal, danach <strong>20 %</strong> des Einkommens zwischen 100 und 520 Euro, <strong>30 %</strong> zwischen 520 und 1.000 Euro und <strong>10 %</strong> zwischen 1.000 und 1.200 Euro (mit Kind bis 1.500 Euro). Für Schüler, Auszubildende und Studierende unter 25 Jahren gilt ein erhöhter Freibetrag in Höhe der Minijob-Grenze (2026: 556 Euro). Kindergeld zählt als Einkommen des Kindes und mindert dessen Bedarf.</p><p>Auch <strong>Vermögen</strong> wird geprüft, aber erst oberhalb von Freibeträgen. Bis zum 30. Juni 2026 gilt eine <strong>Karenzzeit</strong> im ersten Bezugsjahr mit einem Freibetrag von 40.000 Euro für die erste Person und 15.000 Euro für jede weitere; danach sinken die Freibeträge. Ab dem <strong>1. Juli 2026</strong> entfällt diese Karenzzeit: Mit dem Grundsicherungsgeld gilt von Beginn an ein altersgestaffelter Freibetrag von 5.000 Euro (bis 30 Jahre), 10.000 Euro (ab 31 Jahre), 12.500 Euro (ab 41 Jahre) und 20.000 Euro (ab 51 Jahre) pro Person der Bedarfsgemeinschaft. Selbstgenutztes Wohneigentum in angemessener Größe bleibt geschützt.</p><p>Nicht jedes Einkommen wird angerechnet: Bestimmte Einnahmen bleiben nach § 11a SGB II außer Betracht, etwa das Pflegegeld für die Pflege Angehöriger, Teile des Kindergeldzuschlags oder zweckbestimmte Einnahmen. Ferienjobs von Schülerinnen und Schülern sind innerhalb bestimmter Grenzen vollständig anrechnungsfrei. Liegt das anrechenbare Einkommen über dem Gesamtbedarf, besteht kein Anspruch; liegt es darunter, wird die Differenz gezahlt. Genau dieses Zusammenspiel aus Bedarf, Freibeträgen und Anrechnung macht die Berechnung individuell — zwei Haushalte mit gleichem Brutto können sehr unterschiedliche Ansprüche haben, je nach Miete, Kinderzahl und Erwerbssituation.</p>`,
+        // W183: vorher „erhöhter Freibetrag in Höhe der Minijob-Grenze (2026: 556 Euro)“ — 556 € war 2025.
+        html: `<p>Eigenes <strong>Einkommen</strong> wird grundsätzlich auf den Bedarf angerechnet — aber nicht vollständig. Nach § 11b SGB II bleiben vom Erwerbseinkommen Freibeträge anrechnungsfrei: die ersten <strong>100 Euro</strong> pauschal, danach <strong>20 %</strong> des Einkommens zwischen 100 und 520 Euro, <strong>30 %</strong> zwischen 520 und 1.000 Euro und <strong>10 %</strong> zwischen 1.000 und 1.200 Euro (mit Kind bis 1.500 Euro). Für Schüler, Auszubildende, Studierende und Freiwilligendienstleistende unter 25 Jahren bleibt statt der 100 Euro ein Betrag in Höhe der Minijob-Grenze frei (2026: 603 Euro), oberhalb von 520 Euro kommen die 30 % und 10 % hinzu (§ 11b Abs. 2b und Abs. 3 Satz 4 SGB II). Kindergeld zählt als Einkommen des Kindes und mindert dessen Bedarf.</p><p>Auch <strong>Vermögen</strong> wird geprüft, aber erst oberhalb von Freibeträgen. Bis zum 30. Juni 2026 gilt eine <strong>Karenzzeit</strong> im ersten Bezugsjahr mit einem Freibetrag von 40.000 Euro für die erste Person und 15.000 Euro für jede weitere; danach sinken die Freibeträge. Ab dem <strong>1. Juli 2026</strong> entfällt diese Karenzzeit: Mit dem Grundsicherungsgeld gilt von Beginn an ein altersgestaffelter Freibetrag von 5.000 Euro (bis 30 Jahre), 10.000 Euro (ab 31 Jahre), 12.500 Euro (ab 41 Jahre) und 20.000 Euro (ab 51 Jahre) pro Person der Bedarfsgemeinschaft. Selbstgenutztes Wohneigentum in angemessener Größe bleibt geschützt.</p><p>Nicht jedes Einkommen wird angerechnet: Bestimmte Einnahmen bleiben nach § 11a SGB II außer Betracht, etwa das Pflegegeld für die Pflege Angehöriger, Teile des Kindergeldzuschlags oder zweckbestimmte Einnahmen. Ferienjobs von Schülerinnen und Schülern sind innerhalb bestimmter Grenzen vollständig anrechnungsfrei. Liegt das anrechenbare Einkommen über dem Gesamtbedarf, besteht kein Anspruch; liegt es darunter, wird die Differenz gezahlt. Genau dieses Zusammenspiel aus Bedarf, Freibeträgen und Anrechnung macht die Berechnung individuell — zwei Haushalte mit gleichem Brutto können sehr unterschiedliche Ansprüche haben, je nach Miete, Kinderzahl und Erwerbssituation.</p>`,
       },
       {
         typ: 'vergleich',
@@ -815,7 +818,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie viel darf man beim Bürgergeld dazuverdienen?',
-        antwort: 'Die ersten 100 Euro sind komplett frei. Zwischen 100 und 520 Euro bleiben 20% anrechnungsfrei, zwischen 520 und 1.000 Euro sind es 30%. Von 1.000 bis 1.200 Euro (ohne Kind) bzw. 1.500 Euro (mit Kind) bleiben 10% frei. Einkommen darüber wird voll angerechnet.',
+        // W183: Satz zu § 11b Abs. 2b SGB II ergänzt (Minijob-Grenze 2026: 603 €).
+        antwort: 'Die ersten 100 Euro sind komplett frei. Zwischen 100 und 520 Euro bleiben 20% anrechnungsfrei, zwischen 520 und 1.000 Euro sind es 30%. Von 1.000 bis 1.200 Euro (ohne Kind) bzw. 1.500 Euro (mit Kind) bleiben 10% frei. Einkommen darüber wird voll angerechnet. Für Schüler, Azubis, Studierende und Freiwilligendienstleistende unter 25 Jahren bleiben statt der ersten 100 Euro 603 Euro frei (Minijob-Grenze 2026, § 11b Abs. 2b SGB II); die 30- und 10-Prozent-Stufen gelten zusätzlich.',
       },
       {
         frage: 'Wie viel Vermögen darf man beim Bürgergeld haben?',
@@ -823,7 +827,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Heißt das jetzt Grundsicherungsgeld?',
-        antwort: 'Ja, seit dem 1. Juli 2026 wurde das Bürgergeld durch das 13. Gesetz zur Änderung des SGB II in Grundsicherungsgeld umbenannt (BGBl. 2026 I Nr. 107 vom 22. April 2026). Inhaltlich ändern sich vor allem das Schonvermögen (altersgestaffelt statt Karenzzeit-Modell), die Unterkunftskosten-Deckelung auf das 1,5-Fache der örtlichen Angemessenheit und die Sanktionsregeln. Die Regelsätze bleiben unverändert (Nullrunde 2026 durch Besitzschutz). Der Begriff „Bürgergeld" bleibt im Sprachgebrauch verbreitet und wird hier weiter genutzt, weil die Suchanfragen noch überwiegend unter diesem Namen laufen.',
+        // W183: vorher „Ja, seit dem 1. Juli 2026 wurde … umbenannt“ (Zeitform).
+        antwort: 'Ja. Zum 1. Juli 2026 wurde das Bürgergeld durch das 13. Gesetz zur Änderung des SGB II in Grundsicherungsgeld umbenannt (BGBl. 2026 I Nr. 107 vom 22. April 2026). Inhaltlich ändern sich vor allem das Schonvermögen (altersgestaffelt statt Karenzzeit-Modell), die Unterkunftskosten-Deckelung auf das 1,5-Fache der örtlichen Angemessenheit und die Sanktionsregeln. Die Regelsätze bleiben unverändert (Nullrunde 2026 durch Besitzschutz). Der Begriff „Bürgergeld" bleibt im Sprachgebrauch verbreitet und wird hier weiter genutzt, weil die Suchanfragen noch überwiegend unter diesem Namen laufen.',
       },
       {
         frage: 'Was ist der Unterschied zwischen Bürgergeld und Hartz IV?',
@@ -4029,7 +4034,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'krankengeld-rechner',
-    letzteAktualisierung: '2026-06-23',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Krankengeld-Rechner',
     beschreibung: 'Krankengeld berechnen: Tägliches und monatliches Krankengeld bei Arbeitsunfähigkeit — mit Netto-Vergleich.',
     kategorie: 'Finanzen',
@@ -4038,14 +4043,15 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Krankengeld berechnen: Tägliches und monatliches Krankengeld ✓ Netto nach SV-Abzügen ✓ Einkommensverlust ✓ KI-Erklärung.',
     keywords: ['krankengeld rechner', 'krankengeld berechnen', 'krankengeld hoehe', 'krankengeld 70 prozent', 'krankengeld netto', 'krankengeld dauer', 'lohnfortzahlung', 'progressionsvorbehalt krankengeld'],
     icon: '🏥',
-    beispiel: 'Beispiel: 3.500 € Brutto, 2.350 € Netto, mit Kind → Krankengeld 70,50 €/Tag brutto (90-%-Netto-Grenze greift) → 66,16 €/Tag netto → ca. 1.985 €/Monat. Das sind rund 365 € (15,5 %) weniger als das normale Nettogehalt.',
+    // W183: vorher 66,16 €/Tag, 1.985 €, 365 € (15,5 %) mit 6,15 % Abzug; richtig 12,4 % (RV 9,3 + ALV 1,3 + PV 1,8).
+    beispiel: 'Beispiel: 3.500 € Brutto, 2.350 € Netto, mit Kind → Krankengeld 70,50 €/Tag brutto (90-%-Netto-Grenze greift) → 61,76 €/Tag netto (12,4 % Abzug) → ca. 1.853 €/Monat. Das sind rund 497 € (21,2 %) weniger als das normale Nettogehalt.',
     // W19-Goldstandard (YMYL): krankengeld-rechner auf volle Tiefe (12 Bausteine, ~1.560 W),
-    // Leitformat „tabelle" (3× dominant). SSOT ist die Component KrankengeldRechner.tsx (keine Lib):
-    // KG/Tag = min(70 % Brutto/30 ; 90 % Netto/30) − SV 6,15 % (mit Kind) / 6,45 % (kinderlos);
-    // BBG KV 2026 = 5.812,50 €/Monat deckelt das Brutto. Alle Beispielwerte gegen die Component
-    // nachgerechnet (3.500/2.350 mit Kind → 70,50 €/Tag brutto → 66,16 €/Tag netto → ~1.985 €/Monat,
-    // Verlust 365 €/15,5 %). Stale beispiel-Feld + faq[0] (vorher 2.158 €/190 €) in diesem Commit
-    // auf Component-Wert korrigiert. §§ 44/47/48 SGB V; Progressionsvorbehalt § 32b EStG.
+    // Leitformat „tabelle" (3× dominant). W183: SSOT jetzt lib/berechnungen/krankengeld.ts
+    // (verify-krankengeld.ts): KG/Tag = min(70 % Brutto/30 ; 90 % Netto/30) − 12,4 % (mit Kind) /
+    // 13,0 % (kinderlos), Abschläge ab dem 2. Kind unter 25. Vorher galt (falsch) 6,15 % / 6,45 %;
+    // BBG KV 2026 = 5.812,50 €/Monat deckelt das Brutto. Alle Beispielwerte gegen die Lib
+    // nachgerechnet (3.500/2.350 mit Kind → 70,50 €/Tag brutto → 61,76 €/Tag netto → ~1.853 €/Monat,
+    // Verlust 497 €/21,2 %). §§ 44/47/48 SGB V; Progressionsvorbehalt § 32b EStG.
     contentBloecke: [
       {
         typ: 'text',
@@ -4073,42 +4079,46 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: '70 % vom Brutto', formel: '116,67 € × 70 %', ergebnis: '81,67 €' },
           { label: '90 % vom Netto (Obergrenze)', formel: '78,33 € × 90 %', ergebnis: '70,50 €' },
           { label: 'Krankengeld brutto = niedrigerer Wert', formel: 'min(81,67 € ; 70,50 €)', ergebnis: '70,50 €/Tag' },
-          { label: 'Abzüge RV + ALV + PV (mit Kind)', formel: '70,50 € × 6,15 %', ergebnis: '−4,34 €' },
-          { label: 'Krankengeld netto pro Tag', formel: '70,50 € − 4,34 €', ergebnis: '66,16 €/Tag' },
-          { label: 'Krankengeld netto pro Monat', formel: '66,16 € × 30', ergebnis: '≈ 1.985 €' },
+          // W183: vorher 70,50 € × 6,15 % = 4,34 € → 66,16 €/Tag → 1.985 €/Monat.
+          { label: 'Abzüge RV + ALV + PV (mit Kind)', formel: '70,50 € × 12,4 % (9,3 + 1,3 + 1,8)', ergebnis: '−8,74 €' },
+          { label: 'Krankengeld netto pro Tag', formel: '70,50 € − 8,74 €', ergebnis: '61,76 €/Tag' },
+          { label: 'Krankengeld netto pro Monat', formel: '61,76 € × 30', ergebnis: '≈ 1.853 €' },
         ],
-        fazit: 'Hier greift die 90-%-Netto-Grenze (70,50 €), weil sie unter der 70-%-Brutto-Grenze (81,67 €) liegt — das ist bei den meisten Beschäftigten der Fall. Nach den Sozialabgaben von 6,15 % bleiben rund 1.985 € pro Monat. Das sind etwa 365 € (15,5 %) weniger als das gewohnte Nettogehalt von 2.350 €. Genau diese monatliche Lücke rechnet der Krankengeld-Rechner für Ihre eigenen Brutto- und Nettowerte aus, sodass Sie den Verdienstausfall vorab einplanen können.',
+        fazit: 'Hier greift die 90-%-Netto-Grenze (70,50 €), weil sie unter der 70-%-Brutto-Grenze (81,67 €) liegt — das ist bei den meisten Beschäftigten der Fall. Nach den Sozialabgaben von 12,4 % bleiben rund 1.853 € pro Monat. Das sind etwa 497 € (21,2 %) weniger als das gewohnte Nettogehalt von 2.350 €. Genau diese monatliche Lücke rechnet der Krankengeld-Rechner für Ihre eigenen Brutto- und Nettowerte aus, sodass Sie den Verdienstausfall vorab einplanen können.',
       },
       {
         typ: 'tabelle',
         titel: 'Krankengeld nach Brutto- und Nettogehalt (mit Kind)',
         kopf: ['Brutto / Monat', 'Typisches Netto', 'Krankengeld netto / Monat', 'Verlust'],
         zeilen: [
-          ['2.500 €', '1.780 €', '≈ 1.503 €', '−277 € (15,5 %)'],
-          ['3.500 €', '2.350 €', '≈ 1.985 €', '−365 € (15,5 %)'],
-          ['4.500 €', '2.880 €', '≈ 2.433 €', '−447 € (15,5 %)'],
-          ['5.812,50 € (BBG)', '3.520 €', '≈ 2.973 €', '−547 € (15,5 %)'],
-          ['7.000 €', '4.080 €', '≈ 3.446 €', '−634 € (15,5 %)'],
+          // W183: vorher mit 6,15 % Abzug (Verlust je 15,5 %); jetzt 12,4 %, Verlust je 21,2 %.
+          ['2.500 €', '1.780 €', '≈ 1.403 €', '−377 € (21,2 %)'],
+          ['3.500 €', '2.350 €', '≈ 1.853 €', '−497 € (21,2 %)'],
+          ['4.500 €', '2.880 €', '≈ 2.271 €', '−609 € (21,2 %)'],
+          ['5.812,50 € (BBG)', '3.520 €', '≈ 2.775 €', '−745 € (21,2 %)'],
+          ['7.000 €', '4.080 €', '≈ 3.217 €', '−863 € (21,2 %)'],
         ],
         fussnote: 'Die Nettowerte sind illustrative Annahmen (Steuerklasse I, ledig) — Ihr tatsächliches Netto bestimmt das Ergebnis, deshalb fragt der Rechner es direkt ab. In der Praxis bindet fast immer die 90-%-Netto-Grenze, sodass das Krankengeld näherungsweise 90 % des Nettos minus Sozialabgaben beträgt. Bruttogehälter über 5.812,50 €/Monat (Beitragsbemessungsgrenze KV 2026) erhöhen die 70-%-Brutto-Grenze nicht mehr — das Krankengeld ist nach oben gedeckelt, die prozentuale Lücke wächst dadurch mit steigendem Einkommen.',
       },
       {
         typ: 'text',
         titel: 'Die 70/90-Regel: zwei Grenzen, der niedrigere Wert zählt',
-        html: `<p>Das Krankengeld kennt <strong>zwei Obergrenzen</strong>, von denen die niedrigere gilt. Die erste: <strong>70 % des Bruttoentgelts</strong>. Die zweite: höchstens <strong>90 % des Nettoentgelts</strong>. Weil das Netto bei den meisten Beschäftigten deutlich weniger als 78 % des Bruttos beträgt, ist die <strong>90-%-Netto-Grenze</strong> in der Praxis fast immer der bindende Wert — sie liegt unter der 70-%-Brutto-Grenze. Grundlage ist das sogenannte Regelentgelt, das durchschnittliche Einkommen vor der Erkrankung; berechnet wird kalendertäglich, indem die Monatswerte durch 30 geteilt und die Tagessätze für die Monatssumme wieder mit 30 multipliziert werden.</p><p>Vom so ermittelten Krankengeld gehen noch <strong>Sozialversicherungsbeiträge</strong> ab — der Arbeitnehmeranteil zur <strong>Renten-, Arbeitslosen- und Pflegeversicherung</strong>, zusammen rund <strong>6,15 %</strong> (mit Kind) bzw. <strong>6,45 %</strong> (kinderlos, wegen des Pflegeversicherungs-Zuschlags von 0,30 Prozentpunkten). Einen eigenen <strong>Krankenversicherungsbeitrag</strong> auf das Krankengeld gibt es dagegen nicht — die Mitgliedschaft bleibt während des Bezugs beitragsfrei erhalten. <strong>Lohnsteuer</strong> fällt ebenfalls nicht an; wohl aber wirkt der Progressionsvorbehalt, der den Steuersatz für die übrigen Einkünfte erhöht. Wichtig: Die 70-%-Brutto-Grenze bezieht sich auf das Brutto bis zur Beitragsbemessungsgrenze — höhere Gehaltsteile bleiben für das Krankengeld unberücksichtigt.</p>`,
+        // W183: vorher „zusammen rund 6,15 % (mit Kind) bzw. 6,45 % (kinderlos …0,30 Prozentpunkten)“.
+        html: `<p>Das Krankengeld kennt <strong>zwei Obergrenzen</strong>, von denen die niedrigere gilt. Die erste: <strong>70 % des Bruttoentgelts</strong>. Die zweite: höchstens <strong>90 % des Nettoentgelts</strong>. Weil das Netto bei den meisten Beschäftigten deutlich weniger als 78 % des Bruttos beträgt, ist die <strong>90-%-Netto-Grenze</strong> in der Praxis fast immer der bindende Wert — sie liegt unter der 70-%-Brutto-Grenze. Grundlage ist das sogenannte Regelentgelt, das durchschnittliche Einkommen vor der Erkrankung; berechnet wird kalendertäglich, indem die Monatswerte durch 30 geteilt und die Tagessätze für die Monatssumme wieder mit 30 multipliziert werden.</p><p>Vom so ermittelten Krankengeld gehen noch <strong>Sozialversicherungsbeiträge</strong> ab — der Versichertenanteil zur <strong>Renten-, Arbeitslosen- und Pflegeversicherung</strong>, zusammen <strong>12,4 %</strong> (mit Kind) bzw. <strong>13,0 %</strong> (kinderlos, wegen des Pflegeversicherungs-Zuschlags von 0,6 Prozentpunkten); ab dem zweiten Kind unter 25 sinkt er um 0,25 Punkte je Kind. Einen eigenen <strong>Krankenversicherungsbeitrag</strong> auf das Krankengeld gibt es dagegen nicht — die Mitgliedschaft bleibt während des Bezugs beitragsfrei erhalten. <strong>Lohnsteuer</strong> fällt ebenfalls nicht an; wohl aber wirkt der Progressionsvorbehalt, der den Steuersatz für die übrigen Einkünfte erhöht. Wichtig: Die 70-%-Brutto-Grenze bezieht sich auf das Brutto bis zur Beitragsbemessungsgrenze — höhere Gehaltsteile bleiben für das Krankengeld unberücksichtigt.</p>`,
       },
       {
         typ: 'tabelle',
         titel: 'Sozialabgaben, die vom Krankengeld abgehen',
         kopf: ['Beitragsart', 'Trägt', 'Anteil vom Krankengeld'],
         zeilen: [
-          ['Rentenversicherung (RV)', 'Versicherter (anteilig)', '4,65 %'],
-          ['Arbeitslosenversicherung (ALV)', 'Versicherter (anteilig)', '0,65 %'],
-          ['Pflegeversicherung (PV)', 'Versicherter (anteilig)', '0,85 % (+0,30 % kinderlos)'],
+          // W183: vorher 4,65 / 0,65 / 0,85 (+0,30) = 6,15 % / 6,45 % — das war nur die Hälfte des Versichertenanteils.
+          ['Rentenversicherung (RV)', 'Versicherter (Hälfte des Beitrags)', '9,3 %'],
+          ['Arbeitslosenversicherung (ALV)', 'Versicherter (Hälfte des Beitrags)', '1,3 %'],
+          ['Pflegeversicherung (PV)', 'Versicherter (Hälfte des Beitrags)', '1,8 % (+0,6 % kinderlos; ab dem 2. Kind unter 25 je −0,25 %)'],
           ['Krankenversicherung (KV)', '— (beitragsfrei)', 'kein eigener Beitrag auf Krankengeld'],
-          ['Summe mit Kind / kinderlos', '', '6,15 % / 6,45 %'],
+          ['Summe mit Kind / kinderlos', '', '12,4 % / 13,0 %'],
         ],
-        fussnote: 'Die Krankenkasse trägt ihren Teil der Beiträge selbst; der Versicherte zahlt nur den hälftigen Arbeitnehmeranteil zu Renten-, Arbeitslosen- und Pflegeversicherung. Der Pflegeversicherungs-Zuschlag von 0,30 % gilt für Kinderlose über 23 Jahre. Auf das Krankengeld selbst wird kein Krankenversicherungsbeitrag erhoben, die Mitgliedschaft bleibt beitragsfrei bestehen. Stand 2026.',
+        fussnote: 'Beiträge auf das Krankengeld tragen Versicherter und Krankenkasse je zur Hälfte, soweit sie auf die Leistung entfallen (§ 170 Abs. 1 Nr. 2 Buchst. a SGB VI, § 347 Nr. 5 SGB III, § 59 SGB XI); den übrigen Teil zahlt die Krankenkasse allein. Den Zuschlag von 0,6 % für Kinderlose über 23 Jahre trägt der Versicherte allein; ab dem zweiten Kind unter 25 sinkt sein Pflegeanteil um 0,25 Punkte je Kind (§ 55 Abs. 3 SGB XI), mit fünf Kindern auf 0,8 % — zusammen dann 11,4 %. Auf das Krankengeld selbst wird kein Krankenversicherungsbeitrag erhoben, die Mitgliedschaft bleibt beitragsfrei bestehen (§ 224 SGB V). Stand 2026.',
       },
       {
         typ: 'infobox',
@@ -4154,21 +4164,23 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Höchst-Bemessung (BBG KV)', wert: '5.812,50 €/Mon', hinweis: '69.750 €/Jahr — deckelt das Brutto (2026)' },
           { label: 'Lohnfortzahlung Arbeitgeber', wert: '42 Tage', hinweis: '6 Wochen, 100 % des Gehalts' },
           { label: 'Krankengeld-Höchstdauer', wert: '78 Wochen', hinweis: '546 Tage je Krankheit in 3 Jahren' },
-          { label: 'Abzug vom Krankengeld', wert: '6,15 % / 6,45 %', hinweis: 'Sozialabgaben mit Kind / kinderlos' },
-          { label: 'Typische Nettolücke', wert: '~10–30 %', hinweis: 'je nach Brutto-Netto-Verhältnis' },
+          // W183: vorher 6,15 % / 6,45 % und Nettolücke ~10–30 %.
+          { label: 'Abzug vom Krankengeld', wert: '12,4 % / 13,0 %', hinweis: 'RV, ALV und PV mit Kind / kinderlos' },
+          { label: 'Typische Nettolücke', wert: '~20–30 %', hinweis: '90 % des Nettos minus Abzüge; über der BBG mehr' },
           { label: 'Steuererklärungs-Pflicht ab', wert: '410 €/Jahr', hinweis: 'Lohnersatz mit Progressionsvorbehalt' },
         ],
       },
       {
         typ: 'text',
         titel: 'Die Nettolücke früh erkennen und vorsorgen',
-        html: `<p>Das gesetzliche Krankengeld federt einen längeren Verdienstausfall ab, ersetzt aber nicht das volle Nettogehalt — typischerweise bleibt eine <strong>Lücke von rund 10 bis 30 Prozent</strong>, die mit steigendem Einkommen größer wird, weil das Brutto über der Beitragsbemessungsgrenze nicht mehr zählt. Wer laufende Fixkosten wie Miete oder Kreditraten hat, sollte diese Lücke kennen, bevor der Krankheitsfall eintritt. Eine private <strong>Krankentagegeld-Versicherung</strong> kann die Differenz schließen; für gesetzlich Versicherte mit höherem Einkommen oder für Selbstständige ist sie oft sinnvoll. Sinnvoll ist auch ein finanzieller Puffer von zwei bis drei Monatsausgaben, der den Übergang von der Lohnfortzahlung zum niedrigeren Krankengeld überbrückt.</p><p>Berechnen Sie zunächst Ihr genaues Nettogehalt als Ausgangsbasis mit dem <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a> — dieser Nettowert ist die Grundlage der entscheidenden 90-%-Grenze und bestimmt damit die Höhe Ihres Krankengeldes. Wenn es um Pflegebedürftigkeit statt um eigene Arbeitsunfähigkeit geht, hilft der <a href="/finanzen/pflegegeld-rechner">Pflegegeld-Rechner</a> weiter. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Sozial- oder Steuerberatung; die verbindliche Höhe Ihres Krankengeldes setzt allein Ihre Krankenkasse fest.</p>`,
+        html: `<p>Das gesetzliche Krankengeld federt einen längeren Verdienstausfall ab, ersetzt aber nicht das volle Nettogehalt — typischerweise bleibt eine <strong>Lücke von rund 20 bis 30 Prozent</strong>, die mit steigendem Einkommen größer wird, weil das Brutto über der Beitragsbemessungsgrenze nicht mehr zählt. Wer laufende Fixkosten wie Miete oder Kreditraten hat, sollte diese Lücke kennen, bevor der Krankheitsfall eintritt. Eine private <strong>Krankentagegeld-Versicherung</strong> kann die Differenz schließen; für gesetzlich Versicherte mit höherem Einkommen oder für Selbstständige ist sie oft sinnvoll. Sinnvoll ist auch ein finanzieller Puffer von zwei bis drei Monatsausgaben, der den Übergang von der Lohnfortzahlung zum niedrigeren Krankengeld überbrückt.</p><p>Berechnen Sie zunächst Ihr genaues Nettogehalt als Ausgangsbasis mit dem <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a> — dieser Nettowert ist die Grundlage der entscheidenden 90-%-Grenze und bestimmt damit die Höhe Ihres Krankengeldes. Wenn es um Pflegebedürftigkeit statt um eigene Arbeitsunfähigkeit geht, hilft der <a href="/finanzen/pflegegeld-rechner">Pflegegeld-Rechner</a> weiter. Dieser Rechner liefert eine unverbindliche Orientierung und ersetzt keine Sozial- oder Steuerberatung; die verbindliche Höhe Ihres Krankengeldes setzt allein Ihre Krankenkasse fest.</p>`,
       },
     ],
     faq: [
       {
         frage: 'Wie hoch ist das Krankengeld?',
-        antwort: 'Das Krankengeld beträgt 70 % Ihres Bruttogehalts, maximal aber 90 % des Nettogehalts. Nach Abzug der Sozialversicherungsbeiträge (ca. 6,15 % mit Kind bzw. 6,45 % kinderlos) bleibt das Netto-Krankengeld. Bei 3.500 € Brutto und 2.350 € Netto ergibt das ungefähr 1.985 €/Monat — also etwa 365 € weniger als das normale Nettogehalt.',
+        // W183: vorher 6,15 % / 6,45 %, 1.985 €, 365 €.
+        antwort: 'Das Krankengeld beträgt 70 % Ihres Bruttogehalts, maximal aber 90 % des Nettogehalts. Nach Abzug der Beiträge zur Renten-, Arbeitslosen- und Pflegeversicherung (12,4 % mit Kind bzw. 13,0 % kinderlos) bleibt das Netto-Krankengeld. Bei 3.500 € Brutto und 2.350 € Netto ergibt das ungefähr 1.853 €/Monat — also etwa 497 € weniger als das normale Nettogehalt.',
       },
       {
         frage: 'Ab wann bekomme ich Krankengeld?',
@@ -4192,6 +4204,10 @@ export const finanzenRechner: RechnerConfig[] = [
       { titel: '§ 47 SGB V — Höhe und Berechnung des Krankengeldes', url: 'https://www.gesetze-im-internet.de/sgb_5/__47.html', hinweis: '70 % des Regelentgelts, höchstens 90 % des Nettoarbeitsentgelts; kalendertägliche Berechnung.' },
       { titel: '§ 48 SGB V — Höchstdauer (78 Wochen)', url: 'https://www.gesetze-im-internet.de/sgb_5/__48.html', hinweis: 'maximal 78 Wochen je Krankheit innerhalb von 3 Jahren; Lohnfortzahlung wird angerechnet.' },
       { titel: 'Bundesregierung — Rechengrößen der Sozialversicherung 2026', url: 'https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2386514', hinweis: 'Beitragsbemessungsgrenze KV 2026 = 5.812,50 €/Monat (69.750 €/Jahr).' },
+      // W183: Rechtsgrundlagen der Abzüge vom Krankengeld ergänzt.
+      { titel: '§ 170 SGB VI — Beitragstragung bei Krankengeld', url: 'https://www.gesetze-im-internet.de/sgb_6/__170.html', hinweis: 'Rentenbeiträge je zur Hälfte von Versichertem und Krankenkasse, soweit sie auf die Leistung entfallen (9,3 %).' },
+      { titel: '§ 347 SGB III — Beitragstragung bei Leistungsbezug', url: 'https://www.gesetze-im-internet.de/sgb_3/__347.html', hinweis: 'Arbeitslosenversicherung bei Krankengeld je zur Hälfte (1,3 %).' },
+      { titel: '§ 59 SGB XI — Beitragstragung Pflegeversicherung', url: 'https://www.gesetze-im-internet.de/sgb_11/__59.html', hinweis: 'Pflegebeitrag je zur Hälfte (1,8 %), Zuschlag für Kinderlose (0,6 %) trägt der Versicherte allein; Abschläge nach § 55 Abs. 3 SGB XI.' },
     ],
     affiliate: [
       { programId: 'burdaZahn', context: 'krankengeld' },
@@ -4589,18 +4605,21 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'midijob-rechner',
-    letzteAktualisierung: '2026-10-19',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Midijob-Rechner',
     beschreibung: 'Midijob-Abgaben berechnen: Reduzierte Sozialversicherungsbeiträge im Übergangsbereich von 603,01 bis 2.000 Euro.',
     kategorie: 'Finanzen',
     kategorieSlug: 'finanzen',
     metaTitle: 'Midijob-Rechner 2026 — Abgaben & Netto',
-    metaDescription: 'Midijob berechnen: Reduzierte SV-Beiträge im Übergangsbereich 603–2.000 € ✓ Netto ✓ Ersparnis ✓ KI-Erklärung.',
+    // W183: vorher „603–2.000 €“ — bei 603 € liegt noch ein Minijob vor.
+    metaDescription: 'Midijob berechnen: Reduzierte SV-Beiträge im Übergangsbereich 603,01–2.000 € ✓ Netto ✓ Ersparnis ✓ KI-Erklärung.',
     keywords: ['midijob rechner', 'übergangsbereich', 'midijob 2026', 'midijob netto', 'gleitzone', 'beitragspflichtige einnahme', 'faktor f'],
     icon: '💶',
-    beispiel: '1.500 € Brutto, Steuerklasse I, kinderlos: BE_gesamt ≈ 1.427 € (Grundlage des Gesamtbeitrags), BE_AN ≈ 1.284 € → AN-SV ca. 280 € → Netto ca. 1.211 € (ca. 46 € Ersparnis gegenüber regulärer Beschäftigung; den Differenzbetrag trägt der Arbeitgeber).',
+    // W183: vorher „den Differenzbetrag trägt der Arbeitgeber“ — er zahlt bei 1.500 € nur 14,78 € mehr als regulär.
+    beispiel: '1.500 € Brutto, Steuerklasse I, kinderlos: BE_gesamt ≈ 1.427 € (Grundlage des Gesamtbeitrags), BE_AN ≈ 1.284 € → AN-SV ca. 280 € → Netto ca. 1.211 € (ca. 46 € Ersparnis gegenüber regulärer Beschäftigung; der Arbeitgeber zahlt mit ca. 332 € nur rund 15 € mehr als regulär (317 €), der Rest kommt aus dem niedrigeren Gesamtbeitrag: 612 € statt 644 €).',
     faq: [
-      { frage: 'Was ist ein Midijob?', antwort: 'Ein Midijob (offiziell: Beschäftigung im Übergangsbereich) ist eine sozialversicherungspflichtige Beschäftigung mit einem monatlichen Verdienst zwischen 603,01 und 2.000 Euro. Im Übergangsbereich zahlen Arbeitnehmer reduzierte Sozialversicherungsbeiträge, den Differenzbetrag trägt der Arbeitgeber — er zahlt damit mehr als die übliche Hälfte.' },
+      // W183: vorher „den Differenzbetrag trägt der Arbeitgeber — er zahlt damit mehr als die übliche Hälfte“.
+      { frage: 'Was ist ein Midijob?', antwort: 'Ein Midijob (offiziell: Beschäftigung im Übergangsbereich) ist eine sozialversicherungspflichtige Beschäftigung mit einem monatlichen Verdienst zwischen 603,01 und 2.000 Euro. Im Übergangsbereich zahlen Arbeitnehmer reduzierte Sozialversicherungsbeiträge. Der Arbeitgeber trägt mehr als die Hälfte des Gesamtbeitrags und damit etwas mehr als bei einer regulären Stelle; der größere Teil der Ersparnis entsteht aber, weil auch der Gesamtbeitrag aus einer reduzierten Bemessungsgrundlage berechnet wird.' },
       { frage: 'Wie hoch sind die Abgaben im Midijob?', antwort: 'Die Arbeitnehmer-Sozialabgaben werden nicht auf das tatsächliche Brutto, sondern auf eine reduzierte beitragspflichtige Einnahme (BE) berechnet. An der Untergrenze (603,01 €) ist diese Einnahme null, bis 2.000 € steigt sie linear auf das volle Brutto. Kinderlose zahlen zusätzlich den Pflege-Zuschlag von 0,6 %, berechnet auf die höhere Gesamt-Bemessungsgrundlage. Die Lohnsteuer wird normal nach Steuerklasse berechnet.' },
       { frage: 'Was ist der Übergangsbereich?', antwort: 'Der Übergangsbereich — früher Gleitzone genannt — ist ein gesetzlicher Bereich zwischen 603,01 € und 2.000 € monatlichem Verdienst, in dem die Sozialabgaben für Arbeitnehmer schrittweise ansteigen. Er soll verhindern, dass Arbeitnehmer an der Minijob-Grenze einen sprunghaften Netto-Verlust erleiden.' },
       { frage: 'Wie unterscheidet sich der Midijob vom Minijob?', antwort: 'Der Minijob ist ein meist pauschal versteuerter Job mit maximal 603 € Verdienst — ohne Sozialabgaben für den Arbeitnehmer bis auf den Rentenbeitrag von 3,6 %, von dem man sich befreien lassen kann. Der Midijob beginnt bei 603,01 € und ist voll sozialversicherungspflichtig, mit reduzierten Beiträgen im Übergangsbereich. Midijobber sind durch den Job krankenversichert, Minijobber nicht.' },
@@ -4610,7 +4629,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Was ein Midijob ist',
-        html: `<p>Ein <strong>Midijob</strong> — offiziell „Beschäftigung im Übergangsbereich" — ist eine voll sozialversicherungspflichtige Stelle mit einem regelmäßigen Monatsverdienst zwischen <strong>603,01 € und 2.000 €</strong> (Stand 2026). Das Besondere: Im Übergangsbereich zahlt der Arbeitnehmer <strong>reduzierte Sozialversicherungsbeiträge</strong>, genießt aber den <strong>vollen Schutz</strong> der Kranken-, Pflege-, Renten- und Arbeitslosenversicherung.</p><p>Der Sinn dahinter ist, den harten Sprung an der Minijob-Grenze abzufedern: Wer knapp über 603 € verdient, soll nicht plötzlich von voller Abgabenlast getroffen werden. Stattdessen steigen die Arbeitnehmer-Beiträge <strong>gleitend</strong> an — von praktisch null an der Untergrenze bis zum vollen Satz bei 2.000 €. Den fehlenden Teil trägt der Arbeitgeber. Dieser Rechner zeigt, wie hoch die reduzierten Beiträge und das Netto bei einem bestimmten Verdienst ausfallen. Die vollständige Lohnabrechnung über alle Verdienste hinweg übernimmt der Brutto-Netto-Rechner. Eingegeben werden der Bruttoverdienst, die Steuerklasse, die Kinderzahl (für den Pflegeversicherungs-Satz) und die Kirchensteuerpflicht; daraus ergeben sich die reduzierten Beiträge, das Netto und die Ersparnis gegenüber einer regulären Stelle.</p>`,
+        // W183: vorher „Den fehlenden Teil trägt der Arbeitgeber.“
+        html: `<p>Ein <strong>Midijob</strong> — offiziell „Beschäftigung im Übergangsbereich" — ist eine voll sozialversicherungspflichtige Stelle mit einem regelmäßigen Monatsverdienst zwischen <strong>603,01 € und 2.000 €</strong> (Stand 2026). Das Besondere: Im Übergangsbereich zahlt der Arbeitnehmer <strong>reduzierte Sozialversicherungsbeiträge</strong>, genießt aber den <strong>vollen Schutz</strong> der Kranken-, Pflege-, Renten- und Arbeitslosenversicherung.</p><p>Der Sinn dahinter ist, den harten Sprung an der Minijob-Grenze abzufedern: Wer knapp über 603 € verdient, soll nicht plötzlich von voller Abgabenlast getroffen werden. Stattdessen steigen die Arbeitnehmer-Beiträge <strong>gleitend</strong> an — von praktisch null an der Untergrenze bis zum vollen Satz bei 2.000 €. Der Arbeitgeber trägt dabei mehr als die Hälfte des Gesamtbeitrags, der seinerseits aus einer reduzierten Bemessungsgrundlage berechnet wird. Dieser Rechner zeigt, wie hoch die reduzierten Beiträge und das Netto bei einem bestimmten Verdienst ausfallen. Die vollständige Lohnabrechnung über alle Verdienste hinweg übernimmt der Brutto-Netto-Rechner. Eingegeben werden der Bruttoverdienst, die Steuerklasse, die Kinderzahl (für den Pflegeversicherungs-Satz) und die Kirchensteuerpflicht; daraus ergeben sich die reduzierten Beiträge, das Netto und die Ersparnis gegenüber einer regulären Stelle.</p>`,
       },
       {
         typ: 'text',
@@ -4627,7 +4647,8 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Lohnsteuer (Klasse I)', formel: 'unter Grundfreibetrag', ergebnis: '0 €' },
           { label: 'Netto', formel: '1.300 − 218,23', ergebnis: '1.081,77 €' },
         ],
-        fazit: 'Statt auf die vollen 1.300 € werden die Arbeitnehmer-Beiträge nur auf die reduzierte beitragspflichtige Einnahme von 997,85 € berechnet, mit 21,15 %. Nur der Pflege-Zuschlag für Kinderlose (0,6 %) bemisst sich an der höheren Gesamt-Bemessungsgrundlage von 1.197,84 €. Zusammen sind das 218,23 € statt 282,75 € in regulärer Beschäftigung — eine Ersparnis von rund 65 € im Monat. In Steuerklasse I fällt bei diesem Verdienst dank des Grundfreibetrags noch keine Lohnsteuer an, sodass netto 1.081,77 € bleiben. Den Differenzbetrag bei den Sozialbeiträgen trägt der Arbeitgeber. Trotz der niedrigeren Beiträge erwirbt der Arbeitnehmer übrigens volle Rentenpunkte auf Basis des Verdienstes von 1.300 € — der Rabatt mindert die Ansprüche nicht.',
+        // W183: vorher „Den Differenzbetrag bei den Sozialbeiträgen trägt der Arbeitgeber.“
+        fazit: 'Statt auf die vollen 1.300 € werden die Arbeitnehmer-Beiträge nur auf die reduzierte beitragspflichtige Einnahme von 997,85 € berechnet, mit 21,15 %. Nur der Pflege-Zuschlag für Kinderlose (0,6 %) bemisst sich an der höheren Gesamt-Bemessungsgrundlage von 1.197,84 €. Zusammen sind das 218,23 € statt 282,75 € in regulärer Beschäftigung — eine Ersparnis von rund 65 € im Monat. In Steuerklasse I fällt bei diesem Verdienst dank des Grundfreibetrags noch keine Lohnsteuer an, sodass netto 1.081,77 € bleiben. Der Arbeitgeber zahlt 295,64 € statt 274,95 € bei regulärer Beschäftigung, also rund 21 € mehr; der übrige Teil der Ersparnis entfällt, weil auch der Gesamtbeitrag aus der reduzierten Gesamt-Bemessungsgrundlage berechnet wird. Trotz der niedrigeren Beiträge erwirbt der Arbeitnehmer übrigens volle Rentenpunkte auf Basis des Verdienstes von 1.300 € — der Rabatt mindert die Ansprüche nicht.',
       },
       {
         typ: 'tabelle',
@@ -4676,7 +4697,8 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'davon Arbeitnehmer-Anteil', formel: 'BE_AN 568,36 × 21,15 % + BE_gesamt 854,06 × 0,6 %', ergebnis: '125,33 €' },
           { label: 'davon Arbeitgeber-Anteil', formel: '366,38 − 125,33', ergebnis: '241,05 €' },
         ],
-        fazit: 'In einer regulären Beschäftigung teilen sich Arbeitnehmer und Arbeitgeber die Sozialbeiträge etwa hälftig. Im Übergangsbereich ist das anders: Bei 1.000 € Brutto trägt der Arbeitnehmer nur 125,33 €, der Arbeitgeber dagegen 241,05 € — fast das Doppelte. Der Grund ist die reduzierte Arbeitnehmer-Bemessungsgrundlage; den vollen Gesamtbeitrag (auf Basis der höheren Gesamt-Bemessungsgrundlage) muss trotzdem jemand aufbringen, und das ist der Arbeitgeber. So bleibt der volle Versicherungsschutz finanziert, ohne den Arbeitnehmer zu belasten. Mit steigendem Verdienst gleicht sich das Verhältnis an: Bei 2.000 € tragen beide Seiten wieder den gleichen halben Beitrag — der besondere Arbeitgeber-Anteil ist dann aufgebraucht. Für den Arbeitgeber ist ein Midijob im unteren Bereich also etwas teurer als ein gleich bezahlter regulärer Job, weil er den AN-Rabatt mitfinanziert; gewollt ist das als Anreiz, solche Stellen überhaupt anzubieten.',
+        // W183: vorher „den vollen Gesamtbeitrag … muss trotzdem jemand aufbringen, und das ist der Arbeitgeber“.
+        fazit: 'In einer regulären Beschäftigung teilen sich Arbeitnehmer und Arbeitgeber die Sozialbeiträge etwa hälftig. Im Übergangsbereich ist das anders: Bei 1.000 € Brutto trägt der Arbeitnehmer nur 125,33 €, der Arbeitgeber dagegen 241,05 € — fast das Doppelte. Der Grund: Der Gesamtbeitrag wird aus der Gesamt-Bemessungsgrundlage (854,06 €) berechnet, der Arbeitnehmeranteil nur aus der deutlich kleineren BE_AN; den Rest trägt der Arbeitgeber. Gegenüber einer regulären Stelle (211,50 € Arbeitgeberanteil) zahlt er damit 29,55 € mehr. Den größeren Teil der Arbeitnehmer-Ersparnis von 92,17 € deckt der niedrigere Gesamtbeitrag (366,38 € statt 429,00 €). Mit steigendem Verdienst gleicht sich das Verhältnis an: Bei 2.000 € tragen beide Seiten wieder den gleichen halben Beitrag — der besondere Arbeitgeber-Anteil ist dann aufgebraucht. Für den Arbeitgeber ist ein Midijob im unteren Bereich also etwas teurer als ein gleich bezahlter regulärer Job, weil er den AN-Rabatt mitfinanziert; gewollt ist das als Anreiz, solche Stellen überhaupt anzubieten.',
       },
       {
         typ: 'text',
@@ -4691,7 +4713,8 @@ export const finanzenRechner: RechnerConfig[] = [
           'Die Arbeitnehmer-Beiträge steigen gleitend — an der Untergrenze fast null, bei 2.000 € voll.',
           'Voller SV-Schutz: Kranken-, Pflege-, Renten- und Arbeitslosenversicherung sind aktiv.',
           'Rentenpunkte und Lohnersatzleistungen richten sich nach dem vollen Brutto, nicht nach der reduzierten Basis.',
-          'Den Differenzbetrag bei den Beiträgen trägt der Arbeitgeber.',
+          // W183: vorher „Den Differenzbetrag bei den Beiträgen trägt der Arbeitgeber.“
+          'Der Arbeitgeber trägt mehr als die Hälfte des Gesamtbeitrags, gleicht die Ersparnis des Arbeitnehmers aber nur zum kleineren Teil aus.',
           'Die Lohnsteuer wird normal nach Steuerklasse berechnet — kein Rabatt wie bei der Sozialversicherung.',
           'Maßgeblich ist der regelmäßige Verdienst im Jahresdurchschnitt, nicht ein einzelner Monat.',
           'Unter 603 € gilt der Minijob, über 2.000 € die reguläre Beschäftigung.',
@@ -4874,7 +4897,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'kurzarbeitergeld-rechner',
-    letzteAktualisierung: '2026-10-19',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Kurzarbeitergeld-Rechner',
     beschreibung: 'Kurzarbeitergeld berechnen: KuG-Höhe basierend auf Ihrem Gehalt und der Arbeitszeitreduzierung.',
     kategorie: 'Finanzen',
@@ -4993,7 +5016,8 @@ export const finanzenRechner: RechnerConfig[] = [
         werte: [
           { label: 'Satz ohne Kind', wert: '60 %', hinweis: 'der Netto-Entgeltdifferenz nach § 105 SGB III' },
           { label: 'Satz mit Kind', wert: '67 %', hinweis: 'mind. ein Kind auf der Lohnsteuerkarte (ELStAM)' },
-          { label: 'Regel-Bezugsdauer', wert: 'bis 12 Monate', hinweis: '§ 104 SGB III, per Rechtsverordnung verlängerbar (Corona bis 24)' },
+          // W183: vorher „Regel-Bezugsdauer bis 12 Monate … (Corona bis 24)“ — 2026 gilt die 4. KugBeV.
+          { label: 'Bezugsdauer 2026', wert: 'bis 24 Monate', hinweis: '4. KugBeV, längstens bis 31.12.2026; regulär 12 Monate (§ 104 SGB III)' },
           { label: 'Bemessungsgrundlage', wert: 'Soll-Netto − Ist-Netto', hinweis: 'die Differenz der Nettobeträge, nicht das Brutto' },
           { label: 'Sozialversicherung', wert: 'bleibt bestehen', hinweis: 'Beiträge auf 80 % des Ausfalls trägt der Arbeitgeber allein' },
           { label: 'Steuererklärungs-Pflicht ab', wert: '410 €/Jahr', hinweis: 'Lohnersatz mit Progressionsvorbehalt (§ 32b EStG)' },
@@ -5007,7 +5031,8 @@ export const finanzenRechner: RechnerConfig[] = [
     ],
     faq: [
       { frage: 'Wie hoch ist das Kurzarbeitergeld?', antwort: 'Das KuG beträgt 60 % der Nettoentgeltdifferenz (Soll-Netto minus Ist-Netto). Mit mindestens einem Kind auf der Lohnsteuerkarte sind es 67 %. Die Berechnung erfolgt pauschaliert nach der KuG-Tabelle der Agentur für Arbeit — maßgeblich ist die Differenz zwischen pauschaliertem Soll-Netto und Ist-Netto.' },
-      { frage: 'Wie lange wird Kurzarbeitergeld gezahlt?', antwort: 'Die Regelbezugsdauer beträgt 12 Monate. In wirtschaftlichen Ausnahmesituationen (z. B. während Corona) kann die Bundesregierung per Verordnung auf bis zu 24 Monate verlängern. Nach Ablauf läuft das Arbeitsverhältnis normal weiter oder es folgt regulär ALG I.' },
+      // W183: vorher „In wirtschaftlichen Ausnahmesituationen (z. B. während Corona) kann … verlängern“ — die Verlängerung gilt 2026 bereits.
+      { frage: 'Wie lange wird Kurzarbeitergeld gezahlt?', antwort: 'Die Regelbezugsdauer beträgt 12 Monate (§ 104 SGB III). Für 2026 hat die Bundesregierung sie per Verordnung auf bis zu 24 Monate verlängert: Die Vierte Kurzarbeitergeldbezugsdauerverordnung (4. KugBeV) gilt vom 01.01. bis 31.12.2026, gezahlt wird längstens bis zum 31.12.2026. Ab 2027 gelten wieder 12 Monate, sofern die Bundesregierung nicht erneut verlängert. Nach Ablauf läuft das Arbeitsverhältnis normal weiter oder es folgt regulär ALG I.' },
       { frage: 'Muss ich Kurzarbeitergeld selbst beantragen?', antwort: 'Nein — Kurzarbeit wird vom Arbeitgeber bei der Agentur für Arbeit angemeldet und beantragt. Sie als Beschäftigte müssen nichts tun. Der Arbeitgeber rechnet das KuG zusammen mit dem reduzierten Gehalt ab und zahlt es Ihnen aus. Die Agentur für Arbeit erstattet dem Arbeitgeber den Betrag.' },
       { frage: 'Was passiert mit den Sozialversicherungsbeiträgen?', antwort: 'Der Versicherungsschutz bleibt bestehen. Auf das reduzierte Ist-Entgelt zahlen Sie wie gewohnt Ihren Anteil. Für den Ausfall gelten 80 % des Unterschieds zwischen Soll- und Ist-Entgelt als beitragspflichtig; diese Beiträge zur Kranken-, Pflege- und Rentenversicherung trägt der Arbeitgeber allein (§ 163 Abs. 6 und § 168 Abs. 1 Nr. 1a SGB VI, § 232a Abs. 2 SGB V). Auf das Kurzarbeitergeld selbst fallen keine Abzüge an. Die spätere Rente fällt nur wenig niedriger aus, weil für 20 % des Ausfalls keine Rentenpunkte entstehen.' },
       { frage: 'Bekomme ich nach Kurzarbeit mehr Arbeitslosengeld?', antwort: 'Ja — falls Sie nach Ende der Kurzarbeit doch gekündigt werden und ALG I beantragen, wird das ALG aus Ihrem letzten Normalgehalt berechnet, nicht aus dem reduzierten Kurzarbeits-Gehalt. Das ist in § 151 SGB III geregelt und soll Kurzarbeit nicht zum Nachteil werden lassen.' },
@@ -5019,12 +5044,14 @@ export const finanzenRechner: RechnerConfig[] = [
       { titel: '§ 106 SGB III — Nettoentgeltdifferenz', url: 'https://www.gesetze-im-internet.de/sgb_3/__106.html', hinweis: 'Soll- und Ist-Entgelt, Rundung auf 20 €, pauschaliertes Netto nach § 153.' },
       { titel: '§ 153 SGB III — Leistungsentgelt', url: 'https://www.gesetze-im-internet.de/sgb_3/__153.html', hinweis: 'Sozialversicherungspauschale 20 %, Lohnsteuer und Solidaritätszuschlag, keine Kirchensteuer.' },
       { titel: '§ 104 SGB III — Bezugsdauer', url: 'https://www.gesetze-im-internet.de/sgb_3/__104.html', hinweis: 'Regelbezugsdauer bis 12 Monate, per Rechtsverordnung verlängerbar.' },
+      // W183: Quelle zur Verlängerung 2026 ergänzt.
+      { titel: 'Vierte Kurzarbeitergeldbezugsdauerverordnung (4. KugBeV)', url: 'https://www.gesetze-im-internet.de/kugbev_4/BJNR1520A0025.html', hinweis: 'Bezugsdauer bis zu 24 Monate, längstens bis 31.12.2026 (BGBl. 2025 I Nr. 338).' },
       { titel: '§ 32b EStG — Progressionsvorbehalt', url: 'https://www.gesetze-im-internet.de/estg/__32b.html', hinweis: 'KuG ist steuerfrei, erhöht aber den Steuersatz auf die übrigen Einkünfte.' },
     ],
   },
   {
     slug: 'riester-rechner',
-    letzteAktualisierung: '2026-06-25',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Riester-Rechner',
     beschreibung: 'Riester-Rente berechnen: Zulage, Eigenbeitrag, Steuerersparnis und ob sich Riestern für Sie lohnt.',
     kategorie: 'Finanzen',
@@ -5033,14 +5060,16 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Riester-Rente kostenlos berechnen: Grundzulage, Kinderzulage, optimaler Eigenbeitrag und Steuerersparnis mit Günstigerprüfung.',
     keywords: ['riester rechner', 'riester rente berechnen', 'riester zulage', 'riester eigenbeitrag', 'riester kinderzulage', 'riester steuerersparnis', 'riester lohnt sich', 'günstigerprüfung riester'],
     icon: '📊',
-    beispiel: 'Alleinstehend, 40.000 € Brutto, 1 Kind (ab 2008), Grenzsteuersatz 35 % → Zulagen: 175 + 300 = 475 € → Mindesteigenbeitrag: 4 % × 40.000 − 475 = 1.125 € → Steuerersparnis: (1.125 + 475) × 35 % = 560 € → Günstigerprüfung: 560 > 475 → Zusatzvorteil 85 € → Gesamtförderung 560 €.',
+    // W183: vorher mit 35 % Grenzsteuersatz (560 € Steuerersparnis, 85 € Zusatzvorteil) — 35 % passt nicht zu 40.000 €.
+    beispiel: 'Alleinstehend, 40.000 € Brutto, 1 Kind (ab 2008), Grenzsteuersatz geschätzt rund 28,5 % → Zulagen: 175 + 300 = 475 € → Mindesteigenbeitrag: 4 % × 40.000 − 475 = 1.125 € → Steuerersparnis: (1.125 + 475) × 28,5 % ≈ 456 € → Günstigerprüfung: 456 < 475 → kein Zusatzvorteil, die Zulage ist günstiger → Gesamtförderung 475 € (Förderquote 42,2 %).',
     // W19-Goldstandard: riester-rechner auf volle Tiefe (~1.560 W, 15 Bausteine).
     // Leitformat „Vergleich & Einordnung" — 3 vergleich-Bausteine dominant (Zulagen vs.
     // Sonderausgabenabzug · Riester 2026 vs. Reform ab 2027 · Riester vs. ETF), grenzt sich
     // von rente (tabelle) und etf (diagramm) ab. ALLE Werte aus lib/berechnungen/riester.ts
-    // reproduziert (Lib-Resolver-Check 25.06.2026): A1 40k/0K/35 % → Eigenbeitrag 1.425 €,
-    // Förderung 560 €, Quote 39 %; A2 28k/2K/25 % → 345 €, 775 €, 225 %; A3 60k/beide/42 %
-    // → 1.750 €, 860 €, 49 %. Werte 2026: Grundzulage 175 € (§ 84), Kinderzulage 300/185 €
+    // reproduziert (Lib-Resolver-Check, W183 neu mit schaetzeGrenzsteuersatz2026): A1 40k/0K/≈ 28,4 % →
+    // Eigenbeitrag 1.425 €, Förderung 455 €, Quote 32 %; A2 28k/2K/25 % → 345 €, 775 €, 225 %;
+    // A3 60k/beide/≈ 25,7 % → 2.050 €, 616 €, 30 % (Mindest-/Höchstbetrag je Person; vorher 35 % → 560 €/39 % und 42 % → 860 €/49 %).
+    // Werte 2026: Grundzulage 175 € (§ 84), Kinderzulage 300/185 €
     // (§ 85), Höchstbetrag 2.100 € (§ 10a), Sockel 60 € / 4 % (§ 86 EStG).
     // REFORM-DISZIPLIN: 2026-Werte = geltend (Bestandsschutz), 2027-Werte = geplante
     // Neuregelung (Bundestag 27.03.2026, Umsetzung 01.01.2027) — überall klar getrennt.
@@ -5090,15 +5119,16 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Beispiel: Single, 40.000 €, keine Kinder (35 %)',
+        // W183: vorher mit 35 % (560 €, 39 %); 40.000 € ledig ergibt 2026 rund 28,4 %.
+        titel: 'Beispiel: Single, 40.000 €, keine Kinder (≈ 28,4 %)',
         schritte: [
           { label: 'Zulagen', formel: 'Grundzulage 175 € (keine Kinder)', ergebnis: '175 €' },
           { label: 'Optimaler Eigenbeitrag', formel: '4 % × 40.000 € − 175 € Zulage', ergebnis: '1.425 €' },
           { label: 'Sonderausgabenabzug', formel: 'Eigenbeitrag 1.425 € + Zulage 175 €', ergebnis: '1.600 €' },
-          { label: 'Steuerersparnis', formel: '1.600 € × 35 % Grenzsteuersatz', ergebnis: '560 €' },
-          { label: 'Günstigerprüfung', formel: '560 € Steuervorteil > 175 € Zulage', ergebnis: 'Steuerweg gewinnt' },
+          { label: 'Steuerersparnis', formel: '1.600 € × 28,4 % Grenzsteuersatz', ergebnis: '455 €' },
+          { label: 'Günstigerprüfung', formel: '455 € Steuervorteil > 175 € Zulage', ergebnis: 'Steuerweg gewinnt' },
         ],
-        fazit: 'Gesamtförderung 560 € bei 1.425 € Eigenbeitrag — eine Förderquote von 39 %. Für jeden selbst eingezahlten Euro gibt der Staat rund 39 Cent dazu. Bei diesem Single-Haushalt dominiert der Steuervorteil über den Sonderausgabenabzug, nicht die Zulage. Bei einer Familie mit zwei Kindern und niedrigerem Einkommen kehrt sich das Bild um: Dort tragen die Zulagen (775 €) den Großteil, der Eigenbeitrag sinkt auf 345 €, und die Förderquote springt auf über 200 %. Genau diese Spreizung zeigt, warum sich Riester für die einen stark und für die anderen kaum lohnt — entscheidend sind Kinderzahl und Einkommen.',
+        fazit: 'Gesamtförderung 455 € bei 1.425 € Eigenbeitrag — eine Förderquote von 32 %. Für jeden selbst eingezahlten Euro gibt der Staat rund 32 Cent dazu. Bei diesem Single-Haushalt dominiert der Steuervorteil über den Sonderausgabenabzug, nicht die Zulage. Bei einer Familie mit zwei Kindern und niedrigerem Einkommen kehrt sich das Bild um: Dort tragen die Zulagen (775 €) den Großteil, der Eigenbeitrag sinkt auf 345 €, und die Förderquote springt auf über 200 %. Genau diese Spreizung zeigt, warum sich Riester für die einen stark und für die anderen kaum lohnt — entscheidend sind Kinderzahl und Einkommen.',
       },
       {
         typ: 'tabelle',
@@ -5106,8 +5136,10 @@ export const finanzenRechner: RechnerConfig[] = [
         kopf: ['Profil', 'Eigenbeitrag/Jahr', 'Förderung/Jahr', 'Förderquote'],
         zeilen: [
           ['Familie, 28.000 €, 2 Kinder, 25 %', '345 €', '775 €', '225 %'],
-          ['Single, 40.000 €, 0 Kinder, 35 %', '1.425 €', '560 €', '39 %'],
-          ['Paar (beide), 60.000 €, 0 Kinder, 42 %', '1.750 €', '860 €', '49 %'],
+          // W183: vorher 35 % → 560 €/39 % und 42 % → 860 €/49 % (Steuersätze passten nicht zum Einkommen).
+          ['Single, 40.000 €, 0 Kinder, ≈ 28 %', '1.425 €', '455 €', '32 %'],
+          // W183: Paar vorher 1.750 € / 526 € (Mindest- und Höchstbetrag nur einmal fürs Paar); je Person 1.025 € Beitrag, Sonderausgaben 2 × 1.200 €.
+          ['Paar (beide), 60.000 €, 0 Kinder, ≈ 26 %', '2.050 €', '616 €', '30 %'],
         ],
         fussnote: 'Optimaler Eigenbeitrag und Gesamtförderung aus diesem Rechner (Werte 2026). Förderquote = Gesamtförderung ÷ Eigenbeitrag. Je mehr Kinder und je geringer das Einkommen, desto höher fällt die Quote aus.',
       },
@@ -5573,7 +5605,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'afa-rechner',
-    letzteAktualisierung: '2026-06-25',
+    letzteAktualisierung: '2026-10-20',
     titel: 'AfA-Rechner',
     beschreibung: 'Abschreibung berechnen: Lineare und degressive AfA für Anlagegüter, Immobilien und GWG mit AfA-Plan und Rechenweg.',
     kategorie: 'Finanzen',
@@ -5591,7 +5623,9 @@ export const finanzenRechner: RechnerConfig[] = [
     // 30.000/21.000/14.700/10.290/7.203 € (J1–5); GWG 800 € Sofort; Sammelposten 1.000 € →
     // 200 €/J × 5. Degressiv § 7 Abs. 2 EStG n.F. (Investitionssofortprogramm, BGBl. I Nr. 161
     // v. 18.07.2025): max. 3× linear/30 %, Fenster 01.07.2025–31.12.2027, ab 2028 nur linear
-    // (Lib-Fix 8800688). erklaerung bleibt Fallback.
+    // (Lib-Fix 8800688). W183: frühere Fenster 2020–2022 (25 %) und 04–12/2024 (20 %) in der Lib,
+    // dazwischen linear; § 7 Abs. 5a jetzt 5 % vom Restwert mit Wechsel zur linearen AfA.
+    // erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
@@ -5609,10 +5643,11 @@ export const finanzenRechner: RechnerConfig[] = [
         kopf: ['Methode', 'Wofür / Grenze', 'Satz', 'Rechtsgrundlage'],
         zeilen: [
           ['Linear', 'Standard, alle abnutzbaren WG', '100 % ÷ Nutzungsdauer', '§ 7 Abs. 1 EStG'],
-          ['Degressiv (Booster)', 'bewegliche WG, Anschaffung 2025–2027', 'max. 3× linear, 30 %', '§ 7 Abs. 2 EStG n.F.'],
+          // W183: vorher „Anschaffung 2025–2027“ und „5 % linear p. a.“ (§ 7 Abs. 5a ist degressiv vom Restwert).
+          ['Degressiv (Booster)', 'bewegliche WG, Anschaffung 07/2025–12/2027', 'max. 3× linear, 30 %', '§ 7 Abs. 2 EStG n.F.'],
           ['GWG-Sofortabschreibung', '≤ 800 € netto, sofort', '100 % im Anschaffungsjahr', '§ 6 Abs. 2 EStG'],
           ['Sammelposten-Pool', '250,01–1.000 € netto', '20 %/Jahr über 5 Jahre', '§ 6 Abs. 2a EStG'],
-          ['Sonder-AfA Wohngebäude', 'neue Mietwohngebäude', '5 % linear p. a.', '§ 7 Abs. 5a EStG'],
+          ['Degressive AfA Wohngebäude', 'Baubeginn 10/2023–09/2029', '5 % vom Restwert p. a.', '§ 7 Abs. 5a EStG'],
         ],
         fussnote: 'Alle Wertgrenzen netto (vorsteuerabzugsberechtigt); Kleinunternehmer nach § 19 UStG rechnen brutto (800 € netto = 952 € bei 19 %). Die betriebsgewöhnliche Nutzungsdauer entnehmen Sie den AfA-Tabellen des BMF.',
       },
@@ -5630,7 +5665,8 @@ export const finanzenRechner: RechnerConfig[] = [
           { kriterium: 'Berechnungsbasis', a: 'Anschaffungskosten (konstant)', b: 'Restbuchwert (sinkend)' },
           { kriterium: 'Jahresbetrag', a: 'jedes Jahr gleich', b: 'früh hoch, später fallend' },
           { kriterium: 'Satz', a: '100 % ÷ Nutzungsdauer', b: 'max. 3× linear, 30 %' },
-          { kriterium: 'Zulässig', a: 'immer', b: 'nur Anschaffung 2025–2027' },
+          // W183: vorher „nur Anschaffung 2025–2027“ — das Fenster beginnt am 01.07.2025.
+          { kriterium: 'Zulässig', a: 'immer', b: 'nur Anschaffung 07/2025–12/2027' },
           { kriterium: 'Vorteil', a: 'einfach und planbar', b: 'früher Liquiditäts- und Steuervorteil' },
         ],
       },
@@ -5669,7 +5705,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Der Investitions-Booster als aktuelles Kern-Feature',
-        html: `<p>Die degressive AfA ist kein Dauerrecht — sie wird vom Gesetzgeber gezielt als Konjunkturinstrument ein- und ausgeschaltet. Aktuell gilt das <strong>Investitionssofortprogramm</strong> (Wachstumsbooster, BGBl. I Nr. 161 vom 18.07.2025): Für bewegliche Wirtschaftsgüter des Anlagevermögens, die zwischen dem <strong>1. Juli 2025 und dem 31. Dezember 2027</strong> angeschafft werden, ist die degressive AfA mit bis zu <strong>30 %</strong> (höchstens dem Dreifachen des linearen Satzes) zulässig.</p><p>Für Unternehmen ist das ein spürbarer Hebel: Eine Investition, die ohnehin ansteht, kann in dieses Fenster vorgezogen werden, um früh Abschreibungsvolumen und damit eine Steuerstundung zu heben. Das verbessert die Liquidität in der Investitionsphase.</p><p>Nach dem 31.12.2027 ist — Stand heute — wieder nur die lineare AfA möglich. Die niedrigere Steuerlast wirkt sich auch auf die <a href="/finanzen/gewerbesteuer-rechner">Gewerbesteuer</a> aus, weil der Gewerbeertrag durch die höhere Abschreibung sinkt.</p>`,
+        // W183: Satz zu den früheren Fenstern (2020–2022, 04–12/2024) ergänzt.
+        html: `<p>Die degressive AfA ist kein Dauerrecht — sie wird vom Gesetzgeber gezielt als Konjunkturinstrument ein- und ausgeschaltet. Aktuell gilt das <strong>Investitionssofortprogramm</strong> (Wachstumsbooster, BGBl. I Nr. 161 vom 18.07.2025): Für bewegliche Wirtschaftsgüter des Anlagevermögens, die zwischen dem <strong>1. Juli 2025 und dem 31. Dezember 2027</strong> angeschafft werden, ist die degressive AfA mit bis zu <strong>30 %</strong> (höchstens dem Dreifachen des linearen Satzes) zulässig. Für frühere Anschaffungen gelten die alten Fenster weiter: vom 1. April bis 31. Dezember 2024 höchstens 20 % (das Doppelte), von 2020 bis 2022 höchstens 25 % (das 2,5-Fache). Wer 2023, im ersten Quartal 2024 oder im ersten Halbjahr 2025 angeschafft hat, schreibt linear ab.</p><p>Für Unternehmen ist das ein spürbarer Hebel: Eine Investition, die ohnehin ansteht, kann in dieses Fenster vorgezogen werden, um früh Abschreibungsvolumen und damit eine Steuerstundung zu heben. Das verbessert die Liquidität in der Investitionsphase.</p><p>Nach dem 31.12.2027 ist — Stand heute — wieder nur die lineare AfA möglich. Die niedrigere Steuerlast wirkt sich auch auf die <a href="/finanzen/gewerbesteuer-rechner">Gewerbesteuer</a> aus, weil der Gewerbeertrag durch die höhere Abschreibung sinkt.</p>`,
       },
       {
         typ: 'vergleich',
@@ -5697,12 +5734,14 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Immobilien: die Gebäude-AfA',
-        html: `<p>Für Immobilien gelten eigene AfA-Sätze, die nicht über eine Nutzungsdauer-Eingabe, sondern direkt vom Gesetz vorgegeben sind. Für <strong>Bestandsgebäude</strong> sind es <strong>2 %</strong> pro Jahr (Fertigstellung ab 1925) bzw. <strong>2,5 %</strong> für ältere, und <strong>3 %</strong> für neu errichtete Wohngebäude ab Baujahr 2023 (§ 7 Abs. 4 EStG).</p><p>Zusätzlich gibt es seit 2023 die <strong>degressive Gebäude-AfA</strong> für neue Mietwohngebäude (§ 7 Abs. 5a EStG): 5 % auf den jeweiligen Restwert in den ersten Jahren, danach Wechsel zur linearen AfA. Voraussetzung sind bestimmte Effizienzhaus-Standards.</p><p>Wichtig bei jeder Immobilien-AfA: Nur das <strong>Gebäude</strong> wird abgeschrieben, nicht Grund und Boden — der Grundstücksanteil muss aus dem Kaufpreis herausgerechnet werden. Vermieter machen die AfA in der Anlage V geltend; sie ist oft der größte Posten der Vermietungsrendite, die der <a href="/finanzen/mietrendite-rechner">Mietrendite-Rechner</a> ausweist.</p>`,
+        // W183: vorher „für neue Mietwohngebäude … Voraussetzung sind bestimmte Effizienzhaus-Standards“.
+        html: `<p>Für Immobilien gelten eigene AfA-Sätze, die nicht über eine Nutzungsdauer-Eingabe, sondern direkt vom Gesetz vorgegeben sind. Für <strong>Bestandsgebäude</strong> sind es <strong>2 %</strong> pro Jahr (Fertigstellung ab 1925) bzw. <strong>2,5 %</strong> für ältere, und <strong>3 %</strong> für neu errichtete Wohngebäude ab Baujahr 2023 (§ 7 Abs. 4 EStG).</p><p>Zusätzlich gibt es die <strong>degressive Gebäude-AfA</strong> für Wohngebäude (§ 7 Abs. 5a EStG), deren Bau nach dem 30. September 2023 und vor dem 1. Oktober 2029 beginnt oder die in diesem Zeitraum gekauft werden: 5 % auf den jeweiligen Restwert, später ist der Wechsel zur linearen AfA erlaubt (Restwert verteilt auf die Restnutzungsdauer). Einen Effizienzhaus-Standard verlangt § 7 Abs. 5a nicht; den setzt nur die Sonder-AfA nach § 7b voraus. Bei 300.000 € Herstellungskosten sind das im ersten vollen Jahr 15.000 €, im zweiten 14.250 €; der Wechsel lohnt sich ab etwa dem 15. Jahr.</p><p>Wichtig bei jeder Immobilien-AfA: Nur das <strong>Gebäude</strong> wird abgeschrieben, nicht Grund und Boden — der Grundstücksanteil muss aus dem Kaufpreis herausgerechnet werden. Vermieter machen die AfA in der Anlage V geltend; sie ist oft der größte Posten der Vermietungsrendite, die der <a href="/finanzen/mietrendite-rechner">Mietrendite-Rechner</a> ausweist.</p>`,
       },
       {
         typ: 'vergleich',
         titel: 'Degressiv im Booster-Fenster vs. ab 2028',
-        spalteA: 'Anschaffung 2025–2027',
+        // W183: vorher „Anschaffung 2025–2027“.
+        spalteA: 'Anschaffung 07/2025–12/2027',
         spalteB: 'Anschaffung ab 2028',
         zeilen: [
           { kriterium: 'Degressive AfA', a: 'zulässig (bis 30 %)', b: 'nicht mehr zulässig' },
@@ -5730,7 +5769,8 @@ export const finanzenRechner: RechnerConfig[] = [
           'Nutzungsdauer aus der BMF-AfA-Tabelle entnehmen — nicht schätzen',
           'Anschaffungskosten netto ansetzen (Kleinunternehmer nach § 19 UStG: brutto)',
           'Anschaffungsdatum genau erfassen — das erste Jahr wird pro rata temporis (monatsweise) gerechnet',
-          'Bei beweglichen WG 2025–2027 die degressive AfA prüfen — früher Liquiditätsvorteil',
+          // W183: vorher „2025–2027“.
+          'Bei beweglichen WG mit Anschaffung 07/2025–12/2027 die degressive AfA prüfen — früher Liquiditätsvorteil',
           'Wechsel degressiv → linear nutzen, sobald linear günstiger wird (Rechner macht es automatisch)',
           'Güter bis 800 € netto sofort abschreiben (GWG) oder einheitlich in den Sammelposten legen',
           'Bei Immobilien den Grundstücksanteil herausrechnen — Grund und Boden wird nicht abgeschrieben',
@@ -5766,7 +5806,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Gilt die AfA auch für Vermieter?',
-        antwort: 'Ja. Vermieter einer Immobilie können die Gebäude-AfA als Werbungskosten in der Anlage V geltend machen. Für Bestandsgebäude gelten 2 % (Baujahr ab 1925) oder 2,5 % (älter). Für neue Wohngebäude ab Baujahr 2023 sind es 3 % linear, optional 5 % degressiv in den ersten Jahren. Der Grundstücksanteil wird nicht abgeschrieben — er muss aus dem Kaufpreis herausgerechnet werden. Die AfA ist bei vermieteten Immobilien einer der größten steuerlichen Hebel.',
+        // W183: vorher „optional 5 % degressiv in den ersten Jahren“ ohne Zeitfenster.
+        antwort: 'Ja. Vermieter einer Immobilie können die Gebäude-AfA als Werbungskosten in der Anlage V geltend machen. Für Bestandsgebäude gelten 2 % (Baujahr ab 1925) oder 2,5 % (älter). Für neue Wohngebäude ab Baujahr 2023 sind es 3 % linear; bei Baubeginn zwischen Oktober 2023 und September 2029 wahlweise 5 % vom jeweiligen Restwert (§ 7 Abs. 5a EStG) mit späterem Wechsel zur linearen AfA. Der Grundstücksanteil wird nicht abgeschrieben — er muss aus dem Kaufpreis herausgerechnet werden. Die AfA ist bei vermieteten Immobilien einer der größten steuerlichen Hebel.',
       },
     ],
     quellen: [
@@ -7109,7 +7150,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'steuerklassen-vergleich-rechner',
-    letzteAktualisierung: '2026-10-19',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Steuerklassen-Vergleich-Rechner',
     beschreibung: 'Steuerklassen-Kombinationen vergleichen: III/V, V/III und IV/IV mit Faktor — welche Wahl bringt das höchste monatliche Netto?',
     kategorie: 'Finanzen',
@@ -7118,7 +7159,8 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Steuerklassen-Kombinationen vergleichen: III/V, V/III, IV/IV mit Faktor — welche bringt Ehepaaren das höchste monatliche Netto? Kostenlos mit KI-Erklärung.',
     keywords: ['steuerklassen vergleich', 'steuerklasse 3 5', 'steuerklasse 4 4 faktor', 'steuerklasse ehepaar', 'faktorverfahren', 'steuerklasse wechseln', 'steuerklasse optimieren', 'beste steuerklasse ehepaar', 'iii v oder iv iv'],
     icon: '⚖️',
-    beispiel: 'Paar mit 50.000 € + 25.000 € Brutto/Jahr (2026, ohne Kirchensteuer): III/V ergibt ca. 4.184 € Haushaltsnetto/Monat, aber rund 496 € Nachzahlung bei der Veranlagung. IV/IV mit Faktor: ca. 4.143 €/Monat, dafür kein Ausgleich nötig. Die Jahressteuer (9.422 €) ist in beiden Fällen identisch.',
+    // W183: vorher 4.184 / 4.143 €, 496 € Nachzahlung, 9.422 € (Näherung mit 12 % Vorsorgepauschale); jetzt PAP 2026, kinderlos.
+    beispiel: 'Paar mit 50.000 € + 25.000 € Brutto/Jahr (2026, ohne Kirchensteuer, ohne Kinder): III/V ergibt ca. 4.331 € Haushaltsnetto/Monat, aber rund 973 € Nachzahlung bei der Veranlagung. IV/IV mit Faktor (0,957): ca. 4.250 €/Monat, der Ausgleich am Jahresende liegt bei rund 1 €. Die Jahressteuer (7.694 €) ist in beiden Fällen identisch.',
     faq: [
       {
         frage: 'Welche Steuerklassen-Kombination ist für uns am besten?',
@@ -7126,7 +7168,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist das Faktorverfahren (IV/IV mit Faktor)?',
-        antwort: 'Beim Faktorverfahren sind beide Partner in Klasse IV, aber die Lohnsteuer wird mit einem individuellen Faktor multipliziert (Faktor = Splittingsteuer / Summe LSt IV+IV). Dadurch entspricht die monatliche Lohnsteuer fast genau der Jahressteuer — keine Nachzahlung oder Erstattung. Der Faktor gilt zwei Jahre und muss beim Finanzamt beantragt werden.',
+        // W183: vorher „keine Nachzahlung oder Erstattung“, ohne Abschneiden des Faktors und ohne Erklärungspflicht.
+        antwort: 'Beim Faktorverfahren sind beide Partner in Klasse IV, aber die Lohnsteuer wird mit einem individuellen Faktor multipliziert (Faktor = voraussichtliche Splittingsteuer ÷ Summe der Lohnsteuer in IV/IV, auf drei Nachkommastellen abgeschnitten, § 39f EStG). Dadurch entspricht die einbehaltene Lohnsteuer fast genau der Jahressteuer — Nachzahlung oder Erstattung bleiben klein. Der Faktor gilt zwei Jahre und muss beim Finanzamt beantragt werden; wie bei III/V ist danach die Steuererklärung Pflicht (§ 46 Abs. 2 Nr. 3a EStG).',
       },
       {
         frage: 'Hat die Steuerklasse Einfluss auf das Elterngeld?',
@@ -7142,7 +7185,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Muss ich bei III/V eine Steuererklärung abgeben?',
-        antwort: 'Ja, bei der Kombination III/V ist die Steuererklärung Pflicht (§ 46 Abs. 2 Nr. 3a EStG). Grund: Die monatliche Lohnsteuer bei III/V entspricht meist nicht der Jahressteuer — oft resultiert eine Nachzahlung. Bei IV/IV ohne Faktor oder mit Faktor ist die Erklärung nur in bestimmten Fällen Pflicht.',
+        // W183: vorher „Bei IV/IV ohne Faktor oder mit Faktor … nur in bestimmten Fällen Pflicht“; § 46 Abs. 2 Nr. 3a EStG nennt den Faktor ausdrücklich.
+        antwort: 'Ja, bei der Kombination III/V ist die Steuererklärung Pflicht (§ 46 Abs. 2 Nr. 3a EStG). Grund: Die monatliche Lohnsteuer bei III/V entspricht meist nicht der Jahressteuer — oft resultiert eine Nachzahlung. Dieselbe Vorschrift gilt, wenn bei Klasse IV ein Faktor eingetragen ist. Bei IV/IV ohne Faktor ist die Erklärung nur in bestimmten Fällen Pflicht.',
       },
     ],
     affiliate: { programId: 'wiso', context: 'steuerklassen' },
@@ -7163,12 +7207,13 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'III/V vs. IV/IV mit Faktor (Paar 50.000 € + 25.000 € brutto)',
         spalteA: 'III/V',
         spalteB: 'IV/IV mit Faktor',
+        // W183: vorher 2.967/2.640, 1.218/1.503, 4.184/4.143 €, 496 € Nachzahlung, Erklärung „meist freiwillig“; jetzt PAP 2026, kinderlos.
         zeilen: [
-          { kriterium: 'Netto Hauptverdiener (50.000 €)', a: '≈ 2.967 €/Mon', b: '≈ 2.640 €/Mon' },
-          { kriterium: 'Netto Zweitverdiener (25.000 €)', a: '≈ 1.218 €/Mon', b: '≈ 1.503 €/Mon' },
-          { kriterium: 'Haushaltsnetto gesamt', a: '≈ 4.184 €/Mon', b: '≈ 4.143 €/Mon' },
-          { kriterium: 'Bei der Veranlagung', a: 'rund 496 € Nachzahlung', b: 'kein Ausgleich nötig' },
-          { kriterium: 'Steuererklärung', a: 'Pflicht (§ 46 EStG)', b: 'meist freiwillig' },
+          { kriterium: 'Netto Hauptverdiener (50.000 €)', a: '≈ 3.026 €/Mon', b: '≈ 2.719 €/Mon' },
+          { kriterium: 'Netto Zweitverdiener (25.000 €)', a: '≈ 1.304 €/Mon', b: '≈ 1.530 €/Mon' },
+          { kriterium: 'Haushaltsnetto gesamt', a: '≈ 4.331 €/Mon', b: '≈ 4.250 €/Mon' },
+          { kriterium: 'Bei der Veranlagung', a: 'rund 973 € Nachzahlung', b: 'rund 1 € Nachzahlung' },
+          { kriterium: 'Steuererklärung', a: 'Pflicht (§ 46 EStG)', b: 'Pflicht (§ 46 EStG)' },
         ],
       },
       {
@@ -7184,7 +7229,8 @@ export const finanzenRechner: RechnerConfig[] = [
         zeilen: [
           { kriterium: 'Lohnsteuer je Partner', a: 'wie eine alleinstehende Person (Grundtarif)', b: 'mit einem Faktor unter 1 anteilig gesenkt' },
           { kriterium: 'Splittingvorteil wirkt', a: 'erst bei der Veranlagung', b: 'bereits monatlich' },
-          { kriterium: 'Ergebnis am Jahresende', a: 'meist eine Erstattung', b: 'punktgenau, kaum Ausgleich' },
+          // W183: vorher „punktgenau“ — der Faktor wird auf drei Nachkommastellen abgeschnitten.
+          { kriterium: 'Ergebnis am Jahresende', a: 'meist eine Erstattung', b: 'fast genau, kaum Ausgleich' },
           { kriterium: 'Beantragung', a: 'Standard, nichts zu tun', b: 'beim Finanzamt, gilt zwei Jahre' },
         ],
       },
@@ -7205,14 +7251,15 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'beispielrechnung',
         titel: 'Paar 50.000 € + 25.000 € brutto: III/V vs. IV/IV mit Faktor',
+        // W183: vorher 4.184 / 4.143 €, 41 €, 496 €, 9.422 € (Näherung); jetzt PAP 2026, kinderlos.
         schritte: [
-          { label: 'Haushaltsnetto III/V', formel: 'Schätzung des Rechners', ergebnis: '≈ 4.184 €/Mon' },
-          { label: 'Haushaltsnetto IV/IV mit Faktor', formel: 'Faktor 0,957', ergebnis: '≈ 4.143 €/Mon' },
-          { label: 'monatlicher Unterschied', formel: '4.184 − 4.143', ergebnis: '≈ 41 €/Mon' },
-          { label: 'III/V: übers Jahr zu wenig einbehalten', formel: 'Nachzahlung bei Veranlagung', ergebnis: 'rund 496 €' },
-          { label: 'Jahressteuer (Splitting) — in beiden Fällen', formel: 'fix', ergebnis: '9.422 €' },
+          { label: 'Haushaltsnetto III/V', formel: 'Lohnsteuer nach PAP 2026', ergebnis: '≈ 4.331 €/Mon' },
+          { label: 'Haushaltsnetto IV/IV mit Faktor', formel: 'Faktor 0,957', ergebnis: '≈ 4.250 €/Mon' },
+          { label: 'monatlicher Unterschied', formel: '4.331 − 4.250', ergebnis: '≈ 81 €/Mon' },
+          { label: 'III/V: übers Jahr zu wenig einbehalten', formel: 'Nachzahlung bei Veranlagung', ergebnis: 'rund 973 €' },
+          { label: 'Jahressteuer (Splitting) — in beiden Fällen', formel: 'fix', ergebnis: '7.694 €' },
         ],
-        fazit: 'III/V bringt diesem Paar rund 41 € mehr Haushaltsnetto pro Monat — über das Jahr also etwa 492 €. Genau diese Summe holt sich das Finanzamt aber als Nachzahlung von rund 496 € zurück, weil bei III/V zu wenig Lohnsteuer einbehalten wurde. Unterm Strich bleibt das Gleiche: Die Jahressteuer beträgt in jeder Variante 9.422 €. IV/IV mit Faktor verteilt die Last über den Faktor 0,957 gleichmäßig und trifft die Jahressteuer punktgenau — kein Nachzahlungs-Schreck. Die Klassenwahl ist hier also eine Frage des Zahlungs-Zeitpunkts und der Lohnersatz-Bemessung, nicht der Steuerhöhe. Die Werte sind eine Schätzung des Rechners; die exakte Lohnsteuer folgt dem amtlichen Programmablaufplan. Wer Wert auf möglichst gleichmäßige Monatsbeträge ohne Nachzahlung legt, wählt das Faktorverfahren; wer kurzfristig mehr Liquidität braucht, kann III/V nutzen und die Nachzahlung zurücklegen.',
+        fazit: 'III/V bringt diesem Paar rund 81 € mehr Haushaltsnetto pro Monat — über das Jahr also etwa 972 €. Genau diese Summe holt sich das Finanzamt aber als Nachzahlung von rund 973 € zurück, weil bei III/V zu wenig Lohnsteuer einbehalten wurde. Unterm Strich bleibt das Gleiche: Die Jahressteuer beträgt in jeder Variante 7.694 €. IV/IV mit Faktor verteilt die Last über den Faktor 0,957 gleichmäßig und trifft die Jahressteuer fast genau — es bleibt rund 1 € Nachzahlung, weil der Faktor auf drei Nachkommastellen abgeschnitten wird. Die Klassenwahl ist hier also eine Frage des Zahlungs-Zeitpunkts und der Lohnersatz-Bemessung, nicht der Steuerhöhe. Die Lohnsteuer rechnet der Rechner nach dem amtlichen Programmablaufplan 2026; die Jahressteuer ist der Splittingtarif mit Pauschbeträgen und Vorsorgepauschale, wie ihn auch das Finanzamt für den Faktor ansetzt. Wer Wert auf möglichst gleichmäßige Monatsbeträge ohne Nachzahlung legt, wählt das Faktorverfahren; wer kurzfristig mehr Liquidität braucht, kann III/V nutzen und die Nachzahlung zurücklegen.',
       },
       {
         typ: 'statistik',
@@ -7220,14 +7267,16 @@ export const finanzenRechner: RechnerConfig[] = [
         werte: [
           { label: 'Empfehlung des Rechners', wert: 'III/V', hinweis: 'höchstes monatliches Haushaltsnetto' },
           { label: 'Faktor bei IV/IV mit Faktor', wert: '0,957', hinweis: 'senkt die Lohnsteuer anteilig' },
-          { label: 'III/V: Ausgleich bei Veranlagung', wert: '≈ 496 € Nachzahlung', hinweis: 'der monatliche Vorteil wird ausgeglichen' },
-          { label: 'Jahressteuer (alle Varianten)', wert: '9.422 €', hinweis: 'identisch — die Klassenwahl ändert sie nicht' },
+          // W183: vorher ≈ 496 € und 9.422 € (Näherung).
+          { label: 'III/V: Ausgleich bei Veranlagung', wert: '≈ 973 € Nachzahlung', hinweis: 'der monatliche Vorteil wird ausgeglichen' },
+          { label: 'Jahressteuer (alle Varianten)', wert: '7.694 €', hinweis: 'identisch — die Klassenwahl ändert sie nicht' },
         ],
       },
       {
         typ: 'text',
         titel: 'Steuerklasse wechseln und das Faktorverfahren',
-        html: `<p>Seit 2020 können Ehepaare die <strong>Steuerklasse beliebig oft im Jahr wechseln</strong> (früher nur einmal jährlich). Der Antrag ist formlos beim Finanzamt oder online über Elster möglich und wirkt ab dem Folgemonat. Ein Wechsel ändert nie die Jahressteuer, sondern nur die monatliche Verteilung — und die Höhe einkommensabhängiger Lohnersatzleistungen.</p><p>Das <strong>Faktorverfahren</strong> (IV/IV mit Faktor, § 39f EStG) ist die gerechteste Variante: Beide Partner bleiben in Klasse IV, ihre Lohnsteuer wird aber mit einem Faktor unter 1 multipliziert, der den Splittingvorteil bereits monatlich berücksichtigt. Dadurch entspricht die einbehaltene Lohnsteuer fast genau der späteren Jahressteuer — Nachzahlungen oder hohe Erstattungen entfallen. Der Faktor wird beim Finanzamt beantragt und gilt seit 2024 für zwei Jahre. Er verteilt die Last fairer auf beide Einkommen als das oft als unausgewogen empfundene III/V-Modell. Ein Wechsel lohnt sich besonders, wenn sich die Einkommen deutlich verschieben — etwa nach einer Gehaltserhöhung, dem Wiedereinstieg nach der Elternzeit oder dem Übergang in Teilzeit. Steht eine solche Veränderung an, sollte man die Kombination neu durchrechnen, statt die einmal gewählte Klasse einfach beizubehalten.</p>`,
+        // W183: vorher „gilt seit 2024 für zwei Jahre“ — die Zweijahresgeltung gibt es seit 2019.
+        html: `<p>Seit 2020 können Ehepaare die <strong>Steuerklasse beliebig oft im Jahr wechseln</strong> (früher nur einmal jährlich). Der Antrag ist formlos beim Finanzamt oder online über Elster möglich und wirkt ab dem Folgemonat. Ein Wechsel ändert nie die Jahressteuer, sondern nur die monatliche Verteilung — und die Höhe einkommensabhängiger Lohnersatzleistungen.</p><p>Das <strong>Faktorverfahren</strong> (IV/IV mit Faktor, § 39f EStG) ist die gerechteste Variante: Beide Partner bleiben in Klasse IV, ihre Lohnsteuer wird aber mit einem Faktor unter 1 multipliziert, der den Splittingvorteil bereits monatlich berücksichtigt. Dadurch entspricht die einbehaltene Lohnsteuer fast genau der späteren Jahressteuer — Nachzahlungen oder hohe Erstattungen entfallen. Der Faktor wird beim Finanzamt beantragt und gilt seit 2019 auf Wunsch für zwei Jahre (§ 39f Abs. 1 Satz 9 EStG). Er verteilt die Last fairer auf beide Einkommen als das oft als unausgewogen empfundene III/V-Modell. Ein Wechsel lohnt sich besonders, wenn sich die Einkommen deutlich verschieben — etwa nach einer Gehaltserhöhung, dem Wiedereinstieg nach der Elternzeit oder dem Übergang in Teilzeit. Steht eine solche Veränderung an, sollte man die Kombination neu durchrechnen, statt die einmal gewählte Klasse einfach beizubehalten.</p>`,
       },
       {
         typ: 'text',
@@ -7244,7 +7293,8 @@ export const finanzenRechner: RechnerConfig[] = [
           'III/V bedeutet Pflicht zur Steuererklärung und oft eine Nachzahlung — eine Rücklage einplanen.',
           'Vor Elterngeld, ALG I oder Kurzarbeit: rechtzeitig in die günstigere Klasse wechseln (Bemessung am Netto).',
           'Die Klassenwahl ändert nie die Jahressteuer — nur die monatliche Liquidität und den Ausgleich am Jahresende.',
-          'Das Ergebnis ist eine Schätzung; die genaue Lohnsteuer ergibt sich aus dem amtlichen Programmablaufplan.',
+          // W183: vorher „Das Ergebnis ist eine Schätzung; die genaue Lohnsteuer ergibt sich aus dem amtlichen Programmablaufplan.“
+          'Die Lohnsteuer folgt dem amtlichen Programmablaufplan 2026; die endgültige Steuer hängt von den Angaben in der Steuererklärung ab.',
         ],
       },
       {
@@ -7257,7 +7307,8 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Stand 2026 — Schätzung, keine Steuerberatung',
-        text: 'Dieser Rechner schätzt den monatlichen Lohnsteuerabzug und das Haushaltsnetto nach einem vereinfachten Modell mit den ab 2026 geltenden Werten (Grundfreibetrag 12.348 €, Sozialversicherungs-Sätze 2026). Die genaue Lohnsteuer folgt dem amtlichen Programmablaufplan und kann je nach Vorsorgeaufwendungen, Zusatzbeitrag der Krankenkasse, Kirchensteuer und weiteren Faktoren leicht abweichen; die hier gezeigten Beispielwerte dienen daher der Einordnung der Größenordnung, nicht der centgenauen Planung. Die Ergebnisse sind eine Orientierung, keine verbindliche Steuerfestsetzung und keine Steuerberatung. Die amtliche, kostenlose Berechnung bietet der BMF-Steuerrechner unter bmf-steuerrechner.de. Maßgeblich für die endgültige Steuer ist immer der Bescheid des Finanzamts; bei Fragen helfen Steuerberatung oder Lohnsteuerhilfeverein.',
+        // W183: vorher „nach einem vereinfachten Modell … Die genaue Lohnsteuer folgt dem amtlichen Programmablaufplan und kann … leicht abweichen“.
+        text: 'Dieser Rechner berechnet den monatlichen Lohnsteuerabzug nach dem amtlichen Programmablaufplan 2026 (Grundfreibetrag 12.348 €, Sozialversicherungs-Sätze 2026) und den Faktor nach § 39f EStG. Er nimmt an, dass beide Partner gesetzlich versichert sind (durchschnittlicher Zusatzbeitrag 2,9 %) und die angegebenen Kinderfreibeträge gemeinsame Kinder betreffen; ohne Kinderfreibeträge rechnet er den Zuschlag für Kinderlose in der Pflegeversicherung. Ein anderer Zusatzbeitrag, private Krankenversicherung, Freibeträge oder weitere Einkünfte verändern die Werte; die Beispielwerte dienen der Einordnung, nicht der centgenauen Planung. Die Ergebnisse sind eine Orientierung, keine verbindliche Steuerfestsetzung und keine Steuerberatung. Die amtliche, kostenlose Berechnung bietet der BMF-Steuerrechner unter bmf-steuerrechner.de. Maßgeblich für die endgültige Steuer ist immer der Bescheid des Finanzamts; bei Fragen helfen Steuerberatung oder Lohnsteuerhilfeverein.',
       },
     ],
     quellen: [

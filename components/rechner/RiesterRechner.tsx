@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import {
   berechneRiester,
+  schaetzeGrenzsteuersatz2026,
   type RiesterFamilienstand,
 } from '@/lib/berechnungen/riester';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -20,12 +21,16 @@ export default function RiesterRechner() {
   const [kinderAnzahl, setKinderAnzahl] = useState('0');
   const [kinderAb2008, setKinderAb2008] = useState<boolean[]>([true, true, true, true, true]);
   const [eigenbeitragEingabe, setEigenbeitragEingabe] = useState('0');
-  const [grenzsteuersatz, setGrenzsteuersatz] = useState('35');
+  // W183: vorher fester Startwert 35 % — passt nicht zu 40.000 € (ledig rund 28,5 %). Jetzt
+  // „automatisch“: Schätzung aus dem Vorjahresbrutto; 25/30/35/42 % bleiben wählbar.
+  const [grenzsteuersatz, setGrenzsteuersatz] = useState('auto');
 
   const b = parseDeutscheZahl(brutto);
   const ebEingabe = parseDeutscheZahl(eigenbeitragEingabe);
-  const grenz = parseInt(grenzsteuersatz, 10) / 100;
   const kAnzahl = parseInt(kinderAnzahl, 10) || 0;
+  const grenzAuto = schaetzeGrenzsteuersatz2026(b, familienstand, kAnzahl);
+  const grenz = grenzsteuersatz === 'auto' ? grenzAuto : parseInt(grenzsteuersatz, 10) / 100;
+  const fmtSatz = (n: number) => (n * 100).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 1 });
 
   const ergebnis = useMemo(
     () =>
@@ -59,6 +64,12 @@ export default function RiesterRechner() {
           Jahresbruttoeinkommen (Vorjahr)
         </label>
         <NummerEingabe value={brutto} onChange={setBrutto} placeholder="40000" einheit="€/Jahr" />
+        {/* W183: Modellannahme für Paare sichtbar (Mindest- und Höchstbetrag rechnet die Lib je Person) */}
+        {familienstand === 'beide-partner' && (
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            Bei „beide riestern“: gemeinsames Brutto, je zur Hälfte verdient. Mindestbeitrag und Höchstbetrag gelten je Person, die Kinderzulagen erhält die Mutter.
+          </p>
+        )}
       </div>
 
       {/* Familienstand */}
@@ -132,11 +143,17 @@ export default function RiesterRechner() {
             onChange={e => setGrenzsteuersatz(e.target.value)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
           >
+            <option value="auto">{`automatisch aus dem Brutto (≈ ${fmtSatz(grenzAuto)} %)`}</option>
             <option value="25">25 %</option>
             <option value="30">30 %</option>
             <option value="35">35 %</option>
             <option value="42">42 %</option>
           </select>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            Schätzung 2026 ohne Soli und Kirchensteuer: gesetzlich versichert, Pauschbeträge und
+            Vorsorgepauschale; Verheiratete im Splittingtarif (nur einer riestert: Partner ohne eigenes
+            Einkommen; beide riestern: Brutto je zur Hälfte).
+          </p>
         </div>
       </div>
 
@@ -213,7 +230,8 @@ export default function RiesterRechner() {
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.sonderausgaben)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Steuerersparnis ({(grenz * 100).toLocaleString('de-DE')} %)</span>
+                {/* W183: Satz auf eine Nachkommastelle (geschätzter Satz hat mehr Stellen). */}
+                <span className="text-gray-600 dark:text-gray-400">Steuerersparnis ({fmtSatz(grenz)} %{grenzsteuersatz === 'auto' ? ', geschätzt' : ''})</span>
                 <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.steuerersparnis)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
@@ -263,7 +281,8 @@ export default function RiesterRechner() {
               familienstand,
               kinder: kAnzahl,
               eigenbeitrag: ergebnis.eigenbeitrag,
-              grenzsteuersatz: grenz,
+              // W183: als Prozentangabe; „automatisch“ = Schätzung aus dem Brutto.
+              grenzsteuersatz: `${fmtSatz(grenz)} %${grenzsteuersatz === 'auto' ? ' (geschätzt)' : ''}`,
             }}
             ergebnis={{
               gesamtfoerderung: ergebnis.gesamtfoerderung,

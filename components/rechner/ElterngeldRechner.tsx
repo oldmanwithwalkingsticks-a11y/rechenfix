@@ -162,20 +162,30 @@ export default function ElterngeldRechner() {
           </div>
 
           {/* Detail-Kacheln */}
+          {/* W183: vorher „Gesamt-Elterngeld: monatlich × 14 (12+2 Partnermonate)“ ohne Hinweis — das stimmt nur,
+              wenn beide Eltern dasselbe Netto hatten; ein Elternteil allein bekommt höchstens 12 Monatsbeträge. */}
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Bezugsdauer</p>
-              <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.bezugsMonate} Monate</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Bezugsdauer je Elternteil</p>
+              <p className="text-xl font-bold text-gray-800 dark:text-gray-100">bis {ergebnis.bezugsMonateEinElternteil} Monate</p>
               <p className="text-xs text-gray-600 dark:text-gray-500">
-                {variante === 'basis' ? '(12+2 Partnermonate)' : '(24+4 Partnermonate)'}
+                {variante === 'basis'
+                  ? 'Paar zusammen bis 14 (12 + 2 Partnermonate)'
+                  : 'Paar zusammen bis 28 (24 + 4 Partnermonate)'}
               </p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamt-Elterngeld</p>
-              <p className="text-xl font-bold text-accent-600 dark:text-accent-400">{fmt(ergebnis.gesamt)} €</p>
-              <p className="text-xs text-gray-600 dark:text-gray-500">über {ergebnis.bezugsMonate} Monate</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamt für Sie allein</p>
+              <p className="text-xl font-bold text-accent-600 dark:text-accent-400">{fmt(ergebnis.gesamtEinElternteil)} €</p>
+              <p className="text-xs text-gray-600 dark:text-gray-500">über {ergebnis.bezugsMonateEinElternteil} Monate</p>
             </div>
           </div>
+          <p className="text-xs text-gray-600 dark:text-gray-400">
+            Mit {variante === 'basis' ? '2' : '4'} Partnermonaten des anderen Elternteils käme das Paar auf bis zu{' '}
+            {fmt(ergebnis.gesamt)} € ({ergebnis.bezugsMonate} Monate) — aber nur, wenn der andere Elternteil dasselbe
+            Netto hatte; seine Partnermonate richten sich nach seinem eigenen Einkommen (§ 4 Abs. 3 und 4 BEEG).
+            Alleinerziehende können die Partnermonate selbst nehmen (§ 4c BEEG).
+          </p>
 
           {/* Aufschlüsselung */}
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
@@ -253,10 +263,16 @@ export default function ElterngeldRechner() {
                       <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">{vergleich.basis.bezugsMonate} Monate</td>
                       <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">{vergleich.plus.bezugsMonate} Monate</td>
                     </tr>
+                    {/* W183: vorher nur „Gesamt“ = Paar-Wert mit Partnermonaten. */}
                     <tr className="bg-primary-50/30 dark:bg-primary-500/5">
-                      <td className="px-4 py-2.5 font-semibold text-gray-800 dark:text-gray-100">Gesamt</td>
-                      <td className="px-4 py-2.5 text-right font-bold text-gray-800 dark:text-gray-200">{fmt(vergleich.basis.gesamt)} €</td>
-                      <td className="px-4 py-2.5 text-right font-bold text-gray-800 dark:text-gray-200">{fmt(vergleich.plus.gesamt)} €</td>
+                      <td className="px-4 py-2.5 font-semibold text-gray-800 dark:text-gray-100">Gesamt ein Elternteil (12 / 24 Monate)</td>
+                      <td className="px-4 py-2.5 text-right font-bold text-gray-800 dark:text-gray-200">{fmt(vergleich.basis.gesamtEinElternteil)} €</td>
+                      <td className="px-4 py-2.5 text-right font-bold text-gray-800 dark:text-gray-200">{fmt(vergleich.plus.gesamtEinElternteil)} €</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Paar mit Partnermonaten (14 / 28), gleiches Netto</td>
+                      <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">{fmt(vergleich.basis.gesamt)} €</td>
+                      <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">{fmt(vergleich.plus.gesamt)} €</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Min/Max pro Monat</td>
@@ -280,7 +296,7 @@ export default function ElterngeldRechner() {
           <CrossLink href="/arbeit/mutterschutz-rechner" emoji="🤱" text="Mutterschutz-Fristen berechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`${variante === 'basis' ? 'Basiselterngeld' : 'ElterngeldPlus'}: ${fmt(ergebnis.monatlich)} € / Monat, ${fmt(ergebnis.gesamt)} € gesamt (${ergebnis.bezugsMonate} Monate)`}
+            ergebnisText={`${variante === 'basis' ? 'Basiselterngeld' : 'ElterngeldPlus'}: ${fmt(ergebnis.monatlich)} € / Monat, ${fmt(ergebnis.gesamtEinElternteil)} € für einen Elternteil (${ergebnis.bezugsMonateEinElternteil} Monate); Paar mit Partnermonaten bei gleichem Netto ${fmt(ergebnis.gesamt)} € (${ergebnis.bezugsMonate} Monate)`}
             seitenTitel="Elterngeld-Rechner"
             pdfDaten={[
               {
@@ -289,8 +305,9 @@ export default function ElterngeldRechner() {
                   { label: 'Relevantes Nettoeinkommen', wert: `${fmt(ergebnis.relevantesEinkommen)} €` },
                   { label: 'Ersatzrate', wert: `${ergebnis.ersatzrate.toLocaleString('de-DE')} %` },
                   { label: 'Elterngeld pro Monat', wert: `${fmt(ergebnis.monatlich)} €`, highlight: true },
-                  { label: 'Bezugsmonate', wert: `${ergebnis.bezugsMonate} Monate` },
-                  { label: 'Gesamt-Elterngeld', wert: `${fmt(ergebnis.gesamt)} €` },
+                  { label: 'Bezugsmonate ein Elternteil', wert: `${ergebnis.bezugsMonateEinElternteil} Monate` },
+                  { label: 'Gesamt ein Elternteil', wert: `${fmt(ergebnis.gesamtEinElternteil)} €` },
+                  { label: `Paar mit Partnermonaten (${ergebnis.bezugsMonate} Monate, gleiches Netto)`, wert: `${fmt(ergebnis.gesamt)} €` },
                 ],
               },
             ]}
@@ -306,8 +323,11 @@ export default function ElterngeldRechner() {
             }}
             ergebnis={{
               monatlich: ergebnis.monatlich,
-              gesamt: ergebnis.gesamt,
-              bezugsMonate: ergebnis.bezugsMonate,
+              // W183: ein Elternteil allein vs. Paar-Wert mit Partnermonaten (gleiches Netto angenommen)
+              gesamtEinElternteil: ergebnis.gesamtEinElternteil,
+              bezugsMonateEinElternteil: ergebnis.bezugsMonateEinElternteil,
+              gesamtPaarBeiGleichemNetto: ergebnis.gesamt,
+              bezugsMonatePaar: ergebnis.bezugsMonate,
               ersatzrate: ergebnis.ersatzrate,
             }}
           />
