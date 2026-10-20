@@ -408,7 +408,7 @@ Das Repo nutzt **`darkMode: 'class'`** (nicht `'media'`). Der Modus wird über e
 ### Regel 1 — Schwarze/graue Texte
 
 - Überschrift & Haupttext: `fill="currentColor"`, und am `<svg>` die Klasse `text-gray-900 dark:text-gray-100`. So folgt der Text dem Modus.
-- Graue Sekundärtexte: fester Mittelton `#9ca3af` (gray-400) — auf hell UND dunkel lesbar, bleibt leiser als die Überschrift.
+- Graue Sekundärtexte: `fill="#9ca3af"` (gray-400) im Markup. `app/globals.css` setzt solchen Text im hellen Modus auf `#4b5563` (gray-600, 7,6:1 auf Weiß), im Dark Mode bleibt `#9ca3af` (Welle 188; gray-400 allein hätte auf Weiß nur 2,5:1). Keinen anderen Grauton für Text verwenden, sonst greift die Regel nicht.
 
 ### Regel 2 — FARBIGE Texte (die versteckte Falle)
 
@@ -511,7 +511,7 @@ export default function Video({ src, poster, caption }: { src: string; poster?: 
   return (
     <figure className="my-8">
       <video src={src} poster={poster} controls loop muted playsInline preload="none" className="rounded-xl w-full h-auto" />
-      {caption && <figcaption className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-sm text-center text-gray-600 dark:text-gray-400">{caption}</figcaption>}
     </figure>
   );
 }
@@ -800,7 +800,7 @@ Das `datum` aus `meta.ts` wird sonst nur maschinenlesbar im Schema genutzt und i
 // components/blog/ArtikelDatum.tsx — Server-Komponente
 export default function ArtikelDatum({ datum }: { datum: string }) {
   const f = new Date(datum).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' });
-  return <p className="-mt-4 mb-8 text-sm text-gray-500 dark:text-gray-400">Veröffentlicht am <time dateTime={datum}>{f}</time></p>;
+  return <p className="-mt-4 mb-8 text-sm text-gray-600 dark:text-gray-400">Veröffentlicht am <time dateTime={datum}>{f}</time></p>;
 }
 ```
 

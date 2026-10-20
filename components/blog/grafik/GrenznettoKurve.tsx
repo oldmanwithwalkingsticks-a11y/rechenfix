@@ -141,7 +141,7 @@ export default function GrenznettoKurve() {
           Dafür wachsen dort auch Rente, Arbeitslosen- und Krankengeld nicht mehr mit.
         </text>
       </svg>
-      <figcaption className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
+      <figcaption className="mt-2 text-sm text-center text-gray-600 dark:text-gray-400">
         Am wenigsten bleibt von einer Gehaltserhöhung zwischen rund 7.700 und 8.450 Euro brutto.
       </figcaption>
     </figure>

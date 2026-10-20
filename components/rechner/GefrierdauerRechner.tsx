@@ -271,6 +271,8 @@ function formatDate(date: Date): string {
 // Komponente
 // ────────────────────────────────────────────────────────────────────────────
 
+// W188: Diese Komponente hat bewusst keine Dark-Mode-Varianten (helle Karten auch im Dark Mode).
+// Deshalb hier keine dark:text-Klassen ergänzen, sonst steht heller Text auf weißem Grund.
 export default function GefrierdauerRechner() {
   // SSR-sicher: kein new Date() beim ersten Render
   const [mounted, setMounted] = useState(false);
@@ -448,7 +450,7 @@ export default function GefrierdauerRechner() {
             </p>
             <p className="text-sm text-gray-600 mt-1">
               {verbleibendMax <= 0 ? (
-                <span className="text-red-600 font-medium">Haltbarkeit abgelaufen</span>
+                <span className="text-red-700 font-medium">Haltbarkeit abgelaufen</span>
               ) : (
                 <>
                   noch ca.{' '}
@@ -571,7 +573,7 @@ function HaltbarkeitsBalken({
           />
         )}
       </div>
-      <div className="flex justify-between text-xs text-gray-500">
+      <div className="flex justify-between text-xs text-gray-600">
         <span>Eingefroren</span>
         <span>Opt. Verbrauch</span>
         <span>Max. Haltbar</span>
@@ -629,7 +631,7 @@ function RichtwertTabelle({
           </tbody>
         </table>
       </div>
-      <p className="text-xs text-gray-500 mt-3">
+      <p className="text-xs text-gray-600 mt-3">
         Angaben gelten für Standardverpackung. Vakuumieren verlängert um ca. 50 %.
       </p>
     </div>

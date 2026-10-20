@@ -28,7 +28,7 @@ const fmtGpa = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits:
 function notenFarbe(nd: number): string {
   if (nd <= 2.0) return 'text-green-700 dark:text-green-400';
   if (nd <= 3.5) return 'text-amber-700 dark:text-amber-400';
-  return 'text-red-700 dark:text-red-400';
+  return 'text-red-700 dark:text-red-300';
 }
 
 export default function NotenInternationalRechner() {
@@ -216,7 +216,7 @@ export default function NotenInternationalRechner() {
 
           {/* Hinweis-Box */}
           <div className="flex gap-3 p-4 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl text-sm text-gray-700 dark:text-gray-300">
-            <span className="text-amber-600 dark:text-amber-400 text-base flex-shrink-0 mt-0.5" aria-hidden="true">⚠</span>
+            <span className="text-amber-700 dark:text-amber-400 text-base flex-shrink-0 mt-0.5" aria-hidden="true">⚠</span>
             <p>
               Umrechnung ist immer eine Näherung. Hochschulen haben teils eigene Umrechnungstabellen. Im Zweifelsfall die Zieleinrichtung direkt kontaktieren.
             </p>

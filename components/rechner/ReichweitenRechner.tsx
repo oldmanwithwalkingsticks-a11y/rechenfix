@@ -189,7 +189,7 @@ export default function ReichweitenRechner() {
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
         <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder="32" einheit="ct/kWh" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Haushaltsstrom ≈ 32 ct, Wallbox-Sondertarif ≈ 28 ct, öffentlich AC ≈ 45 ct, DC-Schnelllader ≈ 60 ct.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Haushaltsstrom ≈ 32 ct, Wallbox-Sondertarif ≈ 28 ct, öffentlich AC ≈ 45 ct, DC-Schnelllader ≈ 60 ct.</p>
       </div>
 
       {ergebnis && (

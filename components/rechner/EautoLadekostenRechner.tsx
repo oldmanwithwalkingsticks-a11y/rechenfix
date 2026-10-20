@@ -141,7 +141,7 @@ export default function EautoLadekostenRechner() {
               </div>
             </div>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
             Richtwerte: Haushaltsstrom Stand {STAND_STROM} ({STROMPREIS_META.quelle}), öffentliche Ladepreise Stand {STAND_LADEN} — tatsächliche Tarife variieren stark. Ohne Gewähr.
           </p>
 
@@ -191,7 +191,7 @@ export default function EautoLadekostenRechner() {
               </table>
             </div>
             {ergebnis.ersparnis100 > 0 && (
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
                 Ersparnis gegenüber dem Benziner mit Ihrem Ladeort: {eur(ergebnis.ersparnis100)} € pro 100 km.
               </p>
             )}
@@ -211,7 +211,7 @@ export default function EautoLadekostenRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Verbrauch und Strompreis ein, um die Ladekosten zu berechnen.
         </p>
       )}

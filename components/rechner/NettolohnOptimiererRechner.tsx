@@ -165,7 +165,7 @@ export default function NettolohnOptimiererRechner() {
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geplanter Betrag vom Arbeitgeber</label>
         <NummerEingabe value={agBetrag} onChange={setAgBetrag} placeholder="200" einheit="€/Monat" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Budget, das der Arbeitgeber für Sie bereitstellt — als Gehaltserhöhung ODER Sachbezug.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Budget, das der Arbeitgeber für Sie bereitstellt — als Gehaltserhöhung ODER Sachbezug.</p>
       </div>
 
       {/* Kirchensteuer */}
@@ -226,15 +226,15 @@ export default function NettolohnOptimiererRechner() {
                 const diff = o.nettoZugewinn - nettoDiffBrutto;
                 return (
                   <tr key={o.id} className={i === 0 ? 'bg-green-50 dark:bg-green-500/10 font-semibold' : ''}>
-                    <td className="px-3 py-2.5 text-gray-500 dark:text-gray-400 tabular-nums">{i + 1}</td>
+                    <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400 tabular-nums">{i + 1}</td>
                     <td className="px-3 py-2.5 text-gray-800 dark:text-gray-200">
                       {o.label}
                       {/* W175: Bedingung je Option sichtbar (vorher nur im Datenobjekt, nie angezeigt) */}
-                      <span className="block text-[11px] font-normal leading-snug text-gray-500 dark:text-gray-400 mt-0.5">{o.beschreibung}</span>
+                      <span className="block text-[11px] font-normal leading-snug text-gray-600 dark:text-gray-400 mt-0.5">{o.beschreibung}</span>
                     </td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400">+{fmt2(o.nettoZugewinn)} €</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400">+{fmt2(o.nettoZugewinn)} €</td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">{fmt2(o.agKosten)} €</td>
-                    <td className={`px-3 py-2.5 text-right tabular-nums ${diff > 0 ? 'text-green-600 dark:text-green-400' : diff < 0 ? 'text-red-600 dark:text-red-400' : 'text-gray-500'}`}>
+                    <td className={`px-3 py-2.5 text-right tabular-nums ${diff > 0 ? 'text-green-700 dark:text-green-400' : diff < 0 ? 'text-red-700 dark:text-red-300' : 'text-gray-600 dark:text-gray-400'}`}>
                       {diff > 0 ? '+' : ''}{fmt2(diff)} €
                     </td>
                   </tr>

@@ -29,7 +29,7 @@ export default function OfflineSeite() {
         besteht und sie noch nicht auf diesem Gerät gespeichert ist.
       </p>
 
-      <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+      <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-gray-600 dark:text-gray-400">
         Rechner, die Sie schon einmal geöffnet hatten, funktionieren weiterhin — sie rechnen
         vollständig auf Ihrem Gerät und brauchen dafür kein Netz.
       </p>
@@ -58,7 +58,7 @@ export default function OfflineSeite() {
         .
       </p>
 
-      <p className="mt-6 text-xs text-gray-400 dark:text-gray-500">
+      <p className="mt-6 text-xs text-gray-600 dark:text-gray-400">
         Sobald die Verbindung zurück ist, lädt jede Seite wieder in der aktuellen Fassung.
         Rechenfix zeigt gespeicherte Inhalte nur, wenn kein Netz erreichbar ist.
       </p>

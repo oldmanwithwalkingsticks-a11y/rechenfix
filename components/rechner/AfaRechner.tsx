@@ -105,7 +105,7 @@ export default function AfaRechner() {
           Nutzungsdauer
         </label>
         <NummerEingabe value={nutzungsdauer} onChange={setNutzungsdauer} placeholder="5" einheit="Jahre" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Laut AfA-Tabelle des BMF</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Laut AfA-Tabelle des BMF</p>
       </div>
 
       {/* Methode */}
@@ -170,7 +170,7 @@ export default function AfaRechner() {
           onChange={e => setDatum(e.target.value)}
           className="w-full min-h-[48px] px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Für die anteilige AfA im ersten Jahr (pro rata temporis)</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Für die anteilige AfA im ersten Jahr (pro rata temporis)</p>
       </div>
 
       {/* Warn-Banner: Degressive AfA ab Anschaffungsjahr 2028 nicht zulässig */}
@@ -226,7 +226,7 @@ export default function AfaRechner() {
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">AfA-Plan</p>
           <table className="w-full text-xs text-left">
             <thead>
-              <tr className="text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-600">
+              <tr className="text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-600">
                 <th className="py-1 pr-2">Jahr</th>
                 <th className="py-1 pr-2 text-right">AfA</th>
                 <th className="py-1 pr-2 text-right">Kumuliert</th>

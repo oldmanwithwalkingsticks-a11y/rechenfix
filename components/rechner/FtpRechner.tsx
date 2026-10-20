@@ -161,7 +161,7 @@ export default function FtpRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Ihre Testleistung ein, um die FTP und die Trainingszonen zu berechnen.
         </p>
       )}

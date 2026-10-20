@@ -205,7 +205,7 @@ export default function BetriebskostenRechner() {
               ))}
               <div className="flex justify-between px-4 py-3 text-sm font-bold bg-amber-50/30 dark:bg-amber-500/5">
                 <span className="text-gray-800 dark:text-gray-100">Variable Kosten gesamt</span>
-                <span className="text-amber-600 dark:text-amber-400">{fmt(ergebnis.variableKostenGesamt)} €</span>
+                <span className="text-amber-700 dark:text-amber-400">{fmt(ergebnis.variableKostenGesamt)} €</span>
               </div>
 
               <div className="flex justify-between px-4 py-3 text-sm">

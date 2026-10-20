@@ -50,7 +50,7 @@ export default function ElterngeldRechner() {
           value={variante}
           onChange={(v) => setVariante(v as ElterngeldVariante)}
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5">
           {variante === 'basis'
             ? '12+2 Monate, 300–1.800 € pro Monat'
             : '24+4 Monate, 150–900 € pro Monat'}
@@ -83,7 +83,7 @@ export default function ElterngeldRechner() {
           placeholder="0 wenn nicht arbeitend"
           einheit="€"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Bei Teilzeit in der Elternzeit: Ihr voraussichtliches Netto eingeben
         </p>
       </div>
@@ -100,7 +100,7 @@ export default function ElterngeldRechner() {
           placeholder="z. B. 60000"
           einheit="€"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           zvE aus Steuerbescheid. Bei Paaren: Summe beider zvE. Über {grenzeFormatiert} € kein Elterngeldanspruch (§ 1 Abs. 8 BEEG).
         </p>
       </div>
@@ -124,13 +124,13 @@ export default function ElterngeldRechner() {
       {/* Kein Anspruch — § 1 Abs. 8 BEEG */}
       {ergebnis && ergebnis.anspruchAusgeschlossen && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-2xl p-6 mb-4">
-          <p className="text-base font-bold text-red-700 dark:text-red-400 mb-2">
+          <p className="text-base font-bold text-red-700 dark:text-red-300 mb-2">
             Kein Anspruch auf Elterngeld
           </p>
           <p className="text-sm text-red-800 dark:text-red-300 leading-relaxed">
             Ihr zu versteuerndes Jahreseinkommen (zvE) liegt über {grenzeFormatiert} €. Seit 01.04.2025 (für alle laufenden Fälle ab 01.01.2026) besteht nach <strong>§ 1 Abs. 8 BEEG</strong> kein Anspruch auf Elterngeld — die Grenze gilt sowohl für Paare als auch für Alleinerziehende.
           </p>
-          <p className="text-xs text-red-700 dark:text-red-400 mt-3">
+          <p className="text-xs text-red-700 dark:text-red-300 mt-3">
             Bezugsdauer und Ersatzrate entfallen. Der Mutterschutz-Zuschuss bleibt davon unberührt.
           </p>
         </div>
@@ -156,7 +156,7 @@ export default function ElterngeldRechner() {
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
               {fmt(ergebnis.monatlich)} €
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               Ersatzrate: {ergebnis.ersatzrate.toLocaleString('de-DE')} %
             </p>
           </div>
@@ -166,18 +166,18 @@ export default function ElterngeldRechner() {
               wenn beide Eltern dasselbe Netto hatten; ein Elternteil allein bekommt höchstens 12 Monatsbeträge. */}
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Bezugsdauer je Elternteil</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Bezugsdauer je Elternteil</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">bis {ergebnis.bezugsMonateEinElternteil} Monate</p>
-              <p className="text-xs text-gray-600 dark:text-gray-500">
+              <p className="text-xs text-gray-600 dark:text-gray-400">
                 {variante === 'basis'
                   ? 'Paar zusammen bis 14 (12 + 2 Partnermonate)'
                   : 'Paar zusammen bis 28 (24 + 4 Partnermonate)'}
               </p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamt für Sie allein</p>
-              <p className="text-xl font-bold text-accent-600 dark:text-accent-400">{fmt(ergebnis.gesamtEinElternteil)} €</p>
-              <p className="text-xs text-gray-600 dark:text-gray-500">über {ergebnis.bezugsMonateEinElternteil} Monate</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Gesamt für Sie allein</p>
+              <p className="text-xl font-bold text-accent-700 dark:text-accent-400">{fmt(ergebnis.gesamtEinElternteil)} €</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">über {ergebnis.bezugsMonateEinElternteil} Monate</p>
             </div>
           </div>
           <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -199,7 +199,7 @@ export default function ElterngeldRechner() {
                   <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.relevantesEinkommen)} €</span>
                 </div>
                 {nVor > ELTERNGELD_VORGEBURT_DECKEL_2026 && nNach > 0 && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right">
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 text-right">
                     Vor-Geburt-Netto auf {ELTERNGELD_VORGEBURT_DECKEL_2026.toLocaleString('de-DE')} € gedeckelt (§ 2 Abs. 3 BEEG)
                   </p>
                 )}
@@ -217,13 +217,13 @@ export default function ElterngeldRechner() {
               {ergebnis.geschwisterbonusBetrag > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Geschwisterbonus (+10%)</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">+{fmt(ergebnis.geschwisterbonusBetrag)} €</span>
+                  <span className="font-medium text-green-700 dark:text-green-400">+{fmt(ergebnis.geschwisterbonusBetrag)} €</span>
                 </div>
               )}
               {ergebnis.mehrlingszuschlag > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Mehrlingszuschlag</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">+{fmt(ergebnis.mehrlingszuschlag)} €</span>
+                  <span className="font-medium text-green-700 dark:text-green-400">+{fmt(ergebnis.mehrlingszuschlag)} €</span>
                 </div>
               )}
               <div className="flex justify-between px-4 py-3 text-sm font-bold bg-primary-50/50 dark:bg-primary-500/5">
@@ -243,7 +243,7 @@ export default function ElterngeldRechner() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
-                      <th className="text-left px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium"></th>
+                      <th className="text-left px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium"></th>
                       <th className={`text-right px-4 py-2.5 font-semibold ${variante === 'basis' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-600 dark:text-gray-300'}`}>
                         Basiselterngeld
                       </th>
@@ -276,8 +276,8 @@ export default function ElterngeldRechner() {
                     </tr>
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Min/Max pro Monat</td>
-                      <td className="px-4 py-2.5 text-right text-gray-500 dark:text-gray-400">300–1.800 €</td>
-                      <td className="px-4 py-2.5 text-right text-gray-500 dark:text-gray-400">150–900 €</td>
+                      <td className="px-4 py-2.5 text-right text-gray-600 dark:text-gray-400">300–1.800 €</td>
+                      <td className="px-4 py-2.5 text-right text-gray-600 dark:text-gray-400">150–900 €</td>
                     </tr>
                   </tbody>
                 </table>
@@ -371,7 +371,7 @@ function ToggleButton({
       </div>
       <div>
         <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{label}</p>
-        <p className="text-xs text-gray-500 dark:text-gray-400">{sublabel}</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400">{sublabel}</p>
       </div>
     </button>
   );

@@ -112,7 +112,7 @@ export default function FleischGarzeitRechner() {
           Gewicht (kg)
         </h2>
         <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="1.5" einheit="kg" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Richtwert für den Ofen bei rund 160–180 °C. Die Fleischdicke zählt für die Zeit mehr als das reine Gewicht.
         </p>
       </div>
@@ -209,7 +209,7 @@ export default function FleischGarzeitRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="px-4 pb-3 pt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="px-4 pb-3 pt-1 text-xs text-gray-600 dark:text-gray-400">
               Richtwerte bei 160–180 °C Ober-/Unterhitze. Immer bis zum Erreichen der Ziel-Kerntemperatur garen.
             </p>
           </div>
@@ -230,11 +230,11 @@ export default function FleischGarzeitRechner() {
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   <tr>
                     <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300">Geflügel (Hähnchen, Pute)</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums font-semibold text-red-600 dark:text-red-400">74 °C</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums font-semibold text-red-700 dark:text-red-300">74 °C</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300">Hackfleisch / Faschiertes</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums font-semibold text-red-600 dark:text-red-400">72 °C</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums font-semibold text-red-700 dark:text-red-300">72 °C</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300">Schwein / Rind / Lamm (ganze Stücke)</td>

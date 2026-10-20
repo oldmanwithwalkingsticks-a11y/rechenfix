@@ -91,7 +91,7 @@ export default function RabattRechner() {
             }`}
           >
             <span className="block">{m.label}</span>
-            <span className="block text-[10px] opacity-70 mt-0.5">{m.kurz}</span>
+            <span className="block text-[10px] mt-0.5">{m.kurz}</span>
           </button>
         ))}
       </div>
@@ -193,7 +193,7 @@ export default function RabattRechner() {
           {/* Visuelle Ersparnis-Leiste */}
           {n1 > 0 && (
             <div>
-              <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                 <span>Endpreis</span>
                 <span>Ersparnis</span>
               </div>
@@ -209,14 +209,14 @@ export default function RabattRechner() {
               </div>
               <div className="flex justify-between text-xs mt-1">
                 <span className="text-primary-600 dark:text-primary-400 font-medium">{fmt(ergebnis.endpreis)} €</span>
-                <span className="text-red-600 font-medium">−{fmt(ergebnis.ersparnis)} €</span>
+                <span className="text-red-700 dark:text-red-300 font-medium">−{fmt(ergebnis.ersparnis)} €</span>
               </div>
             </div>
           )}
 
           {/* Rechenweg */}
           <div className="bg-gray-50 dark:bg-gray-700/40 rounded-xl p-4">
-            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Rechenweg</p>
+            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-2">Rechenweg</p>
             <div className="space-y-1">
               {ergebnis.rechenweg.map((schritt, i) => (
                 <p key={i} className={`text-sm ${i === ergebnis.rechenweg.length - 1 ? 'font-bold text-primary-600 dark:text-primary-400' : 'text-gray-600 dark:text-gray-300'}`}>

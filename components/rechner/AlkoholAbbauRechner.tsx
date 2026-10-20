@@ -107,10 +107,11 @@ export default function AlkoholAbbauRechner() {
   const removeGetraenk = (id: number) => setGetraenke(prev => prev.filter(g => g.id !== id));
 
   const peakColor =
-    ergebnis.promilleMax >= 1.1 ? 'bg-red-500' :
-    ergebnis.promilleMax >= 0.5 ? 'bg-orange-500' :
-    ergebnis.promilleMax >= 0.3 ? 'bg-yellow-500' :
-    'bg-green-500';
+    // W188: Plaketten mit weißer Schrift in -600/-700 statt -500 (vorher 2,1–3,8:1)
+    ergebnis.promilleMax >= 1.1 ? 'bg-red-600' :
+    ergebnis.promilleMax >= 0.5 ? 'bg-orange-700' :
+    ergebnis.promilleMax >= 0.3 ? 'bg-yellow-700' :
+    'bg-green-700';
 
   return (
     <div>
@@ -146,7 +147,7 @@ export default function AlkoholAbbauRechner() {
                     className="w-16 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-center text-sm"
                     min="0"
                   />
-                  <button onClick={() => removeGetraenk(g.id)} className="min-h-[44px] min-w-[44px] rounded-lg text-red-600 border border-red-200 dark:border-red-800" aria-label="Entfernen">×</button>
+                  <button onClick={() => removeGetraenk(g.id)} className="min-h-[44px] min-w-[44px] rounded-lg text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800" aria-label="Entfernen">×</button>
                 </div>
                 {g.art === 'eigen' && (
                   <div className="grid grid-cols-2 gap-2 mt-2">
@@ -215,7 +216,7 @@ export default function AlkoholAbbauRechner() {
             <span className="font-bold">{mounted ? fmtTime(ergebnis.zeitNull) : '—'}</span>
           </div>
         </div>
-        <p className="text-xs text-gray-500 mt-3">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-3">
           Abbaurate: ca. 0,15 ‰/Stunde · Resorption bis 60 Min. nach Trinkende
         </p>
       </div>

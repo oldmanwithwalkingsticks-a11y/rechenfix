@@ -285,7 +285,7 @@ export default function AufloesungSeitenverhaeltnisRechner() {
       )}
 
       {!ergebnisA && !ergebnisB && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie eine Auflösung ein, um das Seitenverhältnis zu bestimmen.
         </p>
       )}

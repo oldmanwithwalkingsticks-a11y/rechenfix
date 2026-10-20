@@ -106,7 +106,7 @@ export default function EnergiekostenRechner() {
             {geraete.length > 1 && (
               <button
                 onClick={() => removeGeraet(g.id)}
-                className="text-xs text-red-600 dark:text-red-400 underline"
+                className="text-xs text-red-700 dark:text-red-300 underline"
               >
                 ✕ Entfernen
               </button>
@@ -168,7 +168,7 @@ export default function EnergiekostenRechner() {
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
         <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} einheit="ct/kWh" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">BDEW-Durchschnitt 2026 in Deutschland: ca. 37 ct/kWh (Festpreis-Neuvertrag günstiger, Grundversorgung höher)</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">BDEW-Durchschnitt 2026 in Deutschland: ca. 37 ct/kWh (Festpreis-Neuvertrag günstiger, Grundversorgung höher)</p>
       </div>
 
       {/* Gesamt-Ergebnis */}
@@ -197,7 +197,7 @@ export default function EnergiekostenRechner() {
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Aufschlüsselung pro Gerät</p>
           <table className="w-full text-xs text-left">
             <thead>
-              <tr className="text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-600">
+              <tr className="text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-600">
                 <th className="py-1 pr-2">Gerät</th>
                 <th className="py-1 pr-2 text-right">kWh/Jahr</th>
                 <th className="py-1 pr-2 text-right">€/Monat</th>

@@ -80,14 +80,14 @@ export default function EtfSparplanRechner() {
             className="w-full mt-2 accent-primary-500"
             aria-label="Anlagedauer in Jahren (Schieberegler)"
           />
-          <div className="flex justify-between text-xs text-gray-600 dark:text-gray-500">
+          <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
             <span>1</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span>
           </div>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erwartete jährl. Rendite</label>
           <NummerEingabe value={rendite} onChange={setRendite} placeholder="z.B. 7" einheit="%" />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Historische Durchschnittsrendite MSCI World: ca. 7–8 % p.a.
           </p>
         </div>
@@ -183,12 +183,12 @@ export default function EtfSparplanRechner() {
               {steuern && ergebnis.steuer > 0 && (
                 <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                   <span className="text-gray-600 dark:text-gray-400">Abgezogene Steuer</span>
-                  <span className="font-semibold text-red-600 dark:text-red-400">−{fmt(ergebnis.steuer)} €</span>
+                  <span className="font-semibold text-red-700 dark:text-red-300">−{fmt(ergebnis.steuer)} €</span>
                 </div>
               )}
             </div>
             {nAnlagedauer <= 3 && (
-              <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+              <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
                 Hinweis: Bei einem Sparplan wird das Geld schrittweise investiert. Die Rendite wirkt nur auf das bereits angelegte Kapital — bei kurzen Laufzeiten ist der Zinseszinseffekt daher noch gering.
               </p>
             )}
@@ -200,7 +200,7 @@ export default function EtfSparplanRechner() {
               <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Vermögensentwicklung</h2>
               <div className="relative h-64">
                 {/* Y-Achse Labels */}
-                <div className="absolute left-0 top-0 bottom-6 w-16 flex flex-col justify-between text-xs text-gray-600 dark:text-gray-500 text-right pr-2">
+                <div className="absolute left-0 top-0 bottom-6 w-16 flex flex-col justify-between text-xs text-gray-600 dark:text-gray-400 text-right pr-2">
                   <span>{fmt(chartData.maxKapital)} €</span>
                   <span>{fmt(chartData.maxKapital / 2)} €</span>
                   <span>0 €</span>
@@ -240,14 +240,14 @@ export default function EtfSparplanRechner() {
                   })}
                 </div>
                 {/* X-Achse */}
-                <div className="ml-16 flex justify-between text-xs text-gray-600 dark:text-gray-500">
+                <div className="ml-16 flex justify-between text-xs text-gray-600 dark:text-gray-400">
                   <span>1</span>
                   {nAnlagedauer >= 10 && <span>{Math.round(nAnlagedauer / 2)}</span>}
                   <span>{nAnlagedauer} J.</span>
                 </div>
               </div>
               {/* Legende */}
-              <div className="flex gap-4 mt-3 justify-center text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex gap-4 mt-3 justify-center text-xs text-gray-600 dark:text-gray-400">
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block w-3 h-3 rounded-sm bg-blue-400/70 dark:bg-blue-500/50" /> Einzahlungen
                 </span>

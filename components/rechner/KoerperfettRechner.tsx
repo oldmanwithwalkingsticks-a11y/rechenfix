@@ -42,11 +42,11 @@ export default function KoerperfettRechner() {
 
   // Farben für die Skala-Segmente
   const skalaFarben = [
-    { label: 'Essentiell', bg: 'bg-red-400', text: 'text-red-700' },
-    { label: 'Athletisch', bg: 'bg-blue-400', text: 'text-blue-700' },
-    { label: 'Fitness', bg: 'bg-green-400', text: 'text-green-700' },
-    { label: 'Durchschnitt', bg: 'bg-yellow-400', text: 'text-yellow-700' },
-    { label: 'Oberhalb', bg: 'bg-red-500', text: 'text-red-700' }, // W187: vorher „Übergewicht“
+    { label: 'Essentiell', bg: 'bg-red-400', text: 'text-red-700 dark:text-red-300' },
+    { label: 'Athletisch', bg: 'bg-blue-400', text: 'text-blue-700 dark:text-blue-300' },
+    { label: 'Fitness', bg: 'bg-green-400', text: 'text-green-700 dark:text-green-400' },
+    { label: 'Durchschnitt', bg: 'bg-yellow-400', text: 'text-yellow-800 dark:text-yellow-300' },
+    { label: 'Oberhalb', bg: 'bg-red-500', text: 'text-red-700 dark:text-red-300' }, // W187: vorher „Übergewicht“
   ];
 
   // Marker-Position berechnen (0-100%)
@@ -87,7 +87,7 @@ export default function KoerperfettRechner() {
         <div className="w-full sm:w-1/2">
           <NummerEingabe value={bauchumfang} onChange={setBauchumfang} placeholder="z.B. 85" einheit="cm" />
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Auf Nabelhöhe messen, morgens nüchtern</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Auf Nabelhöhe messen, morgens nüchtern</p>
       </div>
 
       {/* Halsumfang */}
@@ -96,7 +96,7 @@ export default function KoerperfettRechner() {
         <div className="w-full sm:w-1/2">
           <NummerEingabe value={halsumfang} onChange={setHalsumfang} placeholder="z.B. 38" einheit="cm" />
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Unterhalb des Kehlkopfes messen</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Unterhalb des Kehlkopfes messen</p>
       </div>
 
       {/* Hüftumfang (nur Frauen) */}
@@ -106,13 +106,13 @@ export default function KoerperfettRechner() {
           <div className="w-full sm:w-1/2">
             <NummerEingabe value={hueftumfang} onChange={setHueftumfang} placeholder="z.B. 95" einheit="cm" />
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">An der breitesten Stelle messen</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">An der breitesten Stelle messen</p>
         </div>
       )}
 
       {/* Alter */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter <span className="text-gray-600 font-normal">(für Vergleichswerte)</span></label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter <span className="text-gray-600 dark:text-gray-400 font-normal">(für Vergleichswerte)</span></label>
         <div className="w-full sm:w-1/3">
           <NummerEingabe value={alter} onChange={setAlter} placeholder="z.B. 30" einheit="Jahre" />
         </div>
@@ -120,7 +120,7 @@ export default function KoerperfettRechner() {
 
       {/* Gewicht (optional) */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht <span className="text-gray-600 font-normal">(optional, für Fett-/Magermasse)</span></label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht <span className="text-gray-600 dark:text-gray-400 font-normal">(optional, für Fett-/Magermasse)</span></label>
         <div className="w-full sm:w-1/3">
           <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="z.B. 80" einheit="kg" />
         </div>
@@ -184,13 +184,13 @@ export default function KoerperfettRechner() {
                   return (
                     <div
                       key={k.label}
-                      className={`text-center text-[10px] sm:text-xs font-medium ${skalaFarben[i]?.text ?? 'text-gray-600'}`}
+                      className={`text-center text-[10px] sm:text-xs font-medium ${skalaFarben[i]?.text ?? 'text-gray-600 dark:text-gray-400'}`}
                       style={{ width: `${breite}%` }}
                     >
                       <span className="hidden sm:inline">{k.label}</span>
                       <span className="sm:hidden">{skalaFarben[i]?.label ?? ''}</span>
                       <br />
-                      <span className="text-gray-600 text-[9px]">{k.von}–{k.bis}%</span>
+                      <span className="text-gray-600 dark:text-gray-400 text-[9px]">{k.von}–{k.bis}%</span>
                     </div>
                   );
                 })}
@@ -208,7 +208,7 @@ export default function KoerperfettRechner() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Kategorie</span>
-                <span className={`font-semibold ${ergebnis.kategorieFarbe} dark:opacity-90`}>{ergebnis.kategorie}</span>
+                <span className={`font-semibold ${ergebnis.kategorieFarbe}`}>{ergebnis.kategorie}</span>
               </div>
               {ergebnis.fettmasse !== null && ergebnis.magermasse !== null && (
                 <>

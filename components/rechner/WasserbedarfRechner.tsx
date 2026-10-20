@@ -74,7 +74,7 @@ export default function WasserbedarfRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sportdauer heute</label>
           <NummerEingabe value={sportMinuten} onChange={setSportMinuten} placeholder="z.B. 60" einheit="Min." />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Pro 30 Min. Sport ca. 350 ml zusätzlich.
           </p>
         </div>
@@ -159,19 +159,19 @@ export default function WasserbedarfRechner() {
               {ergebnis.sportZuschlag > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Sport-Zuschlag ({fmt(nSportMinuten)} Min.)</span>
-                  <span className="font-semibold text-green-600 dark:text-green-400">+{fmt(ergebnis.sportZuschlag)} ml</span>
+                  <span className="font-semibold text-green-700 dark:text-green-400">+{fmt(ergebnis.sportZuschlag)} ml</span>
                 </div>
               )}
               {ergebnis.hitzeZuschlag > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Hitze-Zuschlag</span>
-                  <span className="font-semibold text-orange-600 dark:text-orange-400">+{fmt(ergebnis.hitzeZuschlag)} ml</span>
+                  <span className="font-semibold text-orange-700 dark:text-orange-400">+{fmt(ergebnis.hitzeZuschlag)} ml</span>
                 </div>
               )}
               {ergebnis.schwangerZuschlag > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">{schwangerStillend === 'schwanger' ? 'Schwangerschaft' : 'Stillzeit'}</span>
-                  <span className="font-semibold text-pink-600 dark:text-pink-400">+{fmt(ergebnis.schwangerZuschlag)} ml</span>
+                  <span className="font-semibold text-pink-700 dark:text-pink-400">+{fmt(ergebnis.schwangerZuschlag)} ml</span>
                 </div>
               )}
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
@@ -199,7 +199,7 @@ export default function WasserbedarfRechner() {
                   <div className="bg-pink-400 dark:bg-pink-500 h-full transition-all" style={{ width: `${(ergebnis.schwangerZuschlag / ergebnis.gesamtMl) * 100}%` }} />
                 )}
               </div>
-              <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-600 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-blue-400 dark:bg-blue-500 inline-block" />
                   Basis

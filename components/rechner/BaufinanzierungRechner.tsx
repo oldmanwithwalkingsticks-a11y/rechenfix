@@ -139,7 +139,7 @@ export default function BaufinanzierungRechner() {
               </button>
             ))}
           </div>
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Empfehlung: Mindestens 2%, besser 3% für schnellere Entschuldung.
           </p>
         </div>
@@ -268,7 +268,7 @@ export default function BaufinanzierungRechner() {
                 const stProzent = gesamt > 0 ? (j.sondertilgung / gesamt) * 100 : 0;
                 return (
                   <div key={j.jahr} className="flex items-center gap-2">
-                    <span className="text-xs text-gray-500 dark:text-gray-400 w-8 text-right flex-shrink-0">{j.jahr}.</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 w-8 text-right flex-shrink-0">{j.jahr}.</span>
                     <div className="flex-1 h-4 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-600">
                       <div className="bg-orange-400 dark:bg-orange-500 h-full transition-all" style={{ width: `${zinsProzent}%` }} />
                       <div className="bg-green-400 dark:bg-green-500 h-full transition-all" style={{ width: `${tilgProzent}%` }} />
@@ -276,12 +276,12 @@ export default function BaufinanzierungRechner() {
                         <div className="bg-blue-400 dark:bg-blue-500 h-full transition-all" style={{ width: `${stProzent}%` }} />
                       )}
                     </div>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 w-24 text-right flex-shrink-0 tabular-nums">{fmt(j.restschuld)} €</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 w-24 text-right flex-shrink-0 tabular-nums">{fmt(j.restschuld)} €</span>
                   </div>
                 );
               })}
             </div>
-            <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-600 dark:text-gray-400">
               <span className="flex items-center gap-1">
                 <span className="w-2.5 h-2.5 rounded-full bg-orange-400 dark:bg-orange-500 inline-block" />
                 Zinsanteil
@@ -308,7 +308,7 @@ export default function BaufinanzierungRechner() {
             >
               <span>Tilgungsplan anzeigen</span>
               <svg
-                className={`w-5 h-5 text-gray-600 transition-transform ${tilgungsplanOffen ? 'rotate-180' : ''}`}
+                className={`w-5 h-5 text-gray-600 dark:text-gray-400 transition-transform ${tilgungsplanOffen ? 'rotate-180' : ''}`}
                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

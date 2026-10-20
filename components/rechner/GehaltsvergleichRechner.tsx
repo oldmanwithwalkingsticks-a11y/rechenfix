@@ -32,7 +32,7 @@ function PerzentilBar({ perzentil }: { perzentil: number }) {
         <div className="bg-green-400 flex-1" />
         <div className="bg-emerald-500 flex-1" />
       </div>
-      <div className="flex justify-between text-[10px] text-gray-600 mt-1 px-0.5">
+      <div className="flex justify-between text-[10px] text-gray-600 dark:text-gray-400 mt-1 px-0.5">
         <span>0%</span>
         <span>25%</span>
         <span>50%</span>
@@ -141,11 +141,11 @@ export default function GehaltsvergleichRechner() {
           {/* Vergleich zum Median */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="bg-white dark:bg-gray-600/50 rounded-xl p-4 text-center border border-gray-100 dark:border-gray-600">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Ihr Gehalt</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Ihr Gehalt</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{fmt(nBrutto)} €</p>
             </div>
             <div className="bg-white dark:bg-gray-600/50 rounded-xl p-4 text-center border border-gray-100 dark:border-gray-600">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Median der Vergleichsgruppe</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Median der Vergleichsgruppe</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.adjustierterMedian)} €</p>
             </div>
             <div className={`rounded-xl p-4 text-center border ${
@@ -153,18 +153,18 @@ export default function GehaltsvergleichRechner() {
                 ? 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/30'
                 : 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30'
             }`}>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Differenz</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Differenz</p>
               <p className={`text-xl font-bold ${
                 ergebnis.differenz >= 0
-                  ? 'text-green-600 dark:text-green-400'
-                  : 'text-red-600 dark:text-red-400'
+                  ? 'text-green-700 dark:text-green-400'
+                  : 'text-red-700 dark:text-red-300'
               }`}>
                 {ergebnis.differenz >= 0 ? '+' : ''}{fmt(ergebnis.differenz)} €
               </p>
               <p className={`text-xs mt-0.5 ${
                 ergebnis.differenz >= 0
-                  ? 'text-green-600 dark:text-green-400'
-                  : 'text-red-600 dark:text-red-400'
+                  ? 'text-green-700 dark:text-green-400'
+                  : 'text-red-700 dark:text-red-300'
               }`}>
                 {/* W184: vorher roh „{differenzProzent}%“ („+12.5%“), jetzt de-DE mit 1 Nachkommastelle */}
                 ({ergebnis.differenzProzent >= 0 ? '+' : ''}{ergebnis.differenzProzent.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %)
@@ -208,7 +208,7 @@ export default function GehaltsvergleichRechner() {
                   ? 'text-green-700 dark:text-green-400'
                   : ergebnis.perzentil >= 25
                     ? 'text-amber-700 dark:text-amber-400'
-                    : 'text-red-700 dark:text-red-400'
+                    : 'text-red-700 dark:text-red-300'
             }`}>
               {ergebnis.perzentil >= 75
                 ? 'Überdurchschnittliches Gehalt'
@@ -234,11 +234,11 @@ export default function GehaltsvergleichRechner() {
             <p className="font-semibold text-primary-700 dark:text-primary-400 text-sm mb-2">Hochrechnung Jahresgehalt</p>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-gray-500 dark:text-gray-400 text-xs">Ihr Jahresgehalt (12 Monate)</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs">Ihr Jahresgehalt (12 Monate)</p>
                 <p className="font-bold text-gray-800 dark:text-gray-100">{fmt(nBrutto * 12)} €</p>
               </div>
               <div>
-                <p className="text-gray-500 dark:text-gray-400 text-xs">Mit Weihnachtsgeld (13. Gehalt)</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs">Mit Weihnachtsgeld (13. Gehalt)</p>
                 <p className="font-bold text-gray-800 dark:text-gray-100">{fmt(nBrutto * 13)} €</p>
               </div>
             </div>

@@ -103,7 +103,7 @@ export default function HalbeHeizungGanzeRechnung() {
           35 % weniger auf der Rechnung
         </text>
       </svg>
-      <figcaption className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+      <figcaption className="mt-2 text-sm text-gray-600 dark:text-gray-400">
         Derselbe Mieter, dasselbe Verhalten: Ueber den Unterschied entscheidet allein der
         Verteilerschluessel des Gebaeudes — und den legt § 7 der Heizkostenverordnung nach dem
         Baustand fest, nicht nach Wunsch.

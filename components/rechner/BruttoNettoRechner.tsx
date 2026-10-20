@@ -420,7 +420,7 @@ export default function BruttoNettoRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuer</label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={kirchensteuer} onChange={e => setKirchensteuer(e.target.checked)} className="w-5 h-5 rounded text-primary-600 focus:ring-primary-200" />
+              <input type="checkbox" checked={kirchensteuer} onChange={e => setKirchensteuer(e.target.checked)} className="w-5 h-5 rounded text-primary-600 dark:text-primary-400 focus:ring-primary-200" />
               <span className="text-sm text-gray-700 dark:text-gray-300">Ja ({kstSatz}% in {bl?.name})</span>
             </label>
           </div>
@@ -442,7 +442,7 @@ export default function BruttoNettoRechner() {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">KV-Zusatzbeitrag (AN-Anteil)</label>
               <NummerEingabe value={kvZusatzbeitrag} onChange={setKvZusatzbeitrag} placeholder="z.B. 2,9" einheit="%" />
-              <p className="text-xs text-gray-600 mt-1">Durchschnitt 2026: 1,45% (halber Zusatzbeitrag von 2,9%)</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Durchschnitt 2026: 1,45% (halber Zusatzbeitrag von 2,9%)</p>
             </div>
           ) : (
             <div>
@@ -453,7 +453,7 @@ export default function BruttoNettoRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rentenversicherung</label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={rvBefreit} onChange={e => setRvBefreit(e.target.checked)} className="w-5 h-5 rounded text-primary-600 focus:ring-primary-200" />
+              <input type="checkbox" checked={rvBefreit} onChange={e => setRvBefreit(e.target.checked)} className="w-5 h-5 rounded text-primary-600 dark:text-primary-400 focus:ring-primary-200" />
               <span className="text-sm text-gray-700 dark:text-gray-300">RV-befreit (z. B. Beamte)</span>
             </label>
           </div>
@@ -493,7 +493,7 @@ export default function BruttoNettoRechner() {
                 )}
                 {weihnachtsgeldHoehe !== 'eigen' && weihnachtsgeldWert > 0 && (
                   <div className="flex items-end">
-                    <p className="text-sm text-gray-500 dark:text-gray-400 pb-2">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 pb-2">
                       = {fmt(weihnachtsgeldWert)} € brutto
                     </p>
                   </div>
@@ -581,7 +581,7 @@ export default function BruttoNettoRechner() {
                 Sozial
               </div>
             </div>
-            <div className="flex justify-between text-xs text-gray-600 mt-1">
+            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1">
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-green-600 inline-block" /> Netto</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-red-600 inline-block" /> Steuern</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-amber-600 inline-block" /> Sozialabgaben</span>
@@ -610,11 +610,11 @@ export default function BruttoNettoRechner() {
             <table className="w-full text-sm">
               <tbody>
                 <Zeile label="Bruttogehalt" wert={ergebnis.bruttoMonat} hervorgehoben />
-                <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
+                <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Steuern</td></tr>
                 <Zeile label="Lohnsteuer" wert={-ergebnis.lohnsteuer} brutto={ergebnis.bruttoMonat} />
                 <Zeile label="Solidaritätszuschlag" wert={-ergebnis.solidaritaet} brutto={ergebnis.bruttoMonat} />
                 {kirchensteuer && <Zeile label={`Kirchensteuer (${kstSatz}%)`} wert={-ergebnis.kirchensteuer} brutto={ergebnis.bruttoMonat} />}
-                <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
+                <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Sozialabgaben</td></tr>
                 <Zeile label={kvArt === 'privat' ? 'Private KV (AN-Anteil)' : 'Krankenversicherung'} wert={-ergebnis.krankenversicherung} brutto={ergebnis.bruttoMonat} />
                 <Zeile label="Rentenversicherung" wert={-ergebnis.rentenversicherung} brutto={ergebnis.bruttoMonat} />
                 <Zeile label="Arbeitslosenversicherung" wert={-ergebnis.arbeitslosenversicherung} brutto={ergebnis.bruttoMonat} />
@@ -662,20 +662,20 @@ export default function BruttoNettoRechner() {
                   {/* Übersichtskarten */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Brutto</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Brutto</p>
                       <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(wg.brutto)} €</p>
                     </div>
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Abzüge</p>
-                      <p className="text-lg font-bold text-red-600 dark:text-red-400">{fmt(wg.abzuege)} €</p>
-                      <p className="text-xs text-gray-600">{fmtPct(wgAbzuegePct)}%</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Abzüge</p>
+                      <p className="text-lg font-bold text-red-700 dark:text-red-300">{fmt(wg.abzuege)} €</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{fmtPct(wgAbzuegePct)}%</p>
                     </div>
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Netto</p>
-                      <p className="text-lg font-bold text-green-600 dark:text-green-400">{fmt(wg.netto)} €</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Netto</p>
+                      <p className="text-lg font-bold text-green-700 dark:text-green-400">{fmt(wg.netto)} €</p>
                     </div>
                     <div className="bg-white dark:bg-gray-800/60 rounded-lg p-3 text-center">
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Eff. Steuersatz</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Eff. Steuersatz</p>
                       <p className="text-lg font-bold text-amber-700 dark:text-amber-300">{fmtPct(effektiverSteuersatz)}%</p>
                     </div>
                   </div>
@@ -691,11 +691,11 @@ export default function BruttoNettoRechner() {
                   <table className="w-full text-sm">
                     <tbody>
                       <Zeile label="Weihnachtsgeld (brutto)" wert={wg.brutto} hervorgehoben />
-                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-500 uppercase tracking-wider">Steuern</td></tr>
+                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Steuern</td></tr>
                       <Zeile label="Lohnsteuer" wert={-wg.lohnsteuer} brutto={wg.brutto} />
                       <Zeile label="Solidaritätszuschlag" wert={-wg.solidaritaet} brutto={wg.brutto} />
                       {wg.kirchensteuer > 0 && <Zeile label={`Kirchensteuer (${kstSatz}%)`} wert={-wg.kirchensteuer} brutto={wg.brutto} />}
-                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-500 uppercase tracking-wider">Sozialabgaben</td></tr>
+                      <tr><td colSpan={3} className="pt-3 pb-1 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Sozialabgaben</td></tr>
                       <Zeile label="Krankenversicherung" wert={-wg.krankenversicherung} brutto={wg.brutto} />
                       <Zeile label="Rentenversicherung" wert={-wg.rentenversicherung} brutto={wg.brutto} />
                       <Zeile label="Arbeitslosenversicherung" wert={-wg.arbeitslosenversicherung} brutto={wg.brutto} />
@@ -707,7 +707,7 @@ export default function BruttoNettoRechner() {
                       </tr>
                     </tbody>
                   </table>
-                  <p className="text-xs text-amber-600 dark:text-amber-400/70 mt-3">
+                  <p className="text-xs text-amber-700 dark:text-amber-300 mt-3">
                     Berechnung nach der Jahreslohnsteuer-Differenzmethode: Jahressteuer mit Weihnachtsgeld minus Jahressteuer ohne Weihnachtsgeld.
                   </p>
                 </div>
@@ -717,14 +717,14 @@ export default function BruttoNettoRechner() {
                   <h2 className="font-bold text-primary-800 dark:text-primary-300 mb-3">Jahresübersicht inkl. Weihnachtsgeld</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Jahresbrutto inkl. Weihnachtsgeld</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Jahresbrutto inkl. Weihnachtsgeld</p>
                       <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{fmt(jahresBruttoMitWg)} €</p>
-                      <p className="text-xs text-gray-600 mt-1">{fmt(ergebnis.bruttoJahr)} € Gehalt + {fmt(wg.brutto)} € Weihnachtsgeld</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{fmt(ergebnis.bruttoJahr)} € Gehalt + {fmt(wg.brutto)} € Weihnachtsgeld</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Jahresnetto inkl. Weihnachtsgeld</p>
-                      <p className="text-2xl font-bold text-green-600 dark:text-green-400">{fmt(jahresNettoMitWg)} €</p>
-                      <p className="text-xs text-gray-600 mt-1">{fmt(ergebnis.nettoJahr)} € Gehalt + {fmt(wg.netto)} € Weihnachtsgeld</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Jahresnetto inkl. Weihnachtsgeld</p>
+                      <p className="text-2xl font-bold text-green-700 dark:text-green-400">{fmt(jahresNettoMitWg)} €</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{fmt(ergebnis.nettoJahr)} € Gehalt + {fmt(wg.netto)} € Weihnachtsgeld</p>
                     </div>
                   </div>
                 </div>
@@ -732,7 +732,7 @@ export default function BruttoNettoRechner() {
             );
           })()}
 
-          <p className="text-xs text-gray-600 dark:text-gray-500 mt-4 no-print">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-4 no-print">
             * Vereinfachte Berechnung zur Orientierung. Für eine exakte Berechnung wenden Sie sich an Ihren Steuerberater oder nutzen Sie ELSTER.
           </p>
 
@@ -915,7 +915,7 @@ export default function BruttoNettoRechner() {
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                   <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
-                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 dark:text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
@@ -955,7 +955,7 @@ export default function BruttoNettoRechner() {
       {/* Brutto-Netto-Tabelle (SEO) */}
       <div className="mt-8 no-print">
         <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Brutto-Netto-Tabelle 2026</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
           Wie viel Netto bleibt vom Brutto? Übersicht für Steuerklasse 1, 3 und 5 (ohne Kirchensteuer, GKV, NRW).
         </p>
         <div className="overflow-x-auto">
@@ -985,7 +985,7 @@ export default function BruttoNettoRechner() {
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-gray-600 dark:text-gray-500 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           Werte gerundet, ohne Kirchensteuer, GKV mit 2,9 % durchschnittlichem Zusatzbeitrag (AN-Anteil 1,45 %), keine Kinder, NRW. Stand 2026. Der kassenindividuelle Zusatzbeitrag kann abweichen.
         </p>
       </div>
@@ -1000,10 +1000,10 @@ function Zeile({ label, wert, hervorgehoben = false, brutto }: { label: string; 
   return (
     <tr className={hervorgehoben ? 'font-semibold text-gray-800 dark:text-gray-100' : 'text-gray-600 dark:text-gray-400'}>
       <td className="py-1.5">{label}</td>
-      <td className={`py-1.5 text-right ${wert < 0 ? 'text-red-600 dark:text-red-400' : ''}`}>
+      <td className={`py-1.5 text-right ${wert < 0 ? 'text-red-700 dark:text-red-300' : ''}`}>
         {wert < 0 ? `−${fmt(Math.abs(wert))}` : fmt(wert)} &euro;
       </td>
-      <td className="py-1.5 text-right text-xs text-gray-600 dark:text-gray-500 w-16">
+      <td className="py-1.5 text-right text-xs text-gray-600 dark:text-gray-400 w-16">
         {prozent ? `${prozent}%` : ''}
       </td>
     </tr>

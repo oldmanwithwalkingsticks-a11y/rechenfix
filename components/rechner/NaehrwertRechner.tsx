@@ -227,7 +227,7 @@ export default function NaehrwertRechner() {
               <button
                 type="button"
                 onClick={() => removeZutat(z.id)}
-                className="w-9 h-[48px] flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-600 text-gray-500 hover:text-red-600 hover:border-red-300 transition-colors shrink-0"
+                className="w-9 h-[48px] flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:border-red-300 transition-colors shrink-0"
                 aria-label="Zutat entfernen"
               >
                 ✕
@@ -297,7 +297,7 @@ export default function NaehrwertRechner() {
             { label: 'Fett', wert: ergebnis.gesamt.fett, einheit: 'g' },
           ].map(item => (
             <div key={item.label} className="bg-gray-50 dark:bg-gray-700/30 rounded-lg p-3">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{item.label}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">{item.label}</p>
               <p className="font-bold text-gray-800 dark:text-gray-200">{fmt(item.wert, 1)} {item.einheit}</p>
             </div>
           ))}

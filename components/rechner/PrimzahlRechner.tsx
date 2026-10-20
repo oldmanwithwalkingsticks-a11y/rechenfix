@@ -71,7 +71,7 @@ export default function PrimzahlRechner() {
                   {checkErgebnis.istPrim ? (
                     <span className="text-green-700 dark:text-green-400">✓ Primzahl</span>
                   ) : (
-                    <span className="text-red-700 dark:text-red-400">✗ Keine Primzahl</span>
+                    <span className="text-red-700 dark:text-red-300">✗ Keine Primzahl</span>
                   )}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{checkErgebnis.begruendung}</p>

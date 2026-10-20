@@ -60,7 +60,7 @@ export default function KurzarbeitergeldRechner() {
           Ist-Brutto (reduziertes Gehalt während Kurzarbeit)
         </label>
         <NummerEingabe value={istBrutto} onChange={setIstBrutto} placeholder="1750" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Gehalt für die tatsächlich geleisteten Stunden (z. B. bei 50 % Kurzarbeit = halbes Brutto)
         </p>
       </div>
@@ -138,7 +138,7 @@ export default function KurzarbeitergeldRechner() {
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
               {fmt(ergebnis.kug)} €
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">pro Monat</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">pro Monat</p>
           </div>
 
           {/* Vergleich */}
@@ -157,7 +157,7 @@ export default function KurzarbeitergeldRechner() {
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">+ Kurzarbeitergeld ({(ergebnis.satz * 100).toLocaleString('de-DE')} %)</span>
-                <span className="font-medium text-green-600 dark:text-green-400">+{fmt(ergebnis.kug)} €</span>
+                <span className="font-medium text-green-700 dark:text-green-400">+{fmt(ergebnis.kug)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm font-bold bg-primary-50/50 dark:bg-primary-500/5">
                 <span className="text-gray-800 dark:text-gray-100">Gesamteinkommen während Kurzarbeit</span>
@@ -165,7 +165,7 @@ export default function KurzarbeitergeldRechner() {
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Verlust gegenüber normalem Netto</span>
-                <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.verlust)} € ({fmtP(ergebnis.verlustProzent)} %)</span>
+                <span className="font-medium text-red-700 dark:text-red-300">−{fmt(ergebnis.verlust)} € ({fmtP(ergebnis.verlustProzent)} %)</span>
               </div>
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function KurzarbeitergeldRechner() {
 
           {/* Balkenvergleich */}
           <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-5 mb-4">
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Visueller Vergleich</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">Visueller Vergleich</p>
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between text-xs mb-1">

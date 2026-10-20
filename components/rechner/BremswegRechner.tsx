@@ -83,7 +83,7 @@ export default function BremswegRechner() {
           Geschwindigkeit
         </h2>
         <NummerEingabe value={tempo} onChange={setTempo} placeholder="50" einheit="km/h" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Faustformeln der Fahrschule für trockene Fahrbahn und gute Reifen.
         </p>
       </div>
@@ -159,7 +159,7 @@ export default function BremswegRechner() {
             placeholder="1,0"
             einheit="Sekunden"
           />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Die Faustformel unterstellt 1,08 Sekunden. Bei Ablenkung sind zwei Sekunden und mehr realistisch.
           </p>
         </div>
@@ -316,7 +316,7 @@ export default function BremswegRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="px-4 pb-3 pt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="px-4 pb-3 pt-1 text-xs text-gray-600 dark:text-gray-400">
               Bei doppelter Geschwindigkeit vervierfacht sich der Bremsweg (er wächst im Quadrat), der Reaktionsweg nur doppelt.
             </p>
           </div>

@@ -126,7 +126,7 @@ export default function HandykostenRechner() {
               Zusatzoptionen pro Monat
             </label>
             <NummerEingabe value={zusatzoptionen} onChange={setZusatzoptionen} einheit="€" placeholder="0" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">z.B. Auslandsflatrate, Cloud-Speicher</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">z.B. Auslandsflatrate, Cloud-Speicher</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -142,13 +142,13 @@ export default function HandykostenRechner() {
             Anschlussgebühr (einmalig)
           </label>
           <NummerEingabe value={anschlussgebuehr} onChange={setAnschlussgebuehr} einheit="€" placeholder="0" />
-          <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">wird auf die Vertragslaufzeit umgelegt (bei „monatlich kündbar“ im ersten Monat)</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">wird auf die Vertragslaufzeit umgelegt (bei „monatlich kündbar“ im ersten Monat)</p>
         </div>
 
         {/* Vergleich mit aktuellem Anbieter */}
         <div className="bg-gray-50 dark:bg-gray-700/30 rounded-xl p-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Aktueller Anbieter — Kosten pro Monat <span className="text-gray-600 font-normal">(optional, zum Vergleich)</span>
+            Aktueller Anbieter — Kosten pro Monat <span className="text-gray-600 dark:text-gray-400 font-normal">(optional, zum Vergleich)</span>
           </label>
           <NummerEingabe value={aktuellerAnbieter} onChange={setAktuellerAnbieter} einheit="€" placeholder="z.B. 30" />
         </div>
@@ -189,7 +189,7 @@ export default function HandykostenRechner() {
                 <p className={`font-bold text-sm ${
                   ergebnis.istGuenstiger
                     ? 'text-green-700 dark:text-green-400'
-                    : 'text-red-700 dark:text-red-400'
+                    : 'text-red-700 dark:text-red-300'
                 }`}>
                   {ergebnis.istGuenstiger
                     ? `${fmt(Math.abs(ergebnis.ersparnisMontlich))} € günstiger pro Monat`
@@ -198,7 +198,7 @@ export default function HandykostenRechner() {
                 </p>
               </div>
               <p className={`text-sm ${
-                ergebnis.istGuenstiger ? 'text-green-600 dark:text-green-300' : 'text-red-600 dark:text-red-300'
+                ergebnis.istGuenstiger ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'
               }`}>
                 {ergebnis.istGuenstiger
                   ? `Sie sparen ${fmt(Math.abs(ergebnis.ersparnisJaehrlich))} € pro Jahr im Vergleich zu Ihrem aktuellen Tarif.`
@@ -222,7 +222,7 @@ export default function HandykostenRechner() {
                       <div className="flex justify-between text-sm mb-1">
                         <span className="text-gray-600 dark:text-gray-400">{pos.label}</span>
                         <span className="font-medium text-gray-800 dark:text-gray-200">
-                          {fmt(pos.betrag)} € <span className="text-gray-600 text-xs">({prozent.toFixed(0)}%)</span>
+                          {fmt(pos.betrag)} € <span className="text-gray-600 dark:text-gray-400 text-xs">({prozent.toFixed(0)}%)</span>
                         </span>
                       </div>
                       <div className="h-3 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
@@ -251,8 +251,8 @@ export default function HandykostenRechner() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-700">
-                    <th className="text-left px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Tarifart</th>
-                    <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Kosten/Monat</th>
+                    <th className="text-left px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Tarifart</th>
+                    <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Kosten/Monat</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">

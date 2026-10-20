@@ -294,7 +294,7 @@ export default function BudgetRechner() {
                         Bedürfnisse
                         <span className="ml-1 text-gray-600 dark:text-gray-400 font-normal">(Soll: 50%)</span>
                       </span>
-                      <span className={`font-semibold ${istOk ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                      <span className={`font-semibold ${istOk ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>
                         {fmt(ergebnis.beduerfnisseIst)} € ({fmtProzent(istProzent)}%)
                       </span>
                     </div>
@@ -333,7 +333,7 @@ export default function BudgetRechner() {
                         Wünsche
                         <span className="ml-1 text-gray-600 dark:text-gray-400 font-normal">(Soll: 30%)</span>
                       </span>
-                      <span className={`font-semibold ${istOk ? 'text-green-600 dark:text-green-400' : 'text-amber-600 dark:text-amber-400'}`}>
+                      <span className={`font-semibold ${istOk ? 'text-green-700 dark:text-green-400' : 'text-amber-700 dark:text-amber-400'}`}>
                         {fmt(ergebnis.wuenscheIst)} € ({fmtProzent(istProzent)}%)
                       </span>
                     </div>
@@ -370,7 +370,7 @@ export default function BudgetRechner() {
                         Sparen
                         <span className="ml-1 text-gray-600 dark:text-gray-400 font-normal">(Soll: 20%)</span>
                       </span>
-                      <span className={`font-semibold ${istOk ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                      <span className={`font-semibold ${istOk ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>
                         {fmt(ergebnis.sparenIst)} € ({fmtProzent(istProzent)}%)
                       </span>
                     </div>

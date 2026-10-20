@@ -31,19 +31,21 @@ export interface KoerperfettErgebnis {
 // von/bis sind die ganzzahligen Anzeige-Grenzen der ACE-Tabelle; die Zuordnung erfolgt halboffen
 // (Kategorie gilt ab „von“ bis unter „von“ der nächsten Kategorie), siehe kategorieFuer().
 export const KATEGORIEN_MANN: KoerperfettKategorie[] = [
-  { label: 'Essentielles Fett', farbe: 'text-red-600', von: 2, bis: 5 },
-  { label: 'Athletisch', farbe: 'text-blue-600', von: 6, bis: 13 },
-  { label: 'Fitness', farbe: 'text-green-600', von: 14, bis: 17 },
-  { label: 'Durchschnittlich', farbe: 'text-yellow-600', von: 18, bis: 24 },
-  { label: 'Oberhalb des Durchschnitts', farbe: 'text-red-600', von: 25, bis: 50 },
+  // W188: Farbklassen mit Dark-Variante (vorher -600 ohne, im Dark Mode 2,2–3,3:1). lib/ liegt nicht im
+  // Tailwind-content — jede Klasse hier muss auch in components/ vorkommen.
+  { label: 'Essentielles Fett', farbe: 'text-red-700 dark:text-red-300', von: 2, bis: 5 },
+  { label: 'Athletisch', farbe: 'text-blue-700 dark:text-blue-300', von: 6, bis: 13 },
+  { label: 'Fitness', farbe: 'text-green-700 dark:text-green-400', von: 14, bis: 17 },
+  { label: 'Durchschnittlich', farbe: 'text-yellow-800 dark:text-yellow-300', von: 18, bis: 24 },
+  { label: 'Oberhalb des Durchschnitts', farbe: 'text-red-700 dark:text-red-300', von: 25, bis: 50 },
 ];
 
 export const KATEGORIEN_FRAU: KoerperfettKategorie[] = [
-  { label: 'Essentielles Fett', farbe: 'text-red-600', von: 10, bis: 13 },
-  { label: 'Athletisch', farbe: 'text-blue-600', von: 14, bis: 20 },
-  { label: 'Fitness', farbe: 'text-green-600', von: 21, bis: 24 },
-  { label: 'Durchschnittlich', farbe: 'text-yellow-600', von: 25, bis: 31 },
-  { label: 'Oberhalb des Durchschnitts', farbe: 'text-red-600', von: 32, bis: 50 },
+  { label: 'Essentielles Fett', farbe: 'text-red-700 dark:text-red-300', von: 10, bis: 13 },
+  { label: 'Athletisch', farbe: 'text-blue-700 dark:text-blue-300', von: 14, bis: 20 },
+  { label: 'Fitness', farbe: 'text-green-700 dark:text-green-400', von: 21, bis: 24 },
+  { label: 'Durchschnittlich', farbe: 'text-yellow-800 dark:text-yellow-300', von: 25, bis: 31 },
+  { label: 'Oberhalb des Durchschnitts', farbe: 'text-red-700 dark:text-red-300', von: 32, bis: 50 },
 ];
 
 /**

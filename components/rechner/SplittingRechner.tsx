@@ -120,7 +120,7 @@ export default function SplittingRechner() {
             <option key={k} value={k}>{k}</option>
           ))}
         </select>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Pro Kind 0,5 je Elternteil = 1,0 zusammen. Nur relevant wenn günstiger als Kindergeld.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Pro Kind 0,5 je Elternteil = 1,0 zusammen. Nur relevant wenn günstiger als Kindergeld.</p>
       </div>
 
       <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💶" text="Nettolohn berechnen" />
@@ -152,14 +152,14 @@ export default function SplittingRechner() {
                 <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Partner 1</p>
                 <p className="font-bold text-blue-800 dark:text-blue-200">{fmtEuro(ergebnis.zveP1)} €</p>
               </div>
-              <div className="text-gray-600 text-lg hidden sm:block">+</div>
-              <div className="text-gray-600 text-lg sm:hidden">+</div>
+              <div className="text-gray-600 dark:text-gray-400 text-lg hidden sm:block">+</div>
+              <div className="text-gray-600 dark:text-gray-400 text-lg sm:hidden">+</div>
               <div className="bg-pink-50 dark:bg-pink-500/10 rounded-lg p-3 text-center flex-1 w-full">
-                <p className="text-xs text-pink-600 dark:text-pink-400 mb-1">Partner 2</p>
+                <p className="text-xs text-pink-700 dark:text-pink-400 mb-1">Partner 2</p>
                 <p className="font-bold text-pink-800 dark:text-pink-200">{fmtEuro(ergebnis.zveP2)} €</p>
               </div>
-              <div className="text-gray-600 text-lg hidden sm:block">→</div>
-              <div className="text-gray-600 text-lg sm:hidden">↓</div>
+              <div className="text-gray-600 dark:text-gray-400 text-lg hidden sm:block">→</div>
+              <div className="text-gray-600 dark:text-gray-400 text-lg sm:hidden">↓</div>
               <div className="bg-purple-50 dark:bg-purple-500/10 rounded-lg p-3 text-center flex-1 w-full">
                 <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Gesamt ÷ 2</p>
                 <p className="font-bold text-purple-800 dark:text-purple-200">{fmtEuro(ergebnis.zveHalbe)} €</p>
@@ -197,7 +197,7 @@ export default function SplittingRechner() {
                     <td className="px-5 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">
                       {fmtEuro(z.splitting)} €
                     </td>
-                    <td className={`px-5 py-2.5 text-right tabular-nums font-semibold ${z.vorteil > 0 ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`}>
+                    <td className={`px-5 py-2.5 text-right tabular-nums font-semibold ${z.vorteil > 0 ? 'text-green-700 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`}>
                       {z.vorteil > 0 ? `${fmtEuro(z.vorteil)} €` : '—'}
                     </td>
                   </tr>
@@ -211,7 +211,7 @@ export default function SplittingRechner() {
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Steuerlast im Vergleich</h2>
             <div className="space-y-3">
               <div>
-                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                   <span>Einzelveranlagung</span>
                   <span>{fmtEuro(ergebnis.gesamtEinzel)} €</span>
                 </div>
@@ -223,7 +223,7 @@ export default function SplittingRechner() {
                 </div>
               </div>
               <div>
-                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                   <span>Zusammenveranlagung (Splitting)</span>
                   <span>{fmtEuro(ergebnis.gesamtSplitting)} €</span>
                 </div>

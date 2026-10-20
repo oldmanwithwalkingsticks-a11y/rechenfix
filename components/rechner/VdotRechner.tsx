@@ -251,7 +251,7 @@ export default function VdotRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               Prognose bei gleichem Trainingszustand — längere Distanzen setzen spezifische Ausdauer voraus.
             </p>
           </div>
@@ -270,7 +270,7 @@ export default function VdotRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Distanz und gelaufene Zeit ein, um den VDOT-Wert zu berechnen.
         </p>
       )}

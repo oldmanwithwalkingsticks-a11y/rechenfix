@@ -45,7 +45,7 @@ export default function DreisatzRechner() {
       </div>
 
       {/* Hinweis */}
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-4">
         {antiproportional
           ? '\u201EJe mehr, desto weniger\u201C — z.\u00A0B. mehr Arbeiter = weniger Tage'
           : '\u201EJe mehr, desto mehr\u201C — z.\u00A0B. mehr \u00C4pfel = h\u00F6herer Preis'}

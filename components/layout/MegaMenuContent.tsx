@@ -41,7 +41,7 @@ export default function MegaMenuContent({ onClose }: { onClose: () => void }) {
           >
             <span className="text-lg" aria-hidden="true">📝</span>
             Blog: Geschichten hinter den Zahlen
-            <span className="ml-auto shrink-0 text-accent-600 dark:text-accent-400" aria-hidden="true">→</span>
+            <span className="ml-auto shrink-0 text-accent-700 dark:text-accent-400" aria-hidden="true">→</span>
           </Link>
         </div>
 
@@ -72,7 +72,7 @@ export default function MegaMenuContent({ onClose }: { onClose: () => void }) {
                 >
                   <span className="text-lg">{k.icon}</span>
                   {k.name}
-                  <span className="text-xs font-normal text-gray-600 ml-auto">{katRechner.length}</span>
+                  <span className="text-xs font-normal text-gray-600 dark:text-gray-400 ml-auto">{katRechner.length}</span>
                 </Link>
                 <ul className="space-y-0.5">
                   {katRechner.map(r => (

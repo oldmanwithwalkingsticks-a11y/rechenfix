@@ -109,7 +109,7 @@ export default function ArbeitslosengeldRechner() {
         </select>
       </div>
 
-      <p className="-mt-3 mb-6 text-xs text-gray-500 dark:text-gray-400">
+      <p className="-mt-3 mb-6 text-xs text-gray-600 dark:text-gray-400">
         Kirchensteuer wird beim Arbeitslosengeld nicht abgezogen — vom Bemessungsentgelt gehen nur die Sozialversicherungspauschale von 20 %, die Lohnsteuer und der Solidaritätszuschlag ab (§ 153 Abs. 1 SGB III).
       </p>
 

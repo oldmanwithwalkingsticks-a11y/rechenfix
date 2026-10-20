@@ -52,7 +52,7 @@ export default function AbfindungsRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betriebszugehörigkeit</label>
           <NummerEingabe value={betriebsjahre} onChange={setBetriebsjahre} placeholder="z.B. 8" einheit="Jahre" />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Angefangene Jahre über 6 Monate zählen als volles Jahr
           </p>
         </div>
@@ -90,7 +90,7 @@ export default function AbfindungsRechner() {
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Faktor</label>
           <NummerEingabe value={faktor} onChange={setFaktor} placeholder="z.B. 0,5" einheit="×" />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Standard: 0,5 Monatsgehälter pro Beschäftigungsjahr. Bei älteren AN oder langer Zugehörigkeit teils höher.
           </p>
         </div>
@@ -156,11 +156,11 @@ export default function AbfindungsRechner() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Einkommensteuer</span>
-                <span className="font-semibold text-red-600 dark:text-red-400">−{fmt(ergebnis.steuerMitFuenftel)} €</span>
+                <span className="font-semibold text-red-700 dark:text-red-300">−{fmt(ergebnis.steuerMitFuenftel)} €</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Solidaritätszuschlag</span>
-                <span className="font-semibold text-red-600 dark:text-red-400">−{fmt(ergebnis.soliMitFuenftel)} €</span>
+                <span className="font-semibold text-red-700 dark:text-red-300">−{fmt(ergebnis.soliMitFuenftel)} €</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Kirchensteuer</span>
@@ -170,7 +170,7 @@ export default function AbfindungsRechner() {
               </div>
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                 <span className="text-gray-700 dark:text-gray-200 font-bold">Netto-Abfindung</span>
-                <span className="font-bold text-green-600 dark:text-green-400">{fmt(ergebnis.nettoMitFuenftel)} €</span>
+                <span className="font-bold text-green-700 dark:text-green-400">{fmt(ergebnis.nettoMitFuenftel)} €</span>
               </div>
             </div>
           </div>
@@ -237,7 +237,7 @@ export default function AbfindungsRechner() {
                 title={`Soli/KiSt: ${fmt(ergebnis.soliMitFuenftel + ergebnis.kirchensteuerMitFuenftel)} €`}
               />
             </div>
-            <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-600 dark:text-gray-400">
               <span className="flex items-center gap-1.5">
                 <span className="inline-block w-3 h-3 rounded-sm bg-green-400 dark:bg-green-500" /> Netto ({fmt(ergebnis.nettoMitFuenftel)} €)
               </span>

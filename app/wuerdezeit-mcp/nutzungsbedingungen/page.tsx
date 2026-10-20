@@ -34,7 +34,7 @@ export default function WuerdezeitMcpNutzungsbedingungenSeite() {
             .
           </p>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400 pt-6">
+          <p className="text-sm text-gray-600 dark:text-gray-400 pt-6">
             Verantwortlich: Karsten Kautz, Dülkener Straße 35, 47804 Krefeld · Stand: 15. September 2026
           </p>
         </div>

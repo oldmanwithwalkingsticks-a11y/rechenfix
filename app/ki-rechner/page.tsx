@@ -32,7 +32,7 @@ export default function KiRechnerPage() {
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
           KI-Rechner — Fragen Sie einfach!
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 text-lg max-w-xl mx-auto">
           Stellen Sie eine Rechenfrage in natürlicher Sprache. Die KI liefert die Antwort und verlinkt Sie zum passenden Rechner.
         </p>
         <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
@@ -55,17 +55,17 @@ export default function KiRechnerPage() {
             <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5 text-center">
               <div className="w-10 h-10 mx-auto mb-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-xl">&#x1F4AC;</div>
               <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">1. Frage stellen</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Schreiben Sie Ihre Rechenfrage in natürlicher Sprache — so wie Sie sie einem Freund stellen würden.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Schreiben Sie Ihre Rechenfrage in natürlicher Sprache — so wie Sie sie einem Freund stellen würden.</p>
             </div>
             <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5 text-center">
               <div className="w-10 h-10 mx-auto mb-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-xl">&#x1F9E0;</div>
               <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">2. KI berechnet</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Die KI erkennt den Rechentyp, führt die Berechnung durch und liefert eine präzise Antwort.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Die KI erkennt den Rechentyp, führt die Berechnung durch und liefert eine präzise Antwort.</p>
             </div>
             <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5 text-center">
               <div className="w-10 h-10 mx-auto mb-3 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-xl">&#x1F517;</div>
               <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">3. Detailrechner</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Am Ende jeder Antwort finden Sie einen Link zum passenden Rechner für exakte Berechnungen.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Am Ende jeder Antwort finden Sie einen Link zum passenden Rechner für exakte Berechnungen.</p>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function KiRechnerPage() {
                   <span className="text-lg">{k.icon}</span>
                   <span className="font-semibold text-gray-800 dark:text-gray-200 text-sm">{k.name}</span>
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{k.items}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{k.items}</p>
               </div>
             ))}
           </div>
@@ -102,25 +102,25 @@ export default function KiRechnerPage() {
               <span className="text-2xl">&#x26A1;</span>
               <div>
                 <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">Schnell</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Keine Formularfelder, keine Dropdowns — einfach fragen und sofort die Antwort erhalten.</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Keine Formularfelder, keine Dropdowns — einfach fragen und sofort die Antwort erhalten.</p>
               </div>
             </div>
             <div className="flex items-start gap-3 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
               <span className="text-2xl">&#x1F4AC;</span>
               <div>
                 <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">Verständlich</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Die Antwort kommt in einfachem Deutsch, nicht in Fachsprache oder Formeln.</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Die Antwort kommt in einfachem Deutsch, nicht in Fachsprache oder Formeln.</p>
               </div>
             </div>
             <div className="flex items-start gap-3 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
               <span className="text-2xl">&#x1F517;</span>
               <div>
                 <h3 className="font-semibold text-gray-800 dark:text-gray-200 text-sm mb-1">Weiterführend</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Jede Antwort verlinkt auf den passenden Detailrechner für exakte Berechnungen.</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">Jede Antwort verlinkt auf den passenden Detailrechner für exakte Berechnungen.</p>
               </div>
             </div>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 text-center">
             Der KI-Rechner ist kostenlos, ohne Anmeldung nutzbar und speichert keine persönlichen Daten.
           </p>
         </div>

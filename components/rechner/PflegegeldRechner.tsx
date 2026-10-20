@@ -59,11 +59,11 @@ export default function PflegegeldRechner() {
               className={`px-2 py-3 rounded-xl text-sm font-semibold transition-all min-h-[56px] ${pflegegrad === n ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
             >
               <div className="text-lg font-bold">{n}</div>
-              <div className="text-[10px] opacity-80">Grad</div>
+              <div className="text-[10px]">Grad</div>
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           <strong>Pflegegrad {pflegegrad}:</strong> {PFLEGEGRAD_INFO[pflegegrad]}
         </p>
       </div>
@@ -105,12 +105,12 @@ export default function PflegegeldRechner() {
               onChange={e => setAnteilDienst(Number(e.target.value))}
               className="w-full accent-primary-500"
             />
-            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
               <span>0% (nur Angehörige)</span>
               <strong className="text-primary-600 dark:text-primary-400 text-base">{anteilDienst}%</strong>
               <span>100% (nur Dienst)</span>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Wie viel der Pflege übernimmt der professionelle Dienst?</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">Wie viel der Pflege übernimmt der professionelle Dienst?</p>
           </div>
         </div>
       )}
@@ -160,12 +160,12 @@ export default function PflegegeldRechner() {
             <div className="bg-blue-50 dark:bg-blue-500/10 rounded-lg p-3">
               <p className="text-xs text-blue-700 dark:text-blue-400 mb-1">Pflegesachleistung</p>
               <p className="text-lg font-bold text-blue-800 dark:text-blue-300">{fmtEuro(ergebnis.anteiligSachleistung)} €</p>
-              <p className="text-xs text-blue-600/70 dark:text-blue-400/70">{anteilDienst}% von {fmtEuro(ergebnis.pflegesachleistungVoll)} €</p>
+              <p className="text-xs text-blue-800 dark:text-blue-300">{anteilDienst}% von {fmtEuro(ergebnis.pflegesachleistungVoll)} €</p>
             </div>
             <div className="bg-green-50 dark:bg-green-500/10 rounded-lg p-3">
               <p className="text-xs text-green-700 dark:text-green-400 mb-1">Pflegegeld (anteilig)</p>
               <p className="text-lg font-bold text-green-800 dark:text-green-300">{fmtEuro(ergebnis.anteiligPflegegeld)} €</p>
-              <p className="text-xs text-green-600/70 dark:text-green-400/70">{ergebnis.restProzentPflegegeld}% von {fmtEuro(ergebnis.pflegegeldVoll)} €</p>
+              <p className="text-xs text-green-800 dark:text-green-300">{ergebnis.restProzentPflegegeld}% von {fmtEuro(ergebnis.pflegegeldVoll)} €</p>
             </div>
           </div>
         </div>
@@ -206,8 +206,8 @@ export default function PflegegeldRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">+ Entlastungsbetrag</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.entlastungsbetrag)} €</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.entlastungsbetrag * 12)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.entlastungsbetrag)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.entlastungsbetrag * 12)} €</td>
               </tr>
               {/* W184: vorher zwei Zeilen „Verhinderungspflege bis 3.539 €“ und „Kurzzeitpflege bis 3.539 €“ —
                   seit 01.07.2025 ein gemeinsamer Jahresbetrag (§ 42a SGB XI), also zusammen höchstens 3.539 € */}
@@ -215,9 +215,9 @@ export default function PflegegeldRechner() {
                 <tr>
                   <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300">
                     Verhinderungs- und Kurzzeitpflege
-                    <span className="block text-xs text-gray-500 dark:text-gray-400">gemeinsamer Jahresbetrag (§ 42a SGB XI), für beide zusammen</span>
+                    <span className="block text-xs text-gray-600 dark:text-gray-400">gemeinsamer Jahresbetrag (§ 42a SGB XI), für beide zusammen</span>
                   </td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 whitespace-nowrap">—</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400 whitespace-nowrap">—</td>
                   <td className="px-4 py-2.5 text-right tabular-nums whitespace-nowrap">zusammen bis {fmtEuro(ergebnis.verhinderungspflegeJahr)} €</td>
                 </tr>
               )}

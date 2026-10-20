@@ -87,11 +87,11 @@ export default function EinheitenRechner() {
       <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 mb-6">
         {/* Wert + Von */}
         <div className="flex-1">
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Wert</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wert</label>
           <NummerEingabe value={wert} onChange={setWert} placeholder="1" />
         </div>
         <div className="flex-1">
-          <label htmlFor="einheiten-select-1" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Von</label>
+          <label htmlFor="einheiten-select-1" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Von</label>
           <select id="einheiten-select-1"
             value={von}
             onChange={e => setVon(e.target.value)}
@@ -114,7 +114,7 @@ export default function EinheitenRechner() {
 
         {/* Zu */}
         <div className="flex-1">
-          <label htmlFor="einheiten-select-2" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Zu</label>
+          <label htmlFor="einheiten-select-2" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Zu</label>
           <select id="einheiten-select-2"
             value={zu}
             onChange={e => setZu(e.target.value)}
@@ -136,7 +136,7 @@ export default function EinheitenRechner() {
             <p className="text-2xl sm:text-3xl font-extrabold text-primary-700 dark:text-primary-300 break-words">
               {formatWert(ergebnis.wert)} {ergebnis.vonLabel} = {formatWert(ergebnis.ergebnis)} {ergebnis.zuLabel}
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 font-mono">{ergebnis.formel}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 font-mono">{ergebnis.formel}</p>
           </div>
 
           {/* Temperatur-Skala */}
@@ -156,7 +156,7 @@ export default function EinheitenRechner() {
 
                   return (
                     <div key={u.key}>
-                      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-0.5">
+                      <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-0.5">
                         <span>{label}</span>
                         <span className="font-medium text-gray-800 dark:text-gray-200">{formatWert(w)} °{u.key.toUpperCase()}</span>
                       </div>

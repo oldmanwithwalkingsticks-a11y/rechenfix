@@ -151,7 +151,7 @@ export default function KalorienRechner() {
                   <span className="text-gray-600 dark:text-gray-400">
                     {ergebnis.differenz < 0 ? 'Kaloriendefizit' : 'Kalorienüberschuss'}
                   </span>
-                  <span className={`font-semibold ${ergebnis.differenz < 0 ? 'text-orange-600 dark:text-orange-400' : 'text-green-600 dark:text-green-400'}`}>
+                  <span className={`font-semibold ${ergebnis.differenz < 0 ? 'text-orange-700 dark:text-orange-400' : 'text-green-700 dark:text-green-400'}`}>
                     {ergebnis.differenz > 0 ? '+' : ''}{fmt(ergebnis.differenz)} kcal
                   </span>
                 </div>
@@ -185,7 +185,7 @@ export default function KalorienRechner() {
                     style={{ width: `${balkenDaten.zielProzent}%` }}
                   />
                 </div>
-                <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+                <div className="flex justify-between mt-2 text-xs text-gray-600 dark:text-gray-400">
                   <span>Grundumsatz: {fmt(ergebnis.grundumsatz)}</span>
                   {ziel !== 'halten' && <span>Empfehlung: {fmt(ergebnis.zielKalorien)}</span>}
                   <span>Gesamtumsatz: {fmt(ergebnis.gesamtumsatz)}</span>

@@ -95,7 +95,7 @@ export default function BruttoNettoTabelle() {
             <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
               Brutto-Netto-Tabelle 2026
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Alle Gehälter von {fmtK(STUFEN[0])} € bis {fmtK(STUFEN[STUFEN.length - 1])} € brutto im Überblick. Ohne Kirchensteuer, GKV, keine Kinder, NRW.
             </p>
 
@@ -117,7 +117,7 @@ export default function BruttoNettoTabelle() {
                       <tr key={z.brutto} className={`${i % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700/30' : ''} ${highlight ? 'font-medium' : ''}`}>
                         <td className="p-2.5 sm:p-3 text-gray-800 dark:text-gray-200">
                           {highlight ? (
-                            <Link href={`/finanzen/${z.brutto}-euro-brutto-netto`} className="text-primary-600 hover:text-primary-600 font-semibold">
+                            <Link href={`/finanzen/${z.brutto}-euro-brutto-netto`} className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-semibold">
                               {fmtK(z.brutto)} €
                             </Link>
                           ) : (
@@ -134,7 +134,7 @@ export default function BruttoNettoTabelle() {
               </table>
             </div>
 
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-3">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-3">
               Werte gerundet, ohne Kirchensteuer, GKV mit 2,9 % durchschnittlichem Zusatzbeitrag (AN-Anteil 1,45 %), keine Kinder, NRW. Stand 2026.
             </p>
 
@@ -168,13 +168,13 @@ export default function BruttoNettoTabelle() {
                 <strong className="text-gray-800 dark:text-gray-100">Sozialabgaben als konstanter Faktor:</strong> Während die Lohnsteuer progressiv steigt, bleiben die Sozialabgaben (Kranken-, Renten-, Arbeitslosen- und Pflegeversicherung) ab 2.000 € brutto prozentual gleich — bis zur jeweiligen Beitragsbemessungsgrenze. Darunter, im Midijob-Bereich, sind sie reduziert. 2026 liegt die BBG in der Kranken- und Pflegeversicherung bei 5.812,50 € monatlich (69.750 €/Jahr). In der Renten- und Arbeitslosenversicherung gilt bundeseinheitlich 8.450 € monatlich (101.400 €/Jahr) — seit 2025 entfällt die Trennung zwischen Ost und West. Ab einer Versicherungspflichtgrenze von 77.400 €/Jahr (6.450 €/Monat) können Arbeitnehmer in die private Krankenversicherung wechseln. Ab den BBG steigen die Sozialabgaben nicht mehr weiter, wodurch die relative Belastung bei sehr hohen Gehältern sogar leicht sinkt.
               </p>
               <p>
-                <strong className="text-gray-800 dark:text-gray-100">Wichtiger Hinweis:</strong> Die Tabelle zeigt Orientierungswerte ohne Kirchensteuer, mit gesetzlicher Krankenversicherung (durchschnittlicher Zusatzbeitrag 2,9 % gemäß § 242a SGB V, AN-Anteil 1,45 %) und ohne Kinderfreibeträge. Der kassenindividuelle Zusatzbeitrag kann abweichen (Spanne 2026 ca. 2,2–4,4 %). Kirchensteuer (8–9 % der Lohnsteuer), private Krankenversicherung oder Kinderfreibeträge können das Ergebnis verändern. Für Ihre individuelle Berechnung nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit allen Optionen.
+                <strong className="text-gray-800 dark:text-gray-100">Wichtiger Hinweis:</strong> Die Tabelle zeigt Orientierungswerte ohne Kirchensteuer, mit gesetzlicher Krankenversicherung (durchschnittlicher Zusatzbeitrag 2,9 % gemäß § 242a SGB V, AN-Anteil 1,45 %) und ohne Kinderfreibeträge. Der kassenindividuelle Zusatzbeitrag kann abweichen (Spanne 2026 ca. 2,2–4,4 %). Kirchensteuer (8–9 % der Lohnsteuer), private Krankenversicherung oder Kinderfreibeträge können das Ergebnis verändern. Für Ihre individuelle Berechnung nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit allen Optionen.
               </p>
               <p>
                 <strong className="text-gray-800 dark:text-gray-100">Steuerklasse wechseln?</strong> Verheiratete können die Steuerklassenkombination beim Finanzamt ändern. Die klassische Kombination 3/5 lohnt sich, wenn ein Partner deutlich mehr verdient. Beachten Sie: Die Steuerklasse beeinflusst nur die monatliche Auszahlung — die tatsächliche Jahressteuer wird über die Einkommensteuererklärung ausgeglichen. Bei der Kombination 3/5 ist die Steuererklärung Pflicht und es kommt häufig zu Nachzahlungen.
               </p>
               <p>
-                Für detaillierte Berechnungen zu einzelnen Gehältern haben wir eigene Seiten erstellt: <Link href="/finanzen/2000-euro-brutto-netto" className="text-primary-600 hover:text-primary-600 font-medium">2.000 € brutto</Link>, <Link href="/finanzen/3000-euro-brutto-netto" className="text-primary-600 hover:text-primary-600 font-medium">3.000 € brutto</Link>, <Link href="/finanzen/4000-euro-brutto-netto" className="text-primary-600 hover:text-primary-600 font-medium">4.000 € brutto</Link> und <Link href="/finanzen/5000-euro-brutto-netto" className="text-primary-600 hover:text-primary-600 font-medium">5.000 € brutto</Link> — jeweils mit allen 6 Steuerklassen und ausführlicher Erklärung.
+                Für detaillierte Berechnungen zu einzelnen Gehältern haben wir eigene Seiten erstellt: <Link href="/finanzen/2000-euro-brutto-netto" className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium">2.000 € brutto</Link>, <Link href="/finanzen/3000-euro-brutto-netto" className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium">3.000 € brutto</Link>, <Link href="/finanzen/4000-euro-brutto-netto" className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium">4.000 € brutto</Link> und <Link href="/finanzen/5000-euro-brutto-netto" className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium">5.000 € brutto</Link> — jeweils mit allen 6 Steuerklassen und ausführlicher Erklärung.
               </p>
             </div>
           </section>
@@ -187,7 +187,7 @@ export default function BruttoNettoTabelle() {
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                   <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
-                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 dark:text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
@@ -217,9 +217,9 @@ export default function BruttoNettoTabelle() {
                   <span className="text-2xl shrink-0">{link.icon}</span>
                   <div className="min-w-0">
                     <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{link.desc}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">{link.desc}</p>
                   </div>
-                  <span className="text-gray-300 dark:text-gray-600 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>
+                  <span className="text-gray-300 dark:text-gray-400 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>
                 </Link>
               ))}
             </div>

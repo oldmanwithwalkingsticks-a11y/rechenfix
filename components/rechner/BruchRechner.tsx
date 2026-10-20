@@ -169,7 +169,7 @@ function OperandEingabe({
       />
       {modus === 'dezimal' ? (
         <div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1.5">Zahl {nr} (Dezimalzahl)</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-1.5">Zahl {nr} (Dezimalzahl)</p>
           <div className="w-32">
             <NummerEingabe value={dezimal} onChange={setDezimal} placeholder="0,75" />
           </div>
@@ -191,7 +191,7 @@ function BruchEingabe({
 }) {
   return (
     <div>
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1.5">{label}</p>
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-1.5">{label}</p>
       <div className="flex items-center gap-2">
         {ganz !== undefined && setGanz && (
           <div className="w-14">
@@ -370,7 +370,7 @@ export default function BruchRechner() {
                 <div className="flex items-center justify-center text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   <BruchAnzeige zaehler={rechenErgebnis.ergebnis.zaehler} nenner={rechenErgebnis.ergebnis.nenner} />
                 </div>
-                <div className="flex flex-wrap items-center justify-center gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400">
+                <div className="flex flex-wrap items-center justify-center gap-4 mt-3 text-sm text-gray-600 dark:text-gray-400">
                   {anzeige1 && <span className="min-w-0 [overflow-wrap:anywhere]">{anzeige1.zeichen} {anzeige1.wert}</span>}
                   {rechenErgebnis.gemischt && (
                     <span className="inline-flex items-center min-w-0 max-w-full">
@@ -420,9 +420,9 @@ export default function BruchRechner() {
                   <BruchAnzeige zaehler={kuerzenErgebnis.gekuerzt.zaehler} nenner={kuerzenErgebnis.gekuerzt.nenner} />
                 </div>
                 {kuerzenErgebnis.istBereitsGekuerzt ? (
-                  <p className="text-sm text-green-600 dark:text-green-400 mt-3">Der Bruch ist bereits vollständig gekürzt.</p>
+                  <p className="text-sm text-green-700 dark:text-green-400 mt-3">Der Bruch ist bereits vollständig gekürzt.</p>
                 ) : (
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
                     {/* String(): React 18 rendert BigInt-Kinder nicht, obwohl die Typen sie zulassen (W154) */}
                     Gekürzt mit GGT {String(kuerzenErgebnis.teilGgt)} — Zähler und Nenner durch {String(kuerzenErgebnis.teilGgt)} geteilt.
                   </p>
@@ -455,7 +455,7 @@ export default function BruchRechner() {
           <div className="flex justify-center mb-6">
             {dezMode === 'zuBruch' ? (
               <div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1.5">Dezimalzahl</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1.5">Dezimalzahl</p>
                 <div className="w-32">
                   <NummerEingabe value={dezWert} onChange={setDezWert} placeholder="0,75" />
                 </div>
@@ -477,7 +477,7 @@ export default function BruchRechner() {
                       <BruchAnzeige zaehler={dezimalErgebnis.bruch.zaehler} nenner={dezimalErgebnis.bruch.nenner} />
                     </div>
                     {dezimalErgebnis.gemischt && (
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 inline-flex items-center justify-center max-w-full">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 inline-flex items-center justify-center max-w-full">
                         = <GemischtAnzeige ganz={dezimalErgebnis.gemischt.ganz} zaehler={dezimalErgebnis.gemischt.zaehler} nenner={dezimalErgebnis.gemischt.nenner} />
                       </p>
                     )}
@@ -488,7 +488,7 @@ export default function BruchRechner() {
                     <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300 [overflow-wrap:anywhere]">
                       {dezimalErgebnis.anzeige?.zeichen === '≈' ? '≈ ' : ''}{dezimalErgebnis.anzeige?.wert}
                     </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 inline-flex items-center justify-center max-w-full">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 inline-flex items-center justify-center max-w-full">
                       <BruchAnzeige zaehler={dezimalErgebnis.bruch.zaehler} nenner={dezimalErgebnis.bruch.nenner} className="text-base" />
                       <span className="ml-1 min-w-0 [overflow-wrap:anywhere]">{dezimalErgebnis.anzeige?.zeichen} {dezimalErgebnis.anzeige?.wert}</span>
                     </p>
@@ -507,7 +507,7 @@ export default function BruchRechner() {
         <div>
           <div className="flex flex-wrap items-end justify-center gap-4 mb-6">
             <BruchEingabe zaehler={vz1} setZaehler={setVz1} nenner={vn1} setNenner={setVn1} label="Bruch 1" />
-            <div className="pb-4 text-2xl font-bold text-gray-600">?</div>
+            <div className="pb-4 text-2xl font-bold text-gray-600 dark:text-gray-400">?</div>
             <BruchEingabe zaehler={vz2} setZaehler={setVz2} nenner={vn2} setNenner={setVn2} label="Bruch 2" />
           </div>
 
@@ -520,8 +520,8 @@ export default function BruchRechner() {
                   <BruchAnzeige zaehler={vergleich4.b1.zaehler} nenner={vergleich4.b1.nenner} />
                   <span className={`text-4xl ${
                     vergleichErgebnis.zeichen === '='
-                      ? 'text-green-600 dark:text-green-400'
-                      : 'text-accent-600 dark:text-accent-400'
+                      ? 'text-green-700 dark:text-green-400'
+                      : 'text-accent-700 dark:text-accent-400'
                   }`}>
                     {vergleichErgebnis.zeichen}
                   </span>

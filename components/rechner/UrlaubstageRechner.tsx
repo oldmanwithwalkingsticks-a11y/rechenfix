@@ -85,7 +85,7 @@ export default function UrlaubstageRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Vertragliche Urlaubstage/Jahr</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Vertragliche Urlaubstage/Jahr</label>
               <input
                 type="number"
                 inputMode="numeric"
@@ -98,7 +98,7 @@ export default function UrlaubstageRechner() {
               />
             </div>
             <div>
-              <label htmlFor="urlaubstage-select-1" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage pro Woche</label>
+              <label htmlFor="urlaubstage-select-1" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Arbeitstage pro Woche</label>
               <select id="urlaubstage-select-1"
                 value={arbeitstageProWoche}
                 onChange={e => setArbeitstageProWoche(parseInt(e.target.value, 10) as 5 | 6)}
@@ -114,7 +114,7 @@ export default function UrlaubstageRechner() {
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Beschäftigungszeitraum (optional)</p>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Eintritt</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Eintritt</label>
               <input
                 type="date"
                 value={beschaeftigungsBeginn}
@@ -123,7 +123,7 @@ export default function UrlaubstageRechner() {
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Austritt</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Austritt</label>
               <input
                 type="date"
                 value={beschaeftigungsEnde}
@@ -132,7 +132,7 @@ export default function UrlaubstageRechner() {
               />
             </div>
           </div>
-          <p className="text-xs text-gray-600 dark:text-gray-500 mb-4">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-4">
             Leer lassen = Beschäftigung im ganzen Jahr. Teilurlaub (ein Zwölftel je vollem Monat) gibt es nur bei Eintritt ab 1. Juli, bei Austritt vor Ablauf der sechsmonatigen Wartezeit oder bei Austritt bis 30. Juni (§ 5 Abs. 1 BUrlG). Sonst besteht der volle Jahresurlaub.
           </p>
           {(beschaeftigungsBeginn || beschaeftigungsEnde) && (
@@ -163,7 +163,7 @@ export default function UrlaubstageRechner() {
           </div>
           {teilzeit && (
             <div className="mb-4">
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage pro Woche (Teilzeit)</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Arbeitstage pro Woche (Teilzeit)</label>
               <input
                 type="number"
                 inputMode="numeric"
@@ -174,7 +174,7 @@ export default function UrlaubstageRechner() {
                 onBlur={e => setTeilzeitTage(clampInputValueOnBlur(e.target.value, 1, arbeitstageProWoche - 1))}
                 className="input-field w-32"
               />
-              <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 Umrechnung: {teilzeitTage}/{arbeitstageProWoche} der Vollzeit-Tage
               </p>
             </div>
@@ -203,7 +203,7 @@ export default function UrlaubstageRechner() {
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmtZahl(anspruchErgebnis.gesamt)} Tage
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   ≈ {fmtZahl(anspruchErgebnis.wochen)} Wochen Urlaub
                 </p>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
@@ -213,17 +213,17 @@ export default function UrlaubstageRechner() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesetzl. Minimum</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Gesetzl. Minimum</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {fmtZahl(anspruchErgebnis.gesetzlichMinimum)} Tage
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Über Minimum</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Über Minimum</p>
                   <p className={`text-lg font-bold ${
                     anspruchErgebnis.ueberMinimum >= 0
-                      ? 'text-green-600 dark:text-green-400'
-                      : 'text-red-600 dark:text-red-400'
+                      ? 'text-green-700 dark:text-green-400'
+                      : 'text-red-700 dark:text-red-300'
                   }`}>
                     {anspruchErgebnis.ueberMinimum >= 0 ? '+' : ''}{fmtZahl(anspruchErgebnis.ueberMinimum)} Tage
                   </p>
@@ -283,7 +283,7 @@ export default function UrlaubstageRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Urlaubstage pro Jahr</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Urlaubstage pro Jahr</label>
               <input
                 type="number"
                 inputMode="numeric"
@@ -296,7 +296,7 @@ export default function UrlaubstageRechner() {
               />
             </div>
             <div>
-              <label htmlFor="urlaubstage-select-2" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage pro Woche</label>
+              <label htmlFor="urlaubstage-select-2" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Arbeitstage pro Woche</label>
               <select id="urlaubstage-select-2"
                 value={restArbeitstage}
                 onChange={e => setRestArbeitstage(parseInt(e.target.value, 10) as 5 | 6)}
@@ -310,7 +310,7 @@ export default function UrlaubstageRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Austrittsdatum (letzter Tag)</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Austrittsdatum (letzter Tag)</label>
               <input
                 type="date"
                 value={kuendigungsDatum}
@@ -319,7 +319,7 @@ export default function UrlaubstageRechner() {
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bereits genommene Tage</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bereits genommene Tage</label>
               <input
                 type="number"
                 inputMode="numeric"
@@ -341,7 +341,7 @@ export default function UrlaubstageRechner() {
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmtZahl(resturlaubErgebnis.resturlaub)} Tage
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   {resturlaubErgebnis.vollerAnspruch
                     ? 'Voller Jahresanspruch (Austritt in 2. Jahreshälfte)'
                     : 'Anteiliger Anspruch (Austritt in 1. Jahreshälfte)'}
@@ -353,19 +353,19 @@ export default function UrlaubstageRechner() {
 
               <div className="grid grid-cols-3 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Anspruch</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Anspruch</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {fmtZahl(resturlaubErgebnis.anspruchBisKuendigung)}
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Genommen</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Genommen</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {resturlaubErgebnis.bereitsGenommen}
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Rest</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Rest</p>
                   <p className="text-lg font-bold text-primary-600 dark:text-primary-400">
                     {fmtZahl(resturlaubErgebnis.resturlaub)}
                   </p>
@@ -425,7 +425,7 @@ export default function UrlaubstageRechner() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-gray-600 dark:text-gray-500 mt-6 text-center">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mt-6 text-center">
         Allgemeine Information auf Basis des BUrlG. Tarifverträge und Betriebsvereinbarungen können abweichende Regelungen enthalten. Für verbindliche Auskünfte wenden Sie sich an einen Fachanwalt für Arbeitsrecht.
       </p>
     </div>

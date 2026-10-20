@@ -64,7 +64,7 @@ export default function WohngeldRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliches Bruttoeinkommen</label>
             <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="2.000" einheit="€" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Gesamteinkommen aller Haushaltsmitglieder</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Gesamteinkommen aller Haushaltsmitglieder</p>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@ export default function WohngeldRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Miete (kalt + kalte NK)</label>
             <NummerEingabe value={miete} onChange={setMiete} placeholder="600" einheit="€" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Kaltmiete + kalte Nebenkosten, oder Belastung bei Eigentum</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Kaltmiete + kalte Nebenkosten, oder Belastung bei Eigentum</p>
           </div>
           <div>
             <label htmlFor="wohngeld-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mietstufe der Gemeinde</label>
@@ -93,8 +93,8 @@ export default function WohngeldRechner() {
                 <option key={o.value} value={o.value}>{o.label}</option>
               ))}
             </select>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              <a href="https://www.bmwsb.bund.de/SharedDocs/downloads/Webs/BMWSB/DE/veroeffentlichungen/wohnen/wohngeld-mietstufen.html" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline">Mietstufe Ihrer Gemeinde prüfen → bmwsb.bund.de</a>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              <a href="https://www.bmwsb.bund.de/SharedDocs/downloads/Webs/BMWSB/DE/veroeffentlichungen/wohnen/wohngeld-mietstufen.html" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">Mietstufe Ihrer Gemeinde prüfen → bmwsb.bund.de</a>
             </p>
           </div>
         </div>
@@ -105,9 +105,9 @@ export default function WohngeldRechner() {
               type="checkbox"
               checked={heizkosten}
               onChange={e => setHeizkosten(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Heizkostenpauschale einrechnen <span className="text-gray-600">(Wohngeld-Plus)</span></span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Heizkostenpauschale einrechnen <span className="text-gray-600 dark:text-gray-400">(Wohngeld-Plus)</span></span>
           </label>
         </div>
 
@@ -118,7 +118,7 @@ export default function WohngeldRechner() {
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-          Freibeträge <span className="text-gray-600 font-normal text-xs">(optional)</span>
+          Freibeträge <span className="text-gray-600 dark:text-gray-400 font-normal text-xs">(optional)</span>
         </h2>
 
         <div className="space-y-3">
@@ -127,9 +127,9 @@ export default function WohngeldRechner() {
               type="checkbox"
               checked={erwerbstaetig}
               onChange={e => setErwerbstaetig(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Erwerbstätig <span className="text-gray-600">(Erwerbstätigenfreibetrag)</span></span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Erwerbstätig <span className="text-gray-600 dark:text-gray-400">(Erwerbstätigenfreibetrag)</span></span>
           </label>
 
           <label className="flex items-center gap-2 cursor-pointer">
@@ -137,9 +137,9 @@ export default function WohngeldRechner() {
               type="checkbox"
               checked={alleinerziehend}
               onChange={e => setAlleinerziehend(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Alleinerziehend <span className="text-gray-600">(110 €/Monat pauschal, § 17 Nr. 3 WoGG)</span></span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Alleinerziehend <span className="text-gray-600 dark:text-gray-400">(110 €/Monat pauschal, § 17 Nr. 3 WoGG)</span></span>
           </label>
 
           <label className="flex items-center gap-2 cursor-pointer">
@@ -147,9 +147,9 @@ export default function WohngeldRechner() {
               type="checkbox"
               checked={schwerbehindert}
               onChange={e => setSchwerbehindert(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">Schwerbehindert <span className="text-gray-600">(GdB ≥ 50)</span></span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Schwerbehindert <span className="text-gray-600 dark:text-gray-400">(GdB ≥ 50)</span></span>
           </label>
         </div>
       </div>
@@ -185,19 +185,19 @@ export default function WohngeldRechner() {
           {/* Detail-Karten */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Bereinigtes Einkommen</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Bereinigtes Einkommen</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.bereinigtesEinkommen)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Berücksichtigte Miete</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Berücksichtigte Miete</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.beruecksichtigteMiete)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Höchstbetrag (Stufe {mietstufe})</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Höchstbetrag (Stufe {mietstufe})</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.hoechstbetragMiete)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Freibeträge</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Freibeträge</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.freibetraege)} €</p>
             </div>
           </div>
@@ -216,12 +216,12 @@ export default function WohngeldRechner() {
                   </tr>
                   <tr>
                     <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Pauschalabzug (30 %)</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(Math.round(parseDeutscheZahl(einkommen) * 0.30))} €</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">−{fmtEuro(Math.round(parseDeutscheZahl(einkommen) * 0.30))} €</td>
                   </tr>
                   {ergebnis.freibetraege > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Freibeträge</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.freibetraege)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">−{fmtEuro(ergebnis.freibetraege)} €</td>
                     </tr>
                   )}
                   <tr className="bg-gray-50 dark:bg-gray-700/30 font-medium">
@@ -240,7 +240,7 @@ export default function WohngeldRechner() {
                   {/* W185: Klimakomponente erhöht den Höchstbetrag (§ 12 Abs. 7 WoGG), vorher als Zuschlag auf die Miete gezeigt */}
                   <tr>
                     <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">+ Klimakomponente (erhöht den Höchstbetrag)</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro2(ergebnis.klimaKomponente)} €</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro2(ergebnis.klimaKomponente)} €</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Berücksichtigte Miete</td>
@@ -249,7 +249,7 @@ export default function WohngeldRechner() {
                   {ergebnis.heizkostenZuschlag > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">+ Heizkostenpauschale</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro2(ergebnis.heizkostenZuschlag)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro2(ergebnis.heizkostenZuschlag)} €</td>
                     </tr>
                   )}
                   <tr className="bg-gray-50 dark:bg-gray-700/30 font-medium">
@@ -272,24 +272,24 @@ export default function WohngeldRechner() {
               <h2 className="font-bold text-blue-800 dark:text-blue-300 text-sm mb-2">📊 Mietbelastungsquote</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-blue-700/70 dark:text-blue-400/70">Ohne Wohngeld</p>
-                  <p className={`text-xl font-bold ${ergebnis.mietbelastungOhne > 40 ? 'text-red-600 dark:text-red-400' : 'text-blue-800 dark:text-blue-300'}`}>
+                  <p className="text-xs text-blue-800 dark:text-blue-300">Ohne Wohngeld</p>
+                  <p className={`text-xl font-bold ${ergebnis.mietbelastungOhne > 40 ? 'text-red-700 dark:text-red-300' : 'text-blue-800 dark:text-blue-300'}`}>
                     {fmtEuro2(ergebnis.mietbelastungOhne)} %
                   </p>
-                  <p className="text-xs text-blue-700/60 dark:text-blue-400/60">{fmtEuro(parseDeutscheZahl(miete))} € von {fmtEuro(parseDeutscheZahl(einkommen))} €</p>
+                  <p className="text-xs text-blue-800 dark:text-blue-300">{fmtEuro(parseDeutscheZahl(miete))} € von {fmtEuro(parseDeutscheZahl(einkommen))} €</p>
                 </div>
                 {ergebnis.hatAnspruch && (
                   <div>
-                    <p className="text-xs text-blue-700/70 dark:text-blue-400/70">Mit Wohngeld</p>
-                    <p className="text-xl font-bold text-green-600 dark:text-green-400">
+                    <p className="text-xs text-blue-800 dark:text-blue-300">Mit Wohngeld</p>
+                    <p className="text-xl font-bold text-green-700 dark:text-green-400">
                       {fmtEuro2(ergebnis.mietbelastungMit)} %
                     </p>
-                    <p className="text-xs text-blue-700/60 dark:text-blue-400/60">{fmtEuro(parseDeutscheZahl(miete) - ergebnis.wohngeldMonat)} € von {fmtEuro(parseDeutscheZahl(einkommen))} €</p>
+                    <p className="text-xs text-blue-800 dark:text-blue-300">{fmtEuro(parseDeutscheZahl(miete) - ergebnis.wohngeldMonat)} € von {fmtEuro(parseDeutscheZahl(einkommen))} €</p>
                   </div>
                 )}
               </div>
               {ergebnis.mietbelastungOhne > 40 && (
-                <p className="text-xs text-red-600 dark:text-red-400 mt-2">⚠️ Eine Mietbelastung über 40% gilt als kritisch hoch.</p>
+                <p className="text-xs text-red-700 dark:text-red-300 mt-2">⚠️ Eine Mietbelastung über 40% gilt als kritisch hoch.</p>
               )}
             </div>
           )}

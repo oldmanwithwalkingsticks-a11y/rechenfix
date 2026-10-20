@@ -55,35 +55,35 @@ export default function NebenkostenRechner() {
       <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nebenkosten (monatlich)</p>
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Heizkosten</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Heizkosten</label>
           <NummerEingabe value={heizkosten} onChange={setHeizkosten} placeholder="80" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Warmwasser</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Warmwasser</label>
           <NummerEingabe value={warmwasser} onChange={setWarmwasser} placeholder="25" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Wasser/Abwasser</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wasser/Abwasser</label>
           <NummerEingabe value={wasser} onChange={setWasser} placeholder="35" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Müllentsorgung</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Müllentsorgung</label>
           <NummerEingabe value={muell} onChange={setMuell} placeholder="20" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Grundsteuer</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundsteuer</label>
           <NummerEingabe value={grundsteuer} onChange={setGrundsteuer} placeholder="15" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Gebäudeversicherung</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Gebäudeversicherung</label>
           <NummerEingabe value={versicherung} onChange={setVersicherung} placeholder="10" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Hauswart</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Hauswart</label>
           <NummerEingabe value={hauswart} onChange={setHauswart} placeholder="15" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Sonstige</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Sonstige</label>
           <NummerEingabe value={sonstige} onChange={setSonstige} placeholder="0" einheit="€" />
         </div>
       </div>
@@ -93,20 +93,20 @@ export default function NebenkostenRechner() {
           <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
             <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">Warmmiete (Kaltmiete + Nebenkosten)</p>
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">{fmt(ergebnis.warmmiete)} €</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">davon {fmt(ergebnis.nebenkostenMonat)} € Nebenkosten</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">davon {fmt(ergebnis.nebenkostenMonat)} € Nebenkosten</p>
           </div>
 
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Nebenkosten/Jahr</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Nebenkosten/Jahr</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.nebenkostenJahr)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Nebenkosten/m²</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Nebenkosten/m²</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.nebenkostenProQm)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Anteil an Warmmiete</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Anteil an Warmmiete</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{ergebnis.anteilAnWarmmiete.toLocaleString('de-DE')} %</p>
             </div>
           </div>

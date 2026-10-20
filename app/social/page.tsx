@@ -128,9 +128,9 @@ export default async function SocialBioHubPage({ searchParams }: PageProps<'/soc
           className="mx-auto mb-3"
         />
         <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-700 dark:text-primary-300">
-          rechen<span className="text-emerald-600">fix</span>.de
+          rechen<span className="text-emerald-700">fix</span>.de
         </h1>
-        <p className="mt-2 text-sm sm:text-base text-gray-500 dark:text-gray-400">
+        <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
           Schnell gerechnet — direkt zum Rechner aus dem Post.
         </p>
       </header>
@@ -138,7 +138,7 @@ export default async function SocialBioHubPage({ searchParams }: PageProps<'/soc
       {/* Block 1: aktueller Bio-Rechner (IG „Heute auf Instagram" / TikTok „Aus deinem TikTok-Video") */}
       {current && (
         <section className="mb-8">
-          <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
+          <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 mb-3">
             {blockLabel}
           </h2>
           <CalcButton rechner={current} size="lg" />
@@ -147,7 +147,7 @@ export default async function SocialBioHubPage({ searchParams }: PageProps<'/soc
 
       {/* Block 2: Beliebte Rechner */}
       <section className="mb-10">
-        <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
+        <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 mb-3">
           Beliebte Rechner
         </h2>
         <div className="space-y-3">

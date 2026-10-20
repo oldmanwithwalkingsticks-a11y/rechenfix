@@ -224,7 +224,7 @@ export default function FlaechenRechner() {
             <Feld label="Grundseite (a)" value={grundseite} onChange={setGrundseite} einheit={e} />
             <Feld label="Höhe (h)" value={hoehe} onChange={setHoehe} einheit={e} hinweis="Oder leer lassen und 3 Seiten eingeben (Heron)" />
             <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Für Umfang / Heron-Formel (optional):</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Für Umfang / Heron-Formel (optional):</p>
               <div className="grid grid-cols-2 gap-3">
                 <Feld label="Seite b" value={seiteB} onChange={setSeiteB} einheit={e} small />
                 <Feld label="Seite c" value={seiteC} onChange={setSeiteC} einheit={e} small />
@@ -257,7 +257,7 @@ export default function FlaechenRechner() {
             <Feld label="Seite c (oben)" value={trapezC} onChange={setTrapezC} einheit={e} />
             <Feld label="Höhe (h)" value={trapezH} onChange={setTrapezH} einheit={e} />
             <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Für Umfang (optional):</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Für Umfang (optional):</p>
               <div className="grid grid-cols-2 gap-3">
                 <Feld label="Seite b" value={trapezB} onChange={setTrapezB} einheit={e} small />
                 <Feld label="Seite d" value={trapezD} onChange={setTrapezD} einheit={e} small />
@@ -493,7 +493,7 @@ function Feld({ label, value, onChange, einheit, hinweis, small }: {
       <div className={small ? 'w-full' : 'w-full sm:w-1/2'}>
         <NummerEingabe value={value} onChange={onChange} placeholder="0" einheit={einheit} />
       </div>
-      {hinweis && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{hinweis}</p>}
+      {hinweis && <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{hinweis}</p>}
     </div>
   );
 }

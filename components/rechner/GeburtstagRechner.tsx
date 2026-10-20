@@ -155,7 +155,7 @@ export default function GeburtstagRechner() {
                     <span className={`text-base ${ms.vergangen ? '' : 'opacity-70'}`}>
                       {ms.vergangen ? '✅' : '⏳'}
                     </span>
-                    <span className={`font-medium ${ms.vergangen ? 'text-gray-800 dark:text-gray-200' : 'text-gray-500 dark:text-gray-400'}`}>
+                    <span className={`font-medium ${ms.vergangen ? 'text-gray-800 dark:text-gray-200' : 'text-gray-600 dark:text-gray-400'}`}>
                       {ms.label}
                     </span>
                   </div>
@@ -205,9 +205,9 @@ export default function GeburtstagRechner() {
 function FactCard({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{label}</p>
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">{label}</p>
       <p className="text-lg font-bold text-gray-800 dark:text-gray-200 tabular-nums">{value}</p>
-      {sub && <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{sub}</p>}
+      {sub && <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">{sub}</p>}
     </div>
   );
 }

@@ -72,7 +72,7 @@ export default function HefeUmrechner() {
           Menge
         </h2>
         <NummerEingabe value={menge} onChange={setMenge} placeholder="42" einheit="g" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Tipp: 1 Würfel Frischhefe = 42 g. 1 Päckchen Trockenhefe = 7 g.
         </p>
       </div>

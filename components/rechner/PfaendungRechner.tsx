@@ -65,7 +65,7 @@ export default function PfaendungRechner() {
           Monatliches Nettoeinkommen
         </h2>
         <NummerEingabe value={netto} onChange={setNetto} placeholder="2.500" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Nettolohn nach Steuern und Sozialabgaben. Bei unregelmäßigem Einkommen: Durchschnitt der letzten 12 Monate.
         </p>
       </div>
@@ -126,7 +126,7 @@ export default function PfaendungRechner() {
           onChange={e => setStichtagMonat(e.target.value)}
           className="w-full min-h-[48px] px-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Die Pfändungsfreigrenzen wurden zum 01.07.2026 angehoben. Mit diesem Feld können Sie Vorher-/Nachher-Szenarien durchspielen.
         </p>
       </div>
@@ -154,10 +154,10 @@ export default function PfaendungRechner() {
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Aufteilung</h2>
         <div className="h-10 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden flex">
-          <div className="h-full bg-green-500 flex items-center justify-center text-xs font-semibold text-white" style={{ width: `${freiBreite}%` }}>
+          <div className="h-full bg-green-700 flex items-center justify-center text-xs font-semibold text-white" style={{ width: `${freiBreite}%` }}>
             {freiBreite > 15 && 'Pfändungsfrei'}
           </div>
-          <div className="h-full bg-red-500 flex items-center justify-center text-xs font-semibold text-white" style={{ width: `${100 - freiBreite}%` }}>
+          <div className="h-full bg-red-600 flex items-center justify-center text-xs font-semibold text-white" style={{ width: `${100 - freiBreite}%` }}>
             {(100 - freiBreite) > 15 && 'Pfändbar'}
           </div>
         </div>
@@ -184,7 +184,7 @@ export default function PfaendungRechner() {
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">
                     + Erhöhung für {ergebnis.unterhaltspflichten} unterhaltsberechtigte Person{ergebnis.unterhaltspflichten > 1 ? 'en' : ''}
                   </td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.erhoehungUnterhalt)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.erhoehungUnterhalt)} €</td>
                 </tr>
               )}
               <tr className="bg-green-50 dark:bg-green-500/10 font-medium">
@@ -206,7 +206,7 @@ export default function PfaendungRechner() {
               {ergebnis.ueberObergrenze && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Obergrenze überschritten</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">Darüber: 100 % pfändbar</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">Darüber: 100 % pfändbar</td>
                 </tr>
               )}
               <tr className="bg-red-50 dark:bg-red-500/10 font-bold">
@@ -240,8 +240,8 @@ export default function PfaendungRechner() {
               {ergebnis.beispielTabelle.map(row => (
                 <tr key={row.netto}>
                   <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">{fmtEuro0(row.netto)} €</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">{fmtEuro0(row.frei)} €</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">{fmtEuro0(row.pfaendbar)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">{fmtEuro0(row.frei)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">{fmtEuro0(row.pfaendbar)} €</td>
                 </tr>
               ))}
             </tbody>
@@ -261,7 +261,7 @@ export default function PfaendungRechner() {
           {' '}Unter der Grenze gilt die Pauschalquote aus § 850c Abs. 3 ZPO
           ({ergebnis.pfaendungsQuote} % für {ergebnis.unterhaltspflichten} Unterhaltsberechtigte).
           {ergebnis.ueberObergrenze && (
-            <span className="text-red-700 dark:text-red-400 font-semibold"> Ihr Einkommen liegt über dieser Grenze.</span>
+            <span className="text-red-700 dark:text-red-300 font-semibold"> Ihr Einkommen liegt über dieser Grenze.</span>
           )}
         </p>
       </div>

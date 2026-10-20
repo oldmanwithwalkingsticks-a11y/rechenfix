@@ -88,7 +88,7 @@ export default function FfmiRechner() {
         <div>
           <label htmlFor="ffmi-kfa" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körperfettanteil</label>
           <NummerEingabe value={kfa} onChange={setKfa} placeholder="15" einheit="%" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Aus Waage, Caliper oder Schätzung — bestimmt das Ergebnis maßgeblich.</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Aus Waage, Caliper oder Schätzung — bestimmt das Ergebnis maßgeblich.</p>
         </div>
         <div>
           <label htmlFor="ffmi-geschlecht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschlecht (nur für die Einordnung)</label>
@@ -115,7 +115,7 @@ export default function FfmiRechner() {
               </div>
             </div>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
             Schätzwert, abhängig von der Körperfett-Messung. Eine Kennzahl zur Einordnung — kein Fitness- oder Schönheitsziel. Ersetzt keine ärztliche Beratung.
           </p>
 
@@ -157,7 +157,7 @@ export default function FfmiRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               Populationsbasierte Richtwerte zur Einordnung, keine Vorgabe. Werte gelten für alle Körpertypen gleichermaßen.
             </p>
           </div>
@@ -178,7 +178,7 @@ export default function FfmiRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Gewicht, Größe und Körperfettanteil ein, um den FFMI zu berechnen.
         </p>
       )}

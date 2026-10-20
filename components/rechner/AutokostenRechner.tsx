@@ -145,7 +145,7 @@ export default function AutokostenRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kfz-Versicherung</label>
             <NummerEingabe value={versicherung} onChange={setVersicherung} placeholder="80" einheit="€/Monat" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Haftpflicht + Teilkasko/Vollkasko</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Haftpflicht + Teilkasko/Vollkasko</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kfz-Steuer</label>
@@ -215,23 +215,23 @@ export default function AutokostenRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wartung &amp; Inspektion</label>
             <NummerEingabe value={wartung} onChange={setWartung} placeholder="600" einheit="€/Jahr" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Ölwechsel, Inspektion, Verschleißteile</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Ölwechsel, Inspektion, Verschleißteile</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reifen</label>
             <NummerEingabe value={reifen} onChange={setReifen} placeholder="400" einheit="€/Jahr" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Reifenwechsel + anteilige Neuanschaffung</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Reifenwechsel + anteilige Neuanschaffung</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">TÜV / HU+AU</label>
             <NummerEingabe value={tuev} onChange={setTuev} placeholder="120" einheit="€ / 2 Jahre" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Parkkosten <span className="text-gray-600 font-normal">(optional)</span></label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Parkkosten <span className="text-gray-600 dark:text-gray-400 font-normal">(optional)</span></label>
             <NummerEingabe value={parkkosten} onChange={setParkkosten} placeholder="0" einheit="€/Monat" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Waschanlage / Pflege <span className="text-gray-600 font-normal">(optional)</span></label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Waschanlage / Pflege <span className="text-gray-600 dark:text-gray-400 font-normal">(optional)</span></label>
             <NummerEingabe value={waschanlage} onChange={setWaschanlage} placeholder="15" einheit="€/Monat" />
           </div>
         </div>
@@ -263,19 +263,19 @@ export default function AutokostenRechner() {
           {/* Kennzahlen */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Monat</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Monat</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.gesamtMonat)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Kilometer</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Kilometer</p>
               <p className="text-xl font-bold text-primary-600 dark:text-primary-400">{fmtEuro2(ergebnis.kostenProKm)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Tag</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Tag</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-200">{fmtEuro2(ergebnis.kostenProTag)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Restwert</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Restwert</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.restwert)} €</p>
             </div>
           </div>
@@ -338,14 +338,14 @@ export default function AutokostenRechner() {
                       </td>
                       <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(b.monat)} €</td>
                       <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(b.jahr)} €</td>
-                      <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400 whitespace-nowrap">{Math.round(b.anteilProzent)} %</td>
+                      <td className="px-4 py-2 text-right tabular-nums text-gray-600 dark:text-gray-400 whitespace-nowrap">{Math.round(b.anteilProzent)} %</td>
                     </tr>
                   ))}
                   <tr className="bg-gray-50 dark:bg-gray-700/30 font-bold">
                     <td className="px-4 py-2.5 text-gray-800 dark:text-gray-200">Gesamt</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-primary-600 dark:text-primary-400 whitespace-nowrap">{fmtEuro(ergebnis.gesamtMonat)} €</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-primary-600 dark:text-primary-400 whitespace-nowrap">{fmtEuro(ergebnis.gesamtJahr)} €</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400">100 %</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">100 %</td>
                   </tr>
                 </tbody>
               </table>
@@ -357,19 +357,19 @@ export default function AutokostenRechner() {
             <h2 className="font-bold text-amber-800 dark:text-amber-300 text-sm mb-2">⛽ Kraftstoffverbrauch</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
               <div>
-                <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">Verbrauch</p>
+                <p className="text-amber-800 dark:text-amber-300 text-xs">Verbrauch</p>
                 <p className="font-semibold text-amber-800 dark:text-amber-300">{verbrauch} {VERBRAUCH_EINHEITEN[antrieb]}</p>
               </div>
               <div>
-                <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">Preis</p>
+                <p className="text-amber-800 dark:text-amber-300 text-xs">Preis</p>
                 <p className="font-semibold text-amber-800 dark:text-amber-300">{kraftstoffpreis} {ANTRIEB_EINHEITEN[antrieb]}</p>
               </div>
               <div>
-                <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">{antrieb === 'elektro' ? 'kWh / Jahr' : 'Liter / Jahr'}</p>
+                <p className="text-amber-800 dark:text-amber-300 text-xs">{antrieb === 'elektro' ? 'kWh / Jahr' : 'Liter / Jahr'}</p>
                 <p className="font-semibold text-amber-800 dark:text-amber-300">{fmtEuro(ergebnis.kraftstoffVerbrauchJahr)}</p>
               </div>
               <div>
-                <p className="text-amber-700/70 dark:text-amber-400/70 text-xs">Spritkosten / km</p>
+                <p className="text-amber-800 dark:text-amber-300 text-xs">Spritkosten / km</p>
                 <p className="font-semibold text-amber-800 dark:text-amber-300">{fmtEuro2(ergebnis.kraftstoffProKm)} €</p>
               </div>
             </div>
@@ -396,13 +396,13 @@ export default function AutokostenRechner() {
           {/* Kosten pro Strecke */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-1">🛣️ Spritkosten pro Strecke</h2>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Reine Kraftstoffkosten — ohne Fixkosten wie Versicherung oder Wertverlust</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-4">Reine Kraftstoffkosten — ohne Fixkosten wie Versicherung oder Wertverlust</p>
             <div className="space-y-3">
               {ergebnis.streckenKosten.map(s => (
                 <div key={s.label} className="flex justify-between items-center text-sm">
                   <div>
                     <span className="text-gray-700 dark:text-gray-300 font-medium">{s.label}</span>
-                    <span className="text-gray-600 dark:text-gray-500 text-xs ml-1">({s.km} km{s.hinweis ? `, ${s.hinweis}` : ''})</span>
+                    <span className="text-gray-600 dark:text-gray-400 text-xs ml-1">({s.km} km{s.hinweis ? `, ${s.hinweis}` : ''})</span>
                   </div>
                   <span className="font-bold text-gray-800 dark:text-gray-200 tabular-nums">{fmtEuro2(s.kosten)} €</span>
                 </div>

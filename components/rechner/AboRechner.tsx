@@ -133,7 +133,7 @@ export default function AboRechner() {
               placeholder="€/Mon."
               onKeyDown={e => e.key === 'Enter' && addEigenesAbo()}
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-sm">€</span>
           </div>
           <button
             onClick={addEigenesAbo}
@@ -162,7 +162,7 @@ export default function AboRechner() {
                     }}
                     className="input-field text-sm py-1 pr-7 text-right"
                   />
-                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs">€</span>
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-xs">€</span>
                 </div>
                 <button
                   onClick={() => {
@@ -173,7 +173,7 @@ export default function AboRechner() {
                       removeAbo(a.id);
                     }
                   }}
-                  className="w-7 h-7 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors text-sm font-bold flex items-center justify-center"
+                  className="w-7 h-7 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors text-sm font-bold flex items-center justify-center"
                 >
                   ×
                 </button>
@@ -216,10 +216,10 @@ export default function AboRechner() {
             <p className="text-sm text-red-800 dark:text-red-300">
               💸 In <strong>10 Jahren</strong> geben Sie für Ihre Abos aus:
             </p>
-            <p className="text-2xl font-bold text-red-700 dark:text-red-400 mt-1">
+            <p className="text-2xl font-bold text-red-700 dark:text-red-300 mt-1">
               {fmt(ergebnis.gesamtIn10Jahren)} €
             </p>
-            <p className="text-xs text-red-600/70 dark:text-red-400/60 mt-1">
+            <p className="text-xs text-red-800 dark:text-red-300 mt-1">
               {ergebnis.gesamtIn10Jahren >= 30000
                 ? 'Das ist ein neues Auto!'
                 : ergebnis.gesamtIn10Jahren >= 15000
@@ -243,7 +243,7 @@ export default function AboRechner() {
                     <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: a.farbe }} />
                     <span className="text-sm text-gray-700 dark:text-gray-300 flex-1">{a.name}</span>
                     <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{fmt(a.betrag)} €</span>
-                    <span className="text-xs text-gray-600 w-10 text-right">{Math.round(a.prozent)}%</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 w-10 text-right">{Math.round(a.prozent)}%</span>
                   </div>
                 ))}
               </div>
@@ -291,7 +291,7 @@ export default function AboRechner() {
                 ))}
                 {' '}und sparen Sie <strong>{fmt(ergebnis.kuendigungsErsparnis)} € pro Jahr</strong>.
               </p>
-              <p className="text-xs text-green-600/70 dark:text-green-400/60 mt-2">
+              <p className="text-xs text-green-800 dark:text-green-300 mt-2">
                 Tipp: Prüfen Sie bei jedem Abo, ob Sie es in den letzten 30 Tagen wirklich genutzt haben.
               </p>
             </div>

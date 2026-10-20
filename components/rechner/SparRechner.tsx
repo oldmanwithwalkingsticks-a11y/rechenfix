@@ -63,7 +63,7 @@ export default function SparRechner() {
             Dynamik (jährl. Erhöhung)
           </label>
           <NummerEingabe value={dynamik} onChange={setDynamik} placeholder="0" einheit="%" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Sparrate jährlich erhöhen</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Sparrate jährlich erhöhen</p>
         </div>
         <div>
           <RadioToggleGroup
@@ -93,16 +93,16 @@ export default function SparRechner() {
           {/* Aufschlüsselung */}
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Eigenkapital</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Eigenkapital</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.eigenkapital)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Zinserträge</p>
-              <p className="text-lg font-bold text-accent-600 dark:text-accent-400">{fmt(ergebnis.gesamtzinsen)} €</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Zinserträge</p>
+              <p className="text-lg font-bold text-accent-700 dark:text-accent-400">{fmt(ergebnis.gesamtzinsen)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Zinsanteil</p>
-              <p className="text-lg font-bold text-green-600 dark:text-green-400">{ergebnis.zinsenAnteil.toLocaleString('de-DE')} %</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Zinsanteil</p>
+              <p className="text-lg font-bold text-green-700 dark:text-green-400">{ergebnis.zinsenAnteil.toLocaleString('de-DE')} %</p>
             </div>
           </div>
 
@@ -179,7 +179,7 @@ export default function SparRechner() {
                   const zinsenAnteil = maxKapital > 0 ? (j.zinsenGesamt / maxKapital * 100) : 0;
                   return (
                     <div key={j.jahr} className="flex items-center gap-2">
-                      <span className="text-xs text-gray-500 dark:text-gray-400 w-8 text-right shrink-0">{j.jahr}</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400 w-8 text-right shrink-0">{j.jahr}</span>
                       <div className="flex-1 h-5 rounded-full overflow-hidden flex bg-gray-100 dark:bg-gray-700">
                         <div className="bg-primary-400 dark:bg-primary-500" style={{ width: `${eigenAnteil}%` }} />
                         <div className="bg-accent-400 dark:bg-accent-500" style={{ width: `${zinsenAnteil}%` }} />
@@ -203,7 +203,7 @@ export default function SparRechner() {
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
                 Jahr-für-Jahr-Tabelle ({ergebnis.jahre.length} Jahre)
               </p>
-              <svg className={`w-5 h-5 text-gray-600 transition-transform ${tabelleOffen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-5 h-5 text-gray-600 dark:text-gray-400 transition-transform ${tabelleOffen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
@@ -212,11 +212,11 @@ export default function SparRechner() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/20">
-                      <th className="text-left px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Jahr</th>
-                      <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Sparrate</th>
-                      <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Einzahlung</th>
-                      <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Zinsen</th>
-                      <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Kapital</th>
+                      <th className="text-left px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Jahr</th>
+                      <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Sparrate</th>
+                      <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Einzahlung</th>
+                      <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Zinsen</th>
+                      <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Kapital</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -225,7 +225,7 @@ export default function SparRechner() {
                         <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">{j.jahr}</td>
                         <td className="px-4 py-2.5 text-right text-gray-600 dark:text-gray-400">{fmt(j.sparrate)} €</td>
                         <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">{fmt(j.einzahlungGesamt)} €</td>
-                        <td className="px-4 py-2.5 text-right font-medium text-accent-600 dark:text-accent-400">{fmt(j.zinsenGesamt)} €</td>
+                        <td className="px-4 py-2.5 text-right font-medium text-accent-700 dark:text-accent-400">{fmt(j.zinsenGesamt)} €</td>
                         <td className="px-4 py-2.5 text-right font-bold text-gray-800 dark:text-gray-100">{fmt(j.kapital)} €</td>
                       </tr>
                     ))}

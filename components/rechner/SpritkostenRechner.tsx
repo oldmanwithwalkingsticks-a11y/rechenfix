@@ -107,15 +107,15 @@ export default function SpritkostenRechner() {
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Benzinverbrauch</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Benzinverbrauch</p>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.literGesamt)} L</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Kosten pro km</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Kosten pro km</p>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.kostenProKm)} €</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamtstrecke</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Gesamtstrecke</p>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.effektiveStrecke)} km</p>
               </div>
             </div>

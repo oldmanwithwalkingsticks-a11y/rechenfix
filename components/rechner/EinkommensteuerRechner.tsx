@@ -58,7 +58,7 @@ export default function EinkommensteuerRechner() {
           Zu versteuerndes Einkommen (Jahr)
         </h2>
         <NummerEingabe value={zvE} onChange={setZvE} placeholder="50.000" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Bruttoeinkommen abzüglich Werbungskosten, Sonderausgaben, außergewöhnliche Belastungen und Freibeträge.
         </p>
       </div>
@@ -198,7 +198,7 @@ export default function EinkommensteuerRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Grundfreibetrag {ergebnis.splitting ? '(Splitting)' : ''}</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro0(ergebnis.splitting ? ergebnis.grundfreibetrag * 2 : ergebnis.grundfreibetrag)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">−{fmtEuro0(ergebnis.splitting ? ergebnis.grundfreibetrag * 2 : ergebnis.grundfreibetrag)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Veranlagungsart</td>
@@ -211,7 +211,7 @@ export default function EinkommensteuerRechner() {
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">
                   + Solidaritätszuschlag
-                  <span className="text-xs text-gray-500 ml-1">(Freigrenze {fmtEuro0(ergebnis.soliFreigrenze)} €)</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">(Freigrenze {fmtEuro0(ergebnis.soliFreigrenze)} €)</span>
                 </td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(ergebnis.solidaritaetszuschlag)} €</td>
               </tr>
@@ -267,14 +267,14 @@ export default function EinkommensteuerRechner() {
             <line x1={aktuellerX} y1={aktuellerY} x2={aktuellerX} y2="100" stroke="#dc2626" strokeWidth="0.3" strokeDasharray="1,1" vectorEffect="non-scaling-stroke" />
           </svg>
         </div>
-        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-2">
           <span>0 €</span>
           <span>50k</span>
           <span>100k</span>
           <span>150k</span>
           <span>200k €</span>
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 text-center">
           Roter Punkt: Ihr aktuelles Einkommen ({fmtEuro0(parseDeutscheZahl(zvE))} €) mit ESt {fmtEuro0(ergebnis.einkommensteuer)} €
         </p>
       </div>

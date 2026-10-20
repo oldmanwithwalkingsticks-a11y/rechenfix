@@ -104,9 +104,9 @@ export default function OfflineSchalter() {
         {zustand === 'an' ? (
           <span className="text-primary-700 dark:text-primary-400">aktiv</span>
         ) : zustand === 'laeuft' ? (
-          <span className="text-gray-500">wird geändert …</span>
+          <span className="text-gray-600 dark:text-gray-400">wird geändert …</span>
         ) : zustand === 'unbekannt' ? (
-          <span className="text-gray-500">wird geprüft …</span>
+          <span className="text-gray-600 dark:text-gray-400">wird geprüft …</span>
         ) : (
           <span className="text-gray-600 dark:text-gray-400">nicht aktiv</span>
         )}

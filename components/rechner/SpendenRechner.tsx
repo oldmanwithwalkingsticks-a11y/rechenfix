@@ -62,7 +62,7 @@ export default function SpendenRechner() {
               einheit="€"
               placeholder="z.B. 50.000"
             />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               Nach allen Abzügen (zvE aus Steuerbescheid)
             </p>
           </div>
@@ -104,7 +104,7 @@ export default function SpendenRechner() {
           {/* Limit-Warnung: Spende überschreitet 20%-Grenze */}
           {ergebnis.spendenbetrag > ergebnis.maxAbsetzbar && (
             <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-4">
-              <p className="text-sm text-red-700 dark:text-red-400">
+              <p className="text-sm text-red-700 dark:text-red-300">
                 <strong>Hinweis: 20%-Grenze überschritten.</strong> Ihr Spendenbetrag von{' '}
                 <strong>{fmt(ergebnis.spendenbetrag)} €</strong> übersteigt die steuerlich
                 abziehbare Höchstgrenze von <strong>{fmt(ergebnis.maxAbsetzbar)} €</strong> (20 %
@@ -159,7 +159,7 @@ export default function SpendenRechner() {
                 <span className="text-sm text-gray-700 dark:text-gray-300">
                   Einkommensteuer-Ersparnis
                 </span>
-                <span className="font-medium text-sm text-green-600 dark:text-green-400">
+                <span className="font-medium text-sm text-green-700 dark:text-green-400">
                   {fmt(ergebnis.steuerersparnisESt)} €
                 </span>
               </div>
@@ -167,7 +167,7 @@ export default function SpendenRechner() {
                 <span className="text-sm text-gray-700 dark:text-gray-300">
                   Solidaritätszuschlag-Ersparnis
                 </span>
-                <span className="font-medium text-sm text-green-600 dark:text-green-400">
+                <span className="font-medium text-sm text-green-700 dark:text-green-400">
                   {fmt(ergebnis.steuerersparnisSoli)} €
                 </span>
               </div>
@@ -176,7 +176,7 @@ export default function SpendenRechner() {
                   <span className="text-sm text-gray-700 dark:text-gray-300">
                     Kirchensteuer-Ersparnis
                   </span>
-                  <span className="font-medium text-sm text-green-600 dark:text-green-400">
+                  <span className="font-medium text-sm text-green-700 dark:text-green-400">
                     {fmt(ergebnis.steuerersparnisKiSt)} €
                   </span>
                 </div>

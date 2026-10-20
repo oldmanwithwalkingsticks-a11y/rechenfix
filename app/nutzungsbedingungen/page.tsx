@@ -123,7 +123,7 @@ export default function NutzungsbedingungenSeite() {
             </p>
           </Section>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400">Stand: Oktober 2026</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Stand: Oktober 2026</p>
         </div>
       </div>
     </div>

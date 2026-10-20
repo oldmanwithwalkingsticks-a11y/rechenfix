@@ -142,10 +142,10 @@ export default function HundejahreRechner() {
           <li>Jahr 2: + 9 Menschenjahre (→ 24)</li>
           <li>Ab Jahr 3: + 4 (klein) / 5 (mittel) / 6 (groß) / 7 (Riese) pro Jahr</li>
         </ul>
-        <p className="text-xs text-gray-500 mt-2">Große Hunde altern schneller als kleine — deshalb ist der Faktor höher.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">Große Hunde altern schneller als kleine — deshalb ist der Faktor höher.</p>
       </div>
 
-      <p className="text-xs text-gray-500 mb-6">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
         ⚠️ Die 1:7-Formel ist überholt. Der tatsächliche Alterungsprozess hängt stark von Rasse, Größe und Pflege ab. Unser Rechner nutzt eine differenzierte Formel je nach Körpergröße.
       </p>
 

@@ -15,7 +15,7 @@ import CrossLink from '@/components/ui/CrossLink';
 const SPRIT_DEFAULT = SPRITPREISE_REFERENZ.superE10.toFixed(3).replace('.', ',');
 
 const FARBEN = ['bg-blue-500', 'bg-amber-500', 'bg-green-500', 'bg-purple-500', 'bg-red-400'];
-const FARBEN_TEXT = ['text-blue-600 dark:text-blue-400', 'text-amber-600 dark:text-amber-400', 'text-green-600 dark:text-green-400', 'text-purple-600 dark:text-purple-400', 'text-red-600 dark:text-red-400'];
+const FARBEN_TEXT = ['text-blue-600 dark:text-blue-400', 'text-amber-700 dark:text-amber-400', 'text-green-700 dark:text-green-400', 'text-purple-600 dark:text-purple-400', 'text-red-700 dark:text-red-300'];
 
 const VERPFLEGUNG_OPTIONEN = [
   { value: '25', label: 'Budget (25 €/Tag)' },

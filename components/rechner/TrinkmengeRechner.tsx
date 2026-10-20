@@ -93,7 +93,7 @@ export default function TrinkmengeRechner() {
               </div>
             </div>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
             Orientierungswert für gesunde Erwachsene. Auch zu viel Wasser in kurzer Zeit kann schaden. Bei Nieren- oder Herzerkrankungen gilt oft eine ärztlich verordnete Trinkmenge — dann ärztlichen Rat befolgen.
           </p>
 
@@ -139,7 +139,7 @@ export default function TrinkmengeRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               {/* W187: vorher „Rund 20 % der Flüssigkeit nimmt man üblicherweise über die Nahrung auf.“ */}
               Basis mit {faktorKg} ml/kg (Gesamtwasser). Nach den D-A-CH-Referenzwerten kommen bei Erwachsenen rund {fmt0(GETRAENKE_ANTEIL * 100)} % aus Getränken; der Rest stammt aus fester Nahrung (rund ein Drittel) und Oxidationswasser aus dem Stoffwechsel.
             </p>
@@ -159,7 +159,7 @@ export default function TrinkmengeRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Ihr Gewicht ein, um Flüssigkeitsbedarf und Trinkmenge grob zu schätzen.
         </p>
       )}

@@ -51,7 +51,7 @@ export default function ScheidungskostenRechner() {
           Gemeinsames Nettoeinkommen (beide Ehepartner)
         </h2>
         <NummerEingabe value={netto} onChange={setNetto} placeholder="5.000" einheit="€/Monat" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Der Verfahrenswert beträgt das 3-fache Ihres gemeinsamen monatlichen Nettoeinkommens (mindestens 3.000 €).
         </p>
       </div>
@@ -94,7 +94,7 @@ export default function ScheidungskostenRechner() {
           onChange={(v) => setVersorgungsausgleich(v === 'ja')}
         />
         {/* W187: vorher „erhöht den Verfahrenswert um 10%“ (pauschal, ein Anrecht, ohne Mindestwert) */}
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Der Versorgungsausgleich (Aufteilung der Rentenansprüche) ist der gesetzliche Regelfall. Er erhöht den Verfahrenswert je Anrecht um 10 % des dreifachen Nettoeinkommens, insgesamt mindestens um 1.000 € (§ 50 FamGKG).
         </p>
         {versorgungsausgleich && (
@@ -134,7 +134,7 @@ export default function ScheidungskostenRechner() {
                 />
                 <div className="flex-1">
                   <div className="text-sm font-medium text-gray-800 dark:text-gray-200">{label}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">{hint}</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">{hint}</div>
                 </div>
               </label>
             ))}
@@ -224,14 +224,14 @@ export default function ScheidungskostenRechner() {
         </div>
         <div className="grid grid-cols-2 divide-x divide-gray-100 dark:divide-gray-700">
           <div className={`p-4 ${art === 'einvernehmlich' ? 'bg-green-50 dark:bg-green-500/10' : ''}`}>
-            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">🤝 Einvernehmlich</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400 uppercase tracking-wide">🤝 Einvernehmlich</div>
             <div className="text-2xl font-bold text-green-700 dark:text-green-300 mt-1">{fmtEuro(ergebnis.gesamtkostenEinvernehmlich)} €</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">1 Anwalt</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">1 Anwalt</div>
           </div>
           <div className={`p-4 ${art === 'streitig' ? 'bg-red-50 dark:bg-red-500/10' : ''}`}>
-            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">⚔️ Streitig</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400 uppercase tracking-wide">⚔️ Streitig</div>
             <div className="text-2xl font-bold text-red-700 dark:text-red-300 mt-1">{fmtEuro(ergebnis.gesamtkostenStreitig)} €</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">2 Anwälte{(zugewinnausgleich || unterhalt || sorgerecht || ehewohnung) ? ' + Folgesachen' : ''}</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">2 Anwälte{(zugewinnausgleich || unterhalt || sorgerecht || ehewohnung) ? ' + Folgesachen' : ''}</div>
           </div>
         </div>
         {ergebnis.ersparnisEinvernehmlich > 0 && (

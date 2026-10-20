@@ -89,7 +89,7 @@ export default function GrundsteuerRechner() {
           columns={3}
         />
         {/* W187: Hinweis auf nicht abgebildete Ländermodelle (vorher keiner) */}
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           Hamburg, Hessen und Niedersachsen haben eigene Modelle, die dieser Rechner nicht abbildet.
         </p>
         {istBund && (
@@ -131,7 +131,7 @@ export default function GrundsteuerRechner() {
           Bodenrichtwert
         </h2>
         <NummerEingabe value={bodenrichtwert} onChange={setBodenrichtwert} placeholder="200" einheit="€/m²" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Finden Sie auf boris.de oder beim Gutachterausschuss Ihrer Gemeinde.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Finden Sie auf boris.de oder beim Gutachterausschuss Ihrer Gemeinde.</p>
       </div>
 
       {/* 4: Grundfläche */}
@@ -190,7 +190,7 @@ export default function GrundsteuerRechner() {
                     </option>
                   ))}
                 </select>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steht in der Mietniveau-Einstufungsverordnung zu § 254 BewG; nicht aufgeführte Gemeinden: Stufe 3.</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Steht in der Mietniveau-Einstufungsverordnung zu § 254 BewG; nicht aufgeführte Gemeinden: Stufe 3.</p>
               </div>
               <div>
                 <label htmlFor="grundsteuer-ermaessigung" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Ermäßigung der Steuermesszahl</label>
@@ -199,7 +199,7 @@ export default function GrundsteuerRechner() {
                   <option value="denkmal">Baudenkmal (−10 %)</option>
                   <option value="gefoerdert">Geförderter Wohnraum / Wohnungsbaugesellschaft, -genossenschaft (−25 %)</option>
                 </select>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">§ 15 Abs. 2–5 GrStG, nur auf Antrag bzw. mit Nachweis.</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">§ 15 Abs. 2–5 GrStG, nur auf Antrag bzw. mit Nachweis.</p>
               </div>
             </div>
           )}
@@ -213,7 +213,7 @@ export default function GrundsteuerRechner() {
           Hebesatz der Gemeinde
         </h2>
         <NummerEingabe value={hebesatz} onChange={setHebesatz} placeholder="500" einheit="%" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Finden Sie auf der Website Ihrer Gemeinde. Durchschnitt: ca. 500 %.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Finden Sie auf der Website Ihrer Gemeinde. Durchschnitt: ca. 500 %.</p>
       </div>
 
       {/* ERGEBNIS */}

@@ -137,11 +137,11 @@ export default function KaffeeWasserRechner() {
         </h2>
         <NummerEingabe value={menge} onChange={setMenge} placeholder={istEspresso ? '18' : '500'} einheit={einheit} />
         {istEspresso ? (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Übliche Dosis: 18–20 g im doppelten Siebträger, ergibt bei 1:2 rund 36–40 g Espresso.
           </p>
         ) : (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Richtwert: 1 Tasse ≈ 250 ml. 500 ml entsprechen zwei großen Tassen.
           </p>
         )}
@@ -269,7 +269,7 @@ export default function KaffeeWasserRechner() {
                   </tbody>
                 </table>
               </div>
-              <p className="px-4 pb-3 pt-1 text-xs text-gray-500 dark:text-gray-400">
+              <p className="px-4 pb-3 pt-1 text-xs text-gray-600 dark:text-gray-400">
                 Basis-Ratios ohne Stärke-Anpassung. Espresso ist nicht vergleichbar (Verhältnis zur ausgegebenen Menge).
               </p>
             </div>

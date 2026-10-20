@@ -101,7 +101,7 @@ export default function KalorienverbrauchRechner() {
             <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
               {f1(met)} MET × {f0(nGewicht)} kg × {f1(nDauer / 60)} h = {f0(ergebnis.kcal)} kcal
             </p>
-            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+            <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
               Grobe Schätzung nach der MET-Methode — der reale Verbrauch ist individuell sehr unterschiedlich.
             </p>
           </div>
@@ -122,7 +122,7 @@ export default function KalorienverbrauchRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Wählen Sie eine Aktivität und geben Sie Gewicht und Dauer ein.
         </p>
       )}

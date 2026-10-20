@@ -140,7 +140,7 @@ export default function BafoegRechner() {
                   <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
                 {schulform === 'berufsfachschuleOhneVorausbildung' ? (
                   <>Bedarf nach § 12 Abs. 1 Nr. 1 / Abs. 2 Nr. 1 BAföG: <strong>276 € bei Eltern</strong>, <strong>666 € auswärts</strong>.</>
                 ) : (
@@ -164,12 +164,12 @@ export default function BafoegRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliches Einkommen</label>
             <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€/Monat" />
             {/* W187: vorher „Minijob bis 603 € teilweise angerechnet. Freibetrag: 330 €“ */}
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Bruttoverdienst. Freibetrag {fmtEuro(params.freibetraege.eigenesEinkommen)} € nach Abzug von Werbungskosten- und Sozialpauschale — ein Minijob bis 603 € bleibt anrechnungsfrei.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bruttoverdienst. Freibetrag {fmtEuro(params.freibetraege.eigenesEinkommen)} € nach Abzug von Werbungskosten- und Sozialpauschale — ein Minijob bis 603 € bleibt anrechnungsfrei.</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
             <NummerEingabe value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag: 15.000 € (unter 30) bzw. 45.000 € (ab 30)</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag: 15.000 € (unter 30) bzw. 45.000 € (ab 30)</p>
           </div>
         </div>
       </div>
@@ -194,7 +194,7 @@ export default function BafoegRechner() {
               ))}
             </select>
             {elternunabhaengig && (
-              <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+              <p className="text-xs text-green-700 dark:text-green-400 mt-1">
                 ✓ Kein Elterneinkommen wird angerechnet
                 {elternunabhaengigViaTatbestand && !elternunabhaengigViaFamilienstand
                   ? ' (Tatbestand § 11 Abs. 3 / Abs. 2a BAföG unten ausgewählt)'
@@ -240,7 +240,7 @@ export default function BafoegRechner() {
                     <option key={o.value} value={o.value}>{o.label}</option>
                   ))}
                 </select>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                   Bei den Tatbeständen &bdquo;5 Jahre erwerbstätig&ldquo; und &bdquo;3 Jahre Berufsausbildung + 3 Jahre erwerbstätig&ldquo;
                   verlangt § 11 Abs. 3 Satz 2 BAföG zusätzlich, dass Sie sich aus dem Ertrag der Erwerbstätigkeit
                   selbst unterhalten konnten. Diese Detail-Prüfung muss das BAföG-Amt im Einzelfall vornehmen —
@@ -263,7 +263,7 @@ export default function BafoegRechner() {
                   <option key={n} value={n}>{n}{n === 0 ? ' (keine)' : ''}</option>
                 ))}
               </select>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
                 Geschwister und andere Unterhaltsberechtigte der Eltern, die <strong>nicht</strong> in einer
                 nach BAföG oder § 56 SGB III förderfähigen Ausbildung stehen (z. B. jüngere Schulkinder).
                 Sie erhöhen den Elternfreibetrag um {fmtEuro(params.freibetraege.proGeschwister)} €/Monat pro Kopf
@@ -287,7 +287,7 @@ export default function BafoegRechner() {
                   <option key={n} value={n}>{n}{n === 0 ? ' (keine)' : ''}</option>
                 ))}
               </select>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
                 § 11 Abs. 4 BAföG: Stehen mehrere Kinder in einer Ausbildung, die nach BAföG oder
                 § 56 SGB III (Berufsausbildungsbeihilfe) gefördert werden kann, wird der auf die Eltern
                 entfallende Anrechnungsbetrag zu gleichen Teilen auf alle diese Kinder aufgeteilt.
@@ -341,7 +341,7 @@ export default function BafoegRechner() {
                     <option key={n} value={n}>{n}</option>
                   ))}
                 </select>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Kinderbetreuungszuschlag: 160 € pro Kind</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Kinderbetreuungszuschlag: 160 € pro Kind</p>
               </div>
             )}
           </div>
@@ -411,19 +411,19 @@ export default function BafoegRechner() {
                   {ergebnis.kvZuschlag > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">+ KV-Zuschlag (selbst versichert)</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.kvZuschlag)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.kvZuschlag)} €</td>
                     </tr>
                   )}
                   {ergebnis.pvZuschlag > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">+ PV-Zuschlag</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.pvZuschlag)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.pvZuschlag)} €</td>
                     </tr>
                   )}
                   {ergebnis.kinderZuschlag > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">+ Kinderbetreuungszuschlag ({anzahlKinder} Kind{parseInt(anzahlKinder) > 1 ? 'er' : ''})</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.kinderZuschlag)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.kinderZuschlag)} €</td>
                     </tr>
                   )}
                   <tr className="bg-blue-50 dark:bg-blue-500/10 font-medium">
@@ -438,13 +438,13 @@ export default function BafoegRechner() {
                   {ergebnis.anrechnungEinkommen > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Eigenes Einkommen</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEinkommen)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEinkommen)} €</td>
                     </tr>
                   )}
                   {ergebnis.anrechnungVermoegen > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Eigenes Vermögen</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungVermoegen)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungVermoegen)} €</td>
                     </tr>
                   )}
                   {!ergebnis.elternunabhaengig && ergebnis.aufteilungDivisor > 1 && (
@@ -452,23 +452,23 @@ export default function BafoegRechner() {
                       <tr>
                         <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                           Anrechnungsbetrag Eltern (§ 25 BAföG)
-                          <span className="text-xs text-gray-600 ml-1">(vor § 11 Abs. 4-Aufteilung)</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">(vor § 11 Abs. 4-Aufteilung)</span>
                         </td>
                         <td className="px-4 py-2.5 text-right tabular-nums text-gray-700 dark:text-gray-300 whitespace-nowrap">{fmtEuro(ergebnis.anrechnungElternVorAufteilung)} €</td>
                       </tr>
                       <tr>
                         <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                           ÷ Aufteilung auf Antragsteller + {ergebnis.aufteilungDivisor - 1} gefördert{ergebnis.aufteilungDivisor - 1 === 1 ? 'es' : 'e'} Geschwister
-                          <span className="text-xs text-gray-600 ml-1">(§ 11 Abs. 4 BAföG)</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">(§ 11 Abs. 4 BAföG)</span>
                         </td>
                         <td className="px-4 py-2.5 text-right tabular-nums text-gray-700 dark:text-gray-300 whitespace-nowrap">÷ {ergebnis.aufteilungDivisor}</td>
                       </tr>
                       <tr>
                         <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                           Anrechnung nach Aufteilung
-                          <span className="text-xs text-gray-600 ml-1">(Einkommen {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">(Einkommen {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
                         </td>
-                        <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
+                        <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
                       </tr>
                     </>
                   )}
@@ -476,9 +476,9 @@ export default function BafoegRechner() {
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                         Elterneinkommen
-                        <span className="text-xs text-gray-600 ml-1">(Einkommen {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">(Einkommen {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
                       </td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
                     </tr>
                   )}
                   {ergebnis.elternunabhaengig && (
@@ -486,16 +486,16 @@ export default function BafoegRechner() {
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                         Elterneinkommen
                         {ergebnis.elternunabhaengigGrund && ergebnis.elternunabhaengigGrund.startsWith('tatbestand:') && (
-                          <span className="text-xs text-gray-600 ml-1">(§ 11 Abs. 3 / Abs. 2a BAföG)</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">(§ 11 Abs. 3 / Abs. 2a BAföG)</span>
                         )}
                       </td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">nicht angerechnet</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">nicht angerechnet</td>
                     </tr>
                   )}
                   {ergebnis.anrechnungEinkommen === 0 && ergebnis.anrechnungVermoegen === 0 && ergebnis.anrechnungEltern === 0 && !ergebnis.elternunabhaengig && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Keine Anrechnungen</td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">0 €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">0 €</td>
                     </tr>
                   )}
 
@@ -515,7 +515,7 @@ export default function BafoegRechner() {
 
           {/* Disclaimer-Block — Vereinfachungen gegenüber BAföG-Amt */}
           <div className="mb-6 rounded-xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700 px-3 py-2.5 flex gap-2 items-start">
-            <span className="text-gray-500 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
+            <span className="text-gray-600 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
             <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
               <strong className="font-semibold text-gray-700 dark:text-gray-300">Vereinfachte Schätzung — Abweichungen möglich.</strong>{' '}
               Dieser Rechner bildet die Grundmechanik nach §§ 11, 12, 13, 13a, 25 BAföG ab —
@@ -535,19 +535,19 @@ export default function BafoegRechner() {
               <h2 className="font-bold text-indigo-800 dark:text-indigo-300 text-sm mb-3">📋 Rückzahlung (Studien-BAföG)</h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
                 <div>
-                  <p className="text-indigo-700/70 dark:text-indigo-400/70 text-xs">Zuschuss (geschenkt)</p>
-                  <p className="text-xl font-bold text-green-600 dark:text-green-400">{fmtEuro(ergebnis.zuschussAnteil)} €</p>
-                  <p className="text-xs text-indigo-700/60 dark:text-indigo-400/60">50% — keine Rückzahlung</p>
+                  <p className="text-indigo-800 dark:text-indigo-300 text-xs">Zuschuss (geschenkt)</p>
+                  <p className="text-xl font-bold text-green-700 dark:text-green-400">{fmtEuro(ergebnis.zuschussAnteil)} €</p>
+                  <p className="text-xs text-indigo-800 dark:text-indigo-300">50% — keine Rückzahlung</p>
                 </div>
                 <div>
-                  <p className="text-indigo-700/70 dark:text-indigo-400/70 text-xs">Darlehen (rückzahlbar)</p>
+                  <p className="text-indigo-800 dark:text-indigo-300 text-xs">Darlehen (rückzahlbar)</p>
                   <p className="text-xl font-bold text-indigo-800 dark:text-indigo-300">{fmtEuro(ergebnis.darlehensAnteil)} €</p>
-                  <p className="text-xs text-indigo-700/60 dark:text-indigo-400/60">50% — zinsloses Darlehen</p>
+                  <p className="text-xs text-indigo-800 dark:text-indigo-300">50% — zinsloses Darlehen</p>
                 </div>
                 <div>
-                  <p className="text-indigo-700/70 dark:text-indigo-400/70 text-xs">Max. Rückzahlung</p>
+                  <p className="text-indigo-800 dark:text-indigo-300 text-xs">Max. Rückzahlung</p>
                   <p className="text-xl font-bold text-indigo-800 dark:text-indigo-300">{fmtEuro(ergebnis.maxRueckzahlung)} €</p>
-                  <p className="text-xs text-indigo-700/60 dark:text-indigo-400/60">Gedeckelt — unabhängig von der Dauer</p>
+                  <p className="text-xs text-indigo-800 dark:text-indigo-300">Gedeckelt — unabhängig von der Dauer</p>
                 </div>
               </div>
             </div>

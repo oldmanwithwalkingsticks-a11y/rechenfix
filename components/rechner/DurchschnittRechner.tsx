@@ -143,7 +143,7 @@ export default function DurchschnittRechner() {
             placeholder="4; 7; 2; 9; 5"
             className="input-field w-full"
           />
-          <p className="text-xs text-gray-600 mt-1">{aktuelleWerte.length} Werte erkannt</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{aktuelleWerte.length} Werte erkannt</p>
         </div>
       ) : (
         <div>
@@ -151,7 +151,7 @@ export default function DurchschnittRechner() {
           <div className="space-y-2">
             {einzelWerte.map((e, idx) => (
               <div key={e.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-600 w-5 shrink-0">{idx + 1}.</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
                   <NummerEingabe value={e.wert} onChange={v => updateEinzel(e.id, v)} placeholder="Wert" />
                 </div>
@@ -168,7 +168,7 @@ export default function DurchschnittRechner() {
           </div>
           <button
             onClick={fuegeEinzelHinzu}
-            className="w-full py-2 mt-2 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 transition-all"
+            className="w-full py-2 mt-2 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 transition-all"
           >
             + Wert hinzufügen
           </button>
@@ -189,7 +189,7 @@ export default function DurchschnittRechner() {
         { label: 'Std.-Abw.', wert: fmt(erg.standardabweichung) },
       ].map(k => (
         <div key={k.label} className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">{k.label}</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-0.5">{k.label}</p>
           <p className="text-sm font-bold text-gray-800 dark:text-gray-100">{k.wert}</p>
         </div>
       ))}
@@ -228,14 +228,14 @@ export default function DurchschnittRechner() {
 
               {/* Rechenweg */}
               <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-4">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Rechenweg</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Rechenweg</p>
                 <p className="text-sm font-mono text-gray-800 dark:text-gray-200 break-words">{arithmErgebnis.rechenweg}</p>
               </div>
 
               {statistikKacheln(arithmErgebnis)}
 
               <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-4">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Sortierte Werte</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Sortierte Werte</p>
                 <p className="text-sm text-gray-800 dark:text-gray-200">{arithmErgebnis.sortiert.map(fmt).join(', ')}</p>
               </div>
 
@@ -263,11 +263,11 @@ export default function DurchschnittRechner() {
           <div className="space-y-2 mb-4">
             {gEintraege.map((e, idx) => (
               <div key={e.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-600 w-5 shrink-0">{idx + 1}.</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
                   <NummerEingabe value={e.wert} onChange={v => updateG(e.id, 'wert', v)} placeholder="Wert" />
                 </div>
-                <span className="text-xs text-gray-600 shrink-0">×</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 shrink-0">×</span>
                 <div className="w-16">
                   <NummerEingabe value={e.gewicht} onChange={v => updateG(e.id, 'gewicht', v)} placeholder="1" />
                 </div>
@@ -284,7 +284,7 @@ export default function DurchschnittRechner() {
           </div>
           <button
             onClick={fuegeGHinzu}
-            className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 transition-all"
+            className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 transition-all"
           >
             + Weitere Zeile
           </button>
@@ -294,11 +294,11 @@ export default function DurchschnittRechner() {
               <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
                 <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">Gewichtetes Mittel</p>
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">{fmt(gewichtetErgebnis.mittelwert)}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{gewichtetErgebnis.anzahl} Werte, Gewichtung: {fmt(gewichtetErgebnis.summeGewichte)}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{gewichtetErgebnis.anzahl} Werte, Gewichtung: {fmt(gewichtetErgebnis.summeGewichte)}</p>
               </div>
 
               <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-4">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Rechenweg</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Rechenweg</p>
                 <p className="text-sm font-mono text-gray-800 dark:text-gray-200 break-words">{gewichtetErgebnis.rechenweg}</p>
               </div>
 
@@ -340,36 +340,36 @@ export default function DurchschnittRechner() {
                   <p className="text-2xl font-extrabold text-primary-700 dark:text-primary-300">{fmt(medianErgebnis.mittelwert)}</p>
                 </div>
                 <div className="bg-gradient-to-br from-accent-50 to-accent-100/50 dark:from-accent-500/15 dark:to-accent-600/10 rounded-2xl p-4 text-center">
-                  <p className="text-xs text-accent-600 dark:text-accent-400 font-medium mb-1">Median</p>
+                  <p className="text-xs text-accent-700 dark:text-accent-400 font-medium mb-1">Median</p>
                   <p className="text-2xl font-extrabold text-accent-700 dark:text-accent-300">{fmt(medianErgebnis.median)}</p>
                 </div>
                 <div className="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-500/15 dark:to-green-600/10 rounded-2xl p-4 text-center">
-                  <p className="text-xs text-green-600 dark:text-green-400 font-medium mb-1">Modus</p>
+                  <p className="text-xs text-green-700 dark:text-green-400 font-medium mb-1">Modus</p>
                   <p className="text-2xl font-extrabold text-green-700 dark:text-green-300">
                     {medianErgebnis.modus ? medianErgebnis.modus.map(fmt).join(', ') : '–'}
                   </p>
                   {!medianErgebnis.modus && (
-                    <p className="text-xs text-gray-600 mt-0.5">kein Modus</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">kein Modus</p>
                   )}
                 </div>
               </div>
 
               {/* Rechenweg Mittelwert */}
               <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-4">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Rechenweg Mittelwert</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Rechenweg Mittelwert</p>
                 <p className="text-sm font-mono text-gray-800 dark:text-gray-200 break-words">{medianErgebnis.rechenweg}</p>
               </div>
 
               {/* Rechenweg Median */}
               <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-4">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Rechenweg Median</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Rechenweg Median</p>
                 <p className="text-sm font-mono text-gray-800 dark:text-gray-200 break-words">{medianErgebnis.medianRechenweg}</p>
               </div>
 
               {statistikKacheln(medianErgebnis)}
 
               <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-4">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Sortierte Werte</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Sortierte Werte</p>
                 <p className="text-sm text-gray-800 dark:text-gray-200">{medianErgebnis.sortiert.map(fmt).join(', ')}</p>
               </div>
 

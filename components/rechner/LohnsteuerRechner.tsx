@@ -194,7 +194,7 @@ export default function LohnsteuerRechner() {
           Jährlicher Steuerfreibetrag (optional)
         </h2>
         <NummerEingabe value={jahresfreibetrag} onChange={setJahresfreibetrag} placeholder="0" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Vom Finanzamt eingetragener Freibetrag (z. B. Werbungskosten, Pendlerpauschale über 1.230 €, Kinderbetreuung).
         </p>
       </div>

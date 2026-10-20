@@ -69,7 +69,7 @@ export default function VorfaelligkeitsentschaedigungRechner() {
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktueller Marktzins (Wiederanlage)</label>
         <NummerEingabe value={marktZins} onChange={setMarktZins} placeholder="3,5" einheit="%" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Aktueller Bauzins für die Restlaufzeit</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Aktueller Bauzins für die Restlaufzeit</p>
       </div>
 
       {/* Ergebnis */}

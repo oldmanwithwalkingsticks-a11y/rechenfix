@@ -41,7 +41,7 @@ export default async function Startseite() {
         <h1 className="text-4xl md:text-5xl font-extrabold text-primary-700 dark:text-primary-300 mb-3">
           rechenfix.de — Fix gerechnet!
         </h1>
-        <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
+        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
           {alleRechner.length} Online-Rechner für Deutschland — mit Erklärungen statt blanker Zahlen.
         </p>
         <SearchBar grosse="gross" className="mx-auto w-full" style={{ maxWidth: '600px' }} />
@@ -70,9 +70,9 @@ export default async function Startseite() {
                   <span className="font-semibold text-sm text-gray-800 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {k.name}
                   </span>
-                  <span className="text-xs text-gray-600 dark:text-gray-500">{anzahl}</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">{anzahl}</span>
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2">
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-2">
                   {k.beschreibung}
                 </p>
               </Link>
@@ -96,7 +96,7 @@ export default async function Startseite() {
                 <h3 className="font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                   {r.titel}
                 </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{r.kategorie}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">{r.kategorie}</p>
               </div>
               <span className="text-primary-400 ml-auto shrink-0">→</span>
             </Link>
@@ -147,7 +147,7 @@ export default async function Startseite() {
                 <h3 className="font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                   {r.titel}
                 </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{r.kategorie}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">{r.kategorie}</p>
               </div>
               <span className="text-primary-400 ml-auto shrink-0">→</span>
             </Link>
@@ -196,7 +196,7 @@ export default async function Startseite() {
                   <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {r.titel}
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
                     {r.beschreibung}
                   </p>
                   <span className="inline-block mt-3 text-primary-600 dark:text-primary-400 text-sm font-medium">
@@ -236,19 +236,19 @@ export default async function Startseite() {
             Rechenfix.de bietet Ihnen aktuell <strong className="text-gray-800 dark:text-gray-200">{alleRechner.length} kostenlose Online-Rechner</strong> in {kategorien.length} Kategorien — von Finanzen über Gesundheit bis hin zu Mathe und Arbeit. Alle Berechnungen erfolgen sofort im Browser, ohne Anmeldung und ohne versteckte Kosten.
           </p>
           <p>
-            Im Bereich <strong className="text-gray-800 dark:text-gray-200">Finanzen</strong> finden Sie unseren beliebten <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 underline">Brutto-Netto-Rechner</Link> mit allen sechs Steuerklassen für 2026, einen präzisen <Link href="/finanzen/mwst-rechner" className="text-primary-600 underline">Mehrwertsteuer-Rechner</Link> sowie den <Link href="/finanzen/zinsrechner" className="text-primary-600 underline">Zinsrechner</Link> mit Zinseszins-Berechnung. Ergänzt wird das Angebot durch den <Link href="/finanzen/sparrechner" className="text-primary-600 underline">Sparrechner</Link> für langfristige Sparpläne, den <Link href="/finanzen/elterngeld-rechner" className="text-primary-600 underline">Elterngeld-Rechner</Link> und den <Link href="/finanzen/buergergeld-rechner" className="text-primary-600 underline">Bürgergeld-Rechner</Link> für Sozialleistungen. Eine <Link href="/finanzen/brutto-netto-tabelle" className="text-primary-600 underline">Brutto-Netto-Tabelle</Link> zeigt Ihnen die Nettowerte für verschiedene Gehaltsstufen im Überblick.
+            Im Bereich <strong className="text-gray-800 dark:text-gray-200">Finanzen</strong> finden Sie unseren beliebten <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 dark:text-primary-400 underline">Brutto-Netto-Rechner</Link> mit allen sechs Steuerklassen für 2026, einen präzisen <Link href="/finanzen/mwst-rechner" className="text-primary-600 dark:text-primary-400 underline">Mehrwertsteuer-Rechner</Link> sowie den <Link href="/finanzen/zinsrechner" className="text-primary-600 dark:text-primary-400 underline">Zinsrechner</Link> mit Zinseszins-Berechnung. Ergänzt wird das Angebot durch den <Link href="/finanzen/sparrechner" className="text-primary-600 dark:text-primary-400 underline">Sparrechner</Link> für langfristige Sparpläne, den <Link href="/finanzen/elterngeld-rechner" className="text-primary-600 dark:text-primary-400 underline">Elterngeld-Rechner</Link> und den <Link href="/finanzen/buergergeld-rechner" className="text-primary-600 dark:text-primary-400 underline">Bürgergeld-Rechner</Link> für Sozialleistungen. Eine <Link href="/finanzen/brutto-netto-tabelle" className="text-primary-600 dark:text-primary-400 underline">Brutto-Netto-Tabelle</Link> zeigt Ihnen die Nettowerte für verschiedene Gehaltsstufen im Überblick.
           </p>
           <p>
-            Für den <strong className="text-gray-800 dark:text-gray-200">Alltag</strong> stehen der vielseitige <Link href="/alltag/prozentrechner" className="text-primary-600 underline">Prozentrechner</Link>, der <Link href="/alltag/dreisatz-rechner" className="text-primary-600 underline">Dreisatz-Rechner</Link>, ein <Link href="/alltag/rabattrechner" className="text-primary-600 underline">Rabattrechner</Link> mit Doppelrabatt-Funktion und der <Link href="/alltag/tagerechner" className="text-primary-600 underline">Tagerechner</Link> bereit. Mit dem <Link href="/mathe/einheiten-umrechner" className="text-primary-600 underline">Einheiten-Umrechner</Link> konvertieren Sie Längen, Gewichte, Temperaturen und viele weitere Maßeinheiten.
+            Für den <strong className="text-gray-800 dark:text-gray-200">Alltag</strong> stehen der vielseitige <Link href="/alltag/prozentrechner" className="text-primary-600 dark:text-primary-400 underline">Prozentrechner</Link>, der <Link href="/alltag/dreisatz-rechner" className="text-primary-600 dark:text-primary-400 underline">Dreisatz-Rechner</Link>, ein <Link href="/alltag/rabattrechner" className="text-primary-600 dark:text-primary-400 underline">Rabattrechner</Link> mit Doppelrabatt-Funktion und der <Link href="/alltag/tagerechner" className="text-primary-600 dark:text-primary-400 underline">Tagerechner</Link> bereit. Mit dem <Link href="/mathe/einheiten-umrechner" className="text-primary-600 dark:text-primary-400 underline">Einheiten-Umrechner</Link> konvertieren Sie Längen, Gewichte, Temperaturen und viele weitere Maßeinheiten.
           </p>
           <p>
-            Im Bereich <strong className="text-gray-800 dark:text-gray-200">Auto &amp; Verkehr</strong> berechnen Sie mit dem <Link href="/auto/spritkosten-rechner" className="text-primary-600 underline">Spritkosten-Rechner</Link> Ihre Fahrtkosten, ermitteln mit dem <Link href="/auto/kfz-steuer-rechner" className="text-primary-600 underline">Kfz-Steuer-Rechner</Link> Ihre jährliche Steuer und nutzen den <Link href="/auto/kw-ps-umrechner" className="text-primary-600 underline">kW-PS-Umrechner</Link> für Motorleistungen. Der <Link href="/arbeit/pendlerpauschale-rechner" className="text-primary-600 underline">Pendlerpauschale-Rechner</Link> zeigt Ihnen die steuerliche Entlastung für Ihren Arbeitsweg.
+            Im Bereich <strong className="text-gray-800 dark:text-gray-200">Auto &amp; Verkehr</strong> berechnen Sie mit dem <Link href="/auto/spritkosten-rechner" className="text-primary-600 dark:text-primary-400 underline">Spritkosten-Rechner</Link> Ihre Fahrtkosten, ermitteln mit dem <Link href="/auto/kfz-steuer-rechner" className="text-primary-600 dark:text-primary-400 underline">Kfz-Steuer-Rechner</Link> Ihre jährliche Steuer und nutzen den <Link href="/auto/kw-ps-umrechner" className="text-primary-600 dark:text-primary-400 underline">kW-PS-Umrechner</Link> für Motorleistungen. Der <Link href="/arbeit/pendlerpauschale-rechner" className="text-primary-600 dark:text-primary-400 underline">Pendlerpauschale-Rechner</Link> zeigt Ihnen die steuerliche Entlastung für Ihren Arbeitsweg.
           </p>
           <p>
-            Rund ums <strong className="text-gray-800 dark:text-gray-200">Wohnen</strong> helfen der <Link href="/wohnen/mietrechner" className="text-primary-600 underline">Mietrechner</Link>, der <Link href="/wohnen/nebenkosten-rechner" className="text-primary-600 underline">Nebenkosten-Rechner</Link>, der <Link href="/wohnen/stromkosten-rechner" className="text-primary-600 underline">Stromkosten-Rechner</Link> und der <Link href="/wohnen/heizkosten-rechner" className="text-primary-600 underline">Heizkosten-Rechner</Link> bei der Planung Ihrer monatlichen Ausgaben. Für Immobilienkäufer berechnet der <Link href="/wohnen/grunderwerbsteuer-rechner" className="text-primary-600 underline">Grunderwerbsteuer-Rechner</Link> die Kaufnebenkosten nach Bundesland.
+            Rund ums <strong className="text-gray-800 dark:text-gray-200">Wohnen</strong> helfen der <Link href="/wohnen/mietrechner" className="text-primary-600 dark:text-primary-400 underline">Mietrechner</Link>, der <Link href="/wohnen/nebenkosten-rechner" className="text-primary-600 dark:text-primary-400 underline">Nebenkosten-Rechner</Link>, der <Link href="/wohnen/stromkosten-rechner" className="text-primary-600 dark:text-primary-400 underline">Stromkosten-Rechner</Link> und der <Link href="/wohnen/heizkosten-rechner" className="text-primary-600 dark:text-primary-400 underline">Heizkosten-Rechner</Link> bei der Planung Ihrer monatlichen Ausgaben. Für Immobilienkäufer berechnet der <Link href="/wohnen/grunderwerbsteuer-rechner" className="text-primary-600 dark:text-primary-400 underline">Grunderwerbsteuer-Rechner</Link> die Kaufnebenkosten nach Bundesland.
           </p>
           <p>
-            Für <strong className="text-gray-800 dark:text-gray-200">Schule und Studium</strong> bieten wir den <Link href="/mathe/bruchrechner" className="text-primary-600 underline">Bruchrechner</Link>, den <Link href="/mathe/durchschnitt-rechner" className="text-primary-600 underline">Durchschnitt-Rechner</Link> mit Median und Modus, den <Link href="/mathe/notenschluessel-rechner" className="text-primary-600 underline">Notenschlüssel-Rechner</Link> für Lehrer und Schüler sowie einen vollständigen <Link href="/mathe/wissenschaftlicher-taschenrechner" className="text-primary-600 underline">wissenschaftlichen Taschenrechner</Link>. Im Bereich <strong className="text-gray-800 dark:text-gray-200">Arbeit &amp; Recht</strong> berechnen der <Link href="/finanzen/stundenlohn-rechner" className="text-primary-600 underline">Stundenlohn-Rechner</Link>, der <Link href="/arbeit/arbeitszeitrechner" className="text-primary-600 underline">Arbeitszeitrechner</Link>, der <Link href="/arbeit/urlaubstage-rechner" className="text-primary-600 underline">Urlaubstage-Rechner</Link> und der <Link href="/arbeit/ueberstunden-rechner" className="text-primary-600 underline">Überstunden-Rechner</Link> alles rund um Gehalt und Arbeitszeit.
+            Für <strong className="text-gray-800 dark:text-gray-200">Schule und Studium</strong> bieten wir den <Link href="/mathe/bruchrechner" className="text-primary-600 dark:text-primary-400 underline">Bruchrechner</Link>, den <Link href="/mathe/durchschnitt-rechner" className="text-primary-600 dark:text-primary-400 underline">Durchschnitt-Rechner</Link> mit Median und Modus, den <Link href="/mathe/notenschluessel-rechner" className="text-primary-600 dark:text-primary-400 underline">Notenschlüssel-Rechner</Link> für Lehrer und Schüler sowie einen vollständigen <Link href="/mathe/wissenschaftlicher-taschenrechner" className="text-primary-600 dark:text-primary-400 underline">wissenschaftlichen Taschenrechner</Link>. Im Bereich <strong className="text-gray-800 dark:text-gray-200">Arbeit &amp; Recht</strong> berechnen der <Link href="/finanzen/stundenlohn-rechner" className="text-primary-600 dark:text-primary-400 underline">Stundenlohn-Rechner</Link>, der <Link href="/arbeit/arbeitszeitrechner" className="text-primary-600 dark:text-primary-400 underline">Arbeitszeitrechner</Link>, der <Link href="/arbeit/urlaubstage-rechner" className="text-primary-600 dark:text-primary-400 underline">Urlaubstage-Rechner</Link> und der <Link href="/arbeit/ueberstunden-rechner" className="text-primary-600 dark:text-primary-400 underline">Überstunden-Rechner</Link> alles rund um Gehalt und Arbeitszeit.
           </p>
           <p>
             Alle Rechner auf Rechenfix.de zeigen Ergebnisse in Echtzeit, erklären den Rechenweg transparent und lassen sich per Klick teilen oder als PDF speichern. Probieren Sie es aus — fix gerechnet, ohne Umwege.

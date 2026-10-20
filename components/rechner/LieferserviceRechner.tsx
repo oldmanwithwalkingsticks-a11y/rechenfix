@@ -60,7 +60,7 @@ export default function LieferserviceRechner() {
               className="input-field pr-8"
               placeholder="z.B. 25,50"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-sm">€</span>
           </div>
         </div>
 
@@ -75,7 +75,7 @@ export default function LieferserviceRechner() {
               className="input-field pr-8"
               placeholder="z.B. 2,99"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-sm">€</span>
           </div>
         </div>
 
@@ -90,7 +90,7 @@ export default function LieferserviceRechner() {
               className="input-field pr-8"
               placeholder="z.B. 1,50"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-sm">€</span>
           </div>
         </div>
       </div>
@@ -110,19 +110,19 @@ export default function LieferserviceRechner() {
           {/* Zeitraum-Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             <div className="bg-orange-50 dark:bg-orange-900/15 rounded-xl p-3 text-center">
-              <p className="text-xs text-orange-600 dark:text-orange-400 font-medium">Pro Monat</p>
+              <p className="text-xs text-orange-700 dark:text-orange-400 font-medium">Pro Monat</p>
               <p className="text-lg font-bold text-orange-800 dark:text-orange-200">{fmt(ergebnis.kostenProMonat)} €</p>
             </div>
             <div className="bg-orange-50 dark:bg-orange-900/15 rounded-xl p-3 text-center">
-              <p className="text-xs text-orange-600 dark:text-orange-400 font-medium">Pro Jahr</p>
+              <p className="text-xs text-orange-700 dark:text-orange-400 font-medium">Pro Jahr</p>
               <p className="text-lg font-bold text-orange-800 dark:text-orange-200">{fmt(ergebnis.kostenProJahr)} €</p>
             </div>
             <div className="bg-orange-50 dark:bg-orange-900/15 rounded-xl p-3 text-center">
-              <p className="text-xs text-orange-600 dark:text-orange-400 font-medium">In 5 Jahren</p>
+              <p className="text-xs text-orange-700 dark:text-orange-400 font-medium">In 5 Jahren</p>
               <p className="text-lg font-bold text-orange-800 dark:text-orange-200">{fmt(ergebnis.kostenIn5Jahren)} €</p>
             </div>
             <div className="bg-orange-50 dark:bg-orange-900/15 rounded-xl p-3 text-center">
-              <p className="text-xs text-orange-600 dark:text-orange-400 font-medium">In 10 Jahren</p>
+              <p className="text-xs text-orange-700 dark:text-orange-400 font-medium">In 10 Jahren</p>
               <p className="text-lg font-bold text-orange-800 dark:text-orange-200">{fmt(ergebnis.kostenIn10Jahren)} €</p>
             </div>
           </div>
@@ -135,7 +135,7 @@ export default function LieferserviceRechner() {
             <p className="text-2xl font-bold text-green-700 dark:text-green-400 mt-2">
               {fmt(ergebnis.ersparnisProJahr)} € pro Jahr gespart
             </p>
-            <p className="text-sm text-green-600/80 dark:text-green-400/70 mt-1">
+            <p className="text-sm text-green-800 dark:text-green-300 mt-1">
               Selberkochen: {fmt(ergebnis.selbstKochenProJahr)} €/Jahr vs. Lieferdienst: {fmt(ergebnis.kostenProJahr)} €/Jahr
             </p>
           </div>
@@ -148,15 +148,15 @@ export default function LieferserviceRechner() {
             <div className="grid grid-cols-3 gap-3 mt-3">
               <div className="text-center">
                 <p className="text-lg font-bold text-emerald-700 dark:text-emerald-300">{fmt(ergebnis.ersparnisProMonat)} €</p>
-                <p className="text-xs text-emerald-600/70 dark:text-emerald-400/60">pro Monat</p>
+                <p className="text-xs text-emerald-800 dark:text-emerald-300">pro Monat</p>
               </div>
               <div className="text-center">
                 <p className="text-lg font-bold text-emerald-700 dark:text-emerald-300">{fmt(ergebnis.ersparnisProJahr)} €</p>
-                <p className="text-xs text-emerald-600/70 dark:text-emerald-400/60">pro Jahr</p>
+                <p className="text-xs text-emerald-800 dark:text-emerald-300">pro Jahr</p>
               </div>
               <div className="text-center">
                 <p className="text-lg font-bold text-emerald-700 dark:text-emerald-300">{fmt(ergebnis.ersparnisIn10Jahren)} €</p>
-                <p className="text-xs text-emerald-600/70 dark:text-emerald-400/60">in 10 Jahren</p>
+                <p className="text-xs text-emerald-800 dark:text-emerald-300">in 10 Jahren</p>
               </div>
             </div>
           </div>
@@ -168,11 +168,11 @@ export default function LieferserviceRechner() {
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-gray-600 dark:text-gray-400">🛵 Lieferdienst</span>
-                  <span className="font-bold text-orange-600 dark:text-orange-400">{fmt(ergebnis.kostenProJahr)} €</span>
+                  <span className="font-bold text-orange-700 dark:text-orange-400">{fmt(ergebnis.kostenProJahr)} €</span>
                 </div>
                 <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-6">
                   <div
-                    className="bg-orange-500 h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-2"
+                    className="bg-orange-700 h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-2"
                     style={{ width: `${ergebnis.lieferAnteilProzent}%` }}
                   >
                     <span className="text-xs text-white font-medium">{Math.round(ergebnis.lieferAnteilProzent)}%</span>
@@ -182,11 +182,11 @@ export default function LieferserviceRechner() {
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-gray-600 dark:text-gray-400">🍳 Selberkochen</span>
-                  <span className="font-bold text-green-600 dark:text-green-400">{fmt(ergebnis.selbstKochenProJahr)} €</span>
+                  <span className="font-bold text-green-700 dark:text-green-400">{fmt(ergebnis.selbstKochenProJahr)} €</span>
                 </div>
                 <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-6">
                   <div
-                    className="bg-green-500 h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-2"
+                    className="bg-green-700 h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-2"
                     style={{ width: `${ergebnis.kochenAnteilProzent}%` }}
                   >
                     <span className="text-xs text-white font-medium">{Math.round(ergebnis.kochenAnteilProzent)}%</span>
@@ -207,7 +207,7 @@ export default function LieferserviceRechner() {
                   <div key={i} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl p-3 text-center">
                     <span className="text-2xl">{v.icon}</span>
                     <p className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-1">{v.anzahl}×</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{v.label}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">{v.label}</p>
                   </div>
                 ))}
               </div>

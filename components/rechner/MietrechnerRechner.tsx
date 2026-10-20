@@ -56,7 +56,7 @@ export default function MietrechnerRechner() {
           <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
             <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">Warmmiete pro Monat</p>
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">{fmt(ergebnis.warmmiete)} €</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               {fmt(ergebnis.warmmieteProQm)} €/m² warm · {fmt(ergebnis.kaltmieteProQm)} €/m² kalt
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function MietrechnerRechner() {
                 <p className={`text-sm font-semibold ${
                   ergebnis.mietbelastungOk
                     ? 'text-green-700 dark:text-green-400'
-                    : 'text-red-700 dark:text-red-400'
+                    : 'text-red-700 dark:text-red-300'
                 }`}>
                   Mietbelastung: {ergebnis.mietbelastung.toLocaleString('de-DE')} % des Nettoeinkommens
                 </p>
@@ -93,12 +93,12 @@ export default function MietrechnerRechner() {
 
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Jahresmiete</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Jahresmiete</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.jahresmiete)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Rest nach Miete</p>
-              <p className={`text-xl font-bold ${ergebnis.restNachMiete >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Rest nach Miete</p>
+              <p className={`text-xl font-bold ${ergebnis.restNachMiete >= 0 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>
                 {fmt(ergebnis.restNachMiete)} €
               </p>
             </div>

@@ -329,7 +329,7 @@ Diese Werte gehören als User-Eingabe (mit Default + Hint), **nicht** als Statik
 **Hint-Text-Pattern:**
 ```jsx
 <input ... />
-<p className="text-xs text-gray-500 mt-1">
+<p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
   Aktueller Wert aus Bundesbank-Zeitreihe BBK01.WT3320, alternativ
   Steuerbescheid der Gemeinde, BMF-AfA-Tabelle, etc.
 </p>

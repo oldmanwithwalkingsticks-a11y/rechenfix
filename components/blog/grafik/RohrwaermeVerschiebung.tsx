@@ -101,7 +101,7 @@ export default function RohrwaermeVerschiebung() {
           Der Kostentopf bleibt gleich — was A mehr zahlt, zahlt B weniger.
         </text>
       </svg>
-      <figcaption className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+      <figcaption className="mt-2 text-sm text-gray-600 dark:text-gray-400">
         Fuer B stellt die Korrektur Gerechtigkeit her, fuer A ist sie eine Rechnung ueber Waerme, die
         er nie bestellt hat. Ob sie ueberhaupt angewandt werden darf, haengt allein daran, ob die
         Steigleitung sichtbar verlaeuft.

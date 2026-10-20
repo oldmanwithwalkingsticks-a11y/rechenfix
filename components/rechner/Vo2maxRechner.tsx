@@ -103,7 +103,7 @@ export default function Vo2maxRechner() {
                 ? `(${f0(nDistanz)} − 504,9) ÷ 44,73 = ${f1(ergebnis.vo2max)} ml/kg/min`
                 : `15 × (${f0(nHfmax)} ÷ ${f0(nHfruhe)}) = ${f1(ergebnis.vo2max)} ml/kg/min`}
             </p>
-            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+            <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
               Schätzung — der im Labor gemessene Wert kann abweichen.
             </p>
           </div>
@@ -124,7 +124,7 @@ export default function Vo2maxRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Wählen Sie eine Methode und geben Sie die nötigen Werte ein.
         </p>
       )}

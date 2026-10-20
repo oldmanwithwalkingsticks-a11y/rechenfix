@@ -116,7 +116,7 @@ export default function ZweiJahreslaengen() {
           Zwölf Monate zu 30 Tagen ergeben 360. Beide Zahlen stehen in einem Satz.
         </text>
       </svg>
-      <figcaption className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
+      <figcaption className="mt-2 text-sm text-center text-gray-600 dark:text-gray-400">
         Der Sollzins und die gesetzlich vorgeschriebene Vergleichszahl rechnen mit
         unterschiedlich langen Monaten.
       </figcaption>

@@ -100,7 +100,7 @@ export default function KalorienbedarfRechner() {
               </div>
             </div>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
             Dieser Wert hält dein Gewicht ungefähr. Schätzung (±10–15 %) — der Aktivitätsfaktor ist grob. Ersetzt keine ärztliche oder ernährungsmedizinische Beratung.
           </p>
 
@@ -164,7 +164,7 @@ export default function KalorienbedarfRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Gewicht, Größe, Alter, Geschlecht und Aktivitätslevel ein, um den Tagesbedarf zu berechnen.
         </p>
       )}

@@ -88,7 +88,7 @@ export default function InternetgeschwindigkeitRechner() {
             placeholder="z.B. 50"
             einheit="Mbit/s"
           />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Der Wert, den der Provider bewirbt (z. B. „50.000“ = 50 Mbit/s).
           </p>
         </div>
@@ -141,7 +141,7 @@ export default function InternetgeschwindigkeitRechner() {
       )}
 
       {!ergebnis && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Dateigröße und Bandbreite ein, um die Download-Zeit zu berechnen.
         </p>
       )}

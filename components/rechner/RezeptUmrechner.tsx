@@ -281,7 +281,7 @@ export default function RezeptUmrechner() {
                 type="button"
                 onClick={() => removeZutat(z.id)}
                 aria-label={`Zutat ${idx + 1} entfernen`}
-                className="col-span-1 h-11 w-11 rounded-lg border border-gray-200 dark:border-gray-600 text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 text-lg"
+                className="col-span-1 h-11 w-11 rounded-lg border border-gray-200 dark:border-gray-600 text-red-700 dark:text-red-300 hover:bg-red-50 dark:hover:bg-red-500/10 text-lg"
               >
                 ×
               </button>
@@ -311,7 +311,7 @@ export default function RezeptUmrechner() {
               {neuesZutatenliste.filter(z => z.name.trim()).map(z => (
                 <tr key={z.id}>
                   <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">{z.name || '—'}</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400 whitespace-nowrap">
                     {z.menge} {formatEinheit(parseZahl(z.menge), z.einheit)}
                   </td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-primary-700 dark:text-primary-300 font-semibold whitespace-nowrap">
@@ -321,7 +321,7 @@ export default function RezeptUmrechner() {
               ))}
               {neuesZutatenliste.filter(z => z.name.trim()).length === 0 && (
                 <tr>
-                  <td colSpan={3} className="px-4 py-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+                  <td colSpan={3} className="px-4 py-4 text-center text-gray-600 dark:text-gray-400 text-sm">
                     Fügen Sie Zutaten hinzu, um die Umrechnung zu sehen.
                   </td>
                 </tr>

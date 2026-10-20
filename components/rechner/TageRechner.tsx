@@ -124,7 +124,7 @@ export default function TageRechner() {
               className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 opacity-0 cursor-pointer"
               title="Datum auswählen"
             />
-            <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
@@ -146,7 +146,7 @@ export default function TageRechner() {
               className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 opacity-0 cursor-pointer"
               title="Datum auswählen"
             />
-            <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
@@ -201,19 +201,19 @@ export default function TageRechner() {
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Kalendertage</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Kalendertage</p>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.tage.toLocaleString('de-DE')}</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Arbeitstage</p>
                 <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">{ergebnis.arbeitstage.toLocaleString('de-DE')}</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Wochenendtage</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Wochenendtage</p>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.wochenendtage.toLocaleString('de-DE')}</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Wochen</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Wochen</p>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.wochen.toLocaleString('de-DE')}</p>
               </div>
             </div>

@@ -123,7 +123,7 @@ export default function WaehrungsRechner() {
             const w = WAEHRUNGEN.find(x => x.code === code)!;
             return (
               <div key={code} className="text-center bg-gray-50 dark:bg-gray-900 rounded-lg p-2">
-                <div className="text-xs text-gray-500">{code}</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400">{code}</div>
                 <div className="font-bold text-gray-800 dark:text-gray-200">{fmt(w.kurs, 2)}</div>
               </div>
             );
@@ -131,7 +131,7 @@ export default function WaehrungsRechner() {
         </div>
       </div>
 
-      <p className="text-xs text-gray-500 mb-6">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
         ⚠️ Kurse vom <strong>{KURS_DATUM}</strong> — statische EZB-Referenzkurse, <strong>keine Echtzeitkurse</strong>. Für aktuelle Kurse und Transaktionen nutzen Sie Ihre Bank oder einen Wechselkurs-Dienst.
       </p>
 

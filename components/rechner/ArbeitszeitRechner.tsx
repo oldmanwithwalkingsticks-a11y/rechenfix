@@ -17,7 +17,7 @@ function ZeitEingabe({ value, onChange, label }: { value: string; onChange: (v: 
   const id = useId();
   return (
     <div>
-      <label htmlFor={id} className="block text-xs text-gray-500 dark:text-gray-400 mb-1">{label}</label>
+      <label htmlFor={id} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">{label}</label>
       <input
         id={id}
         type="time"
@@ -33,7 +33,7 @@ function MinutenEingabe({ value, onChange, label }: { value: string; onChange: (
   const id = useId();
   return (
     <div>
-      <label htmlFor={id} className="block text-xs text-gray-500 dark:text-gray-400 mb-1">{label}</label>
+      <label htmlFor={id} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">{label}</label>
       <div className="relative">
         <input
           id={id}
@@ -46,7 +46,7 @@ function MinutenEingabe({ value, onChange, label }: { value: string; onChange: (
           onBlur={e => onChange(clampInputValueOnBlur(e.target.value, 0, 480))}
           className="input-field w-full pr-10"
         />
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">min</span>
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-sm pointer-events-none">min</span>
       </div>
     </div>
   );
@@ -205,24 +205,24 @@ export default function ArbeitszeitRechner() {
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmtZeit(tagesErgebnis.nettoStunden, tagesErgebnis.nettoRestMinuten)}
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Dezimal: {fmtDez(tagesErgebnis.dezimal)} h
                 </p>
               </div>
 
               <div className="grid grid-cols-3 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Brutto</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Brutto</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {fmtZeit(Math.floor(tagesErgebnis.bruttoMinuten / 60), tagesErgebnis.bruttoMinuten % 60)}
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pausen</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pausen</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{tagesErgebnis.pauseMinuten} Min.</p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Dezimal</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Dezimal</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtDez(tagesErgebnis.dezimal)} h</p>
                 </div>
               </div>
@@ -302,7 +302,7 @@ export default function ArbeitszeitRechner() {
                         className="input-field w-28 sm:w-32 text-xs py-1.5"
                         aria-label={`Arbeitsbeginn ${tag.label}`}
                       />
-                      <span className="text-gray-600 text-xs" aria-hidden="true">–</span>
+                      <span className="text-gray-600 dark:text-gray-400 text-xs" aria-hidden="true">–</span>
                       <input
                         type="time"
                         value={tag.ende}
@@ -323,12 +323,12 @@ export default function ArbeitszeitRechner() {
                         className="input-field w-20 text-xs py-1.5 text-center"
                         aria-label={`Pause ${tag.label} in Minuten`}
                       />
-                      <span className="text-xs text-gray-600 shrink-0" aria-hidden="true">min</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400 shrink-0" aria-hidden="true">min</span>
                     </div>
                   </div>
                 )}
                 {tag.frei && (
-                  <span className="text-xs text-gray-600 italic ml-2">Frei</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400 italic ml-2">Frei</span>
                 )}
               </div>
             ))}
@@ -341,20 +341,20 @@ export default function ArbeitszeitRechner() {
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmtZeit(wochenErgebnis.gesamtStunden, wochenErgebnis.gesamtRestMinuten)}
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Dezimal: {fmtDez(wochenErgebnis.gesamtDezimal)} h | {wochenErgebnis.arbeitstage} Arbeitstage
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Durchschnitt/Tag</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Durchschnitt/Tag</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {fmtZeit(Math.floor(wochenErgebnis.durchschnittMinuten / 60), wochenErgebnis.durchschnittMinuten % 60)}
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Dezimal/Tag</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Dezimal/Tag</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtDez(wochenErgebnis.durchschnittDezimal)} h</p>
                 </div>
               </div>
@@ -368,11 +368,11 @@ export default function ArbeitszeitRechner() {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-700">
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Tag</th>
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Beginn</th>
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Ende</th>
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Pause</th>
-                        <th className="px-4 py-2 text-right text-gray-500 dark:text-gray-400 font-medium">Arbeitszeit</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Tag</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Beginn</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Ende</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Pause</th>
+                        <th className="px-4 py-2 text-right text-gray-600 dark:text-gray-400 font-medium">Arbeitszeit</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -390,11 +390,11 @@ export default function ArbeitszeitRechner() {
                               <td className="px-4 py-2 text-gray-600 dark:text-gray-400">{t.ergebnis.pauseMinuten} min</td>
                               <td className="px-4 py-2 text-right font-medium text-gray-800 dark:text-gray-200">
                                 {fmtZeit(t.ergebnis.nettoStunden, t.ergebnis.nettoRestMinuten)}
-                                <span className="text-xs text-gray-600 ml-1">({fmtDez(t.ergebnis.dezimal)} h)</span>
+                                <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">({fmtDez(t.ergebnis.dezimal)} h)</span>
                               </td>
                             </>
                           ) : (
-                            <td colSpan={4} className="px-4 py-2 text-gray-600 italic">Frei</td>
+                            <td colSpan={4} className="px-4 py-2 text-gray-600 dark:text-gray-400 italic">Frei</td>
                           )}
                         </tr>
                       ))}
@@ -422,7 +422,7 @@ export default function ArbeitszeitRechner() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-gray-600 dark:text-gray-500 mt-6 text-center">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mt-6 text-center">
         Allgemeine Information. Für verbindliche Auskünfte zum Arbeitsrecht wenden Sie sich an einen Fachanwalt für Arbeitsrecht.
       </p>
     </div>

@@ -119,7 +119,7 @@ export default function ZyklusRechner() {
           <select id="zyklus-select-1" value={laenge} onChange={e => setLaenge(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
             {Array.from({ length: 15 }, (_, i) => 21 + i).map(n => <option key={n} value={n}>{n} Tage</option>)}
           </select>
-          <p className="text-xs text-gray-500 mt-1">Vom ersten Tag der Periode bis zum Tag vor der nächsten Periode.</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Vom ersten Tag der Periode bis zum Tag vor der nächsten Periode.</p>
         </div>
         <div>
           <label htmlFor="zyklus-periode" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Länge der Periode (Tage)</label>
@@ -135,7 +135,7 @@ export default function ZyklusRechner() {
             onBlur={e => setPeriode(clampInputValueOnBlur(e.target.value, 1, 20))}
             className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
           />
-          <p className="text-xs text-gray-500 mt-1">Durchschnittliche Dauer der Menstruationsblutung. Typischer Bereich: 3–7 Tage.</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Durchschnittliche Dauer der Menstruationsblutung. Typischer Bereich: 3–7 Tage.</p>
           {periodeAusserhalbRange && (
             <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
               Ungewöhnlich {parseInt(periode) < 2 ? 'kurzer' : 'langer'} Wert — bitte prüfen. Die Berechnung läuft dennoch.
@@ -191,7 +191,7 @@ export default function ZyklusRechner() {
                     <p className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
                       {first.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' })}
                     </p>
-                    <div className="grid grid-cols-7 gap-0.5 text-[10px] text-gray-600 mb-1">
+                    <div className="grid grid-cols-7 gap-0.5 text-[10px] text-gray-600 dark:text-gray-400 mb-1">
                       {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(l => <div key={l} className="text-center">{l}</div>)}
                     </div>
                     <div className="grid grid-cols-7 gap-0.5">
@@ -203,7 +203,7 @@ export default function ZyklusRechner() {
                           kind === 'period' ? 'bg-red-600 text-white' :
                           kind === 'ovulation' ? 'bg-green-600 text-white font-bold' :
                           kind === 'fertile' ? 'bg-green-200 dark:bg-green-800 text-gray-800 dark:text-gray-100' :
-                          'bg-gray-50 dark:bg-gray-900 text-gray-500';
+                          'bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400';
                         return (
                           <div key={i} className={`aspect-square flex items-center justify-center rounded text-[11px] ${color} ${istHeute ? 'ring-2 ring-primary-500' : ''}`}>
                             {kind === 'ovulation' ? '★' : c.getDate()}
@@ -222,7 +222,7 @@ export default function ZyklusRechner() {
               <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Zyklus-Übersicht</h2>
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="text-gray-500 dark:text-gray-400 text-left">
+                  <tr className="text-gray-600 dark:text-gray-400 text-left">
                     <th className="pb-2">Zyklus</th>
                     <th className="pb-2">Periode</th>
                     <th className="pb-2">Eisprung</th>

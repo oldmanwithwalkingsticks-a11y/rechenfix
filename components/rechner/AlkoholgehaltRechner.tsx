@@ -173,7 +173,7 @@ export default function AlkoholgehaltRechner() {
                   <button
                     type="button"
                     onClick={() => removeZutat(z.id)}
-                    className="w-9 h-[48px] flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-600 text-gray-500 hover:text-red-600 hover:border-red-300 transition-colors shrink-0"
+                    className="w-9 h-[48px] flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:border-red-300 transition-colors shrink-0"
                     aria-label="Zutat entfernen"
                   >
                     ✕
@@ -251,7 +251,7 @@ export default function AlkoholgehaltRechner() {
                 Alkohol im Rezept (ml)
               </h2>
               <NummerEingabe value={kochMl} onChange={setKochMl} placeholder="250" einheit="ml" />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">z. B. 250 ml Wein oder 50 ml Rum</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">z. B. 250 ml Wein oder 50 ml Rum</p>
             </div>
             <div>
               <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-1 flex items-center gap-2">

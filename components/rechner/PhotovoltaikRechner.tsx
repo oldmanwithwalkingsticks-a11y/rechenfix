@@ -145,7 +145,7 @@ export default function PhotovoltaikRechner() {
         <div>
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Aktueller Strompreis</label>
           <NummerEingabe value={strompreis} onChange={setStrompreis} einheit="ct/kWh" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Default {STROMPREIS_DEFAULT} ct = typischer Festpreis-Neuvertrag (Verivox/Check24, 04/2026).
           </p>
         </div>
@@ -217,7 +217,7 @@ export default function PhotovoltaikRechner() {
         <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Finanz-Übersicht</h2>
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-xs text-gray-500">
+            <tr className="text-xs text-gray-600 dark:text-gray-400">
               <th></th>
               <th className="text-right font-normal">pro Jahr</th>
               <th className="text-right font-normal">über 20 Jahre</th>
@@ -227,9 +227,9 @@ export default function PhotovoltaikRechner() {
             <tr><td className="py-1.5 text-gray-600 dark:text-gray-400">Ersparnis Eigenverbrauch</td><td className="py-1.5 text-right">{fmtEur(ergebnis.ersparnis)}</td><td className="py-1.5 text-right">{fmtEur(ergebnis.ersparnis * 20)}</td></tr>
             <tr><td className="py-1.5 text-gray-600 dark:text-gray-400">Einspeisung ({fmt(ergebnis.verguetungCt, 2)} ct/kWh)</td><td className="py-1.5 text-right">{fmtEur(ergebnis.einnahmen)}</td><td className="py-1.5 text-right">{fmtEur(ergebnis.einnahmen * 20)}</td></tr>
             <tr><td className="py-1.5 text-gray-600 dark:text-gray-400">Wartung</td><td className="py-1.5 text-right">−{fmtEur(ergebnis.wartung)}</td><td className="py-1.5 text-right">−{fmtEur(ergebnis.wartung * 20)}</td></tr>
-            <tr className="font-semibold"><td className="py-1.5">Nettoertrag</td><td className="py-1.5 text-right text-green-600 dark:text-green-400">{fmtEur(ergebnis.nettoertrag)}</td><td className="py-1.5 text-right text-green-600 dark:text-green-400">{fmtEur(ergebnis.nettoertrag * 20)}</td></tr>
+            <tr className="font-semibold"><td className="py-1.5">Nettoertrag</td><td className="py-1.5 text-right text-green-700 dark:text-green-400">{fmtEur(ergebnis.nettoertrag)}</td><td className="py-1.5 text-right text-green-700 dark:text-green-400">{fmtEur(ergebnis.nettoertrag * 20)}</td></tr>
             <tr><td className="py-1.5 text-gray-600 dark:text-gray-400">Investition</td><td className="py-1.5 text-right">—</td><td className="py-1.5 text-right">−{fmtEur(ergebnis.gesamtInvest)}</td></tr>
-            <tr className="font-bold"><td className="py-2">Gewinn nach 20 Jahren</td><td></td><td className={`py-2 text-right ${ergebnis.gewinn20 >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>{fmtEur(ergebnis.gewinn20)}</td></tr>
+            <tr className="font-bold"><td className="py-2">Gewinn nach 20 Jahren</td><td></td><td className={`py-2 text-right ${ergebnis.gewinn20 >= 0 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>{fmtEur(ergebnis.gewinn20)}</td></tr>
           </tbody>
         </table>
       </div>
@@ -241,7 +241,7 @@ export default function PhotovoltaikRechner() {
         </p>
       </div>
 
-      <p className="text-xs text-gray-500 mb-6">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
         ⚠️ Vereinfachte Berechnung. Der tatsächliche Ertrag hängt von Standort, Verschattung und Wetterbedingungen ab. Lassen Sie sich ein individuelles Angebot erstellen.
       </p>
 

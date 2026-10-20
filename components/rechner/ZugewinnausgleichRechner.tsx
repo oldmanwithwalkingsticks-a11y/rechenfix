@@ -126,7 +126,7 @@ export default function ZugewinnausgleichRechner() {
               <NummerEingabe value={endstichtagJahr} onChange={setEndstichtagJahr} placeholder={String(VPI_JAHR_MAX)} />
             </div>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
             Für die Indexierung des Anfangsvermögens nach § 1376 BGB. Verfügbarer VPI-Bereich: {VPI_JAHR_MIN}–{VPI_JAHR_MAX}.
             {!ergebnis.vpiFehler && ergebnis.indexFaktor !== 1 && (
               <> Index-Faktor {fmtFaktor(ergebnis.indexFaktor)} (VPI {fmtVpi(ergebnis.vpiHeirat)} → {fmtVpi(ergebnis.vpiEnde)}).</>
@@ -150,7 +150,7 @@ export default function ZugewinnausgleichRechner() {
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anfangsvermögen (bei Heirat)</label>
             <NummerEingabe value={anfangP1} onChange={setAnfangP1} placeholder="15.000" einheit="€" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               Vermögen am Tag der Heirat. Schulden als negativer Wert möglich.
             </p>
           </div>
@@ -164,7 +164,7 @@ export default function ZugewinnausgleichRechner() {
               <NummerEingabe value={privilegP1} onChange={setPrivilegP1} placeholder="0" einheit="€" />
               <NummerEingabe value={privilegJahrP1} onChange={setPrivilegJahrP1} placeholder="2015" einheit="Jahr" />
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               Erbschaften und Schenkungen während der Ehe werden dem Anfangsvermögen zugerechnet (mit VPI zum Erwerbsjahr indexiert).
             </p>
           </div>

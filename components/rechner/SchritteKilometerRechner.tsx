@@ -113,7 +113,7 @@ export default function SchritteKilometerRechner() {
         <div>
           <label htmlFor="sk-eigene" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigene Schrittlänge (optional)</label>
           <NummerEingabe value={eigeneSL} onChange={setEigeneSL} placeholder="z. B. 74" einheit="cm" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Überschreibt die Schätzung aus der Körpergröße.</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Überschreibt die Schätzung aus der Körpergröße.</p>
         </div>
         <div>
           <label htmlFor="sk-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht (für Kalorien)</label>
@@ -184,7 +184,7 @@ export default function SchritteKilometerRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               Bezogen auf {fmt1(ergebnis.slaenge)} cm Schrittlänge ({AKTIVITAET[aktivitaet].label}). Schätzung, real ±8–15 %.
             </p>
           </div>
@@ -206,7 +206,7 @@ export default function SchritteKilometerRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Ihre Werte ein, um Schritte und Distanz umzurechnen.
         </p>
       )}

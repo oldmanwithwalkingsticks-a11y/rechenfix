@@ -113,15 +113,15 @@ export default async function RechnerSeite({ params }: Props) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/logo.svg" alt="Rechenfix" width={32} height={32} />
                 <div>
-                  <span className="text-lg font-extrabold text-gray-800">Rechen<span className="text-emerald-600">fix</span><span className="text-sm font-normal text-gray-600">.de</span></span>
-                  <span className="block text-[10px] text-gray-500">Fix gerechnet!</span>
+                  <span className="text-lg font-extrabold text-gray-800 dark:text-gray-200">Rechen<span className="text-emerald-700">fix</span><span className="text-sm font-normal text-gray-600 dark:text-gray-400">.de</span></span>
+                  <span className="block text-[10px] text-gray-600 dark:text-gray-400">Fix gerechnet!</span>
                 </div>
               </div>
             </div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2 print-compact">
               {config.icon} {config.titel}
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-6 no-print">{config.beschreibung}</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-6 no-print">{config.beschreibung}</p>
             {/* W129: Marker fuer FeedbackButtons -- misst, ob der Nutzer im Rechner
                 ueberhaupt etwas eingegeben hat. Keine Eingabewerte, nur ein Zaehler. */}
             <div data-rechnerbereich>
@@ -153,7 +153,7 @@ export default async function RechnerSeite({ params }: Props) {
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {link.label}
                     </span>
-                    <span className="block text-xs text-gray-600 dark:text-gray-500 mt-0.5">in netto →</span>
+                    <span className="block text-xs text-gray-600 dark:text-gray-400 mt-0.5">in netto →</span>
                   </Link>
                 ))}
               </div>
@@ -186,7 +186,7 @@ export default async function RechnerSeite({ params }: Props) {
                   <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                     <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                       {item.frage}
-                      <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-gray-600 dark:text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </summary>
@@ -257,7 +257,7 @@ export default async function RechnerSeite({ params }: Props) {
                       <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">
                         {r.titel}
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{r.kategorie}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{r.kategorie}</p>
                     </div>
                   </Link>
                 ))}
@@ -282,7 +282,7 @@ export default async function RechnerSeite({ params }: Props) {
                     >
                       <span>{k.icon}</span>
                       <span>{k.name}</span>
-                      <span className="text-xs font-normal text-gray-600 ml-auto">{katRechner.length}</span>
+                      <span className="text-xs font-normal text-gray-600 dark:text-gray-400 ml-auto">{katRechner.length}</span>
                     </Link>
                     <ul className="space-y-0.5">
                       {katRechner.map(r => {

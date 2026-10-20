@@ -43,7 +43,7 @@ export default function Bild({
         <KiHinweis typ="bild" src={src} beschreibung={alt} generator={generator} />
       )}
       {caption && (
-        <figcaption className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
+        <figcaption className="mt-2 text-sm text-center text-gray-600 dark:text-gray-400">
           {caption}
         </figcaption>
       )}

@@ -74,7 +74,7 @@ export default function MakronaehrstoffeRechner() {
         <div>
           <label htmlFor="mk-kcal" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ziel-Kalorien</label>
           <NummerEingabe value={kcal} onChange={setKcal} placeholder="2500" einheit="kcal" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Aus dem Kalorienbedarf-Rechner oder selbst gewählt.</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Aus dem Kalorienbedarf-Rechner oder selbst gewählt.</p>
         </div>
         <div>
           <label htmlFor="mk-preset" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verteilung (Protein/KH/Fett)</label>
@@ -143,7 +143,7 @@ export default function MakronaehrstoffeRechner() {
               )}
             </div>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
             Orientierungswerte. Gesamtkalorien und Lebensmittelqualität zählen mehr als die exakte Aufteilung. Ersetzt keine ärztliche oder ernährungsmedizinische Beratung.
           </p>
 
@@ -204,7 +204,7 @@ export default function MakronaehrstoffeRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie ein Kalorienziel und eine Verteilung ein, um die Makronährstoffe in Gramm zu berechnen.
         </p>
       )}

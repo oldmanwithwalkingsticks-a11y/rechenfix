@@ -55,9 +55,9 @@ export default function MietrenditeRechner() {
   const fmtProzent = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
   function bewertungFarbe(b: 'gut' | 'durchschnittlich' | 'gering' | 'hoch') {
-    if (b === 'gut') return 'text-green-600 dark:text-green-400';
-    if (b === 'durchschnittlich') return 'text-yellow-600 dark:text-yellow-400';
-    return 'text-red-600 dark:text-red-400';
+    if (b === 'gut') return 'text-green-700 dark:text-green-400';
+    if (b === 'durchschnittlich') return 'text-yellow-800 dark:text-yellow-400';
+    return 'text-red-700 dark:text-red-300';
   }
 
   function bewertungBg(b: 'gut' | 'durchschnittlich' | 'gering' | 'hoch') {
@@ -89,7 +89,7 @@ export default function MietrenditeRechner() {
         <div className="w-full sm:w-1/3">
           <NummerEingabe value={kaufnebenkostenProzent} onChange={setKaufnebenkostenProzent} placeholder="z.B. 10" einheit="%" />
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Typisch: 8–15% je nach Bundesland (Grunderwerbsteuer + Notar + Makler)</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Typisch: 8–15% je nach Bundesland (Grunderwerbsteuer + Notar + Makler)</p>
         <CrossLink href="/wohnen/grunderwerbsteuer-rechner" emoji="📋" text="Grunderwerbsteuer genau berechnen" />
       </div>
 
@@ -107,7 +107,7 @@ export default function MietrenditeRechner() {
         <div className="w-full sm:w-1/2">
           <NummerEingabe value={nichtUmlagefaehigeNK} onChange={setNichtUmlagefaehigeNK} placeholder="z.B. 150" einheit="€/Monat" />
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Verwaltung, Instandhaltungsrücklage, anteilige Reparaturen</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Verwaltung, Instandhaltungsrücklage, anteilige Reparaturen</p>
       </div>
 
       {/* Instandhaltung */}
@@ -197,32 +197,32 @@ export default function MietrenditeRechner() {
           {/* Kennzahlen-Übersicht */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
             <div className={`rounded-xl p-4 ${bewertungBg(ergebnis.bruttoRenditeBewertung)}`}>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Bruttomietrendite</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Bruttomietrendite</p>
               <p className={`text-xl font-bold ${bewertungFarbe(ergebnis.bruttoRenditeBewertung)}`}>{fmtProzent(ergebnis.bruttomietrendite)} %</p>
               <p className={`text-xs font-medium ${bewertungFarbe(ergebnis.bruttoRenditeBewertung)}`}>{bewertungLabel(ergebnis.bruttoRenditeBewertung)}</p>
             </div>
             <div className="rounded-xl p-4 bg-gray-100 dark:bg-gray-700/50">
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Nettomietrendite</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Nettomietrendite</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-200">{fmtProzent(ergebnis.nettomietrendite)} %</p>
             </div>
             <div className={`rounded-xl p-4 ${bewertungBg(ergebnis.multiplikatorBewertung)}`}>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Mietmultiplikator</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Mietmultiplikator</p>
               <p className={`text-xl font-bold ${bewertungFarbe(ergebnis.multiplikatorBewertung)}`}>{fmtProzent(ergebnis.mietmultiplikator)}</p>
               <p className={`text-xs font-medium ${bewertungFarbe(ergebnis.multiplikatorBewertung)}`}>{bewertungLabel(ergebnis.multiplikatorBewertung)}</p>
             </div>
             {ergebnis.eigenkapitalrendite !== null && (
               <div className="rounded-xl p-4 bg-blue-100 dark:bg-blue-500/20">
-                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Eigenkapitalrendite</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Eigenkapitalrendite</p>
                 <p className="text-xl font-bold text-blue-700 dark:text-blue-400">{fmtProzent(ergebnis.eigenkapitalrendite)} %</p>
-                <p className="text-xs text-blue-600 dark:text-blue-300">Leverage-Effekt</p>
+                <p className="text-xs text-blue-700 dark:text-blue-300">Leverage-Effekt</p>
               </div>
             )}
             <div className={`rounded-xl p-4 ${ergebnis.monatsCashflow >= 0 ? 'bg-green-100 dark:bg-green-500/20' : 'bg-red-100 dark:bg-red-500/20'}`}>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Monatl. Cashflow</p>
-              <p className={`text-xl font-bold ${ergebnis.monatsCashflow >= 0 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'}`}>{fmtEuro(ergebnis.monatsCashflow)} €</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Monatl. Cashflow</p>
+              <p className={`text-xl font-bold ${ergebnis.monatsCashflow >= 0 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>{fmtEuro(ergebnis.monatsCashflow)} €</p>
             </div>
             <div className="rounded-xl p-4 bg-gray-100 dark:bg-gray-700/50">
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Jahresreinertrag</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Jahresreinertrag</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.jahresreinertrag)} €</p>
             </div>
           </div>
@@ -251,15 +251,15 @@ export default function MietrenditeRechner() {
                     </td>
                     <td className={`px-5 py-2.5 text-right tabular-nums ${
                       z.istSumme
-                        ? z.monat >= 0 ? 'text-green-700 dark:text-green-400 font-bold' : 'text-red-700 dark:text-red-400 font-bold'
-                        : z.istNegativ ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-200'
+                        ? z.monat >= 0 ? 'text-green-700 dark:text-green-400 font-bold' : 'text-red-700 dark:text-red-300 font-bold'
+                        : z.istNegativ ? 'text-red-700 dark:text-red-300' : 'text-gray-800 dark:text-gray-200'
                     }`}>
                       {fmtEuro(Math.abs(z.monat))} €
                     </td>
                     <td className={`px-5 py-2.5 text-right tabular-nums ${
                       z.istSumme
-                        ? z.jahr >= 0 ? 'text-green-700 dark:text-green-400 font-bold' : 'text-red-700 dark:text-red-400 font-bold'
-                        : z.istNegativ ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-200'
+                        ? z.jahr >= 0 ? 'text-green-700 dark:text-green-400 font-bold' : 'text-red-700 dark:text-red-300 font-bold'
+                        : z.istNegativ ? 'text-red-700 dark:text-red-300' : 'text-gray-800 dark:text-gray-200'
                     }`}>
                       {fmtEuro(Math.abs(z.jahr))} €
                     </td>

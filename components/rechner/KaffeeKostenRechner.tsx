@@ -90,7 +90,7 @@ export default function KaffeeKostenRechner() {
           className={`mt-2 w-full p-2 rounded-xl text-sm border-2 transition-all ${
             art === 'custom'
               ? 'border-amber-500 bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-300'
-              : 'border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-amber-300'
+              : 'border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-amber-300'
           }`}
         >
           Eigener Preis
@@ -105,7 +105,7 @@ export default function KaffeeKostenRechner() {
                 className="input-field pr-8"
                 placeholder="z.B. 2,50"
               />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">€</span>
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-sm">€</span>
             </div>
           </div>
         )}
@@ -126,15 +126,15 @@ export default function KaffeeKostenRechner() {
           {/* Zeitraum-Cards */}
           <div className="grid grid-cols-3 gap-3 mb-6">
             <div className="bg-amber-50 dark:bg-amber-900/15 rounded-xl p-3 text-center">
-              <p className="text-xs text-amber-600 dark:text-amber-400 font-medium">Pro Woche</p>
+              <p className="text-xs text-amber-700 dark:text-amber-400 font-medium">Pro Woche</p>
               <p className="text-lg font-bold text-amber-800 dark:text-amber-200">{fmt(ergebnis.kostenProWoche)} €</p>
             </div>
             <div className="bg-amber-50 dark:bg-amber-900/15 rounded-xl p-3 text-center">
-              <p className="text-xs text-amber-600 dark:text-amber-400 font-medium">Pro Monat</p>
+              <p className="text-xs text-amber-700 dark:text-amber-400 font-medium">Pro Monat</p>
               <p className="text-lg font-bold text-amber-800 dark:text-amber-200">{fmt(ergebnis.kostenProMonat)} €</p>
             </div>
             <div className="bg-amber-50 dark:bg-amber-900/15 rounded-xl p-3 text-center">
-              <p className="text-xs text-amber-600 dark:text-amber-400 font-medium">Pro Jahr</p>
+              <p className="text-xs text-amber-700 dark:text-amber-400 font-medium">Pro Jahr</p>
               <p className="text-lg font-bold text-amber-800 dark:text-amber-200">{fmt(ergebnis.kostenProJahr)} €</p>
             </div>
           </div>
@@ -145,10 +145,10 @@ export default function KaffeeKostenRechner() {
               <p className="text-sm text-red-800 dark:text-red-300">
                 ☕ Seit Sie vor <strong>{jahre} {jahre === 1 ? 'Jahr' : 'Jahren'}</strong> angefangen haben:
               </p>
-              <p className="text-2xl font-bold text-red-700 dark:text-red-400 mt-1">
+              <p className="text-2xl font-bold text-red-700 dark:text-red-300 mt-1">
                 {fmt(ergebnis.kostenBisher)} € für Kaffee ausgegeben
               </p>
-              <p className="text-xs text-red-600/70 dark:text-red-400/60 mt-1">
+              <p className="text-xs text-red-800 dark:text-red-300 mt-1">
                 Das sind {fmtInt(ergebnis.kaffeeBisher)} Tassen Kaffee
               </p>
             </div>
@@ -162,7 +162,7 @@ export default function KaffeeKostenRechner() {
             <p className="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">
               {fmt(ergebnis.kostenIn30Jahren)} €
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               {ergebnis.kostenIn30Jahren >= 50000
                 ? 'Das reicht für eine Anzahlung auf eine Eigentumswohnung!'
                 : ergebnis.kostenIn30Jahren >= 15000
@@ -183,7 +183,7 @@ export default function KaffeeKostenRechner() {
                     <p className="text-sm text-gray-700 dark:text-gray-300">
                       Umstieg von <strong>{v.von}</strong> auf <strong>{v.nach}</strong>
                     </p>
-                    <p className="text-sm font-bold text-green-600 dark:text-green-400 whitespace-nowrap ml-2">
+                    <p className="text-sm font-bold text-green-700 dark:text-green-400 whitespace-nowrap ml-2">
                       +{fmt(v.ersparnis)} €/Jahr
                     </p>
                   </div>
@@ -203,7 +203,7 @@ export default function KaffeeKostenRechner() {
                   <div key={i} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl p-3 text-center">
                     <span className="text-2xl">{v.icon}</span>
                     <p className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-1">{v.anzahl}×</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{v.label}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">{v.label}</p>
                   </div>
                 ))}
               </div>

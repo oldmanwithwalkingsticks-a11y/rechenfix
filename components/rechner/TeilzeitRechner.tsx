@@ -211,7 +211,7 @@ export default function TeilzeitRechner() {
                   <td className="py-3 pr-3 text-gray-700 dark:text-gray-300 font-medium">Wochenstunden</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmtStd(nVollzeitStunden)} Std.</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmtStd(nTeilzeitStunden)} Std.</td>
-                  <td className="py-3 pl-3 text-right font-semibold text-orange-600 dark:text-orange-400">
+                  <td className="py-3 pl-3 text-right font-semibold text-orange-700 dark:text-orange-400">
                     −{fmtDez(nVollzeitStunden - nTeilzeitStunden)} Std.
                   </td>
                 </tr>
@@ -219,7 +219,7 @@ export default function TeilzeitRechner() {
                   <td className="py-3 pr-3 text-gray-700 dark:text-gray-300 font-medium">Brutto/Monat</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmt(ergebnis.vollzeitBrutto)} €</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmt(ergebnis.teilzeitBrutto)} €</td>
-                  <td className="py-3 pl-3 text-right font-semibold text-orange-600 dark:text-orange-400">
+                  <td className="py-3 pl-3 text-right font-semibold text-orange-700 dark:text-orange-400">
                     −{fmt(ergebnis.bruttoDifferenz)} €
                   </td>
                 </tr>
@@ -227,7 +227,7 @@ export default function TeilzeitRechner() {
                   <td className="py-3 pr-3 text-gray-700 dark:text-gray-300 font-medium">Netto/Monat (ca.)</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmt(ergebnis.vollzeitNetto)} €</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmt(ergebnis.teilzeitNetto)} €</td>
-                  <td className="py-3 pl-3 text-right font-semibold text-orange-600 dark:text-orange-400">
+                  <td className="py-3 pl-3 text-right font-semibold text-orange-700 dark:text-orange-400">
                     −{fmt(ergebnis.nettoDifferenz)} €
                   </td>
                 </tr>
@@ -235,13 +235,13 @@ export default function TeilzeitRechner() {
                   <td className="py-3 pr-3 text-gray-700 dark:text-gray-300 font-medium">Stundenlohn (brutto)</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmtDez(ergebnis.stundenlohn)} €</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{fmtDez(ergebnis.stundenlohn)} €</td>
-                  <td className="py-3 pl-3 text-right font-semibold text-green-600 dark:text-green-400">±0 €</td>
+                  <td className="py-3 pl-3 text-right font-semibold text-green-700 dark:text-green-400">±0 €</td>
                 </tr>
                 <tr>
                   <td className="py-3 pr-3 text-gray-700 dark:text-gray-300 font-medium">Urlaubstage</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{nUrlaubstage}</td>
                   <td className="py-3 px-3 text-right text-gray-800 dark:text-gray-200">{ergebnis.urlaubstageTeilzeit.toLocaleString('de-DE', { maximumFractionDigits: 2 })}</td>
-                  <td className="py-3 pl-3 text-right font-semibold text-gray-500 dark:text-gray-400">
+                  <td className="py-3 pl-3 text-right font-semibold text-gray-600 dark:text-gray-400">
                     {ergebnis.urlaubstageTeilzeit === nUrlaubstage ? '—' : `−${(nUrlaubstage - ergebnis.urlaubstageTeilzeit).toLocaleString('de-DE', { maximumFractionDigits: 2 })}`}
                   </td>
                 </tr>
@@ -295,7 +295,7 @@ export default function TeilzeitRechner() {
               {/* Differenz */}
               <div className="pt-2 border-t border-gray-200 dark:border-gray-600 flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Monatliche Netto-Differenz</span>
-                <span className="font-bold text-orange-600 dark:text-orange-400">−{fmt(ergebnis.nettoDifferenz)} €</span>
+                <span className="font-bold text-orange-700 dark:text-orange-400">−{fmt(ergebnis.nettoDifferenz)} €</span>
               </div>
             </div>
           </div>
@@ -314,7 +314,7 @@ export default function TeilzeitRechner() {
               </div>
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                 <span className="text-gray-600 dark:text-gray-400">Netto-Differenz pro Jahr</span>
-                <span className="font-bold text-orange-600 dark:text-orange-400">−{fmt(ergebnis.jahresNettoDifferenz)} €</span>
+                <span className="font-bold text-orange-700 dark:text-orange-400">−{fmt(ergebnis.jahresNettoDifferenz)} €</span>
               </div>
             </div>
           </div>

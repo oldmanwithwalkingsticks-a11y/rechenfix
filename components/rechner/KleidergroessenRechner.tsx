@@ -156,7 +156,7 @@ export default function KleidergroessenRechner() {
         <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Optional: Körpermaße (cm)</p>
         <div className={`grid ${typ === 'damen' ? 'grid-cols-3' : 'grid-cols-2'} gap-3`}>
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
               {typ === 'damen' ? 'Oberweite' : 'Brust'}
             </label>
             <input
@@ -169,7 +169,7 @@ export default function KleidergroessenRechner() {
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Taille</label>
+            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Taille</label>
             <input
               type="text"
               inputMode="decimal"
@@ -181,7 +181,7 @@ export default function KleidergroessenRechner() {
           </div>
           {typ === 'damen' && (
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Hüfte</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Hüfte</label>
               <input
                 type="text"
                 inputMode="decimal"

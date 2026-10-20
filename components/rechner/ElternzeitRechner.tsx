@@ -126,7 +126,7 @@ export default function ElternzeitRechner() {
         <div className="flex items-center justify-between mb-2">
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Teilzeit während Elternzeit?</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">15–32 Stunden/Woche erlaubt</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">15–32 Stunden/Woche erlaubt</p>
           </div>
           <button
             onClick={() => setTeilzeit(!teilzeit)}
@@ -152,7 +152,7 @@ export default function ElternzeitRechner() {
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
               {ergebnis.gesamtMonate} Monate
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               Partner 1: {ergebnis.p1Mon} Monate · Partner 2: {ergebnis.p2Mon} Monate
             </p>
           </div>

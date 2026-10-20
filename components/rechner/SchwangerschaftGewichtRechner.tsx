@@ -166,7 +166,7 @@ export default function SchwangerschaftGewichtRechner() {
         <p className="text-white/80 text-sm mb-1">Sie haben bisher zugenommen</p>
         <p className="text-5xl font-bold">{fmt(ergebnis.aktuelleZunahme)} kg</p>
         <div className="mt-3">
-          <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${statusColor === 'green' ? 'bg-green-700' : 'bg-yellow-600'} text-white`}>
+          <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${statusColor === 'green' ? 'bg-green-700' : 'bg-yellow-700'} text-white`}>
             {statusText}
           </span>
         </div>
@@ -227,7 +227,7 @@ export default function SchwangerschaftGewichtRechner() {
         </div>
       </div>
 
-      <p className="text-xs text-gray-500 mb-6">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
         ⚠️ Die Empfehlungen basieren auf den IOM-Richtlinien. Jede Schwangerschaft ist individuell — sprechen Sie Abweichungen mit Ihrer Hebamme oder Ihrem Arzt ab.
       </p>
 

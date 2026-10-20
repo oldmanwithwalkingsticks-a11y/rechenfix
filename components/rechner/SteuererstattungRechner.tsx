@@ -90,7 +90,7 @@ export default function SteuererstattungRechner() {
               Arbeitstage pro Jahr (gesamt)
             </label>
             <NummerEingabe value={arbeitstage} onChange={setArbeitstage} placeholder="220" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">inklusive Homeoffice-Tage</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">inklusive Homeoffice-Tage</p>
           </div>
         </div>
 
@@ -102,14 +102,14 @@ export default function SteuererstattungRechner() {
             </label>
             <NummerEingabe value={homeofficeTage} onChange={setHomeofficeTage} placeholder="0" />
             {/* W187: Hinweis auf Pendeltage = Arbeitstage − Homeoffice-Tage und den Sonderfall § 4 Abs. 5 S. 1 Nr. 6c S. 2 EStG */}
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Tage ohne Fahrt zur Arbeitsstätte: 6 €/Tag, max. 1.260 €/Jahr. Für diese Tage entfällt die Pendlerpauschale. Ausnahme: Steht dauerhaft kein anderer Arbeitsplatz zur Verfügung (z. B. Lehrkräfte), gibt es die 6 € auch an Tagen mit Fahrt; das bildet der Rechner nicht ab.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Tage ohne Fahrt zur Arbeitsstätte: 6 €/Tag, max. 1.260 €/Jahr. Für diese Tage entfällt die Pendlerpauschale. Ausnahme: Steht dauerhaft kein anderer Arbeitsplatz zur Verfügung (z. B. Lehrkräfte), gibt es die 6 € auch an Tagen mit Fahrt; das bildet der Rechner nicht ab.</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Berufsbedingte Ausgaben
             </label>
             <NummerEingabe value={beruflicheAusgaben} onChange={setBeruflicheAusgaben} einheit="€" placeholder="0" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Fachliteratur, Fortbildung, Arbeitsmittel</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Fachliteratur, Fortbildung, Arbeitsmittel</p>
           </div>
         </div>
 
@@ -137,7 +137,7 @@ export default function SteuererstattungRechner() {
               Haushaltsnahe Dienstleistungen
             </label>
             <NummerEingabe value={haushaltsnaheDL} onChange={setHaushaltsnaheDL} einheit="€" placeholder="0" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">z.B. Putzhilfe, Handwerker</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">z.B. Putzhilfe, Handwerker</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -241,9 +241,9 @@ export default function SteuererstattungRechner() {
                   <div key={p.label} className="flex justify-between items-center px-4 py-3">
                     <div>
                       <span className="text-sm text-gray-700 dark:text-gray-300">{p.label}</span>
-                      {p.info && <p className="text-xs text-gray-600 dark:text-gray-500">{p.info}</p>}
+                      {p.info && <p className="text-xs text-gray-600 dark:text-gray-400">{p.info}</p>}
                     </div>
-                    <span className="font-medium text-sm text-green-600 dark:text-green-400">+{fmt(p.betrag)} €</span>
+                    <span className="font-medium text-sm text-green-700 dark:text-green-400">+{fmt(p.betrag)} €</span>
                   </div>
                 ))}
                 <div className="flex justify-between px-4 py-3 font-bold bg-primary-50/50 dark:bg-primary-500/5">

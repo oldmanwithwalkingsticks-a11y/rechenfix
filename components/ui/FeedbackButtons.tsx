@@ -85,7 +85,7 @@ export default function FeedbackButtons() {
 
   if (feedback === 'ja') {
     return (
-      <div className="text-center py-4 text-sm text-green-600 dark:text-green-400 font-medium">
+      <div className="text-center py-4 text-sm text-green-700 dark:text-green-400 font-medium">
         Danke für Ihr Feedback! Schön, dass der Rechner hilfreich war.
       </div>
     );
@@ -93,7 +93,7 @@ export default function FeedbackButtons() {
 
   if (status === 'ok') {
     return (
-      <div className="text-center py-4 text-sm text-green-600 dark:text-green-400 font-medium">
+      <div className="text-center py-4 text-sm text-green-700 dark:text-green-400 font-medium">
         Vielen Dank! Ihr Feedback hilft uns, diesen Rechner zu verbessern.
       </div>
     );
@@ -101,7 +101,7 @@ export default function FeedbackButtons() {
 
   if (uebersprungen) {
     return (
-      <div className="text-center py-4 text-sm text-gray-500 dark:text-gray-400">
+      <div className="text-center py-4 text-sm text-gray-600 dark:text-gray-400">
         Alles klar. Falls Ihnen später doch noch etwas auffällt, freuen wir uns über eine
         Nachricht.
       </div>
@@ -226,7 +226,7 @@ export default function FeedbackButtons() {
           {status === 'fehler' && (
             <p
               role="alert"
-              className="mt-3 text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-lg px-3 py-2"
+              className="mt-3 text-xs text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-lg px-3 py-2"
             >
               Das Absenden hat nicht geklappt — Ihre Nachricht ist noch da. Bitte versuchen Sie es
               noch einmal, oder schreiben Sie an info@rechenfix.de.
@@ -240,7 +240,7 @@ export default function FeedbackButtons() {
               className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${
                 absendbar
                   ? 'bg-primary-600 text-white hover:bg-primary-700'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 cursor-not-allowed'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 cursor-not-allowed'
               }`}
             >
               {sendet
@@ -251,7 +251,7 @@ export default function FeedbackButtons() {
             </button>
             <button
               onClick={() => setUebersprungen(true)}
-              className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+              className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
             >
               Überspringen
             </button>
@@ -289,7 +289,7 @@ export default function FeedbackButtons() {
 
   return (
     <div className="text-center py-4 no-print">
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">War dieser Rechner hilfreich?</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">War dieser Rechner hilfreich?</p>
       <div className="flex justify-center gap-3">
         <button
           onClick={() => handleFeedback('ja')}
@@ -299,7 +299,7 @@ export default function FeedbackButtons() {
         </button>
         <button
           onClick={() => handleFeedback('nein')}
-          className="inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+          className="inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
         >
           <span className="text-base">👎</span> Nein
         </button>

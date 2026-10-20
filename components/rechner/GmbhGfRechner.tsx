@@ -166,7 +166,7 @@ export default function GmbhGfRechner() {
             onChange={(v) => setBeherrschend(v === 'ja')}
           />
           {/* W187: vorher „&gt; 50 % Anteile oder Sperrminorität“; BSG 14.03.2018, B 12 KR 13/17 R: mindestens 50 % oder umfassende Sperrminorität */}
-          <p className="text-xs text-gray-500 mt-1">Beherrschend = mindestens 50 % der Anteile oder eine umfassende Sperrminorität (alle Gesellschafterbeschlüsse blockierbar) → sozialversicherungsfrei.</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Beherrschend = mindestens 50 % der Anteile oder eine umfassende Sperrminorität (alle Gesellschafterbeschlüsse blockierbar) → sozialversicherungsfrei.</p>
         </div>
 
         <div>
@@ -239,7 +239,7 @@ export default function GmbhGfRechner() {
                 <option key={bl} value={bl}>{bl}</option>
               ))}
             </select>
-            <p className="text-xs text-gray-500 mt-1">Bayern und Baden-Württemberg: 8 %, sonst 9 %.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bayern und Baden-Württemberg: 8 %, sonst 9 %.</p>
           </div>
         )}
 
@@ -281,14 +281,14 @@ export default function GmbhGfRechner() {
           )}
           <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">zu versteuerndes Einkommen</span><span className="font-medium">{fmtEur(ergebnis.zvE)}</span></div>
           <div className="border-t border-gray-100 dark:border-gray-700 my-2"></div>
-          <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Einkommensteuer</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.est)}</span></div>
-          {ergebnis.soli > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Soli</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.soli)}</span></div>}
-          {ergebnis.kirchensteuer > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Kirchensteuer</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.kirchensteuer)}</span></div>}
-          {ergebnis.anRv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Rentenversicherung (AN)</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anRv)}</span></div>}
-          {ergebnis.anAv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Arbeitslosenvers. (AN)</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anAv)}</span></div>}
-          {ergebnis.anKv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">{beherrschend ? 'GKV freiwillig (voller Beitrag)' : 'GKV (AN)'}</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anKv)}</span></div>}
-          {ergebnis.anPv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">{beherrschend ? 'Pflegeversicherung (voller Beitrag)' : 'Pflegeversicherung (AN)'}</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.anPv)}</span></div>}
-          {ergebnis.pkvJahr > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">PKV-Beitrag (geschätzt)</span><span className="font-medium text-red-600 dark:text-red-400">− {fmtEur(ergebnis.pkvJahr)}</span></div>}
+          <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Einkommensteuer</span><span className="font-medium text-red-700 dark:text-red-300">− {fmtEur(ergebnis.est)}</span></div>
+          {ergebnis.soli > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Soli</span><span className="font-medium text-red-700 dark:text-red-300">− {fmtEur(ergebnis.soli)}</span></div>}
+          {ergebnis.kirchensteuer > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Kirchensteuer</span><span className="font-medium text-red-700 dark:text-red-300">− {fmtEur(ergebnis.kirchensteuer)}</span></div>}
+          {ergebnis.anRv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Rentenversicherung (AN)</span><span className="font-medium text-red-700 dark:text-red-300">− {fmtEur(ergebnis.anRv)}</span></div>}
+          {ergebnis.anAv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">Arbeitslosenvers. (AN)</span><span className="font-medium text-red-700 dark:text-red-300">− {fmtEur(ergebnis.anAv)}</span></div>}
+          {ergebnis.anKv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">{beherrschend ? 'GKV freiwillig (voller Beitrag)' : 'GKV (AN)'}</span><span className="font-medium text-red-700 dark:text-red-300">− {fmtEur(ergebnis.anKv)}</span></div>}
+          {ergebnis.anPv > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">{beherrschend ? 'Pflegeversicherung (voller Beitrag)' : 'Pflegeversicherung (AN)'}</span><span className="font-medium text-red-700 dark:text-red-300">− {fmtEur(ergebnis.anPv)}</span></div>}
+          {ergebnis.pkvJahr > 0 && <div className="flex justify-between"><span className="text-gray-600 dark:text-gray-400">PKV-Beitrag (geschätzt)</span><span className="font-medium text-red-700 dark:text-red-300">− {fmtEur(ergebnis.pkvJahr)}</span></div>}
           <div className="border-t border-gray-200 dark:border-gray-600 mt-2 pt-2 flex justify-between font-bold">
             <span className="text-gray-800 dark:text-gray-100">= Jahresnetto</span>
             <span className="text-primary-600 dark:text-primary-400">{fmtEur(ergebnis.nettoJahr)}</span>
@@ -302,7 +302,7 @@ export default function GmbhGfRechner() {
         </div>
       )}
 
-      <p className="text-xs text-gray-500 mb-6">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
         ⚠️ Hinweis: Vereinfachte Schätzung auf Basis §32a EStG 2026. PKV-Beitrag ist eine Pauschale. Für die genaue Berechnung Ihres Gehalts empfehlen wir eine Lohnbuchhaltung oder einen Steuerberater.
       </p>
 

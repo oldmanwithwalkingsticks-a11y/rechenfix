@@ -128,7 +128,7 @@ export default function RechtsschutzRechner() {
             })}
           </div>
           {bausteine.length === 0 && (
-            <p className="text-sm text-amber-600 dark:text-amber-400 mt-2">Bitte wählen Sie mindestens einen Baustein.</p>
+            <p className="text-sm text-amber-700 dark:text-amber-400 mt-2">Bitte wählen Sie mindestens einen Baustein.</p>
           )}
         </div>
 
@@ -219,20 +219,20 @@ export default function RechtsschutzRechner() {
                 </div>
               ))}
               {ergebnis.selbstbeteiligungRabattProzent > 0 && (
-                <div className="flex justify-between px-4 py-3 text-sm text-green-600 dark:text-green-400">
+                <div className="flex justify-between px-4 py-3 text-sm text-green-700 dark:text-green-400">
                   <span>Selbstbeteiligung ({selbstbeteiligung} €)</span>
                   <span>−{ergebnis.selbstbeteiligungRabattProzent.toFixed(0)}%</span>
                 </div>
               )}
               {ergebnis.zahlweiseRabattProzent > 0 && (
-                <div className="flex justify-between px-4 py-3 text-sm text-green-600 dark:text-green-400">
+                <div className="flex justify-between px-4 py-3 text-sm text-green-700 dark:text-green-400">
                   <span>Zahlweise ({ZAHLWEISEN.find(z => z.value === zahlweise)?.label})</span>
                   <span>−{ergebnis.zahlweiseRabattProzent.toFixed(0)}%</span>
                 </div>
               )}
               {ergebnis.berufFaktorProzent !== 0 && (
                 <div className={`flex justify-between px-4 py-3 text-sm ${
-                  ergebnis.berufFaktorProzent < 0 ? 'text-green-600 dark:text-green-400' : 'text-amber-600 dark:text-amber-400'
+                  ergebnis.berufFaktorProzent < 0 ? 'text-green-700 dark:text-green-400' : 'text-amber-700 dark:text-amber-400'
                 }`}>
                   <span>Beruf ({BERUFE.find(b => b.value === beruf)?.label})</span>
                   <span>{ergebnis.berufFaktorProzent > 0 ? '+' : ''}{ergebnis.berufFaktorProzent.toFixed(0)}%</span>

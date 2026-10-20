@@ -38,7 +38,7 @@ export default function UeberUnsSeite() {
       <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
         Über Rechenfix.de
       </h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-8">
+      <p className="text-gray-600 dark:text-gray-400 mb-8">
         Über 200 deutsche Online-Rechner — die nicht nur Zahlen ausspucken, sondern erklären, was dahintersteckt.
       </p>
 
@@ -90,7 +90,7 @@ export default function UeberUnsSeite() {
             />
           ) : (
             <div
-              className="w-[200px] h-[200px] rounded-2xl bg-gray-200 dark:bg-gray-700 shrink-0 flex items-center justify-center text-gray-500 dark:text-gray-400 text-sm"
+              className="w-[200px] h-[200px] rounded-2xl bg-gray-200 dark:bg-gray-700 shrink-0 flex items-center justify-center text-gray-600 dark:text-gray-300 text-sm"
               role="img"
               aria-label="Foto folgt"
             >
@@ -102,7 +102,7 @@ export default function UeberUnsSeite() {
             <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               Gründer und alleiniger Betreiber von Rechenfix
             </div>
-            <div className="text-sm text-gray-500 dark:text-gray-500 mt-0.5">Krefeld</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">Krefeld</div>
           </div>
         </div>
       </section>
@@ -344,7 +344,7 @@ export default function UeberUnsSeite() {
       </section>
 
       {/* 9. Aktualisiert-Block (NEU, ganz am Ende) */}
-      <p className="text-xs text-gray-500 dark:text-gray-400 text-right mt-2">
+      <p className="text-xs text-gray-600 dark:text-gray-400 text-right mt-2">
         Diese Seite zuletzt aktualisiert: {LAST_UPDATED}
       </p>
     </div>

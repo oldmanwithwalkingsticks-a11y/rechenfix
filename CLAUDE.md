@@ -105,7 +105,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - Custom-Toggle-Buttons statt `<RadioToggleGroup>`
 - Custom-Button-Tabs statt `<TabGroup>`
 - Selects ohne sichtbares `<label>`
-- `text-gray-400` als Sekundärtextfarbe auf weißem Grund
+- `text-gray-400` oder `text-gray-500` als Sekundärtextfarbe auf weißem Grund (seit Welle 188 auch `-500`; Prüfskript `verify-textfarben`)
 - Ergebnis-Updates ohne aria-live-Region
 - Erklärtext, FAQ, Disclaimer oder andere Crawler-relevante Text-Sektionen in client-only Lazy-Wrappern (`<LazySection>`, `IntersectionObserver`-gated Render) — bei SSR liefern solche Wrapper nur einen leeren Placeholder, AdSense-Crawler bewertet die Seite als „thin content" (Lehre 25 / Vorfall 27.04.2026, Sprint 154+155+156)
 - `new Date()` auf Modul-Ebene in `'use client'`-Components für Year-Dropdowns o. Ä. — Hydration-Mismatch-Risiko, statische Range bevorzugen (Lehre 24)
@@ -116,9 +116,11 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 rechenfix erfüllt WCAG 2.1 AA (Lighthouse ≥97 auf Referenzseiten, Stand April 2026).
 
 ### Farb-Regeln
-- Text auf weiß: min. `text-gray-600`, NIE `-400` oder `-300`
-- Akzent-Buttons mit weißem Text: immer `-600`-Varianten (`bg-green-600`, `bg-red-600`, `bg-amber-600`, `bg-blue-600`)
-- Rote Beträge: `text-red-600` (nicht `-500`)
+- Text auf weiß: min. `text-gray-600`, NIE `-500`, `-400` oder `-300` — auch nicht für kleine Zusatz- und Hinweiszeilen (`-500` hat auf `bg-gray-100` nur 4,2:1). Immer mit Dark-Variante, meist `text-gray-600 dark:text-gray-400`. Ausnahme: rein dekorative Zeichen (Trennpunkt, Pfeil, Stern); die zulässigen stehen in `scripts/verify-textfarben.ts`. SVG-Grafiken: grauer Text nur mit `fill="#9ca3af"`, `app/globals.css` macht ihn im hellen Modus zu gray-600 (Welle 188).
+- Flächen mit weißem Text (Buttons, Plaketten, Balken): `bg-red-600`, `bg-blue-600`, `bg-primary-500`; bei Grün, Orange, Amber, Gelb und Teal erst `-700` (`bg-green-700`, `bg-orange-700`, `bg-amber-700`/`bg-accent-700`, `bg-yellow-700`, `bg-teal-700`), die `-600`-Stufen haben mit Weiß nur 2,9–3,7:1 (Welle 188)
+- Farbige Beträge und Hinweise: `text-red-700`, `text-green-700`, `text-orange-700`, `text-amber-700`, `text-yellow-800` (die `-600`-Stufen fallen auf Weiß oder auf ihrer eigenen `-50`-Tönung unter 4,5:1); keine Deckkraft-Varianten wie `text-amber-700/70` für Text
+- Dark Mode: jede helle Textfarbe mit `dark:`-Variante; Grau mindestens `dark:text-gray-400`, auf `dark:bg-gray-700` und dunkel getönten Karten (`dark:bg-gray-600/50`, `dark:bg-*-500/20`) `dark:text-gray-300`; nie `dark:text-gray-500`/`-600`; Rot `dark:text-red-300`, Primär `dark:text-primary-400`. Komponenten ohne Dark-Varianten (z. B. `GefrierdauerRechner`) bleiben ganz hell, dort keine `dark:text-` ergänzen
+- Gegenprobe: axe-Regel `color-contrast` über alle Seiten, hell und dunkel; Ergebnis Welle 188: 0 Verstöße
 
 ### A11y-Komponenten
 - `<RadioToggleGroup>` (`components/ui/RadioToggleGroup.tsx`) — Werte-Auswahl mit 2–4 Optionen (native Radio-Inputs + Fieldset/Legend)

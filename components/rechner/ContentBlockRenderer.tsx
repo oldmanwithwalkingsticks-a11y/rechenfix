@@ -106,7 +106,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
             </table>
           </div>
           {block.fussnote && (
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{block.fussnote}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">{block.fussnote}</p>
           )}
         </DatenKachel>
       );
@@ -127,7 +127,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
                   <span className={`text-xs font-medium ${akzent.label}`}>{w.label}</span>
                   <span className="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-0.5">{w.wert}</span>
                   {w.hinweis && (
-                    <span className="text-xs text-gray-500 dark:text-gray-400 mt-auto pt-2">{w.hinweis}</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-auto pt-2">{w.hinweis}</span>
                   )}
                 </div>
               );
@@ -203,7 +203,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
             {block.punkte.map((p, j) => (
               <li key={j} className="flex gap-2.5 items-start">
                 <svg
-                  className="shrink-0 w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5"
+                  className="shrink-0 w-5 h-5 text-emerald-700 dark:text-emerald-400 mt-0.5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -248,7 +248,7 @@ function DiagrammBlock({
         <Balken block={block} />
       )}
       {block.fussnote && (
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{block.fussnote}</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">{block.fussnote}</p>
       )}
     </DatenKachel>
   );

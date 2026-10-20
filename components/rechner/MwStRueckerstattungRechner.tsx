@@ -63,14 +63,14 @@ export default function MwstRueckerstattungRechner() {
             <option value="global-blue">Global Blue (Richtwert ~{DIENSTLEISTER_ABZUG_PROZENT} % der MwSt)</option>
             <option value="planet">Planet (Richtwert ~{DIENSTLEISTER_ABZUG_PROZENT} % der MwSt)</option>
           </select>
-          <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Dienstleister-Gebühren werden von der MwSt-Erstattung abgezogen. Die genaue Höhe steht in der Erstattungstabelle auf dem Tax-Free-Formular.</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Dienstleister-Gebühren werden von der MwSt-Erstattung abgezogen. Die genaue Höhe steht in der Erstattungstabelle auf dem Tax-Free-Formular.</p>
         </div>
       </div>
 
       {/* Mindestbetrag-Warnung */}
       {ergebnis && !ergebnis.mindestbetragErreicht && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-4">
-          <p className="text-sm text-red-700 dark:text-red-400">
+          <p className="text-sm text-red-700 dark:text-red-300">
             {/* W187: vorher „Mindestbetrag von 50,01 € pro Händler“; § 6 Abs. 3a Nr. 3 UStG: Gesamtwert der Lieferung (Rechnungsbetrag) über 50 € */}
             <strong>Achtung:</strong> Der Rechnungsbetrag muss über 50 € brutto liegen (mindestens 50,01 € je Rechnung, § 6 Abs. 3a Nr. 3 UStG). Mehrere kleine Belege lassen sich nicht zusammenrechnen.
           </p>
@@ -124,12 +124,12 @@ export default function MwstRueckerstattungRechner() {
                   {ergebnis.fixgebuehr > 0 && (
                     <div className="flex justify-between px-4 py-3 text-sm">
                       <span className="text-gray-600 dark:text-gray-400">Fixgebühr ({gebuehrenTyp === 'global-blue' ? 'Global Blue' : 'Planet'})</span>
-                      <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.fixgebuehr)} €</span>
+                      <span className="font-medium text-red-700 dark:text-red-300">−{fmt(ergebnis.fixgebuehr)} €</span>
                     </div>
                   )}
                   <div className="flex justify-between px-4 py-3 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">Servicegebühr {gebuehrenTyp === 'global-blue' ? 'Global Blue' : 'Planet'} (Richtwert ~{DIENSTLEISTER_ABZUG_PROZENT} % der MwSt)</span>
-                    <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.prozentgebuehr)} €</span>
+                    <span className="font-medium text-red-700 dark:text-red-300">−{fmt(ergebnis.prozentgebuehr)} €</span>
                   </div>
                 </>
               )}

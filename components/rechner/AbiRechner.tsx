@@ -115,12 +115,12 @@ export default function AbiRechner() {
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Punkte Block I (Kurse)</label>
             <NummerEingabe value={blockIStr} onChange={setBlockIStr} einheit="Pkt" />
-            <p className="text-xs text-gray-500 mt-1">Qualifikationsphase: mind. 200, max. 600 Punkte</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Qualifikationsphase: mind. 200, max. 600 Punkte</p>
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Punkte Block II (Prüfungen)</label>
             <NummerEingabe value={blockIIStr} onChange={setBlockIIStr} einheit="Pkt" />
-            <p className="text-xs text-gray-500 mt-1">Abiturprüfungen: mind. 100, max. 300 Punkte</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Abiturprüfungen: mind. 100, max. 300 Punkte</p>
           </div>
         </div>
       )}
@@ -204,7 +204,7 @@ export default function AbiRechner() {
           {PUNKTE_NOTEN.map(pn => (
             <div key={pn.p} className="text-center bg-gray-50 dark:bg-gray-900 rounded-lg p-2">
               <div className="font-bold text-gray-800 dark:text-gray-200">{pn.p} P.</div>
-              <div className="text-gray-500 dark:text-gray-400">{pn.note}</div>
+              <div className="text-gray-600 dark:text-gray-400">{pn.note}</div>
             </div>
           ))}
         </div>

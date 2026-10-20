@@ -12,6 +12,16 @@
   --foreground: #e2e8f0;
 }
 
+/* W188: graue Sekundärtexte der Blog-Grafiken (fill="#9ca3af" = gray-400, auf Weiß nur 2,5:1) im hellen
+   Modus auf gray-600 (7,6:1); im Dark Mode bleibt gray-400 (auf #0f172a rund 7:1). CSS schlägt das fill-Attribut. */
+svg text[fill="#9ca3af"] {
+  fill: #4b5563;
+}
+
+.dark svg text[fill="#9ca3af"] {
+  fill: #9ca3af;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

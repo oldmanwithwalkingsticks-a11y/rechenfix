@@ -135,13 +135,13 @@ export default function KrankengeldRechner() {
                     <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">pro Tag</td>
                     <td className="px-3 py-2.5 text-right tabular-nums">{fmt2(ergebnis.neTag)} €</td>
                     <td className="px-3 py-2.5 text-right tabular-nums">{fmt2(ergebnis.krankengeldNetto)} €</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmt2(ergebnis.neTag - ergebnis.krankengeldNetto)} €</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmt2(ergebnis.neTag - ergebnis.krankengeldNetto)} €</td>
                   </tr>
                   <tr>
                     <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">pro Monat</td>
                     <td className="px-3 py-2.5 text-right tabular-nums">{fmt(parseDeutscheZahl(netto))} €</td>
                     <td className="px-3 py-2.5 text-right tabular-nums">{fmt(ergebnis.krankengeldNettoMonat)} €</td>
-                    <td className="px-3 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmt(ergebnis.verlust)} € ({fmt2(ergebnis.verlustProzent)} %)</td>
+                    <td className="px-3 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmt(ergebnis.verlust)} € ({fmt2(ergebnis.verlustProzent)} %)</td>
                   </tr>
                 </tbody>
               </table>

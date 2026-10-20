@@ -77,7 +77,7 @@ export const AFFILIATE_PROGRAMS = {
     baseUrl: 'https://www.awin1.com/cread.php?awinmid=121064&awinaffid=2843240',
     deeplink: 'https://zahn.burda-vergleicht.de/campaign_600.html',
     icon: '🦷',
-    color: '#0D9488',
+    color: '#0F766E', // W188: vorher #0D9488 (teal-600, weißer Text darauf 3,7:1), jetzt teal-700 (5,5:1)
   },
   verivox: {
     name: 'Verivox',
@@ -426,7 +426,7 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
         className="mt-6 mb-6 relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden print:hidden"
         style={{ borderLeftWidth: '4px', borderLeftColor: program.color }}
       >
-        <span className="absolute top-2 right-3 text-[11px] text-gray-600 dark:text-gray-500 font-medium">
+        <span className="absolute top-2 right-3 text-[11px] text-gray-600 dark:text-gray-400 font-medium">
           Anzeige
         </span>
         <a
@@ -445,8 +445,9 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
           <span className="text-sm text-gray-600 dark:text-gray-400 truncate hidden sm:inline">
             {description}
           </span>
-          <span className="ml-auto flex-shrink-0 text-sm font-medium whitespace-nowrap"
-            style={{ color: program.color }}
+          {/* W188: Partnerfarbe nur im hellen Modus; auf dark:bg-gray-800 hätten die dunklen Markenfarben 1,4–3,9:1 */}
+          <span className="ml-auto flex-shrink-0 text-sm font-medium whitespace-nowrap text-[color:var(--marke)] dark:text-gray-100"
+            style={{ ['--marke' as string]: program.color }}
           >
             {program.cta} →
           </span>
@@ -466,7 +467,7 @@ export function AffiliateBox({ programId, context, variant = 'full' }: Affiliate
       className="mt-6 mb-6 relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 print:hidden"
       style={{ borderLeftWidth: '4px', borderLeftColor: program.color }}
     >
-      <span className="absolute top-3 right-4 text-[11px] text-gray-600 dark:text-gray-500 font-medium">
+      <span className="absolute top-3 right-4 text-[11px] text-gray-600 dark:text-gray-400 font-medium">
         Anzeige
       </span>
       <div className="p-4">

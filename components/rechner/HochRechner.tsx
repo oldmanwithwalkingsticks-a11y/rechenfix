@@ -128,7 +128,7 @@ export default function HochRechner() {
             </div>
           ))}
         </div>
-        <p className="text-xs text-gray-500 mt-3">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-3">
           Arbeitsstunden pro Monat: {fmtStd(ergebnis.stdMonat)} h · pro Tag: {fmtStd(ergebnis.stdTag)} h
         </p>
       </div>

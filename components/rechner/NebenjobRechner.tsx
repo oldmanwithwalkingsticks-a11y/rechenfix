@@ -186,7 +186,7 @@ export default function NebenjobRechner() {
               </div>
               <div className="flex justify-between px-4 py-3">
                 <span className="text-gray-600 dark:text-gray-400">Netto-Zuwachs</span>
-                <span className="tabular-nums font-semibold text-green-600 dark:text-green-400">
+                <span className="tabular-nums font-semibold text-green-700 dark:text-green-400">
                   +{fmt(ergebnis.nettoZuwachsMonat)} €
                 </span>
               </div>
@@ -209,7 +209,7 @@ export default function NebenjobRechner() {
               </div>
               <div className="flex justify-between px-4 py-2.5">
                 <span className="text-gray-600 dark:text-gray-400">− Lohnsteuer</span>
-                <span className="tabular-nums text-red-600 dark:text-red-400">
+                <span className="tabular-nums text-red-700 dark:text-red-300">
                   {ergebnis.nebenjobLohnsteuer > 0
                     ? `−${fmt(ergebnis.nebenjobLohnsteuer)} €`
                     : '0,00 €'}
@@ -217,7 +217,7 @@ export default function NebenjobRechner() {
               </div>
               <div className="flex justify-between px-4 py-2.5">
                 <span className="text-gray-600 dark:text-gray-400">− Solidaritätszuschlag</span>
-                <span className="tabular-nums text-red-600 dark:text-red-400">
+                <span className="tabular-nums text-red-700 dark:text-red-300">
                   {ergebnis.nebenjobSoli > 0
                     ? `−${fmt(ergebnis.nebenjobSoli)} €`
                     : '0,00 €'}
@@ -226,7 +226,7 @@ export default function NebenjobRechner() {
               {kirchensteuer === 'ja' && (
                 <div className="flex justify-between px-4 py-2.5">
                   <span className="text-gray-600 dark:text-gray-400">− Kirchensteuer ({kistSatzProzent} %)</span>
-                  <span className="tabular-nums text-red-600 dark:text-red-400">
+                  <span className="tabular-nums text-red-700 dark:text-red-300">
                     {ergebnis.nebenjobKirchensteuer > 0
                       ? `−${fmt(ergebnis.nebenjobKirchensteuer)} €`
                       : '0,00 €'}
@@ -235,7 +235,7 @@ export default function NebenjobRechner() {
               )}
               <div className="flex justify-between px-4 py-2.5">
                 <span className="text-gray-600 dark:text-gray-400">− Sozialversicherung</span>
-                <span className="tabular-nums text-red-600 dark:text-red-400">
+                <span className="tabular-nums text-red-700 dark:text-red-300">
                   {ergebnis.nebenjobSozialversicherung > 0
                     ? `−${fmt(ergebnis.nebenjobSozialversicherung)} €`
                     : '0,00 €'}
@@ -254,7 +254,7 @@ export default function NebenjobRechner() {
                     <span className="text-gray-600 dark:text-gray-400">
                       Steuererklärung, geschätzt: {ergebnis.steuerNachErklaerungJahr > 0 ? 'Nachzahlung' : 'Erstattung'} im Jahr
                     </span>
-                    <span className={`tabular-nums ${ergebnis.steuerNachErklaerungJahr > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+                    <span className={`tabular-nums ${ergebnis.steuerNachErklaerungJahr > 0 ? 'text-red-700 dark:text-red-300' : 'text-green-700 dark:text-green-400'}`}>
                       {ergebnis.steuerNachErklaerungJahr > 0 ? '−' : '+'}{fmt(Math.abs(ergebnis.steuerNachErklaerungJahr))} €
                     </span>
                   </div>

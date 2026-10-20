@@ -77,7 +77,7 @@ export default function KfzSteuerRechner() {
                 <option key={j} value={j}>{j}</option>
               ))}
             </select>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               § 9 Abs. 1 Nr. 2 Buchst. b KraftStG: 2 € je g/km CO₂ über 120 g (Erstzulassung bis 2011), 110 g (2012–2013) bzw. 95 g (ab 2014).
             </p>
           </div>
@@ -136,7 +136,7 @@ export default function KfzSteuerRechner() {
             onChange={e => setErstzulassung(e.target.value)}
             className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
           />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Förderzeitraum § 3d KraftStG: 18.05.2011 – 31.12.2030. Befreiung gilt 10 Jahre ab Erstzulassung, längstens bis 31.12.2035.
           </p>
         </div>

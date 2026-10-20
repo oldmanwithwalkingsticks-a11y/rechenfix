@@ -139,7 +139,7 @@ export default function BackzeitRechner() {
           Gewünschte Temperatur ({zielHerdart === 'ou' ? 'O/U' : zielHerdart === 'umluft' ? 'Umluft' : 'Gasmark°C'})
         </h2>
         <NummerEingabe value={zielTemp} onChange={setZielTemp} placeholder="160" einheit="°C" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Tipp: Umluft liegt meist 20 °C unter Ober-/Unterhitze bei gleicher Zeit.
         </p>
       </div>
@@ -240,7 +240,7 @@ export default function BackzeitRechner() {
                 <tr key={row.stufe}>
                   <td className="px-4 py-2 text-gray-700 dark:text-gray-300 whitespace-nowrap">{row.stufe}</td>
                   <td className="px-4 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{row.celsius} °C</td>
-                  <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400 whitespace-nowrap">{row.celsius - 20} °C</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-600 dark:text-gray-400 whitespace-nowrap">{row.celsius - 20} °C</td>
                 </tr>
               ))}
             </tbody>

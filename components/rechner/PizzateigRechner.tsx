@@ -75,7 +75,7 @@ export default function PizzateigRechner() {
             Gewicht pro Pizza
           </h2>
           <NummerEingabe value={gewichtProPizza} onChange={setGewichtProPizza} placeholder="270" einheit="g" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Napoletana: 250–280 g | Normal: 300–350 g</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Napoletana: 250–280 g | Normal: 300–350 g</p>
         </div>
       </div>
 
@@ -100,7 +100,7 @@ export default function PizzateigRechner() {
             {hyd} %
           </span>
         </div>
-        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1">
           <span>55 % (fest, knusprig)</span>
           <span>65 % (neapolitanisch)</span>
           <span>80 % (sehr weich)</span>
@@ -155,7 +155,7 @@ export default function PizzateigRechner() {
             />
             <div>
               <span className="text-sm font-medium text-gray-800 dark:text-gray-200">🫒 Mit Olivenöl (2 %)</span>
-              <span className="block text-xs text-gray-500 dark:text-gray-400">Ohne = authentisch neapolitanisch</span>
+              <span className="block text-xs text-gray-600 dark:text-gray-400">Ohne = authentisch neapolitanisch</span>
             </div>
           </label>
         </div>

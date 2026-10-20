@@ -195,7 +195,7 @@ export default function GehaltserhoehungRechner() {
       {/* Highlight-Box */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-          Von <strong>{fmtEuro(bruttoDiff)} € Brutto-Erhöhung</strong> bleiben <strong className="text-green-600 dark:text-green-400">{fmtEuro(nettoDiff)} € Netto</strong> — der Staat bekommt <strong className="text-red-600 dark:text-red-400">{fmtEuro(abgabenAufErhoehung)} € ({fmtProz(grenzbelastung)} %)</strong>.
+          Von <strong>{fmtEuro(bruttoDiff)} € Brutto-Erhöhung</strong> bleiben <strong className="text-green-700 dark:text-green-400">{fmtEuro(nettoDiff)} € Netto</strong> — der Staat bekommt <strong className="text-red-700 dark:text-red-300">{fmtEuro(abgabenAufErhoehung)} € ({fmtProz(grenzbelastung)} %)</strong>.
         </p>
         <div className="flex h-8 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600">
           <div className="bg-green-700 flex items-center justify-center text-white text-xs font-semibold" style={{ width: `${nettoPct}%` }}>
@@ -227,20 +227,20 @@ export default function GehaltserhoehungRechner() {
                 <td className="px-3 py-2.5 text-gray-700 dark:text-gray-300">Brutto/Monat</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(bruttoAlt)} €</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(bruttoNeu)} €</td>
-                <td className="px-3 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400">+{fmtEuro(bruttoDiff)} €</td>
+                <td className="px-3 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400">+{fmtEuro(bruttoDiff)} €</td>
               </tr>
               <tr>
                 <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">Lohnsteuer</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(alt.lohnsteuer)} €</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(neu.lohnsteuer)} €</td>
-                <td className="px-3 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">+{fmtEuro(lstDiff)} €</td>
+                <td className="px-3 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">+{fmtEuro(lstDiff)} €</td>
               </tr>
               {neu.solidaritaet + alt.solidaritaet > 0 && (
                 <tr>
                   <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">Solidaritätszuschlag</td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(alt.solidaritaet)} €</td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(neu.solidaritaet)} €</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">+{fmtEuro(soliDiff)} €</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">+{fmtEuro(soliDiff)} €</td>
                 </tr>
               )}
               {kirchensteuer && (
@@ -248,26 +248,26 @@ export default function GehaltserhoehungRechner() {
                   <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">Kirchensteuer</td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(alt.kirchensteuer)} €</td>
                   <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(neu.kirchensteuer)} €</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">+{fmtEuro(kstDiff)} €</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">+{fmtEuro(kstDiff)} €</td>
                 </tr>
               )}
               <tr>
                 <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">Sozialabgaben</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(alt.sozialabgabenGesamt)} €</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(neu.sozialabgabenGesamt)} €</td>
-                <td className="px-3 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">+{fmtEuro(svDiff)} €</td>
+                <td className="px-3 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">+{fmtEuro(svDiff)} €</td>
               </tr>
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-bold">
                 <td className="px-3 py-3 text-blue-800 dark:text-blue-300">Netto/Monat</td>
                 <td className="px-3 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtEuro(alt.nettoMonat)} €</td>
                 <td className="px-3 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtEuro(neu.nettoMonat)} €</td>
-                <td className="px-3 py-3 text-right tabular-nums text-green-600 dark:text-green-400">+{fmtEuro(nettoDiff)} €</td>
+                <td className="px-3 py-3 text-right tabular-nums text-green-700 dark:text-green-400">+{fmtEuro(nettoDiff)} €</td>
               </tr>
               <tr>
                 <td className="px-3 py-2.5 text-gray-600 dark:text-gray-400">Netto/Jahr</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(alt.nettoJahr)} €</td>
                 <td className="px-3 py-2.5 text-right tabular-nums">{fmtEuro(neu.nettoJahr)} €</td>
-                <td className="px-3 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400">+{fmtEuro(nettoDiff * 12)} €</td>
+                <td className="px-3 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400">+{fmtEuro(nettoDiff * 12)} €</td>
               </tr>
             </tbody>
           </table>

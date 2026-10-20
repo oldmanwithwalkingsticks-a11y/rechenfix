@@ -186,7 +186,7 @@ export default function NetzteilWattRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Wählen Sie Ihre Komponenten aus, um die empfohlene Netzteilgröße zu berechnen.
         </p>
       )}

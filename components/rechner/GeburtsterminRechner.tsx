@@ -191,25 +191,25 @@ export default function GeburtsterminRechner() {
           {/* SSW + Trimester + Verbleibend */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
-              <p className="text-sm text-gray-500 dark:text-gray-400">Aktuelle SSW</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Aktuelle SSW</p>
               <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                 {ergebnis.aktuelleSSW}+{ergebnis.aktuelleTage}
               </p>
-              <p className="text-xs text-gray-600 dark:text-gray-500">{ergebnis.aktuelleSSW}. Woche, {ergebnis.aktuelleTage}. Tag</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">{ergebnis.aktuelleSSW}. Woche, {ergebnis.aktuelleTage}. Tag</p>
             </div>
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
-              <p className="text-sm text-gray-500 dark:text-gray-400">Trimester</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Trimester</p>
               <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">{ergebnis.trimester}. Trimester</p>
-              <p className="text-xs text-gray-600 dark:text-gray-500">
+              <p className="text-xs text-gray-600 dark:text-gray-400">
                 {ergebnis.trimester === 1 ? 'SSW 1–12' : ergebnis.trimester === 2 ? 'SSW 13–27' : 'SSW 28–40'}
               </p>
             </div>
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
-              <p className="text-sm text-gray-500 dark:text-gray-400">Verbleibend</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Verbleibend</p>
               <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                 {ergebnis.verbleibendeTage > 0 ? `${ergebnis.verbleibendeTage} Tage` : 'Termin erreicht'}
               </p>
-              <p className="text-xs text-gray-600 dark:text-gray-500">
+              <p className="text-xs text-gray-600 dark:text-gray-400">
                 {ergebnis.verbleibendeTage > 0 ? `ca. ${Math.ceil(ergebnis.verbleibendeTage / 7)} Wochen` : ''}
               </p>
             </div>
@@ -234,7 +234,7 @@ export default function GeburtsterminRechner() {
                 }}
               />
             </div>
-            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
               {TRIMESTER_LABELS.map((label, i) => (
                 <span key={i} className="flex items-center gap-1">
                   <span className={`inline-block w-2 h-2 rounded-full ${TRIMESTER_FARBEN[i]}`} />
@@ -242,7 +242,7 @@ export default function GeburtsterminRechner() {
                 </span>
               ))}
             </div>
-            <div className="flex justify-between mt-1 text-[10px] text-gray-600 dark:text-gray-500">
+            <div className="flex justify-between mt-1 text-[10px] text-gray-600 dark:text-gray-400">
               <span>SSW 0</span>
               <span>SSW 12</span>
               <span>SSW 27</span>
@@ -284,12 +284,12 @@ export default function GeburtsterminRechner() {
                       <div className={`flex-1 pb-1 ${m.vergangen ? 'opacity-60' : ''}`}>
                         <div className="flex flex-wrap items-baseline gap-x-2">
                           <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">{m.label}</p>
-                          <span className="text-xs text-gray-600 dark:text-gray-500">{fmtDatumKurz(m.datum)}</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400">{fmtDatumKurz(m.datum)}</span>
                           {m.aktiv && (
                             <span className="text-[10px] font-bold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-500/10 px-1.5 py-0.5 rounded">AKTUELL</span>
                           )}
                         </div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">{m.beschreibung}</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{m.beschreibung}</p>
                         {m.link && (
                           <Link href={m.link.href} className="text-xs text-primary-600 dark:text-primary-400 underline font-medium">
                             {m.link.text}

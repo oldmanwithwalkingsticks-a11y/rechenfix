@@ -64,7 +64,7 @@ export default function OfflineNutzungSeite() {
         automatisch verwendet, weil sie dann zum ausdrücklich gewünschten Dienst gehört.
       </p>
 
-      <p className="mt-10 text-sm text-gray-500 dark:text-gray-400">
+      <p className="mt-10 text-sm text-gray-600 dark:text-gray-400">
         Einzelheiten zur Rechtsgrundlage stehen in der{' '}
         <Link href="/datenschutz" className="text-primary-600 underline dark:text-primary-400">
           Datenschutzerklärung

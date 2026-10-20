@@ -99,7 +99,7 @@ export default function FuehrerscheinRechner() {
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           Fahrstundenpreis: <strong>{fmt(r.fahrstundenpreis)} €</strong> · Grundgebühr: <strong>{fmt(r.grundgebuehr)} €</strong>
         </p>
       </div>
@@ -108,7 +108,7 @@ export default function FuehrerscheinRechner() {
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Übungsfahrstunden</label>
         <NummerEingabe value={uebungsstunden} onChange={setUebungsstunden} placeholder="25" einheit="Std" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Durchschnitt: 20–35 Stunden (zusätzlich zu den 12 Pflicht-Sonderfahrten).</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Durchschnitt: 20–35 Stunden (zusätzlich zu den 12 Pflicht-Sonderfahrten).</p>
       </div>
 
       {/* Theorie bestanden */}

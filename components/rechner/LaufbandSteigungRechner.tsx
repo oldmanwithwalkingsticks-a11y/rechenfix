@@ -119,7 +119,7 @@ export default function LaufbandSteigungRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               Bezogen auf {fmt1(nBand)} km/h Band-Geschwindigkeit. Modell: ACSM-Laufgleichung, ebene Straße ≈ 1 % Steigung (Jones &amp; Doust 1996) — je Steigungsprozent rund 4,3 % mehr Straßentempo, 0 % liegt rund 4,3 % unter der Straße. Richtwert für etwa 8–16 km/h.
             </p>
           </div>
@@ -138,7 +138,7 @@ export default function LaufbandSteigungRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Band-Geschwindigkeit und Steigung ein, um das Outdoor-Äquivalent zu berechnen.
         </p>
       )}

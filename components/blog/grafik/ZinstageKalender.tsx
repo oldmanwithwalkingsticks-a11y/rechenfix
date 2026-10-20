@@ -114,7 +114,7 @@ export default function ZinstageKalender() {
           Über ein volles Jahr gleicht sich das aus. Über einen einzelnen Monat nicht.
         </text>
       </svg>
-      <figcaption className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
+      <figcaption className="mt-2 text-sm text-center text-gray-600 dark:text-gray-400">
         Die deutsche Methode ändert nicht die Jahressumme, sondern ihre Verteilung.
       </figcaption>
     </figure>

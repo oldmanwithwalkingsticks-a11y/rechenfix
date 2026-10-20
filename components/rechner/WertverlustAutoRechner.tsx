@@ -71,7 +71,7 @@ export default function WertverlustAutoRechner() {
           Neupreis (Listenpreis)
         </h2>
         <NummerEingabe value={neupreis} onChange={setNeupreis} placeholder="30000" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Der Neupreis bei Erstzulassung inklusive Ausstattung.
         </p>
       </div>
@@ -83,7 +83,7 @@ export default function WertverlustAutoRechner() {
           Fahrzeugalter (Jahre)
         </h2>
         <NummerEingabe value={alter} onChange={setAlter} placeholder="3" einheit="Jahre" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Jahre seit Erstzulassung. Der Wertverlust ist im ersten Jahr am größten.
         </p>
       </div>
@@ -179,7 +179,7 @@ export default function WertverlustAutoRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="px-4 pb-3 pt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="px-4 pb-3 pt-1 text-xs text-gray-600 dark:text-gray-400">
               Degressive Durchschnittskurve — im ersten Jahr am stärksten, danach flacher. Reale Werte weichen je nach Modell ab.
             </p>
           </div>

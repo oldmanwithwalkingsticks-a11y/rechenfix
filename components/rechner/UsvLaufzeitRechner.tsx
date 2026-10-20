@@ -230,7 +230,7 @@ export default function UsvLaufzeitRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Akku-Kapazität und Last ein, um die Überbrückungszeit zu berechnen.
         </p>
       )}

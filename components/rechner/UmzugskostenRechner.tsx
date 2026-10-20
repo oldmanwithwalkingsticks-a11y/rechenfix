@@ -179,10 +179,10 @@ export default function UmzugskostenRechner() {
                   type="checkbox"
                   checked={z.checked}
                   onChange={e => z.set(e.target.checked)}
-                  className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-400"
+                  className="w-4 h-4 rounded border-gray-300 text-primary-600 dark:text-primary-400 focus:ring-primary-400"
                 />
                 <span className="text-sm text-gray-800 dark:text-gray-200">{z.label}</span>
-                <span className="ml-auto text-xs text-gray-500 dark:text-gray-400">{z.hint}</span>
+                <span className="ml-auto text-xs text-gray-600 dark:text-gray-400">{z.hint}</span>
               </label>
             ))}
           </div>
@@ -285,7 +285,7 @@ export default function UmzugskostenRechner() {
                           <div key={t.label} className={`${t.farbe} h-full transition-all`} style={{ width: `${(t.wert / ergebnis.gesamtkosten) * 100}%` }} />
                         ))}
                       </div>
-                      <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                      <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-600 dark:text-gray-400">
                         {teile.map(t => (
                           <span key={t.label} className="flex items-center gap-1">
                             <span className={`w-2.5 h-2.5 rounded-full ${t.farbe} inline-block`} />
@@ -313,7 +313,7 @@ export default function UmzugskostenRechner() {
                           <div key={t.label} className={`${t.farbe} h-full transition-all`} style={{ width: `${(t.wert / ergebnis.gesamtkosten) * 100}%` }} />
                         ))}
                       </div>
-                      <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                      <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-600 dark:text-gray-400">
                         {teile.map(t => (
                           <span key={t.label} className="flex items-center gap-1">
                             <span className={`w-2.5 h-2.5 rounded-full ${t.farbe} inline-block`} />
@@ -355,7 +355,7 @@ export default function UmzugskostenRechner() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Ummeldung beim Einwohnermeldeamt</span>
-                <span className="font-semibold text-green-600 dark:text-green-400">kostenlos</span>
+                <span className="font-semibold text-green-700 dark:text-green-400">kostenlos</span>
               </div>
             </div>
           </div>

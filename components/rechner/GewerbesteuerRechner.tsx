@@ -68,7 +68,7 @@ export default function GewerbesteuerRechner() {
           value={rechtsform}
           onChange={(v) => setRechtsform(v as Rechtsform)}
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           {rechtsform === 'personengesellschaft'
             ? 'Freibetrag: 24.500 € + ESt-Anrechnung nach § 35 EStG'
             : 'Kein Freibetrag, keine ESt-Anrechnung'}
@@ -92,7 +92,7 @@ export default function GewerbesteuerRechner() {
           className="w-full mt-2 accent-primary-600"
           aria-label="Hebesatz Slider"
         />
-        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1">
           <span>200 %</span>
           <span>Ø 400 %</span>
           <span>900 %</span>
@@ -106,7 +106,7 @@ export default function GewerbesteuerRechner() {
           Hinzurechnungen (§ 8 GewStG, optional)
         </h2>
         <NummerEingabe value={hinzurechnungen} onChange={setHinzurechnungen} placeholder="0" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Z. B. 25 % der Zinsen über 200.000 € Freibetrag, Mieten, Pachten, Lizenzen.
         </p>
       </div>
@@ -118,7 +118,7 @@ export default function GewerbesteuerRechner() {
           Kürzungen (§ 9 GewStG, optional)
         </h2>
         <NummerEingabe value={kuerzungen} onChange={setKuerzungen} placeholder="0" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Z. B. 1,2 % des Einheitswerts des Grundbesitzes.
         </p>
       </div>
@@ -198,19 +198,19 @@ export default function GewerbesteuerRechner() {
               {ergebnis.hinzurechnungen > 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">+ Hinzurechnungen (§ 8 GewStG)</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">+{fmtEuro0(ergebnis.hinzurechnungen)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">+{fmtEuro0(ergebnis.hinzurechnungen)} €</td>
                 </tr>
               )}
               {ergebnis.kuerzungen > 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">− Kürzungen (§ 9 GewStG)</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro0(ergebnis.kuerzungen)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">−{fmtEuro0(ergebnis.kuerzungen)} €</td>
                 </tr>
               )}
               {ergebnis.freibetrag > 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">− Freibetrag (Personengesellschaft)</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro0(ergebnis.freibetrag)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">−{fmtEuro0(ergebnis.freibetrag)} €</td>
                 </tr>
               )}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-medium">
@@ -238,7 +238,7 @@ export default function GewerbesteuerRechner() {
                 <>
                   <tr>
                     <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">− ESt-Anrechnung (§ 35 EStG)</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.estAnrechnung)} €</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.estAnrechnung)} €</td>
                   </tr>
                   <tr className="bg-amber-50 dark:bg-amber-500/10 font-bold">
                     <td className="px-4 py-3 text-amber-800 dark:text-amber-300 whitespace-nowrap">= Effektive Belastung</td>

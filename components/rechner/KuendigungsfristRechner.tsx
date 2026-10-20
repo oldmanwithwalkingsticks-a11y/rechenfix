@@ -105,7 +105,7 @@ export default function KuendigungsfristRechner() {
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
           />
           {ergebnis && (
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               Betriebszugehörigkeit: {ergebnis.betriebszugehoerigkeitText}
             </p>
           )}
@@ -118,7 +118,7 @@ export default function KuendigungsfristRechner() {
             onChange={e => setKuendigungsDatum(e.target.value)}
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
           />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Datum, an dem die Kündigung zugestellt wird
           </p>
         </div>
@@ -254,7 +254,7 @@ export default function KuendigungsfristRechner() {
                   />
                 </div>
                 {/* Marker */}
-                <div className="flex justify-between mt-3 text-xs text-gray-500 dark:text-gray-400">
+                <div className="flex justify-between mt-3 text-xs text-gray-600 dark:text-gray-400">
                   <div className="text-center">
                     <div className="font-semibold text-gray-700 dark:text-gray-300">Heute</div>
                     <div>{fmtDatumKurz(zeitleiste.heute)}</div>

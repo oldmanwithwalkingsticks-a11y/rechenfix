@@ -124,7 +124,7 @@ export default function BruttoNettoLongTail({
             <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
               {bruttoFmt} Euro brutto — wie viel netto 2026?
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Alle Steuerklassen im Überblick. Ohne Kirchensteuer, GKV, keine Kinder.
             </p>
 
@@ -144,10 +144,10 @@ export default function BruttoNettoLongTail({
                     <tr key={e.sk} className={i % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700/30' : ''}>
                       <td className="p-3">
                         <span className="font-medium text-gray-800 dark:text-gray-200">{e.label}</span>
-                        <span className="block text-xs text-gray-600 dark:text-gray-500">{e.beschreibung}</span>
+                        <span className="block text-xs text-gray-600 dark:text-gray-400">{e.beschreibung}</span>
                       </td>
                       <td className="p-3 text-right font-bold text-primary-600 dark:text-primary-400">{fmt(e.ergebnis.nettoMonat)} €</td>
-                      <td className="p-3 text-right text-red-600 dark:text-red-400">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
+                      <td className="p-3 text-right text-red-700 dark:text-red-300">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
                       <td className="p-3 text-right text-gray-600 dark:text-gray-400">{fmtAbzugsquote(e.ergebnis.abzuegeProzent)}%</td>
                     </tr>
                   ))}
@@ -192,7 +192,7 @@ export default function BruttoNettoLongTail({
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                   <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
-                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 dark:text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
@@ -210,7 +210,7 @@ export default function BruttoNettoLongTail({
                   href={`/finanzen/${vorherige}-euro-brutto-netto`}
                   className="flex-1 card p-4 flex items-center gap-2 group hover:border-primary-200 dark:hover:border-primary-500/30 transition-all"
                 >
-                  <svg className="w-4 h-4 text-gray-600 group-hover:text-primary-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-primary-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
@@ -226,7 +226,7 @@ export default function BruttoNettoLongTail({
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {fmtBrutto(naechste)} € brutto netto
                   </span>
-                  <svg className="w-4 h-4 text-gray-600 group-hover:text-primary-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-primary-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
@@ -252,9 +252,9 @@ export default function BruttoNettoLongTail({
                   <span className="text-2xl shrink-0">{link.icon}</span>
                   <div className="min-w-0">
                     <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{link.desc}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">{link.desc}</p>
                   </div>
-                  <span className="text-gray-300 dark:text-gray-600 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>
+                  <span className="text-gray-300 dark:text-gray-400 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>
                 </Link>
               ))}
             </div>

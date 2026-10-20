@@ -108,7 +108,7 @@ export default function DmEuroRechner() {
             const e = inEuro(dm, 'DEM');
             return (
               <div key={dm} className="text-center bg-gray-50 dark:bg-gray-900 rounded-lg p-2">
-                <div className="text-xs text-gray-500">{dm} DM</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400">{dm} DM</div>
                 <div className="font-bold text-gray-800 dark:text-gray-200">{e ? fmt(e.betrag) : '—'} €</div>
               </div>
             );

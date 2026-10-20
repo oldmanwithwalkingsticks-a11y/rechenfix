@@ -88,7 +88,7 @@ export default function LaminatRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Paketgröße</label>
           <NummerEingabe value={paketGroesse} onChange={setPaketGroesse} einheit="m²/Paket" placeholder="2,49" />
-          <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Steht auf der Verpackung — typisch 2,0–3,0 m²</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Steht auf der Verpackung — typisch 2,0–3,0 m²</p>
         </div>
 
         {/* Verlegemuster */}

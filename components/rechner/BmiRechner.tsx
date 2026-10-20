@@ -150,7 +150,7 @@ export default function BmiRechner() {
                 </div>
               </div>
               {/* Beschriftung */}
-              <div className="flex justify-between mt-6 text-[10px] text-gray-500 dark:text-gray-400">
+              <div className="flex justify-between mt-6 text-[10px] text-gray-600 dark:text-gray-400">
                 <span>10</span>
                 <span>18,5</span>
                 <span>25</span>

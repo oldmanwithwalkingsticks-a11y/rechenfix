@@ -140,7 +140,7 @@ export default function CupsUmrechner() {
             </option>
           ))}
         </select>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Die Zutat ist wichtig für die Gramm-Umrechnung — Mehl (125 g/Cup) ist deutlich leichter als Zucker (200 g/Cup) oder Honig (340 g/Cup).
         </p>
       </div>

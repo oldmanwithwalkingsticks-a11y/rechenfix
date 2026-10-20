@@ -127,10 +127,10 @@ export default function RaucherRechner() {
           {/* Gesamtkosten-Header */}
           <div className="text-center p-6 bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/30 dark:to-orange-900/20 rounded-2xl border border-red-200 dark:border-red-700/30">
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Bisher insgesamt ausgegeben</p>
-            <p className="text-4xl sm:text-5xl font-extrabold text-red-600 dark:text-red-400">
+            <p className="text-4xl sm:text-5xl font-extrabold text-red-700 dark:text-red-300">
               {formatEuro(ergebnis.kostenGesamt)} €
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               in {jahreGeraucht} Jahr{parseFloat(jahreGeraucht) !== 1 ? 'en' : ''}
             </p>
           </div>
@@ -138,20 +138,20 @@ export default function RaucherRechner() {
           {/* Kosten-Übersicht */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Tag</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Tag</p>
               <p className="text-xl font-bold text-gray-900 dark:text-white">{formatEuro(ergebnis.kostenProTag)} €</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Woche</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Woche</p>
               <p className="text-xl font-bold text-gray-900 dark:text-white">{formatEuro(ergebnis.kostenProWoche)} €</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Monat</p>
-              <p className="text-xl font-bold text-amber-600 dark:text-amber-400">{formatEuro(ergebnis.kostenProMonat)} €</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Monat</p>
+              <p className="text-xl font-bold text-amber-700 dark:text-amber-400">{formatEuro(ergebnis.kostenProMonat)} €</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Jahr</p>
-              <p className="text-xl font-bold text-red-600 dark:text-red-400">{formatEuro(ergebnis.kostenProJahr)} €</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Jahr</p>
+              <p className="text-xl font-bold text-red-700 dark:text-red-300">{formatEuro(ergebnis.kostenProJahr)} €</p>
             </div>
           </div>
 
@@ -160,7 +160,7 @@ export default function RaucherRechner() {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Blick in die Zukunft</h2>
             <div className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700">
               <span className="text-gray-600 dark:text-gray-400">In den n&auml;chsten 10 Jahren</span>
-              <span className="font-bold text-red-600 dark:text-red-400 text-lg">{formatEuro(ergebnis.kostenNaechste10Jahre)} €</span>
+              <span className="font-bold text-red-700 dark:text-red-300 text-lg">{formatEuro(ergebnis.kostenNaechste10Jahre)} €</span>
             </div>
             <div className="flex items-center justify-between py-2">
               <span className="text-gray-600 dark:text-gray-400">Zigaretten pro Jahr</span>
@@ -207,7 +207,7 @@ export default function RaucherRechner() {
             <p className="text-3xl sm:text-4xl font-extrabold text-green-700 dark:text-green-400 mt-3">
               {formatEuro(ergebnis.investmentWert)} €
             </p>
-            <p className="text-sm text-green-600 dark:text-green-500 mt-1">
+            <p className="text-sm text-green-700 dark:text-green-500 mt-1">
               statt {formatEuro(ergebnis.kostenGesamt)} € Rauchkosten &ndash; eine Differenz von {formatEuro(ergebnis.investmentWert - ergebnis.kostenGesamt)} €
             </p>
           </div>

@@ -84,7 +84,7 @@ export default function GrundumsatzRechner() {
               </div>
             </div>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
             Der Grundumsatz ist der Verbrauch in völliger Ruhe und zugleich die untere Grenze — dauerhaft weniger zu essen ist nicht ratsam. Statistische Schätzung (±10 %), ersetzt keine ärztliche Beratung.
           </p>
 
@@ -128,7 +128,7 @@ export default function GrundumsatzRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               Der Grundumsatz sinkt in der Formel um 5 kcal pro Lebensjahr. Nur informativ, kein Zielwert.
             </p>
           </div>
@@ -149,7 +149,7 @@ export default function GrundumsatzRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Gewicht, Größe, Alter und Geschlecht ein, um den Grundumsatz zu berechnen.
         </p>
       )}

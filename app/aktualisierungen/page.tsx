@@ -143,7 +143,7 @@ export default function AktualisierungenPage() {
                 <div className="flex flex-wrap items-center gap-3 text-xs mb-2">
                   <time
                     dateTime={eintrag.datumAnfrage}
-                    className="text-gray-500 dark:text-gray-400 font-medium"
+                    className="text-gray-600 dark:text-gray-400 font-medium"
                   >
                     {formatGermanDate(eintrag.datumAnfrage)}
                   </time>
@@ -152,7 +152,7 @@ export default function AktualisierungenPage() {
                   >
                     {badge.label}
                   </span>
-                  <span className="text-gray-500 dark:text-gray-400">
+                  <span className="text-gray-600 dark:text-gray-400">
                     Bereich: {renderBereich(eintrag.bereich)}
                   </span>
                 </div>
@@ -166,7 +166,7 @@ export default function AktualisierungenPage() {
                 </p>
 
                 {eintrag.datumUmsetzung && (
-                  <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+                  <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
                     Umgesetzt am:{' '}
                     <time dateTime={eintrag.datumUmsetzung}>
                       {formatGermanDate(eintrag.datumUmsetzung)}

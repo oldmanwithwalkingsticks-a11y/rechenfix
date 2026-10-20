@@ -124,15 +124,15 @@ export default function ZinsRechner() {
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Eigenkapital</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Eigenkapital</p>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.eigenkapital)} €</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamtzinsen</p>
-                <p className="text-2xl font-bold text-green-600 dark:text-green-400">{fmt(ergebnis.gesamtzinsen)} €</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Gesamtzinsen</p>
+                <p className="text-2xl font-bold text-green-700 dark:text-green-400">{fmt(ergebnis.gesamtzinsen)} €</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Endkapital</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Endkapital</p>
                 <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">{fmt(ergebnis.endkapital)} €</p>
               </div>
             </div>
@@ -149,7 +149,7 @@ export default function ZinsRechner() {
                   style={{ width: `${100 - eigenkapitalAnteil}%` }}
                 />
               </div>
-              <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex justify-between mt-2 text-xs text-gray-600 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-primary-400 dark:bg-primary-500 inline-block" />
                   Eigenkapital ({eigenkapitalAnteil.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%){/* W184: vorher toFixed(1) („80.1%“) */}
@@ -171,7 +171,7 @@ export default function ZinsRechner() {
               >
                 <span>Entwicklung pro Jahr</span>
                 <svg
-                  className={`w-5 h-5 text-gray-600 transition-transform ${tabelleOffen ? 'rotate-180' : ''}`}
+                  className={`w-5 h-5 text-gray-600 dark:text-gray-400 transition-transform ${tabelleOffen ? 'rotate-180' : ''}`}
                   fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -199,7 +199,7 @@ export default function ZinsRechner() {
                           {nSparrate > 0 && (
                             <td className="py-2 pr-3 text-gray-600 dark:text-gray-400 text-right">{fmt(j.einzahlungen)} €</td>
                           )}
-                          <td className="py-2 pr-3 text-green-600 dark:text-green-400 text-right">+{fmt(j.zinsen)} €</td>
+                          <td className="py-2 pr-3 text-green-700 dark:text-green-400 text-right">+{fmt(j.zinsen)} €</td>
                           <td className="py-2 text-gray-800 dark:text-gray-200 font-medium text-right">{fmt(j.kapitalEnde)} €</td>
                         </tr>
                       ))}

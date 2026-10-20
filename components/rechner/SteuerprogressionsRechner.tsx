@@ -145,7 +145,7 @@ export default function SteuerprogressionsRechner() {
               className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer accent-primary-600"
               aria-label="Zu versteuerndes Einkommen per Schieberegler"
             />
-            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-500 mt-1">
+            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1">
               <span>0 €</span>
               <span>100.000 €</span>
               <span>200.000 €</span>

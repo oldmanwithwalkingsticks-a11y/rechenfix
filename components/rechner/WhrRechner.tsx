@@ -14,7 +14,7 @@ type Geschlecht = 'frau' | 'mann';
 const RISIKO_FARBEN = {
   niedrig: { bg: 'bg-green-50 dark:bg-green-500/10', border: 'border-green-200 dark:border-green-500/30', text: 'text-green-700 dark:text-green-400', label: 'Niedriges Risiko' },
   moderat: { bg: 'bg-amber-50 dark:bg-amber-500/10', border: 'border-amber-200 dark:border-amber-500/30', text: 'text-amber-700 dark:text-amber-400', label: 'Moderates Risiko' },
-  erhoeht: { bg: 'bg-red-50 dark:bg-red-500/10', border: 'border-red-200 dark:border-red-500/30', text: 'text-red-700 dark:text-red-400', label: 'Erhöhtes Risiko' },
+  erhoeht: { bg: 'bg-red-50 dark:bg-red-500/10', border: 'border-red-200 dark:border-red-500/30', text: 'text-red-700 dark:text-red-300', label: 'Erhöhtes Risiko' },
 };
 
 export default function WhrRechner() {
@@ -58,12 +58,12 @@ export default function WhrRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Taillenumfang</label>
             <NummerEingabe value={taillenumfang} onChange={setTaillenumfang} einheit="cm" placeholder="78" />
             {/* W187: vorher „Auf Nabelhöhe messen“; WHO-Protokoll: Mitte zwischen unterem Rippenbogen und Beckenkamm */}
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Mitte zwischen unterem Rippenbogen und Beckenkamm messen</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Mitte zwischen unterem Rippenbogen und Beckenkamm messen</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hüftumfang</label>
             <NummerEingabe value={hueftumfang} onChange={setHueftumfang} einheit="cm" placeholder="100" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">An der breitesten Stelle</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">An der breitesten Stelle</p>
           </div>
         </div>
 
@@ -113,7 +113,7 @@ export default function WhrRechner() {
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{ergebnis.whtrRisiko === 'optimal' ? '🟢' : '🔴'}</span>
                 <div>
-                  <p className={`font-bold ${ergebnis.whtrRisiko === 'optimal' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'}`}>
+                  <p className={`font-bold ${ergebnis.whtrRisiko === 'optimal' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>
                     WHtR: {ergebnis.whtrRisiko === 'optimal' ? 'Optimal' : 'Erhöhtes Risiko'}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">

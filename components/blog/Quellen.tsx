@@ -25,7 +25,7 @@ export default function Quellen({ eintraege }: { eintraege: QuellenEintrag[] }) 
               <span>{e.titel}</span>
             )}
             {e.hinweis && (
-              <span className="block text-sm text-gray-500 dark:text-gray-400 mt-0.5">{e.hinweis}</span>
+              <span className="block text-sm text-gray-600 dark:text-gray-400 mt-0.5">{e.hinweis}</span>
             )}
           </li>
         ))}

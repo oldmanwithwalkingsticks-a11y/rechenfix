@@ -57,7 +57,7 @@ export default function FirmenwagenRechner() {
           Bruttolistenpreis
         </h2>
         <NummerEingabe value={blp} onChange={setBlp} placeholder="45000" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Inkl. Sonderausstattung und Umsatzsteuer.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Inkl. Sonderausstattung und Umsatzsteuer.</p>
       </div>
 
       {/* 2: Antrieb */}
@@ -143,7 +143,7 @@ export default function FirmenwagenRechner() {
           value={methode}
           onChange={(v) => setMethode(v as Methode)}
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Einzelbewertung lohnt sich bei weniger als 15 Fahrten/Monat.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Einzelbewertung lohnt sich bei weniger als 15 Fahrten/Monat.</p>
       </div>
 
       {methode === 'einzel' && (
@@ -220,7 +220,7 @@ export default function FirmenwagenRechner() {
             </tr>
             <tr>
               <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Zuzahlung</td>
-              <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(parseDeutscheZahl(zuzahlung) || 0)} €</td>
+              <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(parseDeutscheZahl(zuzahlung) || 0)} €</td>
             </tr>
             <tr className="bg-blue-50 dark:bg-blue-500/10 font-bold">
               <td className="px-4 py-3 text-blue-800 dark:text-blue-300">= Geldwerter Vorteil</td>
@@ -228,7 +228,7 @@ export default function FirmenwagenRechner() {
             </tr>
             <tr>
               <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">× Grenzsteuersatz {grenzsteuersatz} %</td>
-              <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-400">{fmtEuro(ergebnis.aktuell.steuerMonat)} €</td>
+              <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">{fmtEuro(ergebnis.aktuell.steuerMonat)} €</td>
             </tr>
           </tbody>
         </table>
@@ -254,24 +254,24 @@ export default function FirmenwagenRechner() {
             <div className="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-700">
               <div className={`p-4 ${aktiveSpalte === 'verbrenner' ? aktivCls : ''}`}>
                 {aktiveSpalte === 'verbrenner' && aktivBadge}
-                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Verbrenner</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 uppercase tracking-wide">Verbrenner</div>
                 <div className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">{fmtEuro(ergebnis.verbrenner.gwv)} €</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.verbrenner.steuerMonat)} €</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.verbrenner.steuerMonat)} €</div>
               </div>
               <div className={`p-4 ${aktiveSpalte === 'hybrid' ? aktivCls : ''}`}>
                 {aktiveSpalte === 'hybrid' && aktivBadge}
-                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Hybrid</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 uppercase tracking-wide">Hybrid</div>
                 <div className="text-xl font-bold text-gray-800 dark:text-gray-200 mt-1">{fmtEuro(ergebnis.hybrid.gwv)} €*</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.hybrid.steuerMonat)} €</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.hybrid.steuerMonat)} €</div>
               </div>
               <div className={`p-4 ${aktiveSpalte === 'eAuto' ? aktivCls : ''}`}>
                 {aktiveSpalte === 'eAuto' && aktivBadge}
-                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">E-Auto</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 uppercase tracking-wide">E-Auto</div>
                 <div className="text-xl font-bold text-green-700 dark:text-green-300 mt-1">{fmtEuro(ergebnis.eAuto.gwv)} €</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.eAuto.steuerMonat)} €</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Steuer: {fmtEuro(ergebnis.eAuto.steuerMonat)} €</div>
               </div>
             </div>
-            <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400">
+            <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-700 text-xs text-gray-600 dark:text-gray-400">
               * 0,5-%-Regel für Hybrid bei CO₂ ≤ 50 g/km oder elektrischer Reichweite ≥ 80 km (§ 6 Abs. 1 Nr. 4 S. 2 Nr. 5 EStG — eine Bedingung reicht).
             </div>
             {ergebnis.ersparnisEAuto > 0 && (

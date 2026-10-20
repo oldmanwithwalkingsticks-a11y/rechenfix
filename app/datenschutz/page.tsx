@@ -27,7 +27,7 @@ export default function DatenschutzSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Datenschutzerklärung
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: 18. Oktober 2026</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">Stand: 18. Oktober 2026</p>
 
         <div className="space-y-10 text-gray-700 dark:text-gray-300 text-[15px] leading-relaxed">
 
@@ -163,7 +163,7 @@ export default function DatenschutzSeite() {
                   </tr>
                 </tbody>
               </table>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
                 Vercel Analytics ist nicht in dieser Tabelle aufgeführt, da der Dienst cookielos arbeitet (siehe Abschnitt 6).
               </p>
             </div>

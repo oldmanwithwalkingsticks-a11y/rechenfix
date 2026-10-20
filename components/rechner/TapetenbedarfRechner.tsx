@@ -116,15 +116,15 @@ export default function TapetenbedarfRechner() {
       {modus === 'schnell' ? (
         <div className="grid grid-cols-3 gap-3 mb-5">
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Raumlänge</label>
+            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumlänge</label>
             <NummerEingabe value={raumLaenge} onChange={setRaumLaenge} placeholder="5" einheit="m" />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Raumbreite</label>
+            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumbreite</label>
             <NummerEingabe value={raumBreite} onChange={setRaumBreite} placeholder="4" einheit="m" />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Raumhöhe</label>
+            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumhöhe</label>
             <NummerEingabe value={raumHoehe} onChange={setRaumHoehe} placeholder="2,50" einheit="m" />
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function TapetenbedarfRechner() {
               <div className="flex-1">
                 <NummerEingabe value={w.b} onChange={w.setB} placeholder="Breite" einheit="m" />
               </div>
-              <span className="text-gray-600">×</span>
+              <span className="text-gray-600 dark:text-gray-400">×</span>
               <div className="flex-1">
                 <NummerEingabe value={w.h} onChange={w.setH} placeholder="Höhe" einheit="m" />
               </div>
@@ -154,29 +154,29 @@ export default function TapetenbedarfRechner() {
       <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Abzüge</p>
       <div className="grid grid-cols-2 gap-3 mb-2">
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Fenster (Anzahl)</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster (Anzahl)</label>
           <NummerEingabe value={fenster} onChange={setFenster} placeholder="1" einheit="Stk" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Türen (Anzahl)</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Türen (Anzahl)</label>
           <NummerEingabe value={tueren} onChange={setTueren} placeholder="1" einheit="Stk" />
         </div>
       </div>
       <div className="grid grid-cols-4 gap-2 mb-5">
         <div>
-          <label className="block text-xs text-gray-600 mb-1">Fenster B</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster B</label>
           <NummerEingabe value={fensterB} onChange={setFensterB} placeholder="1,2" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 mb-1">Fenster H</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster H</label>
           <NummerEingabe value={fensterH} onChange={setFensterH} placeholder="1,4" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 mb-1">Tür B</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tür B</label>
           <NummerEingabe value={tuerB} onChange={setTuerB} placeholder="0,9" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 mb-1">Tür H</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tür H</label>
           <NummerEingabe value={tuerH} onChange={setTuerH} placeholder="2,1" einheit="m" />
         </div>
       </div>
@@ -185,7 +185,7 @@ export default function TapetenbedarfRechner() {
       <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tapete</p>
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Rollenbreite</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Rollenbreite</label>
           <div className="flex gap-1.5">
             {['0,53', '1,06'].map(v => (
               <button
@@ -194,7 +194,7 @@ export default function TapetenbedarfRechner() {
                 className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${
                   rollenBreite === v
                     ? 'bg-primary-100 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 ring-1 ring-primary-300 dark:ring-primary-500/40'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 {v} m
@@ -203,7 +203,7 @@ export default function TapetenbedarfRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Rollenlänge</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Rollenlänge</label>
           <div className="flex gap-1.5">
             {['10,05', '25'].map(v => (
               <button
@@ -212,7 +212,7 @@ export default function TapetenbedarfRechner() {
                 className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${
                   rollenLaenge === v
                     ? 'bg-primary-100 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 ring-1 ring-primary-300 dark:ring-primary-500/40'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 {v} m
@@ -223,15 +223,15 @@ export default function TapetenbedarfRechner() {
       </div>
       <div className="grid grid-cols-3 gap-3 mb-6">
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Rapport</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Rapport</label>
           <NummerEingabe value={rapport} onChange={setRapport} placeholder="0" einheit="cm" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Verschnitt</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verschnitt</label>
           <NummerEingabe value={verschnitt} onChange={setVerschnitt} placeholder="10" einheit="%" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Preis/Rolle</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Preis/Rolle</label>
           <NummerEingabe value={preisProRolle} onChange={setPreisProRolle} placeholder="0" einheit="€" />
         </div>
       </div>
@@ -245,7 +245,7 @@ export default function TapetenbedarfRechner() {
             <p className="text-5xl font-extrabold text-primary-700 dark:text-primary-300">
               {ergebnis.rollenBenoetigt}
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               Rollen ({parseDeutscheZahl(rollenBreite).toLocaleString('de-DE')} m × {parseDeutscheZahl(rollenLaenge).toLocaleString('de-DE')} m)
             </p>
           </div>
@@ -253,15 +253,15 @@ export default function TapetenbedarfRechner() {
           {/* Detail-Kacheln */}
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Tapezierfläche</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Tapezierfläche</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.tapezierFlaeche)} m²</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Bahnen</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Bahnen</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{ergebnis.bahnenBenoetigt}</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Verschnitt</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Verschnitt</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.verschnittFlaeche)} m²</p>
             </div>
           </div>
@@ -316,13 +316,13 @@ export default function TapetenbedarfRechner() {
               {ergebnis.fensterFlaeche > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Fenster ({parseDeutscheZahl(fenster)}×)</span>
-                  <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.fensterFlaeche)} m²</span>
+                  <span className="font-medium text-red-700 dark:text-red-300">−{fmt(ergebnis.fensterFlaeche)} m²</span>
                 </div>
               )}
               {ergebnis.tuerFlaeche > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Türen ({parseDeutscheZahl(tueren)}×)</span>
-                  <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.tuerFlaeche)} m²</span>
+                  <span className="font-medium text-red-700 dark:text-red-300">−{fmt(ergebnis.tuerFlaeche)} m²</span>
                 </div>
               )}
               <div className="flex justify-between px-4 py-3 text-sm font-semibold">

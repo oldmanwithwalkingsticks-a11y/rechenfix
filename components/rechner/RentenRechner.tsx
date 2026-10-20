@@ -83,7 +83,7 @@ export default function RentenRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bisherige Beitragsjahre</label>
           <NummerEingabe value={beitragsjahre} onChange={setBeitragsjahre} placeholder="z.B. 15" einheit="Jahre" />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Inkl. Ausbildung, Studium (wenn versichert), Kindererziehungszeiten.
           </p>
         </div>
@@ -94,14 +94,14 @@ export default function RentenRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bereits gesammelte Rentenpunkte (optional)</label>
           <NummerEingabe value={rentenpunkte} onChange={setRentenpunkte} placeholder="z.B. 12,5" einheit="EP" />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Finden Sie auf Ihrer Renteninformation. Falls unbekannt, wird geschätzt.
           </p>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gehaltsentwicklung über dem Lohndurchschnitt pro Jahr</label>
           <NummerEingabe value={gehaltssteigerung} onChange={setGehaltssteigerung} placeholder="z.B. 1" einheit="%" />
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             0 % = Ihr Gehalt steigt wie die Löhne insgesamt. Alle Beträge in heutigen Werten.
           </p>
         </div>
@@ -113,7 +113,7 @@ export default function RentenRechner() {
         <div className="w-full sm:w-1/2">
           <NummerEingabe value={gewuenschtesNetto} onChange={setGewuenschtesNetto} placeholder="z.B. 2000" einheit="€/Monat" />
         </div>
-        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+        <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
           Für die Berechnung Ihrer Rentenlücke.
         </p>
       </div>
@@ -182,7 +182,7 @@ export default function RentenRechner() {
                   style={{ width: `${(ergebnis.zukuenftigeRentenpunkte / ergebnis.gesamtRentenpunkte) * 100}%` }}
                 />
               </div>
-              <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex justify-between mt-2 text-xs text-gray-600 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-green-400 dark:bg-green-500 inline-block" />
                   Bereits erworben
@@ -205,8 +205,8 @@ export default function RentenRechner() {
               </div>
               {ergebnis.abschlagProzent > 0 && (
                 <div className="flex justify-between text-sm">
-                  <span className="text-red-600 dark:text-red-400">Abschlag ({ergebnis.abschlagMonate} Monate × 0,3%)</span>
-                  <span className="font-semibold text-red-600 dark:text-red-400">−{fmtDez(ergebnis.abschlagProzent)}%</span>
+                  <span className="text-red-700 dark:text-red-300">Abschlag ({ergebnis.abschlagMonate} Monate × 0,3%)</span>
+                  <span className="font-semibold text-red-700 dark:text-red-300">−{fmtDez(ergebnis.abschlagProzent)}%</span>
                 </div>
               )}
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
@@ -229,14 +229,14 @@ export default function RentenRechner() {
               </div>
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                 <span className="text-gray-700 dark:text-gray-200 font-bold">Geschätzte Netto-Monatsrente</span>
-                <span className="font-bold text-green-600 dark:text-green-400">{fmt(ergebnis.nettoRente)} €</span>
+                <span className="font-bold text-green-700 dark:text-green-400">{fmt(ergebnis.nettoRente)} €</span>
               </div>
             </div>
-            <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+            <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
               Aktueller Rentenwert: {fmtDez(ergebnis.rentenwert)} € | Durchschnittsentgelt: {fmt(ergebnis.durchschnittsentgelt)} €/Jahr
             </p>
             {/* W187: Annahmen der Netto-Schätzung (keine Kinder-Eingabe in der Komponente) */}
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               Annahmen: gesetzlich krankenversichert mit Ø-Zusatzbeitrag, kinderlos (Pflegeversicherung 4,2 %; mit Kindern 3,6 %), alleinstehend, keine weiteren Einkünfte. Steuer nach Abzug von Werbungskosten- (102 €) und Sonderausgaben-Pauschbetrag (36 €) sowie der KV/PV-Beiträge.
             </p>
           </div>
@@ -250,7 +250,7 @@ export default function RentenRechner() {
                 Ihre geschätzte Brutto-Rente läge dann bei ca.{' '}
                 <strong>{fmt(ergebnis.gesamtRentenpunkte * RENTENWERT_AB_01_07_2026 * (1 - ergebnis.abschlagProzent / 100))} €</strong>/Monat.
               </p>
-              <p className="text-blue-700/80 dark:text-blue-300/70 text-xs mt-1">
+              <p className="text-blue-800 dark:text-blue-300 text-xs mt-1">
                 Quelle: Rentenanpassungsverordnung 2026 (BMAS 05.03.2026)
               </p>
             </div>
@@ -313,10 +313,10 @@ export default function RentenRechner() {
                   <p className="text-sm font-bold text-red-800 dark:text-red-300">
                     Monatliche Lücke: {fmt(ergebnis.rentenluecke)} €
                   </p>
-                  <p className="text-sm text-red-700 dark:text-red-400">
+                  <p className="text-sm text-red-700 dark:text-red-300">
                     Um die Lücke zu schließen, müssten Sie ab heute ca. <strong>{fmt(ergebnis.sparrateMonatlich)} €/Monat</strong> zusätzlich sparen.
                   </p>
-                  <p className="text-xs text-red-600/70 dark:text-red-400/70">
+                  <p className="text-xs text-red-800 dark:text-red-300">
                     (Annahme: 5% Rendite p.a., 20 Jahre Entnahmephase, benötigtes Kapital: ca. {fmt(ergebnis.benoetigtesKapital)} €)
                   </p>
                   <p className="mt-2 text-xs">

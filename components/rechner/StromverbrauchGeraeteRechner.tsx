@@ -137,7 +137,7 @@ export default function StromverbrauchGeraeteRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Leistung und Nutzungsdauer ein, um Verbrauch und Kosten zu berechnen.
         </p>
       )}

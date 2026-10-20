@@ -25,7 +25,7 @@ export default function QualitaetSeite() {
       <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
         Qualität &amp; Methodik
       </h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-8">
+      <p className="text-gray-600 dark:text-gray-400 mb-8">
         Wie Rechenfix.de Genauigkeit, Aktualität und Transparenz sicherstellt.
       </p>
 

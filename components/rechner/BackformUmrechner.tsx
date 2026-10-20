@@ -125,8 +125,8 @@ export default function BackformUmrechner() {
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Größenvergleich (maßstabsgetreu)</h2>
         <div className="flex items-end justify-around gap-4" style={{ height: '200px' }}>
-          <FormSvg form={original} skala={origSkala} farbe="#2563eb" label="Original" />
-          <FormSvg form={ziel} skala={zielSkala} farbe="#16a34a" label="Ziel" />
+          <FormSvg form={original} skala={origSkala} farbe="#2563eb" label="Original" labelKlasse="text-primary-600 dark:text-primary-400" />
+          <FormSvg form={ziel} skala={zielSkala} farbe="#16a34a" label="Ziel" labelKlasse="text-green-700 dark:text-green-400" />
         </div>
       </div>
 
@@ -150,7 +150,7 @@ export default function BackformUmrechner() {
                 return (
                   <tr key={b.name}>
                     <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 whitespace-nowrap">{b.name}</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400 whitespace-nowrap">{b.original} {b.einheit}</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400 whitespace-nowrap">{b.original} {b.einheit}</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-primary-700 dark:text-primary-300 font-semibold whitespace-nowrap">{neuGerundet} {b.einheit}</td>
                   </tr>
                 );
@@ -295,12 +295,14 @@ function FormEingabe({
 }
 
 function FormSvg({
-  form, skala, farbe, label,
+  form, skala, farbe, label, labelKlasse,
 }: {
   form: FormState;
   skala: number;
   farbe: string;
   label: string;
+  /** W188: Beschriftung über Klassen statt style={{ color }} — Grün #16a34a hatte auf Weiß 3,3:1, im Dark Mode Blau 2,8:1 */
+  labelKlasse: string;
 }) {
   const maxSize = 150; // max SVG-Größe
   const size = Math.max(skala * maxSize, 20);
@@ -339,8 +341,8 @@ function FormSvg({
           );
         })()}
       </svg>
-      <p className="text-xs font-semibold mt-1" style={{ color: farbe }}>{label}</p>
-      <p className="text-xs text-gray-500 dark:text-gray-400">{formBeschreibung(form)}</p>
+      <p className={`text-xs font-semibold mt-1 ${labelKlasse}`}>{label}</p>
+      <p className="text-xs text-gray-600 dark:text-gray-400">{formBeschreibung(form)}</p>
     </div>
   );
 }

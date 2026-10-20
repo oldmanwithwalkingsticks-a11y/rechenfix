@@ -114,7 +114,7 @@ export default function Page() {
             <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
               Mindestlohn 2026 netto — was bleibt übrig?
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Berechnung: {STUNDENLOHN.toLocaleString('de-DE')} € × {STUNDEN_PRO_MONAT} Stunden = <strong className="text-gray-700 dark:text-gray-200">{BRUTTO.toLocaleString('de-DE')} € brutto/Monat</strong>
             </p>
 
@@ -147,10 +147,10 @@ export default function Page() {
                     <tr key={e.sk} className={i % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700/30' : ''}>
                       <td className="p-3">
                         <span className="font-medium text-gray-800 dark:text-gray-200">{e.label}</span>
-                        <span className="block text-xs text-gray-600 dark:text-gray-500">{e.beschreibung}</span>
+                        <span className="block text-xs text-gray-600 dark:text-gray-400">{e.beschreibung}</span>
                       </td>
                       <td className="p-3 text-right font-bold text-primary-600 dark:text-primary-400">{fmt(e.ergebnis.nettoMonat)} €</td>
-                      <td className="p-3 text-right text-red-600 dark:text-red-400">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
+                      <td className="p-3 text-right text-red-700 dark:text-red-300">{fmt(e.ergebnis.gesamtAbzuege)} €</td>
                       <td className="p-3 text-right text-gray-600 dark:text-gray-400">{fmtAbzugsquote(e.ergebnis.abzuegeProzent)}%</td>
                     </tr>
                   ))}
@@ -203,10 +203,10 @@ export default function Page() {
                 Der Mindestlohn wurde 2015 mit 8,50 € eingeführt und seitdem mehrfach erhöht. Nach der Anhebung auf 12,41 € (2024) und 12,82 € (2025) folgte zum 1. Januar 2026 ein Sprung um <strong className="text-gray-800 dark:text-gray-100">1,08 €</strong> auf 13,90 € — größer war nur die gesetzliche Anhebung von 10,45 € auf 12 € im Oktober 2022. Zum 1. Januar 2027 steigt er laut Fünfter Mindestlohnanpassungsverordnung weiter auf 14,60 € pro Stunde.
               </p>
               <p>
-                <strong className="text-gray-800 dark:text-gray-100">Wichtig:</strong> Wer vom Mindestlohn lebt und ergänzende Sozialleistungen wie <strong className="text-gray-800 dark:text-gray-100">Wohngeld</strong> oder <strong className="text-gray-800 dark:text-gray-100">Kinderzuschlag</strong> beantragen möchte, sollte sein exaktes Nettogehalt kennen. Nutzen Sie dafür unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit individuellen Einstellungen für Bundesland, Kirchensteuer und Krankenversicherung.
+                <strong className="text-gray-800 dark:text-gray-100">Wichtig:</strong> Wer vom Mindestlohn lebt und ergänzende Sozialleistungen wie <strong className="text-gray-800 dark:text-gray-100">Wohngeld</strong> oder <strong className="text-gray-800 dark:text-gray-100">Kinderzuschlag</strong> beantragen möchte, sollte sein exaktes Nettogehalt kennen. Nutzen Sie dafür unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> mit individuellen Einstellungen für Bundesland, Kirchensteuer und Krankenversicherung.
               </p>
               <p>
-                In der <Link href="/finanzen/brutto-netto-tabelle" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Tabelle 2026</Link> finden Sie einen Überblick über weitere Gehaltsstufen von 1.500 € bis 10.000 € brutto.
+                In der <Link href="/finanzen/brutto-netto-tabelle" className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium">Brutto-Netto-Tabelle 2026</Link> finden Sie einen Überblick über weitere Gehaltsstufen von 1.500 € bis 10.000 € brutto.
               </p>
             </div>
           </section>
@@ -219,7 +219,7 @@ export default function Page() {
                 <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                   <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
                     {item.frage}
-                    <svg className="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-600 dark:text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
@@ -246,9 +246,9 @@ export default function Page() {
                 >
                   <div className="min-w-0">
                     <p className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-sm">{link.label}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{link.desc}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">{link.desc}</p>
                   </div>
-                  <span className="text-gray-300 dark:text-gray-600 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>
+                  <span className="text-gray-300 dark:text-gray-400 ml-auto shrink-0 group-hover:text-primary-400 transition-colors">→</span>
                 </Link>
               ))}
             </div>

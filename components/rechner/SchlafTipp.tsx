@@ -93,7 +93,7 @@ export default function SchlafTipp({ eingaben, ergebnis }: Props) {
           <p className="text-sm text-red-700 dark:text-red-300">{fehler}</p>
           <button
             onClick={handleAnfrage}
-            className="mt-2 text-sm text-red-600 dark:text-red-400 underline hover:no-underline"
+            className="mt-2 text-sm text-red-700 dark:text-red-300 underline hover:no-underline"
           >
             Erneut versuchen
           </button>

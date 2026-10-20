@@ -116,7 +116,7 @@ export default function MutterschutzRechner() {
           onChange={e => setTatsaechlich(e.target.value)}
           className="w-full sm:w-1/2 px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
         />
-        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+        <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
           Falls Ihr Kind schon geboren ist. Bei Frühgeburt verlängert sich der Mutterschutz um die nicht in Anspruch genommenen Tage vor der Geburt.
         </p>
       </div>
@@ -126,7 +126,7 @@ export default function MutterschutzRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Netto-Monatsgehalt (Ø letzte 3 Monate)</label>
           <NummerEingabe value={nettoGehalt} onChange={setNettoGehalt} placeholder="z.B. 2500" einheit="€" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Bei schwankendem Einkommen: Durchschnitt der letzten 3 abgerechneten Monate eingeben (§ 24i Abs. 2 SGB V).
           </p>
         </div>
@@ -234,7 +234,7 @@ export default function MutterschutzRechner() {
               {ergebnis.verlaengerungTage > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Verlängerung</span>
-                  <span className="font-semibold text-green-600 dark:text-green-400">+{ergebnis.verlaengerungTage} Tage</span>
+                  <span className="font-semibold text-green-700 dark:text-green-400">+{ergebnis.verlaengerungTage} Tage</span>
                 </div>
               )}
             </div>
@@ -264,7 +264,7 @@ export default function MutterschutzRechner() {
                 )}
                 <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                   <span className="text-gray-700 dark:text-gray-200 font-bold">Ihr Einkommen im Mutterschutz</span>
-                  <span className="font-bold text-green-600 dark:text-green-400">{fmt(ergebnis.einkommenMonat)} €/Monat</span>
+                  <span className="font-bold text-green-700 dark:text-green-400">{fmt(ergebnis.einkommenMonat)} €/Monat</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Gesamt über {ergebnis.gesamtTage} Tage</span>
@@ -272,7 +272,7 @@ export default function MutterschutzRechner() {
                 </div>
               </div>
             )}
-            <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+            <p className="mt-3 text-xs text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
               {ergebnis.geldHinweis}
             </p>
           </div>

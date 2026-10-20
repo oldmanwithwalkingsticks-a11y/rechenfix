@@ -55,7 +55,7 @@ export default function Quellen({ quellen }: QuellenProps) {
               </>
             )}
             {q.hinweis && (
-              <span className="block text-sm text-gray-500 dark:text-gray-400 mt-1">
+              <span className="block text-sm text-gray-600 dark:text-gray-400 mt-1">
                 {q.hinweis}
               </span>
             )}

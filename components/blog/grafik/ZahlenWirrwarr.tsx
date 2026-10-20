@@ -44,7 +44,7 @@ export default function ZahlenWirrwarr() {
           </tbody>
         </table>
       </div>
-      <figcaption className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+      <figcaption className="mt-3 text-sm text-gray-600 dark:text-gray-400">
         Dieselbe Grundüberlegung – Kraft mal Weg pro Zeit – ergibt je nach Annahme über π, Radius
         und Ausgangsdaten völlig verschiedene Zahlen.
       </figcaption>

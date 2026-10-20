@@ -75,11 +75,11 @@ export default function DatenmengenRechner() {
       {/* Eingabe */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 mb-6">
         <div className="flex-1">
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Wert</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wert</label>
           <NummerEingabe value={wert} onChange={setWert} placeholder="500" />
         </div>
         <div className="flex-1">
-          <label htmlFor="datenmenge-von" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Von</label>
+          <label htmlFor="datenmenge-von" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Von</label>
           <select
             id="datenmenge-von"
             value={von}
@@ -103,7 +103,7 @@ export default function DatenmengenRechner() {
         </button>
 
         <div className="flex-1">
-          <label htmlFor="datenmenge-zu" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Zu</label>
+          <label htmlFor="datenmenge-zu" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Zu</label>
           <select
             id="datenmenge-zu"
             value={zu}
@@ -134,7 +134,7 @@ export default function DatenmengenRechner() {
             <p className="text-gray-800 dark:text-gray-200 font-mono text-sm break-words">
               {fmt(nWert)} × {ergebnis.vonE.faktor.toLocaleString('de-DE')} ÷ {ergebnis.zuE.faktor.toLocaleString('de-DE')} = {fmt(ergebnis.ergebnisWert)}
             </p>
-            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+            <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
               Basis: {fmt(ergebnis.bytes)} Byte
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function DatenmengenRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie einen Wert ein und wählen Sie Ausgangs- und Zieleinheit.
         </p>
       )}

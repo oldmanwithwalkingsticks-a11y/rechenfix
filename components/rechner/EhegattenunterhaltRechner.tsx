@@ -75,7 +75,7 @@ export default function EhegattenunterhaltRechner() {
           columns={2}
           fullWidth
         />
-        <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+        <p className="mt-2 text-xs text-gray-600 dark:text-gray-400">
           Süddeutsche Leitlinien gelten in den OLG-Bezirken Bamberg, Karlsruhe, München, Nürnberg, Stuttgart und Zweibrücken — sonst die bundesweite 3/7-Methode.
         </p>
       </div>

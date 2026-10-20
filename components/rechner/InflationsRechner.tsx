@@ -70,7 +70,7 @@ export default function InflationsRechner() {
               className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 inflationsrate === r
                   ? 'bg-primary-100 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 ring-1 ring-primary-300 dark:ring-primary-500/40'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {r} %
@@ -97,7 +97,7 @@ export default function InflationsRechner() {
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmt(ergebnis.ergebnis)} €
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Ihre {fmt(ergebnis.ausgangswert)} € haben in {ergebnis.jahre.length} Jahren nur noch eine Kaufkraft von {fmt(ergebnis.ergebnis)} €
                 </p>
               </>
@@ -109,7 +109,7 @@ export default function InflationsRechner() {
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmt(ergebnis.ergebnis)} €
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Was heute {fmt(ergebnis.ausgangswert)} € kostet, kostet in {ergebnis.jahre.length} Jahren {fmt(ergebnis.ergebnis)} €
                 </p>
               </>
@@ -119,19 +119,19 @@ export default function InflationsRechner() {
           {/* Detail-Kacheln */}
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                 {modus === 'kaufkraft' ? 'Kaufkraftverlust' : 'Preisanstieg'}
               </p>
-              <p className="text-lg font-bold text-red-600 dark:text-red-400">{fmt(ergebnis.differenz)} €</p>
+              <p className="text-lg font-bold text-red-700 dark:text-red-300">{fmt(ergebnis.differenz)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                 {modus === 'kaufkraft' ? 'Verlust' : 'Anstieg'} in %
               </p>
-              <p className="text-lg font-bold text-red-600 dark:text-red-400">{ergebnis.differenzProzent.toLocaleString('de-DE')} %</p>
+              <p className="text-lg font-bold text-red-700 dark:text-red-300">{ergebnis.differenzProzent.toLocaleString('de-DE')} %</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Durchschn. pro Jahr</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Durchschn. pro Jahr</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.jaehrlicherVerlust)} €</p>
             </div>
           </div>
@@ -144,14 +144,14 @@ export default function InflationsRechner() {
             {modus === 'kaufkraft' ? (
               <>
                 <div className="mb-2">
-                  <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                     <span>Heute</span>
                     <span>{fmt(ergebnis.ausgangswert)} €</span>
                   </div>
                   <div className="h-6 rounded-full bg-primary-500 w-full" />
                 </div>
                 <div>
-                  <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                     <span>In {ergebnis.jahre.length} Jahren</span>
                     <span>{fmt(ergebnis.ergebnis)} €</span>
                   </div>
@@ -166,7 +166,7 @@ export default function InflationsRechner() {
             ) : (
               <>
                 <div className="mb-2">
-                  <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                     <span>Heute</span>
                     <span>{fmt(ergebnis.ausgangswert)} €</span>
                   </div>
@@ -176,7 +176,7 @@ export default function InflationsRechner() {
                   />
                 </div>
                 <div>
-                  <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                     <span>In {ergebnis.jahre.length} Jahren</span>
                     <span>{fmt(ergebnis.ergebnis)} €</span>
                   </div>
@@ -241,7 +241,7 @@ export default function InflationsRechner() {
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
                 Jahr-für-Jahr-Tabelle ({ergebnis.jahre.length} Jahre)
               </p>
-              <svg className={`w-5 h-5 text-gray-600 transition-transform ${tabelleOffen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-5 h-5 text-gray-600 dark:text-gray-400 transition-transform ${tabelleOffen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
@@ -250,14 +250,14 @@ export default function InflationsRechner() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/20">
-                      <th className="text-left px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Jahr</th>
-                      <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">
+                      <th className="text-left px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Jahr</th>
+                      <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">
                         {modus === 'kaufkraft' ? 'Kaufkraft' : 'Preis'}
                       </th>
-                      <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">
+                      <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">
                         {modus === 'kaufkraft' ? 'Verlust' : 'Anstieg'} kum.
                       </th>
-                      <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">in %</th>
+                      <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">in %</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -265,8 +265,8 @@ export default function InflationsRechner() {
                       <tr key={j.jahr} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                         <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">{j.jahr}</td>
                         <td className="px-4 py-2.5 text-right font-medium text-gray-800 dark:text-gray-200">{fmt(j.wert)} €</td>
-                        <td className="px-4 py-2.5 text-right text-red-600 dark:text-red-400">{fmt(j.verlustKumuliert)} €</td>
-                        <td className="px-4 py-2.5 text-right text-red-600 dark:text-red-400">{j.verlustProzent.toLocaleString('de-DE')} %</td>
+                        <td className="px-4 py-2.5 text-right text-red-700 dark:text-red-300">{fmt(j.verlustKumuliert)} €</td>
+                        <td className="px-4 py-2.5 text-right text-red-700 dark:text-red-300">{j.verlustProzent.toLocaleString('de-DE')} %</td>
                       </tr>
                     ))}
                   </tbody>

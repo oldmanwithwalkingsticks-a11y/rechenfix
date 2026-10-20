@@ -175,7 +175,7 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
           <p className="text-sm text-red-700 dark:text-red-300">{fehler}</p>
           <button
             onClick={handleExplain}
-            className="mt-2 text-sm text-red-600 dark:text-red-400 underline hover:no-underline"
+            className="mt-2 text-sm text-red-700 dark:text-red-300 underline hover:no-underline"
           >
             Erneut versuchen
           </button>
@@ -212,7 +212,7 @@ export default function AiExplain({ rechnerName, eingaben, ergebnis }: Props) {
           {/* Text */}
           <div className="px-5 py-4 text-gray-800 dark:text-gray-200 text-sm leading-relaxed">
             {renderMarkdown(erklaerung)}
-            <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+            <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
               Dieser Text wurde von einem KI-System erzeugt und kann Fehler enthalten.{' '}
               <a href="/ki-transparenz" className="underline">
                 KI-Transparenz

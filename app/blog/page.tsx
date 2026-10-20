@@ -70,7 +70,7 @@ export default async function BlogUebersicht() {
                   </span>
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 mb-3">{a.beschreibung}</p>
-                <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
                   <time dateTime={a.datum}>
                     {new Date(a.datum).toLocaleDateString('de-DE', {
                       year: 'numeric',

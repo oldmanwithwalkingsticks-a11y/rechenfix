@@ -7,7 +7,7 @@ interface BreadcrumbItem {
 
 export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+    <nav aria-label="Breadcrumb" className="text-sm text-gray-600 dark:text-gray-400 mb-6">
       <ol className="flex flex-wrap items-center gap-1">
         <li>
           <Link href="/" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">

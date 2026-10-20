@@ -264,7 +264,7 @@ export default function ZuckerUmrechner() {
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-700 dark:text-gray-300 whitespace-nowrap">
                       {fmt(ek, 0)} kcal
                     </td>
-                    <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${(zk - ek) > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                    <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${(zk - ek) > 0 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>
                       {(zk - ek) >= 0 ? '−' : '+'}{fmt(Math.abs(zk - ek), 0)} kcal
                     </td>
                   </tr>
@@ -273,7 +273,7 @@ export default function ZuckerUmrechner() {
             </tbody>
           </table>
         </div>
-        <p className="px-4 py-2 text-xs text-gray-500 dark:text-gray-400">
+        <p className="px-4 py-2 text-xs text-gray-600 dark:text-gray-400">
           Auf Zeile klicken zum Auswählen. Zucker: {fmt((parseDeutscheZahl(menge) || 100) * ZUCKER_KCAL / 100, 0)} kcal.
         </p>
       </div>

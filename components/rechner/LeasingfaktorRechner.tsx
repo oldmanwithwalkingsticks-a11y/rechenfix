@@ -65,7 +65,7 @@ export default function LeasingfaktorRechner() {
           Monatliche Leasingrate
         </h2>
         <NummerEingabe value={rate} onChange={setRate} placeholder="250" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Privat die Brutto-Rate verwenden (inkl. MwSt.), passend zum Bruttolistenpreis.
         </p>
       </div>
@@ -77,7 +77,7 @@ export default function LeasingfaktorRechner() {
           Bruttolistenpreis (BLP)
         </h2>
         <NummerEingabe value={blp} onChange={setBlp} placeholder="40000" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Der Listenpreis des Fahrzeugs inkl. Sonderausstattung — nicht der reduzierte Angebotspreis.
         </p>
       </div>
@@ -86,10 +86,10 @@ export default function LeasingfaktorRechner() {
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-          Anzahlung / Sonderzahlung <span className="font-normal text-gray-400">(optional)</span>
+          Anzahlung / Sonderzahlung <span className="font-normal text-gray-600 dark:text-gray-400">(optional)</span>
         </h2>
         <NummerEingabe value={anzahlung} onChange={setAnzahlung} placeholder="0" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Bei einer Sonderzahlung wird der Gesamtkostenfaktor maßgeblich.
         </p>
       </div>
@@ -101,7 +101,7 @@ export default function LeasingfaktorRechner() {
           Laufzeit (Monate)
         </h2>
         <NummerEingabe value={laufzeit} onChange={setLaufzeit} placeholder="36" einheit="Monate" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Wird nur für den Gesamtkostenfaktor gebraucht (verteilt die Anzahlung auf die Laufzeit).
         </p>
       </div>
@@ -179,7 +179,7 @@ export default function LeasingfaktorRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="px-4 pb-3 pt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="px-4 pb-3 pt-1 text-xs text-gray-600 dark:text-gray-400">
               Branchenschnitt rund 0,63. Faustregeln für private Brutto-Angebote — Gewerbe-Netto nicht direkt vergleichbar.
             </p>
           </div>

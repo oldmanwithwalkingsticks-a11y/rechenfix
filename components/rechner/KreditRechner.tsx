@@ -129,19 +129,19 @@ export default function KreditRechner() {
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Aufschlüsselung</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-5">
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamtkosten</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Gesamtkosten</p>
                 <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.gesamtkosten)} €</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Davon Zinsen</p>
-                <p className="text-xl font-bold text-orange-600 dark:text-orange-400">{fmt(ergebnis.gesamtzins)} €</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Davon Zinsen</p>
+                <p className="text-xl font-bold text-orange-700 dark:text-orange-400">{fmt(ergebnis.gesamtzins)} €</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Effektivzins</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Effektivzins</p>
                 <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.effektivzins)} %</p>
               </div>
               <div className="bg-white dark:bg-gray-600/50 rounded-lg p-4 text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Laufzeit</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Laufzeit</p>
                 <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.tatsaechlicheLaufzeit} Mon.</p>
               </div>
             </div>
@@ -158,7 +158,7 @@ export default function KreditRechner() {
                   style={{ width: `${100 - kreditsummeAnteil}%` }}
                 />
               </div>
-              <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex justify-between mt-2 text-xs text-gray-600 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-green-400 dark:bg-green-500 inline-block" />
                   Kreditsumme ({kreditsummeAnteil.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%){/* W184: vorher toFixed(1) („72.4%“) */}
@@ -191,7 +191,7 @@ export default function KreditRechner() {
               >
                 <span>Tilgungsplan anzeigen</span>
                 <svg
-                  className={`w-5 h-5 text-gray-600 transition-transform ${tilgungsplanOffen ? 'rotate-180' : ''}`}
+                  className={`w-5 h-5 text-gray-600 dark:text-gray-400 transition-transform ${tilgungsplanOffen ? 'rotate-180' : ''}`}
                   fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -248,8 +248,8 @@ export default function KreditRechner() {
                                 : `${z.monat} Mon.`}
                             </td>
                             <td className="py-2 pr-3 text-gray-600 dark:text-gray-400 text-right">{fmt(z.rate)} €</td>
-                            <td className="py-2 pr-3 text-orange-600 dark:text-orange-400 text-right">{fmt(z.zinsanteil)} €</td>
-                            <td className="py-2 pr-3 text-green-600 dark:text-green-400 text-right">{fmt(z.tilgungsanteil)} €</td>
+                            <td className="py-2 pr-3 text-orange-700 dark:text-orange-400 text-right">{fmt(z.zinsanteil)} €</td>
+                            <td className="py-2 pr-3 text-green-700 dark:text-green-400 text-right">{fmt(z.tilgungsanteil)} €</td>
                             {nSondertilgung > 0 && (
                               <td className="py-2 pr-3 text-blue-600 dark:text-blue-400 text-right">{fmt(z.sondertilgung)} €</td>
                             )}

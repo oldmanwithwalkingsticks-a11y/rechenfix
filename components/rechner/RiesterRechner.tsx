@@ -66,7 +66,7 @@ export default function RiesterRechner() {
         <NummerEingabe value={brutto} onChange={setBrutto} placeholder="40000" einheit="€/Jahr" />
         {/* W183: Modellannahme für Paare sichtbar (Mindest- und Höchstbetrag rechnet die Lib je Person) */}
         {familienstand === 'beide-partner' && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Bei „beide riestern“: gemeinsames Brutto, je zur Hälfte verdient. Mindestbeitrag und Höchstbetrag gelten je Person, die Kinderzulagen erhält die Mutter.
           </p>
         )}
@@ -107,7 +107,7 @@ export default function RiesterRechner() {
           <div className="space-y-2">
             {Array.from({ length: kAnzahl }).map((_, i) => (
               <div key={i} className="flex items-center gap-3">
-                <span className="text-xs text-gray-500 dark:text-gray-400 w-16">Kind {i + 1}</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Kind {i + 1}</span>
                 <div className="flex-1">
                   <RadioToggleGroup
                     name={`riester-kind-${i}`}
@@ -132,7 +132,7 @@ export default function RiesterRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewünschter Eigenbeitrag</label>
           <NummerEingabe value={eigenbeitragEingabe} onChange={setEigenbeitragEingabe} placeholder="0 = optimal" einheit="€/Jahr" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             0 lassen für automatisch optimierten Beitrag
           </p>
         </div>
@@ -166,7 +166,7 @@ export default function RiesterRechner() {
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
               {fmt(ergebnis.gesamtfoerderung)} €
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               bei {fmt(ergebnis.eigenbeitrag)} € Eigenbeitrag
             </p>
           </div>
@@ -193,7 +193,7 @@ export default function RiesterRechner() {
                 ? 'text-green-700 dark:text-green-400'
                 : ergebnis.lohntSich === 'gelb'
                   ? 'text-amber-700 dark:text-amber-400'
-                  : 'text-red-700 dark:text-red-400'
+                  : 'text-red-700 dark:text-red-300'
             }`}>
               {ergebnis.lohntSich === 'gruen' && 'Riestern lohnt sich für Sie — Sie bekommen überdurchschnittlich viel Förderung auf jeden eingezahlten Euro.'}
               {ergebnis.lohntSich === 'gelb' && 'Riestern kann sich lohnen — mit höherer Kinderzulage oder mehr Grenzsteuersatz würde die Quote steigen.'}
@@ -213,12 +213,12 @@ export default function RiesterRechner() {
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Grundzulage ({ergebnis.personen} × 175 €)</span>
-                <span className="font-medium text-green-600 dark:text-green-400">+{fmt(ergebnis.grundzulagen)} €</span>
+                <span className="font-medium text-green-700 dark:text-green-400">+{fmt(ergebnis.grundzulagen)} €</span>
               </div>
               {ergebnis.kinderzulagen > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Kinderzulagen</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">+{fmt(ergebnis.kinderzulagen)} €</span>
+                  <span className="font-medium text-green-700 dark:text-green-400">+{fmt(ergebnis.kinderzulagen)} €</span>
                 </div>
               )}
               <div className="flex justify-between px-4 py-3 text-sm">
@@ -236,7 +236,7 @@ export default function RiesterRechner() {
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Zusätzlicher Steuervorteil (Günstigerprüfung)</span>
-                <span className="font-medium text-green-600 dark:text-green-400">+{fmt(ergebnis.zusatzlicherSteuervorteil)} €</span>
+                <span className="font-medium text-green-700 dark:text-green-400">+{fmt(ergebnis.zusatzlicherSteuervorteil)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm font-bold bg-primary-50/50 dark:bg-primary-500/5">
                 <span className="text-gray-800 dark:text-gray-100">Gesamtförderung</span>

@@ -138,7 +138,7 @@ export default function BalkonSolarRechner() {
                   key={p.v}
                   type="button"
                   onClick={() => setKosten(p.v)}
-                  className={`text-xs px-2 py-0.5 rounded border transition-colors ${kosten === p.v ? 'bg-primary-100 dark:bg-primary-500/20 border-primary-300 dark:border-primary-500/40 text-primary-700 dark:text-primary-300' : 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}
+                  className={`text-xs px-2 py-0.5 rounded border transition-colors ${kosten === p.v ? 'bg-primary-100 dark:bg-primary-500/20 border-primary-300 dark:border-primary-500/40 text-primary-700 dark:text-primary-300' : 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'}`}
                 >
                   {p.l}
                 </button>

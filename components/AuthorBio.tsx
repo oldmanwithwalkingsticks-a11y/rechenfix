@@ -38,7 +38,7 @@ export default function AuthorBio() {
         )}
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-            Karsten Kautz <span className="text-gray-400 dark:text-gray-500">·</span>{' '}
+            Karsten Kautz <span className="text-gray-400 dark:text-gray-400">·</span>{' '}
             <span className="font-normal text-gray-700 dark:text-gray-300">
               Gründer und Betreiber von Rechenfix.de
             </span>

@@ -74,7 +74,7 @@ export default function BinaerRechner() {
             className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 font-mono"
             placeholder={basis === 'dec' ? '42' : basis === 'bin' ? '101010' : basis === 'oct' ? '52' : '2A'}
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Erlaubte Zeichen: {basis === 'dec' ? '0–9' : basis === 'bin' ? '0, 1' : basis === 'oct' ? '0–7' : '0–9, A–F'}
           </p>
         </div>
@@ -111,7 +111,7 @@ export default function BinaerRechner() {
           {ergebnis.bin.weg.length > 0 && (
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
               <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Rechenweg (Zweierpotenzen)</h2>
-              <p className="text-xs text-gray-500 mb-2">Jede 1-Stelle im Binärcode entspricht einer Zweierpotenz.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Jede 1-Stelle im Binärcode entspricht einer Zweierpotenz.</p>
               <div className="space-y-1 text-sm font-mono">
                 {ergebnis.bin.weg.map(w => (
                   <div key={w.bit} className="flex justify-between">

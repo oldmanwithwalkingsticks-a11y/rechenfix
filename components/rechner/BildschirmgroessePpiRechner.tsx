@@ -111,7 +111,7 @@ export default function BildschirmgroessePpiRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Diagonale (Zoll) und Auflösung (Pixel) ein, um PPI und Maße zu berechnen.
         </p>
       )}

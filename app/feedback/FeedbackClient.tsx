@@ -23,7 +23,7 @@ function Sterne({ wert, onChange }: { wert: number; onChange: (n: number) => voi
           key={n}
           type="button"
           onClick={() => onChange(n)}
-          className={`text-3xl transition-transform hover:scale-110 ${n <= wert ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}
+          className={`text-3xl transition-transform hover:scale-110 ${n <= wert ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-400'}`}
         >
           ★
         </button>
@@ -164,7 +164,7 @@ export default function FeedbackClient() {
           >
             <span className="text-2xl">{typ.icon}</span>
             <p className="font-bold text-gray-800 dark:text-gray-100 mt-2">{typ.label}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{typ.beschreibung}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{typ.beschreibung}</p>
           </button>
         ))}
       </div>

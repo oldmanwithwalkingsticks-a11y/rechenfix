@@ -203,9 +203,9 @@ export default function IdealgewichtRechner() {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex justify-between mt-2 text-xs text-gray-600 dark:text-gray-400">
                 <span>Untergewicht</span>
-                <span className="text-green-600 dark:text-green-400 font-medium">
+                <span className="text-green-700 dark:text-green-400 font-medium">
                   Idealbereich ({fmt(ergebnis.bmiSpanne.gewichtUnten)}–{fmt(ergebnis.bmiSpanne.gewichtOben)} kg)
                 </span>
                 <span>Übergewicht</span>

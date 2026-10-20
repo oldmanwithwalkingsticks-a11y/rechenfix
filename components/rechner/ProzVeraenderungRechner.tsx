@@ -56,7 +56,7 @@ export default function ProzVeraenderungRechner() {
       {/* Einheit */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-          Einheit <span className="text-gray-600 font-normal">(optional)</span>
+          Einheit <span className="text-gray-600 dark:text-gray-400 font-normal">(optional)</span>
         </label>
         <div className="w-full sm:w-1/3">
           <input
@@ -130,13 +130,13 @@ export default function ProzVeraenderungRechner() {
                   </div>
                   <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                     <span className="text-gray-600 dark:text-gray-400">Absolute Veränderung</span>
-                    <span className={`font-bold ${ergebnis.richtung === 'zunahme' ? 'text-green-600 dark:text-green-400' : ergebnis.richtung === 'abnahme' ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-200'}`}>
+                    <span className={`font-bold ${ergebnis.richtung === 'zunahme' ? 'text-green-700 dark:text-green-400' : ergebnis.richtung === 'abnahme' ? 'text-red-700 dark:text-red-300' : 'text-gray-800 dark:text-gray-200'}`}>
                       {ergebnis.absolut > 0 ? '+' : ''}{fmtZ(ergebnis.absolut)}{e ? ` ${e}` : ''}
                     </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600 dark:text-gray-400">Prozentuale Veränderung</span>
-                    <span className={`font-bold ${ergebnis.richtung === 'zunahme' ? 'text-green-600 dark:text-green-400' : ergebnis.richtung === 'abnahme' ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-200'}`}>
+                    <span className={`font-bold ${ergebnis.richtung === 'zunahme' ? 'text-green-700 dark:text-green-400' : ergebnis.richtung === 'abnahme' ? 'text-red-700 dark:text-red-300' : 'text-gray-800 dark:text-gray-200'}`}>
                       {ergebnis.prozent > 0 ? '+' : ''}{fmtP(ergebnis.prozent)} %
                     </span>
                   </div>
@@ -165,7 +165,7 @@ export default function ProzVeraenderungRechner() {
                   <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Visueller Vergleich</h2>
                   <div className="space-y-3">
                     <div>
-                      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                      <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                         <span>Alter Wert</span>
                         <span>{fmtZ(ergebnis.alterWert)}{e ? ` ${e}` : ''}</span>
                       </div>
@@ -177,7 +177,7 @@ export default function ProzVeraenderungRechner() {
                       </div>
                     </div>
                     <div>
-                      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                      <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                         <span>Neuer Wert</span>
                         <span>{fmtZ(ergebnis.neuerWert)}{e ? ` ${e}` : ''}</span>
                       </div>

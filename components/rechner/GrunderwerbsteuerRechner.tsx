@@ -52,15 +52,15 @@ export default function GrunderwerbsteuerRechner() {
 
       <div className="grid grid-cols-3 gap-3 mb-6">
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Makler inkl. MwSt</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Makler inkl. MwSt</label>
           <NummerEingabe value={makler} onChange={setMakler} placeholder="3,57" einheit="%" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Notarkosten</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Notarkosten</label>
           <NummerEingabe value={notar} onChange={setNotar} placeholder="1,5" einheit="%" />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Grundbuch</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundbuch</label>
           <NummerEingabe value={grundbuch} onChange={setGrundbuch} placeholder="0,5" einheit="%" />
         </div>
       </div>
@@ -70,7 +70,7 @@ export default function GrunderwerbsteuerRechner() {
           <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
             <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">Gesamtkosten inkl. Nebenkosten</p>
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">{fmt(ergebnis.gesamtkosten)} €</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               davon {fmt(ergebnis.nebenkostenGesamt)} € Nebenkosten ({ergebnis.nebenkostenProzent.toLocaleString('de-DE')} %)
             </p>
           </div>

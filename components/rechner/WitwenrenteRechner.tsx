@@ -89,7 +89,7 @@ export default function WitwenrenteRechner() {
           onChange={(v) => setArt(v as Art)}
           fullWidth
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5">
           Große: ab 47 Jahre, erwerbsgemindert oder Kind erziehend. Kleine: alle anderen Fälle.
         </p>
       </div>
@@ -127,7 +127,7 @@ export default function WitwenrenteRechner() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Neues Recht (Heirat nach 2001)</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Große Rente: 55 % statt 60 %. Kleine Rente auf 24 Monate befristet.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">Große Rente: 55 % statt 60 %. Kleine Rente auf 24 Monate befristet.</p>
           </div>
           <button
             onClick={() => setNeuesRecht(!neuesRecht)}
@@ -149,7 +149,7 @@ export default function WitwenrenteRechner() {
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
               {fmt(ergebnis.auszahlung)} €
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">pro Monat</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">pro Monat</p>
             {ergebnis.befristung && (
               <p className="text-xs text-amber-700 dark:text-amber-400 mt-2">
                 Befristet auf {ergebnis.befristung} Monate (kleine Witwenrente, neues Recht)
@@ -196,7 +196,7 @@ export default function WitwenrenteRechner() {
               </div>
               <div className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Abzug (40 % des anrechenbaren Einkommens)</span>
-                <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.abzug)} €</span>
+                <span className="font-medium text-red-700 dark:text-red-300">−{fmt(ergebnis.abzug)} €</span>
               </div>
               <div className="flex justify-between px-4 py-3 text-sm font-bold bg-primary-50/50 dark:bg-primary-500/5">
                 <span className="text-gray-800 dark:text-gray-100">Auszahlung pro Monat</span>

@@ -65,7 +65,7 @@ export default function FreelancerStundensatzRechner() {
               Produktive Stunden pro Tag
             </label>
             <NummerEingabe value={produktiveStunden} onChange={setProduktiveStunden} einheit="h" placeholder="6" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Fakturierbare Stunden (ohne Akquise, Admin etc.)</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Fakturierbare Stunden (ohne Akquise, Admin etc.)</p>
           </div>
         </div>
 
@@ -108,7 +108,7 @@ export default function FreelancerStundensatzRechner() {
               Betriebsausgaben
             </label>
             <NummerEingabe value={betriebsausgaben} onChange={setBetriebsausgaben} einheit="€/Monat" placeholder="200" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Büro, Software, Telefon, Internet etc.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Büro, Software, Telefon, Internet etc.</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -173,7 +173,7 @@ export default function FreelancerStundensatzRechner() {
           {/* Warnung niedriger Stundensatz */}
           {ergebnis.warnungNiedrig && (
             <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-4">
-              <p className="text-sm text-red-700 dark:text-red-400">
+              <p className="text-sm text-red-700 dark:text-red-300">
                 <strong>Achtung:</strong> Ein Stundensatz unter 50 € ist für viele Branchen nicht nachhaltig. Bedenken Sie, dass Sie als Freelancer keine bezahlten Krankheitstage, kein Urlaubsgeld und keinen Arbeitgeberzuschuss zur Sozialversicherung erhalten.
               </p>
             </div>

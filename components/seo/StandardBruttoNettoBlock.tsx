@@ -47,7 +47,7 @@ export default function StandardBruttoNettoBlock({ bruttoFmt, seoText, ergebniss
           <strong className="text-gray-800 dark:text-gray-100">Wichtig zu wissen:</strong> Die Steuerklasse beeinflusst nur die monatlichen Abzüge, nicht die tatsächliche Jahressteuer. Über die Steuererklärung gleicht das Finanzamt die Differenz aus.
         </p>
         <p>
-          Nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> für eine individuelle Berechnung mit allen Parametern wie Kirchensteuer, Bundesland und privater Krankenversicherung.
+          Nutzen Sie unseren <Link href="/finanzen/brutto-netto-rechner" className="text-primary-600 dark:text-primary-400 hover:text-primary-600 font-medium">Brutto-Netto-Rechner</Link> für eine individuelle Berechnung mit allen Parametern wie Kirchensteuer, Bundesland und privater Krankenversicherung.
         </p>
       </div>
     </section>

@@ -86,7 +86,7 @@ export default function SchenkungssteuerRechner() {
           Bereits genutzte Freibeträge (letzte 10 Jahre)
         </h2>
         <NummerEingabe value={bereitsGenutzt} onChange={setBereitsGenutzt} placeholder="0" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Schenkungen innerhalb von 10 Jahren werden zusammengerechnet und verringern den verfügbaren Freibetrag.
         </p>
       </div>
@@ -108,7 +108,7 @@ export default function SchenkungssteuerRechner() {
           value={hausratFreibetrag ? 'ja' : 'nein'}
           onChange={(v) => setHausratFreibetrag(v === 'ja')}
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           § 13 Abs. 1 Nr. 1 ErbStG: 41.000 € in Steuerklasse I, 12.000 € in Steuerklasse II und III.
         </p>
       </div>
@@ -156,20 +156,20 @@ export default function SchenkungssteuerRechner() {
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">
                   Persönlicher Freibetrag
-                  <span className="text-xs text-gray-600 dark:text-gray-500 ml-1">({ergebnis.verwandtschaftLabel})</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">({ergebnis.verwandtschaftLabel})</span>
                 </td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.freibetrag)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.freibetrag)} €</td>
               </tr>
               {ergebnis.hausratFreibetrag > 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Hausrat-Freibetrag</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.hausratFreibetrag)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.hausratFreibetrag)} €</td>
                 </tr>
               )}
               {ergebnis.bereitsGenutzt > 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Bereits genutzte Freibeträge</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">bereits abgezogen</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">bereits abgezogen</td>
                 </tr>
               )}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-medium">

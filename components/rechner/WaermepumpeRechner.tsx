@@ -168,7 +168,7 @@ export default function WaermepumpeRechner() {
           <NummerEingabe value={heizkostenAktuell} onChange={setHeizkostenAktuell} placeholder="2000" einheit="€/Jahr" />
         )}
         {!heizkostenBekannt && (
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
             Kosten werden aus Wohnfläche, Dämmstandard und Brennstoffpreis geschätzt.
           </p>
         )}
@@ -181,7 +181,7 @@ export default function WaermepumpeRechner() {
           Strompreis
         </h2>
         <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={String(getStrompreis('waermepumpen_tarif'))} einheit="ct/kWh" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Wärmepumpen-Spezialtarife (HT, separater Zähler) liegen 2026 bei ca. 25–30 ct/kWh, Haushaltsstrom bei ca. 33–37 ct/kWh.
         </p>
       </div>
@@ -227,7 +227,7 @@ export default function WaermepumpeRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">8</span>
           BEG-Förderung 2026
         </h2>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
           Konditionen für Anträge ab 21.07.2026: Grundförderung {BEG_FOERDERUNG_2026.grundfoerderung} % für jeden Antragsteller. Boni sind kombinierbar — gedeckelt bei {BEG_FOERDERUNG_2026.maxGesamtfoerderung} %, in der 40-%-Einkommensstufe bei {BEG_FOERDERUNG_2026.maxGesamtfoerderungNiedrigesEinkommen} %. Gefördert werden höchstens {BEG_FOERDERUNG_2026.maxFoerderfaehigeKosten_einheit1.toLocaleString('de-DE')} € Kosten (1. Wohneinheit).
         </p>
         <fieldset className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-3">
@@ -264,7 +264,7 @@ export default function WaermepumpeRechner() {
             <option value={30}>+30 % — zvE 30.001 bis 40.000 €</option>
             <option value={40}>+40 % — zvE bis 30.000 € (Deckel 80 %)</option>
           </select>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
             Den Effizienzbonus (+5 %) gibt es für Anträge ab 21.07.2026 nicht mehr.
           </p>
         </fieldset>
@@ -274,7 +274,7 @@ export default function WaermepumpeRechner() {
             ⓘ Maximalförderung erreicht (Deckel bei {begHoechstsatz(boniEinkommen)} % nach BEG-Richtlinie).
           </p>
         )}
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           {BEG_LAUTSTAERKE_HINWEIS_2026}
         </p>
       </div>
@@ -329,13 +329,13 @@ export default function WaermepumpeRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Jährliche Ersparnis</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-green-600 dark:text-green-400">+{fmtEuro(ergebnis.ersparnisJaehrlich)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-green-700 dark:text-green-400">+{fmtEuro(ergebnis.ersparnisJaehrlich)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Investition (nach Förderung)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">{fmtEuro(ergebnis.nettoInvestition)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">{fmtEuro(ergebnis.nettoInvestition)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Gesamtkosten ({jahre} Jahre)</td>
@@ -344,7 +344,7 @@ export default function WaermepumpeRechner() {
               </tr>
               <tr className={`font-bold ${ergebnis.gesamtersparnis > 0 ? 'bg-green-50 dark:bg-green-500/10' : 'bg-red-50 dark:bg-red-500/10'}`}>
                 <td className={`px-4 py-3 ${ergebnis.gesamtersparnis > 0 ? 'text-green-800 dark:text-green-300' : 'text-red-800 dark:text-red-300'}`}>= Gesamtersparnis</td>
-                <td className="px-4 py-3 text-right tabular-nums text-gray-600">—</td>
+                <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
                 <td className={`px-4 py-3 text-right tabular-nums text-lg ${ergebnis.gesamtersparnis > 0 ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>
                   {ergebnis.gesamtersparnis >= 0 ? '+' : ''}{fmtEuro(ergebnis.gesamtersparnis)} €
                 </td>
@@ -361,7 +361,7 @@ export default function WaermepumpeRechner() {
           <polyline fill="none" stroke="#ef4444" strokeWidth="1.5" points={points(werteAlt)} vectorEffect="non-scaling-stroke" />
           <polyline fill="none" stroke="#10b981" strokeWidth="1.5" points={points(werteWp)} vectorEffect="non-scaling-stroke" />
         </svg>
-        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-2">
           <span>Jahr 1</span>
           <span>Jahr {jahreZahl}</span>
         </div>

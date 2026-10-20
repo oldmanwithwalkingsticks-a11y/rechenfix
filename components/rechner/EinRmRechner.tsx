@@ -85,7 +85,7 @@ export default function EinRmRechner() {
                 Brzycki: {f0(nGewicht)} × 36 ÷ (37 − {f0(nWdh)}) = {f1(ergebnis.brzycki)} kg
               </p>
             )}
-            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+            <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
               Schätzung — am genauesten bei wenigen Wiederholungen. Kein Anlass für echte Maximalversuche.
             </p>
           </div>
@@ -131,7 +131,7 @@ export default function EinRmRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie das bewegte Gewicht und die Wiederholungen ein, um das 1RM zu schätzen.
         </p>
       )}

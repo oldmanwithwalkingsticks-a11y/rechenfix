@@ -13,7 +13,7 @@ interface Props {
  */
 export default function StandHinweis({ letzteAktualisierung }: Props) {
   return (
-    <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 no-print">
+    <p className="text-xs text-gray-600 dark:text-gray-400 mb-3 no-print">
       Aktualisiert am {formatGermanDate(letzteAktualisierung)}
     </p>
   );

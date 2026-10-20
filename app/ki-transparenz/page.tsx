@@ -191,7 +191,7 @@ export default function KiTransparenzPage() {
         </p>
       </Abschnitt>
 
-      <p className="text-sm text-gray-500 dark:text-gray-400 mt-12">Stand: {STAND}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mt-12">Stand: {STAND}</p>
       </div>
     </div>
   );

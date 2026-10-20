@@ -129,10 +129,10 @@ export default function MidijobRechner() {
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   const status = ergebnis.imBereich
-    ? { text: 'Midijob ✓', color: 'bg-green-500' }
+    ? { text: 'Midijob ✓', color: 'bg-green-700' }
     : ergebnis.b < untergrenze
-    ? { text: '⚠️ Minijob-Bereich', color: 'bg-orange-500' }
-    : { text: '⚠️ Reguläre Beschäftigung', color: 'bg-red-500' };
+    ? { text: '⚠️ Minijob-Bereich', color: 'bg-orange-700' }
+    : { text: '⚠️ Reguläre Beschäftigung', color: 'bg-red-600' }; // W188: Plaketten -700/-600 statt -500 (weiße Schrift ≥ 4,5:1)
 
   const fmtUntergrenze = untergrenze.toFixed(2).replace('.', ',');
 
@@ -145,7 +145,7 @@ export default function MidijobRechner() {
           Monatlicher Bruttoverdienst
         </h2>
         <NummerEingabe value={brutto} onChange={setBrutto} placeholder="1200" einheit="€" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Übergangsbereich: {fmtUntergrenze} – 2.000 €</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Übergangsbereich: {fmtUntergrenze} – 2.000 €</p>
         <div className={`mt-3 inline-block px-3 py-1 rounded-lg text-xs font-semibold text-white ${status.color}`}>{status.text}</div>
       </div>
 
@@ -275,22 +275,22 @@ export default function MidijobRechner() {
             )}
             <tr>
               <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− AN-Sozialversicherung</td>
-              <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.anSv)} €</td>
+              <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.anSv)} €</td>
             </tr>
             <tr>
               <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Lohnsteuer</td>
-              <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.lohnsteuer)} €</td>
+              <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.lohnsteuer)} €</td>
             </tr>
             {ergebnis.soli > 0 && (
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Solidaritätszuschlag</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.soli)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.soli)} €</td>
               </tr>
             )}
             {ergebnis.kiSt > 0 && (
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Kirchensteuer</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.kiSt)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.kiSt)} €</td>
               </tr>
             )}
             <tr className="bg-blue-50 dark:bg-blue-500/10 font-bold">
@@ -306,33 +306,33 @@ export default function MidijobRechner() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-2 text-gray-500 dark:text-gray-400">Gesamtbeitrag SV (AN + AG)</td>
-                  <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.gesamtSv)} €</td>
+                  <td className="px-4 py-2 text-gray-600 dark:text-gray-400">Gesamtbeitrag SV (AN + AG)</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-600 dark:text-gray-400">{fmtEuro(ergebnis.gesamtSv)} €</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-2 pl-8 text-xs text-gray-500 dark:text-gray-400">
+                  <td className="px-4 py-2 pl-8 text-xs text-gray-600 dark:text-gray-400">
                     davon AG-Anteil (= Gesamtbeitrag − AN-Anteil)
                   </td>
-                  <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.agSv)} €</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-600 dark:text-gray-400">{fmtEuro(ergebnis.agSv)} €</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-2 pl-8 text-xs text-gray-500 dark:text-gray-400">
+                  <td className="px-4 py-2 pl-8 text-xs text-gray-600 dark:text-gray-400">
                     zum Vergleich: AG-Anteil bei regulärer Beschäftigung
                   </td>
-                  <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.agSvRegulaer)} €</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-gray-600 dark:text-gray-400">{fmtEuro(ergebnis.agSvRegulaer)} €</td>
                 </tr>
               </>
             )}
             {!ergebnis.imBereich && (
               <tr>
-                <td className="px-4 py-2.5 text-gray-500 dark:text-gray-400">AG-Sozialversicherung (normal, halber Satz)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-500 dark:text-gray-400">{fmtEuro(ergebnis.agSv)} €</td>
+                <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">AG-Sozialversicherung (normal, halber Satz)</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">{fmtEuro(ergebnis.agSv)} €</td>
               </tr>
             )}
           </tbody>
         </table>
         {ergebnis.imBereich && (
-          <p className="px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700">
+          <p className="px-4 py-2 text-xs text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700">
             F-Faktor <strong>{fFaktorAnzeige}</strong> für {jahrAnzeige} — jährlich vom Bundesarbeitsministerium im Bundesanzeiger bekannt gegeben (§ 20 Abs. 2a SGB IV).
           </p>
         )}

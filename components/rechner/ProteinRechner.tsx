@@ -120,7 +120,7 @@ export default function ProteinRechner() {
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
               {fmt(ergebnis.bedarf)} g
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               = {fmt1(ergebnis.faktor)} g pro kg Körpergewicht
             </p>
           </div>
@@ -128,8 +128,8 @@ export default function ProteinRechner() {
           {/* Verteilung */}
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5 mb-4">
             <p className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">Verteilung auf {m} Mahlzeiten</p>
-            <p className="text-2xl font-bold text-accent-600 dark:text-accent-400">{fmt(ergebnis.proMahlzeit)} g</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">pro Mahlzeit</p>
+            <p className="text-2xl font-bold text-accent-700 dark:text-accent-400">{fmt(ergebnis.proMahlzeit)} g</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">pro Mahlzeit</p>
           </div>
 
           {/* Lebensmittel-Tabelle */}
@@ -148,7 +148,7 @@ export default function ProteinRechner() {
                   <div key={l.name} className="flex justify-between px-4 py-3 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">
                       {l.name}
-                      <span className="text-xs text-gray-600 ml-2">({l.protein} g / {l.menge})</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400 ml-2">({l.protein} g / {l.menge})</span>
                     </span>
                     <span className="font-medium text-gray-800 dark:text-gray-200">{anzeige}</span>
                   </div>
@@ -166,7 +166,7 @@ export default function ProteinRechner() {
               <li>Abend: 150 g Lachs + Linsen 100 g ≈ 39 g Protein</li>
               <li>Snack: 250 g Magerquark + 2 Eier ≈ 44 g Protein</li>
             </ul>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Kombinieren Sie 2–3 dieser Mahlzeiten je nach Bedarf.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">Kombinieren Sie 2–3 dieser Mahlzeiten je nach Bedarf.</p>
           </div>
 
           {/* DGE-Hinweis */}

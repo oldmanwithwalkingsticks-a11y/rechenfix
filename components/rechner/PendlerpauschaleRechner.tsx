@@ -59,7 +59,7 @@ export default function PendlerpauschaleRechner() {
     <div>
       {/* Entfernung */}
       <div className="mb-4">
-        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
           Einfache Entfernung Wohnung — Arbeitsstätte
         </label>
         <NummerEingabe
@@ -70,7 +70,7 @@ export default function PendlerpauschaleRechner() {
           min={1}
           max={999}
         />
-        <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Nur die einfache Strecke (nicht Hin + Rück).
         </p>
         <CrossLink href="/auto/spritkosten-rechner" emoji="⛽" text="Spritkosten für Ihren Arbeitsweg berechnen" />
@@ -79,7 +79,7 @@ export default function PendlerpauschaleRechner() {
       {/* Arbeitstage */}
       <div className="mb-4">
         <div className="flex items-center justify-between mb-1">
-          <label className="text-xs text-gray-500 dark:text-gray-400">Arbeitstage pro Jahr</label>
+          <label className="text-xs text-gray-600 dark:text-gray-400">Arbeitstage pro Jahr</label>
           <button
             onClick={() => setArbeitstageMode(arbeitstageMode === 'direkt' ? 'detail' : 'direkt')}
             className="text-xs text-primary-600 hover:text-primary-600 dark:text-primary-400 font-medium"
@@ -100,13 +100,13 @@ export default function PendlerpauschaleRechner() {
               onBlur={e => setArbeitstage(clampInputValueOnBlur(e.target.value, 1, 365))}
               className="input-field w-full pr-12"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm pointer-events-none">Tage</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-sm pointer-events-none">Tage</span>
           </div>
         ) : (
           <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Arbeitstage/Woche</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Arbeitstage/Woche</label>
                 <input
                   type="number"
                   inputMode="numeric"
@@ -119,7 +119,7 @@ export default function PendlerpauschaleRechner() {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Urlaubstage</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Urlaubstage</label>
                 <input
                   type="number"
                   inputMode="numeric"
@@ -132,7 +132,7 @@ export default function PendlerpauschaleRechner() {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Feiertage</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Feiertage</label>
                 <input
                   type="number"
                   inputMode="numeric"
@@ -145,7 +145,7 @@ export default function PendlerpauschaleRechner() {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Krankheitstage</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Krankheitstage</label>
                 <input
                   type="number"
                   inputMode="numeric"
@@ -159,7 +159,7 @@ export default function PendlerpauschaleRechner() {
               </div>
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Homeoffice-Tage pro Woche</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Homeoffice-Tage pro Woche</label>
               <NummerEingabe
                 value={homeofficeTage}
                 onChange={v => setHomeofficeTage(clampInputValue(v, 0, homeofficeMax))}
@@ -178,7 +178,7 @@ export default function PendlerpauschaleRechner() {
 
       {/* Grenzsteuersatz */}
       <div className="mb-6">
-        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Grenzsteuersatz</label>
+        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grenzsteuersatz</label>
         <div className="flex items-center gap-2 mb-2">
           <div className="flex-1">
             <NummerEingabe
@@ -199,23 +199,23 @@ export default function PendlerpauschaleRechner() {
               className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
                 parseDeutscheZahl(grenzsteuersatz) === s
                   ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {s}%
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-600 dark:text-gray-500 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           Der Grenzsteuersatz ist der Steuersatz auf Ihren letzten verdienten Euro. Er liegt meist zwischen 25–42%.
         </p>
       </div>
 
       {/* W187: weitere Werbungskosten (Arbeitnehmer-Pauschbetrag) */}
       <div className="mb-6">
-        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Weitere Werbungskosten (€/Jahr)</label>
+        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Weitere Werbungskosten (€/Jahr)</label>
         <NummerEingabe value={weitereWK} onChange={setWeitereWK} einheit="€" placeholder="0" />
-        <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Z. B. Arbeitsmittel, Fortbildung, Homeoffice-Pauschale. Der Arbeitnehmer-Pauschbetrag von 1.230 € wird ohnehin abgezogen; die Pendlerpauschale spart nur mit dem Teil Steuern, um den Ihre Werbungskosten insgesamt darüber liegen.
         </p>
       </div>
@@ -229,11 +229,11 @@ export default function PendlerpauschaleRechner() {
             <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
               {fmtEuro(ergebnis.steuerersparnis)}
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               = {fmtEuro(ergebnis.monatlicheErsparnis)} pro Monat
             </p>
             {/* W187: vorher Pauschale × Satz ohne Pauschbetrag; Obergrenze bleibt als Zusatzinfo */}
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               Über dem Arbeitnehmer-Pauschbetrag wirken {fmtEuro(ergebnis.wirksamerBetrag)} der Pauschale.
               {ergebnis.steuerersparnisObergrenze > ergebnis.steuerersparnis + 0.005 && (
                 <> Ist der Pauschbetrag schon durch andere Werbungskosten ausgeschöpft, sind es bis zu {fmtEuro(ergebnis.steuerersparnisObergrenze)}.</>
@@ -243,13 +243,13 @@ export default function PendlerpauschaleRechner() {
 
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pendlerpauschale</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pendlerpauschale</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                 {fmtEuro(ergebnis.pauschaleGesamt)}
               </p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Ersparnis/Monat</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Ersparnis/Monat</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                 {fmtEuro(ergebnis.monatlicheErsparnis)}
               </p>
@@ -288,7 +288,7 @@ export default function PendlerpauschaleRechner() {
                       ? 'border-green-300 dark:border-green-500/50 bg-green-50 dark:bg-green-500/10'
                       : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50'
                   }`}>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pendlerpauschale</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pendlerpauschale</p>
                     <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtEuro(ergebnis.pauschaleGesamt)}</p>
                   </div>
                   <div className={`rounded-xl p-3 text-center border-2 ${
@@ -296,17 +296,17 @@ export default function PendlerpauschaleRechner() {
                       ? 'border-green-300 dark:border-green-500/50 bg-green-50 dark:bg-green-500/10'
                       : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50'
                   }`}>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Homeoffice-Pauschale</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Homeoffice-Pauschale</p>
                     <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtEuro(ergebnis.homeofficePauschale)}</p>
-                    <p className="text-xs text-gray-600 mt-0.5">{ergebnis.homeofficeTageJahr} Tage × 6 €</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">{ergebnis.homeofficeTageJahr} Tage × 6 €</p>
                   </div>
                 </div>
                 <p className="text-sm text-center font-medium text-gray-700 dark:text-gray-300">
-                  Sie sparen mehr mit: <strong className="text-green-600 dark:text-green-400">
+                  Sie sparen mehr mit: <strong className="text-green-700 dark:text-green-400">
                     {ergebnis.homeofficeVorteilhaft ? 'Homeoffice-Pauschale' : 'Pendlerpauschale'}
                   </strong>
                 </p>
-                <p className="text-xs text-gray-600 dark:text-gray-500 mt-2 text-center">
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 text-center">
                   Hinweis: Pro Tag kann nur eine Pauschale angesetzt werden — entweder Pendler oder Homeoffice.
                 </p>
               </div>
@@ -336,7 +336,7 @@ export default function PendlerpauschaleRechner() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-gray-600 dark:text-gray-500 mt-6 text-center">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mt-6 text-center">
         Allgemeine Information auf Basis des EStG 2026. Für verbindliche Auskünfte wenden Sie sich an einen Steuerberater.
       </p>
     </div>

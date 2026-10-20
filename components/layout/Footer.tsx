@@ -25,7 +25,7 @@ export default function Footer() {
                   <span className="text-2xl font-extrabold text-accent-400">fix</span>
                   <span className="text-sm text-primary-300">.de</span>
                 </div>
-                <span className="text-[11px] tracking-widest uppercase text-primary-300 dark:text-gray-500 font-medium -mt-1">
+                <span className="text-[11px] tracking-widest uppercase text-primary-300 dark:text-gray-400 font-medium -mt-1">
                   Fix gerechnet!
                 </span>
               </div>
@@ -33,7 +33,7 @@ export default function Footer() {
             <p className="text-primary-200 dark:text-gray-400 text-sm leading-relaxed mb-4">
               Kostenlose Online-Rechner für jeden Bedarf. Schnell, einfach und ohne Anmeldung.
             </p>
-            <p className="text-primary-300 dark:text-gray-500 text-xs">
+            <p className="text-primary-300 dark:text-gray-400 text-xs">
               {rechner.length} Rechner in {kategorien.length} Kategorien
             </p>
           </div>
@@ -80,7 +80,7 @@ export default function Footer() {
                           <span>{k.name}</span>
                         </Link>
                       </td>
-                      <td className="text-primary-400 dark:text-gray-600 text-xs tabular-nums pl-4">{anzahl}</td>
+                      <td className="text-primary-400 dark:text-gray-400 text-xs tabular-nums pl-4">{anzahl}</td>
                     </tr>
                   );
                 })}
@@ -155,7 +155,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-primary-600 dark:border-gray-800 py-5 text-center text-primary-300 dark:text-gray-500 text-sm">
+        <div className="border-t border-primary-600 dark:border-gray-800 py-5 text-center text-primary-300 dark:text-gray-400 text-sm">
           <p>&copy; {new Date().getFullYear()} Rechenfix.de — Alle Angaben ohne Gewähr.</p>
         </div>
       </div>

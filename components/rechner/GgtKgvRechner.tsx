@@ -117,7 +117,7 @@ export default function GgtKgvRechner() {
                   </span>
                 </div>
               ))}
-              <div className="px-4 py-2 text-xs text-gray-600 dark:text-gray-500">
+              <div className="px-4 py-2 text-xs text-gray-600 dark:text-gray-400">
                 <strong className="text-primary-600 dark:text-primary-400">Fett</strong> = gemeinsame Teiler (der größte ist der ggT)
               </div>
             </div>

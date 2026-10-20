@@ -112,7 +112,7 @@ export default function PromilleRechner() {
       {/* Gewicht & Trinkzeit */}
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Körpergewicht</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Körpergewicht</label>
           <NummerEingabe
             value={gewicht}
             onChange={v => setGewicht(clampInputValue(v, 30, 250))}
@@ -123,7 +123,7 @@ export default function PromilleRechner() {
           />
         </div>
         <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Trinkbeginn vor</label>
+          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Trinkbeginn vor</label>
           <NummerEingabe
             value={trinkzeit}
             onChange={v => setTrinkzeit(clampInputValue(v, 0, 48))}
@@ -137,7 +137,7 @@ export default function PromilleRechner() {
 
       {/* Schnellwahl */}
       <div className="mb-4">
-        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-2">Getränk hinzufügen</label>
+        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-2">Getränk hinzufügen</label>
         <div className="flex flex-wrap gap-2">
           {SCHNELLWAHL.map(s => (
             <button
@@ -169,7 +169,7 @@ export default function PromilleRechner() {
                   onBlur={e => setzeMenge(g.id, clampInputValueOnBlur(e.target.value, 0.01, 5))}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">L</span>
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-xs pointer-events-none">L</span>
               </div>
               <div className="relative flex-1">
                 <input
@@ -182,7 +182,7 @@ export default function PromilleRechner() {
                   onBlur={e => setzeAlkohol(g.id, clampInputValueOnBlur(e.target.value, 0.1, 100))}
                   className="input-field w-full pr-6 text-xs py-1.5"
                 />
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">%</span>
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-xs pointer-events-none">%</span>
               </div>
               <button
                 onClick={() => entferne(g.id)}
@@ -215,7 +215,7 @@ export default function PromilleRechner() {
               {fmtZahl(ergebnis.aktuellPromille)} ‰
             </p>
             {ergebnis.aktuellPromille < ergebnis.maxPromille && (
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
                 Maximum: {fmtZahl(ergebnis.maxPromille)} ‰ — bereits {fmtZahl(ergebnis.abgebaut)} ‰ abgebaut
               </p>
             )}
@@ -236,7 +236,7 @@ export default function PromilleRechner() {
                 }}
               />
             </div>
-            <div className="flex justify-between text-[10px] text-gray-500 dark:text-gray-400">
+            <div className="flex justify-between text-[10px] text-gray-600 dark:text-gray-400">
               <span>0,0‰</span>
               <span>0,3‰</span>
               <span>0,5‰</span>
@@ -256,9 +256,9 @@ export default function PromilleRechner() {
           {/* Countdown */}
           {ergebnis.aktuellPromille > 0 && (
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Geschätzt nüchtern um</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Geschätzt nüchtern um</p>
               <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.nuechternUhrzeit}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 Noch ca. {restH > 0 ? `${restH} Std. ` : ''}{restM} Min.
               </p>
             </div>
@@ -267,19 +267,19 @@ export default function PromilleRechner() {
           {/* Statistiken */}
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Alkohol gesamt</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Alkohol gesamt</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                 {fmtZahl(ergebnis.gesamtAlkoholGramm, 1)} g
               </p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Getränke</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Getränke</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                 {getraenke.length}
               </p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Abbau/Std.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Abbau/Std.</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                 0,15 ‰
               </p>
@@ -295,9 +295,9 @@ export default function PromilleRechner() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-700">
-                    <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Getränk</th>
-                    <th className="px-4 py-2 text-right text-gray-500 dark:text-gray-400 font-medium">Menge</th>
-                    <th className="px-4 py-2 text-right text-gray-500 dark:text-gray-400 font-medium">Alkohol (g)</th>
+                    <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Getränk</th>
+                    <th className="px-4 py-2 text-right text-gray-600 dark:text-gray-400 font-medium">Menge</th>
+                    <th className="px-4 py-2 text-right text-gray-600 dark:text-gray-400 font-medium">Alkohol (g)</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -335,7 +335,7 @@ export default function PromilleRechner() {
       )}
 
       {getraenke.length === 0 && (
-        <div className="text-center py-8 text-gray-600 dark:text-gray-500">
+        <div className="text-center py-8 text-gray-600 dark:text-gray-400">
           <p className="text-3xl mb-2">🍺</p>
           <p className="text-sm">Fügen Sie Getränke hinzu, um den Promillewert zu berechnen.</p>
         </div>

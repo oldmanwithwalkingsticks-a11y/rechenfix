@@ -339,7 +339,7 @@ export default function MwStRechner() {
       {/* Multi-Rechner */}
       {tab === 'multi' && (
         <>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             Berechnen Sie die MwSt für mehrere Positionen gleichzeitig — ideal für Rechnungen und Angebote.
           </p>
 
@@ -347,7 +347,7 @@ export default function MwStRechner() {
             {zeilen.map((z, idx) => (
               <div key={z.id} className="flex flex-wrap sm:flex-nowrap gap-2 items-end bg-gray-50 dark:bg-gray-700/30 rounded-xl p-3">
                 <div className="w-full sm:w-auto sm:flex-1">
-                  {idx === 0 && <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bezeichnung</label>}
+                  {idx === 0 && <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bezeichnung</label>}
                   <input
                     type="text"
                     value={z.bezeichnung}
@@ -357,7 +357,7 @@ export default function MwStRechner() {
                   />
                 </div>
                 <div className="w-full sm:w-32">
-                  {idx === 0 && <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Netto (€)</label>}
+                  {idx === 0 && <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Netto (€)</label>}
                   <NummerEingabe
                     value={z.netto}
                     onChange={val => updateZeile(z.id, 'netto', val)}
@@ -365,7 +365,7 @@ export default function MwStRechner() {
                   />
                 </div>
                 <div className="w-full sm:w-24">
-                  {idx === 0 && <label htmlFor="mwst-select-1" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">MwSt %</label>}
+                  {idx === 0 && <label htmlFor="mwst-select-1" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">MwSt %</label>}
                   <select id="mwst-select-1"
                     value={z.mwstSatz}
                     onChange={e => updateZeile(z.id, 'mwstSatz', Number(e.target.value))}
@@ -378,7 +378,7 @@ export default function MwStRechner() {
                 </div>
                 <button
                   onClick={() => removeZeile(z.id)}
-                  className="px-2 py-2 text-gray-600 hover:text-red-600 transition-colors shrink-0"
+                  className="px-2 py-2 text-gray-600 dark:text-gray-400 hover:text-red-600 transition-colors shrink-0"
                   title="Position entfernen"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -405,7 +405,7 @@ export default function MwStRechner() {
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-left text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-600">
+                    <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-600">
                       <th className="pb-2 font-medium">Position</th>
                       <th className="pb-2 font-medium text-right">Netto</th>
                       <th className="pb-2 font-medium text-right">MwSt</th>
@@ -417,7 +417,7 @@ export default function MwStRechner() {
                       <tr key={i} className="text-gray-700 dark:text-gray-300">
                         <td className="py-1.5">{z.bezeichnung}</td>
                         <td className="py-1.5 text-right">{fmt(z.netto)} €</td>
-                        <td className="py-1.5 text-right text-amber-600 dark:text-amber-400">{fmt(z.mwstBetrag)} € ({z.mwstSatz}%)</td>
+                        <td className="py-1.5 text-right text-amber-700 dark:text-amber-400">{fmt(z.mwstBetrag)} € ({z.mwstSatz}%)</td>
                         <td className="py-1.5 text-right font-medium">{fmt(z.brutto)} €</td>
                       </tr>
                     ))}

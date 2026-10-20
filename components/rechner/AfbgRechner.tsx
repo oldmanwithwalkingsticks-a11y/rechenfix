@@ -75,7 +75,7 @@ export default function AfbgRechner() {
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
           Unterhaltsbeitrag nach § 10 AFBG gibt es nur bei Vollzeit-Maßnahmen. Der
           Maßnahmebeitrag (Lehrgangskosten) und der Kinderbetreuungszuschlag für
           Alleinerziehende stehen bei beiden Formen zu.
@@ -92,7 +92,7 @@ export default function AfbgRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lehrgangs- und Prüfungsgebühren</label>
             <NummerEingabe value={lehrgangskosten} onChange={setLehrgangskosten} placeholder="10.000" einheit="€ gesamt" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               § 12 AFBG — Höchstbetrag 15.000 €. Über diesem Betrag wird nicht gefördert.
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function AfbgRechner() {
             <div className="px-4 pb-4 pt-1 border-t border-gray-100 dark:border-gray-700">
               <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mt-3 mb-1">Materialkosten</label>
               <NummerEingabe value={meisterstueckKosten} onChange={setMeisterstueckKosten} placeholder="0" einheit="€ gesamt" />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 § 12 AFBG — Höchstbetrag 2.000 €. Aufteilung identisch: 50 % Zuschuss, 50 % Darlehen.
               </p>
             </div>
@@ -116,7 +116,7 @@ export default function AfbgRechner() {
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-          Persönliche Situation <span className="text-xs font-normal text-gray-500">({istVollzeit ? 'für Unterhaltsbeitrag und Kinderbetreuungszuschlag' : 'für den Kinderbetreuungszuschlag'})</span>
+          Persönliche Situation <span className="text-xs font-normal text-gray-600 dark:text-gray-400">({istVollzeit ? 'für Unterhaltsbeitrag und Kinderbetreuungszuschlag' : 'für den Kinderbetreuungszuschlag'})</span>
         </h2>
 
         <div className="space-y-4">
@@ -125,12 +125,12 @@ export default function AfbgRechner() {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Bruttoeinkommen</label>
               <NummerEingabe value={antragstellerBrutto} onChange={setAntragstellerBrutto} placeholder="0" einheit="€/Monat" />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag ca. 603 €/Monat (Minijob-Grenze)</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag ca. 603 €/Monat (Minijob-Grenze)</p>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
               <NummerEingabe value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag 45.000 € (§ 29 BAföG)</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag 45.000 € (§ 29 BAföG)</p>
             </div>
           </div>
           )}
@@ -149,7 +149,7 @@ export default function AfbgRechner() {
               <div className="mt-3 w-full sm:w-1/2">
                 <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttoeinkommen Ehegatte/Partner</label>
                 <NummerEingabe value={ehegatteBrutto} onChange={setEhegatteBrutto} placeholder="0" einheit="€/Monat" />
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag 850 €/Monat zusätzlich + 235 € Bedarfs-Zuschlag</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag 850 €/Monat zusätzlich + 235 € Bedarfs-Zuschlag</p>
               </div>
             )}
           </div>
@@ -213,7 +213,7 @@ export default function AfbgRechner() {
                 ))}
               </div>
             )}
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
               {/* W187: vorher „… für Kinder unter 14 (§ 10 Abs. 3a AFBG)“ ohne Einschränkung auf Alleinerziehende */}
               {istVollzeit && <>Pro kindergeldberechtigtem Kind: + 235 € Bedarfs-Zuschlag + 770 € Einkommens-Freibetrag. </>}
               Alleinerziehende (ohne Ehegatten/Lebenspartner) erhalten bei Voll- und Teilzeit 150 €/Monat
@@ -235,12 +235,12 @@ export default function AfbgRechner() {
                 type="checkbox"
                 checked={bestehensErlass}
                 onChange={e => setBestehensErlass(e.target.checked)}
-                className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 mt-0.5"
+                className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500 mt-0.5"
               />
               <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                 <strong>Bestehens-Erlass (50 %)</strong> — bei bestandener Abschlussprüfung werden 50 %
                 des bis dahin noch nicht fällig gewordenen Lehrgangsdarlehens erlassen
-                <span className="text-gray-600 dark:text-gray-500"> (§ 13b Abs. 1 AFBG)</span>
+                <span className="text-gray-600 dark:text-gray-400"> (§ 13b Abs. 1 AFBG)</span>
               </span>
             </label>
             <label className="flex items-start gap-2 cursor-pointer">
@@ -248,12 +248,12 @@ export default function AfbgRechner() {
                 type="checkbox"
                 checked={gruenderErlass}
                 onChange={e => setGruenderErlass(e.target.checked)}
-                className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 mt-0.5"
+                className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500 mt-0.5"
               />
               <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                 <strong>Gründer-Erlass (100 % Rest)</strong> — bei Existenzgründung im Haupterwerb mit
                 mindestens 3 Jahren Führung wird das verbleibende Restdarlehen komplett erlassen
-                <span className="text-gray-600 dark:text-gray-500"> (§ 13b Abs. 2 AFBG, seit 2020 ohne Mitarbeiter-Pflicht)</span>
+                <span className="text-gray-600 dark:text-gray-400"> (§ 13b Abs. 2 AFBG, seit 2020 ohne Mitarbeiter-Pflicht)</span>
               </span>
             </label>
           </div>
@@ -307,7 +307,7 @@ export default function AfbgRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2 pl-8 text-xs text-gray-600 dark:text-gray-400">davon Zuschuss (50 %)</td>
-                <td className="px-4 py-2 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">{fmtEuro(ergebnis.massnahme.zuschussLehrgang)} €</td>
+                <td className="px-4 py-2 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">{fmtEuro(ergebnis.massnahme.zuschussLehrgang)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 pl-8 text-xs text-gray-600 dark:text-gray-400">davon Darlehen (50 %, KfW)</td>
@@ -321,7 +321,7 @@ export default function AfbgRechner() {
                   </tr>
                   <tr>
                     <td className="px-4 py-2 pl-8 text-xs text-gray-600 dark:text-gray-400">davon Zuschuss (50 %)</td>
-                    <td className="px-4 py-2 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">{fmtEuro(ergebnis.massnahme.zuschussMeisterstueck)} €</td>
+                    <td className="px-4 py-2 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">{fmtEuro(ergebnis.massnahme.zuschussMeisterstueck)} €</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-2 pl-8 text-xs text-gray-600 dark:text-gray-400">davon Darlehen (50 %)</td>
@@ -353,13 +353,13 @@ export default function AfbgRechner() {
                   {ergebnis.unterhalt.bedarfAufschluesselung.ehegattenZuschlag > 0 && (
                     <tr>
                       <td className="px-4 py-2 text-gray-600 dark:text-gray-400">+ Ehegatten-/Partner-Zuschlag</td>
-                      <td className="px-4 py-2 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.unterhalt.bedarfAufschluesselung.ehegattenZuschlag)} €</td>
+                      <td className="px-4 py-2 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.unterhalt.bedarfAufschluesselung.ehegattenZuschlag)} €</td>
                     </tr>
                   )}
                   {ergebnis.unterhalt.bedarfAufschluesselung.kinderZuschlag > 0 && (
                     <tr>
                       <td className="px-4 py-2 text-gray-600 dark:text-gray-400">+ Kinder-Zuschlag (235 € je Kind mit Kindergeld)</td>
-                      <td className="px-4 py-2 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.unterhalt.bedarfAufschluesselung.kinderZuschlag)} €</td>
+                      <td className="px-4 py-2 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.unterhalt.bedarfAufschluesselung.kinderZuschlag)} €</td>
                     </tr>
                   )}
                   <tr className="bg-blue-50 dark:bg-blue-500/10 font-medium">
@@ -371,20 +371,20 @@ export default function AfbgRechner() {
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                         Einkommensanrechnung
-                        <span className="text-xs text-gray-600 ml-1">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">
                           (Brutto {fmtEuroCent(ergebnis.unterhalt.anrechnungAufschluesselung.gesamtBrutto)} € − Freibetrag {fmtEuroCent(ergebnis.unterhalt.anrechnungAufschluesselung.gesamtFreibetrag)} € × Quote {(ergebnis.unterhalt.anrechnungAufschluesselung.quote * 100).toFixed(0)} %)
                         </span>
                       </td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuroCent(ergebnis.unterhalt.anrechnungAufschluesselung.einkommensAnrechnung)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">−{fmtEuroCent(ergebnis.unterhalt.anrechnungAufschluesselung.einkommensAnrechnung)} €</td>
                     </tr>
                   )}
                   {ergebnis.unterhalt.anrechnungAufschluesselung.vermoegenMonat > 0 && (
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                         Vermögensanrechnung
-                        <span className="text-xs text-gray-600 ml-1">(Überschuss {fmtEuroCent(ergebnis.unterhalt.anrechnungAufschluesselung.vermoegenUeberschreitend)} € / 24 Monate)</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">(Überschuss {fmtEuroCent(ergebnis.unterhalt.anrechnungAufschluesselung.vermoegenUeberschreitend)} € / 24 Monate)</span>
                       </td>
-                      <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuroCent(ergebnis.unterhalt.anrechnungAufschluesselung.vermoegenMonat)} €</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300 whitespace-nowrap">−{fmtEuroCent(ergebnis.unterhalt.anrechnungAufschluesselung.vermoegenMonat)} €</td>
                     </tr>
                   )}
                   <tr className="bg-green-50 dark:bg-green-500/10 font-bold">
@@ -399,7 +399,7 @@ export default function AfbgRechner() {
                 <tr className="bg-green-50 dark:bg-green-500/10 font-medium">
                   <td className="px-4 py-2.5 text-green-800 dark:text-green-300">
                     + Kinderbetreuungszuschlag (150 € × {ergebnis.kinderbetreuung.anzahlKinder} Kind{ergebnis.kinderbetreuung.anzahlKinder > 1 ? 'er' : ''}, § 10 Abs. 3 AFBG)
-                    <span className="text-xs text-green-700/80 dark:text-green-400/80 ml-1">— Zuschuss, ohne Einkommensanrechnung</span>
+                    <span className="text-xs text-green-800 dark:text-green-300 ml-1">— Zuschuss, ohne Einkommensanrechnung</span>
                   </td>
                   <td className="px-4 py-2.5 text-right tabular-nums text-green-800 dark:text-green-300 whitespace-nowrap">{fmtEuroCent(ergebnis.kinderbetreuung.zuschlagMonat)} €</td>
                 </tr>
@@ -418,7 +418,7 @@ export default function AfbgRechner() {
               {ergebnis.rueckzahlung.bestehensErlass > 0 && (
                 <tr>
                   <td className="px-4 py-2 pl-4 text-xs text-gray-600 dark:text-gray-400">− Bestehens-Erlass 50 % (§ 13b Abs. 1)</td>
-                  <td className="px-4 py-2 text-right tabular-nums text-green-600 whitespace-nowrap">−{fmtEuro(ergebnis.rueckzahlung.bestehensErlass)} €</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.rueckzahlung.bestehensErlass)} €</td>
                 </tr>
               )}
               {bestehensErlass && (
@@ -430,7 +430,7 @@ export default function AfbgRechner() {
               {ergebnis.rueckzahlung.gruenderErlass > 0 && (
                 <tr>
                   <td className="px-4 py-2 pl-4 text-xs text-gray-600 dark:text-gray-400">− Gründer-Erlass 100 % (§ 13b Abs. 2)</td>
-                  <td className="px-4 py-2 text-right tabular-nums text-green-600 whitespace-nowrap">−{fmtEuro(ergebnis.rueckzahlung.gruenderErlass)} €</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-green-700 dark:text-green-400 whitespace-nowrap">−{fmtEuro(ergebnis.rueckzahlung.gruenderErlass)} €</td>
                 </tr>
               )}
               <tr className="bg-indigo-50 dark:bg-indigo-500/10 font-bold">
@@ -438,8 +438,8 @@ export default function AfbgRechner() {
                 <td className="px-4 py-3 text-right tabular-nums text-lg text-indigo-700 dark:text-indigo-300 whitespace-nowrap">{fmtEuro(ergebnis.rueckzahlung.nachGruenderErlass)} €</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 text-xs text-gray-600 dark:text-gray-500">Mindestrate {ergebnis.rueckzahlung.mindestrateMonat} €/Monat · Karenzzeit {ergebnis.rueckzahlung.karenzzeitMonate} Monate nach Lehrgangsende</td>
-                <td className="px-4 py-2 text-right text-xs text-gray-600 dark:text-gray-500">§ 13 AFBG (KfW)</td>
+                <td className="px-4 py-2 text-xs text-gray-600 dark:text-gray-400">Mindestrate {ergebnis.rueckzahlung.mindestrateMonat} €/Monat · Karenzzeit {ergebnis.rueckzahlung.karenzzeitMonate} Monate nach Lehrgangsende</td>
+                <td className="px-4 py-2 text-right text-xs text-gray-600 dark:text-gray-400">§ 13 AFBG (KfW)</td>
               </tr>
             </tbody>
           </table>
@@ -448,7 +448,7 @@ export default function AfbgRechner() {
 
       {/* Disclaimer-Block */}
       <div className="mb-6 rounded-xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700 px-3 py-2.5 flex gap-2 items-start">
-        <span className="text-gray-500 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
+        <span className="text-gray-600 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
         <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
           <strong className="font-semibold text-gray-700 dark:text-gray-300">Vereinfachte Schätzung — Abweichungen möglich.</strong>{' '}
           Dieser Rechner bildet die Grundmechanik nach §§ 10, 12 und 13b AFBG ab. Nicht berücksichtigt sind:
@@ -461,7 +461,7 @@ export default function AfbgRechner() {
       </div>
 
       {/* Quelle */}
-      <p className="text-xs text-gray-500 dark:text-gray-500 mb-6">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
         Rechtsstand: {ergebnis.quelle}
       </p>
 

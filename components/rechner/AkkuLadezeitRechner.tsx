@@ -186,7 +186,7 @@ export default function AkkuLadezeitRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Akkukapazität und Ladestrom ein, um die Ladezeit zu berechnen.
         </p>
       )}

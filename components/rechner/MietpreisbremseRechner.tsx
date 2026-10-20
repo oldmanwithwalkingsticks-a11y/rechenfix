@@ -54,7 +54,7 @@ export default function MietpreisbremseRechner() {
       <div className="mb-5">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ortsübliche Vergleichsmiete</label>
         <NummerEingabe value={vergleichsmiete} onChange={setVergleichsmiete} placeholder="10" einheit="€/m² kalt" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Finden Sie im Mietspiegel Ihrer Stadt (oft kostenlos online).</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Finden Sie im Mietspiegel Ihrer Stadt (oft kostenlos online).</p>
       </div>
 
       {/* Aktuelle Miete */}
@@ -90,7 +90,7 @@ export default function MietpreisbremseRechner() {
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Gilt in den meisten Großstädten und Ballungsräumen — Liste auf der Website Ihres Bundeslandes.</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Gilt in den meisten Großstädten und Ballungsräumen — Liste auf der Website Ihres Bundeslandes.</p>
       </div>
 
       {/* Ausnahme */}
@@ -152,7 +152,7 @@ export default function MietpreisbremseRechner() {
             </tr>
             <tr className="border-t-2 border-primary-200 dark:border-primary-500/40 font-bold">
               <td className="py-2 text-primary-700 dark:text-primary-300">Differenz / Monat</td>
-              <td className={`py-2 text-right tabular-nums ${zuHoch ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+              <td className={`py-2 text-right tabular-nums ${zuHoch ? 'text-red-700 dark:text-red-300' : 'text-green-700 dark:text-green-400'}`}>
                 {zuHoch ? '+' : ''}{fmt(ergebnis.ueberhoehungMonat)} €
               </td>
             </tr>

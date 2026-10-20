@@ -215,7 +215,7 @@ export default function DpiDruckRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               {modus === 'A' ? `Bezogen auf ${fmt0(nBreitePx)} px Breite.` : 'Bezogen auf 6.000 px Breite.'} Mehr DPI = kleinerer, schärferer Druck.
             </p>
           </div>
@@ -237,7 +237,7 @@ export default function DpiDruckRechner() {
       )}
 
       {!ergebnisA && !ergebnisB && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Geben Sie Pixelmaße und DPI ein, um die Druckgröße zu berechnen.
         </p>
       )}

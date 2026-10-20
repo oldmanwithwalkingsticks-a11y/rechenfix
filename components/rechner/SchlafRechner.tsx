@@ -59,7 +59,7 @@ export default function SchlafRechner() {
               className={`px-3 py-2 rounded-xl text-sm font-medium transition-all ${
                 aufwachzeit === z
                   ? 'bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 ring-1 ring-indigo-300 dark:ring-indigo-500/40'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {z}
@@ -92,7 +92,7 @@ export default function SchlafRechner() {
               className="input-field pr-14"
               placeholder="30"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600">Jahre</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600 dark:text-gray-400">Jahre</span>
           </div>
         </div>
         <div>
@@ -108,7 +108,7 @@ export default function SchlafRechner() {
               className="input-field pr-14"
               placeholder="15"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600">Min.</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600 dark:text-gray-400">Min.</span>
           </div>
         </div>
       </div>
@@ -175,10 +175,10 @@ export default function SchlafRechner() {
                 <p className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
                   {empfohlen.min}–{empfohlen.max} Stunden
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">empfohlene Schlafdauer pro Nacht</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">empfohlene Schlafdauer pro Nacht</p>
               </div>
               <div className="mt-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
                   <span>4 Std.</span>
                   <span>8 Std.</span>
                   <span>12 Std.</span>
@@ -193,7 +193,7 @@ export default function SchlafRechner() {
                     }}
                   />
                 </div>
-                <p className="text-[10px] text-gray-600 mt-1 text-center">Grüner Bereich = empfohlen</p>
+                <p className="text-[10px] text-gray-600 dark:text-gray-400 mt-1 text-center">Grüner Bereich = empfohlen</p>
               </div>
             </div>
 
@@ -230,7 +230,7 @@ export default function SchlafRechner() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50 dark:bg-gray-700/30 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider">
+                  <tr className="bg-gray-50 dark:bg-gray-700/30 text-gray-600 dark:text-gray-400 text-xs uppercase tracking-wider">
                     <th className="px-4 py-2 text-left font-medium">Alter</th>
                     <th className="px-4 py-2 text-right font-medium">Empfohlen</th>
                   </tr>

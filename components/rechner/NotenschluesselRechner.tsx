@@ -35,17 +35,17 @@ function fmtZahl(n: number): string {
 }
 
 function farbKlasse(farbe: 'gruen' | 'gelb' | 'rot') {
-  if (farbe === 'gruen') return 'text-green-600 dark:text-green-400';
-  if (farbe === 'gelb') return 'text-yellow-600 dark:text-yellow-400';
-  return 'text-red-600 dark:text-red-400';
+  if (farbe === 'gruen') return 'text-green-700 dark:text-green-400';
+  if (farbe === 'gelb') return 'text-yellow-800 dark:text-yellow-400';
+  return 'text-red-700 dark:text-red-300';
 }
 
 function notenFarbe(note: string): string {
   const n = parseFloat(note.replace(',', '.').replace('+', '').replace('-', ''));
   if (isNaN(n)) return 'text-gray-800 dark:text-gray-200';
-  if (n <= 2) return 'text-green-600 dark:text-green-400';
-  if (n <= 3.5) return 'text-yellow-600 dark:text-yellow-400';
-  return 'text-red-600 dark:text-red-400';
+  if (n <= 2) return 'text-green-700 dark:text-green-400';
+  if (n <= 3.5) return 'text-yellow-800 dark:text-yellow-400';
+  return 'text-red-700 dark:text-red-300';
 }
 
 export default function NotenschluesselRechner() {
@@ -146,13 +146,13 @@ export default function NotenschluesselRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label htmlFor="notenschluessel-select-1" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Notensystem</label>
+              <label htmlFor="notenschluessel-select-1" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Notensystem</label>
               <select id="notenschluessel-select-1" value={system} onChange={e => setSystem(e.target.value as Notensystem)} className="input-field w-full">
                 {systemOptionen.map(o => <option key={o.key} value={o.key}>{o.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Schlüsseltyp</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Schlüsseltyp</label>
               <div className="flex gap-1.5">
                 {(['linear', 'knick'] as Schluesseltyp[]).map(s => (
                   <button
@@ -173,7 +173,7 @@ export default function NotenschluesselRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bestehensgrenze</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bestehensgrenze</label>
               <NummerEingabe value={bestehen} onChange={setBestehen} placeholder="50" einheit="%" />
             </div>
             <div className="flex items-end pb-1">
@@ -201,12 +201,12 @@ export default function NotenschluesselRechner() {
                   {noteErgebnis.note}
                 </p>
                 <p className="text-lg font-medium text-gray-600 dark:text-gray-300 mt-1 capitalize">{noteErgebnis.bezeichnung}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{fmtZahl(noteErgebnis.prozent)} %</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{fmtZahl(noteErgebnis.prozent)} %</p>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Ergebnis</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Ergebnis</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtZahl(noteErgebnis.prozent)} %</p>
                 </div>
                 <div className={`rounded-xl p-4 text-center ${
@@ -214,11 +214,11 @@ export default function NotenschluesselRechner() {
                     ? 'bg-green-50 dark:bg-green-500/10'
                     : 'bg-red-50 dark:bg-red-500/10'
                 }`}>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Status</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Status</p>
                   <p className={`text-lg font-bold ${
                     noteErgebnis.bestanden
-                      ? 'text-green-600 dark:text-green-400'
-                      : 'text-red-600 dark:text-red-400'
+                      ? 'text-green-700 dark:text-green-400'
+                      : 'text-red-700 dark:text-red-300'
                   }`}>
                     {noteErgebnis.bestanden ? 'Bestanden' : 'Nicht bestanden'}
                   </p>
@@ -252,7 +252,7 @@ export default function NotenschluesselRechner() {
               <NummerEingabe value={sMaximum} onChange={setSMaximum} placeholder="100" />
             </div>
             <div>
-              <label htmlFor="notenschluessel-select-2" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Notensystem</label>
+              <label htmlFor="notenschluessel-select-2" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Notensystem</label>
               <select id="notenschluessel-select-2" value={sSystem} onChange={e => setSSystem(e.target.value as Notensystem)} className="input-field w-full">
                 {systemOptionen.map(o => <option key={o.key} value={o.key}>{o.label}</option>)}
               </select>
@@ -261,7 +261,7 @@ export default function NotenschluesselRechner() {
 
           <div className="grid grid-cols-3 gap-3 mb-6">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Schlüsseltyp</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Schlüsseltyp</label>
               <div className="flex gap-1.5">
                 {(['linear', 'knick'] as Schluesseltyp[]).map(s => (
                   <button
@@ -279,7 +279,7 @@ export default function NotenschluesselRechner() {
               </div>
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bestehensgrenze</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bestehensgrenze</label>
               <NummerEingabe value={sBestehen} onChange={setSBestehen} placeholder="50" einheit="%" />
             </div>
             <div className="flex items-end pb-1">
@@ -320,10 +320,10 @@ export default function NotenschluesselRechner() {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-700">
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Punkte</th>
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Prozent</th>
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Note</th>
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Bewertung</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Punkte</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Prozent</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Note</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Bewertung</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -356,11 +356,11 @@ export default function NotenschluesselRechner() {
           <div className="space-y-2 mb-4">
             {noten.map((n, idx) => (
               <div key={n.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-600 w-5 shrink-0">{idx + 1}.</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
                   <NummerEingabe value={n.note} onChange={v => updateNote(n.id, 'note', v)} placeholder="Note" />
                 </div>
-                <span className="text-xs text-gray-600 shrink-0">×</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 shrink-0">×</span>
                 <div className="w-16">
                   <NummerEingabe value={n.gewicht} onChange={v => updateNote(n.id, 'gewicht', v)} placeholder="1" />
                 </div>
@@ -379,7 +379,7 @@ export default function NotenschluesselRechner() {
 
           <button
             onClick={fuegeNoteHinzu}
-            className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-400 transition-all"
+            className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-400 transition-all"
           >
             + Weitere Note
           </button>
@@ -389,9 +389,9 @@ export default function NotenschluesselRechner() {
               <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/15 dark:to-primary-600/10 rounded-2xl p-6 text-center">
                 <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">Notendurchschnitt</p>
                 <p className={`text-5xl font-extrabold ${
-                  durchschnittErgebnis.durchschnitt <= 2 ? 'text-green-600 dark:text-green-400'
-                    : durchschnittErgebnis.durchschnitt <= 3.5 ? 'text-yellow-600 dark:text-yellow-400'
-                    : 'text-red-600 dark:text-red-400'
+                  durchschnittErgebnis.durchschnitt <= 2 ? 'text-green-700 dark:text-green-400'
+                    : durchschnittErgebnis.durchschnitt <= 3.5 ? 'text-yellow-800 dark:text-yellow-400'
+                    : 'text-red-700 dark:text-red-300'
                 }`}>
                   {durchschnittErgebnis.durchschnitt.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
@@ -400,11 +400,11 @@ export default function NotenschluesselRechner() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Noten einbezogen</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Noten einbezogen</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{durchschnittErgebnis.anzahl}</p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Gesamtgewichtung</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Gesamtgewichtung</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmtZahl(durchschnittErgebnis.gesamtGewichtung)}</p>
                 </div>
               </div>

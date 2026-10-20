@@ -62,7 +62,7 @@ export default function IndexmieteRechner() {
           VPI bei Vertragsabschluss / letzter Anpassung
         </h2>
         <NummerEingabe value={vpiAlt} onChange={setVpiAlt} placeholder="117,4" einheit="Punkte" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Steht in Ihrem Mietvertrag oder der letzten Anpassungsmitteilung. VPI-Werte finden Sie beim Statistischen Bundesamt (destatis.de).
         </p>
       </div>
@@ -74,7 +74,7 @@ export default function IndexmieteRechner() {
           Aktueller VPI
         </h2>
         <NummerEingabe value={vpiNeu} onChange={setVpiNeu} placeholder="127,8" einheit="Punkte" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Aktuellen Wert prüfen auf destatis.de → Verbraucherpreisindex (Basisjahr 2020 = 100).
         </p>
       </div>
@@ -91,7 +91,7 @@ export default function IndexmieteRechner() {
           onChange={e => setDatumLetzteAnpassung(e.target.value)}
           className="w-full sm:w-1/2 px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Eine Anpassung ist frühestens 12 Monate nach der letzten möglich.
         </p>
       </div>
@@ -117,19 +117,19 @@ export default function IndexmieteRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">VPI-Veränderung</td>
-                <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${ergebnis.vpiVeraenderung >= 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+                <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${ergebnis.vpiVeraenderung >= 0 ? 'text-red-700 dark:text-red-300' : 'text-green-700 dark:text-green-400'}`}>
                   {ergebnis.vpiVeraenderung >= 0 ? '+' : ''}{fmtProzent(ergebnis.vpiVeraenderung)} %
                 </td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Erhöhung absolut</td>
-                <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${ergebnis.erhoehungAbsolut >= 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+                <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${ergebnis.erhoehungAbsolut >= 0 ? 'text-red-700 dark:text-red-300' : 'text-green-700 dark:text-green-400'}`}>
                   {ergebnis.erhoehungAbsolut >= 0 ? '+' : ''}{fmtEuro(ergebnis.erhoehungAbsolut)} € ({ergebnis.erhoehungProzent >= 0 ? '+' : ''}{fmtProzent(ergebnis.erhoehungProzent)} %)
                 </td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Mehrkosten pro Jahr</td>
-                <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${ergebnis.erhoehungProJahr >= 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+                <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${ergebnis.erhoehungProJahr >= 0 ? 'text-red-700 dark:text-red-300' : 'text-green-700 dark:text-green-400'}`}>
                   {ergebnis.erhoehungProJahr >= 0 ? '+' : ''}{fmtEuro(ergebnis.erhoehungProJahr)} €
                 </td>
               </tr>

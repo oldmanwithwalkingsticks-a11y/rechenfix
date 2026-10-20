@@ -217,7 +217,7 @@ export default function SchwimmPaceRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           {modus === 'B'
             ? 'Bitte die 400-m-Zeit über der 200-m-Zeit eingeben, um die CSS zu berechnen.'
             : 'Geben Sie Distanz und Gesamtzeit ein, um die Pace pro 100 m zu berechnen.'}

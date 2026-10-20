@@ -66,7 +66,7 @@ export default async function KategorieSeite({ params }: Props) {
       <h1 className="text-3xl md:text-4xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
         {kategorie.icon} {kategorie.name}-Rechner — {rechnerListe.length} kostenlose Tools 2026
       </h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-2xl">{kategorie.beschreibung}</p>
+      <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl">{kategorie.beschreibung}</p>
 
       {kategorie.einleitung && kategorie.einleitung.trim().length > 0 && (
         <section className="mb-8 max-w-3xl">
@@ -93,7 +93,7 @@ export default async function KategorieSeite({ params }: Props) {
             <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
               {r.titel}
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">{r.beschreibung}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">{r.beschreibung}</p>
             <span className="inline-block mt-3 text-primary-600 dark:text-primary-400 text-sm font-medium">
               Jetzt berechnen →
             </span>
@@ -105,7 +105,7 @@ export default async function KategorieSeite({ params }: Props) {
       {kategorieSlug === 'finanzen' && (
         <section className="mt-12">
           <h2 className="section-title mb-4">Brutto-Netto-Beispiele</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Wie viel netto bleibt bei diesen Bruttogehältern?</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Wie viel netto bleibt bei diesen Bruttogehältern?</p>
           <div className="flex flex-wrap gap-2.5">
             {[
               { href: '/finanzen/mindestlohn-netto', label: 'Mindestlohn 2026' },

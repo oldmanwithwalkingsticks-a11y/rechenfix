@@ -138,7 +138,7 @@ export default function StundenlohnRechner() {
               {modus === 'jahresgehalt' && `${fmt(ergebnis.jahresgehalt)} €`}
             </p>
             {modus === 'stundenlohn' && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                 bei {ergebnis.arbeitsstundenProMonat.toLocaleString('de-DE')} Stunden/Monat
               </p>
             )}
@@ -147,15 +147,15 @@ export default function StundenlohnRechner() {
           {/* Alle drei Werte */}
           <div className="grid grid-cols-3 gap-3">
             <div className={`rounded-xl p-4 text-center ${modus === 'stundenlohn' ? 'bg-primary-50 dark:bg-primary-500/10 ring-2 ring-primary-200 dark:ring-primary-500/30' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Stundenlohn</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Stundenlohn</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.stundenlohn)} €</p>
             </div>
             <div className={`rounded-xl p-4 text-center ${modus === 'monatsgehalt' ? 'bg-primary-50 dark:bg-primary-500/10 ring-2 ring-primary-200 dark:ring-primary-500/30' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Monatsgehalt</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Monatsgehalt</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.monatsgehalt)} €</p>
             </div>
             <div className={`rounded-xl p-4 text-center ${modus === 'jahresgehalt' ? 'bg-primary-50 dark:bg-primary-500/10 ring-2 ring-primary-200 dark:ring-primary-500/30' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Jahresgehalt</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Jahresgehalt</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.jahresgehalt)} €</p>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default function StundenlohnRechner() {
                 <p className={`text-sm font-semibold ${
                   ergebnis.ueberMindestlohn
                     ? 'text-green-700 dark:text-green-400'
-                    : 'text-red-700 dark:text-red-400'
+                    : 'text-red-700 dark:text-red-300'
                 }`}>
                   {ergebnis.ueberMindestlohn
                     ? `${fmt(Math.abs(ergebnis.differenzMindestlohn))} € über dem Mindestlohn`
@@ -206,9 +206,9 @@ export default function StundenlohnRechner() {
               <div className="flex justify-between px-4 py-3 text-sm bg-accent-50/50 dark:bg-accent-500/5">
                 <span className="text-gray-600 dark:text-gray-400">
                   Effektiver Stundenlohn
-                  <span className="block text-xs text-gray-600 dark:text-gray-500">nach Abzug Urlaub & Feiertage</span>
+                  <span className="block text-xs text-gray-600 dark:text-gray-400">nach Abzug Urlaub & Feiertage</span>
                 </span>
-                <span className="font-bold text-accent-600 dark:text-accent-400">{fmt(ergebnis.effektiverStundenlohn)} €</span>
+                <span className="font-bold text-accent-700 dark:text-accent-400">{fmt(ergebnis.effektiverStundenlohn)} €</span>
               </div>
             </div>
           </div>
@@ -248,8 +248,8 @@ export default function StundenlohnRechner() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-700">
-                    <th className="text-left px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Berufsgruppe</th>
-                    <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Stundenlohn</th>
+                    <th className="text-left px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Berufsgruppe</th>
+                    <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Stundenlohn</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">

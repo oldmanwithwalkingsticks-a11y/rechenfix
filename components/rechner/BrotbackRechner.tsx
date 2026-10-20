@@ -170,11 +170,11 @@ export default function BrotbackRechner() {
             >
               <div className="text-2xl mb-1">{r.icon}</div>
               <div className="text-xs font-medium leading-tight">{r.name}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{r.hydration} %</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">{r.hydration} %</div>
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           <strong>Mehl:</strong> {rezept.mehlBeschreibung}
         </p>
       </div>
@@ -194,7 +194,7 @@ export default function BrotbackRechner() {
             Teiggewicht pro Brot
           </h2>
           <NummerEingabe value={teigGewicht} onChange={setTeigGewicht} placeholder="900" einheit="g" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Fertig gebacken: ca. {fmt((parseDeutscheZahl(teigGewicht) || 900) * 0.88, 0)} g
           </p>
         </div>
@@ -293,7 +293,7 @@ export default function BrotbackRechner() {
           <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
             Enthält: {fmt(ergebnis.asg / 2, 0)} g Mehl + {fmt(ergebnis.asg / 2, 0)} g Wasser — bereits in den Mengen oben berücksichtigt.
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
             Tipp: ASG 8–12 h vorher auffrischen (1 Teil ASG + 1 Teil Mehl + 1 Teil Wasser, Raumtemperatur). Backfertig, wenn es sich verdoppelt hat und Bläschen wirft.
           </p>
         </div>
@@ -306,14 +306,14 @@ export default function BrotbackRechner() {
         </h2>
         <div className="grid grid-cols-2 gap-3 mb-3">
           <div className="bg-gray-50 dark:bg-gray-700/30 rounded-lg p-3 text-center">
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Temperatur</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Temperatur</p>
             <p className="font-bold text-gray-800 dark:text-gray-200 text-lg">{rezept.backtemp} °C</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Ober-/Unterhitze</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">Ober-/Unterhitze</p>
           </div>
           <div className="bg-gray-50 dark:bg-gray-700/30 rounded-lg p-3 text-center">
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Backzeit</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Backzeit</p>
             <p className="font-bold text-gray-800 dark:text-gray-200 text-lg">ca. {rezept.backzeitMin} Min</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">je nach Form und Ofen</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">je nach Form und Ofen</p>
           </div>
         </div>
         <p className="text-sm text-gray-700 dark:text-gray-300">💡 {rezept.tipp}</p>

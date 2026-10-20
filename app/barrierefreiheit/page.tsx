@@ -27,7 +27,7 @@ export default function BarrierefreiheitSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Erklärung zur Barrierefreiheit
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Stand: Mai 2026</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">Stand: Mai 2026</p>
 
         <div className="space-y-8 text-gray-700 dark:text-gray-300">
           <p className="text-base leading-relaxed">

@@ -166,7 +166,7 @@ export default function QuadratmeterRechner() {
             {flaechen.length > 1 && (
               <button
                 onClick={() => entferneFlaeche(f.id)}
-                className="text-xs text-red-600 hover:text-red-700 dark:hover:text-red-400 transition-colors"
+                className="text-xs text-red-700 dark:text-red-300 hover:text-red-700 dark:hover:text-red-400 transition-colors"
               >
                 Entfernen
               </button>
@@ -194,11 +194,11 @@ export default function QuadratmeterRechner() {
           {f.form === 'rechteck' && (
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Länge</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
                 <NummerEingabe value={f.laenge} onChange={v => updateFlaeche(f.id, { laenge: v })} placeholder="5" einheit={einheitLabel} />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Breite</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
                 <NummerEingabe value={f.breite} onChange={v => updateFlaeche(f.id, { breite: v })} placeholder="4" einheit={einheitLabel} />
               </div>
             </div>
@@ -230,12 +230,12 @@ export default function QuadratmeterRechner() {
               </div>
               {f.kreisMode === 'radius' ? (
                 <div>
-                  <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Radius</label>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Radius</label>
                   <NummerEingabe value={f.radius} onChange={v => updateFlaeche(f.id, { radius: v })} placeholder="3" einheit={einheitLabel} />
                 </div>
               ) : (
                 <div>
-                  <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Durchmesser</label>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Durchmesser</label>
                   <NummerEingabe value={f.durchmesser} onChange={v => updateFlaeche(f.id, { durchmesser: v })} placeholder="6" einheit={einheitLabel} />
                 </div>
               )}
@@ -245,11 +245,11 @@ export default function QuadratmeterRechner() {
           {f.form === 'dreieck' && (
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Grundseite</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundseite</label>
                 <NummerEingabe value={f.grundseite} onChange={v => updateFlaeche(f.id, { grundseite: v })} placeholder="6" einheit={einheitLabel} />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Höhe</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
                 <NummerEingabe value={f.hoehe} onChange={v => updateFlaeche(f.id, { hoehe: v })} placeholder="4" einheit={einheitLabel} />
               </div>
             </div>
@@ -257,26 +257,26 @@ export default function QuadratmeterRechner() {
 
           {f.form === 'lform' && (
             <div>
-              <p className="text-xs text-gray-600 dark:text-gray-500 mb-3">Teilen Sie Ihren L-förmigen Raum in zwei Rechtecke auf</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">Teilen Sie Ihren L-förmigen Raum in zwei Rechtecke auf</p>
               <p className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-2">Rechteck 1</p>
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
-                  <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Länge</label>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
                   <NummerEingabe value={f.r1Laenge} onChange={v => updateFlaeche(f.id, { r1Laenge: v })} placeholder="5" einheit={einheitLabel} />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Breite</label>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
                   <NummerEingabe value={f.r1Breite} onChange={v => updateFlaeche(f.id, { r1Breite: v })} placeholder="3" einheit={einheitLabel} />
                 </div>
               </div>
               <p className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-2">Rechteck 2</p>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Länge</label>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
                   <NummerEingabe value={f.r2Laenge} onChange={v => updateFlaeche(f.id, { r2Laenge: v })} placeholder="3" einheit={einheitLabel} />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Breite</label>
+                  <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
                   <NummerEingabe value={f.r2Breite} onChange={v => updateFlaeche(f.id, { r2Breite: v })} placeholder="2" einheit={einheitLabel} />
                 </div>
               </div>
@@ -286,15 +286,15 @@ export default function QuadratmeterRechner() {
           {f.form === 'trapez' && (
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Seite a (oben)</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Seite a (oben)</label>
                 <NummerEingabe value={f.seiteA} onChange={v => updateFlaeche(f.id, { seiteA: v })} placeholder="3" einheit={einheitLabel} />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Seite c (unten)</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Seite c (unten)</label>
                 <NummerEingabe value={f.seiteC} onChange={v => updateFlaeche(f.id, { seiteC: v })} placeholder="5" einheit={einheitLabel} />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Höhe</label>
+                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
                 <NummerEingabe value={f.trapezHoehe} onChange={v => updateFlaeche(f.id, { trapezHoehe: v })} placeholder="4" einheit={einheitLabel} />
               </div>
             </div>
@@ -305,7 +305,7 @@ export default function QuadratmeterRechner() {
       {/* Weitere Fläche hinzufügen */}
       <button
         onClick={fuegeHinzu}
-        className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-400 transition-all"
+        className="w-full py-2.5 mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:border-primary-400 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-400 transition-all"
       >
         + Weitere Fläche hinzufügen
       </button>
@@ -321,7 +321,7 @@ export default function QuadratmeterRechner() {
               {fmt(ergebnis.gesamtFlaeche)} m²
             </p>
             {ergebnis.einzelFlaechen.length === 1 && ergebnis.einzelFlaechen[0].umfang !== null && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                 Umfang: {fmt(ergebnis.einzelFlaechen[0].umfang)} m
               </p>
             )}
@@ -362,7 +362,7 @@ export default function QuadratmeterRechner() {
                     <div className="text-right">
                       <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ef.flaeche)} m²</span>
                       {ef.umfang !== null && (
-                        <span className="text-xs text-gray-600 dark:text-gray-500 ml-2">(U: {fmt(ef.umfang)} m)</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 ml-2">(U: {fmt(ef.umfang)} m)</span>
                       )}
                     </div>
                   </div>
@@ -378,19 +378,19 @@ export default function QuadratmeterRechner() {
           {/* Umrechnungen */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Quadratzentimeter</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Quadratzentimeter</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.inCm2, 2)} cm²</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Quadratmillimeter</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Quadratmillimeter</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.inMm2, 2)} mm²</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Ar</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Ar</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.inAr)} a</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Hektar</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Hektar</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{ergebnis.inHektar.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 6 })} ha</p>
             </div>
           </div>

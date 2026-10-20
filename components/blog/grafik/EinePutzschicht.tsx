@@ -117,7 +117,7 @@ export default function EinePutzschicht() {
           BGH, Urteil vom 15. Maerz 2017 — VIII ZR 5/16
         </text>
       </svg>
-      <figcaption className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+      <figcaption className="mt-2 text-sm text-gray-600 dark:text-gray-400">
         Das technische Regelwerk, auf das die Verordnung verweist, haelt den Unterschied fuer
         bedeutungslos. Das Gericht haelt ihn fuer entscheidend. Der Mieter merkt von der Putzschicht
         nichts — die Abrechnung schon.

@@ -160,7 +160,7 @@ export default function DachflaechenRechner() {
         </div>
       </div>
 
-      <p className="text-xs text-gray-500 mb-6">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
         ⚠️ Die Berechnung gilt für regelmäßige Dachformen mit gleichmäßiger Neigung. Für Walmdächer mit unterschiedlichen Neigungen, Krüppelwalme, Gauben oder komplexe Dachformen lassen Sie die Fläche von einem Dachdecker aufmessen.
       </p>
 

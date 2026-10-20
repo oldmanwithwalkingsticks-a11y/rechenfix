@@ -24,7 +24,7 @@ const SCHWERE_FARBEN: Record<string, { bg: string; text: string; label: string }
   'gering': { bg: 'bg-green-500', text: 'text-green-700 dark:text-green-400', label: 'Gering' },
   'mittel': { bg: 'bg-yellow-500', text: 'text-yellow-700 dark:text-yellow-400', label: 'Mittel' },
   'schwer': { bg: 'bg-orange-500', text: 'text-orange-700 dark:text-orange-400', label: 'Schwer' },
-  'sehr-schwer': { bg: 'bg-red-500', text: 'text-red-700 dark:text-red-400', label: 'Sehr schwer' },
+  'sehr-schwer': { bg: 'bg-red-500', text: 'text-red-700 dark:text-red-300', label: 'Sehr schwer' },
 };
 
 export default function BussgeldRechner() {
@@ -196,7 +196,7 @@ export default function BussgeldRechner() {
 
       {/* Hinweis Bußgeldkatalog */}
       <div className="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-3 mb-4">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
+        <p className="text-xs text-gray-600 dark:text-gray-400">
           Angaben basierend auf dem Bußgeldkatalog (Stand 2025). Alle Angaben ohne Gewähr.
         </p>
       </div>
@@ -276,14 +276,14 @@ export default function BussgeldRechner() {
         <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-4 mb-4">
           <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{ergebnis.beschreibung}</p>
           {ergebnis.fahrverbotHinweis && (
-            <p className="text-sm text-red-600 dark:text-red-400 mt-1 font-medium">{ergebnis.fahrverbotHinweis}</p>
+            <p className="text-sm text-red-700 dark:text-red-300 mt-1 font-medium">{ergebnis.fahrverbotHinweis}</p>
           )}
         </div>
 
         {/* Fahrverbot-Info */}
         {(ergebnis.fahrverbot > 0 || ergebnis.straftat) && (
           <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-4">
-            <p className="text-sm text-red-700 dark:text-red-400">
+            <p className="text-sm text-red-700 dark:text-red-300">
               {ergebnis.straftat ? (
                 <><strong>Straftat:</strong> Ab 1,1 ‰ handelt es sich um eine Straftat. Die Fahrerlaubnis wird entzogen — eine Neuerteilung erfordert in der Regel eine MPU (Medizinisch-Psychologische Untersuchung).</>
               ) : (

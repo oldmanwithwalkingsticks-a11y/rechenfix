@@ -64,9 +64,9 @@ export default function MinijobRechner() {
   const fmtZ = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
   const statusLabel =
-    ergebnis.status === 'minijob' ? { text: 'Minijob ✓', color: 'bg-green-500' } :
-    ergebnis.status === 'midijob' ? { text: '⚠️ Midijob-Übergangsbereich', color: 'bg-orange-500' } :
-    { text: '⚠️ Reguläre Beschäftigung', color: 'bg-red-500' };
+    ergebnis.status === 'minijob' ? { text: 'Minijob ✓', color: 'bg-green-700' } :
+    ergebnis.status === 'midijob' ? { text: '⚠️ Midijob-Übergangsbereich', color: 'bg-orange-700' } :
+    { text: '⚠️ Reguläre Beschäftigung', color: 'bg-red-600' }; // W188: Plaketten -700/-600 statt -500 (weiße Schrift ≥ 4,5:1)
 
   return (
     <div>
@@ -130,7 +130,7 @@ export default function MinijobRechner() {
           onChange={(v) => setRvPflicht(v === 'ja')}
           columns={2}
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Sie können sich von der RV-Pflicht befreien lassen. Dann entfällt Ihr Eigenanteil, aber Sie erwerben keine Rentenpunkte.
         </p>
       </div>
@@ -139,7 +139,7 @@ export default function MinijobRechner() {
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
-          Stunden pro Woche <span className="text-xs font-normal text-gray-500">(optional)</span>
+          Stunden pro Woche <span className="text-xs font-normal text-gray-600 dark:text-gray-400">(optional)</span>
         </h2>
         <NummerEingabe value={stunden} onChange={setStunden} placeholder="z.B. 10" einheit="Std." />
       </div>
@@ -191,34 +191,34 @@ export default function MinijobRechner() {
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">RV-Eigenanteil ({art === 'gewerblich' ? '3,6' : '13,6'} %{ergebnis.verdienst > 0 && ergebnis.verdienst < 175 ? ', Beitrag mindestens aus 175 €' : ''})</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">{ergebnis.rvEigenanteil > 0 ? `−${fmtEuro(ergebnis.rvEigenanteil)} €` : '—'}</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">{ergebnis.rvEigenanteil > 0 ? `−${fmtEuro(ergebnis.rvEigenanteil)} €` : '—'}</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Pauschale Rentenversicherung ({art === 'gewerblich' ? '15' : '5'} %)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agRentenversicherung)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.agRentenversicherung)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Pauschale Krankenversicherung ({art === 'gewerblich' ? '13' : '5'} %)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agKrankenversicherung)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.agKrankenversicherung)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Pauschale Lohnsteuer (2 %)</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agLohnsteuer)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.agLohnsteuer)} €</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">{art === 'gewerblich' ? 'Umlagen (U1, U2, Insolvenzgeld)' : 'Umlagen (U1, U2)'}</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agUmlagen)} €</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
+                <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.agUmlagen)} €</td>
               </tr>
               {ergebnis.agUnfallversicherung > 0 && (
                 <tr>
                   <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Unfallversicherung (1,6 %)</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-600">—</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-red-600 dark:text-red-400">−{fmtEuro(ergebnis.agUnfallversicherung)} €</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.agUnfallversicherung)} €</td>
                 </tr>
               )}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-bold">
@@ -259,16 +259,16 @@ export default function MinijobRechner() {
           </div>
           <div className="grid grid-cols-2 divide-x divide-gray-100 dark:divide-gray-700">
             <div className={`p-4 ${rvPflicht ? 'bg-primary-50 dark:bg-primary-500/10' : ''}`}>
-              <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Mit RV-Pflicht</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 uppercase tracking-wide">Mit RV-Pflicht</div>
               <div className="text-2xl font-bold text-gray-800 dark:text-gray-200 mt-1">{fmtEuro(vergleichMitRv.nettoAN)} €</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 ca. {vergleichMitRv.rentenpunkteProJahrMitRv.toLocaleString('de-DE')} Rentenpunkte/Jahr
               </div>
             </div>
             <div className={`p-4 ${!rvPflicht ? 'bg-primary-50 dark:bg-primary-500/10' : ''}`}>
-              <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Ohne RV (befreit)</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 uppercase tracking-wide">Ohne RV (befreit)</div>
               <div className="text-2xl font-bold text-gray-800 dark:text-gray-200 mt-1">{fmtEuro(vergleichOhneRv.nettoAN)} €</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">0 Rentenpunkte</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">0 Rentenpunkte</div>
             </div>
           </div>
         </div>

@@ -98,7 +98,7 @@ export default function LeasingRechner() {
           <div>
             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Leasingfaktor</label>
             <NummerEingabe value={leasingfaktor} onChange={setLeasingfaktor} einheit="%" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Typisch 0,6–1,2 %. Niedriger = günstiger. Steht im Leasingangebot.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Typisch 0,6–1,2 %. Niedriger = günstiger. Steht im Leasingangebot.</p>
           </div>
         ) : (
           <div>

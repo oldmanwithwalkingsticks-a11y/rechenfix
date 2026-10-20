@@ -177,14 +177,14 @@ export default function KiRechnerClient() {
       </div>
 
       {/* KI-Transparenzhinweis (Art. 50 Abs. 1 KI-VO) */}
-      <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+      <p className="text-xs text-center text-gray-600 dark:text-gray-400">
         Hinweis: Sie interagieren hier mit einem KI-System. Die Antworten werden automatisch generiert.
       </p>
 
       {/* Beispiel-Fragen */}
       {verlauf.length === 0 && (
         <div>
-          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">Beispiel-Fragen</p>
+          <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2 uppercase tracking-wider">Beispiel-Fragen</p>
           <div className="flex flex-wrap gap-2">
             {BEISPIELE.map(b => (
               <button
@@ -205,7 +205,7 @@ export default function KiRechnerClient() {
           <p className="text-sm text-red-700 dark:text-red-300">{fehler}</p>
           <button
             onClick={handleAbsenden}
-            className="mt-2 text-sm text-red-600 dark:text-red-400 underline hover:no-underline"
+            className="mt-2 text-sm text-red-700 dark:text-red-300 underline hover:no-underline"
           >
             Erneut versuchen
           </button>
@@ -293,14 +293,14 @@ export default function KiRechnerClient() {
                 <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                 <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400">Berechne Antwort...</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">Berechne Antwort...</span>
             </div>
           </div>
         </div>
       )}
 
       {/* Hinweis */}
-      <p className="text-xs text-center text-gray-600 dark:text-gray-500">
+      <p className="text-xs text-center text-gray-600 dark:text-gray-400">
         Die Antwort wird von der KI berechnet und formuliert. F&uuml;r ein gepr&uuml;ftes, nachvollziehbares Ergebnis den verlinkten Rechner nutzen. Max 3 Fragen pro Minute.
       </p>
     </div>

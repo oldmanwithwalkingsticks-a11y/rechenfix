@@ -123,7 +123,7 @@ export default function KapitalertragsteuerRechner() {
           ))}
         </div>
         {art.teilfreistellung > 0 && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
             Teilfreistellung: <strong>{(art.teilfreistellung * 100).toFixed(0)} %</strong> steuerfrei (InvStG).
           </p>
         )}
@@ -173,7 +173,7 @@ export default function KapitalertragsteuerRechner() {
         </div>
         {pauschStatus === 'teilweise' && (
           <div className="mt-3">
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Restlicher Freibetrag</label>
+            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Restlicher Freibetrag</label>
             <NummerEingabe value={restFreibetrag} onChange={setRestFreibetrag} placeholder="500" einheit="€" />
           </div>
         )}
@@ -225,19 +225,19 @@ export default function KapitalertragsteuerRechner() {
         {!verlusteAufgeteilt ? (
           <>
             <NummerEingabe value={verlusteAllgemein} onChange={setVerlusteAllgemein} placeholder="0" einheit="€" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Realisierte Verluste aus dem gleichen Verlusttopf, die mit den Erträgen verrechnet werden können.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Realisierte Verluste aus dem gleichen Verlusttopf, die mit den Erträgen verrechnet werden können.</p>
           </>
         ) : (
           <div className="space-y-3">
             <div>
               <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verluste Aktien-Topf</label>
               <NummerEingabe value={verlusteAktien} onChange={setVerlusteAktien} placeholder="0" einheit="€" />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Nur aus direkt gehaltenen Aktien — nur mit Aktien-Kursgewinnen verrechenbar.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Nur aus direkt gehaltenen Aktien — nur mit Aktien-Kursgewinnen verrechenbar.</p>
             </div>
             <div>
               <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verluste allgemeiner Topf</label>
               <NummerEingabe value={verlusteAllgemein} onChange={setVerlusteAllgemein} placeholder="0" einheit="€" />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">ETF, Anleihen, Zertifikate u. a. — mit allen Erträgen außer direkten Aktien-Gewinnen verrechenbar.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">ETF, Anleihen, Zertifikate u. a. — mit allen Erträgen außer direkten Aktien-Gewinnen verrechenbar.</p>
             </div>
             <div className="text-xs text-blue-800 dark:text-blue-300 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-2">
               Aktuell wirkt: <strong>{ertragsart === 'aktien' ? 'Aktien-Topf' : 'Allgemeiner Topf'}</strong> (abhängig von Ertragsart „{art.label}“).
@@ -274,18 +274,18 @@ export default function KapitalertragsteuerRechner() {
             {art.teilfreistellung > 0 && (
               <tr className="text-gray-600 dark:text-gray-400">
                 <td className="py-2">− Teilfreistellung ({(art.teilfreistellung * 100).toFixed(0)} %)</td>
-                <td className="py-2 text-right tabular-nums text-green-600 dark:text-green-400">− {fmt(ergebnis.teilfreistellungBetrag)} €</td>
+                <td className="py-2 text-right tabular-nums text-green-700 dark:text-green-400">− {fmt(ergebnis.teilfreistellungBetrag)} €</td>
               </tr>
             )}
             {nVerluste > 0 && (
               <tr className="text-gray-600 dark:text-gray-400">
                 <td className="py-2">− Verlustverrechnung</td>
-                <td className="py-2 text-right tabular-nums text-green-600 dark:text-green-400">− {fmt(Math.min(nVerluste, ergebnis.nachTeilfreistellung))} €</td>
+                <td className="py-2 text-right tabular-nums text-green-700 dark:text-green-400">− {fmt(Math.min(nVerluste, ergebnis.nachTeilfreistellung))} €</td>
               </tr>
             )}
             <tr className="text-gray-600 dark:text-gray-400">
               <td className="py-2">− Sparerpauschbetrag</td>
-              <td className="py-2 text-right tabular-nums text-green-600 dark:text-green-400">− {fmt(Math.min(ergebnis.verfuegbarerPausch, ergebnis.nachVerlust))} €</td>
+              <td className="py-2 text-right tabular-nums text-green-700 dark:text-green-400">− {fmt(Math.min(ergebnis.verfuegbarerPausch, ergebnis.nachVerlust))} €</td>
             </tr>
             <tr className="text-gray-700 dark:text-gray-300 font-semibold">
               <td className="py-2">= Steuerpflichtig</td>
@@ -293,16 +293,16 @@ export default function KapitalertragsteuerRechner() {
             </tr>
             <tr className="text-gray-600 dark:text-gray-400">
               <td className="py-2">Abgeltungssteuer (25 %)</td>
-              <td className="py-2 text-right tabular-nums text-red-600 dark:text-red-400">{fmt(ergebnis.abgSt)} €</td>
+              <td className="py-2 text-right tabular-nums text-red-700 dark:text-red-300">{fmt(ergebnis.abgSt)} €</td>
             </tr>
             <tr className="text-gray-600 dark:text-gray-400">
               <td className="py-2">Solidaritätszuschlag (5,5 %)</td>
-              <td className="py-2 text-right tabular-nums text-red-600 dark:text-red-400">{fmt(ergebnis.soli)} €</td>
+              <td className="py-2 text-right tabular-nums text-red-700 dark:text-red-300">{fmt(ergebnis.soli)} €</td>
             </tr>
             {kirchensteuer && (
               <tr className="text-gray-600 dark:text-gray-400">
                 <td className="py-2">Kirchensteuer ({kirchensteuersatz} %)</td>
-                <td className="py-2 text-right tabular-nums text-red-600 dark:text-red-400">{fmt(ergebnis.kiSt)} €</td>
+                <td className="py-2 text-right tabular-nums text-red-700 dark:text-red-300">{fmt(ergebnis.kiSt)} €</td>
               </tr>
             )}
             <tr className="border-t-2 border-primary-200 dark:border-primary-500/40 font-bold text-primary-700 dark:text-primary-300">

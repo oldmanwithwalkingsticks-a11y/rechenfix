@@ -158,8 +158,8 @@ export default function GleichungsloeserRechner() {
                 <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Rechenweg</h2>
                 <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 tabular-nums">
                   <p><strong>1.</strong> {fmt(linErgebnis.na)}x {fmtSigned(linErgebnis.nb)} = {fmt(linErgebnis.nc)}</p>
-                  <p><strong>2.</strong> {fmt(linErgebnis.na)}x = {fmt(linErgebnis.nc)} {fmtSigned(-linErgebnis.nb)} = {fmt(linErgebnis.nc - linErgebnis.nb)} <span className="text-gray-500"> | {linErgebnis.nb >= 0 ? '−' : '+'} {fmt(Math.abs(linErgebnis.nb))}</span></p>
-                  <p><strong>3.</strong> x = {fmt(linErgebnis.nc - linErgebnis.nb)} / {fmt(linErgebnis.na)} <span className="text-gray-500"> | ÷ {fmt(linErgebnis.na)}</span></p>
+                  <p><strong>2.</strong> {fmt(linErgebnis.na)}x = {fmt(linErgebnis.nc)} {fmtSigned(-linErgebnis.nb)} = {fmt(linErgebnis.nc - linErgebnis.nb)} <span className="text-gray-600 dark:text-gray-400"> | {linErgebnis.nb >= 0 ? '−' : '+'} {fmt(Math.abs(linErgebnis.nb))}</span></p>
+                  <p><strong>3.</strong> x = {fmt(linErgebnis.nc - linErgebnis.nb)} / {fmt(linErgebnis.na)} <span className="text-gray-600 dark:text-gray-400"> | ÷ {fmt(linErgebnis.na)}</span></p>
                   <p><strong>4.</strong> <strong>x = {fmt(linErgebnis.x!)}</strong></p>
                 </div>
               </div>
@@ -287,7 +287,7 @@ export default function GleichungsloeserRechner() {
                       </text>
                     </svg>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 text-center">
                     🟢 Nullstellen · 🔴 Scheitelpunkt
                   </p>
                 </div>

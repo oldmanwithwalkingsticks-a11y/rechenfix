@@ -25,7 +25,7 @@ export default function QuersummeRechner() {
             placeholder="123456789"
             className="input-field font-mono text-lg"
           />
-          <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Auch sehr große Zahlen möglich (beliebig viele Ziffern)</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Auch sehr große Zahlen möglich (beliebig viele Ziffern)</p>
         </div>
       </div>
 
@@ -85,7 +85,7 @@ export default function QuersummeRechner() {
                 <span className="text-gray-600 dark:text-gray-400">
                   Durch <strong>3</strong> teilbar? (QS {ergebnis.quersumme} {ergebnis.teilbarDurch3 ? 'ist' : 'ist nicht'} durch 3 teilbar)
                 </span>
-                <span className={`font-bold ${ergebnis.teilbarDurch3 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                <span className={`font-bold ${ergebnis.teilbarDurch3 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>
                   {ergebnis.teilbarDurch3 ? '✓ Ja' : '✗ Nein'}
                 </span>
               </div>
@@ -93,7 +93,7 @@ export default function QuersummeRechner() {
                 <span className="text-gray-600 dark:text-gray-400">
                   Durch <strong>9</strong> teilbar? (QS {ergebnis.quersumme} {ergebnis.teilbarDurch9 ? 'ist' : 'ist nicht'} durch 9 teilbar)
                 </span>
-                <span className={`font-bold ${ergebnis.teilbarDurch9 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                <span className={`font-bold ${ergebnis.teilbarDurch9 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>
                   {ergebnis.teilbarDurch9 ? '✓ Ja' : '✗ Nein'}
                 </span>
               </div>
@@ -101,7 +101,7 @@ export default function QuersummeRechner() {
                 <span className="text-gray-600 dark:text-gray-400">
                   Durch <strong>11</strong> teilbar? (Alt. QS {ergebnis.alternierend} {ergebnis.teilbarDurch11 ? 'ist' : 'ist nicht'} durch 11 teilbar)
                 </span>
-                <span className={`font-bold ${ergebnis.teilbarDurch11 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                <span className={`font-bold ${ergebnis.teilbarDurch11 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-300'}`}>
                   {ergebnis.teilbarDurch11 ? '✓ Ja' : '✗ Nein'}
                 </span>
               </div>

@@ -92,7 +92,7 @@ export default function ReifengroesseRechner() {
           Tacho-Anzeige (km/h)
         </h2>
         <NummerEingabe value={tacho} onChange={setTacho} placeholder="100" einheit="km/h" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Zeigt die reale Geschwindigkeit mit dem neuen Reifen bei dieser Tacho-Anzeige.
         </p>
       </div>
@@ -124,13 +124,13 @@ export default function ReifengroesseRechner() {
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   <tr>
-                    <td className="px-4 py-2.5 whitespace-nowrap text-gray-700 dark:text-gray-300">{d0(ergebnis.ba)}/{d0(ergebnis.qa)} R{d0(ergebnis.za)} <span className="text-gray-400">(alt)</span></td>
+                    <td className="px-4 py-2.5 whitespace-nowrap text-gray-700 dark:text-gray-300">{d0(ergebnis.ba)}/{d0(ergebnis.qa)} R{d0(ergebnis.za)} <span className="text-gray-600 dark:text-gray-400">(alt)</span></td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400 whitespace-nowrap">{d1(ergebnis.alt.flanke)} mm</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{d1(ergebnis.alt.durchmesser)} mm</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{d0(ergebnis.alt.abrollumfang)} mm</td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-2.5 whitespace-nowrap font-medium text-gray-800 dark:text-gray-200">{d0(ergebnis.bn)}/{d0(ergebnis.qn)} R{d0(ergebnis.zn)} <span className="text-primary-500">(neu)</span></td>
+                    <td className="px-4 py-2.5 whitespace-nowrap font-medium text-gray-800 dark:text-gray-200">{d0(ergebnis.bn)}/{d0(ergebnis.qn)} R{d0(ergebnis.zn)} <span className="text-primary-600 dark:text-primary-400">(neu)</span></td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400 whitespace-nowrap">{d1(ergebnis.neu.flanke)} mm</td>
                     <td className="px-4 py-2.5 text-right tabular-nums font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap">{d1(ergebnis.neu.durchmesser)} mm</td>
                     <td className="px-4 py-2.5 text-right tabular-nums font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap">{d0(ergebnis.neu.abrollumfang)} mm</td>
@@ -200,7 +200,7 @@ export default function ReifengroesseRechner() {
                       <tr key={`${g.b}-${g.q}-${g.z}`}>
                         <td className="px-4 py-2.5 whitespace-nowrap text-gray-700 dark:text-gray-300">{g.b}/{g.q} R{g.z}</td>
                         <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{d1(m.durchmesser)} mm</td>
-                        <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${grenz ? 'text-amber-600 dark:text-amber-400 font-semibold' : 'text-gray-600 dark:text-gray-400'}`}>
+                        <td className={`px-4 py-2.5 text-right tabular-nums whitespace-nowrap ${grenz ? 'text-amber-700 dark:text-amber-400 font-semibold' : 'text-gray-600 dark:text-gray-400'}`}>
                           {abw >= 0 ? '+' : ''}{d1(abw)} %
                         </td>
                       </tr>
@@ -209,7 +209,7 @@ export default function ReifengroesseRechner() {
                 </tbody>
               </table>
             </div>
-            <p className="px-4 pb-3 pt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="px-4 pb-3 pt-1 text-xs text-gray-600 dark:text-gray-400">
               Abweichung des Außendurchmessers gegenüber der alten Größe. Ab über ±2 % ist die Größe technisch grenzwertig.
             </p>
           </div>

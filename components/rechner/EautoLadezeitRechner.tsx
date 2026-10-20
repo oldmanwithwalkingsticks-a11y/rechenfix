@@ -128,7 +128,7 @@ export default function EautoLadezeitRechner() {
             <select id="ev-obc" value={obc} onChange={(e) => setObc(e.target.value)} className="input-field w-full">
               {OBC_OPTIONEN.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
             </select>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               Die meisten E-Autos laden AC mit max. 11 kW; 22 kW nur z. B. Renault Zoe/Megane, smart #1, Polestar 2 LR.
             </p>
           </div>
@@ -170,7 +170,7 @@ export default function EautoLadezeitRechner() {
               </div>
             </div>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-6">
             Richtwert inkl. typischer Ladeverluste — real ±10–30 % je nach Temperatur, Batteriezustand und Ladekurve. Stand 2026.
           </p>
 
@@ -246,7 +246,7 @@ export default function EautoLadezeitRechner() {
           />
         </>
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Bitte Ziel-Ladestand über den Start setzen, um die Ladezeit zu berechnen.
         </p>
       )}

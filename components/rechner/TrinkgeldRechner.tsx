@@ -164,7 +164,7 @@ export default function TrinkgeldRechner() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Trinkgeld ({fmtDez(ergebnis.trinkgeldProzent).replace(',00', '')}%){ergebnis.aufgerundet ? ' (aufgerundet)' : ''}</span>
-                <span className="font-semibold text-green-600 dark:text-green-400">+{fmtDez(ergebnis.trinkgeldBetrag)} €</span>
+                <span className="font-semibold text-green-700 dark:text-green-400">+{fmtDez(ergebnis.trinkgeldBetrag)} €</span>
               </div>
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                 <span className="text-gray-700 dark:text-gray-200 font-bold">Gesamtbetrag</span>

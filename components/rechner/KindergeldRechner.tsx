@@ -54,7 +54,7 @@ export default function KindergeldRechner() {
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           Kindergeld 2026: <strong>{KINDERGELD_PRO_KIND_MONAT} €/Monat pro Kind</strong> (einheitlich)
         </p>
       </div>
@@ -88,7 +88,7 @@ export default function KindergeldRechner() {
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Verheiratete profitieren vom Splittingtarif und dem doppelten Kinderfreibetrag.
         </p>
       </div>
@@ -161,7 +161,7 @@ export default function KindergeldRechner() {
                   )}
                 </div>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.vorteilKindergeld)} €</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">pro Jahr</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">pro Jahr</p>
               </div>
               <div className={`rounded-xl p-4 ${ergebnis.gewinner === 'freibetrag' ? 'bg-white dark:bg-gray-800 border-2 border-purple-500' : 'bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700'}`}>
                 <div className="flex items-center justify-between mb-1">
@@ -171,7 +171,7 @@ export default function KindergeldRechner() {
                   )}
                 </div>
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.vorteilFreibetrag)} €</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Steuerersparnis/Jahr</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Steuerersparnis/Jahr</p>
               </div>
             </div>
             <div className="text-sm text-gray-700 dark:text-gray-300 bg-white/70 dark:bg-gray-800/50 rounded-lg p-3">

@@ -38,7 +38,7 @@ function FaktKarte({ icon, label, wert, einheit, farbe = 'primary' }: {
       <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{label}</p>
       <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
         {wert}
-        {einheit && <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-1">{einheit}</span>}
+        {einheit && <span className="text-sm font-normal text-gray-600 dark:text-gray-400 ml-1">{einheit}</span>}
       </p>
     </div>
   );
@@ -133,7 +133,7 @@ export default function LebenszeitRechner() {
       </button>
 
       {fehler && (
-        <p className="text-red-600 dark:text-red-400 text-sm">{fehler}</p>
+        <p className="text-red-700 dark:text-red-300 text-sm">{fehler}</p>
       )}
 
       {/* Ergebnis */}
@@ -227,7 +227,7 @@ export default function LebenszeitRechner() {
                     style={{ width: `${Math.min(100, ergebnis.prozentGelebt)}%` }}
                   />
                 </div>
-                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1">
                   <span>Geburt</span>
                   <span>{formatZahl1(ergebnis.lebenserwartung)} Jahre</span>
                 </div>
@@ -249,7 +249,7 @@ export default function LebenszeitRechner() {
               </div>
 
               {ergebnis.prozentGelebt < 100 && (
-                <p className="text-center text-sm text-gray-500 dark:text-gray-400 italic">
+                <p className="text-center text-sm text-gray-600 dark:text-gray-400 italic">
                   Nutzen Sie jedes Wochenende &ndash; es sind statistisch nur noch {formatZahl(ergebnis.verbleibendeWochenenden)} übrig!
                 </p>
               )}

@@ -317,7 +317,7 @@ export default function ZufallszahlRechner() {
                       type="checkbox"
                       checked={opt.checked}
                       onChange={e => opt.onChange(e.target.checked)}
-                      className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      className="w-4 h-4 rounded border-gray-300 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
                     />
                     {opt.label}
                   </label>

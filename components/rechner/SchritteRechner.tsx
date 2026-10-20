@@ -101,7 +101,7 @@ export default function SchritteRechner() {
                 Noch {fmt(ergebnis.restSchritte)} Schritte ({ergebnis.restKm.toLocaleString('de-DE')} km) bis zum Tagesziel
               </p>
             ) : (
-              <p className="text-xs text-green-600 dark:text-green-400 mt-2 font-medium">
+              <p className="text-xs text-green-700 dark:text-green-400 mt-2 font-medium">
                 ✓ Tagesziel erreicht!
               </p>
             )}

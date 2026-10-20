@@ -133,13 +133,13 @@ export default function WahrerStundenlohnRechner() {
               <p className="text-3xl sm:text-4xl font-extrabold text-gray-600 dark:text-gray-400">
                 {formatEuro(ergebnis.offiziellerStundenlohn)} €
               </p>
-              <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 {formatEuro(ergebnis.nettoMonatlich)} € netto &divide; {formatStunden2(ergebnis.vertragsstundenMonat)} h
               </p>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/30 dark:to-orange-900/20 rounded-2xl border border-red-200 dark:border-red-700/30">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Wahrer Stundenlohn</p>
-              <p className="text-4xl sm:text-5xl font-extrabold text-red-600 dark:text-red-400">
+              <p className="text-4xl sm:text-5xl font-extrabold text-red-700 dark:text-red-300">
                 {formatEuro(ergebnis.wahrerStundenlohn)} €
               </p>
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
@@ -151,7 +151,7 @@ export default function WahrerStundenlohnRechner() {
           {/* Differenz-Highlight */}
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/30 rounded-xl p-5 text-center">
             <p className="text-lg text-gray-700 dark:text-gray-300">
-              Sie verdienen <strong className="text-red-600 dark:text-red-400">wirklich {formatEuro(ergebnis.differenzStundenlohn)} € weniger</strong> pro Stunde als Sie denken.
+              Sie verdienen <strong className="text-red-700 dark:text-red-300">wirklich {formatEuro(ergebnis.differenzStundenlohn)} € weniger</strong> pro Stunde als Sie denken.
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               Das sind <strong>{ergebnis.differenzProzent.toFixed(0)} %</strong> weniger &ndash; oder <strong>{formatEuro(ergebnis.jahresverlust)} € pro Jahr</strong>.
@@ -180,7 +180,7 @@ export default function WahrerStundenlohnRechner() {
                   </div>
                 );
               })}
-              <div className="px-4 py-3 bg-gray-50 dark:bg-gray-750 border-t border-gray-200 dark:border-gray-600">
+              <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-600">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-gray-900 dark:text-white">Tats&auml;chliche Stunden gesamt</span>
                   <span className="text-sm font-bold text-primary-600 dark:text-primary-400">{ergebnis.tatsaechlicheStundenMonat.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h/Monat</span>
@@ -199,7 +199,7 @@ export default function WahrerStundenlohnRechner() {
               <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-700 dark:text-gray-300">Nettogehalt</span>
-                  <span className="text-sm font-semibold text-green-600 dark:text-green-400">+{formatEuro(ergebnis.nettoMonatlich)} €</span>
+                  <span className="text-sm font-semibold text-green-700 dark:text-green-400">+{formatEuro(ergebnis.nettoMonatlich)} €</span>
                 </div>
               </div>
               {[
@@ -210,11 +210,11 @@ export default function WahrerStundenlohnRechner() {
                 <div key={i} className={`px-4 py-3 ${i < arr.length - 1 ? 'border-b border-gray-100 dark:border-gray-700' : ''}`}>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
-                    <span className="text-sm font-semibold text-red-600 dark:text-red-400">&minus;{formatEuro(item.wert)} €</span>
+                    <span className="text-sm font-semibold text-red-700 dark:text-red-300">&minus;{formatEuro(item.wert)} €</span>
                   </div>
                 </div>
               ))}
-              <div className="px-4 py-3 bg-gray-50 dark:bg-gray-750 border-t border-gray-200 dark:border-gray-600">
+              <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-600">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-gray-900 dark:text-white">Tats&auml;chliches Netto</span>
                   <span className="text-sm font-bold text-primary-600 dark:text-primary-400">{formatEuro(ergebnis.tatsaechlichesNetto)} €</span>

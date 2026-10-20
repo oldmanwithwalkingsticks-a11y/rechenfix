@@ -127,7 +127,7 @@ export default function SoliRampe() {
           Darüber zählen 5,5 % der ganzen Steuer – als hätte es die Freigrenze nie gegeben.
         </text>
       </svg>
-      <figcaption className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
+      <figcaption className="mt-2 text-sm text-center text-gray-600 dark:text-gray-400">
         Aus dem Sprung an der Freigrenze macht die Milderungszone eine Rampe – steiler als 5,5 Prozent.
       </figcaption>
     </figure>

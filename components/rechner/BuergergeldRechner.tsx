@@ -191,7 +191,7 @@ export default function BuergergeldRechner() {
           onChange={e => setStichtagMonat(e.target.value)}
           className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Ab 01.07.2026 heißt die Leistung offiziell <strong>Grundsicherungsgeld</strong>, mit neuem Schonvermögen
           (§ 12 Abs. 2 SGB II i.d.F. des 13. SGB II-Änderungsgesetzes, BGBl. 2026 I Nr. 107).
         </p>
@@ -270,7 +270,7 @@ export default function BuergergeldRechner() {
           {kinder.length < 6 && (
             <button
               onClick={kindHinzufuegen}
-              className="mt-2 text-sm text-primary-600 hover:text-primary-600 dark:hover:text-primary-400 font-medium flex items-center gap-1 transition-colors"
+              className="mt-2 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-600 dark:hover:text-primary-400 font-medium flex items-center gap-1 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -298,7 +298,7 @@ export default function BuergergeldRechner() {
 
       {/* KdU-Angemessenheitshinweis § 22 SGB II */}
       <div className="mb-6 rounded-xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700 px-3 py-2.5 flex gap-2 items-start">
-        <span className="text-gray-500 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
+        <span className="text-gray-600 dark:text-gray-400 text-sm leading-tight" aria-hidden="true">ℹ️</span>
         <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
           {KDU_ANGEMESSENHEITS_HINWEIS}
         </p>
@@ -309,12 +309,12 @@ export default function BuergergeldRechner() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einkommen (Brutto)</label>
           <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Monatliches Brutto</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Monatliches Brutto</p>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vermögen</label>
           <NummerEingabe value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Gesamt-Vermögen</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Gesamt-Vermögen</p>
         </div>
       </div>
 
@@ -324,7 +324,7 @@ export default function BuergergeldRechner() {
           Sonderstatus Einkommensfreibetrag (Schüler/Azubi/Student/Freiwilligendienst) — § 11b Abs. 2b SGB II
         </summary>
         <div className="px-4 pb-4 pt-1 space-y-3 border-t border-gray-100 dark:border-gray-700">
-          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed italic">
+          <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed italic">
             {/* W183: vorher „statt der üblichen Stufen-Regelung“ und 250 € für alle ab 25. */}
             § 11b Abs. 2b SGB II: Für Schüler/Azubis/Studierende/Freiwilligendienstler unter
             25 Jahren bleibt statt 100 € ein Betrag in Höhe der Minijob-Grenze anrechnungsfrei
@@ -367,7 +367,7 @@ export default function BuergergeldRechner() {
                 onBlur={e => setJugendlicherAlter(clampInputValueOnBlur(e.target.value, 14, 99))}
                 className="w-full sm:w-1/2 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 Unter 25 → Grundfreibetrag {params.einkommensfreibetrag.jugendlicherFreibetrag_unter25} €/Monat.
                 Ab 25 → im Freiwilligendienst {params.einkommensfreibetrag.jugendlicherFreibetrag_ab25} €/Monat, sonst regulär.
               </p>
@@ -382,7 +382,7 @@ export default function BuergergeldRechner() {
           Weitere Bedarfe (optional) — § 21 SGB II
         </summary>
         <div className="px-4 pb-4 pt-1 space-y-3 border-t border-gray-100 dark:border-gray-700">
-          <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+          <p className="text-xs text-gray-600 dark:text-gray-400 italic">
             Mehrbedarfe werden zusätzlich zum Regelsatz gewährt, wenn bestimmte Lebensumstände vorliegen. Mehrere Mehrbedarfe sind kombinierbar.
           </p>
 
@@ -393,13 +393,13 @@ export default function BuergergeldRechner() {
                   type="checkbox"
                   checked={alleinerziehend}
                   onChange={e => setAlleinerziehend(e.target.checked)}
-                  className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+                  className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
                 />
                 <span className="text-sm text-gray-700 dark:text-gray-300">
-                  Alleinerziehend <span className="text-gray-600 dark:text-gray-500">— alleinige Pflege und Erziehung des/der Kinder (+12–60 % nach Staffel)</span>
+                  Alleinerziehend <span className="text-gray-600 dark:text-gray-400">— alleinige Pflege und Erziehung des/der Kinder (+12–60 % nach Staffel)</span>
                 </span>
               </label>
-              <p className="ml-7 mt-1 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="ml-7 mt-1 text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                 Rechtsgrundlage: § 21 Abs. 3 SGB II. Anwendbar, wenn Sie allein für Pflege und Erziehung zuständig sind. Bei Wechselmodellen mit etwa gleicher Betreuung durch beide Elternteile greift der Mehrbedarf üblicherweise nicht.
               </p>
             </div>
@@ -410,10 +410,10 @@ export default function BuergergeldRechner() {
               type="checkbox"
               checked={schwanger}
               onChange={e => setSchwanger(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              Schwangerschaft ab 13. Woche <span className="text-gray-600 dark:text-gray-500">(+17 %)</span>
+              Schwangerschaft ab 13. Woche <span className="text-gray-600 dark:text-gray-400">(+17 %)</span>
             </span>
           </label>
 
@@ -422,10 +422,10 @@ export default function BuergergeldRechner() {
               type="checkbox"
               checked={behinderung}
               onChange={e => setBehinderung(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              Behinderung mit Leistungen zur Teilhabe am Arbeitsleben <span className="text-gray-600 dark:text-gray-500">(+35 %)</span>
+              Behinderung mit Leistungen zur Teilhabe am Arbeitsleben <span className="text-gray-600 dark:text-gray-400">(+35 %)</span>
             </span>
           </label>
 
@@ -434,27 +434,27 @@ export default function BuergergeldRechner() {
               type="checkbox"
               checked={warmwasserDezentral}
               onChange={e => setWarmwasserDezentral(e.target.checked)}
-              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+              className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              Dezentrale Warmwasserbereitung <span className="text-gray-600 dark:text-gray-500">(Boiler/Durchlauferhitzer; § 21 Abs. 7 SGB II, altersgestaffelt)</span>
+              Dezentrale Warmwasserbereitung <span className="text-gray-600 dark:text-gray-400">(Boiler/Durchlauferhitzer; § 21 Abs. 7 SGB II, altersgestaffelt)</span>
             </span>
           </label>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
             <div>
               <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Kostenaufwändige Ernährung <span className="font-normal text-gray-500">(§ 21 Abs. 5)</span>
+                Kostenaufwändige Ernährung <span className="font-normal text-gray-600 dark:text-gray-400">(§ 21 Abs. 5)</span>
               </label>
               <NummerEingabe value={ernaehrungEuro} onChange={setErnaehrungEuro} placeholder="0" einheit="€/Mo" />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Laut ärztl. Attest, angemessene Höhe.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Laut ärztl. Attest, angemessene Höhe.</p>
             </div>
             <div>
               <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Sonstiger unabweisbarer Bedarf <span className="font-normal text-gray-500">(§ 21 Abs. 6)</span>
+                Sonstiger unabweisbarer Bedarf <span className="font-normal text-gray-600 dark:text-gray-400">(§ 21 Abs. 6)</span>
               </label>
               <NummerEingabe value={atypischEuro} onChange={setAtypischEuro} placeholder="0" einheit="€/Mo" />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Atypisch, individuell vom Jobcenter geprüft.</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Atypisch, individuell vom Jobcenter geprüft.</p>
             </div>
           </div>
         </div>
@@ -471,9 +471,9 @@ export default function BuergergeldRechner() {
           }`}>
             {ergebnis.bedarfGedeckt ? (
               <>
-                <p className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Kein {params.bezeichnung}-Anspruch</p>
-                <p className="text-2xl font-extrabold text-gray-500 dark:text-gray-400">0,00 €</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Kein {params.bezeichnung}-Anspruch</p>
+                <p className="text-2xl font-extrabold text-gray-600 dark:text-gray-400">0,00 €</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Ihr Einkommen deckt den Bedarf vollständig.
                 </p>
               </>
@@ -485,7 +485,7 @@ export default function BuergergeldRechner() {
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmt(ergebnis.gesamtAnspruch)} €
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">pro Monat</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">pro Monat</p>
               </>
             )}
           </div>
@@ -502,7 +502,7 @@ export default function BuergergeldRechner() {
                 <p className={`text-sm font-semibold ${
                   ergebnis.vermoegenOk
                     ? 'text-green-700 dark:text-green-400'
-                    : 'text-red-700 dark:text-red-400'
+                    : 'text-red-700 dark:text-red-300'
                 }`}>
                   {ergebnis.vermoegenOk
                     ? 'Vermögen liegt unter dem Freibetrag'
@@ -532,7 +532,7 @@ export default function BuergergeldRechner() {
                         </li>
                       ))}
                     </ul>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
                       Hinweis: Selbstgenutztes Hausgrundstück oder selbstgenutzte Eigentumswohnung bleiben
                       während der Karenzzeit (erstes Bezugsjahr, § 22 Abs. 1 Satz 2 SGB II) unabhängig
                       von der Größe vom Vermögen ausgenommen (§ 12 Abs. 1 Satz 3 SGB II n.F.).
@@ -551,7 +551,7 @@ export default function BuergergeldRechner() {
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               {/* Erwachsene */}
               <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Regelbedarf Erwachsene</p>
+                <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">Regelbedarf Erwachsene</p>
               </div>
               {ergebnis.aufschluesselungErwachsene.map((pos, i) => (
                 <div key={`e-${i}`} className="flex justify-between px-4 py-2.5 text-sm">
@@ -564,7 +564,7 @@ export default function BuergergeldRechner() {
               {ergebnis.aufschluesselungKinder.length > 0 && (
                 <>
                   <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
-                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Regelbedarf Kinder</p>
+                    <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">Regelbedarf Kinder</p>
                   </div>
                   {ergebnis.aufschluesselungKinder.map((pos, i) => (
                     <div key={`k-${i}`} className="flex justify-between px-4 py-2.5 text-sm">
@@ -579,7 +579,7 @@ export default function BuergergeldRechner() {
               {ergebnis.mehrbedarfe.gesamt > 0 && (
                 <>
                   <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
-                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Mehrbedarfe (§ 21 SGB II)</p>
+                    <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">Mehrbedarfe (§ 21 SGB II)</p>
                   </div>
                   {ergebnis.mehrbedarfe.schwangerschaft > 0 && (
                     <div className="flex justify-between px-4 py-2 text-sm">
@@ -622,7 +622,7 @@ export default function BuergergeldRechner() {
 
               {/* Unterkunft */}
               <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Kosten der Unterkunft</p>
+                <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">Kosten der Unterkunft</p>
               </div>
               <div className="flex justify-between px-4 py-2.5 text-sm">
                 {/* W183: vorher „Warmmiete + Heizkosten“ */}
@@ -640,7 +640,7 @@ export default function BuergergeldRechner() {
               {jugendlicherStatus !== 'none' && parseDeutscheZahl(einkommen) > 0 && (
                 <>
                   <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
-                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Einkommensanrechnung</p>
+                    <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">Einkommensanrechnung</p>
                   </div>
                   <div className="flex justify-between px-4 py-2.5 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">Monatliches Bruttoeinkommen</span>
@@ -653,7 +653,7 @@ export default function BuergergeldRechner() {
                         ? 'abzgl. Freibetrag § 11b Abs. 2 und 3 SGB II (regulär, ab 25)'
                         : 'abzgl. Freibetrag § 11b Abs. 2b und 3 SGB II'}
                     </span>
-                    <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.freibetragEinkommen)} €</span>
+                    <span className="font-medium text-red-700 dark:text-red-300">−{fmt(ergebnis.freibetragEinkommen)} €</span>
                   </div>
                   <div className="flex justify-between px-4 py-2.5 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">Anrechenbares Einkommen</span>
@@ -666,15 +666,15 @@ export default function BuergergeldRechner() {
               {jugendlicherStatus === 'none' && ergebnis.anrechenbareEinkommen > 0 && (
                 <>
                   <div className="px-4 py-2 bg-gray-50/50 dark:bg-gray-700/20">
-                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Einkommensanrechnung</p>
+                    <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">Einkommensanrechnung</p>
                   </div>
                   <div className="flex justify-between px-4 py-2.5 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">Freibetrag</span>
-                    <span className="font-medium text-green-600 dark:text-green-400">{fmt(ergebnis.freibetragEinkommen)} €</span>
+                    <span className="font-medium text-green-700 dark:text-green-400">{fmt(ergebnis.freibetragEinkommen)} €</span>
                   </div>
                   <div className="flex justify-between px-4 py-2.5 text-sm">
                     <span className="text-gray-600 dark:text-gray-400">Anrechenbares Einkommen</span>
-                    <span className="font-medium text-red-600 dark:text-red-400">−{fmt(ergebnis.anrechenbareEinkommen)} €</span>
+                    <span className="font-medium text-red-700 dark:text-red-300">−{fmt(ergebnis.anrechenbareEinkommen)} €</span>
                   </div>
                 </>
               )}

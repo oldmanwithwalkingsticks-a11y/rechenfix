@@ -113,7 +113,7 @@ export default function UeberstundenRechner() {
       {modus === 'berechnen' && (
         <div>
           <div className="mb-4">
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Vertragliche Wochenarbeitszeit</label>
+            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Vertragliche Wochenarbeitszeit</label>
             <NummerEingabe
               value={vertraglicheStunden}
               onChange={v => setVertraglicheStunden(clampInputValue(v, 0, 80))}
@@ -136,7 +136,7 @@ export default function UeberstundenRechner() {
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   eingabeArt === t.key
                     ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
                 }`}
               >
                 {t.label}
@@ -146,7 +146,7 @@ export default function UeberstundenRechner() {
 
           {eingabeArt === 'gesamt' ? (
             <div className="mb-4">
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Tatsächliche Wochenarbeitszeit</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tatsächliche Wochenarbeitszeit</label>
               <NummerEingabe
                 value={tatsaechlich}
                 onChange={v => setTatsaechlich(clampInputValue(v, 0, 120))}
@@ -173,7 +173,7 @@ export default function UeberstundenRechner() {
                   </div>
                 </div>
               ))}
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 Summe: <strong>{fmtZahl(tatsaechlicheStunden, 1)} Std.</strong>
               </p>
             </div>
@@ -181,7 +181,7 @@ export default function UeberstundenRechner() {
 
           {/* Zeitraum */}
           <div className="mb-6">
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Zeitraum</label>
+            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Zeitraum</label>
             <div className="flex gap-2">
               {([
                 { key: 'woche' as const, label: '1 Woche' },
@@ -194,7 +194,7 @@ export default function UeberstundenRechner() {
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     zeitraum === t.key
                       ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
                   }`}
                 >
                   {t.label}
@@ -213,7 +213,7 @@ export default function UeberstundenRechner() {
                   onBlur={e => setCustomWochen(clampInputValueOnBlur(e.target.value, 1, 52))}
                   className="input-field w-full pr-16"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs pointer-events-none">Wochen</span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-xs pointer-events-none">Wochen</span>
               </div>
             )}
           </div>
@@ -228,7 +228,7 @@ export default function UeberstundenRechner() {
               }`}>
                 <p className={`text-sm font-medium mb-1 ${
                   ergebnis1.istMinusstunden
-                    ? 'text-yellow-600 dark:text-yellow-400'
+                    ? 'text-yellow-800 dark:text-yellow-400'
                     : 'text-primary-600 dark:text-primary-400'
                 }`}>
                   {ergebnis1.istMinusstunden ? 'Minusstunden' : 'Überstunden'} {ergebnis1.zeitraumLabel}
@@ -244,19 +244,19 @@ export default function UeberstundenRechner() {
 
               <div className="grid grid-cols-3 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Woche</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Woche</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {ergebnis1.proWoche >= 0 ? '+' : ''}{fmtZahl(ergebnis1.proWoche, 1)} h
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Monat</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Monat</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {ergebnis1.proMonat >= 0 ? '+' : ''}{fmtZahl(ergebnis1.proMonat, 1)} h
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Jahr</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Jahr</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {ergebnis1.proJahr >= 0 ? '+' : ''}{fmtZahl(ergebnis1.proJahr, 1)} h
                   </p>
@@ -307,7 +307,7 @@ export default function UeberstundenRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label htmlFor="ueberstunden-anzahl" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Anzahl Überstunden</label>
+              <label htmlFor="ueberstunden-anzahl" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Anzahl Überstunden</label>
               <NummerEingabe
                 id="ueberstunden-anzahl"
                 value={ueberstunden}
@@ -317,7 +317,7 @@ export default function UeberstundenRechner() {
               />
             </div>
             <div>
-              <label htmlFor="ueberstunden-bruttogehalt" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bruttogehalt monatlich</label>
+              <label htmlFor="ueberstunden-bruttogehalt" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bruttogehalt monatlich</label>
               <NummerEingabe
                 id="ueberstunden-bruttogehalt"
                 value={bruttogehalt}
@@ -332,7 +332,7 @@ export default function UeberstundenRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div>
-              <label htmlFor="ueberstunden-monatsstunden" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Monatsstunden (vertraglich)</label>
+              <label htmlFor="ueberstunden-monatsstunden" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Monatsstunden (vertraglich)</label>
               <NummerEingabe
                 id="ueberstunden-monatsstunden"
                 value={monatsstunden}
@@ -343,7 +343,7 @@ export default function UeberstundenRechner() {
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Überstundenzuschlag</label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Überstundenzuschlag</label>
               <NummerEingabe
                 value={zuschlag}
                 onChange={v => setZuschlag(clampInputValue(v, 0, 200))}
@@ -357,7 +357,7 @@ export default function UeberstundenRechner() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
             <div>
-              <label htmlFor="ueberstunden-select-stkl" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Steuerklasse</label>
+              <label htmlFor="ueberstunden-select-stkl" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Steuerklasse</label>
               <select
                 id="ueberstunden-select-stkl"
                 value={steuerklasse}
@@ -372,7 +372,7 @@ export default function UeberstundenRechner() {
               </select>
             </div>
             <div>
-              <label htmlFor="ueberstunden-select-bl" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Bundesland</label>
+              <label htmlFor="ueberstunden-select-bl" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bundesland</label>
               <select
                 id="ueberstunden-select-bl"
                 value={bundesland}
@@ -385,7 +385,7 @@ export default function UeberstundenRechner() {
               </select>
             </div>
             <div>
-              <label htmlFor="ueberstunden-select-kst" className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Kirchensteuer</label>
+              <label htmlFor="ueberstunden-select-kst" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Kirchensteuer</label>
               <select
                 id="ueberstunden-select-kst"
                 value={kirchensteuer ? 'ja' : 'nein'}
@@ -406,20 +406,20 @@ export default function UeberstundenRechner() {
                 <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300">
                   {fmtEuro(ergebnis2.verguetungBrutto)}
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                   Geschätzt netto: ≈ {fmtEuro(ergebnis2.verguetungNetto)}
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Stundenlohn</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Stundenlohn</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {fmtEuro(ergebnis2.stundenlohn)}
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Überstundenlohn</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Überstundenlohn</p>
                   <p className="text-lg font-bold text-gray-800 dark:text-gray-100">
                     {fmtEuro(ergebnis2.ueberstundenlohn)}
                   </p>
@@ -435,10 +435,10 @@ export default function UeberstundenRechner() {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-700">
-                        <th className="px-4 py-2 text-left text-gray-500 dark:text-gray-400 font-medium">Zuschlag</th>
-                        <th className="px-4 py-2 text-right text-gray-500 dark:text-gray-400 font-medium">Stundenlohn</th>
-                        <th className="px-4 py-2 text-right text-gray-500 dark:text-gray-400 font-medium">Brutto</th>
-                        <th className="px-4 py-2 text-right text-gray-500 dark:text-gray-400 font-medium">≈ Netto</th>
+                        <th className="px-4 py-2 text-left text-gray-600 dark:text-gray-400 font-medium">Zuschlag</th>
+                        <th className="px-4 py-2 text-right text-gray-600 dark:text-gray-400 font-medium">Stundenlohn</th>
+                        <th className="px-4 py-2 text-right text-gray-600 dark:text-gray-400 font-medium">Brutto</th>
+                        <th className="px-4 py-2 text-right text-gray-600 dark:text-gray-400 font-medium">≈ Netto</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -461,7 +461,7 @@ export default function UeberstundenRechner() {
                 </div>
               </div>
 
-              <p className="text-xs text-gray-600 dark:text-gray-500 text-center">
+              <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
                 Die Nettoschätzung basiert auf der echten Lohnsteuer-Berechnung mit Steuerklasse, Bundesland und Kirchensteuer (Mehrbetrag gegenüber dem Bruttogehalt ohne Vergütung). KV-Zusatzbeitrag durchschnittlich 2026.
               </p>
 
@@ -475,7 +475,7 @@ export default function UeberstundenRechner() {
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-gray-600 dark:text-gray-500 mt-6 text-center">
+      <p className="text-xs text-gray-600 dark:text-gray-400 mt-6 text-center">
         Allgemeine Information. Überstundenregelungen hängen vom Arbeitsvertrag und Tarifvertrag ab.
       </p>
     </div>

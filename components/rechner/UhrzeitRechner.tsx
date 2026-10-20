@@ -220,7 +220,7 @@ export default function UhrzeitRechner() {
               {ZEITZONEN.map(z => <option key={z.id} value={z.id}>{zonenLabel(z)}{zonenOffsetText(z.tz)}</option>)}
             </select>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
             Sommer- und Winterzeit werden je Zone automatisch nach dem Datum berücksichtigt (IANA-Zeitzonendatenbank).
           </p>
         </div>

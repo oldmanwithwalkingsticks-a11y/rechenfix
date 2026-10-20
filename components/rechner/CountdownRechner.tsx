@@ -12,13 +12,13 @@ function Ziffer({ wert, label }: { wert: number; label: string }) {
       <span className="text-4xl sm:text-5xl font-extrabold tabular-nums text-primary-700 dark:text-primary-300">
         {String(wert).padStart(2, '0')}
       </span>
-      <span className="text-xs text-gray-500 dark:text-gray-400 mt-1 uppercase tracking-wider">{label}</span>
+      <span className="text-xs text-gray-600 dark:text-gray-400 mt-1 uppercase tracking-wider">{label}</span>
     </div>
   );
 }
 
 function Trenner() {
-  return <span className="text-3xl sm:text-4xl font-bold text-gray-300 dark:text-gray-600 mx-1">:</span>;
+  return <span className="text-3xl sm:text-4xl font-bold text-gray-300 dark:text-gray-400 mx-1">:</span>;
 }
 
 export default function CountdownRechner() {
@@ -126,11 +126,11 @@ export default function CountdownRechner() {
         <div className="space-y-5">
           {/* Event-Titel */}
           <div className="text-center">
-            <p className="text-gray-500 dark:text-gray-400 text-sm mb-1">Countdown bis</p>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">Countdown bis</p>
             <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">
               {eventIcon} {eventLabel}
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{datumFormatiert}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{datumFormatiert}</p>
           </div>
 
           {/* Live Countdown */}
@@ -149,26 +149,26 @@ export default function CountdownRechner() {
           {/* Detail-Kacheln */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="bg-white dark:bg-gray-600/50 rounded-xl p-4 text-center border border-gray-100 dark:border-gray-600">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Wochen</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Wochen</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.wochen.toLocaleString('de-DE')}</p>
             </div>
             <div className="bg-white dark:bg-gray-600/50 rounded-xl p-4 text-center border border-gray-100 dark:border-gray-600">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Tage</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Tage</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.tage.toLocaleString('de-DE')}</p>
             </div>
             <div className="bg-white dark:bg-gray-600/50 rounded-xl p-4 text-center border border-gray-100 dark:border-gray-600">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Stunden</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Stunden</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.gesamtStunden.toLocaleString('de-DE')}</p>
             </div>
             <div className="bg-white dark:bg-gray-600/50 rounded-xl p-4 text-center border border-gray-100 dark:border-gray-600">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Sekunden</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Sekunden</p>
               <p className="text-xl font-bold text-gray-800 dark:text-gray-100">{ergebnis.gesamtSekunden.toLocaleString('de-DE')}</p>
             </div>
           </div>
 
           {/* Fortschrittsbalken (Tage im Jahr) */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5">
-            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
+            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-2">
               <span>Heute</span>
               <span>{ergebnis.tage} Tage</span>
               <span>{eventLabel}</span>
@@ -202,7 +202,7 @@ export default function CountdownRechner() {
                     <span className="flex items-center gap-2">
                       <span>{e.icon}</span>
                       <span className="text-gray-800 dark:text-gray-200 font-medium">{e.label}</span>
-                      <span className="text-xs text-gray-600">{e.d.toLocaleDateString('de-DE', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">{e.d.toLocaleDateString('de-DE', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                     </span>
                     <span className="font-bold text-primary-600 dark:text-primary-400">{e.cd.tage} Tage</span>
                   </button>
@@ -235,7 +235,7 @@ export default function CountdownRechner() {
 
       {/* Kein Datum gewählt */}
       {istEigen && !eigenDatum && (
-        <div className="text-center py-8 text-gray-600 dark:text-gray-500 text-sm">
+        <div className="text-center py-8 text-gray-600 dark:text-gray-400 text-sm">
           Bitte wählen Sie ein Datum aus.
         </div>
       )}

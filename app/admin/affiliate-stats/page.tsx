@@ -491,7 +491,7 @@ export default function AffiliateStatsPage() {
   if (angemeldet === null) {
     return (
       <div className="max-w-md mx-auto px-4 py-16">
-        <p className="text-sm text-gray-500 dark:text-gray-400">Anmeldung wird geprüft …</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">Anmeldung wird geprüft …</p>
       </div>
     );
   }
@@ -501,7 +501,7 @@ export default function AffiliateStatsPage() {
     return (
       <div className="max-w-md mx-auto px-4 py-16">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Admin-Login</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
           Passwort erforderlich für Zugriff auf die Affiliate- &amp; Feedback-Statistiken.
         </p>
         <form onSubmit={handleLogin} className="space-y-4">
@@ -514,7 +514,7 @@ export default function AffiliateStatsPage() {
             className="w-full px-4 py-3 text-sm border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 min-h-[48px]"
           />
           {authFehler && (
-            <p className="text-sm text-red-600 dark:text-red-400">
+            <p className="text-sm text-red-700 dark:text-red-300">
               {gesperrt
                 ? 'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.'
                 : 'Passwort falsch. Bitte erneut versuchen.'}
@@ -540,7 +540,7 @@ export default function AffiliateStatsPage() {
         </h1>
         <button
           onClick={handleLogout}
-          className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 underline"
+          className="text-xs text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 underline"
         >
           Abmelden
         </button>
@@ -551,10 +551,10 @@ export default function AffiliateStatsPage() {
       </p>
 
       {ladeStatus === 'lade' && (
-        <div className="text-sm text-gray-500 dark:text-gray-400 mb-6">Daten werden geladen …</div>
+        <div className="text-sm text-gray-600 dark:text-gray-400 mb-6">Daten werden geladen …</div>
       )}
       {ladeStatus === 'fehler' && (
-        <div className="text-sm text-red-600 dark:text-red-400 mb-6">
+        <div className="text-sm text-red-700 dark:text-red-300 mb-6">
           Fehler beim Laden der Daten.
           <button onClick={() => ladeStats()} className="ml-2 underline">
             Erneut versuchen
@@ -581,20 +581,20 @@ export default function AffiliateStatsPage() {
       {/* Übersicht */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Affiliate-Klicks</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Affiliate-Klicks</p>
           <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{clicks.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Programme</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Programme</p>
           <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">{nachProgramm.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Feedback</p>
-          <p className="text-3xl font-bold text-green-600 dark:text-green-400">{feedbackGesamt.gesamt}</p>
-          <p className="text-xs text-gray-600 dark:text-gray-500">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Feedback</p>
+          <p className="text-3xl font-bold text-green-700 dark:text-green-400">{feedbackGesamt.gesamt}</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400">👍 {feedbackGesamt.ja} / 👎 {feedbackGesamt.nein}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Zufriedenheit</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Zufriedenheit</p>
           <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
             {feedbackGesamt.gesamt > 0 ? `${((feedbackGesamt.ja / feedbackGesamt.gesamt) * 100).toFixed(0)}%` : '—'}
           </p>
@@ -635,7 +635,7 @@ export default function AffiliateStatsPage() {
             className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               tab === t.key
                 ? 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 shadow-sm'
-                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
             }`}
           >
             {t.label}
@@ -647,14 +647,14 @@ export default function AffiliateStatsPage() {
       {tab === 'social' && (
         <div className="space-y-4">
           {socialStatus === 'lade' && (
-            <div className="text-center py-12 text-gray-600 dark:text-gray-500">Lade Social-Status…</div>
+            <div className="text-center py-12 text-gray-600 dark:text-gray-400">Lade Social-Status…</div>
           )}
           {socialStatus === 'fehler' && (
-            <div className="text-center py-12 text-red-600 dark:text-red-400">Social-Status konnte nicht geladen werden.</div>
+            <div className="text-center py-12 text-red-700 dark:text-red-300">Social-Status konnte nicht geladen werden.</div>
           )}
           {socialStatus === 'ok' && socialData && (
             <>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="text-sm text-gray-600 dark:text-gray-400">
                 Queue-Länge: <strong>{socialData.queueLaenge}</strong> · abgerufen {fmtDate(new Date(socialData.abgerufenAm).getTime())}
               </div>
               {socialData.plattformen.map((p) => (
@@ -664,7 +664,7 @@ export default function AffiliateStatsPage() {
                     p.platform === 'tiktok' && socialData.tiktokTakttagHeute === false ? (
                       <>
                         <p className="text-gray-700 dark:text-gray-300">Heute kein Takttag</p>
-                        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                           TikTok postet jeden zweiten Tag.
                           {socialData.tiktokNaechsterTakttag
                             ? ` Nächster Post am ${fmtTag(socialData.tiktokNaechsterTakttag)}.`
@@ -672,7 +672,7 @@ export default function AffiliateStatsPage() {
                         </p>
                       </>
                     ) : (
-                      <p className="text-gray-500 dark:text-gray-400">inaktiv</p>
+                      <p className="text-gray-600 dark:text-gray-400">inaktiv</p>
                     )
                   ) : (
                     <>
@@ -691,10 +691,10 @@ export default function AffiliateStatsPage() {
                         {p.naechsterSlug ? (
                           <span className="font-mono text-xs">{p.naechsterSlug}</span>
                         ) : (
-                          <span className="text-gray-500 dark:text-gray-400">Runde abgeschlossen — der nächste Lauf startet die neue Runde</span>
+                          <span className="text-gray-600 dark:text-gray-400">Runde abgeschlossen — der nächste Lauf startet die neue Runde</span>
                         )}
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                         Letzter Rundenwechsel:{' '}
                         {p.letzterRundenwechsel ? fmtDate(new Date(p.letzterRundenwechsel).getTime()) : 'noch keiner'}
                       </div>
@@ -709,14 +709,14 @@ export default function AffiliateStatsPage() {
 
       {/* Tab Content */}
       {tab !== 'social' && (clicks.length === 0 && feedbacks.length === 0 ? (
-        <div className="text-center py-12 text-gray-600 dark:text-gray-500">
+        <div className="text-center py-12 text-gray-600 dark:text-gray-400">
           Keine Daten für {getMonatLabel(monat)} vorhanden.
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
           {tab === 'programm' && (
             clicks.length === 0 ? (
-              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-400">Keine Affiliate-Klicks in diesem Monat.</div>
             ) : (
             <table className="w-full text-sm">
               <thead>
@@ -731,7 +731,7 @@ export default function AffiliateStatsPage() {
                   <tr key={r.programm} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                     <td className="px-4 py-3 font-medium text-gray-800 dark:text-gray-200">{r.programm}</td>
                     <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.count}</td>
-                    <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(r.letzter)}</td>
+                    <td className="px-4 py-3 text-right text-gray-600 dark:text-gray-400">{fmtDate(r.letzter)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -741,7 +741,7 @@ export default function AffiliateStatsPage() {
 
           {tab === 'rechner' && (
             clicks.length === 0 ? (
-              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-400">Keine Affiliate-Klicks in diesem Monat.</div>
             ) : (
             <table className="w-full text-sm">
               <thead>
@@ -758,7 +758,7 @@ export default function AffiliateStatsPage() {
                     <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
                     <td className="px-4 py-3 font-medium text-gray-600 dark:text-gray-400">{r.programm}</td>
                     <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.count}</td>
-                    <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(r.letzter)}</td>
+                    <td className="px-4 py-3 text-right text-gray-600 dark:text-gray-400">{fmtDate(r.letzter)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -768,7 +768,7 @@ export default function AffiliateStatsPage() {
 
           {tab === 'alle' && (
             clicks.length === 0 ? (
-              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine Affiliate-Klicks in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-400">Keine Affiliate-Klicks in diesem Monat.</div>
             ) : (
             <table className="w-full text-sm">
               <thead>
@@ -782,7 +782,7 @@ export default function AffiliateStatsPage() {
               <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                 {alleKlicks.map((c, i) => (
                   <tr key={`${c.t}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
-                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400 whitespace-nowrap">{fmtDate(c.t)}</td>
+                    <td className="px-4 py-3 text-gray-600 dark:text-gray-400 whitespace-nowrap">{fmtDate(c.t)}</td>
                     <td className="px-4 py-3 font-medium text-gray-800 dark:text-gray-200">{c.p}</td>
                     <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{c.c || '—'}</td>
                     <td className="px-4 py-3 text-gray-600 dark:text-gray-400 font-mono text-xs">{c.r}</td>
@@ -795,7 +795,7 @@ export default function AffiliateStatsPage() {
 
           {tab === 'feedback' && (
             feedbacks.length === 0 ? (
-              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine Feedback-Daten in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-400">Keine Feedback-Daten in diesem Monat.</div>
             ) : (
               <>
               <table className="w-full text-sm">
@@ -813,25 +813,25 @@ export default function AffiliateStatsPage() {
                   {feedbackStats.map(r => (
                     <tr key={r.rechner} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                       <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
-                      <td className="px-4 py-3 text-right tabular-nums text-green-600 dark:text-green-400">{r.ja}</td>
-                      <td className="px-4 py-3 text-right tabular-nums text-red-600 dark:text-red-400">{r.nein}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-green-700 dark:text-green-400">{r.ja}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-red-700 dark:text-red-300">{r.nein}</td>
                       <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.gesamt}</td>
                       <td className="px-4 py-3 text-right">
                         <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${
                           r.rate >= 80 ? 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400'
                             : r.rate >= 50 ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400'
-                            : 'bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400'
+                            : 'bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-300'
                         }`}>
                           {r.rate.toFixed(0)}%
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(r.letzter)}</td>
+                      <td className="px-4 py-3 text-right text-gray-600 dark:text-gray-400">{fmtDate(r.letzter)}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
               <div className="border-t border-gray-200 dark:border-gray-700 mt-2">
-                <p className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Gruende gesamt</p>
+                <p className="px-4 py-3 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Gruende gesamt</p>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
@@ -847,15 +847,15 @@ export default function AffiliateStatsPage() {
                       </tr>
                     ))}
                     <tr className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
-                      <td className="px-4 py-2 text-gray-500 dark:text-gray-400 italic">
+                      <td className="px-4 py-2 text-gray-600 dark:text-gray-400 italic">
                         ohne Grund
                         {gruendeGesamt.rohDifferenz < 0 && (
-                          <span className="ml-2 not-italic text-xs text-red-600 dark:text-red-400">
+                          <span className="ml-2 not-italic text-xs text-red-700 dark:text-red-300">
                             (Neins {feedbackGesamt.nein}, Gruende {gruendeGesamt.zeilen.reduce((a, b) => a + b.anzahl, 0)} — pruefen)
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-2 text-right tabular-nums text-gray-500 dark:text-gray-400">{gruendeGesamt.ohneGrund}</td>
+                      <td className="px-4 py-2 text-right tabular-nums text-gray-600 dark:text-gray-400">{gruendeGesamt.ohneGrund}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -863,7 +863,7 @@ export default function AffiliateStatsPage() {
 
               {gruendeJeRechner.length > 0 && (
                 <div className="border-t border-gray-200 dark:border-gray-700 mt-2">
-                  <p className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Gruende je Rechner</p>
+                  <p className="px-4 py-3 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Gruende je Rechner</p>
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
@@ -888,7 +888,7 @@ export default function AffiliateStatsPage() {
               )}
 
               <div className="border-t border-gray-200 dark:border-gray-700 mt-2">
-                <p className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Einzelne Feedbacks</p>
+                <p className="px-4 py-3 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-gray-700/30">Einzelne Feedbacks</p>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">
@@ -901,10 +901,10 @@ export default function AffiliateStatsPage() {
                   <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                     {[...bewertungen].sort((a, b) => b.t - a.t).map((f, i) => (
                       <tr key={`fb-${f.t}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
-                        <td className="px-4 py-2 text-gray-500 dark:text-gray-400 whitespace-nowrap">{fmtDate(f.t)}</td>
-                        <td className="px-4 py-2">{f.v === 'ja' ? <span className="text-green-600 dark:text-green-400">👍 Ja</span> : <span className="text-red-600 dark:text-red-400">👎 Nein</span>}</td>
+                        <td className="px-4 py-2 text-gray-600 dark:text-gray-400 whitespace-nowrap">{fmtDate(f.t)}</td>
+                        <td className="px-4 py-2">{f.v === 'ja' ? <span className="text-green-700 dark:text-green-400">👍 Ja</span> : <span className="text-red-700 dark:text-red-300">👎 Nein</span>}</td>
                         <td className="px-4 py-2 text-gray-800 dark:text-gray-200 font-mono text-xs">{f.r}</td>
-                        <td className="px-4 py-2 text-gray-500 dark:text-gray-400 text-xs whitespace-nowrap tabular-nums">
+                        <td className="px-4 py-2 text-gray-600 dark:text-gray-400 text-xs whitespace-nowrap tabular-nums">
                           {`${f.e ?? '—'} · ${f.s ?? '—'} · ${f.g ?? '—'}`}
                         </td>
                       </tr>
@@ -918,7 +918,7 @@ export default function AffiliateStatsPage() {
 
           {tab === 'pdf' && (
             pdfs.length === 0 ? (
-              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine PDF-Downloads in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-400">Keine PDF-Downloads in diesem Monat.</div>
             ) : (
             <>
               <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
@@ -937,7 +937,7 @@ export default function AffiliateStatsPage() {
                     <tr key={`${r.rechner}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                       <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
                       <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.count}</td>
-                      <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(r.letzter)}</td>
+                      <td className="px-4 py-3 text-right text-gray-600 dark:text-gray-400">{fmtDate(r.letzter)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -948,7 +948,7 @@ export default function AffiliateStatsPage() {
 
           {tab === 'ki' && (
             kiEreignisse.length === 0 ? (
-              <div className="text-center py-12 text-gray-600 dark:text-gray-500">Keine KI-Nutzung in diesem Monat.</div>
+              <div className="text-center py-12 text-gray-600 dark:text-gray-400">Keine KI-Nutzung in diesem Monat.</div>
             ) : (
             <>
               <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
@@ -969,7 +969,7 @@ export default function AffiliateStatsPage() {
                       <td className="px-4 py-3 text-gray-800 dark:text-gray-200">{k.label}</td>
                       <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{k.gesamt}</td>
                       <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{k.fehler}</td>
-                      <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(k.letzter)}</td>
+                      <td className="px-4 py-3 text-right text-gray-600 dark:text-gray-400">{fmtDate(k.letzter)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -977,7 +977,7 @@ export default function AffiliateStatsPage() {
 
               <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3 mt-8">Nach Rechner</h3>
               {nachKiRechner.length === 0 ? (
-                <div className="text-sm text-gray-600 dark:text-gray-500">Keine Aufrufe mit Rechnerbezug — der KI-Rechner gehört zu keinem einzelnen Rechner.</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Keine Aufrufe mit Rechnerbezug — der KI-Rechner gehört zu keinem einzelnen Rechner.</div>
               ) : (
               <table className="w-full text-sm">
                 <thead>
@@ -992,7 +992,7 @@ export default function AffiliateStatsPage() {
                     <tr key={`${r.rechner}-${i}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
                       <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-mono text-xs">{r.rechner}</td>
                       <td className="px-4 py-3 text-right tabular-nums text-gray-600 dark:text-gray-400">{r.count}</td>
-                      <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">{fmtDate(r.letzter)}</td>
+                      <td className="px-4 py-3 text-right text-gray-600 dark:text-gray-400">{fmtDate(r.letzter)}</td>
                     </tr>
                   ))}
                 </tbody>

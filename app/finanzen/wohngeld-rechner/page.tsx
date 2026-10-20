@@ -138,7 +138,7 @@ export default function WohngeldErklaerseite() {
             <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-3">
               Wohngeld 2026 — Anspruch, Mietstufen & Berechnung erklärt
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-8">
+            <p className="text-gray-600 dark:text-gray-400 mb-8">
               Was Wohngeld ist, wer Anspruch hat, wie sich die Höhe ergibt — kompakt erklärt mit
               den aktuellen Höchstbeträgen nach § 12 WoGG.
             </p>
@@ -276,7 +276,7 @@ export default function WohngeldErklaerseite() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-3">
                 Werte nach § 12 Abs. 1 WoGG in der Fassung der Wohngeld-Plus-Reform,
                 BGBl. 2024 I Nr. 314 (Dynamisierungsverordnung vom 21.10.2024, gültig seit
                 01.01.2025, unverändert 2026).
@@ -581,7 +581,7 @@ export default function WohngeldErklaerseite() {
                   Stadtentwicklung und Bauwesen.
                 </li>
               </ul>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-4">
                 {/* W187: vorher „die verbindliche Berechnung leistet der offizielle BMWSB-Wohngeldrechner“ */}
                 Diese Seite bietet eine allgemeine Erläuterung zum Wohngeld und ersetzt keine
                 Rechts- oder Sozialberatung. Maßgeblich für Ihren Anspruch ist der Bescheid Ihrer
@@ -609,7 +609,7 @@ export default function WohngeldErklaerseite() {
                     >
                       <span>{k.icon}</span>
                       <span>{k.name}</span>
-                      <span className="text-xs font-normal text-gray-600 ml-auto">{katRechner.length}</span>
+                      <span className="text-xs font-normal text-gray-600 dark:text-gray-400 ml-auto">{katRechner.length}</span>
                     </Link>
                     <ul className="space-y-0.5">
                       {katRechner.map(r => {

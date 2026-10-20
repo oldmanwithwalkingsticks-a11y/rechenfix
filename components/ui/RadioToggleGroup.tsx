@@ -36,7 +36,7 @@ export default function RadioToggleGroup({
   activeColor = 'primary',
 }: RadioToggleGroupProps) {
   const activeClasses = activeColor === 'accent'
-    ? 'bg-accent-500 text-white shadow-md'
+    ? 'bg-accent-700 text-white shadow-md' // W188: vorher accent-500 (weiße Schrift 2,1:1)
     : 'bg-primary-500 text-white shadow-md';
 
   const inactiveClasses = 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600';
@@ -74,7 +74,7 @@ export default function RadioToggleGroup({
               {opt.description ? (
                 <div className="text-left w-full">
                   <div className="font-semibold">{opt.label}</div>
-                  <div className={`text-xs mt-0.5 ${checked ? 'text-white/80' : 'text-gray-500 dark:text-gray-400'}`}>
+                  <div className={`text-xs mt-0.5 ${checked ? 'text-white' : 'text-gray-600 dark:text-gray-300'}`}>
                     {opt.description}
                   </div>
                 </div>

@@ -67,7 +67,7 @@ export default function HerzfrequenzZonenRechner() {
           Ruhepuls (optional — für Karvonen-Formel)
         </h2>
         <NummerEingabe value={ruhepuls} onChange={setRuhepuls} placeholder="65" einheit="bpm" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Morgens im Bett messen, vor dem Aufstehen. Trainierte: 50–60 bpm. Untrainierte: 70–80 bpm.
         </p>
       </div>
@@ -79,7 +79,7 @@ export default function HerzfrequenzZonenRechner() {
           Maximale Herzfrequenz (optional)
         </h2>
         <NummerEingabe value={hfmaxEigen} onChange={setHfmaxEigen} placeholder="z. B. 185" einheit="bpm" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Falls Sie Ihre HFmax aus einem Belastungstest kennen — sonst wird sie nach Formel berechnet.
         </p>
       </div>

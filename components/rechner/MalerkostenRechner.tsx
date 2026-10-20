@@ -96,15 +96,15 @@ export default function MalerkostenRechner() {
           {modus === 'raum' ? (
             <div className="grid grid-cols-3 gap-2">
               <div>
-                <label className="block text-[10px] text-gray-500 mb-1">Länge</label>
+                <label className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Länge</label>
                 <NummerEingabe value={laenge} onChange={setLaenge} einheit="m" />
               </div>
               <div>
-                <label className="block text-[10px] text-gray-500 mb-1">Breite</label>
+                <label className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Breite</label>
                 <NummerEingabe value={breite} onChange={setBreite} einheit="m" />
               </div>
               <div>
-                <label className="block text-[10px] text-gray-500 mb-1">Höhe</label>
+                <label className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
                 <NummerEingabe value={hoehe} onChange={setHoehe} einheit="m" />
               </div>
             </div>

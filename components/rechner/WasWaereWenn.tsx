@@ -189,7 +189,7 @@ export default function WasWaereWenn({ eingaben, ergebnis }: Props) {
                 <p className="text-sm text-red-700 dark:text-red-300">{fehler}</p>
                 <button
                   onClick={handleAbsenden}
-                  className="mt-1 text-sm text-red-600 dark:text-red-400 underline hover:no-underline"
+                  className="mt-1 text-sm text-red-700 dark:text-red-300 underline hover:no-underline"
                 >
                   Erneut versuchen
                 </button>
@@ -221,7 +221,7 @@ export default function WasWaereWenn({ eingaben, ergebnis }: Props) {
 
           {/* Frage */}
           <div className="px-5 pt-4 pb-2">
-            <p className="text-xs text-purple-500 dark:text-purple-400 font-medium mb-1">Ihre Frage:</p>
+            <p className="text-xs text-purple-700 dark:text-purple-400 font-medium mb-1">Ihre Frage:</p>
             <p className="text-sm text-gray-700 dark:text-gray-300 italic">&bdquo;{frage}&ldquo;</p>
           </div>
 

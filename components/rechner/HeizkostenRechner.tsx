@@ -79,15 +79,15 @@ export default function HeizkostenRechner() {
 
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro Monat</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro Monat</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.kostenMonat)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Pro m²/Jahr</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Pro m²/Jahr</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.kostenProQm)} €</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Verbrauch</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Verbrauch</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{ergebnis.verbrauchGesamt.toLocaleString('de-DE')} kWh</p>
             </div>
           </div>
@@ -121,9 +121,9 @@ export default function HeizkostenRechner() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-700">
-                    <th className="text-left px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Energieträger</th>
-                    <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">ct/kWh</th>
-                    <th className="text-right px-4 py-2.5 text-gray-500 dark:text-gray-400 font-medium">Kosten/Jahr</th>
+                    <th className="text-left px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Energieträger</th>
+                    <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">ct/kWh</th>
+                    <th className="text-right px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium">Kosten/Jahr</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">

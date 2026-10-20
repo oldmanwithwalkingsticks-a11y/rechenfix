@@ -73,7 +73,7 @@ export default function ReisWasserRechner() {
           Reismenge (trocken)
         </h2>
         <NummerEingabe value={menge} onChange={setMenge} placeholder="150" einheit="g" />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Faustregel: 60–75 g Trockenreis pro Person als Beilage, 100 g als Hauptgericht.
         </p>
       </div>
