@@ -1378,7 +1378,7 @@ export const kochenRechner: RechnerConfig[] = [
   },
   {
     slug: 'alkoholgehalt-rechner',
-    letzteAktualisierung: '2026-06-26',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Alkoholgehalt-Rechner',
     beschreibung: 'Alkoholgehalt von Cocktails berechnen und Restalkohol beim Kochen ermitteln — mit Kalorien und Standardgläsern.',
     kategorie: 'Kochen & Ernährung',
@@ -1403,7 +1403,8 @@ export const kochenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist ein Standardglas Alkohol?',
-        antwort: 'In Deutschland (und nach WHO-Definition) gilt: 1 Standardglas = 10 g reiner Alkohol. Das entspricht ca. 0,33 l Bier (5 %), 0,1 l Wein (12 %) oder 3 cl Schnaps (40 %). Andere Länder definieren es anders: USA = 14 g, UK = 8 g. Die DGE empfiehlt max. 1–2 Standardgläser täglich mit mehreren alkoholfreien Tagen/Woche.',
+        // W187: vorher „Die DGE empfiehlt max. 1–2 Standardgläser täglich …“ — überholt seit dem DGE-Positionspapier vom 15.08.2024
+        antwort: 'In Deutschland (und nach WHO-Definition) gilt: 1 Standardglas = 10 g reiner Alkohol. Das entspricht ca. 0,25 l Bier (5 %), 0,1 l Wein (12 %) oder 3 cl Schnaps (40 %). Andere Länder definieren es anders: USA = 14 g, UK = 8 g. Die DGE empfiehlt seit 2024, auf alkoholische Getränke zu verzichten; als risikoarm gelten höchstens 1–2 alkoholische Getränke pro Woche.',
       },
       {
         frage: 'Wie viel Restalkohol bleibt beim Flambieren?',
@@ -1432,7 +1433,8 @@ export const kochenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Mischgehalt und Standardglas berechnen',
-        html: `<p>Der Misch-Modus rechnet mit <strong>Volumenanteilen</strong>. Jede Zutat bringt reinen Alkohol mit: Volumen (ml) × Alkoholgehalt (% vol) ÷ 100. Ein halber Liter Bier mit 5 % liefert also 500 × 5 ÷ 100 = 25 ml reinen Alkohol. Der <strong>Mischgehalt</strong> der ganzen Mischung ergibt sich aus Σ Alkohol ÷ Σ Volumen × 100.</p><p>Aus den Millilitern werden über die <strong>Dichte 0,789 g/ml</strong> Gramm — Alkohol ist leichter als Wasser. Diese Umrechnung ist nötig, weil sowohl Kalorien als auch das Standardglas in Gramm definiert sind.</p><p>Ein <strong>Standardglas</strong> entspricht in Deutschland und nach WHO-Definition 10 g reinem Alkohol — etwa 0,33 l Bier, 0,1 l Wein oder 3 cl Schnaps. Die Einheit hilft, den eigenen Konsum einzuordnen; die DGE empfiehlt höchstens 1–2 Gläser pro Tag und mehrere alkoholfreie Tage je Woche.</p>`,
+        html: `<p>Der Misch-Modus rechnet mit <strong>Volumenanteilen</strong>. Jede Zutat bringt reinen Alkohol mit: Volumen (ml) × Alkoholgehalt (% vol) ÷ 100. Ein halber Liter Bier mit 5 % liefert also 500 × 5 ÷ 100 = 25 ml reinen Alkohol. Der <strong>Mischgehalt</strong> der ganzen Mischung ergibt sich aus Σ Alkohol ÷ Σ Volumen × 100.</p><p>Aus den Millilitern werden über die <strong>Dichte 0,789 g/ml</strong> Gramm — Alkohol ist leichter als Wasser. Diese Umrechnung ist nötig, weil sowohl Kalorien als auch das Standardglas in Gramm definiert sind.</p><p>Ein <strong>Standardglas</strong> entspricht in Deutschland und nach WHO-Definition 10 g reinem Alkohol — etwa 0,25 l Bier, 0,1 l Wein oder 3 cl Schnaps. Die Einheit hilft, den eigenen Konsum einzuordnen; die DGE empfiehlt seit 2024, auf alkoholische Getränke zu verzichten, und nennt höchstens 1–2 Getränke pro Woche als risikoarm.</p>`,
+        // W187: vorher „die DGE empfiehlt höchstens 1–2 Gläser pro Tag und mehrere alkoholfreie Tage je Woche“
       },
       {
         typ: 'beispielrechnung',
@@ -1513,12 +1515,12 @@ export const kochenRechner: RechnerConfig[] = [
         titel: 'Standardglas — international unterschiedlich',
         kopf: ['Land / Norm', 'Standardglas', 'Beispiel / Hinweis'],
         zeilen: [
-          ['Deutschland / WHO', '10 g', '0,33 l Bier / 0,1 l Wein / 3 cl Schnaps'],
+          ['Deutschland / WHO', '10 g', '0,25 l Bier / 0,1 l Wein / 3 cl Schnaps'], // W187: 0,33 l Bier (5 %) = 13 g
           ['USA', '14 g', 'höher angesetzt'],
           ['Großbritannien', '8 g', 'niedriger angesetzt'],
-          ['DGE-Empfehlung', 'max. 1–2 / Tag', 'plus mehrere alkoholfreie Tage/Woche'],
+          ['DGE-Empfehlung (2024)', 'Verzicht', 'risikoarm höchstens 1–2 Getränke / Woche'], // W187: vorher „max. 1–2 / Tag“, „plus mehrere alkoholfreie Tage/Woche“
         ],
-        fussnote: 'Das Standardglas ist eine Hilfsgröße zur Einordnung des Konsums, keine medizinische Grenze. Die Definitionen unterscheiden sich international. Die DGE rät zu Zurückhaltung; gesundheitlich gilt: je weniger, desto besser — eine völlig risikofreie Menge gibt es nicht.',
+        fussnote: 'Das Standardglas ist eine Hilfsgröße zur Einordnung des Konsums, keine medizinische Grenze. Die Definitionen unterscheiden sich international. Die DGE rät seit 2024 zum Verzicht; gesundheitlich gilt: je weniger, desto besser — eine völlig risikofreie Menge gibt es nicht.',
       },
       {
         typ: 'statistik',
@@ -1563,6 +1565,8 @@ export const kochenRechner: RechnerConfig[] = [
     quellen: [
       { titel: 'USDA Table of Nutrient Retention Factors, Release 6', hinweis: 'Haupt-Methodikquelle für Restalkohol nach Garzeit (40/35/25/10/5 %)' },
       { titel: 'Deutsche Gesellschaft für Ernährung (DGE)', hinweis: 'Standardglas 10 g reiner Alkohol, Konsumempfehlungen' },
+      // W187: Positionspapier 2024 als Beleg ergänzt
+      { titel: 'DGE — Positionspapier Alkohol, Pressemitteilung vom 15.08.2024', url: 'https://dkfz.de/fileadmin/user_upload/Krebspraevention/Download/pdf/Weitere_Publikationen/DGE_2024_PM_Positionspapier-Alkohol-final.pdf', hinweis: '„Die DGE empfiehlt daher, auf alkoholische Getränke zu verzichten.“ Risikoarm: 1 bis 2 alkoholische Getränke pro Woche; ersetzt den bisherigen Referenzwert.' },
       { titel: 'WHO — Definition des Standardglases', hinweis: '10 g reiner Alkohol; international abweichende Werte (USA 14 g, UK 8 g)' },
       { titel: 'Physikalische Konstanten Ethanol', hinweis: 'Dichte 0,789 g/ml, Brennwert 7,1 kcal/g' },
     ],
@@ -1931,7 +1935,8 @@ export const kochenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Wie viel Honig ersetzt 100 g Zucker?',
-        antwort: 'Für 100 g Zucker verwenden Sie ca. 75 g Honig (Faktor 0,75), da Honig etwas süßer ist. Da Honig Flüssigkeit enthält, reduzieren Sie die Flüssigkeit im Rezept um ca. 30 ml. Beim Backen: Ofen 10–15 °C kühler stellen, da Honig schneller bräunt.',
+        // W187: vorher „um ca. 30 ml“ (gehört zu 200 g Zucker); 75 g Honig × 0,2 = 15 ml
+        antwort: 'Für 100 g Zucker verwenden Sie ca. 75 g Honig (Faktor 0,75), da Honig etwas süßer ist. Da Honig Flüssigkeit enthält, reduzieren Sie die Flüssigkeit im Rezept um ca. 15 ml. Beim Backen: Ofen 10–15 °C kühler stellen, da Honig schneller bräunt.',
       },
       {
         frage: 'Kann ich Erythrit 1:1 wie Zucker verwenden?',

@@ -21,6 +21,11 @@
  *   - KiSt-Verteilung bei Splitting: Lib teilt ESt hälftig (vereinfacht);
  *     Realität: Bundesland-spezifische Aufteilungs-Mechanik
  *
+ * W187: Eingabe ist jetzt das zvE je Partner (vorher „Jahresbrutto“ mit Abzug von nur 1.230 € + 36 €,
+ * ohne Vorsorgeaufwendungen). Cluster B prüft, dass kein Pauschalen-Abzug mehr erfolgt; Cluster J rechnet
+ * Seitenbeispiel (zvE 60.000 € + 20.000 €) und Startwerte (55.000 € + 25.000 €) mit einem unabhängig
+ * implementierten § 32a-Tarif 2026 nach.
+ *
  * Ausführen: npx tsx scripts/verify-splitting.ts
  */
 
@@ -52,8 +57,9 @@ const calc = (params: {
   k1?: boolean; k2?: boolean;
   bl?: string; kfb?: number;
 }) => berechneSplitting({
-  jahresBruttoP1: params.p1 ?? 50000,
-  jahresBruttoP2: params.p2 ?? 50000,
+  // W187: vorher jahresBruttoP1/P2
+  zvEP1: params.p1 ?? 50000,
+  zvEP2: params.p2 ?? 50000,
   kirchensteuerP1: params.k1 ?? false,
   kirchensteuerP2: params.k2 ?? false,
   bundesland: params.bl ?? 'Nordrhein-Westfalen',
@@ -64,36 +70,31 @@ const calc = (params: {
 
 cases.push(
   { name: 'A-01 BUNDESLAENDER-Re-Export Länge = 16', actual: BUNDESLAENDER.length, expected: 16, tolerance: 0 },
-  { name: 'A-02 WK-Pauschale konsumiert (1.230 €)',  actual: WK_PAUSCHALE_AN_2026, expected: 1230, tolerance: 0 },
+  { name: 'A-02 WK-Pauschale SSOT (1.230 €, seit W187 nicht mehr abgezogen)', actual: WK_PAUSCHALE_AN_2026, expected: 1230, tolerance: 0 },
   { name: 'A-03 KIFB-Konsumption 9.756 € (2026)',     actual: KIFB_GESAMT_ZUSAMMEN_2026, expected: 9756, tolerance: 0 },
 );
 
-// === Cluster B: zvE-Berechnung mit Pauschalen § 9a + § 10c ===
+// === Cluster B: zvE-Eingabe ohne Pauschalen-Abzug (W187) ===
 //
 // Manuell:
-//   P1=50000, P2=50000, 0 Kifb:
-//     zveP1Vor = 50000 - 1230 - 36 = 48734
-//     zveP2Vor = 48734
-//     zveGesamt = 97468; zveHalbe = round(48734) = 48734
-//   P1=80000, P2=0:
-//     zveP1Vor = 80000 - 1266 = 78734
-//     zveP2Vor = pauschalenAbzug(0) = 0
-//     zveGesamt = 78734; zveHalbe = 39367
+//   P1=50000, P2=50000, 0 Kifb: zveP1 = 50.000, zveP2 = 50.000, zveGesamt = 100.000, zveHalbe = 50.000
+//   P1=80000, P2=0:             zveP1 = 80.000, zveP2 = 0, zveGesamt = 80.000, zveHalbe = 40.000
+// (vorher 48.734 / 97.468 bzw. 78.734 / 39.367 durch Abzug von 1.266 € je Partner)
 
 const b1 = calc({ p1: 50000, p2: 50000 });
 cases.push(
-  { name: 'B-01 P1=50k, P2=50k: zveP1 = 48.734', actual: b1!.zveP1, expected: 48734 },
-  { name: 'B-01: zveP2 = 48.734',                actual: b1!.zveP2, expected: 48734 },
-  { name: 'B-01: zveGesamt = 97.468',            actual: b1!.zveGesamt, expected: 97468 },
-  { name: 'B-01: zveHalbe = 48.734',             actual: b1!.zveHalbe, expected: 48734 },
+  { name: 'B-01 P1=50k, P2=50k: zveP1 = 50.000', actual: b1!.zveP1, expected: 50000 },
+  { name: 'B-01: zveP2 = 50.000',                actual: b1!.zveP2, expected: 50000 },
+  { name: 'B-01: zveGesamt = 100.000',           actual: b1!.zveGesamt, expected: 100000 },
+  { name: 'B-01: zveHalbe = 50.000',             actual: b1!.zveHalbe, expected: 50000 },
 );
 
 const b2 = calc({ p1: 80000, p2: 0 });
 cases.push(
-  { name: 'B-02 P1=80k, P2=0: zveP1 = 78.734',   actual: b2!.zveP1, expected: 78734 },
+  { name: 'B-02 P1=80k, P2=0: zveP1 = 80.000',   actual: b2!.zveP1, expected: 80000 },
   { name: 'B-02: zveP2 = 0',                     actual: b2!.zveP2, expected: 0 },
-  { name: 'B-02: zveGesamt = 78.734',            actual: b2!.zveGesamt, expected: 78734 },
-  { name: 'B-02: zveHalbe = 39.367',             actual: b2!.zveHalbe, expected: 39367 },
+  { name: 'B-02: zveGesamt = 80.000',            actual: b2!.zveGesamt, expected: 80000 },
+  { name: 'B-02: zveHalbe = 40.000',             actual: b2!.zveHalbe, expected: 40000 },
 );
 
 // === Cluster C: ESt-Cross-Computation gegen berechneEStGrund (L-36) ===
@@ -198,6 +199,24 @@ cases.push(
   { name: 'I-02 P2<0: null',                          actual: isNull(calc({ p1: 50000, p2: -100 })), expected: 1, tolerance: 0 },
   { name: 'I-03 beide=0: null',                       actual: isNull(calc({ p1: 0, p2: 0 })),         expected: 1, tolerance: 0 },
   { name: 'I-04 P1=0, P2>0: nicht null (Single-Earner P2)', actual: isNull(calc({ p1: 0, p2: 60000 })), expected: 0, tolerance: 0 },
+);
+
+// === Cluster J: Seitenbeispiel und Startwerte mit unabhängigem Tarif (W187) ===
+//
+// § 32a Abs. 1 EStG ab VZ 2026, Zone 3: (173,10 · z + 2.397) · z + 1.034,87, z = (zvE − 17.799) / 10.000
+//   ESt(60.000) = 14.233; ESt(20.000) = 1.570; ESt(40.000) = 7.209 → Einzel 15.803, Splitting 14.418, Vorteil 1.385
+//   ESt(55.000) = 12.347; ESt(25.000) = 2.850 → Einzel 15.197, Splitting 14.418, Vorteil 779
+// Alle ESt-Beträge unter der Soli-Freigrenze (20.350 € bzw. 40.700 €) → kein Soli.
+const estZone3 = (x: number) => { const z = (x - 17799) / 10000; return Math.floor((173.10 * z + 2397) * z + 1034.87); };
+const j1 = calc({ p1: 60000, p2: 20000 });
+const j2 = calc({ p1: 55000, p2: 25000 });
+cases.push(
+  { name: 'J-01 Seitenbeispiel 60k+20k: Einzel 15.803 €',   actual: j1!.gesamtEinzel,    expected: estZone3(60000) + estZone3(20000), tolerance: 0 },
+  { name: 'J-02 Seitenbeispiel: Splitting 14.418 €',         actual: j1!.gesamtSplitting, expected: 2 * estZone3(40000), tolerance: 0 },
+  { name: 'J-03 Seitenbeispiel: Vorteil 1.385 €',            actual: j1!.vorteilGesamt,   expected: 1385, tolerance: 0 },
+  { name: 'J-04 Startwerte 55k+25k: Einzel 15.197 €',        actual: j2!.gesamtEinzel,    expected: estZone3(55000) + estZone3(25000), tolerance: 0 },
+  { name: 'J-05 Startwerte: Splitting 14.418 €',             actual: j2!.gesamtSplitting, expected: 14418, tolerance: 0 },
+  { name: 'J-06 Startwerte: Vorteil 779 €',                  actual: j2!.vorteilGesamt,   expected: 779, tolerance: 0 },
 );
 
 // === Ausgabe ===

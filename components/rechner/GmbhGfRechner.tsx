@@ -165,7 +165,8 @@ export default function GmbhGfRechner() {
             value={beherrschend ? 'ja' : 'nein'}
             onChange={(v) => setBeherrschend(v === 'ja')}
           />
-          <p className="text-xs text-gray-500 mt-1">Beherrschend = &gt; 50 % Anteile oder Sperrminorität → sozialversicherungsfrei.</p>
+          {/* W187: vorher „&gt; 50 % Anteile oder Sperrminorität“; BSG 14.03.2018, B 12 KR 13/17 R: mindestens 50 % oder umfassende Sperrminorität */}
+          <p className="text-xs text-gray-500 mt-1">Beherrschend = mindestens 50 % der Anteile oder eine umfassende Sperrminorität (alle Gesellschafterbeschlüsse blockierbar) → sozialversicherungsfrei.</p>
         </div>
 
         <div>

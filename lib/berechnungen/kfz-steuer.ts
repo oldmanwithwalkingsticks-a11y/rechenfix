@@ -1,14 +1,23 @@
 import {
   berechneCO2Komponente,
+  berechneCO2KomponenteNr2b,
+  co2SchwelleNr2b,
   berechneElektroBefreiungsende,
   SOCKEL_PRO_100CCM,
 } from './kfz-steuer-parameter';
 
 export type Antriebsart = 'benzin' | 'diesel' | 'elektro' | 'hybrid';
-export type Zulassungszeitraum = 'vor-2009' | 'nach-2009';
+// W187: vorher 'vor-2009' | 'nach-2009'; „nach-2009“ rechnete auch Erstzulassungen 01.07.2009–31.12.2020
+// mit der Staffel ab 2021 (§ 9 Abs. 1 Nr. 2 Buchst. c) statt linear nach Buchst. b.
+export type Zulassungszeitraum = 'vor-2009' | '2009-2020' | 'ab-2021';
 
 export interface KfzSteuerEingabe {
   zulassung: Zulassungszeitraum;
+  /**
+   * W187: Jahr der Erstzulassung, nur für '2009-2020' (CO₂-Schwelle 120/110/95 g/km nach § 9 Abs. 1
+   * Nr. 2 Buchst. b KraftStG). Fehlt es, gilt die Schwelle ab 2014 (95 g/km).
+   */
+  erstzulassungsjahr?: number;
   antrieb: Antriebsart;
   hubraum: number;    // in ccm
   co2: number;        // g/km (WLTP)
@@ -25,6 +34,8 @@ export interface KfzSteuerErgebnis {
   monatsSteuer: number;
   sockelbetrag: number;
   co2Betrag: number;
+  /** W187: CO₂-Grenze, ab der die CO₂-Komponente greift (95 g/km ab 2021; 120/110/95 g/km bei 2009–2020). */
+  co2Schwelle?: number;
   befreit: boolean;
   /** ISO-Datum (YYYY-MM-DD) des Befreiungsendes, falls berechenbar. */
   befreitBis?: string;
@@ -36,7 +47,7 @@ export interface KfzSteuerErgebnis {
 }
 
 /**
- * Hubraum-Komponente nach § 9 Abs. 1 Nr. 2a/2b KraftStG.
+ * Hubraum-Komponente nach § 9 Abs. 1 Nr. 2 Buchst. b/c KraftStG (W187: vorher „Nr. 2a/2b“ zitiert).
  * „Angefangene 100 ccm" → Math.ceil.
  */
 function berechneSockelbetrag(hubraum: number, antrieb: Antriebsart): number {
@@ -122,10 +133,15 @@ export function berechneKfzSteuer(eingabe: KfzSteuerEingabe): KfzSteuerErgebnis 
     };
   }
 
-  // Nach 01.07.2009: Sockelbetrag + CO₂-Komponente nach § 9 Abs. 1 Nr. 2c
-  // (CO₂-Staffel aus SSOT `kfz-steuer-parameter.ts`).
+  // Ab 01.07.2009: Sockelbetrag + CO₂-Komponente (SSOT `kfz-steuer-parameter.ts`).
+  // W187: Erstzulassung 01.07.2009–31.12.2020 linear nach § 9 Abs. 1 Nr. 2 Buchst. b (2 € je g über
+  // 120/110/95 g/km), ab 01.01.2021 progressive Staffel nach Buchst. c. Vorher immer Buchst. c.
   const sockelbetrag = berechneSockelbetrag(hubraum, effektiverAntrieb);
-  const co2Betrag = berechneCO2Komponente(co2);
+  const jahr = eingabe.erstzulassungsjahr ?? 2014;
+  const co2Betrag = zulassung === '2009-2020'
+    ? berechneCO2KomponenteNr2b(co2, jahr)
+    : berechneCO2Komponente(co2);
+  const co2Schwelle = zulassung === '2009-2020' ? co2SchwelleNr2b(jahr) : 95;
   const jahresSteuer = Math.round((sockelbetrag + co2Betrag) * 100) / 100;
 
   return {
@@ -133,6 +149,7 @@ export function berechneKfzSteuer(eingabe: KfzSteuerEingabe): KfzSteuerErgebnis 
     monatsSteuer: Math.round((jahresSteuer / 12) * 100) / 100,
     sockelbetrag,
     co2Betrag,
+    co2Schwelle,
     befreit: false,
   };
 }

@@ -53,12 +53,15 @@ export function berechneSparplan(eingabe: SparplanEingabe): SparplanErgebnis | n
         zinsenJahr += zinsen;
       }
     } else {
-      // Jährlich: Sparraten monatlich einzahlen, Zinsen am Jahresende
-      for (let m = 1; m <= 12; m++) {
-        kapital += aktuelleRate;
-      }
-      const zinsen = kapital * (zinssatz / 100);
-      kapital += zinsen;
+      // Jährlich: Sparraten monatlich (vorschüssig) einzahlen, Zinsen am Jahresende.
+      // Unterjährig lineare Verzinsung: Die Rate von Monat m liegt (13 − m) Monate,
+      // Zinsen im Jahr = Kapital am Jahresanfang × i + Rate × i × (12 + 11 + … + 1) / 12.
+      // W187: vorher wurden alle 12 Monatsraten ein volles Jahr verzinst (als läge die
+      // Jahresrate am 1. Januar auf dem Konto; 100 €/5 %/10 J. = 15.848 € statt 15.502 €,
+      // damit mehr als bei monatlicher Gutschrift).
+      const i = zinssatz / 100;
+      const zinsen = kapital * i + aktuelleRate * i * 78 / 12;
+      kapital += aktuelleRate * 12 + zinsen;
       zinsenJahr = zinsen;
     }
 

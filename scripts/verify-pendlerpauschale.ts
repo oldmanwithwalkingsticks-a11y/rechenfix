@@ -16,6 +16,11 @@
  * Lib-Befund: § 101 EStG Mobilitätsprämie wird NICHT in der Lib modelliert
  * (nur im Erklärtext der Konfig erwähnt) → kein Test-Cluster dafür.
  *
+ * W187: steuerersparnis rechnet jetzt den Arbeitnehmer-Pauschbetrag an (§ 9a Satz 1 Nr. 1 Buchst. a EStG,
+ * https://www.gesetze-im-internet.de/estg/__9a.html: 1.230 €, „wenn nicht höhere Werbungskosten
+ * nachgewiesen werden“): Ersparnis = (max(1.230, P + W) − max(1.230, W)) × Satz. Die frühere Größe
+ * P × Satz heißt jetzt steuerersparnisObergrenze. Cluster B prüft die Obergrenze, Cluster F die Ersparnis.
+ *
  * Ausführen: npx tsx scripts/verify-pendlerpauschale.ts
  */
 
@@ -39,13 +44,14 @@ const cases: TestCase[] = [];
 // Helper für Null-Checks (L-33 Variant b)
 const isNull = (v: unknown): number => v === null ? 1 : 0;
 
-const calc = (km: number, tage: number, sat: number, ho = 0, awWoche = 5) =>
+const calc = (km: number, tage: number, sat: number, ho = 0, awWoche = 5, weitere = 0) =>
   berechnePendlerpauschale({
     entfernungKm: km,
     arbeitstageProJahr: tage,
     grenzsteuersatz: sat,
     homeofficeTageProWoche: ho,
     arbeitstageProWoche: awWoche,
+    weitereWerbungskosten: weitere,
   });
 
 // === Cluster A: Konstanten gegen StÄndG 2025 ===
@@ -58,7 +64,7 @@ cases.push(
 
 // === Cluster B: Entfernungspauschale (einheitlicher 0,38-Tarif) ===
 //
-// Manuell: pauschale = km × 0,38 × tage; ersparnis = pauschale × satz/100
+// Manuell: pauschale = km × 0,38 × tage; Obergrenze = pauschale × satz/100 (W187: vorher „ersparnis“)
 //   25 km × 0,38 × 220 = 2.090,00 €; bei 35 % → 731,50 €
 //   10 km × 0,38 × 220 =   836,00 €; bei 35 % → 292,60 €
 //   50 km × 0,38 × 200 = 3.800,00 €; bei 42 % → 1.596,00 €
@@ -68,37 +74,38 @@ cases.push(
 const b1 = calc(25, 220, 35);
 cases.push(
   { name: 'B-01 25 km, 220 Tage @ 35 %: pauschaleGesamt',  actual: b1!.pauschaleGesamt,  expected: 2090.00 },
-  { name: 'B-01 25 km, 220 Tage @ 35 %: steuerersparnis',  actual: b1!.steuerersparnis,  expected: 731.50 },
+  { name: 'B-01 25 km, 220 Tage @ 35 %: steuerersparnisObergrenze', actual: b1!.steuerersparnisObergrenze,  expected: 731.50 },
 );
 
 const b2 = calc(10, 220, 35);
 cases.push(
   { name: 'B-02 10 km, 220 Tage @ 35 %: pauschaleGesamt',  actual: b2!.pauschaleGesamt,  expected: 836.00 },
-  { name: 'B-02 10 km, 220 Tage @ 35 %: steuerersparnis',  actual: b2!.steuerersparnis,  expected: 292.60 },
+  { name: 'B-02 10 km, 220 Tage @ 35 %: Obergrenze ohne Pauschbetrag',  actual: b2!.steuerersparnisObergrenze,  expected: 292.60 },
 );
 
 const b3 = calc(50, 200, 42);
 cases.push(
   { name: 'B-03 50 km, 200 Tage @ 42 %: pauschaleGesamt',  actual: b3!.pauschaleGesamt,  expected: 3800.00 },
-  { name: 'B-03 50 km, 200 Tage @ 42 %: steuerersparnis',  actual: b3!.steuerersparnis,  expected: 1596.00 },
+  { name: 'B-03 50 km, 200 Tage @ 42 %: Obergrenze ohne Pauschbetrag',  actual: b3!.steuerersparnisObergrenze,  expected: 1596.00 },
 );
 
 const b4 = calc(100, 230, 45);
 cases.push(
   { name: 'B-04 100 km, 230 Tage @ 45 %: pauschaleGesamt', actual: b4!.pauschaleGesamt,  expected: 8740.00 },
-  { name: 'B-04 100 km, 230 Tage @ 45 %: steuerersparnis', actual: b4!.steuerersparnis,  expected: 3933.00 },
+  { name: 'B-04 100 km, 230 Tage @ 45 %: Obergrenze ohne Pauschbetrag', actual: b4!.steuerersparnisObergrenze,  expected: 3933.00 },
 );
 
 const b5 = calc(1, 200, 14);
 cases.push(
   { name: 'B-05 1 km, 200 Tage @ 14 %: pauschaleGesamt',   actual: b5!.pauschaleGesamt, expected: 76.00 },
-  { name: 'B-05 1 km, 200 Tage @ 14 %: steuerersparnis',   actual: b5!.steuerersparnis, expected: 10.64 },
+  { name: 'B-05 1 km, 200 Tage @ 14 %: Obergrenze ohne Pauschbetrag',   actual: b5!.steuerersparnisObergrenze, expected: 10.64 },
 );
 
 // monatlicheErsparnis = steuerersparnis / 12
-//   B-01: 731,50 / 12 = 60,9583... ≈ 60.958333
+//   B-01 (W187): 301,00 / 12 = 25,0833...
 cases.push(
-  { name: 'B-06 monatlicheErsparnis = ersparnis/12 (B-01)', actual: b1!.monatlicheErsparnis, expected: 731.50 / 12 },
+  // W187: monatlicheErsparnis = steuerersparnis (über Pauschbetrag) / 12 = (2.090 − 1.230) × 0,35 / 12 = 301 / 12
+  { name: 'B-06 monatlicheErsparnis = ersparnis/12 (B-01)', actual: b1!.monatlicheErsparnis, expected: 301 / 12 },
 );
 
 // === Cluster C: Homeoffice-Pauschale § 4 Abs. 5 Nr. 6c EStG ===
@@ -181,6 +188,35 @@ cases.push(
   { name: 'E-05 grenzsteuersatz = 0 → null',       actual: isNull(calc(25, 220, 0)),      expected: 1 },
   { name: 'E-06 grenzsteuersatz negativ → null',   actual: isNull(calc(25, 220, -5)),     expected: 1 },
   { name: 'E-07 Mindest-Input → nicht null',       actual: isNull(calc(1, 1, 14)),        expected: 0 },
+);
+
+// === Cluster F: Steuerersparnis über dem Arbeitnehmer-Pauschbetrag (W187) ===
+//
+// Ersparnis = (max(1.230, P + W) − max(1.230, W)) × Satz, P = Pauschale, W = weitere Werbungskosten
+//   Startwerte 25 km, 220 T, 35 %, W = 0:   (2.090 − 1.230) × 0,35 = 860 × 0,35 = 301,00 €
+//   15 km, 220 T, 35 %, W = 0:             (1.254 − 1.230) × 0,35 = 24 × 0,35 = 8,40 €
+//   10 km, 220 T, 35 %, W = 0:             836 < 1.230 → 0 €
+//   25 km, 220 T, 35 %, W = 500:           (2.590 − 1.230) × 0,35 = 1.360 × 0,35 = 476,00 €
+//   25 km, 220 T, 35 %, W = 1.230:         (3.320 − 1.230) × 0,35 = 2.090 × 0,35 = 731,50 € (= Obergrenze)
+//   25 km, 220 T, 35 %, W = 2.000:         (4.090 − 2.000) × 0,35 = 731,50 €
+//   Seite: 20 km, 220 T, 30 %, W = 0:      (1.672 − 1.230) × 0,30 = 442 × 0,30 = 132,60 €
+const f1 = calc(25, 220, 35);
+const f2 = calc(15, 220, 35);
+const f3 = calc(10, 220, 35);
+const f4 = calc(25, 220, 35, 0, 5, 500);
+const f5 = calc(25, 220, 35, 0, 5, 1230);
+const f6 = calc(25, 220, 35, 0, 5, 2000);
+const f7 = calc(20, 220, 30);
+cases.push(
+  { name: 'F-01 Startwerte: wirksamer Betrag 860 €',          actual: f1!.wirksamerBetrag, expected: 860 },
+  { name: 'F-01 Startwerte: Ersparnis 301,00 €',              actual: f1!.steuerersparnis, expected: 301.00 },
+  { name: 'F-01 Startwerte: Obergrenze 731,50 € bleibt',      actual: f1!.steuerersparnisObergrenze, expected: 731.50 },
+  { name: 'F-02 15 km: nur 24 € über Pauschbetrag → 8,40 €',  actual: f2!.steuerersparnis, expected: 8.40 },
+  { name: 'F-03 10 km: unter Pauschbetrag → 0 €',             actual: f3!.steuerersparnis, expected: 0 },
+  { name: 'F-04 weitere WK 500 € → 476,00 €',                 actual: f4!.steuerersparnis, expected: 476.00 },
+  { name: 'F-05 weitere WK = 1.230 € → volle 731,50 €',       actual: f5!.steuerersparnis, expected: 731.50 },
+  { name: 'F-06 weitere WK 2.000 € → volle 731,50 €',         actual: f6!.steuerersparnis, expected: 731.50 },
+  { name: 'F-07 Seitenbeispiel 20 km @ 30 % → 132,60 €',      actual: f7!.steuerersparnis, expected: 132.60 },
 );
 
 // === Ausgabe ===

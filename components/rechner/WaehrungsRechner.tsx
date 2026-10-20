@@ -8,39 +8,42 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { AffiliateBox } from '@/components/AffiliateBox';
 
-// Statische Referenzkurse (Basis EUR = 1). Stand: 27.06.2026
-const KURS_DATUM = '27.06.2026';
+// Statische Referenzkurse (Basis EUR = 1): EZB-Euro-Referenzkurse vom 19.10.2026 (Montag),
+// abgerufen über die Wechselkursstatistik der Deutschen Bundesbank („Euro-Referenzkurse der EZB“,
+// Tageskurse, Stand 19.10.2026). AED hat keinen EZB-Kurs: abgeleitet aus dem USD-Kurs × 3,6725
+// (feste Bindung des Dirham an den US-Dollar).
+// W187: vorher Stand „27.06.2026“ (ein Samstag, kein Fixing-Tag) mit teils abweichenden Kursen,
+// BGN (Bulgarien hat seit 01.01.2026 den Euro) und RUB (EZB veröffentlicht seit 03/2022 keinen Kurs) gestrichen.
+const KURS_DATUM = '19.10.2026';
 
 const WAEHRUNGEN: { code: string; name: string; symbol: string; kurs: number }[] = [
   { code: 'EUR', name: 'Euro', symbol: '€', kurs: 1.0 },
-  { code: 'USD', name: 'US-Dollar', symbol: '$', kurs: 1.135 },
-  { code: 'GBP', name: 'Britisches Pfund', symbol: '£', kurs: 0.862 },
-  { code: 'CHF', name: 'Schweizer Franken', symbol: 'Fr.', kurs: 0.915 },
-  { code: 'JPY', name: 'Japanischer Yen', symbol: '¥', kurs: 183.5 },
-  { code: 'PLN', name: 'Polnischer Zloty', symbol: 'zł', kurs: 4.24 },
-  { code: 'CZK', name: 'Tschechische Krone', symbol: 'Kč', kurs: 24.25 },
-  { code: 'TRY', name: 'Türkische Lira', symbol: '₺', kurs: 53.3 },
-  { code: 'SEK', name: 'Schwedische Krone', symbol: 'kr', kurs: 10.85 },
-  { code: 'NOK', name: 'Norwegische Krone', symbol: 'kr', kurs: 10.85 },
-  { code: 'DKK', name: 'Dänische Krone', symbol: 'kr', kurs: 7.46 },
-  { code: 'HUF', name: 'Ungarischer Forint', symbol: 'Ft', kurs: 356.0 },
-  { code: 'RON', name: 'Rumänischer Leu', symbol: 'lei', kurs: 5.22 },
-  { code: 'BGN', name: 'Bulgarischer Lew', symbol: 'лв', kurs: 1.96 },
-  { code: 'AUD', name: 'Australischer Dollar', symbol: 'A$', kurs: 1.63 },
-  { code: 'CAD', name: 'Kanadischer Dollar', symbol: 'C$', kurs: 1.61 },
-  { code: 'NZD', name: 'Neuseeland-Dollar', symbol: 'NZ$', kurs: 1.97 },
-  { code: 'CNY', name: 'Chinesischer Yuan', symbol: '¥', kurs: 8.00 },
-  { code: 'INR', name: 'Indische Rupie', symbol: '₹', kurs: 111.1 },
-  { code: 'BRL', name: 'Brasilianischer Real', symbol: 'R$', kurs: 5.78 },
-  { code: 'THB', name: 'Thailändischer Baht', symbol: '฿', kurs: 37.9 },
-  { code: 'KRW', name: 'Südkoreanischer Won', symbol: '₩', kurs: 1725.0 },
-  { code: 'ZAR', name: 'Südafrikanischer Rand', symbol: 'R', kurs: 20.2 },
-  { code: 'MXN', name: 'Mexikanischer Peso', symbol: '$', kurs: 21.3 },
-  { code: 'SGD', name: 'Singapur-Dollar', symbol: 'S$', kurs: 1.44 },
-  { code: 'HKD', name: 'Hongkong-Dollar', symbol: 'HK$', kurs: 8.85 },
-  { code: 'ILS', name: 'Israelischer Schekel', symbol: '₪', kurs: 3.90 },
-  { code: 'AED', name: 'UAE Dirham', symbol: 'د.إ', kurs: 4.17 },
-  { code: 'RUB', name: 'Russischer Rubel', symbol: '₽', kurs: 98.0 },
+  { code: 'USD', name: 'US-Dollar', symbol: '$', kurs: 1.1225 },
+  { code: 'GBP', name: 'Britisches Pfund', symbol: '£', kurs: 0.84205 },
+  { code: 'CHF', name: 'Schweizer Franken', symbol: 'Fr.', kurs: 0.9261 },
+  { code: 'JPY', name: 'Japanischer Yen', symbol: '¥', kurs: 177.63 },
+  { code: 'PLN', name: 'Polnischer Zloty', symbol: 'zł', kurs: 4.3713 },
+  { code: 'CZK', name: 'Tschechische Krone', symbol: 'Kč', kurs: 24.343 },
+  { code: 'TRY', name: 'Türkische Lira', symbol: '₺', kurs: 55.6227 },
+  { code: 'SEK', name: 'Schwedische Krone', symbol: 'kr', kurs: 11.104 },
+  { code: 'NOK', name: 'Norwegische Krone', symbol: 'kr', kurs: 10.5555 },
+  { code: 'DKK', name: 'Dänische Krone', symbol: 'kr', kurs: 7.4747 },
+  { code: 'HUF', name: 'Ungarischer Forint', symbol: 'Ft', kurs: 363.4 },
+  { code: 'RON', name: 'Rumänischer Leu', symbol: 'lei', kurs: 5.3264 },
+  { code: 'AUD', name: 'Australischer Dollar', symbol: 'A$', kurs: 1.6068 },
+  { code: 'CAD', name: 'Kanadischer Dollar', symbol: 'C$', kurs: 1.5798 },
+  { code: 'NZD', name: 'Neuseeland-Dollar', symbol: 'NZ$', kurs: 1.9792 },
+  { code: 'CNY', name: 'Chinesischer Yuan', symbol: '¥', kurs: 7.4991 },
+  { code: 'INR', name: 'Indische Rupie', symbol: '₹', kurs: 106.559 },
+  { code: 'BRL', name: 'Brasilianischer Real', symbol: 'R$', kurs: 5.6633 },
+  { code: 'THB', name: 'Thailändischer Baht', symbol: '฿', kurs: 37.665 },
+  { code: 'KRW', name: 'Südkoreanischer Won', symbol: '₩', kurs: 1492.35 },
+  { code: 'ZAR', name: 'Südafrikanischer Rand', symbol: 'R', kurs: 18.4469 },
+  { code: 'MXN', name: 'Mexikanischer Peso', symbol: '$', kurs: 20.7481 },
+  { code: 'SGD', name: 'Singapur-Dollar', symbol: 'S$', kurs: 1.4357 },
+  { code: 'HKD', name: 'Hongkong-Dollar', symbol: 'HK$', kurs: 8.8097 },
+  { code: 'ILS', name: 'Israelischer Schekel', symbol: '₪', kurs: 3.489 },
+  { code: 'AED', name: 'UAE Dirham', symbol: 'د.إ', kurs: 4.1224 },
 ];
 
 function umrechnen(betrag: number, von: string, nach: string): number {
@@ -129,7 +132,7 @@ export default function WaehrungsRechner() {
       </div>
 
       <p className="text-xs text-gray-500 mb-6">
-        ⚠️ Kurse vom <strong>{KURS_DATUM}</strong> — statische Referenzkurse, <strong>keine Echtzeitkurse</strong>. Für aktuelle Kurse und Transaktionen nutzen Sie Ihre Bank oder einen Wechselkurs-Dienst.
+        ⚠️ Kurse vom <strong>{KURS_DATUM}</strong> — statische EZB-Referenzkurse, <strong>keine Echtzeitkurse</strong>. Für aktuelle Kurse und Transaktionen nutzen Sie Ihre Bank oder einen Wechselkurs-Dienst.
       </p>
 
       <CrossLink href="/mathe/einheiten-umrechner" emoji="📐" text="Einheiten umrechnen" />

@@ -57,7 +57,8 @@ export default function WhrRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Taillenumfang</label>
             <NummerEingabe value={taillenumfang} onChange={setTaillenumfang} einheit="cm" placeholder="78" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Auf Nabelhöhe messen</p>
+            {/* W187: vorher „Auf Nabelhöhe messen“; WHO-Protokoll: Mitte zwischen unterem Rippenbogen und Beckenkamm */}
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Mitte zwischen unterem Rippenbogen und Beckenkamm messen</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hüftumfang</label>

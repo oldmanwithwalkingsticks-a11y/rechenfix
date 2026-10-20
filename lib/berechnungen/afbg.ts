@@ -4,8 +4,13 @@
  * Zwei Förderkomponenten:
  *  - Maßnahmebeitrag (§ 12 AFBG): Lehrgangs-/Prüfungsgebühren + optional
  *    Meisterstück-Materialkosten. Je 50 % Zuschuss + 50 % KfW-Darlehen.
- *  - Unterhaltsbeitrag (§ 10 AFBG): nur Vollzeit, 100 % Vollzuschuss
+ *  - Unterhaltsbeitrag (§ 10 Abs. 2 AFBG): nur Vollzeit, 100 % Vollzuschuss
  *    seit 29. BAföG-ÄndG (23.07.2024).
+ *  - Kinderbetreuungszuschlag (§ 10 Abs. 3 AFBG): 150 € je Kind unter 14 oder
+ *    mit Behinderung, nur für Alleinerziehende, bei Voll- UND Teilzeit, als Zuschuss
+ *    und ohne Einkommensanrechnung (§ 12 Abs. 2, § 17 Abs. 1 AFBG nur für § 10 Abs. 2).
+ *    W187: vorher Teil des Unterhaltsbedarfs (nur Vollzeit, auch mit Ehegatten,
+ *    Einkommen angerechnet, ohne behinderte Kinder ab 14).
  *
  * Rückzahlungs-Szenarien:
  *  - ohne Erlass: volles Lehrgangsdarlehen
@@ -29,6 +34,8 @@ export interface AfbgKind {
   alter: number;
   /** Kindergeldanspruch → entscheidet über Kinder-Freibetrag + Kinder-Zuschlag. */
   anspruchAufKindergeld: boolean;
+  /** Kind mit Behinderung: Kinderbetreuungszuschlag ohne Altersgrenze (§ 10 Abs. 3 AFBG). */
+  behindert?: boolean;
 }
 
 export interface AfbgEhegatte {
@@ -53,6 +60,11 @@ export interface AfbgEingabe {
   vermoegen?: number;
   ehegatte?: AfbgEhegatte;
   kinder?: AfbgKind[];
+  /**
+   * Alleinerziehend im Sinne von § 10 Abs. 3 AFBG (Voraussetzung für den
+   * Kinderbetreuungszuschlag). Default: kein Ehegatte/Lebenspartner angegeben.
+   */
+  alleinerziehend?: boolean;
 
   // Rückzahlungs-Szenarien
   /** § 13b Abs. 1: Default true (Regelfall: bestandene Prüfung). */
@@ -65,7 +77,15 @@ export interface AfbgUnterhaltAufschluesselung {
   grundbedarf: number;
   ehegattenZuschlag: number;
   kinderZuschlag: number;
-  kinderbetreuungZuschlag: number;
+}
+
+/** § 10 Abs. 3 AFBG: Kinderbetreuungszuschlag, unabhängig vom Unterhaltsbeitrag. */
+export interface AfbgKinderbetreuung {
+  /** Monatlicher Zuschlag (Zuschuss, ohne Einkommensanrechnung) */
+  zuschlagMonat: number;
+  /** Anzahl Kinder unter 14 oder mit Behinderung */
+  anzahlKinder: number;
+  alleinerziehend: boolean;
 }
 
 export interface AfbgAnrechnungAufschluesselung {
@@ -107,6 +127,8 @@ export interface AfbgErgebnis {
     anrechnungAufschluesselung: AfbgAnrechnungAufschluesselung;
     auszahlung: number;                  // 100 % Vollzuschuss
   };
+
+  kinderbetreuung: AfbgKinderbetreuung;
 
   rueckzahlung: {
     darlehenOhneErlass: number;
@@ -216,21 +238,30 @@ export function berechneAfbg(
 
   const kinder = eingabe.kinder ?? [];
   const kinderKg = kinder.filter(k => k.anspruchAufKindergeld);
-  const kinderUnter14 = kinder.filter(k => k.alter < params.unterhalt.kinderbetreuungAltersgrenze);
 
   const bedarfAufschluesselung: AfbgUnterhaltAufschluesselung = {
     grundbedarf: anwendbar ? params.unterhalt.alleinstehendVZ : 0,
     ehegattenZuschlag: anwendbar && eingabe.ehegatte?.vorhanden ? params.unterhalt.ehegattenZuschlag : 0,
     kinderZuschlag: anwendbar ? kinderKg.length * params.unterhalt.kinderZuschlag : 0,
-    kinderbetreuungZuschlag: anwendbar ? kinderUnter14.length * params.unterhalt.kinderbetreuungZuschlag : 0,
   };
 
   const bedarf = rund2(
     bedarfAufschluesselung.grundbedarf +
     bedarfAufschluesselung.ehegattenZuschlag +
-    bedarfAufschluesselung.kinderZuschlag +
-    bedarfAufschluesselung.kinderbetreuungZuschlag,
+    bedarfAufschluesselung.kinderZuschlag,
   );
+
+  // === 2a. Kinderbetreuungszuschlag (§ 10 Abs. 3 AFBG) ===
+  // W187: vorher im Unterhaltsbedarf (nur Vollzeit, für jedes Kind unter 14, auch mit Ehegatten,
+  // mit Einkommensanrechnung). Jetzt: nur Alleinerziehende, Voll- und Teilzeit, Kinder unter 14
+  // oder mit Behinderung, voller Zuschuss ohne Anrechnung.
+  const alleinerziehend = eingabe.alleinerziehend ?? !eingabe.ehegatte?.vorhanden;
+  const betreuungsKinder = kinder.filter(k => k.alter < params.unterhalt.kinderbetreuungAltersgrenze || k.behindert === true);
+  const kinderbetreuung: AfbgKinderbetreuung = {
+    zuschlagMonat: alleinerziehend ? betreuungsKinder.length * params.unterhalt.kinderbetreuungZuschlag : 0,
+    anzahlKinder: betreuungsKinder.length,
+    alleinerziehend,
+  };
 
   const leereAnrechnung: AfbgAnrechnungAufschluesselung = {
     eigenBrutto: 0, ehegattenBrutto: 0, gesamtBrutto: 0,
@@ -279,6 +310,7 @@ export function berechneAfbg(
       anrechnungAufschluesselung,
       auszahlung,
     },
+    kinderbetreuung,
     rueckzahlung: {
       darlehenOhneErlass: darlehenLehrgang,
       bestehensErlass,

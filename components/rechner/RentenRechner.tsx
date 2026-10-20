@@ -25,7 +25,8 @@ export default function RentenRechner() {
   const [monatsbrutto, setMonatsbrutto] = useState('3500');
   const [beitragsjahre, setBeitragsjahre] = useState('15');
   const [rentenpunkte, setRentenpunkte] = useState('');
-  const [gehaltssteigerung, setGehaltssteigerung] = useState('1,5');
+  // W187: Startwert 0 statt 1,5 — die Steigerung zählt relativ zum Durchschnittsentgelt (siehe lib/berechnungen/rente.ts)
+  const [gehaltssteigerung, setGehaltssteigerung] = useState('0');
   const [gewuenschtesNetto, setGewuenschtesNetto] = useState('2000');
 
   const nAlter = parseDeutscheZahl(alter);
@@ -98,8 +99,11 @@ export default function RentenRechner() {
           </p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erwartete Gehaltssteigerung pro Jahr</label>
-          <NummerEingabe value={gehaltssteigerung} onChange={setGehaltssteigerung} placeholder="z.B. 1,5" einheit="%" />
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gehaltsentwicklung über dem Lohndurchschnitt pro Jahr</label>
+          <NummerEingabe value={gehaltssteigerung} onChange={setGehaltssteigerung} placeholder="z.B. 1" einheit="%" />
+          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            0 % = Ihr Gehalt steigt wie die Löhne insgesamt. Alle Beträge in heutigen Werten.
+          </p>
         </div>
       </div>
 
@@ -210,12 +214,18 @@ export default function RentenRechner() {
                 <span className="font-bold text-gray-800 dark:text-gray-200">{fmt(ergebnis.bruttoRente)} €</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Steuerpflichtiger Anteil bei Rentenbeginn</span>
+                {/* W187: Besteuerungsanteil nach Rentenbeginn-Jahr (§ 22 EStG n. F.: 2026 84 %, bis 2058 100 %) */}
+                <span className="text-gray-600 dark:text-gray-400">Steuerpflichtiger Anteil bei Rentenbeginn {ergebnis.rentenbeginnJahr}</span>
                 <span className="font-semibold text-gray-800 dark:text-gray-200">{fmtDez(ergebnis.steuerpflichtAnteil)}%</span>
               </div>
+              {/* W187: vorher eine Zeile „Abzüge (Steuer + KV/PV, geschätzt)“ mit pauschal 10,85 % KV/PV */}
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Abzüge (Steuer + KV/PV, geschätzt)</span>
-                <span className="font-semibold text-gray-800 dark:text-gray-200">−{fmt(ergebnis.bruttoRente - ergebnis.nettoRente)} €</span>
+                <span className="text-gray-600 dark:text-gray-400">Kranken- und Pflegeversicherung ({fmtDez(ergebnis.kvPvSatzProzent)} %)</span>
+                <span className="font-semibold text-gray-800 dark:text-gray-200">−{fmt(ergebnis.kvPvMonat)} €</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600 dark:text-gray-400">Einkommensteuer (geschätzt)</span>
+                <span className="font-semibold text-gray-800 dark:text-gray-200">−{fmt(ergebnis.steuerMonat)} €</span>
               </div>
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
                 <span className="text-gray-700 dark:text-gray-200 font-bold">Geschätzte Netto-Monatsrente</span>
@@ -224,6 +234,10 @@ export default function RentenRechner() {
             </div>
             <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
               Aktueller Rentenwert: {fmtDez(ergebnis.rentenwert)} € | Durchschnittsentgelt: {fmt(ergebnis.durchschnittsentgelt)} €/Jahr
+            </p>
+            {/* W187: Annahmen der Netto-Schätzung (keine Kinder-Eingabe in der Komponente) */}
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Annahmen: gesetzlich krankenversichert mit Ø-Zusatzbeitrag, kinderlos (Pflegeversicherung 4,2 %; mit Kindern 3,6 %), alleinstehend, keine weiteren Einkünfte. Steuer nach Abzug von Werbungskosten- (102 €) und Sonderausgaben-Pauschbetrag (36 €) sowie der KV/PV-Beiträge.
             </p>
           </div>
 
@@ -372,6 +386,12 @@ export default function RentenRechner() {
             ergebnis={{
               bruttoRente: ergebnis.bruttoRente,
               nettoRente: ergebnis.nettoRente,
+              // W187: Aufteilung der Abzüge und Annahme kinderlos
+              kvPvMonat: ergebnis.kvPvMonat,
+              kvPvSatzProzent: ergebnis.kvPvSatzProzent,
+              steuerMonat: ergebnis.steuerMonat,
+              besteuerungsanteilProzent: ergebnis.steuerpflichtAnteil,
+              annahme: 'kinderlos, gesetzlich versichert, alleinstehend',
               gesamtRentenpunkte: ergebnis.gesamtRentenpunkte,
               abschlagProzent: ergebnis.abschlagProzent,
               rentenluecke: ergebnis.rentenluecke,

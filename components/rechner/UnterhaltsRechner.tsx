@@ -54,6 +54,9 @@ const fmtEuro = (n: number) =>
   n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 const fmtEuro2 = (n: number) =>
   n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// W187: vorher Zahlbeträge mit fmtEuro (0 Nachkommastellen) — seit der Zahlbetrag nicht mehr
+// aufgerundet wird (512,50 €), mit Cent anzeigen, wenn er nicht glatt ist.
+const fmtBetrag = (n: number) => (Number.isInteger(n) ? fmtEuro(n) : fmtEuro2(n));
 
 export default function UnterhaltsRechner() {
   const [netto, setNetto] = useState('3000');
@@ -323,7 +326,7 @@ export default function UnterhaltsRechner() {
       {/* ERGEBNIS */}
       <div className="result-box mb-2">
         <p className="text-white/90 text-sm mb-1">Monatlicher Kindesunterhalt gesamt</p>
-        <p className="text-5xl font-bold">{fmtEuro(ergebnis.summe)} €</p>
+        <p className="text-5xl font-bold">{fmtBetrag(ergebnis.summe)} €</p>
         <p className="text-white/90 text-sm mt-2">
           Einkommensgruppe <strong>{ergebnis.gruppe}</strong> der Düsseldorfer Tabelle 2026
         </p>
@@ -340,7 +343,7 @@ export default function UnterhaltsRechner() {
       {ergebnis.istMangelfall && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-6">
           <p className="text-red-800 dark:text-red-300 text-sm">
-            <strong>⚠️ Mangelfall-Hinweis:</strong> Die rechnerische Unterhaltssumme ({fmtEuro(ergebnis.summe)} €) übersteigt das verfügbare Einkommen oberhalb des Selbstbehalts ({fmtEuro(ergebnis.selbstbehalt)} €). In der Praxis wird der Unterhalt dann anteilig gekürzt (Quotelung). Dieser Rechner zeigt den Tabellenwert unverändert — für eine Mangelfall-Berechnung ist eine anwaltliche Prüfung sinnvoll.
+            <strong>⚠️ Mangelfall-Hinweis:</strong> Die rechnerische Unterhaltssumme ({fmtBetrag(ergebnis.summe)} €) übersteigt das verfügbare Einkommen oberhalb des Selbstbehalts ({fmtEuro(ergebnis.selbstbehalt)} €). In der Praxis wird der Unterhalt dann anteilig gekürzt (Quotelung). Dieser Rechner zeigt den Tabellenwert unverändert — für eine Mangelfall-Berechnung ist eine anwaltliche Prüfung sinnvoll.
           </p>
         </div>
       )}
@@ -382,13 +385,13 @@ export default function UnterhaltsRechner() {
                         ? `−${fmtEuro(KINDERGELD_2026)} €`
                         : '—'}
                   </td>
-                  <td className="px-3 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">{k.anrechenbar > 0 ? `−${fmtEuro(k.anrechenbar)} €` : '—'}</td>
-                  <td className="px-3 py-2.5 text-right tabular-nums font-semibold text-gray-900 dark:text-gray-100">{fmtEuro(k.zahl)} €</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">{k.anrechenbar > 0 ? `−${fmtBetrag(k.anrechenbar)} €` : '—'}</td>
+                  <td className="px-3 py-2.5 text-right tabular-nums font-semibold text-gray-900 dark:text-gray-100">{fmtBetrag(k.zahl)} €</td>
                 </tr>
               ))}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-bold">
                 <td className="px-3 py-3 text-blue-800 dark:text-blue-300" colSpan={5}>= Gesamtsumme</td>
-                <td className="px-3 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtEuro(ergebnis.summe)} €</td>
+                <td className="px-3 py-3 text-right tabular-nums text-blue-800 dark:text-blue-300">{fmtBetrag(ergebnis.summe)} €</td>
               </tr>
             </tbody>
           </table>
@@ -413,7 +416,7 @@ export default function UnterhaltsRechner() {
       <CrossLink href="/finanzen/kindergeld-rechner" emoji="👶" text="Kindergeld-Höhe prüfen" />
 
       <ErgebnisAktionen
-        ergebnisText={`Kindesunterhalt (DT 2026): ${fmtEuro(ergebnis.summe)} €/Monat für ${anzahlKinder === 1 ? '1 Kind' : `${anzahlKinder} Kinder`} | Netto ${fmtEuro(ergebnis.einkommen)} € | Einkommensgruppe ${ergebnis.gruppe}${ergebnis.anpassungWirktSich ? ` (Basis ${ergebnis.basisGruppe}, Höherstufung aktiv)` : ''}${ergebnis.istMangelfall ? ' | Mangelfall-Hinweis' : ''}`}
+        ergebnisText={`Kindesunterhalt (DT 2026): ${fmtBetrag(ergebnis.summe)} €/Monat für ${anzahlKinder === 1 ? '1 Kind' : `${anzahlKinder} Kinder`} | Netto ${fmtEuro(ergebnis.einkommen)} € | Einkommensgruppe ${ergebnis.gruppe}${ergebnis.anpassungWirktSich ? ` (Basis ${ergebnis.basisGruppe}, Höherstufung aktiv)` : ''}${ergebnis.istMangelfall ? ' | Mangelfall-Hinweis' : ''}`}
         seitenTitel="Unterhaltsrechner"
       />
 
@@ -531,7 +534,7 @@ export default function UnterhaltsRechner() {
           }).join(' | '),
         }}
         ergebnis={{
-          gesamt: `${fmtEuro(ergebnis.summe)} €`,
+          gesamt: `${fmtBetrag(ergebnis.summe)} €`,
           einkommensgruppe: `${ergebnis.gruppe}${ergebnis.anpassungWirktSich ? ` (Basis ${ergebnis.basisGruppe})` : ''}`,
           mangelfall: ergebnis.istMangelfall ? 'ja' : 'nein',
           elternunterhalt: elternErgebnis ? `${fmtEuro(elternErgebnis.zumutbar)} €` : 'nicht berechnet',

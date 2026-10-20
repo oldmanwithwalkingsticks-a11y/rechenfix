@@ -514,12 +514,16 @@ export const technikRechner: RechnerConfig[] = [
       {
         // W185: vorher „Bei der Spannungswandlung gehen rund 35 Prozent als Wärme und Wandlerverlust verloren“.
         // E = Q × U: 20.000 mAh × 3,7 V = 14.800 mAh × 5 V (keine Verluste); Aufwärtswandler ~85–93 % → 0,74 × 0,88 ≈ 0,65.
+        // W187: vorher diese W185-Herleitung „26 % Spannungsumrechnung × 10 % Wandler“ — falsch, weil auch die Handy-mAh auf die
+        // Zellspannung (≈ 3,85 V) bezogen sind. 0,65 ist ein Gesamtwirkungsgrad: Boost ~0,85–0,93 × Ladeelektronik Handy ~0,85–0,90
+        // × Kabel/Wärme/Akku ~0,90–0,95 × Zellspannung 3,7/3,85 ≈ 0,96 → rund 0,6–0,75.
         frage: 'Warum lädt eine 20.000-mAh-Powerbank mein 5.000-mAh-Handy nicht 4-mal?',
-        antwort: 'Weil die aufgedruckte Kapazität für die Zellspannung von 3,7 Volt gilt, das Handy aber über 5 Volt geladen wird. Auf 5 Volt umgerechnet entsprechen 20.000 mAh nur noch 14.800 mAh (× 3,7 ÷ 5) — rund ein Viertel weniger, ohne dass dabei Energie verloren geht. Echte Verluste als Wärme entstehen im Spannungswandler: gut 10 Prozent. Zusammen ergibt das 0,74 × rund 0,88 ≈ 0,65. Aus 20.000 mAh werden so nur rund 13.000 mAh nutzbar — das reicht für etwa 2,6 statt 4 volle Ladungen.',
+        antwort: 'Weil auf dem Weg vom Powerbank-Akku in den Handy-Akku Energie verloren geht. Beide mAh-Angaben beziehen sich auf die Zellspannung der Akkus (Powerbank meist 3,6–3,7 Volt, moderne Handys rund 3,85 Volt) und sind damit nahezu direkt vergleichbar — die 5 Volt am USB-Anschluss sind nur die Übertragungsspannung. Verluste entstehen beim Hochsetzen der Spannung in der Powerbank (Wirkungsgrad grob 85–93 Prozent), in der Ladeelektronik des Handys, die wieder heruntersetzt und den Akku lädt (grob 85–90 Prozent), sowie als Wärme in Kabel und Akkus. Zusammen liegt der Gesamtwirkungsgrad typisch bei 60 bis 75 Prozent; der Rechner setzt vorsichtig 65 Prozent an. Aus 20.000 mAh werden so nur rund 13.000 mAh nutzbar — das reicht für etwa 2,6 statt 4 volle Ladungen.',
       },
       {
         frage: 'Was ist der Unterschied zwischen aufgedruckter und nutzbarer Kapazität?',
-        antwort: 'Die aufgedruckte (Nenn-)Kapazität beschreibt die Energie der Akkuzellen bei 3,7 Volt. Die nutzbare Kapazität ist das, was nach Spannungswandlung auf 5 Volt und Verlusten tatsächlich beim Endgerät ankommt — typisch 60 bis 70 Prozent. Bei einer 10.000-mAh-Powerbank sind das nur rund 6.500 mAh.',
+        // W187: vorher „… was nach Spannungswandlung auf 5 Volt und Verlusten …“
+        antwort: 'Die aufgedruckte (Nenn-)Kapazität beschreibt die Ladung der Akkuzellen bei 3,7 Volt. Die nutzbare Kapazität ist das, was nach den Verlusten in Spannungswandler, Kabel und Ladeelektronik des Handys tatsächlich im Geräteakku ankommt — typisch 60 bis 70 Prozent. Bei einer 10.000-mAh-Powerbank sind das nur rund 6.500 mAh.',
       },
       {
         frage: 'Wie viele Ladungen schafft eine 10.000-mAh-Powerbank?',
@@ -548,7 +552,7 @@ export const technikRechner: RechnerConfig[] = [
         typ: 'vergleich',
         titel: 'Aufgedruckt vs. nutzbar',
         spalteA: 'Nennkapazität (3,7 V)',
-        spalteB: 'Nutzbar (5 V, ~65 %)',
+        spalteB: 'Nutzbar im Handy-Akku (~65 %)', // W187: vorher „Nutzbar (5 V, ~65 %)“
         zeilen: [
           { kriterium: 'Mini-Powerbank', a: '10.000 mAh', b: '≈ 6.500 mAh' },
           { kriterium: 'Standard', a: '20.000 mAh', b: '≈ 13.000 mAh' },
@@ -562,7 +566,8 @@ export const technikRechner: RechnerConfig[] = [
         titel: 'Die mAh-Falle',
         // W185: vorher „Beim Hochwandeln der Spannung gehen rund 35 Prozent der Energie verloren“ (≈ 26 % sind reine
         // mAh-Umrechnung auf 5 V ohne Energieverlust, gut 10 % Wandlerverlust).
-        text: 'Aufgedruckte 20.000 mAh klingen nach vier vollen Handyladungen — tatsächlich sind es nur etwa 2,6. Der Trick steckt in der Spannung: Die Kapazitätsangabe gilt für die Akkuzellen mit 3,7 Volt, geladen wird das Handy aber über 5 Volt am USB-Anschluss. Rechnet man die Kapazität auf 5 Volt um, schrumpft die mAh-Zahl um rund ein Viertel, obwohl die Energie gleich bleibt; beim Hochwandeln selbst gehen zusätzlich gut 10 Prozent als Wärme verloren. Von 20.000 mAh bleiben so real nur rund 13.000 mAh übrig. Deshalb darf man niemals die aufgedruckte Kapazität direkt durch den Handy-Akku teilen — das überschätzt die Ladungen um etwa die Hälfte. Wer ehrlich plant, rechnet mit dem nutzbaren Wert von 60 bis 70 Prozent der Nennkapazität. Hersteller geben die größere Zahl an, weil sie auf dem Datenblatt eindrucksvoller wirkt. Seriöse Tests bestätigen diesen Bereich quer durch alle Marken: Egal ob günstiges No-Name-Modell oder Markengerät, am Ende kommen nur selten mehr als zwei Drittel der aufgedruckten Energie beim Handy an. Unterschiede gibt es vor allem in der zweiten Nachkommastelle, nicht in der Größenordnung. Manche Anbieter drucken inzwischen zusätzlich die nutzbare Kapazität oder die Wattstunden auf — ein Blick darauf erspart die Umrechnung. Steht nur die Nennkapazität in mAh auf dem Gehäuse, ist die Faustregel „mal 0,65" der sicherste Weg zu einer ehrlichen Erwartung. Wer mehrere Geräte über mehrere Tage versorgen will, sollte diese Reserve von vornherein einplanen, statt sich auf die optimistische Zahl auf der Verpackung zu verlassen.',
+        // W187: vorher „Der Trick steckt in der Spannung: … schrumpft die mAh-Zahl um rund ein Viertel … zusätzlich gut 10 Prozent“
+        text: 'Aufgedruckte 20.000 mAh klingen nach vier vollen Handyladungen — tatsächlich sind es nur etwa 2,6. Der Grund sind Verluste auf dem Weg vom Powerbank-Akku in den Handy-Akku: Die Powerbank setzt die Zellspannung auf die USB-Spannung hoch, das Handy setzt sie wieder herunter und lädt seinen Akku, und Kabel und Zellen erwärmen sich. Jede Stufe kostet einige Prozent, zusammen kommen meist nur 60 bis 70 Prozent an. Die 5 Volt am USB-Anschluss sind dabei kein eigener Verlust, denn auch die Kapazität des Handy-Akkus ist auf seine Zellspannung bezogen. Von 20.000 mAh bleiben so real nur rund 13.000 mAh übrig. Deshalb darf man niemals die aufgedruckte Kapazität direkt durch den Handy-Akku teilen — das überschätzt die Ladungen um etwa die Hälfte. Wer ehrlich plant, rechnet mit dem nutzbaren Wert von 60 bis 70 Prozent der Nennkapazität. Hersteller geben die größere Zahl an, weil sie auf dem Datenblatt eindrucksvoller wirkt. Seriöse Tests bestätigen diesen Bereich quer durch alle Marken: Egal ob günstiges No-Name-Modell oder Markengerät, am Ende kommen nur selten mehr als zwei Drittel der aufgedruckten Energie beim Handy an. Unterschiede gibt es vor allem in der zweiten Nachkommastelle, nicht in der Größenordnung. Manche Anbieter drucken inzwischen zusätzlich die nutzbare Kapazität oder die Wattstunden auf — ein Blick darauf erspart die Umrechnung. Steht nur die Nennkapazität in mAh auf dem Gehäuse, ist die Faustregel „mal 0,65" der sicherste Weg zu einer ehrlichen Erwartung. Wer mehrere Geräte über mehrere Tage versorgen will, sollte diese Reserve von vornherein einplanen, statt sich auf die optimistische Zahl auf der Verpackung zu verlassen.',
       },
       {
         typ: 'beispielrechnung',
@@ -648,14 +653,15 @@ export const technikRechner: RechnerConfig[] = [
         hinweis: 'Powerbanks bis 100 Wh (~27.000 mAh bei 3,7 V) sind ohne Genehmigung erlaubt, 100–160 Wh nur mit Airline-Zustimmung.',
       },
       {
-        titel: 'Wirkungsgrad Spannungswandlung (3,7 V → 5 V)',
-        hinweis: 'Die Nennkapazität gilt bei Zellspannung 3,7 V; die Umwandlung auf 5 V USB plus Verluste senkt die nutzbare Kapazität auf typisch 60–70 %.',
+        // W187: vorher „Wirkungsgrad Spannungswandlung (3,7 V → 5 V)“ / „Umwandlung auf 5 V USB plus Verluste“
+        titel: 'Gesamtwirkungsgrad Powerbank → Handy-Akku',
+        hinweis: 'Nenn- und Handy-Kapazität beziehen sich auf die Zellspannung (≈ 3,6–3,9 V); Verluste in Aufwärtswandler, Ladeelektronik des Handys, Kabel und Akku senken die nutzbare Kapazität auf typisch 60–70 %.',
       },
     ],
   },
   {
     slug: 'aufloesung-seitenverhaeltnis-rechner',
-    letzteAktualisierung: '2026-06-30',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Seitenverhältnis-Rechner',
     beschreibung: 'Seitenverhältnis aus der Auflösung berechnen (16:9, 21:9, 4:5) oder eine fehlende Seite aus dem Verhältnis bestimmen — mit Rechenweg.',
     kategorie: 'Technik',

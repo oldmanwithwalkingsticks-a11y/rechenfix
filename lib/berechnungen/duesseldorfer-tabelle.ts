@@ -36,16 +36,18 @@ export const EINKOMMENSGRUPPEN_2026 = [
   { gruppe: 3, bis: 2900, prozent: 1.1 },
   { gruppe: 4, bis: 3300, prozent: 1.15 },
   { gruppe: 5, bis: 3700, prozent: 1.2 },
-  { gruppe: 6, bis: 4100, prozent: 1.25 },
-  { gruppe: 7, bis: 4500, prozent: 1.3 },
-  { gruppe: 8, bis: 4900, prozent: 1.35 },
-  { gruppe: 9, bis: 5300, prozent: 1.4 },
-  { gruppe: 10, bis: 5700, prozent: 1.45 },
-  { gruppe: 11, bis: 6400, prozent: 1.5 },
-  { gruppe: 12, bis: 7200, prozent: 1.55 },
-  { gruppe: 13, bis: 8200, prozent: 1.6 },
-  { gruppe: 14, bis: 9700, prozent: 1.65 },
-  { gruppe: 15, bis: 11200, prozent: 1.7 },
+  // W187: vorher Gruppen 6–15 mit 125, 130, … 170 % (Fünf-Punkte-Schritte); die DT 2026
+  // steigt ab Gruppe 6 in Acht-Punkte-Schritten: 128, 136, … 200 % (Gruppe 6, 6–11 J.: 715 €).
+  { gruppe: 6, bis: 4100, prozent: 1.28 },
+  { gruppe: 7, bis: 4500, prozent: 1.36 },
+  { gruppe: 8, bis: 4900, prozent: 1.44 },
+  { gruppe: 9, bis: 5300, prozent: 1.52 },
+  { gruppe: 10, bis: 5700, prozent: 1.6 },
+  { gruppe: 11, bis: 6400, prozent: 1.68 },
+  { gruppe: 12, bis: 7200, prozent: 1.76 },
+  { gruppe: 13, bis: 8200, prozent: 1.84 },
+  { gruppe: 14, bis: 9700, prozent: 1.92 },
+  { gruppe: 15, bis: 11200, prozent: 2.0 },
 ] as const;
 
 /** Selbstbehalte 2026 (Kindesunterhalt unverändert, Elternunterhalt neu quantifiziert). */
@@ -112,8 +114,9 @@ export type KindergeldOption = 'hälftig' | 'voll' | 'keine';
 
 /**
  * Zahlbetrag pro Kind: Tabellenwert − Kindergeld-Anrechnung − anrechenbares
- * Eigeneinkommen, nach oben auf volle Euro gerundet (konsistent mit
- * Tabellenwert-Rundung).
+ * Eigeneinkommen, centgenau. Aufgerundet wird nach § 1612a Abs. 2 S. 2 BGB
+ * nur der Tabellenbetrag, nicht der Zahlbetrag (DT 2026, Anhang Zahlbeträge:
+ * Gruppe 4, 6–11 J. = 512,50 €).
  *
  * Wichtig: Kindergeld wird exakt (129,50 € bzw. 259 €) vor der Subtraktion
  * eingesetzt, NICHT vorher kaufmännisch auf ganze Euro gerundet.
@@ -130,7 +133,9 @@ export function berechneZahlbetrag(
         ? KINDERGELD_2026
         : 0;
   const raw = tabellenwert - kg - eigenesEinkommenAnrechenbar;
-  return Math.ceil(Math.max(0, raw));
+  // W187: vorher Math.ceil(Math.max(0, raw)) — rundete den Zahlbetrag nach dem Kindergeldabzug
+  // erneut auf (513 statt 512,50 €); jetzt nur auf Cent geglättet.
+  return Math.round(Math.max(0, raw) * 100) / 100;
 }
 
 // ─────────────────────────────────────────────────────────────────────

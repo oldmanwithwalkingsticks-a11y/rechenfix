@@ -7,7 +7,14 @@
 // - § 28 FamGKG i.V.m. Anlage 2 (Wertgebühren-Tabelle Familiensachen)
 // - § 13 RVG i.V.m. Anlage 2 (Wertgebühren-Tabelle Anwaltsvergütung)
 // - VV RVG: Nr. 3100 (1,3 Verfahrensgebühr), Nr. 3104 (1,2 Terminsgebühr),
-//           Nr. 1003 (1,0 Einigungsgebühr), Nr. 7002 (Auslagenpauschale 20% / max. 20 €)
+//           Nr. 7002 (Auslagenpauschale 20% / max. 20 €)
+// - W187: vorher zusätzlich Nr. 1003 (1,0 Einigungsgebühr aus dem Gesamtwert bei „einvernehmlich“).
+//   Nach Nr. 1000 Anm. Abs. 5 VV RVG entsteht die Einigungsgebühr in Ehesachen nicht; eine
+//   Vereinbarung über eine Folgesache bildet der Rechner nicht ab.
+// - § 43 FamGKG (Ehesache: 3-Monats-Netto, mind. 3.000 €, höchstens 1 Mio. €),
+//   § 44 Abs. 2 FamGKG (Kindschaftssache im Verbund: +20 %, höchstens 5.000 €),
+//   § 48 Abs. 1 FamGKG (Ehewohnungssache § 200 Abs. 1 Nr. 2 FamFG: 5.000 €),
+//   § 50 Abs. 1 FamGKG (Versorgungsausgleich: je Anrecht 10 % des 3-Monats-Netto, mind. 1.000 €)
 
 export type Scheidungsart = 'einvernehmlich' | 'streitig';
 
@@ -15,6 +22,8 @@ export interface ScheidungskostenEingabe {
   nettoeinkommenGesamt: number; // €/Monat (beide Ehepartner)
   art: Scheidungsart;
   versorgungsausgleich: boolean;
+  /** Zahl der auszugleichenden Anrechte beider Ehegatten (§ 50 FamGKG); Standard 2 (je eine gesetzliche Rente). */
+  anrechteVA?: number;
   zugewinnausgleich: boolean;
   unterhalt: boolean;
   sorgerecht: boolean;
@@ -33,7 +42,6 @@ export interface ScheidungskostenErgebnis {
 
   verfahrensgebuehr: number;   // 1,3 × RVG-Gebühr (Nr. 3100 VV RVG)
   terminsgebuehr: number;      // 1,2 × RVG-Gebühr (Nr. 3104 VV RVG)
-  einigungsgebuehr: number;    // 1,0 × RVG-Gebühr (Nr. 1003 VV RVG, nur einvernehmlich)
   auslagenpauschale: number;   // Min(0,2 × Gebühren, 20 €) Nr. 7002 VV RVG
   anwaltNetto: number;
   mwst: number;
@@ -106,6 +114,9 @@ const RVG_TABELLE_2025: { bis: number; gebuehr: number }[] = [
   { bis: 50000, gebuehr: 1357.00 },
 ];
 
+/** W187: Standardzahl der Anrechte im Versorgungsausgleich (je Ehegatte die gesetzliche Rente). */
+export const ANRECHTE_VA_STANDARD = 2;
+
 function rund2(n: number): number {
   return Math.round(n * 100) / 100;
 }
@@ -120,8 +131,13 @@ function gebuehrFamGKG(wert: number): number {
     return rund2(638 + stufen * 140);
   }
   // > 200.000 €: pro angefangene 30.000 € weitere 210,00 €
-  const stufen = Math.ceil((wert - 200000) / 30000);
-  return rund2(2038 + stufen * 210);
+  if (wert <= 500000) {
+    const stufen = Math.ceil((wert - 200000) / 30000);
+    return rund2(2038 + stufen * 210);
+  }
+  // W187: vorher auch über 500.000 € in 30.000-€-Schritten; § 28 Abs. 1 FamGKG: je angefangene 50.000 € + 210 €
+  const stufen = Math.ceil((wert - 500000) / 50000);
+  return rund2(4138 + stufen * 210);
 }
 
 function gebuehrRVG(wert: number): number {
@@ -134,16 +150,28 @@ function gebuehrRVG(wert: number): number {
     return rund2(1357 + stufen * 99.50);
   }
   // > 200.000 €: pro angefangene 30.000 € weitere 140,00 €
-  const stufen = Math.ceil((wert - 200000) / 30000);
-  return rund2(2352 + stufen * 140);
+  if (wert <= 500000) {
+    const stufen = Math.ceil((wert - 200000) / 30000);
+    return rund2(2352 + stufen * 140);
+  }
+  // W187: vorher auch über 500.000 € in 30.000-€-Schritten; § 13 Abs. 1 RVG: je angefangene 50.000 € + 175 €
+  const stufen = Math.ceil((wert - 500000) / 50000);
+  return rund2(3752 + stufen * 175);
 }
 
 function berechneEineScheidung(eingabe: ScheidungskostenEingabe, art: Scheidungsart) {
   // === VERFAHRENSWERT ===
-  const verfahrenswertBasis = Math.max(3000, eingabe.nettoeinkommenGesamt * 3);
+  // § 43 FamGKG: 3-Monats-Netto, mindestens 3.000 €, höchstens 1 Mio. € (W187: Obergrenze ergänzt)
+  const dreiMonatsNetto = Math.max(0, eingabe.nettoeinkommenGesamt) * 3;
+  const verfahrenswertBasis = Math.min(1000000, Math.max(3000, dreiMonatsNetto));
 
+  // W187: vorher Math.round(verfahrenswertBasis * 0.1) — ein Anrecht, aus dem Ehesachen-Wert
+  // (inkl. 3.000-€-Untergrenze) und ohne Mindestwert. § 50 Abs. 1 FamGKG: je Anrecht 10 % des
+  // 3-Monats-Nettoeinkommens, insgesamt mindestens 1.000 €.
+  const anrechteRoh = eingabe.anrechteVA ?? ANRECHTE_VA_STANDARD;
+  const anrechte = Number.isFinite(anrechteRoh) ? Math.max(1, Math.round(anrechteRoh)) : ANRECHTE_VA_STANDARD;
   const verfahrenswertVA = eingabe.versorgungsausgleich
-    ? Math.round(verfahrenswertBasis * 0.1)
+    ? Math.max(1000, Math.round(dreiMonatsNetto * 0.1 * anrechte))
     : 0;
 
   // Folgesachen (nur relevant bei streitig)
@@ -151,8 +179,12 @@ function berechneEineScheidung(eingabe: ScheidungskostenEingabe, art: Scheidungs
   if (art === 'streitig') {
     if (eingabe.zugewinnausgleich) folgesachen += Math.round(verfahrenswertBasis * 0.2);
     if (eingabe.unterhalt)         folgesachen += Math.round(verfahrenswertBasis * 0.15);
-    if (eingabe.sorgerecht)        folgesachen += 4000;
-    if (eingabe.ehewohnung)        folgesachen += 4000;
+    // W187: vorher pauschal 4.000 € (Wert einer selbständigen Kindschaftssache, § 45 FamGKG);
+    // im Verbund § 44 Abs. 2 FamGKG: + 20 % des Ehesachen-Werts, höchstens 5.000 €.
+    if (eingabe.sorgerecht)        folgesachen += Math.min(5000, Math.round(verfahrenswertBasis * 0.2));
+    // W187: vorher 4.000 € (Ehewohnung während der Trennung, § 200 Abs. 1 Nr. 1 FamFG);
+    // als Folgesache (§ 1568a BGB, § 200 Abs. 1 Nr. 2 FamFG) § 48 Abs. 1 FamGKG: 5.000 €.
+    if (eingabe.ehewohnung)        folgesachen += 5000;
   }
 
   const verfahrenswertGesamt = verfahrenswertBasis + verfahrenswertVA + folgesachen;
@@ -165,13 +197,13 @@ function berechneEineScheidung(eingabe: ScheidungskostenEingabe, art: Scheidungs
   const gRVG = gebuehrRVG(verfahrenswertGesamt);
   const verfahrensgebuehr = rund2(gRVG * 1.3); // Nr. 3100 VV RVG
   const terminsgebuehr    = rund2(gRVG * 1.2); // Nr. 3104 VV RVG
-  const einigungsgebuehr  = art === 'einvernehmlich' ? rund2(gRVG * 1.0) : 0; // Nr. 1003 VV RVG
+  // W187: Einigungsgebühr (vorher 1,0 × gRVG bei „einvernehmlich“) entfällt — Nr. 1000 Anm. Abs. 5 VV RVG.
 
   // Auslagenpauschale Nr. 7002 VV RVG: 20 % der Gebühren, max. 20 €
-  const gebuehrenSumme = verfahrensgebuehr + terminsgebuehr + einigungsgebuehr;
+  const gebuehrenSumme = verfahrensgebuehr + terminsgebuehr;
   const auslagenpauschale = Math.min(rund2(gebuehrenSumme * 0.2), 20);
 
-  const anwaltNetto = rund2(verfahrensgebuehr + terminsgebuehr + einigungsgebuehr + auslagenpauschale);
+  const anwaltNetto = rund2(verfahrensgebuehr + terminsgebuehr + auslagenpauschale);
   const mwst = rund2(anwaltNetto * 0.19);
   const anwaltBrutto = rund2(anwaltNetto + mwst);
 
@@ -191,7 +223,6 @@ function berechneEineScheidung(eingabe: ScheidungskostenEingabe, art: Scheidungs
     gerichtskosten,
     verfahrensgebuehr,
     terminsgebuehr,
-    einigungsgebuehr,
     auslagenpauschale,
     anwaltNetto,
     mwst,

@@ -86,9 +86,11 @@ export default function SteuererstattungRechner() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Arbeitstage pro Jahr
+              {/* W187: vorher „Arbeitstage pro Jahr“ — Homeoffice-Tage wurden zusätzlich als Pendeltage gezählt */}
+              Arbeitstage pro Jahr (gesamt)
             </label>
             <NummerEingabe value={arbeitstage} onChange={setArbeitstage} placeholder="220" />
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">inklusive Homeoffice-Tage</p>
           </div>
         </div>
 
@@ -96,10 +98,11 @@ export default function SteuererstattungRechner() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Homeoffice-Tage pro Jahr
+              davon Homeoffice-Tage
             </label>
             <NummerEingabe value={homeofficeTage} onChange={setHomeofficeTage} placeholder="0" />
-            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">6 €/Tag, max. 1.260 €/Jahr</p>
+            {/* W187: Hinweis auf Pendeltage = Arbeitstage − Homeoffice-Tage und den Sonderfall § 4 Abs. 5 S. 1 Nr. 6c S. 2 EStG */}
+            <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">Tage ohne Fahrt zur Arbeitsstätte: 6 €/Tag, max. 1.260 €/Jahr. Für diese Tage entfällt die Pendlerpauschale. Ausnahme: Steht dauerhaft kein anderer Arbeitsplatz zur Verfügung (z. B. Lehrkräfte), gibt es die 6 € auch an Tagen mit Fahrt; das bildet der Rechner nicht ab.</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -168,27 +171,41 @@ export default function SteuererstattungRechner() {
                 <p className="text-lg font-bold">{(ergebnis.grenzsteuersatz * 100).toFixed(0)} %</p>
               </div>
             </div>
+            {/* W187: vorher Grenzsatz aus dem Brutto; jetzt aus dem geschätzten zvE */}
+            <p className="text-white/60 text-xs mt-3">
+              Geschätztes zu versteuerndes Einkommen: {Math.round(ergebnis.zvEGeschaetzt).toLocaleString('de-DE')} € (Brutto abzüglich Pauschbeträge und Vorsorgepauschale)
+            </p>
           </div>
+
+          {parseDeutscheZahl(homeofficeTage) > parseDeutscheZahl(arbeitstage) && (
+            <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
+              <p className="text-sm text-amber-700 dark:text-amber-400">
+                Die Homeoffice-Tage sind mehr als die Arbeitstage insgesamt. Der Rechner setzt dann keine Pendeltage an.
+              </p>
+            </div>
+          )}
 
           {/* Steuerklasse-Hinweis */}
           {steuerklasse === 3 && (
             <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-4">
               <p className="text-sm text-blue-700 dark:text-blue-400">
-                <strong>Steuerklasse III:</strong> In dieser Steuerklasse zahlen Sie monatlich bereits weniger Lohnsteuer dank Ehegattensplitting. Dadurch ist Ihr Grenzsteuersatz niedriger — jede absetzbare Ausgabe bringt daher etwas weniger Erstattung. Dafür haben Sie über das Jahr verteilt aber deutlich mehr Netto.
+                <strong>Steuerklasse III:</strong> In dieser Steuerklasse zahlen Sie monatlich bereits weniger Lohnsteuer dank Ehegattensplitting. Dadurch ist Ihr Grenzsteuersatz niedriger — jede absetzbare Ausgabe bringt daher etwas weniger Erstattung. Dafür haben Sie über das Jahr verteilt aber deutlich mehr Netto. {/* W187: Annahme genannt */}Der Rechner nimmt an, dass Ihr Partner kein eigenes Einkommen hat.
               </p>
             </div>
           )}
           {steuerklasse === 5 && (
             <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-4">
               <p className="text-sm text-blue-700 dark:text-blue-400">
-                <strong>Steuerklasse V:</strong> In dieser Steuerklasse wird ein höherer Lohnsteueranteil einbehalten, damit Ihr Partner in Steuerklasse III weniger zahlt. Dadurch ist Ihr Grenzsteuersatz höher — absetzbare Ausgaben bringen hier mehr Erstattung.
+                {/* W187: vorher „Dadurch ist Ihr Grenzsteuersatz höher“ — in der Veranlagung gilt der gemeinsame Splittingtarif */}
+                <strong>Steuerklasse V:</strong> In der Steuererklärung zählt der gemeinsame Splittingtarif beider Partner. Der Rechner nimmt an, dass Ihr Partner in Steuerklasse III 60 % des gemeinsamen Einkommens verdient. Verdient er mehr, sind Steuersatz und Erstattung höher, verdient er weniger, niedriger. Bei III/V kommt es trotz Werbungskosten häufig zu einer Nachzahlung.
               </p>
             </div>
           )}
           {steuerklasse === 6 && (
             <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-4">
               <p className="text-sm text-blue-700 dark:text-blue-400">
-                <strong>Steuerklasse VI:</strong> Diese Steuerklasse gilt für Zweit- und Nebenjobs. Da der Grundfreibetrag bereits beim Hauptjob berücksichtigt wird, ist der Grenzsteuersatz hier am höchsten — absetzbare Ausgaben bringen daher die größte Erstattung.
+                {/* W187: Annahme zum Hauptjob genannt */}
+                <strong>Steuerklasse VI:</strong> Diese Steuerklasse gilt für Zweit- und Nebenjobs. In der Steuererklärung werden Haupt- und Nebenjob zusammen besteuert. Der Rechner nimmt an, dass der Hauptjob gerade den Grundfreibetrag ausschöpft; bei höherem Hauptjob-Einkommen sind Steuersatz und Erstattung höher.
               </p>
             </div>
           )}
@@ -245,7 +262,7 @@ export default function SteuererstattungRechner() {
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
               {ergebnis.pendlerpauschale > 0 && (
                 <div className="flex justify-between px-4 py-3 text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">Pendlerpauschale</span>
+                  <span className="text-gray-600 dark:text-gray-400">Pendlerpauschale ({ergebnis.pendeltage.toLocaleString('de-DE')} Pendeltage)</span>
                   <span className="font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.pendlerpauschale)} €</span>
                 </div>
               )}
@@ -279,7 +296,8 @@ export default function SteuererstattungRechner() {
           {/* Hinweis */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
             <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
-              <strong>Hinweis:</strong> Vereinfachte Schätzung. Die tatsächliche Erstattung hängt von vielen weiteren Faktoren ab (Vorsorgeaufwendungen, Kinderfreibeträge, außergewöhnliche Belastungen etc.). Für eine exakte Berechnung nutzen Sie eine Steuersoftware oder einen Steuerberater.
+              {/* W187: vorher „hängt ab von … Vorsorgeaufwendungen …“ — die stecken jetzt pauschal im geschätzten zvE */}
+              <strong>Hinweis:</strong> Vereinfachte Schätzung der Einkommensteuer-Ersparnis 2026, ohne Solidaritätszuschlag und Kirchensteuer. Das zu versteuernde Einkommen schätzt der Rechner aus dem Brutto (gesetzlich versichert, kinderlos, in Steuerklasse II mit einem Kind). Die tatsächliche Erstattung hängt von weiteren Faktoren ab (andere Einkünfte, tatsächliche Vorsorgeaufwendungen, Kinderfreibeträge, außergewöhnliche Belastungen, einbehaltene Lohnsteuer). Für eine exakte Berechnung nutzen Sie eine Steuersoftware oder einen Steuerberater.
             </p>
           </div>
 
@@ -320,6 +338,9 @@ export default function SteuererstattungRechner() {
               geschaetzteErstattungEuro: ergebnis.geschaetzteErstattung,
               werbungskostenGesamtEuro: ergebnis.werbungskostenGesamt,
               grenzsteuersatzProzent: ergebnis.grenzsteuersatz * 100,
+              // W187: zvE-Schätzung und Pendeltage für die KI-Erklärung
+              zvEGeschaetztEuro: Math.round(ergebnis.zvEGeschaetzt),
+              pendeltage: ergebnis.pendeltage,
             }}
           />
         </>

@@ -4,8 +4,11 @@ import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import {
   berechneGrundsteuer,
+  BUNDESMODELL_LAENDER,
+  type BundesmodellLand,
   type GrundsteuerModell,
   type Grundstuecksart,
+  type MesszahlErmaessigung,
 } from '@/lib/berechnungen/grundsteuer';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -23,6 +26,13 @@ export default function GrundsteuerRechner() {
   const [wohnflaeche, setWohnflaeche] = useState('120');
   const [baujahr, setBaujahr] = useState('1990');
   const [hebesatz, setHebesatz] = useState('500');
+  // W187: neue Eingaben für das Ertragswertverfahren nach §§ 252–257 BewG (Bundesmodell)
+  const [land, setLand] = useState<BundesmodellLand>('NW');
+  const [mietniveaustufe, setMietniveaustufe] = useState('3');
+  const [meaZaehler, setMeaZaehler] = useState('250');
+  const [meaNenner, setMeaNenner] = useState('1000');
+  const [anzahlWohnungen, setAnzahlWohnungen] = useState('6');
+  const [ermaessigung, setErmaessigung] = useState<MesszahlErmaessigung>('keine');
 
   const ergebnis = useMemo(
     () =>
@@ -34,9 +44,23 @@ export default function GrundsteuerRechner() {
         wohnflaeche: parseDeutscheZahl(wohnflaeche) || 0,
         baujahr: parseDeutscheZahl(baujahr) || 2000,
         hebesatz: parseDeutscheZahl(hebesatz) || 0,
+        land,
+        mietniveaustufe: Number(mietniveaustufe),
+        miteigentumsanteil: (parseDeutscheZahl(meaNenner) || 0) > 0
+          ? (parseDeutscheZahl(meaZaehler) || 0) / parseDeutscheZahl(meaNenner)
+          : 1,
+        anzahlWohnungen: parseDeutscheZahl(anzahlWohnungen) || 3,
+        ermaessigung,
       }),
-    [modell, art, bodenrichtwert, grundflaeche, wohnflaeche, baujahr, hebesatz],
+    [modell, art, bodenrichtwert, grundflaeche, wohnflaeche, baujahr, hebesatz, land, mietniveaustufe, meaZaehler, meaNenner, anzahlWohnungen, ermaessigung],
   );
+  const istBund = modell === 'bund';
+  const bm = ergebnis.bundesmodell;
+  const landName = BUNDESMODELL_LAENDER.find(l => l.kuerzel === land)?.name ?? land;
+  const fmtProzent = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const fmtFaktor = (n: number, stellen: number) => n.toLocaleString('de-DE', { minimumFractionDigits: stellen, maximumFractionDigits: stellen });
+  const fmtPromille = (n: number) => (n * 1000).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+  const selectKlasse = 'w-full min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200';
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const fmtEuro2 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -64,6 +88,20 @@ export default function GrundsteuerRechner() {
           onChange={(v) => setModell(v as Modell)}
           columns={3}
         />
+        {/* W187: Hinweis auf nicht abgebildete Ländermodelle (vorher keiner) */}
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+          Hamburg, Hessen und Niedersachsen haben eigene Modelle, die dieser Rechner nicht abbildet.
+        </p>
+        {istBund && (
+          <div className="mt-3">
+            <label htmlFor="grundsteuer-land" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Bundesland</label>
+            <select id="grundsteuer-land" value={land} onChange={e => setLand(e.target.value as BundesmodellLand)} className={selectKlasse}>
+              {BUNDESMODELL_LAENDER.map(l => (
+                <option key={l.kuerzel} value={l.kuerzel}>{l.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {/* 2: Grundstücksart */}
@@ -77,7 +115,9 @@ export default function GrundsteuerRechner() {
           onChange={e => setArt(e.target.value as Grundstuecksart)}
           className="w-full min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200"
         >
-          <option value="efh">Ein-/Zweifamilienhaus</option>
+          {/* W187: vorher eine Option „Ein-/Zweifamilienhaus“; Anlage 39 BewG unterscheidet beide */}
+          <option value="efh">Einfamilienhaus</option>
+          <option value="zfh">Zweifamilienhaus</option>
           <option value="etw">Eigentumswohnung</option>
           <option value="miet">Mietwohngrundstück</option>
           <option value="unbebaut">Unbebautes Grundstück</option>
@@ -98,9 +138,25 @@ export default function GrundsteuerRechner() {
       <div className="mb-6">
         <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
-          Grundstücksfläche
+          {istBund && art === 'etw' ? 'Grundstücksfläche der gesamten Wohnanlage' : 'Grundstücksfläche'}
         </h2>
         <NummerEingabe value={grundflaeche} onChange={setGrundflaeche} placeholder="400" einheit="m²" />
+        {/* W187: Miteigentumsanteil — beim Wohnungseigentum zählt nur der anteilige Bodenwert */}
+        {istBund && art === 'etw' && (
+          <div className="mt-3">
+            <span className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Miteigentumsanteil laut Grundbuch</span>
+            <div className="grid grid-cols-2 gap-2">
+              <NummerEingabe id="grundsteuer-mea-zaehler" value={meaZaehler} onChange={setMeaZaehler} placeholder="250" einheit="Anteile" />
+              <NummerEingabe id="grundsteuer-mea-nenner" value={meaNenner} onChange={setMeaNenner} placeholder="1000" einheit="von gesamt" />
+            </div>
+          </div>
+        )}
+        {istBund && art === 'miet' && (
+          <div className="mt-3">
+            <label htmlFor="grundsteuer-wohnungen" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl der Wohnungen</label>
+            <NummerEingabe id="grundsteuer-wohnungen" value={anzahlWohnungen} onChange={setAnzahlWohnungen} placeholder="6" einheit="Wohnungen" />
+          </div>
+        )}
       </div>
 
       {art !== 'unbebaut' && (
@@ -122,6 +178,31 @@ export default function GrundsteuerRechner() {
             </h2>
             <NummerEingabe value={baujahr} onChange={setBaujahr} placeholder="1990" einheit="" />
           </div>
+
+          {istBund && (
+            <div className="mb-6 grid sm:grid-cols-2 gap-3">
+              <div>
+                <label htmlFor="grundsteuer-mietniveau" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Mietniveaustufe der Gemeinde</label>
+                <select id="grundsteuer-mietniveau" value={mietniveaustufe} onChange={e => setMietniveaustufe(e.target.value)} className={selectKlasse}>
+                  {[1, 2, 3, 4, 5, 6, 7].map(n => (
+                    <option key={n} value={String(n)}>
+                      Stufe {n} ({n === 3 ? '±0 %' : `${n < 3 ? '−' : '+'}${Math.abs(n - 3) * 10} %`})
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Steht in der Mietniveau-Einstufungsverordnung zu § 254 BewG; nicht aufgeführte Gemeinden: Stufe 3.</p>
+              </div>
+              <div>
+                <label htmlFor="grundsteuer-ermaessigung" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Ermäßigung der Steuermesszahl</label>
+                <select id="grundsteuer-ermaessigung" value={ermaessigung} onChange={e => setErmaessigung(e.target.value as MesszahlErmaessigung)} className={selectKlasse}>
+                  <option value="keine">Keine</option>
+                  <option value="denkmal">Baudenkmal (−10 %)</option>
+                  <option value="gefoerdert">Geförderter Wohnraum / Wohnungsbaugesellschaft, -genossenschaft (−25 %)</option>
+                </select>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">§ 15 Abs. 2–5 GrStG, nur auf Antrag bzw. mit Nachweis.</p>
+              </div>
+            </div>
+          )}
         </>
       )}
 
@@ -151,12 +232,39 @@ export default function GrundsteuerRechner() {
         </div>
         <table className="w-full text-sm">
           <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+            {/* W187: Rechenweg des Ertragswertverfahrens (§§ 252–257 BewG) — vorher nur Endwerte */}
+            {istBund && bm && (
+              <>
+                <tr>
+                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Rohertrag ({fmtEuro2(bm.mieteProQm)} €/m² × Wohnfläche × 12)</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro2(bm.rohertrag)} €</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">− Bewirtschaftungskosten {bm.bewirtschaftungskostenProzent} %</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro2(bm.reinertrag)} €</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">× Vervielfältiger {fmtFaktor(bm.vervielfaeltiger, 2)} ({bm.restnutzungsdauer} J. Restnutzungsdauer, {fmtProzent(bm.liegenschaftszins)} %)</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro2(bm.barwertReinertrag)} €</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">+ Bodenwert {fmtEuro(bm.bodenwert)} € × Abzinsungsfaktor {fmtFaktor(bm.abzinsungsfaktor, 4)}</td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro2(bm.abgezinsterBodenwert)} €</td>
+                </tr>
+                {bm.mindestwertGreift && (
+                  <tr>
+                    <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Mindestwert 75 % des Bodenwerts (§ 251 BewG) greift</td>
+                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro2(bm.mindestwert)} €</td>
+                  </tr>
+                )}
+              </>
+            )}
             <tr>
-              <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Grundsteuerwert</td>
+              <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Grundsteuerwert{istBund ? ' (auf volle 100 € abgerundet)' : ''}</td>
               <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro(ergebnis.grundsteuerwert)} €</td>
             </tr>
             <tr>
-              <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Steuermessbetrag</td>
+              <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Steuermessbetrag{istBund && bm ? ` (× ${fmtPromille(bm.steuermesszahl)} ‰)` : ''}</td>
               <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmtEuro2(ergebnis.messbetrag)} €</td>
             </tr>
             <tr>
@@ -173,7 +281,11 @@ export default function GrundsteuerRechner() {
 
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Hinweis:</strong> Stark vereinfachte Berechnung. Der tatsächliche Grundsteuerwert wird vom Finanzamt festgestellt und kann abweichen.
+          {/* W187: vorher für alle Modelle „Stark vereinfachte Berechnung“ */}
+          <strong>⚠️ Hinweis:</strong>{' '}
+          {istBund
+            ? 'Schätzung nach dem Ertragswertverfahren der §§ 252–257 BewG mit den gesetzlichen Tabellen (Mieten, Bewirtschaftungskosten, Vervielfältiger, Abzinsung). Nicht abgebildet sind u. a. Garagen, gewerblich genutzte Flächen und Modernisierungen. Verbindlich sind der Grundsteuerwertbescheid des Finanzamts und der Grundsteuerbescheid der Gemeinde.'
+            : 'Stark vereinfachte Berechnung. Der tatsächliche Grundsteuerwert wird vom Finanzamt festgestellt und kann abweichen.'}
         </p>
       </div>
 
@@ -182,7 +294,7 @@ export default function GrundsteuerRechner() {
       <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📊" text="Nebenkosten berechnen" />
 
       <ErgebnisAktionen
-        ergebnisText={`Grundsteuer 2026 (${modell === 'bund' ? 'Bundesmodell' : modell === 'bayern' ? 'Bayern' : 'BW'}): ${fmtEuro(ergebnis.grundsteuerJahr)} €/Jahr | Grundsteuerwert ${fmtEuro(ergebnis.grundsteuerwert)} € | Messbetrag ${fmtEuro2(ergebnis.messbetrag)} € × Hebesatz ${fmtHebesatz(parseDeutscheZahl(hebesatz))} %`}
+        ergebnisText={`Grundsteuer 2026 (${modell === 'bund' ? `Bundesmodell, ${landName}, Mietniveaustufe ${mietniveaustufe}` : modell === 'bayern' ? 'Bayern' : 'BW'}): ${fmtEuro(ergebnis.grundsteuerJahr)} €/Jahr | Grundsteuerwert ${fmtEuro(ergebnis.grundsteuerwert)} € | Messbetrag ${fmtEuro2(ergebnis.messbetrag)} € × Hebesatz ${fmtHebesatz(parseDeutscheZahl(hebesatz))} %`}
         seitenTitel="Grundsteuer-Rechner"
       />
 
@@ -190,6 +302,9 @@ export default function GrundsteuerRechner() {
         rechnerName="Grundsteuer-Rechner"
         eingaben={{
           modell,
+          ...(istBund ? { land: landName, mietniveaustufe: `Stufe ${mietniveaustufe}`, ermaessigung } : {}),
+          ...(istBund && art === 'etw' ? { miteigentumsanteil: `${meaZaehler}/${meaNenner}` } : {}),
+          ...(istBund && art === 'miet' ? { anzahlWohnungen } : {}),
           art,
           bodenrichtwert: `${bodenrichtwert} €/m²`,
           grundflaeche: `${grundflaeche} m²`,

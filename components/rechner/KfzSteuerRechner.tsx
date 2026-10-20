@@ -10,7 +10,9 @@ import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
 export default function KfzSteuerRechner() {
-  const [zulassung, setZulassung] = useState<Zulassungszeitraum>('nach-2009');
+  // W187: drei Zeiträume statt zwei (vorher 'nach-2009' = Staffel ab 2021 auch für 2009–2020)
+  const [zulassung, setZulassung] = useState<Zulassungszeitraum>('ab-2021');
+  const [erstzulassungsjahr, setErstzulassungsjahr] = useState(2015);
   const [antrieb, setAntrieb] = useState<Antriebsart>('benzin');
   const [hubraum, setHubraum] = useState('1498');
   const [co2, setCo2] = useState('128');
@@ -30,8 +32,8 @@ export default function KfzSteuerRechner() {
   }, [antrieb, erstzulassung]);
 
   const ergebnis = useMemo(
-    () => berechneKfzSteuer({ zulassung, antrieb, hubraum: nHubraum, co2: nCo2, erstzulassungsdatum }),
-    [zulassung, antrieb, nHubraum, nCo2, erstzulassungsdatum]
+    () => berechneKfzSteuer({ zulassung, antrieb, hubraum: nHubraum, co2: nCo2, erstzulassungsdatum, erstzulassungsjahr }),
+    [zulassung, antrieb, nHubraum, nCo2, erstzulassungsdatum, erstzulassungsjahr]
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -55,12 +57,31 @@ export default function KfzSteuerRechner() {
           name="kfzsteuer-zulassung"
           legend="Erstzulassung"
           options={[
-            { value: 'nach-2009', label: 'Ab 01.07.2009' },
+            { value: 'ab-2021', label: 'Ab 01.01.2021' },
+            { value: '2009-2020', label: '01.07.2009–31.12.2020' },
             { value: 'vor-2009', label: 'Vor 01.07.2009' },
           ]}
           value={zulassung}
           onChange={(v) => setZulassung(v as Zulassungszeitraum)}
         />
+        {zulassung === '2009-2020' && !istElektro && (
+          <div className="mt-3">
+            <label htmlFor="kfzsteuer-ez-jahr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahr der Erstzulassung</label>
+            <select
+              id="kfzsteuer-ez-jahr"
+              value={erstzulassungsjahr}
+              onChange={e => setErstzulassungsjahr(Number(e.target.value))}
+              className="input-field w-full sm:w-1/2"
+            >
+              {Array.from({ length: 12 }, (_, i) => 2009 + i).map(j => (
+                <option key={j} value={j}>{j}</option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              § 9 Abs. 1 Nr. 2 Buchst. b KraftStG: 2 € je g/km CO₂ über 120 g (Erstzulassung bis 2011), 110 g (2012–2013) bzw. 95 g (ab 2014).
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Antriebsart */}
@@ -76,7 +97,7 @@ export default function KfzSteuerRechner() {
 
       {/* Eingaben */}
       {!istElektro && (
-        <div className={`grid grid-cols-1 ${zulassung === 'nach-2009' ? 'sm:grid-cols-2' : ''} gap-4 mb-6`}>
+        <div className={`grid grid-cols-1 ${zulassung !== 'vor-2009' ? 'sm:grid-cols-2' : ''} gap-4 mb-6`}>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hubraum</label>
             <NummerEingabe
@@ -86,9 +107,10 @@ export default function KfzSteuerRechner() {
               einheit="ccm"
             />
           </div>
-          {zulassung === 'nach-2009' && (
+          {zulassung !== 'vor-2009' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CO₂-Ausstoß (WLTP)</label>
+              {/* W187: vorher „CO₂-Ausstoß (WLTP)“ — bei Erstzulassung bis 2018 steht im Schein oft der NEFZ-Wert */}
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CO₂-Ausstoß (Fahrzeugschein, Feld V.7)</label>
               <NummerEingabe
                 value={co2}
                 onChange={setCo2}
@@ -149,7 +171,8 @@ export default function KfzSteuerRechner() {
               <p className="text-amber-800 dark:text-amber-300 text-sm">
                 {ergebnis.keineBefreiungGrund === 'vor-2011'
                   ? 'Das Erstzulassungsdatum liegt vor dem 18.05.2011 — § 3d Abs. 1 KraftStG greift nicht.'
-                  : 'Das Erstzulassungsdatum liegt nach dem 31.12.2030 — die Förderung nach § 3d Abs. 1 KraftStG ist ausgelaufen. Elektrofahrzeuge werden dann gewichtsbasiert nach § 9 Abs. 1 Nr. 2e KraftStG besteuert. Dieser Rechner bildet die gewichtsbasierte Berechnung aktuell noch nicht ab.'}
+                  // W187: vorher „§ 9 Abs. 1 Nr. 2e KraftStG“ (gibt es nicht)
+                  : 'Das Erstzulassungsdatum liegt nach dem 31.12.2030 — die Förderung nach § 3d Abs. 1 KraftStG ist ausgelaufen. Elektrofahrzeuge werden dann nach dem zulässigen Gesamtgewicht besteuert (§ 9 Abs. 1 Nr. 3 i. V. m. Abs. 2 KraftStG, um 50 % ermäßigt). Dieser Rechner bildet die gewichtsbasierte Berechnung aktuell noch nicht ab.'}
               </p>
             </div>
           ) : (nHubraum > 0) && (
@@ -180,9 +203,10 @@ export default function KfzSteuerRechner() {
                       <td className="py-2">Sockelbetrag (Hubraum: {Math.ceil(nHubraum / 100) * 100} ccm)</td>
                       <td className="py-2 text-right font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.sockelbetrag)} €</td>
                     </tr>
-                    {zulassung === 'nach-2009' && (
+                    {zulassung !== 'vor-2009' && (
                       <tr className="text-gray-600 dark:text-gray-400">
-                        <td className="py-2">CO₂-Komponente ({nCo2 > 95 ? `${fmtCo2(nCo2)} − 95 = ${Math.round(nCo2 - 95)} g/km` : 'unter Freibetrag'})</td>
+                        {/* W187: Schwelle je Zeitraum (95 g/km ab 2021; 120/110/95 g/km bei 2009–2020, dann × 2 €) */}
+                        <td className="py-2">CO₂-Komponente ({nCo2 > (ergebnis.co2Schwelle ?? 95) ? `${fmtCo2(nCo2)} − ${ergebnis.co2Schwelle ?? 95} = ${fmtCo2(nCo2 - (ergebnis.co2Schwelle ?? 95))} g/km${zulassung === '2009-2020' ? ' × 2,00 €' : ''}` : 'unter Freibetrag'})</td>
                         <td className="py-2 text-right font-medium text-gray-800 dark:text-gray-200">{fmt(ergebnis.co2Betrag)} €</td>
                       </tr>
                     )}
@@ -198,7 +222,7 @@ export default function KfzSteuerRechner() {
               {zulassung === 'vor-2009' && (
                 <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
                   <p className="text-amber-800 dark:text-amber-300 text-xs leading-relaxed">
-                    <strong>Vereinfachung:</strong> Der Rechner nimmt Schadstoffklasse Euro 4 oder besser an (6,75 € Benzin / 15,44 € Diesel je angefangene 100 ccm). Für schlechtere Emissionsklassen (Euro 0 bis Euro 3, insbesondere Dieselfahrzeuge ohne Partikelfilter) gelten nach § 9 Abs. 1 Nr. 2a KraftStG deutlich höhere Sätze. Verbindlicher Bescheid beim Hauptzollamt.
+                    <strong>Vereinfachung:</strong> Der Rechner nimmt Schadstoffklasse Euro 4 oder besser an (6,75 € Benzin / 15,44 € Diesel je angefangene 100 ccm). Für schlechtere Emissionsklassen (Euro 0 bis Euro 3, insbesondere Dieselfahrzeuge ohne Partikelfilter) gelten nach § 9 Abs. 1 Nr. 2 Buchst. a KraftStG deutlich höhere Sätze. Verbindlicher Bescheid beim Hauptzollamt.
                   </p>
                 </div>
               )}
@@ -210,7 +234,8 @@ export default function KfzSteuerRechner() {
             <div className="bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl p-4 mb-6">
               <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Steuerbefreiung für Elektroautos (§ 3d KraftStG)</p>
               <p className="text-gray-800 dark:text-gray-200 text-sm">
-                Reine Elektrofahrzeuge sind bei Erstzulassung zwischen 18.05.2011 und <strong>31.12.2030</strong> für 10 Jahre steuerbefreit, längstens jedoch bis zum <strong>31.12.2035</strong>. Danach gilt eine gewichtsbasierte Besteuerung nach § 9 Abs. 1 Nr. 2e KraftStG.
+                {/* W187: vorher „§ 9 Abs. 1 Nr. 2e KraftStG“ */}
+                Reine Elektrofahrzeuge sind bei Erstzulassung zwischen 18.05.2011 und <strong>31.12.2030</strong> für 10 Jahre steuerbefreit, längstens jedoch bis zum <strong>31.12.2035</strong>. Danach gilt eine gewichtsbasierte Besteuerung nach § 9 Abs. 1 Nr. 3 i. V. m. Abs. 2 KraftStG (um 50 % ermäßigt).
               </p>
             </div>
           )}
@@ -230,7 +255,7 @@ export default function KfzSteuerRechner() {
               ergebnis.befreit
                 ? `Kfz-Steuer: 0,00 € (steuerbefreit bis ${ergebnis.befreitBis})`
                 : ergebnis.keineBefreiungGrund
-                  ? `Kfz-Steuer: keine § 3d-Befreiung (Erstzulassung außerhalb Förderzeitraum), gewichtsbasierte Steuer nach § 9 Abs. 1 Nr. 2e KraftStG`
+                  ? `Kfz-Steuer: keine § 3d-Befreiung (Erstzulassung außerhalb Förderzeitraum), gewichtsbasierte Steuer nach § 9 Abs. 1 Nr. 3 i. V. m. Abs. 2 KraftStG`
                   : `Kfz-Steuer: ${fmt(ergebnis.jahresSteuer)} € pro Jahr (${fmt(ergebnis.monatsSteuer)} € / Monat)`
             }
             seitenTitel="Kfz-Steuer-Rechner"
@@ -249,7 +274,7 @@ export default function KfzSteuerRechner() {
           />
           <AiExplain
             rechnerName="Kfz-Steuer-Rechner"
-            eingaben={{ zulassung, antrieb, hubraumCcm: nHubraum, co2GProKm: nCo2 }}
+            eingaben={{ zulassung, ...(zulassung === '2009-2020' ? { erstzulassungsjahr } : {}), antrieb, hubraumCcm: nHubraum, co2GProKm: nCo2 }}
             ergebnis={{ jahresSteuerEuro: ergebnis.jahresSteuer, monatsSteuerEuro: ergebnis.monatsSteuer, sockelbetragEuro: ergebnis.sockelbetrag, co2BetragEuro: ergebnis.co2Betrag, befreit: ergebnis.befreit }}
           />
         </>

@@ -160,6 +160,12 @@ function rund2(n: number): number {
   return Math.round(n * 100) / 100;
 }
 
+// W187: vorher ungerundet (z. B. 248.050 € × 11 % = 27.286 €). § 10 Abs. 1 Satz 6 ErbStG: „Der
+// steuerpflichtige Erwerb wird auf volle 100 Euro nach unten abgerundet.“ → 248.000 € × 11 % = 27.280 €.
+function abrunden100(n: number): number {
+  return Math.floor(Math.max(0, n) / 100) * 100;
+}
+
 export function berechneErbschaftsteuer(e: ErbschaftsteuerEingabe): ErbschaftsteuerErgebnis {
   const { erwerbsart, wert, verwandtschaft, vorschenkungen, selbstgenutzteImmobilie } = e;
   const hausratAktiv = e.hausratFreibetrag ?? false;
@@ -216,9 +222,9 @@ export function berechneErbschaftsteuer(e: ErbschaftsteuerEingabe): Erbschaftste
     // angewandt. Bei reinen Vorschenkungs-Szenarien (§ 13 greift nur für das
     // aktuelle Inventar) ist das konservativ zuungunsten des Erben.
     const gesamtErwerb = wert + vorschenkungen;
-    const stpflGesamt = Math.max(0, gesamtErwerb - persoenlicherFreibetrag);
+    const stpflGesamt = abrunden100(gesamtErwerb - persoenlicherFreibetrag); // W187: § 10 Abs. 1 S. 6
     const tariff = berechneErbStMitHaertefall(stpflGesamt, steuerklasse);
-    const stpflVor = Math.max(0, vorschenkungen - persoenlicherFreibetrag);
+    const stpflVor = abrunden100(vorschenkungen - persoenlicherFreibetrag); // W187: § 10 Abs. 1 S. 6
     const steuerVorTatsaechlich = berechneErbStMitHaertefall(stpflVor, steuerklasse).steuerbetrag;
     const anteilVor = gesamtErwerb > 0 ? vorschenkungen / gesamtErwerb : 0;
     const steuerProportional = Math.round(tariff.steuerbetrag * anteilVor);
@@ -227,7 +233,7 @@ export function berechneErbschaftsteuer(e: ErbschaftsteuerEingabe): Erbschaftste
     steuersatz = tariff.steuersatz;
     steuerbetrag = Math.max(0, tariff.steuerbetrag - anrechenbareVorsteuer);
   } else {
-    steuerpflichtigerErwerb = Math.max(0, wert - gesamtFreibetrag);
+    steuerpflichtigerErwerb = abrunden100(wert - gesamtFreibetrag); // W187: vorher Math.max(0, …) ohne Abrundung
     const tariff = berechneErbStMitHaertefall(steuerpflichtigerErwerb, steuerklasse);
     steuerbetrag = tariff.steuerbetrag;
     steuersatz = tariff.steuersatz;

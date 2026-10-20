@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import {
   berechneScheidungskosten,
+  ANRECHTE_VA_STANDARD,
   type Scheidungsart,
 } from '@/lib/berechnungen/scheidungskosten';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
@@ -17,6 +18,8 @@ export default function ScheidungskostenRechner() {
   const [netto, setNetto] = useState('5000');
   const [art, setArt] = useState<Scheidungsart>('einvernehmlich');
   const [versorgungsausgleich, setVersorgungsausgleich] = useState(true);
+  // W187: neu — Zahl der Anrechte, § 50 FamGKG bewertet den Versorgungsausgleich je Anrecht
+  const [anrechte, setAnrechte] = useState(String(ANRECHTE_VA_STANDARD));
   const [zugewinnausgleich, setZugewinnausgleich] = useState(false);
   const [unterhalt, setUnterhalt] = useState(false);
   const [sorgerecht, setSorgerecht] = useState(false);
@@ -27,15 +30,17 @@ export default function ScheidungskostenRechner() {
       nettoeinkommenGesamt: parseDeutscheZahl(netto),
       art,
       versorgungsausgleich,
+      anrechteVA: parseDeutscheZahl(anrechte) || ANRECHTE_VA_STANDARD,
       zugewinnausgleich,
       unterhalt,
       sorgerecht,
       ehewohnung,
     }),
-    [netto, art, versorgungsausgleich, zugewinnausgleich, unterhalt, sorgerecht, ehewohnung],
+    [netto, art, versorgungsausgleich, anrechte, zugewinnausgleich, unterhalt, sorgerecht, ehewohnung],
   );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const fmtEuro2 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
     <div>
@@ -88,9 +93,18 @@ export default function ScheidungskostenRechner() {
           value={versorgungsausgleich ? 'ja' : 'nein'}
           onChange={(v) => setVersorgungsausgleich(v === 'ja')}
         />
+        {/* W187: vorher „erhöht den Verfahrenswert um 10%“ (pauschal, ein Anrecht, ohne Mindestwert) */}
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Der Versorgungsausgleich (Aufteilung der Rentenansprüche) ist der gesetzliche Regelfall und erhöht den Verfahrenswert um 10%.
+          Der Versorgungsausgleich (Aufteilung der Rentenansprüche) ist der gesetzliche Regelfall. Er erhöht den Verfahrenswert je Anrecht um 10 % des dreifachen Nettoeinkommens, insgesamt mindestens um 1.000 € (§ 50 FamGKG).
         </p>
+        {versorgungsausgleich && (
+          <div className="mt-3">
+            <label htmlFor="scheidung-anrechte" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Anzahl der Anrechte beider Ehegatten (z. B. gesetzliche Rente, Betriebsrente, Riester)
+            </label>
+            <NummerEingabe id="scheidung-anrechte" value={anrechte} onChange={setAnrechte} placeholder="2" einheit="Anrechte" />
+          </div>
+        )}
       </div>
 
       {/* === 4: Folgesachen (nur streitig) === */}
@@ -104,8 +118,9 @@ export default function ScheidungskostenRechner() {
             {([
               ['zugewinnausgleich', 'Zugewinnausgleich', '+20% Verfahrenswert', zugewinnausgleich, setZugewinnausgleich],
               ['unterhalt', 'Unterhaltsregelung', '+15% Verfahrenswert', unterhalt, setUnterhalt],
-              ['sorgerecht', 'Sorgerecht / Umgang', '+4.000 € Verfahrenswert', sorgerecht, setSorgerecht],
-              ['ehewohnung', 'Ehewohnung / Hausrat', '+4.000 € Verfahrenswert', ehewohnung, setEhewohnung],
+              // W187: vorher je „+4.000 € Verfahrenswert“; § 44 Abs. 2 bzw. § 48 Abs. 1 FamGKG
+              ['sorgerecht', 'Sorgerecht / Umgang', '+20 % des Ehesachen-Werts (höchstens 5.000 €)', sorgerecht, setSorgerecht],
+              ['ehewohnung', 'Ehewohnung', '+5.000 € Verfahrenswert', ehewohnung, setEhewohnung],
             ] as [string, string, string, boolean, (v: boolean) => void][]).map(([key, label, hint, value, setter]) => (
               <label
                 key={key}
@@ -176,12 +191,7 @@ export default function ScheidungskostenRechner() {
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Terminsgebühr (1,2 RVG)</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(ergebnis.terminsgebuehr)} €</td>
               </tr>
-              {ergebnis.einigungsgebuehr > 0 && (
-                <tr>
-                  <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Einigungsgebühr (1,0 RVG)</td>
-                  <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(ergebnis.einigungsgebuehr)} €</td>
-                </tr>
-              )}
+              {/* W187: Zeile „Einigungsgebühr (1,0 RVG)“ entfernt — entsteht in Ehesachen nicht (Nr. 1000 Anm. Abs. 5 VV RVG) */}
               <tr>
                 <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400 whitespace-nowrap">Auslagenpauschale</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-gray-800 dark:text-gray-200 whitespace-nowrap">{fmtEuro(ergebnis.auslagenpauschale)} €</td>
@@ -261,17 +271,18 @@ export default function ScheidungskostenRechner() {
         eingaben={{
           nettoeinkommen: `${fmtEuro(parseDeutscheZahl(netto))} €/Monat`,
           art,
-          versorgungsausgleich: versorgungsausgleich ? 'Ja' : 'Nein',
+          versorgungsausgleich: versorgungsausgleich ? `Ja (${anrechte} Anrechte)` : 'Nein',
           folgesachen: art === 'streitig'
             ? [zugewinnausgleich && 'Zugewinn', unterhalt && 'Unterhalt', sorgerecht && 'Sorgerecht', ehewohnung && 'Ehewohnung'].filter(Boolean).join(', ') || 'keine'
             : 'n/a',
         }}
         ergebnis={{
-          verfahrenswert: `${ergebnis.verfahrenswertGesamt} €`,
-          gerichtskosten: `${ergebnis.gerichtskosten} €`,
-          anwaltskosten: `${ergebnis.anwaltskostenGesamt} €`,
-          gesamt: `${ergebnis.gesamtkosten} €`,
-          proPerson: `${ergebnis.proPerson} €`,
+          // W187: vorher rohe JS-Zahlen („3203.38 €“), jetzt de-DE
+          verfahrenswert: `${fmtEuro(ergebnis.verfahrenswertGesamt)} €`,
+          gerichtskosten: `${fmtEuro2(ergebnis.gerichtskosten)} €`,
+          anwaltskosten: `${fmtEuro2(ergebnis.anwaltskostenGesamt)} €`,
+          gesamt: `${fmtEuro2(ergebnis.gesamtkosten)} €`,
+          proPerson: `${fmtEuro2(ergebnis.proPerson)} €`,
         }}
       />
     </div>

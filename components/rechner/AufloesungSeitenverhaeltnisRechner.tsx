@@ -29,7 +29,7 @@ function ggt(a: number, b: number): number {
 const STANDARD_MAP: Record<string, string> = {
   '16:9': 'Full HD / 4K (TV & Monitor)',
   '21:9': 'Ultrawide',
-  '64:27': 'echtes 21:9 (UWQHD, z. B. 2560×1080)',
+  '64:27': 'als 21:9 vermarktet (UW-FHD, z. B. 2560×1080)', // W187: vorher „echtes 21:9 (UWQHD, …)“ — UWQHD ist 3440×1440, 64:27 ≈ 2,37 ≠ 21:9 ≈ 2,33
   '43:18': '21:9-Variante (3440×1440)',
   '4:3': 'klassisch',
   '3:2': 'Fotografie / Surface',

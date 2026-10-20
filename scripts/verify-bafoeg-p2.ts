@@ -2,13 +2,14 @@
 // Ausführen: npx tsx scripts/verify-bafoeg-p2.ts
 //
 // Externe Referenzen:
-//   § 25 Abs. 6 S. 1 BAföG (Gesetzestext): basisQuote 50 %, −5 %/Kind nach Abs. 3
+//   § 25 Abs. 4 BAföG (Gesetzestext; W187: vorher als Abs. 6 zitiert): basisQuote 50 %, −5 %/Kind nach Abs. 3
 //   BMBF-FAQ bafög.de: Antragsteller zählt NICHT als "Kind"
 //   § 13+§ 13a BAföG: Höchstsatz 992 € bleibt unverändert
 
 import { berechneBafoeg } from '../lib/berechnungen/bafoeg';
 import {
   BAFOEG_AB_2024_08_01,
+  BAFOEG_AB_2026_01_01,
   getAktuelleBafoegParameter,
   getAnrechnungsquote,
 } from '../lib/berechnungen/bafoeg-parameter';
@@ -17,12 +18,12 @@ interface Fall<T> { name: string; actual: T; expected: T; tol?: number; quelle: 
 
 const cases: Fall<number>[] = [];
 
-// --- SSOT-Selbsttests: Anrechnungsquote-Formel (§ 25 Abs. 6 BAföG) ---
+// --- SSOT-Selbsttests: Anrechnungsquote-Formel (§ 25 Abs. 4 BAföG) ---
 cases.push(
-  { name: 'Quote 0 Geschwister = 0,50',                actual: getAnrechnungsquote(0),  expected: 0.50, tol: 0.001, quelle: '§ 25 Abs. 6 BAföG + BMBF-FAQ' },
-  { name: 'Quote 1 Geschwister = 0,45',                actual: getAnrechnungsquote(1),  expected: 0.45, tol: 0.001, quelle: '§ 25 Abs. 6 BAföG' },
-  { name: 'Quote 2 Geschwister = 0,40',                actual: getAnrechnungsquote(2),  expected: 0.40, tol: 0.001, quelle: '§ 25 Abs. 6 BAföG' },
-  { name: 'Quote 5 Geschwister = 0,25',                actual: getAnrechnungsquote(5),  expected: 0.25, tol: 0.001, quelle: '§ 25 Abs. 6 BAföG' },
+  { name: 'Quote 0 Geschwister = 0,50',                actual: getAnrechnungsquote(0),  expected: 0.50, tol: 0.001, quelle: '§ 25 Abs. 4 BAföG + BMBF-FAQ' },
+  { name: 'Quote 1 Geschwister = 0,45',                actual: getAnrechnungsquote(1),  expected: 0.45, tol: 0.001, quelle: '§ 25 Abs. 4 BAföG' },
+  { name: 'Quote 2 Geschwister = 0,40',                actual: getAnrechnungsquote(2),  expected: 0.40, tol: 0.001, quelle: '§ 25 Abs. 4 BAföG' },
+  { name: 'Quote 5 Geschwister = 0,25',                actual: getAnrechnungsquote(5),  expected: 0.25, tol: 0.001, quelle: '§ 25 Abs. 4 BAföG' },
   { name: 'Quote 11 Geschwister = 0 (min-Clamp)',      actual: getAnrechnungsquote(11), expected: 0.00, tol: 0.001, quelle: 'min-Clamp in bafoeg-parameter.ts' },
 );
 
@@ -32,7 +33,8 @@ cases.push(
   { name: 'SSOT Bedarf Studium bei Eltern = 534',               actual: BAFOEG_AB_2024_08_01.bedarf.studium.eltern, expected: 534, quelle: '§ 13 Abs. 2 Nr. 1 BAföG' },
   { name: 'SSOT KV-Zuschlag = 102',                             actual: BAFOEG_AB_2024_08_01.zuschlaege.kv, expected: 102, quelle: '§ 13a BAföG' },
   { name: 'SSOT PV-Zuschlag = 35',                              actual: BAFOEG_AB_2024_08_01.zuschlaege.pv, expected: 35,  quelle: '§ 13a BAföG' },
-  { name: 'SSOT Elternfreibetrag verheiratet = 2.415',          actual: BAFOEG_AB_2024_08_01.freibetraege.elternVerheiratet, expected: 2415, quelle: '§ 25 Abs. 1 BAföG' },
+  // W187: vorher 2.415 € (Stand vor dem 29. BAföGÄndG) — § 25 Abs. 1 Nr. 1 BAföG: „2 540 Euro“
+  { name: 'SSOT Elternfreibetrag verheiratet = 2.540',          actual: BAFOEG_AB_2024_08_01.freibetraege.elternVerheiratet, expected: 2540, quelle: '§ 25 Abs. 1 BAföG' },
 );
 
 // --- Höchstsatz unverändert nach Refactoring (Regression-Smoke) ---
@@ -72,12 +74,12 @@ const ba01_zwei = berechneBafoeg({
 cases.push({
   name: 'BA-01 mit 2 Geschw. ≥ BA-01 mit 0 Geschw. (Monotonie)',
   actual: ba01_zwei.bafoegMonat >= ba01_null.bafoegMonat ? 1 : 0,
-  expected: 1, quelle: 'Logik § 25 Abs. 3 + 6 BAföG',
+  expected: 1, quelle: 'Logik § 25 Abs. 3 + 4 BAföG',
 });
 cases.push({
   name: 'BA-01 mit 0 Geschw. nutzt Quote 0,50',
   actual: ba01_null.anrechnungsquoteEltern, expected: 0.50, tol: 0.001,
-  quelle: 'getAnrechnungsquote(0) = 0,50 (§ 25 Abs. 6)',
+  quelle: 'getAnrechnungsquote(0) = 0,50 (§ 25 Abs. 4)',
 });
 cases.push({
   name: 'BA-01 mit 2 Geschw. nutzt Quote 0,40',
@@ -85,13 +87,19 @@ cases.push({
   quelle: 'getAnrechnungsquote(2) = 0,40',
 });
 
-// --- Stichtag-Switch aktuell single-bucket ---
+// --- Stichtag-Switch (W187: zweiter Bucket ab 01.01.2026 für § 23 Abs. 1 S. 1 Nr. 1, vorher ein Bucket) ---
+const dez25 = getAktuelleBafoegParameter(new Date('2025-12-15'));
 const jan = getAktuelleBafoegParameter(new Date('2026-01-15'));
 const jun = getAktuelleBafoegParameter(new Date('2026-06-15'));
 cases.push({
-  name: 'Single-Bucket: Jan und Jun 2026 = BAFOEG_AB_2024_08_01',
-  actual: jan === BAFOEG_AB_2024_08_01 && jun === BAFOEG_AB_2024_08_01 ? 1 : 0,
-  expected: 1, quelle: 'Stichtag-Switch-Skeleton (aktuell nur 1 Bucket)',
+  name: 'Bucket: Dez 2025 = BAFOEG_AB_2024_08_01',
+  actual: dez25 === BAFOEG_AB_2024_08_01 ? 1 : 0,
+  expected: 1, quelle: 'Stichtag-Switch',
+});
+cases.push({
+  name: 'Bucket: Jan und Jun 2026 = BAFOEG_AB_2026_01_01',
+  actual: jan === BAFOEG_AB_2026_01_01 && jun === BAFOEG_AB_2026_01_01 ? 1 : 0,
+  expected: 1, quelle: 'Stichtag-Switch (Freibetrag eigenes Einkommen 389 € ab 01.01.2026)',
 });
 
 let passed = 0, failed = 0;

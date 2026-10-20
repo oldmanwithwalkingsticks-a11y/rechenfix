@@ -3,14 +3,16 @@ import {
   berechneSoli,
   berechneKirchensteuerByBundesland,
   BUNDESLAENDER as BUNDESLAENDER_CENTRAL,
-  WK_PAUSCHALE_AN_2026,
   type Bundesland,
 } from './einkommensteuer';
 import { KIFB_GESAMT_ZUSAMMEN_2026 } from './kindergeld';
 
 export interface SplittingEingabe {
-  jahresBruttoP1: number;
-  jahresBruttoP2: number;
+  // W187: vorher jahresBruttoP1/P2 („Jahresbrutto“), von dem nur 1.230 € + 36 € abgezogen wurden —
+  // Vorsorgeaufwendungen fehlten, die Steuer war für Arbeitnehmer rund 50 % zu hoch. Jetzt wird das
+  // zu versteuernde Einkommen je Partner eingegeben (wie im Einkommensteuer-Rechner), vor Kinderfreibeträgen.
+  zvEP1: number;
+  zvEP2: number;
   kirchensteuerP1: boolean;
   kirchensteuerP2: boolean;
   bundesland: string;
@@ -60,21 +62,11 @@ export interface SplittingErgebnis {
   vergleichsTabelle: SplittingVergleichsZeile[];
 }
 
-const WERBUNGSKOSTEN_PAUSCHBETRAG = WK_PAUSCHALE_AN_2026;
-const SONDERAUSGABEN_PAUSCHBETRAG = 36;
-
 export const BUNDESLAENDER = BUNDESLAENDER_CENTRAL;
 
 function kistWenn(est: number, hatKirche: boolean, bundesland: string): number {
   if (!hatKirche) return 0;
   return berechneKirchensteuerByBundesland(est, bundesland as Bundesland);
-}
-
-// zvE-Hilfsfunktion: Brutto eines Partners nach Arbeitnehmer-Pauschbetrag (§ 9a EStG)
-// und Sonderausgabenpauschale (§ 10c EStG). Gilt nur, wenn Partner auch Einkommen hat.
-function pauschalenAbzug(brutto: number): number {
-  if (brutto <= 0) return 0;
-  return Math.max(0, brutto - WERBUNGSKOSTEN_PAUSCHBETRAG - SONDERAUSGABEN_PAUSCHBETRAG);
 }
 
 function kifbAbzug(zve: number, kinderfreibetraege: number): number {
@@ -87,19 +79,18 @@ function kifbAbzug(zve: number, kinderfreibetraege: number): number {
 
 export function berechneSplitting(eingabe: SplittingEingabe): SplittingErgebnis | null {
   const {
-    jahresBruttoP1, jahresBruttoP2,
+    zvEP1, zvEP2,
     kirchensteuerP1, kirchensteuerP2,
     bundesland, kinderfreibetraege,
   } = eingabe;
 
-  if (jahresBruttoP1 < 0 || jahresBruttoP2 < 0) return null;
-  if (jahresBruttoP1 === 0 && jahresBruttoP2 === 0) return null;
+  if (zvEP1 < 0 || zvEP2 < 0) return null;
+  if (zvEP1 === 0 && zvEP2 === 0) return null;
 
-  // === zvE berechnen ===
-  // WK- und Sonderausgabenpauschale greifen PRO PARTNER (§ 9a, § 10c EStG), auch bei
-  // Zusammenveranlagung — sofern der Partner überhaupt Einkommen hat.
-  const zveP1Vor = pauschalenAbzug(jahresBruttoP1);
-  const zveP2Vor = pauschalenAbzug(jahresBruttoP2);
+  // === zvE ===
+  // W187: vorher pauschalenAbzug(Brutto) = Brutto − 1.230 − 36; jetzt ist die Eingabe bereits das zvE.
+  const zveP1Vor = zvEP1;
+  const zveP2Vor = zvEP2;
 
   // Bei Einzelveranlagung: Kinderfreibeträge hälftig aufteilen (halber Anteil pro Elternteil)
   const zveP1 = Math.max(0, Math.round(kifbAbzug(zveP1Vor, kinderfreibetraege / 2)));
@@ -145,8 +136,9 @@ export function berechneSplitting(eingabe: SplittingEingabe): SplittingErgebnis 
   const vorteilGesamt = Math.round((gesamtEinzel - gesamtSplitting) * 100) / 100;
 
   // === STEUERKLASSEN-EMPFEHLUNG ===
-  const gesamtBrutto = jahresBruttoP1 + jahresBruttoP2;
-  const anteilP1 = gesamtBrutto > 0 ? jahresBruttoP1 / gesamtBrutto : 0.5;
+  // W187: Verhältnis jetzt aus den zvE (vorher Brutto)
+  const gesamtEinkommen = zvEP1 + zvEP2;
+  const anteilP1 = gesamtEinkommen > 0 ? zvEP1 / gesamtEinkommen : 0.5;
   let empfehlung: 'III/V' | 'IV/IV' | 'IV/IV mit Faktor';
   let empfehlungText: string;
 
@@ -155,7 +147,7 @@ export function berechneSplitting(eingabe: SplittingEingabe): SplittingErgebnis 
     empfehlungText = 'Beide Partner verdienen ähnlich viel. Die Kombination IV/IV sorgt für eine gleichmäßige Steuerbelastung im laufenden Jahr und vermeidet hohe Nachzahlungen.';
   } else {
     empfehlung = 'III/V';
-    const mehrverdiener = jahresBruttoP1 >= jahresBruttoP2 ? 'Partner 1' : 'Partner 2';
+    const mehrverdiener = zvEP1 >= zvEP2 ? 'Partner 1' : 'Partner 2';
     empfehlungText = `${mehrverdiener} verdient deutlich mehr. Mit III für den Mehrverdienenden und V für den Geringverdienenden erhalten Sie monatlich mehr Netto. Achtung: Es kann zu Nachzahlungen bei der Steuererklärung kommen. Das Faktorverfahren (IV/IV mit Faktor) kann eine Alternative sein.`;
   }
 

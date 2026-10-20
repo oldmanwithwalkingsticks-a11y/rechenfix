@@ -862,7 +862,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'lebenszeit-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Lebenszeit-Rechner',
     beschreibung: 'Wie viele Tage haben Sie bereits gelebt? Überraschende Fakten über Ihre Lebenszeit, Herzschläge und verbleibende Wochenenden.',
     kategorie: 'Alltag',
@@ -871,7 +871,8 @@ export const alltagRechner: RechnerConfig[] = [
     metaDescription: 'Lebenszeit-Rechner: Mit 40 sind es rund 14.600 gelebte Tage, 1,5 Mrd. Herzschläge und über 13 Jahre Schlaf. Ihre Zahlen kostenlos berechnen.',
     keywords: ['lebenszeit rechner', 'wie viele tage habe ich gelebt', 'tage gelebt', 'lebenserwartung rechner', 'herzschläge berechnen', 'wie alt bin ich in tagen', 'lebenszeit statistik', 'verbleibende lebenszeit', 'alter in tagen', 'lebensuhr'],
     icon: '🧬',
-    beispiel: 'Beispiel: Geboren am 15. März 1990 → Sie haben ca. 13.170 Tage gelebt, Ihr Herz hat ca. 1,33 Milliarden Mal geschlagen.',
+    // W187: vorher ohne Stichtag („ca. 13.170 Tage“ = Stand 05.04.2026); Stichtag wie in den übrigen Beispielen.
+    beispiel: 'Beispiel: Geboren am 15. März 1990, Stichtag 21.06.2026 → Sie haben 13.247 Tage gelebt, Ihr Herz hat bei 70 Schlägen pro Minute ca. 1,34 Milliarden Mal geschlagen.',
     faq: [
       {
         frage: 'Wie genau ist der Lebenszeit-Rechner?',
@@ -879,7 +880,8 @@ export const alltagRechner: RechnerConfig[] = [
       },
       {
         frage: 'Woher stammen die Daten zur Lebenserwartung?',
-        antwort: 'Die statistischen Lebenserwartungen (Männer: 78,5 Jahre, Frauen: 83,2 Jahre) basieren auf den aktuellen Sterbetafeln des Statistischen Bundesamtes (Destatis) für Deutschland. Die tatsächliche Lebenserwartung hängt von individuellen Faktoren wie Lebensstil und genetischer Veranlagung ab.',
+        // W187: vorher 78,5 / 83,2 Jahre (Sterbetafel 2022/2024)
+        antwort: 'Die statistischen Lebenserwartungen (Männer: 78,8 Jahre, Frauen: 83,4 Jahre) basieren auf der aktuellen Sterbetafel 2023/2025 des Statistischen Bundesamtes (Destatis) für Deutschland. Die tatsächliche Lebenserwartung hängt von individuellen Faktoren wie Lebensstil und genetischer Veranlagung ab.',
       },
       {
         frage: 'Wie viele Herzschläge hat ein Mensch im Leben?',
@@ -891,7 +893,8 @@ export const alltagRechner: RechnerConfig[] = [
       },
     ],
     quellen: [
-      { titel: 'Destatis — Sterbetafel / Lebenserwartung', url: 'https://www.destatis.de', hinweis: 'Durchschnittliche Lebenserwartung in Deutschland (Männer 78,5 / Frauen 83,2 Jahre)' },
+      // W187: vorher „Männer 78,5 / Frauen 83,2 Jahre“, URL nur Startseite
+      { titel: 'Destatis — Sterbetafel 2023/2025 / Lebenserwartung', url: 'https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Sterbefaelle-Lebenserwartung/sterbetafel.html', hinweis: 'Durchschnittliche Lebenserwartung bei Geburt in Deutschland (Männer 78,8 / Frauen 83,4 Jahre, Stand 07.07.2026)' },
       { titel: 'WHO / Statista — Zeitverwendung', hinweis: 'Durchschnittswerte zu Schlaf-, Arbeits- und Mediennutzungszeit' },
       { titel: 'Medizinische Durchschnittswerte — Ruhepuls und Atemfrequenz', hinweis: 'Erwachsene in Ruhe: rund 60–100 Herzschläge/Min (Modellwert 70) und 12–18 Atemzüge/Min (Modellwert 15)' },
     ],
@@ -970,16 +973,17 @@ export const alltagRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Lebenserwartung in Deutschland — der Geschlechtsunterschied',
-        html: `<p>Die statistische <strong>Lebenserwartung</strong> in Deutschland liegt nach den Sterbetafeln des Statistischen Bundesamts (Destatis) bei rund <strong>78,5 Jahren für Männer</strong> und <strong>83,2 Jahren für Frauen</strong>. Frauen leben im Durchschnitt also knapp fünf Jahre länger — ein Unterschied, der sich seit Jahrzehnten zeigt und auf eine Mischung aus biologischen, sozialen und verhaltensbedingten Faktoren zurückgeführt wird.</p><p>Wichtig ist die Einordnung: Diese Zahlen sind <strong>Durchschnitte</strong> über die gesamte Bevölkerung, keine Vorhersage für eine einzelne Person. Die individuelle Lebenserwartung hängt von Lebensstil, Ernährung, Bewegung, sozialem Umfeld, genetischer Veranlagung und medizinischer Versorgung ab — Faktoren, die teils beeinflussbar sind. Der Rechner nutzt die Destatis-Mittelwerte als neutrale Bezugsgröße, um daraus die verbleibende Zeit als Perspektive abzuleiten. Es geht ausdrücklich nicht um eine Prognose des eigenen Lebens, sondern um ein Gefühl für Größenordnungen. Auch die Lebenserwartung selbst ist kein fester Wert: Sie ist über die letzten Jahrzehnte gestiegen, und wer ein bestimmtes Alter bereits erreicht hat, hat statistisch sogar eine etwas höhere Resterwartung als die Geburtsjahrgangs-Tabelle nahelegt.</p>`,
+        html: `<p>Die statistische <strong>Lebenserwartung</strong> in Deutschland liegt nach den Sterbetafeln des Statistischen Bundesamts (Destatis) bei rund <strong>78,8 Jahren für Männer</strong> und <strong>83,4 Jahren für Frauen</strong> (Sterbetafel 2023/2025). Frauen leben im Durchschnitt also knapp fünf Jahre länger — ein Unterschied, der sich seit Jahrzehnten zeigt und auf eine Mischung aus biologischen, sozialen und verhaltensbedingten Faktoren zurückgeführt wird.</p><p>Wichtig ist die Einordnung: Diese Zahlen sind <strong>Durchschnitte</strong> über die gesamte Bevölkerung, keine Vorhersage für eine einzelne Person. Die individuelle Lebenserwartung hängt von Lebensstil, Ernährung, Bewegung, sozialem Umfeld, genetischer Veranlagung und medizinischer Versorgung ab — Faktoren, die teils beeinflussbar sind. Der Rechner nutzt die Destatis-Mittelwerte als neutrale Bezugsgröße, um daraus die verbleibende Zeit als Perspektive abzuleiten. Es geht ausdrücklich nicht um eine Prognose des eigenen Lebens, sondern um ein Gefühl für Größenordnungen. Auch die Lebenserwartung selbst ist kein fester Wert: Sie ist über die letzten Jahrzehnte gestiegen, und wer ein bestimmtes Alter bereits erreicht hat, hat statistisch sogar eine etwas höhere Resterwartung als die Geburtsjahrgangs-Tabelle nahelegt.</p>`,
       },
       {
         typ: 'statistik',
         titel: 'Lebenserwartung und verbleibende Zeit (Beispiel: 40 Jahre alt)',
         werte: [
-          { label: 'Lebenserwartung Männer', wert: '78,5 Jahre', hinweis: 'aktuelle Destatis-Sterbetafel für Deutschland' },
-          { label: 'Lebenserwartung Frauen', wert: '83,2 Jahre', hinweis: 'rund 4,7 Jahre mehr als Männer' },
-          { label: 'Verbleibend (40-j. Mann)', wert: '14.063 Tage', hinweis: '≈ 38,5 Jahre, etwa 2.009 Wochenenden' },
-          { label: 'Verbleibend (40-j. Frau)', wert: '15.780 Tage', hinweis: '≈ 43,2 Jahre, etwa 2.254 Wochenenden' },
+          // W187: vorher 78,5 / 83,2 Jahre, 4,7 Jahre Abstand, 14.063 / 15.780 Tage verbleibend
+          { label: 'Lebenserwartung Männer', wert: '78,8 Jahre', hinweis: 'Destatis-Sterbetafel 2023/2025 für Deutschland' },
+          { label: 'Lebenserwartung Frauen', wert: '83,4 Jahre', hinweis: 'rund 4,6 Jahre mehr als Männer' },
+          { label: 'Verbleibend (40-j. Mann)', wert: '14.173 Tage', hinweis: '≈ 38,8 Jahre, etwa 2.024 volle Wochenenden' },
+          { label: 'Verbleibend (40-j. Frau)', wert: '15.853 Tage', hinweis: '≈ 43,4 Jahre, etwa 2.264 volle Wochenenden' },
           { label: 'Bereits gelebt (Mann, 40 J)', wert: '51 %', hinweis: 'gut die Hälfte der statistischen Zeit; bei einer Frau gleichen Alters erst rund 48 %' },
         ],
       },
@@ -987,10 +991,11 @@ export const alltagRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Verbleibende Wochenenden eines 40-jährigen Mannes',
         schritte: [
-          { label: 'Statistische Lebenserwartung (Mann)', formel: 'Destatis', ergebnis: '78,5 Jahre' },
-          { label: 'In Tage umrechnen', formel: '78,5 × 365,25', ergebnis: '≈ 28.672 Tage' },
-          { label: 'Bereits gelebte Tage abziehen', formel: '28.672 − 14.609', ergebnis: '14.063 Tage' },
-          { label: 'In Wochenenden umrechnen', formel: '14.063 ÷ 7', ergebnis: '≈ 2.009 Wochenenden' },
+          // W187: vorher 78,5 × 365,25 ≈ 28.672 → 14.063 Tage → ≈ 2.009 Wochenenden
+          { label: 'Statistische Lebenserwartung (Mann)', formel: 'Destatis 2023/2025', ergebnis: '78,8 Jahre' },
+          { label: 'In Tage umrechnen', formel: '78,8 × 365,25', ergebnis: '≈ 28.782 Tage' },
+          { label: 'Bereits gelebte Tage abziehen', formel: '28.782 − 14.609', ergebnis: '14.173 Tage' },
+          { label: 'In Wochenenden umrechnen', formel: '14.173 ÷ 7 (abgerundet)', ergebnis: '2.024 volle Wochenenden' },
         ],
         fazit: 'Rund 2.000 Wochenenden — diese Zahl wirkt überschaubarer als 14.000 Tage und genau das ist der Punkt. Wochenenden sind ein greifbares Maß: Man kann sie sich vorstellen, planen und bewusst gestalten. Die Rechnung ist kein Countdown, sondern eine Einladung, die freie Zeit nicht beiläufig verstreichen zu lassen. Wer 365,25 statt 365 Tage pro Jahr ansetzt, berücksichtigt übrigens die Schaltjahre — auf Jahrzehnte gerechnet macht das mehrere Tage Unterschied und hält die Umrechnung präzise.',
       },
@@ -999,11 +1004,12 @@ export const alltagRechner: RechnerConfig[] = [
         titel: 'Gelebte gegen verbleibende Tage',
         schritte: [
           { label: 'Gelebte Tage (40 Jahre)', formel: 'heute − Geburtsdatum', ergebnis: '14.609 Tage' },
-          { label: 'Erwartete Gesamttage (Mann)', formel: '78,5 × 365,25', ergebnis: '≈ 28.672 Tage' },
-          { label: 'Anteil bereits gelebt', formel: '14.609 ÷ 28.672', ergebnis: '≈ 51 %' },
-          { label: 'Statistisch verbleibend', formel: '28.672 − 14.609', ergebnis: '14.063 Tage' },
+          // W187: vorher 78,5 × 365,25 ≈ 28.672, verbleibend 14.063 Tage
+          { label: 'Erwartete Gesamttage (Mann)', formel: '78,8 × 365,25', ergebnis: '≈ 28.782 Tage' },
+          { label: 'Anteil bereits gelebt', formel: '14.609 ÷ 28.782', ergebnis: '≈ 51 %' },
+          { label: 'Statistisch verbleibend', formel: '28.782 − 14.609', ergebnis: '14.173 Tage' },
         ],
-        fazit: 'Mit 40 Jahren hat ein Mann statistisch gut die Hälfte seiner Zeit hinter sich — und ungefähr die Hälfte noch vor sich. Diese Symmetrie überrascht viele, weil sich die erste Lebenshälfte mit Kindheit, Ausbildung und Berufseinstieg sehr voll anfühlt. Die zweite Hälfte bietet damit reichlich Raum, den man bewusst füllen kann. Für eine gleichaltrige Frau verschiebt sich die Marke nach hinten: Bei 83,2 Jahren Lebenserwartung sind mit 40 erst rund 48 Prozent gelebt, also noch etwas mehr als die Hälfte offen.',
+        fazit: 'Mit 40 Jahren hat ein Mann statistisch gut die Hälfte seiner Zeit hinter sich — und ungefähr die Hälfte noch vor sich. Diese Symmetrie überrascht viele, weil sich die erste Lebenshälfte mit Kindheit, Ausbildung und Berufseinstieg sehr voll anfühlt. Die zweite Hälfte bietet damit reichlich Raum, den man bewusst füllen kann. Für eine gleichaltrige Frau verschiebt sich die Marke nach hinten: Bei 83,4 Jahren Lebenserwartung sind mit 40 erst rund 48 Prozent gelebt, also noch etwas mehr als die Hälfte offen.',
       },
       {
         typ: 'infobox',
@@ -2252,7 +2258,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'geburtstag-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Geburtstags-Rechner',
     beschreibung: 'Geburtstag berechnen: Alter in Tagen, Stunden und Minuten, Wochentag der Geburt, Sternzeichen und nächster runder Geburtstag.',
     kategorie: 'Alltag',
@@ -2261,7 +2267,8 @@ export const alltagRechner: RechnerConfig[] = [
     metaDescription: 'Geburtsdatum analysieren: Alter in Tagen, Stunden und Minuten ✓ Wochentag der Geburt ✓ Sternzeichen ✓ Nächster runder Geburtstag ✓ Live-Zähler.',
     keywords: ['geburtstag rechner', 'alter in tagen', 'alter in stunden', 'wochentag geburt', 'wie alt bin ich in tagen', 'sternzeichen berechnen', 'nächster runder geburtstag', 'geburtstag berechnen', 'alter in minuten', 'tage seit geburt'],
     icon: '🎂',
-    beispiel: 'Geboren am 15.06.1990 → 35 Jahre, 9 Monate, 28 Tage = 13.087 Tage = 314.088 Stunden = ca. 1,13 Milliarden Sekunden.',
+    // W187: vorher ohne Stichtag „35 Jahre, 9 Monate, 28 Tage = 13.087 Tage = 314.088 Stunden“ (in sich nicht stimmig); jetzt Stichtag wie die übrigen Beispiele
+    beispiel: 'Geboren am 15.06.1990, Stichtag 21.06.2026 → 36 Jahre, 0 Monate, 6 Tage = 13.155 Tage = 315.720 Stunden = ca. 1,14 Milliarden Sekunden.',
     faq: [
       {
         frage: 'Wie alt bin ich in Tagen?',
@@ -3126,24 +3133,27 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'waehrungsrechner',
-    letzteAktualisierung: '2026-06-27',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Währungsrechner',
-    beschreibung: 'Beträge zwischen 29 Währungen umrechnen — mit statischen Referenzkursen vom 27.06.2026.',
+    // W187: vorher 29 Währungen (inkl. BGN und RUB) mit Kursen vom 27.06.2026 (Samstag, kein EZB-Fixing)
+    beschreibung: 'Beträge zwischen 27 Währungen umrechnen — mit statischen EZB-Referenzkursen vom 19.10.2026.',
     kategorie: 'Alltag',
     kategorieSlug: 'alltag',
-    metaTitle: 'Währungsrechner — 29 Währungen weltweit',
-    metaDescription: 'Währungsrechner: Beträge zwischen 29 Währungen umrechnen ✓ EUR, USD, GBP, CHF, JPY, PLN, TRY ✓ Statische Referenzkurse ✓ Mit KI-Erklärung.',
+    metaTitle: 'Währungsrechner — 27 Währungen weltweit',
+    metaDescription: 'Währungsrechner: Beträge zwischen 27 Währungen umrechnen ✓ EUR, USD, GBP, CHF, JPY, PLN, TRY ✓ Statische EZB-Referenzkurse ✓ Mit KI-Erklärung.',
     keywords: ['währungsrechner', 'wechselkurs rechner', 'euro dollar umrechnen', 'euro franken umrechnen', 'währung umrechnen', 'devisenrechner', 'wechselkurse'],
     icon: '💱',
-    beispiel: 'Beispiel: 100 € in USD bei Kurs 1,135 → (100 / 1,0) × 1,135 = 113,50 $. Umgekehrt: 100 $ in € → (100 / 1,135) × 1,0 = 88,11 €.',
+    // W187: vorher Kurs 1,135 (113,50 $ / 88,11 €) — EZB-Referenzkurs 19.10.2026: 1,1225
+    beispiel: 'Beispiel: 100 € in USD bei Kurs 1,1225 → (100 / 1,0) × 1,1225 = 112,25 $. Umgekehrt: 100 $ in € → (100 / 1,1225) × 1,0 = 89,09 €.',
     faq: [
       {
         frage: 'Sind die Wechselkurse aktuell?',
-        antwort: 'Nein, der Rechner nutzt statische Referenzkurse mit Stand vom 27.06.2026. Für grobe Orientierung ist das ausreichend. Für echte Transaktionen nutzen Sie bitte die aktuellen Kurse Ihrer Bank oder einen Echtzeit-Dienst (EZB-Referenzkurs, xe.com).',
+        antwort: 'Nein, der Rechner nutzt statische EZB-Referenzkurse mit Stand vom 19.10.2026. Für grobe Orientierung ist das ausreichend. Für echte Transaktionen nutzen Sie bitte die aktuellen Kurse Ihrer Bank oder einen Echtzeit-Dienst (EZB-Referenzkurs, xe.com).',
       },
       {
         frage: 'Welche Währungen unterstützt der Rechner?',
-        antwort: 'Insgesamt 29 Währungen: EUR, USD, GBP, CHF, JPY, PLN, CZK, TRY, SEK, NOK, DKK, HUF, RON, BGN, AUD, CAD, NZD, CNY, INR, BRL, THB, KRW, ZAR, MXN, SGD, HKD, ILS, AED und RUB.',
+        // W187: BGN (seit 01.01.2026 Euro in Bulgarien) und RUB (kein EZB-Referenzkurs seit 03/2022) gestrichen
+        antwort: 'Insgesamt 27 Währungen: EUR, USD, GBP, CHF, JPY, PLN, CZK, TRY, SEK, NOK, DKK, HUF, RON, AUD, CAD, NZD, CNY, INR, BRL, THB, KRW, ZAR, MXN, SGD, HKD, ILS und AED. Den bulgarischen Lew gibt es nicht mehr: Bulgarien zahlt seit dem 1. Januar 2026 mit dem Euro (Umrechnungskurs 1 € = 1,95583 Lew). Für den russischen Rubel veröffentlicht die EZB seit März 2022 keinen Referenzkurs.',
       },
       {
         frage: 'Warum bekomme ich bei der Bank einen schlechteren Kurs?',
@@ -3151,7 +3161,7 @@ export const alltagRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist der EZB-Referenzkurs?',
-        antwort: 'Die Europäische Zentralbank veröffentlicht werktäglich um 16:00 Uhr einen offiziellen Referenzkurs für den Euro gegenüber 31 Währungen. Dieser Kurs dient als Orientierung, ist aber kein handelbarer Kurs — er basiert auf einer Stichprobe internationaler Banken.',
+        antwort: 'Die Europäische Zentralbank veröffentlicht werktäglich um 16:00 Uhr einen offiziellen Referenzkurs für den Euro gegenüber 29 Währungen (Stand 2026). Dieser Kurs dient als Orientierung, ist aber kein handelbarer Kurs — er basiert auf einer Stichprobe internationaler Banken.',
       },
       {
         frage: 'Wie kann ich günstig Geld wechseln?',
@@ -3162,7 +3172,7 @@ export const alltagRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Währungen umrechnen über den Euro als Basis',
-        html: `<p>Der <strong>Währungsrechner</strong> rechnet Beträge zwischen 29 Währungen um — von Euro, Dollar und Pfund bis zu Yen, Lira und Won. Alle Kurse sind auf den <strong>Euro normiert (EUR = 1)</strong>, sodass jede Umrechnung über den Euro als gemeinsame Basis läuft: erst in Euro, dann in die Zielwährung.</p><p>Die Grundformel ist einfach: <strong>(Betrag ÷ Kurs der Ausgangswährung) × Kurs der Zielwährung</strong>. Für zwei Fremdwährungen ohne direkten Kurs entsteht so automatisch ein <strong>Kreuzkurs</strong> über den Euro. Das Ergebnis erscheint live in beide Richtungen.</p><p>Ein wichtiger Hinweis vorweg, der weiter unten ausführlich erklärt wird: Die hinterlegten Kurse sind <strong>Referenzwerte mit Stichtag</strong>, keine Live-Kurse. Wer Reisetermine plant, kombiniert den Rechner gern mit dem <a href="/alltag/uhrzeitrechner">Uhrzeitrechner</a> für die Zeitverschiebung am Zielort.</p>`,
+        html: `<p>Der <strong>Währungsrechner</strong> rechnet Beträge zwischen 27 Währungen um — von Euro, Dollar und Pfund bis zu Yen, Lira und Won. Alle Kurse sind auf den <strong>Euro normiert (EUR = 1)</strong>, sodass jede Umrechnung über den Euro als gemeinsame Basis läuft: erst in Euro, dann in die Zielwährung.</p><p>Die Grundformel ist einfach: <strong>(Betrag ÷ Kurs der Ausgangswährung) × Kurs der Zielwährung</strong>. Für zwei Fremdwährungen ohne direkten Kurs entsteht so automatisch ein <strong>Kreuzkurs</strong> über den Euro. Das Ergebnis erscheint live in beide Richtungen.</p><p>Ein wichtiger Hinweis vorweg, der weiter unten ausführlich erklärt wird: Die hinterlegten Kurse sind <strong>Referenzwerte mit Stichtag</strong>, keine Live-Kurse. Wer Reisetermine plant, kombiniert den Rechner gern mit dem <a href="/alltag/uhrzeitrechner">Uhrzeitrechner</a> für die Zeitverschiebung am Zielort.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -3170,49 +3180,52 @@ export const alltagRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Ausgangsbetrag', formel: '100 €', ergebnis: '100 €' },
           { label: 'EUR-Kurs (Basis)', formel: 'Kurs_EUR = 1,0', ergebnis: 'Referenz' },
-          { label: 'USD-Kurs', formel: 'Kurs_USD = 1,135', ergebnis: '1 € = 1,135 $' },
-          { label: 'Umrechnung', formel: '(100 / 1,0) × 1,135', ergebnis: '113,50 $' },
+          // W187: vorher Kurs 1,135 → 113,50 $ (Stand 27.06.2026)
+          { label: 'USD-Kurs', formel: 'Kurs_USD = 1,1225', ergebnis: '1 € = 1,1225 $' },
+          { label: 'Umrechnung', formel: '(100 / 1,0) × 1,1225', ergebnis: '112,25 $' },
         ],
-        fazit: 'Bei einem Referenzkurs von 1,135 werden aus 100 € rund 113,50 US-Dollar. Die Formel lautet immer (Betrag ÷ Kurs der Ausgangswährung) × Kurs der Zielwährung — weil alle Kurse auf den Euro als Basis (EUR = 1) normiert sind. Stand der Kurse: 27.06.2026.',
+        fazit: 'Bei einem Referenzkurs von 1,1225 werden aus 100 € rund 112,25 US-Dollar. Die Formel lautet immer (Betrag ÷ Kurs der Ausgangswährung) × Kurs der Zielwährung — weil alle Kurse auf den Euro als Basis (EUR = 1) normiert sind. Stand der Kurse: EZB-Referenzkurse vom 19.10.2026.',
       },
       {
         typ: 'tabelle',
-        titel: 'Referenzkurse (Auszug, Stand 27.06.2026)',
+        // W187: vorher Stand 27.06.2026 mit 1,135 $ / 0,862 £ / 0,915 Fr. / 183,5 ¥ / 4,24 zł / 53,3 ₺ / 24,25 Kč / 356 Ft / 37,9 ฿
+        titel: 'Referenzkurse (Auszug, EZB, Stand 19.10.2026)',
         kopf: ['Währung', 'Code', '1 € ='],
         zeilen: [
-          ['US-Dollar', 'USD', '1,135 $'],
-          ['Britisches Pfund', 'GBP', '0,862 £'],
-          ['Schweizer Franken', 'CHF', '0,915 Fr.'],
-          ['Japanischer Yen', 'JPY', '183,5 ¥'],
-          ['Polnischer Zloty', 'PLN', '4,24 zł'],
-          ['Türkische Lira', 'TRY', '53,3 ₺'],
-          ['Tschechische Krone', 'CZK', '24,25 Kč'],
-          ['Ungarischer Forint', 'HUF', '356 Ft'],
-          ['Thailändischer Baht', 'THB', '37,9 ฿'],
+          ['US-Dollar', 'USD', '1,1225 $'],
+          ['Britisches Pfund', 'GBP', '0,84205 £'],
+          ['Schweizer Franken', 'CHF', '0,9261 Fr.'],
+          ['Japanischer Yen', 'JPY', '177,63 ¥'],
+          ['Polnischer Zloty', 'PLN', '4,3713 zł'],
+          ['Türkische Lira', 'TRY', '55,6227 ₺'],
+          ['Tschechische Krone', 'CZK', '24,343 Kč'],
+          ['Ungarischer Forint', 'HUF', '363,40 Ft'],
+          ['Thailändischer Baht', 'THB', '37,665 ฿'],
         ],
-        fussnote: 'Auszug der Referenzkurse mit Stand 27.06.2026, Basis EUR = 1. Der Rechner kennt 29 Währungen. Es sind Referenz-Momentaufnahmen, keine Live-Kurse — die tatsächlichen Marktkurse ändern sich täglich.',
+        fussnote: 'Auszug der EZB-Euro-Referenzkurse vom 19.10.2026, Basis EUR = 1. Der Rechner kennt 27 Währungen. Es sind Referenz-Momentaufnahmen, keine Live-Kurse — die tatsächlichen Marktkurse ändern sich täglich.',
       },
       {
         typ: 'text',
         titel: 'Umrechnungslogik und Kreuzkurse',
-        html: `<p>Hinter dem Rechner steckt ein einfaches Prinzip: Jede Währung hat einen festen Kurs zum <strong>Euro</strong>. 1 € sind zum Beispiel 1,135 $ oder 183,5 ¥. Will man von einer Fremdwährung in eine andere umrechnen, geht der Weg immer über den Euro als <strong>Drehscheibe</strong>.</p><p>Beispiel Dollar nach Pfund: Man rechnet die Dollar zuerst in Euro um (Betrag ÷ 1,135) und das Ergebnis dann in Pfund (× 0,862). Diesen abgeleiteten Kurs nennt man <strong>Kreuzkurs</strong> — er ergibt sich, indem man die beiden Euro-Kurse durcheinander teilt.</p><p>Genau so arbeiten auch professionelle Systeme: Der Euro (oder im Welthandel der US-Dollar) dient als Leitwährung, gegen die alle anderen gemessen werden. Der Vorteil: Man braucht nicht für jedes Währungspaar einen eigenen Kurs, sondern nur einen Kurs je Währung zur Basis.</p>`,
+        html: `<p>Hinter dem Rechner steckt ein einfaches Prinzip: Jede Währung hat einen festen Kurs zum <strong>Euro</strong>. 1 € sind zum Beispiel 1,1225 $ oder 177,63 ¥. Will man von einer Fremdwährung in eine andere umrechnen, geht der Weg immer über den Euro als <strong>Drehscheibe</strong>.</p><p>Beispiel Dollar nach Pfund: Man rechnet die Dollar zuerst in Euro um (Betrag ÷ 1,1225) und das Ergebnis dann in Pfund (× 0,84205). Diesen abgeleiteten Kurs nennt man <strong>Kreuzkurs</strong> — er ergibt sich, indem man die beiden Euro-Kurse durcheinander teilt.</p><p>Genau so arbeiten auch professionelle Systeme: Der Euro (oder im Welthandel der US-Dollar) dient als Leitwährung, gegen die alle anderen gemessen werden. Der Vorteil: Man braucht nicht für jedes Währungspaar einen eigenen Kurs, sondern nur einen Kurs je Währung zur Basis.</p>`,
       },
       {
         typ: 'beispielrechnung',
         titel: 'Beispiel: Kreuzkurs Dollar in Pfund',
         schritte: [
           { label: 'Ausgangsbetrag', formel: '200 US-Dollar', ergebnis: '200 $' },
-          { label: 'Schritt 1: $ → €', formel: '200 / 1,135', ergebnis: '176,21 €' },
-          { label: 'Schritt 2: € → £', formel: '176,21 × 0,862', ergebnis: '151,89 £' },
-          { label: 'Kreuzkurs USD/GBP', formel: '0,862 / 1,135', ergebnis: '≈ 0,759' },
+          // W187: vorher 200 / 1,135 = 176,21 € × 0,862 = 151,89 £, Kreuzkurs ≈ 0,759
+          { label: 'Schritt 1: $ → €', formel: '200 / 1,1225', ergebnis: '178,17 €' },
+          { label: 'Schritt 2: € → £', formel: '178,17 × 0,84205', ergebnis: '150,03 £' },
+          { label: 'Kreuzkurs USD/GBP', formel: '0,84205 / 1,1225', ergebnis: '≈ 0,750' },
         ],
-        fazit: 'Für zwei Währungen ohne direkten Kurs — etwa Dollar zu Pfund — läuft die Rechnung über den Euro als Drehscheibe: erst in Euro, dann in die Zielwährung. 200 $ ergeben so rund 152 £. Den Kreuzkurs erhält man, indem man die beiden EUR-Kurse durcheinander teilt.',
+        fazit: 'Für zwei Währungen ohne direkten Kurs — etwa Dollar zu Pfund — läuft die Rechnung über den Euro als Drehscheibe: erst in Euro, dann in die Zielwährung. 200 $ ergeben so rund 150 £. Den Kreuzkurs erhält man, indem man die beiden EUR-Kurse durcheinander teilt.',
       },
       {
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Referenzkurs ist nicht gleich Live-Kurs',
-        text: 'Wichtig: Dieser Rechner arbeitet mit statischen Referenzkursen mit Stichtag 27.06.2026 — das sind KEINE Live-Kurse. Die tatsächlichen Wechselkurse an den Devisenmärkten ändern sich täglich, in turbulenten Phasen auch innerhalb von Stunden. Für eine tagesaktuelle oder transaktionsrelevante Umrechnung nutzen Sie die EZB-Referenzkurse (ecb.europa.eu) oder die Konditionen Ihrer Bank. Banken, Wechselstuben und Kreditkarten erheben zudem Aufschläge (meist 1–3 % plus Gebühren) — der reale Kurs beim Geldwechsel weicht also zusätzlich vom Referenzkurs ab.',
+        text: 'Wichtig: Dieser Rechner arbeitet mit statischen EZB-Referenzkursen mit Stichtag 19.10.2026 — das sind KEINE Live-Kurse. Die tatsächlichen Wechselkurse an den Devisenmärkten ändern sich täglich, in turbulenten Phasen auch innerhalb von Stunden. Für eine tagesaktuelle oder transaktionsrelevante Umrechnung nutzen Sie die EZB-Referenzkurse (ecb.europa.eu) oder die Konditionen Ihrer Bank. Banken, Wechselstuben und Kreditkarten erheben zudem Aufschläge (meist 1–3 % plus Gebühren) — der reale Kurs beim Geldwechsel weicht also zusätzlich vom Referenzkurs ab.',
       },
       {
         typ: 'text',
@@ -3222,7 +3235,7 @@ export const alltagRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum statische Kurse statt Live-Daten?',
-        html: `<p>Warum nutzt der Rechner keine <strong>Live-Kurse</strong>? Echtzeit-Wechselkurse erfordern eine kostenpflichtige Datenanbindung an einen Marktanbieter und ständige Aktualisierung. Für einen kostenlosen Rechner wäre das unwirtschaftlich — und für die meisten Alltagsfragen sind Referenzkurse mit Stichtag völlig ausreichend.</p><p>Wechselkurse großer Währungen schwanken an normalen Tagen nur um <strong>Zehntelprozent</strong>. Für den Kaffee in Istanbul, den Preis im New Yorker Online-Shop oder die Trinkgeld-Kalkulation in Prag spielt das keine Rolle. Erst bei größeren Beträgen oder echten Transaktionen lohnt der Blick auf den tagesaktuellen Kurs.</p><p>Geplant ist als Erweiterung eine <strong>automatische wöchentliche Aktualisierung</strong> der Referenzkurse aus den EZB-Daten, mit der statischen Liste als Fallback. Bis dahin gilt der angegebene Stichtag — der hier auf den 27. Juni 2026 aktualisiert wurde.</p>`,
+        html: `<p>Warum nutzt der Rechner keine <strong>Live-Kurse</strong>? Echtzeit-Wechselkurse erfordern eine kostenpflichtige Datenanbindung an einen Marktanbieter und ständige Aktualisierung. Für einen kostenlosen Rechner wäre das unwirtschaftlich — und für die meisten Alltagsfragen sind Referenzkurse mit Stichtag völlig ausreichend.</p><p>Wechselkurse großer Währungen schwanken an normalen Tagen nur um <strong>Zehntelprozent</strong>. Für den Kaffee in Istanbul, den Preis im New Yorker Online-Shop oder die Trinkgeld-Kalkulation in Prag spielt das keine Rolle. Erst bei größeren Beträgen oder echten Transaktionen lohnt der Blick auf den tagesaktuellen Kurs.</p><p>Geplant ist als Erweiterung eine <strong>automatische wöchentliche Aktualisierung</strong> der Referenzkurse aus den EZB-Daten, mit der statischen Liste als Fallback. Bis dahin gilt der angegebene Stichtag — der hier auf den 19. Oktober 2026 aktualisiert wurde.</p>`,
       },
       {
         typ: 'vergleich',
@@ -3233,7 +3246,8 @@ export const alltagRechner: RechnerConfig[] = [
           { kriterium: 'Quelle', a: 'EZB / Marktmittel', b: 'Bank, Wechselstube, Karte' },
           { kriterium: 'Aufschlag', a: 'keiner', b: '1–10 % je nach Anbieter' },
           { kriterium: 'Zweck', a: 'Orientierung, Vergleich', b: 'tatsächliche Transaktion' },
-          { kriterium: 'Beispiel 500 €', a: '567,50 $ (Kurs 1,135)', b: '~550 $ (3 % Aufschlag)' },
+          // W187: vorher 567,50 $ (Kurs 1,135) / ~550 $
+          { kriterium: 'Beispiel 500 €', a: '561,25 $ (Kurs 1,1225)', b: '~544 $ (3 % Aufschlag)' },
           { kriterium: 'DCC beim Bezahlen', a: 'nicht relevant', b: 'immer in Landeswährung zahlen' },
         ],
       },
@@ -3241,12 +3255,13 @@ export const alltagRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Beispiel: was der Aufschlag kostet',
         schritte: [
-          { label: 'Referenzwert', formel: '500 € × 1,135', ergebnis: '567,50 $' },
+          // W187: vorher 500 € × 1,135 = 567,50 $ → 550,48 $
+          { label: 'Referenzwert', formel: '500 € × 1,1225', ergebnis: '561,25 $' },
           { label: 'Wechselstuben-Aufschlag', formel: '+ 3 %', ergebnis: 'schlechterer Kurs' },
-          { label: 'Effektiv erhalten', formel: '567,50 × 0,97', ergebnis: '~550,48 $' },
-          { label: 'Differenz', formel: '567,50 − 550,48', ergebnis: '~17 $ weniger' },
+          { label: 'Effektiv erhalten', formel: '561,25 × 0,97', ergebnis: '~544,41 $' },
+          { label: 'Differenz', formel: '561,25 − 544,41', ergebnis: '~17 $ weniger' },
         ],
-        fazit: 'Der Referenzkurs ist nicht der Kurs, den man beim Wechseln bekommt. Bei 3 % Aufschlag erhält man für 500 € statt 567,50 $ nur rund 550 $ — etwa 17 $ weniger. An Flughäfen sind 10 % und mehr üblich; dann schrumpft der Betrag noch deutlicher.',
+        fazit: 'Der Referenzkurs ist nicht der Kurs, den man beim Wechseln bekommt. Bei 3 % Aufschlag erhält man für 500 € statt 561,25 $ nur rund 544 $ — etwa 17 $ weniger. An Flughäfen sind 10 % und mehr üblich; dann schrumpft der Betrag noch deutlicher.',
       },
       {
         typ: 'text',
@@ -3256,7 +3271,7 @@ export const alltagRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Die wichtigsten Reisewährungen',
-        html: `<p>Innerhalb der <strong>Eurozone</strong> entfällt das Umrechnen ganz — 20 EU-Länder zahlen mit dem Euro. Doch schon beliebte Nachbarziele tanzen aus der Reihe: Die <strong>Schweiz</strong> nutzt den Franken, <strong>Tschechien</strong> die Krone, <strong>Polen</strong> den Zloty, <strong>Ungarn</strong> den Forint.</p><p>Für Fernreisen sind der <strong>US-Dollar</strong> (USA, viele Pauschalpreise weltweit), das <strong>britische Pfund</strong> und der <strong>Yen</strong> die häufigsten Größen. Stark schwankende Währungen wie die <strong>türkische Lira</strong> machen das Umrechnen besonders wichtig, weil sich Preise gefühlt schnell ändern.</p><p>Der Rechner deckt mit 29 Währungen praktisch alle gängigen Reiseziele und Handelspartner ab. Für seltenere Währungen wie den vietnamesischen Dong oder das ägyptische Pfund empfiehlt sich ein spezialisierter Live-Dienst.</p>`,
+        html: `<p>Innerhalb der <strong>Eurozone</strong> entfällt das Umrechnen ganz — 21 EU-Länder zahlen mit dem Euro, seit dem 1. Januar 2026 auch Bulgarien. Doch schon beliebte Nachbarziele tanzen aus der Reihe: Die <strong>Schweiz</strong> nutzt den Franken, <strong>Tschechien</strong> die Krone, <strong>Polen</strong> den Zloty, <strong>Ungarn</strong> den Forint.</p><p>Für Fernreisen sind der <strong>US-Dollar</strong> (USA, viele Pauschalpreise weltweit), das <strong>britische Pfund</strong> und der <strong>Yen</strong> die häufigsten Größen. Stark schwankende Währungen wie die <strong>türkische Lira</strong> machen das Umrechnen besonders wichtig, weil sich Preise gefühlt schnell ändern.</p><p>Der Rechner deckt mit 27 Währungen praktisch alle gängigen Reiseziele und Handelspartner ab. Für seltenere Währungen wie den vietnamesischen Dong oder das ägyptische Pfund empfiehlt sich ein spezialisierter Live-Dienst.</p>`,
       },
       {
         typ: 'tabelle',
@@ -3301,10 +3316,10 @@ export const alltagRechner: RechnerConfig[] = [
         titel: 'Währungs-Eckwerte',
         werte: [
           { label: 'Basis', wert: 'EUR = 1', hinweis: 'alle Kurse darauf normiert' },
-          { label: '1 € (Stand 27.06.2026)', wert: '1,135 $', hinweis: 'Referenzkurs' },
+          { label: '1 € (Stand 19.10.2026)', wert: '1,1225 $', hinweis: 'EZB-Referenzkurs' },
           { label: 'Bankaufschlag', wert: '1–3 %', hinweis: 'Flughafen 10 %+' },
           { label: 'EZB-Kurs', wert: 'werktäglich 16:00', hinweis: 'offizielle Referenz' },
-          { label: 'Währungen im Rechner', wert: '29', hinweis: 'inkl. Reisewährungen' },
+          { label: 'Währungen im Rechner', wert: '27', hinweis: 'inkl. Reisewährungen' },
         ],
       },
       {
@@ -3321,17 +3336,19 @@ export const alltagRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Referenzkurse mit Stichtag — keine Anlageberatung',
-        text: 'Alle Kurse sind statische Referenzwerte mit Stichtag 27.06.2026 und keine Live-Kurse. Sie dienen der groben Orientierung, nicht als Grundlage für Transaktionen oder Anlageentscheidungen. Für tagesaktuelle Kurse nutzen Sie die EZB-Referenzkurse oder Ihre Bank. Der reale Kurs beim Wechseln weicht durch Aufschläge ab. Eine automatische wöchentliche Kursaktualisierung ist als Erweiterung geplant; bis dahin gilt der angegebene Stichtag.',
+        text: 'Alle Kurse sind statische Referenzwerte (EZB-Referenzkurse) mit Stichtag 19.10.2026 und keine Live-Kurse. Sie dienen der groben Orientierung, nicht als Grundlage für Transaktionen oder Anlageentscheidungen. Für tagesaktuelle Kurse nutzen Sie die EZB-Referenzkurse oder Ihre Bank. Der reale Kurs beim Wechseln weicht durch Aufschläge ab. Eine automatische wöchentliche Kursaktualisierung ist als Erweiterung geplant; bis dahin gilt der angegebene Stichtag.',
       },
     ],
     quellen: [
-      { titel: 'EZB — Euro-Referenzkurse', url: 'https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates', hinweis: 'Tägliche offizielle Referenzkurse (werktags 16:00); Basis der hinterlegten Kurse, Stand 27.06.2026' },
+      // W187: vorher „Stand 27.06.2026“; Bundesbank-Veröffentlichung als Abrufquelle ergänzt
+      { titel: 'EZB — Euro-Referenzkurse', url: 'https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html', hinweis: 'Tägliche offizielle Referenzkurse (werktags 16:00); Basis der hinterlegten Kurse, Stand 19.10.2026. AED ohne EZB-Kurs: USD-Kurs × 3,6725 (feste Dollar-Bindung).' },
+      { titel: 'Deutsche Bundesbank — Euro-Referenzkurse der EZB (Wechselkursstatistik, Tageskurse)', url: 'https://www.bundesbank.de/resource/blob/804114/92733476568fcf300174b1efe6a3c9cb/472B63F073F071307366337C94F8C870/ii-euro-referenzkurse-der-ezb-data.pdf', hinweis: 'Tageskurse vom 19.10.2026, u. a. USD 1,1225, GBP 0,84205, CHF 0,9261, JPY 177,63' },
       { titel: 'Referenzkurs-Prinzip (Basis EUR = 1, Kreuzkurs über den Euro)', hinweis: 'Umrechnungsmethodik des Rechners' },
     ],
   },
   {
     slug: 'schuhgroessen-rechner',
-    letzteAktualisierung: '2026-07-28',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Schuhgrößen-Umrechner',
     beschreibung: 'Schuhgrößen umrechnen: EU, US, UK und cm — für Damen, Herren und Kinder mit vollständiger Tabelle.',
     kategorie: 'Alltag',
@@ -3340,7 +3357,8 @@ export const alltagRechner: RechnerConfig[] = [
     metaDescription: 'Schuhgrößen umrechnen: EU, US, UK und cm Fußlänge — für Damen, Herren und Kinder. Mit vollständiger Umrechnungstabelle.',
     keywords: ['schuhgrößen umrechner', 'schuhgröße umrechnen', 'eu us uk schuhgröße', 'schuhgröße cm', 'fußlänge schuhgröße', 'damen schuhgröße us', 'herren schuhgröße uk', 'kinderschuhgröße', 'schuhgröße tabelle'],
     icon: '👟',
-    beispiel: 'Beispiel: Damen EU 39 entspricht US 8,5, UK 6 und etwa 25 cm Fußlänge. Herren EU 43 = US 9,5 = UK 8,5 = 27,5 cm.',
+    // W187: vorher „Herren EU 43 = US 9,5 = UK 8,5 = 27,5 cm“ (eigene Herren-Zuordnung für EU/UK/cm)
+    beispiel: 'Beispiel: Damen EU 39 entspricht US 8,5, UK 6 und etwa 25 cm Fußlänge. Herren EU 43 = US 10 = UK 9 = 28,0 cm — EU, UK und cm gelten für Damen und Herren gleich, nur die US-Skala unterscheidet sich.',
     faq: [
       {
         frage: 'Warum sind Schuhgrößen nicht international einheitlich?',
@@ -3380,9 +3398,10 @@ export const alltagRechner: RechnerConfig[] = [
         spalteB: 'UK-System',
         zeilen: [
           { kriterium: 'Ursprung', a: 'Zoll-Brüche (barleycorn)', b: 'Zoll-Brüche, eigener Nullpunkt' },
-          { kriterium: 'Damen/Herren', a: 'getrennte Skalen', b: 'getrennte Skalen' },
-          { kriterium: 'Versatz', a: '—', b: 'meist ~0,5 Größe tiefer als US' },
-          { kriterium: 'Herren EU 43', a: 'US 9,5', b: 'UK 8,5' },
+          // W187: vorher UK „getrennte Skalen“, Versatz „~0,5 Größe tiefer als US“, Herren EU 43 = US 9,5 / UK 8,5
+          { kriterium: 'Damen/Herren', a: 'getrennte Skalen (Damen = Herren + 1,5)', b: 'eine gemeinsame Skala' },
+          { kriterium: 'Versatz', a: '—', b: 'Herren 1, Damen 2,5 Größen tiefer als US' },
+          { kriterium: 'Herren EU 43', a: 'US 10', b: 'UK 9' },
           { kriterium: 'Damen EU 39', a: 'US 8,5', b: 'UK 6' },
         ],
       },
@@ -3411,7 +3430,7 @@ export const alltagRechner: RechnerConfig[] = [
           ['43', '11,5', '9', '28,0'],
           ['44', '12', '9,5', '28,5'],
         ],
-        fussnote: 'Damen-Umrechnung EU/US/UK und Fußlänge in cm. Maßgeblich ist die cm-Spalte — sie ist unabhängig vom nationalen System. Halbe EU-Größen (38,5 / 40,5 …) liegen jeweils dazwischen.',
+        fussnote: 'Damen-Umrechnung EU/US/UK und Fußlänge in cm. Maßgeblich ist die cm-Spalte — sie ist unabhängig vom nationalen System. EU, UK und cm gelten für Herren genauso; nur die US-Nummer ist für Damen 1,5 höher (US Damen = UK + 2,5). Halbe EU-Größen (38,5 / 40,5 …) liegen jeweils dazwischen.',
       },
       {
         typ: 'vergleich',
@@ -3419,10 +3438,11 @@ export const alltagRechner: RechnerConfig[] = [
         spalteA: 'Damen',
         spalteB: 'Herren',
         zeilen: [
-          { kriterium: 'EU 39', a: 'US 8,5 / UK 6', b: 'US 6 / UK 5,5' },
-          { kriterium: 'EU 43', a: 'US 11,5 / UK 9', b: 'US 9,5 / UK 8,5' },
-          { kriterium: 'cm bei EU 39', a: '25,0 cm', b: '24,5 cm' },
-          { kriterium: 'US-Nummer (gleiche EU)', a: 'höher', b: 'niedriger (~2 Größen)' },
+          // W187: vorher Herren EU 39 = US 6 / UK 5,5 / 24,5 cm, EU 43 = US 9,5 / UK 8,5 — EU und UK sind geschlechtsneutral
+          { kriterium: 'EU 39', a: 'US 8,5 / UK 6', b: 'US 7 / UK 6' },
+          { kriterium: 'EU 43', a: 'US 11,5 / UK 9', b: 'US 10 / UK 9' },
+          { kriterium: 'cm bei EU 39', a: '25,0 cm', b: '25,0 cm' },
+          { kriterium: 'US-Nummer (gleiche EU)', a: 'höher', b: 'niedriger (1,5 Größen)' },
           { kriterium: 'Leistenform', a: 'enger geschnitten', b: 'breiter geschnitten' },
         ],
       },
@@ -3470,17 +3490,18 @@ export const alltagRechner: RechnerConfig[] = [
         titel: 'Umrechnungstabelle Herren',
         kopf: ['EU', 'US', 'UK', 'cm'],
         zeilen: [
-          ['39', '6', '5,5', '24,5'],
-          ['40', '7', '6', '25,0'],
-          ['41', '8', '7', '26,0'],
-          ['42', '8,5', '7,5', '26,5'],
-          ['43', '9,5', '8,5', '27,5'],
+          // W187: vorher 39: 6/5,5/24,5 · 40: 7/6/25,0 · 41: 8/7/26,0 · 42: 8,5/7,5/26,5 · 43: 9,5/8,5/27,5 (eigene Herren-Zuordnung)
+          ['39', '7', '6', '25,0'],
+          ['40', '7,5', '6,5', '25,5'],
+          ['41', '8,5', '7,5', '26,5'],
+          ['42', '9', '8', '27,0'],
+          ['43', '10', '9', '28,0'],
           ['44', '10,5', '9,5', '28,5'],
           ['45', '11,5', '10,5', '29,5'],
           ['46', '12', '11', '30,0'],
           ['47', '13', '12', '31,0'],
         ],
-        fussnote: 'Herren-Umrechnung. Auffällig: Dieselbe EU-Größe ergibt im US-System für Herren eine deutlich niedrigere Nummer als für Damen (EU 43 → Herren US 9,5, Damen US 11,5). Wer international bestellt, muss die richtige Geschlechter-Skala wählen.',
+        fussnote: 'Herren-Umrechnung. EU, UK und cm sind dieselben wie bei Damen; nur im US-System ergibt dieselbe EU-Größe für Herren eine niedrigere Nummer (EU 43 → Herren US 10, Damen US 11,5; US Herren = UK + 1). Wer international bestellt, muss die richtige US-Skala wählen.',
       },
       {
         typ: 'vergleich',
@@ -3489,7 +3510,7 @@ export const alltagRechner: RechnerConfig[] = [
         spalteB: 'UK-Shop',
         zeilen: [
           { kriterium: 'Größenangabe', a: 'US-Nummer (Damen ≠ Herren)', b: 'UK-Nummer' },
-          { kriterium: 'Häufige Stolperfalle', a: 'Damen-/Herren-Skala verwechseln', b: 'UK halbe Nummer tiefer als US' },
+          { kriterium: 'Häufige Stolperfalle', a: 'Damen-/Herren-Skala verwechseln', b: 'UK 1 (Herren) bzw. 2,5 (Damen) Nummern tiefer als US' }, // W187: vorher „UK halbe Nummer tiefer als US“
           { kriterium: 'Sicherster Weg', a: 'cm-Angabe nutzen', b: 'cm-Angabe nutzen' },
           { kriterium: 'Rückgabe', a: 'Versand teuer und langsam', b: 'innerhalb EU oft einfacher' },
           { kriterium: 'Beispiel Damen EU 39', a: 'US 8,5', b: 'UK 6' },
@@ -3519,7 +3540,8 @@ export const alltagRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'International online Schuhe kaufen',
-        html: `<p>Beim internationalen <strong>Online-Shopping</strong> lohnt sich ein kurzer Umrechnungs-Check, bevor man bestellt. Amerikanische Shops geben US-Größen an — und zwar getrennt nach Damen und Herren. Wer die falsche Skala erwischt, liegt schnell zwei Nummern daneben. Britische Shops nutzen UK-Größen, die meist eine halbe Nummer tiefer liegen als US.</p><p>Der sicherste Weg führt über die <strong>cm-Angabe</strong>: Viele seriöse Shops nennen zu jeder Größe die Innensohlen- oder Fußlänge in Zentimetern. Dieses Maß ist eindeutig und erspart das Rätselraten zwischen den Systemen.</p><p>Bei teurer Rücksendung ins Ausland gilt: lieber vorab genau messen, als zwei Größen blind bestellen. Eine kurze Umrechnung spart Versandkosten, Wartezeit und Frust — gerade bei Marken, die man noch nicht kennt.</p>`,
+        // W187: vorher „… liegt schnell zwei Nummern daneben. Britische Shops nutzen UK-Größen, die meist eine halbe Nummer tiefer liegen als US.“
+        html: `<p>Beim internationalen <strong>Online-Shopping</strong> lohnt sich ein kurzer Umrechnungs-Check, bevor man bestellt. Amerikanische Shops geben US-Größen an — und zwar getrennt nach Damen und Herren. Wer die falsche Skala erwischt, liegt schnell anderthalb Nummern daneben. Britische Shops nutzen UK-Größen, die für Damen und Herren gleich sind und bei Herren eine, bei Damen zweieinhalb Nummern tiefer liegen als US.</p><p>Der sicherste Weg führt über die <strong>cm-Angabe</strong>: Viele seriöse Shops nennen zu jeder Größe die Innensohlen- oder Fußlänge in Zentimetern. Dieses Maß ist eindeutig und erspart das Rätselraten zwischen den Systemen.</p><p>Bei teurer Rücksendung ins Ausland gilt: lieber vorab genau messen, als zwei Größen blind bestellen. Eine kurze Umrechnung spart Versandkosten, Wartezeit und Frust — gerade bei Marken, die man noch nicht kennt.</p>`,
       },
       {
         typ: 'infobox',
@@ -3534,6 +3556,8 @@ export const alltagRechner: RechnerConfig[] = [
       { titel: 'Randle Holme III, The Academy of Armory and Blazon (1688)', hinweis: 'Erste dokumentierte Schuhgrößenskala — in Viertelzoll-Schritten' },
       { titel: 'SATRA Bulletin — The diversity of footwear sizing systems (2023)', url: 'https://www.satra.com/bulletin/article.php?id=3230', hinweis: 'Forschungsverband der Schuhindustrie zu Systemgeschichte und kursierenden Legenden' },
       { titel: 'Pariser Stich — europäisches Schuhgrößensystem (1 Stich = 2/3 cm)', hinweis: 'Methodik EU-Größen' },
+      // W187: Beleg für geschlechtsneutrale EU-/UK-Skala und den US-Versatz ergänzt
+      { titel: 'Wikipedia (en) — Shoe size', url: 'https://en.wikipedia.org/wiki/Shoe_size', hinweis: 'EU-Größe = 3/2 × Leistenlänge in cm, für beide Geschlechter; UK-Erwachsenengröße = 3 × Leistenlänge in Zoll − 25, nominell für Damen und Herren; US Herren = UK + 1, US Damen = US Herren + 1,5 („common scale“) bzw. + 1 (FIA).' },
       { titel: 'Brannock Device — US-Patent 1.682.366, angemeldet 1925, erteilt 1928', url: 'https://patents.google.com/patent/US1682366', hinweis: 'Messgerät hinter der US-Skala' },
       { titel: 'WMS-Weitenmesssystem (Deutsches Schuhinstitut) für Kinderschuhe', hinweis: 'Längen- und Weitenmessung bei Kindern' },
     ],

@@ -25,10 +25,12 @@ const NEBENKOSTEN = {
   antragsgebuehr: 45,
 };
 const NEBENKOSTEN_GESAMT = Object.values(NEBENKOSTEN).reduce((a, b) => a + b, 0);
-// Amtliche Prüfungsgebühren TÜV/DEKRA 2026 nach GebOSt-Anlage
-// (zweijährliche Anpassung, letzte Anhebung 2024).
-const THEORIEPRUEFUNG = 22.49;
-const PRAXISPRUEFUNG: number = 116.93;
+// Amtliche Prüfungsgebühren TÜV/DEKRA 2026 nach GebOSt-Anlage, brutto inkl. 19 % USt:
+// Theorie Nr. 401.1 (11,10 €) + Nr. 401.3 Prüfung am PC (9,90 €) = 21,00 € → 24,99 €;
+// Praxis Klasse B Nr. 402.3 (109,10 €) → 129,83 € (TÜV-SÜD-Preisliste gültig ab 30.01.2024).
+// W187: vorher 22,49 € / 116,93 € (alte Gebührensätze).
+const THEORIEPRUEFUNG = 24.99;
+const PRAXISPRUEFUNG: number = 129.83;
 
 export default function FuehrerscheinRechner() {
   const [region, setRegion] = useState<Region>('vorort');
@@ -67,7 +69,8 @@ export default function FuehrerscheinRechner() {
 
   const posten = [
     { label: 'Grundgebühr Fahrschule', wert: ergebnis.grundgebuehr },
-    { label: `Pflichtfahrstunden (12 × ${fmt(r.fahrstundenpreis * 1.5)} €)`, wert: ergebnis.pflichtKosten },
+    // W187: Preis je Sonderfahrt mit Cent (vorher „12 × 83 €“ bei 82,50 €)
+    { label: `Pflichtfahrstunden (12 × ${(r.fahrstundenpreis * 1.5).toLocaleString('de-DE', { minimumFractionDigits: Number.isInteger(r.fahrstundenpreis * 1.5) ? 0 : 2, maximumFractionDigits: 2 })} €)`, wert: ergebnis.pflichtKosten },
     { label: `Übungsfahrstunden (${fmt(uStd)} × ${fmt(r.fahrstundenpreis)} €)`, wert: ergebnis.uebungsKosten },
     { label: 'Nebenkosten (Sehtest, Erste Hilfe, …)', wert: ergebnis.nebenkosten },
     { label: `Theorieprüfung${theorieBestanden ? '' : ' (inkl. Wiederholung)'}`, wert: ergebnis.theorieKosten },

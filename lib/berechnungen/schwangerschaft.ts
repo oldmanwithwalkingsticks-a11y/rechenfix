@@ -40,7 +40,9 @@ function addDays(date: Date, days: number): Date {
 
 function diffDays(a: Date, b: Date): number {
   const msPerDay = 86400000;
-  return Math.floor((a.getTime() - b.getTime()) / msPerDay);
+  // W187: vorher Math.floor — zwischen zwei lokalen Mitternächten über die Sommerzeit-Umstellung
+  // fehlt eine Stunde, floor zog dann einen ganzen Tag ab (SSW einen Tag zu niedrig)
+  return Math.round((a.getTime() - b.getTime()) / msPerDay);
 }
 
 function fmtDatum(d: Date): string {
@@ -380,7 +382,8 @@ export function berechneSsw(eingabe: SswEingabe): SswErgebnis {
   const geburtstermin = addDays(sswBeginn, 280 + zyklusKorrektur);
 
   const msInTag = 1000 * 60 * 60 * 24;
-  const vergangeneTage = Math.floor((heute.getTime() - sswBeginn.getTime()) / msInTag);
+  // W187: Math.round statt Math.floor (Sommerzeit-Umstellung zwischen den beiden Mitternächten, siehe diffDays)
+  const vergangeneTage = Math.round((heute.getTime() - sswBeginn.getTime()) / msInTag);
 
   if (vergangeneTage < 0) {
     return {
@@ -406,7 +409,7 @@ export function berechneSsw(eingabe: SswEingabe): SswErgebnis {
 
   const fortschrittProzent = Math.min(100, Math.round((vergangeneTage / 280) * 100));
 
-  const tageBisET = Math.floor((geburtstermin.getTime() - heute.getTime()) / msInTag);
+  const tageBisET = Math.round((geburtstermin.getTime() - heute.getTime()) / msInTag); // W187: round statt floor
   const wochenBisET = Math.floor(Math.abs(tageBisET) / 7);
   const tageRestWoche = Math.abs(tageBisET) % 7;
 

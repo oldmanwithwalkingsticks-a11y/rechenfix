@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneSonnenschutz, HAUTTYPEN, UV_INDEXE } from '@/lib/berechnungen/sonnenschutz';
+import { berechneSonnenschutz, HAUTTYPEN, UV_INDEXE, UV_BEZUG_TABELLE } from '@/lib/berechnungen/sonnenschutz';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -105,7 +105,7 @@ export default function SonnenschutzRechner() {
           <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-4">
             <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-1">Empfehlung für 2 Stunden Sonne</p>
             <p className="text-sm text-blue-700 dark:text-blue-400">
-              Bei {ergebnis.hauttyp.name} und UV-Index {ergebnis.uvIndex.id} empfehlen wir mindestens <strong>LSF {ergebnis.empfohlenerLsf}</strong>.
+              Bei {ergebnis.hauttyp.name} und UV-Index {ergebnis.uvIndex.id} empfehlen wir mindestens <strong>LSF {ergebnis.empfohlenerLsf}</strong>{/* W187: Untergrenze LSF 30 nach BfS */} (das BfS empfiehlt grundsätzlich mindestens LSF 30).
             </p>
           </div>
 
@@ -151,6 +151,13 @@ export default function SonnenschutzRechner() {
               <div><p className="font-medium text-gray-700 dark:text-gray-300">8–10</p><p className="text-gray-600 dark:text-gray-400">sehr hoch</p></div>
               <div><p className="font-medium text-gray-700 dark:text-gray-300">11+</p><p className="text-gray-600 dark:text-gray-400">extrem</p></div>
             </div>
+          </div>
+
+          {/* W187: Annahme zum Bezug der Eigenschutzzeit offen gekennzeichnet (vorher stillschweigend „UV ~3“) */}
+          <div className="bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl p-4 mb-4">
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              <strong>Annahme:</strong> Die Eigenschutzzeiten je Hauttyp sind Richtwerte für die Mittagssonne im mitteleuropäischen Sommer; einen festen UV-Index nennen die Quellen nicht. Der Rechner setzt sie mit UV-Index {UV_BEZUG_TABELLE} gleich, verkürzt sie bei höherem UV-Index im Verhältnis {UV_BEZUG_TABELLE} : UV-Index und verlängert sie bei niedrigerem UV-Index sicherheitshalber nicht.
+            </p>
           </div>
 
           {/* Hinweis */}

@@ -9,6 +9,7 @@ import {
   type SchulForm,
   type ElternunabhaengigTatbestand,
 } from '@/lib/berechnungen/bafoeg';
+import { getAktuelleBafoegParameter } from '@/lib/berechnungen/bafoeg-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -89,6 +90,7 @@ export default function BafoegRechner() {
   );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const params = getAktuelleBafoegParameter();
 
   return (
     <div>
@@ -161,7 +163,8 @@ export default function BafoegRechner() {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliches Einkommen</label>
             <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€/Monat" />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Minijob bis 603 € teilweise angerechnet. Freibetrag: 330 €</p>
+            {/* W187: vorher „Minijob bis 603 € teilweise angerechnet. Freibetrag: 330 €“ */}
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Bruttoverdienst. Freibetrag {fmtEuro(params.freibetraege.eigenesEinkommen)} € nach Abzug von Werbungskosten- und Sozialpauschale — ein Minijob bis 603 € bleibt anrechnungsfrei.</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
@@ -249,7 +252,8 @@ export default function BafoegRechner() {
 
           {!elternunabhaengig && (
             <div>
-              <label htmlFor="bafoeg-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschwister in Ausbildung (ohne eigenes BAföG)</label>
+              {/* W187: vorher „Geschwister in Ausbildung (ohne eigenes BAföG)“, 730 €, § 25 Abs. 6 — § 25 Abs. 3 Nr. 2 gilt für Kinder OHNE förderfähige Ausbildung */}
+              <label htmlFor="bafoeg-select-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Weitere Kinder der Eltern ohne förderfähige Ausbildung</label>
               <select id="bafoeg-select-2"
                 value={geschwister}
                 onChange={e => setGeschwister(e.target.value)}
@@ -260,11 +264,11 @@ export default function BafoegRechner() {
                 ))}
               </select>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
-                Geschwister unter 25 in BAföG-fähiger Ausbildung <strong>ohne eigenen BAföG-Bezug</strong>
-                (z. B. Azubi mit Ausbildungsvergütung). Diese erhöhen den Elternfreibetrag um
-                730 €/Monat pro Kopf (§ 25 Abs. 3 BAföG) und senken die Anrechnungsquote um
-                5 %-Punkte (§ 25 Abs. 6 BAföG). Geschwister MIT eigenem BAföG gehören ins
-                separate Feld darunter.
+                Geschwister und andere Unterhaltsberechtigte der Eltern, die <strong>nicht</strong> in einer
+                nach BAföG oder § 56 SGB III förderfähigen Ausbildung stehen (z. B. jüngere Schulkinder).
+                Sie erhöhen den Elternfreibetrag um {fmtEuro(params.freibetraege.proGeschwister)} €/Monat pro Kopf
+                (§ 25 Abs. 3 BAföG) und senken die Anrechnungsquote um 5 %-Punkte (§ 25 Abs. 4 BAföG).
+                Geschwister in förderfähiger Ausbildung gehören ins separate Feld darunter.
               </p>
             </div>
           )}
@@ -272,7 +276,7 @@ export default function BafoegRechner() {
           {!elternunabhaengig && (
             <div>
               <label htmlFor="bafoeg-select-gefoerdert" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Weitere Geschwister mit eigenem BAföG- / BAB-Bezug (§ 11 Abs. 4 BAföG)
+                Weitere Geschwister in BAföG- / BAB-förderfähiger Ausbildung (§ 11 Abs. 4 BAföG)
               </label>
               <select id="bafoeg-select-gefoerdert"
                 value={gefoerdeteGeschwister}
@@ -284,12 +288,11 @@ export default function BafoegRechner() {
                 ))}
               </select>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
-                § 11 Abs. 4 BAföG: Wenn mehrere Geschwister gleichzeitig BAföG oder BAB
-                (Berufsausbildungsbeihilfe nach § 56 SGB III) beziehen, wird der auf die Eltern
-                entfallende Anrechnungsbetrag zu gleichen Teilen auf alle geförderten Kinder
-                aufgeteilt. Zählen Sie hier nur Geschwister mit <strong>eigenem</strong>
-                {' '}BAföG/BAB — NICHT solche, die oben unter &bdquo;Geschwister in Ausbildung&ldquo;
-                bereits erfasst sind.
+                § 11 Abs. 4 BAföG: Stehen mehrere Kinder in einer Ausbildung, die nach BAföG oder
+                § 56 SGB III (Berufsausbildungsbeihilfe) gefördert werden kann, wird der auf die Eltern
+                entfallende Anrechnungsbetrag zu gleichen Teilen auf alle diese Kinder aufgeteilt.
+                Zählen Sie hier nur solche Geschwister — NICHT die Kinder, die oben unter
+                &bdquo;Weitere Kinder ohne förderfähige Ausbildung&ldquo; erfasst sind.
               </p>
             </div>
           )}
@@ -463,7 +466,7 @@ export default function BafoegRechner() {
                       <tr>
                         <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                           Anrechnung nach Aufteilung
-                          <span className="text-xs text-gray-600 ml-1">(Netto {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
+                          <span className="text-xs text-gray-600 ml-1">(Einkommen {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
                         </td>
                         <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
                       </tr>
@@ -473,7 +476,7 @@ export default function BafoegRechner() {
                     <tr>
                       <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">
                         Elterneinkommen
-                        <span className="text-xs text-gray-600 ml-1">(Netto {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
+                        <span className="text-xs text-gray-600 ml-1">(Einkommen {fmtEuro(ergebnis.nettoEltern)} € − Freibetrag {fmtEuro(ergebnis.freibetragEltern)} €)</span>
                       </td>
                       <td className="px-4 py-2.5 text-right tabular-nums text-red-600 whitespace-nowrap">−{fmtEuro(ergebnis.anrechnungEltern)} €</td>
                     </tr>

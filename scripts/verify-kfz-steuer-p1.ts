@@ -7,6 +7,12 @@
 //     gesetze-im-internet.de/kraftstg/__9.html
 //   § 9 Abs. 1 Nr. 2c KraftStG — progressive CO₂-Staffel ab 01.01.2021
 //     (95/115/135/155/175/195 g/km mit 2,00/2,20/2,50/2,90/3,40/4,00 €/g).
+//   W187: § 9 Abs. 1 Nr. 2 Buchst. b KraftStG — Erstzulassung 01.07.2009–31.12.2020: Sockel wie oben
+//     „zuzüglich jeweils 2 Euro für jedes Gramm Kohlendioxidemission je Kilometer …, das bei erstmaliger
+//     Zulassung aa) bis zum 31. Dezember 2011 120 g/km, bb) ab dem 1. Januar 2012 110 g/km, cc) ab dem
+//     1. Januar 2014 95 g/km überschreitet“ (Gruppe 5). Vorher rechnete der Rechner diese Fahrzeuge mit der
+//     Staffel nach Buchst. c; der Zeitraum hieß 'nach-2009', jetzt 'ab-2021' bzw. '2009-2020'.
+//     (Die „Nr. 2a/2b/2c“ in den Quelle-Spalten unten meinen Nr. 2 Buchst. a/b/c.)
 //   § 3d KraftStG i.d.F. 8. KraftStÄndG (BT 04.12.2025, Drs. 21/2672) —
 //     Elektro-Befreiung 10 J. ab Erstzulassung, längstens 31.12.2035,
 //     Zulassungsfenster 18.05.2011–31.12.2030.
@@ -65,31 +71,31 @@ cases.push({ name: 'CO₂ 220 g/km → 360,00 €', actual: berechneCO2Komponent
 // === GRUPPE 2: berechneKfzSteuer Integrationstests ===
 
 // Kleinstwagen Benzin 95g/km 1000ccm: Sockel 10*2 = 20 €, kein CO₂
-const t1 = berechneKfzSteuer({ zulassung: 'nach-2009', antrieb: 'benzin', hubraum: 1000, co2: 95 })!;
+const t1 = berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'benzin', hubraum: 1000, co2: 95 })!;
 cases.push({ name: 'Kleinstwagen 1000ccm/95g → 20,00 €', actual: t1.jahresSteuer, expected: 20, tol: 0.005, quelle: '§ 9 Abs. 1 Nr. 2a + 2c' });
 
 // Kompaktwagen Benzin 1500ccm/128g: Sockel 15*2=30 + CO₂ 68,60 = 98,60 €
-const t2 = berechneKfzSteuer({ zulassung: 'nach-2009', antrieb: 'benzin', hubraum: 1500, co2: 128 })!;
+const t2 = berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'benzin', hubraum: 1500, co2: 128 })!;
 cases.push({ name: 'Kompaktwagen 1500ccm/128g → 98,60 €', actual: t2.jahresSteuer, expected: 98.60, tol: 0.005, quelle: 'Integration Sockel + CO₂' });
 
 // Mittelklasse Benzin 2000ccm/145g: Sockel 20*2=40 + CO₂ 109 = 149 €
-const t3 = berechneKfzSteuer({ zulassung: 'nach-2009', antrieb: 'benzin', hubraum: 2000, co2: 145 })!;
+const t3 = berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'benzin', hubraum: 2000, co2: 145 })!;
 cases.push({ name: 'Mittelklasse 2000ccm/145g → 149,00 €', actual: t3.jahresSteuer, expected: 149, tol: 0.005, quelle: 'Integration Benzin' });
 
 // Diesel-SUV 2000ccm/175g: Sockel 20*9,50=190 + CO₂ 192 = 382 €
-const t4 = berechneKfzSteuer({ zulassung: 'nach-2009', antrieb: 'diesel', hubraum: 2000, co2: 175 })!;
+const t4 = berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'diesel', hubraum: 2000, co2: 175 })!;
 cases.push({ name: 'Diesel-SUV 2000ccm/175g → 382,00 €', actual: t4.jahresSteuer, expected: 382, tol: 0.005, quelle: 'Integration Diesel-Sockel' });
 
 // Oberklasse Benzin 3000ccm/190g: Sockel 30*2=60 + CO₂ 243 = 303 €
-const t5 = berechneKfzSteuer({ zulassung: 'nach-2009', antrieb: 'benzin', hubraum: 3000, co2: 190 })!;
+const t5 = berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'benzin', hubraum: 3000, co2: 190 })!;
 cases.push({ name: 'Oberklasse 3000ccm/190g → 303,00 €', actual: t5.jahresSteuer, expected: 303, tol: 0.005, quelle: 'Integration 5 CO₂-Stufen' });
 
 // Großmotor Benzin 4000ccm/220g: Sockel 40*2=80 + CO₂ 360 = 440 €
-const t6 = berechneKfzSteuer({ zulassung: 'nach-2009', antrieb: 'benzin', hubraum: 4000, co2: 220 })!;
+const t6 = berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'benzin', hubraum: 4000, co2: 220 })!;
 cases.push({ name: 'Großmotor 4000ccm/220g → 440,00 €', actual: t6.jahresSteuer, expected: 440, tol: 0.005, quelle: 'Integration alle 6 CO₂-Stufen' });
 
 // "angefangene 100 ccm"-Regel: 1498 ccm → 15 × 2,00 = 30 € (nicht 14,98 × 2)
-const t7 = berechneKfzSteuer({ zulassung: 'nach-2009', antrieb: 'benzin', hubraum: 1498, co2: 95 })!;
+const t7 = berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'benzin', hubraum: 1498, co2: 95 })!;
 cases.push({ name: 'Sockel angefangene-100-Regel 1498ccm → 30 €', actual: t7.sockelbetrag, expected: 30, tol: 0.005, quelle: '§ 9 Abs. 1 Nr. 2a (Math.ceil)' });
 
 // === GRUPPE 3: Elektro-Befreiung § 3d ===
@@ -142,7 +148,7 @@ cases.push({
 // === GRUPPE 4: berechneKfzSteuer Integration Elektro ===
 
 const tE1 = berechneKfzSteuer({
-  zulassung: 'nach-2009', antrieb: 'elektro', hubraum: 0, co2: 0,
+  zulassung: 'ab-2021', antrieb: 'elektro', hubraum: 0, co2: 0,
   erstzulassungsdatum: new Date('2024-03-15'),
 })!;
 cases.push({ name: 'Elektro 2024 → befreit=true', actual: tE1.befreit ? 'true' : 'false', expected: 'true', quelle: 'Integration § 3d' });
@@ -150,16 +156,40 @@ cases.push({ name: 'Elektro 2024 → jahresSteuer = 0', actual: tE1.jahresSteuer
 cases.push({ name: 'Elektro 2024 → befreitBis = 15.03.2034', actual: tE1.befreitBis ?? '', expected: '15.03.2034', quelle: 'UI-Formatierung deutsch' });
 
 const tE2 = berechneKfzSteuer({
-  zulassung: 'nach-2009', antrieb: 'elektro', hubraum: 0, co2: 0,
+  zulassung: 'ab-2021', antrieb: 'elektro', hubraum: 0, co2: 0,
   erstzulassungsdatum: new Date('2031-01-01'),
 })!;
 cases.push({ name: 'Elektro 2031 → befreit=false', actual: tE2.befreit ? 'true' : 'false', expected: 'false', quelle: 'außerhalb Förderzeitraum' });
 cases.push({ name: 'Elektro 2031 → keineBefreiungGrund = nach-2030', actual: tE2.keineBefreiungGrund ?? '', expected: 'nach-2030', quelle: 'UI-Branching' });
 
 // Ohne Erstzulassungs-Datum: konservativer Default auf Max-Cap
-const tE3 = berechneKfzSteuer({ zulassung: 'nach-2009', antrieb: 'elektro', hubraum: 0, co2: 0 })!;
+const tE3 = berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'elektro', hubraum: 0, co2: 0 })!;
 cases.push({ name: 'Elektro ohne EZ-Datum → befreit=true (Fallback)', actual: tE3.befreit ? 'true' : 'false', expected: 'true', quelle: 'UI-Default' });
 cases.push({ name: 'Elektro ohne EZ-Datum → befreitBis = 31.12.2035', actual: tE3.befreitBis ?? '', expected: '31.12.2035', quelle: 'konservativer Max-Cap-Default' });
+
+// === GRUPPE 5 (W187): Erstzulassung 01.07.2009–31.12.2020, § 9 Abs. 1 Nr. 2 Buchst. b ===
+// Unabhängig nachgerechnet: Sockel (angefangene 100 ccm × 2,00 / 9,50 €) + 2,00 € × (CO₂ − Schwelle)
+const k = (jahr: number | undefined, antrieb: 'benzin' | 'diesel', hubraum: number, co2: number) =>
+  berechneKfzSteuer({ zulassung: '2009-2020', erstzulassungsjahr: jahr, antrieb, hubraum, co2 })!;
+cases.push(
+  { name: 'EZ 2015 Benzin 1.498 ccm/128 g → 30 + 33 × 2 = 96,00 €', actual: k(2015, 'benzin', 1498, 128).jahresSteuer, expected: 96, quelle: 'Nr. 2 Buchst. b cc (95 g)' },
+  { name: 'EZ 2015 Diesel 2.000 ccm/150 g → 190 + 55 × 2 = 300,00 €', actual: k(2015, 'diesel', 2000, 150).jahresSteuer, expected: 300, quelle: 'Nr. 2 Buchst. b cc (95 g)' },
+  { name: 'EZ 2010 Benzin 1.598 ccm/140 g → 32 + 20 × 2 = 72,00 €', actual: k(2010, 'benzin', 1598, 140).jahresSteuer, expected: 72, quelle: 'Nr. 2 Buchst. b aa (120 g)' },
+  { name: 'EZ 2011 Benzin 1.400 ccm/118 g → unter 120 g → 28,00 €', actual: k(2011, 'benzin', 1400, 118).jahresSteuer, expected: 28, quelle: 'Nr. 2 Buchst. b aa (120 g)' },
+  { name: 'EZ 2012 Benzin 1.400 ccm/115 g → 28 + 5 × 2 = 38,00 €', actual: k(2012, 'benzin', 1400, 115).jahresSteuer, expected: 38, quelle: 'Nr. 2 Buchst. b bb (110 g)' },
+  { name: 'EZ 2013 Diesel 1.600 ccm/119 g → 152 + 9 × 2 = 170,00 €', actual: k(2013, 'diesel', 1600, 119).jahresSteuer, expected: 170, quelle: 'Nr. 2 Buchst. b bb (110 g)' },
+  { name: 'EZ 2014 Benzin 1.000 ccm/105 g → 20 + 10 × 2 = 40,00 €', actual: k(2014, 'benzin', 1000, 105).jahresSteuer, expected: 40, quelle: 'Nr. 2 Buchst. b cc (95 g)' },
+  { name: 'EZ 2020 Benzin 1.000 ccm/105 g → CO₂-Anteil 10 × 2 = 20,00 €', actual: k(2020, 'benzin', 1000, 105).co2Betrag, expected: 20, quelle: 'Nr. 2 Buchst. b cc (95 g)' },
+  { name: 'EZ 2018 Benzin 2.000 ccm/200 g → 40 + 105 × 2 = 250,00 €', actual: k(2018, 'benzin', 2000, 200).jahresSteuer, expected: 250, quelle: 'Nr. 2 Buchst. b linear (Buchst. c: 320 €)' },
+  { name: 'ohne EZ-Jahr → Schwelle 95 g (Default ab 2014)', actual: k(undefined, 'benzin', 1498, 128).co2Schwelle ?? -1, expected: 95, quelle: 'Lib-Default' },
+  { name: 'EZ 2011 → Schwelle 120 g', actual: k(2011, 'benzin', 1498, 128).co2Schwelle ?? -1, expected: 120, quelle: 'Nr. 2 Buchst. b aa' },
+  { name: 'EZ 2013 → Schwelle 110 g', actual: k(2013, 'benzin', 1498, 128).co2Schwelle ?? -1, expected: 110, quelle: 'Nr. 2 Buchst. b bb' },
+);
+// Startwerte der Komponente (ab 2021, 1.498 ccm/128 g) bleiben 98,60 €; vor 2009: 1.598 ccm Benzin 16 × 6,75 € = 108 €
+cases.push(
+  { name: 'Startwerte ab 2021 1.498 ccm/128 g → 98,60 €', actual: berechneKfzSteuer({ zulassung: 'ab-2021', antrieb: 'benzin', hubraum: 1498, co2: 128 })!.jahresSteuer, expected: 98.60, quelle: 'Nr. 2 Buchst. c' },
+  { name: 'vor 01.07.2009 Benzin 1.598 ccm → 108,00 €', actual: berechneKfzSteuer({ zulassung: 'vor-2009', antrieb: 'benzin', hubraum: 1598, co2: 160 })!.jahresSteuer, expected: 108, quelle: 'Nr. 2 Buchst. a aa (6,75 €)' },
+);
 
 // === Regression-Schutz: Alt-Staffel (Pre-131) würde diese Werte liefern ===
 // Bei CO₂=128 g/km wäre der alte Code: 20*2 + 13*2,50 = 72,50 € (neu korrekt: 68,60 €)

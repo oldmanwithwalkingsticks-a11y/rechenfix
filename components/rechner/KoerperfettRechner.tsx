@@ -46,7 +46,7 @@ export default function KoerperfettRechner() {
     { label: 'Athletisch', bg: 'bg-blue-400', text: 'text-blue-700' },
     { label: 'Fitness', bg: 'bg-green-400', text: 'text-green-700' },
     { label: 'Durchschnitt', bg: 'bg-yellow-400', text: 'text-yellow-700' },
-    { label: 'Übergewicht', bg: 'bg-red-500', text: 'text-red-700' },
+    { label: 'Oberhalb', bg: 'bg-red-500', text: 'text-red-700' }, // W187: vorher „Übergewicht“
   ];
 
   // Marker-Position berechnen (0-100%)
@@ -271,7 +271,8 @@ export default function KoerperfettRechner() {
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                 {ergebnis.kategorien.map((k, i) => {
-                  const istAktuell = ergebnis.kfa >= k.von && ergebnis.kfa <= k.bis;
+                  // W187: vorher „kfa >= von && kfa <= bis“ (Lücken zwischen ganzzahligen Grenzen); jetzt Kategorie aus der Lib; letzte Zeile „ab 25 %“ wie die Seite (vorher „25–50 %“)
+                  const istAktuell = k.label === ergebnis.kategorie;
                   return (
                     <tr
                       key={k.label}
@@ -285,7 +286,7 @@ export default function KoerperfettRechner() {
                         {istAktuell && <span className="ml-1 text-xs">✓</span>}
                       </td>
                       <td className={`px-5 py-2.5 text-right tabular-nums ${istAktuell ? 'text-primary-700 dark:text-primary-400' : 'text-gray-600 dark:text-gray-400'}`}>
-                        {k.von}–{k.bis} %
+                        {i === ergebnis.kategorien.length - 1 ? `ab ${k.von}` : `${k.von}–${k.bis}`} %
                       </td>
                     </tr>
                   );

@@ -411,7 +411,9 @@ export const finanzenRechner: RechnerConfig[] = [
     // contentBloecke (W19): eigenständiges „Varianten- & Entscheidungs-Leitformat" —
     // dominant vergleich + beispielrechnung + tabelle (Basis vs. Plus vs. Bonus). Werte
     // gespiegelt aus lib/berechnungen/elterngeld.ts (Einkommensgrenze 175.000 €,
-    // Vor-Geburt-Deckel 2.770 €, Ersatzrate 65–100 %, Plateau 67 % bei 1.000–1.240 € Netto).
+    // Vor-Geburt-Deckel 2.770 €, Ersatzrate 65–100 %, Plateau 67 % bei 1.000–1.200 € Netto).
+    // W187: vorher Plateau „1.000–1.240 €“ (§ 2 Abs. 2 S. 2 BEEG: Absenkung ab 1.200 €) und § 2 Abs. 3 als
+    // allgemeiner Deckel des Vor-Geburt-Einkommens; Höchstbetrag 1.800 € steht in § 2 Abs. 1 S. 2.
     // Rechtsstand: BEEG, Stand 06/2026; Einkommensgrenze § 1 Abs. 8 BEEG.
     contentBloecke: [
       {
@@ -422,7 +424,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Wie sich die Höhe berechnet',
-        html: `<p>Bemessungsgrundlage ist das <strong>durchschnittliche Nettoeinkommen der zwölf Monate vor der Geburt</strong> aus Erwerbstätigkeit. Auf diesen Betrag wird die Ersatzrate angewendet. Sie liegt zwischen <strong>65 % und 100 %</strong>: Der gesetzliche Regelfall ist ein Plateau von 67 % für ein Netto zwischen 1.000 und 1.240 Euro. Wer darunter verdient hat, bekommt eine höhere Rate — pro 2 Euro unter 1.000 Euro steigt sie um 0,1 Prozentpunkte bis maximal 100 %. Wer darüber liegt, dessen Rate sinkt schrittweise bis zur Untergrenze von 65 %, die mittlere und höhere Einkommen praktisch immer erreichen. Diese Staffelung sorgt dafür, dass kleine Einkommen relativ stärker abgesichert werden als hohe.</p><p>Ein häufiges Missverständnis: Das „Elterngeld-Netto" ist <strong>nicht</strong> das Netto vom Lohnzettel. Die Elterngeldstelle ermittelt es eigenständig — beim Bruttoeinkommen werden pauschale Abzüge für Steuern (nach der Steuerklasse), für die Sozialversicherung sowie eine Werbungskostenpauschale angesetzt. Dadurch weicht das Elterngeld-Netto oft spürbar vom tatsächlichen Auszahlungsbetrag ab. <strong>Sonderzahlungen</strong> wie Weihnachts- oder Urlaubsgeld und Boni zählen nicht mit, weil sie nach der Lohnsteuer als „sonstige Bezüge" gelten. Bei Selbstständigen tritt an die Stelle der zwölf Monatsgehälter in der Regel der Gewinn des letzten abgeschlossenen Wirtschaftsjahres.</p><p>Der Betrag wird in jedem Fall gedeckelt: Basiselterngeld beträgt mindestens 300 Euro und höchstens 1.800 Euro im Monat. Der Höchstbetrag wird ab rund 2.770 Euro Elterngeld-Netto erreicht — denn nach § 2 Abs. 3 BEEG wird das anrechenbare Vor-Geburt-Einkommen auf 2.770 Euro pro Monat gedeckelt, selbst wenn faktisch mehr verdient wurde. Wer während der Elternzeit in Teilzeit arbeitet, dem wird der Zuverdienst gegengerechnet; maßgeblich für die Ersatzrate bleibt aber das Einkommen vor der Geburt, nicht der Unterschiedsbetrag. So bleibt von einem Teilzeit-Gehalt während des Bezugs unterm Strich häufig mehr übrig, als viele zunächst erwarten.</p>`,
+        html: `<p>Bemessungsgrundlage ist das <strong>durchschnittliche Nettoeinkommen der zwölf Monate vor der Geburt</strong> aus Erwerbstätigkeit. Auf diesen Betrag wird die Ersatzrate angewendet. Sie liegt zwischen <strong>65 % und 100 %</strong>: Der gesetzliche Regelfall ist ein Plateau von 67 % für ein Netto zwischen 1.000 und 1.200 Euro. Wer darunter verdient hat, bekommt eine höhere Rate — pro 2 Euro unter 1.000 Euro steigt sie um 0,1 Prozentpunkte bis maximal 100 %. Wer darüber liegt, dessen Rate sinkt schrittweise bis zur Untergrenze von 65 %, die mittlere und höhere Einkommen praktisch immer erreichen. Diese Staffelung sorgt dafür, dass kleine Einkommen relativ stärker abgesichert werden als hohe.</p><p>Ein häufiges Missverständnis: Das „Elterngeld-Netto" ist <strong>nicht</strong> das Netto vom Lohnzettel. Die Elterngeldstelle ermittelt es eigenständig — beim Bruttoeinkommen werden pauschale Abzüge für Steuern (nach der Steuerklasse), für die Sozialversicherung sowie eine Werbungskostenpauschale angesetzt. Dadurch weicht das Elterngeld-Netto oft spürbar vom tatsächlichen Auszahlungsbetrag ab. <strong>Sonderzahlungen</strong> wie Weihnachts- oder Urlaubsgeld und Boni zählen nicht mit, weil sie nach der Lohnsteuer als „sonstige Bezüge" gelten. Bei Selbstständigen tritt an die Stelle der zwölf Monatsgehälter in der Regel der Gewinn des letzten abgeschlossenen Wirtschaftsjahres.</p><p>Der Betrag wird in jedem Fall gedeckelt: Basiselterngeld beträgt mindestens 300 Euro und höchstens 1.800 Euro im Monat. Den Höchstbetrag von 1.800 Euro legt § 2 Abs. 1 Satz 2 BEEG fest; er wird ab rund 2.770 Euro Elterngeld-Netto erreicht (1.800 ÷ 0,65). Wer nach der Geburt in Teilzeit arbeitet, dem wird der Zuverdienst gegengerechnet: Elterngeld gibt es dann auf den Unterschiedsbetrag, und für diese Rechnung wird das Vor-Geburt-Einkommen höchstens mit 2.770 Euro angesetzt (§ 2 Abs. 3 Satz 2 BEEG); maßgeblich für die Ersatzrate bleibt aber das Einkommen vor der Geburt, nicht der Unterschiedsbetrag. So bleibt von einem Teilzeit-Gehalt während des Bezugs unterm Strich häufig mehr übrig, als viele zunächst erwarten.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -433,7 +435,7 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Gegenbeispiel Geringverdiener (Plateau): 1.000 € Netto', formel: '1.000 € × 67 %', ergebnis: '670 €' },
           { label: 'Unter 1.000 € Netto steigt die Rate: 900 € Netto', formel: '900 € × 72 %', ergebnis: '648 €' },
         ],
-        fazit: 'Der Monatsbetrag ist beim Basiselterngeld immer auf 300 bis 1.800 Euro gedeckelt. Je höher das Vor-Geburt-Netto, desto näher rückt die Ersatzrate an die Untergrenze von 65 %. Geringverdiener werden über die steigende Ersatzrate aufgestockt — bis hin zu 100 % ihres Elterngeld-Nettos. Praktisch heißt das: Ab etwa 2.770 Euro Elterngeld-Netto ändert sich der Basisbetrag nicht mehr, weil der Deckel greift; zwischen 1.000 und 1.240 Euro liegt das stabile 67-%-Plateau, und erst darunter wird die Ersatzrate spürbar großzügiger. Die Beispiele sind Orientierungswerte — der genaue Wert hängt von Steuerklasse und individuellen Pauschalen ab.',
+        fazit: 'Der Monatsbetrag ist beim Basiselterngeld immer auf 300 bis 1.800 Euro gedeckelt. Je höher das Vor-Geburt-Netto, desto näher rückt die Ersatzrate an die Untergrenze von 65 %. Geringverdiener werden über die steigende Ersatzrate aufgestockt — bis hin zu 100 % ihres Elterngeld-Nettos. Praktisch heißt das: Ab etwa 2.770 Euro Elterngeld-Netto ändert sich der Basisbetrag nicht mehr, weil der Deckel greift; zwischen 1.000 und 1.200 Euro liegt das stabile 67-%-Plateau, und erst darunter wird die Ersatzrate spürbar großzügiger. Die Beispiele sind Orientierungswerte — der genaue Wert hängt von Steuerklasse und individuellen Pauschalen ab.',
       },
       {
         typ: 'vergleich',
@@ -544,7 +546,9 @@ export const finanzenRechner: RechnerConfig[] = [
       { titel: '§ 149 SGB III: Höhe des Arbeitslosengeldes (60/67 %)', url: 'https://www.gesetze-im-internet.de/sgb_3/__149.html' },
       { titel: '§ 142 SGB III: Anwartschaftszeit', url: 'https://www.gesetze-im-internet.de/sgb_3/__142.html' },
       { titel: '§ 147 SGB III: Dauer des Anspruchs (Bezugsdauer-Staffel)', url: 'https://www.gesetze-im-internet.de/sgb_3/__147.html' },
-      { titel: '§ 153 SGB III: Leistungsentgelt (pauschalierter Sozialabzug 21 %)', url: 'https://www.gesetze-im-internet.de/sgb_3/__153.html' },
+      // W187: vorher „pauschalierter Sozialabzug 21 %“; § 151 (Tages-Bemessungsentgelt) ergänzt
+      { titel: '§ 151 SGB III: Bemessungsentgelt (Tagesdurchschnitt im Bemessungszeitraum)', url: 'https://www.gesetze-im-internet.de/sgb_3/__151.html' },
+      { titel: '§ 153 SGB III: Leistungsentgelt (Sozialversicherungspauschale 20 %, Lohnsteuer, Soli)', url: 'https://www.gesetze-im-internet.de/sgb_3/__153.html' },
     ],
     titel: 'Arbeitslosengeld-Rechner',
     beschreibung: 'Arbeitslosengeld I berechnen: Höhe, Dauer und Auszahlungsbetrag basierend auf dem letzten Gehalt.',
@@ -554,14 +558,17 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Arbeitslosengeld berechnen: ALG-I-Höhe, Bezugsdauer und Auszahlung ✓ 60 %/67 % ✓ Steuerklasse ✓ KI-Erklärung.',
     keywords: ['arbeitslosengeld rechner', 'alg 1 rechner', 'alg i 2026', 'arbeitslosengeld berechnen', 'bezugsdauer alg', 'leistungsentgelt', 'sperrzeit'],
     icon: '💶',
-    beispiel: '3.500 € Brutto, Steuerklasse I, ohne Kind, 24 Monate Beschäftigung (Alter 40): ca. 1.412 € ALG I/Monat für 12 Monate = rund 16.945 € Gesamtanspruch.',
+    // W187: vorher „ca. 1.412 € … rund 16.945 €“ (Lib mit SV-Pauschale 21 % und Monat ÷ 30)
+    beispiel: '3.500 € Brutto, Steuerklasse I, ohne Kind, 24 Monate Beschäftigung (Alter 40): ca. 1.417 € ALG I/Monat für 12 Monate = rund 17.000 € Gesamtanspruch.',
     // contentBloecke (W19): eigenständiges „Voraussetzungs- & Staffelungs-Leitformat" —
     // dominant tabelle (Bezugsdauer-Staffel § 147) + beispielrechnung + checkliste. Werte
     // gespiegelt aus lib/berechnungen/arbeitslosengeld.ts: Satz 60 %/67 % (§ 149),
-    // SV-Pauschale 21 % (§ 153 Abs. 1 S. 2 Nr. 1), Bemessungsdeckel BBG_RV 8.450 €/Monat
+    // SV-Pauschale 20 % (§ 153 Abs. 1 S. 2 Nr. 1), Bemessungsdeckel BBG_RV 8.450 €/Monat
     // (2026), Staffel 12→6/16→8/20→10/24→12, ab 50/30→15, ab 55/36→18, ab 58/48→24.
-    // Beispielwerte aus berechneArbeitslosengeld(3000 €, Kl. I): Leistungsentgelt 2.072 €,
-    // 60 % = 1.243,20 €, 67 % = 1.388,24 €. § 155-Nebenverdienst (165 €) ist Konfig-Info
+    // W187: vorher Monatsbasis mit 21 % (2.072 € / 1.243,20 € / 1.388,24 €). Jetzt Tagesbasis
+    // aus berechneArbeitslosengeld(3000 €, Kl. I): 36.000 ÷ 365 = 98,63 €, SV 19,73 €, LSt 9,63 €,
+    // Leistungsentgelt 69,27 €/Tag, 60 % = 41,56 € → 1.246,80 €, 67 % = 46,41 € → 1.392,30 €;
+    // Höchstbetrag BBG Kl. III mit Kind 3.621,30 €. § 155-Nebenverdienst (165 €) ist Konfig-Info
     // (Lib modelliert keine Anrechnung — L-35). Rechtsstand: SGB III, Stand 06/2026.
     contentBloecke: [
       {
@@ -602,13 +609,15 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'beispielrechnung',
         titel: 'ALG I bei 3.000 € brutto (ohne Kind)',
+        // W187: vorher Monatsbasis mit SV-Pauschale 21 % (3.000 − 630 − 298 = 2.072 € → 1.243,20 €)
         schritte: [
-          { label: 'Bemessungsentgelt = Brutto (max. BBG 8.450 €)', formel: '3.000 € / Monat', ergebnis: '3.000 €' },
-          { label: 'minus SV-Pauschale 21 % (§ 153 SGB III)', formel: '3.000 € − 630 €', ergebnis: '2.370 €' },
-          { label: 'minus Lohnsteuer Steuerklasse I (Soli 0 €)', formel: '2.370 € − 298 €', ergebnis: '2.072 €' },
-          { label: 'Leistungssatz 60 % ohne Kind (§ 149 SGB III)', formel: '2.072 € × 60 %', ergebnis: '1.243,20 €' },
+          { label: 'Bemessungsentgelt pro Tag (Jahresentgelt ÷ 365, max. BBG 8.450 €/Monat)', formel: '12 × 3.000 € ÷ 365', ergebnis: '98,63 €' },
+          { label: 'minus SV-Pauschale 20 % (§ 153 SGB III)', formel: '98,63 € − 19,73 €', ergebnis: '78,90 €' },
+          { label: 'minus Lohnsteuer Steuerklasse I pro Tag (Soli 0 €)', formel: '78,90 € − 9,63 €', ergebnis: '69,27 €' },
+          { label: 'Leistungssatz 60 % ohne Kind (§ 149 SGB III)', formel: '69,27 € × 60 %', ergebnis: '41,56 € pro Tag' },
+          { label: 'ALG für einen vollen Monat (§ 154 SGB III)', formel: '41,56 € × 30', ergebnis: '1.246,80 €' },
         ],
-        fazit: 'Aus 3.000 € brutto werden rund 1.243 € ALG I im Monat — der Tagessatz (41,44 €) wird dabei immer mit 30 multipliziert, unabhängig von der echten Monatslänge. Mit mindestens einem Kind steigt der Satz auf 67 % (siehe Beispiel mit Kind weiter unten). Das Leistungsentgelt von 2.072 € ist ein pauschaliertes Netto und weicht vom tatsächlichen Lohn-Netto ab.',
+        fazit: 'Aus 3.000 € brutto werden rund 1.247 € ALG I im Monat. Gerechnet wird pro Kalendertag: Der Tagessatz (41,56 €) wird für jeden vollen Monat mit 30 multipliziert, unabhängig von der echten Monatslänge. Mit mindestens einem Kind steigt der Satz auf 67 % (siehe Beispiel mit Kind weiter unten). Das Leistungsentgelt von 69,27 € pro Tag (2.078,10 € für 30 Tage) ist ein pauschaliertes Netto und weicht vom tatsächlichen Lohn-Netto ab.',
       },
       {
         typ: 'text',
@@ -618,17 +627,18 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Wie die Höhe genau berechnet wird',
-        html: `<p>Die Berechnung läuft in vier Schritten ab. Erstens das <strong>Bemessungsentgelt</strong>: Das ist das beitragspflichtige Bruttoentgelt der letzten zwölf Monate, gedeckelt auf die Beitragsbemessungsgrenze der Rentenversicherung — 2026 einheitlich <strong>8.450 Euro im Monat</strong> (seit 2025 ohne West/Ost-Trennung). Verdienst oberhalb dieser Grenze erhöht das ALG nicht.</p><p>Zweitens werden vom Bemessungsentgelt pauschale Abzüge vorgenommen, um das <strong>Leistungsentgelt</strong> (das pauschalierte Netto) zu ermitteln: eine <strong>Sozialversicherungspauschale von 21 %</strong> (§ 153 SGB III), die Lohnsteuer nach der individuellen Steuerklasse, der Solidaritätszuschlag und gegebenenfalls die Kirchensteuer. Drittens wird dieses Leistungsentgelt mit dem Leistungssatz multipliziert — <strong>60 %</strong> ohne Kind, <strong>67 %</strong> mit Kind. Viertens ergibt der Tagessatz mal 30 den Monatsbetrag.</p><p>Weil die Abzüge pauschaliert sind, weicht das ALG-Netto vom echten Lohn-Netto ab — mal nach oben, mal nach unten. Ein wichtiger Stolperstein ist die <strong>Steuerklasse</strong>: Maßgeblich ist die Klasse, die am <strong>1. Januar des Anspruchsjahres</strong> eingetragen war. Ein Wechsel im laufenden Jahr (etwa von IV/IV auf III/V bei Verheirateten) wirkt sich erst auf einen späteren Anspruch aus, nicht mehr auf das ALG des laufenden Jahres.</p><p>Durch den BBG-Deckel gibt es auch eine Obergrenze beim ALG: Selbst Spitzenverdiener erreichen 2026 nur rund <strong>2.940 Euro im Monat</strong>, und das nur bei der günstigsten Kombination aus voller Beitragsbemessungsgrenze, Steuerklasse III und dem 67-%-Satz mit Kind. Wer mit einem höheren Betrag rechnet, überschätzt das ALG: Mehr ist rechnerisch nicht möglich. Umgekehrt sorgt die Pauschalierung dafür, dass die Höhe leicht abschätzbar bleibt — sie hängt nur von Bruttoverdienst, Steuerklasse und Kinder-Status ab, nicht von individuellen Freibeträgen.</p>`,
+        html: `<p>Die Berechnung läuft in vier Schritten ab. Erstens das <strong>Bemessungsentgelt</strong>: Das ist das beitragspflichtige Bruttoentgelt der letzten zwölf Monate, umgerechnet auf den Kalendertag (Jahresentgelt ÷ 365, § 151 SGB III) und gedeckelt auf die Beitragsbemessungsgrenze der Rentenversicherung — 2026 einheitlich <strong>8.450 Euro im Monat</strong> (seit 2025 ohne West/Ost-Trennung). Verdienst oberhalb dieser Grenze erhöht das ALG nicht.</p><p>Zweitens werden vom täglichen Bemessungsentgelt pauschale Abzüge vorgenommen, um das <strong>Leistungsentgelt</strong> (das pauschalierte Netto) zu ermitteln: eine <strong>Sozialversicherungspauschale von 20 %</strong> (§ 153 SGB III), die Lohnsteuer nach der individuellen Steuerklasse und der Solidaritätszuschlag. Kirchensteuer wird nicht abgezogen. Drittens wird dieses Leistungsentgelt mit dem Leistungssatz multipliziert — <strong>60 %</strong> ohne Kind, <strong>67 %</strong> mit Kind. Viertens ergibt der Tagessatz mal 30 den Monatsbetrag.</p><p>Weil die Abzüge pauschaliert sind, weicht das ALG-Netto vom echten Lohn-Netto ab — mal nach oben, mal nach unten. Ein wichtiger Stolperstein ist die <strong>Steuerklasse</strong>: Maßgeblich ist die Klasse, die am <strong>1. Januar des Anspruchsjahres</strong> eingetragen war. Ein Wechsel im laufenden Jahr (etwa von IV/IV auf III/V bei Verheirateten) wirkt sich erst auf einen späteren Anspruch aus, nicht mehr auf das ALG des laufenden Jahres.</p><p>Durch den BBG-Deckel gibt es auch eine Obergrenze beim ALG: Selbst Spitzenverdiener erreichen 2026 nur rund <strong>3.620 Euro im Monat</strong>, und das nur bei der günstigsten Kombination aus voller Beitragsbemessungsgrenze, Steuerklasse III und dem 67-%-Satz mit Kind. Wer mit einem höheren Betrag rechnet, überschätzt das ALG: Mehr ist rechnerisch nicht möglich. Umgekehrt sorgt die Pauschalierung dafür, dass die Höhe leicht abschätzbar bleibt — sie hängt nur von Bruttoverdienst, Steuerklasse und Kinder-Status ab, nicht von individuellen Freibeträgen.</p>`,
       },
       {
         typ: 'beispielrechnung',
         titel: 'Mit Kind: 67 % statt 60 %',
+        // W187: vorher 2.072 € × 67 % = 1.388,24 €, Differenz 145,04 €, „rund 1.740 Euro“
         schritte: [
-          { label: 'Leistungsentgelt wie im Beispiel oben', formel: '2.072 € / Monat', ergebnis: '2.072 €' },
-          { label: 'Leistungssatz 67 % mit mindestens einem Kind', formel: '2.072 € × 67 %', ergebnis: '1.388,24 €' },
-          { label: 'Differenz zum 60-%-Satz (ohne Kind)', formel: '1.388,24 € − 1.243,20 €', ergebnis: '145,04 €' },
+          { label: 'Leistungsentgelt wie im Beispiel oben', formel: '69,27 € / Tag', ergebnis: '69,27 €' },
+          { label: 'Leistungssatz 67 % mit mindestens einem Kind', formel: '69,27 € × 67 % = 46,41 € × 30', ergebnis: '1.392,30 €' },
+          { label: 'Differenz zum 60-%-Satz (ohne Kind)', formel: '1.392,30 € − 1.246,80 €', ergebnis: '145,50 €' },
         ],
-        fazit: 'Der höhere Satz von 67 % gilt, sobald für mindestens ein Kind ein Kindergeld- oder Kinderfreibetrag-Anspruch besteht — das eigene Kind oder das des Partners genügt. Über 12 Bezugsmonate macht der Kinder-Bonus hier rund 1.740 Euro mehr aus.',
+        fazit: 'Der höhere Satz von 67 % gilt, sobald für mindestens ein Kind ein Kindergeld- oder Kinderfreibetrag-Anspruch besteht — das eigene Kind oder das des Partners genügt. Über 12 Bezugsmonate macht der Kinder-Bonus hier rund 1.750 Euro mehr aus.',
       },
       {
         typ: 'infobox',
@@ -667,7 +677,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
     ],
     faq: [
-      { frage: 'Wie hoch ist das Arbeitslosengeld I?', antwort: 'Das ALG I beträgt 60 % des pauschalierten Netto (Leistungsentgelt) bzw. 67 % mit mindestens einem Kind. Grundlage ist das Durchschnittsbrutto der letzten 12 Monate. Bei 3.500 € Brutto und Steuerklasse I ergeben sich etwa 1.412 €/Monat. Nutzen Sie unseren Rechner für Ihren individuellen Wert.' },
+      { frage: 'Wie hoch ist das Arbeitslosengeld I?', antwort: 'Das ALG I beträgt 60 % des pauschalierten Netto (Leistungsentgelt) bzw. 67 % mit mindestens einem Kind. Grundlage ist das Durchschnittsbrutto der letzten 12 Monate. Bei 3.500 € Brutto und Steuerklasse I ergeben sich etwa 1.417 €/Monat. Nutzen Sie unseren Rechner für Ihren individuellen Wert.' },
       { frage: 'Wie lange bekomme ich ALG I?', antwort: 'Die Bezugsdauer richtet sich nach Beschäftigungsdauer und Alter: 12 Monate Beschäftigung ergeben 6 Monate ALG, 24 Monate Beschäftigung 12 Monate ALG. Ältere Arbeitnehmer erhalten länger: ab 50 Jahre bis zu 15 Monate, ab 55 bis zu 18 Monate, ab 58 sogar bis zu 24 Monate.' },
       { frage: 'Wird eine Abfindung auf das ALG I angerechnet?', antwort: 'Grundsätzlich nicht — solange die ordentliche Kündigungsfrist eingehalten wird. Wird die Kündigungsfrist verkürzt (z. B. im Aufhebungsvertrag), ruht das ALG bis zum fiktiven regulären Kündigungstermin (§ 158 SGB III). Steuerlich profitieren Abfindungen von der Fünftelregelung.' },
       { frage: 'Was passiert bei Eigenkündigung?', antwort: 'Bei Eigenkündigung oder Aufhebungsvertrag ohne wichtigen Grund verhängt die Arbeitsagentur eine Sperrzeit von 12 Wochen. In dieser Zeit wird kein ALG gezahlt und die Gesamtanspruchsdauer verkürzt sich um bis zu ein Viertel. Ein wichtiger Grund (z. B. Mobbing, gesundheitliche Gründe) muss nachgewiesen werden.' },
@@ -1023,7 +1033,8 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Sparplan berechnen ✓ Mit Zinseszins-Effekt ✓ Monatliche Sparrate ✓ Jahr-für-Jahr-Tabelle ✓ Kostenlos. Jetzt Sparziel berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['sparrechner', 'sparplan rechner', 'sparplan berechnen', 'zinseszins rechner', 'etf sparplan rechner', 'sparrate berechnen', 'vermögensaufbau'],
     icon: '🐖',
-    beispiel: 'Beispiel: 100 € monatlich bei 5% Rendite über 10 Jahre → 15.848 € Endkapital (12.000 € eingezahlt + 3.848 € Zinsen, jährliche Zinsgutschrift)',
+    // W187: vorher 15.848 € / 3.848 € (Lib verzinste im Modus „jährlich“ alle Monatsraten ein volles Jahr)
+    beispiel: 'Beispiel: 100 € monatlich bei 5% Rendite über 10 Jahre → 15.502 € Endkapital (12.000 € eingezahlt + 3.502 € Zinsen inkl. Zinseszins, jährliche Zinsgutschrift)',
     // W19-Goldstandard: sparrechner auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
     // „beispielrechnung" (5× dominant) + 1 gestapeltes Diagramm. Fokus RATENSPAREN
     // (monatliche Rate) — disjunkt zu zinsrechner (Einmalanlage). Alle Endkapital-Werte
@@ -1455,19 +1466,21 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Gehaltsvergleich 2026: Verdienen Sie mehr oder weniger als der Durchschnitt? Nach Berufsgruppe, Bundesland und Alter vergleichen.',
     keywords: ['gehaltsvergleich', 'gehalt vergleichen', 'durchschnittsgehalt', 'gehaltscheck', 'verdiene ich genug', 'gehaltsrechner', 'gehalt deutschland', 'median gehalt', 'gehalt berufsgruppe', 'gehalt bundesland'],
     icon: '💵',
-    beispiel: 'Beispiel: 3.500 € brutto als kaufmännischer Angestellter, 35–44 Jahre, in NRW → Sie verdienen mehr als ca. 46 % der Vergleichsgruppe (Median 3.641 €).',
+    // W187: vorher „ca. 46 % … (Median 3.641 €)“ — Median-Basis 3.600 € statt Destatis-Niveau 4.120 €
+    beispiel: 'Beispiel: 3.500 € brutto als kaufmännischer Angestellter, 35–44 Jahre, in NRW → Sie verdienen mehr als ca. 32 % der Vergleichsgruppe (Median 4.166 €).',
     // W19-Goldstandard: gehaltsvergleich auf volle Tiefe (16 Bausteine, ~1.560 W), Leitformat
     // „vergleich" (4× dominant). Perzentil-/Median-Logik aus lib/berechnungen/gehaltsvergleich.ts
     // gespiegelt (adjustierterMedian = Median × Bundesland-Faktor × Alters-Faktor; Perzentil via
-    // Normalverteilung). Beispielwerte aus der Lib berechnet (3.800 €/kaufm/NRW/35-44 = P57,
-    // Median 3.641 €; 3.200 €/Gesundheit/25-34: Sachsen P89 vs. Bayern P57). Median-Werte als
+    // Normalverteilung). Beispielwerte aus der Lib berechnet (W187, Basis 4.120 €: 3.800 €/kaufm/NRW/35-44
+    // = P40, Median 4.166 €; 3.200 €/Gesundheit/25-34: Sachsen P71 vs. Bayern P38; 3.500 €/NRW/35-44:
+    // Gastronomie P74, IT P10). Median-Werte als
     // Destatis-Orientierung (Verdiensterhebung), KEINE tagesaktuelle Einzelzahl. Keine
     // individuelle Gehaltsberatung. erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
         titel: 'Wie man das eigene Gehalt einordnet: Median & Perzentil',
-        html: `<p>Die Frage „Verdiene ich genug?" lässt sich nur im <strong>Vergleich</strong> beantworten — und zwar mit der richtigen Bezugsgröße. Ein einzelnes Durchschnittsgehalt sagt wenig aus, weil Gehälter stark nach Beruf, Region und Erfahrung streuen.</p><p>Aussagekräftiger ist das <strong>Perzentil</strong>: Es zeigt, wie viel Prozent einer Vergleichsgruppe weniger verdienen als Sie. Ein Perzentil von 70 bedeutet, dass 70 % weniger und 30 % mehr verdienen. Der <strong>Median</strong> (das 50. Perzentil) markiert die Mitte: Genau die Hälfte verdient mehr, die Hälfte weniger.</p><p>Dieser Rechner ordnet Ihr Bruttogehalt in die Verteilung Ihrer Berufsgruppe ein und gewichtet sie zusätzlich nach Bundesland und Altersgruppe. Datengrundlage sind die Median-Entgelte der <strong>Verdiensterhebung des Statistischen Bundesamts</strong> — Annäherungswerte, keine tagesaktuellen Einzelzahlen. Das Ergebnis ist eine Orientierung, kein exakter Marktpreis für genau Ihre Stelle.</p>`,
+        html: `<p>Die Frage „Verdiene ich genug?" lässt sich nur im <strong>Vergleich</strong> beantworten — und zwar mit der richtigen Bezugsgröße. Ein einzelnes Durchschnittsgehalt sagt wenig aus, weil Gehälter stark nach Beruf, Region und Erfahrung streuen.</p><p>Aussagekräftiger ist das <strong>Perzentil</strong>: Es zeigt, wie viel Prozent einer Vergleichsgruppe weniger verdienen als Sie. Ein Perzentil von 70 bedeutet, dass 70 % weniger und 30 % mehr verdienen. Der <strong>Median</strong> (das 50. Perzentil) markiert die Mitte: Genau die Hälfte verdient mehr, die Hälfte weniger.</p><p>Dieser Rechner ordnet Ihr Bruttogehalt in die Verteilung Ihrer Berufsgruppe ein und gewichtet sie zusätzlich nach Bundesland und Altersgruppe. Das Gehaltsniveau stammt aus der <strong>Verdiensterhebung des Statistischen Bundesamts</strong>: Der Median aller Vollzeitbeschäftigten lag im April 2024 bei 3.978 € brutto im Monat (ohne Sonderzahlungen), fortgeschrieben auf 2025 rechnet der Rechner mit rund 4.120 €. Die Abstufung nach Beruf, Region und Alter ist ein Modell auf dieser Basis — Annäherungswerte, keine tagesaktuellen Einzelzahlen. Das Ergebnis ist eine Orientierung, kein exakter Marktpreis für genau Ihre Stelle.</p>`,
       },
       {
         typ: 'vergleich',
@@ -1496,11 +1509,12 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Eigenes Gehalt im Perzentil verorten',
         schritte: [
           { label: 'Eingaben', formel: '3.800 € · kaufm. · NRW · 35–44 J.', ergebnis: '—' },
-          { label: 'Adjustierter Median (Region × Alter)', formel: '3.400 € × 1,02 × 1,05', ergebnis: '3.641 €' },
-          { label: 'Einordnung in die Verteilung', formel: '3.800 € vs. Median 3.641 €', ergebnis: 'Perzentil 55' },
-          { label: 'Differenz zum Median', formel: '3.800 € − 3.641 €', ergebnis: '+159 € (+4,4 %)' },
+          // W187: vorher Median 3.400 € × 1,02 × 1,05 = 3.641 €, Perzentil 55, +159 €; P75 4.508 €, P90 5.288 €
+          { label: 'Adjustierter Median (Region × Alter)', formel: '3.890 € × 1,02 × 1,05', ergebnis: '4.166 €' },
+          { label: 'Einordnung in die Verteilung', formel: '3.800 € vs. Median 4.166 €', ergebnis: 'Perzentil 40' },
+          { label: 'Differenz zum Median', formel: '3.800 € − 4.166 €', ergebnis: '−366 € (−8,8 %)' },
         ],
-        fazit: 'Mit 3.800 € liegt dieses Beispiel im 55. Perzentil — über der Hälfte der Vergleichsgruppe (Median 3.641 €), aber im Mittelfeld. Zur Einordnung: das 75. Perzentil läge bei rund 4.508 €, das 90. bei 5.288 €.',
+        fazit: 'Mit 3.800 € liegt dieses Beispiel im 40. Perzentil — knapp unter dem Median der Vergleichsgruppe (4.166 €), im unteren Mittelfeld. Zur Einordnung: das 75. Perzentil läge bei rund 5.156 €, das 90. bei 6.046 €.',
       },
       {
         typ: 'text',
@@ -1513,10 +1527,11 @@ export const finanzenRechner: RechnerConfig[] = [
         spalteA: 'Eher höhere Mediane',
         spalteB: 'Eher niedrigere Mediane',
         zeilen: [
-          { kriterium: 'Technik / IT', a: 'IT & Software ~4.800 €', b: 'Logistik & Transport ~2.900 €' },
-          { kriterium: 'Engineering / Bau', a: 'Ingenieurwesen ~4.900 €', b: 'Handwerk & Produktion ~3.000 €' },
-          { kriterium: 'Büro / Dienstleistung', a: 'Recht & Steuern ~4.500 €', b: 'Gastronomie & Hotellerie ~2.400 €' },
-          { kriterium: 'Finanz / Vertrieb', a: 'Finanzen & Versicherung ~4.200 €', b: 'Vertrieb & Verkauf ~3.300 €' },
+          // W187: vorher Modellwerte auf Basis 3.600 € (IT 4.800, Logistik 2.900, Ingenieur 4.900, Handwerk 3.000, Recht 4.500, Gastro 2.400, Finanzen 4.200, Vertrieb 3.300)
+          { kriterium: 'Technik / IT', a: 'IT & Software ~5.490 €', b: 'Logistik & Transport ~3.320 €' },
+          { kriterium: 'Engineering / Bau', a: 'Ingenieurwesen ~5.610 €', b: 'Handwerk & Produktion ~3.430 €' },
+          { kriterium: 'Büro / Dienstleistung', a: 'Recht & Steuern ~5.150 €', b: 'Gastronomie & Hotellerie ~2.750 €' },
+          { kriterium: 'Finanz / Vertrieb', a: 'Finanzen & Versicherung ~4.810 €', b: 'Vertrieb & Verkauf ~3.780 €' },
         ],
       },
       {
@@ -1535,28 +1550,31 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Gleiches Gehalt, anderes Perzentil — die Region entscheidet',
         schritte: [
+          // W187: vorher Sachsen Median 2.390 € / P86, Bayern 3.082 € / P55 (Basis 3.600 €)
           { label: 'Gleiches Gehalt & Beruf', formel: '3.200 € · Gesundheit · 25–34 J.', ergebnis: '—' },
-          { label: 'In Sachsen (Faktor 0,83)', formel: 'Median 2.390 €', ergebnis: 'Perzentil 86' },
-          { label: 'In Bayern (Faktor 1,07)', formel: 'Median 3.082 €', ergebnis: 'Perzentil 55' },
+          { label: 'In Sachsen (Faktor 0,83)', formel: 'Median 2.734 €', ergebnis: 'Perzentil 71' },
+          { label: 'In Bayern (Faktor 1,07)', formel: 'Median 3.525 €', ergebnis: 'Perzentil 38' },
         ],
-        fazit: 'Dasselbe Bruttogehalt von 3.200 € steht in Sachsen für ein hohes Einkommen (86. Perzentil), in Bayern nur für solides Mittelfeld (55.). Der Grund ist das regionale Median-Niveau — wer einen Umzug erwägt, muss Gehalt und Region zusammen denken.',
+        fazit: 'Dasselbe Bruttogehalt von 3.200 € steht in Sachsen für ein überdurchschnittliches Einkommen (71. Perzentil), in Bayern für das untere Mittelfeld (38.). Der Grund ist das regionale Median-Niveau — wer einen Umzug erwägt, muss Gehalt und Region zusammen denken.',
       },
       {
         typ: 'beispielrechnung',
         titel: 'Gleiches Gehalt, andere Branche — der stärkste Hebel',
         schritte: [
+          // W187: vorher Gastronomie Median 2.570 € / P89, IT 5.141 € / P15 (Basis 3.600 €)
           { label: 'Gleiches Gehalt, Region & Alter', formel: '3.500 € · NRW · 35–44 J.', ergebnis: '—' },
-          { label: 'In der Gastronomie (Median 2.570 €)', formel: '3.500 € vs. 2.570 €', ergebnis: 'Perzentil 89' },
-          { label: 'In der IT (Median 5.141 €)', formel: '3.500 € vs. 5.141 €', ergebnis: 'Perzentil 15' },
+          { label: 'In der Gastronomie (Median 2.945 €)', formel: '3.500 € vs. 2.945 €', ergebnis: 'Perzentil 74' },
+          { label: 'In der IT (Median 5.880 €)', formel: '3.500 € vs. 5.880 €', ergebnis: 'Perzentil 10' },
         ],
-        fazit: 'Mit 3.500 € gehört man in der Gastronomie zur Spitzengruppe (89. Perzentil), in der IT dagegen ins untere Sechstel (15.). Dieselbe Zahl, völlig andere Einordnung — die Branche ist der stärkste einzelne Hebel beim Gehalt.',
+        fazit: 'Mit 3.500 € gehört man in der Gastronomie fast ins obere Viertel (74. Perzentil), in der IT dagegen zu den unteren zehn Prozent (10.). Dieselbe Zahl, völlig andere Einordnung — die Branche ist der stärkste einzelne Hebel beim Gehalt.',
       },
       {
         typ: 'tabelle',
         titel: 'Einflussfaktoren auf das Gehalt im Überblick',
         kopf: ['Faktor', 'Effekt auf das Gehalt', 'Hinweis'],
         zeilen: [
-          ['Branche', 'sehr stark (bis ~2.000 € Median-Differenz)', 'größter einzelner Hebel'],
+          // W187: vorher „bis ~2.000 €“ (schon im alten Modell 4.900 − 2.400 = 2.500 €)
+          ['Branche', 'sehr stark (bis ~2.900 € Median-Differenz)', 'größter einzelner Hebel'],
           ['Region', 'stark (≈ −18 % bis +10 %)', 'Ost/West- und Stadt/Land-Gefälle'],
           ['Berufserfahrung / Alter', 'mittel bis stark', 'Einstieg −28 %, Höhepunkt 45–54 J.'],
           ['Qualifikation', 'mittel bis stark', 'Abschluss, Zertifikate, Führung'],
@@ -1641,7 +1659,8 @@ export const finanzenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Woher stammen die Gehaltsdaten?',
-        antwort: 'Die Daten basieren auf der Verdienststrukturerhebung des Statistischen Bundesamtes (Destatis). Die Werte werden jährlich aktualisiert und nach Berufsgruppe, Region und Alter differenziert.',
+        // W187: vorher „Verdienststrukturerhebung … jährlich aktualisiert“ (Basis war seit 2022/2023 nicht fortgeschrieben)
+        antwort: 'Das Gehaltsniveau stammt aus der Verdiensterhebung des Statistischen Bundesamtes (Destatis): Der Median aller Vollzeitbeschäftigten lag im April 2024 bei 3.978 € brutto im Monat ohne Sonderzahlungen. Fortgeschrieben mit der Entwicklung des mittleren Jahresverdienstes bis 2025 (+3,7 %) rechnet der Rechner mit rund 4.120 €. Die Abstufung nach Berufsgruppe, Bundesland und Alter ist ein vereinfachtes Modell auf dieser Basis, denn Mediane in genau dieser Gruppierung veröffentlicht Destatis nicht.',
       },
       {
         frage: 'Was bedeutet das Perzentil genau?',
@@ -1661,7 +1680,10 @@ export const finanzenRechner: RechnerConfig[] = [
       },
     ],
     quellen: [
-      { titel: 'Statistisches Bundesamt (Destatis) — Verdiensterhebung', url: 'https://www.destatis.de', hinweis: 'Median-Bruttoverdienste nach Branche, Region und Alter' },
+      // W187: konkrete Fundstellen der Median-Basis ergänzt
+      { titel: 'Destatis: Der Durchschnittsmensch in Deutschland (Pressemitteilung N037, Juli 2025)', url: 'https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/07/PD25_N037_12_62.html', hinweis: 'Median Bruttomonatsverdienst Vollzeit April 2024: 3.978 € ohne Sonderzahlungen' },
+      { titel: 'Destatis: Mittlerer Bruttojahresverdienst lag 2025 bei 54 066 Euro (Pressemitteilung 113 vom 01.04.2026)', url: 'https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_113_621.html', hinweis: 'Median Vollzeit inkl. Sonderzahlungen 2025: 54.066 € (2024: 52.159 €) — Fortschreibung +3,66 %' },
+      { titel: 'Statistisches Bundesamt (Destatis) — Verdiensterhebung', url: 'https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/_inhalt.html', hinweis: 'Verdienste nach Branchen und Berufen (GENESIS 62361)' },
       { titel: 'Entgeltatlas der Bundesagentur für Arbeit', url: 'https://web.arbeitsagentur.de/entgeltatlas', hinweis: 'Median-Entgelte nach Beruf' },
     ],
   },
@@ -1852,7 +1874,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'steuererstattung-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Steuererstattungs-Rechner',
     beschreibung: 'Steuererstattung schätzen: Mögliche Rückzahlung vom Finanzamt anhand Ihrer Ausgaben berechnen.',
     kategorie: 'Finanzen',
@@ -1861,7 +1883,8 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Steuererstattung schätzen: Berechnen Sie Ihre mögliche Erstattung anhand Pendlerpauschale, Homeoffice, Werbungskosten ✓ KI-Erklärung.',
     keywords: ['steuererstattung rechner', 'steuererstattung berechnen', 'steuererklärung erstattung', 'steuer zurück bekommen', 'werbungskosten absetzen', 'pendlerpauschale steuer', 'homeoffice pauschale', 'steuerersparnis berechnen', 'steuerrückzahlung', 'lohnsteuer erstattung'],
     icon: '💸',
-    beispiel: 'Beispiel: 40.000 € Brutto, 25 km Pendelweg, 220 Arbeitstage, 50 Homeoffice-Tage: Werbungskosten 2.390 €, über dem Pauschbetrag 1.160 €. Bei rund 32 % Grenzsteuersatz ≈ 371 € Erstattung.',
+    // W187: vorher „Werbungskosten 2.390 €, über dem Pauschbetrag 1.160 €. Bei rund 32 % Grenzsteuersatz ≈ 371 €“ (Homeoffice-Tage doppelt, Grenzsatz aus dem Brutto)
+    beispiel: 'Beispiel: 40.000 € Brutto (Steuerklasse I), 25 km Pendelweg, 220 Arbeitstage, davon 50 im Homeoffice: 25 km × 170 Pendeltage × 0,38 € = 1.615 € plus 300 € Homeoffice-Pauschale = 1.915 € Werbungskosten, 685 € über dem Pauschbetrag. Bei einem geschätzten zvE von rund 30.700 € (Grenzsteuersatz rund 28 %) ≈ 193 € Erstattung.',
     faq: [
       {
         frage: 'Wie hoch ist die durchschnittliche Steuererstattung?',
@@ -1881,7 +1904,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist die Homeoffice-Pauschale und wie hoch ist sie?',
-        antwort: 'Die Homeoffice-Pauschale beträgt 6 € pro Tag, maximal 1.260 € pro Jahr (210 Tage). Sie können die Pauschale für jeden Tag geltend machen, an dem Sie überwiegend zu Hause gearbeitet haben — unabhängig davon, ob Sie ein separates Arbeitszimmer haben. An Homeoffice-Tagen entfällt allerdings die Pendlerpauschale.',
+        // W187: Sonderfall § 4 Abs. 5 Satz 1 Nr. 6c Satz 2 EStG ergänzt
+        antwort: 'Die Homeoffice-Pauschale beträgt 6 € pro Tag, maximal 1.260 € pro Jahr (210 Tage). Sie können die Pauschale für jeden Tag geltend machen, an dem Sie überwiegend zu Hause gearbeitet und die erste Tätigkeitsstätte nicht aufgesucht haben — unabhängig davon, ob Sie ein separates Arbeitszimmer haben. An Homeoffice-Tagen entfällt deshalb die Pendlerpauschale. Ausnahme: Steht Ihnen dauerhaft kein anderer Arbeitsplatz zur Verfügung (etwa bei Lehrkräften), gibt es die Tagespauschale auch an Tagen, an denen Sie zusätzlich zur Arbeitsstätte fahren (§ 4 Abs. 5 Satz 1 Nr. 6c Satz 2 EStG).',
       },
       {
         frage: 'Steuersoftware oder Steuerberater — was ist besser?',
@@ -1903,17 +1927,18 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Was bei einem typischen Arbeitnehmer zusammenkommt (50.000 € brutto)',
         schritte: [
-          { label: 'Pendlerpauschale', formel: '25 km × 220 Tage × 0,38 €', ergebnis: '2.090 €' },
+          // W187: vorher 25 km × 220 Tage (Homeoffice-Tage doppelt) und 35 % Grenzsatz aus dem Brutto → 865 €
+          { label: 'Pendlerpauschale', formel: '25 km × 180 Pendeltage × 0,38 € (220 Arbeitstage, davon 40 Homeoffice)', ergebnis: '1.710 €' },
           { label: 'Homeoffice-Pauschale', formel: '40 Tage × 6 €', ergebnis: '240 €' },
           { label: 'berufliche Ausgaben', formel: 'Arbeitsmittel, Fortbildung', ergebnis: '500 €' },
-          { label: 'Werbungskosten gesamt', formel: '2.090 + 240 + 500', ergebnis: '2.830 €' },
-          { label: 'über dem Pauschbetrag (1.230 €)', formel: '2.830 − 1.230', ergebnis: '1.600 €' },
-          { label: 'Erstattung aus Werbungskosten', formel: '1.600 × 35 % Grenzsteuersatz', ergebnis: '560 €' },
+          { label: 'Werbungskosten gesamt', formel: '1.710 + 240 + 500', ergebnis: '2.450 €' },
+          { label: 'über dem Pauschbetrag (1.230 €)', formel: '2.450 − 1.230', ergebnis: '1.220 €' },
+          { label: 'Erstattung aus Werbungskosten', formel: 'ESt-Differenz bei zvE ≈ 38.700 € (Grenzsteuersatz rund 31 %)', ergebnis: '378 €' },
           { label: 'haushaltsnahe Dienstleistungen', formel: '1.000 € × 20 %', ergebnis: '200 €' },
-          { label: 'Spenden', formel: '300 € × 35 %', ergebnis: '105 €' },
-          { label: 'geschätzte Erstattung', formel: '560 + 200 + 105', ergebnis: '865 €' },
+          { label: 'Spenden', formel: '(300 € − 36 € Sonderausgaben-Pauschbetrag) × rund 31 %', ergebnis: '81 €' },
+          { label: 'geschätzte Erstattung', formel: '378 + 200 + 81', ergebnis: '659 €' },
         ],
-        fazit: 'Für 50.000 € Brutto kommen aus Arbeitsweg, Homeoffice und beruflichen Ausgaben 2.830 € Werbungskosten zusammen. Davon wirkt nur der Teil über dem Pauschbetrag von 1.230 € zusätzlich — also 1.600 €. Bei einem Grenzsteuersatz von rund 35 % ergibt das 560 € Erstattung. Hinzu kommen 200 € für haushaltsnahe Dienstleistungen (20 % direkt von der Steuerschuld) und 105 € aus einer Spende. Insgesamt schätzt der Rechner rund 865 € Erstattung. Wichtig: Das ist eine Schätzung aus den größten Posten — die genaue Höhe hängt vom Einzelfall ab und ergibt sich erst aus dem Steuerbescheid. Schon dieses Beispiel zeigt das Grundmuster: Der größte Hebel sind die Werbungskosten, sobald sie den Pauschbetrag übersteigen; haushaltsnahe Leistungen wirken zusätzlich und unabhängig vom Steuersatz. Wer keinen einzigen dieser Posten hat, bekommt dagegen nichts über den ohnehin automatischen Pauschbetrag hinaus zurück.',
+        fazit: 'Für 50.000 € Brutto (Steuerklasse I, ohne Kirchensteuer) kommen aus Arbeitsweg, Homeoffice und beruflichen Ausgaben 2.450 € Werbungskosten zusammen; die Pendlerpauschale zählt dabei nur für die 180 Tage, an denen tatsächlich gefahren wird. Davon wirkt nur der Teil über dem Pauschbetrag von 1.230 € zusätzlich — also 1.220 €. Das zu versteuernde Einkommen liegt nach Pauschbeträgen und Vorsorgepauschale bei rund 38.700 €, der Grenzsteuersatz bei rund 31 %; die Einkommensteuer sinkt dadurch um 378 €. Hinzu kommen 200 € für haushaltsnahe Dienstleistungen (20 % direkt von der Steuerschuld) und 81 € aus einer Spende von 300 €, von der nur der Teil über dem Sonderausgaben-Pauschbetrag von 36 € zusätzlich wirkt. Insgesamt schätzt der Rechner rund 659 € Erstattung. Wichtig: Das ist eine Schätzung aus den größten Posten — die genaue Höhe hängt vom Einzelfall ab und ergibt sich erst aus dem Steuerbescheid. Schon dieses Beispiel zeigt das Grundmuster: Der größte Hebel sind die Werbungskosten, sobald sie den Pauschbetrag übersteigen; haushaltsnahe Leistungen wirken zusätzlich und unabhängig vom Steuersatz. Wer keinen einzigen dieser Posten hat, bekommt dagegen nichts über den ohnehin automatischen Pauschbetrag hinaus zurück.',
       },
       {
         typ: 'text',
@@ -1926,10 +1951,11 @@ export const finanzenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'zu versteuerndes Einkommen', formel: '', ergebnis: '45.000 €' },
           { label: 'Werbungskosten über dem Pauschbetrag', formel: '', ergebnis: '2.000 €' },
-          { label: 'Grenzsteuersatz', formel: 'bei 45.000 €', ergebnis: '≈ 34 %' },
-          { label: 'Erstattungseffekt', formel: '2.000 × 34 %', ergebnis: '≈ 680 €' },
+          // W187: vorher „≈ 34 %“ / „≈ 680 €“; § 32a EStG 2026 bei 45.000 €: 33,4 %, ESt(45.000) − ESt(43.000) = 661 €
+          { label: 'Grenzsteuersatz', formel: 'bei 45.000 €', ergebnis: '≈ 33 %' },
+          { label: 'Erstattungseffekt', formel: 'ESt(45.000 €) − ESt(43.000 €)', ergebnis: '≈ 660 €' },
         ],
-        fazit: 'Die 2.000 € abgesetzte Werbungskosten sind nicht die Erstattung — sie senken das zu versteuernde Einkommen. Zurück kommt davon der Grenzsteuersatz, hier rund 34 %, also etwa 680 €. Bei einem geringeren Einkommen mit nur 20 % Grenzsteuersatz wären es für denselben Betrag nur rund 400 €, bei 42 % entsprechend 840 €. Das erklärt, warum sich identische Ausgaben für Gut- und Geringverdiener unterschiedlich stark auswirken. Der abgesetzte Betrag selbst muss zunächst aus eigener Tasche bezahlt worden sein; die Erstattung ist nur die anteilige Steuerentlastung darauf.',
+        fazit: 'Die 2.000 € abgesetzte Werbungskosten sind nicht die Erstattung — sie senken das zu versteuernde Einkommen. Zurück kommt davon ungefähr der Grenzsteuersatz, hier rund 33 %, also etwa 660 €. Bei einem geringeren Einkommen mit nur 20 % Grenzsteuersatz wären es für denselben Betrag nur rund 400 €, bei 42 % entsprechend 840 €. Das erklärt, warum sich identische Ausgaben für Gut- und Geringverdiener unterschiedlich stark auswirken. Der abgesetzte Betrag selbst muss zunächst aus eigener Tasche bezahlt worden sein; die Erstattung ist nur die anteilige Steuerentlastung darauf.',
       },
       {
         typ: 'tabelle',
@@ -1943,7 +1969,8 @@ export const finanzenRechner: RechnerConfig[] = [
           ['Sonderausgaben (Spenden u. a.)', 'in tatsächlicher Höhe', '× Grenzsteuersatz'],
           ['Haushaltsnahe DL / Handwerker', '20 % der Kosten, max. 4.000 €', 'direkt von der Steuerschuld'],
         ],
-        fussnote: 'Stand 2026. Werbungskosten und Sonderausgaben senken das zu versteuernde Einkommen — die Erstattung entspricht dem Grenzsteuersatz des Betrags. Zusätzlich wirkt nur, was über dem Arbeitnehmer-Pauschbetrag von 1.230 € liegt. Haushaltsnahe Dienstleistungen und Handwerkerleistungen sind die Ausnahme: Sie werden mit 20 % direkt von der Steuerschuld abgezogen. An Homeoffice-Tagen entfällt die Pendlerpauschale für denselben Tag — beide lassen sich nicht doppelt für einen Kalendertag ansetzen.',
+        // W187: Sonderfall § 4 Abs. 5 Satz 1 Nr. 6c Satz 2 EStG ergänzt
+        fussnote: 'Stand 2026. Werbungskosten und Sonderausgaben senken das zu versteuernde Einkommen — die Erstattung entspricht dem Grenzsteuersatz des Betrags. Zusätzlich wirkt nur, was über dem Arbeitnehmer-Pauschbetrag von 1.230 € liegt. Haushaltsnahe Dienstleistungen und Handwerkerleistungen sind die Ausnahme: Sie werden mit 20 % direkt von der Steuerschuld abgezogen. An Homeoffice-Tagen entfällt die Pendlerpauschale für denselben Tag — beide lassen sich nicht doppelt für einen Kalendertag ansetzen (Ausnahme: dauerhaft kein anderer Arbeitsplatz, § 4 Abs. 5 Satz 1 Nr. 6c Satz 2 EStG).',
       },
       {
         typ: 'statistik',
@@ -1960,12 +1987,13 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Pendlerpauschale: 30 km Arbeitsweg',
         schritte: [
           { label: 'Entfernung (einfach)', formel: '', ergebnis: '30 km' },
-          { label: 'Arbeitstage', formel: '', ergebnis: '220' },
+          // W187: vorher „1.278 × 34 % (bei 45.000 €) ≈ 435 €“; ESt(45.000) − ESt(43.722) = 424 €
+          { label: 'Arbeitstage mit Fahrt (ohne Homeoffice)', formel: '', ergebnis: '220' },
           { label: 'Pendlerpauschale', formel: '30 × 220 × 0,38 €', ergebnis: '2.508 €' },
           { label: 'über dem Pauschbetrag (1.230 €)', formel: '2.508 − 1.230', ergebnis: '1.278 €' },
-          { label: 'Erstattung', formel: '1.278 × 34 % (bei 45.000 €)', ergebnis: '≈ 435 €' },
+          { label: 'Erstattung', formel: '1.278 € bei zvE 45.000 € (rund 33 %)', ergebnis: '≈ 424 €' },
         ],
-        fazit: 'Allein der Arbeitsweg von 30 km bringt bei 220 Arbeitstagen 2.508 € Werbungskosten — deutlich mehr als der Pauschbetrag von 1.230 €. Nur der überschießende Teil von 1.278 € wirkt zusätzlich; bei rund 34 % Grenzsteuersatz fließen davon etwa 435 € zurück. Faustregel: Ab etwa 15 km einfacher Strecke übersteigt die Pendlerpauschale bei 220 Tagen bereits den Pauschbetrag, sodass sich die Steuererklärung allein deswegen lohnt. Maßgeblich ist die kürzeste Straßenverbindung; eine längere Strecke zählt nur, wenn sie offensichtlich verkehrsgünstiger und regelmäßig genutzt wird. Für reine Homeoffice-Tage gibt es dagegen keine Pendlerpauschale, sondern die separate Homeoffice-Pauschale.',
+        fazit: 'Allein der Arbeitsweg von 30 km bringt bei 220 Tagen mit Fahrt 2.508 € Werbungskosten — deutlich mehr als der Pauschbetrag von 1.230 €. Nur der überschießende Teil von 1.278 € wirkt zusätzlich; bei rund 33 % Grenzsteuersatz fließen davon etwa 424 € zurück. Faustregel: Ab etwa 15 km einfacher Strecke übersteigt die Pendlerpauschale bei 220 Tagen bereits den Pauschbetrag, sodass sich die Steuererklärung allein deswegen lohnt. Maßgeblich ist die kürzeste Straßenverbindung; eine längere Strecke zählt nur, wenn sie offensichtlich verkehrsgünstiger und regelmäßig genutzt wird. Für reine Homeoffice-Tage gibt es dagegen keine Pendlerpauschale, sondern die separate Homeoffice-Pauschale.',
       },
       {
         typ: 'text',
@@ -1982,7 +2010,8 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Was die Erstattung erhöht — diese Belege sammeln',
         punkte: [
           'Werbungskosten über dem Pauschbetrag von 1.230 € — nur der überschießende Teil wirkt zusätzlich.',
-          'Pendlerpauschale: Entfernung × Arbeitstage × 0,38 € (ab dem ersten Kilometer, Stand 2026).',
+          // W187: vorher „Entfernung × Arbeitstage“
+          'Pendlerpauschale: volle Entfernungskilometer × Tage mit Fahrt zur Arbeit × 0,38 € (ab dem ersten Kilometer, Stand 2026); Homeoffice-Tage zählen nicht mit.',
           'Homeoffice-Pauschale: 6 € je Tag, bis zu 1.260 € im Jahr.',
           'Arbeitsmittel, Fortbildung, Fachliteratur und Bewerbungskosten in tatsächlicher Höhe.',
           'Sonderausgaben wie Spenden — wirken mit dem persönlichen Grenzsteuersatz.',
@@ -2001,11 +2030,13 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Schätzung — keine Steuerberatung',
-        text: 'Dieser Rechner liefert eine grobe Schätzung der möglichen Erstattung auf Basis der wichtigsten absetzbaren Posten und des Einkommensteuertarifs 2026 (Pendlerpauschale 0,38 €/km, Arbeitnehmer-Pauschbetrag 1.230 €). Der tatsächliche Betrag hängt von vielen individuellen Faktoren ab, die hier nicht abgebildet sind — etwa weiteren Einkünften, der genauen Steuerklasse oder dem Familienstand. Es handelt sich um keine verbindliche Berechnung und keine Steuerberatung. Die exakte Erstattung ergibt sich erst aus dem Steuerbescheid. Insbesondere der Grenzsteuersatz ist hier vereinfacht aus dem Bruttoeinkommen abgeleitet; das tatsächlich zu versteuernde Einkommen und damit der reale Satz können abweichen. Die amtliche Berechnung und Abgabe erfolgt über den BMF-Steuerrechner (bmf-steuerrechner.de) und ELSTER; bei komplexen Fällen helfen Steuerberatung oder Lohnsteuerhilfeverein.',
+        // W187: vorher „Insbesondere der Grenzsteuersatz ist hier vereinfacht aus dem Bruttoeinkommen abgeleitet …“
+        text: 'Dieser Rechner liefert eine grobe Schätzung der möglichen Erstattung auf Basis der wichtigsten absetzbaren Posten und des Einkommensteuertarifs 2026 (Pendlerpauschale 0,38 €/km, Arbeitnehmer-Pauschbetrag 1.230 €). Der tatsächliche Betrag hängt von vielen individuellen Faktoren ab, die hier nicht abgebildet sind — etwa weiteren Einkünften, der genauen Steuerklasse oder dem Familienstand. Es handelt sich um keine verbindliche Berechnung und keine Steuerberatung. Die exakte Erstattung ergibt sich erst aus dem Steuerbescheid. Das zu versteuernde Einkommen schätzt der Rechner aus dem Brutto (Arbeitnehmer- und Sonderausgaben-Pauschbetrag, Vorsorgepauschale wie beim Lohnsteuerabzug); die Erstattung ist die Differenz der Einkommensteuer mit und ohne die eingetragenen Posten, ohne Soli und Kirchensteuer. Bei weiteren Einkünften oder abweichenden Vorsorgeaufwendungen können zvE und Steuersatz abweichen. Die amtliche Berechnung und Abgabe erfolgt über den BMF-Steuerrechner (bmf-steuerrechner.de) und ELSTER; bei komplexen Fällen helfen Steuerberatung oder Lohnsteuerhilfeverein.',
       },
     ],
     quellen: [
       { titel: '§ 9 EStG — Werbungskosten / Entfernungspauschale', url: 'https://www.gesetze-im-internet.de/estg/__9.html', hinweis: 'Werbungskosten, Arbeitnehmer-Pauschbetrag und Entfernungspauschale (0,38 €/km, Stand 2026).' },
+      { titel: '§ 4 Abs. 5 Satz 1 Nr. 6c EStG — Tagespauschale (Homeoffice)', url: 'https://www.gesetze-im-internet.de/estg/__4.html', hinweis: '6 € je Homeoffice-Tag ohne Aufsuchen der ersten Tätigkeitsstätte, höchstens 1.260 €; Satz 2: Sonderfall ohne anderen Arbeitsplatz.' },
       { titel: '§ 46 EStG — Veranlagung bei Lohneinkünften', url: 'https://www.gesetze-im-internet.de/estg/__46.html', hinweis: 'Pflicht- und Antragsveranlagung von Arbeitnehmern; Fristen und 410-€-Grenze.' },
       { titel: 'BMF — amtlicher Steuerrechner / ELSTER', url: 'https://www.bmf-steuerrechner.de', hinweis: 'Offizielle Berechnung; Abgabe der Steuererklärung über ELSTER (elster.de).' },
     ],
@@ -2357,7 +2388,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'rentenrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Rentenrechner',
     beschreibung: 'Gesetzliche Rente schätzen: Voraussichtliche Monatsrente, Rentenpunkte und Rentenlücke berechnen.',
     kategorie: 'Finanzen',
@@ -2366,16 +2397,18 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Rente berechnen: Voraussichtliche Monatsrente, Rentenpunkte und Rentenlücke ✓ Abschläge bei Frührente ✓ Netto-Schätzung ✓ KI-Erklärung.',
     keywords: ['rentenrechner', 'rente berechnen', 'rentenpunkte berechnen', 'rentenlücke rechner', 'gesetzliche rente rechner', 'rente mit 63', 'monatsrente berechnen', 'rentenanspruch berechnen', 'netto rente rechner', 'altersvorsorge rechner'],
     icon: '👴',
-    beispiel: '45 Beitragsjahre als Durchschnittsverdiener = 45 Entgeltpunkte → Brutto-Rente 1.835,55 € (bis 30.06.2026) bzw. 1.913,40 € (ab 01.07.2026, Rentenwert 42,52 €) → Netto ca. 1.594 € (Näherung, Rentenbeginn 2026).',
+    beispiel: '45 Beitragsjahre als Durchschnittsverdiener = 45 Entgeltpunkte → Brutto-Rente 1.835,55 € (bis 30.06.2026) bzw. 1.913,40 € (ab 01.07.2026, Rentenwert 42,52 €) → Netto ca. 1.610 € (Näherung, Rentenbeginn 2026, kinderlos; mit Kindern ca. 1.619 €).',
+    // W187: vorher „Netto ca. 1.594 €“ (Besteuerungsanteil 83 %, KV/PV pauschal 10,85 %, ohne Abzug der Beiträge vom zvE)
     // W19-Goldstandard: rentenrechner auf volle Tiefe (~1.560 W, 15 Bausteine).
     // Leitformat „Tabellen-Nachschlagewerk" — 3 Tabellen dominant (EP→Rente, Rentenwert-
     // Historie, Abschlags-Staffel), grenzt sich vom vergleich-dominanten witwenrente-Rechner ab.
     // ALLE Werte aus lib/berechnungen/rente.ts reproduziert (Lib-Resolver-Check 25.06.2026):
     // EP = min(Brutto, 101.400)/51.944; Rentenwert 40,79 € (bis 30.06.) / 42,52 € (ab 01.07.2026,
-    // BMAS 05.03.2026, +4,24 %); Abschlag 0,3 %/Monat, gedeckelt 14,4 %; steuerpfl. Anteil 83 %
-    // (Beginn 2026); SV-Pauschale Rentner 10,85 %; Netto via ESt-Grundtabelle § 32a 2026.
+    // BMAS 05.03.2026, +4,24 %); Abschlag 0,3 %/Monat, gedeckelt 14,4 %; steuerpfl. Anteil 84 %
+    // (Beginn 2026, W187: vorher 83 %); KV/PV Rentner 12,95 % kinderlos (W187: vorher 10,85 %); Netto via
+    // ESt-Grundtabelle § 32a 2026 nach Abzug 102 € + 36 € + KV/PV.
     // STICHTAG-DISZIPLIN: Hauptbeispiel in EP, beide Rentenwert-Stände explizit (Build-Konstante).
-    // 45 EP: brutto 1.835,55 € / 1.913,40 €; netto ~1.540 € / ~1.594 € (83 %, Näherung).
+    // 45 EP: brutto 1.835,55 € / 1.913,40 €; netto ~1.553 € / ~1.610 € (W187, vorher ~1.540 / ~1.594 €).
     // erklaerung bleibt Fallback.
     contentBloecke: [
       {
@@ -2452,15 +2485,19 @@ export const finanzenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Entgeltpunkte sammeln', formel: '45 Jahre × 1,0 EP (Durchschnittsverdienst)', ergebnis: '45 Entgeltpunkte' },
           { label: 'Brutto-Rente = EP × Rentenwert', formel: '45 × 40,79 € bzw. 45 × 42,52 €', ergebnis: '1.835,55 € / 1.913,40 €' },
-          { label: 'Steuerpflichtiger Anteil 2026', formel: '83 % von 1.913,40 € × 12 Monate', ergebnis: '19.057 €/Jahr steuerpflichtig' },
-          { label: 'Abzüge (Näherung)', formel: 'Einkommensteuer ~112 € + KV/PV 10,85 % ~208 €', ergebnis: '−320 €/Monat' },
+          // W187: vorher 83 % → 19.057 €, „Einkommensteuer ~112 € + KV/PV 10,85 % ~208 € = −320 €/Monat“, netto 1.594 €
+          { label: 'Steuerpflichtiger Anteil 2026', formel: '84 % von 1.913,40 € × 12 Monate', ergebnis: '19.287 €/Jahr steuerpflichtig' },
+          { label: 'Kranken- und Pflegeversicherung', formel: '1.913,40 € × 12,95 % (KV 7,3 % + 1,45 %, PV kinderlos 4,2 %)', ergebnis: '−247,79 €/Monat' },
+          { label: 'zu versteuerndes Einkommen', formel: '19.287 € − 102 € − 36 € − 12 × 247,79 €', ergebnis: '≈ 16.176 €/Jahr' },
+          { label: 'Einkommensteuer', formel: '§ 32a EStG 2026 auf 16.176 € ÷ 12', ergebnis: '−55,75 €/Monat' },
         ],
-        fazit: 'Aus 45 Entgeltpunkten ergibt sich ab 01.07.2026 eine Brutto-Rente von 1.913,40 €, netto nach Steuer und Sozialabgaben rund 1.594 € (Näherung, Rentenbeginn 2026). Vor dem Stichtag (Rentenwert 40,79 €) wären es 1.835,55 € brutto bzw. rund 1.540 € netto. Bei früherem Renteneintritt sind zusätzlich die Abschläge abzuziehen.',
+        fazit: 'Aus 45 Entgeltpunkten ergibt sich ab 01.07.2026 eine Brutto-Rente von 1.913,40 €, netto nach Kranken- und Pflegeversicherung und Steuer rund 1.610 € (Näherung, Rentenbeginn 2026, kinderlos; mit Kindern rund 1.619 €). Vor dem Stichtag (Rentenwert 40,79 €) wären es 1.835,55 € brutto bzw. rund 1.553 € netto. Bei früherem Renteneintritt sind zusätzlich die Abschläge abzuziehen.',
       },
       {
         typ: 'text',
         titel: 'Netto-Rente: Steuern und Sozialabgaben',
-        html: `<p>Von der Brutto-Rente bleibt nicht alles übrig. Renten werden <strong>nachgelagert besteuert</strong>: Wer 2026 in Rente geht, muss <strong>83 %</strong> der Rente versteuern; dieser Anteil steigt für jeden späteren Jahrgang um 0,5 Prozentpunkte, bis 2058 die vollen 100 % erreicht sind. Auf den steuerpflichtigen Teil wird die normale Einkommensteuer nach der Grundtabelle angewandt — bei kleinen Renten bleibt durch den Grundfreibetrag oft wenig oder gar keine Steuer.</p><p>Hinzu kommen Beiträge zur <strong>Kranken- und Pflegeversicherung</strong> der Rentner von zusammen rund 10,85 % (je nach Zusatzbeitrag der Krankenkasse und Kinderlosenzuschlag etwas mehr oder weniger). Sie werden direkt von der Rente einbehalten.</p><p>Für das Beispiel mit 1.913,40 € Brutto (45 EP, Rentenbeginn 2026) ergibt sich nach rund 112 € Steuer und 208 € Sozialabgaben eine Netto-Rente von etwa <strong>1.594 €</strong>. Das ist eine Näherung — der genaue Wert hängt von Ihrer Krankenkasse, weiteren Einkünften und Ihrem persönlichen Steuerstatus ab. Ihre aktuelle Abgabenlast zeigt der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
+        // W187: vorher „83 %“, „KV/PV rund 10,85 %“, „112 € Steuer und 208 € Sozialabgaben … 1.594 €“
+        html: `<p>Von der Brutto-Rente bleibt nicht alles übrig. Renten werden <strong>nachgelagert besteuert</strong>: Wer 2026 in Rente geht, muss <strong>84 %</strong> der Rente versteuern (§ 22 Nr. 1 Satz 3 Buchst. a Doppelbuchst. aa EStG); dieser Anteil steigt für jeden späteren Rentenbeginn um 0,5 Prozentpunkte, bis 2058 die vollen 100 % erreicht sind. Auf den steuerpflichtigen Teil wird die normale Einkommensteuer nach der Grundtabelle angewandt — bei kleinen Renten bleibt durch den Grundfreibetrag oft wenig oder gar keine Steuer.</p><p>Hinzu kommen Beiträge zur <strong>Kranken- und Pflegeversicherung</strong> der Rentner: In der Krankenversicherung die Hälfte des allgemeinen Beitragssatzes (7,3 %) plus der halbe Zusatzbeitrag der Kasse (2026 im Schnitt 1,45 %), die Pflegeversicherung trägt der Rentner allein mit 3,6 %, Kinderlose mit 4,2 %. Zusammen sind das rund 12,35 % bzw. 12,95 %, die direkt von der Rente einbehalten werden. Beide Beiträge sind als Sonderausgaben abziehbar und senken die Steuer, ebenso der Werbungskosten-Pauschbetrag von 102 € und der Sonderausgaben-Pauschbetrag von 36 €.</p><p>Für das Beispiel mit 1.913,40 € Brutto (45 EP, Rentenbeginn 2026, kinderlos) ergibt sich nach rund 248 € Kranken- und Pflegeversicherung und rund 56 € Steuer eine Netto-Rente von etwa <strong>1.610 €</strong>. Das ist eine Näherung — der genaue Wert hängt von Ihrer Krankenkasse, weiteren Einkünften und Ihrem persönlichen Steuerstatus ab. Ihre aktuelle Abgabenlast zeigt der <a href="/finanzen/brutto-netto-rechner">Brutto-Netto-Rechner</a>.</p>`,
       },
       {
         typ: 'text',
@@ -2489,7 +2526,8 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Durchschnittsentgelt 2026', wert: '51.944 €', hinweis: 'Jahresbrutto für 1,0 EP (§ 69 SGB VI)' },
           { label: 'Beitragssatz Rentenversicherung', wert: '18,6 %', hinweis: 'je 9,3 % Arbeitnehmer und Arbeitgeber' },
           { label: 'Maximaler Abschlag Frührente', wert: '14,4 %', hinweis: '48 Monate × 0,3 %, dauerhaft' },
-          { label: 'Steuerpflichtiger Anteil 2026', wert: '83 %', hinweis: '+0,5 %-Punkte je späterem Jahrgang' },
+          // W187: vorher 83 % (§ 22 EStG n. F.: Rentenbeginn 2026 → 84 %)
+          { label: 'Steuerpflichtiger Anteil 2026', wert: '84 %', hinweis: '+0,5 %-Punkte je späterem Rentenbeginn, 2058: 100 %' },
         ],
       },
       {
@@ -2535,7 +2573,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wird meine Rente besteuert?',
-        antwort: 'Ja, Renten werden nachgelagert besteuert. Der steuerpflichtige Anteil hängt vom Renteneintrittsjahr ab: 2026 sind 83% steuerpflichtig, dieser Anteil steigt jährlich um 0,5%. Zusätzlich fallen ca. 10% für Kranken- und Pflegeversicherung an. Bei einer Brutto-Rente von 1.500 € bleiben netto ca. 1.250-1.350 € übrig.',
+        // W187: vorher „2026 sind 83% steuerpflichtig … ca. 10% für Kranken- und Pflegeversicherung … 1.250-1.350 €“
+        antwort: 'Ja, Renten werden nachgelagert besteuert. Der steuerpflichtige Anteil hängt vom Jahr des Rentenbeginns ab: 2026 sind 84 % steuerpflichtig, der Anteil steigt für jeden späteren Rentenbeginn um 0,5 Prozentpunkte bis 100 % im Jahr 2058. Zusätzlich fallen rund 12–13 % für Kranken- und Pflegeversicherung an (KV 7,3 % plus halber Zusatzbeitrag, PV 3,6 %, kinderlos 4,2 %). Bei einer Brutto-Rente von 1.500 € und Rentenbeginn 2026 bleiben netto rund 1.300 € übrig.',
       },
     ],
     quellen: [
@@ -2552,7 +2591,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'splitting-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Splitting-Rechner',
     beschreibung: 'Ehegattensplitting berechnen: Steuervorteil durch Zusammenveranlagung im Vergleich zur Einzelveranlagung.',
     kategorie: 'Finanzen',
@@ -2600,7 +2639,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Was das Ehegattensplitting ist',
-        html: `<p>Das <strong>Ehegattensplitting</strong> (§ 32a Abs. 5 EStG) ist das Verfahren, mit dem die Einkommensteuer für zusammenveranlagte Ehegatten und eingetragene Lebenspartner berechnet wird. Der Ablauf: Das <strong>gemeinsame zu versteuernde Einkommen (zvE)</strong> wird halbiert, auf diese Hälfte der normale Grundtarif angewendet und die so ermittelte Steuer anschließend wieder verdoppelt.</p><p>Der Effekt zeigt sich bei unterschiedlich hohen Einkommen: Statt dass der Mehrverdienende voll in die hohen Tarifzonen rutscht und der andere seinen Grundfreibetrag kaum nutzt, werden beide so behandelt, als hätten sie je die Hälfte verdient. Der progressive Tarif wird dadurch „geglättet". Dieser Rechner stellt die Zusammenveranlagung der getrennten Einzelveranlagung gegenüber und zeigt den <strong>Splitting-Vorteil</strong> in Euro. Eingegeben wird das Bruttojahreseinkommen je Partner; daraus zieht der Rechner zunächst den Arbeitnehmer-Pauschbetrag (1.230 €) und die Sonderausgabenpauschale ab. Die folgenden Beispiele rechnen zur besseren Anschauung direkt mit dem zvE — so lässt sich der reine Tarif-Effekt zeigen, ohne dass Pauschalen das Bild verschieben. Der ausgewiesene Splitting-Vorteil ist in beiden Betrachtungsweisen identisch, weil die Pauschalen Einzel- und Zusammenveranlagung gleichermaßen mindern.</p>`,
+        html: `<p>Das <strong>Ehegattensplitting</strong> (§ 32a Abs. 5 EStG) ist das Verfahren, mit dem die Einkommensteuer für zusammenveranlagte Ehegatten und eingetragene Lebenspartner berechnet wird. Der Ablauf: Das <strong>gemeinsame zu versteuernde Einkommen (zvE)</strong> wird halbiert, auf diese Hälfte der normale Grundtarif angewendet und die so ermittelte Steuer anschließend wieder verdoppelt.</p><p>Der Effekt zeigt sich bei unterschiedlich hohen Einkommen: Statt dass der Mehrverdienende voll in die hohen Tarifzonen rutscht und der andere seinen Grundfreibetrag kaum nutzt, werden beide so behandelt, als hätten sie je die Hälfte verdient. Der progressive Tarif wird dadurch „geglättet". Dieser Rechner stellt die Zusammenveranlagung der getrennten Einzelveranlagung gegenüber und zeigt den <strong>Splitting-Vorteil</strong> in Euro. Eingegeben wird das <strong>zu versteuernde Einkommen je Partner</strong> — also das Einkommen nach Werbungskosten, Vorsorgeaufwendungen und Sonderausgaben, wie es im Steuerbescheid steht. Kinderfreibeträge wählt man im Rechner gesondert. Die folgenden Beispiele rechnen genauso und lassen sich mit denselben Eingaben im Rechner nachvollziehen.</p>`,
+        // W187: vorher „Eingegeben wird das Bruttojahreseinkommen je Partner; daraus zieht der Rechner zunächst den Arbeitnehmer-Pauschbetrag (1.230 €) und die Sonderausgabenpauschale ab …“ — Rechner auf zvE-Eingabe umgestellt
       },
       {
         typ: 'vergleich',
@@ -2666,7 +2706,8 @@ export const finanzenRechner: RechnerConfig[] = [
           ['70.000 € + 10.000 €', '18.264 €', '14.418 €', '3.846 €'],
           ['80.000 € + 0 €', '22.464 €', '14.418 €', '8.046 €'],
         ],
-        fussnote: 'Grundtarif (Einzelveranlagung) nach § 32a EStG 2026, Werte vom Rechner berechnet (zvE-Framing, ohne Soli/Kirchensteuer). Auffällig: Die Splitting-Steuer ist in allen Zeilen gleich (14.418 €), weil sie nur von der Summe der Einkommen abhängt — nicht von ihrer Verteilung. Die Einzelveranlagung dagegen steigt, je ungleicher die Einkommen werden. Genau diese wachsende Differenz ist der Splitting-Vorteil: null bei gleichem Einkommen, maximal beim Alleinverdiener-Paar. Liegt das gemeinsame zvE höher, fällt auch der Vorteil entsprechend größer aus, solange der Unterschied bestehen bleibt; bei einem gemeinsamen zvE von 100.000 € (alles bei einem Partner) erreicht er bereits rund 9.768 €. Solidaritätszuschlag und Kirchensteuer würden die Beträge zusätzlich leicht verschieben.',
+        // W187: vorher „(zvE-Framing, …)“
+        fussnote: 'Grundtarif (Einzelveranlagung) nach § 32a EStG 2026, Werte vom Rechner berechnet (Eingabe zvE, ohne Soli/Kirchensteuer). Auffällig: Die Splitting-Steuer ist in allen Zeilen gleich (14.418 €), weil sie nur von der Summe der Einkommen abhängt — nicht von ihrer Verteilung. Die Einzelveranlagung dagegen steigt, je ungleicher die Einkommen werden. Genau diese wachsende Differenz ist der Splitting-Vorteil: null bei gleichem Einkommen, maximal beim Alleinverdiener-Paar. Liegt das gemeinsame zvE höher, fällt auch der Vorteil entsprechend größer aus, solange der Unterschied bestehen bleibt; bei einem gemeinsamen zvE von 100.000 € (alles bei einem Partner) erreicht er bereits rund 9.768 €. Solidaritätszuschlag und Kirchensteuer würden die Beträge zusätzlich leicht verschieben.',
       },
       {
         typ: 'text',
@@ -2738,7 +2779,7 @@ export const finanzenRechner: RechnerConfig[] = [
     // W185: vorher „Bereinigtes Einkommen: ca. 1.400 € | Geschätztes Wohngeld: ca. 296 €“ aus der stillgelegten
     // Lib-Pauschale (Brutto × 0,7 ohne Werbungskosten). Nach §§ 14, 16 WoGG: (24.000 − 1.230) × 0,7 ÷ 12 =
     // 1.328,25 €; Anlage 2/3 (2 Pers.: a 0,03, b 3,571E-4, c 3,040E-5), M 718,40 → z4 = 326,79 → 327 €.
-    beispiel: '2-Personen-Haushalt, ein Verdiener mit 2.000 € brutto (steuer-, kranken- und rentenversicherungspflichtig), 600 € Bruttokaltmiete, Mietstufe III → Einkommen: (2.000 € − 102,50 € Werbungskostenpauschale) × 70 % = 1.328,25 € | Berücksichtigte Miete: 551 € (Höchstbetrag) + 142,60 € Heizkosten + 24,80 € Klima = 718,40 € | Wohngeld nach Anlage 2 WoGG: rund 327 €/Monat (Schätzung, verbindlich ist der BMWSB-Wohngeldrechner).',
+    beispiel: '2-Personen-Haushalt, ein Verdiener mit 2.000 € brutto (steuer-, kranken- und rentenversicherungspflichtig), 600 € Bruttokaltmiete, Mietstufe III → Einkommen: (2.000 € − 102,50 € Werbungskostenpauschale) × 70 % = 1.328,25 € | Berücksichtigte Miete: 600 € gedeckelt auf 551 € Höchstbetrag + 24,80 € Klimakomponente = 575,80 €, dazu 142,60 € Heizkostenkomponente = 718,40 € | Wohngeld nach Anlage 2 WoGG: rund 327 €/Monat (Schätzung; genau rechnet der BMWSB-Wohngeldrechner, verbindlich ist der Bescheid der Wohngeldbehörde).', // W187: vorher „551 € (Höchstbetrag) + 142,60 € Heizkosten + 24,80 € Klima“ und „verbindlich ist der BMWSB-Wohngeldrechner“
     faq: [
       {
         frage: 'Habe ich Anspruch auf Wohngeld?',
@@ -2747,7 +2788,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         // W185: vorher „erhält geschätzt rund 296 € monatlich“ (ohne Werbungskostenabzug); jetzt 327 € bzw. 245 € (20 %).
         frage: 'Wie hoch ist das Wohngeld 2026?',
-        antwort: 'Die Höhe hängt von Haushaltsgröße, Einkommen, Miete und Mietstufe ab. Ende 2025 lag der durchschnittliche Wohngeldanspruch laut Statistischem Bundesamt bei 296 € im Monat (rund 1,3 Millionen Haushalte). Ein 2-Personen-Haushalt mit einem Verdiener (2.000 € brutto, steuer-, kranken- und rentenversicherungspflichtig) und 600 € Bruttokaltmiete in Mietstufe III kommt nach der Formel der Anlage 2 WoGG auf rund 327 € monatlich. Fällt keine Einkommensteuer an, sinkt der Pauschalabzug von 30 auf 20 Prozent und das Wohngeld auf rund 245 €. Verbindlich rechnet der Wohngeldrechner des BMWSB.',
+        antwort: 'Die Höhe hängt von Haushaltsgröße, Einkommen, Miete und Mietstufe ab. Ende 2025 lag der durchschnittliche Wohngeldanspruch laut Statistischem Bundesamt bei 296 € im Monat (rund 1,3 Millionen Haushalte). Ein 2-Personen-Haushalt mit einem Verdiener (2.000 € brutto, steuer-, kranken- und rentenversicherungspflichtig) und 600 € Bruttokaltmiete in Mietstufe III kommt nach der Formel der Anlage 2 WoGG auf rund 327 € monatlich. Fällt keine Einkommensteuer an, sinkt der Pauschalabzug von 30 auf 20 Prozent und das Wohngeld auf rund 245 €. Genau, aber unverbindlich rechnet der Wohngeldrechner des BMWSB; verbindlich ist der Bescheid der Wohngeldbehörde.', // W187: vorher „Verbindlich rechnet der Wohngeldrechner des BMWSB.“
       },
       {
         frage: 'Was ist die Mietstufe und wo finde ich meine?',
@@ -2778,7 +2819,8 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'BAföG berechnen: Anspruch und Höhe für Studium und Schule ✓ Elterneinkommen ✓ Vermögen ✓ Wohnsituation ✓ KI-Erklärung.',
     keywords: ['bafög rechner', 'bafög berechnen', 'bafög 2026', 'bafög anspruch', 'bafög höhe', 'bafög höchstsatz', 'bafög elterneinkommen', 'bafög rückzahlung', 'studenten bafög', 'schüler bafög'],
     icon: '🎓',
-    beispiel: 'Student, eigene Wohnung, selbst versichert, Eltern unter Freibetrag → Höchstsatz 992 €/Monat (496 € Zuschuss + 496 € zinsloses Darlehen). Verdienen verheiratete Eltern z. B. 60.000 € brutto (ein Verdiener), sinkt der Betrag durch Anrechnung auf ca. 636 €.',
+    // W187: vorher „… auf ca. 636 €“ (Elternfreibetrag 2.415 €, Pauschale 21,6 % aufs Brutto, ESt ohne Splitting)
+    beispiel: 'Student, eigene Wohnung, selbst versichert, Eltern unter Freibetrag → Höchstsatz 992 €/Monat (496 € Zuschuss + 496 € zinsloses Darlehen). Verdienen verheiratete Eltern z. B. 60.000 € brutto (ein Verdiener), sinkt der Betrag durch Anrechnung auf ca. 562 €.',
     faq: [
       {
         frage: 'Wie viel BAföG bekomme ich?',
@@ -2786,7 +2828,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie viel dürfen meine Eltern verdienen, damit ich BAföG bekomme?',
-        antwort: 'Die Grenze hängt vom Familienstand und der Anzahl der Geschwister ab. Als Faustregel: Bei verheirateten Eltern mit einem Kind in Ausbildung liegt die Grenze bei ca. 45.000-50.000 € Bruttojahreseinkommen für den vollen BAföG-Satz. Mit jedem Geschwister in Ausbildung steigt die Grenze um ca. 730 € monatlich.',
+        // W187: vorher „ca. 45.000-50.000 € … um ca. 730 € monatlich“
+        antwort: 'Die Grenze hängt vom Familienstand und der Zahl der weiteren Kinder ab. Als Faustregel: Bei verheirateten Eltern, die nur für das studierende Kind aufkommen, gibt es den vollen BAföG-Satz bis rund 42.000–43.000 € Bruttojahreseinkommen (Arbeitnehmer, ohne Kirchensteuer). Der monatliche Freibetrag von 2.540 € steigt für jedes weitere Kind, das selbst nicht in einer förderfähigen Ausbildung steht, um 770 €; mit einem solchen Kind liegt die Grenze bei rund 58.000 €.',
       },
       {
         frage: 'Muss ich BAföG zurückzahlen?',
@@ -2794,7 +2837,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie viel darf ich neben dem BAföG verdienen?',
-        antwort: 'Der BAföG-Freibetrag für eigenes Einkommen liegt nach § 23 BAföG bei 330 €/Monat (3.960 €/Jahr). Ein Minijob bis 603 € (Stand 2026) ist daneben grundsätzlich möglich; die anrechnungsfreie Grenze beim BAföG bleibt davon unberührt. Bei höherem Verdienst wird das überschüssige Einkommen abzüglich 22,5% Sozialversicherungspauschale angerechnet.',
+        // W187: vorher Freibetrag 330 €, Pauschale 22,5 % — seit 01.01.2026 389 € (§ 23 Abs. 6, BGBl. 2025 I Nr. 279)
+        antwort: 'Vom eigenen Einkommen bleiben 2026 nach § 23 BAföG 389 € im Monat anrechnungsfrei. Gerechnet wird dabei nicht mit dem Brutto: Zuerst gehen 102,50 € Werbungskosten-Pauschbetrag (1.230 € im Jahr) und 22,3 % Sozialpauschale ab. Ein Minijob bis 603 € brutto bleibt damit vollständig anrechnungsfrei. Bei höherem Verdienst wird der Teil über dem Freibetrag angerechnet — bei 1.000 € brutto im Monat sind das rund 308 €.',
       },
       {
         frage: 'Wie viel Vermögen darf ich haben?',
@@ -2814,7 +2858,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Wie sich der Förderbetrag ergibt',
-        html: `<p>Die Rechnung folgt immer demselben Schema: <strong>Gesamtbedarf minus Anrechnung</strong>. Der Bedarf besteht aus dem Grundbedarf, der Wohnpauschale (bei eigener Wohnung) und Zuschlägen für die eigene Kranken- und Pflegeversicherung sowie für Kinder.</p><p>Von diesem Bedarf wird abgezogen, was als zumutbarer Eigenbeitrag gilt: <strong>eigenes Einkommen</strong> über dem Freibetrag, <strong>eigenes Vermögen</strong> über dem Freibetrag (auf zwölf Monate verteilt) und das <strong>anrechenbare Elterneinkommen</strong>. Beim Elterneinkommen werden zunächst eine Sozialpauschale von 21,6 % und die Steuern abgezogen, dann der Elternfreibetrag; von dem, was darüber bleibt, fließen 50 % in die Anrechnung. Bleibt nach allen Abzügen ein Betrag von mindestens 10 € übrig, besteht ein BAföG-Anspruch — andernfalls lohnt der Antrag trotzdem, weil das Amt weitere Faktoren berücksichtigt. Die einzelnen Anrechnungen werden also nacheinander vom Bedarf abgezogen: Erst das eigene Einkommen und Vermögen, dann das Elterneinkommen. Genau diese Reihenfolge bildet der Rechner ab und zeigt für jeden Posten, wie stark er den Anspruch mindert.</p>`,
+        html: `<p>Die Rechnung folgt immer demselben Schema: <strong>Gesamtbedarf minus Anrechnung</strong>. Der Bedarf besteht aus dem Grundbedarf, der Wohnpauschale (bei eigener Wohnung) und Zuschlägen für die eigene Kranken- und Pflegeversicherung sowie für Kinder.</p><p>Von diesem Bedarf wird abgezogen, was als zumutbarer Eigenbeitrag gilt: <strong>eigenes Einkommen</strong> über dem Freibetrag, <strong>eigenes Vermögen</strong> über dem Freibetrag (auf zwölf Monate verteilt) und das <strong>anrechenbare Elterneinkommen</strong>. Beim Elterneinkommen werden vom Brutto zunächst der Werbungskosten-Pauschbetrag, eine Sozialpauschale von 22,3 % (höchstens 17.200 € im Jahr je Elternteil) und die Einkommensteuer abgezogen, dann der Elternfreibetrag; von dem, was darüber bleibt, fließen 50 % in die Anrechnung. Bleibt nach allen Abzügen ein Betrag von mindestens 10 € übrig, besteht ein BAföG-Anspruch — andernfalls lohnt der Antrag trotzdem, weil das Amt weitere Faktoren berücksichtigt. Die einzelnen Anrechnungen werden also nacheinander vom Bedarf abgezogen: Erst das eigene Einkommen und Vermögen, dann das Elterneinkommen. Genau diese Reihenfolge bildet der Rechner ab und zeigt für jeden Posten, wie stark er den Anspruch mindert.</p>`,
       },
       {
         typ: 'tabelle',
@@ -2835,7 +2879,8 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'BAföG-Eckwerte 2026',
         werte: [
           { label: 'Höchstsatz Studium auswärts', wert: '992 €/Mon', hinweis: 'mit KV-/PV-Zuschlag' },
-          { label: 'Elternfreibetrag (verheiratet)', wert: '2.415 €/Mon', hinweis: 'alleinstehend 1.605 €' },
+          // W187: vorher 2.415 € / 1.605 € (Stand vor dem 29. BAföGÄndG)
+          { label: 'Elternfreibetrag (verheiratet)', wert: '2.540 €/Mon', hinweis: 'sonst je Elternteil 1.690 €' },
           { label: 'Vermögensfreibetrag (unter 30 J.)', wert: '15.000 €', hinweis: 'ab 30 J. 45.000 €' },
           { label: 'Max. Darlehens-Rückzahlung', wert: '10.010 €', hinweis: 'gedeckelt, zinslos' },
         ],
@@ -2856,14 +2901,18 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'beispielrechnung',
         titel: 'Mit Elternanrechnung: verheiratete Eltern, 60.000 € brutto',
+        // W187: vorher Netto ≈ 3.126 € (21,6 % aufs Brutto, Grundtarif), Freibetrag 2.415 €, Anrechnung ≈ 356 €, BAföG ≈ 636 €
         schritte: [
           { label: 'Gesamtbedarf (selbst versichert)', formel: '', ergebnis: '992 €' },
-          { label: 'Eltern-Nettoeinkommen', formel: 'nach SV-Pauschale 21,6 % + Steuer, ÷ 12', ergebnis: '≈ 3.126 €' },
-          { label: '− Elternfreibetrag (verheiratet)', formel: '', ergebnis: '− 2.415 €' },
-          { label: 'anrechenbar darüber', formel: '× 50 %', ergebnis: '≈ 356 €' },
-          { label: 'BAföG', formel: '992 − 356', ergebnis: '≈ 636 €' },
+          { label: 'Einkünfte der Eltern', formel: '60.000 € − 1.230 € Werbungskosten-Pauschbetrag', ergebnis: '58.770 €/Jahr' },
+          { label: '− Sozialpauschale 22,3 %', formel: '§ 21 Abs. 2 BAföG', ergebnis: '− 13.106 €' },
+          { label: '− Einkommensteuer (Splitting, geschätzt)', formel: '', ergebnis: '− 4.860 €' },
+          { label: '= Einkommen nach § 21 BAföG', formel: '40.804 € ÷ 12', ergebnis: '≈ 3.400 €/Monat' },
+          { label: '− Elternfreibetrag (verheiratet)', formel: '§ 25 Abs. 1 BAföG', ergebnis: '− 2.540 €' },
+          { label: 'anrechenbar darüber', formel: '860 € × 50 %', ergebnis: '≈ 430 €' },
+          { label: 'BAföG', formel: '992 − 430', ergebnis: '≈ 562 €' },
         ],
-        fazit: 'Verdienen verheiratete Eltern zusammen 60.000 € brutto im Jahr (hier ein Hauptverdiener), bleibt nach Abzug der Sozialpauschale und der Steuern ein anrechenbares Nettoeinkommen von rund 3.126 € im Monat. Davon zieht das BAföG-Amt den Elternfreibetrag von 2.415 € ab; von den verbleibenden gut 711 € werden 50 % angerechnet, also rund 356 €. Der BAföG-Anspruch sinkt damit von 992 € auf rund 636 €. Je höher das Elterneinkommen, desto stärker die Anrechnung — bei sehr hohen Einkommen entfällt der Anspruch ganz. Genau hier zeigt sich, warum eine pauschale Einkommensgrenze irreführend ist: Ob noch BAföG fließt, hängt nicht nur vom Bruttoeinkommen ab, sondern auch vom Familienstand, der Zahl der Geschwister in Ausbildung und davon, ob man auswärts wohnt. Deshalb lohnt sich die individuelle Berechnung fast immer.',
+        fazit: 'Verdienen verheiratete Eltern zusammen 60.000 € brutto im Jahr (hier ein Hauptverdiener), bleibt nach Werbungskosten-Pauschbetrag, Sozialpauschale und Einkommensteuer ein anrechenbares Einkommen von rund 3.400 € im Monat. Davon zieht das BAföG-Amt den Elternfreibetrag von 2.540 € ab; von den verbleibenden rund 860 € werden 50 % angerechnet, also rund 430 €. Der BAföG-Anspruch sinkt damit von 992 € auf rund 562 €. Je höher das Elterneinkommen, desto stärker die Anrechnung — bei sehr hohen Einkommen entfällt der Anspruch ganz. Genau hier zeigt sich, warum eine pauschale Einkommensgrenze irreführend ist: Ob noch BAföG fließt, hängt nicht nur vom Bruttoeinkommen ab, sondern auch vom Familienstand, der Zahl der Geschwister in Ausbildung und davon, ob man auswärts wohnt. Deshalb lohnt sich die individuelle Berechnung fast immer.',
       },
       {
         typ: 'beispielrechnung',
@@ -2880,12 +2929,12 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Elternfreibeträge und Geschwister',
-        html: `<p>Das Elterneinkommen wird nicht voll angerechnet, sondern erst oberhalb großzügiger <strong>Freibeträge</strong>. Bei <strong>verheirateten Eltern</strong> bleiben 2.415 € monatliches Nettoeinkommen anrechnungsfrei, bei einem <strong>alleinstehenden Elternteil</strong> 1.605 €. Für jedes weitere <strong>Geschwister in Ausbildung</strong> (ohne eigenen BAföG-Bezug) erhöht sich der Freibetrag um 730 €.</p><p>Geschwister wirken sogar doppelt zugunsten des Antragstellers: Sie heben nicht nur den Freibetrag, sondern senken auch die Anrechnungsquote um 5 Prozentpunkte je Kind (ausgehend von 50 %). Studieren mehrere Kinder gleichzeitig mit eigenem BAföG, wird der auf die Eltern entfallende Anrechnungsbetrag zusätzlich gleichmäßig aufgeteilt (§ 11 Abs. 4 BAföG). Deshalb haben Familien mit mehreren Kindern in Ausbildung oft auch bei höherem Elterneinkommen noch einen BAföG-Anspruch — es lohnt sich, das durchzurechnen. Maßgeblich ist übrigens das Elterneinkommen des vorletzten Kalenderjahres vor dem Bewilligungszeitraum; ist das Einkommen inzwischen deutlich gesunken (etwa durch Arbeitslosigkeit oder Rente), kann ein Aktualisierungsantrag gestellt werden, damit das aktuelle Einkommen zählt.</p>`,
+        html: `<p>Das Elterneinkommen wird nicht voll angerechnet, sondern erst oberhalb großzügiger <strong>Freibeträge</strong>. Bei <strong>verheirateten Eltern</strong> bleiben 2.540 € monatliches Einkommen anrechnungsfrei, bei getrennten oder alleinstehenden Eltern je Elternteil 1.690 €. Für jedes weitere <strong>Kind, das selbst nicht in einer förderfähigen Ausbildung steht</strong> (etwa ein jüngeres Schulkind), erhöht sich der Freibetrag um 770 €.</p><p>Solche Kinder wirken sogar doppelt zugunsten des Antragstellers: Sie heben nicht nur den Freibetrag, sondern senken auch die Anrechnungsquote um 5 Prozentpunkte je Kind (ausgehend von 50 %, § 25 Abs. 4 BAföG). Stehen Geschwister dagegen selbst in einer Ausbildung, die nach BAföG oder als Berufsausbildungsbeihilfe gefördert werden kann, wird der auf die Eltern entfallende Anrechnungsbetrag gleichmäßig auf alle diese Kinder aufgeteilt (§ 11 Abs. 4 BAföG). Deshalb haben Familien mit mehreren Kindern in Ausbildung oft auch bei höherem Elterneinkommen noch einen BAföG-Anspruch — es lohnt sich, das durchzurechnen. Maßgeblich ist übrigens das Elterneinkommen des vorletzten Kalenderjahres vor dem Bewilligungszeitraum; ist das Einkommen inzwischen deutlich gesunken (etwa durch Arbeitslosigkeit oder Rente), kann ein Aktualisierungsantrag gestellt werden, damit das aktuelle Einkommen zählt.</p>`,
       },
       {
         typ: 'text',
         titel: 'Eigenes Einkommen, Nebenjob und Rückzahlung',
-        html: `<p>Neben dem BAföG darf man <strong>330 € im Monat</strong> anrechnungsfrei verdienen (§ 23 BAföG) — ein <strong>Minijob bis 603 €</strong> bleibt damit weitgehend folgenlos, weil von dem darüberliegenden Teil noch eine Sozialpauschale abgeht. Wer ein Kind hat, erhält zusätzlich einen <strong>Kinderbetreuungszuschlag von 160 € je Kind</strong>, der nicht zurückgezahlt werden muss.</p><p>Bei der <strong>Rückzahlung</strong> ist das Studierenden-BAföG besonders fair: Zurückgezahlt wird nur der Darlehensanteil (die Hälfte), und das erst fünf Jahre nach dem Ende der Förderungshöchstdauer, in Raten ab 130 € im Monat. Die <strong>Gesamtrückzahlung ist auf 10.010 € gedeckelt</strong> — egal, wie viel BAföG insgesamt geflossen ist. Wer wenig verdient, kann sich von der Rückzahlung freistellen lassen; bei Zahlung auf einen Schlag gibt es einen Nachlass. Schüler-BAföG muss gar nicht zurückgezahlt werden. Diese Deckelung auf 10.010 € ist der entscheidende Vorteil gegenüber einem normalen Kredit: Selbst wer über mehrere Jahre den Höchstsatz bezieht, zahlt am Ende nie mehr als diese Summe zurück — und das zinsfrei. Damit bleibt BAföG auch für den Darlehensteil deutlich günstiger als jede private Studienfinanzierung.</p>`,
+        html: `<p>Vom eigenen Einkommen bleiben 2026 <strong>389 € im Monat</strong> anrechnungsfrei (§ 23 BAföG) — gerechnet nach Abzug von 102,50 € Werbungskosten-Pauschbetrag und 22,3 % Sozialpauschale. Ein <strong>Minijob bis 603 €</strong> brutto bleibt damit vollständig anrechnungsfrei. Wer ein Kind hat, erhält zusätzlich einen <strong>Kinderbetreuungszuschlag von 160 € je Kind</strong>, der nicht zurückgezahlt werden muss.</p><p>Bei der <strong>Rückzahlung</strong> ist das Studierenden-BAföG besonders fair: Zurückgezahlt wird nur der Darlehensanteil (die Hälfte), und das erst fünf Jahre nach dem Ende der Förderungshöchstdauer, in Raten ab 130 € im Monat. Die <strong>Gesamtrückzahlung ist auf 10.010 € gedeckelt</strong> — egal, wie viel BAföG insgesamt geflossen ist. Wer wenig verdient, kann sich von der Rückzahlung freistellen lassen; bei Zahlung auf einen Schlag gibt es einen Nachlass. Schüler-BAföG muss gar nicht zurückgezahlt werden. Diese Deckelung auf 10.010 € ist der entscheidende Vorteil gegenüber einem normalen Kredit: Selbst wer über mehrere Jahre den Höchstsatz bezieht, zahlt am Ende nie mehr als diese Summe zurück — und das zinsfrei. Damit bleibt BAföG auch für den Darlehensteil deutlich günstiger als jede private Studienfinanzierung.</p>`,
       },
       {
         typ: 'checkliste',
@@ -2894,9 +2943,10 @@ export const finanzenRechner: RechnerConfig[] = [
           'Die Ausbildungsart: Studium oder Schule (jeweils unterschiedliche Bedarfssätze nach §§ 12/13 BAföG).',
           'Die Wohnsituation: bei den Eltern (534 €) oder eigene Wohnung (855 €, Höchstsatz 992 €).',
           'Eigene Kranken-/Pflegeversicherung: +137 € Zuschlag, wenn nicht familienversichert.',
-          'Das Elterneinkommen abzüglich Sozialpauschale, Steuer und Freibetrag (2.415 / 1.605 €).',
-          'Geschwister in Ausbildung: höherer Freibetrag (+730 €) und niedrigere Anrechnungsquote.',
-          'Eigenes Einkommen über 330 €/Monat (Minijob bis 603 €) und Vermögen über 15.000 € (unter 30 J.) werden angerechnet.',
+          // W187: vorher 2.415 / 1.605 €, „Geschwister in Ausbildung … +730 €“, eigenes Einkommen über 330 €
+          'Das Elterneinkommen abzüglich Werbungskosten-Pauschbetrag, Sozialpauschale (22,3 %), Steuer und Freibetrag (2.540 / 1.690 €).',
+          'Weitere Kinder ohne förderfähige Ausbildung: höherer Freibetrag (+770 €) und niedrigere Anrechnungsquote; Geschwister in förderfähiger Ausbildung teilen sich die Anrechnung.',
+          'Eigenes Einkommen über 389 €/Monat nach Pauschalen (ein Minijob bis 603 € bleibt frei) und Vermögen über 15.000 € (unter 30 J.) werden angerechnet.',
           'Elternunabhängiges BAföG: in Sonderfällen zählt nur das eigene Einkommen, nicht das der Eltern.',
           'Das Ergebnis ist eine Schätzung — verbindlich entscheidet das Amt für Ausbildungsförderung.',
         ],
@@ -2920,7 +2970,10 @@ export const finanzenRechner: RechnerConfig[] = [
     quellen: [
       { titel: '§ 13 BAföG — Bedarf für Studierende', url: 'https://www.gesetze-im-internet.de/baf_g/__13.html', hinweis: 'Grundbedarf und Wohnpauschale; Höchstsatz Studium auswärts 855 € + Zuschläge. Stand 2026.' },
       { titel: '§ 13a BAföG — Kranken- und Pflegeversicherungszuschlag', url: 'https://www.gesetze-im-internet.de/baf_g/__13a.html', hinweis: 'KV-Zuschlag 102 € + PV-Zuschlag 35 € für selbst Versicherte → Höchstsatz 992 €.' },
-      { titel: '§ 25 BAföG — Freibeträge vom Einkommen der Eltern', url: 'https://www.gesetze-im-internet.de/baf_g/__25.html', hinweis: 'Elternfreibeträge 2.415 € (verheiratet) / 1.605 € (alleinstehend); Anrechnungsquote.' },
+      // W187: vorher „2.415 € / 1.605 €“; §§ 21, 23 ergänzt
+      { titel: '§ 21 BAföG — Einkommensbegriff', url: 'https://www.gesetze-im-internet.de/baf_g/__21.html', hinweis: 'Einkünfte minus Steuern minus Sozialpauschale 22,3 % (höchstens 17.200 € jährlich).' },
+      { titel: '§ 23 BAföG — Freibeträge vom Einkommen des Auszubildenden', url: 'https://www.gesetze-im-internet.de/baf_g/__23.html', hinweis: '389 € monatlich ab 01.01.2026 (Bekanntmachung BGBl. 2025 I Nr. 279; vorher 353 €).' },
+      { titel: '§ 25 BAföG — Freibeträge vom Einkommen der Eltern', url: 'https://www.gesetze-im-internet.de/baf_g/__25.html', hinweis: 'Elternfreibeträge 2.540 € (verheiratet) / 1.690 € (je Elternteil sonst), 770 € je Kind ohne förderfähige Ausbildung; Anrechnungsquote (Abs. 4).' },
       { titel: '§ 29 BAföG — Freibeträge vom Vermögen', url: 'https://www.gesetze-im-internet.de/baf_g/__29.html', hinweis: 'Vermögensfreibetrag 15.000 € (unter 30 J.) bzw. 45.000 € (ab 30 J.).' },
       // W185: Beleg für die Ausblick-Box ergänzt.
       { titel: 'Deutscher Bundestag — 30. BAföG-Änderungsgesetz, erste Lesung (KW 42/2026)', url: 'https://www.bundestag.de/dokumente/textarchiv/2026/kw42-de-bafoeg-1223582', hinweis: 'Regierungsentwurf BT-Drs. 21/8405, am 15.10.2026 an die Ausschüsse überwiesen, noch nicht beschlossen.' },
@@ -2928,7 +2981,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'aufstiegs-bafoeg-rechner',
-    letzteAktualisierung: '2026-06-23',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Aufstiegs-BAföG-Rechner',
     beschreibung: 'Aufstiegs-BAföG („Meister-BAföG") berechnen: Zuschuss, Darlehen und Unterhaltsbeitrag für Meister, Techniker, Fachwirt und vergleichbare Aufstiegsfortbildungen.',
     kategorie: 'Finanzen',
@@ -2971,11 +3024,12 @@ export const finanzenRechner: RechnerConfig[] = [
           ['Grundbedarf alleinstehend', '1.019 €', '§ 10 AFBG, nur Vollzeit, 100 % Zuschuss'],
           ['Zuschlag Ehe- oder Lebenspartner', '+235 €', 'nicht dauernd getrennt lebend'],
           ['Zuschlag je Kind', '+235 €', 'je kindergeldberechtigtem Kind'],
-          ['Kinderbetreuungszuschlag', '+150 €', 'je Kind unter 14 Jahren (§ 10 Abs. 3 AFBG)'],
+          // W187: vorher „je Kind unter 14 Jahren“ ohne Einschränkung auf Alleinerziehende
+          ['Kinderbetreuungszuschlag', '+150 €', 'nur Alleinerziehende, je Kind unter 14 oder mit Behinderung, auch bei Teilzeit (§ 10 Abs. 3 AFBG)'],
           ['Summe Alleinstehend', '1.019 €', 'ohne weitere Zuschläge'],
           ['Summe Alleinerziehend, 1 Kind unter 14', '1.404 €', '1.019 € + 235 € + 150 €'],
         ],
-        fussnote: 'Der Unterhaltsbeitrag ist ein vollständiger Zuschuss und muss nie zurückgezahlt werden. Er wird ausschließlich bei Vollzeit-Maßnahmen gewährt und um eigenes sowie das Einkommen des Partners gemindert. Die Zuschläge gelten zusätzlich zum Grundbedarf und summieren sich, wie die beiden Beispielzeilen zeigen. Stand: AFBG 2023, Werte 06/2026.',
+        fussnote: 'Der Unterhaltsbeitrag ist ein vollständiger Zuschuss und muss nie zurückgezahlt werden. Er wird ausschließlich bei Vollzeit-Maßnahmen gewährt und um eigenes sowie das Einkommen des Partners gemindert. Die Zuschläge gelten zusätzlich zum Grundbedarf und summieren sich, wie die beiden Beispielzeilen zeigen. Der Kinderbetreuungszuschlag ist kein Teil des Unterhaltsbeitrags: Er wird auch bei Teilzeit gezahlt und nicht um Einkommen gemindert. Stand: AFBG 2023, Werte 06/2026.',
       },
       {
         typ: 'vergleich',
@@ -3588,7 +3642,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Der Versorgungsfreibetrag (§ 17 ErbStG)',
-        html: `<p>Neben dem persönlichen Freibetrag gibt es bei einer <strong>Erbschaft</strong> (nicht bei einer Schenkung) einen zusätzlichen <strong>Versorgungsfreibetrag</strong> für die engsten Hinterbliebenen. Der überlebende <strong>Ehepartner</strong> erhält 256.000 € extra, <strong>Kinder</strong> einen altersabhängigen Betrag, der mit zunehmendem Alter sinkt.</p><p>Die Staffel reicht von 52.000 € (Kind bis 5 Jahre) über 41.000 € (6–10 J.), 30.700 € (11–15 J.), 20.500 € (16–20 J.) bis 10.300 € (21–26 J., also bis zur Vollendung des 27. Lebensjahres); ab 27 Jahren entfällt der Versorgungsfreibetrag für Kinder ganz. Hintergrund ist der Versorgungsgedanke: Wer früh einen Elternteil verliert, soll stärker entlastet werden. Beim Ehepartner wird der Freibetrag um den Kapitalwert steuerfreier Versorgungsbezüge (etwa einer Witwenrente) gekürzt — diese Kürzung bildet der Rechner vereinfacht nicht ab und setzt den vollen Betrag an. In der Praxis bedeutet das: Ein Ehepartner kann zusätzlich zum persönlichen Freibetrag von 500.000 € noch einmal bis zu 256.000 € steuerfrei erhalten, sodass selbst größere Erbschaften oft ganz oder weitgehend steuerfrei bleiben. Wer das genaue Ergebnis braucht, gibt im Rechner bei einem Kind das Alter an — dann greift die exakte Staffel statt des Höchstbetrags.</p>`,
+        // W187: Kürzung beim Kind (§ 17 Abs. 2 Satz 2 ErbStG) ergänzt
+        html: `<p>Neben dem persönlichen Freibetrag gibt es bei einer <strong>Erbschaft</strong> (nicht bei einer Schenkung) einen zusätzlichen <strong>Versorgungsfreibetrag</strong> für die engsten Hinterbliebenen. Der überlebende <strong>Ehepartner</strong> erhält 256.000 € extra, <strong>Kinder</strong> einen altersabhängigen Betrag, der mit zunehmendem Alter sinkt.</p><p>Die Staffel reicht von 52.000 € (Kind bis 5 Jahre) über 41.000 € (6–10 J.), 30.700 € (11–15 J.), 20.500 € (16–20 J.) bis 10.300 € (21–26 J., also bis zur Vollendung des 27. Lebensjahres); ab 27 Jahren entfällt der Versorgungsfreibetrag für Kinder ganz. Hintergrund ist der Versorgungsgedanke: Wer früh einen Elternteil verliert, soll stärker entlastet werden. Beim Ehepartner wird der Freibetrag um den Kapitalwert steuerfreier Versorgungsbezüge (etwa einer Witwenrente) gekürzt, beim Kind ebenso (etwa um eine Waisenrente, § 17 Abs. 2 Satz 2 ErbStG) — diese Kürzung bildet der Rechner vereinfacht nicht ab und setzt den vollen Betrag an. In der Praxis bedeutet das: Ein Ehepartner kann zusätzlich zum persönlichen Freibetrag von 500.000 € noch einmal bis zu 256.000 € steuerfrei erhalten, sodass selbst größere Erbschaften oft ganz oder weitgehend steuerfrei bleiben. Wer das genaue Ergebnis braucht, gibt im Rechner bei einem Kind das Alter an — dann greift die exakte Staffel statt des Höchstbetrags.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -4259,9 +4314,10 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'checkliste',
         titel: 'Bin ich beherrschend? Den SV-Status klären',
         punkte: [
-          'Mehr als 50 % der Geschäftsanteile? → in der Regel beherrschend und sozialversicherungsfrei',
-          'Sperrminorität laut Gesellschaftsvertrag (Beschlüsse blockierbar)? → ebenfalls beherrschend',
-          'Weniger als 50 % und weisungsgebunden? → sozialversicherungspflichtig wie ein Angestellter',
+          // W187: vorher „Mehr als 50 %“ / „Sperrminorität (Beschlüsse blockierbar)“; BSG 14.03.2018, B 12 KR 13/17 R
+          'Mindestens 50 % der Geschäftsanteile? → in der Regel beherrschend und sozialversicherungsfrei',
+          'Umfassende Sperrminorität laut Gesellschaftsvertrag (alle Gesellschafterbeschlüsse blockierbar, nicht nur einzelne Themen)? → ebenfalls beherrschend',
+          'Weniger als 50 % ohne umfassende Sperrminorität? → sozialversicherungspflichtig wie ein Angestellter',
           'Im Zweifel: Statusfeststellungsverfahren bei der Clearingstelle der DRV Bund beantragen',
           'Der SV-Status entscheidet über Renten-, Arbeitslosen-, Kranken- und Pflegeversicherungspflicht',
           'Bei jeder Änderung der Beteiligung den Status neu prüfen lassen',
@@ -4270,7 +4326,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'SV-Freiheit: Chance und Risiko zugleich',
-        html: `<p>Als <strong>beherrschender GGF</strong> gilt, wer mehr als 50 % der Geschäftsanteile hält oder durch eine Sperrminorität alle Beschlüsse blockieren kann. Ein solcher Geschäftsführer ist kein abhängig Beschäftigter im Sinne des § 7 SGB IV und damit <strong>sozialversicherungsfrei</strong>: keine Pflichtbeiträge zur Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung.</p><p>Die <strong>Chance</strong>: Renten- und Arbeitslosenversicherung entfallen — beim Angestellten zusammen 10,6 % des Bruttos bis zur Beitragsbemessungsgrenze. Kranken- und Pflegeversicherung muss der GGF dagegen weiter bezahlen, und zwar ohne Arbeitgeberanteil: freiwillig gesetzlich den vollen Beitrag, privat den PKV-Tarif. Wie viel mehr Netto bleibt, entscheidet deshalb vor allem die Krankenversicherung. Bei 6.000 € brutto sind es mit einer PKV für 650 € rund 4.070 € netto, freiwillig gesetzlich versichert rund 3.710 € — ein nicht beherrschender GGF kommt wie ein Angestellter auf rund 3.650 €.</p><p>Die <strong>Kehrseite</strong>: Es entstehen keine Ansprüche auf gesetzliche Rente oder Arbeitslosengeld. Der GGF muss Kranken- und Altersvorsorge selbst organisieren — typischerweise über eine PKV und private oder betriebliche Vorsorge. Wie groß die Versorgungslücke ohne gesetzliche Rente ist, zeigt der <a href="/finanzen/rentenrechner">Rentenrechner</a>.</p>`,
+        // W187: vorher „wer mehr als 50 % der Geschäftsanteile hält oder durch eine Sperrminorität alle Beschlüsse blockieren kann“
+        html: `<p>Als <strong>beherrschender GGF</strong> gilt, wer mindestens 50 % der Geschäftsanteile hält oder über eine umfassende Sperrminorität verfügt, also laut Gesellschaftsvertrag alle Gesellschafterbeschlüsse blockieren kann (BSG, Urteil vom 14.03.2018, B 12 KR 13/17 R); eine nur auf einzelne Themen begrenzte Sperrminorität reicht nicht. Ein solcher Geschäftsführer ist kein abhängig Beschäftigter im Sinne des § 7 SGB IV und damit <strong>sozialversicherungsfrei</strong>: keine Pflichtbeiträge zur Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung.</p><p>Die <strong>Chance</strong>: Renten- und Arbeitslosenversicherung entfallen — beim Angestellten zusammen 10,6 % des Bruttos bis zur Beitragsbemessungsgrenze. Kranken- und Pflegeversicherung muss der GGF dagegen weiter bezahlen, und zwar ohne Arbeitgeberanteil: freiwillig gesetzlich den vollen Beitrag, privat den PKV-Tarif. Wie viel mehr Netto bleibt, entscheidet deshalb vor allem die Krankenversicherung. Bei 6.000 € brutto sind es mit einer PKV für 650 € rund 4.070 € netto, freiwillig gesetzlich versichert rund 3.710 € — ein nicht beherrschender GGF kommt wie ein Angestellter auf rund 3.650 €.</p><p>Die <strong>Kehrseite</strong>: Es entstehen keine Ansprüche auf gesetzliche Rente oder Arbeitslosengeld. Der GGF muss Kranken- und Altersvorsorge selbst organisieren — typischerweise über eine PKV und private oder betriebliche Vorsorge. Wie groß die Versorgungslücke ohne gesetzliche Rente ist, zeigt der <a href="/finanzen/rentenrechner">Rentenrechner</a>.</p>`,
       },
       {
         typ: 'infobox',
@@ -4321,7 +4378,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Firmenwagen: die 1-%-Regel',
-        html: `<p>Ein beliebter Vergütungsbaustein für Geschäftsführer ist der <strong>Firmenwagen</strong>. Wird er auch privat genutzt, entsteht ein <strong>geldwerter Vorteil</strong>, der wie zusätzliches Gehalt versteuert wird. Die pauschale <strong>1-%-Regel</strong> (§ 8 Abs. 2 EStG) rechnet einfach: 1 % des Bruttolistenpreises pro Monat für die Privatnutzung, plus 0,03 % je Entfernungskilometer für die Fahrten zur Arbeit.</p><p>Beispiel: Bei 45.000 € Listenpreis und 20 km Entfernung sind das 450 € + 270 € = <strong>720 € pro Monat</strong>, die zusätzlich versteuert werden. Wer den Wagen wenig privat nutzt, fährt mit einem <strong>Fahrtenbuch</strong> oft günstiger — dann zählen nur die tatsächlichen Privatfahrten.</p><p>Für <strong>Elektro-Dienstwagen</strong> gilt ein Privileg: Die Bemessung sinkt auf 0,25 % (bis 70.000 € Listenpreis) bzw. 0,5 %. Die Anschaffung selbst schreibt die GmbH über die <a href="/finanzen/afa-rechner">AfA</a> ab.</p>`,
+        // W187: vorher „0,25 % (bis 70.000 € Listenpreis)“; § 52 Abs. 12 Satz 6 EStG: 100.000 € für Anschaffung nach dem 30.06.2025
+        html: `<p>Ein beliebter Vergütungsbaustein für Geschäftsführer ist der <strong>Firmenwagen</strong>. Wird er auch privat genutzt, entsteht ein <strong>geldwerter Vorteil</strong>, der wie zusätzliches Gehalt versteuert wird. Die pauschale <strong>1-%-Regel</strong> (§ 8 Abs. 2 EStG) rechnet einfach: 1 % des Bruttolistenpreises pro Monat für die Privatnutzung, plus 0,03 % je Entfernungskilometer für die Fahrten zur Arbeit.</p><p>Beispiel: Bei 45.000 € Listenpreis und 20 km Entfernung sind das 450 € + 270 € = <strong>720 € pro Monat</strong>, die zusätzlich versteuert werden. Wer den Wagen wenig privat nutzt, fährt mit einem <strong>Fahrtenbuch</strong> oft günstiger — dann zählen nur die tatsächlichen Privatfahrten.</p><p>Für <strong>Elektro-Dienstwagen</strong> gilt ein Privileg: Die Bemessung sinkt auf 0,25 % (bis 100.000 € Bruttolistenpreis bei Anschaffung ab 01.07.2025, bei Anschaffung 2024 bis 30.06.2025 bis 70.000 €; § 6 Abs. 1 Nr. 4 Satz 2 Nr. 3 i. V. m. § 52 Abs. 12 EStG) bzw. 0,5 %. Die Anschaffung selbst schreibt die GmbH über die <a href="/finanzen/afa-rechner">AfA</a> ab.</p>`,
       },
       {
         typ: 'tabelle',
@@ -4403,7 +4461,8 @@ export const finanzenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Wann ist ein GmbH-Geschäftsführer sozialversicherungsfrei?',
-        antwort: 'Sozialversicherungsfrei sind beherrschende Gesellschafter-Geschäftsführer — also solche, die mehr als 50 % der Geschäftsanteile halten oder durch eine Sperrminorität Beschlüsse blockieren können. In diesem Fall entfallen die Pflichtbeiträge zur gesetzlichen Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung vollständig. Kranken- und pflegeversichert sein muss er trotzdem — freiwillig gesetzlich mit vollem Beitrag oder privat. Die Feststellung erfolgt durch die Clearingstelle der Deutschen Rentenversicherung Bund.',
+        // W187: vorher „mehr als 50 % … oder durch eine Sperrminorität Beschlüsse blockieren können“
+        antwort: 'Sozialversicherungsfrei sind beherrschende Gesellschafter-Geschäftsführer — also solche, die mindestens 50 % der Geschäftsanteile halten oder über eine umfassende Sperrminorität alle Gesellschafterbeschlüsse blockieren können (BSG, 14.03.2018, B 12 KR 13/17 R); eine auf einzelne Themen begrenzte Sperrminorität genügt nicht. In diesem Fall entfallen die Pflichtbeiträge zur gesetzlichen Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung vollständig. Kranken- und pflegeversichert sein muss er trotzdem — freiwillig gesetzlich mit vollem Beitrag oder privat. Die Feststellung erfolgt durch die Clearingstelle der Deutschen Rentenversicherung Bund.',
       },
       {
         frage: 'Wie funktioniert die 1-%-Regelung beim Firmenwagen?',
@@ -4426,7 +4485,7 @@ export const finanzenRechner: RechnerConfig[] = [
       { titel: '§ 32a EStG: Einkommensteuertarif 2026', url: 'https://www.gesetze-im-internet.de/estg/__32a.html' },
       { titel: '§ 8 EStG: Geldwerter Vorteil Firmenwagen (1-%-Regel)', url: 'https://www.gesetze-im-internet.de/estg/__8.html' },
       { titel: '§ 243 SGB V: Ermäßigter Beitragssatz', url: 'https://www.gesetze-im-internet.de/sgb_5/__243.html', hinweis: '14,0 % für Mitglieder ohne Anspruch auf Krankengeld, etwa freiwillig versicherte beherrschende GGF ohne Wahlerklärung (§ 44 Abs. 2 SGB V).' },
-      { titel: '§ 7 SGB IV: Beschäftigung & sozialversicherungsrechtlicher Status', url: 'https://www.gesetze-im-internet.de/sgb_4/__7.html', hinweis: 'Beherrschende Gesellschafter-Geschäftsführer (> 50 % oder Sperrminorität) sind sozialversicherungsfrei (st. Rspr. BSG); verbindlich nur per Statusfeststellungsverfahren der DRV-Clearingstelle.' },
+      { titel: '§ 7 SGB IV: Beschäftigung & sozialversicherungsrechtlicher Status', url: 'https://www.gesetze-im-internet.de/sgb_4/__7.html', hinweis: 'Beherrschende Gesellschafter-Geschäftsführer (mindestens 50 % oder umfassende Sperrminorität, BSG 14.03.2018, B 12 KR 13/17 R) sind sozialversicherungsfrei; verbindlich nur per Statusfeststellungsverfahren der DRV-Clearingstelle.' },
     ],
   },
   {
@@ -6002,7 +6061,8 @@ export const finanzenRechner: RechnerConfig[] = [
     slug: 'mwst-rueckerstattung-rechner',
     letzteAktualisierung: '2026-10-20',
     titel: 'MwSt-Rückerstattungs-Rechner',
-    beschreibung: 'Tax-Free-Shopping berechnen: MwSt-Erstattung für Nicht-EU-Touristen beim Einkauf in Deutschland.',
+    // W187: vorher „für Nicht-EU-Touristen“ — maßgeblich ist der Wohnort im Drittlandsgebiet (§ 6 Abs. 3a Nr. 1 UStG)
+    beschreibung: 'Tax-Free-Shopping berechnen: MwSt-Erstattung für Reisende mit Wohnsitz außerhalb der EU beim Einkauf in Deutschland.',
     kategorie: 'Finanzen',
     kategorieSlug: 'finanzen',
     metaTitle: 'MwSt-Rückerstattung — Tax Free Shopping',
@@ -6021,8 +6081,9 @@ export const finanzenRechner: RechnerConfig[] = [
     // (beispielrechnung) ab. ALLE Erstattungswerte aus lib/berechnungen/mwst-rueckerstattung.ts
     // reproduziert (Lib-Resolver-Check 25.06.2026, Gebührenmodell überholt durch W185, siehe oben): 500 €/19 %/GB → 75,13 € (15,0 %); /Planet
     // 74,24 €; /ohne 79,83 € (15,97 %); 1.000 € → 153,77 €; 200 € → 27,95 €; 2.000 € → 311,04 €.
-    // YMYL (§ 6 Abs. 3a UStG / Zoll, Stand 2026): Mindestbetrag 50,01 € (seit 2020), Nicht-EU-
-    // Wohnsitz, Zollstempel Pflicht, Ausfuhr binnen 3 Monaten. erklaerung bleibt Fallback.
+    // YMYL (§ 6 Abs. 3a UStG / Zoll, Stand 2026): Rechnungsbetrag über 50 € (seit 2020), Wohnort im
+    // Drittlandsgebiet, Zollstempel Pflicht, Ausfuhr bis Ende des 3. Folgemonats (W187: vorher „pro Händler
+    // und Tag“, „binnen 3 Monaten“). erklaerung bleibt Fallback.
     contentBloecke: [
       {
         typ: 'text',
@@ -6035,10 +6096,13 @@ export const finanzenRechner: RechnerConfig[] = [
         punkte: [
           'Ständiger Wohnsitz außerhalb der EU — die Staatsangehörigkeit ist egal, entscheidend ist der Wohnsitz',
           'Kein Aufenthaltstitel für die EU von mehr als 3 Monaten',
-          'EU-Bürger sind ausgeschlossen — auch mit zusätzlichem Nicht-EU-Pass (Doppelpass)',
+          // W187: vorher „EU-Bürger sind ausgeschlossen — auch mit zusätzlichem Nicht-EU-Pass (Doppelpass)“
+          'Auch EU-Bürger sind berechtigt, wenn sie dauerhaft im Drittland wohnen (Wohnsitznachweis); wer in der EU wohnt, ist mit keinem Pass berechtigt',
           'Nordirland zählt umsatzsteuerlich zur EU und ist damit ausgeschlossen',
           'Die Ware verlässt die EU im persönlichen Reisegepäck, unbenutzt und im Originalzustand',
-          'Mindestens 50,01 € brutto pro Händler und Tag — kleinere Einkäufe beim selben Händler addierbar',
+          // W187: vorher „pro Händler und Tag — kleinere Einkäufe beim selben Händler addierbar“
+          'Rechnungsbetrag über 50 € brutto (mindestens 50,01 € je Rechnung) — mehrere kleine Belege lassen sich nicht zusammenrechnen',
+          'Ausfuhr bis zum Ende des dritten Kalendermonats nach dem Kaufmonat (Kauf im März → Ausfuhr bis 30.06.)',
         ],
       },
       {
@@ -6107,8 +6171,9 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         typ: 'text',
-        titel: 'Mindestbetrag 50,01 € und Drei-Monats-Frist',
-        html: `<p>Zwei formale Hürden entscheiden über den Anspruch. Erstens der <strong>Mindestbetrag</strong>: Seit 2020 müssen Sie pro Händler und Tag mindestens <strong>50,01 € brutto</strong> ausgeben. Mehrere Einkäufe beim selben Händler am selben Tag dürfen Sie addieren; Einkäufe bei verschiedenen Händlern dagegen nicht. Diese Wertgrenze gilt 2026 unverändert und entfällt erst, wenn das digitale Ausfuhrverfahren in den Echtbetrieb geht — das ist noch nicht der Fall.</p><p>Zweitens die <strong>Frist</strong>: Die Ware muss bis zum Ablauf des dritten auf den Kauf folgenden Monats ausgeführt werden — grob also innerhalb von drei Monaten. Maßgeblich ist das Datum des Zollstempels bei der Ausreise.</p><p>Beide Bedingungen müssen erfüllt sein. Fehlt der Stempel oder wird die Frist überschritten, entfällt die Erstattung vollständig — unabhängig von der Höhe des Einkaufs.</p>`,
+        titel: 'Mindestbetrag 50,01 € und Ausfuhrfrist',
+        // W187: vorher „pro Händler und Tag mindestens 50,01 € … Mehrere Einkäufe beim selben Händler am selben Tag dürfen Sie addieren“ und „grob also innerhalb von drei Monaten“
+        html: `<p>Zwei formale Hürden entscheiden über den Anspruch. Erstens der <strong>Mindestbetrag</strong>: Seit 2020 muss der Gesamtwert der Lieferung einschließlich Umsatzsteuer <strong>50 € übersteigen</strong>, also mindestens <strong>50,01 € brutto</strong> betragen (§ 6 Abs. 3a Nr. 3 UStG). Maßgeblich ist der Rechnungsbetrag: Mehrere kleine Belege lassen sich nicht zusammenrechnen, auch nicht beim selben Händler am selben Tag — mehrere Artikel auf einer gemeinsamen Rechnung zählen dagegen zusammen. Diese Wertgrenze gilt 2026 unverändert und entfällt erst, wenn das digitale Ausfuhrverfahren in den Echtbetrieb geht — das ist noch nicht der Fall.</p><p>Zweitens die <strong>Frist</strong>: Die Ware muss vor Ablauf des dritten Kalendermonats ausgeführt werden, der auf den Monat des Kaufs folgt (§ 6 Abs. 3a Nr. 2 UStG). Ein Einkauf am 15. März muss also spätestens am 30. Juni die EU verlassen — je nach Kaufdatum sind das gut drei bis knapp vier Monate. Maßgeblich ist das Datum des Zollstempels bei der Ausreise.</p><p>Beide Bedingungen müssen erfüllt sein. Fehlt der Stempel oder wird die Frist überschritten, entfällt die Erstattung vollständig — unabhängig von der Höhe des Einkaufs.</p>`,
       },
       {
         typ: 'text',
@@ -6151,8 +6216,9 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Eckwerte Tax-Free-Shopping 2026',
         werte: [
           { label: 'Max. Erstattung bei 19 %', wert: '15,97 %', hinweis: 'im Bruttopreis enthaltener MwSt-Anteil' },
-          { label: 'Mindestbetrag', wert: '50,01 €', hinweis: 'pro Händler und Tag (brutto), seit 2020' },
-          { label: 'Ausfuhrfrist', wert: '3 Monate', hinweis: 'bis Ablauf des 3. Folgemonats' },
+          // W187: vorher „pro Händler und Tag“ / „3 Monate“
+          { label: 'Mindestbetrag', wert: '50,01 €', hinweis: 'je Rechnung (brutto, über 50 €), seit 2020' },
+          { label: 'Ausfuhrfrist', wert: 'Ende 3. Folgemonat', hinweis: 'Kauf im März → Ausfuhr bis 30.06.' },
           { label: 'Regelsteuersatz', wert: '19 %', hinweis: 'ermäßigt 7 % (z. B. Bücher)' },
           { label: 'Zollstempel', wert: 'Pflicht', hinweis: 'ohne Ausfuhrbestätigung keine Erstattung' },
         ],
@@ -6160,7 +6226,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Tipps für die maximale Erstattung',
-        html: `<p>Mit ein paar Kniffen holen Sie das Maximum heraus. <strong>Bündeln Sie Einkäufe</strong> bei wenigen Händlern, um den Mindestbetrag von 50,01 € sicher zu überschreiten — viele kleine Belege unter der Grenze bringen nichts. <strong>Setzen Sie auf hochpreisige Waren</strong> zum Regelsatz: Bei Elektronik oder Designermode bringt die prozentuale Erstattung absolut am meisten.</p><p>Wo möglich, lohnt die <strong>direkte Händlererstattung</strong>: Erstattet das Geschäft selbst, sparen Sie die Dienstleistergebühr und erhalten die vollen 15,97 %. Große Beträge zahlen sich absolut aus, und in den gestaffelten Erstattungstabellen ist der Abzug bei kleinen Belegen anteilig oft noch höher — nach dem Richtwert bleiben bei 2.000 € Einkauf über Global Blue rund 240 €, bei 100 € rund 12 €.</p><p>Und planen Sie Zeit ein: Der Zoll- und Erstattungsprozess am Flughafen kostet in der Hauptsaison schnell eine halbe bis ganze Stunde extra.</p>`,
+        // W187: vorher „Bündeln Sie Einkäufe bei wenigen Händlern“ (Wertgrenze gilt je Rechnung)
+        html: `<p>Mit ein paar Kniffen holen Sie das Maximum heraus. <strong>Bündeln Sie Einkäufe</strong> auf einer Rechnung, um den Mindestbetrag von 50,01 € sicher zu überschreiten — viele kleine Belege unter der Grenze bringen nichts, auch nicht beim selben Händler. <strong>Setzen Sie auf hochpreisige Waren</strong> zum Regelsatz: Bei Elektronik oder Designermode bringt die prozentuale Erstattung absolut am meisten.</p><p>Wo möglich, lohnt die <strong>direkte Händlererstattung</strong>: Erstattet das Geschäft selbst, sparen Sie die Dienstleistergebühr und erhalten die vollen 15,97 %. Große Beträge zahlen sich absolut aus, und in den gestaffelten Erstattungstabellen ist der Abzug bei kleinen Belegen anteilig oft noch höher — nach dem Richtwert bleiben bei 2.000 € Einkauf über Global Blue rund 240 €, bei 100 € rund 12 €.</p><p>Und planen Sie Zeit ein: Der Zoll- und Erstattungsprozess am Flughafen kostet in der Hauptsaison schnell eine halbe bis ganze Stunde extra.</p>`,
       },
       {
         typ: 'text',
@@ -6181,11 +6248,13 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist der Mindestbetrag für Tax-Free-Shopping?',
-        antwort: 'Sie müssen mindestens 50,01 € (brutto) pro Händler und pro Tag ausgeben. Mehrere Einkäufe beim selben Händler am selben Tag können addiert werden. Einkäufe bei verschiedenen Händlern können nicht zusammengefasst werden.',
+        // W187: vorher „pro Händler und pro Tag … Mehrere Einkäufe beim selben Händler am selben Tag können addiert werden“
+        antwort: 'Der Rechnungsbetrag muss einschließlich Mehrwertsteuer über 50 € liegen, also mindestens 50,01 € (§ 6 Abs. 3a Nr. 3 UStG). Maßgeblich ist die einzelne Rechnung: Mehrere kleine Belege lassen sich nicht zusammenrechnen, auch nicht beim selben Händler. Kaufen Sie mehrere Artikel, lassen Sie sie auf eine Rechnung schreiben.',
       },
       {
         frage: 'Wer hat Anspruch auf MwSt-Rückerstattung?',
-        antwort: 'Alle Personen mit ständigem Wohnsitz außerhalb der EU. Das schließt Schweizer, Briten, US-Amerikaner und alle anderen Nicht-EU-Bürger ein. EU-Bürger sind nicht berechtigt, auch nicht mit einem zusätzlichen Nicht-EU-Pass. Entscheidend ist der ständige Wohnsitz, nicht die Staatsangehörigkeit.',
+        // W187: vorher „EU-Bürger sind nicht berechtigt, auch nicht mit einem zusätzlichen Nicht-EU-Pass“ — widersprach dem Wohnsitzprinzip
+        antwort: 'Alle Personen mit Wohnort außerhalb der EU (Drittlandsgebiet, § 6 Abs. 3a Nr. 1 UStG) — etwa in der Schweiz, in Großbritannien oder den USA. Entscheidend ist der Wohnort, nicht die Staatsangehörigkeit: Auch EU-Bürger, die dauerhaft im Drittland leben, sind berechtigt (Wohnsitznachweis nötig); wer in der EU wohnt, ist dagegen auch mit einem Nicht-EU-Pass nicht berechtigt.',
       },
       {
         frage: 'Was ist der Unterschied zwischen Global Blue und Planet?',
@@ -6201,15 +6270,15 @@ export const finanzenRechner: RechnerConfig[] = [
       },
     ],
     quellen: [
-      { titel: '§ 6 UStG: Ausfuhrlieferungen (Abs. 3a Wertgrenze 50 €)', url: 'https://www.gesetze-im-internet.de/ustg_1980/__6.html' },
+      { titel: '§ 6 UStG: Ausfuhrlieferungen (Abs. 3a Wertgrenze 50 €)', url: 'https://www.gesetze-im-internet.de/ustg_1980/__6.html', hinweis: 'Abs. 3a: Wohnort im Drittlandsgebiet, Ausfuhr vor Ablauf des dritten Kalendermonats nach dem Liefermonat, Gesamtwert der Lieferung über 50 €.' },
       // W185: Beleg für den Gebühren-Richtwert ergänzt (vorher ohne Quelle, 3,50 € + 1,5 % bzw. 4,00 € + 2 %).
       { titel: 'SRF Kassensturz: Mehrwertsteuer-Rückerstattung mit happigen Gebühren (19.03.2025)', url: 'https://www.srf.ch/sendungen/kassensturz-espresso/kassensturz/mehrwertsteuer-rueckerstattung-mit-happigen-gebuehren-die-kundschaft-aergert-s', hinweis: 'Einkäufe in Deutschland: Global Blue behielt rund 25 % (399 € MwSt → 297 €), Planet rund 25 % (790 € → 596 €). Grundlage des Richtwerts 25 % der MwSt.' },
-      { titel: 'Zoll: Tax-free einkaufen — Verfahren & Voraussetzungen', url: 'https://www.zoll.de/DE/Privatpersonen/Reisen/Reisen-nach-Deutschland-aus-einem-nicht-eu-Staat/Zoll-und-Steuern/Tax-free-einkaufen/tax-free-einkaufen_node.html', hinweis: 'Mindestbetrag 50,01 €, Nicht-EU-Wohnsitz, Zollstempel, Ausfuhr binnen 3 Monaten (Stand 2026).' },
+      { titel: 'Zoll: Tax-free einkaufen — Verfahren & Voraussetzungen', url: 'https://www.zoll.de/DE/Privatpersonen/Reisen/Reisen-nach-Deutschland-aus-einem-nicht-eu-Staat/Zoll-und-Steuern/Tax-free-einkaufen/tax-free-einkaufen_node.html', hinweis: 'Mindestbetrag 50,01 € je Rechnung, Wohnsitz außerhalb der EU, Zollstempel, Ausfuhr bis Ende des dritten Folgemonats (Stand 2026).' },
     ],
   },
   {
     slug: 'steuerprogression-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Steuerprogression-Rechner',
     beschreibung: 'Steuerprogression visualisieren: Durchschnitts- und Grenzsteuersatz für jedes Einkommen berechnen.',
     kategorie: 'Finanzen',
@@ -6328,7 +6397,8 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Solidaritätszuschlag und Kirchensteuer',
-        html: `<p>Zur Einkommensteuer können zwei Zuschläge hinzukommen, die der Rechner auf Wunsch berücksichtigt. Der <strong>Solidaritätszuschlag</strong> beträgt 5,5 % der Einkommensteuer, fällt aber erst oberhalb einer Freigrenze an: 2026 bei 20.350 € Jahres-ESt (Einzelveranlagung) bzw. 40.700 € bei Zusammenveranlagung. Das entspricht etwa 73.000 € zvE — für rund 90 % der Steuerzahler ist der Soli seit 2021 entfallen. In der anschließenden <strong>Milderungszone</strong> wächst er gleitend in den vollen Satz hinein, statt sprunghaft einzusetzen.</p><p>Die <strong>Kirchensteuer</strong> beträgt 8 % der Einkommensteuer in Bayern und Baden-Württemberg, in den übrigen Bundesländern 9 %. Sie ist im Folgejahr als Sonderausgabe abziehbar. Beide Zuschläge bemessen sich an der Einkommensteuer, nicht direkt am Einkommen — sie verstärken also den progressiven Effekt zusätzlich, ändern aber nichts an der grundsätzlichen Logik von Grenz- und Durchschnittssteuersatz. Wer die reine Einkommensteuer ohne Zuschläge betrachten will, lässt beide Optionen im Rechner einfach deaktiviert.</p>`,
+        // W187: vorher „etwa 73.000 € zvE“; ESt 2026 liegt erst ab 74.969 € zvE über 20.350 € (§ 32a, § 3 Abs. 3 SolZG).
+        html: `<p>Zur Einkommensteuer können zwei Zuschläge hinzukommen, die der Rechner auf Wunsch berücksichtigt. Der <strong>Solidaritätszuschlag</strong> beträgt 5,5 % der Einkommensteuer, fällt aber erst oberhalb einer Freigrenze an: 2026 bei 20.350 € Jahres-ESt (Einzelveranlagung) bzw. 40.700 € bei Zusammenveranlagung. Das entspricht etwa 75.000 € zvE — für rund 90 % der Steuerzahler ist der Soli seit 2021 entfallen. In der anschließenden <strong>Milderungszone</strong> wächst er gleitend in den vollen Satz hinein, statt sprunghaft einzusetzen.</p><p>Die <strong>Kirchensteuer</strong> beträgt 8 % der Einkommensteuer in Bayern und Baden-Württemberg, in den übrigen Bundesländern 9 %. Sie ist im Folgejahr als Sonderausgabe abziehbar. Beide Zuschläge bemessen sich an der Einkommensteuer, nicht direkt am Einkommen — sie verstärken also den progressiven Effekt zusätzlich, ändern aber nichts an der grundsätzlichen Logik von Grenz- und Durchschnittssteuersatz. Wer die reine Einkommensteuer ohne Zuschläge betrachten will, lässt beide Optionen im Rechner einfach deaktiviert.</p>`,
       },
       {
         typ: 'checkliste',
@@ -6674,7 +6744,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'schenkungssteuer-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Schenkungssteuer-Rechner',
     beschreibung: 'Schenkungssteuer berechnen: Freibeträge, Steuerklassen und 10-Jahres-Regel bei Schenkungen an Verwandte.',
     kategorie: 'Finanzen',
@@ -7010,7 +7080,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'einkommensteuer-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Einkommensteuer-Rechner',
     beschreibung: 'Einkommensteuer berechnen: Grundtabelle, Splitting, Soli, Kirchensteuer und Grenzsteuersatz nach § 32a EStG.',
     kategorie: 'Finanzen',
@@ -7019,7 +7089,8 @@ export const finanzenRechner: RechnerConfig[] = [
     metaDescription: 'Einkommensteuer 2026 kostenlos berechnen: Grundtabelle oder Splitting, Soli, Kirchensteuer, Grenz- und Durchschnittssteuersatz — mit KI-Erklärung.',
     keywords: ['einkommensteuer rechner', 'einkommensteuer berechnen', 'est rechner', '32a estg', 'einkommensteuer 2026', 'einkommensteuer tabelle', 'grenzsteuersatz rechner', 'durchschnittssteuersatz', 'einkommensteuer splitting', 'grundtabelle'],
     icon: '📋',
-    beispiel: '50.000 € zvE, Einzelveranlagung 2026: Einkommensteuer 10.548 €, Grenzsteuersatz ca. 35,1 %, Durchschnittssteuersatz 21,1 %. Mit Splitting (Paar mit zvE 50k): nur 5.700 € — Splitting-Vorteil ca. 4.848 €.',
+    // W187: vorher „Mit Splitting (Paar mit zvE 50k): nur 5.700 € — Splitting-Vorteil ca. 4.848 €“ ohne Bedingung; 4.848 € gilt nur für Alleinverdiener
+    beispiel: '50.000 € zvE, Einzelveranlagung 2026: Einkommensteuer 10.548 €, Grenzsteuersatz ca. 35,1 %, Durchschnittssteuersatz 21,1 %. Mit Splitting (Paar mit gemeinsamem zvE 50.000 €): 5.700 € — Splitting-Vorteil 4.848 € bei Alleinverdiener (ein Partner verdient die 50.000 € allein); verdienen beide je 25.000 €, ist der Vorteil 0 €.',
     faq: [
       {
         frage: 'Wie hoch ist der Grundfreibetrag 2026?',
@@ -7035,7 +7106,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wann fällt der Solidaritätszuschlag an?',
-        antwort: 'Der Soli beträgt 5,5 % der Einkommensteuer, aber erst ab einer Jahres-ESt von 20.350 € (2026, Einzelveranlagung) bzw. 40.700 € (Splitting). Das entspricht etwa 73.000 € zvE bei Einzelveranlagung. Für ca. 90 % der Steuerzahler ist der Soli seit 2021 abgeschafft.',
+        // W187: vorher „etwa 73.000 € zvE“ (ESt(73.000) = 19.524 €)
+        antwort: 'Der Soli beträgt 5,5 % der Einkommensteuer, aber erst, wenn die Jahres-ESt 20.350 € (2026, Einzelveranlagung) bzw. 40.700 € (Splitting) übersteigt. Das entspricht etwa 75.000 € zvE bei Einzelveranlagung (die Einkommensteuer erreicht 20.350 € bei 74.966 € zvE). Für ca. 90 % der Steuerzahler ist der Soli seit 2021 abgeschafft.',
       },
       {
         frage: 'Was ist das zu versteuernde Einkommen (zvE)?',
@@ -7043,7 +7115,8 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie hoch ist der Spitzensteuersatz 2026?',
-        antwort: 'Der Spitzensteuersatz von 42 % gilt ab einem zvE von 66.761 € (Einzelveranlagung) bzw. 133.522 € (Splitting). Ab 277.826 € (Einzelveranlagung) bzw. 555.652 € (Splitting) greift zusätzlich die sogenannte „Reichensteuer" mit 45 %.',
+        // W187: vorher 66.761 € / 133.522 € (Tarif 2024); § 32a Abs. 1 Nr. 4 EStG ab VZ 2026: ab 69.879 €
+        antwort: 'Der Spitzensteuersatz von 42 % gilt ab einem zvE von 69.879 € (Einzelveranlagung) bzw. 139.758 € (Splitting). Ab 277.826 € (Einzelveranlagung) bzw. 555.652 € (Splitting) greift zusätzlich die sogenannte „Reichensteuer" mit 45 %.',
       },
     ],
     affiliate: [
@@ -7079,12 +7152,14 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Tarifformel', formel: '(173,10 · z + 2.397) · z + 1.034,87', ergebnis: '' },
           { label: 'Einkommensteuer', formel: 'abgerundet auf volle Euro', ergebnis: '7.209 €' },
         ],
-        fazit: 'Ein zu versteuerndes Einkommen von 40.000 Euro fällt in Zone 3. Der Tarif rechnet hier mit einem Polynom: Aus der Differenz zum Zonenbeginn (40.000 − 17.799 = 22.201) wird der Zwischenwert z = 2,2201 gebildet und in die Formel (173,10 · z + 2.397) · z + 1.034,87 eingesetzt. Das ergibt rund 7.210 Euro, abgerundet auf volle Euro 7.209 Euro Einkommensteuer. Das entspricht einem Durchschnittssteuersatz von etwa 18 Prozent — deutlich weniger als der Grenzsteuersatz, der an dieser Stelle bereits bei rund 35 Prozent liegt. Genau diese Lücke zwischen Durchschnitt und Grenze ist der Kern der Progression. Die Polynom-Koeffizienten der Zonen 2 und 3 sind im Gesetz so gewählt, dass der Grenzsteuersatz gleitend ansteigt — anders als bei einem Stufentarif gibt es also keine harten Sprünge an den Zonengrenzen.',
+        // W187: vorher „rund 35 Prozent“ (40.000 € zvE: 31,7 %)
+        fazit: 'Ein zu versteuerndes Einkommen von 40.000 Euro fällt in Zone 3. Der Tarif rechnet hier mit einem Polynom: Aus der Differenz zum Zonenbeginn (40.000 − 17.799 = 22.201) wird der Zwischenwert z = 2,2201 gebildet und in die Formel (173,10 · z + 2.397) · z + 1.034,87 eingesetzt. Das ergibt rund 7.210 Euro, abgerundet auf volle Euro 7.209 Euro Einkommensteuer. Das entspricht einem Durchschnittssteuersatz von etwa 18 Prozent — deutlich weniger als der Grenzsteuersatz, der an dieser Stelle bereits bei rund 32 Prozent liegt. Genau diese Lücke zwischen Durchschnitt und Grenze ist der Kern der Progression. Die Polynom-Koeffizienten der Zonen 2 und 3 sind im Gesetz so gewählt, dass der Grenzsteuersatz gleitend ansteigt — anders als bei einem Stufentarif gibt es also keine harten Sprünge an den Zonengrenzen.',
       },
       {
         typ: 'text',
         titel: 'Grenzsteuersatz und Durchschnittssteuersatz',
-        html: `<p>Zwei Sätze werden oft verwechselt. Der <strong>Durchschnittssteuersatz</strong> ist die gesamte Steuer geteilt durch das zvE — er sagt, welcher Anteil des Einkommens insgesamt als Steuer abfließt. Der <strong>Grenzsteuersatz</strong> dagegen ist der Satz auf den <strong>nächsten verdienten Euro</strong>. Im Beispiel der 40.000 Euro liegt der Durchschnitt bei 18 Prozent, der Grenzsatz aber bei rund 35 Prozent.</p><p>Diese Unterscheidung räumt mit einem verbreiteten Irrtum auf: Eine Gehaltserhöhung wird nie so besteuert, dass netto weniger übrig bleibt. Versteuert wird zusätzliches Einkommen mit dem Grenzsteuersatz, also nur der draufkommende Teil — der Rest bleibt unberührt. Wie sich Grenz- und Durchschnittssatz über den gesamten Einkommensverlauf entwickeln, zeigt im Detail der <strong>Steuerprogressions-Rechner</strong>; dieser hier konzentriert sich auf die Jahres-Einkommensteuer selbst. Der Eingangssteuersatz von 14 Prozent gilt direkt oberhalb des Grundfreibetrags, der höchste Grenzsteuersatz von 45 Prozent erst für Einkommensteile über 277.825 Euro — dazwischen liegt ein langer, gleitender Anstieg.</p>`,
+        // W187: vorher „Grenzsatz aber bei rund 35 Prozent“ (40.000 € zvE: 31,7 %)
+        html: `<p>Zwei Sätze werden oft verwechselt. Der <strong>Durchschnittssteuersatz</strong> ist die gesamte Steuer geteilt durch das zvE — er sagt, welcher Anteil des Einkommens insgesamt als Steuer abfließt. Der <strong>Grenzsteuersatz</strong> dagegen ist der Satz auf den <strong>nächsten verdienten Euro</strong>. Im Beispiel der 40.000 Euro liegt der Durchschnitt bei 18 Prozent, der Grenzsatz aber bei rund 32 Prozent.</p><p>Diese Unterscheidung räumt mit einem verbreiteten Irrtum auf: Eine Gehaltserhöhung wird nie so besteuert, dass netto weniger übrig bleibt. Versteuert wird zusätzliches Einkommen mit dem Grenzsteuersatz, also nur der draufkommende Teil — der Rest bleibt unberührt. Wie sich Grenz- und Durchschnittssatz über den gesamten Einkommensverlauf entwickeln, zeigt im Detail der <strong>Steuerprogressions-Rechner</strong>; dieser hier konzentriert sich auf die Jahres-Einkommensteuer selbst. Der Eingangssteuersatz von 14 Prozent gilt direkt oberhalb des Grundfreibetrags, der höchste Grenzsteuersatz von 45 Prozent erst für Einkommensteile über 277.825 Euro — dazwischen liegt ein langer, gleitender Anstieg.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -7109,7 +7184,8 @@ export const finanzenRechner: RechnerConfig[] = [
         kopf: ['zu versteuerndes Einkommen', 'Einkommensteuer', 'Durchschnittssatz'],
         zeilen: [
           ['15.000 €', '435 €', '2,9 %'],
-          ['20.000 €', '1.570 €', '7,8 %'],
+          // W187: vorher 7,8 % (1.570 ÷ 20.000 = 7,85 % → 7,9 %)
+          ['20.000 €', '1.570 €', '7,9 %'],
           ['30.000 €', '4.217 €', '14,1 %'],
           ['40.000 €', '7.209 €', '18,0 %'],
           ['60.000 €', '14.233 €', '23,7 %'],
@@ -7158,7 +7234,8 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'tipp',
         titel: 'Nur der Teil über dem Grundfreibetrag zählt',
-        text: 'Eine beruhigende Klarstellung gegen einen häufigen Irrtum: Es wird nie das gesamte Einkommen mit dem höchsten Satz besteuert. Bis zum Grundfreibetrag (12.348 Euro) bleibt alles steuerfrei, und jede höhere Tarifzone gilt nur für den Einkommensteil, der in sie hineinreicht. Eine Gehaltserhöhung wird deshalb immer nur mit dem Grenzsteuersatz auf den zusätzlichen Betrag belastet — unterm Strich bleibt von jedem Euro mehr also stets ein spürbarer Teil übrig. Der Schritt in eine höhere Tarifzone kostet niemals netto Geld — von einem Bruttozuwachs bleibt selbst im Spitzensatz noch deutlich mehr als die Hälfte übrig.',
+        text: 'Eine beruhigende Klarstellung gegen einen häufigen Irrtum: Es wird nie das gesamte Einkommen mit dem höchsten Satz besteuert. Bis zum Grundfreibetrag (12.348 Euro) bleibt alles steuerfrei, und jede höhere Tarifzone gilt nur für den Einkommensteil, der in sie hineinreicht. Eine Gehaltserhöhung wird deshalb immer nur mit dem Grenzsteuersatz auf den zusätzlichen Betrag belastet — unterm Strich bleibt von jedem Euro mehr also stets ein spürbarer Teil übrig. Der Schritt in eine höhere Tarifzone kostet niemals netto Geld: Selbst im Spitzensatz nimmt die Einkommensteuer von einem zusätzlichen Euro zvE höchstens 42 Cent (ab 277.826 €: 45 Cent). Mit Solidaritätszuschlag — in seiner Milderungszone zwischen rund 75.000 und 117.000 € zvE 11,9 % der Mehrsteuer —, Kirchensteuer und bei Arbeitnehmern Sozialabgaben kann die Belastung des zusätzlichen Euros aber bei rund der Hälfte oder darüber liegen.',
+        // W187: vorher „von einem Bruttozuwachs bleibt selbst im Spitzensatz noch deutlich mehr als die Hälfte übrig“ (Soli-Milderungszone 42 % × 1,119 ≈ 47 %, mit 9 % KiSt ≈ 51 %)
       },
     ],
     quellen: [

@@ -90,8 +90,9 @@ export function berechneSchenkungssteuer(e: SchenkungssteuerEingabe): Schenkungs
   const verfuegbarerFB = Math.max(0, persoenlichFB - bereitsGenutzt);
   const gesamtFB = verfuegbarerFB + hausratFB;
 
-  // Steuerpflichtiger Erwerb
-  const steuerpflichtigerErwerb = Math.max(0, schenkungswert - gesamtFB);
+  // Steuerpflichtiger Erwerb — W187: vorher ohne Abrundung; § 10 Abs. 1 Satz 6 ErbStG (gilt auch für Schenkungen):
+  // auf volle 100 € nach unten abgerundet.
+  const steuerpflichtigerErwerb = Math.floor(Math.max(0, schenkungswert - gesamtFB) / 100) * 100;
 
   const { steuerbetrag: schenkungssteuer, steuersatz } =
     berechneErbStMitHaertefall(steuerpflichtigerErwerb, steuerklasse);

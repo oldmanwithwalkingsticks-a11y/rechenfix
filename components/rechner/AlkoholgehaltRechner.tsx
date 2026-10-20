@@ -359,7 +359,7 @@ export default function AlkoholgehaltRechner() {
       {/* Info-Box */}
       <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-4 mb-6">
         <p className="text-blue-800 dark:text-blue-300 text-sm">
-          <strong>ℹ️ Standardglas:</strong> 1 Standardglas = 10 g reiner Alkohol (DGE-Definition). Entspricht ca. 0,33 l Bier (5 %), 0,1 l Wein (12 %) oder 3 cl Schnaps (40 %). Die WHO empfiehlt max. 1–2 Standardgläser täglich, an mehreren Tagen/Woche keinen Alkohol.
+          <strong>ℹ️ Standardglas:</strong> 1 Standardglas = 10 g reiner Alkohol (DGE-Definition). Entspricht ca. 0,25 l Bier (5 %), 0,1 l Wein (12 %) oder 3 cl Schnaps (40 %). Die DGE empfiehlt seit 2024, auf Alkohol zu verzichten; als risikoarm gelten höchstens 1–2 alkoholische Getränke pro Woche.{/* W187: vorher „0,33 l Bier“ (= 13 g) und „Die WHO empfiehlt max. 1–2 Standardgläser täglich, an mehreren Tagen/Woche keinen Alkohol.“ */}
         </p>
       </div>
 

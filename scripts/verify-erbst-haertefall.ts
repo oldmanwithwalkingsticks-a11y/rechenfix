@@ -44,7 +44,9 @@ const erb = (wert: number, vw: any, vorsch = 0, alterKind?: number) =>
 cases.push(
   { name: 'ER-01: Erbschaft 500k Kind (3 J.)',                    actual: erb(500_000,   'kind', 0, 3), expected: 3_360 },
   { name: 'ER-02a: Erbschaft 750k Kind (3 J., stpfl. 298k)',      actual: erb(750_000,   'kind', 0, 3), expected: 32_780 },
-  { name: 'ER-02b: Erbschaft 752.001 Kind (3 J., 300.001, HF)',   actual: erb(752_001,   'kind', 0, 3), expected: 33_001 },
+  // W187: § 10 Abs. 1 Satz 6 ErbStG rundet den steuerpflichtigen Erwerb auf volle 100 € ab: 300.001 → 300.000 → 11 % = 33.000
+  // (vorher 33.001 über die Härtefallregel; den Härtefall selbst prüft „Kern: Kl. I @ 300.001 €“ weiter oben).
+  { name: 'ER-02b: Erbschaft 752.001 Kind (3 J., stpfl. 300.000)',  actual: erb(752_001,   'kind', 0, 3), expected: 33_000, tolerance: 0 },
   { name: 'ER-03: Erbschaft 1,5M Ehepartner',                     actual: erb(1_500_000, 'ehepartner'), expected: 141_360 },
   { name: 'ER-05: Erbschaft 500k Kind ohne Alter → kein Vers.-FB', actual: erb(500_000,  'kind'),       expected: 11_000 },
   { name: 'ER-06: Erbschaft 700k Kind 26 J. → 10.300 € Vers.-FB',  actual: erb(700_000,  'kind', 0, 26), expected: 31_867 },
@@ -62,8 +64,12 @@ const sch = (wert: number, vw: any, genutzt = 0, hausrat = false) =>
 
 cases.push(
   { name: 'SS-01: Schenkung 250k Enkel (Eltern leben)',  actual: sch(250_000, 'enkel-eltern-leben'), expected: 3_500 },
-  { name: 'SS-Härtefall: Schenkung 700.001 Kind',        actual: sch(700_001, 'kind'),      expected: 33_001 },
-  { name: 'SS-Härtefall: Schenkung 475.001 Kind',        actual: sch(475_001, 'kind'),      expected: 5_251 },
+  // W187: § 10 Abs. 1 S. 6 ErbStG — 300.001 € und 75.001 € werden auf 300.000 € bzw. 75.000 € abgerundet (vorher Härtefall 33.001 / 5.251 €).
+  { name: 'SS-Abrundung: Schenkung 700.001 Kind → 300.000 × 11 %',  actual: sch(700_001, 'kind'),      expected: 33_000 },
+  { name: 'SS-Abrundung: Schenkung 475.001 Kind → 75.000 × 7 %',    actual: sch(475_001, 'kind'),      expected: 5_250 },
+  // Härteausgleich § 19 Abs. 3: 300.200 € → 33.000 + ½ × 200 = 33.100 €; 75.200 € → 5.250 + ½ × 200 = 5.350 €
+  { name: 'SS-Härtefall: Schenkung 700.200 Kind',        actual: sch(700_200, 'kind'),      expected: 33_100 },
+  { name: 'SS-Härtefall: Schenkung 475.200 Kind',        actual: sch(475_200, 'kind'),      expected: 5_350 },
 );
 
 // --- Prompt 116 Neuzugänge (P2) ---
@@ -122,6 +128,19 @@ cases.push({
   }).steuerbetrag,
   expected: 4_130,
 });
+
+// W187: Abrundung des steuerpflichtigen Erwerbs auf volle 100 € (§ 10 Abs. 1 Satz 6 ErbStG,
+// https://www.gesetze-im-internet.de/erbstg_1974/__10.html). Seitenbefund: 700.050 € Kind bis 5 J.
+// → 700.050 − 400.000 − 52.000 = 248.050 → 248.000 € × 11 % = 27.280 € (vorher 27.286 €).
+const erbVoll = (wert: number, vw: any, vorsch = 0, alterKind?: number) =>
+  berechneErbschaftsteuer({ erwerbsart: 'erbschaft', wert, verwandtschaft: vw, vorschenkungen: vorsch, selbstgenutzteImmobilie: false, alterKind });
+cases.push(
+  { name: 'R-01: 700.050 Kind (3 J.) → stpfl. 248.000 €',        actual: erbVoll(700_050, 'kind', 0, 3).steuerpflichtigerErwerb, expected: 248_000, tolerance: 0 },
+  { name: 'R-02: 700.050 Kind (3 J.) → 27.280 €',                  actual: erbVoll(700_050, 'kind', 0, 3).steuerbetrag, expected: 27_280, tolerance: 0 },
+  { name: 'R-03: Seitenbeispiel 700.000 Kind (3 J.) → 27.280 €',   actual: erbVoll(700_000, 'kind', 0, 3).steuerbetrag, expected: 27_280, tolerance: 0 },
+  { name: 'R-04: 120.099 Geschwister → stpfl. 100.000 €',          actual: erbVoll(120_099, 'geschwister').steuerpflichtigerErwerb, expected: 100_000, tolerance: 0 },
+  { name: 'R-05: § 14 Kumulation 500.050 + 350.000 → 450.000 €',   actual: erbVoll(500_050, 'kind', 350_000).steuerpflichtigerErwerb, expected: 450_000, tolerance: 0 },
+);
 
 let passed = 0;
 let failed = 0;

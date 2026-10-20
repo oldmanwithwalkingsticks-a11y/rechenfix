@@ -1,4 +1,5 @@
-import { berechneEStGrund } from './einkommensteuer';
+import { berechneEStMitSplitting, WK_PAUSCHALE_AN_2026, SA_PAUSCHALE_2026 } from './einkommensteuer';
+import { berechneVorsorgepauschale2026 } from './lohnsteuer';
 import {
   getAktuelleBafoegParameter,
   getAnrechnungsquote,
@@ -50,13 +51,15 @@ export interface BafoegEingabe {
   einkommenEltern1: number; // brutto/Jahr
   einkommenEltern2: number; // brutto/Jahr (nur bei verheiratet)
   /**
-   * Anzahl weiterer Geschwister/Unterhaltsberechtigter der Eltern in
-   * BAföG-fähiger Ausbildung OHNE eigenen BAföG-Bezug (z. B. Azubi mit
-   * Ausbildungsvergütung). Der Antragsteller zählt hier NICHT mit
-   * (§ 25 Abs. 3/6 BAföG). Wirkt in zwei Dimensionen: + `proGeschwister`
-   * Freibetrag absolut und −5 %-Punkte Anrechnungsquote relativ.
+   * Anzahl weiterer Kinder/Unterhaltsberechtigter der Eltern, die NICHT in
+   * einer nach BAföG oder § 56 SGB III förderfähigen Ausbildung stehen
+   * (z. B. Schulkinder). Der Antragsteller zählt hier NICHT mit
+   * (§ 25 Abs. 3 Nr. 2, Abs. 4 Nr. 2 BAföG). Wirkt in zwei Dimensionen:
+   * + `proGeschwister` Freibetrag absolut und −5 %-Punkte Anrechnungsquote relativ.
+   * W187: vorher als „Geschwister in BAföG-fähiger Ausbildung ohne eigenes BAföG“
+   * beschrieben — § 25 Abs. 3 gewährt den Freibetrag gerade für Kinder OHNE förderfähige Ausbildung.
    *
-   * Geschwister MIT eigenem BAföG-/BAB-Bezug gehören NICHT hier rein —
+   * Geschwister in förderfähiger Ausbildung gehören NICHT hier rein —
    * dafür existiert das separate Feld `gefoerdeteGeschwisterAnzahl` für
    * § 11 Abs. 4 BAföG (Aufteilung des Anrechnungsbetrags).
    */
@@ -100,7 +103,7 @@ export interface BafoegErgebnis {
   anrechnungEltern: number;
   gesamtAnrechnung: number;
 
-  /** Angewendete Elternanrechnungsquote (§ 25 Abs. 6 BAföG) — 0,50 bei 0 Geschwistern, je −0,05 pro Geschwister. */
+  /** Angewendete Elternanrechnungsquote (§ 25 Abs. 4 BAföG) — 0,50 bei 0 Geschwistern, je −0,05 pro Geschwister. */
   anrechnungsquoteEltern: number;
 
   /**
@@ -119,6 +122,7 @@ export interface BafoegErgebnis {
   maxRueckzahlung: number;
 
   // Hilfswerte
+  /** Anrechenbares Einkommen der Eltern nach § 21 BAföG, monatlich (Einkünfte − Sozialpauschale − ESt) */
   nettoEltern: number;
   freibetragEltern: number;
   elternunabhaengig: boolean;
@@ -136,20 +140,51 @@ function rund2(n: number): number {
 }
 
 /**
- * Einkommensteuer-Schätzung nach § 32a EStG 2026 — zentrale SSOT.
+ * § 21 Abs. 1 S. 1 BAföG: Einkünfte aus nichtselbständiger Arbeit = Bruttolohn minus
+ * Arbeitnehmer-Pauschbetrag (§ 9a S. 1 Nr. 1a EStG, 1.230 €/Jahr).
  */
-const schaetzeEinkommensteuer = (zvE: number) => berechneEStGrund(zvE, 2026);
+function einkuenfteAusLohn(bruttoJahr: number): number {
+  return Math.max(0, bruttoJahr - WK_PAUSCHALE_AN_2026);
+}
+
+/** § 21 Abs. 2 S. 1 Nr. 1 BAföG: Sozialpauschale 22,3 % der Einkünfte, höchstens 17.200 €/Jahr. */
+function sozialpauschaleJahr(einkuenfte: number, satz: number, params: BafoegParameter): number {
+  return Math.min(einkuenfte * satz, params.svPauschalen.hoechstbetragJahr);
+}
 
 /**
- * Berechnet das anrechenbare Netto-Einkommen eines Elternteils.
+ * Anrechenbares Einkommen der Eltern nach § 21 BAföG, monatlich.
+ *
+ * Einkommen = Summe der Einkünfte (Brutto − 1.230 € je Elternteil) − Sozialpauschale
+ * (22,3 %, max. 17.200 € je Elternteil) − Einkommensteuer (§ 21 Abs. 1 S. 3 Nr. 3).
+ * Die Einkommensteuer wird geschätzt: zvE = Einkünfte − Vorsorgeaufwendungen (Näherung über
+ * die Vorsorgepauschale 2026 aus lohnsteuer.ts, Eltern mit einem Kind) − Sonderausgaben-
+ * Pauschbetrag; verheiratete Eltern per Splitting (§ 32a Abs. 5 EStG), sonst Grundtarif.
+ * Nicht modelliert: Kirchensteuer und Solidaritätszuschlag.
+ *
+ * W187: vorher je Elternteil Brutto − 21,6 % Pauschale − ESt nach Grundtarif auf
+ * (Brutto − 21,6 %), ohne Werbungskosten-Pauschbetrag und ohne Splitting.
  */
-function berechneElternNetto(bruttoJahr: number, params: BafoegParameter): number {
-  if (bruttoJahr <= 0) return 0;
-  const svAbzug = bruttoJahr * params.svPauschalen.eltern;
-  const zvE = bruttoJahr - svAbzug;
-  const est = schaetzeEinkommensteuer(Math.max(0, zvE));
-  const netto = bruttoJahr - svAbzug - est;
-  return Math.max(0, rund2(netto / 12)); // monatlich
+function berechneElternEinkommen(
+  bruttoJahre: number[],
+  splitting: boolean,
+  params: BafoegParameter,
+): number {
+  const bruttos = bruttoJahre.filter(b => b > 0);
+  if (bruttos.length === 0) return 0;
+  let einkuenfte = 0;
+  let pauschalen = 0;
+  let vorsorge = 0;
+  for (const b of bruttos) {
+    const e = einkuenfteAusLohn(b);
+    einkuenfte += e;
+    pauschalen += sozialpauschaleJahr(e, params.svPauschalen.eltern, params);
+    vorsorge += berechneVorsorgepauschale2026(b, splitting ? 4 : 1, { kinderUnter25: 1 });
+  }
+  const saPauschbetrag = splitting ? 2 * SA_PAUSCHALE_2026 : SA_PAUSCHALE_2026;
+  const zvE = Math.max(0, einkuenfte - vorsorge - saPauschbetrag);
+  const est = berechneEStMitSplitting(zvE, splitting, 2026);
+  return Math.max(0, rund2((einkuenfte - pauschalen - est) / 12));
 }
 
 /**
@@ -233,8 +268,12 @@ export function berechneBafoeg(eingabe: BafoegEingabe): BafoegErgebnis | null {
   const gesamtBedarf = grundbedarf + kvZuschlag + pvZuschlag + kinderZuschlag;
 
   // === ANRECHNUNG EIGENES EINKOMMEN ===
-  const ueberFreibetrag = Math.max(0, eigenesEinkommen - params.freibetraege.eigenesEinkommen);
-  const anrechnungEinkommen = rund2(ueberFreibetrag * (1 - params.svPauschalen.eigen));
+  // § 21 i. V. m. § 23 Abs. 1 BAföG: Bruttoverdienst/Monat − Werbungskosten-Pauschbetrag (1.230 € ÷ 12)
+  // − Sozialpauschale 22,3 % = Einkommen; davon bleiben 389 € (2026) anrechnungsfrei.
+  // W187: vorher (Brutto − 330 €) × (1 − 22,5 %) — ein Minijob mit 603 € wurde mit 211,58 € angerechnet.
+  const einkuenfteMonat = einkuenfteAusLohn(eigenesEinkommen * 12) / 12;
+  const einkommenMonat = einkuenfteMonat - sozialpauschaleJahr(einkuenfteMonat * 12, params.svPauschalen.eigen, params) / 12;
+  const anrechnungEinkommen = rund2(Math.max(0, einkommenMonat - params.freibetraege.eigenesEinkommen));
 
   // === ANRECHNUNG VERMÖGEN ===
   const vermoegenFreibetrag = params.vermoegen.unterDreissig;
@@ -246,21 +285,19 @@ export function berechneBafoeg(eingabe: BafoegEingabe): BafoegErgebnis | null {
   let anrechnungElternVorAufteilung = 0;
   let nettoEltern = 0;
   let freibetragEltern = 0;
-  // Anrechnungsquote als Funktion der Geschwister — § 25 Abs. 6 BAföG.
+  // Anrechnungsquote als Funktion der Geschwister — § 25 Abs. 4 BAföG.
   // Antragsteller zählt NICHT mit (siehe bafoeg-parameter.ts-Doc).
   const anrechnungsquoteEltern = getAnrechnungsquote(geschwisterInAusbildung, params);
   const aufteilungDivisor = elternunabhaengig ? 1 : (1 + gefoerdeteGeschwisterAnzahl);
 
   if (!elternunabhaengig) {
     if (familienstand === 'verheiratet') {
-      // Beide Einkommen zusammen
-      const netto1 = berechneElternNetto(einkommenEltern1, params);
-      const netto2 = berechneElternNetto(einkommenEltern2, params);
-      nettoEltern = rund2(netto1 + netto2);
+      // Beide Einkommen zusammen, Einkommensteuer per Splitting (Zusammenveranlagung)
+      nettoEltern = berechneElternEinkommen([einkommenEltern1, einkommenEltern2], true, params);
       freibetragEltern = params.freibetraege.elternVerheiratet + geschwisterInAusbildung * params.freibetraege.proGeschwister;
     } else {
-      // Getrennt/Geschieden/Verwitwet: nur Elternteil 1
-      nettoEltern = berechneElternNetto(einkommenEltern1, params);
+      // Getrennt/Geschieden/Verwitwet: nur Elternteil 1, Grundtarif
+      nettoEltern = berechneElternEinkommen([einkommenEltern1], false, params);
       freibetragEltern = params.freibetraege.elternAlleinstehend + geschwisterInAusbildung * params.freibetraege.proGeschwister;
     }
 

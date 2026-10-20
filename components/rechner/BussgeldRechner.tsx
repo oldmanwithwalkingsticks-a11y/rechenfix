@@ -242,7 +242,13 @@ export default function BussgeldRechner() {
                   {ergebnis.straftat ? 'Entzug' : `${ergebnis.fahrverbot} Monat${ergebnis.fahrverbot > 1 ? 'e' : ''}`}
                 </p>
               ) : (
-                <p className="text-lg font-bold text-green-300">Keins</p>
+                <>
+                  <p className="text-lg font-bold text-green-300">Keins</p>
+                  {/* W187: vorher „1 Monat“ für 26–30 km/h innerorts / 26–40 km/h außerorts (nur Wiederholungsfall) */}
+                  {(ergebnis.fahrverbotWiederholung ?? 0) > 0 && (
+                    <p className="text-white/70 text-[11px] leading-tight mt-0.5">{ergebnis.fahrverbotWiederholung} Monat bei Wiederholung</p>
+                  )}
+                </>
               )}
             </div>
 
@@ -310,7 +316,7 @@ export default function BussgeldRechner() {
         <CrossLink href="/auto/kfz-steuer-rechner" emoji="📋" text="Kfz-Steuer berechnen" />
 
         <ErgebnisAktionen
-          ergebnisText={`${ergebnis.beschreibung}: ${ergebnis.straftat ? 'Straftat' : `${ergebnis.bussgeld} € Bußgeld`}, ${ergebnis.punkte} Punkt${ergebnis.punkte !== 1 ? 'e' : ''} in Flensburg${ergebnis.fahrverbot > 0 ? `, ${ergebnis.fahrverbot} Monat${ergebnis.fahrverbot > 1 ? 'e' : ''} Fahrverbot` : ''}`}
+          ergebnisText={`${ergebnis.beschreibung}: ${ergebnis.straftat ? 'Straftat' : `${ergebnis.bussgeld} € Bußgeld`}, ${ergebnis.punkte} Punkt${ergebnis.punkte !== 1 ? 'e' : ''} in Flensburg${ergebnis.fahrverbot > 0 ? `, ${ergebnis.fahrverbot} Monat${ergebnis.fahrverbot > 1 ? 'e' : ''} Fahrverbot` : ''}${(ergebnis.fahrverbotWiederholung ?? 0) > 0 ? `, kein Regelfahrverbot (${ergebnis.fahrverbotWiederholung} Monat nur bei Wiederholung binnen eines Jahres, § 4 Abs. 2 S. 2 BKatV)` : ''}`}
           seitenTitel="Bußgeldrechner"
         />
 
@@ -334,6 +340,8 @@ export default function BussgeldRechner() {
             bussgeldEuro: ergebnis.bussgeld,
             punkte: ergebnis.punkte,
             fahrverbotMonate: ergebnis.fahrverbot,
+            // W187: Wiederholungsfall getrennt (vorher fahrverbotMonate: 1 auch für Ersttäter bei 26–30 km/h)
+            ...((ergebnis.fahrverbotWiederholung ?? 0) > 0 ? { fahrverbotNurBeiWiederholungMonate: ergebnis.fahrverbotWiederholung, regelfahrverbotErsttaeter: 'keins' } : {}),
             straftat: ergebnis.straftat,
             schwere: ergebnis.schwere,
           }}

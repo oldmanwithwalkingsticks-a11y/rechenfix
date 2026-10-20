@@ -214,7 +214,7 @@ export default function LeasingRechner() {
       {/* Km-Risiko */}
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Km-Risiko:</strong> Bei {ergebnis.mehrKmBeispiel.toLocaleString('de-DE')} km mehr pro Jahr als vereinbart: Nachzahlung ca. <strong>{fmt(ergebnis.mehrKosten)} €</strong> über die gesamte Laufzeit. Leasingkosten sind Nettokosten (zzgl. MwSt). Gewerbetreibende können Leasingraten steuerlich absetzen.
+          <strong>⚠️ Km-Risiko:</strong> Bei {ergebnis.mehrKmBeispiel.toLocaleString('de-DE')} km mehr pro Jahr als vereinbart: Nachzahlung ca. <strong>{fmt(ergebnis.mehrKosten)} €</strong> über die gesamte Laufzeit. {/* W187: vorher „Leasingkosten sind Nettokosten (zzgl. MwSt).“ — widersprach der Bruttorate seit W182 */}Beim Privatleasing sind die Raten Bruttobeträge (inkl. MwSt); der Rechner rechnet mit Bruttolistenpreis und Bruttorate. Gewerbetreibende rechnen netto (Vorsteuerabzug) und können die Leasingraten als Betriebsausgabe absetzen.
         </p>
       </div>
 

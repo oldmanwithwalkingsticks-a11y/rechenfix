@@ -8,8 +8,11 @@
  *    (gesetze-im-internet.de/kraftstg/__3d.html). Maximaldauer durch
  *    das 8. KraftStÄndG (Bundestag 04.12.2025, Drucksache 21/2672)
  *    bestätigt auf 31.12.2035.
- *  - § 9 Abs. 1 Nr. 2a KraftStG — Hubraum-basierte Sockelbeträge
+ *  - § 9 Abs. 1 Nr. 2 Buchst. b und c KraftStG — Hubraum-basierte Sockelbeträge
  *    (2,00 €/angefangene 100 ccm Benzin; 9,50 €/100 ccm Diesel).
+ *    W187: vorher „Nr. 2a“ zitiert; Nr. 2a ist die Wohnmobil-Regel, Pkw stehen in Nr. 2 Buchst. a–c.
+ *  - § 9 Abs. 1 Nr. 2 Buchst. b KraftStG (W187) — Erstzulassung 01.07.2009–31.12.2020:
+ *    linear 2 € je g/km über 120 g (bis 2011), 110 g (2012–2013) bzw. 95 g (ab 2014).
  *
  * Progressive Staffel: jede CO₂-Stufe greift NUR für das Delta oberhalb
  * ihrer Stufenuntergrenze (vergleichbar mit ESt-Tarifzonen, nicht mit
@@ -31,13 +34,44 @@ export const CO2_STAFFEL_KRAFTSTG_9_NR2C = [
 ] as const;
 
 /**
- * Sockelbetrag pro angefangene 100 ccm Hubraum.
- * § 9 Abs. 1 Nr. 2a KraftStG (Benzin) / Nr. 2b (Diesel).
+ * Sockelbetrag pro angefangene 100 ccm Hubraum, Erstzulassung ab 01.07.2009.
+ * § 9 Abs. 1 Nr. 2 Buchst. b und c KraftStG (Fremdzündung 2 €, Selbstzündung 9,50 €).
+ * W187: vorher als „Nr. 2a (Benzin) / Nr. 2b (Diesel)“ zitiert.
  */
 export const SOCKEL_PRO_100CCM = {
   benzin: 2.00,
   diesel: 9.50,
 } as const;
+
+/**
+ * W187: CO₂-Schwellen § 9 Abs. 1 Nr. 2 Buchst. b KraftStG für Pkw mit Erstzulassung
+ * 01.07.2009–31.12.2020 (gesetze-im-internet.de/kraftstg/__9.html): 2 € je Gramm über
+ * aa) 120 g/km bei Erstzulassung bis 31.12.2011, bb) 110 g/km ab 01.01.2012, cc) 95 g/km ab 01.01.2014.
+ * Vorher rechnete der Rechner diese Fahrzeuge mit der Staffel ab 2021 (Nr. 2 Buchst. c).
+ */
+export const CO2_SCHWELLEN_KRAFTSTG_9_NR2B = [
+  { bisJahr: 2011, schwelle: 120 },
+  { bisJahr: 2013, schwelle: 110 },
+  { bisJahr: 2020, schwelle: 95 },
+] as const;
+
+export const CO2_SATZ_KRAFTSTG_9_NR2B = 2.00;
+
+/** W187: CO₂-Schwelle nach Erstzulassungsjahr (2009–2020); außerhalb wird auf 2009 bzw. 2020 begrenzt. */
+export function co2SchwelleNr2b(erstzulassungsjahr: number): number {
+  const jahr = Math.min(2020, Math.max(2009, Math.floor(erstzulassungsjahr)));
+  return CO2_SCHWELLEN_KRAFTSTG_9_NR2B.find(s => jahr <= s.bisJahr)!.schwelle;
+}
+
+/**
+ * W187: CO₂-Komponente für Erstzulassung 01.07.2009–31.12.2020 (§ 9 Abs. 1 Nr. 2 Buchst. b):
+ * linear 2,00 € je g/km über der Schwelle des Erstzulassungsjahres. Auf Cent gerundet.
+ */
+export function berechneCO2KomponenteNr2b(co2GproKm: number, erstzulassungsjahr: number): number {
+  const ueber = co2GproKm - co2SchwelleNr2b(erstzulassungsjahr);
+  if (ueber <= 0) return 0;
+  return Math.round(ueber * CO2_SATZ_KRAFTSTG_9_NR2B * 100) / 100;
+}
 
 /**
  * Steuerbefreiung Elektrofahrzeuge nach § 3d KraftStG.

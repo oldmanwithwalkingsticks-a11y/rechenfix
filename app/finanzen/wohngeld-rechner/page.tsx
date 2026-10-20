@@ -21,7 +21,8 @@ const MIETSTUFEN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'] as const;
 export const metadata: Metadata = {
   title: 'Wohngeld 2026: Anspruch, Mietstufen & Berechnung erklärt',
   description:
-    'Wohngeld 2026: Wer hat Anspruch, wie funktionieren die Mietstufen und welche Höchstbeträge gelten? Kompakte Erklärung mit Link zum verbindlichen BMWSB-Wohngeldrechner.',
+    // W187: vorher „Link zum verbindlichen BMWSB-Wohngeldrechner“ — verbindlich ist nur der Bescheid (§ 24 Abs. 2 WoGG)
+    'Wohngeld 2026: Wer hat Anspruch, wie funktionieren die Mietstufen und welche Höchstbeträge gelten? Kompakte Erklärung mit Link zum offiziellen BMWSB-Wohngeldrechner.',
   alternates: { canonical: 'https://www.rechenfix.de/finanzen/wohngeld-rechner' },
   openGraph: {
     title: 'Wohngeld 2026: Anspruch, Mietstufen & Berechnung erklärt',
@@ -72,7 +73,7 @@ const faq = [
   {
     frage: 'Warum verweist rechenfix.de für die Berechnung auf den BMWSB-Rechner?',
     antwort:
-      'Die Wohngeldberechnung verlangt eine Einkommensermittlung pro Haushaltsmitglied mit individueller Werbungskostenpauschale, eigenen Pauschalabzügen und Freibeträgen nach den §§ 14 bis 17 WoGG. Diese Pro-Person-Logik bildet der offizielle Wohngeldrechner des BMWSB exakt und verbindlich ab. Statt eine vereinfachte Eigenberechnung anzubieten, die im Mehrpersonen-Haushalt von der amtlichen Berechnung abweichen könnte, erklären wir hier dauerhaft die Grundlagen — Anspruch, Mietstufen, Höchstbeträge und Rechenweg — und verweisen für Ihr verbindliches Ergebnis auf den Rechner des Bundes.',
+      'Die Wohngeldberechnung verlangt eine Einkommensermittlung pro Haushaltsmitglied mit individueller Werbungskostenpauschale, eigenen Pauschalabzügen und Freibeträgen nach den §§ 14 bis 17 WoGG. Diese Pro-Person-Logik bildet der offizielle Wohngeldrechner des BMWSB genau ab — verbindlich ist aber auch sein Ergebnis nicht, sondern allein der schriftliche Bescheid der Wohngeldbehörde (§ 24 Abs. 2 WoGG). Statt eine vereinfachte Eigenberechnung anzubieten, die im Mehrpersonen-Haushalt von der amtlichen Berechnung abweichen könnte, erklären wir hier dauerhaft die Grundlagen — Anspruch, Mietstufen, Höchstbeträge und Rechenweg — und verweisen für ein genaues Ergebnis auf den Rechner des Bundes.', // W187: vorher „exakt und verbindlich“ / „für Ihr verbindliches Ergebnis“
   },
 ];
 
@@ -114,9 +115,10 @@ export default function WohngeldErklaerseite() {
             className="card p-5 md:p-6 mb-6 border-2 border-amber-400 dark:border-amber-500/60 bg-amber-50 dark:bg-amber-500/10"
           >
             <p className="text-sm md:text-base text-amber-900 dark:text-amber-100 leading-relaxed">
+              {/* W187: vorher „Für die verbindliche Berechnung …“ — verbindlich ist nur der Bescheid der Wohngeldbehörde */}
               <strong>Hinweis:</strong> Diese Seite erklärt Ihnen Anspruch, Mietstufen,
               Höchstbeträge und die Berechnung des Wohngelds, damit Sie Ihr Ergebnis einordnen
-              können. Für die <strong>verbindliche Berechnung Ihres individuellen
+              können. Für eine <strong>genaue Berechnung Ihres individuellen
               Wohngeldanspruchs</strong> nutzen Sie bitte den{' '}
               <a
                 href={BMWSB_WOHNGELDRECHNER_URL}
@@ -127,6 +129,7 @@ export default function WohngeldErklaerseite() {
                 offiziellen Wohngeldrechner des BMWSB
               </a>{' '}
               — er bildet die Einkommensermittlung pro Person und alle Freibeträge exakt ab.
+              Verbindlich ist allein der Bescheid Ihrer Wohngeldbehörde.
             </p>
           </div>
 
@@ -211,9 +214,12 @@ export default function WohngeldErklaerseite() {
                 Höchstbeträge 2026 nach § 12 WoGG
               </h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                {/* W187: vorher „Eine höhere tatsächliche Miete wird nur bis zu diesem Höchstbetrag angesetzt.“ (ohne Klimakomponente, ohne Mietbegriff) */}
                 Die folgende Tabelle zeigt den monatlichen Höchstbetrag der Miete, bis zu dem
                 Wohngeld berechnet wird — abhängig von der Haushaltsgröße und der Mietstufe der
-                Gemeinde. Eine höhere tatsächliche Miete wird nur bis zu diesem Höchstbetrag
+                Gemeinde. Miete ist dabei die <strong>Bruttokaltmiete</strong> nach § 9 WoGG, also
+                die Miete einschließlich Umlagen, aber ohne Heiz- und Warmwasserkosten. Eine höhere
+                tatsächliche Miete wird nur bis zum Höchstbetrag zuzüglich Klimakomponente
                 angesetzt.
               </p>
               <div className="overflow-x-auto -mx-2">
@@ -276,15 +282,20 @@ export default function WohngeldErklaerseite() {
                 01.01.2025, unverändert 2026).
               </p>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-                Zusätzlich zum Höchstbetrag erhöhen zwei Komponenten die berücksichtigungsfähige
+                {/* W187: vorher „Beide Beträge werden auf die anzusetzende Höchstmiete aufgeschlagen …“ —
+                    § 11 Abs. 1 WoGG: Klimakomponente erhöht die Obergrenze, Heizkostenkomponente kommt immer hinzu */}
+                Zusätzlich zum Höchstbetrag wirken zwei Komponenten auf die zu berücksichtigende
                 Miete. Die <strong>Heizkostenkomponente</strong> nach § 12 Abs. 6 WoGG entlastet bei
                 den gestiegenen Energiekosten: Sie reicht von <strong>110,40 €</strong> monatlich für
                 einen Ein-Personen-Haushalt bis <strong>225,40 €</strong> bei fünf Personen
                 (je weitere Person zusätzlich 27,60 €). Die <strong>Klimakomponente</strong> nach
                 § 12 Abs. 7 WoGG berücksichtigt höhere Mieten in energetisch sanierten Gebäuden und
                 liegt zwischen <strong>19,20 €</strong> (eine Person) und <strong>39,20 €</strong>
-                {' '}(fünf Personen; je weitere Person zusätzlich 4,80 €). Beide Beträge werden auf die
-                anzusetzende Höchstmiete aufgeschlagen, bevor die Wohngeldformel greift.
+                {' '}(fünf Personen; je weitere Person zusätzlich 4,80 €). Die beiden Komponenten wirken
+                unterschiedlich (§ 11 Abs. 1 WoGG): Die Klimakomponente erhöht den Höchstbetrag — die
+                tatsächliche Bruttokaltmiete zählt bis zur Summe aus Höchstbetrag und Klimakomponente.
+                Die Heizkostenkomponente kommt dagegen immer zur angesetzten Miete hinzu, auch wenn die
+                Miete unter dem Höchstbetrag liegt. Erst diese Summe geht in die Wohngeldformel ein.
               </p>
 
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-3">
@@ -302,9 +313,11 @@ export default function WohngeldErklaerseite() {
                   abhängig von der jeweiligen Beitragspflicht pro Person.
                 </li>
                 <li>
-                  Ermittlung der anzusetzenden Miete im Rahmen der Höchstbeträge nach § 12 WoGG.
-                  Überschreitet die tatsächliche Miete den Höchstbetrag, wird nur der Höchstbetrag
-                  angesetzt.
+                  {/* W187: vorher „Überschreitet die tatsächliche Miete den Höchstbetrag, wird nur der Höchstbetrag angesetzt.“ */}
+                  Ermittlung der zu berücksichtigenden Miete nach § 11 WoGG: die Bruttokaltmiete
+                  (§ 9 WoGG) höchstens bis zur Summe aus Höchstbetrag nach § 12 Abs. 1 und
+                  Klimakomponente nach § 12 Abs. 7, dazu immer die Heizkostenkomponente nach
+                  § 12 Abs. 6.
                 </li>
                 <li>
                   Anwendung der Anlage-2-Formel mit drei Koeffizienten je nach Haushaltsgröße.
@@ -434,6 +447,7 @@ export default function WohngeldErklaerseite() {
                     Y = (16.800 − 1.230) × 0,8 ÷ 12 = 1.038 €; M = 500 + 110,40 = 610,40 €
                     (Klimakomponente erhöht nur den Höchstbetrag 511 €); 1 Pers.: a 0,04, b 4,797E-4, c 4,080E-5
                     → z4 = 254,13 → 254 €. */}
+                {/* W187: vorher „verbindlich ist allein das Ergebnis des offiziellen BMWSB-Wohngeldrechners …“ */}
                 Ein Single-Haushalt in Mietstufe IV mit 1.400 € Bruttoeinkommen aus
                 nichtselbständiger Arbeit und einer Bruttokaltmiete von 500 € kommt 2026 nach der
                 Formel der Anlage 2 auf ein Wohngeld von rund <strong>254 €</strong> monatlich. Vom
@@ -442,8 +456,8 @@ export default function WohngeldErklaerseite() {
                 diesem Lohn nicht an. Das wohngeldrechtliche Einkommen liegt damit bei 1.038 € im
                 Monat. Angesetzt werden die Miete von 500 € (unter dem Höchstbetrag von 511 €) und
                 die Heizkostenkomponente von 110,40 €, zusammen 610,40 €. Dieser Wert
-                dient nur der <strong>Orientierung</strong>; verbindlich ist allein das Ergebnis des
-                offiziellen BMWSB-Wohngeldrechners für Ihre konkrete Konstellation.
+                dient nur der <strong>Orientierung</strong>; genau rechnet der offizielle
+                BMWSB-Wohngeldrechner, verbindlich ist allein der Bescheid Ihrer Wohngeldbehörde.
               </p>
 
               <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-8 mb-4">
@@ -478,7 +492,8 @@ export default function WohngeldErklaerseite() {
                   >
                     Offizieller BMWSB-Wohngeldrechner
                   </a>{' '}
-                  — verbindliche Berechnung des Bundes.
+                  {/* W187: vorher „verbindliche Berechnung des Bundes“ */}
+                  — genaue, aber unverbindliche Berechnung des Bundes.
                 </li>
                 <li>
                   <a
@@ -561,14 +576,16 @@ export default function WohngeldErklaerseite() {
                   >
                     BMWSB-Wohngeldrechner
                   </a>{' '}
-                  — verbindliche Berechnung des Bundesministeriums für Wohnen, Stadtentwicklung und
-                  Bauwesen.
+                  {/* W187: vorher „verbindliche Berechnung des Bundesministeriums …“ */}
+                  — genaue, aber unverbindliche Berechnung des Bundesministeriums für Wohnen,
+                  Stadtentwicklung und Bauwesen.
                 </li>
               </ul>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
+                {/* W187: vorher „die verbindliche Berechnung leistet der offizielle BMWSB-Wohngeldrechner“ */}
                 Diese Seite bietet eine allgemeine Erläuterung zum Wohngeld und ersetzt keine
                 Rechts- oder Sozialberatung. Maßgeblich für Ihren Anspruch ist der Bescheid Ihrer
-                Wohngeldstelle; die verbindliche Berechnung leistet der offizielle
+                Wohngeldstelle; eine genaue, aber unverbindliche Berechnung bietet der offizielle
                 BMWSB-Wohngeldrechner. Stand der Werte: 2026 (Höchstbeträge unverändert seit
                 01.01.2025).
               </p>

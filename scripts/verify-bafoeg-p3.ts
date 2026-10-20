@@ -190,9 +190,12 @@ cases.push({
 });
 
 // BA-ABS4-01: Student, Eltern 40k+20k, 1 gefördertes Geschwister
-//  Vor Aufteilung: 537 € Anrechnung (siehe 121-analyse-Dokumentation)
-//  Nach Aufteilung: 537/2 = 268,50 €
-//  BAföG = 992 − 268,50 = 723,50 €
+//  W187: vorher 537 € vor Aufteilung (Freibetrag 2.415 €, Pauschale 21,6 % aufs Brutto, ohne Splitting).
+//  Jetzt (§§ 21, 25 BAföG, Handrechnung in verify-bafoeg-p4.ts): Einkünfte 38.770 + 18.770 = 57.540 €,
+//  Sozialpauschale 22,3 % = 12.831,42 €, ESt Splitting auf zvE 45.558 € = 4.542 €,
+//  Einkommen 40.166,58 ÷ 12 = 3.347,22 €; (3.347,22 − 2.540) × 50 % = 403,61 € vor Aufteilung.
+//  Nach Aufteilung: 403,61 / 2 = 201,81 €
+//  BAföG = 992 − 201,81 = 790,19 €
 //  Oracle-Cross-Check: BMBF bafoeg-rechner.de mit gleichen Eingaben — Karsten manuell im Verify
 {
   const r = berechneBafoeg({
@@ -206,8 +209,8 @@ cases.push({
   })!;
   cases.push({
     name: 'BA-ABS4-01 1 geförderter Geschw. → Aufteilung ÷2',
-    actual: r.anrechnungEltern, expected: 268.50, tol: 0.05,
-    quelle: 'Eltern-Anrechnung ≈ 537 / (1+1) ≈ 268,50 (± Rundung der Eltern-Netto-Berechnung)',
+    actual: r.anrechnungEltern, expected: 201.81, tol: 0.01,
+    quelle: 'Eltern-Anrechnung 403,61 / (1+1) = 201,81',
   });
   cases.push({
     name: 'BA-ABS4-01 aufteilungDivisor = 2',
@@ -215,15 +218,15 @@ cases.push({
     quelle: 'Divisor = 1 + 1 gefördertes Geschw.',
   });
   cases.push({
-    name: 'BA-ABS4-01 bafoegMonat ≈ 723,50 €',
-    actual: r.bafoegMonat, expected: 723.50, tol: 0.05,
-    quelle: 'Bedarf 992 − Anrechnung ≈ 268,50',
+    name: 'BA-ABS4-01 bafoegMonat = 790,19 €',
+    actual: r.bafoegMonat, expected: 790.19, tol: 0.01,
+    quelle: 'Bedarf 992 − Anrechnung 201,81',
   });
 }
 
 // BA-ABS4-02: 2 geförderte Geschwister
-//  Aufteilung: 537/3 = 179,00 €
-//  BAföG = 992 − 179 = 813,00 €
+//  W187: vorher 537/3 = 179,00 € → 813,00 €. Jetzt 403,61 / 3 = 134,54 €
+//  BAföG = 992 − 134,54 = 857,46 €
 {
   const r = berechneBafoeg({
     ausbildung: 'studium', wohnsituation: 'eigene',
@@ -236,22 +239,23 @@ cases.push({
   })!;
   cases.push({
     name: 'BA-ABS4-02 2 geförderte Geschw. → Aufteilung ÷3',
-    actual: r.anrechnungEltern, expected: 179.00, tol: 0.01,
-    quelle: 'Eltern-Anrechnung 537 / (1+2) = 179,00',
+    actual: r.anrechnungEltern, expected: 134.54, tol: 0.01,
+    quelle: 'Eltern-Anrechnung 403,61 / (1+2) = 134,54',
   });
   cases.push({
-    name: 'BA-ABS4-02 bafoegMonat ≈ 813,00 €',
-    actual: r.bafoegMonat, expected: 813.00, tol: 0.01,
-    quelle: 'Bedarf 992 − Anrechnung 179',
+    name: 'BA-ABS4-02 bafoegMonat = 857,46 €',
+    actual: r.bafoegMonat, expected: 857.46, tol: 0.01,
+    quelle: 'Bedarf 992 − Anrechnung 134,54',
   });
 }
 
 // ============================================================================
-// GRUPPE 4: Kombination — § 25 Abs. 3/6 (Quote) UND § 11 Abs. 4 (Aufteilung) unabhängig
+// GRUPPE 4: Kombination — § 25 Abs. 3/4 (Quote) UND § 11 Abs. 4 (Aufteilung) unabhängig
 // ============================================================================
 
-// BA-KOMBI: 2 Geschwister in Ausbildung (Quote 0,40 + Freibetrag 3.875) + 1 gefördertes Geschw. (Aufteilung ÷2)
-//  Netto 3.489 − Freibetrag 3.875 = 0 (gekappt) → Anrechnung vor Aufteilung = 0
+// BA-KOMBI: 2 Kinder ohne förderfähige Ausbildung (Quote 0,40 + Freibetrag 4.080) + 1 gefördertes Geschw. (Aufteilung ÷2)
+//  W187: vorher Netto 3.489 − Freibetrag 3.875 (2.415 + 2 × 730). Jetzt Einkommen 3.347,22 − Freibetrag
+//  4.080 (2.540 + 2 × 770) = 0 (gekappt) → Anrechnung vor Aufteilung = 0
 //  Nach Aufteilung: 0/2 = 0
 //  BAföG = 992 − 0 = 992 € (Vollsatz)
 {
@@ -265,14 +269,19 @@ cases.push({
     selbstVersichert: true, hatKinder: false, anzahlKinder: 0,
   })!;
   cases.push({
-    name: 'BA-KOMBI Quote 0,40 + Freibetrag 3.875 € kappt Anrechnung auf 0',
+    name: 'BA-KOMBI Quote 0,40 + Freibetrag 4.080 € kappt Anrechnung auf 0',
     actual: r.anrechnungElternVorAufteilung, expected: 0, tol: 0.01,
-    quelle: 'Netto 3.489 < Freibetrag 3.875 (2 Geschwister × 730 € + Basis 2.415)',
+    quelle: 'Einkommen 3.347,22 < Freibetrag 4.080 (2 Kinder × 770 € + Basis 2.540)',
   });
   cases.push({
     name: 'BA-KOMBI anrechnungsquoteEltern = 0,40',
     actual: r.anrechnungsquoteEltern, expected: 0.40, tol: 0.001,
-    quelle: '§ 25 Abs. 6 BAföG — 0,50 − 2×0,05',
+    quelle: '§ 25 Abs. 4 BAföG — 0,50 − 2×0,05',
+  });
+  cases.push({
+    name: 'BA-KOMBI Freibetrag Eltern = 4.080',
+    actual: r.freibetragEltern, expected: 4080,
+    quelle: '§ 25 Abs. 1 Nr. 1 + Abs. 3 Nr. 2 BAföG',
   });
   cases.push({
     name: 'BA-KOMBI aufteilungDivisor = 2',
@@ -286,7 +295,7 @@ cases.push({
   });
 }
 
-// BA-KOMBI-2: Anderes Szenario, wo beide Effekte zusammen wirken
+// BA-KOMBI-2 (Rechenweg vor W187, nur noch historisch): Anderes Szenario, wo beide Effekte zusammen wirken
 // Eltern 60k+40k, verheiratet, 0 geschwisterInAusbildung, 1 gefördertes Geschw.
 // Sollte höheres Einkommen sein, damit Anrechnung > 0 trotz ohne Freibetrag-Erhöhung
 // nettoEltern (60k+40k) ≈ ?

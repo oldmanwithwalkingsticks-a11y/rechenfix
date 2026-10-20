@@ -207,6 +207,66 @@ cases.push({
   quelle: 'Welle-3-M6 Geburtstags-Übergang',
 });
 
+// === Cluster 4 (W187): Zahlbetrag centgenau, Gruppen 6–15 nach DT 2026 ===
+//
+// DT 2026 (OLG Düsseldorf, Stand 01.01.2026): Zahlbetrag Gruppe 4, 6–11 J. = 512,50 €
+// (Tabellenbetrag 642 € − 129,50 €; § 1612a Abs. 2 S. 2 BGB rundet nur den Tabellenbetrag auf).
+// Gruppe 6 = 3.701–4.100 € 128 % (715 €), Gruppe 11 = 5.701–6.400 € 168 % (938 €), Gruppe 15 = 200 % (1.116 €).
+
+const unterhaltAbschnitt = (() => {
+  const start = arbeitTs.indexOf("slug: 'unterhaltsrechner'");
+  const ende = arbeitTs.indexOf("slug: '", start + 10);
+  // Kommentarzeilen (// W187: vorher …) nicht mitprüfen, nur den Seitentext.
+  return arbeitTs
+    .slice(start, ende === -1 ? undefined : ende)
+    .split('\n')
+    .filter((z) => !z.trim().startsWith('//'))
+    .map((z) => z.replace(/ \/\/ W\d+:.*$/, ''))
+    .join('\n');
+})();
+cases.push({
+  name: 'arbeit.ts (unterhaltsrechner): kein „513 €“ mehr',
+  actual: unterhaltAbschnitt.includes('513 €'),
+  expected: false,
+  quelle: 'DT 2026 Anhang Zahlbeträge',
+});
+cases.push({
+  name: 'arbeit.ts (unterhaltsrechner): Beispiel nennt 512,50 € Zahlbetrag',
+  actual: unterhaltAbschnitt.includes('= 512,50 € Zahlbetrag/Monat'),
+  expected: true,
+  quelle: 'DT 2026 Anhang Zahlbeträge',
+});
+for (const zeile of [
+  "['6', '4.100 €', '128 %', '715 €']",
+  "['11', '6.400 €', '168 %', '938 €']",
+  "['15', '11.200 €', '200 %', '1.116 €']",
+]) {
+  cases.push({
+    name: `arbeit.ts: Tabellenzeile ${zeile}`,
+    actual: unterhaltAbschnitt.includes(zeile),
+    expected: true,
+    quelle: 'DT 2026 Tabelle Kindesunterhalt',
+  });
+}
+cases.push({
+  name: 'arbeit.ts: keine Fünf-Prozent-Schritte bis 170 % mehr',
+  actual: /170 %|Fünf-Prozent-Schritten/.test(unterhaltAbschnitt),
+  expected: false,
+  quelle: 'DT 2026 Tabelle Kindesunterhalt',
+});
+cases.push({
+  name: 'Component: Zahlbetrag mit Cent (fmtBetrag(k.zahl))',
+  actual: componentTs.includes('fmtBetrag(k.zahl)') && componentTs.includes('fmtBetrag(ergebnis.summe)'),
+  expected: true,
+  quelle: 'Anzeige 512,50 €',
+});
+cases.push({
+  name: 'arbeit.ts (ehegattenunterhalt-rechner): Kindesunterhalt-Vorabzug 540,50 € (Gruppe 5)',
+  actual: arbeitTs.includes("ergebnis: '− 540,50 €'") && !arbeitTs.includes("ergebnis: '− 513 €'"),
+  expected: true,
+  quelle: 'DT 2026 Gruppe 5, 6–11 J.: 670 € − 129,50 €',
+});
+
 // === Ausgabe ===
 let fail = 0;
 for (const c of cases) {

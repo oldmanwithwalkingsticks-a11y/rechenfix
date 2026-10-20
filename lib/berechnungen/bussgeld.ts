@@ -25,6 +25,8 @@ export interface BussgeldErgebnis {
   punkte: number;
   fahrverbot: number; // Monate, 0 = kein Fahrverbot
   fahrverbotHinweis: string;
+  /** W187: Monate Fahrverbot nur im Wiederholungsfall (§ 4 Abs. 2 S. 2 BKatV), sonst 0/undefined */
+  fahrverbotWiederholung?: number;
   straftat: boolean;
   beschreibung: string;
   schwere: 'gering' | 'mittel' | 'schwer' | 'sehr-schwer';
@@ -35,15 +37,20 @@ interface Stufe {
   bussgeld: number;
   punkte: number;
   fahrverbot: number;
+  fahrverbotWiederholung?: number;
   hinweis?: string;
 }
+
+// W187: Hinweistext für Stufen ohne Regelfahrverbot, bei denen § 4 Abs. 2 S. 2 BKatV greifen kann
+const HINWEIS_WIEDERHOLUNG = 'Kein Regelfahrverbot für Ersttäter. 1 Monat Fahrverbot droht in der Regel nur, wenn bereits eine Überschreitung um mindestens 26 km/h rechtskräftig geahndet wurde und innerhalb eines Jahres seit Rechtskraft erneut um mindestens 26 km/h überschritten wird (§ 4 Abs. 2 Satz 2 BKatV).';
 
 const GESCHWINDIGKEIT_INNERORTS_PKW: { bis: number; stufe: Stufe }[] = [
   { bis: 10, stufe: { bussgeld: 30, punkte: 0, fahrverbot: 0 } },
   { bis: 15, stufe: { bussgeld: 50, punkte: 0, fahrverbot: 0 } },
   { bis: 20, stufe: { bussgeld: 70, punkte: 0, fahrverbot: 0 } },
   { bis: 25, stufe: { bussgeld: 115, punkte: 1, fahrverbot: 0 } },
-  { bis: 30, stufe: { bussgeld: 180, punkte: 1, fahrverbot: 1, hinweis: 'Fahrverbot nur bei Wiederholungstäter (2× innerhalb 12 Monate)' } },
+  // W187: vorher fahrverbot: 1 — BKatV Anhang Tabelle 1c Nr. 11.3.5 (26–30 km/h innerorts): 180 €, kein Regelfahrverbot
+  { bis: 30, stufe: { bussgeld: 180, punkte: 1, fahrverbot: 0, fahrverbotWiederholung: 1, hinweis: HINWEIS_WIEDERHOLUNG } },
   { bis: 40, stufe: { bussgeld: 260, punkte: 2, fahrverbot: 1 } },
   { bis: 50, stufe: { bussgeld: 400, punkte: 2, fahrverbot: 1 } },
   { bis: 60, stufe: { bussgeld: 560, punkte: 2, fahrverbot: 2 } },
@@ -56,41 +63,69 @@ const GESCHWINDIGKEIT_AUSSERORTS_PKW: { bis: number; stufe: Stufe }[] = [
   { bis: 15, stufe: { bussgeld: 40, punkte: 0, fahrverbot: 0 } },
   { bis: 20, stufe: { bussgeld: 60, punkte: 0, fahrverbot: 0 } },
   { bis: 25, stufe: { bussgeld: 100, punkte: 1, fahrverbot: 0 } },
-  { bis: 30, stufe: { bussgeld: 150, punkte: 1, fahrverbot: 1, hinweis: 'Fahrverbot nur bei Wiederholungstäter (2× innerhalb 12 Monate)' } },
-  { bis: 40, stufe: { bussgeld: 200, punkte: 1, fahrverbot: 1, hinweis: 'Fahrverbot nur bei Wiederholungstäter (2× innerhalb 12 Monate)' } },
+  // W187: vorher fahrverbot: 1 — BKatV Anhang Tabelle 1c Nr. 11.3.5/11.3.6 außerorts (26–30: 150 €, 31–40: 200 €): kein Regelfahrverbot
+  { bis: 30, stufe: { bussgeld: 150, punkte: 1, fahrverbot: 0, fahrverbotWiederholung: 1, hinweis: HINWEIS_WIEDERHOLUNG } },
+  { bis: 40, stufe: { bussgeld: 200, punkte: 1, fahrverbot: 0, fahrverbotWiederholung: 1, hinweis: HINWEIS_WIEDERHOLUNG } },
   { bis: 50, stufe: { bussgeld: 320, punkte: 2, fahrverbot: 1 } },
   { bis: 60, stufe: { bussgeld: 480, punkte: 2, fahrverbot: 1 } },
   { bis: 70, stufe: { bussgeld: 600, punkte: 2, fahrverbot: 2 } },
   { bis: Infinity, stufe: { bussgeld: 700, punkte: 2, fahrverbot: 3 } },
 ];
 
-// LKW: ~20-50% höhere Bußgelder.
-// Pauschale Näherung. BKatV Lfd.Nr. 11.3.* differenziert nach
-// Fahrzeuggewicht und -art; diese Vereinfachung ist für einen
-// Schätz-Rechner vertretbar. Quelle: BKatV 2013 i.d.F. der Novelle
-// vom 09.11.2021, gesetze-im-internet.de/bkatv_2013/anlage.html
-const LKW_FAKTOR = 1.3;
+// W187: vorher LKW = PKW-Bußgeld × 1,3 und PKW-Fahrverbote („pauschale Näherung“). Jetzt die Regelsätze der
+// BKatV, Anhang zu Nr. 11 der Anlage, Tabelle 1 Buchstabe a (Kfz über 3,5 t zulässige Gesamtmasse, Kraftomnibusse;
+// Nr. 11.1.1–11.1.10, Stand BKatV i. d. F. vom 12.08.2026), Punkte nach Anlage 13 FeV (Nr. 2.2.3, 3.2.2).
+// Kein Regelfahrverbot bis 25 km/h innerorts und bis 30 km/h außerorts; darüber 1–3 Monate.
+// https://www.gesetze-im-internet.de/bkatv_2013/anhang.html
+const GESCHWINDIGKEIT_INNERORTS_LKW: { bis: number; stufe: Stufe }[] = [
+  { bis: 10, stufe: { bussgeld: 40, punkte: 0, fahrverbot: 0 } },
+  { bis: 15, stufe: { bussgeld: 60, punkte: 0, fahrverbot: 0 } },
+  { bis: 20, stufe: { bussgeld: 160, punkte: 1, fahrverbot: 0 } },
+  { bis: 25, stufe: { bussgeld: 175, punkte: 1, fahrverbot: 0 } },
+  { bis: 30, stufe: { bussgeld: 235, punkte: 2, fahrverbot: 1 } },
+  { bis: 40, stufe: { bussgeld: 340, punkte: 2, fahrverbot: 1 } },
+  { bis: 50, stufe: { bussgeld: 560, punkte: 2, fahrverbot: 2 } },
+  { bis: 60, stufe: { bussgeld: 700, punkte: 2, fahrverbot: 3 } },
+  { bis: Infinity, stufe: { bussgeld: 800, punkte: 2, fahrverbot: 3 } },
+];
+
+const GESCHWINDIGKEIT_AUSSERORTS_LKW: { bis: number; stufe: Stufe }[] = [
+  { bis: 10, stufe: { bussgeld: 30, punkte: 0, fahrverbot: 0 } },
+  { bis: 15, stufe: { bussgeld: 50, punkte: 0, fahrverbot: 0 } },
+  { bis: 20, stufe: { bussgeld: 140, punkte: 1, fahrverbot: 0 } },
+  { bis: 25, stufe: { bussgeld: 150, punkte: 1, fahrverbot: 0 } },
+  { bis: 30, stufe: { bussgeld: 175, punkte: 1, fahrverbot: 0, fahrverbotWiederholung: 1, hinweis: HINWEIS_WIEDERHOLUNG } },
+  { bis: 40, stufe: { bussgeld: 255, punkte: 2, fahrverbot: 1 } },
+  { bis: 50, stufe: { bussgeld: 480, punkte: 2, fahrverbot: 1 } },
+  { bis: 60, stufe: { bussgeld: 600, punkte: 2, fahrverbot: 2 } },
+  { bis: Infinity, stufe: { bussgeld: 700, punkte: 2, fahrverbot: 3 } },
+];
 
 function berechneGeschwindigkeit(kmh: number, ort: Ort, fahrzeug: Fahrzeug): BussgeldErgebnis {
-  const tabelle = ort === 'innerorts' ? GESCHWINDIGKEIT_INNERORTS_PKW : GESCHWINDIGKEIT_AUSSERORTS_PKW;
+  const tabelle = fahrzeug === 'lkw'
+    ? (ort === 'innerorts' ? GESCHWINDIGKEIT_INNERORTS_LKW : GESCHWINDIGKEIT_AUSSERORTS_LKW)
+    : (ort === 'innerorts' ? GESCHWINDIGKEIT_INNERORTS_PKW : GESCHWINDIGKEIT_AUSSERORTS_PKW);
   const eintrag = tabelle.find(e => kmh <= e.bis) || tabelle[tabelle.length - 1];
   const s = eintrag.stufe;
 
-  let bussgeld = s.bussgeld;
-  if (fahrzeug === 'lkw') bussgeld = Math.round(bussgeld * LKW_FAKTOR);
+  const bussgeld = s.bussgeld;
+  const fahrverbot = s.fahrverbot;
+  const fahrverbotWiederholung = s.fahrverbotWiederholung ?? 0;
+  const stufenHinweis = s.hinweis;
 
   const hinweise: string[] = [];
-  if (s.hinweis) hinweise.push(s.hinweis);
-  if (fahrzeug === 'lkw') hinweise.push('Für LKW/Busse gelten erhöhte Bußgelder.');
+  if (stufenHinweis) hinweise.push(stufenHinweis);
+  if (fahrzeug === 'lkw') hinweise.push('LKW über 3,5 t und Busse: eigene Regelsätze nach BKatV Tabelle 1a (Busse mit Fahrgästen und Gefahrgut-Fahrzeuge: Tabelle 1b, höher).');
 
   return {
     bussgeld,
     punkte: s.punkte,
-    fahrverbot: s.fahrverbot,
-    fahrverbotHinweis: s.fahrverbot > 0 ? `${s.fahrverbot} Monat${s.fahrverbot > 1 ? 'e' : ''} Fahrverbot` : '',
+    fahrverbot,
+    fahrverbotHinweis: fahrverbot > 0 ? `${fahrverbot} Monat${fahrverbot > 1 ? 'e' : ''} Fahrverbot` : '',
+    fahrverbotWiederholung,
     straftat: false,
     beschreibung: `${kmh} km/h zu schnell ${ort === 'innerorts' ? 'innerorts' : 'außerorts'} (${fahrzeug === 'lkw' ? 'LKW/Bus' : 'PKW'})`,
-    schwere: getSchwere(s.punkte, s.fahrverbot),
+    schwere: getSchwere(s.punkte, fahrverbot),
     hinweise,
   };
 }

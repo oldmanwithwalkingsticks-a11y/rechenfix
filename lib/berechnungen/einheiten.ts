@@ -73,7 +73,7 @@ export const kategorien: KategorieDef[] = [
       { key: 'yd2', label: 'Quadratyard', faktor: 0.83612736 },
       { key: 'ft2', label: 'Quadratfuß', faktor: 0.09290304 },
       { key: 'in2', label: 'Quadratzoll', faktor: 0.00064516 },
-      { key: 'acre', label: 'Morgen (Acre)', faktor: 4046.8564224 },
+      { key: 'acre', label: 'Acre', faktor: 4046.8564224 }, // W187: vorher „Morgen (Acre)“ — ein Acre (4.046,86 m²) ist kein Morgen (regional, z. B. preußisch ≈ 2.553 m²)
     ],
   },
   {

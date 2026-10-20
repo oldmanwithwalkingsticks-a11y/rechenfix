@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneWasserbedarf, type AktivitaetsLevel, type SchwangerStillend } from '@/lib/berechnungen/wasserbedarf';
+import { berechneWasserbedarf, GETRAENKE_ANTEIL, type AktivitaetsLevel, type SchwangerStillend } from '@/lib/berechnungen/wasserbedarf';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -110,11 +110,12 @@ export default function WasserbedarfRechner() {
       {ergebnis && (
         <>
           {/* Hauptergebnis */}
+          {/* W187: vorher „Empfohlene tägliche Trinkmenge“ für den Gesamtbedarf und Gläser aus dem Gesamtbedarf; jetzt Gesamtbedarf + Trinkmenge getrennt */}
           <div className="result-box mb-6">
-            <p className="text-white/80 text-sm mb-1">Empfohlene tägliche Trinkmenge</p>
+            <p className="text-white/80 text-sm mb-1">Täglicher Wasserbedarf gesamt (Getränke + Nahrung)</p>
             <p className="text-5xl font-bold">{ergebnis.gesamtLiter.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} Liter</p>
-            <p className="text-white/70 text-sm mt-2">
-              Das entspricht ca. <strong>{ergebnis.anzahlGlaeser} Gläsern</strong> Wasser (à 250 ml)
+            <p className="text-white/90 text-base mt-3">
+              Davon trinken: <strong>ca. {ergebnis.trinkmengeLiter.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} Liter</strong> — das entspricht ca. <strong>{ergebnis.anzahlGlaeser} Gläsern</strong> (à 250 ml)
             </p>
           </div>
 
@@ -129,7 +130,8 @@ export default function WasserbedarfRechner() {
 
           {/* Gläser-Visualisierung */}
           <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-5 mb-6">
-            <h2 className="font-bold text-blue-800 dark:text-blue-300 mb-3">Ihre {ergebnis.anzahlGlaeser} Gläser am Tag</h2>
+            {/* W187: vorher Gläser aus dem Gesamtbedarf, jetzt aus der Trinkmenge */}
+            <h2 className="font-bold text-blue-800 dark:text-blue-300 mb-3">Ihre {ergebnis.anzahlGlaeser} Gläser Getränke am Tag</h2>
             <div className="flex flex-wrap gap-2">
               {Array.from({ length: Math.min(ergebnis.anzahlGlaeser, 20) }).map((_, i) => (
                 <div
@@ -173,8 +175,13 @@ export default function WasserbedarfRechner() {
                 </div>
               )}
               <div className="flex justify-between text-sm pt-2 border-t border-gray-200 dark:border-gray-600">
-                <span className="text-gray-700 dark:text-gray-200 font-bold">Gesamter Tagesbedarf</span>
+                <span className="text-gray-700 dark:text-gray-200 font-bold">Gesamter Tagesbedarf (Getränke + Nahrung)</span>
                 <span className="font-bold text-primary-600 dark:text-primary-400">{fmt(ergebnis.gesamtMl)} ml ({ergebnis.gesamtLiter.toLocaleString('de-DE', { minimumFractionDigits: 1 })} L)</span>
+              </div>
+              {/* W187: neue Zeile Trinkmenge (vorher keine Trennung von Gesamtbedarf und Getränken) */}
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-600 dark:text-gray-400">davon über Getränke ({fmt(GETRAENKE_ANTEIL * 100)} % von Basis{ergebnis.schwangerZuschlag > 0 ? ` + ${schwangerStillend === 'schwanger' ? 'Schwangerschaft' : 'Stillzeit'}` : ''}{ergebnis.sportZuschlag > 0 || ergebnis.hitzeZuschlag > 0 ? ', Sport/Hitze voll' : ''})</span>
+                <span className="font-bold text-gray-800 dark:text-gray-200">{fmt(ergebnis.trinkmengeMl)} ml ({ergebnis.trinkmengeLiter.toLocaleString('de-DE', { minimumFractionDigits: 1 })} L)</span>
               </div>
             </div>
 
@@ -229,7 +236,8 @@ export default function WasserbedarfRechner() {
           {/* Hinweis */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
             <p className="text-amber-800 dark:text-amber-300 text-xs">
-              <strong>Hinweis:</strong> Ein Teil des Wasserbedarfs wird über die Nahrung gedeckt (ca. 20-30%). Die angezeigte Menge ist die empfohlene reine Trinkmenge. Bei Nierenerkrankungen oder anderen Vorerkrankungen sprechen Sie bitte mit Ihrem Arzt.
+              {/* W187: vorher „über die Nahrung gedeckt (ca. 20-30%). Die angezeigte Menge ist die empfohlene reine Trinkmenge.“ */}
+              <strong>Hinweis:</strong> Der Gesamtbedarf umfasst auch das Wasser aus fester Nahrung (rund ein Drittel) und das im Stoffwechsel entstehende Oxidationswasser (rund 13 %). Nach den D-A-CH-Referenzwerten kommen bei Erwachsenen rund {fmt(GETRAENKE_ANTEIL * 100)} % aus Getränken; die Zuschläge für Sport und Hitze gleichen Schweißverluste aus und sind voll zu trinken. Bei Nierenerkrankungen oder anderen Vorerkrankungen sprechen Sie bitte mit Ihrem Arzt.
             </p>
           </div>
 
@@ -237,7 +245,7 @@ export default function WasserbedarfRechner() {
           <CrossLink href="/gesundheit/bmi-rechner" emoji="📊" text="BMI berechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`Täglicher Wasserbedarf: ${ergebnis.gesamtLiter.toLocaleString('de-DE', { minimumFractionDigits: 1 })} Liter (${ergebnis.anzahlGlaeser} Gläser) | Basis: ${fmt(ergebnis.basisbedarf)} ml${ergebnis.sportZuschlag > 0 ? ` + Sport: ${fmt(ergebnis.sportZuschlag)} ml` : ''}${ergebnis.hitzeZuschlag > 0 ? ' + Hitze: 500 ml' : ''}`}
+            ergebnisText={`Täglicher Wasserbedarf gesamt: ${ergebnis.gesamtLiter.toLocaleString('de-DE', { minimumFractionDigits: 1 })} Liter, davon trinken: ca. ${ergebnis.trinkmengeLiter.toLocaleString('de-DE', { minimumFractionDigits: 1 })} Liter (${ergebnis.anzahlGlaeser} Gläser) | Basis: ${fmt(ergebnis.basisbedarf)} ml${ergebnis.sportZuschlag > 0 ? ` + Sport: ${fmt(ergebnis.sportZuschlag)} ml` : ''}${ergebnis.hitzeZuschlag > 0 ? ' + Hitze: 500 ml' : ''}`}
             seitenTitel="Wasserbedarf-Rechner"
           />
 
@@ -251,9 +259,10 @@ export default function WasserbedarfRechner() {
               schwangerStillend: SCHWANGER_OPTIONEN.find(o => o.key === schwangerStillend)?.label || 'Nein',
             }}
             ergebnis={{
-              gesamtLiter: ergebnis.gesamtLiter,
-              gesamtMl: ergebnis.gesamtMl,
-              anzahlGlaeser: ergebnis.anzahlGlaeser,
+              gesamtbedarfLiter: ergebnis.gesamtLiter,
+              gesamtbedarfMl: ergebnis.gesamtMl,
+              trinkmengeGetraenkeLiter: ergebnis.trinkmengeLiter,
+              anzahlGlaeserTrinkmenge: ergebnis.anzahlGlaeser,
               basisbedarf: ergebnis.basisbedarf,
               sportZuschlag: ergebnis.sportZuschlag,
             }}

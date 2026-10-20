@@ -228,7 +228,7 @@ export const autoRechner: RechnerConfig[] = [
   },
   {
     slug: 'kw-ps-umrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'KW-PS-Umrechner',
     beschreibung: 'KW in PS umrechnen und umgekehrt: Sofort-Ergebnis mit Umrechnungstabelle für gängige Fahrzeuge.',
     kategorie: 'Auto & Verkehr',
@@ -237,7 +237,8 @@ export const autoRechner: RechnerConfig[] = [
     metaDescription: 'KW in PS umrechnen und umgekehrt ✓ Sofort-Ergebnis ✓ Mit Umrechnungstabelle ✓ Kostenlos. Jetzt berechnen! ✓ Mit KI-Erklärung.',
     keywords: ['kw in ps', 'ps in kw', 'kw ps umrechner', 'kilowatt ps', 'ps umrechnen', 'kw umrechnen'],
     icon: '🏎️',
-    beispiel: 'Beispiel: 100 kW × 1,35962 = 135,96 PS | 150 PS × 0,73550 = 110,33 kW',
+    // W187: vorher „150 PS × 0,73550 = 110,33 kW“ (gerundeter Faktor)
+    beispiel: 'Beispiel: 100 kW × 1,35962 = 135,96 PS | 150 PS × 0,73549875 = 110,32 kW',
     faq: [
       {
         frage: 'Wie rechne ich kW in PS um?',
@@ -245,7 +246,8 @@ export const autoRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie rechne ich PS in kW um?',
-        antwort: 'Multiplizieren Sie den PS-Wert mit 0,73550. Beispiel: 150 PS × 0,73550 = 110,33 kW. Als Faustregel: PS × 0,74 ≈ kW.',
+        // W187: vorher „0,73550 … = 110,33 kW“
+        antwort: 'Multiplizieren Sie den PS-Wert mit 0,73549875 (1 PS = 735,49875 Watt). Beispiel: 150 PS × 0,73549875 = 110,32 kW. Als Faustregel: PS × 0,74 ≈ kW.',
       },
       {
         frage: 'Warum gibt es KW und PS?',
@@ -273,7 +275,8 @@ export const autoRechner: RechnerConfig[] = [
           ['150 kW', '204 PS'],
           ['200 kW', '272 PS'],
         ],
-        fussnote: 'Gerechnet mit dem exakten Faktor 1 kW = 1,35962 PS (gerundet auf ganze PS). Beispiel ohne Rundung: 50 kW = 67,98 PS, 100 kW = 135,96 PS. Der Rechner gibt das Ergebnis auf zwei Nachkommastellen aus.',
+        // W187: vorher „mit dem exakten Faktor 1 kW = 1,35962 PS“ — 1,35962 ist gerundet
+        fussnote: 'Gerechnet mit 1 kW = 1 ÷ 0,73549875 PS ≈ 1,35962 PS (gerundet auf ganze PS). Beispiel ohne Rundung: 50 kW = 67,98 PS, 100 kW = 135,96 PS. Der Rechner gibt das Ergebnis auf zwei Nachkommastellen aus.',
       },
       {
         typ: 'beispielrechnung',
@@ -292,26 +295,27 @@ export const autoRechner: RechnerConfig[] = [
         zeilen: [
           ['75 PS', '55,16 kW'],
           ['100 PS', '73,55 kW'],
-          ['150 PS', '110,33 kW'],
+          ['150 PS', '110,32 kW'], // W187: vorher 110,33 kW (Faktor 0,73550)
           ['200 PS', '147,10 kW'],
           ['300 PS', '220,65 kW'],
         ],
-        fussnote: 'Gerechnet mit 1 PS = 0,73550 kW (metrische PS nach DIN 66036). Die Gegenrichtung zur oberen Tabelle: kW × 1,35962 ergibt PS, PS × 0,73550 ergibt kW. Beide Faktoren sind das Kehrwert-Paar derselben Umrechnung.',
+        fussnote: 'Gerechnet mit 1 PS = 0,73549875 kW (metrische PS nach DIN 66036: 735,49875 Watt). Die Gegenrichtung zur oberen Tabelle: kW × 1,35962 ergibt PS, PS × 0,73549875 ergibt kW. Beide Faktoren sind das Kehrwert-Paar derselben Umrechnung.',
       },
       {
         typ: 'beispielrechnung',
         titel: '150 PS in kW umrechnen',
         schritte: [
-          { label: 'PS-Wert mit dem Faktor multiplizieren', formel: '150 PS × 0,73550', ergebnis: '110,33 kW' },
-          { label: 'Gegenprobe (zurück in PS)', formel: '110,33 × 1,35962', ergebnis: '≈ 150 PS' },
+          // W187: vorher „150 PS × 0,73550 = 110,33 kW“
+          { label: 'PS-Wert mit dem Faktor multiplizieren', formel: '150 PS × 0,73549875', ergebnis: '110,32 kW' },
+          { label: 'Gegenprobe (zurück in PS)', formel: '110,32 × 1,35962', ergebnis: '≈ 150 PS' },
           { label: 'Kopfrechen-Faustregel (× 0,74)', formel: '150 × 0,74', ergebnis: '111 ≈ 110 kW' },
         ],
-        fazit: 'Ein mit 150 PS beworbenes Auto leistet 110,33 kW — der Wert, der so auch im Fahrzeugschein stehen würde. Die Gegenprobe zeigt, dass die Umrechnung in beide Richtungen aufgeht. Die Faustregel „PS × 0,74" kommt mit 111 kW nah heran. Wichtig ist nur, nicht versehentlich den falschen Faktor zu nehmen: kW werden größer gerechnet (× 1,36), PS kleiner (× 0,74). Wer unsicher ist, prüft das Ergebnis grob im Kopf: PS ist immer die größere Zahl, kW die kleinere. Kommt bei einer PS-zu-kW-Umrechnung ein größerer Wert heraus als der Ausgangswert, wurde der falsche Faktor verwendet. So ein schneller Plausibilitäts-Check fängt die häufigsten Vertauschungs-Fehler ab.',
+        fazit: 'Ein mit 150 PS beworbenes Auto leistet 110,32 kW — der Wert, der so auch im Fahrzeugschein stehen würde. Die Gegenprobe zeigt, dass die Umrechnung in beide Richtungen aufgeht. Die Faustregel „PS × 0,74" kommt mit 111 kW nah heran. Wichtig ist nur, nicht versehentlich den falschen Faktor zu nehmen: kW werden größer gerechnet (× 1,36), PS kleiner (× 0,74). Wer unsicher ist, prüft das Ergebnis grob im Kopf: PS ist immer die größere Zahl, kW die kleinere. Kommt bei einer PS-zu-kW-Umrechnung ein größerer Wert heraus als der Ausgangswert, wurde der falsche Faktor verwendet. So ein schneller Plausibilitäts-Check fängt die häufigsten Vertauschungs-Fehler ab.',
       },
       {
         typ: 'text',
         titel: 'Welche Einheit gilt offiziell?',
-        html: `<p>Gesetzlich ist die Sache eindeutig: Das <strong>Kilowatt ist die offizielle SI-Einheit</strong> für Leistung und damit die maßgebliche Größe in Fahrzeugpapieren, Typgenehmigungen und technischen Datenblättern. Die <strong>Pferdestärke</strong> darf nach dem Einheitengesetz nur noch <strong>ergänzend</strong> angegeben werden — also zusätzlich zum kW-Wert, nicht an seiner Stelle.</p><p>Die PS, die im Autobereich gemeint ist, ist die <strong>metrische Pferdestärke</strong> nach <strong>DIN 66036</strong>: 1 PS = 0,7355 kW. Sie ist von der älteren, leistungsbezogenen Definition abgeleitet und in Deutschland, Italien, Japan und weiteren Ländern verbreitet. In der EU wurde die kW-Angabe schrittweise verbindlich; PS blieb als Zusatzangabe erlaubt, weil sie den Verbrauchern vertraut ist. Für rechtliche und technische Zwecke zählt also immer der kW-Wert — die PS-Zahl ist die populäre Übersetzung daneben. Genau deshalb braucht man die Umrechnung so oft. Historisch war der Übergang fließend: Lange standen beide Einheiten gleichberechtigt nebeneinander, bevor die kW-Angabe verbindlich wurde und die PS in die Klammer rückte. Für Verbraucher hat sich im Sprachgebrauch wenig geändert — die meisten denken nach wie vor in PS.</p>`,
+        html: `<p>Gesetzlich ist die Sache eindeutig: Das <strong>Kilowatt ist die offizielle SI-Einheit</strong> für Leistung und damit die maßgebliche Größe in Fahrzeugpapieren, Typgenehmigungen und technischen Datenblättern. Die <strong>Pferdestärke</strong> darf nach dem Einheitengesetz nur noch <strong>ergänzend</strong> angegeben werden — also zusätzlich zum kW-Wert, nicht an seiner Stelle.</p><p>Die PS, die im Autobereich gemeint ist, ist die <strong>metrische Pferdestärke</strong> nach <strong>DIN 66036</strong>: 1 PS = 735,49875 W ≈ 0,7355 kW. Sie ist von der älteren, leistungsbezogenen Definition abgeleitet und in Deutschland, Italien, Japan und weiteren Ländern verbreitet. In der EU wurde die kW-Angabe schrittweise verbindlich; PS blieb als Zusatzangabe erlaubt, weil sie den Verbrauchern vertraut ist. Für rechtliche und technische Zwecke zählt also immer der kW-Wert — die PS-Zahl ist die populäre Übersetzung daneben. Genau deshalb braucht man die Umrechnung so oft. Historisch war der Übergang fließend: Lange standen beide Einheiten gleichberechtigt nebeneinander, bevor die kW-Angabe verbindlich wurde und die PS in die Klammer rückte. Für Verbraucher hat sich im Sprachgebrauch wenig geändert — die meisten denken nach wie vor in PS.</p>`,
       },
       {
         typ: 'tabelle',
@@ -335,7 +339,7 @@ export const autoRechner: RechnerConfig[] = [
           ['150 kW', '204 PS', '203,94 PS'],
           ['200 kW', '272 PS', '271,92 PS'],
         ],
-        fussnote: 'Die einfache Faustregel × 1,36 weicht vom exakten Faktor nur um Hundertstel eines PS ab — für jede Kopfrechnung völlig ausreichend. Der Rechner verwendet intern den exakten Faktor 1,35962, sodass das Ergebnis auch für Papiere stimmt.',
+        fussnote: 'Die einfache Faustregel × 1,36 weicht vom exakten Faktor nur um Hundertstel eines PS ab — für jede Kopfrechnung völlig ausreichend. Der Rechner verwendet intern den exakten Kehrwert 1 ÷ 0,73549875 (≈ 1,35962), sodass das Ergebnis auch für Papiere stimmt.',
       },
       {
         typ: 'text',
@@ -368,7 +372,7 @@ export const autoRechner: RechnerConfig[] = [
         punkte: [
           'Im Fahrzeugschein die Nennleistung in kW aus Feld P.2 ablesen — die amtliche Ausgangsgröße.',
           'kW in PS: Wert × 1,35962 (Kopfrechnung: × 1,36).',
-          'PS in kW: Wert × 0,73550 (Kopfrechnung: × 0,74).',
+          'PS in kW: Wert × 0,73549875 (Kopfrechnung: × 0,74).', // W187: vorher × 0,73550
           'Bei Verkaufsanzeigen prüfen, ob die genannte PS-Zahl zum kW-Wert passt.',
           'Bei Elektroautos ist die kW-Angabe ohnehin der Standard — PS nur die Übersetzung.',
           'Auf die richtige Richtung achten: kW-Zahl wird größer (× 1,36), PS-Zahl kleiner (× 0,74).',
@@ -379,7 +383,7 @@ export const autoRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'tipp',
         titel: 'Faustregel für den Kopf: kW × 1,36 ≈ PS',
-        text: 'Für eine schnelle Abschätzung ohne Rechner genügt: kW-Wert mal 1,36 ergibt ungefähr die PS-Zahl, PS-Wert mal 0,74 ungefähr die kW-Zahl. Aus 100 kW werden so im Kopf rund 136 PS, aus 150 PS rund 111 kW. Die Abweichung vom exakten Faktor liegt bei weit unter einem Prozent — für den Alltag, das Lesen von Anzeigen oder das Vergleichen zweier Autos ist das mehr als genau genug. Nur wenn der Wert exakt für ein Dokument stimmen muss, lohnt der volle Faktor 1,35962 beziehungsweise 0,73550, den dieser Rechner verwendet. Noch gröber, aber für den Überschlag oft genug: kW etwa um die Hälfte erhöhen ergibt knapp zu viel PS, ein Drittel draufrechnen knapp zu wenig — die 1,36 liegen genau dazwischen. Wer die Tabelle oben einmal überflogen hat, hat die wichtigsten Stufen ohnehin schnell im Kopf.',
+        text: 'Für eine schnelle Abschätzung ohne Rechner genügt: kW-Wert mal 1,36 ergibt ungefähr die PS-Zahl, PS-Wert mal 0,74 ungefähr die kW-Zahl. Aus 100 kW werden so im Kopf rund 136 PS, aus 150 PS rund 111 kW. Die Abweichung vom exakten Faktor liegt bei weit unter einem Prozent — für den Alltag, das Lesen von Anzeigen oder das Vergleichen zweier Autos ist das mehr als genau genug. Nur wenn der Wert exakt für ein Dokument stimmen muss, lohnt der volle Faktor 1,35962 beziehungsweise 0,73549875, den dieser Rechner verwendet. Noch gröber, aber für den Überschlag oft genug: kW etwa um die Hälfte erhöhen ergibt knapp zu viel PS, ein Drittel draufrechnen knapp zu wenig — die 1,36 liegen genau dazwischen. Wer die Tabelle oben einmal überflogen hat, hat die wichtigsten Stufen ohnehin schnell im Kopf.',
       },
       {
         typ: 'infobox',
@@ -402,7 +406,7 @@ export const autoRechner: RechnerConfig[] = [
   },
   {
     slug: 'kfz-steuer-rechner',
-    letzteAktualisierung: '2026-06-18',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Kfz-Steuer-Rechner',
     beschreibung: 'Kfz-Steuer 2026 berechnen: Für Benziner, Diesel, Elektro und Hybrid. Mit Aufschlüsselung nach Hubraum und CO₂.',
     kategorie: 'Auto & Verkehr',
@@ -411,11 +415,12 @@ export const autoRechner: RechnerConfig[] = [
     metaDescription: 'Kfz-Steuer 2026 berechnen ✓ Benzin, Diesel & Elektro ✓ Nach WLTP ✓ Kostenlos & aktuell. Jetzt Ihre Kfz-Steuer ermitteln! ✓ Mit KI-Erklärung.',
     keywords: ['kfz steuer rechner', 'kfz steuer berechnen', 'kfz steuer 2026', 'autosteuer', 'kraftfahrzeugsteuer', 'co2 steuer auto'],
     icon: '🚙',
-    beispiel: 'Beispiel: 1.498 ccm Benziner, 128 g/km CO₂ → Sockel: 15 × 2,00 € = 30 € + CO₂: (20 × 2,00 €) + (13 × 2,20 €) = 40 € + 28,60 € = 68,60 € → Jahressteuer 98,60 €',
+    // W187: Erstzulassungs-Zeitraum ergänzt; 2009–2020 rechnet linear nach § 9 Abs. 1 Nr. 2 Buchst. b KraftStG
+    beispiel: 'Beispiel (Erstzulassung ab 2021): 1.498 ccm Benziner, 128 g/km CO₂ → Sockel: 15 × 2,00 € = 30 € + CO₂: (20 × 2,00 €) + (13 × 2,20 €) = 40 € + 28,60 € = 68,60 € → Jahressteuer 98,60 €. Derselbe Wagen mit Erstzulassung 2015: 30 € + 33 g × 2,00 € = 96 €.',
     // W19-Goldstandard (YMYL): kfz-steuer-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
     // Leitformat „beispielrechnung" (5× dominant). SSOT aus kfz-steuer-parameter.ts +
     // kfz-steuer.ts gespiegelt: Sockel 2,00 €/100 ccm Benzin / 9,50 € Diesel (§ 9 Abs. 1
-    // Nr. 2a/2b), CO₂-Staffel ab 95 g/km progressiv 2,00→4,00 €/g (§ 9 Abs. 1 Nr. 2c, ab
+    // Nr. 2 Buchst. b/c — W187: vorher „Nr. 2a/2b“), CO₂-Staffel ab 95 g/km progressiv 2,00→4,00 €/g (§ 9 Abs. 1 Nr. 2 Buchst. c, ab
     // 01.01.2021), E-Befreiung 10 J / max 31.12.2035 (§ 3d, 8. KraftStÄndG 04.12.2025).
     // Beispiele lib-exakt (Benziner 1.400/120 = 79 €; Diesel 2.000/140 = 286,50 €; SUV
     // 2.500/200 = 330 €). Keine Steuerberatung. erklaerung bleibt Fallback.
@@ -423,7 +428,7 @@ export const autoRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Wie sich die Kfz-Steuer zusammensetzt (Hubraum + CO₂)',
-        html: `<p>Die <strong>Kraftfahrzeugsteuer</strong> zahlt jeder Fahrzeughalter jährlich an das Hauptzollamt. Für Pkw mit Erstzulassung ab dem 1. Juli 2009 setzt sie sich aus <strong>zwei Bausteinen</strong> zusammen — einem Hubraum-Anteil und einem CO₂-Anteil (§ 9 KraftStG).</p><p>Der <strong>Sockelbetrag</strong> richtet sich nach dem <strong>Hubraum</strong>: Für jede angefangenen 100 ccm fallen bei Benzinern 2,00 € an, bei Dieseln 9,50 €. Der höhere Diesel-Satz gleicht den niedrigeren Energiesteuersatz auf Dieselkraftstoff aus.</p><p>Hinzu kommt die <strong>CO₂-Komponente</strong>. Die ersten <strong>95 g/km</strong> sind frei; jedes Gramm darüber wird <strong>progressiv</strong> besteuert — je höher der Ausstoß, desto höher der Satz pro Gramm. Beide Bausteine zusammen ergeben die Jahressteuer. Maßgeblich sind die Werte aus dem Fahrzeugschein (Hubraum und WLTP-CO₂). Dieser Rechner schlüsselt beide Anteile getrennt auf, sodass nachvollziehbar bleibt, woher die Steuer kommt.</p>`,
+        html: `<p>Die <strong>Kraftfahrzeugsteuer</strong> zahlt jeder Fahrzeughalter jährlich an das Hauptzollamt. Für Pkw mit Erstzulassung ab dem 1. Juli 2009 setzt sie sich aus <strong>zwei Bausteinen</strong> zusammen — einem Hubraum-Anteil und einem CO₂-Anteil (§ 9 KraftStG).</p><p>Der <strong>Sockelbetrag</strong> richtet sich nach dem <strong>Hubraum</strong>: Für jede angefangenen 100 ccm fallen bei Benzinern 2,00 € an, bei Dieseln 9,50 €. Der höhere Diesel-Satz gleicht den niedrigeren Energiesteuersatz auf Dieselkraftstoff aus.</p><p>Hinzu kommt die <strong>CO₂-Komponente</strong>. Bei Erstzulassung ab 2021 sind die ersten <strong>95 g/km</strong> frei; jedes Gramm darüber wird <strong>progressiv</strong> besteuert — je höher der Ausstoß, desto höher der Satz pro Gramm. Bei Erstzulassung vom 01.07.2009 bis 31.12.2020 kostet jedes Gramm über der Grenze einheitlich 2 € (Grenze 120 g/km bis 2011, 110 g/km 2012–2013, 95 g/km ab 2014). Beide Bausteine zusammen ergeben die Jahressteuer. Maßgeblich sind die Werte aus dem Fahrzeugschein (Hubraum und WLTP-CO₂). Dieser Rechner schlüsselt beide Anteile getrennt auf, sodass nachvollziehbar bleibt, woher die Steuer kommt.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -502,7 +507,7 @@ export const autoRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'E-Autos & Hybride — Befreiung bis 2035',
-        html: `<p>Reine <strong>Elektroautos</strong> sind von der Kfz-Steuer <strong>befreit</strong>. Wer ein E-Auto mit Erstzulassung im Zeitraum 18.05.2011 bis 31.12.2030 anmeldet, zahlt <strong>10 Jahre lang keine</strong> Kfz-Steuer — längstens jedoch bis zum <strong>31.12.2035</strong> (§ 3d KraftStG in der Fassung des 8. KraftStÄndG vom 04.12.2025).</p><p>Wichtig: Die Frist ist an die <strong>Erstzulassung</strong> gekoppelt, nicht an den Halter. Wer ein gebrauchtes E-Auto kauft, übernimmt die Restlaufzeit der Befreiung. Nach Ablauf wird das E-Auto gewichtsbasiert besteuert (§ 9 Abs. 1 Nr. 2e KraftStG), allerdings mit einem Abschlag.</p><p><strong>Plug-in-Hybride</strong> profitieren <strong>nicht</strong> von dieser Befreiung: Sie haben einen Verbrennungsmotor und werden wie Benziner nach Hubraum und CO₂ besteuert. Wegen ihres oft niedrigen offiziellen CO₂-Werts fällt die Steuer aber häufig moderat aus — der reale Verbrauch kann davon allerdings deutlich abweichen.</p>`,
+        html: `<p>Reine <strong>Elektroautos</strong> sind von der Kfz-Steuer <strong>befreit</strong>. Wer ein E-Auto mit Erstzulassung im Zeitraum 18.05.2011 bis 31.12.2030 anmeldet, zahlt <strong>10 Jahre lang keine</strong> Kfz-Steuer — längstens jedoch bis zum <strong>31.12.2035</strong> (§ 3d KraftStG in der Fassung des 8. KraftStÄndG vom 04.12.2025).</p><p>Wichtig: Die Frist ist an die <strong>Erstzulassung</strong> gekoppelt, nicht an den Halter. Wer ein gebrauchtes E-Auto kauft, übernimmt die Restlaufzeit der Befreiung. Nach Ablauf wird das E-Auto nach dem zulässigen Gesamtgewicht besteuert, um 50 % ermäßigt (§ 9 Abs. 1 Nr. 3 i. V. m. Abs. 2 KraftStG).</p><p><strong>Plug-in-Hybride</strong> profitieren <strong>nicht</strong> von dieser Befreiung: Sie haben einen Verbrennungsmotor und werden wie Benziner nach Hubraum und CO₂ besteuert. Wegen ihres oft niedrigen offiziellen CO₂-Werts fällt die Steuer aber häufig moderat aus — der reale Verbrauch kann davon allerdings deutlich abweichen.</p>`,
       },
       {
         typ: 'tabelle',
@@ -529,7 +534,7 @@ export const autoRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Erstzulassung & weitere Faktoren',
-        html: `<p>Welches Steuermodell gilt, hängt vom <strong>Datum der Erstzulassung</strong> ab. Pkw ab dem 01.07.2009 fallen unter das heutige Hubraum-plus-CO₂-Modell. Für die <strong>CO₂-Staffel</strong> gibt es zudem einen Schnitt zum <strong>01.01.2021</strong>: Davor galten niedrigere Sätze, seither die hier gezeigte, stärker gespreizte Staffel.</p><p>Pkw mit Erstzulassung <strong>vor dem 01.07.2009</strong> werden rein nach Hubraum und <strong>Schadstoffklasse</strong> besteuert — ohne CO₂-Komponente, dafür mit deutlich höheren Hubraumsätzen, besonders ohne grüne Plakette.</p><p>Den maßgeblichen CO₂-Wert finden Sie im <strong>Fahrzeugschein</strong> (Zulassungsbescheinigung Teil I), den Hubraum ebenfalls. Seit 2018 gelten die nach dem realitätsnäheren <strong>WLTP</strong>-Verfahren gemessenen Werte, die meist etwas höher liegen als die alten NEFZ-Werte — und damit auch die Steuer leicht erhöhen. Ein Halterwechsel ändert die Steuer nicht; sie bleibt an das Fahrzeug und seine technischen Werte gebunden.</p>`,
+        html: `<p>Welches Steuermodell gilt, hängt vom <strong>Datum der Erstzulassung</strong> ab. Pkw ab dem 01.07.2009 fallen unter das Hubraum-plus-CO₂-Modell. Für die <strong>CO₂-Komponente</strong> gibt es einen Schnitt zum <strong>01.01.2021</strong>: Für Erstzulassungen vom 01.07.2009 bis 31.12.2020 gilt weiterhin ein linearer Satz von 2 € je Gramm über 120 g/km (Erstzulassung bis 2011), 110 g/km (2012–2013) bzw. 95 g/km (ab 2014) — § 9 Abs. 1 Nr. 2 Buchst. b KraftStG. Seit 2021 gilt die hier gezeigte, progressiv gespreizte Staffel nach Buchst. c. Der Rechner fragt deshalb den Zulassungszeitraum und bei 2009–2020 das Jahr ab.</p><p>Pkw mit Erstzulassung <strong>vor dem 01.07.2009</strong> werden rein nach Hubraum und <strong>Schadstoffklasse</strong> besteuert — ohne CO₂-Komponente, dafür mit deutlich höheren Hubraumsätzen, besonders ohne grüne Plakette.</p><p>Den maßgeblichen CO₂-Wert finden Sie im <strong>Fahrzeugschein</strong> (Zulassungsbescheinigung Teil I), den Hubraum ebenfalls. Seit 2018 gelten die nach dem realitätsnäheren <strong>WLTP</strong>-Verfahren gemessenen Werte, die meist etwas höher liegen als die alten NEFZ-Werte — und damit auch die Steuer leicht erhöhen. Ein Halterwechsel ändert die Steuer nicht; sie bleibt an das Fahrzeug und seine technischen Werte gebunden.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -558,7 +563,8 @@ export const autoRechner: RechnerConfig[] = [
           'Hubraum (Feld P.1) und CO₂-Wert nach WLTP (Feld V.7) aus dem Fahrzeugschein ablesen.',
           'Antriebsart bestimmen: Benziner, Diesel, Hybrid oder reines E-Auto.',
           'Bei Diesel den höheren Sockel (9,50 € je 100 ccm) einkalkulieren.',
-          'CO₂-Wert über 95 g/km? Dann kommt die progressive Komponente dazu.',
+          // W187: Zeitraum 2009–2020 ergänzt
+          'CO₂-Wert über 95 g/km? Dann kommt bei Erstzulassung ab 2021 die progressive Komponente dazu, bei 2009–2020 linear 2 € je g über 120/110/95 g/km.',
           'E-Auto: Erstzulassungsdatum prüfen — Befreiung 10 Jahre, längstens bis 31.12.2035.',
           'Erstzulassung vor 01.07.2009? Dann gilt das ältere, hubraum-/schadstoffbasierte Modell.',
           'Sonderfälle (Oldtimer-H, Wohnmobil, Schwerbehinderung) gesondert prüfen.',
@@ -573,8 +579,9 @@ export const autoRechner: RechnerConfig[] = [
       {
         typ: 'infobox',
         variante: 'hinweis',
-        titel: 'Erstzulassung vor 2021 = andere Bemessung; keine Steuerberatung',
-        text: 'Dieser Rechner bildet das aktuelle Hubraum-CO₂-Modell ab. Für Pkw mit Erstzulassung vor dem 01.01.2021 galt eine andere (niedrigere) CO₂-Staffel, für Fahrzeuge vor dem 01.07.2009 ein rein hubraum- und schadstoffbasiertes Modell — die tatsächliche Steuer kann dort abweichen. Maßgeblich ist immer der Steuerbescheid des Hauptzollamts. Die Berechnung ist eine unverbindliche Orientierung und ersetzt keine Steuerberatung.',
+        // W187: vorher „Dieser Rechner bildet das aktuelle Hubraum-CO₂-Modell ab. Für Pkw mit Erstzulassung vor dem 01.01.2021 galt eine andere (niedrigere) CO₂-Staffel …“ — der Rechner rechnet 2009–2020 jetzt nach § 9 Abs. 1 Nr. 2 Buchst. b
+        titel: 'Drei Zulassungszeiträume; keine Steuerberatung',
+        text: 'Der Rechner unterscheidet drei Zeiträume der Erstzulassung: ab 01.01.2021 (progressive CO₂-Staffel), 01.07.2009 bis 31.12.2020 (2 € je Gramm über 120, 110 oder 95 g/km je nach Zulassungsjahr) und vor dem 01.07.2009 (nur Hubraum, vereinfacht mit Schadstoffklasse Euro 4 oder besser). Bei älteren Fahrzeugen mit schlechterer Schadstoffklasse kann die tatsächliche Steuer höher sein. Maßgeblich ist immer der Steuerbescheid des Hauptzollamts. Die Berechnung ist eine unverbindliche Orientierung und ersetzt keine Steuerberatung.',
       },
     ],
     faq: [
@@ -604,7 +611,7 @@ export const autoRechner: RechnerConfig[] = [
       },
     ],
     quellen: [
-      { titel: '§ 9 KraftStG: Steuersätze (Hubraum + CO₂)', url: 'https://www.gesetze-im-internet.de/kraftstg/__9.html', hinweis: 'Sockel 2,00/9,50 € je 100 ccm; CO₂-Staffel ab 95 g/km' },
+      { titel: '§ 9 KraftStG: Steuersätze (Hubraum + CO₂)', url: 'https://www.gesetze-im-internet.de/kraftstg/__9.html', hinweis: 'Sockel 2,00/9,50 € je 100 ccm; Erstzulassung 01.07.2009–31.12.2020: 2 € je g über 120/110/95 g/km (Abs. 1 Nr. 2 Buchst. b); ab 2021: CO₂-Staffel ab 95 g/km (Buchst. c); E-Autos nach Gewicht, Abs. 1 Nr. 3 i. V. m. Abs. 2' },
       { titel: '§ 3d KraftStG: Steuerbefreiung Elektrofahrzeuge', url: 'https://www.gesetze-im-internet.de/kraftstg/__3d.html', hinweis: '10 Jahre, längstens bis 31.12.2035 (8. KraftStÄndG v. 04.12.2025)' },
     ],
     affiliate: [
@@ -614,7 +621,7 @@ export const autoRechner: RechnerConfig[] = [
   },
   {
     slug: 'bussgeldrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Bußgeldrechner',
     beschreibung: 'Bußgeld, Punkte und Fahrverbot für Verkehrsverstöße berechnen — basierend auf dem aktuellen Bußgeldkatalog 2026.',
     kategorie: 'Auto & Verkehr',
@@ -623,7 +630,8 @@ export const autoRechner: RechnerConfig[] = [
     metaDescription: 'Bußgeld berechnen: Geschwindigkeit, Rotlicht, Abstand, Handy, Alkohol ✓ Aktueller Bußgeldkatalog ✓ Punkte & Fahrverbot ✓ KI-Erklärung.',
     keywords: ['bußgeldrechner', 'bußgeld berechnen', 'bußgeldkatalog 2026', 'geschwindigkeitsüberschreitung', 'punkte flensburg', 'fahrverbot', 'blitzer strafe', 'rotlichtverstoß', 'bußgeld geschwindigkeit', 'verkehrsverstoß strafe'],
     icon: '🚨',
-    beispiel: 'Beispiel: 26 km/h zu schnell innerorts (PKW) → 180 € Bußgeld, 1 Punkt in Flensburg, 1 Monat Fahrverbot (bei Wiederholungstäter).',
+    // W187: vorher „…, 1 Monat Fahrverbot (bei Wiederholungstäter)“ — klarer: für Ersttäter kein Regelfahrverbot
+    beispiel: 'Beispiel: 26 km/h zu schnell innerorts (PKW) → 180 € Bußgeld, 1 Punkt in Flensburg, kein Regelfahrverbot (1 Monat nur bei Wiederholung binnen eines Jahres, § 4 Abs. 2 S. 2 BKatV).',
     faq: [
       {
         frage: 'Wie viel kostet eine Geschwindigkeitsüberschreitung?',
@@ -672,7 +680,8 @@ export const autoRechner: RechnerConfig[] = [
           ['61–70', '700 €', '2', '3 Monate'],
           ['über 70', '800 €', '2', '3 Monate'],
         ],
-        fussnote: 'Werte für PKW nach Bußgeldkatalog (Novelle 2021). Die Angabe „km/h zu schnell" bezieht sich auf die Überschreitung nach Toleranzabzug, nicht auf die gemessene Geschwindigkeit. Bei 26–30 km/h droht das Fahrverbot nur für Wiederholungstäter (zweimal mit mindestens 26 km/h innerhalb von 12 Monaten). Für LKW und Busse liegen die Bußgelder rund 30 % höher. Punkte und Fahrverbot kommen jeweils zusätzlich zum Bußgeld.',
+        // W187: vorher „(zweimal mit mindestens 26 km/h innerhalb von 12 Monaten)“ — präzisiert nach § 4 Abs. 2 S. 2 BKatV
+        fussnote: 'Werte für PKW nach Bußgeldkatalog (Novelle 2021). Die Angabe „km/h zu schnell" bezieht sich auf die Überschreitung nach Toleranzabzug, nicht auf die gemessene Geschwindigkeit. Bei 26–30 km/h droht das Fahrverbot nur für Wiederholungstäter: wer innerhalb eines Jahres nach Rechtskraft einer Ahndung wegen mindestens 26 km/h erneut mindestens 26 km/h zu schnell ist (§ 4 Abs. 2 Satz 2 BKatV). Für LKW und Busse liegen die Bußgelder rund 30 % höher. Punkte und Fahrverbot kommen jeweils zusätzlich zum Bußgeld.',
       },
       {
         typ: 'tabelle',
@@ -837,7 +846,8 @@ export const autoRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie hoch ist der Wertverlust bei einem Neuwagen?',
-        antwort: 'Ein Neuwagen verliert im 1. Jahr ca. 24% seines Wertes, im 2. Jahr 13%, danach 6–8% pro Jahr. Nach 5 Jahren ist ein Auto typischerweise noch 45–50% des Neupreises wert. Ein Auto für 25.000 € hat nach 5 Jahren einen Restwert von ca. 11.000–12.500 €.',
+        // W187: vorher „noch 45–50% … ca. 11.000–12.500 €“ — widersprach dem eigenen Modell (12.866 €, 51,5 %); 3. Jahr (10 %) ergänzt
+        antwort: 'Ein Neuwagen verliert im 1. Jahr ca. 24% seines Wertes, im 2. Jahr 13%, im 3. Jahr 10%, danach 6–8% pro Jahr. Nach 5 Jahren ist ein Auto damit noch rund die Hälfte des Neupreises wert (51%). Ein Auto für 25.000 € hat nach 5 Jahren laut Rechner einen Restwert von rund 12.900 €.',
       },
       {
         frage: 'Lohnt sich ein eigenes Auto oder ist Carsharing günstiger?',
@@ -878,7 +888,8 @@ export const autoRechner: RechnerConfig[] = [
         werte: [
           { label: 'Nach 1 Jahr', wert: '19.000 €', hinweis: '76 % — allein im ersten Jahr −24 %' },
           { label: 'Nach 3 Jahren', wert: '14.877 €', hinweis: '60 % — Ende der steilsten Phase, idealer Gebrauchtkauf-Zeitpunkt' },
-          { label: 'Nach 5 Jahren', wert: '12.866 €', hinweis: '51 % — gut die Hälfte des Neupreises ist weg' },
+          // W187: vorher „gut die Hälfte … ist weg“ — weg sind 48,5 %
+          { label: 'Nach 5 Jahren', wert: '12.866 €', hinweis: '51 % — knapp die Hälfte des Neupreises ist weg' },
           { label: 'Nach 8 Jahren', wert: '10.686 €', hinweis: '43 % — Verlust verlangsamt sich auf 6 bis 8 % pro Jahr' },
         ],
       },
@@ -1138,7 +1149,7 @@ export const autoRechner: RechnerConfig[] = [
   },
   {
     slug: 'fuehrerschein-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Führerscheinkosten-Rechner',
     beschreibung: 'Führerscheinkosten berechnen: Gesamtkosten für Klasse B mit Fahrstunden, Prüfungsgebühren und Sehtest.',
     kategorie: 'Auto & Verkehr',
@@ -1147,7 +1158,8 @@ export const autoRechner: RechnerConfig[] = [
     metaDescription: 'Führerscheinkosten Klasse B berechnen: Fahrstunden, Prüfungen und Nebenkosten nach Region — kostenlose Gesamtkosten-Schätzung mit KI-Erklärung.',
     keywords: ['führerscheinkosten', 'führerschein kosten', 'was kostet ein führerschein', 'führerschein klasse b', 'fahrschule kosten', 'fahrstunden preis', 'führerschein rechner', 'führerscheinprüfung kosten'],
     icon: '🚗',
-    beispiel: 'Beispiel (Vorort, 25 Übungsstunden, Erstversuche bestanden): 425 € + 12 × 82,50 € + 25 × 55 € + 157 € + 23 € + 117 € = ca. 3.087 €',
+    // W187: vorher Prüfungsgebühren 23 € + 117 € = ca. 3.087 € (alte GebOSt-Sätze 22,49 / 116,93 €)
+    beispiel: 'Beispiel (Vorort, 25 Übungsstunden, Erstversuche bestanden): 425 € + 12 × 82,50 € + 25 × 55 € + 157 € + 25 € + 130 € = ca. 3.102 €',
     faq: [
       {
         frage: 'Was kostet der Führerschein Klasse B 2026 im Durchschnitt?',
@@ -1159,7 +1171,7 @@ export const autoRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was kostet eine Prüfung beim Führerschein?',
-        antwort: 'Die Theorieprüfung kostet 23 € (TÜV/DEKRA-Gebühr), die Praxisprüfung 117 €. Jede Wiederholung kostet nochmals den vollen Betrag. Dazu kommen meist einige zusätzliche Übungsstunden zur Vorbereitung auf den zweiten Versuch.',
+        antwort: 'Die Theorieprüfung kostet 24,99 € (TÜV/DEKRA-Gebühr), die Praxisprüfung der Klasse B 129,83 € — jeweils inklusive Umsatzsteuer nach der Gebührenordnung (GebOSt). Jede Wiederholung kostet nochmals den vollen Betrag. Dazu kommen meist einige zusätzliche Übungsstunden zur Vorbereitung auf den zweiten Versuch.',
       },
       {
         frage: 'Kann man am Führerschein sparen?',
@@ -1192,8 +1204,9 @@ export const autoRechner: RechnerConfig[] = [
           'Passbilder und Antragsgebühr bei der Führerscheinstelle.',
           'Übungsfahrstunden — die Zahl ist individuell, im Schnitt 25 bis 35.',
           '12 Pflicht-Sonderfahrten: 5 Überland, 4 Autobahn, 3 Nacht (je rund 1,5× Stundenpreis).',
-          'Gebühr für die theoretische Prüfung (22,49 €).',
-          'Gebühr für die praktische Prüfung (116,93 €).',
+          // W187: vorher 22,49 € / 116,93 €
+          'Gebühr für die theoretische Prüfung (24,99 €).',
+          'Gebühr für die praktische Prüfung (129,83 €).',
           'Puffer für eventuelle Wiederholungsprüfungen und Zusatzstunden.',
         ],
       },
@@ -1209,10 +1222,11 @@ export const autoRechner: RechnerConfig[] = [
           ['Erste-Hilfe-Kurs', '20–85 €', 'einmalig, gilt unbefristet'],
           ['Lehrmaterial / Lern-App', '60–80 €', 'Theoriebögen und App'],
           ['Antrag, Passbild, Nachweise', '100–200 €', 'Behörde plus Unterlagen'],
-          ['Theorieprüfung (TÜV/DEKRA)', '22,49 €', 'amtlich, bundeseinheitlich'],
-          ['Praxisprüfung (TÜV/DEKRA)', '116,93 €', 'amtlich, bundeseinheitlich'],
+          // W187: vorher 22,49 € / 116,93 €
+          ['Theorieprüfung (TÜV/DEKRA)', '24,99 €', 'amtlich, bundeseinheitlich'],
+          ['Praxisprüfung (TÜV/DEKRA)', '129,83 €', 'amtlich, bundeseinheitlich'],
         ],
-        fussnote: 'Richtwerte für die Klasse B, Stand 2026 (Quellen: ADAC, Statistisches Bundesamt). Die Beträge schwanken regional erheblich — der größte Hebel ist der Fahrstundenpreis. Die Prüfungsgebühren von TÜV und DEKRA sind dagegen bundesweit einheitlich nach der Gebührenordnung festgelegt (Theorie 22,49 €, Praxis 116,93 €). Der Rechner oben setzt für die Nebenkosten konkrete Standardwerte an (Sehtest 7 €, Erste-Hilfe-Kurs 40 €, Passbilder 15 €, Antragsgebühr 45 €, Lehrmaterial 50 €); je nach Anbieter kann das abweichen.',
+        fussnote: 'Richtwerte für die Klasse B, Stand 2026 (Quellen: ADAC, Statistisches Bundesamt). Die Beträge schwanken regional erheblich — der größte Hebel ist der Fahrstundenpreis. Die Prüfungsgebühren von TÜV und DEKRA sind dagegen bundesweit einheitlich nach der Gebührenordnung festgelegt (Theorie 24,99 €, Praxis 129,83 € inklusive 19 % Umsatzsteuer; netto 21,00 € bzw. 109,10 €). Der Rechner oben setzt für die Nebenkosten konkrete Standardwerte an (Sehtest 7 €, Erste-Hilfe-Kurs 40 €, Passbilder 15 €, Antragsgebühr 45 €, Lehrmaterial 50 €); je nach Anbieter kann das abweichen.',
       },
       {
         typ: 'text',
@@ -1227,10 +1241,11 @@ export const autoRechner: RechnerConfig[] = [
           { label: 'Pflichtfahrstunden', formel: '12 × (55 € × 1,5)', ergebnis: '990 €' },
           { label: 'Übungsfahrstunden', formel: '25 × 55 €', ergebnis: '1.375 €' },
           { label: 'Nebenkosten (Sehtest, EH-Kurs, Antrag …)', formel: '', ergebnis: '157 €' },
-          { label: 'Prüfungsgebühren (Theorie + Praxis)', formel: '22,49 + 116,93', ergebnis: '≈ 139 €' },
-          { label: 'Gesamtkosten', formel: '', ergebnis: '≈ 3.086 €' },
+          // W187: vorher 22,49 + 116,93 ≈ 139 €, Gesamt ≈ 3.086 €
+          { label: 'Prüfungsgebühren (Theorie + Praxis)', formel: '24,99 + 129,83', ergebnis: '≈ 155 €' },
+          { label: 'Gesamtkosten', formel: '', ergebnis: '≈ 3.102 €' },
         ],
-        fazit: 'Das Beispiel rechnet einen Standardfall in einer Vorort-Fahrschule durch: 55 Euro je Fahrstunde, 425 Euro Grundgebühr und 25 Übungsstunden zusätzlich zu den 12 Pflicht-Sonderfahrten. Die Pflichtfahrten kosten das 1,5-Fache einer normalen Stunde, weil Überland-, Autobahn- und Nachtfahrten länger dauern. Unterm Strich ergeben sich rund 3.086 Euro. Allein die Fahrstunden (Pflicht plus Übung) machen mit etwa 2.365 Euro über drei Viertel der Gesamtkosten aus. In einer günstigen ländlichen Fahrschule mit weniger Stunden liegt der Gesamtpreis eher bei rund 2.350 Euro, in einer teuren Großstadt-Fahrschule mit vielen Stunden schnell bei 4.250 Euro und mehr. Die Prüfungsgebühren von zusammen rund 139 Euro sind dagegen bundesweit einheitlich.',
+        fazit: 'Das Beispiel rechnet einen Standardfall in einer Vorort-Fahrschule durch: 55 Euro je Fahrstunde, 425 Euro Grundgebühr und 25 Übungsstunden zusätzlich zu den 12 Pflicht-Sonderfahrten. Die Pflichtfahrten kosten das 1,5-Fache einer normalen Stunde, weil Überland-, Autobahn- und Nachtfahrten länger dauern. Unterm Strich ergeben sich rund 3.102 Euro. Allein die Fahrstunden (Pflicht plus Übung) machen mit etwa 2.365 Euro über drei Viertel der Gesamtkosten aus. In einer günstigen ländlichen Fahrschule mit weniger Stunden liegt der Gesamtpreis eher bei rund 2.350 Euro, in einer teuren Großstadt-Fahrschule mit vielen Stunden schnell bei 4.250 Euro und mehr. Die Prüfungsgebühren von zusammen rund 155 Euro sind dagegen bundesweit einheitlich.',
       },
       {
         typ: 'beispielrechnung',
@@ -1240,11 +1255,12 @@ export const autoRechner: RechnerConfig[] = [
           { label: 'Pflichtfahrstunden', formel: '12 × (65 € × 1,5)', ergebnis: '1.170 €' },
           { label: 'Übungsfahrstunden', formel: '35 × 65 €', ergebnis: '2.275 €' },
           { label: 'Nebenkosten', formel: '', ergebnis: '157 €' },
-          { label: 'Theorieprüfung', formel: 'im 1. Versuch bestanden', ergebnis: '≈ 22 €' },
-          { label: 'Praxisprüfung (mit 1 Wiederholung)', formel: '116,93 × 2', ergebnis: '≈ 234 €' },
-          { label: 'Gesamtkosten', formel: '', ergebnis: '≈ 4.358 €' },
+          // W187: vorher Theorie ≈ 22 €, Praxis 116,93 × 2 ≈ 234 €, Gesamt ≈ 4.358 €
+          { label: 'Theorieprüfung', formel: 'im 1. Versuch bestanden', ergebnis: '≈ 25 €' },
+          { label: 'Praxisprüfung (mit 1 Wiederholung)', formel: '129,83 × 2', ergebnis: '≈ 260 €' },
+          { label: 'Gesamtkosten', formel: '', ergebnis: '≈ 4.387 €' },
         ],
-        fazit: 'Der teure Fall zeigt, wie schnell die Kosten steigen: eine Großstadt-Fahrschule mit 65 Euro je Stunde, 35 Übungsstunden und einer durchgefallenen Praxisprüfung. Schon die doppelte Praxisgebühr (rund 234 statt 117 Euro) und die hohe Stundenzahl treiben die Summe auf etwa 4.358 Euro. In der Praxis kommen nach einer nicht bestandenen Prüfung meist noch zusätzliche Übungsstunden zur Vorbereitung hinzu, die der Rechner nicht automatisch ansetzt — real liegt der Betrag dann oft noch höher. Das unterstreicht, warum sich gründliche Vorbereitung lohnt: Jede vermiedene Wiederholung und jede eingesparte Fahrstunde wirkt sich direkt auf den Endpreis aus. Über den Region- und Stundenregler lässt sich das eigene Szenario im Rechner durchspielen.',
+        fazit: 'Der teure Fall zeigt, wie schnell die Kosten steigen: eine Großstadt-Fahrschule mit 65 Euro je Stunde, 35 Übungsstunden und einer durchgefallenen Praxisprüfung. Schon die doppelte Praxisgebühr (rund 260 statt 130 Euro) und die hohe Stundenzahl treiben die Summe auf etwa 4.387 Euro. In der Praxis kommen nach einer nicht bestandenen Prüfung meist noch zusätzliche Übungsstunden zur Vorbereitung hinzu, die der Rechner nicht automatisch ansetzt — real liegt der Betrag dann oft noch höher. Das unterstreicht, warum sich gründliche Vorbereitung lohnt: Jede vermiedene Wiederholung und jede eingesparte Fahrstunde wirkt sich direkt auf den Endpreis aus. Über den Region- und Stundenregler lässt sich das eigene Szenario im Rechner durchspielen.',
       },
       {
         typ: 'tabelle',
@@ -1306,7 +1322,9 @@ export const autoRechner: RechnerConfig[] = [
     quellen: [
       { titel: 'ADAC — Führerschein-Kosten Klasse B', url: 'https://www.adac.de', hinweis: 'Kostenübersicht und regionale Spannen (Stand 2026).' },
       { titel: 'Statistisches Bundesamt (Destatis) — Fahrschulen und Preise', url: 'https://www.destatis.de', hinweis: 'Preisentwicklung und Erteilungszahlen.' },
-      { titel: 'Methodik & amtliche Prüfungsgebühren', hinweis: 'Gesamtkosten = Grundgebühr + Fahrstunden (Übung + 12 Sonderfahrten à 1,5× Stundenpreis) + Nebenkosten + Prüfungsgebühren. Theorie 22,49 € und Praxis 116,93 € sind bundeseinheitlich nach der Gebührenordnung (GebOSt), Stand 2026.' },
+      { titel: 'Methodik & amtliche Prüfungsgebühren', hinweis: 'Gesamtkosten = Grundgebühr + Fahrstunden (Übung + 12 Sonderfahrten à 1,5× Stundenpreis) + Nebenkosten + Prüfungsgebühren. Theorie 24,99 € und Praxis 129,83 € sind bundeseinheitlich nach der Gebührenordnung (GebOSt), Stand 2026.' },
+      // W187: Primärquelle der Prüfungsgebühren ergänzt; vorher 22,49 € / 116,93 €
+      { titel: 'GebOSt Anlage, Nr. 401 und 402 — Prüfungsgebühren Fahrerlaubnis', url: 'https://www.gesetze-im-internet.de/stgebo_2011/anlage.html', hinweis: 'Theorie 11,10 € + 9,90 € Prüfung am PC = 21,00 €, Praxis Klasse B 109,10 €; TÜV/DEKRA berechnen zusätzlich 19 % USt → 24,99 € / 129,83 €.' },
     ],
   },
   {

@@ -39,13 +39,14 @@ export interface AfbgParameter {
 
   /** Unterhaltsbeitrag nach § 10 AFBG — NUR bei Vollzeit, 100 % Vollzuschuss seit 29. BAföG-ÄndG */
   unterhalt: {
-    /** Grundbedarf alleinstehend, Vollzeit (= Grundbedarf 475 + Wohnpauschale 380 + KV 102 + PV 35 + sonstige 27, gerundet) */
+    /** Grundbedarf alleinstehend, Vollzeit: § 10 Abs. 2 AFBG = 442 (§ 13 Abs. 1 Nr. 1 BAföG) + 380 (§ 13 Abs. 2 Nr. 2) + KV 102 + PV 35 (§ 13a Abs. 1) + 60 (§ 10 Abs. 2 S. 3 AFBG). W187: vorher „475 + … + sonstige 27“ (Summe gleich) */
     alleinstehendVZ: number;           // 1019 ab 01.08.2024
     /** Zuschlag für Ehegatten/Lebenspartner */
     ehegattenZuschlag: number;         // 235
     /** Zuschlag je kindergeldberechtigtem Kind (§ 10 Abs. 3 AFBG) */
     kinderZuschlag: number;            // 235
-    /** Kinderbetreuungszuschlag je Kind unter 14 J. (§ 10 Abs. 3a AFBG) — einkommensunabhängig */
+    /** Kinderbetreuungszuschlag je Kind unter 14 J. oder mit Behinderung, nur Alleinerziehende,
+     *  Voll- und Teilzeit (§ 10 Abs. 3 AFBG; W187: vorher als Abs. 3a zitiert) — einkommensunabhängig */
     kinderbetreuungZuschlag: number;   // 150
     /** Altersgrenze Kinderbetreuungszuschlag (strikt kleiner) */
     kinderbetreuungAltersgrenze: number; // 14

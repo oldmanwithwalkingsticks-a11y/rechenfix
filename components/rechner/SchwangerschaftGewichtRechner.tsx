@@ -24,11 +24,15 @@ const GESAMT_EINLING: Record<BmiKat, [number, number]> = {
   adipos: [5.0, 9.0],
 };
 
-const GESAMT_ZWILLING: Record<BmiKat, [number, number]> = {
-  unter: [22.0, 28.0],
-  normal: [17.0, 25.0],
-  ueber: [14.0, 23.0],
-  adipos: [11.0, 19.0],
+// W187: vorher unter [22, 28], normal [17, 25], ueber [14, 23], adipos [11, 19].
+// IOM 2009 nennt für Zwillinge nur vorläufige Werte in lb (normal 37–54, übergewichtig 31–50,
+// adipös 25–42 lb = 16,8–24,5 / 14,1–22,7 / 11,3–19,1 kg) und für Untergewicht KEINE Empfehlung
+// (zu wenig Daten) → null, die Komponente zeigt dann einen Hinweis statt einer Spanne.
+const GESAMT_ZWILLING: Record<BmiKat, [number, number] | null> = {
+  unter: null,
+  normal: [16.8, 24.5],
+  ueber: [14.1, 22.7],
+  adipos: [11.3, 19.1],
 };
 
 // kg/Woche im 2.+3. Trimester
@@ -176,8 +180,8 @@ export default function SchwangerschaftGewichtRechner() {
         <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Empfehlung (IOM-Richtlinien)</h2>
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-gray-600 dark:text-gray-400">Empfohlene Gesamtzunahme</span>
-            <span className="font-medium">{fmt(ergebnis.gesamtRange[0])} – {fmt(ergebnis.gesamtRange[1])} kg</span>
+            <span className="text-gray-600 dark:text-gray-400">Empfohlene Gesamtzunahme{zwillinge && ergebnis.gesamtRange ? ' (Zwillinge, vorläufig)' : ''}</span>
+            <span className="font-medium">{ergebnis.gesamtRange ? `${fmt(ergebnis.gesamtRange[0])} – ${fmt(ergebnis.gesamtRange[1])} kg` : 'keine IOM-Empfehlung'}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-600 dark:text-gray-400">Erwartet bis SSW {ssw}</span>
@@ -189,6 +193,17 @@ export default function SchwangerschaftGewichtRechner() {
           </div>
         </div>
       </div>
+
+      {/* W187: Hinweis für Zwillinge — vorher Spanne 22–28 kg bei Untergewicht als „IOM-Empfehlung“ */}
+      {zwillinge && (
+        <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
+          <p className="text-sm text-amber-800 dark:text-amber-300">
+            {ergebnis.gesamtRange
+              ? 'Für Zwillinge nennt das IOM (2009) nur vorläufige Gesamtwerte und keine Wochenraten — die Werte „Erwartet bis SSW“ und „Pro Woche“ gelten für Einlinge. Bitte die Entwicklung mit Ärztin, Arzt oder Hebamme besprechen.'
+              : 'Für Zwillingsschwangerschaften bei Untergewicht gibt das IOM (2009) mangels Daten keine Empfehlung zur Gesamtzunahme. Bitte die angestrebte Zunahme ärztlich abklären; die Werte „Erwartet bis SSW“ und „Pro Woche“ gelten für Einlinge.'}
+          </p>
+        </div>
+      )}
 
       {/* Verteilung */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4">
@@ -221,7 +236,7 @@ export default function SchwangerschaftGewichtRechner() {
       <CrossLink href="/gesundheit/bmi-rechner" emoji="⚖️" text="BMI berechnen" />
 
       <ErgebnisAktionen
-        ergebnisText={`Schwangerschafts-Gewichtszunahme: ${fmt(ergebnis.aktuelleZunahme)} kg bei SSW ${ssw} (Empfohlen gesamt: ${fmt(ergebnis.gesamtRange[0])}–${fmt(ergebnis.gesamtRange[1])} kg)`}
+        ergebnisText={`Schwangerschafts-Gewichtszunahme: ${fmt(ergebnis.aktuelleZunahme)} kg bei SSW ${ssw} (Empfohlen gesamt: ${ergebnis.gesamtRange ? `${fmt(ergebnis.gesamtRange[0])}–${fmt(ergebnis.gesamtRange[1])} kg` : 'keine IOM-Empfehlung für Zwillinge bei Untergewicht, ärztlich abklären'})`}
         seitenTitel="Gewichtszunahme-Rechner (Schwangerschaft)"
       />
 
@@ -237,7 +252,7 @@ export default function SchwangerschaftGewichtRechner() {
         ergebnis={{
           'BMI vor SS': `${fmt(ergebnis.bmi, 1)} (${ergebnis.katLabel})`,
           'Aktuelle Zunahme': `${fmt(ergebnis.aktuelleZunahme)} kg`,
-          'Empfohlene Gesamtzunahme': `${fmt(ergebnis.gesamtRange[0])}–${fmt(ergebnis.gesamtRange[1])} kg`,
+          'Empfohlene Gesamtzunahme': ergebnis.gesamtRange ? `${fmt(ergebnis.gesamtRange[0])}–${fmt(ergebnis.gesamtRange[1])} kg${zwillinge ? ' (Zwillinge, vorläufig)' : ''}` : 'keine IOM-Empfehlung (Zwillinge, Untergewicht) – ärztlich abklären',
           'Status': statusText,
         }}
       />

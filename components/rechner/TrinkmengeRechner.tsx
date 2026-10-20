@@ -6,15 +6,18 @@ import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
+import { berechneTrinkmenge, GETRAENKE_ANTEIL } from '@/lib/berechnungen/wasserbedarf';
 
 /**
  * Trinkmenge-Rechner (Flüssigkeitsbedarf; Sport-Kategorie). BLOCK B — YMYL Gesundheit.
  *
- * Inline-Logik (keine separate lib/berechnungen-Datei), IOM/EFSA/ACSM:
- * - Basis (ml) = Gewicht × Faktor (Männer 33 · Frauen 31 ml/kg)
+ * W187: vorher Inline-Logik, Ergebnis als „Empfohlene Trinkmenge“ beschriftet; jetzt
+ * berechneTrinkmenge() aus lib/berechnungen/wasserbedarf.ts (gleicher Ansatz wie Wasserbedarf-Rechner):
+ * - Basis (ml) = Gewicht × Faktor (Männer 33 · Frauen 31 ml/kg) = Gesamtwasserzufuhr (Getränke + Nahrung)
  * - Sport-Bonus (ml) = (Sportminuten ÷ 30) × 350
  * - Klima-Faktor: normal 1,0 · warm 1,1 · sehr heiß 1,2
  * - Gesamt (L) = (Basis × Klima + Sport-Bonus) ÷ 1000
+ * - Trinkmenge (L) = (Basis × 54 % + Basis × (Klima − 1) + Sport-Bonus) ÷ 1000 (D-A-CH-Getränkeanteil)
  * Orientierungswert für gesunde Erwachsene. Auch zu viel Wasser kann schaden (Hyponatriämie).
  */
 
@@ -37,13 +40,10 @@ export default function TrinkmengeRechner() {
   const faktorKg = geschlecht === 'm' ? 33 : 31;
   const klimaFaktor = KLIMA[klima]?.faktor ?? 1.0;
 
-  const ergebnis = useMemo(() => {
-    if (nGewicht <= 0) return null;
-    const basis = nGewicht * faktorKg;
-    const bonus = Math.max(0, nSport) / 30 * 350;
-    const gesamtMl = basis * klimaFaktor + bonus;
-    return { basis, bonus, gesamtMl, gesamtL: gesamtMl / 1000 };
-  }, [nGewicht, faktorKg, nSport, klimaFaktor]);
+  const ergebnis = useMemo(
+    () => berechneTrinkmenge(nGewicht, faktorKg, nSport, klimaFaktor),
+    [nGewicht, faktorKg, nSport, klimaFaktor],
+  );
 
   const fmt0 = (n: number) => n.toLocaleString('de-DE', { maximumFractionDigits: 0 });
   const fmt2 = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -79,9 +79,11 @@ export default function TrinkmengeRechner() {
         <>
           <div className="result-box mb-2">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+              {/* W187: vorher „Empfohlene Trinkmenge“ für den Gesamtbedarf; jetzt Gesamtbedarf + Trinkmenge getrennt */}
               <div>
-                <p className="text-white/80 text-sm mb-1">Empfohlene Trinkmenge</p>
+                <p className="text-white/80 text-sm mb-1">Flüssigkeitsbedarf gesamt (Getränke + Nahrung)</p>
                 <p className="text-5xl font-bold">{fmt2(ergebnis.gesamtL)} L</p>
+                <p className="text-white/90 text-base mt-2">Davon trinken: <strong>ca. {fmt2(ergebnis.trinkL)} L</strong></p>
               </div>
               <div className="sm:text-right space-y-1">
                 <span className="inline-block px-3 py-1 rounded-lg text-sm font-semibold" style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}>
@@ -102,7 +104,11 @@ export default function TrinkmengeRechner() {
               {fmt0(nGewicht)} × {faktorKg} = {fmt0(ergebnis.basis)} ml Basis{klimaFaktor !== 1 ? ` × ${klimaFaktor.toLocaleString('de-DE')} = ${fmt0(ergebnis.basis * klimaFaktor)} ml` : ''}
             </p>
             <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
-              + ({fmt0(nSport)} ÷ 30) × 350 = {fmt0(ergebnis.bonus)} ml Sport → {fmt2(ergebnis.gesamtL)} L
+              + ({fmt0(nSport)} ÷ 30) × 350 = {fmt0(ergebnis.bonus)} ml Sport → {fmt2(ergebnis.gesamtL)} L gesamt
+            </p>
+            {/* W187: neue Zeile Trinkmenge */}
+            <p className="text-gray-800 dark:text-gray-200 font-mono text-sm">
+              Trinken: {fmt0(ergebnis.basis)} × {fmt0(GETRAENKE_ANTEIL * 100)} %{klimaFaktor !== 1 ? ` + ${fmt0(ergebnis.klimaZuschlag)} ml Klima` : ''} + {fmt0(ergebnis.bonus)} ml Sport = {fmt2(ergebnis.trinkL)} L
             </p>
           </div>
 
@@ -114,7 +120,8 @@ export default function TrinkmengeRechner() {
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">
                     <th className="text-left py-2 pr-4 font-semibold text-gray-700 dark:text-gray-300">Gewicht</th>
-                    <th className="text-left py-2 font-semibold text-gray-700 dark:text-gray-300">Basis-Bedarf</th>
+                    <th className="text-left py-2 pr-4 font-semibold text-gray-700 dark:text-gray-300">Basis-Bedarf gesamt</th>
+                    <th className="text-left py-2 font-semibold text-gray-700 dark:text-gray-300">davon trinken</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -124,7 +131,8 @@ export default function TrinkmengeRechner() {
                     return (
                       <tr key={kg} className={`border-b border-gray-100 dark:border-gray-600/50 ${aktiv ? 'bg-primary-50 dark:bg-primary-500/10 font-bold' : ''}`}>
                         <td className="py-2.5 pr-4 text-gray-800 dark:text-gray-200">{kg} kg</td>
-                        <td className="py-2.5 text-gray-800 dark:text-gray-200 tabular-nums">{fmt2(l)} L</td>
+                        <td className="py-2.5 pr-4 text-gray-800 dark:text-gray-200 tabular-nums">{fmt2(l)} L</td>
+                        <td className="py-2.5 text-gray-800 dark:text-gray-200 tabular-nums">{fmt2(l * GETRAENKE_ANTEIL)} L</td>
                       </tr>
                     );
                   })}
@@ -132,7 +140,8 @@ export default function TrinkmengeRechner() {
               </table>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              Basis mit {faktorKg} ml/kg. Rund 20 % der Flüssigkeit nimmt man üblicherweise über die Nahrung auf.
+              {/* W187: vorher „Rund 20 % der Flüssigkeit nimmt man üblicherweise über die Nahrung auf.“ */}
+              Basis mit {faktorKg} ml/kg (Gesamtwasser). Nach den D-A-CH-Referenzwerten kommen bei Erwachsenen rund {fmt0(GETRAENKE_ANTEIL * 100)} % aus Getränken; der Rest stammt aus fester Nahrung (rund ein Drittel) und Oxidationswasser aus dem Stoffwechsel.
             </p>
           </div>
 
@@ -140,18 +149,18 @@ export default function TrinkmengeRechner() {
           <CrossLink href="/sport/schritte-kilometer-rechner" emoji="👟" text="Schritte in Kilometer umrechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`Trinkmenge (Orientierung): ${fmt2(ergebnis.gesamtL)} L/Tag bei ${fmt0(nGewicht)} kg, ${fmt0(nSport)} min Sport, ${KLIMA[klima].label}. Kein medizinischer Wert.`}
+            ergebnisText={`Flüssigkeitsbedarf gesamt (Orientierung): ${fmt2(ergebnis.gesamtL)} L/Tag, davon trinken: ca. ${fmt2(ergebnis.trinkL)} L, bei ${fmt0(nGewicht)} kg, ${fmt0(nSport)} min Sport, ${KLIMA[klima].label}. Kein medizinischer Wert.`}
             seitenTitel="Trinkmenge-Rechner"
           />
           <AiExplain
             rechnerName="Trinkmenge-Rechner"
             eingaben={{ gewichtKg: nGewicht, geschlecht: geschlecht === 'm' ? 'männlich' : 'weiblich', sportMinuten: nSport, klima: KLIMA[klima].label }}
-            ergebnis={{ trinkmengeLiter: Number(ergebnis.gesamtL.toFixed(2)), basisMl: Math.round(ergebnis.basis * klimaFaktor), sportBonusMl: Math.round(ergebnis.bonus), hinweis: 'Orientierungswert, kein medizinischer Zielwert' }}
+            ergebnis={{ fluessigkeitsbedarfGesamtLiter: Number(ergebnis.gesamtL.toFixed(2)), trinkmengeGetraenkeLiter: Number(ergebnis.trinkL.toFixed(2)), basisMl: Math.round(ergebnis.basis * klimaFaktor), sportBonusMl: Math.round(ergebnis.bonus), hinweis: 'Gesamtbedarf inkl. Wasser aus Nahrung; Trinkmenge = 54 % der Basis + Klima- und Sportzuschlag. Orientierungswert, kein medizinischer Zielwert' }}
           />
         </>
       ) : (
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          Geben Sie Ihr Gewicht ein, um die grobe Trinkmenge zu schätzen.
+          Geben Sie Ihr Gewicht ein, um Flüssigkeitsbedarf und Trinkmenge grob zu schätzen.
         </p>
       )}
     </div>

@@ -8,52 +8,41 @@
  * - SGB III § 149: Leistungssatz 60 % (kinderlos) bzw. 67 % (mit Kind) des
  *   pauschalierten Nettoentgelts.
  *   https://www.gesetze-im-internet.de/sgb_3/__149.html
- * - SGB III § 153 Abs. 1: Bemessungsentgelt = beitragspflichtiges Brutto im
- *   Bemessungszeitraum, gedeckelt auf BBG-RV.
+ * - SGB III §§ 150, 151: Bemessungsentgelt = durchschnittlich auf den Tag entfallendes
+ *   beitragspflichtiges Arbeitsentgelt im Bemessungszeitraum (Bemessungsrahmen ein Jahr),
+ *   also Jahresentgelt ÷ 365; beitragspflichtig höchstens bis zur BBG-RV (§ 341 Abs. 4).
+ *   https://www.gesetze-im-internet.de/sgb_3/__151.html
+ * - SGB III § 153 Abs. 1 Satz 2: Abzüge abschließend 1. Sozialversicherungspauschale
+ *   20 %, 2. Lohnsteuer nach PAP (Vorsorgepauschale mit ermäßigtem KV-Satz + durchschn.
+ *   Zusatzbeitrag, PV-Satz § 55 Abs. 1 S. 1 SGB XI), 3. Solidaritätszuschlag.
+ *   Keine Kirchensteuer. Freibeträge, die nicht jedem zustehen (Kinderfreibeträge),
+ *   bleiben außer Ansatz (Satz 3 Nr. 1).
  *   https://www.gesetze-im-internet.de/sgb_3/__153.html
- * - SGB III § 153 Abs. 1 Satz 2 Nr. 1: pauschalierter Sozialabzug 21 %
- *   (KV/PV/RV/AV-Pauschale).
+ * - SGB III § 154: ALG wird für Kalendertage berechnet; voller Monat = 30 Tage.
+ * - SGB III § 338: Rechnung auf zwei Dezimalstellen, kaufmännisch gerundet.
+ *
+ * W187: vorher SV-Pauschale 21 %, Tagesentgelt = Monats-Leistungsentgelt ÷ 30 (statt
+ * Jahresentgelt ÷ 365), Lohnsteuer aus dem Jahresbrutto statt nach Tagestabelle und
+ * Abzug von Kirchensteuer (seit 2005 kein Abzug mehr, § 153 Abs. 1 S. 2 SGB III).
  *
  * L-35-Disziplin (dokumentierte Lib-Vereinfachungen, ggü. Konfig-Erklärtext
  * nicht identisch):
  *   - § 155 SGB III Nebeneinkommen-Schwelle 165 €/Mon NICHT modelliert
  *     (Konfig erwähnt es, Lib hat keine Anrechnungs-Logik).
+ *   - Eingabe ist ein gleichbleibendes Monatsbrutto für alle 12 Monate des
+ *     Bemessungszeitraums; Einmalzahlungen und Faktorverfahren (§ 39f EStG) fehlen.
  *
  * Welle-4 M2c — Lib-Extraktion aus ArbeitslosengeldRechner.tsx (03.05.2026).
- * Component zuvor PARTIAL-KEINE-LIB: importierte einkommensteuer + brutto-netto
- * aus verifizierten Libs, aber alle SGB-III-spezifischen Funktionen
- * (lohnsteuerJahr, bezugsdauerMonate, ALG-Berechnung) inline.
- *
- * Welle-5 Track-B B1 (04.05.2026) — KiSt-Bundesland-Differenzierung:
- *   `KIRCHENSTEUER_ANTEIL_PAUSCHAL = 0.09` (pauschal über alle BL) ersetzt
- *   durch `berechneKirchensteuerByBundesland(est, bundesland)` aus
- *   einkommensteuer.ts (BY/BW: 8 %, übrige 14 BL: 9 %). Interface um
- *   `bundesland?: Bundesland` erweitert (Default 'Nordrhein-Westfalen').
- *   SSOT-Pattern nach CLAUDE.md Z. 147–154.
- *
- * Welle-5 Track-B B2 (04.05.2026) — Stkl V/VI-PAP-Konsum (Variante a):
- *   `berechneVereinfachteLohnsteuerJahr`-Helper (mit V/VI-Approximation
- *   ×1,15) entfernt; ersetzt durch `berechneLohnsteuerJahr` aus
- *   `lohnsteuer.ts` (PAP § 39b 2026 voll-konform via berechneLohnsteuerPAP2026
- *   → ITZBund-XML). Transitive Verify-Kette via `verify-tarif-2026.ts`
- *   bzw. `verify-lohnsteuer-pap.ts`. Roman-Stkl-Strings (`'I'..'VI'`)
- *   intern auf numerische Stkl (`1..6`) gemappt — Component-API
- *   bleibt unverändert. L-36-Pattern in Verify-Cluster „V/VI-Faktoren"
- *   angewandt.
+ * Welle-5 Track-B B2 (04.05.2026) — Lohnsteuer über den Voll-PAP aus lohnsteuer.ts.
  */
 
-import {
-  berechneSoli,
-  berechneKirchensteuerByBundesland,
-  type Bundesland,
-} from './einkommensteuer';
 import { BBG_RV_MONAT } from './brutto-netto';
-import { berechneLohnsteuerJahr } from './lohnsteuer';
+import { berechneLohnsteuerJahr, berechneLohnsteuerMitZuschlaegenJahr } from './lohnsteuer';
 
 export type Steuerklasse = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
 
 export interface ArbeitslosengeldEingabe {
-  /** Letztes Monatsbrutto in € */
+  /** Monatsbrutto in € (Durchschnitt der letzten 12 Monate) */
   brutto: number;
   klasse: Steuerklasse;
   /** mit Kind → 67 % Leistungssatz, sonst 60 % */
@@ -62,25 +51,33 @@ export interface ArbeitslosengeldEingabe {
   alter: number;
   /** Versicherungspflichtige Monate in den letzten 5 Jahren */
   beschMonate: number;
-  kirchensteuer: boolean;
-  /** Bundesland für KiSt-Differenzierung (BY/BW 8 %, sonst 9 %).
-   *  Default: 'Nordrhein-Westfalen' (9 %) bei undefined. */
-  bundesland?: Bundesland;
 }
 
 export interface ArbeitslosengeldErgebnis {
+  /** ALG für einen vollen Kalendermonat = algTag × 30 (§ 154 SGB III) */
   algMonat: number;
+  /** ALG pro Kalendertag = leistungsentgeltTag × satz */
   algTag: number;
   /** Anspruchsdauer in Monaten nach § 147 SGB III */
   dauer: number;
   /** Gesamtanspruch = algMonat × dauer */
   gesamt: number;
-  /** Letztes Netto (Schätzung, gleich leistungsentgeltMonat) */
+  /** Leistungsentgelt für 30 Tage (pauschaliertes Netto, Basis des ALG) */
   letztesNetto: number;
   verlust: number;
   verlustProzent: number;
-  /** Bemessungsentgelt = min(brutto, BBG_RV_MONAT) */
+  /** Monatsbrutto gedeckelt auf die BBG-RV */
   bemessung: number;
+  /** Tägliches Bemessungsentgelt = Jahresentgelt ÷ 365 (§ 151 SGB III) */
+  bemessungTag: number;
+  /** Sozialversicherungspauschale je Tag (20 %) */
+  svPauschaleTag: number;
+  /** Lohnsteuer je Tag (PAP, Lohnzahlungszeitraum Tag) */
+  lohnsteuerTag: number;
+  /** Solidaritätszuschlag je Tag */
+  soliTag: number;
+  /** Tägliches Leistungsentgelt (§ 153 SGB III) */
+  leistungsentgeltTag: number;
   /** 0,60 oder 0,67 nach § 149 SGB III */
   satz: number;
 }
@@ -91,8 +88,16 @@ export interface ArbeitslosengeldErgebnis {
 export const ALG_SATZ_OHNE_KIND = 0.60;
 /** § 149 SGB III: 67 % mit Kind */
 export const ALG_SATZ_MIT_KIND = 0.67;
-/** § 153 Abs. 1 Satz 2 Nr. 1 SGB III: pauschalierter Sozialabzug */
-export const SV_PAUSCHALE_PROZENT = 0.21;
+/** § 153 Abs. 1 Satz 2 Nr. 1 SGB III: Sozialversicherungspauschale.
+ *  W187: vorher 0,21 (der Satz beträgt seit 01.01.2019 20 %). */
+export const SV_PAUSCHALE_PROZENT = 0.20;
+/** §§ 150, 151 SGB III: Bemessungsrahmen ein Jahr → Tagesdurchschnitt über 365 Tage */
+export const BEMESSUNG_TAGE_JAHR = 365;
+/** § 154 SGB III: voller Kalendermonat = 30 Tage */
+export const ALG_TAGE_MONAT = 30;
+
+/** § 338 SGB III: zwei Dezimalstellen, ab 5 aufrunden */
+const rund2 = (x: number) => Math.round((x + Number.EPSILON) * 100) / 100;
 
 /**
  * § 147 Abs. 2 SGB III: Anspruchsdauer-Tabelle.
@@ -133,57 +138,59 @@ const KLASSE_TO_NUMERIC: Record<Steuerklasse, 1 | 2 | 3 | 4 | 5 | 6> = {
 };
 
 /**
- * Jahres-Lohnsteuer-Wrapper für ALG-Berechnung.
- *
- * Welle-5 Track-B B2: konsumiert `berechneLohnsteuerJahr` aus `lohnsteuer.ts`
- * (PAP § 39b 2026 voll-konform via berechneLohnsteuerPAP2026 → ITZBund-XML),
- * mappt Roman-Stkl auf numerisch. `jahresfreibetrag = 0` → keine eingearbeiteten
- * Lohnsteuerfreibeträge (PAP zieht Pauschalen § 9a/§ 10c/Vorsorge intern ab).
+ * Jahres-Lohnsteuer-Wrapper (PAP 2026 über lohnsteuer.ts), Roman-Stkl → numerisch.
+ * `jahresfreibetrag = 0` → keine eingearbeiteten Lohnsteuerfreibeträge.
  */
 export function berechneVereinfachteLohnsteuerJahr(jahresBrutto: number, klasse: Steuerklasse): number {
   if (jahresBrutto <= 0) return 0;
   return berechneLohnsteuerJahr(jahresBrutto, KLASSE_TO_NUMERIC[klasse], 0);
 }
 
-export function berechneArbeitslosengeld(eingabe: ArbeitslosengeldEingabe): ArbeitslosengeldErgebnis {
-  const { brutto, klasse, mitKind, alter, beschMonate, kirchensteuer } = eingabe;
-  const bundesland: Bundesland = eingabe.bundesland ?? 'Nordrhein-Westfalen';
+/**
+ * Lohnsteuer und Solidaritätszuschlag für einen Kalendertag nach PAP 2026
+ * (Lohnzahlungszeitraum Tag, LZZ = 4): Der PAP rechnet den Tageslohn × 360 auf ein
+ * Jahr hoch und nimmt vom Jahresbetrag in Cent 1/360, abgerundet. Ohne Kinderfreibeträge
+ * (§ 153 Abs. 1 S. 3 Nr. 1 SGB III), Vorsorgepauschale mit Default-Parametern
+ * (ermäßigter KV-Satz 14,0 % + durchschn. Zusatzbeitrag 2,9 %, PV 3,6 % ohne
+ * Kinderlosenzuschlag = § 153 Abs. 1 S. 4 SGB III). Gegen den direkten PAP-Lauf mit
+ * LZZ = 4 geprüft (4.380 Stützpunkte, Δ 0 Cent; scripts/verify-arbeitslosengeld.ts).
+ * W187: vorher Lohnsteuer aus Monatsbrutto × 12 ohne Tagestabelle.
+ */
+export function lohnsteuerSoliTag(tagesentgelt: number, klasse: Steuerklasse): { lst: number; soli: number } {
+  if (tagesentgelt <= 0) return { lst: 0, soli: 0 };
+  const tagCent = Math.round(tagesentgelt * 100);
+  const jahr = berechneLohnsteuerMitZuschlaegenJahr(tagCent * 360 / 100, KLASSE_TO_NUMERIC[klasse], 0, 0);
+  const anteil = (betrag: number) => Math.floor(Math.round(betrag * 100) / 360) / 100;
+  return { lst: anteil(jahr.lstJahr), soli: anteil(jahr.soliJahr) };
+}
 
-  // § 153 SGB III: Bemessungsentgelt = brutto, gedeckelt auf BBG-RV
+export function berechneArbeitslosengeld(eingabe: ArbeitslosengeldEingabe): ArbeitslosengeldErgebnis {
+  const { brutto, klasse, mitKind, alter, beschMonate } = eingabe;
+
+  // Beitragspflichtiges Monatsentgelt, gedeckelt auf die BBG-RV
   const bemessung = Math.min(Math.max(0, brutto), BBG_RV_MONAT);
 
-  // Vereinfachte Lohnsteuer (L-35-Approximation für V/VI)
-  const jahresBrutto = bemessung * 12;
-  const lstJahr = berechneVereinfachteLohnsteuerJahr(jahresBrutto, klasse);
-  const lstMonat = lstJahr / 12;
+  // §§ 150, 151 SGB III: Entgelt im Bemessungszeitraum (12 Monate) ÷ 365 Tage.
+  // W187: vorher Monatsbetrag ÷ 30 (Tagesentgelt um 365/360 zu hoch).
+  const bemessungTag = rund2((bemessung * 12) / BEMESSUNG_TAGE_JAHR);
 
-  // Soli mit Freigrenze + Milderungszone (zentrale Lib)
-  const splittingtarif = klasse === 'III';
-  const soliJahr = berechneSoli(lstJahr, splittingtarif, 2026);
-  const soli = soliJahr / 12;
-
-  // § 51a EStG Kirchensteuer mit Bundesland-Differenzierung (BY/BW 8 %, sonst 9 %)
-  // Welle-5 Track-B B1: SSOT-Pattern via berechneKirchensteuerByBundesland
-  const kiSt = kirchensteuer ? berechneKirchensteuerByBundesland(lstMonat, bundesland) : 0;
-
-  // § 153 SGB III: pauschalierter Sozialabzug
-  const svPauschale = bemessung * SV_PAUSCHALE_PROZENT;
-
-  // Leistungsentgelt = pauschaliertes Netto
-  const leistungsentgeltMonat = Math.max(0, bemessung - lstMonat - soli - kiSt - svPauschale);
-  const tagesLeistungsentgelt = leistungsentgeltMonat / 30;
+  // § 153 Abs. 1 S. 2 SGB III: SV-Pauschale 20 %, Lohnsteuer, Soli — keine Kirchensteuer.
+  const svPauschaleTag = rund2(bemessungTag * SV_PAUSCHALE_PROZENT);
+  const { lst: lohnsteuerTag, soli: soliTag } = lohnsteuerSoliTag(bemessungTag, klasse);
+  const leistungsentgeltTag = Math.max(0, rund2(bemessungTag - svPauschaleTag - lohnsteuerTag - soliTag));
 
   // § 149 SGB III: Leistungssatz 60 % oder 67 %
   const satz = mitKind ? ALG_SATZ_MIT_KIND : ALG_SATZ_OHNE_KIND;
-  const algTag = tagesLeistungsentgelt * satz;
-  const algMonat = algTag * 30;
+  const algTag = rund2(leistungsentgeltTag * satz);
+  // § 154 SGB III: voller Kalendermonat = 30 Tage
+  const algMonat = rund2(algTag * ALG_TAGE_MONAT);
 
   // § 147 SGB III: Anspruchsdauer
   const dauer = bezugsdauerMonate(alter, beschMonate);
-  const gesamt = algMonat * dauer;
+  const gesamt = rund2(algMonat * dauer);
 
-  // Vergleich mit letztem Netto
-  const letztesNetto = leistungsentgeltMonat;
+  // Vergleich mit dem pauschalierten Netto (Leistungsentgelt für 30 Tage)
+  const letztesNetto = rund2(leistungsentgeltTag * ALG_TAGE_MONAT);
   const verlust = letztesNetto - algMonat;
   const verlustProzent = letztesNetto > 0 ? (verlust / letztesNetto) * 100 : 0;
 
@@ -196,6 +203,11 @@ export function berechneArbeitslosengeld(eingabe: ArbeitslosengeldEingabe): Arbe
     verlust,
     verlustProzent,
     bemessung,
+    bemessungTag,
+    svPauschaleTag,
+    lohnsteuerTag,
+    soliTag,
+    leistungsentgeltTag,
     satz,
   };
 }

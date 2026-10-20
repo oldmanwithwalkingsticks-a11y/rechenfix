@@ -68,7 +68,8 @@ function nextEndOfMonth(date: Date): Date {
 
 function diffDays(a: Date, b: Date): number {
   const ms = 86400000;
-  return Math.floor((a.getTime() - b.getTime()) / ms);
+  // W187: vorher Math.floor — über die Sommerzeit-Umstellung fehlt zwischen zwei Mitternächten eine Stunde
+  return Math.round((a.getTime() - b.getTime()) / ms);
 }
 
 function calcBetriebszugehoerigkeit(von: Date, bis: Date): { jahre: number; monate: number; text: string; totalMonate: number } {

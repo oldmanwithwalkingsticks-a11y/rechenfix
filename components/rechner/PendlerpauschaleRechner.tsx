@@ -21,6 +21,8 @@ export default function PendlerpauschaleRechner() {
   const [arbeitstageMode, setArbeitstageMode] = useState<'direkt' | 'detail'>('direkt');
   const [arbeitstage, setArbeitstage] = useState('220');
   const [grenzsteuersatz, setGrenzsteuersatz] = useState('35');
+  // W187: weitere Werbungskosten, damit der Arbeitnehmer-Pauschbetrag (1.230 €) richtig angerechnet wird
+  const [weitereWK, setWeitereWK] = useState('0');
 
   // Detail-Berechnung
   const [tageProWoche, setTageProWoche] = useState('5');
@@ -50,7 +52,8 @@ export default function PendlerpauschaleRechner() {
     grenzsteuersatz: parseDeutscheZahl(grenzsteuersatz) || 0,
     homeofficeTageProWoche: homeofficeTageZahl,
     arbeitstageProWoche: parseInt(tageProWoche, 10) || 5,
-  }), [entfernung, effektiveArbeitstage, grenzsteuersatz, homeofficeTageZahl, tageProWoche]);
+    weitereWerbungskosten: parseDeutscheZahl(weitereWK) || 0,
+  }), [entfernung, effektiveArbeitstage, grenzsteuersatz, homeofficeTageZahl, tageProWoche, weitereWK]);
 
   return (
     <div>
@@ -208,6 +211,15 @@ export default function PendlerpauschaleRechner() {
         </p>
       </div>
 
+      {/* W187: weitere Werbungskosten (Arbeitnehmer-Pauschbetrag) */}
+      <div className="mb-6">
+        <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Weitere Werbungskosten (€/Jahr)</label>
+        <NummerEingabe value={weitereWK} onChange={setWeitereWK} einheit="€" placeholder="0" />
+        <p className="text-xs text-gray-600 dark:text-gray-500 mt-1">
+          Z. B. Arbeitsmittel, Fortbildung, Homeoffice-Pauschale. Der Arbeitnehmer-Pauschbetrag von 1.230 € wird ohnehin abgezogen; die Pendlerpauschale spart nur mit dem Teil Steuern, um den Ihre Werbungskosten insgesamt darüber liegen.
+        </p>
+      </div>
+
       {/* Ergebnis */}
       {ergebnis && (
         <div className="space-y-4">
@@ -219,6 +231,13 @@ export default function PendlerpauschaleRechner() {
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
               = {fmtEuro(ergebnis.monatlicheErsparnis)} pro Monat
+            </p>
+            {/* W187: vorher Pauschale × Satz ohne Pauschbetrag; Obergrenze bleibt als Zusatzinfo */}
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              Über dem Arbeitnehmer-Pauschbetrag wirken {fmtEuro(ergebnis.wirksamerBetrag)} der Pauschale.
+              {ergebnis.steuerersparnisObergrenze > ergebnis.steuerersparnis + 0.005 && (
+                <> Ist der Pauschbetrag schon durch andere Werbungskosten ausgeschöpft, sind es bis zu {fmtEuro(ergebnis.steuerersparnisObergrenze)}.</>
+              )}
             </p>
           </div>
 
@@ -305,13 +324,13 @@ export default function PendlerpauschaleRechner() {
           <CrossLink href="/finanzen/steuererstattung-rechner" emoji="💰" text="Gesamte Steuererstattung berechnen" />
 
           <ErgebnisAktionen
-            ergebnisText={`Pendlerpauschale: ${fmtEuro(ergebnis.pauschaleGesamt)} - Steuerersparnis: ${fmtEuro(ergebnis.steuerersparnis)}/Jahr (${fmtEuro(ergebnis.monatlicheErsparnis)}/Monat)`}
+            ergebnisText={`Pendlerpauschale: ${fmtEuro(ergebnis.pauschaleGesamt)} - Steuerersparnis über dem Arbeitnehmer-Pauschbetrag: ${fmtEuro(ergebnis.steuerersparnis)}/Jahr (${fmtEuro(ergebnis.monatlicheErsparnis)}/Monat)`}
             seitenTitel="Pendlerpauschale berechnen"
           />
           <AiExplain
             rechnerName="Pendlerpauschale-Rechner"
-            eingaben={{ entfernungKm: parseDeutscheZahl(entfernung) || 0, arbeitstageProJahr: effektiveArbeitstage, grenzsteuersatzProzent: parseDeutscheZahl(grenzsteuersatz) || 0 }}
-            ergebnis={{ pauschaleGesamtEuro: ergebnis.pauschaleGesamt, steuerersparnisEuro: ergebnis.steuerersparnis, monatlicheErsparnisEuro: ergebnis.monatlicheErsparnis }}
+            eingaben={{ entfernungKm: parseDeutscheZahl(entfernung) || 0, arbeitstageProJahr: effektiveArbeitstage, grenzsteuersatzProzent: parseDeutscheZahl(grenzsteuersatz) || 0, weitereWerbungskostenEuro: parseDeutscheZahl(weitereWK) || 0 }}
+            ergebnis={{ pauschaleGesamtEuro: ergebnis.pauschaleGesamt, wirksamUeberPauschbetragEuro: ergebnis.wirksamerBetrag, steuerersparnisEuro: ergebnis.steuerersparnis, steuerersparnisObergrenzeEuro: ergebnis.steuerersparnisObergrenze, monatlicheErsparnisEuro: ergebnis.monatlicheErsparnis }}
           />
         </div>
       )}

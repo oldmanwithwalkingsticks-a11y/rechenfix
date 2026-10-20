@@ -15,43 +15,44 @@ interface Size {
   cm: number;
 }
 
-// Damen-Tabelle
-const DAMEN: Size[] = [
-  { eu: 35,   us: 5,    uk: 2.5, cm: 22.0 },
-  { eu: 35.5, us: 5.5,  uk: 3,   cm: 22.5 },
-  { eu: 36,   us: 6,    uk: 3.5, cm: 23.0 },
-  { eu: 37,   us: 6.5,  uk: 4,   cm: 23.5 },
-  { eu: 37.5, us: 7,    uk: 4.5, cm: 24.0 },
-  { eu: 38,   us: 7.5,  uk: 5,   cm: 24.5 },
-  { eu: 38.5, us: 8,    uk: 5.5, cm: 24.8 },
-  { eu: 39,   us: 8.5,  uk: 6,   cm: 25.0 },
-  { eu: 40,   us: 9,    uk: 6.5, cm: 25.5 },
-  { eu: 40.5, us: 9.5,  uk: 7,   cm: 26.0 },
-  { eu: 41,   us: 10,   uk: 7.5, cm: 26.5 },
-  { eu: 42,   us: 10.5, uk: 8,   cm: 27.0 },
-  { eu: 42.5, us: 11,   uk: 8.5, cm: 27.5 },
-  { eu: 43,   us: 11.5, uk: 9,   cm: 28.0 },
-  { eu: 44,   us: 12,   uk: 9.5, cm: 28.5 },
+// W187: vorher getrennte DAMEN-/HERREN-Tabellen mit verschiedener EU↔UK↔cm-Zuordnung (z. B. EU 39:
+// Damen UK 6 / 25,0 cm, Herren UK 5,5 / 24,5 cm). EU (Pariser Stich: Größe = 3/2 × Leistenlänge in cm) und
+// UK (Größe = 3 × Leistenlänge in Zoll − 25) sind geschlechtsneutral; nur die US-Skala unterscheidet sich:
+// US Herren = UK + 1, US Damen = US Herren + 1,5 („common scale“). Quelle: Wikipedia „Shoe size“
+// (en.wikipedia.org/wiki/Shoe_size). Basis: bisherige Damen-Zuordnung (passt zur Definition
+// UK ≈ EU ÷ 1,27 − 25 auf ±0,3), oberhalb EU 44 die bisherigen Herren-Werte (ebenso definitionsgemäß).
+const BASIS: Omit<Size, 'us'>[] = [
+  { eu: 35,   uk: 2.5,  cm: 22.0 },
+  { eu: 35.5, uk: 3,    cm: 22.5 },
+  { eu: 36,   uk: 3.5,  cm: 23.0 },
+  { eu: 37,   uk: 4,    cm: 23.5 },
+  { eu: 37.5, uk: 4.5,  cm: 24.0 },
+  { eu: 38,   uk: 5,    cm: 24.5 },
+  { eu: 38.5, uk: 5.5,  cm: 24.8 },
+  { eu: 39,   uk: 6,    cm: 25.0 },
+  { eu: 40,   uk: 6.5,  cm: 25.5 },
+  { eu: 40.5, uk: 7,    cm: 26.0 },
+  { eu: 41,   uk: 7.5,  cm: 26.5 },
+  { eu: 42,   uk: 8,    cm: 27.0 },
+  { eu: 42.5, uk: 8.5,  cm: 27.5 },
+  { eu: 43,   uk: 9,    cm: 28.0 },
+  { eu: 44,   uk: 9.5,  cm: 28.5 },
+  { eu: 44.5, uk: 10,   cm: 29.0 },
+  { eu: 45,   uk: 10.5, cm: 29.5 },
+  { eu: 46,   uk: 11,   cm: 30.0 },
+  { eu: 46.5, uk: 11.5, cm: 30.5 },
+  { eu: 47,   uk: 12,   cm: 31.0 },
+  { eu: 48,   uk: 13,   cm: 31.5 },
 ];
 
-// Herren-Tabelle
-const HERREN: Size[] = [
-  { eu: 39,   us: 6,    uk: 5.5, cm: 24.5 },
-  { eu: 40,   us: 7,    uk: 6,   cm: 25.0 },
-  { eu: 40.5, us: 7.5,  uk: 6.5, cm: 25.5 },
-  { eu: 41,   us: 8,    uk: 7,   cm: 26.0 },
-  { eu: 42,   us: 8.5,  uk: 7.5, cm: 26.5 },
-  { eu: 42.5, us: 9,    uk: 8,   cm: 27.0 },
-  { eu: 43,   us: 9.5,  uk: 8.5, cm: 27.5 },
-  { eu: 43.5, us: 10,   uk: 9,   cm: 28.0 },
-  { eu: 44,   us: 10.5, uk: 9.5, cm: 28.5 },
-  { eu: 44.5, us: 11,   uk: 10,  cm: 29.0 },
-  { eu: 45,   us: 11.5, uk: 10.5,cm: 29.5 },
-  { eu: 46,   us: 12,   uk: 11,  cm: 30.0 },
-  { eu: 46.5, us: 12.5, uk: 11.5,cm: 30.5 },
-  { eu: 47,   us: 13,   uk: 12,  cm: 31.0 },
-  { eu: 48,   us: 14,   uk: 13,  cm: 31.5 },
-];
+// US-Versatz zur UK-Größe je Geschlecht
+const US_VERSATZ = { damen: 2.5, herren: 1 } as const;
+
+// Damen-Tabelle (EU 35–44)
+const DAMEN: Size[] = BASIS.filter((b) => b.eu <= 44).map((b) => ({ ...b, us: b.uk + US_VERSATZ.damen }));
+
+// Herren-Tabelle (EU 39–48)
+const HERREN: Size[] = BASIS.filter((b) => b.eu >= 39).map((b) => ({ ...b, us: b.uk + US_VERSATZ.herren }));
 
 // Kinder-Tabelle
 const KINDER: Size[] = [

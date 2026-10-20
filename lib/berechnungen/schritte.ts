@@ -18,6 +18,17 @@ const GESCHWINDIGKEITEN: Record<string, number> = {
   schnell: 6.5,
 };
 
+/**
+ * W187: MET je Tempo, 2024 Adult Compendium of Physical Activities (Gehen, eben, fester Untergrund):
+ * 4 km/h ≈ 2,5 mph → 3,0 (17170); 5 km/h ≈ 3,1 mph → 3,8 (17190, 2,8–3,4 mph); 6,5 km/h ≈ 4,0 mph → 5,5 (17220).
+ * Vorher kcal = km × kg × 0,9 für jedes Tempo (bei 5 km/h ≈ 4,5 MET, Tempo ohne Einfluss).
+ */
+const MET_GEHEN: Record<string, number> = {
+  langsam: 3.0,
+  normal: 3.8,
+  schnell: 5.5,
+};
+
 export function berechneSchritte(
   schritte: number,
   koerpergroesse: number,
@@ -31,7 +42,7 @@ export function berechneSchritte(
   const kmh = GESCHWINDIGKEITEN[geschwindigkeit] || 5;
   const dauerStunden = distanzKm / kmh;
   const dauerMinuten = Math.round(dauerStunden * 60);
-  const kalorien = Math.round(distanzKm * gewicht * 0.9);
+  const kalorien = Math.round((MET_GEHEN[geschwindigkeit] ?? MET_GEHEN.normal) * gewicht * dauerStunden);
 
   const tagesziel = 10000;
   const fortschrittProzent = Math.min(100, Math.round((schritte / tagesziel) * 100));

@@ -177,7 +177,7 @@ export const matheRechner: RechnerConfig[] = [
   },
   {
     slug: 'einheiten-umrechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Einheiten-Umrechner',
     beschreibung: 'Einheiten umrechnen: Länge, Gewicht, Volumen, Fläche, Temperatur, Zeit, Geschwindigkeit und Daten.',
     kategorie: 'Mathe & Schule',
@@ -2895,7 +2895,7 @@ export const matheRechner: RechnerConfig[] = [
   },
   {
     slug: 'zufallszahl-generator',
-    letzteAktualisierung: '2026-06-26',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Zufallszahl-Generator',
     beschreibung: 'Zufallszahlen generieren: Zahlen, Würfel, Münzwurf, Losziehung und Passwort-Generator.',
     kategorie: 'Mathe & Schule',
@@ -2911,6 +2911,7 @@ export const matheRechner: RechnerConfig[] = [
     // zufallszahl.ts geprüft (Resolver-Check 25.06.2026): Gleichverteilung floor(random×(hi−lo+1))+lo
     // über [min,max] inkl. Grenzen; P=1/n; Lotto 6 aus 49 = C(49,6) = 13.983.816; E(W6)=3,5.
     // Nicht-YMYL. Pseudozufall (Math.random PRNG) — kein CSPRNG. erklaerung bleibt Fallback.
+    // W187: Passwort-Modus vorher ebenfalls Math.random(); jetzt crypto.getRandomValues() mit Rejection Sampling (sichererIndex).
     contentBloecke: [
       {
         typ: 'text',
@@ -3022,7 +3023,7 @@ export const matheRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Pseudozufall: wie der Computer „würfelt"',
-        html: `<p>Computer erzeugen streng genommen keinen echten Zufall, sondern <strong>Pseudozufall</strong>. Ein Pseudozufallsgenerator (PRNG) leitet aus einem Startwert, dem <strong>Seed</strong>, deterministisch eine lange Zahlenfolge ab. Sie sieht zufällig aus und besteht statistische Tests, ist aber im Prinzip reproduzierbar — gleicher Seed, gleiche Folge.</p><p>Für Spiele, Simulationen und Alltagsentscheidungen ist das <strong>völlig ausreichend</strong>. JavaScripts Math.random(), das dieser Generator nutzt, gehört in diese Kategorie. Kritisch wird es nur bei <strong>Sicherheit</strong>: Verschlüsselungsschlüssel und sicherheitskritische Passwörter brauchen einen kryptografisch sicheren Generator (CSPRNG, etwa window.crypto.getRandomValues).</p><p>Echter Zufall stammt aus physikalischen Quellen — radioaktivem Zerfall, thermischem Rauschen oder atmosphärischen Störungen. Mathematisch verwandte Strukturen wie Teiler und Vielfache berechnet der <a href="/mathe/ggt-kgv-rechner">ggT-/kgV-Rechner</a>.</p>`,
+        html: `<p>Computer erzeugen streng genommen keinen echten Zufall, sondern <strong>Pseudozufall</strong>. Ein Pseudozufallsgenerator (PRNG) leitet aus einem Startwert, dem <strong>Seed</strong>, deterministisch eine lange Zahlenfolge ab. Sie sieht zufällig aus und besteht statistische Tests, ist aber im Prinzip reproduzierbar — gleicher Seed, gleiche Folge.</p><p>Für Spiele, Simulationen und Alltagsentscheidungen ist das <strong>völlig ausreichend</strong>. JavaScripts Math.random(), das dieser Generator für Zahlen, Würfel, Münzwurf und Losziehung nutzt, gehört in diese Kategorie. Kritisch wird es nur bei <strong>Sicherheit</strong>: Verschlüsselungsschlüssel und sicherheitskritische Passwörter brauchen einen kryptografisch sicheren Generator (CSPRNG, etwa window.crypto.getRandomValues) — deshalb erzeugt der Passwort-Modus seine Zeichen damit.</p><p>Echter Zufall stammt aus physikalischen Quellen — radioaktivem Zerfall, thermischem Rauschen oder atmosphärischen Störungen. Mathematisch verwandte Strukturen wie Teiler und Vielfache berechnet der <a href="/mathe/ggt-kgv-rechner">ggT-/kgV-Rechner</a>.</p>`,
       },
       {
         typ: 'statistik',
@@ -3038,14 +3039,14 @@ export const matheRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Passwörter: Sicherheit durch Entropie',
-        html: `<p>Der <strong>Passwort-Modus</strong> erzeugt zufällige Zeichenfolgen aus einem wählbaren Pool — Groß- und Kleinbuchstaben, Ziffern und Sonderzeichen. Wie sicher ein Passwort ist, misst die <strong>Entropie</strong>: E = L × log₂(Z), wobei L die Länge und Z die Größe des Zeichenpools ist. Je höher die Entropie in Bit, desto mehr Kombinationen muss ein Angreifer durchprobieren.</p><p>Ein konkreter Vergleich: Ein 16-stelliges Passwort aus rund 78 möglichen Zeichen kommt auf etwa <strong>100 Bit</strong> — das gilt heute als sehr sicher. Ein 8-stelliges Passwort nur aus Kleinbuchstaben (26 Zeichen) hat dagegen nur <strong>37,6 Bit</strong> und ist in Minuten zu knacken.</p><p>Die wichtigste Stellschraube ist die <strong>Länge</strong>: Jedes zusätzliche Zeichen vervielfacht die Möglichkeiten. Ein langes Passwort aus einfachen Zeichen schlägt ein kurzes mit vielen Sonderzeichen — und für jeden Dienst gehört ein eigenes Passwort.</p>`,
+        html: `<p>Der <strong>Passwort-Modus</strong> erzeugt zufällige Zeichenfolgen aus einem wählbaren Pool — Groß- und Kleinbuchstaben, Ziffern und Sonderzeichen. Er nutzt dafür den kryptografisch sicheren Zufallsgenerator des Browsers (crypto.getRandomValues()) und wählt jedes Zeichen gleichverteilt ohne Modulo-Verzerrung aus; das Passwort entsteht ausschließlich lokal in Ihrem Browser und wird nicht übertragen. Wie sicher ein Passwort ist, misst die <strong>Entropie</strong>: E = L × log₂(Z), wobei L die Länge und Z die Größe des Zeichenpools ist. Je höher die Entropie in Bit, desto mehr Kombinationen muss ein Angreifer durchprobieren.</p><p>Ein konkreter Vergleich: Ein 16-stelliges Passwort aus rund 78 möglichen Zeichen kommt auf etwa <strong>100 Bit</strong> — das gilt heute als sehr sicher. Ein 8-stelliges Passwort nur aus Kleinbuchstaben (26 Zeichen) hat dagegen nur <strong>37,6 Bit</strong> und ist in Minuten zu knacken.</p><p>Die wichtigste Stellschraube ist die <strong>Länge</strong>: Jedes zusätzliche Zeichen vervielfacht die Möglichkeiten. Ein langes Passwort aus einfachen Zeichen schlägt ein kurzes mit vielen Sonderzeichen — und für jeden Dienst gehört ein eigenes Passwort.</p>`,
       },
       {
         typ: 'checkliste',
         titel: 'Zufall richtig nutzen',
         punkte: [
           'Für Spiele, Stichproben und Losentscheide ist Math.random() völlig ausreichend',
-          'Für Verschlüsselung und sicherheitskritische Passwörter einen CSPRNG nutzen (window.crypto.getRandomValues)',
+          'Für Verschlüsselung und sicherheitskritische Passwörter einen CSPRNG nutzen (window.crypto.getRandomValues) — der Passwort-Modus dieses Generators tut das',
           'Bei Losziehungen ohne Zurücklegen kommt jede Zahl höchstens einmal vor',
           'Erwartungswert kennen: er sagt den langfristigen Durchschnitt, nicht das nächste Ergebnis voraus',
           'Gesetz der großen Zahlen: erst über viele Versuche nähert sich die Häufigkeit der Wahrscheinlichkeit',
@@ -3057,13 +3058,14 @@ export const matheRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'tipp',
         titel: 'Nur für Spiele und Übungen, nicht für offizielle Ziehungen',
-        text: 'Dieser Generator nutzt den Pseudozufall von Math.random() und ist für Spiele, Übungen und Alltagsentscheidungen gedacht — nicht für offizielle Ziehungen, Gewinnspiele mit rechtlicher Bindung oder die Erzeugung kryptografischer Schlüssel. Wahrscheinlichkeiten beschreiben außerdem nur das langfristige Verhalten: Auch eine sehr unwahrscheinliche Folge (etwa fünfmal hintereinander dieselbe Zahl) kann auftreten und ist kein Fehler.',
+        text: 'Zahlen, Würfel, Münzwurf und Losziehung nutzen den Pseudozufall von Math.random() und sind für Spiele, Übungen und Alltagsentscheidungen gedacht — nicht für offizielle Ziehungen, Gewinnspiele mit rechtlicher Bindung oder die Erzeugung kryptografischer Schlüssel. Nur der Passwort-Modus verwendet den kryptografisch sicheren Zufall des Browsers (crypto.getRandomValues()). Wahrscheinlichkeiten beschreiben außerdem nur das langfristige Verhalten: Auch eine sehr unwahrscheinliche Folge (etwa fünfmal hintereinander dieselbe Zahl) kann auftreten und ist kein Fehler.',
       },
     ],
     faq: [
       {
         frage: 'Sind die Zufallszahlen wirklich zufällig?',
-        antwort: 'Der Generator nutzt Math.random(), einen Pseudo-Zufallsgenerator. Für Spiele, Simulationen und alltägliche Entscheidungen ist das völlig ausreichend. Für kryptografische Zwecke (z. B. Verschlüsselungsschlüssel) sollten spezielle kryptografisch sichere Generatoren verwendet werden.',
+        // W187: vorher „Der Generator nutzt Math.random()“ — gilt nicht mehr für den Passwort-Modus
+        antwort: 'Zahlen, Würfel, Münzwurf und Losziehung nutzen Math.random(), einen Pseudo-Zufallsgenerator. Für Spiele, Simulationen und alltägliche Entscheidungen ist das völlig ausreichend. Für kryptografische Zwecke (z. B. Verschlüsselungsschlüssel) sollten spezielle kryptografisch sichere Generatoren verwendet werden — der Passwort-Modus nutzt deshalb crypto.getRandomValues() des Browsers mit gleichverteilter Zeichenauswahl.',
       },
       {
         frage: 'Wie funktioniert die Losziehung?',

@@ -2623,7 +2623,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'grundsteuer-rechner',
-    letzteAktualisierung: '2026-06-29',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Grundsteuer-Rechner',
     beschreibung: 'Neue Grundsteuer berechnen: Grundsteuerwert, Steuermessbetrag und jährliche Grundsteuer nach dem Bundesmodell.',
     kategorie: 'Wohnen & Energie',
@@ -2632,9 +2632,12 @@ export const wohnenRechner: RechnerConfig[] = [
     metaDescription: 'Grundsteuer berechnen: Bundesmodell, Bayern und Baden-Württemberg ✓ Bodenrichtwert ✓ Hebesatz ✓ KI-Erklärung.',
     keywords: ['grundsteuer rechner', 'grundsteuer 2026', 'grundsteuerreform', 'bodenrichtwert', 'hebesatz', 'grundsteuerwert', 'bundesmodell grundsteuer', 'grundsteuer bayern', 'grundsteuer baden-württemberg'],
     icon: '🏠',
-    beispiel: 'Eigentumswohnung, 120 m² Wohnfläche, 400 m² Grundstück, Bodenrichtwert 200 €/m², Baujahr 1990, Hebesatz 500 %: Grundsteuerwert ca. 242.000 € → Messbetrag ca. 75 € → Grundsteuer ca. 375 €/Jahr.',
+    // W187: vorher „Grundsteuerwert ca. 242.000 € → Messbetrag ca. 75 € → Grundsteuer ca. 375 €/Jahr“ (vereinfachtes Modell:
+    // Kapitalisierungsfaktor 15, Bodenwert voll und unabgezinst, ohne Land/Mietniveaustufe/Miteigentumsanteil)
+    beispiel: 'Eigentumswohnung in Nordrhein-Westfalen (Mietniveaustufe 3), 120 m² Wohnfläche, Baujahr 1990, Grundstück 400 m² mit Miteigentumsanteil 250/1.000, Bodenrichtwert 200 €/m², Hebesatz 500 %: Grundsteuerwert 172.600 € → Messbetrag 53,51 € → Grundsteuer rund 268 €/Jahr (Schätzung nach dem Ertragswertverfahren des BewG).',
     faq: [
-      { frage: 'Wie wird die neue Grundsteuer berechnet?', antwort: 'Beim Bundesmodell: Grundsteuerwert × Steuermesszahl (0,031 % Wohnen) × kommunaler Hebesatz. Der Grundsteuerwert setzt sich aus Bodenwert (Fläche × Bodenrichtwert) und Gebäudewert (Ertragswertverfahren) zusammen. Bayern nutzt ein reines Flächenmodell, Baden-Württemberg ein Bodenwertmodell ohne Berücksichtigung des Gebäudes.' },
+      // W187: vorher „setzt sich aus Bodenwert (Fläche × Bodenrichtwert) und Gebäudewert (Ertragswertverfahren) zusammen“
+      { frage: 'Wie wird die neue Grundsteuer berechnet?', antwort: 'Beim Bundesmodell: Grundsteuerwert × Steuermesszahl (0,031 % Wohnen) × kommunaler Hebesatz. Für Wohngrundstücke ermittelt das Finanzamt den Grundsteuerwert im Ertragswertverfahren (§§ 252–257 BewG): Aus einer gesetzlich festgelegten Nettokaltmiete je Quadratmeter (nach Land, Baujahr, Wohnungsgröße und Mietniveaustufe der Gemeinde) entsteht nach Abzug pauschaler Bewirtschaftungskosten der Reinertrag, der mit einem Vervielfältiger kapitalisiert wird; hinzu kommt der abgezinste Bodenwert (Fläche × Bodenrichtwert, bei Eigentumswohnungen nur der Miteigentumsanteil). Bayern nutzt ein reines Flächenmodell, Baden-Württemberg ein Bodenwertmodell ohne Berücksichtigung des Gebäudes.' },
       { frage: 'Was ist der Bodenrichtwert?', antwort: 'Der Bodenrichtwert gibt den durchschnittlichen Wert pro Quadratmeter Boden in einer bestimmten Lage an. Er wird vom Gutachterausschuss der Gemeinde festgelegt und kann kostenlos auf boris.de (oder den Länder-Portalen) abgerufen werden. Er ist ein zentraler Bestandteil der neuen Grundsteuer-Berechnung.' },
       { frage: 'Wo finde ich den Hebesatz meiner Gemeinde?', antwort: 'Der Hebesatz wird jährlich von der Gemeinde im Rahmen des Haushaltsplans beschlossen und auf der Gemeinde-Website veröffentlicht. Der bundesweite Durchschnitt liegt bei etwa 500 %, in Großstädten oft 600–900 %, im ländlichen Raum teils unter 400 %.' },
       { frage: 'Unterscheiden sich die Bundesländer?', antwort: 'Ja. 11 Länder nutzen das Bundesmodell. Bayern hat ein reines Flächenmodell ohne Berücksichtigung von Bodenrichtwerten, Baden-Württemberg ein Bodenwertmodell ohne Gebäudebewertung, Hamburg ein Wohnlagemodell. Niedersachsen und Hessen nutzen Flächen-Lage-Modelle mit Zuschlägen für gute Lagen.' },
@@ -2649,14 +2652,18 @@ export const wohnenRechner: RechnerConfig[] = [
       {
         typ: 'beispielrechnung',
         titel: 'Bundesmodell Schritt für Schritt',
+        // W187: vorher Bodenwert 80.000 € + Gebäudewert 120 × 7,50 × 12 × 15 = 162.000 € → 242.000 € → 75,02 € → 375,10 €
         schritte: [
-          { label: 'Bodenwert', formel: '400 m² × 200 €/m²', ergebnis: '80.000 €' },
-          { label: 'Gebäudewert (Baujahr 1990)', formel: '120 m² × 7,50 € × 12 × 15', ergebnis: '162.000 €' },
-          { label: 'Grundsteuerwert', formel: '80.000 € + 162.000 €', ergebnis: '242.000 €' },
-          { label: 'Steuermessbetrag', formel: '242.000 € × 0,031 %', ergebnis: '75,02 €' },
-          { label: 'Jahres-Grundsteuer', formel: '75,02 € × 500 % Hebesatz', ergebnis: '375,10 €' },
+          { label: 'Nettokaltmiete (Anlage 39 BewG)', formel: 'NRW, Wohnung ≥ 100 m², Baujahr 1979–1990, Mietniveaustufe 3', ergebnis: '6,15 €/m²' },
+          { label: 'Rohertrag', formel: '120 m² × 6,15 € × 12', ergebnis: '8.856 €' },
+          { label: 'Reinertrag', formel: '8.856 € − 25 % Bewirtschaftungskosten', ergebnis: '6.642 €' },
+          { label: 'Kapitalisierter Reinertrag', formel: '6.642 € × 25,27 (48 Jahre, 3,0 %)', ergebnis: '167.843,34 €' },
+          { label: 'Abgezinster Bodenwert', formel: '400 m² × 200 € × 250/1.000 × 0,2420', ergebnis: '4.840 €' },
+          { label: 'Grundsteuerwert', formel: '172.683,34 €, abgerundet auf volle 100 €', ergebnis: '172.600 €' },
+          { label: 'Steuermessbetrag', formel: '172.600 € × 0,31 ‰', ergebnis: '53,51 €' },
+          { label: 'Jahres-Grundsteuer', formel: '53,51 € × 500 % Hebesatz', ergebnis: '267,55 €' },
         ],
-        fazit: 'Beim Bundesmodell setzt sich der Grundsteuerwert aus Boden- und Gebäudewert zusammen. Der Bodenwert ist die Grundstücksfläche mal Bodenrichtwert (400 m² × 200 € = 80.000 €). Der Gebäudewert entsteht im vereinfachten Ertragswertverfahren: Wohnfläche mal einer fiktiven Nettokaltmiete je Quadratmeter, die sich nach Baujahr richtet (hier 7,50 €), über zwölf Monate und einen Kapitalisierungsfaktor von 15 — das ergibt 162.000 €. Auf den Grundsteuerwert von 242.000 € wird die Steuermesszahl von 0,031 % angewandt, und der Messbetrag von 75,02 € mal dem kommunalen Hebesatz von 500 % ergibt 375,10 € Grundsteuer im Jahr. Bei einem höheren Hebesatz von etwa 700 % läge dieselbe Wohnung schon bei rund 525 € — der Hebesatz wirkt also linear auf das Ergebnis.',
+        fazit: 'Beim Bundesmodell entsteht der Grundsteuerwert einer Eigentumswohnung im Ertragswertverfahren. Das Gesetz gibt eine Nettokaltmiete je Quadratmeter vor, die nach Land, Wohnungsgröße und Baujahr gestaffelt ist (hier 6,15 € in Nordrhein-Westfalen) und je nach Mietniveaustufe der Gemeinde um bis zu 20 % sinkt oder um bis zu 40 % steigt. Von den 8.856 € Jahresmiete gehen 25 % pauschale Bewirtschaftungskosten ab. Der Reinertrag von 6.642 € wird mit 25,27 kapitalisiert — dem Vervielfältiger für 48 Jahre Restnutzungsdauer (80 Jahre Gesamtnutzungsdauer minus 32 Jahre Alter am 01.01.2022) und 3,0 % Liegenschaftszins. Dazu kommt der Bodenwert, bei der Eigentumswohnung nur der Miteigentumsanteil von 250/1.000 (20.000 €), abgezinst mit 0,2420 auf 4.840 €. Auf den Grundsteuerwert von 172.600 € wird die Steuermesszahl von 0,31 ‰ angewandt, und der Messbetrag von 53,51 € mal dem kommunalen Hebesatz von 500 % ergibt 267,55 € Grundsteuer im Jahr. Bei einem Hebesatz von 700 % läge dieselbe Wohnung bei rund 375 € — der Hebesatz wirkt also linear auf das Ergebnis.',
       },
       {
         typ: 'vergleich',
@@ -2675,12 +2682,12 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Welches Bundesland nutzt welches Modell?',
-        text: 'Elf Länder rechnen nach dem Bundesmodell: Berlin, Brandenburg, Bremen, Mecklenburg-Vorpommern, Nordrhein-Westfalen, Rheinland-Pfalz, Sachsen, Sachsen-Anhalt, Saarland, Schleswig-Holstein und Thüringen. Fünf Länder haben über die sogenannte Öffnungsklausel eigene Wege gewählt: Bayern ein reines Flächenmodell, Baden-Württemberg ein Bodenwertmodell, Hamburg ein Wohnlagemodell, Hessen ein Flächen-Faktor-Modell und Niedersachsen ein Flächen-Lage-Modell. Wichtig für die Nutzung dieses Rechners: Abgebildet sind nur die drei verbreitetsten Varianten — Bundesmodell, Bayern und Baden-Württemberg. Die Eigenheiten der Modelle in Hamburg, Hessen und Niedersachsen (Lage-Faktoren, Wohnlagezuschläge) sind nicht hinterlegt; für Grundstücke in diesen Ländern liefert der Rechner daher keine passende Schätzung. Den maßgeblichen Wert entnehmen Sie in diesen Fällen immer dem Bescheid des zuständigen Finanzamts; die Landesfinanzverwaltungen stellen zudem eigene Erläuterungen und teils eigene Online-Hilfen bereit.',
+        text: 'Elf Länder rechnen nach dem Bundesmodell: Berlin, Brandenburg, Bremen, Mecklenburg-Vorpommern, Nordrhein-Westfalen, Rheinland-Pfalz, Sachsen, Sachsen-Anhalt, Saarland, Schleswig-Holstein und Thüringen. Fünf Länder haben über die sogenannte Öffnungsklausel eigene Wege gewählt: Bayern ein reines Flächenmodell, Baden-Württemberg ein Bodenwertmodell, Hamburg ein Wohnlagemodell, Hessen ein Flächen-Faktor-Modell und Niedersachsen ein Flächen-Lage-Modell. Wichtig für die Nutzung dieses Rechners: Abgebildet sind nur die drei verbreitetsten Varianten — Bundesmodell, Bayern und Baden-Württemberg. Die Eigenheiten der Modelle in Hamburg, Hessen und Niedersachsen (Lage-Faktoren, Wohnlagezuschläge) sind nicht hinterlegt; für Grundstücke in diesen Ländern liefert der Rechner daher keine passende Schätzung. Den maßgeblichen Wert entnehmen Sie in diesen Fällen immer dem Bescheid des zuständigen Finanzamts; die Landesfinanzverwaltungen stellen zudem eigene Erläuterungen und teils eigene Online-Hilfen bereit. Innerhalb des Bundesmodells weichen einzelne Länder bei der Steuermesszahl ab: Sachsen setzt für Wohngrundstücke 0,36 ‰ an, das Saarland 0,34 ‰; für unbebaute Grundstücke gelten in Berlin 0,45 ‰, in Bremen 0,75 ‰, in Sachsen 0,36 ‰ und im Saarland 0,64 ‰ — der Rechner berücksichtigt das.', // W187: Satz zu Landes-Messzahlen ergänzt
       },
       {
         typ: 'text',
         titel: 'Die Bausteine des Bundesmodells',
-        html: `<p>Der <strong>Grundsteuerwert</strong> im Bundesmodell besteht aus zwei Teilen. Der <strong>Bodenwert</strong> ist schlicht die Grundstücksfläche multipliziert mit dem Bodenrichtwert. Diesen Wert legt der Gutachterausschuss der Gemeinde fest; er lässt sich kostenlos über das Portal boris.de beziehungsweise die Bodenrichtwert-Portale der Länder abrufen.</p><p>Der <strong>Gebäudewert</strong> entsteht im vereinfachten Ertragswertverfahren über eine fiktive Nettokaltmiete: Die Wohnfläche wird mit einem gesetzlich festgelegten Mietwert je Quadratmeter multipliziert, der sich nach dem Baujahr staffelt (von rund 6,50 € für Altbauten bis 8,50 € für jüngere Gebäude), und mit einem Kapitalisierungsfaktor hochgerechnet. Dieser Rechner nutzt eine vierstufige Baujahres-Tabelle; die im Gesetz vorgesehenen Mietniveaustufen je Gemeinde (§ 254 BewG) und die Restnutzungsdauer (§ 256 BewG) sind dabei vereinfacht. Bodenrichtwert und Hebesatz geben Sie selbst ein. Das Ergebnis ist deshalb eine gute Näherung für die Größenordnung, ersetzt aber nicht die amtliche Bewertung — bei stark abweichenden Werten lohnt der Abgleich mit dem Bescheid.</p>`,
+        html: `<p>Der <strong>Grundsteuerwert</strong> im Bundesmodell besteht aus zwei Teilen. Der <strong>Bodenwert</strong> ist schlicht die Grundstücksfläche multipliziert mit dem Bodenrichtwert. Diesen Wert legt der Gutachterausschuss der Gemeinde fest; er lässt sich kostenlos über das Portal boris.de beziehungsweise die Bodenrichtwert-Portale der Länder abrufen.</p><p>Der <strong>Ertragsteil</strong> entsteht über eine gesetzlich festgelegte Nettokaltmiete: Anlage 39 zum Bewertungsgesetz nennt für jedes Land Mietwerte je Quadratmeter nach Gebäudeart, Wohnungsgröße und Baujahr, die je nach Mietniveaustufe der Gemeinde um bis zu 20 % gesenkt oder bis zu 40 % erhöht werden (§ 254 BewG). Davon gehen pauschale Bewirtschaftungskosten ab (§ 255, Anlage 40); der Reinertrag wird mit einem Vervielfältiger kapitalisiert, der von der Restnutzungsdauer des Gebäudes und dem Liegenschaftszins abhängt (§§ 253, 256, Anlage 37). Den Bodenwert zinst das Gesetz über dieselbe Restnutzungsdauer ab (§ 257, Anlage 41); mindestens zählen aber 75 % des Bodenwerts (§ 251). Bei Eigentumswohnungen geht nur der Miteigentumsanteil am Grundstück ein. Bodenrichtwert, Mietniveaustufe und Hebesatz geben Sie selbst ein. Dieser Rechner folgt dem gesetzlichen Rechenweg, bleibt aber eine Schätzung — Garagen, gewerblich genutzte Flächen oder eine durch Modernisierung verlängerte Nutzungsdauer sind nicht abgebildet. Verbindlich ist der Grundsteuerwertbescheid; bei Abweichungen lohnt der Abgleich der dort genannten Angaben.</p>`, // W187: vorher „vierstufige Baujahres-Tabelle … Kapitalisierungsfaktor … gute Näherung“
       },
       {
         typ: 'vergleich',
@@ -2688,7 +2695,7 @@ export const wohnenRechner: RechnerConfig[] = [
         spalteA: 'Bayern (Flächenmodell)',
         spalteB: 'Bundesmodell',
         zeilen: [
-          { kriterium: 'Berechnung', a: 'Grundfläche × 0,04 € + Wohnfläche × 0,50 €', b: 'Bodenwert + Gebäudeertragswert' },
+          { kriterium: 'Berechnung', a: 'Grundfläche × 0,04 € + Wohnfläche × 0,50 €', b: 'kapitalisierter Reinertrag + abgezinster Bodenwert' }, // W187: vorher „Bodenwert + Gebäudeertragswert“
           { kriterium: 'Wohnermäßigung', a: '−30 % (Faktor 0,70)', b: 'Steuermesszahl 0,031 %' },
           { kriterium: 'Rolle des Werts', a: 'keine — nur Fläche zählt', b: 'Bodenrichtwert und Miete entscheidend' },
           { kriterium: 'Gleiche Fläche, Toplage', a: 'gleicher Beitrag wie einfache Lage', b: 'deutlich höher' },
@@ -2759,7 +2766,8 @@ export const wohnenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'warnung',
         titel: 'Kurzfazit',
-        text: 'Wie hoch Ihre Grundsteuer ausfällt, hängt von drei Dingen ab: dem Modell Ihres Bundeslands, der Lage und Größe des Grundstücks sowie dem Hebesatz Ihrer Gemeinde. Durch die Reform zahlen manche Eigentümer mehr als früher, andere weniger — eine pauschale Aussage ist nicht möglich. Dieser Rechner liefert eine Orientierung für die drei abgebildeten Modelle (Bundesmodell, Bayern, Baden-Württemberg); die Eigenmodelle aus Hamburg, Hessen und Niedersachsen sowie die gesetzlichen Mietniveau- und Restnutzungs-Korrekturen sind nicht hinterlegt. Verbindlich ist allein der Bescheid des Finanzamts und der Gemeinde. Bei Zweifeln an der Bewertung lohnen ein genauer Blick in den Bescheid und gegebenenfalls ein fristgerechter Einspruch; dieser Rechner ersetzt keine Steuerberatung. Da die Grundsteuer jedes Jahr anfällt, summieren sich auch kleine Bewertungsfehler über die Jahre — eine einmalige sorgfältige Prüfung lohnt sich daher fast immer.',
+        // W187: vorher „sowie die gesetzlichen Mietniveau- und Restnutzungs-Korrekturen sind nicht hinterlegt“
+        text: 'Wie hoch Ihre Grundsteuer ausfällt, hängt von drei Dingen ab: dem Modell Ihres Bundeslands, der Lage und Größe des Grundstücks sowie dem Hebesatz Ihrer Gemeinde. Durch die Reform zahlen manche Eigentümer mehr als früher, andere weniger — eine pauschale Aussage ist nicht möglich. Dieser Rechner liefert eine Orientierung für die drei abgebildeten Modelle (Bundesmodell, Bayern, Baden-Württemberg); die Eigenmodelle aus Hamburg, Hessen und Niedersachsen sind nicht hinterlegt. Beim Bundesmodell folgt er dem Ertragswertverfahren des Bewertungsgesetzes mit Mietniveaustufe, Restnutzungsdauer und Abzinsung, bleibt aber eine Schätzung. Verbindlich ist allein der Bescheid des Finanzamts und der Gemeinde. Bei Zweifeln an der Bewertung lohnen ein genauer Blick in den Bescheid und gegebenenfalls ein fristgerechter Einspruch; dieser Rechner ersetzt keine Steuerberatung. Da die Grundsteuer jedes Jahr anfällt, summieren sich auch kleine Bewertungsfehler über die Jahre — eine einmalige sorgfältige Prüfung lohnt sich daher fast immer.',
       },
     ],
     quellen: [

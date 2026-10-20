@@ -20,7 +20,8 @@ import CrossLink from '@/components/ui/CrossLink';
 const SCHRITT_STUFEN = [2000, 5000, 7500, 10000, 15000];
 
 const AKTIVITAET: Record<string, { faktorM: number; faktorF: number; met: number; tempo: number; label: string }> = {
-  gehen: { faktorM: 0.415, faktorF: 0.413, met: 3.5, tempo: 5, label: 'Gehen' },
+  // W187: MET Gehen 3,8 statt 3,5 (2024 Adult Compendium 17190, 2,8–3,4 mph) wie im Schritte-Rechner
+  gehen: { faktorM: 0.415, faktorF: 0.413, met: 3.8, tempo: 5, label: 'Gehen' },
   joggen: { faktorM: 0.50, faktorF: 0.50, met: 7.0, tempo: 8, label: 'Joggen' },
   laufen: { faktorM: 0.60, faktorF: 0.60, met: 9.8, tempo: 10, label: 'Laufen' },
 };

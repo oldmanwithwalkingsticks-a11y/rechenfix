@@ -98,6 +98,23 @@ export function losziehung(aus: number, anzahl: number): LosziehungErgebnis {
   return { gezogene, aus: pool, anzahl: n };
 }
 
+/**
+ * W187: Kryptografisch sicherer, gleichverteilter Index 0 … n−1 (vorher Math.random() im Passwort-Modus).
+ * Quelle: crypto.getRandomValues() (Web Crypto API, im Browser und in Node ≥ 19 als globalThis.crypto).
+ * Rejection Sampling: 32-Bit-Werte ab der größten durch n teilbaren Grenze werden verworfen, damit
+ * „wert % n“ keine Modulo-Verzerrung erzeugt (sonst wären die ersten 2³² mod n Zeichen minimal häufiger).
+ * `zufall` ist nur für das Prüfskript austauschbar.
+ */
+export function sichererIndex(n: number, zufall: (puffer: Uint32Array) => Uint32Array = (p) => globalThis.crypto.getRandomValues(p)): number {
+  if (!Number.isInteger(n) || n < 1 || n > 0x100000000) throw new RangeError('sichererIndex: n muss eine ganze Zahl von 1 bis 2^32 sein');
+  const grenze = 0x100000000 - (0x100000000 % n); // größtes Vielfaches von n ≤ 2^32
+  const puffer = new Uint32Array(1);
+  for (;;) {
+    zufall(puffer);
+    if (puffer[0] < grenze) return puffer[0] % n;
+  }
+}
+
 export function generierePasswort(
   laenge: number,
   optionen: { gross: boolean; klein: boolean; zahlen: boolean; sonder: boolean }
@@ -110,9 +127,10 @@ export function generierePasswort(
   if (optionen.sonder) zeichenPool += '!@#$%^&*()-_=+[]{}|;:,.<>?';
   if (zeichenPool.length === 0) zeichenPool = 'abcdefghijklmnopqrstuvwxyz';
 
+  // W187: vorher zeichenPool[Math.floor(Math.random() * zeichenPool.length)] — Math.random ist kein CSPRNG
   let passwort = '';
   for (let i = 0; i < len; i++) {
-    passwort += zeichenPool[Math.floor(Math.random() * zeichenPool.length)];
+    passwort += zeichenPool[sichererIndex(zeichenPool.length)];
   }
 
   let kategorien = 0;

@@ -100,7 +100,9 @@ export const KI_TOOLS: KiTool[] = [
     input_schema: {
       type: 'object',
       properties: {
-        zulassung: { type: 'string', enum: ['vor-2009', 'nach-2009'], description: 'Zulassungszeitraum des Fahrzeugs' },
+        // W187: vorher enum ['vor-2009', 'nach-2009']; 2009–2020 rechnet nach § 9 Abs. 1 Nr. 2 Buchst. b KraftStG
+        zulassung: { type: 'string', enum: ['vor-2009', '2009-2020', 'ab-2021'], description: 'Zeitraum der Erstzulassung: vor-2009 = bis 30.06.2009, 2009-2020 = 01.07.2009 bis 31.12.2020, ab-2021 = ab 01.01.2021' },
+        erstzulassungsjahr: { type: 'number', description: 'Jahr der Erstzulassung (nur bei 2009-2020 nötig, bestimmt die CO₂-Schwelle 120/110/95 g/km)' },
         antrieb: { type: 'string', enum: ['benzin', 'diesel', 'elektro', 'hybrid'], description: 'Antriebsart des Fahrzeugs' },
         hubraum: { type: 'number', description: 'Hubraum in Kubikzentimetern (ccm)' },
         co2: { type: 'number', description: 'CO₂-Ausstoß in Gramm pro Kilometer (g/km)' },
@@ -294,6 +296,8 @@ export const KI_TOOLS: KiTool[] = [
         grenzsteuersatz: { type: 'number', description: 'Persönlicher Grenzsteuersatz in Prozent' },
         homeofficeTageProWoche: { type: 'number', description: 'Homeoffice-Tage pro Woche' },
         arbeitstageProWoche: { type: 'number', description: 'Arbeitstage pro Woche' },
+        // W187: optional, damit die Ersparnis den Arbeitnehmer-Pauschbetrag (1.230 €) richtig anrechnet
+        weitereWerbungskosten: { type: 'number', description: 'Weitere Werbungskosten in Euro pro Jahr außer der Pendlerpauschale (Standard 0)' },
       },
       required: ['entfernungKm', 'arbeitstageProJahr', 'grenzsteuersatz', 'homeofficeTageProWoche', 'arbeitstageProWoche'],
     },
@@ -301,7 +305,9 @@ export const KI_TOOLS: KiTool[] = [
     run: (i) => berechnePendlerpauschale(i as Parameters<typeof berechnePendlerpauschale>[0]),
     anzeige: (r) => { const x = r as PendlerErgebnis; return [
       { label: 'Pauschale gesamt', wert: formatEuro(x.pauschaleGesamt), highlight: true },
-      { label: 'Steuerersparnis', wert: formatEuro(x.steuerersparnis) },
+      // W187: Ersparnis jetzt über dem Arbeitnehmer-Pauschbetrag; Obergrenze als Zusatzzeile
+      { label: 'Steuerersparnis (über Pauschbetrag)', wert: formatEuro(x.steuerersparnis) },
+      { label: 'Ersparnis, wenn Pauschbetrag schon ausgeschöpft', wert: formatEuro(x.steuerersparnisObergrenze) },
       { label: 'Ersparnis/Monat', wert: formatEuro(x.monatlicheErsparnis) },
       { label: 'Homeoffice-Pauschale', wert: formatEuro(x.homeofficePauschale) },
     ]; },

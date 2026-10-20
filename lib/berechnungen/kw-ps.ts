@@ -10,8 +10,10 @@ export interface KwPsErgebnis {
   ergebnisEinheit: string;
 }
 
-export const KW_ZU_PS = 1.35962;
-export const PS_ZU_KW = 0.73550;
+// W187: vorher PS_ZU_KW = 0.73550 und KW_ZU_PS = 1.35962 (gerundet; 150 PS → 110,33 statt 110,32 kW).
+// Metrische PS: 1 PS = 75 kp·m/s = 75 × 9,80665 W = 735,49875 W (DIN 66036) → exakt 0,73549875 kW.
+export const PS_ZU_KW = 0.73549875;
+export const KW_ZU_PS = 1 / PS_ZU_KW; // ≈ 1,359621617
 
 export function berechneKwPs(eingabe: KwPsEingabe): KwPsErgebnis | null {
   const { wert, richtung } = eingabe;

@@ -567,7 +567,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'pendlerpauschale-rechner',
-    letzteAktualisierung: '2026-06-18',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Pendlerpauschale-Rechner',
     beschreibung: 'Pendlerpauschale 2026 berechnen: Entfernungspauschale, Steuerersparnis und Vergleich mit der Homeoffice-Pauschale.',
     kategorie: 'Arbeit & Recht',
@@ -576,7 +576,8 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Pendlerpauschale 2026 berechnen ✓ einheitlich 0,38 €/km ab dem ersten Kilometer ✓ Steuerersparnis ✓ Vergleich Homeoffice. Kostenlos mit KI-Erklärung.',
     keywords: ['pendlerpauschale rechner', 'entfernungspauschale 2026', 'pendlerpauschale berechnen', 'fahrtkostenpauschale', 'pendlerpauschale steuerersparnis', 'homeoffice pauschale vergleich', 'km pauschale', 'pendlerpauschale 0,38'],
     icon: '🛣️',
-    beispiel: '25 km, 220 Tage, 35% Steuersatz: 25 × 0,38 € × 220 = 2.090 € Pauschale → 731,50 € Steuerersparnis.',
+    // W187: vorher „→ 731,50 € Steuerersparnis“ (ohne Arbeitnehmer-Pauschbetrag); (2.090 − 1.230) × 35 % = 301 €
+    beispiel: '25 km, 220 Tage, 35 % Grenzsteuersatz, keine weiteren Werbungskosten: 25 × 0,38 € × 220 = 2.090 € Pauschale. Über dem Arbeitnehmer-Pauschbetrag von 1.230 € wirken 860 € → 301 € Steuerersparnis. Ist der Pauschbetrag schon durch andere Werbungskosten ausgeschöpft, sind es bis zu 731,50 €.',
     // W19-Goldstandard (YMYL): pendlerpauschale-rechner auf volle Tiefe (15 Bausteine, ~1.560 W),
     // Leitformat „beispielrechnung" (5× dominant). SSOT aus lib/berechnungen/pendlerpauschale.ts
     // gespiegelt: PENDLERPAUSCHALE_SATZ_2026 = 0,38 €/km ab 1. km (§ 9 Abs. 1 Nr. 4 EStG i.d.F.
@@ -616,12 +617,15 @@ export const arbeitRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Von der Pauschale zur echten Steuerersparnis',
         schritte: [
+          // W187: vorher „1.672 € × 30 % = 501,60 €“ ohne Arbeitnehmer-Pauschbetrag (§ 9a EStG)
           { label: 'Pendlerpauschale (aus Beispiel oben)', formel: '1.672 €', ergebnis: '1.672 €' },
+          { label: 'Arbeitnehmer-Pauschbetrag', formel: 'wird ohnehin abgezogen', ergebnis: '− 1.230 €' },
+          { label: 'Zusätzlich wirksam (ohne weitere Werbungskosten)', formel: '1.672 € − 1.230 €', ergebnis: '442 €' },
           { label: 'Persönlicher Grenzsteuersatz', formel: '30 %', ergebnis: '30 %' },
-          { label: 'Tatsächliche Steuerersparnis', formel: '1.672 € × 30 %', ergebnis: '501,60 €' },
-          { label: 'Pro Monat', formel: '501,60 € ÷ 12', ergebnis: '41,80 €' },
+          { label: 'Tatsächliche Steuerersparnis', formel: '442 € × 30 %', ergebnis: '132,60 €' },
+          { label: 'Pro Monat', formel: '132,60 € ÷ 12', ergebnis: '11,05 €' },
         ],
-        fazit: 'Die 1.672 € Pauschale bringen bei 30 % Grenzsteuersatz rund 502 € echte Ersparnis — etwa 42 € im Monat. Die Pauschale ist kein Erstattungsbetrag, sondern senkt das zu versteuernde Einkommen; die Ersparnis steigt mit dem Grenzsteuersatz.',
+        fazit: 'Die 1.672 € Pauschale bringen bei 30 % Grenzsteuersatz ohne weitere Werbungskosten 132,60 € echte Ersparnis — etwa 11 € im Monat. Grund: Den Arbeitnehmer-Pauschbetrag von 1.230 € gibt es auch ohne Nachweis, die Pauschale wirkt nur mit dem Teil darüber. Wer den Pauschbetrag schon mit anderen Werbungskosten (Arbeitsmittel, Fortbildung, Homeoffice-Tage) ausschöpft, spart die vollen 1.672 € × 30 % = 501,60 €. Die Pauschale ist kein Erstattungsbetrag, sondern senkt das zu versteuernde Einkommen; die Ersparnis steigt mit dem Grenzsteuersatz.',
       },
       {
         typ: 'text',
@@ -1275,7 +1279,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'kuendigungsfrist-rechner',
-    letzteAktualisierung: '2026-06-18',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Kündigungsfrist-Rechner',
     beschreibung: 'Gesetzliche Kündigungsfrist berechnen: Für Arbeitnehmer und Arbeitgeber, mit frühestmöglichem Austrittsdatum und relevanten Fristen.',
     kategorie: 'Arbeit & Recht',
@@ -2040,7 +2044,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'scheidungskosten-rechner',
-    letzteAktualisierung: '2026-06-29',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Scheidungskosten-Rechner',
     beschreibung: 'Scheidungskosten berechnen: Gerichtskosten, Anwaltskosten, Verfahrenswert — einvernehmlich vs. streitig im Vergleich.',
     kategorie: 'Arbeit & Recht',
@@ -2049,11 +2053,13 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Scheidungskosten berechnen: Gericht, Anwalt, Verfahrenswert ✓ Einvernehmlich vs. streitig ✓ Verfahrenskostenhilfe ✓ FamGKG & RVG ✓ KI-Erklärung.',
     keywords: ['scheidungskosten rechner', 'was kostet eine scheidung', 'scheidungskosten 2026', 'anwaltskosten scheidung', 'gerichtskosten scheidung', 'verfahrenswert scheidung', 'einvernehmliche scheidung', 'streitige scheidung', 'verfahrenskostenhilfe', 'scheidung kosten'],
     icon: '⚖️',
-    beispiel: 'Ehepaar, Netto 5.000 €/Monat gesamt, einvernehmliche Scheidung mit Versorgungsausgleich → Verfahrenswert 16.500 € → Gerichtskosten ca. 749 € + 1 Anwalt ca. 3.427 € brutto = rund 4.176 € gesamt bzw. 2.088 € pro Person.',
+    // W187: vorher „Verfahrenswert 16.500 € … 1 Anwalt ca. 3.427 € … rund 4.176 € gesamt bzw. 2.088 € pro Person“ — mit
+    // Einigungsgebühr (entsteht in Ehesachen nicht, Nr. 1000 Anm. Abs. 5 VV RVG) und VA für nur ein Anrecht (§ 50 FamGKG).
+    beispiel: 'Ehepaar, Netto 5.000 €/Monat gesamt, einvernehmliche Scheidung mit Versorgungsausgleich (2 Anrechte) → Verfahrenswert 18.000 € → Gerichtskosten ca. 749 € + 1 Anwalt ca. 2.454 € brutto = rund 3.203 € gesamt bzw. 1.602 € pro Person.',
     faq: [
       {
         frage: 'Was kostet eine Scheidung in Deutschland?',
-        antwort: 'Die Kosten hängen vom Verfahrenswert ab, der aus dem 3-fachen gemeinsamen Nettoeinkommen berechnet wird. Eine einvernehmliche Scheidung bei mittlerem Einkommen liegt nach KostBRÄG 2025 (gültig seit 01.06.2025) meist bei 3.500 bis 6.000 Euro gesamt. Streitige Verfahren mit Folgesachen können dagegen 10.000 bis 25.000 Euro oder mehr kosten. Die Kosten werden in der Regel hälftig zwischen den Eheleuten geteilt.',
+        antwort: 'Die Kosten hängen vom Verfahrenswert ab, der aus dem 3-fachen gemeinsamen Nettoeinkommen berechnet wird. Eine einvernehmliche Scheidung bei mittlerem Einkommen liegt nach KostBRÄG 2025 (gültig seit 01.06.2025) meist bei 2.500 bis 4.500 Euro gesamt. Streitige Verfahren mit Folgesachen können dagegen 10.000 bis 25.000 Euro oder mehr kosten. Die Kosten werden in der Regel hälftig zwischen den Eheleuten geteilt.',
       },
       {
         frage: 'Wer zahlt die Scheidungskosten?',
@@ -2061,7 +2067,8 @@ export const arbeitRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie wird der Verfahrenswert berechnet?',
-        antwort: 'Der Verfahrenswert beträgt das 3-fache des gemeinsamen monatlichen Nettoeinkommens beider Ehepartner, mindestens jedoch 3.000 Euro. Hinzu kommen 10 % für den Versorgungsausgleich und bei streitigen Verfahren Zuschläge für Folgesachen wie Zugewinnausgleich (+20%), Unterhalt (+15%), Sorgerecht und Ehewohnung (je +4.000 Euro pauschal).',
+        // W187: vorher „Hinzu kommen 10 % für den Versorgungsausgleich … Sorgerecht und Ehewohnung (je +4.000 Euro pauschal)“
+        antwort: 'Der Verfahrenswert beträgt das 3-fache des gemeinsamen monatlichen Nettoeinkommens beider Ehepartner, mindestens jedoch 3.000 Euro (§ 43 FamGKG). Hinzu kommt der Versorgungsausgleich mit 10 % des dreifachen Nettoeinkommens für jedes Anrecht, insgesamt mindestens 1.000 Euro (§ 50 FamGKG) — bei zwei Anrechten also 20 %. Bei streitigen Verfahren erhöhen Folgesachen den Wert: Für Zugewinnausgleich (+20 %) und Unterhalt (+15 %) setzt der Rechner Schätzwerte an, tatsächlich zählen der geforderte Betrag bzw. der Jahresunterhalt; Sorgerecht oder Umgang erhöhen den Wert um 20 %, höchstens 5.000 Euro (§ 44 FamGKG), die Ehewohnung um 5.000 Euro (§ 48 FamGKG).',
       },
       {
         frage: 'Kann ich Scheidungskosten von der Steuer absetzen?',
@@ -2080,7 +2087,7 @@ export const arbeitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Was kostet eine Scheidung?',
-        html: `<p>Die Kosten einer Scheidung hängen vor allem vom <strong>Verfahrenswert</strong> ab — und der richtet sich nach dem gemeinsamen Nettoeinkommen, nicht danach, wie heftig gestritten wird. Aus dem Verfahrenswert ergeben sich zwei Gebührenblöcke: die Gerichtskosten nach der Tabelle zum FamGKG und die Anwaltskosten nach dem RVG. Beide Tabellen wurden mit dem <strong>KostBRÄG 2025</strong> zum 01.06.2025 um durchschnittlich rund 6 % angehoben; dieser Rechner nutzt die aktuellen Werte.</p><p>Den größten Unterschied macht trotzdem die Einvernehmlichkeit: Eine einvernehmliche Scheidung bei mittlerem Einkommen liegt meist zwischen 3.500 und 6.000 €, ein streitiges Verfahren mit Folgesachen schnell bei 10.000 bis 25.000 € und mehr. Wer sich über die wirtschaftlichen Folgen einer Trennung Gedanken macht — etwa eine <a href="/arbeit/abfindungsrechner">Abfindung</a> nach einem Jobverlust —, sollte diese in die Gesamtplanung einbeziehen. Dieser Rechner schätzt Gerichts- und Anwaltskosten nach den aktuellen Gebührentabellen und zeigt den Anteil pro Person; das eigentliche Scheidungsverfahren betrifft dabei nur die Auflösung der Ehe und den Versorgungsausgleich.</p>`,
+        html: `<p>Die Kosten einer Scheidung hängen vor allem vom <strong>Verfahrenswert</strong> ab — und der richtet sich nach dem gemeinsamen Nettoeinkommen, nicht danach, wie heftig gestritten wird. Aus dem Verfahrenswert ergeben sich zwei Gebührenblöcke: die Gerichtskosten nach der Tabelle zum FamGKG und die Anwaltskosten nach dem RVG. Beide Tabellen wurden mit dem <strong>KostBRÄG 2025</strong> zum 01.06.2025 um durchschnittlich rund 6 % angehoben; dieser Rechner nutzt die aktuellen Werte.</p><p>Den größten Unterschied macht trotzdem die Einvernehmlichkeit: Eine einvernehmliche Scheidung bei mittlerem Einkommen liegt meist zwischen 2.500 und 4.500 €, ein streitiges Verfahren mit Folgesachen schnell bei 10.000 bis 25.000 € und mehr. Wer sich über die wirtschaftlichen Folgen einer Trennung Gedanken macht — etwa eine <a href="/arbeit/abfindungsrechner">Abfindung</a> nach einem Jobverlust —, sollte diese in die Gesamtplanung einbeziehen. Dieser Rechner schätzt Gerichts- und Anwaltskosten nach den aktuellen Gebührentabellen und zeigt den Anteil pro Person; das eigentliche Scheidungsverfahren betrifft dabei nur die Auflösung der Ehe und den Versorgungsausgleich.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -2088,13 +2095,14 @@ export const arbeitRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Gemeinsames Nettoeinkommen', formel: 'pro Monat', ergebnis: '5.000 €' },
           { label: 'Verfahrenswert-Basis', formel: '5.000 € × 3', ergebnis: '15.000 €' },
-          { label: 'Plus Versorgungsausgleich (+10 %)', formel: '15.000 € + 1.500 €', ergebnis: '16.500 €' },
-          { label: 'Gerichtskosten', formel: '2,0 × FamGKG-Gebühr', ergebnis: '≈ 749 €' },
-          { label: 'Ein Anwalt (brutto)', formel: '1,3 + 1,2 + 1,0 RVG + Auslagen + MwSt', ergebnis: '≈ 3.427 €' },
-          { label: 'Gesamtkosten', formel: '749 € + 3.427 €', ergebnis: '≈ 4.176 €' },
-          { label: 'Anteil pro Person', formel: '4.176 € ÷ 2', ergebnis: '≈ 2.088 €' },
+          // W187: vorher VA +10 % (16.500 €), Anwalt mit 1,0-Einigungsgebühr ≈ 3.427 €, gesamt ≈ 4.176 €, pro Person ≈ 2.088 €
+          { label: 'Plus Versorgungsausgleich (2 Anrechte × 10 %)', formel: '15.000 € + 3.000 €', ergebnis: '18.000 €' },
+          { label: 'Gerichtskosten', formel: '2,0 × 374,50 € (FamGKG)', ergebnis: '≈ 749 €' },
+          { label: 'Ein Anwalt (brutto)', formel: '(1,3 + 1,2) × 817 € + 20 € Auslagen + 19 % MwSt', ergebnis: '≈ 2.454 €' },
+          { label: 'Gesamtkosten', formel: '749 € + 2.454 €', ergebnis: '≈ 3.203 €' },
+          { label: 'Anteil pro Person', formel: '3.203 € ÷ 2', ergebnis: '≈ 1.602 €' },
         ],
-        fazit: 'Bei 5.000 € gemeinsamem Nettoeinkommen liegt der Verfahrenswert bei 15.000 €, mit dem Versorgungsausgleich bei 16.500 €. Daraus ergeben sich rund 749 € Gerichtskosten (zwei Gerichtsgebühren) und für den einen Anwalt etwa 3.427 € brutto — zusammengesetzt aus Verfahrens-, Termins- und Einigungsgebühr plus Auslagenpauschale und Mehrwertsteuer. Die Gesamtkosten von rund 4.176 € werden hälftig geteilt, jeder zahlt also etwa 2.088 €. Weil bei der einvernehmlichen Scheidung nur ein Anwalt nötig ist, bleibt es bei diesem Betrag; ein zweiter Anwalt würde die Anwaltskosten nahezu verdoppeln. Kämen streitige Folgesachen hinzu, stiege zudem der Verfahrenswert und mit ihm jede einzelne Gebühr — aus rund 4.000 € können so schnell fünfstellige Summen werden.',
+        fazit: 'Bei 5.000 € gemeinsamem Nettoeinkommen liegt der Verfahrenswert bei 15.000 €, mit dem Versorgungsausgleich für zwei Anrechte bei 18.000 €. Daraus ergeben sich rund 749 € Gerichtskosten (zwei Gerichtsgebühren) und für den einen Anwalt etwa 2.454 € brutto — zusammengesetzt aus Verfahrens- und Terminsgebühr plus Auslagenpauschale und Mehrwertsteuer; eine Einigungsgebühr entsteht in der Ehesache nicht. Die Gesamtkosten von rund 3.203 € werden hälftig geteilt, jeder zahlt also etwa 1.602 €. Weil bei der einvernehmlichen Scheidung nur ein Anwalt nötig ist, bleibt es bei diesem Betrag; ein zweiter Anwalt würde die Anwaltskosten verdoppeln — die streitige Variante kostet hier rund 5.658 €, das Einvernehmen spart also gut 40 %. Kämen streitige Folgesachen hinzu, stiege zudem der Verfahrenswert und mit ihm jede einzelne Gebühr — aus rund 3.200 € können so schnell fünfstellige Summen werden.', // W187: vorher „aus rund 4.000 €“
       },
       {
         typ: 'vergleich',
@@ -2103,16 +2111,17 @@ export const arbeitRechner: RechnerConfig[] = [
         spalteB: 'Streitige Scheidung',
         zeilen: [
           { kriterium: 'Anwälte', a: 'ein Anwalt reicht', b: 'jeder Partner braucht einen eigenen' },
-          { kriterium: 'Einigungsgebühr', a: 'oft, aber günstiger als 2. Anwalt', b: 'meist nicht' },
+          // W187: vorher Zeile „Einigungsgebühr: oft, aber günstiger als 2. Anwalt / meist nicht“ und typisch „3.500–6.000 €“
+          { kriterium: 'Anwaltsgebühren', a: 'einmal 1,3 + 1,2 (keine Einigungsgebühr in der Ehesache)', b: 'zweimal 1,3 + 1,2' },
           { kriterium: 'Folgesachen', a: 'außergerichtlich/notariell geklärt', b: 'mitverhandelt, erhöhen den Wert' },
-          { kriterium: 'Typische Gesamtkosten', a: '3.500–6.000 €', b: '10.000–25.000 € und mehr' },
+          { kriterium: 'Typische Gesamtkosten', a: '2.500–4.500 €', b: '10.000–25.000 € und mehr' },
           { kriterium: 'Dauer', a: '3–6 Monate', b: '1–2 Jahre und länger' },
         ],
       },
       {
         typ: 'text',
         titel: 'Der Verfahrenswert — die Rechengröße für alle Gebühren',
-        html: `<p>Der <strong>Verfahrenswert</strong> ist die Basis, aus der Gericht und Anwälte ihre Gebühren ableiten (§ 43 FamGKG). Er beträgt das Dreifache des gemeinsamen monatlichen Nettoeinkommens, mindestens aber 3.000 €. Hinzu kommen in der Regel 10 % für den <strong>Versorgungsausgleich</strong>, der die Rentenanrechte aus der Ehezeit aufteilt und gesetzlich der Regelfall ist; selbst bei notariellem Ausschluss fällt ein Mindestwert für die formelle Prüfung an.</p><p>Bei einem streitigen Verfahren erhöhen <strong>Folgesachen</strong> den Wert weiter: der Zugewinnausgleich nach dem konkreten Streitwert, der Unterhalt sowie pauschale Zuschläge für Sorgerecht und Ehewohnung. Wie hoch der Zugewinn überhaupt ausfällt, lässt sich vorab mit dem <a href="/arbeit/zugewinnausgleich-rechner">Zugewinnausgleich-Rechner</a> abschätzen, der laufende Unterhalt mit dem <a href="/arbeit/unterhaltsrechner">Unterhalts-Rechner</a>. Je höher der Verfahrenswert, desto höher Gerichts- und Anwaltsgebühren zugleich. Ist das Einkommen ungewöhnlich hoch oder das Vermögen gering, kann das Gericht den Verfahrenswert auf Antrag herauf- oder herabsetzen — die Faustregel ist also nur der Ausgangspunkt.</p>`,
+        html: `<p>Der <strong>Verfahrenswert</strong> ist die Basis, aus der Gericht und Anwälte ihre Gebühren ableiten (§ 43 FamGKG). Er beträgt das Dreifache des gemeinsamen monatlichen Nettoeinkommens, mindestens aber 3.000 €. Hinzu kommt der Wert des <strong>Versorgungsausgleichs</strong>, der die Rentenanrechte aus der Ehezeit aufteilt und gesetzlich der Regelfall ist: 10 % des dreifachen Nettoeinkommens für jedes Anrecht, insgesamt mindestens 1.000 € (§ 50 FamGKG). Weil meist jeder Ehegatte mindestens ein Rentenanrecht hat, sind es oft 20 % und mehr; selbst bei notariellem Ausschluss fällt ein Wert für die gerichtliche Prüfung an.</p><p>Bei einem streitigen Verfahren erhöhen <strong>Folgesachen</strong> den Wert weiter: der Zugewinnausgleich nach dem konkreten Streitwert, der Unterhalt nach dem Jahresbetrag, Sorgerecht oder Umgang mit 20 % des Ehesachen-Werts (höchstens 5.000 €, § 44 FamGKG) und die Ehewohnung mit 5.000 € (§ 48 FamGKG). Wie hoch der Zugewinn überhaupt ausfällt, lässt sich vorab mit dem <a href="/arbeit/zugewinnausgleich-rechner">Zugewinnausgleich-Rechner</a> abschätzen, der laufende Unterhalt mit dem <a href="/arbeit/unterhaltsrechner">Unterhalts-Rechner</a>. Je höher der Verfahrenswert, desto höher Gerichts- und Anwaltsgebühren zugleich. Ist das Einkommen ungewöhnlich hoch oder das Vermögen gering, kann das Gericht den Verfahrenswert auf Antrag herauf- oder herabsetzen — die Faustregel ist also nur der Ausgangspunkt.</p>`,
       },
       {
         typ: 'vergleich',
@@ -2121,8 +2130,9 @@ export const arbeitRechner: RechnerConfig[] = [
         spalteB: 'Anwaltskosten (RVG)',
         zeilen: [
           { kriterium: '1,0-Gebühr', a: '344 €', b: '762 €' },
-          { kriterium: 'Berechnung', a: '2,0-Gebühr', b: '1,3 + 1,2 + ggf. 1,0' },
-          { kriterium: 'Ergebnis', a: '≈ 688 €', b: '≈ 2.290–3.197 € brutto' },
+          // W187: vorher „1,3 + 1,2 + ggf. 1,0“ / „≈ 2.290–3.197 € brutto“ (mit Einigungsgebühr, die in Ehesachen nicht entsteht)
+          { kriterium: 'Berechnung', a: '2,0-Gebühr', b: '1,3 + 1,2' },
+          { kriterium: 'Ergebnis', a: '≈ 688 €', b: '≈ 2.291 € brutto' },
           { kriterium: 'Zusätzlich', a: '—', b: 'Auslagen (max. 20 €) + 19 % MwSt' },
           { kriterium: 'Anzahl', a: 'einmal', b: 'einmal (einvernehmlich) oder zweimal' },
         ],
@@ -2131,7 +2141,7 @@ export const arbeitRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Die Anwaltsgebühren aufgeschlüsselt',
-        text: 'Die Anwaltsvergütung setzt sich aus mehreren Gebühren nach dem Vergütungsverzeichnis zum RVG zusammen, jeweils berechnet auf der RVG-1,0-Gebühr zum Verfahrenswert. Die 1,3-Verfahrensgebühr (Nr. 3100 VV RVG) deckt die Betreuung des Verfahrens ab, die 1,2-Terminsgebühr (Nr. 3104 VV RVG) den Gerichtstermin. Bei einer einvernehmlichen Regelung kommt häufig die 1,0-Einigungsgebühr (Nr. 1003 VV RVG) hinzu. Dazu addieren sich die Auslagenpauschale nach Nr. 7002 (20 % der Gebühren, höchstens 20 €) und 19 % Mehrwertsteuer. Die Einigungsgebühr klingt zunächst nach Mehrkosten, lohnt sich aber fast immer: Sie ist deutlich günstiger als ein zweiter Anwalt und belohnt die einvernehmliche Lösung, die das Verfahren zugleich verkürzt. Wichtig: Jede dieser Gebühren wird auf den vollen Verfahrenswert berechnet — schon ein moderat höherer Wert hebt also Verfahrens-, Termins- und Einigungsgebühr gleichzeitig an.',
+        text: 'Die Anwaltsvergütung setzt sich aus mehreren Gebühren nach dem Vergütungsverzeichnis zum RVG zusammen, jeweils berechnet auf der RVG-1,0-Gebühr zum Verfahrenswert. Die 1,3-Verfahrensgebühr (Nr. 3100 VV RVG) deckt die Betreuung des Verfahrens ab, die 1,2-Terminsgebühr (Nr. 3104 VV RVG) den Gerichtstermin. Dazu addieren sich die Auslagenpauschale nach Nr. 7002 (20 % der Gebühren, höchstens 20 €) und 19 % Mehrwertsteuer. Eine Einigungsgebühr entsteht in der Ehesache nicht, auch nicht bei einer einvernehmlichen Scheidung (Nr. 1000 Anm. Abs. 5 VV RVG). Sie kann nur anfallen, wenn die Anwältin oder der Anwalt an einer Vereinbarung über eine Folgesache mitwirkt, etwa über Unterhalt oder Zugewinn — dann aus deren Wert, nicht aus dem Wert der Scheidung. Wichtig: Verfahrens- und Terminsgebühr werden auf den vollen Verfahrenswert berechnet — schon ein moderat höherer Wert hebt also beide Gebühren gleichzeitig an.', // W187: vorher „kommt häufig die 1,0-Einigungsgebühr (Nr. 1003 VV RVG) hinzu“
       },
       {
         typ: 'vergleich',
@@ -2141,7 +2151,7 @@ export const arbeitRechner: RechnerConfig[] = [
         zeilen: [
           { kriterium: 'Zugewinnausgleich', a: '+ 20 % Verfahrenswert', b: 'notariell/privat geregelt' },
           { kriterium: 'Unterhalt', a: '+ 15 % Verfahrenswert', b: 'Vereinbarung statt Streitwert' },
-          { kriterium: 'Sorgerecht / Ehewohnung', a: 'je + 4.000 € pauschal', b: 'einvernehmlich geklärt' },
+          { kriterium: 'Sorgerecht / Ehewohnung', a: '+ 20 % (höchstens 5.000 €) bzw. + 5.000 €', b: 'einvernehmlich geklärt' }, // W187: vorher „je + 4.000 € pauschal“
           { kriterium: 'Wirkung', a: 'Gericht + alle Anwaltsgebühren steigen', b: 'Verfahrenswert bleibt niedrig' },
           { kriterium: 'Kosten', a: 'oft 2- bis 4-fach', b: 'deutlich günstiger' },
         ],
@@ -2172,7 +2182,7 @@ export const arbeitRechner: RechnerConfig[] = [
         typ: 'checkliste',
         titel: 'Scheidungskosten senken',
         punkte: [
-          'Einvernehmen anstreben — ein Anwalt statt zwei spart fast die Hälfte der Anwaltskosten.',
+          'Einvernehmen anstreben — ein Anwalt statt zwei halbiert die Anwaltskosten.', // W187: vorher „spart fast die Hälfte“ (mit Einigungsgebühr gerechnet)
           'Folgesachen wie Zugewinn und Unterhalt außergerichtlich oder notariell klären.',
           'Den Versorgungsausgleich nicht ohne Grund ausschließen — der Ausschluss kostet selbst.',
           'Verfahrenskostenhilfe prüfen, wenn das Einkommen knapp ist.',
@@ -2526,9 +2536,10 @@ export const arbeitRechner: RechnerConfig[] = [
     metaDescription: 'Kindesunterhalt nach Düsseldorfer Tabelle 2026 berechnen — mit Kindergeld-Verrechnung, Höherstufung und Elternunterhalt-Abschnitt 2026.',
     keywords: ['unterhaltsrechner', 'kindesunterhalt berechnen', 'düsseldorfer tabelle 2026', 'unterhalt 2026', 'elternunterhalt 2026', 'selbstbehalt unterhalt', 'kindergeld verrechnung', 'höherstufung unterhalt'],
     icon: '⚖️',
-    beispiel: 'Bereinigtes Netto 3.000 €, 1 Kind (8 Jahre), Kindergeld hälftig: Einkommensgruppe 4 → Tabellenbetrag 642 € − 129,50 € Kindergeld = 513 € Zahlbetrag/Monat.',
+    // W187: vorher „= 513 € Zahlbetrag“ — aufgerundet wird nur der Tabellenbetrag (§ 1612a Abs. 2 S. 2 BGB), DT 2026: 512,50 €.
+    beispiel: 'Bereinigtes Netto 3.000 €, 1 Kind (8 Jahre), Kindergeld hälftig: Einkommensgruppe 4 → Tabellenbetrag 642 € − 129,50 € Kindergeld = 512,50 € Zahlbetrag/Monat.',
     faq: [
-      { frage: 'Wie viel Kindesunterhalt muss ich 2026 zahlen?', antwort: 'Die Höhe richtet sich nach dem bereinigten Nettoeinkommen und dem Alter des Kindes. Bei einem bereinigten Netto von 3.000 € und einem 8-jährigen Kind ergibt sich nach Düsseldorfer Tabelle 2026 Einkommensgruppe 4 ein Tabellenbetrag von 642 € — minus 129,50 € hälftiges Kindergeld = 513 € Zahlbetrag. Unser Rechner zeigt den genauen Wert für Ihre Situation.' },
+      { frage: 'Wie viel Kindesunterhalt muss ich 2026 zahlen?', antwort: 'Die Höhe richtet sich nach dem bereinigten Nettoeinkommen und dem Alter des Kindes. Bei einem bereinigten Netto von 3.000 € und einem 8-jährigen Kind ergibt sich nach Düsseldorfer Tabelle 2026 Einkommensgruppe 4 ein Tabellenbetrag von 642 € — minus 129,50 € hälftiges Kindergeld = 512,50 € Zahlbetrag. Unser Rechner zeigt den genauen Wert für Ihre Situation.' }, // W187: vorher 513 €
       { frage: 'Was ist die Düsseldorfer Tabelle?', antwort: 'Die Düsseldorfer Tabelle ist eine Leitlinie zur Berechnung des Kindesunterhalts in Deutschland, herausgegeben vom OLG Düsseldorf. Sie enthält Einkommensgruppen und Altersstufen und wird jährlich an die Entwicklung des Mindestbedarfs angepasst. Gerichte orientieren sich bundesweit an dieser Tabelle.' },
       { frage: 'Wird das Kindergeld auf den Unterhalt angerechnet?', antwort: 'Ja. Bei minderjährigen Kindern wird das hälftige Kindergeld (129,50 € in 2026) vom Tabellenbetrag abgezogen, da beide Elternteile das Kind versorgen. Bei volljährigen Kindern wird das volle Kindergeld (259 € in 2026) angerechnet, weil es als Einkommen des Kindes gewertet wird.' },
       { frage: 'Was ist der Selbstbehalt beim Unterhalt?', antwort: 'Der Selbstbehalt ist der Mindestbetrag, der dem Unterhaltspflichtigen zum Leben bleiben muss. 2026 beträgt er 1.450 € monatlich für Erwerbstätige (nicht erwerbstätig: 1.200 €). Er enthält einen Wohnkostenanteil von 520 €. Liegt das Einkommen nach Unterhalt unter dem Selbstbehalt, liegt ein Mangelfall vor.' },
@@ -2568,9 +2579,9 @@ export const arbeitRechner: RechnerConfig[] = [
           { label: 'Altersstufe (6–11 Jahre)', formel: 'Mindestbedarf', ergebnis: '558 €' },
           { label: 'Tabellenbetrag', formel: '⌈558 € × 1,15⌉', ergebnis: '642 €' },
           { label: 'Hälftiges Kindergeld', formel: '259 € ÷ 2', ergebnis: '129,50 €' },
-          { label: 'Zahlbetrag', formel: '642 € − 129,50 €', ergebnis: '513 €' },
+          { label: 'Zahlbetrag', formel: '642 € − 129,50 €', ergebnis: '512,50 €' }, // W187: vorher 513 €
         ],
-        fazit: 'Bei einem bereinigten Netto von 3.000 € fällt ein Unterhaltspflichtiger mit Standard-Annahme (zwei Berechtigte) in Einkommensgruppe 4 mit 115 % des Mindestbedarfs. Für ein achtjähriges Kind (Altersstufe 6–11, Mindestbedarf 558 €) ergibt das einen aufgerundeten Tabellenbetrag von 642 €. Davon wird das hälftige Kindergeld von 129,50 € abgezogen, weil der andere Elternteil das Kind betreut und ebenfalls die halbe Leistung erhält. Es bleibt ein Zahlbetrag von 513 € im Monat. Verdient der Pflichtige mehr, steigt die Gruppe und damit der Betrag; mit nur einem Kind kommt eine Höherstufung hinzu.',
+        fazit: 'Bei einem bereinigten Netto von 3.000 € fällt ein Unterhaltspflichtiger mit Standard-Annahme (zwei Berechtigte) in Einkommensgruppe 4 mit 115 % des Mindestbedarfs. Für ein achtjähriges Kind (Altersstufe 6–11, Mindestbedarf 558 €) ergibt das einen aufgerundeten Tabellenbetrag von 642 €. Davon wird das hälftige Kindergeld von 129,50 € abgezogen, weil der andere Elternteil das Kind betreut und ebenfalls die halbe Leistung erhält. Es bleibt ein Zahlbetrag von 512,50 € im Monat — aufgerundet wird nur der Tabellenbetrag, nicht der Zahlbetrag. Verdient der Pflichtige mehr, steigt die Gruppe und damit der Betrag; mit nur einem Kind kommt eine Höherstufung hinzu.',
       },
       {
         typ: 'tabelle',
@@ -2594,16 +2605,19 @@ export const arbeitRechner: RechnerConfig[] = [
       },
       {
         typ: 'tabelle',
-        titel: 'Einkommensgruppen 2026 (Zahlbetrag-Beispiel, Alter 6–11)',
+        // W187: vorher Titel „Zahlbetrag-Beispiel“ (die Spalte zeigt Tabellenbeträge) und Zeilen
+        // 6 | 3.900 € | 125 % | 698 €, 10 | 6.400 € | 145 % | 810 €, 15 | 11.200 € | 170 % | 949 €;
+        // DT 2026: Gruppe 6 bis 4.100 € 128 %, Gruppe 11 bis 6.400 € 168 %, Gruppe 15 200 %.
+        titel: 'Einkommensgruppen 2026 (Tabellenbetrag-Beispiel, Alter 6–11)',
         kopf: ['Gruppe', 'Netto bis', 'Prozent', 'Tabellenbetrag'],
         zeilen: [
           ['1', '2.100 €', '100 %', '558 €'],
           ['4', '3.300 €', '115 %', '642 €'],
-          ['6', '3.900 €', '125 %', '698 €'],
-          ['10', '6.400 €', '145 %', '810 €'],
-          ['15', '11.200 €', '170 %', '949 €'],
+          ['6', '4.100 €', '128 %', '715 €'],
+          ['11', '6.400 €', '168 %', '938 €'],
+          ['15', '11.200 €', '200 %', '1.116 €'],
         ],
-        fussnote: 'Die Düsseldorfer Tabelle kennt 15 Einkommensgruppen von 100 % (bis 2.100 € Netto) bis 170 % (bis 11.200 €), jeweils in Fünf-Prozent-Schritten. Hier ist beispielhaft die Altersstufe 6–11 Jahre (Mindestbedarf 558 €) abgebildet; der Tabellenbetrag ist auf volle Euro aufgerundet. Vom Tabellenbetrag wird das Kindergeld noch abgezogen. Liegt das bereinigte Netto über 11.200 €, gibt es keine schematische Fortschreibung — dann wird der konkrete Bedarf des Kindes nach § 1610 BGB individuell ermittelt. Die Gruppen gehen von zwei Unterhaltsberechtigten aus.',
+        fussnote: 'Die Düsseldorfer Tabelle kennt 15 Einkommensgruppen von 100 % (bis 2.100 € Netto) bis 200 % (bis 11.200 €): bis Gruppe 5 in Schritten von 5 Prozentpunkten (120 %), ab Gruppe 6 in Schritten von 8 Prozentpunkten (128 %, 136 % … 200 %). Hier ist beispielhaft die Altersstufe 6–11 Jahre (Mindestbedarf 558 €) abgebildet; der Tabellenbetrag ist auf volle Euro aufgerundet. Vom Tabellenbetrag wird das Kindergeld noch abgezogen. Liegt das bereinigte Netto über 11.200 €, gibt es keine schematische Fortschreibung — dann wird der konkrete Bedarf des Kindes nach § 1610 BGB individuell ermittelt. Die Gruppen gehen von zwei Unterhaltsberechtigten aus.',
       },
       {
         typ: 'text',
@@ -2818,7 +2832,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'ehegattenunterhalt-rechner',
-    letzteAktualisierung: '2026-06-29',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Ehegattenunterhalt-Rechner',
     beschreibung: 'Ehegattenunterhalt berechnen: Trennungsunterhalt und nachehelicher Unterhalt nach der 3/7-Methode mit Selbstbehalt-Check.',
     kategorie: 'Arbeit & Recht',
@@ -2893,13 +2907,15 @@ export const arbeitRechner: RechnerConfig[] = [
         titel: 'Mit Kindesunterhalt: Vorabzug senkt den Betrag',
         schritte: [
           { label: 'Bereinigtes Netto Partner 1', formel: 'vor KU-Abzug', ergebnis: '3.500 €' },
-          { label: 'Kindesunterhalt (vorrangig)', formel: '§ 1609 BGB', ergebnis: '− 513 €' },
-          { label: 'Einkommen Partner 1 nach Abzug', formel: '3.500 € − 513 €', ergebnis: '2.987 €' },
-          { label: 'Differenz zu Partner 2', formel: '2.987 € − 1.200 €', ergebnis: '1.787 €' },
-          { label: 'Ehegattenunterhalt (3/7)', formel: '1.787 € × 3/7', ergebnis: '≈ 766 €' },
-          { label: 'Differenz zum Fall ohne Kind', formel: '986 € − 766 €', ergebnis: '−220 €' },
+          // W187: vorher Kindesunterhalt 513 € (falsch aufgerundeter Zahlbetrag der Gruppe 4); bei 3.500 € Netto
+          // gilt DT 2026 Gruppe 5, Kind 6–11: 670 € − 129,50 € = 540,50 €. Folgewerte neu gerechnet.
+          { label: 'Kindesunterhalt (vorrangig)', formel: 'DT 2026, Gruppe 5, Kind 6–11', ergebnis: '− 540,50 €' },
+          { label: 'Einkommen Partner 1 nach Abzug', formel: '3.500 € − 540,50 €', ergebnis: '2.959,50 €' },
+          { label: 'Differenz zu Partner 2', formel: '2.959,50 € − 1.200 €', ergebnis: '1.759,50 €' },
+          { label: 'Ehegattenunterhalt (3/7)', formel: '1.759,50 € × 3/7', ergebnis: '≈ 754 €' },
+          { label: 'Differenz zum Fall ohne Kind', formel: '986 € − 754 €', ergebnis: '−232 €' },
         ],
-        fazit: 'Zahlt Partner 1 für ein Kind 513 € Unterhalt, wird dieser Betrag zuerst von seinem Einkommen abgezogen. Das bereinigte Netto sinkt auf 2.987 €, die Differenz zu Partner 2 auf 1.787 € — und damit der Ehegattenunterhalt auf rund 766 €, etwa 220 € weniger als ohne Kind. Das zeigt den gesetzlichen Vorrang des Kindesunterhalts: Kinder werden zuerst bedient, der Ehegatte erst aus dem, was danach übrig bleibt. Bei mehreren Kindern oder höherem Kindesunterhalt kann der Ehegattenunterhalt entsprechend stärker schrumpfen oder ganz entfallen.',
+        fazit: 'Zahlt Partner 1 für ein achtjähriges Kind 540,50 € Unterhalt (Düsseldorfer Tabelle 2026, Gruppe 5), wird dieser Betrag nach § 1609 BGB zuerst von seinem Einkommen abgezogen. Das bereinigte Netto sinkt auf 2.959,50 €, die Differenz zu Partner 2 auf 1.759,50 € — und damit der Ehegattenunterhalt auf rund 754 €, etwa 232 € weniger als ohne Kind. Das zeigt den gesetzlichen Vorrang des Kindesunterhalts: Kinder werden zuerst bedient, der Ehegatte erst aus dem, was danach übrig bleibt. Bei mehreren Kindern oder höherem Kindesunterhalt kann der Ehegattenunterhalt entsprechend stärker schrumpfen oder ganz entfallen.',
       },
       {
         typ: 'text',

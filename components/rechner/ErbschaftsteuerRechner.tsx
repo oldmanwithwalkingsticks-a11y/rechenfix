@@ -242,7 +242,11 @@ export default function ErbschaftsteuerRechner() {
                 </tr>
               )}
               <tr className="bg-blue-50 dark:bg-blue-500/10 font-medium">
-                <td className="px-4 py-2.5 text-blue-800 dark:text-blue-300 whitespace-nowrap">= Steuerpflichtiger {ergebnis.vorschenkungen > 0 ? 'Gesamterwerb' : 'Erwerb'}</td>
+                <td className="px-4 py-2.5 text-blue-800 dark:text-blue-300 whitespace-nowrap">
+                  = Steuerpflichtiger {ergebnis.vorschenkungen > 0 ? 'Gesamterwerb' : 'Erwerb'}
+                  {/* W187: Abrundung § 10 Abs. 1 Satz 6 ErbStG sichtbar machen */}
+                  <span className="block text-xs font-normal">auf volle 100 € abgerundet</span>
+                </td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-blue-800 dark:text-blue-300 whitespace-nowrap">{fmtEuro(ergebnis.steuerpflichtigerErwerb)} €</td>
               </tr>
               <tr>
@@ -327,7 +331,8 @@ export default function ErbschaftsteuerRechner() {
       {/* Hinweis */}
       <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
         <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Hinweis:</strong> Diese Berechnung ist vereinfacht. Sonderfälle wie Betriebsvermögen, Nießbrauch, die genaue Immobilienbewertung oder altersabhängige Versorgungsfreibeträge für Kinder sind nicht berücksichtigt. Bei größeren Erbschaften/Schenkungen empfehlen wir eine steuerliche Beratung.
+          {/* W187: vorher „… oder altersabhängige Versorgungsfreibeträge für Kinder sind nicht berücksichtigt“ — die Staffel ist seit W178 drin */}
+          <strong>⚠️ Hinweis:</strong> Diese Berechnung ist vereinfacht. Sonderfälle wie Betriebsvermögen, Nießbrauch, die genaue Immobilienbewertung oder die Kürzung des Versorgungsfreibetrags um den Kapitalwert erbschaftsteuerfreier Versorgungsbezüge (z. B. Witwen- oder Waisenrente, § 17 Abs. 1 Satz 2 und Abs. 2 Satz 2 ErbStG) sind nicht berücksichtigt. Bei größeren Erbschaften/Schenkungen empfehlen wir eine steuerliche Beratung.
         </p>
       </div>
 

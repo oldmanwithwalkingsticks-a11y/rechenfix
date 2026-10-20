@@ -12,27 +12,28 @@ import CrossLink from '@/components/ui/CrossLink';
 const KINDERFREIBETRAG_OPTIONEN = ['0', '0,5', '1', '1,5', '2', '2,5', '3', '3,5', '4'];
 
 export default function SplittingRechner() {
-  const [bruttoP1, setBruttoP1] = useState('55000');
-  const [bruttoP2, setBruttoP2] = useState('25000');
+  // W187: Eingabe ist jetzt das zu versteuernde Einkommen (vorher „Jahresbrutto“ mit Abzug von nur 1.266 €)
+  const [zvEP1, setZvEP1] = useState('55000');
+  const [zvEP2, setZvEP2] = useState('25000');
   const [kircheP1, setKircheP1] = useState(false);
   const [kircheP2, setKircheP2] = useState(false);
   const [bundesland, setBundesland] = useState('Nordrhein-Westfalen');
   const [kinderfreibetraege, setKinderfreibetraege] = useState('0');
 
-  const nBruttoP1 = parseDeutscheZahl(bruttoP1);
-  const nBruttoP2 = parseDeutscheZahl(bruttoP2);
+  const nZvEP1 = parseDeutscheZahl(zvEP1);
+  const nZvEP2 = parseDeutscheZahl(zvEP2);
   const nKfb = parseDeutscheZahl(kinderfreibetraege);
 
   const ergebnis = useMemo(
     () => berechneSplitting({
-      jahresBruttoP1: nBruttoP1,
-      jahresBruttoP2: nBruttoP2,
+      zvEP1: nZvEP1,
+      zvEP2: nZvEP2,
       kirchensteuerP1: kircheP1,
       kirchensteuerP2: kircheP2,
       bundesland,
       kinderfreibetraege: nKfb,
     }),
-    [nBruttoP1, nBruttoP2, kircheP1, kircheP2, bundesland, nKfb],
+    [nZvEP1, nZvEP2, kircheP1, kircheP2, bundesland, nKfb],
   );
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -47,20 +48,21 @@ export default function SplittingRechner() {
     <div>
       {/* Partner 1 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahresbrutto Partner 1</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen Partner 1</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={bruttoP1} onChange={setBruttoP1} placeholder="z.B. 55.000" einheit="€" />
+          <NummerEingabe value={zvEP1} onChange={setZvEP1} placeholder="z.B. 55.000" einheit="€" />
         </div>
       </div>
 
       {/* Partner 2 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahresbrutto Partner 2</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen Partner 2</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={bruttoP2} onChange={setBruttoP2} placeholder="z.B. 25.000" einheit="€" />
+          <NummerEingabe value={zvEP2} onChange={setZvEP2} placeholder="z.B. 25.000" einheit="€" />
         </div>
+        {/* W187: vorher „Bruttogehalt … Pauschalen (insg. 1.266 € pro Partner) werden automatisch berücksichtigt“ */}
         <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-          Bruttogehalt aus nichtselbständiger Arbeit (vor Steuern). Werbungskosten- und Sonderausgabenpauschale (insg. 1.266 € pro Partner) werden automatisch berücksichtigt. Sozialversicherungsbeiträge werden nicht gesondert abgezogen — wer das Netto inkl. SV braucht, nutzt den <a href="/finanzen/brutto-netto-rechner" className="underline">Brutto-Netto-Rechner</a>.
+          Jahreseinkommen nach Werbungskosten, Vorsorgeaufwendungen (Renten-, Kranken-, Pflegeversicherung) und Sonderausgaben, wie im Steuerbescheid. Bei Arbeitnehmern liegt es meist rund 20–25 % unter dem Brutto. Kinderfreibeträge hier nicht abziehen, die wählen Sie unten. Vom Brutto zum Netto: <a href="/finanzen/brutto-netto-rechner" className="underline">Brutto-Netto-Rechner</a>.
         </p>
       </div>
 
@@ -260,14 +262,15 @@ export default function SplittingRechner() {
           {/* Info-Box */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 mb-6">
             <p className="text-gray-700 dark:text-gray-300 text-sm">
-              <strong>ℹ️ Gut zu wissen:</strong> Das Ehegattensplitting lohnt sich umso mehr, je größer der Gehaltsunterschied zwischen den Partnern ist. Bei gleich hohen Einkommen gibt es keinen Vorteil. Der maximale Splitting-Vorteil liegt 2026 bei ca. <strong>20.000 €</strong> (wenn ein Partner nichts verdient und der andere ein sehr hohes Einkommen hat).
+              <strong>ℹ️ Gut zu wissen:</strong> Das Ehegattensplitting lohnt sich umso mehr, je größer der Gehaltsunterschied zwischen den Partnern ist. Bei gleich hohen Einkommen gibt es keinen Vorteil. Der maximale Splitting-Vorteil liegt 2026 bei rund <strong>19.470 €</strong> Einkommensteuer, mit Soli rund 20.540 € (wenn ein Partner nichts verdient und der andere ein sehr hohes Einkommen hat).{/* W187: vorher „ca. 20.000 €“; Zone 5 des § 32a: 0,45 x − 19.470,38 */}
             </p>
           </div>
 
           {/* Hinweis */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
             <p className="text-amber-800 dark:text-amber-300 text-xs">
-              <strong>⚠️ Hinweis:</strong> Vereinfachte Berechnung. Sonderausgaben, außergewöhnliche Belastungen und weitere Freibeträge sind nicht berücksichtigt. Für eine exakte Berechnung nutzen Sie eine Steuersoftware.
+              {/* W187: vorher „Sonderausgaben … nicht berücksichtigt“, obwohl 36 € abgezogen wurden */}
+              <strong>⚠️ Hinweis:</strong> Vereinfachte Berechnung auf Basis der eingegebenen zu versteuernden Einkommen nach § 32a EStG 2026. Kinderfreibeträge zieht der Rechner ab, ohne die Günstigerprüfung mit dem Kindergeld; Progressionsvorbehalt und Sonderfälle der Einzelveranlagung sind nicht berücksichtigt. Für eine exakte Berechnung nutzen Sie eine Steuersoftware.
             </p>
           </div>
 
@@ -292,8 +295,8 @@ export default function SplittingRechner() {
           <AiExplain
             rechnerName="Splitting-Rechner (Ehegattensplitting)"
             eingaben={{
-              partner1: `${fmtEuro(nBruttoP1)} € Jahresbrutto`,
-              partner2: `${fmtEuro(nBruttoP2)} € Jahresbrutto`,
+              partner1: `${fmtEuro(nZvEP1)} € zu versteuerndes Einkommen`,
+              partner2: `${fmtEuro(nZvEP2)} € zu versteuerndes Einkommen`,
               kirchensteuerP1: kircheP1 ? 'Ja' : 'Nein',
               kirchensteuerP2: kircheP2 ? 'Ja' : 'Nein',
               bundesland,

@@ -22,7 +22,10 @@ export default function KwPsRechner() {
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   // W184: Umrechnungsfaktor vorher roh („Faktor: 1.35962“, „× 0.7355“), jetzt de-DE
-  const fmtFaktor = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 4, maximumFractionDigits: 5 });
+  // W187: vorher beide Faktoren mit 4–5 Nachkommastellen („0,7355“); PS→kW jetzt exakt mit 8 Stellen (0,73549875), kW→PS gerundet auf 5 (1,35962)
+  const fmtFaktor = (n: number) => n === PS_ZU_KW
+    ? n.toLocaleString('de-DE', { minimumFractionDigits: 8, maximumFractionDigits: 8 })
+    : n.toLocaleString('de-DE', { minimumFractionDigits: 5, maximumFractionDigits: 5 });
 
   return (
     <div>

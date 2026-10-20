@@ -77,7 +77,8 @@ export default function AfbgRechner() {
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">
           Unterhaltsbeitrag nach § 10 AFBG gibt es nur bei Vollzeit-Maßnahmen. Der
-          Maßnahmebeitrag (Lehrgangskosten) steht bei beiden Formen zu.
+          Maßnahmebeitrag (Lehrgangskosten) und der Kinderbetreuungszuschlag für
+          Alleinerziehende stehen bei beiden Formen zu.
         </p>
       </div>
 
@@ -110,105 +111,117 @@ export default function AfbgRechner() {
         </div>
       </div>
 
-      {/* === 3: Persönliche Situation (nur Vollzeit) === */}
-      {istVollzeit && (
-        <div className="mb-6">
-          <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
-            <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-            Persönliche Situation <span className="text-xs font-normal text-gray-500">(für Unterhaltsbeitrag)</span>
-          </h2>
+      {/* === 3: Persönliche Situation === */}
+      {/* W187: vorher nur bei Vollzeit eingeblendet — der Kinderbetreuungszuschlag (§ 10 Abs. 3 AFBG) gilt auch bei Teilzeit */}
+      <div className="mb-6">
+        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+          Persönliche Situation <span className="text-xs font-normal text-gray-500">({istVollzeit ? 'für Unterhaltsbeitrag und Kinderbetreuungszuschlag' : 'für den Kinderbetreuungszuschlag'})</span>
+        </h2>
 
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Bruttoeinkommen</label>
-                <NummerEingabe value={antragstellerBrutto} onChange={setAntragstellerBrutto} placeholder="0" einheit="€/Monat" />
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag ca. 603 €/Monat (Minijob-Grenze)</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
-                <NummerEingabe value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag 45.000 € (§ 29 BAföG)</p>
-              </div>
-            </div>
-
+        <div className="space-y-4">
+          {istVollzeit && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ehegatte / Lebenspartner</label>
-              <div className="flex gap-2">
-                {([false, true] as const).map(val => (
-                  <button key={String(val)} onClick={() => setEhegatteVorhanden(val)}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${ehegatteVorhanden === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
-                    {val ? '💍 Vorhanden' : 'Nein'}
-                  </button>
-                ))}
-              </div>
-              {ehegatteVorhanden && (
-                <div className="mt-3 w-full sm:w-1/2">
-                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttoeinkommen Ehegatte/Partner</label>
-                  <NummerEingabe value={ehegatteBrutto} onChange={setEhegatteBrutto} placeholder="0" einheit="€/Monat" />
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag 850 €/Monat zusätzlich + 235 € Bedarfs-Zuschlag</p>
-                </div>
-              )}
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Bruttoeinkommen</label>
+              <NummerEingabe value={antragstellerBrutto} onChange={setAntragstellerBrutto} placeholder="0" einheit="€/Monat" />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag ca. 603 €/Monat (Minijob-Grenze)</p>
             </div>
-
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Kinder ({kinder.length})</label>
-                {kinder.length < 5 && (
-                  <button onClick={kindHinzufuegen}
-                    className="text-xs text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                    </svg>
-                    Kind hinzufügen
-                  </button>
-                )}
-              </div>
-              {kinder.length > 0 && (
-                <div className="space-y-2">
-                  {kinder.map((kind, i) => (
-                    <div key={i} className="flex items-center gap-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3">
-                      <span className="text-sm text-gray-600 dark:text-gray-400 shrink-0 w-16">Kind {i + 1}</span>
-                      <input
-                        type="number"
-                        min={0} max={25} step={1}
-                        aria-label={`Alter Kind ${i + 1}`}
-                        value={kind.alterText ?? kind.alter}
-                        onChange={e => { const t = clampInputValue(e.target.value, 0, 25); kindAendern(i, { alterText: t, alter: parseInt(t) || 0 }); }}
-                        onBlur={e => { const t = clampInputValueOnBlur(e.target.value, 0, 25); kindAendern(i, { alterText: t, alter: parseInt(t) || 0 }); }}
-                        className="w-20 text-sm bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-2 py-2 text-gray-800 dark:text-gray-200"
-                      />
-                      <span className="text-xs text-gray-600 dark:text-gray-400">J.</span>
-                      <label className="flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 ml-2">
-                        <input
-                          type="checkbox"
-                          checked={kind.anspruchAufKindergeld}
-                          onChange={e => kindAendern(i, { anspruchAufKindergeld: e.target.checked })}
-                          className="w-4 h-4 rounded border-gray-300 dark:border-gray-600"
-                        />
-                        Kindergeld
-                      </label>
-                      <button
-                        onClick={() => kindEntfernen(i)}
-                        className="ml-auto text-red-400 hover:text-red-600 p-1"
-                        aria-label={`Kind ${i + 1} entfernen`}
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">
-                Pro kindergeldberechtigtem Kind: + 235 € Bedarfs-Zuschlag + 770 € Einkommens-Freibetrag.
-                Kinderbetreuungszuschlag 150 €/Monat zusätzlich für Kinder unter 14 (§ 10 Abs. 3a AFBG).
-              </p>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
+              <NummerEingabe value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag 45.000 € (§ 29 BAföG)</p>
             </div>
           </div>
+          )}
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ehegatte / Lebenspartner</label>
+            <div className="flex gap-2">
+              {([false, true] as const).map(val => (
+                <button key={String(val)} onClick={() => setEhegatteVorhanden(val)}
+                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${ehegatteVorhanden === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
+                  {val ? '💍 Vorhanden' : 'Nein'}
+                </button>
+              ))}
+            </div>
+            {ehegatteVorhanden && istVollzeit && (
+              <div className="mt-3 w-full sm:w-1/2">
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttoeinkommen Ehegatte/Partner</label>
+                <NummerEingabe value={ehegatteBrutto} onChange={setEhegatteBrutto} placeholder="0" einheit="€/Monat" />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Freibetrag 850 €/Monat zusätzlich + 235 € Bedarfs-Zuschlag</p>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Kinder ({kinder.length})</label>
+              {kinder.length < 5 && (
+                <button onClick={kindHinzufuegen}
+                  className="text-xs text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium flex items-center gap-1">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  Kind hinzufügen
+                </button>
+              )}
+            </div>
+            {kinder.length > 0 && (
+              <div className="space-y-2">
+                {kinder.map((kind, i) => (
+                  <div key={i} className="flex items-center gap-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3">
+                    <span className="text-sm text-gray-600 dark:text-gray-400 shrink-0 w-16">Kind {i + 1}</span>
+                    <input
+                      type="number"
+                      min={0} max={25} step={1}
+                      aria-label={`Alter Kind ${i + 1}`}
+                      value={kind.alterText ?? kind.alter}
+                      onChange={e => { const t = clampInputValue(e.target.value, 0, 25); kindAendern(i, { alterText: t, alter: parseInt(t) || 0 }); }}
+                      onBlur={e => { const t = clampInputValueOnBlur(e.target.value, 0, 25); kindAendern(i, { alterText: t, alter: parseInt(t) || 0 }); }}
+                      className="w-20 text-sm bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-2 py-2 text-gray-800 dark:text-gray-200"
+                    />
+                    <span className="text-xs text-gray-600 dark:text-gray-400">J.</span>
+                    <label className="flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 ml-2">
+                      <input
+                        type="checkbox"
+                        checked={kind.anspruchAufKindergeld}
+                        onChange={e => kindAendern(i, { anspruchAufKindergeld: e.target.checked })}
+                        className="w-4 h-4 rounded border-gray-300 dark:border-gray-600"
+                      />
+                      Kindergeld
+                    </label>
+                    <label className="flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 ml-2">
+                      <input
+                        type="checkbox"
+                        checked={kind.behindert === true}
+                        onChange={e => kindAendern(i, { behindert: e.target.checked })}
+                        className="w-4 h-4 rounded border-gray-300 dark:border-gray-600"
+                      />
+                      Behinderung
+                    </label>
+                    <button
+                      onClick={() => kindEntfernen(i)}
+                      className="ml-auto text-red-400 hover:text-red-600 p-1"
+                      aria-label={`Kind ${i + 1} entfernen`}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">
+              {/* W187: vorher „… für Kinder unter 14 (§ 10 Abs. 3a AFBG)“ ohne Einschränkung auf Alleinerziehende */}
+              {istVollzeit && <>Pro kindergeldberechtigtem Kind: + 235 € Bedarfs-Zuschlag + 770 € Einkommens-Freibetrag. </>}
+              Alleinerziehende (ohne Ehegatten/Lebenspartner) erhalten bei Voll- und Teilzeit 150 €/Monat
+              Kinderbetreuungszuschlag je Kind unter 14 Jahren oder mit Behinderung — ohne Einkommensanrechnung (§ 10 Abs. 3 AFBG).
+            </p>
+          </div>
         </div>
-      )}
+      </div>
 
       {/* === 4: Rückzahlungs-Szenarien === */}
       <div className="mb-6">
@@ -262,6 +275,13 @@ export default function AfbgRechner() {
               <p className="text-white/80 text-sm mb-1">Unterhaltsbeitrag (Vollzuschuss)</p>
               <p className="text-4xl font-bold">{fmtEuro(ergebnis.unterhalt.auszahlung)} €</p>
               <p className="text-white/90 text-xs mt-1">pro Monat</p>
+            </div>
+          )}
+          {ergebnis.kinderbetreuung.zuschlagMonat > 0 && (
+            <div className="sm:text-right">
+              <p className="text-white/80 text-sm mb-1">Kinderbetreuungszuschlag</p>
+              <p className="text-4xl font-bold">{fmtEuro(ergebnis.kinderbetreuung.zuschlagMonat)} €</p>
+              <p className="text-white/90 text-xs mt-1">pro Monat (Zuschuss)</p>
             </div>
           )}
         </div>
@@ -342,12 +362,6 @@ export default function AfbgRechner() {
                       <td className="px-4 py-2 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.unterhalt.bedarfAufschluesselung.kinderZuschlag)} €</td>
                     </tr>
                   )}
-                  {ergebnis.unterhalt.bedarfAufschluesselung.kinderbetreuungZuschlag > 0 && (
-                    <tr>
-                      <td className="px-4 py-2 text-gray-600 dark:text-gray-400">+ Kinderbetreuungszuschlag (150 € je Kind &lt; 14 J.)</td>
-                      <td className="px-4 py-2 text-right tabular-nums text-green-600 dark:text-green-400 whitespace-nowrap">+{fmtEuro(ergebnis.unterhalt.bedarfAufschluesselung.kinderbetreuungZuschlag)} €</td>
-                    </tr>
-                  )}
                   <tr className="bg-blue-50 dark:bg-blue-500/10 font-medium">
                     <td className="px-4 py-2.5 text-blue-800 dark:text-blue-300">= Gesamtbedarf Unterhalt</td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-blue-800 dark:text-blue-300 whitespace-nowrap">{fmtEuro(ergebnis.unterhalt.bedarf)} €</td>
@@ -378,6 +392,17 @@ export default function AfbgRechner() {
                     <td className="px-4 py-3 text-right tabular-nums text-lg text-green-700 dark:text-green-300 whitespace-nowrap">{fmtEuroCent(ergebnis.unterhalt.auszahlung)} €</td>
                   </tr>
                 </>
+              )}
+
+              {/* KINDERBETREUUNGSZUSCHLAG (§ 10 Abs. 3 AFBG, Voll- und Teilzeit) */}
+              {ergebnis.kinderbetreuung.zuschlagMonat > 0 && (
+                <tr className="bg-green-50 dark:bg-green-500/10 font-medium">
+                  <td className="px-4 py-2.5 text-green-800 dark:text-green-300">
+                    + Kinderbetreuungszuschlag (150 € × {ergebnis.kinderbetreuung.anzahlKinder} Kind{ergebnis.kinderbetreuung.anzahlKinder > 1 ? 'er' : ''}, § 10 Abs. 3 AFBG)
+                    <span className="text-xs text-green-700/80 dark:text-green-400/80 ml-1">— Zuschuss, ohne Einkommensanrechnung</span>
+                  </td>
+                  <td className="px-4 py-2.5 text-right tabular-nums text-green-800 dark:text-green-300 whitespace-nowrap">{fmtEuroCent(ergebnis.kinderbetreuung.zuschlagMonat)} €</td>
+                </tr>
               )}
 
               {/* RÜCKZAHLUNG */}
@@ -470,7 +495,7 @@ export default function AfbgRechner() {
       </a>
 
       <ErgebnisAktionen
-        ergebnisText={`Aufstiegs-BAföG: Maßnahme ${fmtEuro(ergebnis.massnahme.zuschussGesamt)} € Zuschuss + ${fmtEuro(ergebnis.massnahme.darlehenGesamt)} € Darlehen${ergebnis.unterhalt.anwendbar ? ` | Unterhaltsbeitrag ${fmtEuroCent(ergebnis.unterhalt.auszahlung)} €/Monat (Vollzuschuss)` : ''} | Rückzahlung nach Erlass-Szenarien: ${fmtEuro(ergebnis.rueckzahlung.nachGruenderErlass)} €`}
+        ergebnisText={`Aufstiegs-BAföG: Maßnahme ${fmtEuro(ergebnis.massnahme.zuschussGesamt)} € Zuschuss + ${fmtEuro(ergebnis.massnahme.darlehenGesamt)} € Darlehen${ergebnis.unterhalt.anwendbar ? ` | Unterhaltsbeitrag ${fmtEuroCent(ergebnis.unterhalt.auszahlung)} €/Monat (Vollzuschuss)` : ''}${ergebnis.kinderbetreuung.zuschlagMonat > 0 ? ` | Kinderbetreuungszuschlag ${fmtEuro(ergebnis.kinderbetreuung.zuschlagMonat)} €/Monat` : ''} | Rückzahlung nach Erlass-Szenarien: ${fmtEuro(ergebnis.rueckzahlung.nachGruenderErlass)} €`}
         seitenTitel="Aufstiegs-BAföG-Rechner"
       />
 
@@ -490,6 +515,7 @@ export default function AfbgRechner() {
           zuschussGesamt: `${fmtEuro(ergebnis.massnahme.zuschussGesamt)} €`,
           darlehenGesamt: `${fmtEuro(ergebnis.massnahme.darlehenGesamt)} €`,
           unterhaltMonat: ergebnis.unterhalt.anwendbar ? `${fmtEuroCent(ergebnis.unterhalt.auszahlung)} €` : 'nicht anwendbar',
+          kinderbetreuungszuschlagMonat: `${fmtEuro(ergebnis.kinderbetreuung.zuschlagMonat)} €`,
           tatsaechlichRueckzahlen: `${fmtEuro(ergebnis.rueckzahlung.nachGruenderErlass)} €`,
         }}
       />

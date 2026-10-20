@@ -658,7 +658,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'geburtstermin-rechner',
-    letzteAktualisierung: '2026-06-27',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Geburtstermin-Rechner',
     beschreibung: 'Geburtstermin berechnen: Nach der Naegele-Regel mit drei Methoden — letzte Periode, Empfängnisdatum oder Ultraschall.',
     kategorie: 'Gesundheit',
@@ -967,7 +967,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'wasserbedarf-rechner',
-    letzteAktualisierung: '2026-06-14',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Wasserbedarf-Rechner',
     beschreibung: 'Täglichen Wasserbedarf berechnen: Empfohlene Trinkmenge basierend auf Gewicht, Aktivität und individuellen Faktoren.',
     kategorie: 'Gesundheit',
@@ -976,11 +976,13 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'Wasserbedarf berechnen: Empfohlene tägliche Trinkmenge nach Gewicht, Aktivität und Sport ✓ In Gläsern ✓ KI-Erklärung.',
     keywords: ['wasserbedarf rechner', 'trinkmenge berechnen', 'wie viel wasser trinken', 'täglicher wasserbedarf', 'wasserbedarf sport', 'trinkmenge pro tag', 'wasser pro kg körpergewicht', 'dehydration vermeiden', 'flüssigkeitsbedarf rechner', 'wasserbedarf schwangerschaft'],
     icon: '💧',
-    beispiel: '75 kg, leicht aktiv, 60 Min. Sport → 2.625 ml Basis + 700 ml Sport = 3.325 ml ≈ 3,3 Liter (ca. 14 Gläser).',
+    // W187: vorher „… = 3.325 ml ≈ 3,3 Liter (ca. 14 Gläser)“ — Gesamtbedarf als Trinkmenge, Gläser aus dem Gesamtbedarf
+    beispiel: '75 kg, leicht aktiv, 60 Min. Sport → 2.625 ml Basis + 700 ml Sport = 3.325 ml ≈ 3,3 Liter Gesamtbedarf; davon trinken: 54 % von 2.625 ml + 700 ml Sport ≈ 2.118 ml ≈ 2,1 Liter (ca. 9 Gläser).',
     faq: [
       {
         frage: 'Wie viel Wasser sollte ich am Tag trinken?',
-        antwort: 'Die empfohlene Trinkmenge hängt von Ihrem Körpergewicht und Ihrer Aktivität ab. Als Faustregel gelten 30-35 ml pro Kilogramm Körpergewicht. Bei 75 kg sind das 2,3-2,6 Liter pro Tag. Bei Sport, Hitze oder Schwangerschaft entsprechend mehr. Die DGE empfiehlt mindestens 1,5 Liter reine Trinkmenge zusätzlich zur Nahrung.',
+        // W187: vorher „30-35 ml pro Kilogramm … 2,3-2,6 Liter“ als Trinkmenge und „DGE empfiehlt mindestens 1,5 Liter“
+        antwort: 'Der Wasserbedarf hängt von Ihrem Körpergewicht und Ihrer Aktivität ab. Als Faustregel gelten 30–35 ml pro Kilogramm Körpergewicht — nach den D-A-CH-Referenzwerten ist das die gesamte Wasserzufuhr aus Getränken, fester Nahrung und Oxidationswasser. Bei 75 kg sind das 2,3–2,6 Liter pro Tag. Davon kommen bei Erwachsenen rund 54 % aus Getränken, bei 75 kg also etwa 1,2–1,4 Liter; die DGE nennt als Orientierung rund 1,5 Liter Getränke am Tag. Bei Sport, Hitze oder Schwangerschaft entsprechend mehr — was über Schweiß verloren geht, muss voll nachgetrunken werden.',
       },
       {
         frage: 'Kann man zu viel Wasser trinken?',
@@ -1003,7 +1005,7 @@ export const gesundheitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum der Körper Wasser braucht',
-        html: `<p>Wasser ist mengenmäßig der wichtigste Bestandteil des Körpers — ein erwachsener Mensch besteht zu etwa 50 bis 60 Prozent daraus. Es ist <strong>Lösungs- und Transportmittel</strong> für Nährstoffe und Sauerstoff, reguliert über das Schwitzen die <strong>Körpertemperatur</strong>, hält Gelenke geschmeidig und transportiert über die Nieren Abbauprodukte aus dem Körper.</p><p>Schon ein Flüssigkeitsverlust von rund zwei Prozent des Körpergewichts macht sich bemerkbar: Konzentration und Leistungsfähigkeit lassen nach, Kopfschmerzen und Müdigkeit können auftreten. Weil der Körper kein nennenswertes Wasserdepot anlegt, muss die laufend verlorene Menge — über Urin, Haut, Atmung und Verdauung — Tag für Tag ersetzt werden. Wie viel das individuell ist, hängt vor allem von Körpergewicht und Aktivität ab. Genau diese Faktoren rechnet dieser Rechner zu einer persönlichen Richtmenge zusammen und gibt sie zusätzlich in Gläsern à 250 ml an. Die Werte sind Orientierung, kein medizinischer Richtwert.</p>`,
+        html: `<p>Wasser ist mengenmäßig der wichtigste Bestandteil des Körpers — ein erwachsener Mensch besteht zu etwa 50 bis 60 Prozent daraus. Es ist <strong>Lösungs- und Transportmittel</strong> für Nährstoffe und Sauerstoff, reguliert über das Schwitzen die <strong>Körpertemperatur</strong>, hält Gelenke geschmeidig und transportiert über die Nieren Abbauprodukte aus dem Körper.</p><p>Schon ein Flüssigkeitsverlust von rund zwei Prozent des Körpergewichts macht sich bemerkbar: Konzentration und Leistungsfähigkeit lassen nach, Kopfschmerzen und Müdigkeit können auftreten. Weil der Körper kein nennenswertes Wasserdepot anlegt, muss die laufend verlorene Menge — über Urin, Haut, Atmung und Verdauung — Tag für Tag ersetzt werden. Wie viel das individuell ist, hängt vor allem von Körpergewicht und Aktivität ab. Genau diese Faktoren rechnet dieser Rechner zu einem persönlichen Gesamtbedarf zusammen, weist den Anteil aus Getränken separat aus und gibt diese Trinkmenge zusätzlich in Gläsern à 250 ml an. Die Werte sind Orientierung, kein medizinischer Richtwert.</p>`,
       },
       {
         typ: 'statistik',
@@ -1023,10 +1025,12 @@ export const gesundheitRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Körpergewicht', formel: '70 kg', ergebnis: '70 kg' },
           { label: 'Basisfaktor bei überwiegend sitzendem Alltag', formel: '30 ml je kg', ergebnis: '30 ml/kg' },
-          { label: 'Basisbedarf berechnen', formel: '70 × 30 ml', ergebnis: '2.100 ml' },
-          { label: 'In Liter und Gläser (à 250 ml)', formel: '2.100 ml ÷ 250', ergebnis: '2,1 L ≈ 9 Gläser' },
+          { label: 'Basisbedarf berechnen (Gesamtbedarf)', formel: '70 × 30 ml', ergebnis: '2.100 ml' },
+          // W187: vorher „2.100 ml ÷ 250 → 2,1 L ≈ 9 Gläser“ (Gläser aus dem Gesamtbedarf)
+          { label: 'Davon trinken (Getränke-Anteil 54 %)', formel: '2.100 ml × 0,54', ergebnis: '1.134 ml' },
+          { label: 'In Gläser (à 250 ml)', formel: '1.134 ml ÷ 250', ergebnis: '1,1 L ≈ 5 Gläser' },
         ],
-        fazit: 'Für einen 70 kg schweren Menschen mit ruhigem Alltag ergeben sich rund 2,1 Liter am Tag — etwa neun Gläser. Der Faktor von 30 ml je Kilogramm ist der untere Rand der Faustregel (30 bis 35 ml/kg); wer aktiver ist, rechnet mit einem höheren Faktor. Ein Teil dieser Menge kommt ohnehin aus fester Nahrung, der größere Teil sollte aber getrunken werden. Die Zahl ist ein Startwert, kein starres Soll: An manchen Tagen braucht der Körper mehr, an anderen weniger. Das Gewicht ist deshalb die zentrale Stellgröße, weil die Menge an Körperflüssigkeit grob mit der Körpermasse skaliert — ein 90-kg-Mensch käme mit demselben Faktor auf 2,7 Liter, ein 55-kg-Mensch auf rund 1,7 Liter. Der Rechner nimmt einem dieses Umrechnen ab und zeigt das Ergebnis zusätzlich in Gläsern, weil eine Stückzahl im Alltag leichter zu merken ist als eine Milliliter-Angabe.',
+        fazit: 'Für einen 70 kg schweren Menschen mit ruhigem Alltag ergeben sich rund 2,1 Liter Gesamtbedarf am Tag, davon rund 1,1 Liter aus Getränken — etwa fünf Gläser. Der Faktor von 30 ml je Kilogramm ist der untere Rand der Faustregel (30 bis 35 ml/kg); wer aktiver ist, rechnet mit einem höheren Faktor. Knapp die Hälfte des Gesamtbedarfs liefern feste Nahrung und das Oxidationswasser aus dem Stoffwechsel, gut die Hälfte (nach den D-A-CH-Referenzwerten rund 54 %) sollte getrunken werden. Die Zahl ist ein Startwert, kein starres Soll: An manchen Tagen braucht der Körper mehr, an anderen weniger. Das Gewicht ist deshalb die zentrale Stellgröße, weil die Menge an Körperflüssigkeit grob mit der Körpermasse skaliert — ein 90-kg-Mensch käme mit demselben Faktor auf 2,7 Liter, ein 55-kg-Mensch auf rund 1,7 Liter. Der Rechner nimmt einem dieses Umrechnen ab und zeigt das Ergebnis zusätzlich in Gläsern, weil eine Stückzahl im Alltag leichter zu merken ist als eine Milliliter-Angabe.',
       },
       {
         typ: 'text',
@@ -1036,23 +1040,25 @@ export const gesundheitRechner: RechnerConfig[] = [
       {
         typ: 'tabelle',
         titel: 'Wasserbedarf nach Aktivitätslevel (Beispiel 70 kg)',
-        kopf: ['Aktivitätslevel', 'Faktor', 'Basisbedarf bei 70 kg'],
+        // W187: Spalte „davon trinken“ ergänzt (vorher nur Gesamtbedarf)
+        kopf: ['Aktivitätslevel', 'Faktor', 'Gesamtbedarf bei 70 kg', 'davon trinken (54 %)'],
         zeilen: [
-          ['Kaum aktiv (sitzend)', '30 ml/kg', '2,1 L'],
-          ['Leicht aktiv', '35 ml/kg', '2,5 L'],
-          ['Mäßig aktiv', '40 ml/kg', '2,8 L'],
-          ['Sehr aktiv', '45 ml/kg', '3,2 L'],
-          ['Extrem aktiv', '50 ml/kg', '3,5 L'],
+          ['Kaum aktiv (sitzend)', '30 ml/kg', '2,1 L', '1,1 L'],
+          ['Leicht aktiv', '35 ml/kg', '2,5 L', '1,3 L'],
+          ['Mäßig aktiv', '40 ml/kg', '2,8 L', '1,5 L'],
+          ['Sehr aktiv', '45 ml/kg', '3,2 L', '1,7 L'],
+          ['Extrem aktiv', '50 ml/kg', '3,5 L', '1,9 L'],
         ],
-        fussnote: 'Zusätzlich zum Basisbedarf rechnet der Rechner Aufschläge: +350 ml je 30 Minuten Sport, +500 ml an heißen Tagen, +300 ml in der Schwangerschaft und +700 ml in der Stillzeit. Die Liter-Werte gelten für 70 kg — bei anderem Gewicht verschieben sie sich proportional. Die Aktivitätsstufen sind bewusst grob gehalten: „Kaum aktiv" meint überwiegend sitzenden Alltag, „mäßig aktiv" regelmäßige Bewegung und etwas Sport, „extrem aktiv" körperlich harte Arbeit oder tägliches intensives Training. Wer zwischen zwei Stufen liegt, wählt im Zweifel die niedrigere und ergänzt den Sportzuschlag separat.',
+        fussnote: 'Zusätzlich zum Basisbedarf rechnet der Rechner Aufschläge: +350 ml je 30 Minuten Sport, +500 ml an heißen Tagen, +300 ml in der Schwangerschaft und +700 ml in der Stillzeit. Getrunken werden davon 54 % des Basisbedarfs und der Schwangerschafts- bzw. Stillzuschläge; Sport- und Hitzezuschläge gleichen Schweißverluste aus und kommen voll auf die Trinkmenge. Die Liter-Werte gelten für 70 kg — bei anderem Gewicht verschieben sie sich proportional. Die Aktivitätsstufen sind bewusst grob gehalten: „Kaum aktiv" meint überwiegend sitzenden Alltag, „mäßig aktiv" regelmäßige Bewegung und etwas Sport, „extrem aktiv" körperlich harte Arbeit oder tägliches intensives Training. Wer zwischen zwei Stufen liegt, wählt im Zweifel die niedrigere und ergänzt den Sportzuschlag separat.',
       },
       {
         typ: 'statistik',
         titel: 'Woher das Wasser kommt',
         werte: [
-          { label: 'Getränke', wert: '~70–80 %', hinweis: 'Wasser, Tee, Saftschorle, auch Kaffee' },
-          { label: 'Feste Nahrung', wert: '~20–30 %', hinweis: 'Obst, Gemüse, Suppen' },
-          { label: 'Oxidationswasser', wert: '~300 ml', hinweis: 'entsteht im Stoffwechsel selbst' },
+          // W187: vorher Getränke ~70–80 %, feste Nahrung ~20–30 %, Oxidationswasser ~300 ml; jetzt D-A-CH (25 bis unter 51 Jahre: 1.410 + 860 + 330 = 2.600 ml)
+          { label: 'Getränke', wert: '~54 %', hinweis: 'rund 1.410 ml: Wasser, Tee, Saftschorle, auch Kaffee' },
+          { label: 'Feste Nahrung', wert: '~33 %', hinweis: 'rund 860 ml: Obst, Gemüse, Suppen' },
+          { label: 'Oxidationswasser', wert: '~13 %', hinweis: 'rund 330 ml, entsteht im Stoffwechsel selbst' },
         ],
       },
       {
@@ -1063,8 +1069,10 @@ export const gesundheitRechner: RechnerConfig[] = [
           { label: 'Sportzuschlag (60 Min Training)', formel: '60 ÷ 30 × 350 ml', ergebnis: '700 ml' },
           { label: 'Hitzezuschlag (heißer Tag)', formel: 'pauschal', ergebnis: '500 ml' },
           { label: 'Gesamtbedarf', formel: '2.800 + 700 + 500', ergebnis: '4.000 ml = 4,0 L' },
+          // W187: Trinkmenge ergänzt (vorher „rund 4 Liter — etwa 16 Gläser“)
+          { label: 'Davon trinken', formel: '2.800 × 0,54 + 700 + 500', ergebnis: '2.712 ml ≈ 2,7 L' },
         ],
-        fazit: 'An einem heißen Trainingstag steigt der Bedarf desselben 70-kg-Menschen auf rund 4 Liter — etwa 16 Gläser. Die Aufschläge summieren sich: Das mäßige Aktivitätslevel hebt schon den Basisfaktor (40 statt 30 ml/kg), darauf kommen Sport- und Hitzezuschlag. Wichtig ist, über den Tag verteilt nachzutrinken und nicht erst bei starkem Durst — und bei langem, intensivem Schwitzen auch an verlorene Mineralstoffe (vor allem Natrium) zu denken, etwa über eine Saftschorle. Diese Menge ist allerdings eine Tagessumme, kein Trinkpensum für eine einzige Stunde: Vier Liter auf einmal wären sogar kontraproduktiv. Sinnvoll ist, vor dem Sport vorzutrinken, während der Belastung in kleinen Schlucken nachzufüllen und den Rest gleichmäßig über den Tag zu verteilen. So gleicht man den hohen Verlust aus, ohne den Kreislauf oder den Elektrolythaushalt zu überfordern.',
+        fazit: 'An einem heißen Trainingstag steigt der Gesamtbedarf desselben 70-kg-Menschen auf rund 4 Liter; getrunken werden davon rund 2,7 Liter — etwa 11 Gläser. Die Aufschläge summieren sich: Das mäßige Aktivitätslevel hebt schon den Basisfaktor (40 statt 30 ml/kg), darauf kommen Sport- und Hitzezuschlag. Wichtig ist, über den Tag verteilt nachzutrinken und nicht erst bei starkem Durst — und bei langem, intensivem Schwitzen auch an verlorene Mineralstoffe (vor allem Natrium) zu denken, etwa über eine Saftschorle. Diese Menge ist allerdings eine Tagessumme, kein Trinkpensum für eine einzige Stunde: Vier Liter auf einmal wären sogar kontraproduktiv. Sinnvoll ist, vor dem Sport vorzutrinken, während der Belastung in kleinen Schlucken nachzufüllen und den Rest gleichmäßig über den Tag zu verteilen. So gleicht man den hohen Verlust aus, ohne den Kreislauf oder den Elektrolythaushalt zu überfordern.',
       },
       {
         typ: 'text',
@@ -1132,6 +1140,12 @@ export const gesundheitRechner: RechnerConfig[] = [
         titel: 'DGE — Wasser / Trinkmenge',
         url: 'https://www.dge.de',
         hinweis: 'Empfehlungen zur Trinkmenge für Erwachsene.',
+      },
+      // W187: D-A-CH-Richtwerte als Beleg für Getränke-Anteil ergänzt
+      {
+        titel: 'DGE/ÖGE/SGE — D-A-CH-Referenzwerte, Richtwerte für die Wasserzufuhr (Tabelle beim VIS Bayern)',
+        url: 'https://www.vis.bayern.de/essen_trinken/ernaehrungsformen/doc/richtwerte_fuer_zufuhr_wasser_akt.pdf',
+        hinweis: 'Gesamtwasserzufuhr 35 ml/kg (19 bis unter 51 Jahre) bzw. 30 ml/kg (ab 51); davon Getränke z. B. 1.410 von 2.600 ml (25 bis unter 51 Jahre) = 54 %, feste Nahrung 860 ml, Oxidationswasser 330 ml.',
       },
     ],
   },
@@ -1231,7 +1245,8 @@ export const gesundheitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Warum Frauen natürlicherweise mehr Körperfett haben',
-        html: `<p>In allen Bereichen liegen die Werte für Frauen rund 8 bis 10 Prozentpunkte höher als für Männer — das ist <strong>physiologisch normal</strong> und kein Nachteil. Der weibliche Körper trägt von Natur aus mehr <strong>essentielles Fett</strong>.</p><p>Dieses zusätzliche Fett erfüllt wichtige Aufgaben: Es ist am Hormonhaushalt beteiligt, unter anderem an der Bildung von Östrogen, und spielt für den Menstruationszyklus und eine mögliche Schwangerschaft eine Rolle. Auch die geschlechtsspezifische Fettverteilung gehört dazu. Deshalb sind Männer- und Frauen-Spannen nicht miteinander vergleichbar und werden getrennt ausgewiesen: Ein Wert, der für eine Frau im mittleren Bereich liegt, bedeutet für einen Mann eine ganz andere Einordnung. Wer eine Messung einordnet, sollte daher immer die zum eigenen Geschlecht passende Tabelle heranziehen — und im Hinterkopf behalten, dass es sich um Durchschnitts-Orientierung handelt und nicht um eine persönliche Bewertung. Auch innerhalb eines Geschlechts gibt es große natürliche Unterschiede, etwa durch Veranlagung oder Lebensphase; der Wert eines einzelnen Menschen lässt sich daher nicht sinnvoll mit dem einer anderen Person vergleichen.</p>`,
+        // W187: vorher „rund 8 bis 10 Prozentpunkte“ (eigene Tabellen: 10/2, 14/6, 21/14, 25/18, 32/25 → 7–8)
+        html: `<p>In allen Bereichen liegen die Werte für Frauen rund 7 bis 8 Prozentpunkte höher als für Männer — das ist <strong>physiologisch normal</strong> und kein Nachteil. Der weibliche Körper trägt von Natur aus mehr <strong>essentielles Fett</strong>.</p><p>Dieses zusätzliche Fett erfüllt wichtige Aufgaben: Es ist am Hormonhaushalt beteiligt, unter anderem an der Bildung von Östrogen, und spielt für den Menstruationszyklus und eine mögliche Schwangerschaft eine Rolle. Auch die geschlechtsspezifische Fettverteilung gehört dazu. Deshalb sind Männer- und Frauen-Spannen nicht miteinander vergleichbar und werden getrennt ausgewiesen: Ein Wert, der für eine Frau im mittleren Bereich liegt, bedeutet für einen Mann eine ganz andere Einordnung. Wer eine Messung einordnet, sollte daher immer die zum eigenen Geschlecht passende Tabelle heranziehen — und im Hinterkopf behalten, dass es sich um Durchschnitts-Orientierung handelt und nicht um eine persönliche Bewertung. Auch innerhalb eines Geschlechts gibt es große natürliche Unterschiede, etwa durch Veranlagung oder Lebensphase; der Wert eines einzelnen Menschen lässt sich daher nicht sinnvoll mit dem einer anderen Person vergleichen.</p>`,
       },
       {
         typ: 'statistik',
@@ -1320,7 +1335,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'ssw-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'SSW-Rechner',
     beschreibung: 'Schwangerschaftswoche berechnen: Aktuelle SSW, Trimester und Entwicklung Ihres Babys Woche für Woche.',
     kategorie: 'Gesundheit',
@@ -1454,7 +1469,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'schwangerschaft-gewicht-rechner',
-    letzteAktualisierung: '2026-06-22',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Gewichtszunahme-Rechner (Schwangerschaft)',
     beschreibung: 'Gewichtszunahme in der Schwangerschaft berechnen: Empfohlene Zunahme nach BMI, aktueller Stand und Verlaufskurve.',
     kategorie: 'Gesundheit',
@@ -1508,13 +1523,14 @@ export const gesundheitRechner: RechnerConfig[] = [
         typ: 'tabelle',
         titel: 'IOM-Empfehlung Gesamtzunahme — Zwillinge',
         kopf: ['Ausgangs-BMI', 'empfohlene Gesamtzunahme'],
+        // W187: vorher Untergewicht „22 – 28 kg“ (keine IOM-Empfehlung) und gerundet 17–25 / 14–23 / 11–19 kg; IOM 2009: 37–54 / 31–50 / 25–42 lb, vorläufig
         zeilen: [
-          ['Untergewicht', '22 – 28 kg'],
-          ['Normalgewicht', '17 – 25 kg'],
-          ['Übergewicht', '14 – 23 kg'],
-          ['Adipositas', '11 – 19 kg'],
+          ['Untergewicht', 'keine IOM-Empfehlung (zu wenig Daten) — ärztlich abklären'],
+          ['Normalgewicht', '16,8 – 24,5 kg'],
+          ['Übergewicht', '14,1 – 22,7 kg'],
+          ['Adipositas', '11,3 – 19,1 kg'],
         ],
-        fussnote: 'Bei Zwillingsschwangerschaften liegen die Empfehlungen deutlich höher, weil zwei Babys samt zusätzlicher Plazenta und mehr Fruchtwasser versorgt werden. Für Untergewicht gilt der Bereich als vorläufig, da hierzu weniger Daten vorliegen. Auch diese Werte sind Orientierung, nicht Vorgabe; Mehrlingsschwangerschaften werden ohnehin engmaschiger betreut. Der Rechner schaltet auf diese Bereiche um, sobald „Zwillinge" gewählt ist. Dass hier mehr Zunahme vorgesehen ist, hat rein versorgungstechnische Gründe und ist kein Maßstab, an dem man sich messen müsste.',
+        fussnote: 'Bei Zwillingsschwangerschaften liegen die Empfehlungen deutlich höher, weil zwei Babys samt zusätzlicher Plazenta und mehr Fruchtwasser versorgt werden. Das IOM bezeichnet alle Zwillingswerte als vorläufig (umgerechnet aus 37–54, 31–50 und 25–42 Pfund) und nennt für Untergewicht mangels Daten keine Spanne; Wochenraten für Zwillinge gibt es ebenfalls nicht. Auch diese Werte sind Orientierung, nicht Vorgabe; Mehrlingsschwangerschaften werden ohnehin engmaschiger betreut. Der Rechner schaltet auf diese Bereiche um, sobald „Zwillinge" gewählt ist. Dass hier mehr Zunahme vorgesehen ist, hat rein versorgungstechnische Gründe und ist kein Maßstab, an dem man sich messen müsste.',
       },
       {
         typ: 'text',
@@ -2080,7 +2096,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'whr-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'WHR-Rechner',
     beschreibung: 'Taille-Hüfte-Verhältnis berechnen: WHR als Indikator für gesundheitliches Risiko — aussagekräftiger als der BMI.',
     kategorie: 'Gesundheit',
@@ -2093,7 +2109,8 @@ export const gesundheitRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Was ist ein gutes Taille-Hüfte-Verhältnis?',
-        antwort: 'Für Frauen gilt ein WHR unter 0,80 als niedrig, für Männer unter 0,90. Diese Werte stammen von der WHO und zeigen ein geringes Risiko für Herz-Kreislauf-Erkrankungen. Ideal ist ein WHR möglichst deutlich unter diesen Grenzwerten.',
+        // W187: vorher „Für Frauen gilt ein WHR unter 0,80 als niedrig, für Männer unter 0,90. Diese Werte stammen von der WHO …“
+        antwort: 'Die WHO sieht ab einem WHR von 0,85 bei Frauen und 0,90 bei Männern ein deutlich erhöhtes Risiko für Stoffwechsel- und Herz-Kreislauf-Erkrankungen. Der Rechner ordnet Werte darunter als niedrig ein und weist knapp unter der Schwelle eine Vorstufe aus (Frauen 0,80–0,84, Männer 0,85–0,89) — diese Mittelstufe ist eine eigene Einteilung, keine WHO-Stufe. Ideal ist ein WHR möglichst deutlich unter den WHO-Schwellen.',
       },
       {
         frage: 'Ist der WHR aussagekräftiger als der BMI?',
@@ -2101,7 +2118,7 @@ export const gesundheitRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie messe ich den Taillenumfang richtig?',
-        antwort: 'Messen Sie morgens nüchtern im Stehen, in Unterwäsche, ohne den Bauch einzuziehen. Das Maßband liegt auf Nabelhöhe — das ist die Mitte zwischen der untersten Rippe und dem oberen Rand des Hüftknochens. Das Band sollte eng anliegen, aber nicht einschneiden. Wiederholen Sie die Messung dreimal und nehmen Sie den Durchschnitt.',
+        antwort: 'Messen Sie morgens nüchtern im Stehen, in Unterwäsche, ohne den Bauch einzuziehen. Das Maßband liegt nach dem WHO-Protokoll in der Mitte zwischen dem unteren Rippenbogen und dem Beckenkamm (oberer Rand des Hüftknochens) — oft etwas oberhalb des Nabels. Das Band sollte eng anliegen, aber nicht einschneiden. Wiederholen Sie die Messung dreimal und nehmen Sie den Durchschnitt.',
       },
       {
         frage: 'Was ist das Taille-Größe-Verhältnis (WHtR)?',
@@ -2135,14 +2152,15 @@ export const gesundheitRechner: RechnerConfig[] = [
       },
       {
         typ: 'tabelle',
-        titel: 'WHO-Orientierungsschwellen (Frauen / Männer)',
+        // W187: vorher Männer < 0,90 / 0,90 – 0,99 / ≥ 1,00 und alle Stufen als WHO ausgewiesen
+        titel: 'Orientierungsschwellen (WHO-Schwelle Frauen 0,85 / Männer 0,90)',
         kopf: ['Einordnung', 'Frauen', 'Männer'],
         zeilen: [
-          ['niedrigere Spanne', '< 0,80', '< 0,90'],
-          ['mittlere Spanne', '0,80 – 0,84', '0,90 – 0,99'],
-          ['höhere Spanne', '≥ 0,85', '≥ 1,00'],
+          ['niedrigere Spanne', '< 0,80', '< 0,85'],
+          ['mittlere Spanne (Vorstufe, keine WHO-Stufe)', '0,80 – 0,84', '0,85 – 0,89'],
+          ['höhere Spanne (WHO: deutlich erhöhtes Risiko)', '≥ 0,85', '≥ 0,90'],
         ],
-        fussnote: 'Orientierungsschwellen nach WHO für das Taille-Hüfte-Verhältnis, exakt wie im Rechner hinterlegt. Es sind statistische Spannen für die Einordnung von Bevölkerungsgruppen, kein individueller Grenzwert und kein Zielwert. Ein Wert in einer höheren Spanne ist kein Befund, sondern allenfalls ein Anlass, das Thema bei Interesse ärztlich einordnen zu lassen. Die Schwellen unterscheiden sich zwischen Frauen und Männern, weil sich die typische Fettverteilung körperbaubedingt unterscheidet. Sie sind als Orientierung für gesunde Erwachsene gedacht und gelten ausdrücklich nicht als persönliche Vorgabe, die man unterschreiten müsste.',
+        fussnote: 'Die Schwelle zur höheren Spanne stammt von der WHO (Expert Consultation 2008: deutlich erhöhtes Risiko metabolischer Komplikationen ab 0,85 bei Frauen und 0,90 bei Männern); die mittlere Spanne ist eine Vorstufe 0,05 darunter und keine WHO-Stufe. Alle Werte sind exakt wie im Rechner hinterlegt. Es sind statistische Spannen für die Einordnung von Bevölkerungsgruppen, kein individueller Grenzwert und kein Zielwert. Ein Wert in einer höheren Spanne ist kein Befund, sondern allenfalls ein Anlass, das Thema bei Interesse ärztlich einordnen zu lassen. Die Schwellen unterscheiden sich zwischen Frauen und Männern, weil sich die typische Fettverteilung körperbaubedingt unterscheidet. Sie sind als Orientierung für gesunde Erwachsene gedacht und gelten ausdrücklich nicht als persönliche Vorgabe, die man unterschreiten müsste.',
       },
       {
         typ: 'beispielrechnung',
@@ -2187,7 +2205,7 @@ export const gesundheitRechner: RechnerConfig[] = [
         titel: 'Richtig messen: Taille, Hüfte, Größe',
         kopf: ['Maß', 'Wo messen', 'Hinweis'],
         zeilen: [
-          ['Taille', 'schmalste Stelle zwischen unterster Rippe und Beckenkamm', 'locker stehen, normal ausatmen, nicht einziehen'],
+          ['Taille', 'Mitte zwischen unterem Rippenbogen und Beckenkamm (WHO)', 'locker stehen, normal ausatmen, nicht einziehen'], // W187: vorher „schmalste Stelle zwischen unterster Rippe und Beckenkamm“
           ['Hüfte', 'breiteste Stelle über dem Gesäß', 'Füße zusammen, Maßband waagerecht'],
           ['Körpergröße', 'ohne Schuhe, gerade an der Wand', 'nur für das optionale WHtR nötig'],
         ],
@@ -2200,7 +2218,7 @@ export const gesundheitRechner: RechnerConfig[] = [
           { label: 'WHR-Formel', wert: 'Taille ÷ Hüfte', hinweis: 'einheitenloser Verhältniswert' },
           { label: 'WHtR-Faustregel', wert: '< 0,5', hinweis: 'Taille kleiner als die halbe Größe' },
           { label: 'WHO-Schwelle Frauen', wert: 'ab 0,85 höhere Spanne', hinweis: 'statistische Orientierung' },
-          { label: 'WHO-Schwelle Männer', wert: 'ab 1,00 höhere Spanne', hinweis: 'statistische Orientierung' },
+          { label: 'WHO-Schwelle Männer', wert: 'ab 0,90 höhere Spanne', hinweis: 'statistische Orientierung' }, // W187: vorher „ab 1,00“
           { label: 'Aussagekraft', wert: 'Tendenz, kein Befund', hinweis: 'kein Ziel- oder Sollwert' },
         ],
       },
@@ -2213,7 +2231,7 @@ export const gesundheitRechner: RechnerConfig[] = [
         typ: 'checkliste',
         titel: 'Sauber messen und sinnvoll deuten',
         punkte: [
-          'Taille an der schmalsten Stelle, Hüfte an der breitesten messen — locker, ohne einzuziehen.',
+          'Taille in der Mitte zwischen unterem Rippenbogen und Beckenkamm, Hüfte an der breitesten Stelle des Gesäßes messen — locker, ohne einzuziehen.', // W187: vorher „Taille an der schmalsten Stelle“
           'Normal ausatmen und das Maßband waagerecht und ohne Zug anlegen.',
           'Immer zur gleichen Tageszeit und auf dieselbe Weise messen.',
           'Die Tendenz über mehrere Wochen betrachten, nicht einen Einzelwert überbewerten.',
@@ -2230,7 +2248,8 @@ export const gesundheitRechner: RechnerConfig[] = [
       },
     ],
     quellen: [
-      { titel: 'WHO — Waist Circumference and Waist–Hip Ratio (Report of a WHO Expert Consultation)', url: 'https://www.who.int', hinweis: 'Orientierungsschwellen für Taille-Hüfte-Verhältnis und Taillenumfang.' },
+      // W187: URL präzisiert, Schwellen und Messort im Hinweis ergänzt
+      { titel: 'WHO — Waist Circumference and Waist–Hip Ratio (Report of a WHO Expert Consultation, 2008)', url: 'https://www.who.int/publications/i/item/9789241501491', hinweis: 'Deutlich erhöhtes Risiko ab WHR ≥ 0,90 (Männer) bzw. ≥ 0,85 (Frauen); Taille in der Mitte zwischen unterem Rippenbogen und Beckenkamm messen.' },
       { titel: 'Methodik der Berechnung', hinweis: 'WHR = Taillenumfang ÷ Hüftumfang; WHtR = Taillenumfang ÷ Körpergröße (Faustregel < 0,5). Einordnung als statistische Orientierung, kein individueller Ziel- oder Grenzwert.' },
     ],
   },
@@ -2390,7 +2409,7 @@ export const gesundheitRechner: RechnerConfig[] = [
   },
   {
     slug: 'schritte-rechner',
-    letzteAktualisierung: '2026-06-20',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Schritte-Rechner',
     beschreibung: 'Schritte in Kilometer und Kalorien umrechnen: Tagesziel prüfen und Kalorienverbrauch durch Gehen berechnen.',
     kategorie: 'Gesundheit',
@@ -2399,7 +2418,7 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'Schritte in Kilometer und Kalorien umrechnen — mit Schrittlänge, Gehzeit und Fortschrittsbalken zum 10.000-Schritte-Ziel. Kostenlos.',
     keywords: ['schritte rechner', 'schritte in km', 'schritte kalorien', '10000 schritte', 'schrittlänge berechnen', 'gehgeschwindigkeit', 'kalorienverbrauch gehen'],
     icon: '🚶',
-    beispiel: '8.000 Schritte bei 175 cm Größe: Schrittlänge 72,6 cm → 5,81 km. Bei 75 kg: ca. 392 kcal verbrannt.',
+    beispiel: '8.000 Schritte bei 175 cm Größe: Schrittlänge 72,6 cm → 5,81 km. Bei 75 kg und normalem Tempo (5 km/h): ca. 331 kcal verbrannt.',
     faq: [
       {
         frage: 'Wie viele Schritte sind ein Kilometer?',
@@ -2407,7 +2426,7 @@ export const gesundheitRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie viele Kalorien verbrennt man bei 10.000 Schritten?',
-        antwort: 'Bei 175 cm Größe und 75 kg Gewicht verbrennen 10.000 Schritte ca. 490 kcal. Der genaue Wert hängt von Gewicht, Schrittlänge und Geschwindigkeit ab. Schwerere Personen verbrauchen mehr Energie pro Kilometer, da sie mehr Masse bewegen müssen.',
+        antwort: 'Bei 175 cm Größe und 75 kg Gewicht verbrennen 10.000 Schritte bei normalem Tempo (5 km/h) ca. 414 kcal, zügig (6,5 km/h) ca. 461 kcal. Der genaue Wert hängt von Gewicht, Schrittlänge und Geschwindigkeit ab. Schwerere Personen verbrauchen mehr Energie pro Kilometer, da sie mehr Masse bewegen müssen.',
       },
       {
         frage: 'Sind 10.000 Schritte wirklich nötig?',
@@ -2490,17 +2509,17 @@ export const gesundheitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Schritte grob in Kalorien — nur eine Orientierung',
-        html: `<p>Wie viele Kalorien beim Gehen verbraucht werden, lässt sich nur grob schätzen. Der Rechner nutzt eine einfache Näherung: zurückgelegte Distanz mal Körpergewicht mal 0,9. Das Gewicht steht in der Formel, weil schwerere Menschen pro Kilometer mehr Energie aufwenden müssen, um ihre Masse zu bewegen.</p><p>Diese Schätzung ist bewusst simpel und blendet vieles aus: Steigung, feine Abstufungen des Gehtempos, Wind, Untergrund und die individuelle Stoffwechsellage spielen alle eine Rolle. Zwei Menschen mit gleichem Gewicht können bei identischer Strecke unterschiedlich viel verbrauchen. Verstehen Sie die Kalorienangabe deshalb als ungefähre Hausnummer, nicht als exakten Messwert — und schon gar nicht als Grundlage, um Essen gegen Schritte aufzurechnen. Bewegung tut gut, ganz unabhängig davon, wie viele Kalorien dabei genau zusammenkommen. Für gesundheitliche Ziele zählt ohnehin die regelmäßige Bewegung selbst, nicht die exakte Kalorienzahl, die ein Schrittzähler ausweist — diese ist bestenfalls ein grober Anhaltspunkt.</p>`,
+        html: `<p>Wie viele Kalorien beim Gehen verbraucht werden, lässt sich nur grob schätzen. Der Rechner nutzt den MET-Wert des gewählten Gehtempos aus dem Adult Compendium of Physical Activities (2024): langsam (4 km/h) 3,0, normal (5 km/h) 3,8, zügig (6,5 km/h) 5,5. Kalorien = MET × Körpergewicht × Gehzeit in Stunden. Das Gewicht steht in der Formel, weil schwerere Menschen pro Kilometer mehr Energie aufwenden müssen, um ihre Masse zu bewegen.</p><p>Diese Schätzung ist bewusst simpel und blendet vieles aus: Steigung, feine Abstufungen des Gehtempos innerhalb der drei Stufen, Wind, Untergrund und die individuelle Stoffwechsellage spielen alle eine Rolle. Zwei Menschen mit gleichem Gewicht können bei identischer Strecke unterschiedlich viel verbrauchen. Verstehen Sie die Kalorienangabe deshalb als ungefähre Hausnummer, nicht als exakten Messwert — und schon gar nicht als Grundlage, um Essen gegen Schritte aufzurechnen. Bewegung tut gut, ganz unabhängig davon, wie viele Kalorien dabei genau zusammenkommen. Für gesundheitliche Ziele zählt ohnehin die regelmäßige Bewegung selbst, nicht die exakte Kalorienzahl, die ein Schrittzähler ausweist — diese ist bestenfalls ein grober Anhaltspunkt.</p>`,
       },
       {
         typ: 'beispielrechnung',
         titel: 'Kalorien-Schätzung für 10.000 Schritte (75 kg)',
         schritte: [
           { label: 'Zurückgelegte Distanz (175 cm)', formel: '10.000 × 72,6 cm ÷ 100.000', ergebnis: '7,26 km' },
-          { label: 'Kalorien-Näherung', formel: 'Distanz × Gewicht × 0,9', ergebnis: 'Formel' },
-          { label: 'Werte einsetzen', formel: '7,26 × 75 × 0,9', ergebnis: '≈ 490 kcal' },
+          { label: 'Gehzeit bei 5 km/h', formel: '7,26 km ÷ 5 km/h', ergebnis: '1,45 h' },
+          { label: 'Kalorien = MET × Gewicht × Zeit', formel: '3,8 × 75 × 1,45', ergebnis: '≈ 414 kcal' },
         ],
-        fazit: 'Rund 490 Kalorien schätzt der Rechner für 10.000 Schritte bei 75 Kilogramm — das entspricht etwa einer kleinen Mahlzeit. Die Betonung liegt auf „schätzt": Der Wert ergibt sich allein aus Strecke und Gewicht, weshalb er nur eine Größenordnung liefert. Eine leichtere Person verbraucht bei gleicher Strecke weniger, eine schwerere mehr, weil das Bewegen der eigenen Masse den Hauptteil des Aufwands ausmacht. Steigungen, Tempo und Untergrund kommen in der Realität hinzu, bleiben in dieser einfachen Formel aber unberücksichtigt. Deshalb taugt die Zahl gut, um ein Gefühl für die Größenordnung zu bekommen, nicht aber für eine genaue Kalorienbilanz. Und sie ist kein Argument, Bewegung gegen Essen aufzurechnen — der Nutzen des Gehens liegt vor allem in seiner Wirkung auf Herz, Kreislauf und Stimmung.',
+        fazit: 'Rund 414 Kalorien schätzt der Rechner für 10.000 Schritte bei 75 Kilogramm und normalem Tempo — das entspricht etwa einer kleinen Mahlzeit. Die Betonung liegt auf „schätzt": Der Wert ergibt sich aus Strecke, Tempo und Gewicht, weshalb er nur eine Größenordnung liefert. Eine leichtere Person verbraucht bei gleicher Strecke weniger, eine schwerere mehr, weil das Bewegen der eigenen Masse den Hauptteil des Aufwands ausmacht. Steigungen und Untergrund kommen in der Realität hinzu, bleiben in dieser einfachen Formel aber unberücksichtigt. Deshalb taugt die Zahl gut, um ein Gefühl für die Größenordnung zu bekommen, nicht aber für eine genaue Kalorienbilanz. Und sie ist kein Argument, Bewegung gegen Essen aufzurechnen — der Nutzen des Gehens liegt vor allem in seiner Wirkung auf Herz, Kreislauf und Stimmung.',
       },
       {
         typ: 'vergleich',
@@ -2510,7 +2529,7 @@ export const gesundheitRechner: RechnerConfig[] = [
         zeilen: [
           { kriterium: 'Distanz für 10.000 Schritte', a: '≈ 7,26 km', b: '≈ 7,26 km' },
           { kriterium: 'Gehzeit', a: '≈ 87 Min', b: '≈ 67 Min' },
-          { kriterium: 'Kalorien-Schätzung (75 kg)', a: '≈ 490 kcal', b: '≈ 490 kcal' },
+          { kriterium: 'Kalorien-Schätzung (75 kg)', a: '≈ 414 kcal (MET 3,8)', b: '≈ 461 kcal (MET 5,5)' },
           { kriterium: 'Belastung', a: 'gemütlich, gut für Einsteiger', b: 'höhere Herzfrequenz, mehr Trainingsreiz' },
           { kriterium: 'Wofür geeignet', a: 'Alltagswege, lockere Spaziergänge', b: 'bewusstes Walking-Training' },
         ],
@@ -2552,11 +2571,16 @@ export const gesundheitRechner: RechnerConfig[] = [
         titel: 'Schrittlänge & Distanz — Methodik',
         hinweis: 'Schrittlänge ≈ Körpergröße × 0,415; Distanz = Schritte × Schrittlänge. Kalorienwerte sind grobe Schätzungen und individuell sehr variabel.',
       },
+      {
+        titel: '2024 Adult Compendium of Physical Activities — Walking',
+        url: 'https://pacompendium.com/walking/',
+        hinweis: 'MET-Werte Gehen auf festem, ebenem Untergrund: 2,5 mph 3,0 (17170), 2,8–3,4 mph 3,8 (17190), 4,0–4,4 mph 5,5 (17220).',
+      },
     ],
   },
   {
     slug: 'sonnenschutz-rechner',
-    letzteAktualisierung: '2026-06-18',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Sonnenschutz-Rechner',
     beschreibung: 'Sonnenschutz berechnen: Eigenschutzzeit, empfohlener Lichtschutzfaktor und maximale Sonnenzeit.',
     kategorie: 'Gesundheit',
@@ -2565,12 +2589,14 @@ export const gesundheitRechner: RechnerConfig[] = [
     metaDescription: 'Sonnenschutzzeit kostenlos berechnen — Eigenschutzzeit nach Hauttyp, UV-Index und LSF. Mit Nachcreme-Erinnerung und KI-Erklärung.',
     keywords: ['sonnenschutz rechner', 'lsf rechner', 'eigenschutzzeit', 'uv index', 'sonnencreme', 'lichtschutzfaktor', 'hauttyp'],
     icon: '☀️',
-    beispiel: 'Hauttyp II, UV 6–7, LSF 30: Eigenschutz ca. 7 Min., geschützte Zeit ca. 126 Min. Nachcremen nach ca. 63 Min.',
+    // W187: vorher „Eigenschutz ca. 7 Min., geschützte Zeit ca. 126 Min. Nachcremen nach ca. 63 Min.“ (Tabelle als UV-3-Wert skaliert)
+    beispiel: 'Hauttyp II, UV 6–7, LSF 30: Eigenschutz ca. 15 Min., geschützte Zeit ca. 270 Min. (4 Std. 30 Min.), Nachcremen nach ca. 135 Min.',
     // W19-Goldstandard: sonnenschutz-rechner auf volle Tiefe (16 Bausteine, ~1.560 W),
     // Leitformat „statistik" 4× dominant (Eigenschutz/Hauttyp, UV-Index-Stufen, LSF-Wirkung,
     // verstärkende Faktoren). Werte aus lib/berechnungen/sonnenschutz.ts gespiegelt:
     // geschuetzteZeit = Eigenschutz × LSF × 0,6 (40 % Sicherheitsabzug), Eigenschutz skaliert
-    // mit UV (Basis × 3/UV-Mitte). Kanonisches Beispiel Typ II/UV 6–7/LSF 30 → 7/126/63 Min.
+    // mit UV (W187: vorher Basis × 3/UV-Mitte → 7/126/63 Min.; jetzt Basis × min(1, 8/UV-Mitte)).
+    // Kanonisches Beispiel Typ II/UV 6–7/LSF 30 → 15/270/135 Min.
     // WELLBEING präventiv: Hautkrebs-Prävention im Vordergrund, kein Bräunungs-Frame, kein
     // LSF-Freibrief, Verweis auf Dermatologie. erklaerung bleibt Fallback.
     contentBloecke: [
@@ -2581,7 +2607,8 @@ export const gesundheitRechner: RechnerConfig[] = [
       },
       {
         typ: 'statistik',
-        titel: 'Eigenschutzzeit nach Hauttyp (bei UV ~3)',
+        // W187: vorher Titel „(bei UV ~3)“ — Bezug unbelegt; Richtwerte gelten für die Sommer-Mittagssonne
+        titel: 'Eigenschutzzeit nach Hauttyp (Mittagssonne im Sommer)',
         werte: [
           { label: 'Typ I — sehr hell, Sommersprossen', wert: '5–10 min', hinweis: 'bräunt nie' },
           { label: 'Typ II — hell, blond', wert: '10–20 min', hinweis: 'häufig Sonnenbrand' },
@@ -2594,12 +2621,13 @@ export const gesundheitRechner: RechnerConfig[] = [
       {
         typ: 'beispielrechnung',
         titel: 'Schutzdauer Hauttyp II, LSF 30, mäßiger UV-Index (4)',
+        // W187: vorher „15 min × (3 ÷ 4) ≈ 11 min → 330 → 198 min“, Nachcremen 99 min
         schritte: [
-          { label: 'Eigenschutzzeit Typ II bei UV 4', formel: '15 min × (3 ÷ 4)', ergebnis: '≈ 11 min' },
-          { label: 'mit LSF 30 (theoretisch)', formel: '11 min × 30', ergebnis: '330 min' },
-          { label: 'Sicherheitsabzug 40 % (Faktor 0,6)', formel: '330 min × 0,6', ergebnis: '≈ 198 min' },
+          { label: 'Eigenschutzzeit Typ II (Mittel aus 10–20 min)', formel: '15 min, bei UV 4 nicht verlängert', ergebnis: '15 min' },
+          { label: 'mit LSF 30 (theoretisch)', formel: '15 min × 30', ergebnis: '450 min' },
+          { label: 'Sicherheitsabzug 40 % (Faktor 0,6)', formel: '450 min × 0,6', ergebnis: '270 min' },
         ],
-        fazit: 'Bei mäßigem UV-Index hält Hauttyp II mit LSF 30 rund 198 Minuten (gut 3 Stunden) geschützt durch. Nachcremen empfiehlt sich nach etwa der halben Zeit, also nach rund 99 Minuten — das erhält den Schutz, verlängert ihn aber nicht. Wichtig: Dieser Wert setzt voraus, dass die Creme in voller Menge aufgetragen wurde; bei dünnerem Auftrag fällt die reale Schutzzeit deutlich kürzer aus.',
+        fazit: 'Bei mäßigem UV-Index rechnet der Rechner für Hauttyp II mit LSF 30 mit rund 270 Minuten (4,5 Stunden) Schutz. Tatsächlich hält die Haut bei UV 4 eher länger durch, denn die Eigenschutzzeiten der Tabelle beschreiben die Mittagssonne im Sommer — der Rechner verlängert sie bei niedrigerem UV-Index aber bewusst nicht. Nachcremen empfiehlt sich nach etwa der halben Zeit, also nach rund 135 Minuten — das erhält den Schutz, verlängert ihn aber nicht. Wichtig: Dieser Wert setzt voraus, dass die Creme in voller Menge aufgetragen wurde; bei dünnerem Auftrag fällt die reale Schutzzeit deutlich kürzer aus.',
       },
       {
         typ: 'text',
@@ -2609,7 +2637,7 @@ export const gesundheitRechner: RechnerConfig[] = [
       {
         typ: 'tabelle',
         titel: 'Fitzpatrick-Hauttypen im Überblick',
-        kopf: ['Hauttyp', 'Merkmale', 'Eigenschutz (UV ~3)'],
+        kopf: ['Hauttyp', 'Merkmale', 'Eigenschutz (Sommer, mittags)'], // W187: vorher „Eigenschutz (UV ~3)“
         zeilen: [
           ['Typ I', 'Sehr hell, Sommersprossen, rötlich/blond, bräunt nie', '5–10 min'],
           ['Typ II', 'Hell, blondes Haar, helle Augen, bräunt kaum', '10–20 min'],
@@ -2618,7 +2646,7 @@ export const gesundheitRechner: RechnerConfig[] = [
           ['Typ V', 'Dunkel, sehr selten Sonnenbrand', '~60 min'],
           ['Typ VI', 'Sehr dunkel, Sonnenbrand extrem selten', '~90 min'],
         ],
-        fussnote: 'Die Eigenschutzzeit ist die Spanne, in der ungeschützte Haut der Sonne standhält, bevor eine Rötung beginnt. Die Werte gelten für mittlere Sonne (UV-Index ~3); bei höherem UV-Index verkürzen sie sich proportional. Der eigene Hauttyp lässt sich grob über Haar- und Augenfarbe sowie die Sonnenbrand-Neigung einordnen — im Zweifel wählt man den helleren Typ, also kürzere Eigenschutzzeit und mehr Schutz.',
+        fussnote: 'Die Eigenschutzzeit ist die Spanne, in der ungeschützte Haut der Sonne standhält, bevor eine Rötung beginnt. Die Werte sind übliche Richtwerte für ungeschützte, nicht vorgebräunte Haut in der Mittagssonne des mitteleuropäischen Sommers; einen festen UV-Index nennen die Quellen nicht. Der Rechner setzt sie mit UV-Index 8 gleich (das BfS nennt für Deutschland im Sommer Werte von 8 bis 9), verkürzt sie bei höherem UV-Index im Verhältnis 8 : UV-Index und verlängert sie bei niedrigerem UV-Index sicherheitshalber nicht. Der eigene Hauttyp lässt sich grob über Haar- und Augenfarbe sowie die Sonnenbrand-Neigung einordnen — im Zweifel wählt man den helleren Typ, also kürzere Eigenschutzzeit und mehr Schutz.',
       },
       {
         typ: 'statistik',
@@ -2634,17 +2662,18 @@ export const gesundheitRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'UV-Index richtig deuten',
-        html: `<p>Der <strong>UV-Index</strong> ist eine international standardisierte Maßzahl für die sonnenbrandwirksame Strahlung. Er reicht von 0 (nachts) bis über 11 (Hochgebirge, Tropen) und wird vom Bundesamt für Strahlenschutz und von Wetterdiensten tagesaktuell für jede Region angegeben. In Deutschland erreicht er im Sommer typischerweise 6–8.</p><p>Je höher der Index, desto schneller schädigt die Strahlung ungeschützte Haut. Schon ab einem <strong>UV-Index von 3</strong> empfehlen Fachleute aktiven Schutz — Creme, Kleidung und Schatten zur Mittagszeit. Ab Werten von 8 oder mehr, wie sie im Hochsommer, in den Bergen oder am Wasser auftreten, ist besondere Vorsicht geboten.</p><p>Praktisch bestimmt der UV-Index, wie kurz die geschützte Zeit ausfällt: Bei doppeltem UV-Wert halbiert sich grob die Eigenschutzzeit. Ein Blick auf den Tageswert — etwa in der Wetter-App oder beim BfS — gehört deshalb zur Schutzplanung, besonders im Urlaub in südlicheren Regionen.</p>`,
+        html: `<p>Der <strong>UV-Index</strong> ist eine international standardisierte Maßzahl für die sonnenbrandwirksame Strahlung. Er reicht von 0 (nachts) bis über 11 (Hochgebirge, Tropen) und wird vom Bundesamt für Strahlenschutz und von Wetterdiensten tagesaktuell für jede Region angegeben. In Deutschland erreicht er im Sommer Werte von 8 bis 9, in den Hochlagen der süddeutschen Gebirge bis 11.</p><p>Je höher der Index, desto schneller schädigt die Strahlung ungeschützte Haut. Schon ab einem <strong>UV-Index von 3</strong> empfehlen Fachleute aktiven Schutz — Creme, Kleidung und Schatten zur Mittagszeit. Ab Werten von 8 oder mehr, wie sie im Hochsommer, in den Bergen oder am Wasser auftreten, ist besondere Vorsicht geboten.</p><p>Physikalisch gilt: Bei doppeltem UV-Wert halbiert sich grob die Eigenschutzzeit. Der Rechner nutzt das nur in eine Richtung — oberhalb von UV-Index 8 verkürzt er die Eigenschutzzeit, darunter bleibt er sicherheitshalber beim Tabellenwert. Ein Blick auf den Tageswert — etwa in der Wetter-App oder beim BfS — gehört deshalb zur Schutzplanung, besonders im Urlaub in südlicheren Regionen.</p>`,
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Dieselbe Haut bei hohem UV-Index (6–7) — warum kürzer',
+        // W187: vorher „hohem UV-Index (6–7)“ mit 15 × 3/6,5 ≈ 7 → 126 → 63 min; bei UV 6–7 gilt jetzt der Tabellenwert (270 min wie bei UV 4)
+        titel: 'Dieselbe Haut bei sehr hohem UV-Index (8–10) — warum kürzer',
         schritte: [
-          { label: 'Eigenschutzzeit Typ II bei UV 6,5', formel: '15 min × (3 ÷ 6,5)', ergebnis: '≈ 7 min' },
-          { label: 'mit LSF 30, Faktor 0,6', formel: '7 min × 30 × 0,6', ergebnis: '≈ 126 min' },
-          { label: 'Nachcremen nach halber Zeit', formel: '126 min ÷ 2', ergebnis: '≈ 63 min' },
+          { label: 'Eigenschutzzeit Typ II bei UV 9', formel: '15 min × (8 ÷ 9)', ergebnis: '≈ 13 min' },
+          { label: 'mit LSF 30, Faktor 0,6', formel: '13 min × 30 × 0,6', ergebnis: '234 min' },
+          { label: 'Nachcremen nach halber Zeit', formel: '234 min ÷ 2', ergebnis: '117 min' },
         ],
-        fazit: 'Gleicher Hauttyp, gleiche Creme — aber bei hohem statt mäßigem UV-Index sinkt die Schutzdauer von ~198 auf ~126 Minuten. Der UV-Index ist also genauso entscheidend wie Hauttyp und LSF. Bei sehr hohem UV reicht selbst LSF 30 nur für gut zwei Stunden. Wer mittags am Strand oder in den Bergen unterwegs ist, sollte deshalb zu höherem LSF greifen und zusätzlich Schatten und Kleidung nutzen, statt die Zeit auszureizen.',
+        fazit: 'Gleicher Hauttyp, gleiche Creme — aber bei sehr hohem statt mäßigem UV-Index sinkt die Schutzdauer von ~270 auf ~234 Minuten, bei extremem UV-Index (11+) auf 10 Minuten Eigenschutz und rund 180 Minuten mit LSF 30. Der UV-Index ist also genauso entscheidend wie Hauttyp und LSF. Wer mittags am Strand oder in den Bergen unterwegs ist, sollte deshalb zu höherem LSF greifen und zusätzlich Schatten und Kleidung nutzen, statt die Zeit auszureizen.',
       },
       {
         typ: 'text',
@@ -2727,7 +2756,7 @@ export const gesundheitRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wo finde ich den aktuellen UV-Index?',
-        antwort: 'In jeder Wetter-App (Apple Wetter, Google, Wetter.com) wird der UV-Index angezeigt. Auch der Deutsche Wetterdienst (DWD) veröffentlicht UV-Prognosen. Im deutschen Sommer liegt der UV-Index mittags typischerweise bei 5–8, im Mittelmeerraum bei 8–10, am Äquator bei 10–12.',
+        antwort: 'In jeder Wetter-App (Apple Wetter, Google, Wetter.com) wird der UV-Index angezeigt. Auch der Deutsche Wetterdienst (DWD) veröffentlicht UV-Prognosen. Im deutschen Sommer erreicht der UV-Index mittags Werte von 8 bis 9, in den Hochlagen der süddeutschen Gebirge bis 11 (BfS), im Mittelmeerraum 8–10, am Äquator 10–12.',
       },
       {
         frage: 'Reicht LSF 30 oder brauche ich LSF 50?',
@@ -2744,6 +2773,12 @@ export const gesundheitRechner: RechnerConfig[] = [
     ],
     quellen: [
       { titel: 'BfS — UV-Schutz & UV-Index', url: 'https://www.bfs.de', hinweis: 'UV-Index, Schutzempfehlungen' },
+      // W187: Belege für den Bezug der Eigenschutzzeit, die 60-%-Regel und LSF 30 ergänzt
+      { titel: 'BfS — Die verschiedenen Hauttypen', url: 'https://www.bfs.de/DE/themen/opt/uv/wirkung/hauttypen/hauttypen.html', hinweis: 'Fragebogen: Sonnenbrandzeit zur Mittagszeit im Frühsommer in Deutschland bei wolkenlosem Himmel.' },
+      { titel: 'BfS — Was ist der UV-Index?', url: 'https://www.bfs.de/DE/themen/opt/uv/uv-index/einfuehrung/einfuehrung_node.html', hinweis: 'In Deutschland im Sommer Werte von 8 bis 9, in Hochlagen bis 11; je höher, desto schneller Sonnenbrand.' },
+      { titel: 'BfS — UV-Schutz durch Sonnencreme / Tipps zum UV-Schutz', url: 'https://www.bfs.de/DE/themen/opt/uv/schutz/sonnencreme/sonnencreme_node.html', hinweis: 'Theoretische Schutzdauer höchstens zu 60 % ausschöpfen; Lichtschutzfaktor mindestens 30.' },
+      { titel: 'SSK (1997) — Schutz des Menschen vor solarer UV-Strahlung', url: 'https://ssk.de/fileadmin/documents/de/1997/Schutz_des_Menschen_vor_solarer_UVStrahlung.pdf', hinweis: 'Hauttyp II: Rötung im Sommer in Mitteleuropa um die Mittagszeit nach ungefähr 20 Minuten.' },
+      { titel: 'WHO/WMO/UNEP/ICNIRP — Global Solar UV Index: A Practical Guide (2002)', url: 'https://www.icnirp.org/cms/upload/publications/ICNIRPWHOSolarUVI.pdf', hinweis: 'UVI = 40 m²/W × erythemwirksame Bestrahlungsstärke; Brennzeiten sollen nicht zum Verlängern der Sonnenzeit verleiten.' },
       { titel: 'Fitzpatrick-Hauttypen (Dermatologie)', hinweis: 'Hauttyp bestimmt Eigenschutzzeit; LSF verlängert, ersetzt sie aber nicht vollständig.' },
     ],
   },

@@ -13,7 +13,8 @@ import CrossLink from '@/components/ui/CrossLink';
  * Inline-Logik (keine separate lib/berechnungen-Datei):
  * - Nutzbare Kapazität (mAh) = Nennkapazität(mAh) × Wirkungsgrad
  * - Ladungen = Nutzbare Kapazität ÷ Geräte-Akku(mAh)
- * - Wirkungsgrad-Default 0,65 (Spannungswandlung 3,7 V Zelle → 5 V USB + Wandler-/Geräte-Verluste)
+ * - Wirkungsgrad-Default 0,65 als Gesamtwirkungsgrad (Aufwärtswandler, Ladeelektronik im Handy, Kabel, Wärme);
+ *   W187: vorher „Spannungswandlung 3,7 V Zelle → 5 V USB“ als Ursache — auch Handy-mAh beziehen sich auf die Zellspannung
  *   Deshalb lädt eine 20.000-mAh-Powerbank ein 5.000-mAh-Handy nicht 4×, sondern nur ~2,6×.
  */
 

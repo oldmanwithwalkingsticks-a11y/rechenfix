@@ -188,7 +188,7 @@ export const sportRechner: RechnerConfig[] = [
   },
   {
     slug: 'herzfrequenz-zonen-rechner',
-    letzteAktualisierung: '2026-05-21',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Herzfrequenz-Zonen-Rechner',
     beschreibung: 'Trainingszonen berechnen: HFmax nach Tanaka und Karvonen, 5 Zonen, 80/20-Training und Fettverbrennungszone.',
     kategorie: 'Sport & Fitness',
@@ -209,7 +209,8 @@ export const sportRechner: RechnerConfig[] = [
       },
       {
         frage: 'In welcher Zone verbrennt man am meisten Fett?',
-        antwort: 'Prozentual kommt in Zone 2 (60–70 % HFmax) der höchste Anteil der Energie aus Fett. ABSOLUT betrachtet verbrennen Sie aber in höheren Zonen mehr Fett pro Stunde, weil der Gesamtenergieumsatz steigt. Fürs Abnehmen zählt die Gesamtkalorienbilanz — nicht die Zone. Zone 2 ist trotzdem wichtig für den Ausdaueraufbau.',
+        // W187: vorher „Prozentual … Zone 2 …; ABSOLUT … in höheren Zonen mehr Fett pro Stunde“ — prozentual ist Zone 1 vorn, absolut liegt das Maximum (Fatmax) bei moderatem Tempo und fällt in Zone 4–5 wieder (Romijn et al. 1993; Achten & Jeukendrup 2004)
+        antwort: 'Prozentual liefert Fett bei sehr lockerer Belastung (Zone 1, 50–60 % HFmax) den größten Anteil der Energie. Absolut – in Gramm pro Stunde – verbrennen Sie am meisten Fett bei moderatem Tempo, etwa in der oberen Zone 2 bis Zone 3 (individuell verschieden, sogenanntes Fatmax); in Zone 4–5 sinkt die Fettverbrennung wieder, weil der Körper dann vor allem Kohlenhydrate nutzt. Fürs Abnehmen zählt die Gesamtkalorienbilanz — nicht die Zone. Zone 2 ist trotzdem wichtig für den Ausdaueraufbau.',
       },
       {
         frage: 'Was ist die Karvonen-Formel?',
@@ -1472,7 +1473,7 @@ export const sportRechner: RechnerConfig[] = [
   },
   {
     slug: 'schritte-kilometer-rechner',
-    letzteAktualisierung: '2026-07-01',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Schritte-in-Kilometer-Rechner',
     beschreibung: 'Schritte in Kilometer umrechnen (und zurück): mit größenabhängiger Schrittlänge statt Pauschalwert — plus grober Kalorienschätzung.',
     kategorie: 'Sport & Fitness',
@@ -1569,11 +1570,11 @@ export const sportRechner: RechnerConfig[] = [
         titel: '10.000 Schritte je Aktivität (175 cm, 75 kg)',
         kopf: ['Aktivität', 'Schrittlänge', 'Distanz', 'grob kcal'],
         zeilen: [
-          ['Gehen', '72,6 cm', '7,26 km', '~381 kcal'],
+          ['Gehen', '72,6 cm', '7,26 km', '~414 kcal'],
           ['Joggen', '87,5 cm', '8,75 km', '~574 kcal'],
           ['Laufen', '105 cm', '10,50 km', '~772 kcal'],
         ],
-        fussnote: 'Distanz und grober Kalorienverbrauch für 10.000 Schritte bei 175 cm und 75 kg. Die Kalorienwerte sind grobe MET-Schätzungen (Gehen 3,5 · Joggen 7,0 · Laufen 9,8) und dienen nur der Orientierung — der reale Verbrauch hängt von Tempo, Untergrund, Fitness und Stoffwechsel ab. Beim Laufen legt man mit derselben Schrittzahl nicht nur mehr Distanz zurück, sondern verbraucht pro Kilometer auch mehr Energie als beim gemütlichen Gehen. Wichtig für die Interpretation: Die Kalorien beziehen sich hier auf die zurückgelegte Distanz der jeweiligen Aktivität, nicht auf die reinen 10.000 Schritte allein — laufend kommt man in derselben Zeit weiter und bewegt sich intensiver, was beide Effekte zusammenführt. Für den Alltag reicht diese grobe Einordnung völlig aus.',
+        fussnote: 'Distanz und grober Kalorienverbrauch für 10.000 Schritte bei 175 cm und 75 kg. Die Kalorienwerte sind grobe MET-Schätzungen (Gehen 3,8 · Joggen 7,0 · Laufen 9,8) und dienen nur der Orientierung — der reale Verbrauch hängt von Tempo, Untergrund, Fitness und Stoffwechsel ab. Beim Laufen legt man mit derselben Schrittzahl nicht nur mehr Distanz zurück, sondern verbraucht pro Kilometer auch mehr Energie als beim gemütlichen Gehen. Wichtig für die Interpretation: Die Kalorien beziehen sich hier auf die zurückgelegte Distanz der jeweiligen Aktivität, nicht auf die reinen 10.000 Schritte allein — laufend kommt man in derselben Zeit weiter und bewegt sich intensiver, was beide Effekte zusammenführt. Für den Alltag reicht diese grobe Einordnung völlig aus.',
       },
       {
         typ: 'beispielrechnung',
@@ -1622,7 +1623,7 @@ export const sportRechner: RechnerConfig[] = [
   },
   {
     slug: 'ffmi-rechner',
-    letzteAktualisierung: '2026-07-01',
+    letzteAktualisierung: '2026-10-20',
     titel: 'FFMI-Rechner (Muskelmasse-Index)',
     beschreibung: 'FFMI berechnen: den Fat-Free-Mass-Index als Kennzahl für die Muskulosität, die anders als der BMI Muskel- von Fettmasse trennt.',
     kategorie: 'Sport & Fitness',
@@ -1688,7 +1689,8 @@ export const sportRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Der normalisierte FFMI',
-        html: `<p>Ein rein berechneter FFMI hat einen kleinen Schönheitsfehler: Bei gleicher Statur und gleichem Trainingszustand fällt er für <strong>größere Menschen etwas niedriger</strong> aus als für kleinere, weil die Körpergröße quadratisch in den Nenner eingeht. Um große und kleine Personen fair vergleichbar zu machen, wurde der <strong>normalisierte FFMI</strong> eingeführt.</p><p>Er rechnet den Wert auf eine <strong>Referenzgröße von 1,80 m</strong> um: normalisierter FFMI = FFMI + 6,1 × (1,8 − Größe in Metern). Ist jemand kleiner als 1,80 m, wird der Wert leicht nach oben korrigiert, bei größeren nach unten. Bei genau 1,80 m ändert sich nichts, weil der Korrekturterm null wird — dann sind FFMI und normalisierter FFMI gleich. Für den Vergleich verschiedener Personen oder für Referenztabellen wird üblicherweise der normalisierte Wert verwendet, weil er die Größenabhängigkeit herausrechnet. Für die reine Verlaufskontrolle einer einzelnen Person spielt die Normalisierung dagegen keine Rolle, weil sich die eigene Größe nicht ändert und beide Werte parallel steigen oder fallen.</p>`,
+        // W187: vorher „… für größere Menschen etwas niedriger …, weil die Körpergröße quadratisch in den Nenner eingeht“ — verkehrt; Kouri et al. 1995 fanden bei größeren Männern etwas höhere Werte
+        html: `<p>Ein rein berechneter FFMI hat einen kleinen Schönheitsfehler: Bei gleicher Statur und gleichem Trainingszustand fällt er für <strong>größere Menschen etwas höher</strong> aus als für kleinere, weil die fettfreie Masse mit der Körpergröße etwas stärker zunimmt als mit dem Quadrat der Größe (Kouri et al., 1995). Um große und kleine Personen fair vergleichbar zu machen, wurde der <strong>normalisierte FFMI</strong> eingeführt.</p><p>Er rechnet den Wert auf eine <strong>Referenzgröße von 1,80 m</strong> um: normalisierter FFMI = FFMI + 6,1 × (1,8 − Größe in Metern). Ist jemand kleiner als 1,80 m, wird der Wert leicht nach oben korrigiert, bei größeren nach unten. Bei genau 1,80 m ändert sich nichts, weil der Korrekturterm null wird — dann sind FFMI und normalisierter FFMI gleich. Für den Vergleich verschiedener Personen oder für Referenztabellen wird üblicherweise der normalisierte Wert verwendet, weil er die Größenabhängigkeit herausrechnet. Für die reine Verlaufskontrolle einer einzelnen Person spielt die Normalisierung dagegen keine Rolle, weil sich die eigene Größe nicht ändert und beide Werte parallel steigen oder fallen.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -1698,7 +1700,8 @@ export const sportRechner: RechnerConfig[] = [
           { label: 'Bei 1,80 m', formel: '68 ÷ 1,80² = 21,0 → normalisiert', ergebnis: '21,0' },
           { label: 'Bei 1,90 m', formel: '68 ÷ 1,90² = 18,8 → normalisiert', ergebnis: '18,2' },
         ],
-        fazit: 'Dieselbe fettfreie Masse von 68 kg ergibt je nach Körpergröße einen sehr unterschiedlichen FFMI: 23,5 bei 1,70 m, 21,0 bei 1,80 m und 18,8 bei 1,90 m. Nach der Normalisierung liegen die Werte bei 24,1, 21,0 und 18,2. Die Rechnung zeigt, dass die Körpergröße einen erheblichen Einfluss hat — ein kleinerer Mensch erreicht mit derselben Muskelmasse rechnerisch einen höheren FFMI. Genau deshalb macht die Normalisierung Vergleiche zwischen Personen unterschiedlicher Größe erst sinnvoll.',
+        // W187: vorher „… Genau deshalb macht die Normalisierung Vergleiche … erst sinnvoll“ (gleiche Begründungsumkehr wie im Textblock oben)
+        fazit: 'Dieselbe fettfreie Masse von 68 kg ergibt je nach Körpergröße einen sehr unterschiedlichen FFMI: 23,5 bei 1,70 m, 21,0 bei 1,80 m und 18,8 bei 1,90 m. Nach der Normalisierung liegen die Werte bei 24,1, 21,0 und 18,2. Die Rechnung zeigt, dass die Körpergröße einen erheblichen Einfluss hat — ein kleinerer Mensch erreicht mit derselben Muskelmasse rechnerisch einen höheren FFMI, weil der FFMI die Muskelmasse ins Verhältnis zur Größe setzt. Die Normalisierung gleicht diesen Unterschied nicht aus, sondern nur die kleine statistische Verzerrung, dass größere Menschen bei vergleichbarer Statur etwas höhere FFMI-Werte haben: Sie verschiebt den Wert um rund 0,6 Punkte je 10 cm Abstand zu 1,80 m.',
       },
       {
         typ: 'tabelle',
@@ -2191,7 +2194,7 @@ export const sportRechner: RechnerConfig[] = [
   },
   {
     slug: 'trinkmenge-rechner',
-    letzteAktualisierung: '2026-07-01',
+    letzteAktualisierung: '2026-10-20',
     titel: 'Trinkmenge-Rechner (Flüssigkeitsbedarf)',
     beschreibung: 'Täglichen Flüssigkeitsbedarf schätzen: aus Körpergewicht, Sportdauer und Klima — als grobe Orientierung, besonders an Trainingstagen.',
     kategorie: 'Sport & Fitness',
@@ -2200,11 +2203,13 @@ export const sportRechner: RechnerConfig[] = [
     metaDescription: 'Trinkmenge berechnen: den täglichen Flüssigkeitsbedarf aus Gewicht, Sportdauer und Klima schätzen — als grobe Orientierung für gesunde Erwachsene.',
     keywords: ['trinkmenge berechnen', 'wasserbedarf sport', 'wie viel wasser trinken', 'flüssigkeitsbedarf', 'wasser pro tag', 'trinkmenge sport', 'wasserbedarf berechnen', 'wie viel trinken'],
     icon: '💧',
-    beispiel: '75 kg, 45 min Sport, normales Klima: 2.475 ml Basis + 525 ml Sport = 3,00 L pro Tag.',
+    // W187: vorher „… = 3,00 L pro Tag.“ ohne Trennung von Gesamtbedarf und Trinkmenge
+    beispiel: '75 kg, 45 min Sport, normales Klima: 2.475 ml Basis + 525 ml Sport = 3,00 L Flüssigkeitsbedarf pro Tag; davon trinken: 54 % von 2.475 ml + 525 ml ≈ 1,86 L.',
     faq: [
       {
         frage: 'Wie viel Wasser sollte ich pro Tag trinken?',
-        antwort: 'Als grobe Orientierung gelten rund 30 bis 35 ml pro Kilogramm Körpergewicht am Tag — bei 70 kg also etwa 2,1 bis 2,5 Liter. Ein Teil davon kommt über die Nahrung. An Sport- und Hitzetagen steigt der Bedarf. Die verbreitete „8-Gläser-Regel" ist kein belastbarer wissenschaftlicher Standard; der tatsächliche Bedarf ist individuell.',
+        // W187: vorher „… etwa 2,1 bis 2,5 Liter. Ein Teil davon kommt über die Nahrung.“
+        antwort: 'Als grobe Orientierung für den gesamten Flüssigkeitsbedarf gelten rund 30 bis 35 ml pro Kilogramm Körpergewicht am Tag — bei 70 kg also etwa 2,1 bis 2,5 Liter. Das schließt das Wasser aus fester Nahrung und aus dem Stoffwechsel ein; trinken muss man nach den D-A-CH-Referenzwerten rund 54 % davon, bei 70 kg also etwa 1,1 bis 1,3 Liter. An Sport- und Hitzetagen steigt der Bedarf, und der Mehrbedarf wird voll getrunken. Die verbreitete „8-Gläser-Regel" ist kein belastbarer wissenschaftlicher Standard; der tatsächliche Bedarf ist individuell.',
       },
       {
         frage: 'Wie viel mehr sollte ich beim Sport trinken?',
@@ -2216,7 +2221,7 @@ export const sportRechner: RechnerConfig[] = [
       },
       {
         frage: 'Zählen Kaffee und Tee zur Flüssigkeitsbilanz?',
-        antwort: 'Ja. Kaffee und Tee tragen zur Flüssigkeitszufuhr bei — die früher angenommene stark entwässernde Wirkung von Koffein ist bei üblichen Mengen gering. Auch wasserreiche Lebensmittel wie Obst, Gemüse und Suppen zählen mit; rund 20 Prozent der Flüssigkeit nimmt man üblicherweise über die Nahrung auf. Wasser und ungesüßte Getränke bleiben aber die beste Basis.',
+        antwort: 'Ja. Kaffee und Tee tragen zur Flüssigkeitszufuhr bei — die früher angenommene stark entwässernde Wirkung von Koffein ist bei üblichen Mengen gering. Auch wasserreiche Lebensmittel wie Obst, Gemüse und Suppen zählen mit; nach den D-A-CH-Referenzwerten stammt rund ein Drittel der gesamten Wasserzufuhr aus fester Nahrung und gut ein Achtel aus dem Stoffwechsel (Oxidationswasser). Wasser und ungesüßte Getränke bleiben aber die beste Basis.',
       },
       {
         frage: 'Gilt der Wert auch bei Erkrankungen?',
@@ -2235,28 +2240,31 @@ export const sportRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Basis-Bedarf', formel: '75 kg × 33 ml/kg', ergebnis: '2.475 ml' },
           { label: 'Sport-Bonus', formel: '(45 ÷ 30) × 350 ml', ergebnis: '525 ml' },
-          { label: 'Gesamt', formel: '(2.475 × 1,0 + 525) ÷ 1.000', ergebnis: '3,00 L' },
+          { label: 'Flüssigkeitsbedarf gesamt', formel: '(2.475 × 1,0 + 525) ÷ 1.000', ergebnis: '3,00 L' },
+          // W187: Trinkmenge ergänzt; vorher im Fazit „Etwa ein Fünftel dieser Menge nimmt man ohnehin über die Nahrung auf“
+          { label: 'Davon trinken', formel: '(2.475 × 0,54 + 525) ÷ 1.000', ergebnis: '≈ 1,86 L' },
         ],
-        fazit: 'Ein 75 kg schwerer Mann, der 45 Minuten moderat Sport treibt, hat bei normalem Klima einen geschätzten Bedarf von rund 3,0 Litern pro Tag. Er setzt sich aus dem Basis-Bedarf (2.475 ml) und dem Sport-Bonus (525 ml) zusammen. Der Sport-Bonus gleicht den Schweißverlust aus, der bei 45 Minuten moderater Belastung anfällt. An einem trainingsfreien Tag läge der Bedarf entsprechend niedriger, bei Hitze oder längerem Training höher. Etwa ein Fünftel dieser Menge nimmt man ohnehin über die Nahrung auf, sodass die reine Trinkmenge etwas niedriger liegt. Praktisch heißt das: Statt starr auf drei Liter zu achten, verteilt man die Flüssigkeit über den Tag und trinkt rund um das Training bewusst etwas mehr. Der Wert ist eine Orientierung, keine Pflichtmenge, die exakt erreicht werden muss.',
+        fazit: 'Ein 75 kg schwerer Mann, der 45 Minuten moderat Sport treibt, hat bei normalem Klima einen geschätzten Gesamtbedarf von rund 3,0 Litern pro Tag. Er setzt sich aus dem Basis-Bedarf (2.475 ml) und dem Sport-Bonus (525 ml) zusammen. Der Sport-Bonus gleicht den Schweißverlust aus, der bei 45 Minuten moderater Belastung anfällt. An einem trainingsfreien Tag läge der Bedarf entsprechend niedriger, bei Hitze oder längerem Training höher. Trinken muss er davon rund 1,86 Liter: Vom Basis-Bedarf kommen nach den D-A-CH-Referenzwerten nur rund 54 % aus Getränken, der Rest aus fester Nahrung und Oxidationswasser; den Sport-Bonus gleicht er dagegen vollständig über Getränke aus. Praktisch heißt das: Statt starr auf eine Literzahl zu achten, verteilt man die Flüssigkeit über den Tag und trinkt rund um das Training bewusst etwas mehr. Der Wert ist eine Orientierung, keine Pflichtmenge, die exakt erreicht werden muss.',
       },
       {
         typ: 'tabelle',
         titel: 'Basis-Bedarf nach Gewicht (ohne Sport, normales Klima)',
-        kopf: ['Gewicht', 'Basis-Bedarf'],
+        // W187: Spalte „davon trinken“ ergänzt; vorher Fußnote „Rund 20 Prozent der Flüssigkeit nimmt man üblicherweise über die Nahrung auf … etwas niedriger“
+        kopf: ['Gewicht', 'Basis-Bedarf gesamt', 'davon trinken (54 %)'],
         zeilen: [
-          ['50 kg', '1,65 L'],
-          ['60 kg', '1,98 L'],
-          ['70 kg', '2,31 L'],
-          ['80 kg', '2,64 L'],
-          ['90 kg', '2,97 L'],
-          ['100 kg', '3,30 L'],
+          ['50 kg', '1,65 L', '0,89 L'],
+          ['60 kg', '1,98 L', '1,07 L'],
+          ['70 kg', '2,31 L', '1,25 L'],
+          ['80 kg', '2,64 L', '1,43 L'],
+          ['90 kg', '2,97 L', '1,60 L'],
+          ['100 kg', '3,30 L', '1,78 L'],
         ],
-        fussnote: 'Basis-Flüssigkeitsbedarf mit 33 ml pro Kilogramm (Männer; für Frauen etwas weniger, rund 31 ml/kg). Diese Werte gelten ohne zusätzlichen Sport und bei gemäßigtem Klima. Rund 20 Prozent der Flüssigkeit nimmt man üblicherweise über die Nahrung auf, etwa über Obst, Gemüse und Suppen — die reine Trinkmenge liegt also etwas niedriger als der Gesamtbedarf. Die Werte sind Orientierung, kein starres Soll.',
+        fussnote: 'Basis-Flüssigkeitsbedarf mit 33 ml pro Kilogramm (Männer; für Frauen etwas weniger, rund 31 ml/kg). Diese Werte gelten ohne zusätzlichen Sport und bei gemäßigtem Klima. Der Basis-Bedarf ist die gesamte Wasserzufuhr: Nach den D-A-CH-Referenzwerten stammt rund ein Drittel aus fester Nahrung wie Obst, Gemüse und Suppen und gut ein Achtel aus dem Stoffwechsel — getrunken werden müssen nur rund 54 %. Die Werte sind Orientierung, kein starres Soll.',
       },
       {
         typ: 'text',
         titel: 'Woher die 30 bis 35 ml pro Kilogramm kommen',
-        html: `<p>Der Basiswert von etwa <strong>30 bis 35 ml pro Kilogramm</strong> Körpergewicht und Tag stammt aus Empfehlungen von Fachgesellschaften wie dem Institute of Medicine (IOM) und der Europäischen Behörde für Lebensmittelsicherheit (EFSA). Er bildet ab, wie viel Flüssigkeit der Körper eines gesunden Erwachsenen in gemäßigtem Klima ungefähr benötigt, um den täglichen Verlust über Urin, Haut, Atmung und Verdauung auszugleichen.</p><p>Der Wert ist bewusst als <strong>Spanne</strong> formuliert, weil der Bedarf individuell schwankt. Größere und muskulösere Menschen haben tendenziell einen höheren Bedarf, ebenso Menschen mit hohem Stoffwechsel oder viel Bewegung im Alltag. Dieser Rechner verwendet 33 ml/kg für Männer und 31 ml/kg für Frauen als mittlere Werte innerhalb der Spanne. Das ist eine sinnvolle Näherung, aber keine exakte persönliche Vorgabe — der eigene Bedarf kann darüber oder darunter liegen. Wichtiger als das genaue Treffen einer Zahl ist, regelmäßig und ausreichend zu trinken und dabei auf die Signale des Körpers zu achten.</p>`,
+        html: `<p>Der Basiswert von etwa <strong>30 bis 35 ml pro Kilogramm</strong> Körpergewicht und Tag entspricht den D-A-CH-Referenzwerten der Ernährungsgesellschaften aus Deutschland, Österreich und der Schweiz (35 ml/kg für 19 bis unter 51 Jahre, 30 ml/kg ab 51 Jahren) und liegt in der Größenordnung der Referenzwerte der Europäischen Behörde für Lebensmittelsicherheit (EFSA: 2,5 Liter für Männer, 2,0 Liter für Frauen). Er bildet ab, wie viel Wasser der Körper eines gesunden Erwachsenen in gemäßigtem Klima insgesamt benötigt, um den täglichen Verlust über Urin, Haut, Atmung und Verdauung auszugleichen — aus Getränken, fester Nahrung und dem Oxidationswasser des Stoffwechsels zusammen. Getränke decken davon bei Erwachsenen rund 54 %.</p><p>Der Wert ist bewusst als <strong>Spanne</strong> formuliert, weil der Bedarf individuell schwankt. Größere und muskulösere Menschen haben tendenziell einen höheren Bedarf, ebenso Menschen mit hohem Stoffwechsel oder viel Bewegung im Alltag. Dieser Rechner verwendet 33 ml/kg für Männer und 31 ml/kg für Frauen als mittlere Werte innerhalb der Spanne. Das ist eine sinnvolle Näherung, aber keine exakte persönliche Vorgabe — der eigene Bedarf kann darüber oder darunter liegen. Wichtiger als das genaue Treffen einer Zahl ist, regelmäßig und ausreichend zu trinken und dabei auf die Signale des Körpers zu achten.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -2264,9 +2272,11 @@ export const sportRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Basis × Klima-Faktor', formel: '80 × 33 × 1,2', ergebnis: '3.168 ml' },
           { label: 'Sport-Bonus', formel: '(60 ÷ 30) × 350 ml', ergebnis: '700 ml' },
-          { label: 'Gesamt', formel: '(3.168 + 700) ÷ 1.000', ergebnis: '≈ 3,87 L' },
+          { label: 'Flüssigkeitsbedarf gesamt', formel: '(3.168 + 700) ÷ 1.000', ergebnis: '≈ 3,87 L' },
+          // W187: Trinkmenge ergänzt (Basis 2.640 ml × 0,54 + Klima-Mehrbedarf 528 ml + Sport 700 ml)
+          { label: 'Davon trinken', formel: '(2.640 × 0,54 + 528 + 700) ÷ 1.000', ergebnis: '≈ 2,65 L' },
         ],
-        fazit: 'An einem heißen Tag mit einer Stunde Training steigt der Bedarf deutlich. Für einen 80 kg schweren Mann ergibt sich mit dem Klima-Faktor 1,2 und dem Sport-Bonus ein geschätzter Bedarf von rund 3,87 Litern. Der Klima-Faktor erhöht die Basis um 20 Prozent, weil bei Hitze und hoher Luftfeuchte mehr geschwitzt wird. Solche Werte zeigen, wie stark Bedingungen den Bedarf verschieben — an einem kühlen, ruhigen Tag läge derselbe Mensch deutlich niedriger. Bei sehr großer Hitze oder langen Einheiten sollte man zusätzlich auf Elektrolyte achten. Interessant ist der Vergleich zum ersten Beispiel: Derselbe Sportumfang, aber ein schwererer Körper und heißes Klima erhöhen den Bedarf von 3,0 auf fast 3,9 Liter — knapp ein Liter Unterschied allein durch Gewicht und Bedingungen. Das unterstreicht, wie stark äußere Faktoren wirken und warum eine pauschale Zahl für alle wenig sinnvoll ist.',
+        fazit: 'An einem heißen Tag mit einer Stunde Training steigt der Bedarf deutlich. Für einen 80 kg schweren Mann ergibt sich mit dem Klima-Faktor 1,2 und dem Sport-Bonus ein geschätzter Gesamtbedarf von rund 3,87 Litern, davon rund 2,65 Liter aus Getränken. Der Klima-Faktor erhöht die Basis um 20 Prozent, weil bei Hitze und hoher Luftfeuchte mehr geschwitzt wird. Solche Werte zeigen, wie stark Bedingungen den Bedarf verschieben — an einem kühlen, ruhigen Tag läge derselbe Mensch deutlich niedriger. Bei sehr großer Hitze oder langen Einheiten sollte man zusätzlich auf Elektrolyte achten. Interessant ist der Vergleich zum ersten Beispiel: Derselbe Sportumfang, aber ein schwererer Körper und heißes Klima erhöhen den Bedarf von 3,0 auf fast 3,9 Liter — knapp ein Liter Unterschied allein durch Gewicht und Bedingungen. Das unterstreicht, wie stark äußere Faktoren wirken und warum eine pauschale Zahl für alle wenig sinnvoll ist.',
       },
       {
         typ: 'statistik',
@@ -2275,7 +2285,8 @@ export const sportRechner: RechnerConfig[] = [
           { label: 'Schwitzen (moderat)', wert: '0,5–1 l/h', hinweis: 'je nach Intensität' },
           { label: 'Schwitzen (intensiv/Hitze)', wert: '1–2 l/h', hinweis: 'starke Belastung' },
           { label: 'Ersatz-Faustregel', wert: '~350 ml/30 min', hinweis: 'ACSM-Richtwert' },
-          { label: 'Aus der Nahrung', wert: '~20 %', hinweis: 'Obst, Gemüse, Suppen' },
+          // W187: vorher „Aus der Nahrung ~20 %“
+          { label: 'Aus fester Nahrung', wert: '~33 %', hinweis: 'D-A-CH; dazu ~13 % Oxidationswasser' },
         ],
       },
       {
@@ -2319,7 +2330,7 @@ export const sportRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'hinweis',
         titel: 'Ein Schätzwert für gesunde Erwachsene',
-        text: 'Die berechnete Trinkmenge ist ein grober Orientierungswert für gesunde Erwachsene und kein medizinischer Befund. Der individuelle Bedarf schwankt stark je nach Körperzusammensetzung, Stoffwechsel, Ernährung, Umgebung und Aktivität. Etwa 20 Prozent der Flüssigkeit nimmt man ohnehin über feste Nahrung auf, weshalb die reine Trinkmenge unter dem Gesamtbedarf liegt. In besonderen Situationen gelten andere Regeln: In Schwangerschaft und Stillzeit, bei Fieber, Erbrechen, Durchfall oder starkem Schwitzen sowie bei chronischen Erkrankungen sollte die Flüssigkeitsmenge mit ärztlichem Rat abgestimmt werden. Insbesondere bei Nieren- und Herzerkrankungen kann eine ärztlich verordnete Beschränkung gelten, die Vorrang vor jedem Rechnerwert hat. Nutzen Sie diesen Rechner als Anhaltspunkt, um ein Gefühl für Ihren Bedarf zu bekommen, und achten Sie im Alltag vor allem auf die natürlichen Signale Ihres Körpers. Bei Unsicherheit oder gesundheitlichen Fragen ist die ärztliche Beratung die richtige Anlaufstelle.',
+        text: 'Die berechnete Trinkmenge ist ein grober Orientierungswert für gesunde Erwachsene und kein medizinischer Befund. Der individuelle Bedarf schwankt stark je nach Körperzusammensetzung, Stoffwechsel, Ernährung, Umgebung und Aktivität. Nach den D-A-CH-Referenzwerten stammen rund 46 Prozent des Grundbedarfs aus fester Nahrung und Oxidationswasser, weshalb die Trinkmenge deutlich unter dem Gesamtbedarf liegt; der Rechner weist beide Werte getrennt aus. In besonderen Situationen gelten andere Regeln: In Schwangerschaft und Stillzeit, bei Fieber, Erbrechen, Durchfall oder starkem Schwitzen sowie bei chronischen Erkrankungen sollte die Flüssigkeitsmenge mit ärztlichem Rat abgestimmt werden. Insbesondere bei Nieren- und Herzerkrankungen kann eine ärztlich verordnete Beschränkung gelten, die Vorrang vor jedem Rechnerwert hat. Nutzen Sie diesen Rechner als Anhaltspunkt, um ein Gefühl für Ihren Bedarf zu bekommen, und achten Sie im Alltag vor allem auf die natürlichen Signale Ihres Körpers. Bei Unsicherheit oder gesundheitlichen Fragen ist die ärztliche Beratung die richtige Anlaufstelle.',
       },
       {
         typ: 'text',
@@ -2331,6 +2342,12 @@ export const sportRechner: RechnerConfig[] = [
       {
         titel: 'Flüssigkeitsbedarf (IOM/EFSA; Jéquier & Constant 2010)',
         hinweis: 'Basisbedarf ca. 30–35 ml pro kg Körpergewicht/Tag für gesunde Erwachsene in gemäßigtem Klima; individuell variabel.',
+      },
+      // W187: D-A-CH-Richtwerte als Beleg für den Getränke-Anteil ergänzt
+      {
+        titel: 'DGE/ÖGE/SGE — D-A-CH-Referenzwerte, Richtwerte für die Wasserzufuhr (Tabelle beim VIS Bayern)',
+        url: 'https://www.vis.bayern.de/essen_trinken/ernaehrungsformen/doc/richtwerte_fuer_zufuhr_wasser_akt.pdf',
+        hinweis: 'Gesamtwasserzufuhr 35 ml/kg (19 bis unter 51 Jahre) bzw. 30 ml/kg (ab 51); davon Getränke z. B. 1.410 von 2.600 ml (25 bis unter 51 Jahre) = 54 %, feste Nahrung 860 ml, Oxidationswasser 330 ml.',
       },
       {
         titel: 'ACSM — Exercise and Fluid Replacement',

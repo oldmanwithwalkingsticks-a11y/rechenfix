@@ -28,9 +28,11 @@ export interface LebenszeitErgebnis {
   prozentGelebt: number;
 }
 
+// W187: vorher 78,5 / 83,2 (Sterbetafel 2022/2024). Destatis, Sterbetafel 2023/2025 (Stand 07.07.2026,
+// PM Nr. 236): Lebenserwartung bei Geburt 78,8 Jahre (Männer) und 83,4 Jahre (Frauen).
 const LEBENSERWARTUNG = {
-  maennlich: 78.5,
-  weiblich: 83.2,
+  maennlich: 78.8,
+  weiblich: 83.4,
 };
 
 // Durchschnittswerte (Quellen: WHO, Statista, Destatis)

@@ -59,9 +59,11 @@ export interface ElterngeldVergleich {
  *
  * - Netto < 1.000 €: Rate steigt um 0,1 Prozentpunkte pro 2 € unter 1.000 €
  *   bis max. 100 % (Geringverdiener-Bonus § 2 Abs. 2 Satz 1)
- * - Netto 1.000–1.240 €: Plateau bei 67 %
- * - Netto > 1.240 €: Rate sinkt um 0,1 Prozentpunkte pro 2 € über 1.240 €
- *   bis min. 65 % (§ 2 Abs. 2 Satz 2 — zweite Absenkungsstufe)
+ * - Netto 1.000–1.200 €: Plateau bei 67 %
+ * - Netto > 1.200 €: Rate sinkt um 0,1 Prozentpunkte pro 2 € über 1.200 €
+ *   bis min. 65 % (§ 2 Abs. 2 Satz 2 BEEG), erreicht ab 1.240 €
+ * W187: vorher Plateau bis 1.240 € und Absenkung erst ab 1.240 € — zwischen 1.200 und
+ * 1.280 € lag die Rate bis zu 2 Prozentpunkte zu hoch (1.240 €: 67 % statt 65 %).
  */
 export function berechneErsatzrate(nettoVorGeburt: number): number {
   if (nettoVorGeburt <= 0) return 1.0;
@@ -72,12 +74,12 @@ export function berechneErsatzrate(nettoVorGeburt: number): number {
     return Math.min(1.0, 0.67 + zusatz);
   }
 
-  if (nettoVorGeburt <= 1240) {
+  if (nettoVorGeburt <= 1200) {
     return 0.67;
   }
 
-  // Über 1.240 €: Ersatzrate sinkt bis auf 65 %
-  const differenz = nettoVorGeburt - 1240;
+  // Über 1.200 €: Ersatzrate sinkt bis auf 65 % (§ 2 Abs. 2 S. 2 BEEG)
+  const differenz = nettoVorGeburt - 1200;
   const abzug = Math.floor(differenz / 2) * 0.001;
   return Math.max(0.65, 0.67 - abzug);
 }

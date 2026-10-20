@@ -10,7 +10,6 @@ import {
   berechneArbeitslosengeld,
   type Steuerklasse,
 } from '@/lib/berechnungen/arbeitslosengeld';
-import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
 
 export default function ArbeitslosengeldRechner() {
   const [brutto, setBrutto] = useState('3500');
@@ -18,10 +17,8 @@ export default function ArbeitslosengeldRechner() {
   const [mitKind, setMitKind] = useState(false);
   const [alter, setAlter] = useState('40');
   const [beschDauer, setBeschDauer] = useState('24');
-  const [kirchensteuer, setKirchensteuer] = useState(false);
-  const [bundesland, setBundesland] = useState<Bundesland>('Nordrhein-Westfalen');
-
-  const kistSatzProzent = bundesland === 'Bayern' || bundesland === 'Baden-Württemberg' ? 8 : 9;
+  // W187: vorher Kirchensteuer-Auswahl (Ja 8/9 % nach Bundesland) — beim ALG wird keine
+  // Kirchensteuer abgezogen (§ 153 Abs. 1 S. 2 SGB III nennt nur SV-Pauschale, Lohnsteuer, Soli).
 
   const ergebnis = useMemo(() => berechneArbeitslosengeld({
     brutto: parseDeutscheZahl(brutto) || 0,
@@ -29,11 +26,10 @@ export default function ArbeitslosengeldRechner() {
     mitKind,
     alter: parseDeutscheZahl(alter) || 0,
     beschMonate: parseDeutscheZahl(beschDauer) || 0,
-    kirchensteuer,
-    bundesland,
-  }), [brutto, klasse, mitKind, alter, beschDauer, kirchensteuer, bundesland]);
+  }), [brutto, klasse, mitKind, alter, beschDauer]);
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const fmtCent = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
     <div>
@@ -113,56 +109,25 @@ export default function ArbeitslosengeldRechner() {
         </select>
       </div>
 
-      {/* 6: Kirchensteuer */}
-      <div className="mb-6">
-        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
-          <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">6</span>
-          Kirchensteuer
-        </h2>
-        <div className="flex gap-2">
-          {([[true, `Ja (${kistSatzProzent} %)`], [false, 'Nein']] as const).map(([val, label]) => (
-            <button
-              key={String(val)}
-              onClick={() => setKirchensteuer(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] min-w-[80px] ${kirchensteuer === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-        {kirchensteuer && (
-          <div className="mt-3">
-            <label htmlFor="arbeitslosengeld-bundesland" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bundesland</label>
-            <select
-              id="arbeitslosengeld-bundesland"
-              value={bundesland}
-              onChange={e => setBundesland(e.target.value as Bundesland)}
-              className="w-full sm:w-2/3 min-h-[48px] px-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200"
-            >
-              {BUNDESLAENDER.map(bl => (
-                <option key={bl} value={bl}>{bl}</option>
-              ))}
-            </select>
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-              Bayern und Baden-Württemberg: 8 %. Übrige 14 Bundesländer: 9 %.
-            </p>
-          </div>
-        )}
-      </div>
+      <p className="-mt-3 mb-6 text-xs text-gray-500 dark:text-gray-400">
+        Kirchensteuer wird beim Arbeitslosengeld nicht abgezogen — vom Bemessungsentgelt gehen nur die Sozialversicherungspauschale von 20 %, die Lohnsteuer und der Solidaritätszuschlag ab (§ 153 Abs. 1 SGB III).
+      </p>
 
       {/* ERGEBNIS */}
       <div className="result-box mb-6">
         <p className="text-white/80 text-sm mb-1">Arbeitslosengeld I (monatlich)</p>
         <p className="text-5xl font-bold">{fmtEuro(ergebnis.algMonat)} €</p>
         <p className="text-white/80 text-sm mt-1">
-          Tagessatz: <strong>{fmtEuro(ergebnis.algTag)} €</strong> × {ergebnis.satz * 100} % Leistungssatz
+          {/* W187: vorher „Tagessatz: 47 € × 60 % Leistungssatz“ — der Tagessatz enthält die 60 % bereits */}
+          Tagessatz: <strong>{fmtCent(ergebnis.algTag)} €</strong> ({ergebnis.satz * 100} % von {fmtCent(ergebnis.leistungsentgeltTag)} € Leistungsentgelt pro Tag) × 30 Tage
         </p>
       </div>
 
       {ergebnis.dauer === 0 && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-6">
           <p className="text-red-800 dark:text-red-300 text-sm">
-            <strong>⚠️ Kein ALG-Anspruch:</strong> Die Anwartschaftszeit von mindestens 12 Monaten sozialversicherungspflichtiger Beschäftigung in den letzten 5 Jahren wurde nicht erreicht.
+            {/* W187: vorher „… in den letzten 5 Jahren“ — die 5 Jahre gelten nur für die Anspruchsdauer (§ 147) */}
+            <strong>⚠️ Kein ALG-Anspruch:</strong> Die Anwartschaftszeit von mindestens 12 Monaten versicherungspflichtiger Beschäftigung innerhalb der Rahmenfrist von 30 Monaten (§§ 142, 143 SGB III) wurde nicht erreicht.
           </p>
         </div>
       )}
@@ -217,7 +182,7 @@ export default function ArbeitslosengeldRechner() {
             zeilen: [
               { label: 'Leistungssatz', wert: `${ergebnis.satz * 100} %` },
               { label: 'ALG I pro Monat', wert: `${fmtEuro(ergebnis.algMonat)} €`, highlight: true },
-              { label: 'ALG I pro Tag', wert: `${fmtEuro(ergebnis.algTag)} €` },
+              { label: 'ALG I pro Tag', wert: `${fmtCent(ergebnis.algTag)} €` },
               { label: 'Bezugsdauer', wert: `${ergebnis.dauer} Monate` },
               { label: 'Gesamtanspruch', wert: `${fmtEuro(ergebnis.gesamt)} €` },
             ],

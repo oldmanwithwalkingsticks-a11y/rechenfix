@@ -27,21 +27,38 @@ export interface KoerperfettErgebnis {
   kategorien: KoerperfettKategorie[];
 }
 
-const KATEGORIEN_MANN: KoerperfettKategorie[] = [
+// W187: vorher Label „Übergewichtig“ (die Seite nennt den ACE-Bereich neutral „Oberhalb des Durchschnitts“).
+// von/bis sind die ganzzahligen Anzeige-Grenzen der ACE-Tabelle; die Zuordnung erfolgt halboffen
+// (Kategorie gilt ab „von“ bis unter „von“ der nächsten Kategorie), siehe kategorieFuer().
+export const KATEGORIEN_MANN: KoerperfettKategorie[] = [
   { label: 'Essentielles Fett', farbe: 'text-red-600', von: 2, bis: 5 },
   { label: 'Athletisch', farbe: 'text-blue-600', von: 6, bis: 13 },
   { label: 'Fitness', farbe: 'text-green-600', von: 14, bis: 17 },
   { label: 'Durchschnittlich', farbe: 'text-yellow-600', von: 18, bis: 24 },
-  { label: 'Übergewichtig', farbe: 'text-red-600', von: 25, bis: 50 },
+  { label: 'Oberhalb des Durchschnitts', farbe: 'text-red-600', von: 25, bis: 50 },
 ];
 
-const KATEGORIEN_FRAU: KoerperfettKategorie[] = [
+export const KATEGORIEN_FRAU: KoerperfettKategorie[] = [
   { label: 'Essentielles Fett', farbe: 'text-red-600', von: 10, bis: 13 },
   { label: 'Athletisch', farbe: 'text-blue-600', von: 14, bis: 20 },
   { label: 'Fitness', farbe: 'text-green-600', von: 21, bis: 24 },
   { label: 'Durchschnittlich', farbe: 'text-yellow-600', von: 25, bis: 31 },
-  { label: 'Übergewichtig', farbe: 'text-red-600', von: 32, bis: 50 },
+  { label: 'Oberhalb des Durchschnitts', farbe: 'text-red-600', von: 32, bis: 50 },
 ];
+
+/**
+ * W187: vorher „kfa >= von && kfa <= bis“ mit ganzzahligen Grenzen und Default „Übergewichtig“ —
+ * Werte zwischen zwei Bereichen (z. B. 13,2 % beim Mann) und Werte unter der ersten Untergrenze
+ * fielen durch alle Bereiche in den Default. Jetzt halboffene Intervalle:
+ * Mann < 6 Essentiell, < 14 Athletisch, < 18 Fitness, < 25 Durchschnitt, sonst oberhalb;
+ * Frau < 14, < 21, < 25, < 32, sonst oberhalb.
+ */
+export function kategorieFuer(kfa: number, kategorien: KoerperfettKategorie[]): KoerperfettKategorie {
+  for (let i = 0; i < kategorien.length - 1; i++) {
+    if (kfa < kategorien[i + 1].von) return kategorien[i];
+  }
+  return kategorien[kategorien.length - 1];
+}
 
 // Durchschnittswerte KFA nach Alter und Geschlecht (Näherungswerte)
 const DURCHSCHNITT_MANN: [number, number][] = [
@@ -96,16 +113,9 @@ export function berechneKoerperfett(eingabe: KoerperfettEingabe): KoerperfettErg
 
   // Kategorie bestimmen
   const kategorien = geschlecht === 'mann' ? KATEGORIEN_MANN : KATEGORIEN_FRAU;
-  let kategorie = 'Übergewichtig';
-  let kategorieFarbe = 'text-red-600';
-
-  for (const k of kategorien) {
-    if (kfa >= k.von && kfa <= k.bis) {
-      kategorie = k.label;
-      kategorieFarbe = k.farbe;
-      break;
-    }
-  }
+  const treffer = kategorieFuer(kfa, kategorien);
+  const kategorie = treffer.label;
+  const kategorieFarbe = treffer.farbe;
 
   // Fettmasse / Magermasse (nur wenn Gewicht angegeben)
   let fettmasse: number | null = null;

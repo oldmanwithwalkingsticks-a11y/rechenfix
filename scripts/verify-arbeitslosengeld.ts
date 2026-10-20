@@ -1,55 +1,52 @@
 /**
- * Verify-Script für lib/berechnungen/arbeitslosengeld.ts (Welle-4 M2c, 03.05.2026).
- *
- * Lib aus M2c-Refactor extrahiert (Component zuvor PARTIAL-KEINE-LIB —
- * konsumierte einkommensteuer + brutto-netto, hatte aber alle SGB-III-
- * spezifischen Funktionen inline; Refactor-Commit 0301e7b).
+ * Verify-Script für lib/berechnungen/arbeitslosengeld.ts (Welle-4 M2c, 03.05.2026; W187 neu gefasst).
  *
  * Externe Quellen (E6, nicht-zirkulär):
  *   - SGB III § 147 Abs. 2 (Anspruchsdauer-Tabelle):
  *     https://www.gesetze-im-internet.de/sgb_3/__147.html
  *   - SGB III § 149 (Leistungssatz 60/67 %):
  *     https://www.gesetze-im-internet.de/sgb_3/__149.html
- *   - SGB III § 153 Abs. 1 (Bemessungsentgelt + 21 %-Pauschalabzug):
- *     https://www.gesetze-im-internet.de/sgb_3/__153.html
+ *   - SGB III §§ 150, 151 (Bemessungsrahmen ein Jahr; Bemessungsentgelt = auf den Tag
+ *     entfallendes Entgelt im Bemessungszeitraum → Jahresentgelt ÷ 365):
+ *     https://www.gesetze-im-internet.de/sgb_3/__151.html
+ *   - SGB III § 153 Abs. 1 (Abzüge abschließend: SV-Pauschale 20 %, Lohnsteuer nach PAP,
+ *     Soli; keine Kirchensteuer): https://www.gesetze-im-internet.de/sgb_3/__153.html
+ *   - SGB III § 154 (voller Monat = 30 Tage), § 338 (zwei Dezimalstellen, ab 5 aufrunden)
+ *   - BA, Fachliche Weisungen § 153 (gültig ab 21.11.2025): Beispiele rechnen mit
+ *     „täglichem Bemessungsentgelt“ und „täglicher Lohnsteuer“ → PAP-Lohnzahlungszeitraum Tag.
  *
- * L-35-Diskrepanzen Konfig-vs-Lib (im Lib-Header dokumentiert):
- *   - § 155 SGB III Nebeneinkommen-Schwelle 165 €/Mon NICHT modelliert
- *   - Stkl V/VI-Lohnsteuer-Faktor ×1,15 ist grobe Näherung (echter
- *     PAP § 39b ~1,4–1,6) — Tests fokussieren auf Klasse I/IV ohne diesen
- *     Faktor; V/VI-Tests sind als Approximation-touched markiert
- *   - Kirchensteuer pauschal 9 % über alle Bundesländer (statt 8 % BY/BW)
+ * W187: vorher SV-Pauschale 21 %, Tagesentgelt Monat ÷ 30, Lohnsteuer aus Jahresbrutto,
+ * Kirchensteuer als Abzug. Startwert 3.500 € Kl. I ohne Kind: vorher 1.412,05 €/Monat,
+ * jetzt 1.416,90 € (Handrechnung Cluster E-03).
  *
  * Test-Strategie:
- *   - Konstanten direct gegen § 149 + § 153
- *   - bezugsdauerMonate-Tabelle direct gegen § 147 Abs. 2
- *   - BBG-Cap structural: bemessung = min(brutto, BBG_RV_MONAT)
- *   - Satz-Faktor structural: 60 % vs. 67 %
- *   - Hand-rechnung Klasse I niedrige Brutto (LSt=0, soli=0, kiSt=0)
- *     für Cent-genaue End-zu-End-Verifikation der Formel-Kette
- *   - gesamt-/verlust-Strukturtests
- *   - Edge: brutto≤0, kein Anspruch (<12 Mon Versicherungspflicht)
+ *   - Konstanten direkt gegen §§ 149, 151, 153, 154
+ *   - Lohnsteuer/Soli je Tag gegen direkten PAP-Lauf mit LZZ = 4 (unabhängiger Pfad)
+ *   - bezugsdauerMonate-Tabelle direkt gegen § 147 Abs. 2
+ *   - BBG-Cap structural
+ *   - Handrechnungen mit hart codierten Sollwerten (Tagesbasis, § 338-Rundung)
+ *   - gesamt-/verlust-Strukturtests, Edge-Cases
  *
  * Tolerance: 0,01 € für €-Werte, 0 für ganzzahlige Monats-Returns.
  *
  * Ausführen: npx tsx scripts/verify-arbeitslosengeld.ts
  */
 
+import Decimal from 'decimal.js';
 import {
   berechneArbeitslosengeld,
   bezugsdauerMonate,
   berechneVereinfachteLohnsteuerJahr,
+  lohnsteuerSoliTag,
   ALG_SATZ_OHNE_KIND,
   ALG_SATZ_MIT_KIND,
   SV_PAUSCHALE_PROZENT,
+  BEMESSUNG_TAGE_JAHR,
+  ALG_TAGE_MONAT,
 } from '../lib/berechnungen/arbeitslosengeld';
 import { BBG_RV_MONAT } from '../lib/berechnungen/brutto-netto';
-import {
-  berechneKirchensteuerByBundesland,
-  kirchensteuersatzFuer,
-  type Bundesland,
-} from '../lib/berechnungen/einkommensteuer';
 import { berechneLohnsteuerJahr } from '../lib/berechnungen/lohnsteuer';
+import { LohnsteuerPAP2026 } from '../lib/berechnungen/_lohnsteuer-pap-2026';
 
 type TestCase = {
   name: string;
@@ -66,72 +63,61 @@ const calc = (params: {
   mitKind?: boolean;
   alter?: number;
   beschMonate?: number;
-  kirchensteuer?: boolean;
-  bundesland?: Bundesland;
 }) => berechneArbeitslosengeld({
   brutto: params.brutto,
   klasse: params.klasse ?? 'I',
   mitKind: params.mitKind ?? false,
   alter: params.alter ?? 40,
   beschMonate: params.beschMonate ?? 24,
-  kirchensteuer: params.kirchensteuer ?? false,
-  bundesland: params.bundesland,
 });
 
-// === Cluster A: Konstanten gegen SGB III §§ 149, 153 ===
+// === Cluster A: Konstanten gegen SGB III §§ 149, 151, 153, 154 ===
 
 cases.push(
   { name: 'A-01 ALG_SATZ_OHNE_KIND (§ 149 SGB III)',           actual: ALG_SATZ_OHNE_KIND,          expected: 0.60, tolerance: 0.0001 },
   { name: 'A-02 ALG_SATZ_MIT_KIND (§ 149 SGB III)',            actual: ALG_SATZ_MIT_KIND,           expected: 0.67, tolerance: 0.0001 },
-  { name: 'A-03 SV_PAUSCHALE_PROZENT (§ 153 Abs. 1 SGB III)',  actual: SV_PAUSCHALE_PROZENT,        expected: 0.21, tolerance: 0.0001 },
+  // W187: vorher 0,21 — § 153 Abs. 1 S. 2 Nr. 1 SGB III: „Sozialversicherungspauschale in Höhe von 20 Prozent“
+  { name: 'A-03 SV_PAUSCHALE_PROZENT = 20 % (§ 153 Abs. 1)',   actual: SV_PAUSCHALE_PROZENT,        expected: 0.20, tolerance: 0.0001 },
+  { name: 'A-04 Bemessungszeitraum 365 Tage (§§ 150, 151)',    actual: BEMESSUNG_TAGE_JAHR,         expected: 365, tolerance: 0 },
+  { name: 'A-05 voller Monat = 30 Tage (§ 154)',               actual: ALG_TAGE_MONAT,              expected: 30, tolerance: 0 },
 );
 
-// === Cluster A2: KiSt-Bundesland-Differenzierung (Welle-5 Track-B B1) ===
+// === Cluster A2 (W187): Lohnsteuer/Soli je Tag gegen direkten PAP-Lauf mit LZZ = 4 ===
 //
-// L-36 Cross-Lib-Computation: Erwartung über `berechneKirchensteuerByBundesland`
-// (transitive Abdeckung via verify-tarif-2026.ts). KiSt = lstMonat × Satz/100,
-// wobei Satz = 8 für BY/BW, 9 sonst.
-//
-// Strukturtest pro BL: aktiviere KiSt mit fixem Brutto, vergleiche Lib-Output
-// mit Cross-Lib-Erwartung gleicher Eingaben.
+// Die BA rechnet täglich (FW § 153: „tägliches Bemessungsentgelt“, „tägliche Lohnsteuer“).
+// Unabhängiger Pfad: Klasse LohnsteuerPAP2026 direkt mit Lohnzahlungszeitraum Tag (LZZ = 4),
+// Vorsorgepauschale nach § 153 Abs. 1 S. 4 SGB III (ermäßigter KV-Satz + durchschn.
+// Zusatzbeitrag 2,9 %, PV 3,6 % ohne Zuschlag/Abschläge, AV pflichtversichert), keine
+// Kinderfreibeträge (§ 153 Abs. 1 S. 3 Nr. 1). Die Lib geht über den Jahres-PAP (× 360, ÷ 360).
 
-const a2_brutto = 3500;
-const a2_lstJahr = berechneVereinfachteLohnsteuerJahr(Math.min(a2_brutto, BBG_RV_MONAT) * 12, 'I');
-const a2_lstMonat = a2_lstJahr / 12;
-const a2_for = (bl: Bundesland) => calc({ brutto: a2_brutto, kirchensteuer: true, bundesland: bl });
-const a2_kiStExpected = (bl: Bundesland) => berechneKirchensteuerByBundesland(a2_lstMonat, bl);
-
-const a2_by = a2_for('Bayern');
-const a2_bw = a2_for('Baden-Württemberg');
-const a2_nw = a2_for('Nordrhein-Westfalen');
-const a2_be = a2_for('Berlin');
-
+function papTag(tagCent: number, sk: 1 | 2 | 3 | 4 | 5 | 6): { lst: number; soli: number } {
+  const pap = new LohnsteuerPAP2026();
+  pap.setEingaben({
+    LZZ: 4, STKL: sk, R: 0, RE4: new Decimal(tagCent), ZKF: new Decimal(0), LZZFREIB: new Decimal(0),
+    KRV: 0, KVZ: new Decimal(2.9), PKV: 0, PVA: new Decimal(0), PVZ: 0, PVS: 0, ALV: 0,
+    PKPV: new Decimal(0), PKPVAGZ: new Decimal(0), af: 1, f: 1.0,
+  });
+  pap.main();
+  const o = pap.getOutput();
+  return { lst: o.LSTLZZ.toNumber() / 100, soli: o.SOLZLZZ.toNumber() / 100 };
+}
+const ROEMISCH = ['I', 'II', 'III', 'IV', 'V', 'VI'] as const;
+let a2Abweichungen = 0;
+let a2Punkte = 0;
+for (let cent = 2000; cent <= 30000; cent += 113) {
+  for (let sk = 1 as 1 | 2 | 3 | 4 | 5 | 6; sk <= 6; sk = (sk + 1) as 1 | 2 | 3 | 4 | 5 | 6) {
+    const soll = papTag(cent, sk);
+    const ist = lohnsteuerSoliTag(cent / 100, ROEMISCH[sk - 1]);
+    a2Punkte++;
+    if (Math.abs(ist.lst - soll.lst) > 0.001 || Math.abs(ist.soli - soll.soli) > 0.001) a2Abweichungen++;
+  }
+}
 cases.push(
-  { name: 'A2-01 Bayern: kistSatzFuer = 8',                    actual: kirchensteuersatzFuer('Bayern'), expected: 8, tolerance: 0 },
-  { name: 'A2-02 Baden-Württemberg: kistSatzFuer = 8',         actual: kirchensteuersatzFuer('Baden-Württemberg'), expected: 8, tolerance: 0 },
-  { name: 'A2-03 Nordrhein-Westfalen: kistSatzFuer = 9',       actual: kirchensteuersatzFuer('Nordrhein-Westfalen'), expected: 9, tolerance: 0 },
-  { name: 'A2-04 Berlin: kistSatzFuer = 9',                    actual: kirchensteuersatzFuer('Berlin'), expected: 9, tolerance: 0 },
-);
-
-// L-36 Cross-Lib: KiSt-Differenzierung im algMonat-Output.
-// Bei BY (8 %): kiSt-Abzug ist niedriger → letztesNetto und algMonat höher
-// als bei NRW (9 %). Strukturtest: BY-algMonat > NRW-algMonat.
-cases.push(
-  { name: 'A2-05 BY (8 %): algMonat > NRW (9 %) — niedrigere KiSt → höheres Netto', actual: a2_by.algMonat > a2_nw.algMonat ? 1 : 0, expected: 1, tolerance: 0 },
-  { name: 'A2-06 BY = BW (gleiche 8 %): algMonat identisch',   actual: a2_by.algMonat,                expected: a2_bw.algMonat, tolerance: 0.005 },
-  { name: 'A2-07 NRW = Berlin (gleiche 9 %): algMonat identisch', actual: a2_nw.algMonat,             expected: a2_be.algMonat, tolerance: 0.005 },
-);
-
-// L-36 strukturell: letztesNetto = bemessung − lstMonat − soli − kiSt − svPauschale.
-// Bei NRW (kirchensteuer=true): kiSt = berechneKirchensteuerByBundesland(lstMonat, NRW).
-// Wir ziehen das Cross-Comp-Erwartete kiSt aus der unabhängig verifizierten
-// einkommensteuer.ts (verify-tarif-2026.ts) und prüfen, dass der Lib-Output
-// die identische KiSt im Differenzfeld zwischen letztesNetto-Pfad reflektiert.
-
-const a2_kein = calc({ brutto: a2_brutto, kirchensteuer: false });
-cases.push(
-  { name: 'A2-08 KiSt-Differenz NRW = berechneKirchensteuerByBundesland(NRW)', actual: a2_kein.letztesNetto - a2_nw.letztesNetto, expected: a2_kiStExpected('Nordrhein-Westfalen'), tolerance: 0.005 },
-  { name: 'A2-09 KiSt-Differenz BY = berechneKirchensteuerByBundesland(BY)',  actual: a2_kein.letztesNetto - a2_by.letztesNetto, expected: a2_kiStExpected('Bayern'),               tolerance: 0.005 },
+  { name: `A2-01 LSt/Soli je Tag = PAP LZZ 4 (${a2Punkte} Stützpunkte)`, actual: a2Abweichungen, expected: 0, tolerance: 0 },
+  { name: 'A2-02 PAP LZZ 4: 115,07 €/Tag Kl. I → LSt 13,34 €',  actual: papTag(11507, 1).lst, expected: 13.34, tolerance: 0.001 },
+  { name: 'A2-03 PAP LZZ 4: 98,63 €/Tag Kl. I → LSt 9,63 €',    actual: papTag(9863, 1).lst,  expected: 9.63,  tolerance: 0.001 },
+  { name: 'A2-04 PAP LZZ 4: 277,81 €/Tag Kl. III → LSt 42,08 €', actual: papTag(27781, 3).lst, expected: 42.08, tolerance: 0.001 },
+  { name: 'A2-05 PAP LZZ 4: 277,81 €/Tag Kl. I → Soli 1,01 €',  actual: papTag(27781, 1).soli, expected: 1.01, tolerance: 0.001 },
 );
 
 // === Cluster B: § 147 Abs. 2 SGB III bezugsdauerMonate-Tabelle ===
@@ -178,68 +164,88 @@ cases.push(
   { name: 'D-02 mitKind: satz = 0,67',                         actual: d2.satz, expected: 0.67, tolerance: 0.0001 },
 );
 
-// === Cluster E: Hand-rechnung Klasse I, niedrige Brutto (LSt=0, Soli=0) ===
+// === Cluster E: Handrechnungen auf Tagesbasis (W187, hart codierte Sollwerte) ===
 //
-// Test E-01: brutto=1000, klasse I, ohneKind, alter=40, beschMonate=24, kirche=false
-//   bemessung = 1000 (< BBG)
-//   jahresBrutto = 12.000 ≤ Grundfreibetrag 12.348 → estJahr = 0
-//   lstJahr = 0, lstMonat = 0
-//   soli (Grundtarif): est=0 < 20.350 (Freigrenze) → 0
-//   svPauschale = 1000 × 0,21 = 210
-//   leistungsentgeltMonat = 1000 - 0 - 0 - 0 - 210 = 790
-//   tagesLeistungsentgelt = 790 / 30 = 26,333...
-//   algTag = 26,333 × 0,60 = 15,800
-//   algMonat = 15,800 × 30 = 474,000
-//   dauer = bezugsdauerMonate(40, 24) = 12
-//   gesamt = 474,000 × 12 = 5688,000
-//   letztesNetto = 790
-//   verlust = 790 - 474 = 316
-//   verlustProzent = 316/790 × 100 = 40,000
+// E-01: brutto 1.000 €, Kl. I, ohne Kind (Lohnsteuer 0)
+//   Bemessungsentgelt Tag = 12.000 ÷ 365 = 32,876… → 32,88 €
+//   SV-Pauschale 20 % = 6,576 → 6,58 €; LSt 0; Soli 0
+//   Leistungsentgelt Tag = 26,30 €; ALG Tag 60 % = 15,78 €; Monat × 30 = 473,40 €
+//   Dauer 12 Monate → gesamt 5.680,80 €; Leistungsentgelt 30 Tage 789,00 €; Verlust 315,60 € (40 %)
 
 const e1 = calc({ brutto: 1000, klasse: 'I', mitKind: false, alter: 40, beschMonate: 24 });
 cases.push(
-  { name: 'E-01 brutto=1000 Klasse I: bemessung',              actual: e1.bemessung,       expected: 1000 },
-  { name: 'E-01 letztesNetto = 1000 - 210 = 790',              actual: e1.letztesNetto,    expected: 790 },
-  { name: 'E-01 algTag = 790/30 × 0,60',                       actual: e1.algTag,          expected: 15.8 },
-  { name: 'E-01 algMonat = 474',                               actual: e1.algMonat,        expected: 474 },
-  { name: 'E-01 dauer = 12',                                   actual: e1.dauer,           expected: 12, tolerance: 0 },
-  { name: 'E-01 gesamt = 5688',                                actual: e1.gesamt,          expected: 5688 },
-  { name: 'E-01 verlust = 316',                                actual: e1.verlust,         expected: 316 },
-  { name: 'E-01 verlustProzent ≈ 40,0',                        actual: e1.verlustProzent,  expected: 40.0, tolerance: 0.01 },
+  { name: 'E-01 brutto=1000: bemessung (Monat)',               actual: e1.bemessung,          expected: 1000 },
+  { name: 'E-01 Bemessungsentgelt Tag = 12.000 ÷ 365 = 32,88', actual: e1.bemessungTag,       expected: 32.88 },
+  { name: 'E-01 SV-Pauschale Tag 20 % = 6,58',                 actual: e1.svPauschaleTag,     expected: 6.58 },
+  { name: 'E-01 Leistungsentgelt Tag = 26,30',                 actual: e1.leistungsentgeltTag, expected: 26.30 },
+  { name: 'E-01 algTag = 26,30 × 0,60 = 15,78',                actual: e1.algTag,             expected: 15.78 },
+  { name: 'E-01 algMonat = 15,78 × 30 = 473,40',               actual: e1.algMonat,           expected: 473.40 },
+  { name: 'E-01 dauer = 12',                                   actual: e1.dauer,              expected: 12, tolerance: 0 },
+  { name: 'E-01 gesamt = 5.680,80',                            actual: e1.gesamt,             expected: 5680.80 },
+  { name: 'E-01 letztesNetto (30 Tage) = 789,00',              actual: e1.letztesNetto,       expected: 789.00 },
+  { name: 'E-01 verlust = 315,60',                             actual: e1.verlust,            expected: 315.60 },
+  { name: 'E-01 verlustProzent = 40,0',                        actual: e1.verlustProzent,     expected: 40.0, tolerance: 0.01 },
 );
 
-// E-02: brutto=1200 Klasse I mitKind, alter=40, beschMonate=24, kirche=false
-//   bemessung = 1200, jahresBrutto = 14.400.
-//   Welle-5 Track-B B2: L-36 Cross-Lib-Computation gegen berechneLohnsteuerJahr
-//   aus lohnsteuer.ts (PAP § 39b voll-konform via verify-lohnsteuer-pap.ts
-//   bzw. verify-tarif-2026.ts). PAP zieht intern §-9a-WK + §-10c-SO + Vorsorge
-//   ab → bei brutto 14.400 Stkl I liegt zvE deutlich unter Grundfreibetrag,
-//   lstJahr ≈ 0.
-
+// E-02: brutto 1.200 €, Kl. I, mit Kind: 14.400 ÷ 365 = 39,45 €; SV 7,89 €; LSt 0 (PAP LZZ 4)
+//   Leistungsentgelt 31,56 €; ALG 67 % = 21,1452 → 21,15 €; Monat 634,50 €
 const e2 = calc({ brutto: 1200, klasse: 'I', mitKind: true, alter: 40, beschMonate: 24 });
-const e2_lstJahrSoll = berechneLohnsteuerJahr(14_400, 1, 0); // PAP-Cross-Comp
-const e2_lstMonatSoll = e2_lstJahrSoll / 12;
-const e2_svPauschale = 1200 * SV_PAUSCHALE_PROZENT;
-const e2_letztesNettoSoll = 1200 - e2_lstMonatSoll - 0 - 0 - e2_svPauschale; // soli=0, kiSt=0
-const e2_algMonatSoll = (e2_letztesNettoSoll / 30) * 0.67 * 30;
 cases.push(
-  { name: 'E-02 brutto=1200 Klasse I mitKind: bemessung',     actual: e2.bemessung,    expected: 1200 },
+  { name: 'E-02 brutto=1200 mitKind: Bemessungsentgelt Tag 39,45', actual: e2.bemessungTag, expected: 39.45 },
   { name: 'E-02 satz = 0,67',                                  actual: e2.satz,         expected: 0.67, tolerance: 0.0001 },
-  { name: 'E-02 letztesNetto = 1200 − lstMonat(PAP) − 252',    actual: e2.letztesNetto, expected: e2_letztesNettoSoll, tolerance: 0.005 },
-  { name: 'E-02 algMonat = letztesNetto/30 × 0,67 × 30',       actual: e2.algMonat,     expected: e2_algMonatSoll, tolerance: 0.005 },
+  { name: 'E-02 Lohnsteuer Tag = 0 (PAP LZZ 4)',               actual: e2.lohnsteuerTag, expected: papTag(3945, 1).lst, tolerance: 0.001 },
+  { name: 'E-02 algTag = 31,56 × 0,67 = 21,15',                actual: e2.algTag,       expected: 21.15 },
+  { name: 'E-02 algMonat = 634,50',                            actual: e2.algMonat,     expected: 634.50 },
+);
+
+// E-03 (Startwert des Rechners): 3.500 €, Kl. I, ohne Kind, 40 J., 24 Monate
+//   42.000 ÷ 365 = 115,068… → 115,07 €; SV 23,014 → 23,01 €; LSt Tag 13,34 € (PAP LZZ 4); Soli 0
+//   Leistungsentgelt 78,72 €; ALG 60 % = 47,232 → 47,23 €; Monat 1.416,90 €; 12 Monate 17.002,80 €
+const e3 = calc({ brutto: 3500 });
+cases.push(
+  { name: 'E-03 3.500 €: Bemessungsentgelt Tag 115,07',        actual: e3.bemessungTag,        expected: 115.07 },
+  { name: 'E-03 SV-Pauschale Tag 23,01',                       actual: e3.svPauschaleTag,      expected: 23.01 },
+  { name: 'E-03 Lohnsteuer Tag 13,34',                         actual: e3.lohnsteuerTag,       expected: 13.34 },
+  { name: 'E-03 Leistungsentgelt Tag 78,72',                   actual: e3.leistungsentgeltTag, expected: 78.72 },
+  { name: 'E-03 algTag 47,23',                                 actual: e3.algTag,              expected: 47.23 },
+  { name: 'E-03 algMonat 1.416,90',                            actual: e3.algMonat,            expected: 1416.90 },
+  { name: 'E-03 gesamt 17.002,80',                             actual: e3.gesamt,              expected: 17002.80 },
+);
+
+// E-04 (Seitenbeispiel): 3.000 €, Kl. I — 36.000 ÷ 365 = 98,63 €; SV 19,726 → 19,73 €;
+//   LSt Tag 9,63 €; Leistungsentgelt 69,27 €; 60 % = 41,562 → 41,56 € → 1.246,80 €/Monat;
+//   67 % = 46,4109 → 46,41 € → 1.392,30 €/Monat; Differenz 145,50 €
+const e4 = calc({ brutto: 3000 });
+const e4k = calc({ brutto: 3000, mitKind: true });
+cases.push(
+  { name: 'E-04 3.000 €: Leistungsentgelt Tag 69,27',          actual: e4.leistungsentgeltTag, expected: 69.27 },
+  { name: 'E-04 algTag 60 % = 41,56',                          actual: e4.algTag,              expected: 41.56 },
+  { name: 'E-04 algMonat 60 % = 1.246,80',                     actual: e4.algMonat,            expected: 1246.80 },
+  { name: 'E-04 algMonat 67 % = 1.392,30',                     actual: e4k.algMonat,           expected: 1392.30 },
+  { name: 'E-04 Differenz 67/60 % = 145,50',                   actual: e4k.algMonat - e4.algMonat, expected: 145.50 },
+);
+
+// E-05 (Höchstbetrag): BBG 8.450 €, Kl. III, mit Kind — 101.400 ÷ 365 = 277,81 €; SV 55,562 → 55,56 €;
+//   LSt Tag 42,08 €; Soli 0; Leistungsentgelt 180,17 €; 67 % = 120,7139 → 120,71 € → 3.621,30 €/Monat
+const e5 = calc({ brutto: 12000, klasse: 'III', mitKind: true });
+cases.push(
+  { name: 'E-05 BBG Kl. III mit Kind: Bemessungsentgelt Tag 277,81', actual: e5.bemessungTag, expected: 277.81 },
+  { name: 'E-05 Leistungsentgelt Tag 180,17',                  actual: e5.leistungsentgeltTag, expected: 180.17 },
+  { name: 'E-05 algMonat (Höchstbetrag) 3.621,30',             actual: e5.algMonat,            expected: 3621.30 },
 );
 
 // === Cluster F: Strukturelle Invarianten ===
 //
 // gesamt = algMonat × dauer (immer)
 // verlust = letztesNetto - algMonat
-// algTag × 30 = algMonat (mit JS-Float-Toleranz)
+// algTag × 30 = algMonat
 
 const f1 = calc({ brutto: 3500, klasse: 'I', mitKind: false, alter: 40, beschMonate: 24 });
 cases.push(
   { name: 'F-01 gesamt = algMonat × dauer',                    actual: f1.gesamt,                    expected: f1.algMonat * f1.dauer, tolerance: 0.005 },
   { name: 'F-02 verlust = letztesNetto − algMonat',            actual: f1.verlust,                   expected: f1.letztesNetto - f1.algMonat, tolerance: 0.005 },
   { name: 'F-03 algTag × 30 = algMonat',                       actual: f1.algTag * 30,               expected: f1.algMonat, tolerance: 0.005 },
+  { name: 'F-04 Leistungsentgelt = BE − SV − LSt − Soli',      actual: f1.leistungsentgeltTag,       expected: f1.bemessungTag - f1.svPauschaleTag - f1.lohnsteuerTag - f1.soliTag, tolerance: 0.005 },
 );
 
 // === Cluster G: berechneVereinfachteLohnsteuerJahr-PAP-Strukturtests ===

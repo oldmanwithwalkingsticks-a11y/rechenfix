@@ -77,8 +77,10 @@ const cases: Fall[] = [];
 // ============================================================================
 // AFBG-02 — Alleinerziehend Vollzeit mit 1 Kind (5 Jahre), 10.000 € Lehrgang
 // Oracle: BMBF-Rechner; Bedarf ergibt sich aus Grund 1.019 + Kinderzuschlag
-// 235 (BMBF-Portal weist "bis 1.254 €" aus) + Kinderbetreuungszuschlag 150
-// (separat in § 10 Abs. 3a AFBG, einkommensunabhängig) = 1.404 €
+// 235 (BMBF-Portal weist "bis 1.254 €" aus). Kinderbetreuungszuschlag 150 € kommt
+// separat hinzu (§ 10 Abs. 3 AFBG, nicht Teil des Unterhaltsbedarfs, ohne Anrechnung,
+// § 17 Abs. 1 AFBG gilt nur für § 10 Abs. 2) = 1.404 € im Monat insgesamt.
+// W187: vorher KBZ im Bedarf (Gesamtbedarf 1.404 €) und als „Abs. 3a“ zitiert.
 // ============================================================================
 {
   const r = berechneAfbg({
@@ -110,19 +112,24 @@ const cases: Fall[] = [];
     quelle: '§ 10 Abs. 3 AFBG — 235 € je kindergeldberechtigtem Kind',
   });
   cases.push({
-    name: 'AFBG-02 Kinderbetreuungszuschlag (Alter 5 < 14)',
-    actual: r.unterhalt.bedarfAufschluesselung.kinderbetreuungZuschlag, expected: 150, tol: 0.01,
-    quelle: '§ 10 Abs. 3a AFBG — 150 € je Kind unter 14',
+    name: 'AFBG-02 Kinderbetreuungszuschlag (alleinerziehend, Alter 5 < 14)',
+    actual: r.kinderbetreuung.zuschlagMonat, expected: 150, tol: 0.01,
+    quelle: '§ 10 Abs. 3 AFBG — 150 € je Kind unter 14',
   });
   cases.push({
-    name: 'AFBG-02 Gesamtbedarf',
-    actual: r.unterhalt.bedarf, expected: 1404, tol: 0.01,
-    quelle: '1.019 + 235 + 150 = 1.404 (BMBF-Oracle: "bis 1.254" zzgl. KBZ)',
+    name: 'AFBG-02 Gesamtbedarf Unterhalt (ohne KBZ)',
+    actual: r.unterhalt.bedarf, expected: 1254, tol: 0.01,
+    quelle: '1.019 + 235 = 1.254 (BMBF-Oracle: "bis 1.254")',
   });
   cases.push({
     name: 'AFBG-02 Auszahlung = voller Bedarf (kein Einkommen)',
-    actual: r.unterhalt.auszahlung, expected: 1404, tol: 0.01,
+    actual: r.unterhalt.auszahlung, expected: 1254, tol: 0.01,
     quelle: '100 % Vollzuschuss nach 29. BAföG-ÄndG',
+  });
+  cases.push({
+    name: 'AFBG-02 Monatlich gesamt (Unterhalt + KBZ) = 1.404',
+    actual: r.unterhalt.auszahlung + r.kinderbetreuung.zuschlagMonat, expected: 1404, tol: 0.01,
+    quelle: '1.254 + 150',
   });
 }
 
@@ -231,8 +238,8 @@ const cases: Fall[] = [];
 // Freibeträge: 603 + 850 + 770 = 2.223
 // Ueberschreitend: 3.300 − 2.223 = 1.077 € × Quote 0,45 = 484,65
 // Vermögen 18.000 < 45.000 + 2.300 + 2.300 = 49.600 → 0 Anrechnung
-// Bedarf: 1.019 + 235 + 235 + 150 = 1.639
-// Auszahlung: 1.639 − 484,65 = 1.154,35
+// Bedarf: 1.019 + 235 + 235 = 1.489 (W187: vorher + 150 KBZ = 1.639 — mit Ehegatten nicht alleinerziehend)
+// Auszahlung: 1.489 − 484,65 = 1.004,35
 // ============================================================================
 {
   const r = berechneAfbg({
@@ -265,13 +272,18 @@ const cases: Fall[] = [];
   });
   cases.push({
     name: 'AFBG-06 Gesamtbedarf Unterhalt',
-    actual: r.unterhalt.bedarf, expected: 1639, tol: 0.01,
-    quelle: '1.019 + 235 Ehegatte + 235 Kind + 150 KBZ',
+    actual: r.unterhalt.bedarf, expected: 1489, tol: 0.01,
+    quelle: '1.019 + 235 Ehegatte + 235 Kind',
   });
   cases.push({
     name: 'AFBG-06 Auszahlung',
-    actual: r.unterhalt.auszahlung, expected: 1154.35, tol: 0.01,
-    quelle: '1.639 − 484,65',
+    actual: r.unterhalt.auszahlung, expected: 1004.35, tol: 0.01,
+    quelle: '1.489 − 484,65',
+  });
+  cases.push({
+    name: 'AFBG-06 Kein KBZ (Ehegatte im Haushalt)',
+    actual: r.kinderbetreuung.zuschlagMonat, expected: 0,
+    quelle: '§ 10 Abs. 3 AFBG — nur Alleinerziehende',
   });
   cases.push({
     name: 'AFBG-06 Maßnahme-Förderung (12.000 € < Maximum)',
@@ -309,6 +321,31 @@ const cases: Fall[] = [];
 // ============================================================================
 // LAUF
 // ============================================================================
+
+// ============================================================================
+// AFBG-08 (W187) — Kinderbetreuungszuschlag nach § 10 Abs. 3 AFBG
+// „Alleinerziehende, die in einem Haushalt mit Kindern, die das vierzehnte Lebensjahr noch
+// nicht vollendet haben, oder mit behinderten Kindern leben, erhalten bei Voll- und
+// Teilzeitmaßnahmen … einen Kinderbetreuungszuschlag in Höhe von 150 Euro für jeden Monat je Kind.“
+// ============================================================================
+{
+  const teilzeitAllein = berechneAfbg({ fortbildungsart: 'teilzeit', lehrgangskosten: 8000, kinder: [{ alter: 5, anspruchAufKindergeld: true }] });
+  const teilzeitPaar = berechneAfbg({ fortbildungsart: 'teilzeit', lehrgangskosten: 8000, ehegatte: { vorhanden: true }, kinder: [{ alter: 5, anspruchAufKindergeld: true }] });
+  const behindert16 = berechneAfbg({ fortbildungsart: 'teilzeit', lehrgangskosten: 8000, kinder: [{ alter: 16, anspruchAufKindergeld: true, behindert: true }] });
+  const kind15 = berechneAfbg({ fortbildungsart: 'teilzeit', lehrgangskosten: 8000, kinder: [{ alter: 15, anspruchAufKindergeld: true }] });
+  const zwei = berechneAfbg({ fortbildungsart: 'vollzeit', lehrgangskosten: 8000, kinder: [{ alter: 2, anspruchAufKindergeld: true }, { alter: 10, anspruchAufKindergeld: true }] });
+  const mitEinkommen = berechneAfbg({ fortbildungsart: 'vollzeit', lehrgangskosten: 8000, antragstellerBruttoMonat: 6000, kinder: [{ alter: 5, anspruchAufKindergeld: true }] });
+  cases.push(
+    { name: 'AFBG-08 Teilzeit, alleinerziehend, Kind 5 → 150', actual: teilzeitAllein.kinderbetreuung.zuschlagMonat, expected: 150, quelle: '§ 10 Abs. 3 AFBG — auch bei Teilzeit' },
+    { name: 'AFBG-08 Teilzeit: Unterhalt weiterhin 0',            actual: teilzeitAllein.unterhalt.auszahlung, expected: 0, quelle: '§ 10 Abs. 2 AFBG — nur Vollzeit' },
+    { name: 'AFBG-08 Teilzeit mit Ehegatten → 0',                 actual: teilzeitPaar.kinderbetreuung.zuschlagMonat, expected: 0, quelle: '§ 10 Abs. 3 AFBG — nur Alleinerziehende' },
+    { name: 'AFBG-08 Kind 16 mit Behinderung → 150',              actual: behindert16.kinderbetreuung.zuschlagMonat, expected: 150, quelle: '§ 10 Abs. 3 AFBG — behinderte Kinder ohne Altersgrenze' },
+    { name: 'AFBG-08 Kind 15 ohne Behinderung → 0',               actual: kind15.kinderbetreuung.zuschlagMonat, expected: 0, quelle: '§ 10 Abs. 3 AFBG — 14. Lebensjahr vollendet' },
+    { name: 'AFBG-08 Zwei Kinder (2 und 10 J.) → 300',            actual: zwei.kinderbetreuung.zuschlagMonat, expected: 300, quelle: '150 € je Kind' },
+    { name: 'AFBG-08 Hohes Einkommen: KBZ bleibt 150',            actual: mitEinkommen.kinderbetreuung.zuschlagMonat, expected: 150, quelle: '§ 17 Abs. 1 AFBG — Anrechnung nur auf § 10 Abs. 2' },
+    { name: 'AFBG-08 Hohes Einkommen: Unterhalt 0',               actual: mitEinkommen.unterhalt.auszahlung, expected: 0, quelle: 'Einkommen übersteigt Bedarf 1.254 €' },
+  );
+}
 
 let passed = 0, failed = 0;
 console.log('=== Verify Aufstiegs-BAföG (AFBG, Prompt 124) ===\n');

@@ -71,7 +71,8 @@ export default function MwstRueckerstattungRechner() {
       {ergebnis && !ergebnis.mindestbetragErreicht && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-4">
           <p className="text-sm text-red-700 dark:text-red-400">
-            <strong>Achtung:</strong> Der Mindestbetrag von 50,01 € pro Händler ist nicht erreicht. Eine MwSt-Rückerstattung ist nur ab diesem Betrag möglich.
+            {/* W187: vorher „Mindestbetrag von 50,01 € pro Händler“; § 6 Abs. 3a Nr. 3 UStG: Gesamtwert der Lieferung (Rechnungsbetrag) über 50 € */}
+            <strong>Achtung:</strong> Der Rechnungsbetrag muss über 50 € brutto liegen (mindestens 50,01 € je Rechnung, § 6 Abs. 3a Nr. 3 UStG). Mehrere kleine Belege lassen sich nicht zusammenrechnen.
           </p>
         </div>
       )}
@@ -153,7 +154,8 @@ export default function MwstRueckerstattungRechner() {
           {/* Hinweis — W185: vorher „Die tatsächlichen Gebühren können je nach Dienstleister variieren.“ */}
           <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-4">
             <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
-              <strong>Hinweis:</strong> Nur für Nicht-EU-Bürger bei Ausfuhr im persönlichen Reisegepäck innerhalb von 3 Monaten nach Kauf. Der Zoll am Flughafen muss den Ausfuhrschein abstempeln. Mindestbetrag 50,01 € pro Händler pro Tag. Lebensmittel und Dienstleistungen sind ausgeschlossen. Die Gebühr der Dienstleister ist ein Richtwert (Verbraucherberichte: rund ein Viertel der MwSt); sie ist gestaffelt und bei kleinen Beträgen anteilig oft höher.
+              {/* W187: vorher „Nur für Nicht-EU-Bürger … innerhalb von 3 Monaten nach Kauf … Mindestbetrag 50,01 € pro Händler pro Tag“ */}
+              <strong>Hinweis:</strong> Nur bei Wohnsitz außerhalb der EU (Drittlandsgebiet; die Staatsangehörigkeit spielt keine Rolle) und Ausfuhr im persönlichen Reisegepäck bis zum Ende des dritten Kalendermonats nach dem Kaufmonat (§ 6 Abs. 3a UStG). Der Zoll am Flughafen muss den Ausfuhrschein abstempeln. Rechnungsbetrag über 50 € brutto (mindestens 50,01 € je Rechnung). Lebensmittel und Dienstleistungen sind ausgeschlossen. Die Gebühr der Dienstleister ist ein Richtwert (Verbraucherberichte: rund ein Viertel der MwSt); sie ist gestaffelt und bei kleinen Beträgen anteilig oft höher.
             </p>
           </div>
 

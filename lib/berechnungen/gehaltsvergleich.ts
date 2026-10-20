@@ -1,6 +1,15 @@
-// Durchschnittliche Bruttogehälter nach Berufsgruppe (monatlich, Vollzeit)
-// Quelle: Statistisches Bundesamt, Verdienststrukturerhebung 2022/2023, hochgerechnet 2026
-// Median und Verteilungsparameter (Standardabweichung) für Perzentil-Berechnung
+// Median-Bruttomonatsverdienste nach Berufsgruppe (Vollzeit, ohne Sonderzahlungen) und
+// Verteilungsparameter (Standardabweichung) für die Perzentil-Berechnung.
+//
+// Niveau (W187): Statistisches Bundesamt, Verdiensterhebung April 2024 — Median der Vollzeit-
+// beschäftigten 3.978 € brutto im Monat ohne Sonderzahlungen (Destatis, PM N037 vom Juli 2025,
+// „Der Durchschnittsmensch in Deutschland“), fortgeschrieben auf 2025 mit der Entwicklung des
+// Medians der Bruttojahresverdienste Vollzeit von 52.159 € (2024, PM 25/134) auf 54.066 €
+// (2025, PM 26/113 vom 01.04.2026), +3,66 % → 4.123 €, gerundet 4.120 €.
+// Struktur (Verhältnis der Berufsgruppen zueinander, Streuung, Bundesland- und Altersfaktoren)
+// bleibt das bisherige Modell; Destatis veröffentlicht Mediane in dieser Gruppenabgrenzung nicht.
+// W187: vorher „Verdienststrukturerhebung 2022/2023, hochgerechnet 2026“ mit Basis 3.600 € — der
+// Wert lag sogar unter dem Median von April 2022 und war nicht fortgeschrieben.
 
 export interface Berufsgruppe {
   key: string;
@@ -9,8 +18,16 @@ export interface Berufsgruppe {
   stddev: number;      // Standardabweichung (für Normalverteilungs-Approximation)
 }
 
-export const berufsgruppen: Berufsgruppe[] = [
-  { key: 'gesamt', label: 'Alle Arbeitnehmer (Durchschnitt)', median: 3600, stddev: 1400 },
+/** Median aller Vollzeitbeschäftigten (Destatis April 2024, fortgeschrieben 2025, siehe oben) */
+export const MEDIAN_VOLLZEIT_BASIS = 4120;
+/** Basis, auf die sich die Strukturwerte unten beziehen (bisheriges Modell) */
+const STRUKTUR_BASIS = 3600;
+const skaliere = (wert: number) => Math.round((wert * MEDIAN_VOLLZEIT_BASIS) / STRUKTUR_BASIS / 10) * 10;
+
+// Strukturwerte (Basis 3.600 €), werden mit MEDIAN_VOLLZEIT_BASIS ÷ 3.600 skaliert und auf 10 € gerundet.
+// W187: Label „gesamt“ vorher „Alle Arbeitnehmer (Durchschnitt)“ — der Wert ist ein Median.
+const struktur: Berufsgruppe[] = [
+  { key: 'gesamt', label: 'Alle Arbeitnehmer (gesamt)', median: 3600, stddev: 1400 },
   { key: 'it', label: 'IT & Softwareentwicklung', median: 4800, stddev: 1500 },
   { key: 'ingenieur', label: 'Ingenieurwesen', median: 4900, stddev: 1400 },
   { key: 'kaufm', label: 'Kaufmännische Berufe', median: 3400, stddev: 1200 },
@@ -26,6 +43,12 @@ export const berufsgruppen: Berufsgruppe[] = [
   { key: 'gastronomie', label: 'Gastronomie & Hotellerie', median: 2400, stddev: 700 },
   { key: 'medien', label: 'Medien & Design', median: 3400, stddev: 1200 },
 ];
+
+export const berufsgruppen: Berufsgruppe[] = struktur.map(b => ({
+  ...b,
+  median: skaliere(b.median),
+  stddev: skaliere(b.stddev),
+}));
 
 // Regionale Gehaltsfaktoren nach Bundesland (Index: 1.0 = Bundesdurchschnitt)
 export const bundeslandFaktoren: Record<string, { label: string; faktor: number }> = {
