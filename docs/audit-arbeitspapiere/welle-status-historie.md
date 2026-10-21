@@ -6,6 +6,61 @@
 
 ---
 
+## 21.10.2026 — Welle 194: Offline-Nutzung — Abschalten löscht auch im Randfall alles — ✅ ABGESCHLOSSEN 21.10.2026
+
+**Anlass** (Browsermessung vom 21.10.2026 zu Fund 3 aus Susannes rechenfix-Lauf vom 21.10.; im Register von
+susanne-recht v77 unter `browserpruefung.browsermessung_21_10_2026.randfall`): Wer auf `/offline-nutzung` kurz nach
+„Offline-Nutzung aktivieren“ wieder „Abschalten und gespeicherte Daten löschen“ drückte, behielt einen leeren
+Zwischenspeicher `serwist-precache-v2-https://www.rechenfix.de/` (0 Einträge), auch nach dem Neuladen. Live einmal
+gemessen (Abschalten 1,5 s nach dem Einschalten), lokal mit verzögertem Netz nachgestellt.
+- **Ursache, gemessen:** `unregister()` wartet eine laufende Installation ab. Danach räumt der Dienst beim Aktivieren
+  noch seinen Zwischenspeicher auf; kam das Löschen ein paar Millisekunden früher, legt er ihn dabei neu an.
+  `ausschalten` in `components/pwa/OfflineSchalter.tsx` löschte nur einmal und sah danach nicht mehr nach.
+- Datenschutzerklärung 7a.4: „Dabei werden der Service Worker abgemeldet und sämtliche zugehörigen Zwischenspeicher
+  gelöscht.“ Der Text bleibt; die Welle sorgt dafür, dass er auch im Randfall stimmt.
+
+**Änderungen** (nur `components/pwa/OfflineSchalter.tsx`; Vorlage `_lokal/welle194-offline-abschalten.mjs`:
+3 Ersetzungen in 1 Datei, nicht committet):
+- **Nachlauf beim Abschalten:** Nach dem Löschen wird nach 0,5 s und nach weiteren 2 s noch einmal nachgesehen und
+  gelöscht (`[500, 2000]`). Die Meldung zählt jeden gelöschten Namen einmal: „… N Zwischenspeicher geleert“. Das
+  Abschalten dauert damit 2,5 s länger.
+- **Aufräumen beim Laden:** Ist beim Aufruf der Seite kein Dienst angemeldet, werden vorhandene Zwischenspeicher
+  gelöscht (Rest aus einem früheren Abschalten). Im installierten Zustand (`display-mode: standalone`) nicht, dort
+  meldet `PwaStart` den Dienst gerade erst an. Rechtsgrundlage wie bei
+  `components/cookie/EinwilligungsspeicherAufraeumen.tsx`: § 25 Abs. 2 Nr. 2 TDDDG, Löschen eines eigenen Altbestands.
+- **Neue Helfer** `zwischenspeicherLoeschen()` und `installiertGestartet()`, Kopfkommentar „NACHLAUF (Welle 194)“.
+
+**Bewusst nicht geändert:**
+- **Rechtstext:** 7a.4 beschreibt das Ergebnis schon so; `app/datenschutz/page.tsx` und
+  `docs/rechtstexte/aenderungshistorie.md` unverändert, kein `recht:`-Commit.
+- **Kein globales Aufräumen auf jeder Seite:** Das wäre ein Zugriff auf das Endgerät bei jedem Besucher. Aufgeräumt wird
+  nur auf der Seite, auf der die Funktion steht.
+- **Kein automatisches Neuladen nach dem Abschalten:** Die Meldung bittet weiterhin darum.
+- `components/pwa/PwaStart.tsx`, `app/sw.ts`, `next.config.mjs`.
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- Die Browsermessungen (Neuanlage 20 ms bzw. 1,2 s nach dem Abmelden, Rest ohne Dienst, normaler Ablauf mit 1006
+  Einträgen und „1 Hintergrunddienst abgemeldet, 3 Zwischenspeicher geleert.“, 7 von 7 Läufen mit verzögertem Netz ohne
+  Rest) stammen aus dem Probelauf der Vorlage; in diesem Lauf habe ich sie nicht wiederholt. Die Live-Probe macht
+  Karsten.
+- Der Registereintrag `randfall` in susanne-recht v77 führt den Rest als „nicht als offener Punkt geführt; eine
+  Behebung wäre Rechnercode“. Nach dem Deploy kann er beim nächsten Skill-Stand auf „behoben in Welle 194“ gehen.
+
+**Gates:**
+- Phase 0 an `8d174c2`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `8d174c2`, `bbab70a`,
+  `2d669cc` (Welle 193). Greps: `zwischenspeicherLoeschen` keine Ausgabe, die alte Löschzeile
+  `components/pwa/OfflineSchalter.tsx:1`. `verify:alle` 85/85, Exit 0.
+- Phase 1: „OK — 3 Ersetzungen in 1 Dateien.“, Exit 0; `git status` genau ` M components/pwa/OfflineSchalter.tsx`.
+- Phase 2: `verify:alle` 85/85, Exit 0. Greps `:4` (`zwischenspeicherLoeschen`), `:2` (`installiertGestartet`), `:1`
+  (`[500, 2000]`), `:1` (`NACHLAUF (Welle 194)`). `npm run lint` Exit 0, keine Zeile „problems“.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten; danach `git status` weiter nur die eine Datei.
+- Phase 4: `git add`, `git diff --cached --name-only` 1.
+
+**Commits:** A `2223910` (`OfflineSchalter.tsx`). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 21.10.2026 — Welle 193: Social-Kachel `prozentrechner` — „%“ sichtbar — ✅ ABGESCHLOSSEN 21.10.2026
 
 **Anlass** (Fund bei der Prüfung von Welle 192, älter): Das Icon des Prozentrechners ist das Textzeichen `%`
