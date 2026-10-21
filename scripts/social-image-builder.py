@@ -302,6 +302,33 @@ def render_emoji(emoji_char, target_size, emoji_font_path):
     return tile.resize((new_w, new_h), Image.LANCZOS)
 
 
+def _ist_textzeichen(zeichen) -> bool:
+    """True für ein reines Textzeichen wie „%“ (alle Zeichen unter U+2000), also kein Emoji."""
+    return all(ord(c) < 0x2000 for c in zeichen)
+
+
+def render_textzeichen(zeichen, target_size, font_bold_path, farbe):
+    """Zeichnet ein Textzeichen wie „%“ im fetten Textfont in der Farbe farbe (Welle 193).
+
+    Segoe UI Emoji zeichnet „%“ weiß mit hellgrauer Kontur; auf dem hellen Grund der
+    Kachel war es kaum zu sehen. Gezeichnet wird groß mit Rand, dann wie beim Emoji
+    zugeschnitten und an der längeren Seite auf target_size verkleinert.
+    """
+    font = ImageFont.truetype(font_bold_path, 400)
+    rand = font.size
+    seite = 3 * font.size
+    tile = Image.new("RGBA", (seite, seite), (0, 0, 0, 0))
+    ImageDraw.Draw(tile).text((rand, rand), zeichen, font=font, fill=tuple(farbe) + (255,))
+    if not tile.getbbox():
+        raise RuntimeError(f"Zeichen {zeichen!r} ergibt im Textfont kein Bild")
+    if _beruehrt_rand(tile):
+        raise RuntimeError(f"Zeichen {zeichen!r} reicht bis an den Rand der Zeichenfläche")
+    tile = tile.crop(tile.getbbox())
+    w, h = tile.size
+    scale = target_size / max(w, h)
+    return tile.resize((int(w * scale), int(h * scale)), Image.LANCZOS)
+
+
 def render_bolt_mini(size, bolt_png_path):
     """Lädt das transparente Bolt-PNG und skaliert auf Footer-Größe.
 
@@ -398,7 +425,12 @@ def render_post(spec, fonts, bolt_png_path):
 
     # ---- Emoji top ----
     emoji_target_h = 200
-    emoji_tile = render_emoji(spec["emoji"], emoji_target_h, font_emoji_path)
+    # Welle 193: Ein reines Textzeichen wie „%“ zeichnet der fette Textfont in der
+    # Akzentfarbe; als Emoji war es weiß auf hellem Grund kaum zu sehen.
+    if _ist_textzeichen(spec["emoji"]):
+        emoji_tile = render_textzeichen(spec["emoji"], emoji_target_h, font_bold_path, accent)
+    else:
+        emoji_tile = render_emoji(spec["emoji"], emoji_target_h, font_emoji_path)
     ew, eh = emoji_tile.size
     emoji_x = (CANVAS - ew) // 2
     emoji_y = 110
@@ -584,7 +616,8 @@ def render_post_vertical(spec, fonts, bolt_png_path):
 # Ändert sich das Layout eines Renderers, die passende Kennung hochzählen.
 # Dann gelten alle Bilder dieses Formats als veraltet und --stale erzeugt sie neu.
 # Welle 192: -2, weil das Emoji jetzt mit Rand gezeichnet wird (vorher oben abgeschnitten).
-LAYOUT_QUADRAT = "quadrat-2"
+# Welle 193: quadrat-3, weil ein Textzeichen wie „%“ jetzt in der Akzentfarbe gezeichnet wird.
+LAYOUT_QUADRAT = "quadrat-3"
 LAYOUT_HOCHFORMAT = "hochformat-2"
 MANIFEST_REL = Path("lib") / "social" / "kacheln-manifest.json"
 MANIFEST_HINWEIS = (
