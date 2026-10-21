@@ -23,9 +23,31 @@ import { useCallback, useEffect, useState } from 'react';
  *
  * Der Widerruf muss so einfach sein wie die Erteilung — deshalb steht das Abschalten
  * gleichberechtigt auf derselben Seite und leert zugleich alle Zwischenspeicher.
+ *
+ * NACHLAUF (Welle 194): `unregister()` wartet eine laufende Installation ab. Danach räumt
+ * der Dienst beim Aktivieren noch seinen Zwischenspeicher auf und legt ihn dabei neu an,
+ * wenn das Löschen ein paar Millisekunden früher kam — leer, aber vorhanden (gemessen am
+ * 21.10.2026 beim Abschalten kurz nach dem Einschalten, auch nach dem Neuladen noch da).
+ * Deshalb sieht das Abschalten nach dem Löschen zweimal nach, und beim Aufruf dieser
+ * Seite ohne angemeldeten Dienst wird ein solcher Rest gelöscht.
  */
 
 const SCHLUESSEL = 'rechenfix-offline-einwilligung';
+
+/** Löscht alle Zwischenspeicher dieser Website und gibt ihre Namen zurück. */
+async function zwischenspeicherLoeschen(): Promise<string[]> {
+  if (!('caches' in window)) return [];
+  const namen = await caches.keys();
+  for (const n of namen) await caches.delete(n);
+  return namen;
+}
+
+function installiertGestartet(): boolean {
+  return (
+    window.matchMedia?.('(display-mode: standalone)').matches === true ||
+    (window.navigator as Navigator & { standalone?: boolean }).standalone === true
+  );
+}
 
 type Zustand = 'unbekannt' | 'aus' | 'an' | 'laeuft' | 'nicht-unterstuetzt';
 
@@ -38,7 +60,15 @@ export default function OfflineSchalter() {
       setZustand('nicht-unterstuetzt');
       return;
     }
-    navigator.serviceWorker.getRegistrations().then((rs) => {
+    navigator.serviceWorker.getRegistrations().then(async (rs) => {
+      // Ohne angemeldeten Dienst gehört kein Zwischenspeicher mehr zu einer Einwilligung.
+      // Was trotzdem da ist, ist ein Rest aus einem früheren Abschalten und wird gelöscht
+      // (§ 25 Abs. 2 Nr. 2 TDDDG, eigener Altbestand, wie
+      // components/cookie/EinwilligungsspeicherAufraeumen.tsx). Im installierten Zustand
+      // nicht: Dort meldet PwaStart den Dienst gerade erst an.
+      if (rs.length === 0 && !installiertGestartet()) {
+        await zwischenspeicherLoeschen().catch(() => []);
+      }
       setZustand(rs.length > 0 ? 'an' : 'aus');
     });
   }, []);
@@ -73,9 +103,13 @@ export default function OfflineSchalter() {
       protokoll.push(`${rs.length} Hintergrunddienst abgemeldet`);
 
       if ('caches' in window) {
-        const namen = await caches.keys();
-        for (const n of namen) await caches.delete(n);
-        protokoll.push(`${namen.length} Zwischenspeicher geleert`);
+        // Nachlauf: zweimal nachsehen, siehe Kopfkommentar.
+        const geleert = new Set(await zwischenspeicherLoeschen());
+        for (const pause of [500, 2000]) {
+          await new Promise((fertig) => setTimeout(fertig, pause));
+          for (const n of await zwischenspeicherLoeschen()) geleert.add(n);
+        }
+        protokoll.push(`${geleert.size} Zwischenspeicher geleert`);
       }
       window.localStorage.removeItem(SCHLUESSEL);
 
