@@ -20,9 +20,11 @@
  *   node scripts/build-tiktok-videos.mjs --check          (nur melden, Exit 1 bei veralteten)
  *
  * Manifest (Welle 172): lib/social/kacheln-manifest.json, Bereich „videos“,
- * hält je Video den SHA-256 des Quellbilds und des MP4. Veraltet ist ein
- * Video, wenn es fehlt, nicht im Manifest steht, die Datei nicht passt oder
- * das Quellbild sich seitdem geändert hat. Ob das Quellbild selbst aktuell
+ * hält je Video den SHA-256 des Quellbilds und des MP4, seit Welle 192 auch
+ * die Fassung der Filterkette (VIDEO_FASSUNG). Veraltet ist ein Video, wenn
+ * es fehlt, nicht im Manifest steht, die Datei nicht passt, das Quellbild sich
+ * seitdem geändert hat oder es mit einer älteren Fassung erzeugt wurde.
+ * Ob das Quellbild selbst aktuell
  * ist, prüft `python scripts/social-image-builder.py --from-config --vertical --check`.
  *
  * Dependency: ffmpeg-static (^5.3.0). Fehlt das Binary → klare Meldung.
@@ -77,11 +79,17 @@ function manifestSchreiben(manifest) {
   writeFileSync(MANIFEST_PATH, JSON.stringify(sortiert(manifest), null, 2) + '\n', 'utf8');
 }
 
+// Ändert sich die Filterkette in buildArgs, diese Kennung hochzählen. Dann gelten
+// alle Videos als veraltet und --stale erzeugt sie neu.
+// zoom-2 (Welle 192): nur noch der Ken-Burns-Zoom, kein Helligkeitspuls mehr.
+const VIDEO_FASSUNG = 'zoom-2';
+
 function veraltetGrund(eintrag, inputPng, outputMp4) {
   if (!existsSync(outputMp4)) return 'Video fehlt';
   if (!eintrag) return 'nicht im Manifest';
   if (eintrag.sha256 !== dateiSha256(outputMp4)) return 'Videodatei passt nicht zum Manifest';
   if (eintrag.quelleSha256 !== dateiSha256(inputPng)) return 'Quellbild geändert';
+  if (eintrag.fassung !== VIDEO_FASSUNG) return 'ältere Fassung der Filterkette';
   return null;
 }
 
@@ -89,31 +97,24 @@ function veraltetGrund(eintrag, inputPng, outputMp4) {
 const ffmpegPath = ffmpegPathImport;
 
 /**
- * Verifizierte ffmpeg-Filterkette (W18.3b-3 — kantenfreier Vollbild-Puls):
- * erzeugt TikTok-kompatibles MP4 (h264 / 1080×1920 / yuv420p / 30fps / 6s,
- * stumm) MIT Bewegung — Ken-Burns-Zoom (1.0→1.10 über volle 6s) +
- * Vollbild-Helligkeits-Puls (~6× über die Länge, Tal ~10% / Peak 100%).
+ * ffmpeg-Filterkette (Welle 192): TikTok-kompatibles MP4 (h264 / 1080×1920 /
+ * yuv420p / 30fps / 6s, stumm) mit Bewegung durch einen Ken-Burns-Zoom
+ * (1.0→1.10 gleichmäßig über volle 6s). Das erste Bild zeigt die ganze Kachel.
  *
- * Bewusst KEIN Crop/Blur/Overlay: das GANZE Bild wird gleichmäßig in der
- * Helligkeit moduliert → keine Zonen-Kante, kein grauer/schwarzer Kasten.
- * (Ersetzt die W18.3b-2-Glow-Crop-Blur-Kette, die auf fast-schwarzem
- * Hintergrund einen grauen Rechteck-Halo erzeugte.)
+ * Bis Welle 191 lag darüber ein Helligkeitspuls über das ganze Bild (W18.3b-3,
+ * Tal 10 % / Spitze 100 %, etwa jede Sekunde). Das Video blinkte, gut die
+ * Hälfte der Bilder war fast schwarz, auch das erste. Der Zoom allein reicht
+ * als Bewegung.
  *
- * Escaping: Kommas im geq-Ausdruck müssen ffmpeg-intern escaped werden
- * (`\\,` im JS-String = literales `\,` an ffmpeg). Da execFile mit
- * Array-Args läuft (kein Shell), ist NUR das ffmpeg-Escaping nötig,
- * KEIN Shell-Escaping. Der filter_complex-String ist EIN Array-Element.
+ * Da execFile mit Array-Args läuft (kein Shell), ist kein Shell-Escaping
+ * nötig. Der filter_complex-String ist EIN Array-Element.
  */
 function buildArgs(inputPng, outputMp4) {
   // Ken-Burns-Zoom (1.0→1.10 gleichmäßig über 180 Frames = 6s)
-  // + Vollbild-Helligkeits-Puls (~6× über die Länge, Tal ~10% / Peak 100%).
-  const pulse = '(0.1+0.9*max(0\\,sin(T*5.71)))';
   const filter = [
     "[0:v]scale=2160:3840,",
     "zoompan=z='min(zoom+0.00056,1.10)':d=180:",
     "x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1080x1920:fps=30,",
-    "format=rgb24,",
-    `geq=r='r(X\\,Y)*${pulse}':g='g(X\\,Y)*${pulse}':b='b(X\\,Y)*${pulse}',`,
     "format=yuv420p[out]",
   ].join('');
 
@@ -124,6 +125,9 @@ function buildArgs(inputPng, outputMp4) {
     '-filter_complex', filter,
     '-map', '[out]',
     '-c:v', 'libx264',
+    // Welle 192: ohne die dunklen Bilder des Pulses brauchte die Standardqualität (CRF 23)
+    // gut 40 % mehr Platz. CRF 26 hält die bisherige Dateigröße (SSIM 0,9987 zum verlustfreien Bild).
+    '-crf', '26',
     '-t', '6',
     '-pix_fmt', 'yuv420p',
     '-r', '30',
@@ -248,6 +252,7 @@ async function main() {
     try {
       await runFfmpeg(inputPng, outputMp4);
       manifest.videos[slug] = {
+        fassung: VIDEO_FASSUNG,
         quelleSha256: dateiSha256(inputPng),
         sha256: dateiSha256(outputMp4),
       };

@@ -7,7 +7,8 @@ Portierung von scripts/build_phase0_posts.py:
   - Linux-Font-Pfade → Cross-Platform-Resolution (ENV/Windows/Linux)
   - /home/claude/-Output → public/social-posts/<slug>.png
   - Layout-Helper (render_emoji, render_bolt_mini, render_post)
-    unverändert übernommen — Pixel-perfekte Phase-0-Optik.
+    aus Phase 0 übernommen; seit Welle 192 zeichnet render_emoji
+    das Emoji mit Rand, damit oben nichts mehr abgeschnitten wird.
 
 Datenquellen:
   - lib/social/queue.json                (Slug-Reihenfolge)
@@ -219,14 +220,27 @@ def _emoji_font(emoji_font_path):
 
 
 def _emoji_kachel(emoji_char, font):
-    tile = Image.new("RGBA", (140, 140), (0, 0, 0, 0))
+    # Welle 192: Zeichenfläche mit Rand. Vorher 140 × 140 px, gezeichnet ab Ecke 0,0.
+    # Pillow setzt die Oberlinie des Fonts auf y = 0. Was darüber oder links davon
+    # liegt, bekommt negative Koordinaten und fiel weg. Segoe UI Emoji zeichnet viele
+    # Emojis über die Oberlinie (📉, 🧊, 🍺, ❤️ waren oben flach abgeschnitten).
+    # Jetzt eine Schriftgröße Rand auf allen Seiten.
+    rand = font.size
+    seite = 3 * font.size
+    tile = Image.new("RGBA", (seite, seite), (0, 0, 0, 0))
     td = ImageDraw.Draw(tile)
     try:
-        td.text((0, 0), emoji_char, font=font, embedded_color=True)
+        td.text((rand, rand), emoji_char, font=font, embedded_color=True)
     except Exception:
         # Manche Fonts unterstützen kein embedded_color
-        td.text((0, 0), emoji_char, font=font)
+        td.text((rand, rand), emoji_char, font=font)
     return tile
+
+
+def _beruehrt_rand(tile) -> bool:
+    """True, wenn das Zeichen bis an den Rand der Zeichenfläche reicht (also abgeschnitten sein kann)."""
+    bbox = tile.getbbox()
+    return bool(bbox) and (bbox[0] == 0 or bbox[1] == 0 or bbox[2] == tile.width or bbox[3] == tile.height)
 
 
 # Ein Zeichen, das in keinem Font vorkommt (Private Use, Ebene 16). Sieht ein
@@ -274,6 +288,8 @@ def render_emoji(emoji_char, target_size, emoji_font_path):
             + ", ".join(Path(k).name for k in kandidaten)
             + (" — Ersatz-Font .fonts/NotoColorEmoji.ttf fehlt" if not ersatz else "")
         )
+    if _beruehrt_rand(tile):
+        raise RuntimeError(f"Zeichen {emoji_char!r} reicht bis an den Rand der Zeichenfläche")
     bbox = tile.getbbox()
     if bbox:
         tile = tile.crop(bbox)
@@ -567,8 +583,9 @@ def render_post_vertical(spec, fonts, bolt_png_path):
 # ============================================================
 # Ändert sich das Layout eines Renderers, die passende Kennung hochzählen.
 # Dann gelten alle Bilder dieses Formats als veraltet und --stale erzeugt sie neu.
-LAYOUT_QUADRAT = "quadrat-1"
-LAYOUT_HOCHFORMAT = "hochformat-1"
+# Welle 192: -2, weil das Emoji jetzt mit Rand gezeichnet wird (vorher oben abgeschnitten).
+LAYOUT_QUADRAT = "quadrat-2"
+LAYOUT_HOCHFORMAT = "hochformat-2"
 MANIFEST_REL = Path("lib") / "social" / "kacheln-manifest.json"
 MANIFEST_HINWEIS = (
     "Erzeugt von scripts/social-image-builder.py und scripts/build-tiktok-videos.mjs. "
