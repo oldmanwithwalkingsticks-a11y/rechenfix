@@ -381,6 +381,15 @@ export const TERMINE: Termin[] = [
     was: 'Die Preise in lib/berechnungen/streaming-kosten.ts mit den Preisseiten der Anbieter vergleichen (Stand 20.10.2026, Welle 182). Spotify hat in den Niederlanden bereits erhöht, eine Preisrunde in Deutschland ist wahrscheinlich. Bei Änderungen Preise und Stand-Kommentar anpassen, die Beispiele in lib/rechner-config/alltag.ts und den Eintrag streaming-kosten-rechner in lib/social/captions.json neu rechnen, danach Bilder nach CLAUDE.md.',
     quelle: 'Welle 182',
   },
+  {
+    id: 'kindergeld-antragslos',
+    titel: 'Kindergeld-Rechner: Start des Kindergelds ohne Antrag prüfen',
+    datum: '2027-03-01',
+    vorlaufTage: 14,
+    bereich: 'Inhalt',
+    was: 'Seit 01.01.2027 kann die Familienkasse bei Neugeborenen auf den Antrag verzichten (§ 67 Abs. 2 EStG, BGBl. 2026 I Nr. 307). Laut Bundesregierung ab Frühjahr 2027 für Familien, die bereits Kindergeld beziehen, ab Ende 2027 auch für erste Kinder. Auf arbeitsagentur.de nachsehen, ob und für wen das Verfahren läuft, und die Texte des Kindergeld-Rechners in lib/rechner-config/finanzen.ts nachziehen (Abschnitt „Was sich 2026 ändert“, Direktvergleich „Antrag nötig“, Checkliste, Tipp-Box, FAQ „Wie beantrage ich Kindergeld?“). Danach den Eintrag entfernen oder auf den Start für erste Kinder verschieben.',
+    quelle: 'Welle 195; BGBl. 2026 I Nr. 307 (Art. 4: Inkrafttreten 01.01.2027); bundesregierung.de, „Kindergeld ohne Antrag“ vom 25.09.2026',
+  },
 ];
 
 /** Normiert auf UTC-Tagesbeginn, damit Zeitzonen keine Off-by-one erzeugen. */

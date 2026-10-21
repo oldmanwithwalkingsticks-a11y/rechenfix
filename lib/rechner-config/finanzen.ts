@@ -3154,7 +3154,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'kindergeld-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Kindergeld-Rechner',
     beschreibung: 'Kindergeld 2026 berechnen und Günstigerprüfung: Kindergeld oder Kinderfreibetrag — was lohnt sich für Ihr Einkommen?',
     kategorie: 'Finanzen',
@@ -3215,7 +3215,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Was sich 2026 ändert — und was bleibt',
-        html: `<p>Die wichtigste Änderung zum 1. Januar 2026 ist die Anhebung des Kindergeldes um <strong>4 Euro auf 259 Euro</strong> pro Kind und Monat. Parallel steigt der Kinderfreibetrag, sodass Kindergeld und Freibetrag im gesetzlich verankerten Gleichlauf bleiben. Beide Werte werden regelmäßig an das steuerfrei zu stellende Existenzminimum der Kinder angepasst.</p><p>Häufig kursiert die Annahme, das System werde durch eine <strong>Kindergrundsicherung</strong> ersetzt. Das ist nicht der Fall: Die geplante Zusammenlegung mehrerer Familienleistungen wurde nicht umgesetzt. Es bleibt beim bewährten Nebeneinander von Kindergeld, Kinderfreibetrag und Kinderzuschlag.</p><p>Bestehen bleibt auch der <strong>Kindersofortzuschlag</strong> von 25 Euro pro Monat, der einkommensschwache Familien zusätzlich entlastet und unbefristet weitergezahlt wird. Für die meisten Eltern ändert sich im Alltag also wenig — außer den 4 Euro mehr pro Kind, die die Familienkasse automatisch überweist, ohne dass ein neuer Antrag nötig wäre.</p>`,
+        html: `<p>Die wichtigste Änderung zum 1. Januar 2026 ist die Anhebung des Kindergeldes um <strong>4 Euro auf 259 Euro</strong> pro Kind und Monat. Parallel steigt der Kinderfreibetrag, sodass Kindergeld und Freibetrag im gesetzlich verankerten Gleichlauf bleiben. Beide Werte werden regelmäßig an das steuerfrei zu stellende Existenzminimum der Kinder angepasst.</p><p>Häufig kursiert die Annahme, das System werde durch eine <strong>Kindergrundsicherung</strong> ersetzt. Das ist nicht der Fall: Die geplante Zusammenlegung mehrerer Familienleistungen wurde nicht umgesetzt. Es bleibt beim bewährten Nebeneinander von Kindergeld, Kinderfreibetrag und Kinderzuschlag.</p><p>Bestehen bleibt auch der <strong>Kindersofortzuschlag</strong> von 25 Euro pro Monat, der einkommensschwache Familien zusätzlich entlastet und unbefristet weitergezahlt wird. Für die meisten Eltern ändert sich im Alltag also wenig — außer den 4 Euro mehr pro Kind, die die Familienkasse automatisch überweist, ohne dass ein neuer Antrag nötig wäre.</p><p><strong>Ab 2027: Kindergeld teils ohne Antrag.</strong> Nach dem Gesetz zur Einführung eines antragslosen Kindergeldes (BGBl. 2026 I Nr. 307) kann die Familienkasse ab dem 1. Januar 2027 bei Neugeborenen auf den Antrag verzichten: Vergibt das Bundeszentralamt für Steuern dem Kind nach der Geburt eine Steuer-ID, meldet es die Daten der Familienkasse (§ 67 Abs. 2, § 69 EStG). Nach Angaben der Bundesregierung gilt das zunächst ab Frühjahr 2027 für Familien, die bereits Kindergeld beziehen, und ab Ende 2027 auch für erste Kinder. Einen Anspruch auf die Zahlung ohne Antrag haben Eltern nicht; fehlen Daten oder gibt es Zweifel, bleibt es beim Antrag. Die Höhe des Kindergeldes ändert das Gesetz nicht.</p>`,
       },
       {
         typ: 'text',
@@ -3264,7 +3264,7 @@ export const finanzenRechner: RechnerConfig[] = [
           { kriterium: 'Auszahlung', a: 'monatlich von der Familienkasse', b: 'als Steuerersparnis bei der Veranlagung' },
           { kriterium: 'Höhe 2026', a: '259 € / Monat = 3.108 € / Jahr', b: 'bis 9.756 € Abzug vom zu versteuernden Einkommen' },
           { kriterium: 'Wirkung', a: 'fester Betrag, einkommensunabhängig', b: 'wirkt über den persönlichen Grenzsteuersatz' },
-          { kriterium: 'Antrag nötig', a: 'ja, einmalig bei der Familienkasse', b: 'nein, Finanzamt prüft automatisch' },
+          { kriterium: 'Antrag nötig', a: 'ja, einmalig bei der Familienkasse (ab 2027 bei Neugeborenen teils ohne Antrag)', b: 'nein, Finanzamt prüft automatisch' },
           { kriterium: 'Günstig für', a: 'niedrige & mittlere Einkommen', b: 'höhere Einkommen (ab ~80.000 € zvE, verheiratet, 1 Kind)' },
         ],
       },
@@ -3320,13 +3320,14 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'checkliste',
         titel: 'Kindergeld beantragen — Schritt für Schritt',
         punkte: [
-          'Antrag bei der Familienkasse der Bundesagentur für Arbeit stellen (online oder schriftlich).',
+          'Antrag bei der Familienkasse der Bundesagentur für Arbeit stellen — in der Regel online, schriftlich mit eigenhändiger Unterschrift ebenfalls möglich.',
           'Steuer-Identifikationsnummer von Kind und antragstellendem Elternteil bereithalten.',
-          'Geburtsurkunde des Kindes beifügen.',
+          'Geburtsurkunde nur beifügen, wenn das Kind im Ausland geboren wurde oder dort lebt (Kopie, kein Original).',
           'IBAN des Auszahlungskontos angeben.',
           'Bei Kindern über 18: Nachweis über Ausbildung, Studium oder Freiwilligendienst beilegen.',
           'Vorab klären, wer das Kindergeld erhält — nur ein Elternteil ist bezugsberechtigt.',
           'Antrag zeitnah stellen: rückwirkend wird höchstens 6 Monate gezahlt.',
+          'Ab 2027 kann die Familienkasse bei Neugeborenen ohne Antrag zahlen — kommt nach der Geburt kein Bescheid, den Antrag selbst stellen.',
         ],
       },
       {
@@ -3339,7 +3340,7 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'tipp',
         titel: 'Antrag direkt nach der Geburt stellen',
-        text: 'Stellen Sie den Kindergeldantrag möglichst kurz nach der Geburt bei der Familienkasse — am einfachsten online. Seit der Einführung der „Geburtskinderdienste" in einigen Bundesländern lässt sich das Kindergeld teils gemeinsam mit der Geburtsanzeige beantragen. Wichtig: Rückwirkend zahlt die Familienkasse höchstens für die letzten 6 Monate (§ 70 Abs. 1 EStG), wer zu lange wartet, verliert bares Geld.',
+        text: 'Stellen Sie den Kindergeldantrag möglichst kurz nach der Geburt bei der Familienkasse — am einfachsten online. Wichtig: Rückwirkend zahlt die Familienkasse höchstens für die letzten 6 Monate (§ 70 Abs. 1 EStG), wer zu lange wartet, verliert bares Geld. Ab dem 1. Januar 2027 kann die Familienkasse bei Neugeborenen auf den Antrag verzichten (§ 67 Abs. 2 EStG); darüber entscheidet sie selbst. Kommt nach der Geburt kein Bescheid, stellen Sie den Antrag wie bisher.',
       },
       {
         typ: 'infobox',
@@ -3367,7 +3368,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie beantrage ich Kindergeld?',
-        antwort: 'Kindergeld beantragen Sie schriftlich bei der Familienkasse der Bundesagentur für Arbeit. Der Antrag ist auch online über das Familienkassen-Portal möglich. Benötigt werden: Geburtsurkunde des Kindes, Steuer-ID der Eltern und des Kindes, IBAN. Rückwirkend wird Kindergeld maximal 6 Monate ausgezahlt — stellen Sie den Antrag also zeitnah nach der Geburt.',
+        antwort: 'Kindergeld beantragen Sie bei der Familienkasse der Bundesagentur für Arbeit, in der Regel online; ein schriftlicher Antrag mit eigenhändiger Unterschrift ist weiterhin möglich (§ 67 EStG). Für ein Kind unter 18 Jahren genügen meist die Steuer-ID des Kindes, Ihre eigene Steuer-ID und die IBAN. Eine Kopie der Geburtsurkunde braucht die Familienkasse nur, wenn das Kind im Ausland geboren wurde oder dort lebt. Rückwirkend wird Kindergeld höchstens für 6 Monate gezahlt (§ 70 Abs. 1 EStG) — stellen Sie den Antrag also zeitnah nach der Geburt. Ab dem 1. Januar 2027 kann die Familienkasse bei Neugeborenen auf den Antrag verzichten (§ 67 Abs. 2 EStG); nach Angaben der Bundesregierung zunächst ab Frühjahr 2027 für Familien, die bereits Kindergeld beziehen, ab Ende 2027 auch für erste Kinder.',
       },
       {
         frage: 'Wird Kindergeld bei der Steuer angerechnet?',
@@ -3378,6 +3379,10 @@ export const finanzenRechner: RechnerConfig[] = [
       { titel: '§ 66 EStG: Höhe des Kindergeldes', url: 'https://www.gesetze-im-internet.de/estg/__66.html', hinweis: '259 €/Monat pro Kind (2026)' },
       { titel: '§ 32 EStG: Kinderfreibetrag und Berücksichtigung von Kindern', url: 'https://www.gesetze-im-internet.de/estg/__32.html', hinweis: '9.756 €/Kind gesamt (2026); Anspruch bis 18 bzw. 25' },
       { titel: '§ 31 EStG: Familienleistungsausgleich (Günstigerprüfung)', url: 'https://www.gesetze-im-internet.de/estg/__31.html', hinweis: 'automatischer Vergleich Kindergeld vs. Kinderfreibetrag' },
+      { titel: '§ 67 EStG: Antrag', url: 'https://www.gesetze-im-internet.de/estg/__67.html', hinweis: 'elektronischer Antrag als Regel, schriftlich mit Unterschrift möglich; ab 01.01.2027 Abs. 2: Verzicht auf den Antrag bei Neugeborenen' },
+      { titel: '§ 70 EStG: Festsetzung und Zahlung des Kindergeldes', url: 'https://www.gesetze-im-internet.de/estg/__70.html', hinweis: 'rückwirkende Auszahlung nur für die letzten 6 Monate vor dem Antragsmonat' },
+      { titel: 'BGBl. 2026 I Nr. 307: Gesetz zur Einführung eines antragslosen Kindergeldes', url: 'https://www.recht.bund.de/bgbl/1/2026/307/VO.html', hinweis: 'verkündet 20.10.2026, in Kraft 01.01.2027' },
+      { titel: 'Familienkasse: Nachweise und Bescheinigungen', url: 'https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/nachweise-einreichen', hinweis: 'unter 18 Jahren in der Regel nur die Steuer-IDs; Geburtsurkunde bei Geburt im Ausland' },
     ],
     affiliate: [
       { programId: 'wiso', context: 'kindergeld' },
