@@ -6,6 +6,91 @@
 
 ---
 
+## 21.10.2026 — Welle 192: Social-Kacheln — Emoji nicht mehr abgeschnitten; TikTok-Videos ohne Blinken — ✅ ABGESCHLOSSEN 21.10.2026
+
+**Anlass:**
+- **Emoji oben abgeschnitten** (Fund aus Welle 187): `render_emoji` in `scripts/social-image-builder.py` zeichnete das
+  Emoji auf eine Fläche von 140 × 140 px ab Ecke 0,0. Pillow legt dabei die Oberlinie des Fonts auf y = 0; Segoe UI
+  Emoji zeichnet viele Emojis über diese Linie hinaus, der Teil darüber fiel weg (ebenso links vom Nullpunkt). Sichtbar
+  u. a. bei 📉 `afa-rechner`, 🧊 `gefrierdauer-rechner`, 🍺 `alkohol-abbau-rechner`, 🏋️ `1rm-rechner`, 🤰
+  `geburtstermin-rechner`, ❤️ `bmi-rechner`. Betroffen waren Kacheln (`public/social-posts/`) und Hochformate
+  (`public/social-videos-src/`), also auch die TikTok-Videos.
+- **TikTok-Videos blinken** (Puls aus W18.3b-3): Über dem Zoom lag ein Helligkeitspuls über das ganze Bild,
+  `0.1 + 0.9 × max(0, sin(T × 5,71))`. Gut die Hälfte jeder Periode (etwa 1,1 s) lag bei 10 % Helligkeit; laut Vorlage
+  91 von 180 Bildern fast schwarz, auch das erste.
+
+**Änderungen** (Vorlage `_lokal/welle192-emoji-video.mjs`: 11 Ersetzungen in 2 Dateien, `social-image-builder.py` 4,
+`build-tiktok-videos.mjs` 7; nicht committet):
+- **Zeichenfläche mit Rand:** eine Schriftgröße Rand auf allen Seiten. Reicht ein Zeichen trotzdem bis an den Rand,
+  bricht der Slug ab (`_beruehrt_rand`), statt still ein abgeschnittenes Bild zu schreiben.
+- **Layout-Kennungen** `quadrat-2` und `hochformat-2`: Damit galten alle 206 Bilder je Format als veraltet.
+- **Filterkette ohne Puls:** nur noch der Ken-Burns-Zoom (1,0 → 1,10 über 6 s), das erste Bild zeigt die ganze Kachel.
+  Der `geq`-Filter fällt weg (laut Vorlage etwa 8 statt 60 Sekunden je Video).
+- **CRF 26** statt Standard 23: ohne die dunklen Bilder hätte CRF 23 gut 40 % mehr Platz gebraucht.
+- **Videofassung im Manifest:** je Video `fassung: "zoom-2"`; ein Video mit älterer Fassung gilt als veraltet.
+
+**Zahlen:**
+- **Früher abgeschnitten** (Emoji-Gegenprobe `_lokal/welle192-emoji-probe.py`): **190 von 206 Slugs, nach Seite: oben
+  190** (links keiner). `laminat-rechner` 🪵 (Ersatz-Font Noto) war nicht abgeschnitten.
+- **Neu im Commit:** 192 Kacheln, 197 Hochformate, 206 Videos (dazu das Manifest). 190 davon je Bildordner mit
+  vollständigem Emoji; zu den übrigen siehe „Abweichungen und Funde“.
+- **Videos zusammen:** vorher 72,2 MiB (75,7 MB), nachher 74,9 MiB (78,5 MB); `du -ch` 76M. Soll 62 bis 84 MB.
+
+**Bewusst nicht geändert:** `lib/social/captions.json`, `queue.json`, `kategorie-farben.json`; `lib/social/*.ts` und die
+Cron-Routen; die KV-Einträge (`social:done:*`, `social:posted:*`).
+
+**Bewusst offen geblieben:**
+- **Kein sanfter Puls:** Auch ein schwacher Helligkeitswechsel über das ganze Bild wirkt wie Flackern. Der Zoom reicht als
+  Bewegung.
+- **Unveränderte Kacheln:** Emojis, die nicht abgeschnitten waren, bleiben pixelgleich. Ihre Dateien sind deshalb nicht
+  im Commit, obwohl `--stale` sie neu geschrieben hat (Ausnahme: die sieben älteren Dateien unten).
+- **Captions:** unverändert, keine Headline und kein Eyebrow neu.
+- **Bereits gepostete Beiträge** auf Instagram, Facebook und TikTok behalten ihr altes Bild bzw. Video.
+
+**Abweichungen und Funde:**
+- **Mehr geänderte Bilder als N** (laut Vorlage kein STOP): Kacheln 192 statt 190, Hochformate 197 statt 190. Im
+  Video-`--check` nach dem Erzeugen deshalb „ältere Fassung der Filterkette“ 9× statt 206 − 190 = 16, „Quellbild
+  geändert“ 197×.
+  - Zusätzlich bei den Kacheln: `lieferservice-rechner`, `schritte-kilometer-rechner`. Bei den Hochformaten dieselben
+    zwei und `firmenwagen-rechner`, `kfz-steuer-rechner`, `prozentrechner`, `reifengroesse-rechner`, `vo2max-rechner`.
+  - Diese Dateien waren zuletzt im Sommer erzeugt (`74b8e56` 05.06.2026, `005c396` 04.07.2026, `116c6cd` 30.07.2026),
+    die übrigen nicht abgeschnittenen Slugs seit Welle 172 bzw. 187 neu. Unterschiede nur an Textkanten (Kantenglättung
+    um höchstens einen Pixel versetzt), Emoji und Inhalt gleich; angesehen `prozentrechner` (Hochformat) und
+    `lieferservice-rechner` (Kachel, 10.715 Pixel abweichend, davon 360 um mehr als 128 Stufen, vergrößert gleich).
+    Die Kachel `schritte-kilometer-rechner` ist pixelgleich und nur anders komprimiert (54.325 → 52.711 Bytes).
+    Ursache vermutlich ein anderer Pillow-/FreeType-/zlib-Stand beim damaligen Erzeugen.
+- **Video angesehen:** `pace-rechner.mp4` habe ich nicht abgespielt, sondern Bild 0, 90 und 179 mit `ffmpeg-static`
+  herausgezogen: alle hell, Zoom sichtbar zunehmend; Länge 6,00 s, 30 fps, 1080 × 1920. Dazu die Video-Gegenprobe.
+
+**Gates:**
+- Phase 0 an `d298224`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `d298224` und `050d6bb`
+  (Welle 191). Greps `scripts/social-image-builder.py:1`, `scripts/build-tiktok-videos.mjs:1`, dann keine Ausgabe.
+  `verify:alle` 85/85, Exit 0. Pillow `12.2.0`, „Noto da“, „Snapshot (206 Rechner)“. Drei `--check` je Exit 0,
+  „Aktuell: 206“, „Veraltet: 0“; Videos „Aktuell: 206 · Veraltet: 0“.
+- Phase 1: „OK — 11 Ersetzungen in 2 Dateien.“, Exit 0; `git status` genau ` M scripts/build-tiktok-videos.mjs` und
+  ` M scripts/social-image-builder.py`.
+- Phase 2: Emoji-Gegenprobe Exit 0, 9 OK-Zeilen, keine FEHL-Zeile, „Alle Werte OK“; 0 unbekannte Zeichen, 0 Zeichen am
+  Rand der neuen Fläche, die sechs Slugs aus dem Anlass „True“, `laminat-rechner` „False“. Vorher-nachher-Bild: rechts
+  alle Emojis vollständig, mit schwarzer Kontur auch oben. `verify:alle` 85/85, Exit 0. Greps
+  `social-image-builder.py:2`, `social-image-builder.py:2`, keine Ausgabe, `build-tiktok-videos.mjs:4`,
+  `build-tiktok-videos.mjs:1`. `npm run lint` Exit 0, keine Zeile „problems“.
+- Phase 3: „Snapshot (206 Rechner)“. Beide `--check` Exit 1, „Aktuell: 0“, „Veraltet: 206“, „Failed: 0“; „geändert:
+  layout“ 206 und 206. Kacheln und Hochformate `--stale` je Exit 0, „Generated: 206“, „Skipped: 0“, „Aktuell: 0“,
+  „Failed: 0“. Video-`--check` Exit 1, „Aktuell: 0 · Veraltet: 206“. Videos `--stale` im Hintergrund: „Rendered: 206 ·
+  Skipped: 0 · Aktuell: 0 · Failed: 0“, „exit 0“.
+- Phase 4: drei `--check` je Exit 0, 206/0. Video-Gegenprobe 9 × „OK“ (je Video 180 Bilder, 0 fast schwarz, erstes Bild
+  hell), „Alle Werte OK“, Exit 0. Geänderte Dateien 192, 197, 206; Rest von `git status` genau Manifest und die zwei
+  Skripte. Angesehen: `afa-rechner.png` 📉 mit schwarzem Rand auch oben, `bmi-rechner.png` ❤️ oben rund mit zwei
+  Bögen, Hochformat `alkohol-abbau-rechner.png` 🍺 mit ganzer Schaumkrone auf schwarzem Grund.
+- Phase 5: `npm run build` Rückgabewert 0, 271 Seiten.
+- Phase 6: A `git diff --cached --name-only` 2; B 596 (= 192 + 197 + 206 + 1, die Formel 2 × N + 207 = 587 gilt wegen der
+  neun älteren Dateien nicht), danach `git status` leer.
+
+**Commits:** A `f6db834` (die 2 Skripte), B `6057ecf` (Manifest, 192 Kacheln, 197 Hochformate, 206 Videos). C ist
+dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 21.10.2026 — Welle 191: Folgefunde — Kalenderdaten westlich von UTC, Gehaltsvergleich, Bürgergeld-Alter, Kaffee-Wasser, Termine, Feedback-Eintrag — ✅ ABGESCHLOSSEN 21.10.2026
 
 **Anlass:**
