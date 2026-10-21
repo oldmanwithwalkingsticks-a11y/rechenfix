@@ -186,7 +186,9 @@ const EINKOMMENSFREIBETRAG_2026 = {
   stufe3Quote: 0.10,
   // § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag (2026-Werte)
   // W183: vorher fest 556 € (Minijob-Grenze 2025); jetzt aus der SSOT, 13,90 € × 130 / 3 aufgerundet = 603 €.
-  jugendlicherFreibetrag_unter25: getMinijobGrenzeMonat(new Date('2026-01-01')), // Minijob-Grenze § 8 Abs. 1a SGB IV
+  // W191: vorher getMinijobGrenzeMonat(new Date('2026-01-01')) = UTC-Mitternacht; westlich von UTC war das der
+  // 31.12.2025, also die Minijob-Grenze 2025 (556 € statt 603 €).
+  jugendlicherFreibetrag_unter25: getMinijobGrenzeMonat(new Date(2026, 0, 1)), // Minijob-Grenze § 8 Abs. 1a SGB IV
   jugendlicherFreibetrag_ab25: 250,
 };
 
@@ -216,7 +218,7 @@ export const BUERGERGELD_2026_H1: BuergergeldParameter = {
   einkommensfreibetrag: EINKOMMENSFREIBETRAG_2026,
   mehrbedarfe: MEHRBEDARFE_2026,
   quelle: "Bürgergeld-Regelbedarfsermittlungsgesetz 2025 mit § 28a-Besitzschutz (Nullrunde 2026), § 21 SGB II",
-  gueltigAb: new Date("2026-01-01"),
+  gueltigAb: new Date(2026, 0, 1), // W191: lokale Mitternacht wie H2 (vorher new Date("2026-01-01"))
 };
 
 /**

@@ -153,7 +153,8 @@ export const RV_MINDESTBEMESSUNG_MINIJOB = 175;
 // W173: Auch der Wahrer-Stundenlohn-Rechner nimmt Feiertage und Mindestlohn aus diesem Jahr. Beim
 // Umstellen dort die Beispielwerte im Block wahrer-stundenlohn (finanzen.ts) und den Eintrag
 // wahrer-stundenlohn in lib/social/captions.json neu rechnen, danach Bilder nach CLAUDE.md.
-export const SV_RECHENSTAND = new Date('2026-07-01');
+// W191: lokale Mitternacht; vorher new Date('2026-07-01') = UTC-Mitternacht, westlich von UTC der 30.06.2026.
+export const SV_RECHENSTAND = new Date(2026, 6, 1);
 // Alias für interne Verwendung
 const BBG_KV = BBG_KV_MONAT;
 const BBG_RV = BBG_RV_MONAT;

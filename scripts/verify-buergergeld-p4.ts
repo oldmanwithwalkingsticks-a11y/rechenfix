@@ -12,6 +12,8 @@
 //     Monats, in dem Altersgrenze erreicht wird.
 //   § 20 SGB II + § 28a-Besitzschutz — Regelsätze 2026 unverändert (Nullrunde).
 
+// W191: Stichtage in Ortszeit wie das Monatsfeld des Rechners (parseMonat); vorher new Date('2026-07-01') =
+// UTC-Mitternacht, mit TZ=America/New_York also noch der 30.06.2026.
 import { berechneBuergergeld } from '../lib/berechnungen/buergergeld';
 import {
   BUERGERGELD_2026_H1,
@@ -29,8 +31,8 @@ cases.push(
   { name: 'H2 modus = alter_gestaffelt',  actual: BUERGERGELD_2026_H2.vermoegen.modus, expected: 'alter_gestaffelt', quelle: '§ 12 Abs. 2 SGB II n.F.' },
   { name: 'H2 Bezeichnung = Grundsicherungsgeld', actual: BUERGERGELD_2026_H2.bezeichnung, expected: 'Grundsicherungsgeld', quelle: '13. SGB II-ÄndG' },
   { name: 'H1 Bezeichnung = Bürgergeld',  actual: BUERGERGELD_2026_H1.bezeichnung, expected: 'Bürgergeld', quelle: 'SGB II a.F.' },
-  { name: 'Stichtag-Switch 01.07.2026 wählt H2', actual: getAktuelleBuergergeldParameter(new Date('2026-07-01')).bezeichnung, expected: 'Grundsicherungsgeld', quelle: 'Stichtag-Switch-Pattern' },
-  { name: 'Stichtag 30.06.2026 wählt noch H1',  actual: getAktuelleBuergergeldParameter(new Date('2026-06-30')).bezeichnung, expected: 'Bürgergeld', quelle: 'Stichtag-Switch-Pattern' },
+  { name: 'Stichtag-Switch 01.07.2026 wählt H2', actual: getAktuelleBuergergeldParameter(new Date(2026, 6, 1)).bezeichnung, expected: 'Grundsicherungsgeld', quelle: 'Stichtag-Switch-Pattern' },
+  { name: 'Stichtag 30.06.2026 wählt noch H1',  actual: getAktuelleBuergergeldParameter(new Date(2026, 5, 30)).bezeichnung, expected: 'Bürgergeld', quelle: 'Stichtag-Switch-Pattern' },
 );
 
 // === getSchonvermoegenProPerson — Altersstaffel-Einheitstests ===
@@ -60,7 +62,7 @@ if (BUERGERGELD_2026_H2.vermoegen.modus === 'alter_gestaffelt') {
 const t1 = berechneBuergergeld({
   bedarfsgemeinschaft: 'alleinstehend', kinder: [],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-06-30'), erwachseneAlter: [35],
+  stichtag: new Date(2026, 5, 30), erwachseneAlter: [35],
 })!;
 cases.push({ name: '#1 H1 30.06.2026 Single 35 → Freibetrag 40.000 €',
   actual: t1.vermoegensFreibetrag, expected: 40000, quelle: 'Prompt 129-fix Verify #1' });
@@ -70,7 +72,7 @@ cases.push({ name: '#1 H1-Modus aktiv', actual: t1.vermoegenModus, expected: 'ka
 const t2 = berechneBuergergeld({
   bedarfsgemeinschaft: 'alleinstehend', kinder: [],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-07-01'), erwachseneAlter: [35],
+  stichtag: new Date(2026, 6, 1), erwachseneAlter: [35],
 })!;
 cases.push({ name: '#2 H2 01.07.2026 Single 35 → Freibetrag 10.000 €',
   actual: t2.vermoegensFreibetrag, expected: 10000, quelle: 'Prompt 129-fix Verify #2' });
@@ -80,7 +82,7 @@ cases.push({ name: '#2 H2-Modus aktiv', actual: t2.vermoegenModus, expected: 'al
 const t3 = berechneBuergergeld({
   bedarfsgemeinschaft: 'alleinstehend', kinder: [],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-07-01'), erwachseneAlter: [28],
+  stichtag: new Date(2026, 6, 1), erwachseneAlter: [28],
 })!;
 cases.push({ name: '#3 H2 Single 28 → 5.000 €',
   actual: t3.vermoegensFreibetrag, expected: 5000, quelle: 'Prompt 129-fix Verify #3' });
@@ -89,7 +91,7 @@ cases.push({ name: '#3 H2 Single 28 → 5.000 €',
 const t4 = berechneBuergergeld({
   bedarfsgemeinschaft: 'alleinstehend', kinder: [],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-07-01'), erwachseneAlter: [30],
+  stichtag: new Date(2026, 6, 1), erwachseneAlter: [30],
 })!;
 cases.push({ name: '#4 H2 Single 30 (Stufengrenze) → 10.000 €',
   actual: t4.vermoegensFreibetrag, expected: 10000, quelle: 'Prompt 129-fix Verify #4 (§ 12 Abs. 2 Satz 2)' });
@@ -98,7 +100,7 @@ cases.push({ name: '#4 H2 Single 30 (Stufengrenze) → 10.000 €',
 const t5 = berechneBuergergeld({
   bedarfsgemeinschaft: 'alleinstehend', kinder: [],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-07-01'), erwachseneAlter: [29],
+  stichtag: new Date(2026, 6, 1), erwachseneAlter: [29],
 })!;
 cases.push({ name: '#5 H2 Single 29 → 5.000 €',
   actual: t5.vermoegensFreibetrag, expected: 5000, quelle: 'Prompt 129-fix Verify #5' });
@@ -107,7 +109,7 @@ cases.push({ name: '#5 H2 Single 29 → 5.000 €',
 const t6 = berechneBuergergeld({
   bedarfsgemeinschaft: 'alleinstehend', kinder: [],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-07-01'), erwachseneAlter: [45],
+  stichtag: new Date(2026, 6, 1), erwachseneAlter: [45],
 })!;
 cases.push({ name: '#6 H2 Single 45 → 12.500 €',
   actual: t6.vermoegensFreibetrag, expected: 12500, quelle: 'Prompt 129-fix Verify #6' });
@@ -116,7 +118,7 @@ cases.push({ name: '#6 H2 Single 45 → 12.500 €',
 const t7 = berechneBuergergeld({
   bedarfsgemeinschaft: 'alleinstehend', kinder: [],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-07-01'), erwachseneAlter: [55],
+  stichtag: new Date(2026, 6, 1), erwachseneAlter: [55],
 })!;
 cases.push({ name: '#7 H2 Single 55 → 20.000 €',
   actual: t7.vermoegensFreibetrag, expected: 20000, quelle: 'Prompt 129-fix Verify #7' });
@@ -125,7 +127,7 @@ cases.push({ name: '#7 H2 Single 55 → 20.000 €',
 const t8 = berechneBuergergeld({
   bedarfsgemeinschaft: 'paar', kinder: [],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-07-01'), erwachseneAlter: [28, 52],
+  stichtag: new Date(2026, 6, 1), erwachseneAlter: [28, 52],
 })!;
 cases.push({ name: '#8 H2 Paar 28+52 → Summe 25.000 €',
   actual: t8.vermoegensFreibetrag, expected: 25000, quelle: 'Prompt 129-fix Verify #8' });
@@ -138,7 +140,7 @@ cases.push({ name: '#8 Aufschlüsselung hat 2 Einträge',
 const t8b = berechneBuergergeld({
   bedarfsgemeinschaft: 'paar-mit-kindern', kinder: [{ alter: '0-5' }, { alter: '6-13' }],
   warmmiete: 0, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-07-01'), erwachseneAlter: [28, 32],
+  stichtag: new Date(2026, 6, 1), erwachseneAlter: [28, 32],
 })!;
 cases.push({ name: '#8b H2 Paar+2 Kinder → Summe 25.000 €',
   actual: t8b.vermoegensFreibetrag, expected: 25000, quelle: '§ 12 Abs. 2 SGB II n.F. pro Person summiert' });
@@ -156,7 +158,7 @@ cases.push({ name: '#10 H1 und H2 Regelsätze identisch',
 const bg01 = berechneBuergergeld({
   bedarfsgemeinschaft: 'alleinstehend', kinder: [],
   warmmiete: 450, heizkosten: 0, einkommen: 0, vermoegen: 0,
-  stichtag: new Date('2026-03-01'),
+  stichtag: new Date(2026, 2, 1),
 })!;
 cases.push({ name: 'Regression BG-01 (P2) unverändert = 1.013 €',
   actual: bg01.gesamtAnspruch, expected: 1013, tol: 0.01, quelle: 'welle1-stufe4b-testfaelle.md BG-01' });

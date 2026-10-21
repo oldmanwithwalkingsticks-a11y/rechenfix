@@ -45,7 +45,7 @@ export const MIDIJOB_2026: MidijobParameter = {
   obergrenzeOG: 2000,
   faktorF: 0.6619,
   quelle: "§ 20 Abs. 2 und 2a SGB IV + BMAS-Bekanntmachung zum Faktor F für 2026 (Gemeinsames Rundschreiben der Spitzenverbände)",
-  gueltigAb: new Date("2026-01-01"),
+  gueltigAb: new Date(2026, 0, 1), // W191: lokale Mitternacht (vorher new Date("2026-01-01"))
 };
 
 /**

@@ -8,7 +8,7 @@ import AiExplain from '@/components/rechner/AiExplain';
 import { AffiliateBox } from '@/components/AffiliateBox';
 import CrossLink from '@/components/ui/CrossLink';
 import { clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
-import { isoLokal } from '@/lib/datum-lokal';
+import { isoLokal, parseIsoLokal } from '@/lib/datum-lokal';
 
 // W189: vorher toISOString() (UTC). Kurz nach Mitternacht (bis 01:00 Uhr MEZ bzw. 02:00 Uhr MESZ)
 // stand im Feld „Kündigungsdatum“ noch das gestrige Datum, am 20.10.2026 um 00:30 Uhr der 19.10.2026.
@@ -65,7 +65,7 @@ export default function KuendigungsfristRechner() {
     if (!ergebnis) return null;
     const heute = new Date();
     heute.setHours(0, 0, 0, 0);
-    const kd = new Date(kuendigungsDatum);
+    const kd = parseIsoLokal(kuendigungsDatum); // W191: vorher new Date(iso), westlich von UTC der Vortag
     const la = ergebnis.letzterArbeitstag;
     const totalDays = Math.max(1, Math.floor((la.getTime() - heute.getTime()) / 86400000));
     const kdPos = Math.max(0, Math.min(100, (Math.floor((kd.getTime() - heute.getTime()) / 86400000) / totalDays) * 100));

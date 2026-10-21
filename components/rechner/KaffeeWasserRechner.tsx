@@ -38,6 +38,8 @@ const STAERKE_DELTA: Record<Staerke, number> = { mild: 1, normal: 0, stark: -1 }
 
 const g1 = (n: number): string => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const g0 = (n: number): string => n.toLocaleString('de-DE', { maximumFractionDigits: 0 });
+// W191: die eigene Eingabe so, wie sie im Feld steht (vorher g0: 31,25 g Kaffee erschien als „31 g“, 18,5 g als „19 g“)
+const gE = (n: number): string => n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 
 function effRatio(methode: Methode, staerke: Staerke): number {
   if (methode === 'espresso' || methode === 'coldbrew') return RATIO[methode];
@@ -120,7 +122,19 @@ export default function KaffeeWasserRechner() {
           <select
             id="kaffee-modus"
             value={modus}
-            onChange={e => setModus(e.target.value as Modus)}
+            onChange={e => {
+              // W191: Beim Wechsel das bisherige Ergebnis ins Feld übernehmen (500 ml Wasser → 31,25 g Kaffee),
+              // statt die Zahl in der anderen Einheit stehen zu lassen (vorher: „500 g Kaffee brauchen 8.000 ml“).
+              // Kaffee auf 0,01 g statt der angezeigten 0,1 g, damit der Rückweg wieder genau 500 ml ergibt.
+              const neu = e.target.value as Modus;
+              const m = parseDeutscheZahl(menge);
+              if (neu !== modus && m > 0) {
+                const r = effRatio(methode, staerke);
+                const wert = neu === 'kaffee' ? Math.round((m / r) * 100) / 100 : wasserAusKaffee(m, r);
+                setMenge(wert.toLocaleString('de-DE', { maximumFractionDigits: 2, useGrouping: false }));
+              }
+              setModus(neu);
+            }}
             className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[48px] text-sm"
           >
             <option value="wasser">💧 Wasser vorgeben → Kaffeemenge berechnen</option>
@@ -175,7 +189,7 @@ export default function KaffeeWasserRechner() {
             {istEspresso ? (
               <>
                 <p className="text-white/80 text-sm mb-1">
-                  {g0(eingabeMenge)} g Kaffee-Dosis ergeben
+                  {gE(eingabeMenge)} g Kaffee-Dosis ergeben
                 </p>
                 <p className="text-5xl font-bold">{g1(ergebnis.wert)} g Espresso</p>
                 <p className="text-white/90 text-sm mt-2">Verhältnis 1:{ergebnis.ratio} (Dosis : Ausbeute)</p>
@@ -183,7 +197,7 @@ export default function KaffeeWasserRechner() {
             ) : effModus === 'wasser' ? (
               <>
                 <p className="text-white/80 text-sm mb-1">
-                  {g0(eingabeMenge)} ml Wasser brauchen
+                  {gE(eingabeMenge)} ml Wasser brauchen
                 </p>
                 <p className="text-5xl font-bold">{g1(ergebnis.wert)} g Kaffee</p>
                 <p className="text-white/90 text-sm mt-2">
@@ -193,7 +207,7 @@ export default function KaffeeWasserRechner() {
             ) : (
               <>
                 <p className="text-white/80 text-sm mb-1">
-                  {g0(eingabeMenge)} g Kaffee brauchen
+                  {gE(eingabeMenge)} g Kaffee brauchen
                 </p>
                 <p className="text-5xl font-bold">{g0(ergebnis.wert)} ml Wasser</p>
                 <p className="text-white/90 text-sm mt-2">
@@ -208,11 +222,11 @@ export default function KaffeeWasserRechner() {
             <p className="text-sm text-gray-700 dark:text-gray-300">
               <strong>Rechenweg:</strong>{' '}
               {istEspresso ? (
-                <>{g0(eingabeMenge)} g × {ergebnis.ratio} = {g1(ergebnis.wert)} g Espresso</>
+                <>{gE(eingabeMenge)} g × {ergebnis.ratio} = {g1(ergebnis.wert)} g Espresso</>
               ) : effModus === 'wasser' ? (
-                <>{g0(eingabeMenge)} ml ÷ {ergebnis.ratio} = {g1(ergebnis.wert)} g Kaffee</>
+                <>{gE(eingabeMenge)} ml ÷ {ergebnis.ratio} = {g1(ergebnis.wert)} g Kaffee</>
               ) : (
-                <>{g0(eingabeMenge)} g × {ergebnis.ratio} = {g0(ergebnis.wert)} ml Wasser</>
+                <>{gE(eingabeMenge)} g × {ergebnis.ratio} = {g0(ergebnis.wert)} ml Wasser</>
               )}
             </p>
           </div>
@@ -234,8 +248,8 @@ export default function KaffeeWasserRechner() {
               <div className="px-4 pt-4 pb-1">
                 <h2 className="font-bold text-gray-700 dark:text-gray-200">
                   {effModus === 'wasser'
-                    ? `Kaffeemenge je Methode bei ${g0(eingabeMenge)} ml`
-                    : `Wassermenge je Methode bei ${g0(eingabeMenge)} g`}
+                    ? `Kaffeemenge je Methode bei ${gE(eingabeMenge)} ml`
+                    : `Wassermenge je Methode bei ${gE(eingabeMenge)} g`}
                 </h2>
               </div>
               <div className="overflow-x-auto">
@@ -281,10 +295,10 @@ export default function KaffeeWasserRechner() {
           <ErgebnisAktionen
             ergebnisText={
               istEspresso
-                ? `Kaffee-Wasser-Rechner: ${g0(eingabeMenge)} g Espresso-Dosis = ${g1(ergebnis.wert)} g Ausbeute (1:${ergebnis.ratio})`
+                ? `Kaffee-Wasser-Rechner: ${gE(eingabeMenge)} g Espresso-Dosis = ${g1(ergebnis.wert)} g Ausbeute (1:${ergebnis.ratio})`
                 : effModus === 'wasser'
-                ? `Kaffee-Wasser-Rechner: ${g0(eingabeMenge)} ml Wasser (${METHODE_LABEL[methode]}, 1:${ergebnis.ratio}) = ${g1(ergebnis.wert)} g Kaffee`
-                : `Kaffee-Wasser-Rechner: ${g0(eingabeMenge)} g Kaffee (${METHODE_LABEL[methode]}, 1:${ergebnis.ratio}) = ${g0(ergebnis.wert)} ml Wasser`
+                ? `Kaffee-Wasser-Rechner: ${gE(eingabeMenge)} ml Wasser (${METHODE_LABEL[methode]}, 1:${ergebnis.ratio}) = ${g1(ergebnis.wert)} g Kaffee`
+                : `Kaffee-Wasser-Rechner: ${gE(eingabeMenge)} g Kaffee (${METHODE_LABEL[methode]}, 1:${ergebnis.ratio}) = ${g0(ergebnis.wert)} ml Wasser`
             }
             seitenTitel="Kaffee-Wasser-Rechner"
           />
@@ -294,7 +308,7 @@ export default function KaffeeWasserRechner() {
             eingaben={{
               methode: METHODE_LABEL[methode],
               modus: istEspresso ? 'Dosis → Ausbeute' : effModus === 'wasser' ? 'Wasser → Kaffee' : 'Kaffee → Wasser',
-              menge: `${g0(eingabeMenge)} ${einheit}`,
+              menge: `${gE(eingabeMenge)} ${einheit}`,
               staerke: istEspresso || methode === 'coldbrew' ? '—' : staerke,
             }}
             ergebnis={{

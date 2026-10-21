@@ -153,7 +153,7 @@ export const BAFOEG_AB_2024_08_01: BafoegParameter = {
   maxRueckzahlung: 10010,
   bagatellgrenze: 10,
   quelle: "§§ 12, 13, 13a, 14b, 18, 21, 23, 25, 29, 51 BAföG i.d.F. 29. BAföG-ÄndG v. 23.07.2024, gültig ab 01.08.2024",
-  gueltigAb: new Date("2024-08-01"),
+  gueltigAb: new Date(2024, 7, 1), // W191: lokale Mitternacht (vorher new Date("2024-08-01"))
 };
 
 /**

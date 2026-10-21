@@ -39,6 +39,7 @@ import {
   AFA_DEGRESSIV_STICHTAG_JAHR_GESPERRT,
   WOHNGEBAEUDE_NUTZUNGSDAUER_JAHRE,
   berechneAfa,
+  anschaffungMonatJahr,
 } from '../lib/berechnungen/afa';
 
 type TestCase = {
@@ -352,6 +353,19 @@ const i3 = berechneAfa({
 });
 cases.push(
   { name: 'I-03 GWG k=10.000 (weit über Schwelle): gwgOk = false',  actual: bool(i3.gwgOk), expected: 0 },
+);
+
+// === W191: Anschaffungsdatum in Ortszeit (die CI rechnet auch mit TZ=America/New_York) ===
+const j1 = anschaffungMonatJahr('2025-07-01');
+const j2 = anschaffungMonatJahr('2028-01-01');
+const j3 = anschaffungMonatJahr('');
+cases.push(
+  { name: 'J-01 01.07.2025 → Monat 7 (Fenster 30 %, nicht Juni)',     actual: j1.startMonat, expected: 7 },
+  { name: 'J-01 01.07.2025 → Jahr 2025',                              actual: j1.startJahr, expected: 2025 },
+  { name: 'J-02 01.01.2028 → Monat 1',                                actual: j2.startMonat, expected: 1 },
+  { name: 'J-02 01.01.2028 → Jahr 2028 (linear, nicht Dezember 2027)', actual: j2.startJahr, expected: 2028 },
+  { name: 'J-03 leeres Feld → Januar',                                actual: j3.startMonat, expected: 1 },
+  { name: 'J-03 leeres Feld → 2026',                                  actual: j3.startJahr, expected: 2026 },
 );
 
 // === Ausgabe ===

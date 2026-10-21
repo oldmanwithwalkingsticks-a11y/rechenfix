@@ -1,3 +1,5 @@
+import { parseIsoLokal } from '../datum-lokal';
+
 export type GeburtsArt = 'normal' | 'fruehgeburt' | 'mehrlingsgeburt' | 'behinderung';
 export type Beschaeftigung = 'gesetzlich' | 'privat' | 'minijob' | 'selbststaendig';
 export type MinijobVersicherung = 'eigen' | 'familie';
@@ -55,11 +57,12 @@ function nachgeburtWochen(art: GeburtsArt): number {
 
 export function berechneMutterschutz(eingabe: MutterschutzEingabe): MutterschutzErgebnis | null {
   if (!eingabe.geburtstermin) return null;
-  const et = new Date(eingabe.geburtstermin);
+  // W191: vorher new Date(iso) = UTC-Mitternacht; westlich von UTC lagen alle Daten einen Tag zu früh.
+  const et = parseIsoLokal(eingabe.geburtstermin);
   if (isNaN(et.getTime())) return null;
 
   const hatTatsaechlich = !!eingabe.tatsaechlichesGeburtsdatum;
-  const tatsaechlich = hatTatsaechlich ? new Date(eingabe.tatsaechlichesGeburtsdatum) : null;
+  const tatsaechlich = hatTatsaechlich ? parseIsoLokal(eingabe.tatsaechlichesGeburtsdatum) : null;
   if (tatsaechlich && isNaN(tatsaechlich.getTime())) return null;
 
   const nachWochen = nachgeburtWochen(eingabe.geburtsArt);

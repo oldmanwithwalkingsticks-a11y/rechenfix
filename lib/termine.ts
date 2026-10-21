@@ -361,6 +361,26 @@ export const TERMINE: Termin[] = [
     was: 'Ab heute gilt Anhang Nr. 23e UWG (BGBl. 2026 I Nr. 139, Art. 6; Art. 16 Abs. 1). Im Inkognito-Fenster prüfen, dass Kreditrechner, Leasing-Rechner und Wertverlust-Auto-Rechner in der Anzeige „Achtung! Kreditaufnahme kostet Geld.“ zeigen, auch in Handybreite. Danach diesen Termin entfernen.',
     quelle: 'Welle 157, docs/audit-arbeitspapiere/welle-status-historie.md; scripts/verify-kreditwerbung.ts',
   },
+  {
+    id: 'beg-degression',
+    titel: 'BEG-Heizungsförderung: halbjährliche Kürzung übernehmen',
+    datum: '2027-02-01',
+    vorlaufTage: 21,
+    wiederholungMonate: 6,
+    bereich: 'Gesetzeswerte',
+    was: 'Für Anträge ab diesem Tag sinken die förderfähigen Kosten der ersten Wohneinheit um 750 € (ab 01.02.2027: 28.000 → 27.250 €, halbjährlich weiter bis 22.000 € Ende 2030) und der Klimageschwindigkeitsbonus um 4 Punkte (ab 01.02.2027: 16 → 12 %, ab 01.08.2028 entfällt er). Vorher bei der KfW (Heizungsförderung, Zuschuss 458) prüfen, ob die Stufe so gilt. Dann in lib/berechnungen/beg-foerderung.ts die Werte nach Antragsdatum staffeln, den Wärmepumpen-Rechner und die Texte in lib/rechner-config/wohnen.ts mitziehen, verify-wohnen-p1 ergänzen. Nach der letzten Stufe (01.08.2030) den Termin löschen.',
+    quelle: 'Welle 182 (Kopfkommentar lib/berechnungen/beg-foerderung.ts); BEG-Reform für Anträge ab 21.07.2026, Zusammenfassung oekozentrum.nrw vom 06.08.2026',
+  },
+  {
+    id: 'streaming-preise',
+    titel: 'Streaming-Kosten-Rechner: Preise der Dienste prüfen',
+    datum: '2027-01-20',
+    vorlaufTage: 7,
+    wiederholungMonate: 3,
+    bereich: 'Inhalt',
+    was: 'Die Preise in lib/berechnungen/streaming-kosten.ts mit den Preisseiten der Anbieter vergleichen (Stand 20.10.2026, Welle 182). Spotify hat in den Niederlanden bereits erhöht, eine Preisrunde in Deutschland ist wahrscheinlich. Bei Änderungen Preise und Stand-Kommentar anpassen, die Beispiele in lib/rechner-config/alltag.ts und den Eintrag streaming-kosten-rechner in lib/social/captions.json neu rechnen, danach Bilder nach CLAUDE.md.',
+    quelle: 'Welle 182',
+  },
 ];
 
 /** Normiert auf UTC-Tagesbeginn, damit Zeitzonen keine Off-by-one erzeugen. */

@@ -78,11 +78,13 @@ export function berechneCO2KomponenteNr2b(co2GproKm: number, erstzulassungsjahr:
  * Zulassungsfenster + 10-Jahres-Frist + Maximal-Cap bestätigt durch das
  * 8. KraftStÄndG (Bundestag 04.12.2025, Drucksache 21/2672).
  */
+// W191: lokale Mitternächte wie das Datumsfeld (parseIsoLokal in KfzSteuerRechner.tsx); vorher
+// new Date('YYYY-MM-DD') = UTC-Mitternacht, westlich von UTC endete die Befreiung einen Tag zu früh.
 export const ELEKTRO_BEFREIUNG = {
-  erstzulassungVon: new Date('2011-05-18'),
-  erstzulassungBis: new Date('2030-12-31'),
+  erstzulassungVon: new Date(2011, 4, 18),
+  erstzulassungBis: new Date(2030, 11, 31),
   befreiungsdauerJahre: 10,
-  maxBefreiungBis: new Date('2035-12-31'),
+  maxBefreiungBis: new Date(2035, 11, 31),
 } as const;
 
 /**

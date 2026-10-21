@@ -1,3 +1,5 @@
+import { parseIsoLokal, fristEndeMonate } from '../datum-lokal';
+
 export interface IndexmieteEingabe {
   kaltmiete: number;           // €/Monat
   vpiAlt: number;              // VPI bei letzter Anpassung
@@ -21,10 +23,14 @@ function rund2(n: number): number {
   return Math.round(n * 100) / 100;
 }
 
-function addMonate(isoDatum: string, monate: number): Date {
-  const d = new Date(isoDatum);
-  d.setMonth(d.getMonth() + monate);
-  return d;
+/**
+ * Erster Tag nach einer Frist von `monate` Monaten ab `isoDatum` (der Tag selbst zählt mit, § 187 Abs. 2,
+ * § 188 Abs. 2 und 3 BGB): 21.10.2025 + 12 → 21.10.2026, 29.02.2024 + 12 → 01.03.2025.
+ * W191: vorher new Date(iso) (UTC-Mitternacht, westlich von UTC ein Tag zu früh) plus setMonth.
+ */
+function tagNachFrist(isoDatum: string, monate: number): Date {
+  const ende = fristEndeMonate(parseIsoLokal(isoDatum), monate);
+  return new Date(ende.getFullYear(), ende.getMonth(), ende.getDate() + 1);
 }
 
 function toIso(d: Date): string {
@@ -49,7 +55,7 @@ export function berechneIndexmiete(e: IndexmieteEingabe): IndexmieteErgebnis {
   const erhoehungProzent = kaltmiete > 0 ? rund2((erhoehungAbsolut / kaltmiete) * 100) : 0;
   const erhoehungProJahr = rund2(erhoehungAbsolut * 12);
 
-  const fruehDatum = addMonate(datumLetzteAnpassung, 12);
+  const fruehDatum = tagNachFrist(datumLetzteAnpassung, 12); // § 557b Abs. 2 BGB: ein Jahr unverändert
   const heute = new Date();
   heute.setHours(0, 0, 0, 0);
   fruehDatum.setHours(0, 0, 0, 0);

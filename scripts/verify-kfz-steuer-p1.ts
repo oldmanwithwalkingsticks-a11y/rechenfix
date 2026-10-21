@@ -17,6 +17,9 @@
 //     Elektro-Befreiung 10 J. ab Erstzulassung, längstens 31.12.2035,
 //     Zulassungsfenster 18.05.2011–31.12.2030.
 
+// W191: Erstzulassung in Ortszeit wie das Datumsfeld (parseIsoLokal) und Ausgabe über lokale Getter; vorher
+// new Date('JJJJ-MM-TT') und toISOString(), beides UTC — westlich von UTC endete die Befreiung einen Tag zu früh.
+import { isoLokal } from '../lib/datum-lokal';
 import { berechneKfzSteuer } from '../lib/berechnungen/kfz-steuer';
 import {
   berechneCO2Komponente,
@@ -101,46 +104,46 @@ cases.push({ name: 'Sockel angefangene-100-Regel 1498ccm → 30 €', actual: t7
 // === GRUPPE 3: Elektro-Befreiung § 3d ===
 
 // Innerhalb Förderzeitraum, vor 2025: Befreiungsende = Erstzulassung + 10 Jahre
-const eBefr1 = berechneElektroBefreiungsende(new Date('2024-03-15'));
+const eBefr1 = berechneElektroBefreiungsende(new Date(2024, 2, 15));
 cases.push({
   name: 'Elektro EZ 2024-03-15 → Befreiung bis 2034-03-15',
-  actual: eBefr1 ? eBefr1.toISOString().slice(0, 10) : null,
+  actual: eBefr1 ? isoLokal(eBefr1) : null,
   expected: '2034-03-15',
   quelle: '§ 3d Abs. 1 KraftStG (10 J.)',
 });
 
 // Max-Cap greift: 2028+10J = 2038, aber max 2035-12-31
-const eBefr2 = berechneElektroBefreiungsende(new Date('2028-07-01'));
+const eBefr2 = berechneElektroBefreiungsende(new Date(2028, 6, 1));
 cases.push({
   name: 'Elektro EZ 2028-07-01 → Befreiung bis 2035-12-31 (Cap)',
-  actual: eBefr2 ? eBefr2.toISOString().slice(0, 10) : null,
+  actual: eBefr2 ? isoLokal(eBefr2) : null,
   expected: '2035-12-31',
   quelle: '§ 3d Abs. 1 KraftStG (Max-Cap 31.12.2035)',
 });
 
 // Nach 31.12.2030: keine Befreiung
-const eBefr3 = berechneElektroBefreiungsende(new Date('2031-01-01'));
+const eBefr3 = berechneElektroBefreiungsende(new Date(2031, 0, 1));
 cases.push({
   name: 'Elektro EZ 2031-01-01 → null (außerhalb Förderzeitraum)',
-  actual: eBefr3 === null ? 'null' : (eBefr3 as Date).toISOString(),
+  actual: eBefr3 === null ? 'null' : isoLokal(eBefr3 as Date),
   expected: 'null',
   quelle: '§ 3d Abs. 1 KraftStG (Zulassungs-Stichtag 31.12.2030)',
 });
 
 // Vor 18.05.2011: keine § 3d-Befreiung
-const eBefr4 = berechneElektroBefreiungsende(new Date('2010-01-01'));
+const eBefr4 = berechneElektroBefreiungsende(new Date(2010, 0, 1));
 cases.push({
   name: 'Elektro EZ 2010-01-01 → null (vor 18.05.2011)',
-  actual: eBefr4 === null ? 'null' : (eBefr4 as Date).toISOString(),
+  actual: eBefr4 === null ? 'null' : isoLokal(eBefr4 as Date),
   expected: 'null',
   quelle: '§ 3d Abs. 1 KraftStG (Zulassungs-Beginn 18.05.2011)',
 });
 
 // Genau am Grenzwert: 2030-12-31 → Befreiung bis 2035-12-31 (nicht 2040)
-const eBefr5 = berechneElektroBefreiungsende(new Date('2030-12-31'));
+const eBefr5 = berechneElektroBefreiungsende(new Date(2030, 11, 31));
 cases.push({
   name: 'Elektro EZ 2030-12-31 → Befreiung bis 2035-12-31',
-  actual: eBefr5 ? eBefr5.toISOString().slice(0, 10) : null,
+  actual: eBefr5 ? isoLokal(eBefr5) : null,
   expected: '2035-12-31',
   quelle: '§ 3d Abs. 1 KraftStG (Max-Cap greift vor 10-J-Frist)',
 });
@@ -149,7 +152,7 @@ cases.push({
 
 const tE1 = berechneKfzSteuer({
   zulassung: 'ab-2021', antrieb: 'elektro', hubraum: 0, co2: 0,
-  erstzulassungsdatum: new Date('2024-03-15'),
+  erstzulassungsdatum: new Date(2024, 2, 15),
 })!;
 cases.push({ name: 'Elektro 2024 → befreit=true', actual: tE1.befreit ? 'true' : 'false', expected: 'true', quelle: 'Integration § 3d' });
 cases.push({ name: 'Elektro 2024 → jahresSteuer = 0', actual: tE1.jahresSteuer, expected: 0, quelle: 'Integration § 3d' });
@@ -157,7 +160,7 @@ cases.push({ name: 'Elektro 2024 → befreitBis = 15.03.2034', actual: tE1.befre
 
 const tE2 = berechneKfzSteuer({
   zulassung: 'ab-2021', antrieb: 'elektro', hubraum: 0, co2: 0,
-  erstzulassungsdatum: new Date('2031-01-01'),
+  erstzulassungsdatum: new Date(2031, 0, 1),
 })!;
 cases.push({ name: 'Elektro 2031 → befreit=false', actual: tE2.befreit ? 'true' : 'false', expected: 'false', quelle: 'außerhalb Förderzeitraum' });
 cases.push({ name: 'Elektro 2031 → keineBefreiungGrund = nach-2030', actual: tE2.keineBefreiungGrund ?? '', expected: 'nach-2030', quelle: 'UI-Branching' });

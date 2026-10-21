@@ -11,6 +11,7 @@ import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import { VPI_AKTUELL } from '@/lib/berechnungen/vpi';
+import { parseIsoLokal } from '@/lib/datum-lokal';
 
 // VPI-Default aus zentraler SSOT (Destatis, monatlich aktualisiert).
 // Komma-Notation für deutsches Eingabefeld.
@@ -40,7 +41,7 @@ export default function IndexmieteRechner() {
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fmtProzent = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fmtDatum = (iso: string) => {
-    const d = new Date(iso);
+    const d = parseIsoLokal(iso); // W191: vorher new Date(iso), westlich von UTC der Vortag
     return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
   };
 

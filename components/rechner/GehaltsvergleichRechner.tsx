@@ -120,8 +120,9 @@ export default function GehaltsvergleichRechner() {
         <div className="space-y-5">
           {/* Hauptergebnis */}
           <div className="result-box text-center">
+            {/* W191: vorher „weniger als {perzentil}%“ unter dem Median — bei Perzentil 41 verdienen aber 41 % weniger als Sie, nicht mehr. */}
             <p className="text-white/80 text-sm mb-2">
-              Sie verdienen {ergebnis.perzentil >= 50 ? 'mehr' : 'weniger'} als
+              Sie verdienen mehr als
             </p>
             <p className="text-5xl font-extrabold">{ergebnis.perzentil}%</p>
             <p className="text-white/80 text-sm mt-2">
@@ -222,7 +223,7 @@ export default function GehaltsvergleichRechner() {
               {ergebnis.perzentil >= 75
                 ? `Mit ${fmtE(nBrutto)} € brutto verdienen Sie mehr als ${ergebnis.perzentil}% Ihrer Vergleichsgruppe. Sie gehören zu den Top-${100 - ergebnis.perzentil}% der Verdiener.`
                 : ergebnis.perzentil >= 50
-                  ? `Mit ${fmtE(nBrutto)} € brutto liegen Sie über dem Median Ihrer Vergleichsgruppe. ${fmt(ergebnis.differenz)} € mehr als der Durchschnitt.`
+                  ? `Mit ${fmtE(nBrutto)} € brutto liegen Sie über dem Median Ihrer Vergleichsgruppe. ${fmt(ergebnis.differenz)} € mehr als der Median.`
                   : ergebnis.perzentil >= 25
                     ? `Mit ${fmtE(nBrutto)} € brutto liegen Sie unter dem Median Ihrer Vergleichsgruppe. Eine Gehaltsverhandlung oder ein Jobwechsel könnte sich lohnen.`
                     : `Mit ${fmtE(nBrutto)} € brutto liegen Sie deutlich unter dem Median. Prüfen Sie, ob Ihr Gehalt dem Marktstandard entspricht.`}

@@ -1,8 +1,10 @@
 /**
  * Kalenderdaten in Ortszeit (W189).
  *
- * Alle Nutzer sitzen in Deutschland (Europe/Berlin, MEZ = UTC+1, MESZ = UTC+2). Drei JavaScript-
- * Eigenheiten verschieben dort Kalenderdaten um einen Tag, während Probeläufe in UTC grün bleiben:
+ * Fast alle Nutzer sitzen in Deutschland (Europe/Berlin, MEZ = UTC+1, MESZ = UTC+2). Drei JavaScript-
+ * Eigenheiten verschieben dort Kalenderdaten um einen Tag, während Probeläufe in UTC grün bleiben.
+ * Westlich von UTC (W191, z. B. New York) ist `new Date('YYYY-MM-DD')` sogar noch der Vortag, also auch
+ * mit den Datumsgettern ein Tag zu früh; die CI prüft deshalb auch mit TZ=America/New_York:
  *
  *   1. `new Date('YYYY-MM-DD')` ist UTC-Mitternacht, also 01:00 bzw. 02:00 Ortszeit. Vergleiche mit
  *      lokalen Mitternächten (`new Date(j, m, t)`) scheitern am ersten Tag, und `setDate`/`setMonth`

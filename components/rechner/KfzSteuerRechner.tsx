@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { berechneKfzSteuer, type Antriebsart, type Zulassungszeitraum } from '@/lib/berechnungen/kfz-steuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { parseIsoLokal } from '@/lib/datum-lokal';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -27,7 +28,8 @@ export default function KfzSteuerRechner() {
 
   const erstzulassungsdatum = useMemo(() => {
     if (antrieb !== 'elektro' || !erstzulassung) return undefined;
-    const d = new Date(erstzulassung);
+    // W191: vorher new Date(erstzulassung) = UTC-Mitternacht, westlich von UTC ein Tag zu früh (Befreiung bis 14.03. statt 15.03.).
+    const d = parseIsoLokal(erstzulassung);
     return isNaN(d.getTime()) ? undefined : d;
   }, [antrieb, erstzulassung]);
 

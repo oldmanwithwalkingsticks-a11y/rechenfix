@@ -3,6 +3,7 @@ import {
   berechneCO2KomponenteNr2b,
   co2SchwelleNr2b,
   berechneElektroBefreiungsende,
+  ELEKTRO_BEFREIUNG,
   SOCKEL_PRO_100CCM,
 } from './kfz-steuer-parameter';
 
@@ -96,7 +97,7 @@ export function berechneKfzSteuer(eingabe: KfzSteuerEingabe): KfzSteuerErgebnis 
         };
       }
       // Erstzulassung außerhalb Förderzeitraum → keine Befreiung nach § 3d
-      const vorFoerder = erstzulassungsdatum < new Date('2011-05-18');
+      const vorFoerder = erstzulassungsdatum < ELEKTRO_BEFREIUNG.erstzulassungVon; // W191: vorher new Date('2011-05-18')
       return {
         jahresSteuer: 0, // Hubraum 0 bei E-Autos → trotzdem keine Steuer hier
         monatsSteuer: 0,

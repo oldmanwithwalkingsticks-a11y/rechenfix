@@ -159,7 +159,7 @@ export const AFBG_AB_2024_08_01: AfbgParameter = {
     gruenderErlassJahreMin: 3,
   },
   quelle: "§§ 10, 12, 13, 13b, 17b AFBG i.d.F. des 29. BAföG-ÄndG v. 23.07.2024, gültig ab 01.08.2024 — Bedarfssätze aus BMBF aufstiegs-bafoeg.de",
-  gueltigAb: new Date("2024-08-01"),
+  gueltigAb: new Date(2024, 7, 1), // W191: lokale Mitternacht (vorher new Date("2024-08-01"))
 };
 
 /**

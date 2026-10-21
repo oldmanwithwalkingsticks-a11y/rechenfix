@@ -87,6 +87,13 @@ export default function BuergergeldRechner() {
 
   const stichtag = useMemo(() => parseMonat(stichtagMonat), [stichtagMonat]);
 
+  // W191: Ab Juli 2026 gibt es oben das Feld „Alter Antragsteller/in“ (für den Vermögensfreibetrag). Der
+  // Sonderstatus fragte das Alter bisher ein zweites Mal (Startwert 22 statt 35): Wer oben 30 eintrug und
+  // unten nichts änderte, bekam den Freibetrag für unter 25-Jährige. Jetzt zählt das Feld oben; das
+  // eigene Feld im Sonderstatus bleibt nur für Bezugsmonate vor Juli 2026, wo es oben keins gibt.
+  const altersfeldOben = getAktuelleBuergergeldParameter(stichtag).vermoegen.modus === 'alter_gestaffelt';
+  const jugendAlter = altersfeldOben ? alterAntragsteller : jugendlicherAlter;
+
   const erwachseneAlter = useMemo(() => {
     const a = parseInt(alterAntragsteller) || 0;
     if (bg === 'alleinstehend') return [a];
@@ -103,12 +110,12 @@ export default function BuergergeldRechner() {
       vermoegen: parseDeutscheZahl(vermoegen),
       mehrbedarfe: mehrbedarfeInput,
       jugendlicherStatus: jugendlicherStatus !== 'none'
-        ? { alter: parseInt(jugendlicherAlter) || 0, status: jugendlicherStatus }
+        ? { alter: parseInt(jugendAlter) || 0, status: jugendlicherStatus }
         : undefined,
       stichtag,
       erwachseneAlter,
     }),
-    [bg, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfeInput, jugendlicherStatus, jugendlicherAlter, stichtag, erwachseneAlter]
+    [bg, kinder, warmmiete, heizkosten, einkommen, vermoegen, mehrbedarfeInput, jugendlicherStatus, jugendAlter, stichtag, erwachseneAlter]
   );
 
   const fmt = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -351,7 +358,14 @@ export default function BuergergeldRechner() {
               ))}
             </select>
           </div>
-          {jugendlicherStatus !== 'none' && (
+          {jugendlicherStatus !== 'none' && altersfeldOben && (
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              Alter: {parseInt(alterAntragsteller) || 0} Jahre, aus dem Feld „Alter {bg === 'alleinstehend' ? 'Antragsteller/in' : 'Partner/in 1'}“ oben.
+              Unter 25 → Grundfreibetrag {params.einkommensfreibetrag.jugendlicherFreibetrag_unter25} €/Monat.
+              Ab 25 → im Freiwilligendienst {params.einkommensfreibetrag.jugendlicherFreibetrag_ab25} €/Monat, sonst regulär.
+            </p>
+          )}
+          {jugendlicherStatus !== 'none' && !altersfeldOben && (
             <div>
               <label htmlFor="buergergeld-jugend-alter" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Alter des Antragstellers
@@ -649,7 +663,7 @@ export default function BuergergeldRechner() {
                   <div className="flex justify-between px-4 py-2 text-sm">
                     {/* W183: ab 25 gilt Abs. 2b nur im Freiwilligendienst, sonst der reguläre Freibetrag. */}
                     <span className="pl-4 text-xs text-gray-600 dark:text-gray-400">
-                      {(parseInt(jugendlicherAlter) || 0) >= 25 && jugendlicherStatus !== 'freiwilligendienst'
+                      {(parseInt(jugendAlter) || 0) >= 25 && jugendlicherStatus !== 'freiwilligendienst'
                         ? 'abzgl. Freibetrag § 11b Abs. 2 und 3 SGB II (regulär, ab 25)'
                         : 'abzgl. Freibetrag § 11b Abs. 2b und 3 SGB II'}
                     </span>

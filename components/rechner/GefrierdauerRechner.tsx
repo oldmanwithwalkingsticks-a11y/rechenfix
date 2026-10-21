@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
-import { addMonateAnteilig } from '@/lib/datum-lokal';
+import { addMonateAnteilig, parseIsoLokal } from '@/lib/datum-lokal';
 
 // ────────────────────────────────────────────────────────────────────────────
 // Daten
@@ -308,7 +308,8 @@ export default function GefrierdauerRechner() {
   let ampel: 'gruen' | 'gelb' | 'rot' = 'gruen';
 
   if (mounted && lm && vp && einfrierDatum) {
-    const einfrDate = new Date(einfrierDatum);
+    // W191: vorher new Date(einfrierDatum) = UTC-Mitternacht, westlich von UTC der Vortag.
+    const einfrDate = parseIsoLokal(einfrierDatum);
     const minMonate = lm.minMonate * vp.faktor;
     const maxMonate = lm.maxMonate * vp.faktor;
     haltbarBisMin = addMonths(einfrDate, minMonate);
@@ -492,7 +493,7 @@ export default function GefrierdauerRechner() {
 
           {/* Haltbarkeits-Balken */}
           <HaltbarkeitsBalken
-            einfrierDatum={new Date(einfrierDatum)}
+            einfrierDatum={parseIsoLokal(einfrierDatum)}
             haltbarBisMin={haltbarBisMin}
             haltbarBisMax={haltbarBisMax}
           />

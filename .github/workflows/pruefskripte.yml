@@ -1,6 +1,8 @@
 # Welle 186: alle Prüfskripte (npm run verify:alle) bei jedem Push auf main und täglich,
-# je einmal in deutscher Zeit und in UTC. Ein roter Lauf blockiert kein Deploy (Vercel baut
-# unabhängig davon); GitHub meldet ihn per E-Mail. Siehe CLAUDE.md, Abschnitt „Prüfskripte“.
+# je einmal in deutscher Zeit und in UTC. Welle 191: dazu New York — westlich von UTC ist
+# new Date('JJJJ-MM-TT') noch der Vortag, das sieht weder Berlin noch UTC.
+# Ein roter Lauf blockiert kein Deploy (Vercel baut unabhängig davon); GitHub meldet ihn per E-Mail.
+# Siehe CLAUDE.md, Abschnitt „Prüfskripte“.
 name: Prüfskripte
 
 on:
@@ -25,12 +27,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tz: [Europe/Berlin, UTC]
+        tz: [Europe/Berlin, UTC, America/New_York]
     env:
       TZ: ${{ matrix.tz }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # Welle 191: v7 statt v4 (läuft auf Node 24; v4 lief auf Node 20, GitHub warnte)
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm

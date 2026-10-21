@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import {
   berechneAfa,
+  anschaffungMonatJahr,
   WOHNGEBAEUDE_SATZ_PROZENT,
   SAMMELPOSTEN_JAHRE,
   type AfaMethode,
@@ -23,9 +24,8 @@ export default function AfaRechner() {
   const [datum, setDatum] = useState<string>('2026-01-01');
 
   const result = useMemo(() => {
-    const startDate = new Date(datum || '2026-01-01');
-    const startMonat = isNaN(startDate.getTime()) ? 1 : startDate.getMonth() + 1;
-    const startJahr = isNaN(startDate.getTime()) ? 2026 : startDate.getFullYear();
+    // W191: vorher new Date(datum) (UTC-Mitternacht), westlich von UTC einen Monat zu früh am Monatsersten.
+    const { startMonat, startJahr } = anschaffungMonatJahr(datum);
     const ergebnis = berechneAfa({
       anschaffungskosten: parseDeutscheZahl(kosten) || 0,
       nutzungsdauerJahre: parseDeutscheZahl(nutzungsdauer) || 1,

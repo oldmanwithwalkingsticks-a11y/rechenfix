@@ -2311,7 +2311,7 @@ export const kochenRechner: RechnerConfig[] = [
   },
   {
     slug: 'kaffee-wasser-rechner',
-    letzteAktualisierung: '2026-07-01',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Kaffee-Wasser-Rechner',
     beschreibung: 'Wie viel Kaffeepulver auf wie viel Wasser? Methode wählen, Menge eingeben — die passende Dosierung nach dem Golden Ratio berechnen.',
     kategorie: 'Kochen & Ernährung',

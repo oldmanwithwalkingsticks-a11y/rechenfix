@@ -167,11 +167,33 @@ async function main(): Promise<void> {
   f('EEG: 01.08.2026 00:30 → 7,70 ct', getEegSatz(new Date(2026, 7, 1, 0, 30)).bis10kWp_teil, 7.7);
   f('EEG: 31.07.2026 23:30 → 7,78 ct', getEegSatz(new Date(2026, 6, 31, 23, 30)).bis10kWp_teil, 7.78);
 
-  // --- Kontrolle: Mutterschutz rechnet konsistent mit UTC-Mitternacht und bleibt richtig ---
+  // --- Kontrolle: Mutterschutz (seit W191 mit parseIsoLokal statt UTC-Mitternacht) bleibt richtig ---
   const mu = berechneMutterschutz({ geburtstermin: '2026-04-10', geburtsArt: 'normal', tatsaechlichesGeburtsdatum: '', nettoGehalt: 2000, beschaeftigung: 'gesetzlich' })!;
   f('Mutterschutz ET 10.04.2026: Beginn 27.02.2026 (über 29.03.)', tag(mu.beginn), '2026-02-27');
   f('Mutterschutz ET 10.04.2026: Ende 05.06.2026', tag(mu.ende), '2026-06-05');
   f('Mutterschutz ET 10.04.2026: 99 Tage', mu.gesamtTage, 99);
+
+  // --- W191: kein new Date('JJJJ-MM-TT') im Seitencode. Das ist UTC-Mitternacht und westlich von UTC
+  // (z. B. New York) noch der Vortag; Kalenderdaten über parseIsoLokal bzw. new Date(j, m, t). app/api
+  // läuft nur auf dem Server (UTC) und bleibt außen vor. ---
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+  const isoLiteral = /new Date\(\s*['"`]\d{4}-\d{2}-\d{2}['"`]\s*\)/;
+  const treffer: string[] = [];
+  const durchsuche = (ordner: string): void => {
+    for (const e of fs.readdirSync(ordner, { withFileTypes: true })) {
+      const p = path.join(ordner, e.name);
+      if (e.isDirectory()) {
+        if (p !== path.join('app', 'api') && e.name !== 'node_modules') durchsuche(p);
+      } else if (/\.(ts|tsx)$/.test(e.name)) {
+        // Kommentare zählen nicht (dort steht oft, was vorher falsch war)
+        const code = fs.readFileSync(p, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+        if (isoLiteral.test(code)) treffer.push(p);
+      }
+    }
+  };
+  for (const ordner of ['lib', 'components', 'app']) durchsuche(ordner);
+  f("Seitencode ohne new Date('JJJJ-MM-TT')", treffer.join(', ') || 'keine Fundstelle', 'keine Fundstelle');
 
   let rot = 0;
   for (const fall of faelle) {

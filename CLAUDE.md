@@ -291,6 +291,7 @@ Datumsfelder liefern `YYYY-MM-DD`. `new Date('2026-07-01')` ist UTC-Mitternacht,
 - Monate addieren mit `addMonateLokal` (Monatsende gekappt, § 188 Abs. 3 BGB), den letzten Tag einer Monatsfrist mit `fristEndeMonate` bestimmen. Nie `setMonth` auf einem Kalenderdatum: 31.05. + 1 Monat wird sonst der 01.07.
 - Tage über den Kalender addieren (`new Date(j, m, t + n)`), nicht über `n × 86.400.000 ms`: über die Zeitumstellung landet das auf 23:00 Uhr des Vortags.
 - Prüfskripte zu Datumsrechnern auch mit `TZ=Europe/Berlin` laufen lassen; neue Fälle gehören in `scripts/verify-datum-zeitzone.ts`, das die Zeitzone selbst setzt.
+- Seit Welle 191 auch westlich von UTC: Dort ist `new Date('2026-07-01')` noch der 30.06. Kein `new Date('JJJJ-MM-TT')` im Seitencode (`lib/`, `components/`, `app/` ohne `app/api`), auch nicht für Konstanten und nicht in Prüfskripten als Eingabe; `verify-datum-zeitzone` sucht danach. Die CI (`.github/workflows/pruefskripte.yml`) rechnet `verify:alle` in `Europe/Berlin`, `UTC` und `America/New_York`.
 
 ### SSOT-Parameter-Lib-Muster (seit Prompt 121)
 

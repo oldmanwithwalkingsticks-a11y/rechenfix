@@ -1457,7 +1457,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'gehaltsvergleich',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-21',
     titel: 'Gehaltsvergleich',
     beschreibung: 'Vergleichen Sie Ihr Gehalt mit dem Durchschnitt Ihrer Berufsgruppe, Ihres Bundeslandes und Ihrer Altersgruppe.',
     kategorie: 'Finanzen',

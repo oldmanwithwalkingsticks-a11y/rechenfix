@@ -39,7 +39,7 @@ export const MIDIJOB_OBERGRENZE_MONAT = 2_000;
  * für Abwärts-Kompatibilität — neue Konsumenten sollten direkt
  * `getAktuelleMidijobParameter().faktorF` verwenden.
  */
-export const FAKTOR_F_2026 = getAktuelleMidijobParameter(new Date('2026-06-15')).faktorF;
+export const FAKTOR_F_2026 = getAktuelleMidijobParameter(new Date(2026, 5, 15)).faktorF;
 
 /**
  * Untergrenze des Midijob-Übergangsbereichs = Geringfügigkeitsgrenze G + 0,01 €.

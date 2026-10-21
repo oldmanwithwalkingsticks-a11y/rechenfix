@@ -54,6 +54,8 @@
  *     geprüft; die Lib geht davon aus, dass es erfüllt ist
  */
 
+import { parseIsoLokal } from '../datum-lokal';
+
 /** § 7 Abs. 5a Satz 4 EStG — degressiver Satz für Wohngebäude: 5 % vom jeweiligen Restwert. */
 export const WOHNGEBAEUDE_SATZ_PROZENT = 5;
 
@@ -198,6 +200,18 @@ export interface AfaErgebnis {
  * Reine Wert-Funktion: keine Validierung negativer Werte (Component clampt
  * Eingabe-Felder via `parseDeutscheZahl || 0`).
  */
+/**
+ * Anschaffungsmonat und -jahr aus dem Datumsfeld ('YYYY-MM-DD'); leer oder ungültig → Januar 2026.
+ * W191: vorher in AfaRechner.tsx mit new Date(iso) (UTC-Mitternacht). Westlich von UTC (z. B. New York)
+ * fiel der Monatserste damit in den Vormonat: 01.07.2025 wurde Juni (linear statt 30 %), 01.01.2028
+ * wurde Dezember 2027 (30 % statt linear).
+ */
+export function anschaffungMonatJahr(iso: string): { startMonat: number; startJahr: number } {
+  const d = parseIsoLokal(iso || '2026-01-01');
+  if (isNaN(d.getTime())) return { startMonat: 1, startJahr: 2026 };
+  return { startMonat: d.getMonth() + 1, startJahr: d.getFullYear() };
+}
+
 export function berechneAfa(eingabe: AfaEingabe): AfaErgebnis {
   const k = eingabe.anschaffungskosten;
   const nd = Math.max(1, Math.round(eingabe.nutzungsdauerJahre));

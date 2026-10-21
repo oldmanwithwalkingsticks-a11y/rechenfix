@@ -27,6 +27,20 @@ export type FeedbackEntry = {
 
 export const FEEDBACK_LOG: FeedbackEntry[] = [
   {
+    id: '2026-10-20-01',
+    datumAnfrage: '2026-10-20',
+    datumUmsetzung: '2026-10-21',
+    status: 'umgesetzt',
+    bereich: 'mathe/bruchrechner',
+    wunsch: 'Brüche finden, die zwischen zwei Brüchen liegen',
+    kommentar:
+      'Neuer Reiter „Brüche dazwischen“: Der Rechner findet 1 bis 20 Brüche ' +
+      'zwischen zwei Brüchen — über den Hauptnenner und, wenn zwischen den ' +
+      'Zählern kein Platz ist, eine zusätzliche Erweiterung — mit Rechenweg ' +
+      'und dem schnellen Weg über den Mediant. Beispiel: Zwischen 1/11 und ' +
+      '1/9 liegen 19/198 und 10/99.',
+  },
+  {
     id: '2026-09-28-01',
     datumAnfrage: '2026-09-28',
     datumUmsetzung: '2026-09-30',
