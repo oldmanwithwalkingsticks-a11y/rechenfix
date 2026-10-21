@@ -6,6 +6,58 @@
 
 ---
 
+## 21.10.2026 — Welle 193: Social-Kachel `prozentrechner` — „%“ sichtbar — ✅ ABGESCHLOSSEN 21.10.2026
+
+**Anlass** (Fund bei der Prüfung von Welle 192, älter): Das Icon des Prozentrechners ist das Textzeichen `%`
+(`lib/rechner-config/alltag.ts`), kein Emoji; es ist das einzige der 206 Icons mit nur Zeichen unter U+2000. Segoe UI
+Emoji zeichnet „%“ weiß mit hellgrauer Kontur. Auf dem cremefarbenen Grund der Kachel
+`public/social-posts/prozentrechner.png` (255, 248, 225) war es kaum zu sehen, so seit Juni 2026 (`74b8e56`). Im
+Hochformat (schwarzer Grund) ist es gut sichtbar.
+
+**Änderungen** (Vorlage `_lokal/welle193-prozent-kachel.mjs`: 3 Ersetzungen in `scripts/social-image-builder.py`, nicht
+committet):
+- **`_ist_textzeichen`:** wahr, wenn alle Zeichen unter U+2000 liegen.
+- **`render_textzeichen`:** zeichnet das Zeichen im fetten Textfont (Arial Bold) in der Akzentfarbe der Kategorie, mit
+  Rand und derselben Randprüfung (`_beruehrt_rand`) wie bei den Emojis, zugeschnitten und auf 200 px wie die Emojis.
+- **Aufruf in `render_post`** (nur die quadratische Kachel): Textzeichen über `render_textzeichen`, sonst wie bisher
+  `render_emoji`.
+- **Layout-Kennung** `quadrat-3`: Damit galten alle 206 Kacheln als veraltet.
+
+**Zahlen:** 1 Kachel neu (`prozentrechner`), 205 byte-gleich; Hochformate und Videos unverändert. Manifest 207 Zeilen
+geändert: 206 × `"layout": "quadrat-3"`, 1 × neuer SHA-256.
+
+**Bewusst nicht geändert:**
+- **Hochformat und Video:** Auf schwarzem Grund ist das weiße „%“ gut sichtbar.
+- **Icon auf der Website:** `%` bleibt; dort steht es als Text in der Seitenschrift.
+- **Bereits gepostete Beiträge** behalten ihr altes Bild.
+- `lib/social/captions.json`, `queue.json`, `kategorie-farben.json`, `lib/social/*.ts`, die Cron-Routen, die
+  KV-Einträge, `scripts/build-tiktok-videos.mjs`.
+
+**Abweichungen und Funde:** Keine Abweichung von den Sollwerten.
+
+**Gates:**
+- Phase 0 an `9ce2cf7`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `9ce2cf7`, `6057ecf`,
+  `f6db834` (Welle 192). Greps `scripts/social-image-builder.py:1`, dann keine Ausgabe. `verify:alle` 85/85, Exit 0.
+  Pillow `12.2.0`, „Noto da“, „Snapshot (206 Rechner)“. Drei `--check` je Exit 0, „Aktuell: 206“, „Veraltet: 0“; Videos
+  „Aktuell: 206 · Veraltet: 0“.
+- Phase 1: „OK — 3 Ersetzungen in 1 Dateien.“, Exit 0; `git status` genau ` M scripts/social-image-builder.py`.
+- Phase 2: `verify:alle` 85/85, Exit 0. Greps `:1` (`quadrat-3`), `:2` (`render_textzeichen`), `:2`
+  (`_ist_textzeichen`), keine Ausgabe (`"quadrat-2"`), `:1` (`"hochformat-2"`). `npm run lint` Exit 0, keine Zeile
+  „problems“.
+- Phase 3: „Snapshot (206 Rechner)“. `--check` Exit 1, „Aktuell: 0“, „Veraltet: 206“, „Failed: 0“, „geändert: layout“
+  206. `--stale` Exit 0, „Generated: 206“, „Skipped: 0“, „Aktuell: 0“, „Failed: 0“.
+- Phase 4: drei `--check` je Exit 0, 206/0. `git status` genau ` M lib/social/kacheln-manifest.json`,
+  ` M public/social-posts/prozentrechner.png`, ` M scripts/social-image-builder.py`. Manifest `207	207`, grep 206 und 1.
+  Angesehen: oben großes, fettes „%“ in Orange wie „25% von 200 = 50“, darunter unverändert „RECHENBEISPIEL“,
+  „Prozentrechner“, „25% von 200 = 50“ und die Fußzeile; vorher weiß, kaum zu sehen.
+- Phase 5: `npm run build` Rückgabewert 0, 271 Seiten.
+- Phase 6: A `git diff --cached --name-only` 1; B 2, danach `git status` leer.
+
+**Commits:** A `2d669cc` (Bildgenerator), B `bbab70a` (Manifest und Kachel). C ist dieser Doku-Commit. Die Live-Probe
+macht Karsten.
+
+---
+
 ## 21.10.2026 — Welle 192: Social-Kacheln — Emoji nicht mehr abgeschnitten; TikTok-Videos ohne Blinken — ✅ ABGESCHLOSSEN 21.10.2026
 
 **Anlass:**
