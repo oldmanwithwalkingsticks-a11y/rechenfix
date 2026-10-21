@@ -6,6 +6,86 @@
 
 ---
 
+## 21.10.2026 — Welle 195: Kindergeld-Rechner — Antrag nach geltendem Recht, Ausblick auf das Kindergeld ohne Antrag ab 2027 — ✅ ABGESCHLOSSEN 21.10.2026
+
+**Anlass** (Susannes rechenfix-Lauf vom 21.10.2026, QS01, dort als „nicht Gegenstand dieses Laufs“ vermerkt; Prüfung
+durch Chat-Claude am Regelungstext, `_lokal/kindergeld-2027-pruefung.md`, nicht committet):
+- **BGBl. 2026 I Nr. 307**, „Gesetz zur Einführung eines antragslosen Kindergeldes“, verkündet 20.10.2026, in Kraft
+  01.01.2027 (Art. 4). Neu ist § 67 Abs. 2 EStG: „Die Familienkasse kann in den Fällen des § 69 Satz 3 auf einen
+  Antrag verzichten.“ Gemeint ist der Fall, dass das Bundeszentralamt für Steuern nach einer Geburt eine neue Steuer-ID
+  vergibt und die Daten meldet. Neu sind außerdem § 64 Abs. 4 und Datenabrufe. Unverändert bleiben die Beträge (§ 66),
+  Kinderfreibetrag und Günstigerprüfung sowie § 70 (6 Monate rückwirkend).
+- **Praktischer Start laut Bundesregierung** (Seite „Kindergeld ohne Antrag“, 25.09.2026): ab Frühjahr 2027 für
+  Familien, die bereits Kindergeld beziehen, ab Ende 2027 auch für erste Kinder.
+- **Schon vor dem Gesetz ungenau:** Die FAQ nannte den schriftlichen Antrag als Regel; nach dem geltenden § 67 Satz 1
+  EStG ist der elektronische Antrag die Regel, schriftlich mit eigenhändiger Unterschrift die Ausnahme. FAQ und
+  Checkliste verlangten die Geburtsurkunde; die Familienkasse („Nachweise und Bescheinigungen einreichen“) braucht bei
+  Kindern unter 18 im Regelfall nur die Steuer-IDs von Elternteil und Kind, eine Kopie der Geburtsurkunde nur bei
+  Geburt oder Wohnsitz des Kindes im Ausland. Für die „Geburtskinderdienste“ der Tipp-Box gibt es keinen Beleg.
+
+**Änderungen** (`lib/rechner-config/finanzen.ts`, Eintrag `kindergeld-rechner`, und `lib/termine.ts`; Vorlage
+`_lokal/welle195-kindergeld.mjs`: 9 Ersetzungen in 2 Dateien, nicht committet):
+- **Abschnitt „Was sich 2026 ändert — und was bleibt“:** endete mit den 4 Euro mehr ohne neuen Antrag → neuer Absatz
+  „Ab 2027: Kindergeld teils ohne Antrag.“ mit Gesetz, Auslöser (§ 67 Abs. 2, § 69 EStG), Startterminen nach Angaben
+  der Bundesregierung, ohne Anspruch auf die Zahlung ohne Antrag und mit dem Hinweis, dass die Höhe gleich bleibt.
+- **Direktvergleich „Antrag nötig“:** „ja, einmalig bei der Familienkasse“ → „ja, einmalig bei der Familienkasse (ab
+  2027 bei Neugeborenen teils ohne Antrag)“.
+- **Checkliste, Antrag:** „(online oder schriftlich)“ → „in der Regel online, schriftlich mit eigenhändiger
+  Unterschrift ebenfalls möglich“.
+- **Checkliste, Geburtsurkunde:** „Geburtsurkunde des Kindes beifügen.“ → nur, wenn das Kind im Ausland geboren wurde
+  oder dort lebt (Kopie, kein Original).
+- **Checkliste, neuer letzter Punkt:** ab 2027 kann die Familienkasse bei Neugeborenen ohne Antrag zahlen; kommt nach
+  der Geburt kein Bescheid, den Antrag selbst stellen.
+- **Tipp-Box:** Satz zu den „Geburtskinderdiensten“ entfernt → Satz zu § 67 Abs. 2 EStG ab 01.01.2027 angehängt
+  (Familienkasse entscheidet selbst; ohne Bescheid Antrag wie bisher).
+- **FAQ „Wie beantrage ich Kindergeld?“:** „schriftlich …, auch online“ mit Geburtsurkunde → online als Regel,
+  schriftlich mit Unterschrift möglich (§ 67 EStG), Steuer-IDs und IBAN, Geburtsurkunde nur bei Auslandsbezug,
+  6 Monate rückwirkend (§ 70 Abs. 1 EStG), Ausblick auf 2027 mit Startterminen nach Angaben der Bundesregierung. Die
+  Antwort steht damit auch im FAQ-JSON-LD.
+- **Quellen:** drei → sieben, neu § 67 EStG, § 70 EStG, BGBl. 2026 I Nr. 307 und Familienkasse „Nachweise und
+  Bescheinigungen“.
+- **`letzteAktualisierung`:** `2026-10-20` → `2026-10-21`.
+- **`lib/termine.ts`:** neuer Einmaltermin `kindergeld-antragslos` am 01.03.2027 (Vorlauf 14 Tage, Bereich Inhalt):
+  nachsehen, ob und für wen das Verfahren läuft, und die Texte nachziehen. Er bleibt als ÜBERFÄLLIG stehen, bis er
+  entfernt oder auf den Start für erste Kinder verschoben wird.
+
+**Bewusst nicht geändert:**
+- **Beträge und Rechnung:** Das Gesetz ändert sie nicht; `components/rechner/KindergeldRechner.tsx` und
+  `lib/berechnungen/kindergeld.ts` unverändert.
+- **Warnung zur 6-Monats-Frist und Statistik „max. 6 Monate“:** stimmen weiter, § 70 ist unverändert.
+- **§ 64 Abs. 4 EStG:** Die Familienkasse wählt den Berechtigten nur im antragslosen Fall aus; für den Rechner ohne
+  Belang.
+- **Kein Text zu den Voraussetzungen der zweiten Stufe:** Wohnsitz, Arbeit im Inland und IBAN stehen nur auf der Seite
+  der Bundesregierung, nicht im Gesetz.
+- **Starttermine** sind als „nach Angaben der Bundesregierung“ gekennzeichnet; der Termin am 01.03.2027 holt sie nach.
+- `lib/social/captions.json`, die Blogartikel, die übrigen Rechner.
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- Die Messungen aus dem Probelauf der Vorlage (CRLF-Dateien und Abbruch beim zweiten Lauf, `verify:alle` in vier
+  Zeitzonen, `check-contentbloecke-struktur`, Quellen-Adressen) habe ich in diesem Lauf nicht wiederholt.
+- Nachgesehen habe ich die gebaute Seite `.next/server/app/finanzen/kindergeld-rechner.html`: Die neuen Texte stehen
+  drin, die neue FAQ-Antwort auch im FAQ-JSON-LD; „Geburtskinderdienste“ und „Kindergeld beantragen Sie schriftlich“
+  kommen nicht mehr vor; `recht.bund.de/bgbl/1/2026/307/VO.html` ist verlinkt. Die Live-Probe macht Karsten.
+
+**Gates:**
+- Phase 0 an `6faf8b8`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `6faf8b8`, `2223910`
+  (Welle 194), darunter `8d174c2`. Greps `lib/rechner-config/finanzen.ts:1` (`Geburtskinderdienste`),
+  `lib/rechner-config/finanzen.ts:1` (`Kindergeld beantragen Sie schriftlich`), keine Ausgabe
+  (`kindergeld-antragslos`). `verify:alle` 85/85, Exit 0.
+- Phase 1: „OK — 9 Ersetzungen in 2 Dateien.“, Exit 0; `git status` genau ` M lib/rechner-config/finanzen.ts` und
+  ` M lib/termine.ts`; `diff --stat` finanzen.ts 19 Zeilen (12 +, 7 −, darin das Datum), termine.ts 9 +.
+- Phase 2: `verify:alle` 85/85, Exit 0. Greps keine Ausgabe (`Geburtskinderdienste`), keine Ausgabe (`Kindergeld
+  beantragen Sie schriftlich`), `finanzen.ts:2` und `termine.ts:2` (`BGBl. 2026 I Nr. 307`), `finanzen.ts:2`
+  (`§ 67 Abs. 2 EStG`), `finanzen.ts:1` (`nachweise-einreichen`), `termine.ts:1` (`id: 'kindergeld-antragslos'`);
+  `letzteAktualisierung: '2026-10-21'`. `check-termine` Exit 0. `npm run lint` Exit 0, keine Zeile „problems“.
+- Phase 3: `npm run build` Rückgabewert 0, 271 Seiten; danach `git status` weiter nur die beiden Dateien.
+- Phase 4: `git add`, `git diff --cached --name-only` 2.
+
+**Commits:** A `bede261` (`finanzen.ts`, `termine.ts`). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 21.10.2026 — Welle 194: Offline-Nutzung — Abschalten löscht auch im Randfall alles — ✅ ABGESCHLOSSEN 21.10.2026
 
 **Anlass** (Browsermessung vom 21.10.2026 zu Fund 3 aus Susannes rechenfix-Lauf vom 21.10.; im Register von
