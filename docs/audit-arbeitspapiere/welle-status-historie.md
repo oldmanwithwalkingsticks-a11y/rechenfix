@@ -6,6 +6,109 @@
 
 ---
 
+## 21.10.2026 — Welle 191: Folgefunde — Kalenderdaten westlich von UTC, Gehaltsvergleich, Bürgergeld-Alter, Kaffee-Wasser, Termine, Feedback-Eintrag — ✅ ABGESCHLOSSEN 21.10.2026
+
+**Anlass:**
+- **Kalenderdaten westlich von UTC** (Funde aus Welle 183 und Welle 189, Historie `ad3c0e7`): `new Date('2026-07-01')`
+  ist UTC-Mitternacht, in New York noch der 30.06., 20:00 Uhr. Welle 189 hatte Deutschland abgesichert
+  (`lib/datum-lokal.ts`); westlich von UTC rechneten mehrere Rechner weiter einen Tag zu früh. `verify:alle` mit
+  `TZ=America/New_York` vorher 81/85 (rot: `verify-buergergeld-p3`, `-p4`, `verify-kfz-steuer-p1`,
+  `verify-mutterschutz`).
+- **Gehaltsvergleich** (Live-Probe 182): Über der großen Zahl stand bei Perzentil unter 50 „Sie verdienen weniger als
+  30 %“; richtig ist „mehr als 30 %“.
+- **Bürgergeld** (Live-Probe 183): Der Sonderstatus (Schüler, Azubi …) fragte das Alter ein zweites Mal (Startwert 22,
+  oben 35). Wer oben 30 eintrug und unten nichts änderte, bekam den Freibetrag für unter 25-Jährige.
+- **Kaffee-Wasser** (Live-Probe 186): Beim Moduswechsel blieb die Zahl stehen und galt in der anderen Einheit („500 g
+  Kaffee brauchen 8.000 ml Wasser“).
+- **Termine** (Funde aus Welle 182): BEG-Degression und Streaming-Preise hatten keinen Termin.
+- **Feedback-Eintrag** (fehlte in Welle 190): Der Bruchrechner-Reiter „Brüche dazwischen“ stand nicht auf
+  `/aktualisierungen`.
+
+**Kalenderdaten westlich von UTC** (laut Vorlage; Lib-Gegenprobe in `America/New_York` hier nachgemessen):
+
+| Rechner | vorher in New York | jetzt |
+|---|---|---|
+| AfA | 01.07.2025 wird Juni → linear statt 30 %; 01.01.2028 wird Dezember 2027 → 30 % statt linear | richtiger Monat (`anschaffungMonatJahr` in `lib/berechnungen/afa.ts`) |
+| Bürgergeld | Jugendlichen-Freibetrag 556 € (Minijob-Grenze 2025) | 603 € |
+| Mutterschutz | alle Daten einen Tag zu früh (ET 01.09.2025: Beginn 20.07.) | 21.07.2025 |
+| Kfz-Steuer Elektro | Befreiung bis 14.03.2034 | 15.03.2034 |
+| Indexmiete | frühester Erhöhungstermin und Datumsanzeige einen Tag zu früh | Tag nach Ablauf der Jahresfrist (§ 557b Abs. 2, §§ 187, 188 BGB); 29.02.2024 → 01.03.2025 wie bisher |
+| Gefrierdauer | Einfrierdatum einen Tag zu früh | richtig |
+| Kündigungsfrist | Position der Zeitleiste | richtig |
+| alle oben | in Deutschland | unverändert (laut Vorlage in Berlin vorher und nachher gemessen) |
+
+**Änderungen** (Vorlage `_lokal/welle191-folgefunde.mjs`: 74 Textersetzungen in 28 Dateien plus 3 Datumszeilen = 77 in
+30 Dateien, nicht committet; Lib-Gegenprobe `_lokal/welle191-lib.mts`, ebenfalls nicht committet):
+- **Datum:** die Rechner der Tabelle lesen Datumsfelder in Ortszeit; dazu Konstanten auf lokale Mitternacht:
+  `SV_RECHENSTAND`, `gueltigAb` in Bürgergeld-, BAföG-, AFBG- und Midijob-Parametern, `ELEKTRO_BEFREIUNG`,
+  `FAKTOR_F_2026`. Heute ohne Wirkung, aber dieselbe Falle.
+- **Prüfskripte:** `verify-buergergeld-p4` und `verify-kfz-steuer-p1` erzeugten ihre Testdaten selbst mit
+  `new Date('…')` und lasen mit `toISOString()` aus; jetzt Ortszeit und lokale Getter. `verify-afa` +6 Fälle
+  (82 → 88), `verify-datum-zeitzone` +1 Fall (72 → 73): kein `new Date('JJJJ-MM-TT')` mehr im Seitencode (`lib`,
+  `components`, `app` ohne `app/api`; Kommentare zählen nicht).
+- **CI** `.github/workflows/pruefskripte.yml`: dritte Zeitzone `America/New_York`; `actions/checkout@v7` und
+  `actions/setup-node@v7` statt `@v4` (v4 lief auf Node 20, GitHub warnte).
+- **`CLAUDE.md`**, Abschnitt „Kalenderdaten in Ortszeit“: neue Zeile zu westlich von UTC. **`lib/datum-lokal.ts`**:
+  Kopfkommentar.
+- **Gehaltsvergleich:** über der großen Zahl immer „Sie verdienen mehr als“, passend zur Markierung in der Grafik. Im
+  Text für Perzentil 50 bis 74 „… € mehr als der Median“ statt „… als der Durchschnitt“ (gerechnet wird gegen den
+  Median).
+- **Bürgergeld:** Ab Bezugsmonat Juli 2026 zählt im Sonderstatus das Feld „Alter Antragsteller/in“ oben; der Abschnitt
+  zeigt nur „Alter: … Jahre, aus dem Feld …“.
+- **Kaffee-Wasser:** Beim Moduswechsel übernimmt das Feld das Ergebnis (500 ml → 31,25 g, zurück wieder 500 ml). Die
+  eigene Eingabe erscheint mit bis zu zwei Nachkommastellen (vorher „31 g“, bei Espresso 18,5 g als „19 g“).
+- **Feedback-Eintrag** `lib/feedback-log.ts`, `2026-10-20-01`: Bruchrechner, „Brüche finden, die zwischen zwei Brüchen
+  liegen“, umgesetzt 21.10.2026.
+- **3 Datumszeilen** `letzteAktualisierung` → `2026-10-21`: `gehaltsvergleich` (vorher 20.10.), `kaffee-wasser-rechner`
+  (vorher 01.07.); `buergergeld-rechner` stand seit Welle 189 schon auf dem 21.10., die Zeile ändert sich nicht
+  sichtbar. Keine Datumszeile für die Datumskorrekturen: In Deutschland ändert sich dort kein Ergebnis.
+
+**Termine** (`lib/termine.ts`, sonst unverändert):
+- `beg-degression`: ab 01.02.2027 halbjährlich, Vorlauf 21 Tage. Förderfähige Kosten −750 € je Halbjahr bis 22.000 €
+  Ende 2030, Klimageschwindigkeitsbonus −4 Punkte je Halbjahr, ab 01.08.2028 entfällt er.
+- `streaming-preise`: ab 20.01.2027 vierteljährlich, Vorlauf 7 Tage (Stand der Preise 20.10.2026, Spotify-Preisrunde).
+
+**Bewusst nicht geändert:** Captions, Kacheln und Videos; `app/api/**` und `lib/social/**`; `lib/termine.ts` außer den
+zwei neuen Einträgen.
+
+**Bewusst offen geblieben:**
+- **Serverseitiges UTC:** `app/api/**`, `lib/social/**` und die Terminrechnung in `lib/termine.ts` rechnen absichtlich in
+  UTC (`T00:00:00Z`). Sie laufen auf dem Server, nicht im Browser.
+- **Blog-Datumsanzeige** in `app/blog/page.tsx` (`new Date(a.datum)`): Sie wird beim Build auf dem Server in UTC
+  gerendert und ist dort richtig.
+- **Lokaler Lauf in New York** geht unter Git Bash nur über die Lib-Gegenprobe; ein vorangestelltes `TZ=…` kommt nicht
+  bei Node an (Fund aus Welle 183). `verify:alle` in New York läuft ab jetzt in der CI.
+- **Gehaltsvergleich:** auch bei niedrigem Perzentil „mehr als 5 %“, damit Satz und Markierung in der Grafik dieselbe
+  Zahl zeigen.
+- **Bürgergeld:** Für Bezugsmonate vor Juli 2026 bleibt das eigene Altersfeld im Sonderstatus, weil es dort oben keins
+  gibt.
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- `verify:alle` in New York habe ich lokal nicht laufen lassen (siehe oben); die Zeitzone ist nur über die
+  Lib-Gegenprobe belegt (300 und 240 Minuten westlich von UTC). Der CI-Lauf zum Push zeigt den Rest.
+
+**Gates:**
+- Phase 0 an `bbca096`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `bbca096` und `00feb64`
+  (Welle 190). Greps `lib/berechnungen/buergergeld-parameter.ts:1`, `.github/workflows/pruefskripte.yml:1`,
+  `components/rechner/BuergergeldRechner.tsx:5`, dann dreimal keine Ausgabe. `verify:alle` 85/85.
+- Phase 1: „OK — 77 Ersetzungen in 30 Dateien.“, Exit 0; `git status` genau die 30 Dateien der Vorlage, alle ` M`.
+- Phase 2: Lib-Gegenprobe 20 × „OK“ (erste Zeilen 300 und 240), „Alle Werte OK“, Exit 0. `verify:alle` ohne und mit
+  `TZ=UTC` je „Prüfskripte: 85/85 grün.“, Exit 0; darin `verify-afa` 88/88, `verify-datum-zeitzone` 73/73,
+  `verify-kfz-steuer-p1` 44/44, `verify-buergergeld-p4` 33/33, `verify-termine` 12/12. `anschaffungMonatJahr`:
+  `AfaRechner.tsx:2`, `afa.ts:1`, `verify-afa.ts:4`. `America/New_York` `pruefskripte.yml:1`, `@v7` `pruefskripte.yml:2`,
+  `jugendAlter` `BuergergeldRechner.tsx:4`, `2026-10-20-01` `feedback-log.ts:1`, Termine `termine.ts:2`. `npm run lint`
+  Exit 0, keine Zeile „problems“. `npm run build` Rückgabewert 0, 271 Seiten. Im gebauten HTML
+  „Sie verdienen mehr als</p>“ 1×, „Sie verdienen weniger als“ 0× (`/finanzen/gehaltsvergleich`), „Brüche finden, die
+  zwischen zwei Brüchen liegen“ 2× (`/aktualisierungen`, Seitentext und eingebettete Seitendaten). Danach `git status`
+  weiter die 30 Dateien.
+- Phase 3: `git add -u`, `git diff --cached --name-only` 30.
+
+**Commits:** A `050d6bb` (die 30 Dateien). B ist dieser Doku-Commit. Die Live-Probe macht Karsten, die Datumsrechner in
+New-York-Zeit prüft Chat-Claude.
+
+---
+
 ## 21.10.2026 — Welle 190: Bruchrechner — neuer Reiter „Brüche dazwischen“ — ✅ ABGESCHLOSSEN 21.10.2026
 
 **Anlass:** Nutzerfeedback vom 20.10.2026, 15:01 Uhr, zu `/mathe/bruchrechner`: „ich wollte berechnen welche zahlen
