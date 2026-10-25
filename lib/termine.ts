@@ -157,6 +157,9 @@ export const TERMINE: Termin[] = [
     wiederholungMonate: 3,
     bereich: 'Betrieb',
     was: 'Reihenfolge zwingend: neuen Schlüssel anlegen, ANTHROPIC_API_KEY in Vercel ersetzen, deployen, KI-Erklärung testen, ERST DANN den alten widerrufen.',
+    quittiertVorkommen: '2026-10-25',
+    quittiertAm: '2026-10-25',
+    quittungVermerk: 'Neuer Schlüssel am 25.10.2026 angelegt und als ANTHROPIC_API_KEY in Vercel eingetragen. Wirksam erst mit dem Deployment dieses Commits; die beiden Redeploys vom 25.10.2026 hatte das ignoreCommand in vercel.json abgebrochen. Live-Test der KI-Erklärung und Widerruf des alten Schlüssels folgen und werden mit anthropic-key-ablauf quittiert.',
   },
   {
     id: 'anthropic-key-ablauf',
