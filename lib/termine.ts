@@ -128,16 +128,7 @@ export const TERMINE: Termin[] = [
     vorlaufTage: 3,
     wiederholungMonate: 3,
     bereich: 'Betrieb',
-    was: 'Abrechnung läuft automatisch am 30. jedes Monats. Vierteljährlich statt monatlich erinnert, weil die Abbuchung selbst keine Handlung erfordert — geprüft werden Verbrauch, Rechnungshöhe und ob der Tarif noch passt.',
-  },
-  {
-    id: 'vercel-deployment-storage',
-    titel: 'Vercel Deployment Storage nach der 30-Tage-Umstellung prüfen',
-    datum: '2026-10-26',
-    vorlaufTage: 2,
-    bereich: 'Betrieb',
-    was: 'Vercel hat die Aufbewahrung von Deployments am 23.10.2026 auf 30 Tage gesenkt (Mail vom 10.10.2026, Opt-out bewusst nicht gewählt: er hätte die Speicherabrechnung für alle Projekte sofort gestartet). Prüfen: Deployment- und Functions-Storage-Verbrauch im Team-Dashboard unter Usage, und ob Vercel die angekündigte zweite Nachricht vor dem Abrechnungsstart geschickt hat. Preis laut Mail 0,10 $ pro GB und Monat je Speicherart, vor Nutzungsguthaben. Die 10 neuesten Production-Deployments und alle Deployments mit Alias sind von der Aufbewahrung ausgenommen. Nach der Prüfung Termin schließen.',
-    quelle: 'Vercel-Mail vom 10.10.2026 (Deployment Storage pricing)',
+    was: 'Abrechnung läuft automatisch am 30. jedes Monats. Vierteljährlich statt monatlich erinnert, weil die Abbuchung selbst keine Handlung erfordert — geprüft werden Verbrauch, Rechnungshöhe und ob der Tarif noch passt. Seit der 30-Tage-Aufbewahrung (23.10.2026) unter Usage zusätzlich auf Zeilen für Deployment Storage und Functions Storage achten (0,10 $ pro GB und Monat je Speicherart laut Vercel-Mail vom 10.10.2026); am 26.10.2026 gab es noch keine.',
   },
   {
     id: 'awin-programme',
