@@ -39,3 +39,13 @@ Tarif-, SV-, Unterhalts-, Mindestlohn-, Renten- und Pfändungs-Rechner dürfen P
 - `lib/berechnungen/schwangerschaft.ts` **(neu, Prompt 143, 25.04.2026 — Voll-Fusion)** — Konsolidiert die früheren `geburtstermin.ts` + `ssw.ts` (beide gelöscht). Enthält Naegele + erweiterte Naegele für Zykluslänge ≠ 28; SSW-Berechnung; Trimester; Meilensteine. Exports: `parseDatum(s)` (zeitzonen-sicher mit `+'T00:00:00'`), `berechneGeburtstermin(eingabe)` (SSW ab LMP+Zyklus-Korrektur), `berechneSsw(eingabe)` (SSW ab reinem LMP — gynäkologischer Standard), `defaultPeriodeDatum`, `defaultTerminDatum`, `Methode`, `SswMethode`, `Meilenstein`. **Beide SSW-Konventionen klinisch korrekt** — JSDoc dokumentiert die Divergenz, nicht versehentlich vereinheitlichen.
 
 Die drei Tarif-Rechner (Brutto-Netto, Lohnsteuer, Einkommensteuer) sind eine **Rechner-Gruppe** mit geteilter Logik. Änderungen an zentralen Parametern wirken auf alle drei. Siehe auch G10 (keine Dubletten zentraler Werte).
+
+## Konventionen (seit v4, 27.10.2026)
+
+Geteilte Größen, die keine Rechtswerte sind und trotzdem nur eine Quelle haben. Maßgeblich ist das Register im Skill `karola-rechner` (`references/konventionen.md`, maschinenlesbar `assets/karola.json`); hier die Kurzliste. Werte aus `_helpers.ts` importieren Rechner-Komponenten über die Domain-Lib, nie direkt.
+
+- **Wochen pro Monat** — `WOCHEN_PRO_MONAT` (52 ÷ 12) in `lib/berechnungen/_helpers.ts` (KV01)
+- **Monatsstunden Vollzeit** — `VOLLZEIT_STUNDEN_MONAT` (40 × 52 ÷ 12 = 173,33) in `_helpers.ts`, re-exportiert über `mindestlohn.ts` (KV02)
+- **Arbeitstage** — aus Kalender und bundesweiten Feiertagen wie in `lib/berechnungen/wahrer-stundenlohn.ts`, nie pauschal 21,7 pro Monat (KV03)
+- **Minijob-Grenze** — `getMinijobGrenzeMonat(stichtag)` in `mindestlohn.ts` (KV04)
+- **Mindestlohn-Monatsbrutto bei 40 Wochenstunden** — `mindestlohnMonatVollzeit(mindestlohn)` in `mindestlohn.ts` (KV05)

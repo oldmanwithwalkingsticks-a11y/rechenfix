@@ -1,0 +1,136 @@
+{
+  "_stand": "27.10.2026",
+  "_hinweis": "Konfiguration von Karola Rechner. Stabile Werte gehoeren hierher: Pruefkatalog und Konventionen-Register. Pruefberichte werden fortgeschrieben und gehoeren nicht in diese Datei, sondern nach docs/audit-arbeitspapiere/_lokal/karola-berichte/.",
+
+  "pruefkatalog": [
+    {"id": "KR01", "titel": "Inventar", "werkzeug": "karola.py inventar"},
+    {"id": "KR02", "titel": "Unabhaengige Nachrechnung", "werkzeug": "eigene Referenzrechnung aus der Primaerquelle"},
+    {"id": "KR03", "titel": "Zahlen-Inventar", "werkzeug": "karola.py zahlen"},
+    {"id": "KR04", "titel": "Rechenketten", "werkzeug": "karola.py formeln"},
+    {"id": "KR05", "titel": "Konventionen-Register", "werkzeug": "karola.py register"},
+    {"id": "KR06", "titel": "Querabgleich", "werkzeug": "karola.py quer und Verbraucherliste aus KR01"},
+    {"id": "KR07", "titel": "Rechtswerte und Stichtage", "werkzeug": "Primaerquelle, zentrale Lib, lib/termine.ts"},
+    {"id": "KR08", "titel": "Regeln und Pruefskripte", "werkzeug": "CLAUDE.md, rechner-builder, npm run verify:alle, Build"},
+    {"id": "KR09", "titel": "Eingaben und Randfaelle", "werkzeug": "Lib-Laeufe mit npx tsx, Komponente lesen"},
+    {"id": "KR10", "titel": "Browserpruefung", "werkzeug": "Live-Seite oder lokaler Build im Browser"}
+  ],
+
+  "konventionen": [
+    {
+      "id": "KV01",
+      "groesse": "Wochen pro Monat",
+      "regel": "52 / 12 = 4,3333 Wochen. Im Code nur ueber WOCHEN_PRO_MONAT, nie als Zahl 4,33, 4,345, 4,35 oder 4,348. Im Text ist 4,33 als gerundete Anzeige von 52 / 12 erlaubt; kalendergenau 4,348 nur als ausdruecklich benannter Vergleich.",
+      "ssot": "lib/berechnungen/_helpers.ts: WOCHEN_PRO_MONAT (Komponenten importieren ueber die Domain-Lib)",
+      "quelle": "§ 8 Abs. 1a SGB IV (Mindestlohn x 130 / 3); Welle 196 und 197",
+      "seit": "27.10.2026",
+      "stufe": "befund",
+      "pfade": ["lib/", "components/", "app/"],
+      "ausnahmen": ["lib/berechnungen/_helpers.ts"],
+      "zeilen": "code",
+      "muster": [
+        {
+          "name": "Faktor 4,3x im Code",
+          "regex": "[*/]\\s*4\\.3(?:3+|45|48\\d*|5)?(?![\\d.])",
+          "flags": "",
+          "positiv": "const kwhMonat = kwhWoche * 4.33;",
+          "negativ": "const logoH = logoB / 4.381;"
+        },
+        {
+          "name": "Woche mal 4",
+          "regex": "woche\\w*\\s*\\*\\s*4(?![\\d.,])",
+          "flags": "i",
+          "positiv": "const proMonat = stundenWoche * 4;",
+          "negativ": "const proMonat = stundenWoche * WOCHEN_PRO_MONAT;"
+        }
+      ]
+    },
+    {
+      "id": "KV02",
+      "groesse": "Monatsstunden einer Vollzeitstelle",
+      "regel": "40 x 52 / 12 = 173,33 Stunden. Im Code nur ueber VOLLZEIT_STUNDEN_MONAT oder Wochenstunden x WOCHEN_PRO_MONAT. Nie 160 (4 x 40, stimmt nur fuer einen Februar ohne Schalttag) und nie 174 als Rechengrundlage.",
+      "ssot": "lib/berechnungen/_helpers.ts: VOLLZEIT_STUNDEN_MONAT (fuer Komponenten re-exportiert ueber lib/berechnungen/mindestlohn.ts)",
+      "quelle": "Welle 196; dieselben Muster prueft scripts/verify-monatsstunden.ts als Gate",
+      "seit": "27.10.2026",
+      "stufe": "befund",
+      "pfade": ["lib/", "components/", "app/"],
+      "ausnahmen": [],
+      "zeilen": "code",
+      "muster": [
+        {"name": "Division durch 160/174", "regex": "\\b(netto\\w*|brutto\\w*|lohn\\w*)\\s*(/|÷)\\s*1(60|74)(?![\\d.,])", "flags": "i", "positiv": "const stundenlohn = brutto / 160;", "negativ": "const stundenlohn = brutto / VOLLZEIT_STUNDEN_MONAT;"},
+        {"name": "Mindestlohn mal 160/174", "regex": "\\b(mindestlohn\\w*|stundenlohn\\w*)\\s*(\\*|×)\\s*1(60|74)(?![\\d.,])", "flags": "i", "positiv": "const monat = mindestlohn * 160;", "negativ": "const monat = mindestlohn * VOLLZEIT_STUNDEN_MONAT;"},
+        {"name": "Konstante 160/174 Stunden", "regex": "STUNDEN\\w*\\s*=\\s*1(60|74)\\b", "flags": "", "positiv": "const MONATSSTUNDEN = 160;", "negativ": "const MONATSSTUNDEN = 40 * WOCHEN_PRO_MONAT;"},
+        {"name": "160/174 Stunden im Monat", "regex": "\\b1(60|74)\\s*(Std\\.?|Stunden)\\s*(/|pro|im|je)\\s*Monat", "flags": "i", "positiv": "text: 'Bei 160 Stunden im Monat ergibt das 21,88 €.'", "negativ": "text: 'Bei 173,33 Stunden im Monat ergibt das 20,19 €.'"},
+        {"name": "ca. 160/174 Stunden", "regex": "ca\\.\\s*1(60|74)\\s*Stunden", "flags": "", "positiv": "antwort: 'Das sind ca. 174 Stunden.'", "negativ": "antwort: 'Das sind rund 173 Stunden.'"},
+        {"name": "40 mal 4,33", "regex": "\\b40\\s*(\\*|×)\\s*4[.,]33\\b", "flags": "", "positiv": "formel: '40 × 4,33 = 173,2'", "negativ": "formel: '40 × 52 ÷ 12 = 173,33'"}
+      ]
+    },
+    {
+      "id": "KV03",
+      "groesse": "Arbeitstage pro Monat",
+      "regel": "Nie pauschal 21,67, 21,7, 21,75 oder 22 Arbeitstage pro Monat. Arbeitstage kommen aus dem Kalender mit den bundesweiten Feiertagen (Muster lib/berechnungen/wahrer-stundenlohn.ts) oder sind eine Eingabe.",
+      "ssot": "lib/berechnungen/wahrer-stundenlohn.ts (Arbeitstage aus Kalender und Feiertagen)",
+      "quelle": "Welle 164 (pauschal 21,7 Tage abgeloest)",
+      "seit": "27.10.2026",
+      "stufe": "befund",
+      "pfade": ["lib/", "components/", "app/"],
+      "ausnahmen": [],
+      "zeilen": "code",
+      "muster": [
+        {"name": "Pauschale Arbeitstage pro Monat", "regex": "\\b(21[.,]6?7|21[.,]75?|22)\\s*(Arbeits)?tage?n?\\s*(pro|im|je|/)\\s*Monat", "flags": "i", "positiv": "text: 'Bei 21,7 Arbeitstagen pro Monat'", "negativ": "text: 'Bei 223 Arbeitstagen im Jahr'"},
+        {"name": "Konstante Arbeitstage pro Monat", "regex": "ARBEITSTAGE\\w*MONAT\\w*\\s*=\\s*2[12](\\.\\d+)?\\b", "flags": "", "positiv": "const ARBEITSTAGE_PRO_MONAT = 21.7;", "negativ": "const arbeitstage = arbeitstageImJahr(2026);"}
+      ]
+    },
+    {
+      "id": "KV04",
+      "groesse": "Minijob-Grenze",
+      "regel": "Mindestlohn x 130 / 3, aufgerundet (2026: 603 €, 2027: 633 €). In Code und UI nur ueber getMinijobGrenzeMonat; als Zahl im Text nur mit Jahresangabe in derselben Zeile oder mit einem Termin in lib/termine.ts, der die Stelle nennt.",
+      "ssot": "lib/berechnungen/mindestlohn.ts: getMinijobGrenzeMonat",
+      "quelle": "§ 8 Abs. 1a SGB IV",
+      "seit": "27.10.2026",
+      "stufe": "pruefen",
+      "pfade": ["components/", "app/", "lib/berechnungen/"],
+      "ausnahmen": ["lib/berechnungen/mindestlohn.ts"],
+      "ausnahmen_praefix": ["app/blog/", "components/blog/"],
+      "zeilen": "code",
+      "ausser_wenn": "\\b20(26|27)\\b",
+      "muster": [
+        {"name": "603/633 € ohne Jahr", "regex": "\\b6(03|33)\\s*(€|Euro)", "flags": "", "positiv": "label: 'Minijob (bis 603 €)'", "negativ": "label: 'Minijob (2026 bis 603 €)'"}
+      ]
+    },
+    {
+      "id": "KV05",
+      "groesse": "Mindestlohn-Monatsbrutto bei 40 Wochenstunden",
+      "regel": "Mindestlohn x 40 x 52 / 12 (2026: 2.409,33 €, 2027: 2.530,67 €). In Code und UI nur ueber mindestlohnMonatVollzeit; als Zahl im Text nur mit Jahresangabe in derselben Zeile oder mit einem Termin, der die Stelle nennt.",
+      "ssot": "lib/berechnungen/mindestlohn.ts: mindestlohnMonatVollzeit",
+      "quelle": "Welle 196",
+      "seit": "27.10.2026",
+      "stufe": "pruefen",
+      "pfade": ["lib/", "components/", "app/"],
+      "ausnahmen": ["lib/berechnungen/mindestlohn.ts"],
+      "ausnahmen_praefix": ["app/blog/", "components/blog/"],
+      "zeilen": "code",
+      "ausser_wenn": "\\b20(26|27)\\b",
+      "muster": [
+        {"name": "2.409,33/2.530,67 ohne Jahr", "regex": "2\\.?409[,.]33|2\\.?530[,.]67", "flags": "", "positiv": "['13,90 € (Mindestlohn)', '2.409,33 €', '28.912 €'],", "negativ": "text: 'Seit 2026 sind das 2.409,33 € im Monat.'"}
+      ]
+    },
+    {
+      "id": "KV06",
+      "groesse": "Jahreswerte als Zahl im Text",
+      "regel": "Die gesetzlichen Jahreswerte aus scripts/jahreswerte-config.json (Grundfreibetrag, Soli-Grenzen, Rentenwert, BBG, Kinderfreibetrag, Mindestlohn …) stehen im Text nur mit Jahresangabe in derselben Zeile, aus der zentralen Lib interpoliert oder mit einem Termin in lib/termine.ts, der die Stelle nennt. scripts/check-jahreswerte.mjs sucht dieselben Werte im Code (Schreibweise 5812.50), aber nicht in deutscher Schreibweise im Text (5.812,50) und nicht in lib/rechner-config/.",
+      "ssot": "die in scripts/jahreswerte-config.json je Wert genannte Lib",
+      "quelle": "Karola-Lauf 27.10.2026: SchnellCheck nennt 5.812,50 € als Text neben der Bedingung brutto > BBG_KV_MONAT",
+      "seit": "27.10.2026",
+      "stufe": "pruefen",
+      "art": "jahreswerte",
+      "pfade": ["components/", "app/", "lib/rechner-config/"],
+      "ausnahmen": [],
+      "ausnahmen_praefix": ["app/blog/", "components/blog/"],
+      "zeilen": "code",
+      "ausser_wenn": "\\b20(2[5-9])\\b",
+      "muster": [
+        {"name": "Ersatzmuster ohne jahreswerte-config.json", "regex": "5\\.?812[,.]50", "flags": "", "positiv": "text: 'über der KV-Beitragsbemessungsgrenze (5.812,50 €)'", "negativ": "text: 'über der KV-Beitragsbemessungsgrenze 2026 (5.812,50 €)'"}
+      ]
+    }
+  ]
+}

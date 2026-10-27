@@ -127,6 +127,22 @@ hartkodiert waren statt aus der zentralen Lib gezogen.
 **Ausnahme:** Nicht rechts-/jahresabhängige Konstanten (z. B.
 „12 Monate pro Jahr", „π ≈ 3,14159") dürfen hartkodiert sein.
 
+**Keine Ausnahme sind geteilte Konventionen (seit v4, 27.10.2026).** Wochen
+pro Monat, Monatsstunden, Arbeitstage, Minijob-Grenze, Mindestlohn-Monatsbrutto:
+Größen, die mehrere Rechner teilen und die anders festgelegt werden könnten,
+haben eine SSOT wie Rechtswerte. Genau in dieser Ausnahme lag der
+160-Stunden-Fehler (Wellen 196 und 197): 160 (4 × 40) sah wie eine harmlose
+Konstante aus und stand seit April 2026 an drei Stellen im Code und in zwei
+FAQ-Texten. Register mit SSOT und verbotenen Schreibweisen: Skill
+`karola-rechner`, `references/konventionen.md`; Suche mit `karola.py register`.
+
+**Und keine Ausnahme ist der Text.** Ein Jahreswert oder eine abgeleitete Zahl
+in FAQ, Beispiel, Erklärtext oder Hinweis ist ein Duplikat wie im Code. Sie wird
+aus der Lib interpoliert, trägt das Jahr im selben Satz oder hat einen Termin
+in `lib/termine.ts`. `scripts/check-jahreswerte.mjs` sieht nur die
+Code-Schreibweise (`5812.50`); die deutsche (`5.812,50`) findet
+`karola.py register` (KV06).
+
 **Verweis:** Siehe `CLAUDE.md` Abschnitt „Zentrale Libs (SSOT)" für
 die vollständige Liste und das Stichtag-Switch-Pattern.
 

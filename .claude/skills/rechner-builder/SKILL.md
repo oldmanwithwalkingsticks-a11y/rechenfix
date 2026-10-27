@@ -5,7 +5,7 @@ description: Template and checklist for building standardized online calculators
 
 # Rechner Builder für rechenfix.de
 
-**Stand: v3 (18.09.2026).** Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
+**Stand: v4 (27.10.2026).** Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
 **Zur Fassungszählung (eingeführt 18.09.2026):** Dieser Skill hatte als einziger der
 fünf keine Stand-Zeile, und `scripts/skill-paket.sh` verweigerte deshalb den Paketbau — die
@@ -18,18 +18,29 @@ standen:** in der Überschrift des folgenden Abschnitts. Die Ausbaustufen dazwis
 ohne Nummer über die Historientabelle am Ende dieser Datei, die weiterhin die maßgebliche
 Spur ist. v3 ist deshalb kein Neuanfang, sondern der erste Stand, der sich packen lässt.
 
+**v4 (27.10.2026): Wertherkunft und Abnahme.** rechenfix zeigte für dieselbe Größe drei
+Stundenlöhne: Drei Stellen im Code und eine FAQ rechneten mit 160 Monatsstunden, eine zweite
+FAQ mit „ca. 174“, der Stundenlohn-Rechner mit 173,33 (Wellen 196 und 197). Die 160 stand seit
+April 2026 im Code und fiel durch jede Prüfung, weil G10 Konventionen ausdrücklich ausnahm und
+Zahlen im Text nie gegen die Lib gerechnet wurden. v4 schließt beide Lücken: der Abschnitt
+„Pre-Build: Wertherkunft“ (jede Zahl hat eine Herkunft, abgeleitete Zahlen werden nie getippt),
+Teil 2 von Step 11b (Prüfskripte von Karola Rechner, Zahlenprotokoll, Querabgleich) und Step 15,
+die Abnahme durch **Karola Rechner** (eigener Skill `karola-rechner`). Ein Rechner ist erst
+fertig, wenn ihr Urteil „abnahmefähig“ lautet.
+
 ## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026 · Prüfvorschriften-Update Welle 114, 26.08.2026 · Struktur-Umbau und R7, Welle 114b/118, 27.08.2026)
 
 > **Welle 19 (10.06.2026):** Neue Rechner und Migrationen nutzen den Content-Baustein-Standard (`contentBloecke`) statt des Thin-`erklaerung`-String-Pfads, der die 4. AdSense-Ablehnung verursacht hat. Das ist keine Empfehlung, sondern der Pfad — der Thin-String-Pfad ist geschlossen. Die acht Blocktypen, das Leitformat-Prinzip, die Quellen-Pflicht und der Self-Check vor dem Commit stehen in **`references/content-standards.md`**; diese Datei vor dem Schreiben von Inhalten lesen.
 
 Diese Standards wurden nach den W13/W14-Audit-Wellen etabliert, in denen veraltete Affiliate-Verteilung, zu kurze Content-Texte, veraltete Gesetzes-Werte und schlecht dokumentierte Tabellen-Werte wochenlange Korrektur-Sprints nötig machten. Konsequente Befolgung ab Build-Phase erspart spätere Audits.
 
-**Vier Standards für jeden neuen Rechner:**
+**Fünf Standards für jeden neuen Rechner:**
 
 1. **Affiliate-Architektur:** `config.affiliate` (Single-Object oder Array) statt hartkodierter `<AffiliateBox />`-JSX. Siehe „Affiliate-Platzierung"-Sektion.
 2. **Content-Wortzahl:** `erklaerung` + FAQ kombiniert ≥ 750 W (Ideal 1.000–1.500 W), FAQ 5–8 Fragen. Siehe Step 7 + 8.
 3. **Aktuelle Gesetze:** Vor dem Code-Schreiben relevante Paragraphen recherchieren und im Code-Kommentar mit § + Stand + Quelle dokumentieren. Siehe „Pre-Build: Gesetzes-Recherche".
 4. **Tabellen/Sätze/Grenzen:** Als named constants am File-Anfang mit Stichtag + Quelle, KEINE magic numbers inline. Siehe „Pre-Build: Tabellen-Aktualität". Vorher in **`references/zentrale-libs.md`** nachsehen, ob der Wert bereits als SSOT existiert — Duplikate zentraler Werte sind der häufigste Wiederholungsfehler im Repo (G10).
+5. **Wertherkunft (seit v4):** Jede Zahl im Code und im Text hat eine Herkunft — Eingabe, Rechtswert, Konvention oder Ergebnis aus der Lib. Abgeleitete Zahlen werden nie getippt. Siehe „Pre-Build: Wertherkunft“ und das Konventionen-Register im Skill `karola-rechner`.
 
 **Bei jährlichem Januar-Audit greift folgender Workflow:**
 
@@ -236,6 +247,28 @@ const ergebnis = brutto - GRUNDFREIBETRAG_2026;
 ```
 
 Im Idealfall liegt der Wert bereits in einer zentralen Lib (`lib/berechnungen/<domain>.ts`) — Kurzliste in `references/zentrale-libs.md`, Volltabelle in CLAUDE.md → „Zentrale Libs (SSOT)". Eigene Hardcodes nur, wenn der Wert nirgendwo zentral verfügbar ist; dann Inline-Constants mit Stichtag.
+
+---
+
+## Pre-Build: Wertherkunft (Pflicht, v4)
+
+Jede Zahl, die der Rechner verwendet oder zeigt, hat **genau eine Herkunft**:
+
+| Herkunft | Woher | Beispiel |
+|---|---|---|
+| Eingabe | Startwert oder Beispielannahme, im Text als solche erkennbar | „bei 3.500 € brutto und 40 Wochenstunden“ |
+| Rechtswert | zentrale Lib, mit Paragraf, Stand und Quelle | `getAktuellerMindestlohn()` |
+| Konvention | zentrale Konstante, eingetragen im Konventionen-Register | `WOCHEN_PRO_MONAT` (52 ÷ 12) |
+| Ergebnis | aus der Lib berechnet, nie getippt | Monatsstunden, Stundenlohn, Grenzbeträge |
+
+**Vier Regeln:**
+
+1. **Abgeleitete Zahlen werden nie getippt** — nicht im Code (`brutto / 160`) und nicht im Text („ca. 174 Stunden“). Im Code entstehen sie als Ausdruck aus der SSOT, im Text werden sie aus der Lib interpoliert oder per Lib-Lauf ermittelt und im Zahlenprotokoll belegt (Step 11b, Teil 2).
+2. **Konventionen sind keine Ausnahme.** Größen, die mehrere Rechner teilen — Wochen pro Monat, Monatsstunden, Arbeitstage, Minijob-Grenze, Mindestlohn-Monatsbrutto —, haben eine SSOT wie Rechtswerte. Vor dem Bau das Register lesen: Skill `karola-rechner`, `references/konventionen.md`; Kurzliste in `references/zentrale-libs.md`. Braucht der Rechner eine geteilte Größe, die dort fehlt, zuerst die SSOT schaffen und den Registereintrag vorschlagen.
+3. **Eine Größe, ein Wert.** Zeigt eine andere Seite dieselbe Größe, muss sie bei gleichen Eingaben denselben Wert ergeben. Die Kandidaten listet `karola.py inventar` (Step 11b, Teil 2).
+4. **Stichtagswerte im Text** (Mindestlohn, Minijob-Grenze, Beitragsbemessungsgrenzen, Freibeträge …) stehen mit Jahr im selben Satz, werden aus der Lib interpoliert oder bekommen einen Termin in `lib/termine.ts`, der die Stelle nennt. Sonst werden sie am Stichtag still falsch, während die Rechnung schon umgeschaltet hat. Gemessen am 27.10.2026 in `components/rechner/SchnellCheck.tsx`: Bedingung `brutto > BBG_KV_MONAT` aus der Lib, Text „(5.812,50 €)“ fest.
+
+**Anti-Pattern dazu:** `references/anti-patterns.md`, „Monatsstunden als 160 (4 × 40)“.
 
 ---
 
@@ -492,6 +525,9 @@ After creating the calculator, verify:
 - [ ] Kein `✓ Kostenlos. ✓ Mit KI-Erklärung.`-Suffix, keine ✓-Emojis in der Description
 - [ ] **Smoke-Test v3** nach Deploy über die betroffenen Routen laufen lassen: `scripts/smoke-test-v3.js` in die Browser-Konsole auf `https://www.rechenfix.de` pasten und `await runSmokeTestV3({ filter: /<slug>/ })` ausführen. Alle 9 Checks (C1–C9) müssen grün sein.
 - [ ] **Guards G1–G14 geprüft** (`references/qualitaets-guards.md`)
+- [ ] **Prüfskripte von Karola Rechner ohne Befund** (Step 11b, Teil 2): `register` ohne Stelle der Stufe `befund`, `formeln` ohne `BEFUND`
+- [ ] **Zahlenprotokoll** im Bericht (Step 11b, Teil 2): jede Zahl aus `karola.py zahlen` mit Herkunft, jede Ergebniszahl mit ihrem Lib-Lauf
+- [ ] **Abnahme durch Karola Rechner** nach dem Deploy beauftragt (Step 15) — „fertig“ erst mit dem Urteil „abnahmefähig“
 - [ ] "Fix erklärt"-Button erscheint erst, nachdem der `ergebnis`-State gefüllt ist — das ist **kein Bug**, sondern gewollt
 
 ### Step 11b: SSOT-Import-Audit (Pflicht vor Commit)
@@ -526,6 +562,28 @@ Seit Prompt 101 sind die Soli-Freigrenzen (20350 / 37838 / 40700) mit
 Keywords (soli / solidarit / milderung / freigrenze / solz / splitting /
 zusammen) aufgenommen. Der Soli-ohne-Milderungszone-Bug wird damit
 automatisch gefunden, falls er ein sechstes Mal auftritt.
+
+**Teil 2 — Konventionen, Zahlen im Text, Querabgleich (Pflicht seit v4, 27.10.2026).**
+Der Grep oben findet nur Rechtswerte und nur in der neuen Lib. Den 160-Stunden-Fehler hätte er
+nie gefunden: 160 ist kein Rechtswert, und er stand in Lib, Komponente, Seite und Config-Text.
+Deshalb vor jedem Commit zusätzlich, aus dem Wurzelordner des Repos (auf Karstens Rechner
+`G:/Python314/python.exe` statt `python3`; das `python` im PATH gehört zu Inkscape):
+
+```bash
+python3 .claude/skills/karola-rechner/scripts/karola.py selbsttest
+python3 .claude/skills/karola-rechner/scripts/karola.py register . --slug <slug> --alle
+python3 .claude/skills/karola-rechner/scripts/karola.py formeln . <slug>
+python3 .claude/skills/karola-rechner/scripts/karola.py zahlen . <slug>
+python3 .claude/skills/karola-rechner/scripts/karola.py inventar . <slug>
+```
+
+- **`register`:** Jede Stelle der Stufe `befund` wird vor dem Commit behoben. Jede Stelle der Stufe `pruefen` trägt Jahr, Interpolation oder Termin.
+- **`formeln`:** kein `BEFUND`; jeder `HINWEIS` ist im Bericht eingeordnet.
+- **`zahlen`:** Daraus entsteht das **Zahlenprotokoll** im Bericht an Karsten — je Zahl die Herkunft (Eingabe, Rechtswert, Konvention, Ergebnis), je Ergebniszahl der Lib-Lauf, der sie erzeugt: `npx tsx -e "import { f } from './lib/berechnungen/x'; console.log(f({ … }))"`. Eine Zahl ohne Herkunft wird nicht committet.
+- **`inventar`:** Für jede Lib, die auch andere Rechner verwenden, und jede Seite, die den Slug nennt, prüfen, ob dieselbe Größe dort denselben Wert zeigt.
+
+Die Skripte sind dieselben, mit denen Karola Rechner in Step 15 abnimmt. Wer sie vor dem Commit
+laufen lässt, bekommt ihre Befunde früher und billiger.
 
 ### Step 11a: Smoketest v3 Regression (Pflicht nach jedem Eingriff)
 
@@ -629,6 +687,21 @@ Browser-Konsole laufen lassen (siehe `scripts/smoke-test-v3.js`). Alle
 neun Checks müssen grün sein — oder dokumentierte Ausnahme. Erst danach
 committen.
 
+### Step 15: Abnahme durch Karola Rechner (Pflicht, v4)
+
+Nach Push und Deploy nimmt **Karola Rechner** (Skill `karola-rechner`) den Rechner auf einem
+frischen Klon ab: unabhängige Nachrechnung aus der Primärquelle, Zahlen-Inventar, Rechenketten,
+Konventionen-Register, Querabgleich, Rechtswerte und Stichtage, Regeln und Prüfskripte,
+Randfälle, Browserprüfung (KR01 bis KR10). Sie prüft den gepushten Stand, nicht den Bericht des
+Bau-Laufs.
+
+- Urteil `abnahmefähig`: Der Rechner ist fertig.
+- Urteil `nachbessern` oder `gesperrt`: Korrekturwelle auf ihre Befunde, danach Nachprüfung. Bei `gesperrt` (eine sichtbar falsche Zahl) geht die Korrektur jeder anderen Arbeit vor.
+
+Dasselbe gilt für jede Welle, die Rechenkern, Config-Texte oder Komponente eines bestehenden
+Rechners ändert. Bis das Urteil vorliegt, steht im Bericht an Karsten der Satz „Abnahme durch
+Karola Rechner steht aus“.
+
 ## Bewährte Patterns (Kopiervorlagen)
 
 Diese Muster sind durch den April-Audit 2026 validiert und stehen als
@@ -656,6 +729,7 @@ vorsorglich. Jede Zeile nennt den Auslöser, bei dem die Datei fällig ist.
 | `references/anti-patterns.md` | vor dem Bau eines Finanz-, Steuer-, SV- oder Arbeits-Rechners; außerdem bei jedem Bug, der sich „schon mal gesehen" anfühlt |
 | `references/content-standards.md` | Inhalte geschrieben werden — `contentBloecke`-Standard (Pflicht seit Welle 19) und Pattern-Goldstandard für Layout |
 | `references/zentrale-libs.md` | ein gesetzlich bestimmter Wert gebraucht wird — erst hier nachsehen, bevor irgendetwas hartkodiert wird |
+| Skill `karola-rechner`, `references/konventionen.md` | eine Größe gebraucht wird, die mehrere Rechner teilen (Wochen pro Monat, Monatsstunden, Arbeitstage, Minijob-Grenze …) — vor dem ersten Wert |
 | `references/audit-methodik.md` | eine Audit- oder Korrektur-Welle läuft, oder redaktionelle Referenzwerte in Configs angefasst werden |
 | `references/kategorien.md` | ein Technik-Rechner gebaut wird — was diese Kategorie von den anderen unterscheidet |
 
@@ -845,6 +919,7 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge,
 | 26.08.2026 | Welle 114: Prüfvorschriften-Regeln R1–R6 in der Operativen Disziplin, Anti-Pattern zur Namenswahl exportierter Helfer, Working-Tree-Disziplin um Worktree-Pflege und untracked Artefakte erweitert, Checkliste um den Block „Prüfvorschrift schreiben". **Struktur-Umbau:** SKILL.md 1966 → 898 Zeilen, sechs neue Referenzdateien (Qualitäts-Guards, Anti-Patterns, Audit-Methodik, Kategorien, Zentrale Libs, Content-Standards), Sync-Ablauf auf ZIP-Upload umgestellt. | [ ] noch offen |
 | 02.09.2026 | Wellen 128–131: R8 (Abschluss-Commit mit Historienblock gehört in jeden Wellen-Prompt) und R9 (Text mit typografischen Zeichen über Dateien statt zitierter Literale) in der Operativen Disziplin, dazu zwei Zählfallen als Ergänzung zu R2 und R3 (`types.ts`/`index.ts` bei der Rechner-Zählung, Quote-Form bei Objektschlüsseln mit Bindestrich). Bestandszahlen nachgemessen: 16→17 Blogartikel, 73→76 Grafik-Komponenten, 14→15 prebuild-Glieder. | [ ] noch offen |
 | 18.09.2026 | Durchsicht aller Skills: Bestandszahlen nachgemessen an HEAD `4193aa1` — 17→18 Blogartikel, 76→79 Grafik-Komponenten, 15→16 prebuild-Glieder. Unverändert bestätigt: 206 Rechner (R2-Zählfalle greift — roh gegrept sind es 220, `client-data.ts`/`index.ts`/`types.ts` gehören abgezogen), 13 Affiliate-Programme (R3-Zählfalle greift — `'ks-auxilia'` steht in Quote-Form), 55 Aufrufe in 52 Dateien. Drei überholte Stellen berichtigt: Smoketest-Erwartung 178→206 Rechner-URLs, der AdSense-Noise-Hinweis (Ladecode seit 16.08.2026 entfernt, kein `adsbygoogle` mehr im Repo) und die Empfehlung eines nie existierenden `scripts/word-count.mjs`. Dazu die Stand-Zeile `Stand: v3` eingeführt, ohne die `skill-paket.sh` den Paketbau verweigerte. | [ ] noch offen |
+| 27.10.2026 | v4 nach den Wellen 196 und 197 (Welle 198): Abschnitt „Pre-Build: Wertherkunft“, fünfter Standard, Step 11b Teil 2 (Prüfskripte von Karola Rechner, Zahlenprotokoll, Querabgleich), Step 15 Abnahme durch Karola Rechner, Integrations-Checkliste um drei Punkte ergänzt, Lehre zu „Beispielrechnungen“. Referenzen: G10 ohne Ausnahme für geteilte Konventionen und Text, Anti-Pattern „Monatsstunden als 160 (4 × 40)“, Konventionen-Kurzliste in `zentrale-libs.md`, Checklisten-Block „Wertherkunft und Abnahme“. Neuer Skill `karola-rechner` daneben. | [ ] noch offen |
 
 ---
 
@@ -949,6 +1024,8 @@ Nach jedem Deploy macht **nur Karsten** Live-Verify per Inkognito-Browser. **Cla
 ### Beispielrechnungen
 
 Werte für Beispiele in Specs IMMER aus Live-Calculator ziehen, nicht schätzen. Drift zwischen Spec-Wert und Live-Calculator wäre fachlich peinlich.
+
+Diese Regel stand schon hier, als W147b (`6984add`, 23.09.2026) im Beispiel der Brutto-Netto-FAQ das Netto von 2.340 auf 2.333 € korrigierte und „÷ 174“ stehen ließ, während die Lib mit 160 rechnete. Seit v4 ist sie deshalb ein Protokoll und keine Bitte mehr: Das Zahlenprotokoll (Step 11b, Teil 2) belegt jede Zahl mit ihrem Lib-Lauf, Karola Rechner rechnet es in Step 15 nach.
 
 Dasselbe gilt für Beträge, die in Metadaten wandern: Wenn Title oder Description eine Zahl tragen sollen, wird sie zur Build-Zeit aus derselben Funktion abgeleitet, aus der die Seite rechnet — nie hartkodiert. Sonst laufen Snippet und Seiteninhalt beim nächsten Parameter-Stichtag auseinander, und das Snippet ist die Fassung, die Google zeigt. Muster siehe Welle 114, sechs Brutto-Netto-Varianten (`const TITEL` / `const DESC` aus `n(1)` bzw. `n(3)` oberhalb von `export const metadata`).
 

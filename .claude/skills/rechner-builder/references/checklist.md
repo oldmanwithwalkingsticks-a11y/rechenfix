@@ -96,6 +96,17 @@ Vor jeder neuen Rechner-Implementierung oder Sub-Wellen-Update:
 - [ ] Bei unterjährig wechselnden Werten: Stichtag-Switch-Pattern (`getAktuelle…(stichtag)`) statt nackter Konstante
 - [ ] Audit-Vorbereitung: `grep -rn "Stand: " lib/berechnungen/` zeigt alle Stichtage des Repos — neue Datei muss dort auftauchen
 
+### Wertherkunft und Abnahme (v4, 27.10.2026)
+
+- [ ] Konventionen-Register gelesen (Skill `karola-rechner`, `references/konventionen.md`); jede geteilte Größe aus ihrer SSOT, in Komponenten über die Domain-Lib importiert
+- [ ] Keine abgeleitete Zahl getippt — weder im Code noch im Text
+- [ ] Stichtagswerte im Text mit Jahr im selben Satz, interpoliert oder mit Termin in `lib/termine.ts`
+- [ ] `karola.py register . --slug <slug> --alle`: keine Stelle der Stufe `befund`, jede Stelle der Stufe `pruefen` eingeordnet
+- [ ] `karola.py formeln . <slug>`: kein `BEFUND`
+- [ ] Zahlenprotokoll aus `karola.py zahlen . <slug>` im Bericht: Herkunft je Zahl, Lib-Lauf je Ergebniszahl
+- [ ] Querabgleich: dieselbe Größe auf den Seiten aus `karola.py inventar . <slug>` mit demselben Wert
+- [ ] Abnahme durch Karola Rechner nach dem Deploy beauftragt; „fertig“ erst mit `abnahmefähig`
+
 ### Verify-Standards
 
 - [ ] Karsten-Inkognito-Screenshots = ground truth

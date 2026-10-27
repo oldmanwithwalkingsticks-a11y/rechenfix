@@ -413,6 +413,39 @@ Bei Treffern mit abweichendem Verhalten: **umbenennen, nicht überlagern.** Der 
 
 Gilt sinngemäß auch beim Umgekehrten: Wer eine der sieben lokalen Definitionen durch einen Import ersetzen will, muss vorher die Nachkommastellen beider Seiten vergleichen.
 
+### 🚫 Monatsstunden als 160 (4 × 40) — der 160-Stunden-Fall (Wellen 196 und 197, 27.10.2026)
+
+Im Oktober 2026 zeigte rechenfix für dieselbe Größe drei Stundenlöhne. Gemessen am Stand vor
+Welle 196 (`4d15368`) mit `karola.py register`:
+
+| Stelle | Rechnung |
+|---|---|
+| `lib/berechnungen/brutto-netto.ts:324` | `nettoMonat / 160` (Netto pro Stunde) |
+| `components/rechner/SchnellCheck.tsx:91` | `MINDESTLOHN * 160` (Mindestlohn-Hinweis) |
+| `app/finanzen/mindestlohn-netto/page.tsx:13` | `STUNDEN_PRO_MONAT = 160` |
+| `lib/rechner-config/finanzen.ts:48` | FAQ „ca. 160 Stunden“ |
+| `components/rechner/BruttoNettoRechner.tsx:80` | FAQ „ca. 174 Stunden (40 × 52 Wochen ÷ 12 Monate)“, Beispiel „÷ 174“ |
+
+Der Stundenlohn-Rechner rechnete richtig mit 40 × 52 ÷ 12 = 173,33. 160 stimmt nur für einen
+Februar ohne Schalttag; die Schwelle des Mindestlohn-Hinweises lag damit um 205 € zu tief
+(2.204 statt 2.409,33 €).
+
+**Warum es niemand fand:** G10 nahm „nicht rechts-/jahresabhängige Konstanten“ aus, und 160 sah
+wie eine aus. Der Grep in Step 11b sucht nur Rechtswerte und nur in `lib/berechnungen/`. Die
+FAQ-Zahlen wurden nie gegen die Lib gerechnet: W147b (`6984add`) korrigierte im Beispiel das
+Netto von 2.340 auf 2.333 €, ließ aber „÷ 174“ stehen. Und kein Schritt verglich dieselbe Größe
+über mehrere Seiten.
+
+**Regel:** Monatsstunden mit `VOLLZEIT_STUNDEN_MONAT` oder Wochenstunden × `WOCHEN_PRO_MONAT`,
+in Komponenten über die Domain-Lib importiert (`CLAUDE.md`, „Berechnungs-interne Helfer“).
+Allgemein: „Pre-Build: Wertherkunft“ in der SKILL.md und das Konventionen-Register im Skill
+`karola-rechner`. `scripts/verify-monatsstunden.ts` hält die sechs alten Muster als Gate im
+Build; `karola.py register` findet sie und die übrigen Konventionen.
+
+**Die Lehre dahinter:** Eine Regel ohne Messung wird gebrochen. „Werte für Beispiele IMMER aus
+Live-Calculator ziehen“ stand längst in der SKILL.md (Operative Disziplin, „Beispielrechnungen“).
+Seit v4 belegt ein Zahlenprotokoll jede Zahl, und Karola Rechner rechnet es nach.
+
 ### 📌 Meta-Lektion: Soli ohne Milderungszone — ein Wiederholungs-Bug
 
 Das Muster `est > 20350 ? est * 0.055 : 0` (harte Kante ohne Milderungszone)

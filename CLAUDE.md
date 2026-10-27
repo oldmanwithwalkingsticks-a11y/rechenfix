@@ -1,13 +1,14 @@
 # CLAUDE.md — Rechenfix.de Projektregeln
 
 ## Pflicht bei JEDEM neuen Rechner
-1. Lies ZUERST `/mnt/skills/user/rechner-builder/SKILL.md` und befolge ALLE 12 Steps
+1. Lies ZUERST `/mnt/skills/user/rechner-builder/SKILL.md` und befolge alle Steps (seit v4: 1 bis 15)
 2. ALLE URLs müssen `https://www.rechenfix.de/` verwenden (MIT www!)
 3. Sitemap, Canonical und OpenGraph: IMMER mit www
 4. Sidebar-Count der Kategorie nach neuem Rechner erhöhen
 5. Live-Berechnung ohne Submit-Button
 6. Default-Werte für alle Eingabefelder
 7. Input-Felder min. 48px Höhe
+8. Fertig ist ein Rechner erst, wenn Karola Rechner (Skill `karola-rechner`) ihn nach dem Deploy abgenommen hat: Urteil „abnahmefähig“. Ihre Prüfskripte laufen schon vor dem Commit (rechner-builder Step 11b, Teil 2). Dasselbe gilt für jede Welle, die Rechenkern, Texte oder Komponente eines Rechners ändert.
 
 ## Affiliate-System
 - Komponente: `components/AffiliateBox.tsx` (NICHT `src/components/...` — Pfad seit jeher unter `components/`)
@@ -949,15 +950,15 @@ Bei Gesundheits-/Finanz-/Familien-Themen: keine wertende Sprache, Verweis auf Fa
 - `lib/rechner-config/client-data.ts` ist auto-generiertes File (Datums-Stempel-Drift) — **NICHT mit-committen**
 - Vor `git add` immer `git status` prüfen, ob client-data.ts dirty ist
 - Atomic-Commits: ein Sub-Wellen-Commit, prägnante Message
-- **Getrackte Skills unter `.claude/skills/`:** `rechner-builder` und `blog-builder` sind versioniert,
-  liegen aber unter der Ignore-Regel `.claude/skills/` (darunter das private Skill-Repo für peter-ki
-  und susanne-recht, Begründung in `.gitignore`). `git add <pfad>` nimmt geänderte Dateien dort zwar
-  auf, endet aber mit Exit 1 und bricht `&&`-Ketten ab (Welle 166). Deshalb
-  `git add -u -- .claude/skills/rechner-builder .claude/skills/blog-builder`; eine neue Datei in
-  diesen beiden Skills braucht `git add -f`. Das private Repo darunter nie anfassen.
-- **Skill-Kopie in Claude.ai:** Ändert eine Welle `SKILL.md` oder eine Referenzdatei von
-  `rechner-builder` oder `blog-builder`, muss Karsten den Skill in Claude.ai nachziehen. Der Bericht
-  der Welle nennt die geänderten Skill-Dateien ausdrücklich.
+- **Getrackte Skills unter `.claude/skills/`:** `rechner-builder`, `blog-builder` und (seit Welle 198)
+  `karola-rechner` sind versioniert, liegen aber unter der Ignore-Regel `.claude/skills/` (darunter das
+  private Skill-Repo für peter-ki und susanne-recht, Begründung in `.gitignore`). `git add <pfad>` nimmt
+  geänderte Dateien dort zwar auf, endet aber mit Exit 1 und bricht `&&`-Ketten ab (Welle 166). Deshalb
+  `git add -u -- .claude/skills/rechner-builder .claude/skills/blog-builder .claude/skills/karola-rechner`;
+  eine neue Datei in diesen drei Skills braucht `git add -f`. Das private Repo darunter nie anfassen.
+- **Skill-Kopie in Claude.ai:** Ändert eine Welle `SKILL.md`, eine Referenzdatei, ein Skript oder ein
+  Asset von `rechner-builder`, `blog-builder` oder `karola-rechner`, muss Karsten den Skill in Claude.ai
+  nachziehen. Der Bericht der Welle nennt die geänderten Skill-Dateien ausdrücklich.
 
 ### Pre-Phase-Pflicht
 

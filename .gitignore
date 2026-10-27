@@ -144,5 +144,6 @@ scripts/_tmp-etf-check.mjs
 # eigenen, PRIVATEN Repo unter .claude/skills/ versioniert, weil dieses Repo
 # oeffentlich ist und die Pakete interne Arbeitsstaende samt Fehlerprotokollen
 # der Tageslaeufe enthalten. Achtung: Diese Zeile untrackt nichts Bestehendes:
-# blog-builder und rechner-builder bleiben hier versioniert.
+# blog-builder, rechner-builder und karola-rechner (seit Welle 198) bleiben hier
+# versioniert; neue Dateien darin brauchen git add -f.
 .claude/skills/
