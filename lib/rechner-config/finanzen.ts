@@ -874,7 +874,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Was der Stundenlohn wirklich aussagt',
-        html: `<p>Der Stundenlohn beantwortet eine einfache, aber entscheidende Frage: Wie viel Geld verdienen Sie für eine Stunde Ihrer Arbeitszeit? Anders als das Monatsgehalt, das die dahinterstehende Arbeitszeit verschleiert, macht der Stundenlohn Jobs unmittelbar vergleichbar. 3.500 € bei einer 40-Stunden-Woche und 3.500 € bei einer 35-Stunden-Woche klingen gleich — pro Stunde liegen jedoch Welten dazwischen.</p><p>Berechnet wird der Stundenlohn aus dem Bruttogehalt und den monatlichen Arbeitsstunden. Diese ergeben sich aus den Wochenstunden multipliziert mit dem Faktor <strong>52 ÷ 12 = 4,33…</strong> — dem Durchschnitt von 52 Wochen geteilt durch 12 Monate. Ein Monat hat also im Schnitt rund 4,33 Arbeitswochen, nicht 4; wer mit 4 rechnet, überschätzt den Stundenlohn um rund 8 %. Der Rechner nimmt den genauen Bruch 52 ÷ 12, bei 40 Wochenstunden also 173,33 Stunden im Monat.</p><p>Wichtig ist die Unterscheidung zwischen <strong>brutto und netto</strong>. Der Brutto-Stundenlohn ist die ehrlichste Größe, um Stellenangebote zu vergleichen, weil er unabhängig von der persönlichen Steuersituation ist. Der Netto-Stundenlohn zeigt dagegen, was am Ende tatsächlich auf dem Konto landet — und der hängt stark von Steuerklasse, Kinderzahl und Krankenkasse ab. Wer Angebote vergleicht, sollte immer dieselbe Größe verwenden: brutto mit brutto oder netto mit netto, niemals gemischt.</p><p>Ein konkretes Beispiel zeigt, warum das Monatsgehalt allein trügt: Job A bietet 3.800 € im Monat bei 40 Wochenstunden, Job B 3.400 € bei 32 Stunden. Job A klingt besser — pro Stunde liegt jedoch Job B vorn (3.800 ÷ 173,33 = 21,92 € gegen 3.400 ÷ 138,67 = 24,52 €). Erst der Stundenlohn macht solche Angebote ehrlich vergleichbar. Das gilt besonders beim Wechsel zwischen Vollzeit und Teilzeit, bei unbezahlten Überstunden und über Branchengrenzen hinweg, wo sich Arbeitszeiten und Zusatzleistungen stark unterscheiden.</p>`,
+        html: `<p>Der Stundenlohn beantwortet eine einfache, aber entscheidende Frage: Wie viel Geld verdienen Sie für eine Stunde Ihrer Arbeitszeit? Anders als das Monatsgehalt, das die dahinterstehende Arbeitszeit verschleiert, macht der Stundenlohn Jobs unmittelbar vergleichbar. 3.500 € bei einer 40-Stunden-Woche und 3.500 € bei einer 35-Stunden-Woche klingen gleich — pro Stunde liegen jedoch Welten dazwischen.</p><p>Berechnet wird der Stundenlohn aus dem Bruttogehalt und den monatlichen Arbeitsstunden. Diese ergeben sich aus den Wochenstunden multipliziert mit dem Faktor <strong>52 ÷ 12 = 4,33…</strong> — dem Durchschnitt von 52 Wochen geteilt durch 12 Monate. Ein Monat hat also im Schnitt gut 4,3 Arbeitswochen, nicht 4; wer mit 4 rechnet, überschätzt den Stundenlohn um rund 8 %. Der Rechner nimmt den Bruch 52 ÷ 12 wie der Gesetzgeber bei der Minijob-Grenze, bei 40 Wochenstunden also 173,33 Stunden im Monat. Kalendergenau sind es 4,348 Wochen (173,92 Stunden), weil ein Jahr 52 Wochen und ein bis zwei Tage hat; mit diesem Faktor rechnen der TVöD und einige Branchen-Mindestlöhne.</p><p>Wichtig ist die Unterscheidung zwischen <strong>brutto und netto</strong>. Der Brutto-Stundenlohn ist die ehrlichste Größe, um Stellenangebote zu vergleichen, weil er unabhängig von der persönlichen Steuersituation ist. Der Netto-Stundenlohn zeigt dagegen, was am Ende tatsächlich auf dem Konto landet — und der hängt stark von Steuerklasse, Kinderzahl und Krankenkasse ab. Wer Angebote vergleicht, sollte immer dieselbe Größe verwenden: brutto mit brutto oder netto mit netto, niemals gemischt.</p><p>Ein konkretes Beispiel zeigt, warum das Monatsgehalt allein trügt: Job A bietet 3.800 € im Monat bei 40 Wochenstunden, Job B 3.400 € bei 32 Stunden. Job A klingt besser — pro Stunde liegt jedoch Job B vorn (3.800 ÷ 173,33 = 21,92 € gegen 3.400 ÷ 138,67 = 24,52 €). Erst der Stundenlohn macht solche Angebote ehrlich vergleichbar. Das gilt besonders beim Wechsel zwischen Vollzeit und Teilzeit, bei unbezahlten Überstunden und über Branchengrenzen hinweg, wo sich Arbeitszeiten und Zusatzleistungen stark unterscheiden.</p>`,
       },
       {
         typ: 'beispielrechnung',
@@ -997,7 +997,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Warum wird mit 4,33 Wochen gerechnet?',
-        antwort: 'Ein Jahr hat 52 Wochen, verteilt auf 12 Monate. 52 ÷ 12 = 4,333 Wochen pro Monat im Durchschnitt. Da die Monate unterschiedlich lang sind (28–31 Tage), ist das der richtige Durchschnittswert für die Umrechnung von Wochen- auf Monatswerte. Der Rechner nimmt den genauen Bruch; mit dem gerundeten Faktor 4,33 ergäben sich kleine Abweichungen (bei 3.500 € und 40 Stunden 20,21 € statt 20,19 €).',
+        antwort: 'Ein Jahr hat 52 Wochen, verteilt auf 12 Monate: 52 ÷ 12 = 4,333 Wochen pro Monat. Mit diesem Faktor rechnen auch der Gesetzgeber (Minijob-Grenze nach § 8 Abs. 1a SGB IV: Mindestlohn × 130 ÷ 3) und der Mindestlohn-Rechner des BMAS. Kalendergenau ist es etwas mehr: Ein Jahr hat 52 Wochen und ein bis zwei Tage, im langjährigen Schnitt sind das 4,348 Wochen pro Monat — so rechnen der TVöD und einige Branchen-Mindestlöhne. Bei 3.500 € und 40 Stunden ergibt das 20,12 € statt 20,19 €. Der Rechner nimmt den Bruch 52 ÷ 12; mit dem gerundeten Faktor 4,33 kämen 20,21 € heraus. Die Faustregel 4 Wochen mal 40 = 160 Stunden stimmt nur für einen Februar ohne Schalttag und ergibt 21,88 €.',
       },
       {
         frage: 'Wie rechne ich Teilzeit-Gehalt in Stundenlohn um?',
@@ -4495,7 +4495,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'hochrechner',
-    letzteAktualisierung: '2026-06-25',
+    letzteAktualisierung: '2026-10-27',
     titel: 'Hochrechner (Gehalt)',
     beschreibung: 'Rechnen Sie Stunden-, Tages-, Wochen-, Monats- oder Jahreslohn ineinander um — inkl. Mindestlohn-Vergleich 2026.',
     kategorie: 'Finanzen',
@@ -4666,7 +4666,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Warum hat ein Monat nicht 4 Wochen?',
-        antwort: 'Ein Jahr hat 52 Wochen, verteilt auf 12 Monate — ergibt 4,33 Wochen pro Monat im Schnitt. Deshalb rechnen wir Stunde → Monat über den Umweg Jahresstunden / 12, nicht einfach × 4.',
+        antwort: 'Ein Jahr hat 52 Wochen und ein bis zwei Tage, verteilt auf 12 Monate — das sind gut 4,3 Wochen pro Monat. Wir rechnen wie der Gesetzgeber bei der Minijob-Grenze mit 52 Wochen, also 52 ÷ 12 = 4,33 Wochen pro Monat (kalendergenau wären es 4,348). Deshalb rechnen wir Stunde → Monat über den Umweg Jahresstunden / 12, nicht einfach × 4.',
       },
       {
         frage: 'Wie viele Arbeitsstunden hat ein Jahr bei 40 Stunden/Woche?',
