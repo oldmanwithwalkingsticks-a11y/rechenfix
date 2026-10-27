@@ -6,6 +6,89 @@
 
 ---
 
+## 27.10.2026 — Welle 198: rechner-builder v4 und Skill karola-rechner v1 — ✅ ABGESCHLOSSEN 27.10.2026
+
+**Anlass** (Karstens Auftrag vom 27.10.2026 nach den Wellen 196 und 197): ein besserer rechner-builder, der schon beim
+Bau die korrekten Werte ermittelt, und eine Assistentin Karola Rechner, die jeden Rechner nach dem Bau auf Herz und
+Nieren prüft (Funktion, Regeln, Vorgaben, Werte). Ursache des 160-Stunden-Fehlers, gemessen am 27.10.2026:
+- Die 160 kam im April 2026 als feste Zahl in den Code: `6f4e430` und `e1f7044` (04.04.), `6f23e59` (18.04.).
+- Guard G10 nahm „nicht rechts-/jahresabhängige Konstanten“ ausdrücklich aus.
+- Der SSOT-Grep in Step 11b sucht nur Rechtswerte in `lib/berechnungen/`.
+- Zahlen in FAQ und Beispiel wurden nie gegen die Lib gerechnet. W147b (`6984add`) korrigierte das Netto im Beispiel
+  und ließ „÷ 174“ stehen.
+- Kein Schritt verglich dieselbe Größe über mehrere Seiten.
+
+**Änderungen** (nur Skills und Doku; Vorlage `_lokal/welle198-karola-rechner.mjs`: 19 Ersetzungen in 7 Dateien,
+6 neue Dateien, nicht committet):
+- **`rechner-builder/SKILL.md`:** v3 → v4 mit Abschnitt „Pre-Build: Wertherkunft“, fünftem Standard, Step 11b Teil 2
+  (Prüfskripte von Karola, Zahlenprotokoll, Querabgleich), Step 15 „Abnahme durch Karola Rechner“, drei Punkten in der
+  Integrations-Checkliste, einer Lehre unter „Beispielrechnungen“ und einer Zeile im Sync-Protokoll.
+- **`references/qualitaets-guards.md`:** G10 ohne Ausnahme für geteilte Konventionen und für Zahlen im Text.
+- **`references/anti-patterns.md`:** neues Anti-Pattern „Monatsstunden als 160 (4 × 40) — der 160-Stunden-Fall“ mit
+  den fünf Stellen vor Welle 196 und der Begründung, warum es niemand fand.
+- **`references/checklist.md`:** neuer Block „Wertherkunft und Abnahme“ mit acht Punkten.
+- **`references/zentrale-libs.md`:** neuer Abschnitt „Konventionen“ mit der Kurzliste KV01 bis KV05 und ihren SSOT.
+- **`CLAUDE.md`:** Pflichtpunkt 8 (fertig erst mit Karolas Urteil „abnahmefähig“), „alle Steps (seit v4: 1 bis 15)“
+  statt „ALLE 12 Steps“, `karola-rechner` bei den getrackten Skills und bei der Skill-Kopie in Claude.ai.
+- **`.gitignore`:** nur der Kommentar über `.claude/skills/` nennt jetzt auch `karola-rechner`; die Regel bleibt.
+- **Neu `.claude/skills/karola-rechner/`** (v1, versioniert wie `rechner-builder`, per `git add -f`):
+  - `SKILL.md`: Abnahme mit Prüfkatalog KR01 bis KR10, Befundstufen A, B, C und Urteil `abnahmefähig`, `nachbessern`
+    oder `gesperrt`.
+  - `references/pruefkatalog.md`: der Prüfkatalog KR01 bis KR10 nach Werten und Regeln.
+  - `references/konventionen.md`: Register KV01 bis KV06 (Wochen pro Monat, Monatsstunden, Arbeitstage,
+    Minijob-Grenze, Mindestlohn-Monatsbrutto, Jahreswerte im Text) mit SSOT und verbotenen Schreibweisen.
+  - `assets/karola.json`: Katalog und Register maschinenlesbar.
+  - `assets/bericht-vorlage.md`: Vorlage für den Abnahmebericht mit Urteil, Befunden und KR01 bis KR10.
+  - `scripts/karola.py`: nur Standardbibliothek, Befehle `inventar`, `zahlen`, `formeln`, `register`, `quer` und
+    `selbsttest`.
+
+**Karolas erster Lauf am Bestand** (`28fc64a` plus diese Welle, Rechnercode unverändert):
+- **Formel-Prüfer:** 190 Ketten in 443 Dateien, 0 Befunde, 2 Hinweise (`lib/rechner-config/sport.ts:1915`,
+  `lib/rechner-config/wohnen.ts:3290`, beide nur mit gerundeten Zwischenwerten stimmig).
+- **Register:** KV01 1 Befund, `components/rechner/EnergiekostenRechner.tsx:75` (`kwhWoche * 4.33`); KV02 und KV03 je
+  0; Stufe `pruefen`: KV04 3, KV05 1, KV06 103 Stellen.
+- Darunter (KV06) `components/rechner/SchnellCheck.tsx:82`: Die Bedingung prüft `BBG_KV_MONAT` aus der Lib, der Text
+  nennt „5.812,50 €“ fest.
+- Behoben werden die Funde in einer eigenen Welle.
+
+**Bewusst nicht geändert:**
+- **Rechnercode** (`lib/`, `components/`, `app/`, `scripts/`): Diese Welle ändert nur Skills und Doku.
+- **`scripts/verify-monatsstunden.ts`:** bleibt Gate im Build; Karolas KV02 hat dieselben Muster.
+- **Privates Skill-Repo:** nicht angefasst bis auf `info/exclude`. Nach Phase 1 zeigte es `?? karola-rechner/`; die
+  Zeile `karola-rechner/` wurde an `.claude/skills/.git/info/exclude` angehängt (Exit 0), danach war der Status leer.
+  Kein Commit, kein Push dort.
+- **`blog-builder`.**
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- Die Ausgaben von `zahlen` und `inventar` gingen in den Scratchpad-Ordner der Sitzung statt nach `/tmp`; die Werte
+  sind davon nicht berührt.
+- Die Messungen aus dem Probelauf (CRLF-Dateien, Abbruch beim zweiten Lauf, Selbsttest aus dem ZIP, `quer`, Stand
+  `4d15368`) habe ich in diesem Lauf nicht wiederholt.
+
+**Gates:**
+- Phase 0 an `28fc64a`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `28fc64a`, darunter
+  `b3cdfdb`; Skill-Repo-Status leer, dann `frei`; Grep `SKILL.md:1` („Stand: v3 (18.09.2026)“); Python 3.14.5;
+  `verify:alle` 86/86, Exit 0.
+- Phase 1: „OK — 19 Ersetzungen in 7 Dateien, 6 neue Dateien.“, Exit 0; `git status` genau die sieben Dateien
+  (`rechner-builder/SKILL.md`, vier Referenzen, `.gitignore`, `CLAUDE.md`), dazu `!! .claude/skills/karola-rechner/`;
+  Skill-Repo `?? karola-rechner/` → `info/exclude` ergänzt, Exit 0, danach leer.
+- Phase 2: `selbsttest` „60 von 60 Faellen wie erwartet — gruen.“, Exit 0. `formeln .` zwei `HINWEIS`, „190 Ketten in
+  443 Dateien, 0 Befund(e), 2 Hinweis(e)“, Exit 0. `register .` wie oben, „Register: 1 Befund(e)“, Exit 1 (Soll).
+  `register . --slug stundenlohn-rechner` KV01 bis KV05 je 0, KV06 1, „Register: 0 Befund(e)“, Exit 0. `zahlen` Exit
+  0, „260 von Hand einzuordnen, 32 in stimmigen Ketten, automatisch eingeordnet: 2 Datum, 24 Jahr, 7 Norm“.
+  `inventar` Exit 0, Config `lib/rechner-config/finanzen.ts` Zeilen 853 bis 1024 (Kategorie `Finanzen`), Komponente
+  `components/rechner/StundenlohnRechner.tsx`. Sieben Greps je 1. `verify:alle` 86/86, Exit 0. Kein Build: Die Welle
+  ändert keinen Rechnercode, den Build belegt der Vercel-Deploy.
+- Phase 3: `git diff --cached --name-only` 13, „13 files changed, 1557 insertions(+), 13 deletions(-)“; `git commit`
+  Exit 0, danach `git status` leer.
+
+**Commits:** A `1dc9f42` (sechs neue Dateien `karola-rechner`, fünf Dateien `rechner-builder`, `CLAUDE.md`,
+`.gitignore`). B ist dieser Doku-Commit. Die Skill-Pakete `rechner-builder-v4.zip` und `karola-rechner-v1.zip` aus
+`_lokal` spielt Karsten in Claude.ai ein.
+
+---
+
 ## 27.10.2026 — Welle 197: Stundenlohn-Rechner und Hochrechner — 52 ÷ 12 als Konvention, 4,348 als Kalenderwert — ✅ ABGESCHLOSSEN 27.10.2026
 
 **Anlass** (Faktenblatt zu Blogartikel 21 vom 27.10.2026, `_lokal/artikel21-stundenlohn-faktenblatt.md`, F1 bis F4 und
