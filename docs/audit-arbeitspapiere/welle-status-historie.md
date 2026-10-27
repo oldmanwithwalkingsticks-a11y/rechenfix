@@ -6,6 +6,93 @@
 
 ---
 
+## 27.10.2026 — Welle 196: Monatsstunden einer Vollzeitstelle 40 × 52 ÷ 12 = 173,33 statt 160 — Netto pro Stunde, Mindestlohn-Hinweis, Seite „Mindestlohn netto“ — ✅ ABGESCHLOSSEN 27.10.2026
+
+**Anlass** (Prüfung durch Chat-Claude am 27.10.2026 vor Blogartikel 21 zum Stundenlohn-Rechner, gemessen am Stand
+`4d15368` und live auf www.rechenfix.de): Eine 40-Stunden-Woche hat im Monatsdurchschnitt 40 × 52 ÷ 12 = 173,33
+Stunden. Stundenlohn- und Wahrer-Stundenlohn-Rechner rechnen so (`WOCHEN_PRO_MONAT`), andere Stellen nicht:
+- **Brutto-Netto-Rechner, Ergebnis:** `nettoProStunde = nettoMonat / 160` → bei 3.500 € brutto „~14,58 € / Stunde“
+  statt 13,46 € (so auch Video 2). Dieselbe Rechnung auf `/finanzen/mindestlohn-netto` und den sechs Long-Tail-Seiten.
+- **Brutto-Netto-Rechner, FAQ:** sichtbar (Komponente) „ca. 174 Stunden … 13,41 €“, in der Config „ca. 160 Stunden …
+  14,58 €“ — mit dem Ergebnis drei verschiedene Stundenwerte zu einer Frage.
+- **Schnellcheck, Mindestlohn-Hinweis:** Schwelle `MINDESTLOHN × 160 − 20` = 2.204 € statt 2.409,33 €; 2.300 € bei
+  40 Stunden (13,27 €/h) blieben ohne Hinweis. Der Hinweis stand außerdem an letzter Stelle (höchstens zwei Tipps
+  sichtbar, bei Kirchensteuer und PV-Zuschlag fiel er weg), und bei „jährlich“ bekam der Schnellcheck den Jahresbetrag
+  (42.000 € jährlich → Tipp „über der KV-Beitragsbemessungsgrenze“).
+- **Seite „Mindestlohn netto“:** „13,9 € × 160 Stunden = 2.224 € brutto/Monat“, Netto in Steuerklasse 1 1.608,53 €
+  statt 1.716,47 €; Mindestlohn des Build-Tages statt des Rechenjahrs; FAQ-Verlauf „2022 auf 12,00 €, Oktober 2022 auf
+  12,00 €“.
+- **Stundenlohn-Rechner, FAQ Mindestlohn:** „ca. 2.407 Euro“ und „ca. 28.891 Euro“ statt 2.409,33 und 28.912 Euro.
+- **Tipp des Tages:** Mindestlohn × 40 × 4,33 = 2.407 € statt 2.409 €.
+
+**Änderungen** (Vorlage `_lokal/welle196-monatsstunden.mjs`: 40 Ersetzungen in 11 Dateien, 1 neue Datei, nicht
+committet):
+- **`lib/berechnungen/_helpers.ts`:** `VOLLZEIT_WOCHENSTUNDEN = 40` und `VOLLZEIT_STUNDEN_MONAT` = 40 × `WOCHEN_PRO_MONAT`.
+- **`lib/berechnungen/mindestlohn.ts`:** beide Konstanten re-exportiert (Seiten und Komponenten importieren `_helpers`
+  nicht direkt); neu `mindestlohnMonatVollzeit` (auf Cent, 13,90 € → 2.409,33 €, 14,60 € → 2.530,67 €) und
+  `unterMindestlohnBeiVollzeit` (Stundenlohn auf Cent gerundet unter dem Mindestlohn; 2.409 € nein, 2.408 € ja).
+- **`lib/berechnungen/brutto-netto.ts`:** `nettoProStunde` = Netto ÷ `VOLLZEIT_STUNDEN_MONAT` (3.500 € → 13,46 €).
+- **`components/rechner/SchnellCheck.tsx`:** Mindestlohn-Hinweis als erster Tipp, Schwelle über
+  `unterMindestlohnBeiVollzeit`, kein Hinweis im Minijob-Bereich, Text mit der Rechnung „13,90 € × 40 × 52 ÷ 12 =
+  2.409,33 € im Monat“.
+- **`components/rechner/BruttoNettoRechner.tsx`:** FAQ „Wie berechne ich mein Netto pro Stunde?“ neu (173,33 Stunden,
+  2.333,25 € ÷ 173,33 = 13,46 €), Schnellcheck bekommt `ergebnis.bruttoMonat`, Ergebnis und PDF mit „(40-Std.-Woche)“.
+- **`components/seo/BruttoNettoLongTail.tsx`:** „(40-Std.-Woche)“ hinter dem Stundenwert.
+- **`lib/rechner-config/finanzen.ts`:** Config-FAQ Brutto-Netto gleichlautend mit der Komponente; Stundenlohn-FAQ
+  „Monatsbrutto von 2.409,33 Euro (13,90 × 40 × 52 ÷ 12) bzw. einem Jahresbrutto von 28.912 Euro (13,90 × 40 × 52)“;
+  `letzteAktualisierung` von `brutto-netto-rechner` und `stundenlohn-rechner` `2026-10-20` → `2026-10-27`.
+- **`app/finanzen/mindestlohn-netto/page.tsx`:** Mindestlohn des Rechenjahrs (`getAktuellerMindestlohn(SV_RECHENSTAND)`,
+  wie Welle 173), Monatsbrutto 2.409,33 €, Jahresbrutto 28.912 €, „13,90“ statt „13,9“, Rechenweg in Berechnungszeile,
+  Kasten, Text und FAQ; FAQ-Verlauf Januar 2022 9,82 €, Juli 2022 10,45 €, Oktober 2022 per Gesetz 12,00 €; Keyword
+  „13 90 euro netto“ statt „12 82 euro netto“.
+- **`scripts/generate-tipp-constants.ts`, `lib/tipp-konstanten.ts`:** Mindestlohn des Rechenjahrs, Monatsstunden
+  40 × 52 ÷ 12 → 2.409 € brutto, 1.716 € netto (vorher 2.407 / 1.715).
+- **`CLAUDE.md`,** Abschnitt „Berechnungs-interne Helfer in `_helpers.ts`“: die beiden Konstanten, nie 160 oder 174,
+  Import über `mindestlohn.ts`.
+- **Neu `scripts/verify-monatsstunden.ts`** (33 Fälle): Konstanten; Netto pro Stunde gegen Netto-Cent × 12 ÷ 2.080
+  (1.812 Rasterfälle, Steuerklassen 1–6); Mindestlohn-Monatsbrutto 2025–2027 und Schwelle des Hinweises; Texte (beide
+  FAQs gleich, Stundenlohn-FAQ, Tipp-Konstante, Reihenfolge im Schnellcheck); Quelltext-Scan nach den alten Mustern in
+  `lib/`, `components/`, `app/` und `scripts/generate-*.ts`, vorher Selbsttest an den 7 alten Zeilen (Fund) und an 6
+  zulässigen 160ern (kein Fund). `verify:alle` 85 → 86.
+
+**Bewusst nicht geändert:**
+- Stundenlohn-, Wahrer-Stundenlohn-, Überstunden-, Teilzeit- und Minijob-Rechner: rechnen schon mit `WOCHEN_PRO_MONAT`.
+- Freelancer-Stundensatz („Wer mit 160 Stunden kalkuliert …“, „eher 100 bis 120 als 160 pro Monat“): Dort sind die
+  160 die falsche Annahme, vor der der Text warnt.
+- `EnergiekostenRechner` (`kwhWoche * 4.33`): keine Arbeitsstunden.
+- Der Schnellcheck vergleicht weiter mit `MINDESTLOHN` (Wert des Tages): Ob ein Lohn den Mindestlohn unterschreitet,
+  richtet sich nach dem geltenden Recht, nicht nach dem Rechenjahr.
+- `lib/social/captions.json`, Kacheln, Videos und Blogartikel: nennen keinen 160-Stunden-Wert.
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- Die Messungen aus dem Probelauf der Vorlage (CRLF-Dateien und Abbruch beim zweiten Lauf, `verify:alle` in New York
+  und Tokio, Browserprobe am gebauten Stand) habe ich in diesem Lauf nicht wiederholt.
+
+**Gates:**
+- Phase 0 an `4d15368`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `4d15368`, `5df5484`,
+  `bbaccc2`, `23d2667` (Welle 195). `git diff --name-only 4d15368 HEAD` über die 12 Pfade keine Ausgabe. Grep alte
+  Muster genau 6 Zeilen (`mindestlohn-netto/page.tsx:13`, `BruttoNettoRechner.tsx:80`, `SchnellCheck.tsx:91`,
+  `brutto-netto.ts:324`, `finanzen.ts:48`, `generate-tipp-constants.ts:20`); Grep `VOLLZEIT_STUNDEN_MONAT` keine
+  Ausgabe; `scripts/verify-monatsstunden.ts` nicht vorhanden. `verify:alle` 85/85, Exit 0.
+- Phase 1: „OK — 40 Ersetzungen in 11 Dateien, 1 neue Datei. letzteAktualisierung: 2026-10-27 (2 Zeilen).“, Exit 0;
+  `git status` genau die 11 geänderten Dateien und `?? scripts/verify-monatsstunden.ts`; `diff --stat` „11 files
+  changed, 95 insertions(+), 50 deletions(-)“.
+- Phase 2: `verify-monatsstunden` 33/33, Exit 0. `verify:alle` 86/86 in Ortszeit (Europe/Berlin) und mit `TZ=UTC`, je
+  Exit 0. Grep alte Muster keine Ausgabe, Exit 1. Grep `VOLLZEIT_STUNDEN_MONAT` `mindestlohn-netto/page.tsx:2`,
+  `_helpers.ts:1`, `brutto-netto.ts:2`, `mindestlohn.ts:4`, `generate-tipp-constants.ts:3`.
+  `letzteAktualisierung: '2026-10-27'` in `finanzen.ts:6` und `:855`. `tipp-konstanten.ts:13`
+  `MINDESTLOHN_TIPP_BRUTTO = 2409;`, `:16` `MINDESTLOHN_TIPP_NETTO = 1716;`. `npm run lint` Exit 0, keine Zeile
+  „problems“.
+- Phase 3: `npm run build` Exit 0, „Generating static pages … (271/271)“; danach `git status` dieselben 12 Zeilen.
+  Gegenprobe HTML 29/29, Exit 0.
+- Phase 4: `git add` der 12 Pfade, `git diff --cached --name-only` 12; `git commit` Exit 0, danach `git status` leer.
+
+**Commits:** A ba4114a (11 Dateien und `scripts/verify-monatsstunden.ts`). B ist dieser Doku-Commit. Die Live-Probe
+macht Karsten.
+
+---
+
 ## 21.10.2026 — Welle 195: Kindergeld-Rechner — Antrag nach geltendem Recht, Ausblick auf das Kindergeld ohne Antrag ab 2027 — ✅ ABGESCHLOSSEN 21.10.2026
 
 **Anlass** (Susannes rechenfix-Lauf vom 21.10.2026, QS01, dort als „nicht Gegenstand dieses Laufs“ vermerkt; Prüfung
