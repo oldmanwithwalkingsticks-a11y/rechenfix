@@ -12,6 +12,10 @@
  * Modul-Load) oder rufen `getAktuellerMindestlohn(stichtag)` explizit auf.
  */
 
+import { VOLLZEIT_STUNDEN_MONAT } from './_helpers';
+// Für Komponenten und Seiten, die _helpers nicht direkt importieren (CLAUDE.md, „Berechnungs-interne Helfer“)
+export { VOLLZEIT_WOCHENSTUNDEN, VOLLZEIT_STUNDEN_MONAT } from './_helpers';
+
 export const MINDESTLOHN_2024 = 12.41;
 export const MINDESTLOHN_2025 = 12.82;
 export const MINDESTLOHN_2026 = 13.9;
@@ -36,6 +40,23 @@ export function getAktuellerMindestlohn(stichtag: Date = new Date()): number {
 export function getMinijobGrenzeMonat(stichtag: Date = new Date()): number {
   // § 8 Abs. 1a SGB IV: Mindestlohn × 130 / 3, auf volle Euro AUFGERUNDET (nicht kaufmännisch).
   return Math.ceil((getAktuellerMindestlohn(stichtag) * 130) / 3);
+}
+
+/**
+ * Monatsbrutto bei Mindestlohn und 40-Stunden-Woche: Mindestlohn × 40 × 52 ÷ 12, auf Cent (W196).
+ * 13,90 € → 2.409,33 €; 14,60 € → 2.530,67 €. Vorher rechneten Hinweis und Seite mit × 160 (2.224 €).
+ */
+export function mindestlohnMonatVollzeit(mindestlohn: number): number {
+  return Math.round(mindestlohn * VOLLZEIT_STUNDEN_MONAT * 100) / 100;
+}
+
+/**
+ * true, wenn ein Monatsbrutto bei einer 40-Stunden-Woche unter dem Mindestlohn liegt (W196).
+ * Verglichen wird der Stundenlohn auf Cent gerundet: 2.409 € ergeben 13,898… → 13,90 € und zählen
+ * nicht als darunter, 2.408 € ergeben 13,89 €.
+ */
+export function unterMindestlohnBeiVollzeit(bruttoMonat: number, mindestlohn: number): boolean {
+  return bruttoMonat > 0 && Math.round((bruttoMonat / VOLLZEIT_STUNDEN_MONAT) * 100) / 100 < mindestlohn;
 }
 
 export const MINDESTLOHN = getAktuellerMindestlohn();

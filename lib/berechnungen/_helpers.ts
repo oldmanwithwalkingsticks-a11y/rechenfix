@@ -29,3 +29,16 @@ export function rundeBuRlGKonform(tage: number): number {
  * Verwendet in Stundenlohn- und Gehalts-Hochrechnungen.
  */
 export const WOCHEN_PRO_MONAT = 52 / 12;
+
+/**
+ * Wochenstunden einer Vollzeitstelle, wo ein Rechner kein eigenes Stundenfeld hat
+ * (Brutto-Netto „Netto pro Stunde“, Mindestlohn-Hinweis, Seite „Mindestlohn netto“, Tipp des Tages).
+ */
+export const VOLLZEIT_WOCHENSTUNDEN = 40;
+
+/**
+ * Arbeitsstunden einer Vollzeitstelle im Monatsdurchschnitt: 40 × 52 ÷ 12 = 173,33…
+ * W196: Vorher stand an drei Stellen 160 (4 Wochen × 40) und in einer FAQ 174. Ein Monat hat
+ * im Schnitt 52 ÷ 12 = 4,33 Wochen, nicht 4.
+ */
+export const VOLLZEIT_STUNDEN_MONAT = VOLLZEIT_WOCHENSTUNDEN * WOCHEN_PRO_MONAT;

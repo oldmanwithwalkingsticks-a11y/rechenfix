@@ -3,6 +3,7 @@ import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from './pflegeversicherung';
 import { istImUebergangsbereich, berechneBemessungsgrundlageAN, berechneBemessungsgrundlageGesamt, getMidijobUntergrenze, MIDIJOB_OBERGRENZE_MONAT } from './midijob-uebergang';
 import { getAktuelleMidijobParameter } from './midijob-parameter';
 import { getMinijobGrenzeMonat } from './mindestlohn';
+import { VOLLZEIT_STUNDEN_MONAT } from './_helpers';
 
 export interface BruttoNettoEingabe {
   bruttoMonat: number;
@@ -60,7 +61,7 @@ export interface BruttoNettoErgebnis {
   nettoJahr: number;
   steuernGesamt: number;
   sozialabgabenGesamt: number;
-  nettoProStunde: number;
+  nettoProStunde: number;          // Netto ÷ (40 × 52 ÷ 12) Stunden, W196 (vorher ÷ 160)
   abzuegeProzent: number;
   weihnachtsgeld?: WeihnachtsgeldErgebnis;
   /**
@@ -321,7 +322,7 @@ export function berechneBruttoNetto(eingabe: BruttoNettoEingabe): BruttoNettoErg
     nettoJahr: Math.round(nettoMonat * 12 * 100) / 100,
     steuernGesamt: Math.round(steuernGesamt * 100) / 100,
     sozialabgabenGesamt: Math.round(sozialabgabenGesamt * 100) / 100,
-    nettoProStunde: Math.round(nettoMonat / 160 * 100) / 100,
+    nettoProStunde: Math.round(nettoMonat / VOLLZEIT_STUNDEN_MONAT * 100) / 100,
     abzuegeProzent: brutto > 0 ? Math.round((gesamtAbzuege / brutto) * 1000) / 10 : 0,
     weihnachtsgeld: weihnachtsgeldErgebnis,
     svZone,

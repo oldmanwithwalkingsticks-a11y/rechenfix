@@ -77,7 +77,7 @@ const STATIC_FAQ: { frage: string; antwort: string }[] = [
   {
     frage: 'Wie berechne ich mein Netto pro Stunde?',
     antwort:
-      'Teilen Sie Ihr monatliches Nettogehalt durch Ihre durchschnittlichen Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 174 Stunden (40 × 52 Wochen ÷ 12 Monate). Beispiel: 2.333 € netto ÷ 174 = 13,41 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch im Ergebnis-Bereich an.',
+      'Teilen Sie Ihr monatliches Nettogehalt durch Ihre durchschnittlichen Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das 40 × 52 Wochen ÷ 12 Monate = 173,33 Stunden. Ein Monat hat im Schnitt 4,33 Wochen, nicht 4 — mit 160 Stunden (4 × 40) fiele der Wert zu hoch aus. Beispiel: 2.333,25 € netto ÷ 173,33 = 13,46 € netto pro Stunde. Unser Rechner zeigt diesen Wert für eine 40-Stunden-Woche im Ergebnis an.',
   },
 ];
 
@@ -288,7 +288,7 @@ export default function BruttoNettoRechner() {
         [{ content: 'Netto pro Monat', styles: { fontStyle: 'bold' } }, { content: eur(ergebnis.nettoMonat), styles: { fontStyle: 'bold', textColor: [21, 128, 61] } }],
         ['Netto pro Jahr', eur(ergebnis.nettoJahr)],
         ['Brutto pro Jahr', eur(ergebnis.bruttoJahr)],
-        ['Netto pro Stunde (ca.)', `~ ${eur(ergebnis.nettoProStunde)}`],
+        ['Netto pro Stunde (40-Std.-Woche)', `~ ${eur(ergebnis.nettoProStunde)}`],
       ],
       theme: 'grid',
       headStyles: { fillColor: [29, 78, 216], textColor: 255, fontStyle: 'bold' },
@@ -504,10 +504,10 @@ export default function BruttoNettoRechner() {
         </div>
       </details>
 
-      {/* KI-Schnellcheck Tipps */}
+      {/* KI-Schnellcheck Tipps — W196: Monatsbrutto aus dem Ergebnis, bei „jährlich“ kam vorher der Jahresbetrag an */}
       {bruttoNum > 0 && (
         <SchnellCheck
-          brutto={bruttoNum}
+          brutto={ergebnis.bruttoMonat}
           steuerklasse={steuerklasse}
           kirchensteuer={kirchensteuer}
           kirchensteuersatz={kstSatz}
@@ -525,7 +525,7 @@ export default function BruttoNettoRechner() {
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-white/70 text-sm mt-2">
               <span>{fmt(ergebnis.nettoJahr)} € / Jahr</span>
               <span>|</span>
-              <span>~{fmt(ergebnis.nettoProStunde)} € / Stunde</span>
+              <span>~{fmt(ergebnis.nettoProStunde)} € / Stunde (40-Std.-Woche)</span>
               <span>|</span>
               <span>{fmtAbzugsquote(ergebnis.abzuegeProzent)}% Abzüge</span>
             </div>

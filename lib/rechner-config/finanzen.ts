@@ -3,7 +3,7 @@ import type { RechnerConfig } from './types';
 export const finanzenRechner: RechnerConfig[] = [
   {
     slug: 'brutto-netto-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-27',
     zeigtAuthorBio: true,
     titel: 'Brutto-Netto-Rechner',
     beschreibung: 'Nettogehalt berechnen: Mit Steuerklasse, Bundesland, Kirchensteuer, KV und allen Sozialabgaben.',
@@ -45,7 +45,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie berechne ich mein Netto pro Stunde?',
-        antwort: 'Teilen Sie Ihr monatliches Nettogehalt durch Ihre Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das ca. 160 Stunden. Beispiel: 2.333 € netto ÷ 160 = 14,58 € netto/Stunde. Unser Rechner zeigt diesen Wert automatisch an.',
+        antwort: 'Teilen Sie Ihr monatliches Nettogehalt durch Ihre durchschnittlichen Arbeitsstunden pro Monat. Bei einer 40-Stunden-Woche sind das 40 × 52 Wochen ÷ 12 Monate = 173,33 Stunden. Ein Monat hat im Schnitt 4,33 Wochen, nicht 4 — mit 160 Stunden (4 × 40) fiele der Wert zu hoch aus. Beispiel: 2.333,25 € netto ÷ 173,33 = 13,46 € netto pro Stunde. Unser Rechner zeigt diesen Wert für eine 40-Stunden-Woche im Ergebnis an.',
       },
     ],
     quellen: [
@@ -852,7 +852,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'stundenlohn-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-27',
     zeigtAuthorBio: true,
     titel: 'Stundenlohnrechner',
     beschreibung: 'Stundenlohn aus Monatsgehalt berechnen oder umgekehrt — mit Mindestlohn-Vergleich und effektivem Stundenlohn.',
@@ -989,7 +989,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Wie hoch ist der Mindestlohn 2026?',
-        antwort: 'Der gesetzliche Mindestlohn in Deutschland beträgt seit dem 1. Januar 2026 13,90 Euro pro Stunde (vorher 12,82 € in 2025). Bei einer 40-Stunden-Woche entspricht das einem Monatsbrutto von ca. 2.407 Euro bzw. einem Jahresbrutto von ca. 28.891 Euro. Zum 1. Januar 2027 steigt er weiter auf 14,60 €.',
+        antwort: 'Der gesetzliche Mindestlohn in Deutschland beträgt seit dem 1. Januar 2026 13,90 Euro pro Stunde (vorher 12,82 € in 2025). Bei einer 40-Stunden-Woche entspricht das einem Monatsbrutto von 2.409,33 Euro (13,90 × 40 × 52 ÷ 12) bzw. einem Jahresbrutto von 28.912 Euro (13,90 × 40 × 52). Zum 1. Januar 2027 steigt er weiter auf 14,60 €.',
       },
       {
         frage: 'Was ist ein guter Stundenlohn in Deutschland?',

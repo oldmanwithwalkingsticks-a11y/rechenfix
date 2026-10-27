@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import { BBG_KV_MONAT, SV_RECHENSTAND } from '@/lib/berechnungen/brutto-netto';
-import { MINDESTLOHN, getMinijobGrenzeMonat } from '@/lib/berechnungen/mindestlohn';
+import { MINDESTLOHN, getMinijobGrenzeMonat, mindestlohnMonatVollzeit, unterMindestlohnBeiVollzeit } from '@/lib/berechnungen/mindestlohn';
 
 interface SchnellCheckProps {
   brutto: number;
@@ -34,6 +34,18 @@ export default function SchnellCheck({
 
   const alleTipps = useMemo<Tipp[]>(() => {
     const tipps: Tipp[] = [];
+
+    // W196: Mindestlohn zuerst — sichtbar sind höchstens zwei Tipps, und ein Lohn unter dem Mindestlohn
+    // wiegt schwerer als jeder Spartipp (vorher stand er an letzter Stelle und fiel z. B. bei Kirchensteuer
+    // und PV-Zuschlag weg). Schwelle Mindestlohn × 40 × 52 ÷ 12 = 2.409,33 € statt × 160 − 20 = 2.204 €.
+    // Im Minijob-Bereich kein Hinweis: Dort wäre eine 40-Stunden-Woche ohnehin unzulässig.
+    if (brutto > getMinijobGrenzeMonat(SV_RECHENSTAND) && unterMindestlohnBeiVollzeit(brutto, MINDESTLOHN)) {
+      const zwei = (x: number) => x.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      tipps.push({
+        id: 'mindestlohn',
+        text: `Bei einer 40-Stunden-Woche läge dieses Gehalt unter dem gesetzlichen Mindestlohn: ${zwei(MINDESTLOHN)} € × 40 × 52 ÷ 12 = ${zwei(mindestlohnMonatVollzeit(MINDESTLOHN))} € im Monat. Arbeiten Sie Vollzeit, prüfen Sie Ihren Arbeitsvertrag.`,
+      });
+    }
 
     // Kirchensteuer aktiviert → konkreten Betrag anzeigen
     if (kirchensteuer && brutto > 0 && kirchensteuerBetrag > 0) {
@@ -84,15 +96,6 @@ export default function SchnellCheck({
       tipps.push({
         id: 'wohngeld',
         text: 'Bei diesem Gehalt besteht möglicherweise Anspruch auf Wohngeld. Prüfen Sie dies bei Ihrer Gemeinde.',
-      });
-    }
-
-    // Brutto unter Mindestlohn-Niveau (13,90 €/h × 160 h ≈ 2.224 €)
-    const mindestlohnVollzeit = MINDESTLOHN * 160;
-    if (brutto > 0 && brutto < mindestlohnVollzeit - 20) {
-      tipps.push({
-        id: 'mindestlohn',
-        text: `Dieses Gehalt liegt unter dem gesetzlichen Mindestlohn (${MINDESTLOHN.toLocaleString('de-DE', { minimumFractionDigits: 2 })} €/h bei Vollzeit). Prüfen Sie Ihren Arbeitsvertrag.`,
       });
     }
 

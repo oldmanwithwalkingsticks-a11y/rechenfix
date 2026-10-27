@@ -160,7 +160,7 @@ export default function BruttoNettoLongTail({
               <p className="text-white/80 text-sm mb-1">{bruttoFmt} € brutto in Steuerklasse 1</p>
               <p className="text-4xl font-bold">{fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto</p>
               <p className="text-white/70 text-sm mt-2">
-                {fmt(ergebnisse[0].ergebnis.nettoJahr)} € / Jahr &nbsp;|&nbsp; ~{fmt(ergebnisse[0].ergebnis.nettoProStunde)} € / Stunde
+                {fmt(ergebnisse[0].ergebnis.nettoJahr)} € / Jahr &nbsp;|&nbsp; ~{fmt(ergebnisse[0].ergebnis.nettoProStunde)} € / Stunde (40-Std.-Woche)
               </p>
             </div>
 

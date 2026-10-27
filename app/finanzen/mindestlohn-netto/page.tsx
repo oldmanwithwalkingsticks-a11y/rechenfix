@@ -1,17 +1,21 @@
 import Link from 'next/link';
-import { berechneBruttoNetto, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, fmtAbzugsquote, SV_RECHENSTAND } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
-import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
+import { getAktuellerMindestlohn, mindestlohnMonatVollzeit, VOLLZEIT_STUNDEN_MONAT, VOLLZEIT_WOCHENSTUNDEN } from '@/lib/berechnungen/mindestlohn';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ZurueckButton from '@/components/layout/ZurueckButton';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo';
 import type { Metadata } from 'next';
 
-const STUNDENLOHN = MINDESTLOHN;
-const STUNDEN_PRO_MONAT = 160;
-const BRUTTO = Math.round(STUNDENLOHN * STUNDEN_PRO_MONAT);
+// W196: Monatsstunden 40 × 52 ÷ 12 = 173,33 statt 160 (vorher 2.224 € brutto statt 2.409,33 €).
+// Mindestlohn des Rechenjahrs wie in Welle 173, nicht des Build-Tages: Die Seite heißt „Mindestlohn 2026“
+// und rechnet das Netto mit den Parametern 2026.
+const STUNDENLOHN = getAktuellerMindestlohn(SV_RECHENSTAND);
+const STUNDEN_PRO_MONAT = VOLLZEIT_STUNDEN_MONAT;
+const BRUTTO = mindestlohnMonatVollzeit(STUNDENLOHN);
+const BRUTTO_JAHR = Math.round(STUNDENLOHN * VOLLZEIT_WOCHENSTUNDEN * 52 * 100) / 100;
 
 const steuerklassen: { sk: 1 | 2 | 3 | 4 | 5 | 6; label: string; beschreibung: string }[] = [
   { sk: 1, label: 'Steuerklasse 1', beschreibung: 'Ledig, geschieden, verwitwet' },
@@ -47,29 +51,29 @@ const ergebnisse = steuerklassen.map(s => ({
 
 export const metadata: Metadata = {
   title: 'Mindestlohn 2026 netto berechnen',
-  description: `Mindestlohn 2026: ${STUNDENLOHN.toLocaleString('de-DE')} €/Std. = ${BRUTTO.toLocaleString('de-DE')} € brutto/Monat. Netto in allen 6 Steuerklassen berechnet ✓ Aktuell für 2026.`,
-  keywords: 'mindestlohn 2026 netto, mindestlohn netto, mindestlohn steuerklasse 1, 12 82 euro netto, mindestlohn gehalt netto, was bleibt vom mindestlohn',
+  description: `Mindestlohn 2026: ${fmt(STUNDENLOHN)} €/Std. = ${fmt(BRUTTO)} € brutto/Monat. Netto in allen 6 Steuerklassen berechnet ✓ Aktuell für 2026.`,
+  keywords: 'mindestlohn 2026 netto, mindestlohn netto, mindestlohn steuerklasse 1, 13 90 euro netto, mindestlohn gehalt netto, was bleibt vom mindestlohn',
   openGraph: {
     title: 'Mindestlohn 2026 netto berechnen',
-    description: `Mindestlohn 2026: ${STUNDENLOHN.toLocaleString('de-DE')} €/Std. = ${BRUTTO.toLocaleString('de-DE')} € brutto/Monat. Netto in allen Steuerklassen.`,
+    description: `Mindestlohn 2026: ${fmt(STUNDENLOHN)} €/Std. = ${fmt(BRUTTO)} € brutto/Monat. Netto in allen Steuerklassen.`,
     url: 'https://www.rechenfix.de/finanzen/mindestlohn-netto',
     siteName: 'Rechenfix.de',
     type: 'website',
     locale: 'de_DE',
     images: [{ url: 'https://www.rechenfix.de/opengraph-image', width: 1200, height: 630, alt: 'Mindestlohn 2026 netto — Rechenfix.de' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Mindestlohn 2026 netto berechnen', description: `Mindestlohn 2026: ${STUNDENLOHN.toLocaleString('de-DE')} €/Std. = ${BRUTTO.toLocaleString('de-DE')} € brutto/Monat. Netto in allen Steuerklassen.` },
+  twitter: { card: 'summary_large_image', title: 'Mindestlohn 2026 netto berechnen', description: `Mindestlohn 2026: ${fmt(STUNDENLOHN)} €/Std. = ${fmt(BRUTTO)} € brutto/Monat. Netto in allen Steuerklassen.` },
   alternates: { canonical: 'https://www.rechenfix.de/finanzen/mindestlohn-netto' },
 };
 
 const faq = [
   {
     frage: 'Wie hoch ist der Mindestlohn 2026 netto?',
-    antwort: `Der Mindestlohn 2026 beträgt ${STUNDENLOHN.toLocaleString('de-DE')} € brutto pro Stunde. Bei einer 40-Stunden-Woche (${STUNDEN_PRO_MONAT} Std./Monat) ergibt das ca. ${BRUTTO.toLocaleString('de-DE')} € brutto. In Steuerklasse 1 bleiben davon ca. ${fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto übrig.`,
+    antwort: `Der Mindestlohn 2026 beträgt ${fmt(STUNDENLOHN)} € brutto pro Stunde. Bei einer 40-Stunden-Woche (40 × 52 Wochen ÷ 12 Monate = ${fmt(STUNDEN_PRO_MONAT)} Std./Monat) ergibt das ${fmt(BRUTTO)} € brutto. In Steuerklasse 1 bleiben davon ca. ${fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto übrig.`,
   },
   {
     frage: 'Wie viel Mindestlohn netto in Steuerklasse 1?',
-    antwort: `In Steuerklasse 1 bleiben vom Mindestlohn (${BRUTTO.toLocaleString('de-DE')} € brutto) ca. ${fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto. Die Abzugsquote beträgt rund ${fmtAbzugsquote(ergebnisse[0].ergebnis.abzuegeProzent)}%.`,
+    antwort: `In Steuerklasse 1 bleiben vom Mindestlohn (${fmt(BRUTTO)} € brutto) ca. ${fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto. Die Abzugsquote beträgt rund ${fmtAbzugsquote(ergebnisse[0].ergebnis.abzuegeProzent)}%.`,
   },
   {
     frage: 'Wie viel Mindestlohn netto in Steuerklasse 3?',
@@ -81,7 +85,7 @@ const faq = [
   },
   {
     frage: 'Wie hat sich der Mindestlohn in den letzten Jahren entwickelt?',
-    antwort: 'Der Mindestlohn wurde seit seiner Einführung 2015 (8,50 €) kontinuierlich angehoben: 2022 auf 12,00 €, Oktober 2022 auf 12,00 €, Januar 2024 auf 12,41 €, Januar 2025 auf 12,82 €, Januar 2026 auf 13,90 €. Zum 1. Januar 2027 steigt er weiter auf 14,60 € pro Stunde.',
+    antwort: 'Der Mindestlohn wurde seit seiner Einführung 2015 (8,50 €) schrittweise angehoben, zuletzt: Januar 2022 auf 9,82 €, Juli 2022 auf 10,45 €, Oktober 2022 per Gesetz auf 12,00 €, Januar 2024 auf 12,41 €, Januar 2025 auf 12,82 €, Januar 2026 auf 13,90 €. Zum 1. Januar 2027 steigt er weiter auf 14,60 € pro Stunde.',
   },
 ];
 
@@ -115,7 +119,7 @@ export default function Page() {
               Mindestlohn 2026 netto — was bleibt übrig?
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Berechnung: {STUNDENLOHN.toLocaleString('de-DE')} € × {STUNDEN_PRO_MONAT} Stunden = <strong className="text-gray-700 dark:text-gray-200">{BRUTTO.toLocaleString('de-DE')} € brutto/Monat</strong>
+              Berechnung: {fmt(STUNDENLOHN)} € × {fmt(STUNDEN_PRO_MONAT)} Stunden (40 × 52 ÷ 12) = <strong className="text-gray-700 dark:text-gray-200">{fmt(BRUTTO)} € brutto/Monat</strong>
             </p>
 
             {/* Berechnungs-Box */}
@@ -127,7 +131,7 @@ export default function Page() {
                 <span className="font-semibold text-amber-700 dark:text-amber-400 text-sm">So wird gerechnet</span>
               </div>
               <p className="text-sm text-amber-800 dark:text-amber-300">
-                Mindestlohn {STUNDENLOHN.toLocaleString('de-DE')} €/Std. × {STUNDEN_PRO_MONAT} Std./Monat (40-Stunden-Woche) = <strong>{BRUTTO.toLocaleString('de-DE')} € brutto</strong> pro Monat bzw. <strong>{(BRUTTO * 12).toLocaleString('de-DE')} € brutto</strong> pro Jahr.
+                Mindestlohn {fmt(STUNDENLOHN)} €/Std. × 40 Std./Woche × 52 Wochen = <strong>{BRUTTO_JAHR.toLocaleString('de-DE')} € brutto</strong> pro Jahr, geteilt durch 12 Monate = <strong>{fmt(BRUTTO)} € brutto</strong> pro Monat. Das sind {fmt(STUNDEN_PRO_MONAT)} Arbeitsstunden im Monat, nicht 160: Ein Monat hat im Schnitt 4,33 Wochen.
               </p>
             </div>
 
@@ -185,7 +189,7 @@ export default function Page() {
             </h2>
             <div className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
               <p>
-                Der <strong className="text-gray-800 dark:text-gray-100">gesetzliche Mindestlohn</strong> beträgt seit dem 1. Januar 2026 in Deutschland <strong className="text-gray-800 dark:text-gray-100">{STUNDENLOHN.toLocaleString('de-DE')} Euro brutto pro Stunde</strong> (vorher 12,82 € in 2025). Für Arbeitnehmerinnen und Arbeitnehmer in Vollzeit mit einer 40-Stunden-Woche ergibt sich bei durchschnittlich {STUNDEN_PRO_MONAT} Arbeitsstunden pro Monat ein <strong className="text-gray-800 dark:text-gray-100">monatliches Bruttogehalt von rund {BRUTTO.toLocaleString('de-DE')} Euro</strong>. Auf das Jahr gerechnet sind das etwa {(BRUTTO * 12).toLocaleString('de-DE')} Euro brutto.
+                Der <strong className="text-gray-800 dark:text-gray-100">gesetzliche Mindestlohn</strong> beträgt seit dem 1. Januar 2026 in Deutschland <strong className="text-gray-800 dark:text-gray-100">{fmt(STUNDENLOHN)} Euro brutto pro Stunde</strong> (vorher 12,82 € in 2025). Für Arbeitnehmerinnen und Arbeitnehmer in Vollzeit mit einer 40-Stunden-Woche ergibt sich bei durchschnittlich {fmt(STUNDEN_PRO_MONAT)} Arbeitsstunden pro Monat (40 × 52 Wochen ÷ 12) ein <strong className="text-gray-800 dark:text-gray-100">monatliches Bruttogehalt von {fmt(BRUTTO)} Euro</strong>. Auf das Jahr gerechnet sind das {BRUTTO_JAHR.toLocaleString('de-DE')} Euro brutto.
               </p>
               <p>
                 Doch wie viel davon tatsächlich auf dem Konto ankommt, hängt von verschiedenen Faktoren ab. Die wichtigsten sind die <strong className="text-gray-800 dark:text-gray-100">Steuerklasse</strong>, der Familienstand und ob Kirchensteuer anfällt. In <strong className="text-gray-800 dark:text-gray-100">Steuerklasse 1</strong> — der häufigsten Klasse für ledige Arbeitnehmer — bleiben von {BRUTTO.toLocaleString('de-DE')} € brutto etwa <strong className="text-gray-800 dark:text-gray-100">{fmt(ergebnisse[0].ergebnis.nettoMonat)} € netto</strong> übrig. Das entspricht einem effektiven Netto-Stundenlohn von ca. {fmt(ergebnisse[0].ergebnis.nettoProStunde)} Euro.

@@ -6,18 +6,21 @@
  * statische Konstanten in eine TS-Datei. So fliegt `decimal.js` (296 KB
  * Source-Lib, ~100 KB minified) aus dem Homepage-Initial-Bundle.
  *
- * Beim 01.01.2027-Mindestlohn-Wechsel (13,90 → 14,60 € via Stichtag-Switch
- * in mindestlohn.ts) wird beim nächsten Build automatisch der neue Wert
- * eingebaut — keine manuelle Pflege nötig.
+ * W196: Mindestlohn des Rechenjahrs (SV_RECHENSTAND) wie in Welle 173, nicht des
+ * Build-Tages — die Tipp-Zeile heißt „Mindestlohn 2026“ und rechnet das Netto mit
+ * den Parametern 2026. Der Wechsel auf 14,60 € kommt mit der Umstellung des
+ * Rechenjahrs. Monatsstunden 40 × 52 ÷ 12 (VOLLZEIT_STUNDEN_MONAT) statt mit dem
+ * gerundeten Faktor 4,33 Wochen.
  *
  * Lauft im prebuild-Hook (package.json) gemeinsam mit generate-client-data.
  */
 import { writeFileSync } from 'fs';
-import { MINDESTLOHN } from '../lib/berechnungen/mindestlohn';
-import { berechneBruttoNetto } from '../lib/berechnungen/brutto-netto';
+import { getAktuellerMindestlohn, VOLLZEIT_STUNDEN_MONAT } from '../lib/berechnungen/mindestlohn';
+import { berechneBruttoNetto, SV_RECHENSTAND } from '../lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '../lib/berechnungen/sv-parameter';
 
-const mindestlohnBrutto = Math.round(MINDESTLOHN * 40 * 4.33);
+const MINDESTLOHN = getAktuellerMindestlohn(SV_RECHENSTAND);
+const mindestlohnBrutto = Math.round(MINDESTLOHN * VOLLZEIT_STUNDEN_MONAT);
 const mindestlohnNetto = Math.round(
   berechneBruttoNetto({
     bruttoMonat: mindestlohnBrutto,
@@ -42,10 +45,10 @@ const content = `/**
  * Verhindert dass berechneBruttoNetto (→ decimal.js) im Client-Bundle landet.
  */
 
-/** Mindestlohn 2026 in €/Std (aus lib/berechnungen/mindestlohn.ts MINDESTLOHN). */
+/** Mindestlohn des Rechenjahrs in €/Std (getAktuellerMindestlohn(SV_RECHENSTAND)). */
 export const MINDESTLOHN_TIPP_STUNDE = ${MINDESTLOHN};
 
-/** Vollzeit-Brutto pro Monat = MINDESTLOHN × 40 × 4,33, gerundet. */
+/** Vollzeit-Brutto pro Monat = MINDESTLOHN × 40 × 52 ÷ 12, auf Euro gerundet. */
 export const MINDESTLOHN_TIPP_BRUTTO = ${mindestlohnBrutto};
 
 /** Netto in SK 1, NRW, GKV mit Ø-Zusatzbeitrag, ohne Kirchensteuer. */

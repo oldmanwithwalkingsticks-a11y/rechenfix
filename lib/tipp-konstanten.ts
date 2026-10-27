@@ -6,11 +6,11 @@
  * Verhindert dass berechneBruttoNetto (→ decimal.js) im Client-Bundle landet.
  */
 
-/** Mindestlohn 2026 in €/Std (aus lib/berechnungen/mindestlohn.ts MINDESTLOHN). */
+/** Mindestlohn des Rechenjahrs in €/Std (getAktuellerMindestlohn(SV_RECHENSTAND)). */
 export const MINDESTLOHN_TIPP_STUNDE = 13.9;
 
-/** Vollzeit-Brutto pro Monat = MINDESTLOHN × 40 × 4,33, gerundet. */
-export const MINDESTLOHN_TIPP_BRUTTO = 2407;
+/** Vollzeit-Brutto pro Monat = MINDESTLOHN × 40 × 52 ÷ 12, auf Euro gerundet. */
+export const MINDESTLOHN_TIPP_BRUTTO = 2409;
 
 /** Netto in SK 1, NRW, GKV mit Ø-Zusatzbeitrag, ohne Kirchensteuer. */
-export const MINDESTLOHN_TIPP_NETTO = 1715;
+export const MINDESTLOHN_TIPP_NETTO = 1716;
