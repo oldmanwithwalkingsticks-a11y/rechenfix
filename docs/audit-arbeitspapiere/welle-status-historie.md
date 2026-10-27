@@ -6,6 +6,74 @@
 
 ---
 
+## 27.10.2026 — Welle 197: Stundenlohn-Rechner und Hochrechner — 52 ÷ 12 als Konvention, 4,348 als Kalenderwert — ✅ ABGESCHLOSSEN 27.10.2026
+
+**Anlass** (Faktenblatt zu Blogartikel 21 vom 27.10.2026, `_lokal/artikel21-stundenlohn-faktenblatt.md`, F1 bis F4 und
+F9, nicht committet):
+- **Stundenlohn-Rechner, FAQ „Warum wird mit 4,33 Wochen gerechnet?“:** nannte 52 ÷ 12 „den richtigen
+  Durchschnittswert“. Kalendergenau stimmt das nicht: Ein Jahr hat 52 Wochen und ein bis zwei Tage; im 400-jährigen
+  Kalenderzyklus sind es 260,8875 Tage von Montag bis Freitag, also 4,348 Wochen je Monat. Mit 4,348 rechnen der TVöD
+  (BAG 27.03.2014, 6 AZR 621/12, Rn. 27: 39 Std. × 4,348) und mehrere Branchen-Mindestlöhne (Zoll;
+  TVMindestlohnPäda 6 § 3 Abs. 4).
+- **52 ÷ 12 bleibt die Rechengrundlage:** So rechnen der Gesetzgeber bei der Minijob-Grenze (§ 8 Abs. 1a SGB IV,
+  Mindestlohn × 130 ÷ 3) und der BMAS-Mindestlohnrechner (13,90 €, 40 Std. → 2.409 €), dazu Video 2.
+- **Gleiche Überzeichnung** im Erklärtext des Stundenlohn-Rechners („im Schnitt rund 4,33 Arbeitswochen“) und in der
+  Hochrechner-FAQ „Warum hat ein Monat nicht 4 Wochen?“ („4,33 Wochen pro Monat im Schnitt“).
+- **`CLAUDE.md`:** Die Regel aus Welle 196 („nie als 160 (4 × 40) oder 174 rechnen oder schreiben“) passt nicht zum
+  kommenden Artikel, der 174 als Kalenderwert 2026 nennt.
+
+**Änderungen** (`lib/rechner-config/finanzen.ts` und `CLAUDE.md`, nur Text, keine Rechnung; Vorlage
+`_lokal/welle197-monatsfaktor-texte.mjs`: 6 Ersetzungen in 2 Dateien, nicht committet):
+- **Stundenlohn-Rechner, Erklärtext:** „im Schnitt rund 4,33 Arbeitswochen“ und „den genauen Bruch 52 ÷ 12“ → „gut
+  4,3 Arbeitswochen“ und „den Bruch 52 ÷ 12 wie der Gesetzgeber bei der Minijob-Grenze“, dazu neu der Satz, dass es
+  kalendergenau 4,348 Wochen (173,92 Stunden) sind und TVöD und einige Branchen-Mindestlöhne so rechnen.
+- **Stundenlohn-Rechner, FAQ „Warum wird mit 4,33 Wochen gerechnet?“:** „der richtige Durchschnittswert“ → 52 ÷ 12 wie
+  § 8 Abs. 1a SGB IV und BMAS, kalendergenau 4,348 (20,12 € statt 20,19 € bei 3.500 € und 40 Std.), gerundet 4,33 →
+  20,21 €, 160 Stunden nur für einen Februar ohne Schalttag → 21,88 €; die Antwort steht damit auch im FAQ-JSON-LD.
+- **Hochrechner, FAQ „Warum hat ein Monat nicht 4 Wochen?“:** „52 Wochen … 4,33 Wochen pro Monat im Schnitt“ → 52
+  Wochen und ein bis zwei Tage, gut 4,3 Wochen pro Monat, gerechnet wie der Gesetzgeber mit 52 ÷ 12 = 4,33
+  (kalendergenau 4,348).
+- **`letzteAktualisierung`:** `hochrechner` `2026-06-25` → `2026-10-27`; `stundenlohn-rechner` stand seit Welle 196
+  schon auf `2026-10-27` (daher 5 statt 6 Zeilen im Diff).
+- **`CLAUDE.md`,** Abschnitt „Berechnungs-interne Helfer in `_helpers.ts`“: „nie als 160 (4 × 40) oder 174 rechnen
+  oder schreiben“ → rechenfix rechnet Monatsstunden mit 52 ÷ 12 wie § 8 Abs. 1a SGB IV und der BMAS-Mindestlohnrechner,
+  nie mit 160 (stimmt nur für einen Februar ohne Schalttag); kalendergenaue Werte (4,348 Wochen = 173,92 Stunden, 2026
+  genau 174) nur als ausdrücklich benannter Vergleich, nie als Rechengrundlage.
+
+**Bewusst nicht geändert:**
+- **Rechnung:** 52 ÷ 12 bleibt (`WOCHEN_PRO_MONAT`, `VOLLZEIT_STUNDEN_MONAT`, `lib/berechnungen/*` unverändert), wie
+  Gesetzgeber, BMAS und Video 2.
+- **Tabelle und Fußnote „Wochenstunden → Monatsstunden“:** nennen nur die Konvention, nichts Falsches.
+- **`scripts/verify-monatsstunden.ts`:** prüft Rechenmuster, keine Formulierungen.
+- Die übrigen Rechner, `lib/social/captions.json` und der Blog.
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- Die Messungen aus dem Probelauf der Vorlage (CRLF-Dateien und Abbruch beim zweiten Lauf, `verify:alle` in New York
+  und Tokio) habe ich in diesem Lauf nicht wiederholt.
+
+**Gates:**
+- Phase 0 an `6a92475`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `6a92475`, `ba4114a`
+  (Welle 196); `git diff --name-only 6a92475 HEAD` über beide Dateien keine Ausgabe. Greps `finanzen.ts:1` („der
+  richtige Durchschnittswert“), `finanzen.ts:1` („4,33 Wochen pro Monat im Schnitt“), keine Ausgabe (`4,348`).
+  `verify:alle` 86/86, Exit 0.
+- Phase 1: „OK — 6 Ersetzungen in 2 Dateien.“, Exit 0; `git status` genau ` M CLAUDE.md` und
+  ` M lib/rechner-config/finanzen.ts`; `diff --stat` „2 files changed, 5 insertions(+), 5 deletions(-)“ (`CLAUDE.md`
+  2, `finanzen.ts` 8).
+- Phase 2: `verify:alle` 86/86 in Ortszeit (Europe/Berlin), Exit 0; `verify-monatsstunden` 33/33, Exit 0. Greps keine
+  Ausgabe, keine Ausgabe, `finanzen.ts:3` (`4,348`), `finanzen.ts:1` („Februar ohne Schalttag“), `CLAUDE.md:1`;
+  `letzteAktualisierung: '2026-10-27'` bei `stundenlohn-rechner` und `hochrechner`. `npm run lint` Exit 0, keine Zeile
+  „problems“.
+- Phase 3: `npm run build` Exit 0, „(271/271)“; danach `git status` weiter nur die beiden Dateien. Zählungen in
+  `stundenlohn-rechner.html` 4 („Februar ohne Schalttag“), 2 („Kalendergenau sind es 4,348 Wochen“), 0 („der richtige
+  Durchschnittswert“), in `hochrechner.html` 4 („kalendergenau wären es 4,348“); `dateModified` beider Seiten
+  `2026-10-27`.
+- Phase 4: `git add`, `git diff --cached --name-only` 2; `git commit` Exit 0.
+
+**Commits:** A `b3cdfdb` (`CLAUDE.md`, `finanzen.ts`). B ist dieser Doku-Commit. Die Live-Probe macht Karsten.
+
+---
+
 ## 27.10.2026 — Welle 196: Monatsstunden einer Vollzeitstelle 40 × 52 ÷ 12 = 173,33 statt 160 — Netto pro Stunde, Mindestlohn-Hinweis, Seite „Mindestlohn netto“ — ✅ ABGESCHLOSSEN 27.10.2026
 
 **Anlass** (Prüfung durch Chat-Claude am 27.10.2026 vor Blogartikel 21 zum Stundenlohn-Rechner, gemessen am Stand
