@@ -1,6 +1,6 @@
 {
   "_hinweis": "Bestand der KI-erzeugten Medien auf rechenfix.de. Grundlage fuer den Soll-Ist-Abgleich der Kennzeichen-Wache (Skill peter-ki).",
-  "_stand": "23.09.2026",
+  "_stand": "28.10.2026",
   "_quelle": "GENERATOREN-Tabelle in scripts/ki-metadaten-schreiben.mjs",
   "ki_medien": [
     {
@@ -187,6 +187,24 @@
       "datei": "/blog/meter.mp4",
       "art": "video",
       "seite": "/blog/wie-das-meter-erfunden-wurde",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/monatsstunden-titelbild.png",
+      "art": "bild",
+      "seite": "/blog/warum-ein-monat-keine-160-stunden-hat",
+      "generator": "Gemini 3 Pro Image (Google)"
+    },
+    {
+      "datei": "/blog/monatsstunden-video-standbild.jpg",
+      "art": "bild",
+      "seite": "/blog/warum-ein-monat-keine-160-stunden-hat",
+      "generator": "Kling AI 3.0 (Kuaishou)"
+    },
+    {
+      "datei": "/blog/monatsstunden.mp4",
+      "art": "video",
+      "seite": "/blog/warum-ein-monat-keine-160-stunden-hat",
       "generator": "Kling AI 3.0 (Kuaishou)"
     },
     {

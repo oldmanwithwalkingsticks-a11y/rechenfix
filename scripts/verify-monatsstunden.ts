@@ -16,6 +16,8 @@
  *   4. die Texte (beide FAQs gleich, Mindestlohn-FAQ beim Stundenlohn-Rechner, Tipp des Tages),
  *   5. ein Quelltext-Scan nach den alten Mustern in lib/, components/, app/ und scripts/generate-*.ts;
  *      der Scan prüft sich vorher an den alten Zeilen selbst (Fund) und an zulässigen 160ern (kein Fund).
+ *      Ausgenommen sind nur einzelne Zeilen im genauen Wortlaut, die den Wert selbst erklären (seit
+ *      Welle 199: Blogartikel 21); jede Ausnahme muss in ihrer Datei noch vorkommen und ein Muster treffen.
  *
  * Ausführen: npx tsx scripts/verify-monatsstunden.ts
  */
@@ -176,14 +178,24 @@ const scan = [
   ...dateien('app', ['.ts', '.tsx', '.mdx']),
   ...readdirSync('scripts').filter(d => /^generate-.+\.ts$/.test(d)).map(d => `scripts/${d}`),
 ].sort();
+// Blogartikel 21 erklärt die Monatsstunden selbst: 2026 hat 261 Tage von Montag bis Freitag, × 8 ÷ 12 = 174.
+// Ausgenommen ist nur der genaue Wortlaut dieser Zeilen; jede andere Zeile mit einem Muster fällt weiter auf.
+const AUSNAHMEN: Record<string, string[]> = {
+  'app/blog/warum-ein-monat-keine-160-stunden-hat/page.mdx': ['174 Stunden im Monat bezahlt, nicht für 160.'],
+};
 const funde: string[] = [];
+const genutzt = new Set<string>();
 for (const f of scan) {
   readFileSync(f, 'utf-8').split(/\r?\n/).forEach((z, i) => {
     const t = treffer(z);
-    if (t.length) funde.push(`${f}:${i + 1} (${t.join(', ')})`);
+    if (!t.length) return;
+    if ((AUSNAHMEN[f] ?? []).includes(z.trim())) { genutzt.add(`${f}|${z.trim()}`); return; }
+    funde.push(`${f}:${i + 1} (${t.join(', ')})`);
   });
 }
 fall(`Quelltext-Scan über ${scan.length} Dateien${funde.length ? ': ' + funde.join('; ') : ''}`, funde.length, 0);
+const ungenutzt = Object.entries(AUSNAHMEN).flatMap(([f, zs]) => zs.filter(z => !genutzt.has(`${f}|${z}`)).map(z => `${f}: ${z}`));
+fall(`Ausnahmen im Scan: ${Object.values(AUSNAHMEN).flat().length}, alle noch vorhanden und mit Fund${ungenutzt.length ? ': ' + ungenutzt.join('; ') : ''}`, ungenutzt.length, 0);
 
 let ok = 0;
 for (const f of faelle) {

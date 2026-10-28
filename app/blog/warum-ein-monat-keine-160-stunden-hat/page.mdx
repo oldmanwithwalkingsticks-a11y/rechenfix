@@ -1,0 +1,483 @@
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import StructuredData from '@/components/seo/StructuredData';
+import { artikel } from './meta';
+
+export const metadata = {
+  title: artikel.titel,
+  description: artikel.beschreibung,
+  alternates: { canonical: 'https://www.rechenfix.de/blog/warum-ein-monat-keine-160-stunden-hat' },
+  openGraph: {
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    url: 'https://www.rechenfix.de/blog/warum-ein-monat-keine-160-stunden-hat',
+    siteName: 'Rechenfix.de',
+    type: 'article',
+    locale: 'de_DE',
+    publishedTime: artikel.datum,
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: artikel.titel }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: artikel.titel,
+    description: artikel.beschreibung,
+    images: ['/opengraph-image'],
+  },
+};
+
+<StructuredData data={generateArticleSchema({
+  url: 'https://www.rechenfix.de/blog/warum-ein-monat-keine-160-stunden-hat',
+  headline: artikel.titel,
+  description: artikel.beschreibung,
+  datePublished: artikel.datum,
+  dateModified: artikel.datum,
+  image: '/blog/monatsstunden-titelbild.png',
+})} />
+
+<StructuredData data={generateBreadcrumbSchema([
+  { name: 'Start', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: artikel.titel, url: '/blog/warum-ein-monat-keine-160-stunden-hat' },
+])} />
+
+# Ein Monat hat keine 160 Stunden – und auch nicht genau 173,33
+
+<ArtikelDatum datum={artikel.datum} />
+
+<Bild src="/blog/monatsstunden-titelbild.png" alt="Eine alte Stempeluhr mit schlichtem Zifferblatt ohne Ziffern hängt an einer weiß gestrichenen Backsteinwand. Daneben steckt eine lange Reihe Stempelkarten in einem Holzbrett, schräges Licht der Nachmittagssonne fällt über Wand und Karten." caption="Bezahlt wird nach Stunden – wie viele davon in einen Monat passen, ist eine Abmachung." width={1200} height={675} />
+
+3.500 Euro brutto, 40 Stunden die Woche, Steuerklasse I. Wie viel verdient man damit in
+der Stunde? Unser eigener Brutto-Netto-Rechner hatte bis vor Kurzem drei Antworten auf
+diese Frage. Im Ergebnisfeld stand „14,58 Euro pro Stunde“ netto. Ein paar Zentimeter
+tiefer, in den häufigen Fragen, stand 13,41 Euro. Und eine dritte Fassung derselben
+Antwort, im Programmcode hinterlegt, rechnete wieder mit 14,58 Euro.
+
+Richtig nach unserer eigenen Rechenweise sind 13,46 Euro. Der Fehler steckte nicht in
+der Steuer und nicht in den Sozialabgaben. Er steckte in einer Zahl, über die kaum
+jemand nachdenkt: Wie viele Arbeitsstunden hat ein Monat?
+
+Die Frage klingt, als gäbe es eine einfache Antwort. Es gibt mehrere, und jede davon
+wird irgendwo in Deutschland amtlich verwendet.
+
+## Woher die 160 Stunden kommen
+
+Die bekannteste Antwort lautet 160. Sie ist schnell gerechnet: Ein Monat hat vier
+Wochen, eine Vollzeitwoche hat 40 Stunden, macht 160 Stunden. Wer sein Monatsgehalt
+durch 160 teilt, hat seinen Stundenlohn. So rechnen viele, und so stand es bis vor
+Kurzem auch bei uns, an drei Stellen im Code.
+
+Der Haken liegt im ersten Schritt. Ein Monat hat nicht vier Wochen. Vier Wochen sind
+28 Tage, und die meisten Monate haben 30 oder 31. Über das Jahr summiert sich das: Zwölf
+Monate zu je vier Wochen ergeben 48 Wochen, das Jahr hat aber 52 und ein bis zwei Tage.
+Wer mit 160 Stunden rechnet, unterschlägt also gut vier Arbeitswochen im Jahr – und tut
+so, als würde das Gehalt für weniger Stunden gezahlt, als tatsächlich gearbeitet werden.
+
+Das Ergebnis ist ein Stundenlohn, der zu hoch aussieht. Bei 3.500 Euro brutto ergeben
+160 Stunden 21,88 Euro. Mit den Stunden, die ein durchschnittlicher Monat wirklich hat,
+sind es gut 20 Euro, rund 8 Prozent weniger.
+
+## Der einzige Monat mit 160 Stunden
+
+Ganz falsch ist die Zahl 160 trotzdem nicht. Es gibt einen Monat, in dem sie genau
+stimmt: den Februar, solange er keinen Schalttag hat. Er hat 28 Tage, also genau vier
+Wochen, und damit genau 20 Tage von Montag bis Freitag. Mal acht Stunden ergibt das
+160 Stunden.
+
+Alle anderen Monate haben mehr. Im Jahr 2026 sieht das so aus: Sechs Monate haben 22
+Arbeitstage von Montag bis Freitag, also 176 Stunden. Drei Monate haben 21, also 168.
+Juli und Dezember haben sogar 23, also 184 Stunden – 24 Stunden mehr als der Februar,
+drei volle Arbeitstage. Nur der Februar kommt auf 160.
+
+<MonatsstundenKalender2026 />
+
+Feiertage ändern an dieser Rechnung nichts, solange man nach dem bezahlten Monat fragt.
+Fällt ein Arbeitstag auf einen gesetzlichen Feiertag, muss der Arbeitgeber das Entgelt
+zahlen, das ohne den Ausfall angefallen wäre. So steht es in § 2 des
+Entgeltfortzahlungsgesetzes. Der Feiertag ist also bezahlte Arbeitszeit, auch wenn
+niemand arbeitet.
+
+Rechnet man alle zwölf Monate des Jahres 2026 zusammen, kommt man auf 261 Tage von
+Montag bis Freitag, also 2.088 Stunden. Geteilt durch zwölf sind das genau 174 Stunden
+im Monat. Wer 2026 mit einem festen Monatsgehalt arbeitet, wird im Durchschnitt für
+174 Stunden im Monat bezahlt, nicht für 160.
+
+Das ist allerdings nur der Wert für dieses eine Jahr. Ob ein Jahr 260, 261 oder 262 Tage
+von Montag bis Freitag hat, hängt davon ab, auf welchen Wochentag der 1. Januar fällt
+und ob es ein Schaltjahr ist. Der Monatsdurchschnitt schwankt deshalb von Jahr zu Jahr
+ein wenig. Und genau an dieser Stelle trennen sich die Wege der Rechenweisen.
+
+## 52 durch 12: die Rechnung des Gesetzgebers
+
+Die verbreitetste Lösung ist eine Vereinfachung. Man nimmt an, das Jahr habe genau
+52 Wochen, und verteilt sie gleichmäßig auf zwölf Monate. 52 geteilt durch 12 ergibt
+4,333 Wochen je Monat. Bei 40 Stunden die Woche sind das 173,33 Stunden im Monat.
+
+Diese Rechnung hat einen prominenten Anwender: den Gesetzgeber selbst. Die Grenze für
+Minijobs ist in § 8 Absatz 1a des Vierten Sozialgesetzbuchs festgelegt, und zwar nicht
+als fester Betrag, sondern als Formel. Sie ist das monatliche Entgelt bei zehn
+Wochenstunden zum Mindestlohn. Berechnet wird sie, indem der Mindestlohn mit 130
+vervielfacht und durch drei geteilt wird.
+
+Die 130 und die 3 sehen auf den ersten Blick willkürlich aus. Sie sind es nicht. Ein
+Quartal hat 13 Wochen, zehn Wochenstunden mal 13 Wochen ergeben 130 Stunden im Quartal,
+und geteilt durch drei Monate sind das 43,33 Stunden im Monat. Das ist nichts anderes als
+zehn Stunden mal 52 geteilt durch 12. Bei einem Mindestlohn von 13,90 Euro ergibt die
+Formel 602,33 Euro, aufgerundet 603 Euro – die Minijob-Grenze des Jahres 2026.
+
+Auch das Bundesministerium für Arbeit und Soziales rechnet so. Sein
+Mindestlohn-Rechner zeigt für 13,90 Euro und 40 Wochenstunden ein Monatsgehalt von
+2.409 Euro. Das passt auf den Euro zu 40 mal 52 geteilt durch 12 Stunden. Mit vier
+Wochen wären es 2.224 Euro, mit dem kalendergenauen Wert, um den es gleich geht,
+2.417 Euro.
+
+Diese Konvention hat einen großen Vorteil: Sie ist einfach und überall gleich. Ein
+Monat ist ein Zwölftel eines Jahres aus 52 Wochen. Wer weiß, was er im Jahr verdient,
+kommt mit ihr ohne Umweg auf denselben Stundenlohn wie jemand, der vom Monat ausgeht.
+Unsere Rechner nutzen deshalb ebenfalls 52 geteilt durch 12.
+
+Ganz genau ist aber auch sie nicht. 52 Wochen sind 364 Tage. Das Jahr hat 365 oder
+366. Der Tag, der übrig bleibt, und der Schalttag fallen bei dieser Rechnung unter den
+Tisch.
+
+## 4,348: die Rechnung des Kalenders
+
+Wer den übrig gebliebenen Tag mitzählen will, braucht einen Durchschnitt über viele
+Jahre. Der gregorianische Kalender wiederholt sich alle 400 Jahre exakt, mit allen
+Schaltjahren und allen Wochentagen. In diesen 400 Jahren gibt es 146.097 Tage, das sind
+genau 20.871 Wochen, und darunter 104.355 Tage von Montag bis Freitag. Im Durchschnitt
+hat ein Jahr also 260,8875 solcher Tage, ein Monat 21,74 und bei acht Stunden am Tag
+173,925 Stunden. Teilt man das durch 40, erhält man 4,348 Wochen je Monat.
+
+Dieser Faktor ist keine Erfindung für diesen Artikel. Er steht in Tarifverträgen. Im
+Tarifvertrag für den öffentlichen Dienst der Länder heißt es in § 24 Absatz 3, dass
+Monatsbeträge für die Berechnung eines Stundenanteils durch das 4,348-fache der
+regelmäßigen wöchentlichen Arbeitszeit zu teilen sind. Der Tarifvertrag für den
+öffentlichen Dienst von Bund und Kommunen enthält dieselbe Regel, und das
+Bundesarbeitsgericht hat damit gerechnet: In einem Urteil aus dem Jahr 2014 leitet es
+aus 39 Wochenstunden eine Monatsarbeitszeit von 169,57 Stunden ab, eben mit dem Faktor
+4,348.
+
+Auch Mindestlöhne, die per Verordnung für eine ganze Branche gelten, nutzen ihn. Der Mindestlohn-Tarifvertrag für das
+pädagogische Personal in der Aus- und Weiterbildung nach dem Zweiten und Dritten
+Sozialgesetzbuch legt fest, wie ein festes Monatsentgelt zu berechnen ist:
+Mindeststundenentgelt mal vereinbarte Wochenarbeitszeit mal 4,348.
+
+Bei 40 Stunden ergibt 4,348 einen Monat mit 173,92 Stunden. Das sind 0,59 Stunden mehr
+als bei 52 geteilt durch 12. Im Stundenlohn macht das wenig aus: Bei 3.500 Euro brutto
+sind es 20,12 statt 20,19 Euro. Aber es zeigt, dass auch die verbreitete Zahl 173,33
+eine Abmachung ist und kein Naturgesetz.
+
+## Ein Amt, viele Monate
+
+Wie viele Stunden ein Monat hat, ist in Deutschland also keine Tatsache, sondern eine
+Festlegung. Am deutlichsten wird das bei den Branchenmindestlöhnen. Der Zoll, der ihre
+Einhaltung kontrolliert, führt auf einer seiner Seiten auf, wie in den einzelnen
+Branchen ein gleichbleibender Monatslohn zu berechnen ist. Die Liste liest sich wie eine
+Sammlung von Antworten auf die Frage dieses Artikels.
+
+Im Bauhauptgewerbe darf der Monatslohn auf 178 Stunden von April bis November und
+164 Stunden von Dezember bis März beruhen, alternativ auf durchgehend 173 Stunden. Im
+Gerüstbauer-Handwerk sind es 174 Stunden von Mai bis November und 162 von Dezember bis
+April, oder durchgehend mindestens 169. Bei den Bodenabfertigungsdiensten und in der Aus-
+und Weiterbildung gilt der Faktor 4,348. In der Gebäudereinigung wird in einer
+Lohngruppe die Wochenarbeitszeit durch fünf geteilt, mit 261 Arbeitstagen vervielfacht
+und durch zwölf geteilt, in einer anderen die Jahresarbeitszeit durch zwölf.
+
+<MonatsstundenLeiter />
+
+Bemerkenswert ist, was in dieser Liste fehlt: die 173,33 Stunden, die der Gesetzgeber
+beim Minijob und das Ministerium in seinem Mindestlohn-Rechner verwenden. Und
+bemerkenswert ist, was in ihr vorkommt: die 174, die das Jahr 2026 tatsächlich hat, und
+im Bau ein Sommer- und ein Wintermonat, die sich um 14 Stunden unterscheiden.
+
+Keine dieser Zahlen ist falsch. Jede ist eine Vereinbarung, die für ihren Zweck taugt.
+Falsch wird es erst, wenn man nicht weiß, welche man benutzt – oder wenn man zwei davon
+mischt.
+
+<RechnerLoader slug="stundenlohn-rechner" />
+
+## Was der Unterschied kostet
+
+Für einen einzelnen Stundenlohn wirken die Abweichungen klein. Sie werden spürbar, sobald
+mit dem Stundenlohn weitergerechnet wird. Drei Fälle zeigen, wo das passiert.
+
+Der erste Fall ist die Überstunde. Viele Arbeitsverträge vergüten Mehrarbeit mit dem
+anteiligen Stundenlohn, und der wird aus dem Monatsgehalt abgeleitet. Bei 3.500 Euro und
+zehn Überstunden im Monat ergeben 160 Stunden 218,75 Euro, 52 geteilt durch 12 ergibt
+201,92 Euro, der Faktor 4,348 ergibt 201,24 Euro. Wer mit 160 rechnet, bezahlt fast
+17 Euro mehr, als ihm der Vertrag abverlangt. Wer mit 160 rechnet und die eigene
+Abrechnung prüft, glaubt umgekehrt, ihm fehlten knapp 17 Euro. Welcher Teiler gilt,
+steht im Tarif- oder Arbeitsvertrag, nicht im Taschenrechner.
+
+Der zweite Fall ist der Vergleich zweier Stellen. Angenommen, eine Vollzeitstelle zahlt
+3.500 Euro für 40 Stunden und eine Teilzeitstelle 2.600 Euro für 30 Stunden. Mit
+52 geteilt durch 12 gerechnet, liegen die beiden 19 Cent auseinander: 20,19 gegen
+20,00 Euro je Stunde. Rechnet man die Vollzeitstelle aber mit 160 Stunden, wie man es
+aus der Faustregel kennt, und die Teilzeitstelle mit einem Rechner, der 52 durch 12
+nutzt, stehen 21,88 gegen 20,00 Euro da. Aus einem kaum messbaren Unterschied werden
+fast zwei Euro je Stunde – allein durch zwei verschiedene Teiler.
+
+Der dritte Fall betrifft die eigene Wahrnehmung. Wer sein Netto durch 160 teilt, hält
+sich für besser bezahlt, als er ist. Bei 2.333,25 Euro netto, dem Wert für 3.500 Euro
+brutto in Steuerklasse I, sind das 14,58 statt 13,46 Euro. Gut einen Euro zu viel in
+jeder Stunde, die man im Kopf mit anderen Ausgaben vergleicht. Wer wissen will, was ihm
+nach Fahrtzeit und Arbeitskosten tatsächlich bleibt, findet dafür unseren Rechner für den
+[wahren Stundenlohn](/finanzen/wahrer-stundenlohn) – auch er rechnet mit 52 geteilt
+durch 12.
+
+## Den besten Stundenlohn des Jahres gibt es im Februar
+
+Wer ein festes Monatsgehalt bekommt, merkt von all dem auf dem Konto nichts. Im Februar
+kommen 3.500 Euro, im Juli kommen 3.500 Euro. Die Stunden dahinter sind aber verschieden.
+Im Februar 2026 stehen 160 bezahlte Stunden gegenüber, im Juli 184. Pro Stunde sind das im
+Februar 21,88 Euro und im Juli 19,02 Euro. Wer mit Monatsgehalt arbeitet, verdient im
+kürzesten Monat den besten Stundenlohn des Jahres und im längsten den schlechtesten. Über
+das Jahr gleicht sich das aus, und genau dafür ist ein festes Monatsgehalt da.
+
+<Video src="/blog/monatsstunden.mp4" poster="/blog/monatsstunden-video-standbild.jpg" caption="Gleiches Gehalt, ungleich lange Monate: Ein Stapel bleibt der niedrigste." />
+
+Ganz anders sieht es aus, wer nach Stunden bezahlt wird. Nehmen wir jemanden, der genau
+den Stundenlohn bekommt, der 3.500 Euro im Monat entspricht, also 20,19 Euro. Im Februar
+2026 erhält er für 160 Stunden 3.230,77 Euro, im Juli für 184 Stunden 3.715,38 Euro. Sein
+Einkommen schwankt um fast 500 Euro, obwohl er jeden Monat gleich viel arbeitet, nämlich
+jeden Werktag acht Stunden.
+
+Und am Jahresende liegt er vorn. Denn der Stundenlohn von 20,19 Euro ist mit 52 Wochen
+gerechnet, also mit 2.080 Stunden im Jahr. Das Jahr 2026 hat aber 261 Tage von Montag bis
+Freitag und damit 2.088 bezahlte Stunden. Der Stundenlöhner kommt 2026 auf 42.161,54 Euro,
+der Kollege mit Monatsgehalt auf 42.000 Euro. Der Unterschied von 161,54 Euro ist genau ein
+Arbeitstag, der in der Rechnung mit 52 Wochen nicht vorkommt. Im Jahr 2024, das 262 solcher
+Tage hatte, waren es zwei Tage und 323,08 Euro. In Jahren mit 260 Tagen, wie 2022 und 2023,
+liegen beide gleichauf.
+
+Das ist kein Fehler und kein Trick, sondern die Folge der Konvention. Wer ein Monatsgehalt
+in einen Stundenlohn umrechnet oder umgekehrt, legt sich auf ein Jahr aus 52 Wochen fest.
+Der Kalender hält sich nicht daran.
+
+## Das 13. Gehalt und die Faustregel
+
+Es gibt einen Fall, in dem die Faustregel mit den 160 Stunden das richtige Ergebnis
+liefert, und er ist nicht selten: das 13. Monatsgehalt.
+
+Wer zwölf Monatsgehälter und ein dreizehntes bekommt, verdient im Jahr 13 mal sein
+Monatsgehalt. Bei 40 Wochenstunden arbeitet er in der Rechnung mit 52 Wochen 2.080 Stunden.
+Sein Stundenlohn über das ganze Jahr ist also 13 mal das Monatsgehalt geteilt durch 2.080.
+Und 2.080 geteilt durch 13 ergibt genau 160. Bei 3.500 Euro sind es 45.500 Euro im Jahr
+und 21,88 Euro je Stunde – derselbe Wert, den die Faustregel aus dem Monatsgehalt allein
+errechnet.
+
+Das ist kein Zufall, sondern dieselbe Rechnung von der anderen Seite: 13 Monate zu je vier
+Wochen ergeben genau 52 Wochen. Das dreizehnte Gehalt bezahlt also genau die vier Wochen,
+die die Faustregel im Jahr unterschlägt. Das gilt bei jeder Wochenarbeitszeit, solange man
+die Faustregel mit den eigenen Stunden rechnet, bei 38,5 Wochenstunden also mit 154 statt
+160. Ein halbes 13. Gehalt, wie es manche Verträge als Weihnachtsgeld vorsehen, reicht dafür
+nicht. Wer aber ein volles 13. Gehalt bekommt und wissen will, was er über das Jahr
+gerechnet je Stunde verdient, darf ausnahmsweise mit vier Wochen rechnen. Er sollte nur
+wissen, warum: Der Stundenlohn, den er so erhält, enthält das 13. Gehalt bereits.
+
+## Der Mindestlohn und der Juli
+
+Beim Mindestlohn wird aus der Rechenfrage eine Rechtsfrage. Seit dem 1. Januar 2026
+beträgt er 13,90 Euro je Stunde, ab dem 1. Januar 2027 sind es 14,60 Euro. Wie viel
+muss ein fest angestellter Vollzeitbeschäftigter dann im Monat mindestens verdienen?
+
+Mit 52 geteilt durch 12 sind es 2.409,33 Euro. So rechnet der Mindestlohn-Rechner des
+Ministeriums, und so steht es seit Kurzem auch auf unserer Seite zum Mindestlohn netto.
+Mit dem Faktor 4,348 wären es 2.417,49 Euro, mit 160 Stunden nur 2.224 Euro.
+
+Das Bundesarbeitsgericht hat 2016 aber festgehalten, woran sich die Erfüllung des
+Mindestlohns misst: an dem Monat, für den gezahlt wird. Der Anspruch ist erfüllt, wenn
+die für den Kalendermonat gezahlte Bruttovergütung den Betrag erreicht, der sich aus den
+in diesem Monat tatsächlich geleisteten Arbeitsstunden mal Mindestlohn ergibt. Im Fall
+ging es um Urlaubs- und Weihnachtsgeld, das in Zwölfteln ausgezahlt wurde, nicht um
+schwankende Monatslängen. Die Frage, die sich daraus ergibt, bleibt trotzdem.
+
+Denn nimmt man den Satz wörtlich, braucht der Juli 2026 mit seinen 184 Stunden ein
+Gehalt von 2.557,60 Euro. Ein festes Monatsgehalt von 2.409,33 Euro ergibt in diesem
+Monat 13,09 Euro je Stunde. Im Februar dagegen, mit 160 Stunden, sind es 15,06 Euro. Über
+das Jahr gleicht sich das aus, im einzelnen Monat nicht.
+
+Mit der Erhöhung zum 1. Januar 2027 verschiebt sich das Ganze nur nach oben. Bei 14,60 Euro
+ergibt 52 geteilt durch 12 ein Monatsgehalt von 2.530,67 Euro. Die längsten Monate 2027
+sind März und Dezember mit je 184 Stunden; streng monatlich gerechnet bräuchten sie
+2.686,40 Euro, das feste Gehalt ergibt dort 13,75 Euro je Stunde. Der Februar kommt mit
+2.336 Euro aus. Auch die Minijob-Grenze folgt der Formel aus dem Sozialgesetzbuch: 14,60 mal
+130 geteilt durch 3 ergibt 632,67 Euro, aufgerundet 633 Euro.
+
+<MindestlohnMonatsSoll />
+
+Das Ministerium sieht darin kein Problem. Sein Mindestlohn-Rechner gibt ausdrücklich ein
+verstetigtes Monatsgehalt aus: Es wird jeden Monat das gleiche Gehalt gezahlt, auch wenn
+die Monate unterschiedlich viele Werktage haben. Der kommunale Arbeitgeberverband
+Nordrhein-Westfalen gab 2015, im ersten Jahr des Mindestlohns, ein Beispiel des
+Ministeriums wieder, das genau diese beiden Monate gegenüberstellt, einen Februar mit 160
+und einen Juli mit 184 Stunden. Danach werden Unterschiede toleriert, die allein aus der
+Zahl der Arbeitstage folgen. Für Stunden über der vertraglichen Arbeitszeit sieht
+das Mindestlohngesetz zudem ein schriftlich vereinbartes Arbeitszeitkonto vor, dessen
+Plusstunden innerhalb von zwölf Monaten auszugleichen sind.
+
+Ob Prüfer und Gerichte das bei einem festen Gehalt für schwankende Monatslängen ebenso
+sehen, ist nach unserer Recherche nicht höchstrichterlich entschieden. Derselbe Verband
+schrieb, es sei offen, ob die Zollbehörden die Sicht des Ministeriums teilen. Wir lassen
+die Frage deshalb offen, so wie sie offen ist. Wer genau an der Grenze zum Mindestlohn verdient, sollte im Zweifel
+die Mindestlohn-Hotline des Ministeriums fragen oder sich arbeitsrechtlich beraten lassen.
+
+## So rechnen Sie Ihren eigenen Stundenlohn
+
+Für den eigenen Stundenlohn braucht es keinen Kalender, sondern nur Klarheit darüber,
+welche Konvention man benutzt. Fünf Schritte genügen.
+
+Erstens: Nehmen Sie das Bruttomonatsgehalt laut Vertrag, ohne Zuschläge und
+Einmalzahlungen. Zweitens: Nehmen Sie die vertragliche Wochenarbeitszeit, nicht die
+tatsächlich geleistete. Drittens: Rechnen Sie die Wochenstunden mit 52 geteilt durch 12 in
+Monatsstunden um, bei 40 Stunden sind das 173,33, bei 38,5 Stunden 166,83 und bei 20 Stunden
+86,67. Viertens: Teilen Sie das Monatsgehalt durch diese Zahl. Fünftens: Prüfen Sie, ob Ihr
+Tarif- oder Arbeitsvertrag einen eigenen Teiler nennt. Steht dort 4,348, gilt für alles,
+was aus dem Vertrag folgt – Überstunden, Teilzeit, anteilige Monate –, dieser Faktor.
+
+Wollen Sie wissen, was Sie je Stunde netto verdienen, setzen Sie im ersten Schritt das
+Nettogehalt ein. Wollen Sie Einmalzahlungen berücksichtigen, rechnen Sie mit dem
+Jahresbrutto geteilt durch die Jahresstunden, bei 40 Wochenstunden also durch 2.080.
+
+Und wollen Sie wissen, was Ihnen je tatsächlich gearbeiteter Stunde bleibt, müssen Urlaub
+und Feiertage heraus. Bei 30 Urlaubstagen und sieben bundesweiten Feiertagen, die 2026 auf
+Montag bis Freitag fallen, bleiben von den 260 Arbeitstagen eines Jahres aus 52 Wochen 223. Aus 42.000 Euro im Jahr werden dann
+23,54 Euro je gearbeiteter Stunde. Diese Rechnung, samt Fahrtzeit und Arbeitskosten, macht
+der Rechner für den wahren Stundenlohn.
+
+Wichtig ist bei allen Varianten nur eines: Wer zwei Stundenlöhne vergleicht, muss beide mit
+demselben Teiler rechnen. Die meisten Missverständnisse beginnen dort, wo eine Zahl aus dem
+einen Rechenweg neben einer aus dem anderen steht.
+
+## Was unser eigener Rechner falsch gemacht hat
+
+Aufgefallen ist uns das Thema nicht am Schreibtisch, sondern beim Abgleich zweier Zahlen.
+Für ein Video über den wahren Stundenlohn hatten wir für 3.500 Euro brutto einen
+Netto-Stundenlohn von 13,46 Euro ausgerechnet. Unser Brutto-Netto-Rechner zeigte für
+dasselbe Gehalt 14,58 Euro. Beide Zahlen konnten nicht gleichzeitig stimmen, und die Suche
+nach dem Grund führte zu der Frage, um die es in diesem Artikel geht.
+
+Beim Nachrechnen sind wir in unserem eigenen Code dann auf alle drei Rechenweisen
+gestoßen, und auf eine vierte, die gar keine war.
+
+Das Ergebnis „Netto pro Stunde“ im Brutto-Netto-Rechner teilte durch 160. Die häufige
+Frage darunter nannte 174 Stunden, gab aber als Begründung 40 mal 52 Wochen geteilt durch
+12 Monate an, was 173,33 ergibt. Die Zahl hätte als Kalenderwert für 2026 sogar gepasst,
+die Begründung dazu nicht. Unsere Seite zum Mindestlohn netto rechnete mit 160 Stunden
+und kam auf 2.224 Euro brutto im Monat, genau der Betrag, den der Februar braucht. Und
+der Hinweis, der beim Brutto-Netto-Rechner vor einem Lohn unter dem Mindestlohn warnen
+sollte, sprang erst unter 2.204 Euro an. Wer 2.300 Euro für 40 Stunden verdient, also
+rund 13,27 Euro je Stunde, bekam keine Warnung.
+
+Unser Stundenlohn-Rechner rechnete dagegen von Anfang an mit 52 geteilt durch 12. Er
+übertrieb nur in seinem Erklärtext und nannte diesen Wert „den richtigen
+Durchschnittswert“. Nach dem, was oben steht, ist das zu viel gesagt.
+
+Alles das ist korrigiert, bevor dieser Artikel online gegangen ist. Alle unsere Rechner
+nutzen jetzt dieselbe Konvention, 52 geteilt durch 12, und sagen dazu, dass es eine
+Konvention ist. Ein neues Prüfskript schlägt Alarm, sobald irgendwo im Code wieder durch
+160 geteilt wird.
+
+<KarstenSagt>
+
+Überstunden wurden mir in meinem Berufsleben auch bezahlt. Wie genau sie berechnet wurden,
+weiß ich bis heute nicht – es kamen noch Prozente obendrauf, und spätestens da war die
+Abrechnung für mich nicht mehr nachzuvollziehen.
+
+Als wir gemerkt haben, dass rechenfix falsche Stundenlöhne anzeigt, habe ich mich zuerst
+gefragt, wie das überhaupt passieren kann. Und dann gleich drei verschiedene auf einer
+Seite – das geht gar nicht. Warum kommt beim Bau eines Rechners überhaupt etwas Falsches
+hinein, und warum fällt es danach niemandem auf?
+
+Deshalb ändern wir, wie unsere Rechner entstehen. Schon beim Bau müssen die Werte
+stimmen. Und danach wird jeder Rechner noch einmal auf Herz und Nieren geprüft: ob er
+richtig rechnet und ob alle Regeln, Vorgaben und Werte eingehalten sind.
+
+</KarstenSagt>
+
+## Was bleibt
+
+Ein Monat hat keine 160 Stunden, außer er ist ein Februar ohne Schalttag. Er hat auch
+nicht genau 173,33, das ist eine Abmachung über ein Jahr aus 52 Wochen, die der
+Gesetzgeber beim Minijob und das Ministerium beim Mindestlohn treffen. Der Kalender sagt
+im langen Mittel knapp 173,93, das Jahr 2026 sagt 174, der Bau sagt im Sommer 178 und im
+Winter 164.
+
+Das muss niemanden beunruhigen. Es genügt zu wissen, mit welchem Teiler man rechnet, und
+denselben zu benutzen, wenn man zwei Zahlen vergleicht. Wer seinen Stundenlohn
+ausrechnet, sollte die 160 vergessen. Wer seine Überstunden prüft, sollte in seinen
+Vertrag schauen. Und wer an einem Ergebnis zweifelt, hat mit diesem Zweifel
+wahrscheinlich recht: Wir hatten drei Antworten auf einer Seite.
+
+<Quellen eintraege={[
+  {
+    titel: '§ 8 SGB IV – Geringfügige Beschäftigung und geringfügige selbständige Tätigkeit; Geringfügigkeitsgrenze',
+    hinweis:
+      'Absatz 1a: Die Geringfügigkeitsgrenze ist das monatliche Entgelt bei zehn Wochenstunden zum Mindestlohn; berechnet wird sie, indem der Mindestlohn mit 130 vervielfacht, durch drei geteilt und auf volle Euro aufgerundet wird. 130 ÷ 3 = 10 × 52 ÷ 12, also die Konvention 52 Wochen ÷ 12 Monate. 2026: 13,90 × 130 ÷ 3 = 602,33, aufgerundet 603 Euro.',
+    url: 'https://www.gesetze-im-internet.de/sgb_4/__8.html',
+  },
+  {
+    titel: 'Fünfte Mindestlohnanpassungsverordnung vom 5. November 2025 (BGBl. 2025 I Nr. 268)',
+    hinweis: 'Mindestlohn 13,90 Euro ab 1. Januar 2026, 14,60 Euro ab 1. Januar 2027.',
+    url: 'https://www.gesetze-im-internet.de/milov5/BJNR10C0A0025.html',
+  },
+  {
+    titel: 'Bundesministerium für Arbeit und Soziales – Mindestlohn-Rechner',
+    hinweis:
+      'Gibt ein „verstetigtes Monatsgehalt“ aus: jeden Monat dasselbe Gehalt, auch wenn die Monate unterschiedlich viele Werktage haben. Für 13,90 Euro und 40 Wochenstunden zeigt er 2.409 Euro (abgelesen am 27.10.2026), passend zu 52 ÷ 12. Ohne verstetigtes Gehalt ist der Mindestlohn für die tatsächlich geleisteten Stunden zu zahlen.',
+    url: 'https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Mindestlohn/Mindestlohnrechner/mindestlohnrechner.html',
+  },
+  {
+    titel: '§ 24 TV-L – Berechnung und Auszahlung des Entgelts',
+    hinweis:
+      'Absatz 3 Satz 3: Für den auf eine Stunde entfallenden Anteil sind die Monatsbeträge durch das 4,348-fache der regelmäßigen wöchentlichen Arbeitszeit zu teilen. § 24 Absatz 3 TVöD enthält dieselbe Regel. 4,348 ist der kalendergenaue Mittelwert (260,8875 Tage Montag bis Freitag im Jahr, geteilt durch 12 und durch 5).',
+    url: 'https://www.gesetze-bayern.de/Content/Document/TV_L-24',
+  },
+  {
+    titel: 'Bundesarbeitsgericht, Urteil vom 27. März 2014 – 6 AZR 621/12',
+    hinweis:
+      'Randnummer 27: Monatsarbeitszeit nach TVöD aus 39 Wochenstunden mal Faktor 4,348 = 169,57 Stunden.',
+    url: 'https://lexetius.com/2014,1331',
+  },
+  {
+    titel: 'Tarifvertrag zur Regelung des Mindestlohns für pädagogisches Personal (TVMindestlohnPäda 6), § 3 Absatz 4',
+    hinweis:
+      'Bei verstetigtem Monatsentgelt: Mindeststundenentgelt × vereinbarte regelmäßige Wochenarbeitszeit × 4,348.',
+    url: 'https://www.gesetze-im-internet.de/tvmindestlohnp_da_6/BJNR0160B0023.html',
+  },
+  {
+    titel: 'Zoll – Fälligkeit und Arbeitszeitflexibilisierung (Branchenmindestlöhne)',
+    hinweis:
+      'Monatslohn je Branche: Bauhauptgewerbe 178/164 Stunden (Sommer/Winter) oder durchgehend 173; Gerüstbau 174/162 oder mindestens 169; Bodenabfertigung sowie Aus- und Weiterbildung Wochenstunden × 4,348; Gebäudereinigung Wochenarbeitszeit ÷ 5 × 261 ÷ 12 bzw. Jahresarbeitszeit ÷ 12. 173,33 kommt nicht vor.',
+    url: 'https://www.zoll.de/DE/Fachthemen/Arbeit/Mindestarbeitsbedingungen/Mindestlohn-AEntG-Lohnuntergrenze-AUeG/Faelligkeit-Arbeitszeitflexibilisierung/faelligkeit-arbeitszeitflexibilisierung_node.html',
+  },
+  {
+    titel: 'Bundesarbeitsgericht, Urteil vom 25. Mai 2016 – 5 AZR 135/16',
+    hinweis:
+      'Randnummer 26: Der Mindestlohn ist erfüllt, wenn die für den Kalendermonat gezahlte Bruttovergütung die in diesem Monat tatsächlich geleisteten Arbeitsstunden mal Mindestlohn erreicht. Gegenstand waren in Zwölfteln gezahlte Sonderzahlungen, nicht schwankende Monatslängen.',
+    url: 'https://www.bundesarbeitsgericht.de/?p=1152428',
+  },
+  {
+    titel: 'Zoll – Fälligkeit des Mindestlohnanspruchs',
+    hinweis:
+      'Arbeitszeitkonto nach § 2 Absatz 2 MiLoG: schriftlich vereinbart, Plusstunden höchstens 50 Prozent der vertraglichen Arbeitszeit, Ausgleich innerhalb von zwölf Kalendermonaten. Eine Aussage zum verstetigten Gehalt bei schwankenden Monatslängen enthält die Seite nicht.',
+    url: 'https://www.zoll.de/DE/Fachthemen/Arbeit/Mindestarbeitsbedingungen/Mindestlohn-Mindestlohngesetz/Faelligkeit-Mindestlohnanspruchs/faelligkeit-mindestlohnanspruchs_node.html',
+  },
+  {
+    titel: 'KAV NW – Hinweise zum Mindestlohngesetz (Oktober 2015)',
+    hinweis:
+      'Gibt ein Beispiel des Ministeriums wieder, das Februar (20 Arbeitstage, 160 Stunden) und Juli (23 Arbeitstage, 184 Stunden) gegenüberstellt und Unterschiede aus der Zahl der Arbeitstage toleriert; offen sei, ob die Zollbehörden das ebenso sehen.',
+    url: 'https://www.kav-nw.de/kavnwGips/KAV-NW/kav-nw.de/Mitgliederinfo/Newsletter/NL-103-15-Hinweise-zum-Mindestlohngesetz/Hinweise-zum-Mindestlohngesetz.pdf',
+  },
+  {
+    titel: 'Wissenschaftliche Dienste des Deutschen Bundestages – WD 6 - 3000 - 038/17 (13. Juni 2017)',
+    hinweis:
+      '„Mindestlohn bei nach Monaten bemessenen Zeitlohnabreden“: Die Prüfung erfolgt monatlich nach BAG 5 AZR 135/16; eine Durchschnittsbetrachtung über mehrere Monate nennt das Gutachten nicht.',
+    url: 'https://www.bundestag.de/resource/blob/516474/WD-6-038-17-pdf.pdf',
+  },
+  {
+    titel: '§ 2 EFZG – Entgeltzahlung an Feiertagen',
+    hinweis:
+      'Für Arbeitszeit, die infolge eines gesetzlichen Feiertages ausfällt, ist das Entgelt zu zahlen, das ohne den Ausfall angefallen wäre. Deshalb zählen Feiertage von Montag bis Freitag zu den bezahlten Stunden eines Monats.',
+    url: 'https://www.gesetze-im-internet.de/entgfg/__2.html',
+  },
+]} />

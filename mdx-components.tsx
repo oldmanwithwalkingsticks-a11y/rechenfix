@@ -92,6 +92,9 @@ import ZweiJahreslaengen from '@/components/blog/grafik/ZweiJahreslaengen';
 import ZweiKollegenVergleich from '@/components/blog/grafik/ZweiKollegenVergleich';
 import SoliRampe from '@/components/blog/grafik/SoliRampe';
 import GrenznettoKurve from '@/components/blog/grafik/GrenznettoKurve';
+import MonatsstundenKalender2026 from '@/components/blog/grafik/MonatsstundenKalender2026';
+import MonatsstundenLeiter from '@/components/blog/grafik/MonatsstundenLeiter';
+import MindestlohnMonatsSoll from '@/components/blog/grafik/MindestlohnMonatsSoll';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -224,6 +227,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ZweiKollegenVergleich,
     SoliRampe,
     GrenznettoKurve,
+    MonatsstundenKalender2026,
+    MonatsstundenLeiter,
+    MindestlohnMonatsSoll,
     ...components,
   };
 }

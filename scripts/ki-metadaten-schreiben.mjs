@@ -93,6 +93,9 @@ const GENERATOREN = {
   'steuerklassen-titelbild.png': 'Gemini 3 Pro Image (Google)',
   'steuerklassen-video-standbild.jpg': 'Kling AI 3.0 (Kuaishou)',
   'steuerklassen.mp4': 'Kling AI 3.0 (Kuaishou)',
+  'monatsstunden-titelbild.png': 'Gemini 3 Pro Image (Google)',
+  'monatsstunden-video-standbild.jpg': 'Kling AI 3.0 (Kuaishou)',
+  'monatsstunden.mp4': 'Kling AI 3.0 (Kuaishou)',
 };
 
 const nurPruefen = process.argv.includes('--pruefen');
