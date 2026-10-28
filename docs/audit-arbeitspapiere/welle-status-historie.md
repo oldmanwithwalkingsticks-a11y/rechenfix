@@ -6,6 +6,78 @@
 
 ---
 
+## 28.10.2026 — Welle 199: Blogartikel 21 „Ein Monat hat keine 160 Stunden“ — ✅ ABGESCHLOSSEN 28.10.2026
+
+**Anlass:** Artikel 21 der Reihe, zum Stundenlohn-Rechner, Slug `warum-ein-monat-keine-160-stunden-hat`. Er erklärt,
+warum 4 × 40 = 160 Stunden nur im Februar stimmen, warum der Gesetzgeber mit 52 ÷ 12 rechnet, Tarifverträge mit
+4,348 Wochen und der Zoll mit eigenen Monatswerten, und was das für Stundenlohn, Überstunden und Mindestlohn bedeutet.
+Bei seiner Vorbereitung fiel am 27.10. der 160-Stunden-Fehler auf, behoben in den Wellen 196 und 197, bevor der
+Artikel online ging; Welle 198 zog die Lehre in rechner-builder v4 und Karola Rechner. Text, Block „Karsten sagt“,
+Grafiken und Medien hat Karsten freigegeben.
+
+**Änderungen** (Vorlage `_lokal/welle199-artikel21.mjs`: 6 Ersetzungen in 3 Dateien, 5 neue Dateien, nicht
+committet; Medien aus `_lokal/artikel21-medien/`):
+- **`app/blog/warum-ein-monat-keine-160-stunden-hat/`:** `page.mdx` mit Artikeltext und „Karsten sagt“ 1:1 aus der
+  Vorlage, Rechner `stundenlohn-rechner` eingebettet; `meta.ts` mit `datum` 2026-10-28 (Ausführungstag, Berliner Zeit).
+- **Grafiken `MonatsstundenKalender2026`, `MonatsstundenLeiter`, `MindestlohnMonatsSoll`:** Werte nicht getippt,
+  sondern aus `zaehleArbeitstageZeitraum` (`feiertage.ts`) und `mindestlohn.ts`; fest sind nur die Zoll-Werte für Bau
+  und Gerüstbau und 4,348 (§ 24 Abs. 3 Satz 3 TV-L). Geometrie im Probelauf paarweise geprüft, 0 Kollisionen, hell und
+  dunkel gerendert.
+- **`mdx-components.tsx`:** drei Importe nach `GrenznettoKurve`, drei Einträge vor `...components`.
+- **Medien:** Titelbild 1536 × 857 PNG mit Palette (Gemini 3 Pro Image), Video 1928 × 1072 H.264 ohne Ton und
+  Standbild aus dem ersten Bild (Kling AI 3.0); `poster` zeigt auf das Standbild, weil das Video ein eigenes Motiv hat.
+- **`scripts/ki-metadaten-schreiben.mjs`:** drei `GENERATOREN`-Zeilen für die drei Medien. Kennzeichen vor dem
+  Skriptlauf je 0, danach je 1, `--pruefen` 54 × OK.
+- **`public/ki-medien/inventar.json`:** abgeleitet mit `generate-ki-inventar` (54 Medien, `_stand` 28.10.2026).
+- **`scripts/verify-monatsstunden.ts`:** Der Quelltext-Scan aus Welle 196 schlug bei Zeile 101 des Artikels an („174
+  Stunden im Monat bezahlt, nicht für 160.“). Der Satz stimmt (2026 hat 261 Tage von Montag bis Freitag, × 8 ÷ 12 =
+  174) und ist der Kern des Abschnitts. `AUSNAHMEN` je Datei nimmt genau diesen Wortlaut aus (Vergleich mit der ganzen
+  Zeile); neuer Fall „Ausnahmen im Scan“ prüft, dass jede Ausnahme noch vorkommt und ein Muster trifft; 34 statt 33
+  Fälle. Gegenprobe mit geändertem Wortlaut schlägt an.
+
+**Bewusst nicht geändert:**
+- **`Bild.tsx`, `Video.tsx`, `VideoPlayer.tsx`, `KiHinweis.tsx`** und alle übrigen Dateien in `public/blog/`.
+- **Originale im Medienordner** (`titelbild-a-kalender.png`, `titelbild-b-stempeluhr.png`,
+  `video-startbild-kloetze.png`, `video-kloetze-original.mp4`): nicht im Repo.
+- **Karolas Funde im Bestand** (`EnergiekostenRechner.tsx:75`, `SchnellCheck.tsx:82`, 603 € ohne Jahr): eigene Welle
+  200.
+- **`blog-builder` und die Skills.**
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- sha256 nach dem Skriptlauf (nur zur Information) gleich wie im Probelauf auf Linux: Titelbild `11388f8f…`,
+  Standbild `f69242b3…`, Video `17875109…`; 738.456, 91.163 und 2.429.762 Bytes.
+- Im gebauten HTML: `poster="/blog/monatsstunden-video-standbild.jpg"` und `preload="none"`, 4 ×
+  `trainedAlgorithmicMedia`, „Veröffentlicht am 28. Oktober 2026“.
+- Monatswerte aus `zaehleArbeitstageZeitraum` lokal (Berlin) und mit `TZ=UTC` gleich: 22, 20, 22, 22, 21, 22, 23, 21,
+  22, 22, 21, 23, Summe 261.
+- Nicht wiederholt aus dem Probelauf: zweiter Lauf der Vorlage (Abbruch), CRLF-Dateien, `verify:alle` in New York und
+  Tokio, Geometrieprüfung und Rendering der Grafiken.
+- Der Lauf begann um 23:23 Uhr Berliner Zeit.
+
+**Gates:**
+- Phase 0 an `b663ae5`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `b663ae5`, darunter
+  `1dc9f42`; `frei`; sieben Dateien im Medienordner; sha256 der drei Medien wie in der Tabelle; `verify:alle` 86/86,
+  Exit 0.
+- Phase 1: „OK — 6 Ersetzungen in 3 Dateien, 5 neue Dateien.“, Exit 0; `git status` genau die sieben Zeilen;
+  `datum` Zeile 12 `'2026-10-28'`.
+- Phase 2: sha256 nach dem Kopieren wie in der Tabelle; Kennzeichen vorher je 0; `ki-metadaten-schreiben` Exit 0,
+  drei Zeilen `GESCHRIEBEN monatsstunden-…` mit dem Generator aus der Tabelle, „Fertig: 54 Dateien ausgezeichnet, 0
+  unbekannt.“; danach je 1; `--pruefen` Exit 0, 54 Zeilen, 0 ohne `OK`, drei Zeilen `OK monatsstunden-…
+  trainedAlgorithmicMedia`; `generate-ki-inventar` „54 Medien, _stand 28.10.2026 (Laufdatum, Inhalt geaendert)“,
+  Exit 0, „1 file changed, 19 insertions(+), 1 deletion(-)“; `git status` elf Zeilen.
+- Phase 3: Wortzahl Selbsttest grün, `3220 W`, `38.1 %` (Rechnerposition, Vorgabe 26 bis 45 Prozent), „1 Artikel, alle innerhalb der Vorgaben.“, Exit 0. Zählungen 1, 1, 1, 0 (`poster` auf das Titelbild), 1,
+  1, 0, 0, Zeile 44 `<ArtikelDatum datum={artikel.datum} />`, 1, 3, 0. `verify-monatsstunden` 34/34; Gegenprobe mit
+  „nicht etwa für 160.“ 2 Fehlzeilen, danach `zurueck` und wieder 34/34. `verify:alle` 86/86, Exit 0. Build Exit 0,
+  `(272/272)`, Route `○ /blog/warum-ein-monat-keine-160-stunden-hat` (statisch). `git status` elf Zeilen.
+- Phase 4: `git diff --cached --name-only` 12, „12 files changed, 973 insertions(+), 2 deletions(-)“; `git commit`
+  Exit 0, danach `git status` leer.
+
+**Commits:** A `6b34e99` (Artikelordner, drei Grafiken, `mdx-components.tsx`, zwei Skripte, Inventar, drei Medien).
+B ist dieser Doku-Commit.
+
+---
+
 ## 27.10.2026 — Welle 198: rechner-builder v4 und Skill karola-rechner v1 — ✅ ABGESCHLOSSEN 27.10.2026
 
 **Anlass** (Karstens Auftrag vom 27.10.2026 nach den Wellen 196 und 197): ein besserer rechner-builder, der schon beim
