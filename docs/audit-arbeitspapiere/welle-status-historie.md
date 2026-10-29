@@ -6,6 +6,128 @@
 
 ---
 
+## 29.10.2026 — Welle 200: Karola Rechner v1.1 und Werte, die am 01.01.2027 umschalten — ✅ ABGESCHLOSSEN 29.10.2026
+
+**Anlass:** Karolas erste Funde im Bestand (Welle 198) und was Karola v1.1 dazu fand. Zum 01.01.2027 schalten
+Mindestlohn (14,60 €) und Minijob-Grenze (633 €) in den Libs um, feste Zahlen im Text nicht. Der Stundenlohn-Rechner
+verglich fest mit `MINDESTLOHN_2026` und hätte ab 01.01.2027 bei 14,00 € je Stunde „über dem Mindestlohn“ gemeldet;
+der Hochrechner schrieb „Mindestlohn 2026:“ fest vor den umschaltenden Wert. AFBG, BAföG, Nebenjob und die
+Minijob-Schnellwahl nannten 603 € ohne Jahr, SchnellCheck und Brutto-Netto die Beitragsbemessungsgrenze fest neben der
+Bedingung aus der Lib. Der Energiekosten-Rechner rechnete Monat = Woche × 4,33 (zwölf Monate 51,96 statt 52 Wochen).
+Auf der Seite „2.000 Euro brutto“ stand „13,90 €/h × 173,5 h = 2.413 €“ mit „40 h/Woche × 4,33 Wochen/Monat“; 40 ×
+4,33 sind 173,2, richtig sind 173,33 Stunden und 2.409,33 €. Keiner der bisherigen Prüfwege fand das. Fünf
+Rechenschritte in Beispielen zeigten „× 4,33“ oder „÷ 4,33“, das Ergebnis aber mit 52 ÷ 12 (etwa „5 × 4,33 = 21,67“
+statt 21,65).
+
+**Änderungen** (Vorlage `_lokal/welle200-jahreswechsel.mjs`: 73 Ersetzungen in 23 Dateien, 1 neue Datei, nicht
+committet; 65 Textstellen, 7 `letzteAktualisierung`, das Datum der 2.000-Euro-Seite):
+
+Commit A (Skills):
+- **`karola-rechner/scripts/karola.py`:** `zahlen` übergeht Stylesheets in Template-Literalen (Hexfarben waren als
+  Zahlen gezählt), der Formel-Prüfer kennt Einheiten wie €/h und h/Woche, Stand-Zeile auch als v1.1, drei neue
+  Selbsttestfälle.
+- **`karola-rechner/assets/karola.json`:** KV01 mit Muster „× 4,33“ oder „÷ 4,33“ als Rechenschritt im Text, KV02 mit
+  Muster für Monatsstunden 173 oder 173,5 (173,92 bleibt als benannter Vergleich erlaubt), KV01 bis KV03 nehmen
+  `app/blog/` und `components/blog/` aus; `_stand` 29.10.2026.
+- **`karola-rechner/references/konventionen.md`:** Regeln KV01 und KV02 nachgezogen, Fundstellen Stand 29.10.2026,
+  Ausnahme der Blogpfade für alle Einträge.
+- **`karola-rechner/SKILL.md`:** Stand v1.1, Grenze des Formel-Prüfers mit Einheiten, Zeile v1.1 in der Fassungstabelle.
+- **`blog-builder/SKILL.md`:** v14 mit Nachtrag zu Welle 199 (C2PA-Manifest durch die Übertragung, sha256 in der
+  Medientabelle; `verify:alle` im Probelauf) und zwei Punkten in der Prompt-Struktur.
+
+Commit B (Rechner, Texte, Prüfskript, Doku):
+- **`lib/berechnungen/mindestlohn.ts`:** neu `getMindestlohnJahr(stichtag)` (2024 bis 2027 begrenzt) und
+  `MINDESTLOHN_JAHR`.
+- **`lib/berechnungen/stundenlohn.ts`:** `berechneStundenlohn(eingabe, stichtag = new Date())` vergleicht mit
+  `getAktuellerMindestlohn(stichtag)`, das Ergebnis trägt `mindestlohn` und `mindestlohnJahr`; der Re-Export von
+  `MINDESTLOHN_2026` entfällt.
+- **`lib/berechnungen/bafoeg.ts`:** neu `anrechnungsfreierVerdienstMonat(params)`, gerechnet wie die Anrechnung in
+  `berechneBafoeg`; 2026 sind das 603 €.
+- **`components/rechner/StundenlohnRechner.tsx`:** Beschriftung „Mindestlohn <Jahr>“ und Tabellenzeile aus dem
+  Ergebnis statt aus `MINDESTLOHN_2026`.
+- **`components/rechner/HochRechner.tsx`:** „Mindestlohn {MINDESTLOHN_JAHR}:“ statt fest „Mindestlohn 2026:“.
+- **`components/rechner/MinijobRechner.tsx`:** Schnellwahl mit der geltenden Grenze `MINIJOB_GRENZE`, „(Grenze)“ an
+  diesem Wert.
+- **`components/rechner/NebenjobRechner.tsx`:** Beschriftung „Minijob (bis … €)“ mit
+  `getMinijobGrenzeMonat(SV_RECHENSTAND)` wie in `nebenjob.ts`.
+- **`components/rechner/AfbgRechner.tsx`:** Freibetrag aus `getAktuelleAfbgParameter()` statt „ca. 603 €/Monat
+  (Minijob-Grenze)“.
+- **`components/rechner/BafoegRechner.tsx`:** anrechnungsfreier Minijob aus `anrechnungsfreierVerdienstMonat`.
+- **`components/rechner/SchnellCheck.tsx`** und **`BruttoNettoRechner.tsx`:** `BBG_KV_MONAT` und `BBG_RV_MONAT` im Text
+  statt 5.812,50 € und 8.450 €.
+- **`components/rechner/EnergiekostenRechner.tsx`:** Monat = Jahr ÷ 12 statt Woche × 4,33.
+- **`app/finanzen/2000-euro-brutto-netto/page.tsx`:** Mindestlohn, Jahr und Monatsbrutto zum `SV_RECHENSTAND` aus der
+  Lib, 40 × 52 ÷ 12 = 173,33 Stunden in Text und FAQ; `LETZTE_AKTUALISIERUNG` 2026-10-29.
+- **`lib/rechner-config/finanzen.ts`:** Stundenlohn-FAQ ohne „13,90 €“; Hochrechner-Meta ohne „13,90 €“, Tabelle mit
+  Jahr und neuer Zeile „14,60 € (Mindestlohn 2027) · 2.530,67 € · 30.368 €“, Beispiel mit Jahr, „× 12 ÷ 52“ statt
+  „÷ 4,33“.
+- **`lib/rechner-config/arbeit.ts`:** Überstunden und Teilzeit „× 52 ÷ 12“ statt „× 4,33“, Fazit mit 173,33
+  Monatsstunden.
+- **`lib/rechner-config/alltag.ts`:** Streaming „Mindestlohn 2026“ im Beispiel und Fazit.
+- **`lib/rechner-config/wohnen.ts`:** `letzteAktualisierung` des Energiekosten-Rechners.
+- `letzteAktualisierung` 2026-10-29 für `stundenlohn-rechner`, `hochrechner`, `aufstiegs-bafoeg-rechner`,
+  `ueberstunden-rechner`, `teilzeit-rechner`, `streaming-kosten-rechner`, `energiekosten-rechner`.
+- **`scripts/verify-stichtag-2027.ts`** (neu): Wechsel an den Jahresgrenzen, Stundenlohn mit Stichtag 31.12.2026 und
+  01.01.2027 (14,00 € je Stunde erst darüber, dann darunter), BAföG-Wert, Quelltext-Scan auf Jahreskonstanten des
+  Mindestlohns in Rechner-Komponenten und Seiten; Namespace-Importe, damit es auf dem alten Stand rot meldet statt
+  abzubrechen. 20 Fälle.
+- **`docs/jahreswerte-kalender.md`:** Dezember-Audit Punkt 10 „Texte mit Jahreswerten“ mit Karolas Register, BAföG-
+  und AFBG-Freibetrag und `verify-stichtag-2027.ts`; Eintrag in der Änderungshistorie.
+
+**Karola vorher und nachher:**
+- Register v1 in Phase 0: KV01 1 (`EnergiekostenRechner.tsx:75`), KV02 1
+  (`app/blog/warum-ein-monat-keine-160-stunden-hat/page.mdx:101`), KV03 0, KV04 3, KV05 1, KV06 103; „Register: 2
+  Befund(e)“, Exit 1.
+- Register v1.1 in Phase 2: KV01 bis KV05 je 0, KV06 95 Stellen Stufe `pruefen`; „Register: 0 Befund(e)“, Exit 0.
+- Formel-Prüfer: „191 Ketten in 448 Dateien, 0 Befund(e), 3 Hinweis(e)“ (`arbeit.ts:1134`, `sport.ts:1915`,
+  `wohnen.ts:3290`, je „stimmig nur mit gerundeten Zwischenwerten“), Exit 0.
+
+**Gegenprobe:** `verify-stichtag-2027` auf dem alten Stand (`git stash`, neues Skript ungetrackt daneben) Exit 1,
+„Stichtag 01.01.2027: 7/14 grün“, sieben Zeilen `✗`: `getMindestlohnJahr vorhanden`; „2.426,67 € (14,00 €/h) am
+01.01.2027: unter dem Mindestlohn“ (ist `true`); „Abstand am 01.01.2027“ (ist `0.1`); „Ergebnis nennt den Mindestlohn
+des Stichtags“; „Ergebnis nennt sein Jahr“; `anrechnungsfreierVerdienstMonat vorhanden`; Quelltext-Scan mit vier
+Stellen (`HochRechner.tsx:137`, `StundenlohnRechner.tsx` 4, 182 und 257). `git stash pop` ohne Konflikt, danach wieder
+20/20.
+
+**Bewusst nicht geändert:**
+- **Die 95 KV06-Stellen**, davon 79 in `lib/rechner-config/finanzen.ts`: Steuer- und SV-Werte, deren Libs zum
+  01.01.2027 nicht von selbst umschalten, dazu Rentenwert und Pfändung mit Wechsel zum 01.07. Sie gehören in den
+  Dezember-Audit, Punkt 10.
+- **Midijob-Rechner und alles am `SV_RECHENSTAND`:** Termin `midijob-parameter-2027` (01.12.2026).
+- **Blogartikel, `lib/termine.ts`, das private Skill-Repo.**
+
+**Abweichungen und Funde:**
+- Keine Abweichung von den Sollwerten.
+- Ausgaben, die der Prompt nach `/tmp` schreibt, lagen im Scratchpad der Sitzung; Inhalt und Auswertung unverändert.
+- `git stash list` enthielt schon vor dem Lauf zwei alte Einträge (`cf4cace` auf `main`, `90f5c84` auf
+  `fix/critical-css`). Der Stash der Gegenprobe lag darüber und ist mit `git stash pop` wieder entfernt; die beiden alten
+  sind unberührt. Die STOP-Anweisung „`git stash list` muss leer sein“ hätte hier nicht gegriffen.
+- Nicht wiederholt aus dem Probelauf: zweiter Lauf der Vorlage (Abbruch), CRLF-Dateien, `verify:alle` in UTC, New York
+  und Tokio.
+
+**Gates:**
+- Phase 0 an `e2c6894`: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `e2c6894`, darunter
+  `6b34e99`; Skill-Repo leer; `frei`; Selbsttest v1 „60 von 60“, Exit 0; Register v1 wie oben, Exit 1;
+  `verify:alle` 86/86, Exit 0.
+- Phase 1: „OK — 73 Ersetzungen in 23 Dateien, 1 neue Dateien.“, Exit 0; `git status` genau die 24 Zeilen;
+  Skill-Repo leer; `LETZTE_AKTUALISIERUNG` Zeile 8 `'2026-10-29'`; Zählung `letzteAktualisierung` 7.
+- Phase 2: Selbsttest v1.1 „65 von 65 Faellen wie erwartet — gruen.“, Exit 0; Formel-Prüfer und Register wie oben;
+  `verify-stichtag-2027` 20/20; Diff-Statistik vor dem Stash und nach dem Pop „23 files changed, 171 insertions(+),
+  57 deletions(-)“; Gegenprobe wie oben; `verify:alle` 87/87, Exit 0; Build Exit 0, `(272/272)`; `git status` 24
+  Zeilen.
+- Phase 3: Commit A „5 files changed, 70 insertions(+), 15 deletions(-)“; Commit B `git diff --cached --name-only` 19,
+  „19 files changed, 234 insertions(+), 42 deletions(-)“, danach `git status` leer.
+
+**Commits:** A `70214b7` (Karola Rechner v1.1, blog-builder v14). B `c0858b5` (Rechner, Texte,
+`verify-stichtag-2027.ts`, Jahreswerte-Kalender). C ist dieser Doku-Commit.
+
+**Für Karsten:** In Claude.ai karola-rechner v1.1 (`_lokal/karola-rechner-v1.1.zip`) und blog-builder v14
+(`_lokal/blog-builder-v14.zip`) nachziehen, nachdem Chat-Claude den Commit auf einem frischen Klon geprüft hat; Live-Proben
+auf Stundenlohn-Rechner, Hochrechner, Energiekosten-Rechner, Seite 2.000 € brutto, Minijob, BAföG, AFBG und
+Brutto-Netto.
+
+---
+
 ## 28.10.2026 — Welle 199: Blogartikel 21 „Ein Monat hat keine 160 Stunden“ — ✅ ABGESCHLOSSEN 28.10.2026
 
 **Anlass:** Artikel 21 der Reihe, zum Stundenlohn-Rechner, Slug `warum-ein-monat-keine-160-stunden-hat`. Er erklärt,
