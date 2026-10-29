@@ -1,7 +1,7 @@
 export type StundenlohnModus = 'stundenlohn' | 'monatsgehalt' | 'jahresgehalt';
 
-export { MINDESTLOHN_2026 } from './mindestlohn';
-import { MINDESTLOHN_2026 } from './mindestlohn';
+// W200: verglichen wird mit dem Mindestlohn des Stichtags (ab 01.01.2027: 14,60 €), nicht fest mit 2026
+import { getAktuellerMindestlohn, getMindestlohnJahr } from './mindestlohn';
 
 export { WOCHEN_PRO_MONAT } from './_helpers';
 import { WOCHEN_PRO_MONAT } from './_helpers';
@@ -24,12 +24,15 @@ export interface StundenlohnErgebnis {
   effektiverStundenlohn: number;
   differenzMindestlohn: number;
   ueberMindestlohn: boolean;
+  /** Mindestlohn des Stichtags, gegen den verglichen wurde, und sein Jahr */
+  mindestlohn: number;
+  mindestlohnJahr: number;
   arbeitsstundenProMonat: number;
   arbeitsstundenProJahr: number;
   effektiveArbeitstage: number;
 }
 
-export function berechneStundenlohn(eingabe: StundenlohnEingabe): StundenlohnErgebnis | null {
+export function berechneStundenlohn(eingabe: StundenlohnEingabe, stichtag: Date = new Date()): StundenlohnErgebnis | null {
   const { modus, bruttogehalt, stundenlohn: inputStundenlohn, wochenstunden, arbeitstageProWoche, urlaubstage, feiertage } = eingabe;
 
   if (wochenstunden <= 0 || wochenstunden > 80) return null;
@@ -75,7 +78,8 @@ export function berechneStundenlohn(eingabe: StundenlohnEingabe): StundenlohnErg
   const effektiveStunden = effektiveArbeitstage * stundenProTag;
   const effektiverStundenlohn = effektiveStunden > 0 ? jahresgehalt / effektiveStunden : 0;
 
-  const differenzMindestlohn = stundenlohn - MINDESTLOHN_2026;
+  const mindestlohn = getAktuellerMindestlohn(stichtag);
+  const differenzMindestlohn = stundenlohn - mindestlohn;
 
   return {
     stundenlohn: Math.round(stundenlohn * 100) / 100,
@@ -84,6 +88,8 @@ export function berechneStundenlohn(eingabe: StundenlohnEingabe): StundenlohnErg
     effektiverStundenlohn: Math.round(effektiverStundenlohn * 100) / 100,
     differenzMindestlohn: Math.round(differenzMindestlohn * 100) / 100,
     ueberMindestlohn: differenzMindestlohn >= 0,
+    mindestlohn,
+    mindestlohnJahr: getMindestlohnJahr(stichtag),
     arbeitsstundenProMonat,
     arbeitsstundenProJahr,
     effektiveArbeitstage,

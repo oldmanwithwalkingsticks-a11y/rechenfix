@@ -1,12 +1,18 @@
 import BruttoNettoLongTail from '@/components/seo/BruttoNettoLongTail';
-import { berechneBruttoNetto, fmtAbzugsquote } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, fmtAbzugsquote, SV_RECHENSTAND } from '@/lib/berechnungen/brutto-netto';
+import { getAktuellerMindestlohn, getMindestlohnJahr, mindestlohnMonatVollzeit, VOLLZEIT_STUNDEN_MONAT } from '@/lib/berechnungen/mindestlohn';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import type { Metadata } from 'next';
 
 const BRUTTO = 2000;
-const LETZTE_AKTUALISIERUNG = '2026-05-22';
+const LETZTE_AKTUALISIERUNG = '2026-10-29';
 const n = (sk: 1|2|3|4|5|6) => berechneBruttoNetto({ bruttoMonat: BRUTTO, steuerklasse: sk, kirchensteuer: false, kirchensteuersatz: 9, kinderfreibetraege: 0, bundesland: 'NW', kvArt: 'gesetzlich', kvZusatzbeitrag: KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT, kvPrivatBeitrag: 0, rvBefreit: false, abrechnungszeitraum: 'monat' });
 const fmt = (v: number) => v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// W200: Mindestlohn des Rechenjahrs wie auf der Seite „Mindestlohn netto“, Monatsstunden 40 × 52 ÷ 12.
+// Vorher stand die Rechnung mit 173,5 h und 2.413 € fest im Text; 40 Wochenstunden sind im Monatsmittel 173,33 h.
+const ML = getAktuellerMindestlohn(SV_RECHENSTAND);
+const ML_JAHR = getMindestlohnJahr(SV_RECHENSTAND);
+const ML_MONAT = mindestlohnMonatVollzeit(ML);
 
 const BRUTTO_FMT = BRUTTO.toLocaleString('de-DE');
 const TITEL = `${BRUTTO_FMT} € brutto = ${fmt(n(1).nettoMonat)} € netto (2026)`;
@@ -34,7 +40,7 @@ const faq = [
   },
   {
     frage: 'Welche Berufe verdienen typischerweise 2.000 Euro brutto?',
-    antwort: 'Mindestlohn 2026 bei 13,90 €/h × 173,5 h = 2.413 € — 2.000 € deutet also entweder auf Teilzeit, Tarif unter Mindestlohn-Standard, oder unterstes Tarifgefüge hin. Beispiele: Reinigungskraft Vollzeit nach Tarif (2.100-2.400 €), Servicekraft Gastronomie ohne Berufsausbildung (2.000-2.300 €), Verkäufer/in Einzelhandel ohne Berufserfahrung (2.100-2.400 €). Häufig Teilzeit-Verdienst von ca. 75 % bei mittlerem Stundenlohn.',
+    antwort: `Mindestlohn ${ML_JAHR}: ${fmt(ML)} €/h × ${fmt(VOLLZEIT_STUNDEN_MONAT)} h = ${fmt(ML_MONAT)} € — 2.000 € deutet also entweder auf Teilzeit, Tarif unter Mindestlohn-Standard, oder unterstes Tarifgefüge hin. Beispiele: Reinigungskraft Vollzeit nach Tarif (2.100-2.400 €), Servicekraft Gastronomie ohne Berufsausbildung (2.000-2.300 €), Verkäufer/in Einzelhandel ohne Berufserfahrung (2.100-2.400 €). Häufig Teilzeit-Verdienst von ca. 75 % bei mittlerem Stundenlohn.`,
   },
   {
     frage: 'Wie viel netto bei 2.000 Euro brutto in Steuerklasse 3?',
@@ -74,7 +80,7 @@ const spezifischerContent = (
         Mit 2.000 € brutto im Monat liegen Sie deutlich unter den untersten 10 % der Vollzeit-Verdienste. Die 10 %-Schwelle nach Destatis liegt bei 2.819 €/Monat (33.828 €/Jahr). 2.000 € sind also klar im Niedriglohnsektor.
       </p>
       <p>
-        Der gesetzliche Mindestlohn 2026 beträgt 13,90 € pro Stunde — bei einer 173,5-Stunden-Vollzeit (40 h/Woche × 4,33 Wochen/Monat) ergäbe das 2.413 € brutto. 2.000 € deuten deshalb auf eine von drei Konstellationen hin: Teilzeit-Verdienst (z. B. 30 h/Woche bei Tarif-Lohn), ältere Tarif-Stufen unterhalb des aktuellen Mindestlohn-Standards, oder unterste Tarif-Gruppe in einer wenig dynamischen Branche.
+        Der gesetzliche Mindestlohn {ML_JAHR} beträgt {fmt(ML)} € pro Stunde — bei Vollzeit mit 40 Stunden die Woche, im Monatsmittel 40 × 52 ÷ 12 = {fmt(VOLLZEIT_STUNDEN_MONAT)} Stunden, ergäbe das {fmt(ML_MONAT)} € brutto. 2.000 € deuten deshalb auf eine von drei Konstellationen hin: Teilzeit-Verdienst (z. B. 30 h/Woche bei Tarif-Lohn), ältere Tarif-Stufen unterhalb des aktuellen Mindestlohn-Standards, oder unterste Tarif-Gruppe in einer wenig dynamischen Branche.
       </p>
 
       <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mt-4">Konkrete Berufe in diesem Gehaltsbereich</h3>

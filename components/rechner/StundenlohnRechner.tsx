@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneStundenlohn, MINDESTLOHN_2026, type StundenlohnModus } from '@/lib/berechnungen/stundenlohn';
+import { berechneStundenlohn, type StundenlohnModus } from '@/lib/berechnungen/stundenlohn';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -179,7 +179,7 @@ export default function StundenlohnRechner() {
                     : `${fmt(Math.abs(ergebnis.differenzMindestlohn))} € unter dem Mindestlohn`}
                 </p>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
-                  Mindestlohn 2026: {fmt(MINDESTLOHN_2026)} € pro Stunde
+                  Mindestlohn {ergebnis.mindestlohnJahr}: {fmt(ergebnis.mindestlohn)} € pro Stunde
                 </p>
               </div>
             </div>
@@ -254,7 +254,7 @@ export default function StundenlohnRechner() {
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   {[
-                    ['Mindestlohn', `${MINDESTLOHN_2026.toLocaleString('de-DE', { minimumFractionDigits: 2 })} €`],
+                    ['Mindestlohn', `${ergebnis.mindestlohn.toLocaleString('de-DE', { minimumFractionDigits: 2 })} €`],
                     ['Einzelhandel', '14–18 €'],
                     ['Handwerk', '16–22 €'],
                     ['Büro / Verwaltung', '18–25 €'],

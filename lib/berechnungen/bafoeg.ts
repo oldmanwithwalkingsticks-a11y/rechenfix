@@ -153,6 +153,22 @@ function sozialpauschaleJahr(einkuenfte: number, satz: number, params: BafoegPar
 }
 
 /**
+ * Höchster Bruttoverdienst je Monat in vollen Euro, von dem nach §§ 21, 23 Abs. 1 BAföG nichts angerechnet
+ * wird — gerechnet wie die Anrechnung in berechneBafoeg (W200). Mit 389 € Freibetrag (2026) sind das 603 €,
+ * genau die Minijob-Grenze 2026; § 23 Abs. 6 BAföG passt den Freibetrag ihr per Bekanntmachung an. Der
+ * Hinweis im Rechner nennt diesen Wert, damit er mit dem Freibetrag der Lib wechselt.
+ */
+export function anrechnungsfreierVerdienstMonat(params: BafoegParameter = getAktuelleBafoegParameter()): number {
+  const einkommen = (brutto: number) => {
+    const einkuenfte = einkuenfteAusLohn(brutto * 12) / 12;
+    return einkuenfte - sozialpauschaleJahr(einkuenfte * 12, params.svPauschalen.eigen, params) / 12;
+  };
+  let brutto = Math.ceil(params.freibetraege.eigenesEinkommen / (1 - params.svPauschalen.eigen) + WK_PAUSCHALE_AN_2026 / 12);
+  while (brutto > 0 && einkommen(brutto) > params.freibetraege.eigenesEinkommen) brutto--;
+  return brutto;
+}
+
+/**
  * Anrechenbares Einkommen der Eltern nach § 21 BAföG, monatlich.
  *
  * Einkommen = Summe der Einkünfte (Brutto − 1.230 € je Elternteil) − Sozialpauschale

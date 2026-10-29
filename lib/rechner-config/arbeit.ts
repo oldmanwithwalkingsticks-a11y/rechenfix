@@ -366,7 +366,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'ueberstunden-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-29',
     titel: 'Überstunden-Rechner',
     beschreibung: 'Überstunden berechnen: Pro Woche, Monat und Jahr mit Vergütung, Zuschlag und Stundenlohn-Ermittlung.',
     kategorie: 'Arbeit & Recht',
@@ -461,7 +461,7 @@ export const arbeitRechner: RechnerConfig[] = [
         titel: 'Monats- und Jahresbetrachtung hochgerechnet',
         schritte: [
           { label: 'Überstunden pro Woche', formel: '45 Std. − 40 Std.', ergebnis: '5 Std./Woche' },
-          { label: 'Hochrechnung auf den Monat', formel: '5 × 4,33', ergebnis: '≈ 21,67 Std./Monat' },
+          { label: 'Hochrechnung auf den Monat', formel: '5 × 52 ÷ 12', ergebnis: '≈ 21,67 Std./Monat' },
           { label: 'Hochrechnung auf das Jahr', formel: '5 × 52', ergebnis: '260 Std./Jahr' },
           { label: 'In Arbeitstagen (8-Std.-Tag)', formel: '260 ÷ 8', ergebnis: '32,5 Tage' },
         ],
@@ -472,7 +472,7 @@ export const arbeitRechner: RechnerConfig[] = [
         titel: 'Minusstunden — wenn weniger als vertraglich gearbeitet wird',
         schritte: [
           { label: 'Tatsächlich unter Vertrag', formel: '38 Std. − 40 Std.', ergebnis: '−2 Std./Woche' },
-          { label: 'Hochrechnung auf den Monat', formel: '−2 × 4,33', ergebnis: '≈ −8,67 Std.' },
+          { label: 'Hochrechnung auf den Monat', formel: '−2 × 52 ÷ 12', ergebnis: '≈ −8,67 Std.' },
         ],
         fazit: 'Liegt die tatsächliche unter der vertraglichen Arbeitszeit, entstehen Minusstunden. Ob sie nachgearbeitet werden müssen, hängt von der Ursache ab: Bei angeordneter Kurzarbeit oder fehlender Arbeitszuweisung durch den Arbeitgeber dürfen Minusstunden in der Regel nicht einseitig dem Arbeitnehmer angelastet werden — das ist Betriebsrisiko (§ 615 BGB). Bei selbst gewähltem früheren Gehen ist hingegen ein Ausgleich üblich.',
       },
@@ -1494,7 +1494,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'teilzeit-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-29',
     titel: 'Teilzeit-Rechner',
     beschreibung: 'Teilzeitgehalt berechnen: Brutto, geschätztes Netto, Stundenlohn und Urlaubstage bei Reduzierung der Arbeitszeit.',
     kategorie: 'Arbeit & Recht',
@@ -1602,11 +1602,11 @@ export const arbeitRechner: RechnerConfig[] = [
         typ: 'beispielrechnung',
         titel: 'Der Stundenlohn bleibt gleich',
         schritte: [
-          { label: 'Stundenlohn Vollzeit', formel: '3.000 € ÷ (40 h × 4,33)', ergebnis: '17,31 €/h' },
-          { label: 'Stundenlohn Teilzeit (30 h)', formel: '2.250 € ÷ (30 h × 4,33)', ergebnis: '17,31 €/h' },
+          { label: 'Stundenlohn Vollzeit', formel: '3.000 € ÷ (40 h × 52 ÷ 12)', ergebnis: '17,31 €/h' },
+          { label: 'Stundenlohn Teilzeit (30 h)', formel: '2.250 € ÷ (30 h × 52 ÷ 12)', ergebnis: '17,31 €/h' },
           { label: 'Differenz', formel: '17,31 € − 17,31 €', ergebnis: '0 € — identisch' },
         ],
-        fazit: 'Der Stundenlohn ändert sich durch Teilzeit nicht. Weil Brutto und Stunden im gleichen Verhältnis sinken, bleibt der Lohn pro Stunde konstant — hier 17,31 € (3.000 € auf rund 173 Monatsstunden bei 40-Stunden-Woche). Der Faktor 4,33 ergibt sich aus 52 Wochen ÷ 12 Monaten. Eine Teilzeitkraft verdient pro geleisteter Stunde genauso viel wie in Vollzeit — sie arbeitet nur weniger. Eine schlechtere Bezahlung pro Stunde allein wegen Teilzeit wäre nach § 4 TzBfG unzulässig. Genau deshalb ist der Stundenlohn die fairste Größe, um Voll- und Teilzeit zu vergleichen: Er macht sichtbar, dass nicht der Wert der Arbeit sinkt, sondern nur ihre Menge. Wer den Stundenlohn kennt, kann auch leicht überschlagen, was zusätzliche oder weniger Wochenstunden monatlich bedeuten.',
+        fazit: 'Der Stundenlohn ändert sich durch Teilzeit nicht. Weil Brutto und Stunden im gleichen Verhältnis sinken, bleibt der Lohn pro Stunde konstant — hier 17,31 € (3.000 € auf 173,33 Monatsstunden bei 40-Stunden-Woche). Gerechnet wird mit 52 Wochen ÷ 12 Monaten, rund 4,33 Wochen je Monat. Eine Teilzeitkraft verdient pro geleisteter Stunde genauso viel wie in Vollzeit — sie arbeitet nur weniger. Eine schlechtere Bezahlung pro Stunde allein wegen Teilzeit wäre nach § 4 TzBfG unzulässig. Genau deshalb ist der Stundenlohn die fairste Größe, um Voll- und Teilzeit zu vergleichen: Er macht sichtbar, dass nicht der Wert der Arbeit sinkt, sondern nur ihre Menge. Wer den Stundenlohn kennt, kann auch leicht überschlagen, was zusätzliche oder weniger Wochenstunden monatlich bedeuten.',
       },
       {
         typ: 'text',

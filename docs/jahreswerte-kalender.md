@@ -203,6 +203,11 @@
    - `berechneLohnsteuerJahr` in `lohnsteuer.ts` auf Jahres-Switch umstellen (analog Mindestlohn/Rentenwert-Pattern)
    - `scripts/verify-lohnsteuer-pap.ts` um neue Jahres-Stützpunkte erweitern (20 neue BMF-Werte gegen bmf-steuerrechner.de webbasiert verifizieren)
    - Quelle: https://www.bundesfinanzministerium.de/ (PAP-PDF) + https://www.bmf-steuerrechner.de/interface/pseudocodes.xhtml (XML)
+10. [ ] **Texte mit Jahreswerten** (seit Welle 200, 29.10.2026): Die Libs schalten um, feste Zahlen im Text nicht.
+   - `python3 .claude/skills/karola-rechner/scripts/karola.py register . --alle` (unter Windows `G:/Python314/python.exe`): Die Stufe `pruefen` listet je Konvention jede Stelle mit Minijob-Grenze (KV04), Mindestlohn-Monatsbrutto (KV05) und den Werten aus `scripts/jahreswerte-config.json` (KV06). Stand nach Welle 200: KV04 und KV05 ohne Stelle, KV06 95 Stellen, davon 79 in `lib/rechner-config/finanzen.ts`.
+   - Jede Stelle mit einem Wert, der zum 01.01. wechselt: aus der Lib interpolieren oder das Jahr dazuschreiben. Texte, die das alte Jahr als „aktuell“ beschreiben, auf das neue Jahr heben.
+   - BAföG: Der Freibetrag für eigenes Einkommen folgt nach § 23 Abs. 6 BAföG der Minijob-Grenze per Bekanntmachung (2026: 389 €, anrechnungsfrei bis 603 €). Bei neuer Minijob-Grenze die Bekanntmachung suchen und einen Bucket in `bafoeg-parameter.ts` anlegen; den Hinweis im Rechner liefert `anrechnungsfreierVerdienstMonat`. Ebenso den AFBG-Freibetrag des Antragstellers prüfen (`afbg-parameter.ts`, 2026 gleich der Minijob-Grenze).
+   - `scripts/verify-stichtag-2027.ts` prüft den Wechsel des Mindestlohns zum 01.01.2027 in den Rechnern; für das Folgejahr nach diesem Muster einen Fall ergänzen.
 
 **Nach dem Check:**
 - Für jeden geänderten Parameter: Switch in der entsprechenden Lib einbauen (mit Stichtag 01.01.)
@@ -275,6 +280,10 @@ Wenn ein Gesetz verabschiedet wird, das einen Parameter ändert (z. B. StÄndG 2
 ## 🗒️ Änderungshistorie dieser Datei
 
 Neue Einträge oben anfügen.
+
+### 2026-10-29 — Welle 200: Texte mit Jahreswerten im Dezember-Audit
+- Dezember-Audit Punkt 10: Karolas Register (KV04 bis KV06) als Liste der Textstellen, BAföG-Freibetrag nach § 23 Abs. 6, AFBG-Freibetrag, `verify-stichtag-2027.ts`.
+- Anlass: Der Stundenlohn-Rechner verglich fest mit dem Mindestlohn 2026, der Hochrechner schrieb „Mindestlohn 2026:“ vor den umschaltenden Wert, drei Komponenten nannten 603 € ohne Jahr. Behoben in Welle 200.
 
 ### 2026-04-22 — Stufe-4b-Ergänzung (Prompt 121 + 122-doku-sync) + AFBG (Prompt 124)
 - Neue Sektion **BAföG** mit 16 Parametern (Bedarfe, Zuschläge, Freibeträge, Anrechnungsquote) aus `bafoeg-parameter.ts`

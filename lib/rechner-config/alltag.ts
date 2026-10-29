@@ -1046,7 +1046,7 @@ export const alltagRechner: RechnerConfig[] = [
   },
   {
     slug: 'streaming-kosten-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-10-29',
     titel: 'Streaming-Kosten-Rechner',
     beschreibung: 'Berechnen Sie Ihre monatlichen Streaming-Kosten: Netflix, Disney+, Spotify und mehr auf einen Blick.',
     kategorie: 'Alltag',
@@ -1086,9 +1086,9 @@ export const alltagRechner: RechnerConfig[] = [
           { label: 'Monatssumme (4 Abos)', formel: '14 + 12 + 30 + 10', ergebnis: '66 €' },
           { label: 'Pro Jahr', formel: '66 € × 12', ergebnis: '792 €' },
           { label: 'Über 5 Jahre', formel: '792 € × 5', ergebnis: '3.960 €' },
-          { label: 'Arbeitsstunden zum Mindestlohn', formel: '792 € ÷ 13,90 €', ergebnis: '≈ 57 h/Jahr' },
+          { label: 'Arbeitsstunden zum Mindestlohn 2026', formel: '792 € ÷ 13,90 €', ergebnis: '≈ 57 h/Jahr' },
         ],
-        fazit: 'Vier Abos für „nur" 66 € im Monat summieren sich auf 792 € im Jahr und fast 4.000 € in fünf Jahren. Zum Mindestlohn müssten Sie rund 57 Stunden im Jahr allein fürs Streaming arbeiten. Genau diese Hochrechnung macht der Rechner sichtbar.',
+        fazit: 'Vier Abos für „nur" 66 € im Monat summieren sich auf 792 € im Jahr und fast 4.000 € in fünf Jahren. Zum Mindestlohn von 2026 (13,90 €) müssten Sie rund 57 Stunden im Jahr allein fürs Streaming arbeiten. Genau diese Hochrechnung macht der Rechner sichtbar.',
       },
       {
         typ: 'text',

@@ -15,7 +15,9 @@ import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
 import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 
-const SCHNELLWAHL = ['450', '520', '538', '556', '603'];
+// W200: die geltende Grenze aus der Lib (ab 01.01.2027: 633 €), vorher fest 603 mit „(Grenze)“
+const GRENZE = String(MINIJOB_GRENZE);
+const SCHNELLWAHL = Array.from(new Set(['450', '520', '538', '556', '603', GRENZE]));
 
 export default function MinijobRechner() {
   const [verdienst, setVerdienst] = useState('538');
@@ -84,7 +86,7 @@ export default function MinijobRechner() {
               onClick={() => setVerdienst(v)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${verdienst === v ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
             >
-              {v} €{v === '603' ? ' (Grenze)' : ''}
+              {v} €{v === GRENZE ? ' (Grenze)' : ''}
             </button>
           ))}
         </div>

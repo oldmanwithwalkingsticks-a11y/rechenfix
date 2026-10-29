@@ -72,8 +72,10 @@ export default function EnergiekostenRechner() {
       const t = Math.max(0, Math.min(7, parseInt(g.tage) || 0));
       const kwhTag = (w * h) / 1000;
       const kwhWoche = kwhTag * t;
-      const kwhMonat = kwhWoche * 4.33;
       const kwhJahr = kwhWoche * 52;
+      // W200: ein Monat ist ein Zwölftel des Jahres (52 ÷ 12 Wochen). Vorher Woche mal 4,33 — zwölf Monate
+      // ergaben 51,96 statt 52 Wochen, Monat mal 12 war nicht das Jahr.
+      const kwhMonat = kwhJahr / 12;
       const kostenTag = (kwhTag * preis) / 100;
       const kostenMonat = (kwhMonat * preis) / 100;
       const kostenJahr = (kwhJahr * preis) / 100;

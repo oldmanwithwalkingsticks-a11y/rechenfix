@@ -3274,7 +3274,7 @@ export const wohnenRechner: RechnerConfig[] = [
   },
   {
     slug: 'energiekosten-rechner',
-    letzteAktualisierung: '2026-06-21',
+    letzteAktualisierung: '2026-10-29',
     titel: 'Energiekosten-Rechner',
     beschreibung: 'Stromkosten mehrerer Geräte zusammenrechnen: Leistung, Nutzungszeit und Tage pro Woche je Gerät — Gesamtkosten pro Jahr für deinen Haushalt.',
     kategorie: 'Wohnen & Energie',

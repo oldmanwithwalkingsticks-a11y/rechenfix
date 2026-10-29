@@ -6,6 +6,7 @@ import {
   type FortbildungsArt,
   type AfbgKind,
 } from '@/lib/berechnungen/afbg';
+import { getAktuelleAfbgParameter } from '@/lib/berechnungen/afbg-parameter';
 import { parseDeutscheZahl, clampInputValue, clampInputValueOnBlur } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -125,7 +126,8 @@ export default function AfbgRechner() {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Bruttoeinkommen</label>
               <NummerEingabe value={antragstellerBrutto} onChange={setAntragstellerBrutto} placeholder="0" einheit="€/Monat" />
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag ca. 603 €/Monat (Minijob-Grenze)</p>
+              {/* W200: Wert aus afbg-parameter.ts, vorher fest „ca. 603 €/Monat (Minijob-Grenze)“ */}
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag {fmtEuro(getAktuelleAfbgParameter().freibetraege.antragstellerBrutto)} €/Monat</p>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>

@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { berechneNebenjob, type NebenjobArt } from '@/lib/berechnungen/nebenjob';
+import { SV_RECHENSTAND } from '@/lib/berechnungen/brutto-netto';
+import { getMinijobGrenzeMonat } from '@/lib/berechnungen/mindestlohn';
 import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -64,7 +66,8 @@ export default function NebenjobRechner() {
           legend="Art des Nebenjobs"
           srOnlyLegend
           options={[
-            { value: 'minijob', label: 'Minijob (bis 603 €)' },
+            // W200: Grenze wie in nebenjob.ts zum Rechenstand, vorher fest 603 €
+            { value: 'minijob', label: `Minijob (bis ${getMinijobGrenzeMonat(SV_RECHENSTAND)} €)` },
             { value: 'steuerkarte', label: 'Steuerkarte (Kl. VI)' },
             { value: 'selbststaendig', label: 'Selbstständig' },
           ]}

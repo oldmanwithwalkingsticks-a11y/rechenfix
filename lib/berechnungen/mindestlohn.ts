@@ -30,6 +30,15 @@ export function getAktuellerMindestlohn(stichtag: Date = new Date()): number {
 }
 
 /**
+ * Das Jahr, dessen Wert getAktuellerMindestlohn liefert, für Beschriftungen wie „Mindestlohn 2026“ (W200).
+ * Nach dem letzten bekannten Jahr bleibt es bei diesem: 2028 zeigt „Mindestlohn 2027: 14,60 €“, bis die
+ * Lib den nächsten Wert kennt. Vorher stand „Mindestlohn 2026:“ fest neben dem umschaltenden Wert.
+ */
+export function getMindestlohnJahr(stichtag: Date = new Date()): number {
+  return Math.min(Math.max(stichtag.getFullYear(), 2024), 2027);
+}
+
+/**
  * Minijob-Monatsgrenze nach § 8 Abs. 1a Satz 2 SGB IV: Mindestlohn × 130 / 3,
  * auf volle Euro AUFGERUNDET (nicht kaufmännisch).
  *   2024: 538 €
@@ -60,4 +69,5 @@ export function unterMindestlohnBeiVollzeit(bruttoMonat: number, mindestlohn: nu
 }
 
 export const MINDESTLOHN = getAktuellerMindestlohn();
+export const MINDESTLOHN_JAHR = getMindestlohnJahr();
 export const MINIJOB_GRENZE_MONAT = getMinijobGrenzeMonat();

@@ -75,11 +75,12 @@ export default function SchnellCheck({
       });
     }
 
-    // Brutto über KV-Beitragsbemessungsgrenze 2026 (5.812,50 €/Monat)
+    // Brutto über der KV-Beitragsbemessungsgrenze des Rechenstands. W200: Betrag im Text aus derselben
+    // Konstante wie die Bedingung, vorher stand er fest im Text.
     if (brutto > BBG_KV_MONAT) {
       tipps.push({
         id: 'kvgrenze',
-        text: 'Ihr Gehalt liegt über der KV-Beitragsbemessungsgrenze (5.812,50 €). KV-Beiträge steigen ab hier nicht weiter — eine private KV könnte sich lohnen.',
+        text: `Ihr Gehalt liegt über der KV-Beitragsbemessungsgrenze (${BBG_KV_MONAT.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €). KV-Beiträge steigen ab hier nicht weiter — eine private KV könnte sich lohnen.`,
       });
     }
 

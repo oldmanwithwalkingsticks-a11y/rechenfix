@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import {
   berechneBafoeg,
+  anrechnungsfreierVerdienstMonat,
   type AusbildungsArt,
   type Wohnsituation,
   type Familienstand,
@@ -164,7 +165,7 @@ export default function BafoegRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliches Einkommen</label>
             <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€/Monat" />
             {/* W187: vorher „Minijob bis 603 € teilweise angerechnet. Freibetrag: 330 €“ */}
-            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bruttoverdienst. Freibetrag {fmtEuro(params.freibetraege.eigenesEinkommen)} € nach Abzug von Werbungskosten- und Sozialpauschale — ein Minijob bis 603 € bleibt anrechnungsfrei.</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bruttoverdienst. Freibetrag {fmtEuro(params.freibetraege.eigenesEinkommen)} € nach Abzug von Werbungskosten- und Sozialpauschale — ein Minijob bis {fmtEuro(anrechnungsfreierVerdienstMonat(params))} € bleibt anrechnungsfrei.</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>

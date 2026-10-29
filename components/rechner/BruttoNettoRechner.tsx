@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { berechneBruttoNetto, BUNDESLAENDER, fmtAbzugsquote, SV_RECHENSTAND } from '@/lib/berechnungen/brutto-netto';
+import { berechneBruttoNetto, BUNDESLAENDER, fmtAbzugsquote, SV_RECHENSTAND, BBG_KV_MONAT, BBG_RV_MONAT } from '@/lib/berechnungen/brutto-netto';
 import type { BruttoNettoErgebnis } from '@/lib/berechnungen/brutto-netto';
 import { KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2026_PROZENT } from '@/lib/berechnungen/sv-parameter';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
@@ -884,7 +884,7 @@ export default function BruttoNettoRechner() {
                 <strong className="text-gray-800 dark:text-gray-100">Solidaritätszuschlag pauschal abgezogen.</strong> Seit 2021 zahlen rund 90 % der Steuerzahler keinen Soli mehr. Erst ab einer Jahres-Lohnsteuer von 20.350 € (Single 2026) bzw. 40.700 € (gemeinsam) wird er fällig — in Steuerklasse 1 ohne Kinder bei rund 92.400 € Jahresbrutto, und auch dann zunächst gleitend statt sofort mit vollen 5,5 %.
               </li>
               <li>
-                <strong className="text-gray-800 dark:text-gray-100">Beitragsbemessungsgrenze ignoriert.</strong> Bei Bruttogehältern über 5.812,50 € pro Monat zahlen Sie nicht weiter mehr in Kranken- und Pflegeversicherung ein (RV und ALV: bis 8.450 € pro Monat). Wer das nicht weiß, rechnet sein Netto bei hohen Gehältern zu niedrig.
+                <strong className="text-gray-800 dark:text-gray-100">Beitragsbemessungsgrenze ignoriert.</strong> Bei Bruttogehältern über {BBG_KV_MONAT.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} € pro Monat zahlen Sie nicht weiter mehr in Kranken- und Pflegeversicherung ein (RV und ALV: bis {BBG_RV_MONAT.toLocaleString('de-DE')} € pro Monat). Wer das nicht weiß, rechnet sein Netto bei hohen Gehältern zu niedrig.
               </li>
               <li>
                 <strong className="text-gray-800 dark:text-gray-100">Bundesland-Unterschiede vergessen.</strong> Kirchensteuer ist 8 % in Bayern und Baden-Württemberg, 9 % in allen anderen Bundesländern. Beim Umzug ändert sich das automatisch — auch ohne Kirchenwechsel.
