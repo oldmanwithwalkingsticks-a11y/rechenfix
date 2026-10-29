@@ -5,7 +5,7 @@ description: Karola Rechner nimmt jeden Rechner auf rechenfix.de ab, nachdem er 
 
 # Karola Rechner
 
-**Stand: v1 (27.10.2026).** Abnahme für jeden Rechner auf rechenfix.de. Karola baut nicht, sie prüft — unabhängig vom Bauweg, auf einem frischen Klon des gepushten Stands, nie auf der Selbstauskunft des Bau-Laufs.
+**Stand: v1.1 (29.10.2026).** Abnahme für jeden Rechner auf rechenfix.de. Karola baut nicht, sie prüft — unabhängig vom Bauweg, auf einem frischen Klon des gepushten Stands, nie auf der Selbstauskunft des Bau-Laufs.
 
 ## Warum es Karola gibt
 
@@ -128,7 +128,7 @@ Eine neue Konvention bekommt einen Eintrag in `assets/karola.json` (mit Positiv-
 ## Grenzen
 
 - Das Zahlen-Inventar liest Literale und JSX-Text. Texte, die erst zur Laufzeit entstehen, und Zahlen in Grafiken findet es nur teilweise.
-- Der Formel-Prüfer kennt × ÷ + − · und „ / " mit Leerzeichen. Prozentketten, Brüche wie 1/2, Spannen und Verhältnisse übergeht er.
+- Der Formel-Prüfer kennt × ÷ + − · und „ / “ mit Leerzeichen, seit v1.1 auch Einheiten wie €/h oder h/Woche. Prozentketten, Brüche wie 1/2, Spannen und Verhältnisse übergeht er.
 - KV06 baut seine Muster aus `scripts/jahreswerte-config.json` des Klons; fehlt die Datei, greift nur das Ersatzmuster.
 - Karola prüft Rechner. Blogartikel prüft der blog-builder; zitiert ein Artikel einen Rechner, gehört er in KR01 und KR06.
 
@@ -137,3 +137,4 @@ Eine neue Konvention bekommt einen Eintrag in `assets/karola.json` (mit Positiv-
 | Fassung | Datum | Änderung |
 |---|---|---|
 | v1 | 27.10.2026 | Erstfassung nach den Wellen 196 und 197: Prüfkatalog KR01 bis KR10, Register KV01 bis KV06, `scripts/karola.py` mit Selbsttest |
+| v1.1 | 29.10.2026 | Welle 200. `zahlen` übergeht Stylesheets in Template-Literalen (Hexfarben waren als Zahlen gezählt). Formel-Prüfer mit Einheiten wie €/h. KV01: „× 4,33“ als Rechenschritt im Text ist ein Befund; KV02: Monatsstunden 173 oder 173,5 statt 173,33. KV01 bis KV03 nehmen wie KV04 bis KV06 Blogartikel und ihre Grafiken aus. Anlass: `app/finanzen/2000-euro-brutto-netto` rechnete 13,90 € × 173,5 h = 2.413 €, keiner der Prüfwege fand es. Selbsttest 65 Fälle |

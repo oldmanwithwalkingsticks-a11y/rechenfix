@@ -1,20 +1,21 @@
 # Konventionen-Register
 
-Stand 27.10.2026. Maschinenlesbar in `assets/karola.json`, Block `konventionen`; `scripts/karola.py register` sucht die Muster, der Selbsttest prüft jedes Muster gegen sein Positiv- und Negativbeispiel und dass diese Datei für jede Kennung einen Abschnitt hat.
+Stand 29.10.2026 (v1.1). Maschinenlesbar in `assets/karola.json`, Block `konventionen`; `scripts/karola.py register` sucht die Muster, der Selbsttest prüft jedes Muster gegen sein Positiv- und Negativbeispiel und dass diese Datei für jede Kennung einen Abschnitt hat.
 
 **Warum ein Register.** Rechtswerte haben seit April 2026 eine SSOT und einen Wächter (`scripts/check-jahreswerte.mjs`). Konventionen hatten keinen: Guard G10 nahm „nicht rechts- oder jahresabhängige Konstanten" ausdrücklich aus. Genau dort lag der 160-Stunden-Fehler. Eine Konvention ist eine Festlegung, die mehrere Rechner teilen und die anders getroffen werden könnte — 52 ÷ 12 statt 4,348, Arbeitstage aus dem Kalender statt pauschal. Sie braucht dieselbe Behandlung wie ein Rechtswert: einen Ort im Code, einen Grund, eine Suche nach Abweichlern.
 
 **Stufen.** `befund`: jede Fundstelle ist ein Befund (B, bei sichtbar falschem Ergebnis A). `pruefen`: jede Fundstelle wird von Hand eingeordnet — Jahr im selben Satz, Interpolation aus der Lib oder Termin in `lib/termine.ts`, sonst B.
 
-**Was nicht gezählt wird.** Kommentarzeilen und Zeilenendkommentare (Muster mit `zeilen: code`): Historienkommentare wie „W196: vorher 160" sollen stehen bleiben. Bei Stufe `pruefen` außerdem Zeilen, die das Jahr nennen (`ausser_wenn`), und die Pfade unter `ausnahmen_praefix` (Blogartikel tragen ihren Stand im Datum).
+**Was nicht gezählt wird.** Kommentarzeilen und Zeilenendkommentare (Muster mit `zeilen: code`): Historienkommentare wie „W196: vorher 160“ sollen stehen bleiben. Bei Stufe `pruefen` außerdem Zeilen, die das Jahr nennen (`ausser_wenn`). Bei allen Einträgen die Pfade unter `ausnahmen_praefix`: Blogartikel und ihre Grafiken tragen ihren Stand im Datum und erklären die Werte oft gerade im Vergleich (Artikel 21 nennt 160, 173,92 und 174 Stunden mit Grund); sie prüft der blog-builder. Seit v1.1 auch bei KV01 bis KV03.
 
 ## KV01 Wochen pro Monat
 
-- **Regel:** 52 ÷ 12 = 4,3333 Wochen pro Monat. Im Code nur über `WOCHEN_PRO_MONAT`. Im Text ist 4,33 als gerundete Anzeige erlaubt. Kalendergenau 4,348 Wochen (TVöD, Branchen-Mindestlöhne) nur als ausdrücklich benannter Vergleich, nie als Rechengrundlage.
+- **Regel:** 52 ÷ 12 = 4,3333 Wochen pro Monat. Im Code nur über `WOCHEN_PRO_MONAT`. Im Text ist 4,33 als gerundete Anzeige erlaubt, aber nicht als Rechenschritt: „5 × 4,33 = 21,67“ stimmt nicht (5 × 4,33 = 21,65), das Ergebnis ist mit 52 ÷ 12 gerechnet. Die Formel zeigt deshalb „× 52 ÷ 12“. Kalendergenau 4,348 Wochen (TVöD, Branchen-Mindestlöhne) nur als ausdrücklich benannter Vergleich, nie als Rechengrundlage.
 - **SSOT:** `lib/berechnungen/_helpers.ts`, `WOCHEN_PRO_MONAT`. Rechner-Komponenten importieren ihn über die Domain-Lib, nie aus `_helpers.ts` direkt (`CLAUDE.md`, „Berechnungs-interne Helfer“).
 - **Grund:** So rechnet der Gesetzgeber bei der Minijob-Grenze (§ 8 Abs. 1a SGB IV: Mindestlohn × 130 ÷ 3) und der Mindestlohnrechner des BMAS. Regel in `CLAUDE.md` seit Welle 197.
-- **Muster:** Faktor 4,3 bis 4,35 hinter `*` oder `/` im Code; „woche … * 4".
+- **Muster:** Faktor 4,3 bis 4,35 hinter `*` oder `/` im Code; „woche … * 4“; seit v1.1 „× 4,33“ oder „÷ 4,33“ im Text.
 - **Stand 27.10.2026:** eine Fundstelle, `components/rechner/EnergiekostenRechner.tsx:75` (`kwhWoche * 4.33`).
+- **Stand 29.10.2026 (v1.1):** sieben Fundstellen: die eine von oben, dazu „× 4,33“ als Rechenschritt in `lib/rechner-config/arbeit.ts` (Zeilen 464, 475, 1605, 1606), `lib/rechner-config/finanzen.ts:4596` und `app/finanzen/2000-euro-brutto-netto/page.tsx:77`. Behoben in Welle 200.
 
 ## KV02 Monatsstunden einer Vollzeitstelle
 
@@ -22,6 +23,7 @@ Stand 27.10.2026. Maschinenlesbar in `assets/karola.json`, Block `konventionen`;
 - **SSOT:** `lib/berechnungen/_helpers.ts`, `VOLLZEIT_STUNDEN_MONAT`, für Komponenten re-exportiert über `lib/berechnungen/mindestlohn.ts`.
 - **Grund:** Welle 196. Drei Seiten rechneten mit 160, eine FAQ nannte 174, der Stundenlohn-Rechner 173,33.
 - **Muster:** dieselben sechs wie in `scripts/verify-monatsstunden.ts`, das sie als Gate im Build prüft. Das Register führt sie, damit die Regel an einer Stelle mit Begründung steht.
+- **Seit v1.1:** ein siebtes Muster für Monatsstunden 173 oder 173,5 (40 × 4,33 gerundet) statt 173,33; 173,92 (kalendergenau 4,348 × 40) bleibt als benannter Vergleich erlaubt. Stand 29.10.2026: `app/finanzen/2000-euro-brutto-netto/page.tsx` Zeilen 37 und 77 („13,90 €/h × 173,5 h = 2.413 €“), behoben in Welle 200.
 
 ## KV03 Arbeitstage pro Monat
 

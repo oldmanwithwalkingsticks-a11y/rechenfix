@@ -5,7 +5,7 @@ description: Technik-Vorlage und Verifikations-Checkliste zum Ausrollen von Blog
 
 # Blog Builder für rechenfix.de
 
-**Stand: v13 (18.09.2026, Pfade und Kettenpositionen gemessen an HEAD `4193aa1`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
+**Stand: v14 (29.10.2026, nach Artikel 21, Welle 199; Pfade und Kettenpositionen zuletzt gemessen an HEAD `4193aa1`).** Rollt Blogartikel für das deutsche Rechner-Portal rechenfix.de technisch sauber aus. Deckt die **wiederkehrende Mechanik** ab: MDX-Andockpunkte, Grafik-Komponenten-Konvention, Dark-Mode, Quellen, eingebettete Rechner, Verifikations-Checkliste, Build-Prompt-Struktur für Code-Claude.
 
 **v13-Nachtrag (18.09.2026 — zweimal geändert, ohne es oben zu sagen):** Zwischen dem
 28.08. und heute ist dieser Skill zweimal inhaltlich geändert worden, ohne dass die
@@ -18,6 +18,31 @@ Textänderung ins Protokoll gehört. Gleichzeitig nachgemessen: Der Aufruf
 Glied in der prebuild-Kette, weil W137b die Blog-Wortzahl als sechstes eingezogen hat; die
 Kette ist auf 16 Glieder gewachsen. Alle im Skill genannten Dateipfade existieren, und die
 Quellen-Konvention aus W139a (`hinweis` statt `beschreibung`) ist bereits eingearbeitet.
+
+**v14-Nachtrag (29.10.2026 — nach Artikel 21 „Monatsstunden“, Welle 199):** Zwei Dinge fielen erst
+im Probelauf auf, beide wären beim Ausrollen ein STOP oder ein stiller Fehler gewesen.
+
+1. **Die Übertragung auf Karstens Rechner verändert Mediendateien.** `device_commit_files`
+   schreibt in Bilder und Videos ein C2PA-Manifest von Anthropic („Claude provided this file …“):
+   PNG mit Chunk `caBX`, JPEG mit APP11-Segment, MP4 mit einer `uuid`-Box vor `mdat` und
+   verschobenen Chunk-Offsets, je rund 5,8 KB. Die Datei auf Karstens Rechner ist dann nicht
+   mehr die geprüfte, und der Vermerk nennt Claude statt Gemini oder Kling. Textdateien bleiben
+   byte-gleich. Regel: nach jeder Übertragung den sha256 auf dem Gerät gegen den geprüften Stand
+   halten; weicht er ab, mit `_chat-claude-werkzeuge/c2pa_entfernen.py` auf dem Gerät
+   zurückbauen und erneut messen (bei Artikel 21 danach alle drei Dateien byte-gleich). Der
+   Ausroll-Prompt nennt die sha256 der Lieferfassung in der Medientabelle und prüft sie in
+   Phase 0 und nach dem Kopieren. Die Herkunftsvermerke der Generatoren (Googles C2PA im
+   Gemini-Original) fallen beim Verkleinern und Neukodieren ohnehin weg; die Kennzeichnung im
+   Repo leistet Ebene 3.
+2. **Prüfskripte lesen auch Artikel, und `verify:alle` läuft nicht im Build.**
+   `scripts/verify-monatsstunden.ts` durchsucht `app/**/*.mdx`. Artikel 21 erklärt die
+   Monatsstunden und traf ein Muster mit Absicht („174 Stunden im Monat bezahlt, nicht für 160.“,
+   für 2026 richtig). Prebuild und Build waren im Probelauf grün, erst `npm run verify:alle`
+   schlug an. Regel: Der Probelauf vor dem Ausroll-Prompt umfasst `verify:alle` mit dem fertigen
+   Artikel, nicht nur den Build. Trifft ein Wächter einen richtigen Satz, bekommt das Skript eine
+   Ausnahme im genauen Wortlaut (`AUSNAHMEN` in `verify-monatsstunden.ts`, seit Welle 199) mit
+   Begründung, und der Prompt enthält eine Gegenprobe mit geändertem Wortlaut. Den Satz
+   umzuformulieren, bis der Wächter schweigt, ist keine Lösung.
 
 **v4-Nachtrag (05.08.2026 — nach Artikel 9 „Zeitvereinheitlichung", Welle 55):** Der Build-Prompt ließ **KI-Metadaten Ebene 3** (XMP in der Datei) weg und behauptete, die KI-Kennzeichnung entstehe vollständig automatisch. Code-Claude stoppte vor dem Commit — sonst wäre `zeit.mp4` auf Dateiebene ungekennzeichnet live gegangen. Kodifiziert in: „Die drei Ebenen sind nicht gleich automatisch" (unten im KI-Metadaten-Abschnitt), einem Pflichtschritt + STOP-Bedingung + Generator-Spalte in „Build-Prompt-Struktur", und der Regel, dass der **Generatorname eine Tatsachenangabe ist** (Chat-Claude liefert ihn mit den Assets; Code-Claude rät ihn nie und übernimmt ihn nicht aus der Tabelle anderer Artikel).
 
@@ -867,6 +892,8 @@ Jeder Prompt als eigene `.md` in `/mnt/user-data/outputs/`, Konvention `welle<N>
 - **Schritte** mit wörtlichen Such-/Ersetz-Blöcken. **Wortlaute vorab per git clone verifizieren**, damit Code-Claudes STOP-Bedingung nicht fälschlich greift.
 - **Pflichtschritt KI-Metadaten Ebene 3 (Art. 50 KI-VO)** direkt nach dem Schritt, der Titelbild und Video ablegt — sonst geht das Video auf Dateiebene ungekennzeichnet live (Ebene 1/2 reichen NICHT, sie gelten nur auf der eigenen Seite). Der Schritt lautet: je eine Zeile `'<titelbild>.png': '<Generatorname>'` und `'<video>.mp4': '<Generatorname>'` in `GENERATOREN` in `scripts/ki-metadaten-schreiben.mjs` ergänzen (Werte aus der Datei-Tabelle des Prompts, siehe nächster Punkt), dann `node scripts/ki-metadaten-schreiben.mjs` und `node scripts/ki-metadaten-schreiben.mjs --pruefen`. Erwartung: beide neuen Dateien melden `OK` (`UNBEKANNT` = GENERATOREN-Zeile fehlt; `FEHLT` = Skript nicht/nicht erfolgreich gelaufen). `scripts/ki-metadaten-schreiben.mjs` gehört mit in den Commit. **`public/ki-medien/inventar.json` wird NICHT von Hand ergänzt** — es ist seit Welle 127 abgeleitet. Nach dem `GENERATOREN`-Eintrag `node scripts/generate-ki-inventar.mjs` laufen lassen und die neu geschriebene Datei mitcommitten; `--pruefen` in der prebuild-Kette bricht den Build ab, wenn die abgelegte Datei von der ableitbaren abweicht. Ein handgeschriebener Eintrag ist kein gültiger Arbeitsschritt mehr.
 - **Datei-Tabelle des Prompts trägt eine Generator-Spalte.** Die „Mitgelieferte Dateien"-Tabelle bekommt neben `Ziel` die Spalte `Generator (für GENERATOREN)`, damit der Wert an derselben Stelle wie der Dateiname steht und beim Prompt-Schreiben nicht übersehen wird. Chat-Claude füllt sie beim Erzeugen der Assets — nicht aus Gewohnheit, sondern mit dem real verwendeten Modell.
+- **Medien-Prüfsummen:** Die Medientabelle nennt je Datei den sha256 der geprüften Lieferfassung; Phase 0 misst ihn im Ablageordner, nach dem Kopieren noch einmal in `public/blog/` (Lehre Welle 199, siehe v14-Nachtrag).
+- **`npm run verify:alle` im Probelauf mit dem fertigen Artikel**, nicht nur Prebuild und Build: Einige Wächter durchsuchen auch MDX (v14-Nachtrag).
 - **Gezieltes Staging:** `git add <konkrete Pfade>` — NIE `git add .` und **nie ein Verzeichnis** (Lehre Welle 74) (sonst wandern `client-data.ts`-Drift und ungetrackte Handoff-Dateien mit). `client-data.ts` ist auto-generierter Datums-Drift, nie mitcommitten.
 - **Übergabe-Format:** knappe Punktliste (geänderte Dateien, Build-Ergebnis, Routen-Check, Commit-Hash, offene Punkte für Karsten).
 - **„Was du NICHT tust":** Artikeltext inhaltlich ändern (außer explizit benannt), „Karsten sagt"-Block anfassen, Infrastruktur/Renderer verändern, Suchtexte nach Sinn raten.

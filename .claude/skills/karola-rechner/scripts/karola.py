@@ -6,7 +6,7 @@ Aufruf (aus einem beliebigen Ordner, <repo> ist der Klon von rechenfix):
   python3 karola.py inventar <repo> <slug>     KR01  Bausteine und Verbraucher eines Rechners
   python3 karola.py zahlen   <repo> <slug>     KR03  jede Zahl in Config-Eintrag und Komponenten
   python3 karola.py formeln  <repo> [<slug>]   KR04  Rechenketten "Ausdruck = Zahl" nachrechnen
-  python3 karola.py register <repo> [--alle]   KV01 bis KV05 aus assets/karola.json
+  python3 karola.py register <repo> [--alle]   KV01 bis KV06 aus assets/karola.json
   python3 karola.py quer     <repo> <zahl>     KR06  dieselbe Zahl in allen Schreibweisen im Repo
   python3 karola.py selbsttest                 eingebettete Faelle, Katalog deckungsgleich
 
@@ -299,12 +299,14 @@ def klartext(satz):
 # --------------------------------------------------------------------------- Formeln
 
 OP = r'(?:[×÷+−·]|(?<=\s)/(?=\s))'
-EINHEIT = r'(?:\s*(?:€|%|m²|(?:EUR|Euro|h|Std|Stunden|Wochen|Monate|Tage|km|kg|kWh|l|m|Jahre|kcal|ct|W)\b)\.?)?'   # € und % sind keine Wortzeichen: kein \b dahinter
+PRO = r'(?:/(?:h|Std|Stunde|Woche|Monat|Jahr|Tag|kWh|km|kg|l)\b\.?)'   # zusammengesetzte Einheit wie €/h oder h/Woche (W200)
+EINHEIT = rf'(?:\s*(?:€|%|m²|(?:EUR|Euro|h|Std|Stunden|Wochen|Monate|Tage|km|kg|kWh|l|m|Jahre|kcal|ct|W)\b)\.?{PRO}?)?'   # € und % sind keine Wortzeichen: kein \b dahinter
 TERM = rf'(?:\(\s*)*(?:{ZAHL}){EINHEIT}(?:\s*\))*'
 AUSDRUCK = rf'{TERM}(?:\s*{OP}\s*{TERM})+'
 KETTE = re.compile(rf'(?P<ca>ca\.\s*|≈\s*|rund\s+)?(?P<links>{AUSDRUCK})(?P<rest>(?:\s*(?:=|≈)\s*(?:ca\.\s*)?(?:{AUSDRUCK}|{TERM}))+)')
 FAKTOR = {'Tausend': 1e3, 'Millionen': 1e6, 'Million': 1e6, 'Mio.': 1e6, 'Mio': 1e6, 'Milliarden': 1e9, 'Mrd.': 1e9}
 EINHEIT_WEG = re.compile(r'(€|EUR|Euro|%|Std\.?|Stunden|Wochen|Monate|Tage|kWh|kcal|km|kg|m²|Jahre|\bct\b|\bh\b|\bl\b|\bm\b|\bW\b)')
+PRO_WEG = re.compile(r'(?<=[^\s\d])' + PRO)
 
 
 def stellen(s):
@@ -328,7 +330,7 @@ def auswerten(a, intervall=False):
     """Wert des Ausdrucks; mit intervall=True (min, max) bei Operanden, die auf ihre letzte
     angegebene Stelle gerundet sein koennen."""
     t = re.sub(rf'({ZAHL})\s*%', r'\1 __p__', a)          # Prozentzahl: Wert / 100
-    t = ausgleichen(EINHEIT_WEG.sub('', t))
+    t = ausgleichen(EINHEIT_WEG.sub('', PRO_WEG.sub('', t)))
     t = t.replace('×', '*').replace('·', '*').replace('÷', '/').replace('−', '-')
     zahlen = []
 
@@ -527,9 +529,14 @@ CSS_WORT = {'flex', 'grid', 'block', 'inline', 'hidden', 'relative', 'absolute',
             'peer', 'sr-only', 'antialiased', 'tabular-nums', 'grow', 'shrink'}
 
 
+CSS_REGEL = re.compile(r'[\w.#:>\-\[\]=" ]+\{\s*[a-z-]+\s*:[^{}]*\}')
+
+
 def ist_text_literal(inhalt):
     if not re.search(r'\d', inhalt):
         return False
+    if CSS_REGEL.search(inhalt):
+        return False     # Stylesheet in <style>{`…`}: Hexfarben sind keine Zahlen (v1.1)
     if re.fullmatch(r'[\d.,]+', inhalt):
         return len(inhalt.replace('.', '').replace(',', '')) >= 2
     woerter = inhalt.split()
@@ -784,6 +791,8 @@ def selbsttest():
     fall('F18 Einheit pro Tag bleibt pruefbar', f("text: 'Grundumsatz 1.718 × 1,55 = 2.700 kcal/Tag.'") == (1, 0))
     fall('F16 zusammengesetzte Groesse', f("text: '3,75 h = 3 h + 0,75 × 60 = 3 h 45 min'") == (0, 0))
     fall('F17 innere Klammer wird geprueft', f("text: '3.500 € Monatsgehalt / (40 Std × 52 ÷ 12 = 174 Std) = 20,11 €'") == (1, 0))
+    fall('F26 Einheit pro Stunde in der Kette', f("antwort: 'Mindestlohn 13,90 €/h × 40 h/Woche = 556 € je Woche'") == (0, 0))
+    fall('F27 falsche Kette mit €/h wird gefunden', f("antwort: 'Mindestlohn 13,90 €/h × 40 h/Woche = 565 € je Woche'") == (1, 0))
 
     # Tokenizer und Zahlen
     probe = ("const A = 'Freibetrag 603 €';\n// 999 im Kommentar\n"
@@ -813,6 +822,11 @@ def selbsttest():
                                                     "<p>Auch LED statt Glühbirne (−85 %)</p>\n", encoding='utf-8')
         zc = {zk[0] for zeile in zahlen_datei(tmp, 'code.tsx') for zk in zeile[3]}
     fall('Z13 Pfeilfunktion und Vergleich sind kein JSX-Text', zc == {'85'})
+    with tempfile.TemporaryDirectory() as tmp:
+        (pathlib.Path(tmp) / 'grafik.tsx').write_text("<style>{`\n  .ms-ueber { fill: #F6D5C8; }\n  .dark .ms-t-coral { fill: #F0997B; }\n`}</style>\n"
+                                                      "<text>Soll über dem Gehalt in 8 von 12 Monaten</text>\n", encoding='utf-8')
+        zg = {zk[0] for zeile in zahlen_datei(tmp, 'grafik.tsx') for zk in zeile[3]}
+    fall('Z14 Stylesheet im Template uebergangen', zg == {'8', '12'})
     fall('Z12 Saetze getrennt', len(saetze('Erster Satz mit 1,5 %. Zweiter Satz mit 2 €.<li>Dritter 3 h</li>')) == 3)
 
     # Register: jedes Muster trifft sein Positiv und nicht sein Negativ
@@ -839,7 +853,7 @@ def selbsttest():
     fall('K04 keine fremde Kennung in pruefkatalog.md', set(re.findall(r'^\| (KR\d\d) \|', katalog_md, re.M)) == set(ids_json))
     fall('K05 jede Konvention als Abschnitt in konventionen.md', all(re.search(rf'^## {i} ', konv_md, re.M) for i in ids_kv)
          and set(re.findall(r'^## (KV\d\d) ', konv_md, re.M)) == set(ids_kv))
-    fall('K06 Stand-Zeile in SKILL.md', re.search(r'^\*\*Stand: v\d+ \(\d\d\.\d\d\.\d{4}\)\.\*\*', skill_md, re.M))
+    fall('K06 Stand-Zeile in SKILL.md', re.search(r'^\*\*Stand: v\d+(?:\.\d+)? \(\d\d\.\d\d\.\d{4}\)\.\*\*', skill_md, re.M))
     fall('K07 _stand im Format TT.MM.JJJJ', re.fullmatch(r'\d\d\.\d\d\.\d{4}', k.get('_stand', '')))
 
     for name, ok in faelle:
