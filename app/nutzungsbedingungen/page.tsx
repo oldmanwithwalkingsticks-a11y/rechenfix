@@ -72,6 +72,9 @@ export default function NutzungsbedingungenSeite() {
               sein. Ergebnisse, auf die es ankommt, sind daher mit bestehender Internetverbindung
               erneut zu prüfen. Bei bestehender Verbindung wird stets die aktuelle Fassung geladen.
             </p>
+            <p className="mt-4">
+              Die Haftung nach dem Produkthaftungsgesetz bleibt unberührt.
+            </p>
           </Section>
 
           {/* 4. Urheberrecht und Nutzung der Inhalte */}
