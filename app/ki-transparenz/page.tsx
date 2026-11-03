@@ -38,7 +38,7 @@ export default function KiTransparenzPage() {
       </p>
 
       <Abschnitt titel="Wo KI eingesetzt wird">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Wo KI eingesetzt wird">
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="border-b border-gray-300 dark:border-gray-700 text-left">

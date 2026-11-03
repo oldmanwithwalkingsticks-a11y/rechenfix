@@ -136,7 +136,7 @@ export default function DatenschutzSeite() {
             </p>
 
             <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7.1 Was im Einzelnen gespeichert wird</h3>
-            <div className="overflow-x-auto mt-3">
+            <div className="overflow-x-auto mt-3" tabIndex={0} role="region" aria-label="7.1 Was im Einzelnen gespeichert wird">
               <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/50">
@@ -186,7 +186,7 @@ export default function DatenschutzSeite() {
             <h3 className="font-bold text-gray-800 dark:text-gray-100 mt-6 mb-2">7a.2 Wann dies geschieht</h3>
             <p>
               Beim gewöhnlichen Besuch dieser Website wird <strong>nichts</strong> gespeichert. Die Funktion wird erst aktiv, wenn Sie sie auf der Seite{' '}
-              <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 hover:underline">
+              <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">
                 Offline-Nutzung
               </Link>{' '}
               ausdrücklich einschalten, oder wenn Sie Rechenfix zuvor auf Ihrem Startbildschirm abgelegt haben und die Website über dieses Symbol starten.
@@ -206,7 +206,7 @@ export default function DatenschutzSeite() {
             </p>
             <p className="mt-3">
               Sie können die Offline-Nutzung jederzeit auf der Seite{' '}
-              <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 hover:underline">
+              <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">
                 Offline-Nutzung
               </Link>{' '}
               wieder abschalten. Dabei werden der Service Worker abgemeldet und sämtliche zugehörigen Zwischenspeicher gelöscht. Der Widerruf ist damit ebenso einfach möglich wie die Erteilung.
@@ -222,7 +222,7 @@ export default function DatenschutzSeite() {
           <Section nr="7b" titel="Rechenverlauf (optional)">
             <p>
               Einzelne Rechner &mdash; derzeit der{' '}
-              <Link href="/alltag/prozentrechner" className="text-primary-600 dark:text-primary-400 hover:underline">
+              <Link href="/alltag/prozentrechner" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">
                 Prozentrechner
               </Link>{' '}
               &mdash; können Ihre letzten Ergebnisse als Verlauf anzeigen. Ob dieser Verlauf über die laufende Sitzung hinaus auf Ihrem Gerät erhalten bleibt, entscheiden Sie selbst.
@@ -580,7 +580,7 @@ export default function DatenschutzSeite() {
               </li>
               <li>
                 <strong>Offline-Nutzung:</strong> auf der Seite{' '}
-                <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 hover:underline">Offline-Nutzung</Link>{' '}
+                <Link href="/offline-nutzung" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Offline-Nutzung</Link>{' '}
                 &mdash; Abschalten löscht zugleich alle gespeicherten Inhalte
               </li>
               <li>
