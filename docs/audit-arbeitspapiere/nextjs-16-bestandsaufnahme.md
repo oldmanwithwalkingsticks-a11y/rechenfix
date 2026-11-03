@@ -1251,9 +1251,9 @@ Gemessen in der Sitzung der Welle am 03.11.2026, 21:06 Uhr. Windows, Node v24.14
 
 **wuerdezeit:**
 - Schrift-Rückfall: nicht nötig, der Build lief mit `next/font/google` durch.
-- Teil A endete in A.5 mit STOP: `next start` lieferte für `/` und `/datenschutz` je 401 statt 200. Ursache ist der Zugangsschutz in `proxy.ts`: Die ungetrackte `.env.local` setzt `SEITE_PASSWORT`, im Produktionsmodus fragt der Server deshalb nach Benutzer und Kennwort. Live ist die Seite öffentlich (`/` 200 text/html). Zusatzmessung mit `SEITE_OEFFENTLICH=ja npx next start -p 3123`: `/` 200 text/html 75328 B, `/datenschutz` 200 text/html 69117 B.
-- Mitgepusht: nichts. `764a5f3`, `505ab9b`, `74844ce`, `bcf9c4d` liegen weiter nur lokal.
-- Commit(s): keiner. `package.json` und `package-lock.json` auf 16.4.5 stehen uncommittet im Arbeitsbaum; die Rücknahme aus Teil A wurde in der Sitzung abgelehnt und nicht ausgeführt.
+- Teil A hielt zuerst in A.5 an: `next start` lieferte für `/` und `/datenschutz` je 401 statt 200. Ursache ist der Zugangsschutz in `proxy.ts`: Die ungetrackte `.env.local` setzt `SEITE_PASSWORT`, im Produktionsmodus fragt der Server deshalb nach Benutzer und Kennwort. Live ist die Seite öffentlich (`/` 200 text/html). Die Rücknahme wurde abgelehnt und nicht ausgeführt. Auf Karstens Entscheidung lief A.5 erneut mit `SEITE_OEFFENTLICH=ja npx next start -p 3123`, so wie die Seite live läuft: je 200, siehe Tabelle. Danach Commit und Push, 21:52 Uhr.
+- Mitgepusht: `764a5f3`, `505ab9b`, `74844ce`, `bcf9c4d`.
+- Commit(s): `0679214` „Sicherheit: Next.js 16.3.5 → 16.4.5 (kritische Advisories GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr, GHSA-vcvr-r3jv-pc5j); npm audit fix: nodemailer 10.3.1, sharp 0.35.5“.
 
 **diekonkursmasse:** Commit `649c484`.
 
@@ -1277,8 +1277,10 @@ Gemessen in der Sitzung der Welle am 03.11.2026, 21:06 Uhr. Windows, Node v24.14
 
 | Repo | Pfad | Status | Content-Type | Bytes |
 |---|---|---|---|---|
-| wuerdezeit | `/` | 401 | text/plain; charset=utf-8 | 116 |
-| wuerdezeit | `/datenschutz` | 401 | text/plain; charset=utf-8 | 116 |
+| wuerdezeit | `/`, mit `.env.local` | 401 | text/plain; charset=utf-8 | 116 |
+| wuerdezeit | `/datenschutz`, mit `.env.local` | 401 | text/plain; charset=utf-8 | 116 |
+| wuerdezeit | `/`, `SEITE_OEFFENTLICH=ja` | 200 | text/html; charset=utf-8 | 75328 |
+| wuerdezeit | `/datenschutz`, `SEITE_OEFFENTLICH=ja` | 200 | text/html; charset=utf-8 | 69117 |
 | diekonkursmasse | `/` | 200 | text/html; charset=utf-8 | 10378 |
 | diekonkursmasse | `/ki-transparenz` | 200 | text/html; charset=utf-8 | 15940 |
 | diekonkursmasse | `/datenschutz` | 200 | text/html; charset=utf-8 | 24132 |
@@ -1297,7 +1299,7 @@ Gemessen in der Sitzung der Welle am 03.11.2026, 21:06 Uhr. Windows, Node v24.14
 
 | Domain | `live-fassung.py` | Zeit der Messung |
 |---|---|---|
-| www.wuerdezeit.de | nicht gemessen: kein Push, Teil A endete mit STOP in A.5 | — |
+| www.wuerdezeit.de | OK: https://www.wuerdezeit.de liefert 16.4.5 | 03.11.2026, 21:53:37 |
 | www.diekonkursmasse.de | OK: https://www.diekonkursmasse.de liefert 16.4.5 | 03.11.2026, 21:01:33 |
 | www.rechenfix.de | misst die Chat-Sitzung nach dem Push nach | — |
 
