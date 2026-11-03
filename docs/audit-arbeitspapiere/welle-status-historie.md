@@ -6,6 +6,44 @@
 
 ---
 
+## 03.11.2026 — Welle 201: Barrierefreiheit — Beschriftung, Schalter, Links, scrollbare Tabellen — ✅ ABGESCHLOSSEN 03.11.2026
+
+**Anlass:** Vollprüfung Q4/2026. Statt einer erweiterten Stichprobe hat die Chat-Sitzung am 02.11.2026 alle 258 Seiten der Sitemap mit axe-core 4.11.2 gemessen, hell und dunkel. 142 Seiten hatten Verstöße:
+- `link-in-text-block` auf 129 Seiten;
+- `label` auf 32 Seiten;
+- `button-name` auf 6 Seiten;
+- `select-name` auf 1 Seite;
+- `scrollable-region-focusable` auf 2 Seiten, in der Handyansicht am 03.11.2026 auf 199 Seiten mit 475 Tabellen.
+
+Eigene Prüfungen im DOM fanden 321 verschiedene Felder ohne programmatische Beschriftung auf 207 Seiten. axe sah sie nicht, weil ein Platzhalter als Name gilt. Dazu kamen 59 `<label for>`, deren Ziel fehlte. /barrierefreiheit behauptete das Gegenteil. Messbericht: `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`.
+
+**Änderungen:**
+- Eingabefelder: 532 `<label>` neu mit ihrem Feld verknüpft; bei 81 Feldern die id zu einem vorhandenen htmlFor nachgetragen; 68 Felder unter Schritt-Überschriften mit aria-label oder aria-labelledby; 62 Stellen einzeln bearbeitet.
+- `NummerEingabe` reicht aria-label und aria-labelledby durch.
+- 10 Schalter mit role="switch".
+- Das Auswahlfeld „Einkommensbonus“ mit seinem `<label>` verknüpft.
+- 19 Links im Fließtext unterstrichen.
+- 120 scrollbare Bereiche mit tabIndex, role und Namen.
+- Neues Prüfskript `scripts/verify-barrierefreiheit.ts`. Am Stand vor der Welle sind 0 von 6 Prüfungen grün, danach 6 von 6.
+- Regeln in CLAUDE.md.
+- Zwei Zeilen in der Änderungshistorie der Rechtstexte für /datenschutz und /ki-transparenz (nur Darstellung und Bedienung).
+
+**Commits:** `2c176a8` (recht:), `0316371` (Code), dieser Commit (Historie).
+
+**Geprüft in dieser Sitzung (03.11.2026, 23:34:02):**
+- verify-barrierefreiheit rc=0, „Barrierefreiheit: 6/6 grün“
+- verify:alle rc=0, „Prüfskripte: 88/88 grün.“
+- `npx eslint . --no-cache` rc=0, keine Ausgabe
+- Build rc=0, „✓ Generating static pages using 15 workers (272/272) in 10.9s“
+- lokale Abrufe aus A.4: alle wie erwartet
+
+**Messung in der Chat-Sitzung (03.11.2026, lokal am Stand der Welle):** 258 Seiten × 3 Ansichten. Kein axe-Verstoß, kein unbeschriftetes Feld, kein `<label for>` ohne Ziel, keine doppelte id.
+
+**Offen:**
+- Live-Messung nach dem Deploy, danach der neue Text von /barrierefreiheit mit Stand-Datum als eigene recht:-Welle.
+- 39 der 120 scrollbaren Bereiche heißen nur „Tabelle“, weil keine Überschrift in der Nähe steht.
+- Die Vorlage im Skill rechner-builder kennt die neuen Regeln noch nicht. Neue Fehler fängt verify-barrierefreiheit in verify:alle und in der CI.
+
 ## 29.10.2026 — Welle 200: Karola Rechner v1.1 und Werte, die am 01.01.2027 umschalten — ✅ ABGESCHLOSSEN 29.10.2026
 
 **Anlass:** Karolas erste Funde im Bestand (Welle 198) und was Karola v1.1 dazu fand. Zum 01.01.2027 schalten
