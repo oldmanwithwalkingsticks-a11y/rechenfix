@@ -130,7 +130,7 @@ export default function ZuckerUmrechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Menge Haushaltszucker
         </h2>
-        <NummerEingabe value={menge} onChange={setMenge} placeholder="100" einheit="g" />
+        <NummerEingabe aria-label="Menge Haushaltszucker" value={menge} onChange={setMenge} placeholder="100" einheit="g" />
       </div>
 
       {/* === 2: Ziel-Süßungsmittel === */}
@@ -232,7 +232,7 @@ export default function ZuckerUmrechner() {
             Alle Alternativen für {fmt(parseDeutscheZahl(menge) || 100, 0)} g Zucker
           </h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

@@ -46,6 +46,7 @@ export default function NebenjobRechner() {
           Hauptjob Monatsbrutto
         </h2>
         <NummerEingabe
+          aria-label="Hauptjob Monatsbrutto"
           value={hauptjobBrutto}
           onChange={setHauptjobBrutto}
           placeholder="3500"
@@ -86,6 +87,7 @@ export default function NebenjobRechner() {
           Nebenjob-Verdienst
         </h2>
         <NummerEingabe
+          aria-label="Nebenjob-Verdienst"
           value={nebenjobBrutto}
           onChange={setNebenjobBrutto}
           placeholder="450"

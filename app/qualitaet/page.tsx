@@ -201,9 +201,9 @@ export default function QualitaetSeite() {
             <li>Der wissenschaftliche Taschenrechner ist mit Maus/Touch optimiert; Tastatursteuerung ist auf Standard-Operationen beschränkt</li>
           </ul>
           <p>
-            Details unter <Link href="/barrierefreiheit" className="text-primary-600 dark:text-primary-400 hover:underline">/barrierefreiheit</Link>.
+            Details unter <Link href="/barrierefreiheit" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">/barrierefreiheit</Link>.
             Anregungen oder Probleme bitte an{' '}
-            <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 hover:underline">info@rechenfix.de</a>.
+            <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">info@rechenfix.de</a>.
           </p>
         </div>
       </section>
@@ -226,7 +226,7 @@ export default function QualitaetSeite() {
           </p>
           <p>
             Vollständige Angaben zur Datenverarbeitung in der{' '}
-            <Link href="/datenschutz" className="text-primary-600 dark:text-primary-400 hover:underline">Datenschutzerklärung</Link>.
+            <Link href="/datenschutz" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Datenschutzerklärung</Link>.
           </p>
         </div>
       </section>

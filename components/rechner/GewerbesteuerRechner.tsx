@@ -48,7 +48,7 @@ export default function GewerbesteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Gewinn aus Gewerbebetrieb
         </h2>
-        <NummerEingabe value={gewinn} onChange={setGewinn} placeholder="80.000" einheit="€" />
+        <NummerEingabe aria-label="Gewinn aus Gewerbebetrieb" value={gewinn} onChange={setGewinn} placeholder="80.000" einheit="€" />
       </div>
 
       {/* === 2: Rechtsform === */}
@@ -81,7 +81,7 @@ export default function GewerbesteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Hebesatz der Gemeinde
         </h2>
-        <NummerEingabe value={hebesatz} onChange={setHebesatz} placeholder="400" einheit="%" />
+        <NummerEingabe aria-label="Hebesatz der Gemeinde" value={hebesatz} onChange={setHebesatz} placeholder="400" einheit="%" />
         <input
           type="range"
           min="200"
@@ -105,7 +105,7 @@ export default function GewerbesteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Hinzurechnungen (§ 8 GewStG, optional)
         </h2>
-        <NummerEingabe value={hinzurechnungen} onChange={setHinzurechnungen} placeholder="0" einheit="€" />
+        <NummerEingabe aria-label="Hinzurechnungen (§ 8 GewStG, optional)" value={hinzurechnungen} onChange={setHinzurechnungen} placeholder="0" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Z. B. 25 % der Zinsen über 200.000 € Freibetrag, Mieten, Pachten, Lizenzen.
         </p>
@@ -117,7 +117,7 @@ export default function GewerbesteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
           Kürzungen (§ 9 GewStG, optional)
         </h2>
-        <NummerEingabe value={kuerzungen} onChange={setKuerzungen} placeholder="0" einheit="€" />
+        <NummerEingabe aria-label="Kürzungen (§ 9 GewStG, optional)" value={kuerzungen} onChange={setKuerzungen} placeholder="0" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Z. B. 1,2 % des Einheitswerts des Grundbesitzes.
         </p>
@@ -188,7 +188,7 @@ export default function GewerbesteuerRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               <tr>

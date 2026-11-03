@@ -94,19 +94,19 @@ export default function NetzteilWattRechner() {
         </div>
         <div>
           <label htmlFor="ps-ram" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">RAM-Riegel</label>
-          <NummerEingabe value={ram} onChange={setRam} placeholder="2" einheit="×" />
+          <NummerEingabe id="ps-ram" value={ram} onChange={setRam} placeholder="2" einheit="×" />
         </div>
         <div>
           <label htmlFor="ps-ssd" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">SSD / NVMe</label>
-          <NummerEingabe value={ssd} onChange={setSsd} placeholder="1" einheit="×" />
+          <NummerEingabe id="ps-ssd" value={ssd} onChange={setSsd} placeholder="1" einheit="×" />
         </div>
         <div>
           <label htmlFor="ps-hdd" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Festplatten (HDD)</label>
-          <NummerEingabe value={hdd} onChange={setHdd} placeholder="1" einheit="×" />
+          <NummerEingabe id="ps-hdd" value={hdd} onChange={setHdd} placeholder="1" einheit="×" />
         </div>
         <div>
           <label htmlFor="ps-luefter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lüfter / AIO-Pumpe</label>
-          <NummerEingabe value={luefter} onChange={setLuefter} placeholder="4" einheit="×" />
+          <NummerEingabe id="ps-luefter" value={luefter} onChange={setLuefter} placeholder="4" einheit="×" />
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="ps-reserve" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistungsreserve</label>
@@ -147,7 +147,7 @@ export default function NetzteilWattRechner() {
           {/* Beispiel-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Beispiel-Konfigurationen und empfohlenes Netzteil</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Beispiel-Konfigurationen und empfohlenes Netzteil">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

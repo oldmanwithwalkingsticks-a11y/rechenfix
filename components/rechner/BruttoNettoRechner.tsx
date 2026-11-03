@@ -354,10 +354,10 @@ export default function BruttoNettoRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 no-print">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="brutto-netto-bruttogehalt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Bruttogehalt ({abrechnungszeitraum === 'monat' ? 'monatlich' : 'jährlich'})
           </label>
-          <NummerEingabe value={brutto} onChange={setBrutto} placeholder={abrechnungszeitraum === 'monat' ? 'z.B. 3500' : 'z.B. 42000'} einheit="€" />
+          <NummerEingabe id="brutto-netto-bruttogehalt" value={brutto} onChange={setBrutto} placeholder={abrechnungszeitraum === 'monat' ? 'z.B. 3500' : 'z.B. 42000'} einheit="€" />
         </div>
         <div>
           <label htmlFor="bruttonetto-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steuerklasse</label>
@@ -440,14 +440,14 @@ export default function BruttoNettoRechner() {
           </div>
           {kvArt === 'gesetzlich' ? (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">KV-Zusatzbeitrag (AN-Anteil)</label>
-              <NummerEingabe value={kvZusatzbeitrag} onChange={setKvZusatzbeitrag} placeholder="z.B. 2,9" einheit="%" />
+              <label htmlFor="brutto-netto-kv-zusatzbeitrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">KV-Zusatzbeitrag (AN-Anteil)</label>
+              <NummerEingabe id="brutto-netto-kv-zusatzbeitrag" value={kvZusatzbeitrag} onChange={setKvZusatzbeitrag} placeholder="z.B. 2,9" einheit="%" />
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Durchschnitt 2026: 1,45% (halber Zusatzbeitrag von 2,9%)</p>
             </div>
           ) : (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">PKV-Beitrag (AN-Anteil)</label>
-              <NummerEingabe value={kvPrivatBeitrag} onChange={setKvPrivatBeitrag} placeholder="z.B. 350" einheit="€" />
+              <label htmlFor="brutto-netto-pkv-beitrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">PKV-Beitrag (AN-Anteil)</label>
+              <NummerEingabe id="brutto-netto-pkv-beitrag" value={kvPrivatBeitrag} onChange={setKvPrivatBeitrag} placeholder="z.B. 350" einheit="€" />
             </div>
           )}
           <div>
@@ -487,8 +487,8 @@ export default function BruttoNettoRechner() {
                 </div>
                 {weihnachtsgeldHoehe === 'eigen' && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betrag (brutto)</label>
-                    <NummerEingabe value={weihnachtsgeldBetrag} onChange={setWeihnachtsgeldBetrag} placeholder="z.B. 2000" einheit="€" />
+                    <label htmlFor="brutto-netto-betrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betrag (brutto)</label>
+                    <NummerEingabe id="brutto-netto-betrag" value={weihnachtsgeldBetrag} onChange={setWeihnachtsgeldBetrag} placeholder="z.B. 2000" einheit="€" />
                   </div>
                 )}
                 {weihnachtsgeldHoehe !== 'eigen' && weihnachtsgeldWert > 0 && (
@@ -958,7 +958,7 @@ export default function BruttoNettoRechner() {
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
           Wie viel Netto bleibt vom Brutto? Übersicht für Steuerklasse 1, 3 und 5 (ohne Kirchensteuer, GKV, NRW).
         </p>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Brutto-Netto-Tabelle 2026">
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="bg-primary-50 dark:bg-primary-500/10">

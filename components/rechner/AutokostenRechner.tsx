@@ -99,18 +99,18 @@ export default function AutokostenRechner() {
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufpreis / aktueller Wert</label>
-            <div className="w-full sm:w-1/2"><NummerEingabe value={kaufpreis} onChange={setKaufpreis} placeholder="z.B. 25.000" einheit="€" /></div>
+            <label htmlFor="autokosten-kaufpreis-aktueller-wert" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufpreis / aktueller Wert</label>
+            <div className="w-full sm:w-1/2"><NummerEingabe id="autokosten-kaufpreis-aktueller-wert" value={kaufpreis} onChange={setKaufpreis} placeholder="z.B. 25.000" einheit="€" /></div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fahrzeugalter</label>
-              <NummerEingabe value={fahrzeugAlter} onChange={setFahrzeugAlter} placeholder="0" einheit="Jahre" />
+              <label htmlFor="autokosten-fahrzeugalter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fahrzeugalter</label>
+              <NummerEingabe id="autokosten-fahrzeugalter" value={fahrzeugAlter} onChange={setFahrzeugAlter} placeholder="0" einheit="Jahre" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geplante Haltedauer</label>
-              <NummerEingabe value={haltedauer} onChange={setHaltedauer} placeholder="5" einheit="Jahre" />
+              <label htmlFor="autokosten-geplante-haltedauer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geplante Haltedauer</label>
+              <NummerEingabe id="autokosten-geplante-haltedauer" value={haltedauer} onChange={setHaltedauer} placeholder="5" einheit="Jahre" />
             </div>
           </div>
 
@@ -127,8 +127,8 @@ export default function AutokostenRechner() {
             />
             {finanzierung === 'finanziert' && (
               <div className="mt-3 w-full sm:w-1/2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Rate</label>
-                <NummerEingabe value={monatlicheRate} onChange={setMonatlicheRate} placeholder="350" einheit="€/Monat" />
+                <label htmlFor="autokosten-monatliche-rate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Rate</label>
+                <NummerEingabe id="autokosten-monatliche-rate" value={monatlicheRate} onChange={setMonatlicheRate} placeholder="350" einheit="€/Monat" />
               </div>
             )}
           </div>
@@ -143,13 +143,13 @@ export default function AutokostenRechner() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kfz-Versicherung</label>
-            <NummerEingabe value={versicherung} onChange={setVersicherung} placeholder="80" einheit="€/Monat" />
+            <label htmlFor="autokosten-kfz-versicherung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kfz-Versicherung</label>
+            <NummerEingabe id="autokosten-kfz-versicherung" value={versicherung} onChange={setVersicherung} placeholder="80" einheit="€/Monat" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Haftpflicht + Teilkasko/Vollkasko</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kfz-Steuer</label>
-            <NummerEingabe value={kfzSteuer} onChange={setKfzSteuer} placeholder="150" einheit="€/Jahr" />
+            <label htmlFor="autokosten-kfz-steuer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kfz-Steuer</label>
+            <NummerEingabe id="autokosten-kfz-steuer" value={kfzSteuer} onChange={setKfzSteuer} placeholder="150" einheit="€/Jahr" />
           </div>
         </div>
         <CrossLink href="/auto/kfz-steuer-rechner" emoji="📋" text="Kfz-Steuer genau berechnen" />
@@ -164,8 +164,8 @@ export default function AutokostenRechner() {
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jährliche Fahrleistung</label>
-            <div className="w-full sm:w-1/2"><NummerEingabe value={fahrleistung} onChange={setFahrleistung} placeholder="15.000" einheit="km" /></div>
+            <label htmlFor="autokosten-jaehrliche-fahrleistung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jährliche Fahrleistung</label>
+            <div className="w-full sm:w-1/2"><NummerEingabe id="autokosten-jaehrliche-fahrleistung" value={fahrleistung} onChange={setFahrleistung} placeholder="15.000" einheit="km" /></div>
             <div className="flex flex-wrap gap-2 mt-2">
               {FAHRLEISTUNG_SCHNELLWAHL.map(km => (
                 <button key={km} onClick={() => setFahrleistung(String(km))}
@@ -193,12 +193,12 @@ export default function AutokostenRechner() {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch</label>
-              <NummerEingabe value={verbrauch} onChange={setVerbrauch} placeholder="7" einheit={VERBRAUCH_EINHEITEN[antrieb]} />
+              <label htmlFor="autokosten-verbrauch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch</label>
+              <NummerEingabe id="autokosten-verbrauch" value={verbrauch} onChange={setVerbrauch} placeholder="7" einheit={VERBRAUCH_EINHEITEN[antrieb]} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kraftstoffpreis</label>
-              <NummerEingabe value={kraftstoffpreis} onChange={setKraftstoffpreis} placeholder={SPRIT_DEFAULT} einheit={ANTRIEB_EINHEITEN[antrieb]} />
+              <label htmlFor="autokosten-kraftstoffpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kraftstoffpreis</label>
+              <NummerEingabe id="autokosten-kraftstoffpreis" value={kraftstoffpreis} onChange={setKraftstoffpreis} placeholder={SPRIT_DEFAULT} einheit={ANTRIEB_EINHEITEN[antrieb]} />
             </div>
           </div>
         </div>
@@ -213,26 +213,26 @@ export default function AutokostenRechner() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wartung &amp; Inspektion</label>
-            <NummerEingabe value={wartung} onChange={setWartung} placeholder="600" einheit="€/Jahr" />
+            <label htmlFor="autokosten-wartung-amp-inspektion" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wartung &amp; Inspektion</label>
+            <NummerEingabe id="autokosten-wartung-amp-inspektion" value={wartung} onChange={setWartung} placeholder="600" einheit="€/Jahr" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Ölwechsel, Inspektion, Verschleißteile</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reifen</label>
-            <NummerEingabe value={reifen} onChange={setReifen} placeholder="400" einheit="€/Jahr" />
+            <label htmlFor="autokosten-reifen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reifen</label>
+            <NummerEingabe id="autokosten-reifen" value={reifen} onChange={setReifen} placeholder="400" einheit="€/Jahr" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Reifenwechsel + anteilige Neuanschaffung</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">TÜV / HU+AU</label>
-            <NummerEingabe value={tuev} onChange={setTuev} placeholder="120" einheit="€ / 2 Jahre" />
+            <label htmlFor="autokosten-tuev-hu-au" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">TÜV / HU+AU</label>
+            <NummerEingabe id="autokosten-tuev-hu-au" value={tuev} onChange={setTuev} placeholder="120" einheit="€ / 2 Jahre" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Parkkosten <span className="text-gray-600 dark:text-gray-400 font-normal">(optional)</span></label>
-            <NummerEingabe value={parkkosten} onChange={setParkkosten} placeholder="0" einheit="€/Monat" />
+            <label htmlFor="autokosten-parkkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Parkkosten <span className="text-gray-600 dark:text-gray-400 font-normal">(optional)</span></label>
+            <NummerEingabe id="autokosten-parkkosten" value={parkkosten} onChange={setParkkosten} placeholder="0" einheit="€/Monat" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Waschanlage / Pflege <span className="text-gray-600 dark:text-gray-400 font-normal">(optional)</span></label>
-            <NummerEingabe value={waschanlage} onChange={setWaschanlage} placeholder="15" einheit="€/Monat" />
+            <label htmlFor="autokosten-waschanlage-pflege" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Waschanlage / Pflege <span className="text-gray-600 dark:text-gray-400 font-normal">(optional)</span></label>
+            <NummerEingabe id="autokosten-waschanlage-pflege" value={waschanlage} onChange={setWaschanlage} placeholder="15" einheit="€/Monat" />
           </div>
         </div>
       </div>
@@ -317,7 +317,7 @@ export default function AutokostenRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Aufschlüsselung">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/50 text-left">

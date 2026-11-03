@@ -64,7 +64,7 @@ export default function DownloadRechner() {
       <div className="grid gap-4 sm:grid-cols-3 mb-6">
         <div>
           <label htmlFor="download-groesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dateigröße</label>
-          <NummerEingabe value={groesse} onChange={setGroesse} placeholder="1500" einheit={einheit} />
+          <NummerEingabe id="download-groesse" value={groesse} onChange={setGroesse} placeholder="1500" einheit={einheit} />
         </div>
         <div>
           <label htmlFor="download-einheit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einheit</label>
@@ -80,7 +80,7 @@ export default function DownloadRechner() {
         </div>
         <div>
           <label htmlFor="download-bandbreite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Internetgeschwindigkeit</label>
-          <NummerEingabe value={bandbreite} onChange={setBandbreite} placeholder="50" einheit="Mbit/s" />
+          <NummerEingabe id="download-bandbreite" value={bandbreite} onChange={setBandbreite} placeholder="50" einheit="Mbit/s" />
         </div>
         <div className="sm:col-span-3">
           <label htmlFor="download-wirkungsgrad" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wirkungsgrad (Overhead)</label>
@@ -131,7 +131,7 @@ export default function DownloadRechner() {
           {/* Geschwindigkeits-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Gleiche Datei bei verschiedenen Geschwindigkeiten</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Gleiche Datei bei verschiedenen Geschwindigkeiten">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

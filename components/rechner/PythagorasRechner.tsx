@@ -87,20 +87,20 @@ export default function PythagorasRechner() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
         {gesucht !== 'a' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kathete a</label>
-            <NummerEingabe value={inputA} onChange={setInputA} placeholder="3" einheit={einheit} />
+            <label htmlFor="pythagoras-kathete-a" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kathete a</label>
+            <NummerEingabe id="pythagoras-kathete-a" value={inputA} onChange={setInputA} placeholder="3" einheit={einheit} />
           </div>
         )}
         {gesucht !== 'b' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kathete b</label>
-            <NummerEingabe value={inputB} onChange={setInputB} placeholder="4" einheit={einheit} />
+            <label htmlFor="pythagoras-kathete-b" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kathete b</label>
+            <NummerEingabe id="pythagoras-kathete-b" value={inputB} onChange={setInputB} placeholder="4" einheit={einheit} />
           </div>
         )}
         {gesucht !== 'c' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hypotenuse c</label>
-            <NummerEingabe value={inputC} onChange={setInputC} placeholder="5" einheit={einheit} />
+            <label htmlFor="pythagoras-hypotenuse-c" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hypotenuse c</label>
+            <NummerEingabe id="pythagoras-hypotenuse-c" value={inputC} onChange={setInputC} placeholder="5" einheit={einheit} />
           </div>
         )}
       </div>

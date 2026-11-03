@@ -52,23 +52,23 @@ export default function VorfaelligkeitsentschaedigungRechner() {
   return (
     <div>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Restschuld</label>
-        <NummerEingabe value={restschuld} onChange={setRestschuld} placeholder="150000" einheit="€" />
+        <label htmlFor="vorfaelligkeitsentschaedigung-restschuld" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Restschuld</label>
+        <NummerEingabe id="vorfaelligkeitsentschaedigung-restschuld" value={restschuld} onChange={setRestschuld} placeholder="150000" einheit="€" />
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktueller Zinssatz (Vertrag)</label>
-        <NummerEingabe value={altZins} onChange={setAltZins} placeholder="2,5" einheit="%" />
+        <label htmlFor="vorfaelligkeitsentschaedigung-aktueller-zinssatz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktueller Zinssatz (Vertrag)</label>
+        <NummerEingabe id="vorfaelligkeitsentschaedigung-aktueller-zinssatz" value={altZins} onChange={setAltZins} placeholder="2,5" einheit="%" />
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Restlaufzeit der Zinsbindung</label>
-        <NummerEingabe value={restlaufzeit} onChange={setRestlaufzeit} placeholder="5" einheit="Jahre" />
+        <label htmlFor="vorfaelligkeitsentschaedigung-restlaufzeit-der-zinsbindung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Restlaufzeit der Zinsbindung</label>
+        <NummerEingabe id="vorfaelligkeitsentschaedigung-restlaufzeit-der-zinsbindung" value={restlaufzeit} onChange={setRestlaufzeit} placeholder="5" einheit="Jahre" />
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktueller Marktzins (Wiederanlage)</label>
-        <NummerEingabe value={marktZins} onChange={setMarktZins} placeholder="3,5" einheit="%" />
+        <label htmlFor="vorfaelligkeitsentschaedigung-aktueller-marktzins" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktueller Marktzins (Wiederanlage)</label>
+        <NummerEingabe id="vorfaelligkeitsentschaedigung-aktueller-marktzins" value={marktZins} onChange={setMarktZins} placeholder="3,5" einheit="%" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Aktueller Bauzins für die Restlaufzeit</p>
       </div>
 

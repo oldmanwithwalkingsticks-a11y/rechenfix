@@ -56,7 +56,7 @@ export default function FirmenwagenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Bruttolistenpreis
         </h2>
-        <NummerEingabe value={blp} onChange={setBlp} placeholder="45000" einheit="€" />
+        <NummerEingabe aria-label="Bruttolistenpreis" value={blp} onChange={setBlp} placeholder="45000" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Inkl. Sonderausstattung und Umsatzsteuer.</p>
       </div>
 
@@ -90,16 +90,16 @@ export default function FirmenwagenRechner() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label htmlFor="firmenwagen-co-ausstoss" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                   CO₂-Ausstoß
                 </label>
-                <NummerEingabe value={co2} onChange={setCo2} placeholder="50" einheit="g/km" />
+                <NummerEingabe id="firmenwagen-co-ausstoss" value={co2} onChange={setCo2} placeholder="50" einheit="g/km" />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label htmlFor="firmenwagen-elektrische-reichweite" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Elektrische Reichweite
                 </label>
-                <NummerEingabe value={reichweite} onChange={setReichweite} placeholder="80" einheit="km" />
+                <NummerEingabe id="firmenwagen-elektrische-reichweite" value={reichweite} onChange={setReichweite} placeholder="80" einheit="km" />
               </div>
             </div>
             {!ergebnis.hybridBedingungenErfuellt && (
@@ -123,7 +123,7 @@ export default function FirmenwagenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Entfernung Wohnung–Arbeit
         </h2>
-        <NummerEingabe value={km} onChange={setKm} placeholder="20" einheit="km (einfache Strecke)" />
+        <NummerEingabe aria-label="Entfernung Wohnung–Arbeit" value={km} onChange={setKm} placeholder="20" einheit="km (einfache Strecke)" />
       </div>
 
       {/* 4: Methode */}
@@ -152,7 +152,7 @@ export default function FirmenwagenRechner() {
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
             Fahrten pro Monat
           </h2>
-          <NummerEingabe value={fahrten} onChange={setFahrten} placeholder="20" einheit="Fahrten" />
+          <NummerEingabe aria-label="Fahrten pro Monat" value={fahrten} onChange={setFahrten} placeholder="20" einheit="Fahrten" />
         </div>
       )}
 
@@ -162,7 +162,7 @@ export default function FirmenwagenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">{methode === 'einzel' ? '6' : '5'}</span>
           Eigene Zuzahlung pro Monat
         </h2>
-        <NummerEingabe value={zuzahlung} onChange={setZuzahlung} placeholder="0" einheit="€" />
+        <NummerEingabe aria-label="Eigene Zuzahlung pro Monat" value={zuzahlung} onChange={setZuzahlung} placeholder="0" einheit="€" />
       </div>
 
       {/* Grenzsteuersatz */}

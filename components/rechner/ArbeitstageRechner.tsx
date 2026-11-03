@@ -114,12 +114,12 @@ export default function ArbeitstageRechner() {
         {modus === 'zeitraum' && (
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Von</label>
-              <input type="date" value={von} onChange={e => setVon(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
+              <label htmlFor="arbeitstage-von" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Von</label>
+              <input id="arbeitstage-von" type="date" value={von} onChange={e => setVon(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bis</label>
-              <input type="date" value={bis} onChange={e => setBis(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
+              <label htmlFor="arbeitstage-bis" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Bis</label>
+              <input id="arbeitstage-bis" type="date" value={bis} onChange={e => setBis(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
             </div>
           </div>
         )}

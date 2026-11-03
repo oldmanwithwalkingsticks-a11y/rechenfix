@@ -61,10 +61,11 @@ export default function ElterngeldRechner() {
 
       {/* Nettoeinkommen vor der Geburt */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="elterngeld-nettoeinkommen-vor-der-geburt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Nettoeinkommen vor der Geburt (monatlich)
         </label>
         <NummerEingabe
+          id="elterngeld-nettoeinkommen-vor-der-geburt"
           value={nettoVorGeburt}
           onChange={setNettoVorGeburt}
           placeholder="z. B. 2500"
@@ -74,10 +75,11 @@ export default function ElterngeldRechner() {
 
       {/* Nettoeinkommen während Elternzeit */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="elterngeld-nettoeinkommen-waehrend" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Nettoeinkommen während Elternzeit (monatlich)
         </label>
         <NummerEingabe
+          id="elterngeld-nettoeinkommen-waehrend"
           value={nettoDanach}
           onChange={setNettoDanach}
           placeholder="0 wenn nicht arbeitend"
@@ -239,7 +241,7 @@ export default function ElterngeldRechner() {
               <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
                 <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Vergleich: Basiselterngeld vs. ElterngeldPlus</p>
               </div>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Vergleich: Basiselterngeld vs. ElterngeldPlus">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 dark:border-gray-700">

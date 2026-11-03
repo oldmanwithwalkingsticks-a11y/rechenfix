@@ -82,18 +82,18 @@ export default function FliesenbedarfRechner() {
         {flaecheModus === 'masse' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge</label>
-              <NummerEingabe value={laengeM} onChange={setLaengeM} einheit="m" placeholder="3" />
+              <label htmlFor="fliesenbedarf-laenge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge</label>
+              <NummerEingabe id="fliesenbedarf-laenge" value={laengeM} onChange={setLaengeM} einheit="m" placeholder="3" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
-              <NummerEingabe value={breiteM} onChange={setBreiteM} einheit="m" placeholder="2,5" />
+              <label htmlFor="fliesenbedarf-breite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
+              <NummerEingabe id="fliesenbedarf-breite" value={breiteM} onChange={setBreiteM} einheit="m" placeholder="2,5" />
             </div>
           </div>
         ) : (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fläche</label>
-            <NummerEingabe value={flaecheQm} onChange={setFlaecheQm} einheit="m²" placeholder="7,5" />
+            <label htmlFor="fliesenbedarf-flaeche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fläche</label>
+            <NummerEingabe id="fliesenbedarf-flaeche" value={flaecheQm} onChange={setFlaecheQm} einheit="m²" placeholder="7,5" />
           </div>
         )}
 
@@ -121,12 +121,12 @@ export default function FliesenbedarfRechner() {
         {fliesenGroesseIndex === 4 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fliesenlänge</label>
-              <NummerEingabe value={eigeneLaenge} onChange={setEigeneLaenge} einheit="cm" placeholder="30" />
+              <label htmlFor="fliesenbedarf-fliesenlaenge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fliesenlänge</label>
+              <NummerEingabe id="fliesenbedarf-fliesenlaenge" value={eigeneLaenge} onChange={setEigeneLaenge} einheit="cm" placeholder="30" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fliesenbreite</label>
-              <NummerEingabe value={eigeneBreite} onChange={setEigeneBreite} einheit="cm" placeholder="60" />
+              <label htmlFor="fliesenbedarf-fliesenbreite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fliesenbreite</label>
+              <NummerEingabe id="fliesenbedarf-fliesenbreite" value={eigeneBreite} onChange={setEigeneBreite} einheit="cm" placeholder="60" />
             </div>
           </div>
         )}
@@ -142,8 +142,8 @@ export default function FliesenbedarfRechner() {
 
         {/* Fliesenpreis */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fliesenpreis (optional)</label>
-          <NummerEingabe value={fliesenpreis} onChange={setFliesenpreis} einheit="€/m²" placeholder="25" />
+          <label htmlFor="fliesenbedarf-fliesenpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fliesenpreis (optional)</label>
+          <NummerEingabe id="fliesenbedarf-fliesenpreis" value={fliesenpreis} onChange={setFliesenpreis} einheit="€/m²" placeholder="25" />
         </div>
       </div>
 

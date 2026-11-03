@@ -99,7 +99,7 @@ export default function WaermepumpeRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Wohnfläche
         </h2>
-        <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="120" einheit="m²" />
+        <NummerEingabe aria-label="Wohnfläche" value={wohnflaeche} onChange={setWohnflaeche} placeholder="120" einheit="m²" />
         {wohnflaecheWarning && (
           <div
             role="alert"
@@ -165,7 +165,7 @@ export default function WaermepumpeRechner() {
           />
         </div>
         {heizkostenBekannt && (
-          <NummerEingabe value={heizkostenAktuell} onChange={setHeizkostenAktuell} placeholder="2000" einheit="€/Jahr" />
+          <NummerEingabe aria-label="Aktuelle jährliche Heizkosten in Euro" value={heizkostenAktuell} onChange={setHeizkostenAktuell} placeholder="2000" einheit="€/Jahr" />
         )}
         {!heizkostenBekannt && (
           <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -180,7 +180,7 @@ export default function WaermepumpeRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
           Strompreis
         </h2>
-        <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={String(getStrompreis('waermepumpen_tarif'))} einheit="ct/kWh" />
+        <NummerEingabe aria-label="Strompreis" value={strompreis} onChange={setStrompreis} placeholder={String(getStrompreis('waermepumpen_tarif'))} einheit="ct/kWh" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Wärmepumpen-Spezialtarife (HT, separater Zähler) liegen 2026 bei ca. 25–30 ct/kWh, Haushaltsstrom bei ca. 33–37 ct/kWh.
         </p>
@@ -193,7 +193,7 @@ export default function WaermepumpeRechner() {
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">6</span>
             Gaspreis
           </h2>
-          <NummerEingabe value={gaspreis} onChange={setGaspreis} placeholder="12" einheit="ct/kWh" />
+          <NummerEingabe aria-label="Gaspreis" value={gaspreis} onChange={setGaspreis} placeholder="12" einheit="ct/kWh" />
         </div>
       )}
 
@@ -203,7 +203,7 @@ export default function WaermepumpeRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">7</span>
           Anschaffungskosten Wärmepumpe
         </h2>
-        <NummerEingabe value={anschaffung} onChange={setAnschaffung} placeholder="30000" einheit="€" />
+        <NummerEingabe aria-label="Anschaffungskosten Wärmepumpe" value={anschaffung} onChange={setAnschaffung} placeholder="30000" einheit="€" />
         <div className="flex flex-wrap gap-2 mt-2">
           {[
             ['15000', '15.000 € (Luft-Luft)'],
@@ -247,10 +247,11 @@ export default function WaermepumpeRechner() {
               <strong>Klimageschwindigkeitsbonus +{BEG_FOERDERUNG_2026.klimageschwindigkeitsbonus} %</strong> — nur Selbstnutzer: Ersatz einer funktionsfähigen Öl-, Kohle-, Gasetagen- oder Nachtspeicherheizung oder einer mindestens 20 Jahre alten Gasheizung.
             </span>
           </label>
-          <label className="block mb-1 text-xs text-gray-700 dark:text-gray-300">
+          <label htmlFor="waermepumpe-einkommensbonus-nur-selbstnutzer" className="block mb-1 text-xs text-gray-700 dark:text-gray-300">
             <strong>Einkommensbonus</strong> — nur Selbstnutzer, nach zu versteuerndem Haushaltseinkommen (mit mindestens einem minderjährigen Kind zählt es {BEG_FOERDERUNG_2026.kinderMinderungZvE.toLocaleString('de-DE')} € niedriger):
           </label>
           <select
+            id="waermepumpe-einkommensbonus-nur-selbstnutzer"
             value={boniEinkommen}
             onChange={(e) => {
               const stufe = Number(e.target.value) as EinkommensbonusProzent;
@@ -268,7 +269,7 @@ export default function WaermepumpeRechner() {
             Den Effizienzbonus (+5 %) gibt es für Anträge ab 21.07.2026 nicht mehr.
           </p>
         </fieldset>
-        <NummerEingabe value={foerderung} onChange={setFoerderung} placeholder="30" einheit="%" />
+        <NummerEingabe aria-label="Förderquote in Prozent" value={foerderung} onChange={setFoerderung} placeholder="30" einheit="%" />
         {parseInt(foerderung, 10) >= begHoechstsatz(boniEinkommen) && (
           <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
             ⓘ Maximalförderung erreicht (Deckel bei {begHoechstsatz(boniEinkommen)} % nach BEG-Richtlinie).
@@ -312,7 +313,7 @@ export default function WaermepumpeRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Kostenvergleich</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Kostenvergleich">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

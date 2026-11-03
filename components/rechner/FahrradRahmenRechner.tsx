@@ -30,12 +30,12 @@ export default function FahrradRahmenRechner() {
       <div className="space-y-4 mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße (cm)</label>
-            <NummerEingabe value={koerpergroesse} onChange={setKoerpergroesse} placeholder="178" />
+            <label htmlFor="fahrrad-rahmen-koerpergroesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße (cm)</label>
+            <NummerEingabe id="fahrrad-rahmen-koerpergroesse" value={koerpergroesse} onChange={setKoerpergroesse} placeholder="178" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schrittlänge (cm, optional)</label>
-            <NummerEingabe value={schrittlaenge} onChange={setSchrittlaenge} placeholder="z. B. 84" />
+            <label htmlFor="fahrrad-rahmen-schrittlaenge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schrittlänge (cm, optional)</label>
+            <NummerEingabe id="fahrrad-rahmen-schrittlaenge" value={schrittlaenge} onChange={setSchrittlaenge} placeholder="z. B. 84" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Barfuß an der Wand, Buch zwischen die Beine — Abstand Boden bis Oberkante messen</p>
           </div>
         </div>

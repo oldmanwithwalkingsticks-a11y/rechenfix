@@ -51,9 +51,10 @@ export default function LieferserviceRechner() {
 
         {/* Durchschnittliche Bestellung */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ø Bestellwert</label>
+          <label htmlFor="lieferservice-bestellwert" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ø Bestellwert</label>
           <div className="relative">
             <input
+              id="lieferservice-bestellwert"
               type="text"
               value={bestellwert}
               onChange={e => setBestellwert(e.target.value)}
@@ -66,9 +67,10 @@ export default function LieferserviceRechner() {
 
         {/* Liefergebühr */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Liefergebühr</label>
+          <label htmlFor="lieferservice-liefergebuehr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Liefergebühr</label>
           <div className="relative">
             <input
+              id="lieferservice-liefergebuehr"
               type="text"
               value={liefergebuehr}
               onChange={e => setLiefergebuehr(e.target.value)}
@@ -81,9 +83,10 @@ export default function LieferserviceRechner() {
 
         {/* Trinkgeld */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Trinkgeld</label>
+          <label htmlFor="lieferservice-trinkgeld" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Trinkgeld</label>
           <div className="relative">
             <input
+              id="lieferservice-trinkgeld"
               type="text"
               value={trinkgeld}
               onChange={e => setTrinkgeld(e.target.value)}

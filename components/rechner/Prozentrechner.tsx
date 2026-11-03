@@ -169,8 +169,9 @@ export default function Prozentrechner() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{aktuellerModus.label1}</label>
+            <label htmlFor="prozentrechner-feld" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{aktuellerModus.label1}</label>
             <NummerEingabe
+              id="prozentrechner-feld"
               value={wert1}
               onChange={setWert1}
               placeholder={aktuellerModus.default1}
@@ -178,8 +179,9 @@ export default function Prozentrechner() {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{aktuellerModus.label2}</label>
+            <label htmlFor="prozentrechner-feld-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{aktuellerModus.label2}</label>
             <NummerEingabe
+              id="prozentrechner-feld-2"
               value={wert2}
               onChange={setWert2}
               placeholder={aktuellerModus.default2}

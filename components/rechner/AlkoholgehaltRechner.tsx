@@ -156,6 +156,7 @@ export default function AlkoholgehaltRechner() {
                   />
                   <div className="w-24">
                     <NummerEingabe
+                      aria-label="Menge in ml"
                       value={z.menge}
                       onChange={v => updateZutat(z.id, 'menge', v)}
                       placeholder="ml"
@@ -164,6 +165,7 @@ export default function AlkoholgehaltRechner() {
                   </div>
                   <div className="w-24">
                     <NummerEingabe
+                      aria-label="Alkoholgehalt in % vol"
                       value={z.prozent}
                       onChange={v => updateZutat(z.id, 'prozent', v)}
                       placeholder="% vol"
@@ -184,7 +186,7 @@ export default function AlkoholgehaltRechner() {
             <button
               type="button"
               onClick={() => addZutat()}
-              className="mt-2 text-sm text-primary-600 dark:text-primary-400 hover:underline"
+              className="mt-2 text-sm text-primary-600 dark:text-primary-400 underline underline-offset-2"
             >
               + Zutat hinzufügen
             </button>
@@ -250,7 +252,7 @@ export default function AlkoholgehaltRechner() {
                 <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
                 Alkohol im Rezept (ml)
               </h2>
-              <NummerEingabe value={kochMl} onChange={setKochMl} placeholder="250" einheit="ml" />
+              <NummerEingabe aria-label="Alkohol im Rezept (ml)" value={kochMl} onChange={setKochMl} placeholder="250" einheit="ml" />
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">z. B. 250 ml Wein oder 50 ml Rum</p>
             </div>
             <div>
@@ -258,7 +260,7 @@ export default function AlkoholgehaltRechner() {
                 <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
                 Alkoholgehalt (% vol)
               </h2>
-              <NummerEingabe value={kochProzent} onChange={setKochProzent} placeholder="12" einheit="%" />
+              <NummerEingabe aria-label="Alkoholgehalt (% vol)" value={kochProzent} onChange={setKochProzent} placeholder="12" einheit="%" />
             </div>
           </div>
 
@@ -317,7 +319,7 @@ export default function AlkoholgehaltRechner() {
                 Restalkohol nach USDA — für {fmt(parseDeutscheZahl(kochMl) || 0, 0)} ml {fmt(parseDeutscheZahl(kochProzent) || 0, 1)} % vol
               </h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

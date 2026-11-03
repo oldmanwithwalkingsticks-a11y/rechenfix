@@ -93,18 +93,18 @@ export default function AfaRechner() {
     <div>
       {/* Anschaffungskosten */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="afa-anschaffungskosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Anschaffungskosten (netto)
         </label>
-        <NummerEingabe value={kosten} onChange={setKosten} placeholder="10000" einheit="€" />
+        <NummerEingabe id="afa-anschaffungskosten" value={kosten} onChange={setKosten} placeholder="10000" einheit="€" />
       </div>
 
       {/* Nutzungsdauer */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="afa-nutzungsdauer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Nutzungsdauer
         </label>
-        <NummerEingabe value={nutzungsdauer} onChange={setNutzungsdauer} placeholder="5" einheit="Jahre" />
+        <NummerEingabe id="afa-nutzungsdauer" value={nutzungsdauer} onChange={setNutzungsdauer} placeholder="5" einheit="Jahre" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Laut AfA-Tabelle des BMF</p>
       </div>
 
@@ -147,10 +147,10 @@ export default function AfaRechner() {
 
       {methode === 'degressiv' && (
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="afa-degressiver-satz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Degressiver Satz (max. 30 %, höchstens 3× linearer Satz)
           </label>
-          <NummerEingabe value={degSatz} onChange={setDegSatz} placeholder="30" einheit="%" />
+          <NummerEingabe id="afa-degressiver-satz" value={degSatz} onChange={setDegSatz} placeholder="30" einheit="%" />
           {/* W183: Höchstsätze der früheren Fenster */}
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Anschaffung 07/2025–12/2027: höchstens 3× linear und 30 %; 04–12/2024: 2× und 20 %; 2020–2022: 2,5× und 25 %.
@@ -161,10 +161,11 @@ export default function AfaRechner() {
 
       {/* Datum */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="afa-anschaffungsdatum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Anschaffungsdatum
         </label>
         <input
+          id="afa-anschaffungsdatum"
           type="date"
           value={datum}
           onChange={e => setDatum(e.target.value)}
@@ -222,7 +223,7 @@ export default function AfaRechner() {
 
       {/* AfA-Plan Tabelle */}
       {result.rows.length > 0 && result.methode !== 'gwg' && !(result.methode === 'sammelposten' && !result.gwgOk) && (
-        <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto">
+        <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">AfA-Plan</p>
           <table className="w-full text-xs text-left">
             <thead>

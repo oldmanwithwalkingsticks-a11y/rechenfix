@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useId } from 'react';
 import {
   berechneFlaeche,
   FORM_OPTIONEN,
@@ -487,11 +487,12 @@ function Feld({ label, value, onChange, einheit, hinweis, small }: {
   hinweis?: string;
   small?: boolean;
 }) {
+  const feldId = useId();
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
+      <label htmlFor={feldId} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
       <div className={small ? 'w-full' : 'w-full sm:w-1/2'}>
-        <NummerEingabe value={value} onChange={onChange} placeholder="0" einheit={einheit} />
+        <NummerEingabe id={feldId} value={value} onChange={onChange} placeholder="0" einheit={einheit} />
       </div>
       {hinweis && <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{hinweis}</p>}
     </div>

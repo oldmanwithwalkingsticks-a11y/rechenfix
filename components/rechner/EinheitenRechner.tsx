@@ -87,8 +87,8 @@ export default function EinheitenRechner() {
       <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 mb-6">
         {/* Wert + Von */}
         <div className="flex-1">
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wert</label>
-          <NummerEingabe value={wert} onChange={setWert} placeholder="1" />
+          <label htmlFor="einheiten-wert" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wert</label>
+          <NummerEingabe id="einheiten-wert" value={wert} onChange={setWert} placeholder="1" />
         </div>
         <div className="flex-1">
           <label htmlFor="einheiten-select-1" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Von</label>

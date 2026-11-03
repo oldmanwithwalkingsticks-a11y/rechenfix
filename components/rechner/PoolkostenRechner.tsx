@@ -130,16 +130,16 @@ export default function PoolkostenRechner() {
       {groesse === 'eigen' && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge</label>
-            <NummerEingabe value={laenge} onChange={setLaenge} placeholder="5" einheit="m" />
+            <label htmlFor="poolkosten-laenge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge</label>
+            <NummerEingabe id="poolkosten-laenge" value={laenge} onChange={setLaenge} placeholder="5" einheit="m" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
-            <NummerEingabe value={breite} onChange={setBreite} placeholder="3" einheit="m" />
+            <label htmlFor="poolkosten-breite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
+            <NummerEingabe id="poolkosten-breite" value={breite} onChange={setBreite} placeholder="3" einheit="m" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tiefe</label>
-            <NummerEingabe value={tiefe} onChange={setTiefe} placeholder="1,5" einheit="m" />
+            <label htmlFor="poolkosten-tiefe" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tiefe</label>
+            <NummerEingabe id="poolkosten-tiefe" value={tiefe} onChange={setTiefe} placeholder="1,5" einheit="m" />
           </div>
         </div>
       )}
@@ -191,12 +191,12 @@ export default function PoolkostenRechner() {
       {/* Strom- und Wasserpreis */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-          <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} einheit="ct/kWh" />
+          <label htmlFor="poolkosten-strompreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
+          <NummerEingabe id="poolkosten-strompreis" value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} einheit="ct/kWh" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wasserpreis</label>
-          <NummerEingabe value={wasserpreis} onChange={setWasserpreis} placeholder="4" einheit="€/m³" />
+          <label htmlFor="poolkosten-wasserpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wasserpreis</label>
+          <NummerEingabe id="poolkosten-wasserpreis" value={wasserpreis} onChange={setWasserpreis} placeholder="4" einheit="€/m³" />
         </div>
       </div>
 

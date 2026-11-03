@@ -48,17 +48,17 @@ export default function SplittingRechner() {
     <div>
       {/* Partner 1 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen Partner 1</label>
+        <label htmlFor="splitting-zu-versteuerndes-einkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen Partner 1</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={zvEP1} onChange={setZvEP1} placeholder="z.B. 55.000" einheit="€" />
+          <NummerEingabe id="splitting-zu-versteuerndes-einkommen" value={zvEP1} onChange={setZvEP1} placeholder="z.B. 55.000" einheit="€" />
         </div>
       </div>
 
       {/* Partner 2 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen Partner 2</label>
+        <label htmlFor="splitting-zu-versteuerndes-einkommen-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen Partner 2</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={zvEP2} onChange={setZvEP2} placeholder="z.B. 25.000" einheit="€" />
+          <NummerEingabe id="splitting-zu-versteuerndes-einkommen-2" value={zvEP2} onChange={setZvEP2} placeholder="z.B. 25.000" einheit="€" />
         </div>
         {/* W187: vorher „Bruttogehalt … Pauschalen (insg. 1.266 € pro Partner) werden automatisch berücksichtigt“ */}
         <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">

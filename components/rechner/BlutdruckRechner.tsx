@@ -90,12 +90,12 @@ export default function BlutdruckRechner() {
         {modus === 'eine' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Systolisch (mmHg)</label>
-              <NummerEingabe value={sys1} onChange={setSys1} placeholder="130" />
+              <label htmlFor="blutdruck-systolisch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Systolisch (mmHg)</label>
+              <NummerEingabe id="blutdruck-systolisch" value={sys1} onChange={setSys1} placeholder="130" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Diastolisch (mmHg)</label>
-              <NummerEingabe value={dia1} onChange={setDia1} placeholder="85" />
+              <label htmlFor="blutdruck-diastolisch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Diastolisch (mmHg)</label>
+              <NummerEingabe id="blutdruck-diastolisch" value={dia1} onChange={setDia1} placeholder="85" />
             </div>
           </div>
         ) : (
@@ -108,8 +108,8 @@ export default function BlutdruckRechner() {
             {messungen.map((m, i) => (
               <div key={i} className="grid grid-cols-[auto_1fr_1fr] gap-2 items-center">
                 <span className="w-6 text-sm text-gray-600 dark:text-gray-400">{i + 1}</span>
-                <NummerEingabe value={m.sys} onChange={v => updateMessung(i, 'sys', v)} placeholder="130" />
-                <NummerEingabe value={m.dia} onChange={v => updateMessung(i, 'dia', v)} placeholder="85" />
+                <NummerEingabe aria-label={`Messung ${i + 1}, systolisch`} value={m.sys} onChange={v => updateMessung(i, 'sys', v)} placeholder="130" />
+                <NummerEingabe aria-label={`Messung ${i + 1}, diastolisch`} value={m.dia} onChange={v => updateMessung(i, 'dia', v)} placeholder="85" />
               </div>
             ))}
           </div>

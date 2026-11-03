@@ -100,6 +100,7 @@ export default function KaffeeKostenRechner() {
             <div className="relative">
               <input
                 type="text"
+                aria-label="Eigener Preis in Euro"
                 value={customPreis}
                 onChange={e => setCustomPreis(e.target.value)}
                 className="input-field pr-8"

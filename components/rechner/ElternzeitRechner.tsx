@@ -63,8 +63,9 @@ export default function ElternzeitRechner() {
     <div>
       {/* Geburtsdatum */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geburtsdatum des Kindes</label>
+        <label htmlFor="elternzeit-geburtsdatum-des-kindes" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geburtsdatum des Kindes</label>
         <input
+          id="elternzeit-geburtsdatum-des-kindes"
           type="date"
           value={geburt}
           onChange={e => setGeburt(e.target.value)}
@@ -77,8 +78,9 @@ export default function ElternzeitRechner() {
         <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">Elternzeit Partner 1</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Beginn</label>
+            <label htmlFor="elternzeit-beginn" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Beginn</label>
             <input
+              id="elternzeit-beginn"
               type="date"
               value={effP1Beginn}
               onChange={e => setP1Beginn(e.target.value)}
@@ -86,8 +88,8 @@ export default function ElternzeitRechner() {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dauer (Monate, max. 36)</label>
-            <NummerEingabe value={p1Monate} onChange={setP1Monate} placeholder="12" einheit="Monate" />
+            <label htmlFor="elternzeit-dauer" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dauer (Monate, max. 36)</label>
+            <NummerEingabe id="elternzeit-dauer" value={p1Monate} onChange={setP1Monate} placeholder="12" einheit="Monate" />
           </div>
         </div>
       </div>
@@ -97,8 +99,9 @@ export default function ElternzeitRechner() {
         <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">Elternzeit Partner 2</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Beginn</label>
+            <label htmlFor="elternzeit-beginn-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Beginn</label>
             <input
+              id="elternzeit-beginn-2"
               type="date"
               value={effP2Beginn}
               onChange={e => setP2Beginn(e.target.value)}
@@ -106,8 +109,8 @@ export default function ElternzeitRechner() {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dauer (Monate, max. 36)</label>
-            <NummerEingabe value={p2Monate} onChange={setP2Monate} placeholder="2" einheit="Monate" />
+            <label htmlFor="elternzeit-dauer-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dauer (Monate, max. 36)</label>
+            <NummerEingabe id="elternzeit-dauer-2" value={p2Monate} onChange={setP2Monate} placeholder="2" einheit="Monate" />
           </div>
         </div>
       </div>
@@ -120,6 +123,10 @@ export default function ElternzeitRechner() {
             <p className="text-xs text-gray-600 dark:text-gray-400">15–32 Stunden/Woche erlaubt</p>
           </div>
           <button
+            type="button"
+            role="switch"
+            aria-checked={teilzeit}
+            aria-label="Teilzeit während Elternzeit"
             onClick={() => setTeilzeit(!teilzeit)}
             className={`w-12 h-7 rounded-full relative transition-colors ${teilzeit ? 'bg-primary-500' : 'bg-gray-300 dark:bg-gray-600'}`}
           >
@@ -128,8 +135,8 @@ export default function ElternzeitRechner() {
         </div>
         {teilzeit && (
           <div className="mt-3">
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Stunden/Woche</label>
-            <NummerEingabe value={teilzeitStunden} onChange={setTeilzeitStunden} placeholder="20" einheit="h/Woche" />
+            <label htmlFor="elternzeit-stunden-woche" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Stunden/Woche</label>
+            <NummerEingabe id="elternzeit-stunden-woche" value={teilzeitStunden} onChange={setTeilzeitStunden} placeholder="20" einheit="h/Woche" />
           </div>
         )}
       </div>

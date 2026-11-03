@@ -54,16 +54,16 @@ export default function BildschirmgroessePpiRechner() {
       {/* Eingaben */}
       <div className="grid gap-4 sm:grid-cols-3 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Diagonale</label>
-          <NummerEingabe value={zoll} onChange={setZoll} placeholder="27" einheit="Zoll" />
+          <label htmlFor="bildschirmgroesse-ppi-diagonale" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Diagonale</label>
+          <NummerEingabe id="bildschirmgroesse-ppi-diagonale" value={zoll} onChange={setZoll} placeholder="27" einheit="Zoll" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite (Auflösung)</label>
-          <NummerEingabe value={breitePx} onChange={setBreitePx} placeholder="3840" einheit="px" />
+          <label htmlFor="bildschirmgroesse-ppi-breite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite (Auflösung)</label>
+          <NummerEingabe id="bildschirmgroesse-ppi-breite" value={breitePx} onChange={setBreitePx} placeholder="3840" einheit="px" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe (Auflösung)</label>
-          <NummerEingabe value={hoehePx} onChange={setHoehePx} placeholder="2160" einheit="px" />
+          <label htmlFor="bildschirmgroesse-ppi-hoehe" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe (Auflösung)</label>
+          <NummerEingabe id="bildschirmgroesse-ppi-hoehe" value={hoehePx} onChange={setHoehePx} placeholder="2160" einheit="px" />
         </div>
       </div>
 

@@ -186,14 +186,14 @@ export default function BrotbackRechner() {
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
             Anzahl Brote
           </h2>
-          <NummerEingabe value={anzahl} onChange={setAnzahl} placeholder="1" einheit="Brote" />
+          <NummerEingabe aria-label="Anzahl Brote" value={anzahl} onChange={setAnzahl} placeholder="1" einheit="Brote" />
         </div>
         <div>
           <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-1 flex items-center gap-2">
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
             Teiggewicht pro Brot
           </h2>
-          <NummerEingabe value={teigGewicht} onChange={setTeigGewicht} placeholder="900" einheit="g" />
+          <NummerEingabe aria-label="Teiggewicht pro Brot" value={teigGewicht} onChange={setTeigGewicht} placeholder="900" einheit="g" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Fertig gebacken: ca. {fmt((parseDeutscheZahl(teigGewicht) || 900) * 0.88, 0)} g
           </p>
@@ -326,7 +326,7 @@ export default function BrotbackRechner() {
             Bäckerprozente: {rezept.name}
           </h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

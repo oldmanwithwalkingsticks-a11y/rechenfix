@@ -126,21 +126,22 @@ export default function AlkoholAbbauRechner() {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Körpergewicht</label>
-          <NummerEingabe value={gewicht} onChange={v => setGewicht(clampInputValue(v, 30, 250))} onBlur={v => setGewicht(clampInputValueOnBlur(v, 30, 250))} min={30} max={250} einheit="kg" />
+          <label htmlFor="alkohol-abbau-koerpergewicht" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Körpergewicht</label>
+          <NummerEingabe id="alkohol-abbau-koerpergewicht" value={gewicht} onChange={v => setGewicht(clampInputValue(v, 30, 250))} onBlur={v => setGewicht(clampInputValueOnBlur(v, 30, 250))} min={30} max={250} einheit="kg" />
         </div>
 
         <div>
-          <label htmlFor="alkoholabbau-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Getränke</label>
+          <p className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Getränke</p>
           <div className="space-y-2">
             {getraenke.map(g => (
               <div key={g.id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2">
                 <div className="flex gap-2 items-start">
-                  <select id="alkoholabbau-select-1" value={g.art} onChange={e => updateGetraenk(g.id, { art: e.target.value as GetraenkArt })} className="flex-1 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm">
+                  <select aria-label="Getränkeart" value={g.art} onChange={e => updateGetraenk(g.id, { art: e.target.value as GetraenkArt })} className="flex-1 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm">
                     {(Object.keys(GETRAENKE) as GetraenkArt[]).map(k => <option key={k} value={k}>{GETRAENKE[k].label}</option>)}
                   </select>
                   <input
                     type="number"
+                    aria-label="Anzahl"
                     value={g.anzahl}
                     onChange={e => updateGetraenk(g.id, { anzahl: clampInputValue(e.target.value, 0, null) })}
                     onBlur={e => updateGetraenk(g.id, { anzahl: clampInputValueOnBlur(e.target.value, 0, null) })}
@@ -151,8 +152,8 @@ export default function AlkoholAbbauRechner() {
                 </div>
                 {g.art === 'eigen' && (
                   <div className="grid grid-cols-2 gap-2 mt-2">
-                    <input type="number" value={g.ml} onChange={e => updateGetraenk(g.id, { ml: e.target.value })} placeholder="Menge (ml)" className="min-h-[40px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm" />
-                    <input type="number" value={g.vol} onChange={e => updateGetraenk(g.id, { vol: e.target.value })} placeholder="Alkohol (Vol.-%)" className="min-h-[40px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm" />
+                    <input type="number" aria-label="Menge in ml" value={g.ml} onChange={e => updateGetraenk(g.id, { ml: e.target.value })} placeholder="Menge (ml)" className="min-h-[40px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm" />
+                    <input type="number" aria-label="Alkoholgehalt in Vol.-%" value={g.vol} onChange={e => updateGetraenk(g.id, { vol: e.target.value })} placeholder="Alkohol (Vol.-%)" className="min-h-[40px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm" />
                   </div>
                 )}
               </div>
@@ -163,8 +164,8 @@ export default function AlkoholAbbauRechner() {
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Trinkbeginn</label>
-            <input type="time" value={trinkBeginn} onChange={e => setTrinkBeginn(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
+            <label htmlFor="alkohol-abbau-trinkbeginn" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Trinkbeginn</label>
+            <input id="alkohol-abbau-trinkbeginn" type="time" value={trinkBeginn} onChange={e => setTrinkBeginn(e.target.value)} className="w-full min-h-[48px] px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200" />
           </div>
           <div>
             <label htmlFor="alkoholabbau-select-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Trinkdauer</label>

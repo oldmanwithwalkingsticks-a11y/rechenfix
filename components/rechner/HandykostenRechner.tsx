@@ -51,10 +51,10 @@ export default function HandykostenRechner() {
       <div className="space-y-4 mb-6">
         {/* Tarifpreis */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="handykosten-monatlicher-tarifpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Monatlicher Tarifpreis
           </label>
-          <NummerEingabe value={tarifpreis} onChange={setTarifpreis} einheit="€" placeholder="z.B. 15" />
+          <NummerEingabe id="handykosten-monatlicher-tarifpreis" value={tarifpreis} onChange={setTarifpreis} einheit="€" placeholder="z.B. 15" />
         </div>
 
         {/* Vertragslaufzeit */}
@@ -82,10 +82,10 @@ export default function HandykostenRechner() {
         {/* Gerätepreis + Raten */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="handykosten-einmaliger-geraetepreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Einmaliger Gerätepreis
             </label>
-            <NummerEingabe value={geraetepreis} onChange={setGeraetepreis} einheit="€" placeholder="0" />
+            <NummerEingabe id="handykosten-einmaliger-geraetepreis" value={geraetepreis} onChange={setGeraetepreis} einheit="€" placeholder="0" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -93,6 +93,10 @@ export default function HandykostenRechner() {
             </label>
             <div className="flex items-center gap-3 h-[48px]">
               <button
+                type="button"
+                role="switch"
+                aria-checked={hatRaten}
+                aria-label="Ratenzahlung"
                 onClick={() => setHatRaten(!hatRaten)}
                 className={`relative w-12 h-7 rounded-full transition-colors duration-200 ${
                   hatRaten ? 'bg-green-500' : 'bg-red-400'
@@ -112,45 +116,45 @@ export default function HandykostenRechner() {
         {/* Monatliche Rate (nur bei Ratenzahlung) */}
         {hatRaten && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="handykosten-monatliche-rate-fuer-geraet" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Monatliche Rate für Gerät
             </label>
-            <NummerEingabe value={monatlicheRate} onChange={setMonatlicheRate} einheit="€" placeholder="z.B. 25" />
+            <NummerEingabe id="handykosten-monatliche-rate-fuer-geraet" value={monatlicheRate} onChange={setMonatlicheRate} einheit="€" placeholder="z.B. 25" />
           </div>
         )}
 
         {/* Zusatzoptionen + Datenvolumen */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="handykosten-zusatzoptionen-pro-monat" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Zusatzoptionen pro Monat
             </label>
-            <NummerEingabe value={zusatzoptionen} onChange={setZusatzoptionen} einheit="€" placeholder="0" />
+            <NummerEingabe id="handykosten-zusatzoptionen-pro-monat" value={zusatzoptionen} onChange={setZusatzoptionen} einheit="€" placeholder="0" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">z.B. Auslandsflatrate, Cloud-Speicher</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="handykosten-datenvolumen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Datenvolumen
             </label>
-            <NummerEingabe value={datenvolumen} onChange={setDatenvolumen} einheit="GB" placeholder="10" />
+            <NummerEingabe id="handykosten-datenvolumen" value={datenvolumen} onChange={setDatenvolumen} einheit="GB" placeholder="10" />
           </div>
         </div>
 
         {/* Anschlussgebühr (einmalig) */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="handykosten-anschlussgebuehr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Anschlussgebühr (einmalig)
           </label>
-          <NummerEingabe value={anschlussgebuehr} onChange={setAnschlussgebuehr} einheit="€" placeholder="0" />
+          <NummerEingabe id="handykosten-anschlussgebuehr" value={anschlussgebuehr} onChange={setAnschlussgebuehr} einheit="€" placeholder="0" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">wird auf die Vertragslaufzeit umgelegt (bei „monatlich kündbar“ im ersten Monat)</p>
         </div>
 
         {/* Vergleich mit aktuellem Anbieter */}
         <div className="bg-gray-50 dark:bg-gray-700/30 rounded-xl p-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="handykosten-aktueller-anbieter-kosten-pro" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Aktueller Anbieter — Kosten pro Monat <span className="text-gray-600 dark:text-gray-400 font-normal">(optional, zum Vergleich)</span>
           </label>
-          <NummerEingabe value={aktuellerAnbieter} onChange={setAktuellerAnbieter} einheit="€" placeholder="z.B. 30" />
+          <NummerEingabe id="handykosten-aktueller-anbieter-kosten-pro" value={aktuellerAnbieter} onChange={setAktuellerAnbieter} einheit="€" placeholder="z.B. 30" />
         </div>
       </div>
 
@@ -247,7 +251,7 @@ export default function HandykostenRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Typische Handykosten in Deutschland 2026</p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Typische Handykosten in Deutschland 2026">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-700">

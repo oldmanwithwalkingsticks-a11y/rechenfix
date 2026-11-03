@@ -129,7 +129,7 @@ export default function BruttoNettoLongTail({
             </p>
 
             {/* Ergebnis-Tabelle */}
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm border-collapse">
                 <thead>
                   <tr className="bg-primary-50 dark:bg-primary-500/10">

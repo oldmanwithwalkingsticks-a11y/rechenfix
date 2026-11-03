@@ -49,6 +49,7 @@ export default function SearchBar({ className = '', placeholder = 'Was möchten 
         </svg>
         <input
           type="text"
+          aria-label="Rechner suchen"
           value={query}
           onChange={e => { setQuery(e.target.value); setOffen(true); }}
           onFocus={() => setOffen(true)}

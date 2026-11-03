@@ -132,20 +132,20 @@ export default function SchwangerschaftGewichtRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Gewicht vor der Schwangerschaft</label>
-          <NummerEingabe value={vorGewicht} onChange={setVorGewicht} einheit="kg" />
+          <label htmlFor="schwangerschaft-gewicht-gewicht-vor-der-schwangerschaft" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Gewicht vor der Schwangerschaft</label>
+          <NummerEingabe id="schwangerschaft-gewicht-gewicht-vor-der-schwangerschaft" value={vorGewicht} onChange={setVorGewicht} einheit="kg" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Aktuelles Gewicht</label>
-          <NummerEingabe value={aktGewicht} onChange={setAktGewicht} einheit="kg" />
+          <label htmlFor="schwangerschaft-gewicht-aktuelles-gewicht" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Aktuelles Gewicht</label>
+          <NummerEingabe id="schwangerschaft-gewicht-aktuelles-gewicht" value={aktGewicht} onChange={setAktGewicht} einheit="kg" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Körpergröße</label>
-          <NummerEingabe value={groesse} onChange={setGroesse} einheit="cm" />
+          <label htmlFor="schwangerschaft-gewicht-koerpergroesse" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Körpergröße</label>
+          <NummerEingabe id="schwangerschaft-gewicht-koerpergroesse" value={groesse} onChange={setGroesse} einheit="cm" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Aktuelle SSW</label>
-          <NummerEingabe value={ssw} onChange={setSsw} einheit="SSW" />
+          <label htmlFor="schwangerschaft-gewicht-aktuelle-ssw" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Aktuelle SSW</label>
+          <NummerEingabe id="schwangerschaft-gewicht-aktuelle-ssw" value={ssw} onChange={setSsw} einheit="SSW" />
         </div>
         <div>
           <RadioToggleGroup

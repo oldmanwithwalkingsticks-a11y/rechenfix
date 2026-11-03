@@ -93,8 +93,9 @@ export default function GeburtsterminRechner() {
       {methode === 'periode' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erster Tag der letzten Periode</label>
+            <label htmlFor="geburtstermin-erster-tag-der-letzten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erster Tag der letzten Periode</label>
             <input
+              id="geburtstermin-erster-tag-der-letzten"
               type="date"
               value={periodeDatum}
               onChange={e => setPeriodeDatum(e.target.value)}
@@ -118,8 +119,9 @@ export default function GeburtsterminRechner() {
 
       {methode === 'empfaengnis' && (
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Datum der Empfängnis</label>
+          <label htmlFor="geburtstermin-datum-der-empfaengnis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Datum der Empfängnis</label>
           <input
+            id="geburtstermin-datum-der-empfaengnis"
             type="date"
             value={empfaengnisDatum}
             onChange={e => setEmpfaengnisDatum(e.target.value)}
@@ -131,8 +133,9 @@ export default function GeburtsterminRechner() {
       {methode === 'ultraschall' && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ultraschall-Datum</label>
+            <label htmlFor="geburtstermin-ultraschall-datum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ultraschall-Datum</label>
             <input
+              id="geburtstermin-ultraschall-datum"
               type="date"
               value={ultraschallDatum}
               onChange={e => setUltraschallDatum(e.target.value)}

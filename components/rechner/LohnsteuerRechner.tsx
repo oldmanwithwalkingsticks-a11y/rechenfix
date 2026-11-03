@@ -65,11 +65,11 @@ export default function LohnsteuerRechner() {
     <div>
       {/* === 1: Brutto === */}
       <div className="mb-6">
-        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 id="lohnsteuer-schritt-1" className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Bruttolohn {zeitraum === 'monat' ? '(monatlich)' : '(jährlich)'}
         </h2>
-        <NummerEingabe value={brutto} onChange={setBrutto} placeholder={zeitraum === 'monat' ? '3.500' : '42.000'} einheit="€" />
+        <NummerEingabe aria-labelledby="lohnsteuer-schritt-1" value={brutto} onChange={setBrutto} placeholder={zeitraum === 'monat' ? '3.500' : '42.000'} einheit="€" />
         <div className="mt-2">
           <RadioToggleGroup
             name="lst-zeitraum"
@@ -193,7 +193,7 @@ export default function LohnsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">6</span>
           Jährlicher Steuerfreibetrag (optional)
         </h2>
-        <NummerEingabe value={jahresfreibetrag} onChange={setJahresfreibetrag} placeholder="0" einheit="€" />
+        <NummerEingabe aria-label="Jährlicher Steuerfreibetrag (optional)" value={jahresfreibetrag} onChange={setJahresfreibetrag} placeholder="0" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Vom Finanzamt eingetragener Freibetrag (z. B. Werbungskosten, Pendlerpauschale über 1.230 €, Kinderbetreuung).
         </p>
@@ -229,7 +229,7 @@ export default function LohnsteuerRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
@@ -276,7 +276,7 @@ export default function LohnsteuerRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich aller Steuerklassen (bei {fmtEuro0(ergebnis.bruttoMonat)} € Brutto/Monat)</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

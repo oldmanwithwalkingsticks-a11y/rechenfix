@@ -58,19 +58,19 @@ export default function UeberUnsSeite() {
             KI-Funktionen: Wer sie bewusst auslöst, übermittelt dabei die Bezeichnung des
             Rechners sowie die eingegebenen und berechneten Werte an unseren
             KI-Dienstleister. Einzelheiten dazu stehen in der{' '}
-            <Link href="/datenschutz" className="text-primary-600 dark:text-primary-400 hover:underline">Datenschutzerklärung</Link>.
+            <Link href="/datenschutz" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Datenschutzerklärung</Link>.
             Das Ziel ist einfach: komplexe Berechnungen so zugänglich machen, dass Sie in
             Sekunden eine belastbare Orientierung bekommen.
           </p>
           <p className="mb-4">
             Eine Besonderheit von Rechenfix ist die KI-gestützte Erklärung
             („Fix erklärt&rdquo;): Auf Wunsch erläutert eine KI die Berechnung individuell für
-            Ihre konkreten Eingaben. Auch der <Link href="/ki-rechner" className="text-primary-600 dark:text-primary-400 hover:underline">KI-Rechner</Link> beantwortet Fragen live mit KI. Solche live erzeugten Antworten sind als KI-generiert gekennzeichnet.
+            Ihre konkreten Eingaben. Auch der <Link href="/ki-rechner" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">KI-Rechner</Link> beantwortet Fragen live mit KI. Solche live erzeugten Antworten sind als KI-generiert gekennzeichnet.
           </p>
           <p>
             <strong>Transparenz zum KI-Einsatz:</strong> Die zugrundeliegenden Formeln,
             Berechnungslogiken und Rechtswerte sind <strong>nicht KI-generiert</strong>, sondern
-            manuell aus Primärquellen gepflegt und geprüft (siehe <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>).
+            manuell aus Primärquellen gepflegt und geprüft (siehe <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Qualität &amp; Methodik</Link>).
             Die erläuternden Texte und Themenabschnitte auf den Rechnerseiten entstehen
             KI-gestützt, werden aber vor der Veröffentlichung redaktionell geprüft und
             verantwortet — die inhaltliche Verantwortung liegt bei Karsten Kautz als Betreiber.
@@ -135,10 +135,10 @@ export default function UeberUnsSeite() {
             Rechtsanwalt. Die Genauigkeit der Rechner kommt nicht aus persönlicher
             Beratungs-Expertise, sondern aus disziplinierter Pflege gegen die offiziellen
             Primärquellen — siehe{' '}
-            <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>.
+            <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Qualität &amp; Methodik</Link>.
             Vollständige Anbieter-Angaben gemäß § 5 DDG inklusive Anschrift,
             Telefonnummer und Umsatzsteuer-ID finden Sie im{' '}
-            <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
+            <Link href="/impressum" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Impressum</Link>.
           </p>
         </div>
       </section>
@@ -244,7 +244,7 @@ export default function UeberUnsSeite() {
           <p>
             Die ausführliche Darstellung dieses Workflows mit Quellen-Liste und
             Update-Historie steht auf der Seite{' '}
-            <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">Qualität &amp; Methodik</Link>.
+            <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Qualität &amp; Methodik</Link>.
           </p>
         </div>
       </section>
@@ -257,7 +257,7 @@ export default function UeberUnsSeite() {
         <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
           Die folgenden Primärquellen werden für die zentralen Themen-Bereiche genutzt.
           Eine vollständige Liste mit weiterführenden Erläuterungen findet sich auf{' '}
-          <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 hover:underline">/qualitaet</Link>.
+          <Link href="/qualitaet" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">/qualitaet</Link>.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -319,7 +319,7 @@ export default function UeberUnsSeite() {
           </p>
           <p>
             Detaillierte Angaben zur Datenverarbeitung finden Sie in der{' '}
-            <Link href="/datenschutz" className="text-primary-600 dark:text-primary-400 hover:underline">Datenschutzerklärung</Link>.
+            <Link href="/datenschutz" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Datenschutzerklärung</Link>.
           </p>
         </div>
       </section>
@@ -332,14 +332,14 @@ export default function UeberUnsSeite() {
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
           Fehler entdeckt, Verbesserungsvorschlag oder Wunsch für einen neuen
           Rechner? Schreiben Sie an{' '}
-          <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 hover:underline">
+          <a href="mailto:info@rechenfix.de" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">
             info@rechenfix.de
           </a>
           . Antwort in der Regel innerhalb von 14 Tagen.
         </p>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
           Anbieter-Angaben nach § 5 DDG:{' '}
-          <Link href="/impressum" className="text-primary-600 dark:text-primary-400 hover:underline">Impressum</Link>.
+          <Link href="/impressum" className="text-primary-600 dark:text-primary-400 underline underline-offset-2">Impressum</Link>.
         </p>
       </section>
 

@@ -91,8 +91,8 @@ export default function AfbgRechner() {
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lehrgangs- und Prüfungsgebühren</label>
-            <NummerEingabe value={lehrgangskosten} onChange={setLehrgangskosten} placeholder="10.000" einheit="€ gesamt" />
+            <label htmlFor="afbg-lehrgangs-und-pruefungsgebuehren" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lehrgangs- und Prüfungsgebühren</label>
+            <NummerEingabe id="afbg-lehrgangs-und-pruefungsgebuehren" value={lehrgangskosten} onChange={setLehrgangskosten} placeholder="10.000" einheit="€ gesamt" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               § 12 AFBG — Höchstbetrag 15.000 €. Über diesem Betrag wird nicht gefördert.
             </p>
@@ -102,8 +102,8 @@ export default function AfbgRechner() {
               Meisterstück / Prüfungsstück-Materialkosten (optional)
             </summary>
             <div className="px-4 pb-4 pt-1 border-t border-gray-100 dark:border-gray-700">
-              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mt-3 mb-1">Materialkosten</label>
-              <NummerEingabe value={meisterstueckKosten} onChange={setMeisterstueckKosten} placeholder="0" einheit="€ gesamt" />
+              <label htmlFor="afbg-materialkosten" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mt-3 mb-1">Materialkosten</label>
+              <NummerEingabe id="afbg-materialkosten" value={meisterstueckKosten} onChange={setMeisterstueckKosten} placeholder="0" einheit="€ gesamt" />
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                 § 12 AFBG — Höchstbetrag 2.000 €. Aufteilung identisch: 50 % Zuschuss, 50 % Darlehen.
               </p>
@@ -124,14 +124,14 @@ export default function AfbgRechner() {
           {istVollzeit && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Bruttoeinkommen</label>
-              <NummerEingabe value={antragstellerBrutto} onChange={setAntragstellerBrutto} placeholder="0" einheit="€/Monat" />
+              <label htmlFor="afbg-eigenes-bruttoeinkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Bruttoeinkommen</label>
+              <NummerEingabe id="afbg-eigenes-bruttoeinkommen" value={antragstellerBrutto} onChange={setAntragstellerBrutto} placeholder="0" einheit="€/Monat" />
               {/* W200: Wert aus afbg-parameter.ts, vorher fest „ca. 603 €/Monat (Minijob-Grenze)“ */}
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag {fmtEuro(getAktuelleAfbgParameter().freibetraege.antragstellerBrutto)} €/Monat</p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
-              <NummerEingabe value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
+              <label htmlFor="afbg-eigenes-vermoegen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
+              <NummerEingabe id="afbg-eigenes-vermoegen" value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag 45.000 € (§ 29 BAföG)</p>
             </div>
           </div>
@@ -149,8 +149,8 @@ export default function AfbgRechner() {
             </div>
             {ehegatteVorhanden && istVollzeit && (
               <div className="mt-3 w-full sm:w-1/2">
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttoeinkommen Ehegatte/Partner</label>
-                <NummerEingabe value={ehegatteBrutto} onChange={setEhegatteBrutto} placeholder="0" einheit="€/Monat" />
+                <label htmlFor="afbg-bruttoeinkommen-ehegatte-partner" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttoeinkommen Ehegatte/Partner</label>
+                <NummerEingabe id="afbg-bruttoeinkommen-ehegatte-partner" value={ehegatteBrutto} onChange={setEhegatteBrutto} placeholder="0" einheit="€/Monat" />
                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag 850 €/Monat zusätzlich + 235 € Bedarfs-Zuschlag</p>
               </div>
             )}
@@ -294,7 +294,7 @@ export default function AfbgRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               {/* MAßNAHMEBEITRAG */}

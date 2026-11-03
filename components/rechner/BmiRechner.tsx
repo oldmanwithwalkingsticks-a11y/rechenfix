@@ -55,8 +55,9 @@ export default function BmiRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht</label>
+          <label htmlFor="bmi-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht</label>
           <NummerEingabe
+            id="bmi-gewicht"
             value={gewicht}
             onChange={setGewicht}
             placeholder="z.B. 75"
@@ -64,8 +65,9 @@ export default function BmiRechner() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Größe</label>
+          <label htmlFor="bmi-groesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Größe</label>
           <NummerEingabe
+            id="bmi-groesse"
             value={groesse}
             onChange={setGroesse}
             placeholder="z.B. 175"
@@ -73,8 +75,9 @@ export default function BmiRechner() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter (optional)</label>
+          <label htmlFor="bmi-alter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter (optional)</label>
           <NummerEingabe
+            id="bmi-alter"
             value={alter}
             onChange={setAlter}
             placeholder="z.B. 30"

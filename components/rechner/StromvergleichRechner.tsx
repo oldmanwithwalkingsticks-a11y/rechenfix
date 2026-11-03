@@ -69,14 +69,18 @@ export default function StromvergleichRechner() {
         {/* Verbrauch + Ökostrom */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="stromvergleich-jahresverbrauch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Jahresverbrauch
             </label>
-            <NummerEingabe value={verbrauch} onChange={(v) => { setVerbrauch(v); setAusgewaehlteGroesse(-1); }} einheit="kWh" placeholder="z.B. 2.500" />
+            <NummerEingabe id="stromvergleich-jahresverbrauch" value={verbrauch} onChange={(v) => { setVerbrauch(v); setAusgewaehlteGroesse(-1); }} einheit="kWh" placeholder="z.B. 2.500" />
           </div>
           <div className="flex items-end pb-2">
             <div className="flex items-center gap-3">
               <button
+                type="button"
+                role="switch"
+                aria-checked={oekostrom}
+                aria-label="Ökostrom bevorzugt"
                 onClick={() => setOekostrom(!oekostrom)}
                 className={`relative w-12 h-7 rounded-full transition-colors duration-200 ${
                   oekostrom ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
@@ -96,16 +100,16 @@ export default function StromvergleichRechner() {
         {/* Arbeitspreis + Grundpreis */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="stromvergleich-aktueller-arbeitspreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Aktueller Arbeitspreis
             </label>
-            <NummerEingabe value={arbeitspreis} onChange={setArbeitspreis} einheit="ct/kWh" placeholder="z.B. 32" />
+            <NummerEingabe id="stromvergleich-aktueller-arbeitspreis" value={arbeitspreis} onChange={setArbeitspreis} einheit="ct/kWh" placeholder="z.B. 32" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="stromvergleich-aktueller-grundpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Aktueller Grundpreis
             </label>
-            <NummerEingabe value={grundpreis} onChange={setGrundpreis} einheit="€/Monat" placeholder="z.B. 10" />
+            <NummerEingabe id="stromvergleich-aktueller-grundpreis" value={grundpreis} onChange={setGrundpreis} einheit="€/Monat" placeholder="z.B. 10" />
           </div>
         </div>
       </div>

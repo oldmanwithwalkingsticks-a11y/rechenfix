@@ -50,7 +50,7 @@ export default function ScheidungskostenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Gemeinsames Nettoeinkommen (beide Ehepartner)
         </h2>
-        <NummerEingabe value={netto} onChange={setNetto} placeholder="5.000" einheit="€/Monat" />
+        <NummerEingabe aria-label="Gemeinsames Nettoeinkommen (beide Ehepartner)" value={netto} onChange={setNetto} placeholder="5.000" einheit="€/Monat" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Der Verfahrenswert beträgt das 3-fache Ihres gemeinsamen monatlichen Nettoeinkommens (mindestens 3.000 €).
         </p>
@@ -156,7 +156,7 @@ export default function ScheidungskostenRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               <tr>

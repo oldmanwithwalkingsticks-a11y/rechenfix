@@ -81,7 +81,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
     case 'tabelle':
       return (
         <DatenKachel titel={block.titel}>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={block.titel || 'Tabelle'}>
             <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <thead>
                 <tr className="bg-primary-50 dark:bg-primary-500/10">
@@ -142,7 +142,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
     case 'vergleich':
       return (
         <DatenKachel titel={block.titel}>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={block.titel || 'Tabelle'}>
             <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <thead>
                 <tr className="bg-primary-50 dark:bg-primary-500/10">

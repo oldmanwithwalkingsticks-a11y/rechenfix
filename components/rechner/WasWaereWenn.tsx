@@ -155,6 +155,7 @@ export default function WasWaereWenn({ eingaben, ergebnis }: Props) {
             {/* Freitext-Eingabe */}
             <div className="relative">
               <textarea
+                aria-label="Ihre Was-wäre-wenn-Frage"
                 ref={inputRef}
                 value={frage}
                 onChange={(e) => setFrage(e.target.value)}

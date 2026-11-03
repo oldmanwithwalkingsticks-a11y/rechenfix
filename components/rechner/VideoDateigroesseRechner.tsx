@@ -85,11 +85,11 @@ export default function VideoDateigroesseRechner() {
         </div>
         <div>
           <label htmlFor="vid-bitrate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bitrate</label>
-          <NummerEingabe value={bitrate} onChange={(v) => { setBitrate(v); setProfil('custom'); }} placeholder="8" einheit="Mbit/s" />
+          <NummerEingabe id="vid-bitrate" value={bitrate} onChange={(v) => { setBitrate(v); setProfil('custom'); }} placeholder="8" einheit="Mbit/s" />
         </div>
         <div>
           <label htmlFor="vid-laenge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge</label>
-          <NummerEingabe value={laenge} onChange={setLaenge} placeholder="10" einheit={einheit} />
+          <NummerEingabe id="vid-laenge" value={laenge} onChange={setLaenge} placeholder="10" einheit={einheit} />
         </div>
         <div>
           <label htmlFor="vid-einheit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zeiteinheit</label>
@@ -133,7 +133,7 @@ export default function VideoDateigroesseRechner() {
           {/* Auflösungs-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">10-Minuten-Clip je Auflösung</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="10-Minuten-Clip je Auflösung">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

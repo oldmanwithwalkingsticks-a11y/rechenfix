@@ -147,6 +147,7 @@ export default function KiRechnerClient() {
       <div className="relative">
         <div className="bg-white dark:bg-gray-800 border-2 border-purple-200 dark:border-purple-700/40 rounded-2xl shadow-lg shadow-purple-100/50 dark:shadow-purple-900/20 overflow-hidden focus-within:border-purple-400 dark:focus-within:border-purple-500 transition-colors">
           <textarea
+            aria-label="Ihre Rechenfrage an den KI-Rechner"
             ref={inputRef}
             value={frage}
             onChange={e => setFrage(e.target.value)}

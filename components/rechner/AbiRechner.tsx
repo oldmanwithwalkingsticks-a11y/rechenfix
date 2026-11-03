@@ -113,13 +113,13 @@ export default function AbiRechner() {
       {modus === 'schnell' && (
         <div className="mb-6 space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Punkte Block I (Kurse)</label>
-            <NummerEingabe value={blockIStr} onChange={setBlockIStr} einheit="Pkt" />
+            <label htmlFor="abi-punkte-block-i" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Punkte Block I (Kurse)</label>
+            <NummerEingabe id="abi-punkte-block-i" value={blockIStr} onChange={setBlockIStr} einheit="Pkt" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Qualifikationsphase: mind. 200, max. 600 Punkte</p>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Punkte Block II (Prüfungen)</label>
-            <NummerEingabe value={blockIIStr} onChange={setBlockIIStr} einheit="Pkt" />
+            <label htmlFor="abi-punkte-block-ii" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Punkte Block II (Prüfungen)</label>
+            <NummerEingabe id="abi-punkte-block-ii" value={blockIIStr} onChange={setBlockIIStr} einheit="Pkt" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Abiturprüfungen: mind. 100, max. 300 Punkte</p>
           </div>
         </div>
@@ -132,8 +132,8 @@ export default function AbiRechner() {
             <p className="font-semibold text-gray-700 dark:text-gray-200 text-sm mb-2">Block I — Kurse</p>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Ø Punkte pro Kurs</label>
-                <NummerEingabe value={kursDurchschnitt} onChange={setKursDurchschnitt} einheit="/15" />
+                <label htmlFor="abi-punkte-pro-kurs" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Ø Punkte pro Kurs</label>
+                <NummerEingabe id="abi-punkte-pro-kurs" value={kursDurchschnitt} onChange={setKursDurchschnitt} einheit="/15" />
               </div>
               <div>
                 <label htmlFor="abi-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Eingebrachte Kurse</label>
@@ -154,8 +154,8 @@ export default function AbiRechner() {
                 { label: 'Prüfung 5 (Präsentation)', value: p5, setter: setP5 },
               ].map(f => (
                 <div key={f.label}>
-                  <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{f.label}</label>
-                  <NummerEingabe value={f.value} onChange={f.setter} einheit="/15" />
+                  <label htmlFor="abi-feld" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{f.label}</label>
+                  <NummerEingabe id="abi-feld" value={f.value} onChange={f.setter} einheit="/15" />
                 </div>
               ))}
             </div>

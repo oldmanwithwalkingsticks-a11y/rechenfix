@@ -12,6 +12,10 @@ interface NummerEingabeProps {
   einheit?: string;
   /** HTML-id zur Verknüpfung mit <label htmlFor={...}> (A11y). */
   id?: string;
+  /** Zugänglicher Name, wenn kein sichtbares <label> zum Feld gehört (z. B. Zeilen in Listen). */
+  'aria-label'?: string;
+  /** id eines sichtbaren Elements, das das Feld benennt (z. B. die Überschrift eines Schritts). */
+  'aria-labelledby'?: string;
   /** Schrittweite für +/- Buttons (nicht verwendet, nur für Kompatibilität) */
   step?: string;
   /**
@@ -44,6 +48,8 @@ export default function NummerEingabe({
   id,
   min,
   max,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledby,
 }: NummerEingabeProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const neuerWert = e.target.value;
@@ -72,6 +78,8 @@ export default function NummerEingabe({
         onBlur={onBlur ? (e) => onBlur(e.target.value) : undefined}
         placeholder={placeholder}
         id={id}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledby}
         data-min={min}
         data-max={max}
         className={`input-field ${einheitPadding} ${className}`}

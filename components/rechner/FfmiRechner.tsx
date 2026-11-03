@@ -79,15 +79,15 @@ export default function FfmiRechner() {
       <div className="grid gap-4 sm:grid-cols-2 mb-6">
         <div>
           <label htmlFor="ffmi-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="80" einheit="kg" />
+          <NummerEingabe id="ffmi-gewicht" value={gewicht} onChange={setGewicht} placeholder="80" einheit="kg" />
         </div>
         <div>
           <label htmlFor="ffmi-groesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße</label>
-          <NummerEingabe value={groesse} onChange={setGroesse} placeholder="180" einheit="cm" />
+          <NummerEingabe id="ffmi-groesse" value={groesse} onChange={setGroesse} placeholder="180" einheit="cm" />
         </div>
         <div>
           <label htmlFor="ffmi-kfa" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körperfettanteil</label>
-          <NummerEingabe value={kfa} onChange={setKfa} placeholder="15" einheit="%" />
+          <NummerEingabe id="ffmi-kfa" value={kfa} onChange={setKfa} placeholder="15" einheit="%" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Aus Waage, Caliper oder Schätzung — bestimmt das Ergebnis maßgeblich.</p>
         </div>
         <div>
@@ -136,7 +136,7 @@ export default function FfmiRechner() {
           {/* Einordnungs-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Einordnung ({geschlecht === 'm' ? 'Männer' : 'Frauen'}) — Orientierung, kein Ziel</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

@@ -67,16 +67,16 @@ export default function KalorienRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter</label>
-          <NummerEingabe value={alter} onChange={setAlter} placeholder="z.B. 30" einheit="Jahre" />
+          <label htmlFor="kalorien-alter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter</label>
+          <NummerEingabe id="kalorien-alter" value={alter} onChange={setAlter} placeholder="z.B. 30" einheit="Jahre" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Größe</label>
-          <NummerEingabe value={groesse} onChange={setGroesse} placeholder="z.B. 170" einheit="cm" />
+          <label htmlFor="kalorien-groesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Größe</label>
+          <NummerEingabe id="kalorien-groesse" value={groesse} onChange={setGroesse} placeholder="z.B. 170" einheit="cm" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="z.B. 70" einheit="kg" />
+          <label htmlFor="kalorien-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht</label>
+          <NummerEingabe id="kalorien-gewicht" value={gewicht} onChange={setGewicht} placeholder="z.B. 70" einheit="kg" />
         </div>
       </div>
 

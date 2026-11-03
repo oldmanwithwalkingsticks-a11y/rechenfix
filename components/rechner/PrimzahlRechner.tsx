@@ -61,8 +61,8 @@ export default function PrimzahlRechner() {
         {tab === 'check' && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl eingeben</label>
-              <NummerEingabe value={checkZahl} onChange={setCheckZahl} placeholder="97" />
+              <label htmlFor="primzahl-zahl-eingeben" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl eingeben</label>
+              <NummerEingabe id="primzahl-zahl-eingeben" value={checkZahl} onChange={setCheckZahl} placeholder="97" />
             </div>
 
             {checkErgebnis && (
@@ -84,8 +84,8 @@ export default function PrimzahlRechner() {
         {tab === 'zerlegung' && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl eingeben</label>
-              <NummerEingabe value={zerlegungZahl} onChange={setZerlegungZahl} placeholder="360" />
+              <label htmlFor="primzahl-zahl-eingeben-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl eingeben</label>
+              <NummerEingabe id="primzahl-zahl-eingeben-2" value={zerlegungZahl} onChange={setZerlegungZahl} placeholder="360" />
             </div>
 
             {zerlegungErgebnis && (
@@ -119,12 +119,12 @@ export default function PrimzahlRechner() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Von</label>
-                <NummerEingabe value={von} onChange={setVon} placeholder="1" />
+                <label htmlFor="primzahl-von" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Von</label>
+                <NummerEingabe id="primzahl-von" value={von} onChange={setVon} placeholder="1" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bis (max. 100.000)</label>
-                <NummerEingabe value={bis} onChange={setBis} placeholder="100" />
+                <label htmlFor="primzahl-bis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bis (max. 100.000)</label>
+                <NummerEingabe id="primzahl-bis" value={bis} onChange={setBis} placeholder="100" />
               </div>
             </div>
 

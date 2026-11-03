@@ -60,10 +60,10 @@ export default function RiesterRechner() {
     <div>
       {/* Brutto */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="riester-jahresbruttoeinkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Jahresbruttoeinkommen (Vorjahr)
         </label>
-        <NummerEingabe value={brutto} onChange={setBrutto} placeholder="40000" einheit="€/Jahr" />
+        <NummerEingabe id="riester-jahresbruttoeinkommen" value={brutto} onChange={setBrutto} placeholder="40000" einheit="€/Jahr" />
         {/* W183: Modellannahme für Paare sichtbar (Mindest- und Höchstbetrag rechnet die Lib je Person) */}
         {familienstand === 'beide-partner' && (
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
@@ -130,8 +130,8 @@ export default function RiesterRechner() {
       {/* Eigenbeitrag + Grenzsteuersatz */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewünschter Eigenbeitrag</label>
-          <NummerEingabe value={eigenbeitragEingabe} onChange={setEigenbeitragEingabe} placeholder="0 = optimal" einheit="€/Jahr" />
+          <label htmlFor="riester-gewuenschter-eigenbeitrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewünschter Eigenbeitrag</label>
+          <NummerEingabe id="riester-gewuenschter-eigenbeitrag" value={eigenbeitragEingabe} onChange={setEigenbeitragEingabe} placeholder="0 = optimal" einheit="€/Jahr" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             0 lassen für automatisch optimierten Beitrag
           </p>

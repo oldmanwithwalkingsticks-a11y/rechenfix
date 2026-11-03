@@ -119,6 +119,7 @@ export default function AboRechner() {
         <div className="flex gap-2">
           <input
             type="text"
+            aria-label="Name des eigenen Abos"
             value={eigenName}
             onChange={e => setEigenName(e.target.value)}
             className="input-field flex-1"
@@ -127,6 +128,7 @@ export default function AboRechner() {
           <div className="relative w-28">
             <input
               type="text"
+              aria-label="Monatlicher Betrag des eigenen Abos in Euro"
               value={eigenBetrag}
               onChange={e => setEigenBetrag(e.target.value)}
               className="input-field pr-8"
@@ -155,6 +157,7 @@ export default function AboRechner() {
                 <div className="relative w-24">
                   <input
                     type="text"
+                    aria-label={`Monatlicher Betrag für ${a.name} in Euro`}
                     value={a.betrag}
                     onChange={e => {
                       const v = parseFloat(e.target.value.replace(',', '.'));

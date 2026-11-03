@@ -135,12 +135,12 @@ export default function NotenschluesselRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erreichte Punkte</label>
-              <NummerEingabe value={erreicht} onChange={setErreicht} placeholder="38" />
+              <label htmlFor="notenschluessel-erreichte-punkte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erreichte Punkte</label>
+              <NummerEingabe id="notenschluessel-erreichte-punkte" value={erreicht} onChange={setErreicht} placeholder="38" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maximale Punkte</label>
-              <NummerEingabe value={maximum} onChange={setMaximum} placeholder="50" />
+              <label htmlFor="notenschluessel-maximale-punkte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maximale Punkte</label>
+              <NummerEingabe id="notenschluessel-maximale-punkte" value={maximum} onChange={setMaximum} placeholder="50" />
             </div>
           </div>
 
@@ -173,12 +173,16 @@ export default function NotenschluesselRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bestehensgrenze</label>
-              <NummerEingabe value={bestehen} onChange={setBestehen} placeholder="50" einheit="%" />
+              <label htmlFor="notenschluessel-bestehensgrenze" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bestehensgrenze</label>
+              <NummerEingabe id="notenschluessel-bestehensgrenze" value={bestehen} onChange={setBestehen} placeholder="50" einheit="%" />
             </div>
             <div className="flex items-end pb-1">
               <label className="flex items-center gap-2 cursor-pointer">
                 <button
+                  type="button"
+                  role="switch"
+                  aria-checked={halbeNoten}
+                  aria-label="Halbe Noten"
                   onClick={() => setHalbeNoten(!halbeNoten)}
                   className={`w-10 h-6 rounded-full transition-all relative ${
                     halbeNoten ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
@@ -248,8 +252,8 @@ export default function NotenschluesselRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maximale Punktzahl</label>
-              <NummerEingabe value={sMaximum} onChange={setSMaximum} placeholder="100" />
+              <label htmlFor="notenschluessel-maximale-punktzahl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maximale Punktzahl</label>
+              <NummerEingabe id="notenschluessel-maximale-punktzahl" value={sMaximum} onChange={setSMaximum} placeholder="100" />
             </div>
             <div>
               <label htmlFor="notenschluessel-select-2" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Notensystem</label>
@@ -279,12 +283,16 @@ export default function NotenschluesselRechner() {
               </div>
             </div>
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bestehensgrenze</label>
-              <NummerEingabe value={sBestehen} onChange={setSBestehen} placeholder="50" einheit="%" />
+              <label htmlFor="notenschluessel-bestehensgrenze-2" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bestehensgrenze</label>
+              <NummerEingabe id="notenschluessel-bestehensgrenze-2" value={sBestehen} onChange={setSBestehen} placeholder="50" einheit="%" />
             </div>
             <div className="flex items-end pb-1">
               <label className="flex items-center gap-2 cursor-pointer">
                 <button
+                  type="button"
+                  role="switch"
+                  aria-checked={sHalbeNoten}
+                  aria-label="Halbe Noten"
                   onClick={() => setSHalbeNoten(!sHalbeNoten)}
                   className={`w-10 h-6 rounded-full transition-all relative ${
                     sHalbeNoten ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
@@ -316,7 +324,7 @@ export default function NotenschluesselRechner() {
                     Notenschlüssel — {fmtZahl(parseDeutscheZahl(sMaximum))} Punkte
                   </p>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -358,11 +366,11 @@ export default function NotenschluesselRechner() {
               <div key={n.id} className="flex items-center gap-2">
                 <span className="text-xs text-gray-600 dark:text-gray-400 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
-                  <NummerEingabe value={n.note} onChange={v => updateNote(n.id, 'note', v)} placeholder="Note" />
+                  <NummerEingabe aria-label={`Note ${idx + 1}`} value={n.note} onChange={v => updateNote(n.id, 'note', v)} placeholder="Note" />
                 </div>
                 <span className="text-xs text-gray-600 dark:text-gray-400 shrink-0">×</span>
                 <div className="w-16">
-                  <NummerEingabe value={n.gewicht} onChange={v => updateNote(n.id, 'gewicht', v)} placeholder="1" />
+                  <NummerEingabe aria-label={`Gewicht von Note ${idx + 1}`} value={n.gewicht} onChange={v => updateNote(n.id, 'gewicht', v)} placeholder="1" />
                 </div>
                 {noten.length > 1 && (
                   <button

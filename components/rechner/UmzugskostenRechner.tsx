@@ -70,7 +70,7 @@ export default function UmzugskostenRechner() {
     <div>
       {/* Wohnungsgröße */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnungsgröße</label>
+        <label htmlFor="umzugskosten-wohnungsgroesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnungsgröße</label>
         <div className="flex flex-wrap gap-2 mb-2">
           {GROESSE_SCHNELLWAHL.map(g => (
             <button
@@ -87,13 +87,13 @@ export default function UmzugskostenRechner() {
           ))}
         </div>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={wohnungsgroesse} onChange={setWohnungsgroesse} placeholder="z.B. 60" einheit="m²" />
+          <NummerEingabe id="umzugskosten-wohnungsgroesse" value={wohnungsgroesse} onChange={setWohnungsgroesse} placeholder="z.B. 60" einheit="m²" />
         </div>
       </div>
 
       {/* Entfernung */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Entfernung</label>
+        <label htmlFor="umzugskosten-entfernung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Entfernung</label>
         <div className="flex flex-wrap gap-2 mb-2">
           {ENTFERNUNG_SCHNELLWAHL.map(e => (
             <button
@@ -110,7 +110,7 @@ export default function UmzugskostenRechner() {
           ))}
         </div>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={entfernung} onChange={setEntfernung} placeholder="z.B. 50" einheit="km" />
+          <NummerEingabe id="umzugskosten-entfernung" value={entfernung} onChange={setEntfernung} placeholder="z.B. 50" einheit="km" />
         </div>
       </div>
 

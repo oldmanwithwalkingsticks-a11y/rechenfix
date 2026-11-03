@@ -82,16 +82,16 @@ export default function StromverbrauchGeraeteRechner() {
       {/* Eingaben */}
       <div className="grid gap-4 sm:grid-cols-3 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistung</label>
-          <NummerEingabe value={watt} onChange={(v) => { setWatt(v); setGeraet('custom'); }} placeholder="200" einheit="W" />
+          <label htmlFor="stromverbrauch-geraete-leistung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistung</label>
+          <NummerEingabe id="stromverbrauch-geraete-leistung" value={watt} onChange={(v) => { setWatt(v); setGeraet('custom'); }} placeholder="200" einheit="W" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nutzung</label>
-          <NummerEingabe value={stunden} onChange={setStunden} placeholder="5" einheit="h/Tag" />
+          <label htmlFor="stromverbrauch-geraete-nutzung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nutzung</label>
+          <NummerEingabe id="stromverbrauch-geraete-nutzung" value={stunden} onChange={setStunden} placeholder="5" einheit="h/Tag" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-          <NummerEingabe value={preis} onChange={setPreis} placeholder={STROM_DEFAULT} einheit="€/kWh" />
+          <label htmlFor="stromverbrauch-geraete-strompreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
+          <NummerEingabe id="stromverbrauch-geraete-strompreis" value={preis} onChange={setPreis} placeholder={STROM_DEFAULT} einheit="€/kWh" />
         </div>
       </div>
 

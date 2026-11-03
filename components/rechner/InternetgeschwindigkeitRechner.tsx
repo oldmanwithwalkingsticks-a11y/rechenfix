@@ -54,10 +54,11 @@ export default function InternetgeschwindigkeitRechner() {
       {/* Eingaben */}
       <div className="grid gap-6 sm:grid-cols-2 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="internetgeschwindigkeit-dateigroesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Dateigröße
           </label>
           <NummerEingabe
+            id="internetgeschwindigkeit-dateigroesse"
             value={groesse}
             onChange={setGroesse}
             placeholder="z.B. 5"
@@ -79,10 +80,11 @@ export default function InternetgeschwindigkeitRechner() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="internetgeschwindigkeit-bandbreite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Bandbreite (Tarif)
           </label>
           <NummerEingabe
+            id="internetgeschwindigkeit-bandbreite"
             value={bandbreite}
             onChange={setBandbreite}
             placeholder="z.B. 50"

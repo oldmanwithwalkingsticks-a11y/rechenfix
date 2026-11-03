@@ -44,12 +44,12 @@ export default function KrankengeldRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Monatliches Bruttogehalt</label>
-          <NummerEingabe value={brutto} onChange={setBrutto} einheit="€" />
+          <label htmlFor="krankengeld-monatliches-bruttogehalt" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Monatliches Bruttogehalt</label>
+          <NummerEingabe id="krankengeld-monatliches-bruttogehalt" value={brutto} onChange={setBrutto} einheit="€" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Monatliches Nettogehalt</label>
-          <NummerEingabe value={netto} onChange={setNetto} einheit="€" />
+          <label htmlFor="krankengeld-monatliches-nettogehalt" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Monatliches Nettogehalt</label>
+          <NummerEingabe id="krankengeld-monatliches-nettogehalt" value={netto} onChange={setNetto} einheit="€" />
         </div>
         <div>
           <RadioToggleGroup
@@ -120,7 +120,7 @@ export default function KrankengeldRechner() {
 
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
             <div className="px-4 pt-4 pb-1"><h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich</h2></div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Vergleich">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

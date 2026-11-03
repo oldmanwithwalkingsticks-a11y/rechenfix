@@ -82,7 +82,7 @@ export default function GehaltserhoehungRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Aktuelles Monatsbrutto
         </h2>
-        <NummerEingabe value={brutto} onChange={setBrutto} placeholder="3500" einheit="€/Monat" />
+        <NummerEingabe aria-label="Aktuelles Monatsbrutto" value={brutto} onChange={setBrutto} placeholder="3500" einheit="€/Monat" />
       </div>
 
       {/* === 2: Erhöhung === */}
@@ -103,9 +103,9 @@ export default function GehaltserhoehungRechner() {
           ))}
         </div>
         {modus === 'euro' ? (
-          <NummerEingabe value={erhoehungEuro} onChange={setErhoehungEuro} placeholder="300" einheit="€/Monat" />
+          <NummerEingabe aria-label="Gehaltserhöhung in Euro pro Monat" value={erhoehungEuro} onChange={setErhoehungEuro} placeholder="300" einheit="€/Monat" />
         ) : (
-          <NummerEingabe value={erhoehungProzent} onChange={setErhoehungProzent} placeholder="8" einheit="%" />
+          <NummerEingabe aria-label="Gehaltserhöhung in Prozent" value={erhoehungProzent} onChange={setErhoehungProzent} placeholder="8" einheit="%" />
         )}
       </div>
 
@@ -212,7 +212,7 @@ export default function GehaltserhoehungRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich: vorher / nachher</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Vergleich: vorher / nachher">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

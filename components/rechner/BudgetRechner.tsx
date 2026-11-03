@@ -114,6 +114,7 @@ export default function BudgetRechner() {
               Netto-Einkommen
             </label>
             <NummerEingabe
+              id="nettoEinkommen"
               value={nettoEinkommen}
               onChange={setNettoEinkommen}
               placeholder="2500"
@@ -125,6 +126,7 @@ export default function BudgetRechner() {
               Weitere Einnahmen
             </label>
             <NummerEingabe
+              id="weitereEinnahmen"
               value={weitereEinnahmen}
               onChange={setWeitereEinnahmen}
               placeholder="0"
@@ -143,64 +145,64 @@ export default function BudgetRechner() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-miete-nebenkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Miete + Nebenkosten
             </label>
-            <NummerEingabe value={miete} onChange={setMiete} placeholder="750" einheit="€/Mon." />
+            <NummerEingabe id="budget-miete-nebenkosten" value={miete} onChange={setMiete} placeholder="750" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-strom-gas" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Strom/Gas
             </label>
-            <NummerEingabe value={stromGas} onChange={setStromGas} placeholder="80" einheit="€/Mon." />
+            <NummerEingabe id="budget-strom-gas" value={stromGas} onChange={setStromGas} placeholder="80" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-versicherungen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Versicherungen
             </label>
-            <NummerEingabe value={versicherungen} onChange={setVersicherungen} placeholder="100" einheit="€/Mon." />
+            <NummerEingabe id="budget-versicherungen" value={versicherungen} onChange={setVersicherungen} placeholder="100" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-lebensmittel" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Lebensmittel
             </label>
-            <NummerEingabe value={lebensmittel} onChange={setLebensmittel} placeholder="350" einheit="€/Mon." />
+            <NummerEingabe id="budget-lebensmittel" value={lebensmittel} onChange={setLebensmittel} placeholder="350" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-mobilitaet" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Mobilität (Auto/ÖPNV)
             </label>
-            <NummerEingabe value={mobilitaet} onChange={setMobilitaet} placeholder="150" einheit="€/Mon." />
+            <NummerEingabe id="budget-mobilitaet" value={mobilitaet} onChange={setMobilitaet} placeholder="150" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-internet-handy" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Internet/Handy
             </label>
-            <NummerEingabe value={internetHandy} onChange={setInternetHandy} placeholder="50" einheit="€/Mon." />
+            <NummerEingabe id="budget-internet-handy" value={internetHandy} onChange={setInternetHandy} placeholder="50" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-abos-streaming" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Abos/Streaming
             </label>
-            <NummerEingabe value={abosStreaming} onChange={setAbosStreaming} placeholder="40" einheit="€/Mon." />
+            <NummerEingabe id="budget-abos-streaming" value={abosStreaming} onChange={setAbosStreaming} placeholder="40" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-freizeit-ausgehen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Freizeit/Ausgehen
             </label>
-            <NummerEingabe value={freizeitAusgehen} onChange={setFreizeitAusgehen} placeholder="150" einheit="€/Mon." />
+            <NummerEingabe id="budget-freizeit-ausgehen" value={freizeitAusgehen} onChange={setFreizeitAusgehen} placeholder="150" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-kleidung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Kleidung
             </label>
-            <NummerEingabe value={kleidung} onChange={setKleidung} placeholder="75" einheit="€/Mon." />
+            <NummerEingabe id="budget-kleidung" value={kleidung} onChange={setKleidung} placeholder="75" einheit="€/Mon." />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="budget-sonstiges" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Sonstiges
             </label>
-            <NummerEingabe value={sonstiges} onChange={setSonstiges} placeholder="100" einheit="€/Mon." />
+            <NummerEingabe id="budget-sonstiges" value={sonstiges} onChange={setSonstiges} placeholder="100" einheit="€/Mon." />
           </div>
         </div>
       </section>

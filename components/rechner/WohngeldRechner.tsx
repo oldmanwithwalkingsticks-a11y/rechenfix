@@ -62,8 +62,8 @@ export default function WohngeldRechner() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliches Bruttoeinkommen</label>
-            <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="2.000" einheit="€" />
+            <label htmlFor="wohngeld-monatliches-bruttoeinkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliches Bruttoeinkommen</label>
+            <NummerEingabe id="wohngeld-monatliches-bruttoeinkommen" value={einkommen} onChange={setEinkommen} placeholder="2.000" einheit="€" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Gesamteinkommen aller Haushaltsmitglieder</p>
           </div>
         </div>
@@ -78,8 +78,8 @@ export default function WohngeldRechner() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Miete (kalt + kalte NK)</label>
-            <NummerEingabe value={miete} onChange={setMiete} placeholder="600" einheit="€" />
+            <label htmlFor="wohngeld-monatliche-miete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Miete (kalt + kalte NK)</label>
+            <NummerEingabe id="wohngeld-monatliche-miete" value={miete} onChange={setMiete} placeholder="600" einheit="€" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Kaltmiete + kalte Nebenkosten, oder Belastung bei Eigentum</p>
           </div>
           <div>
@@ -207,7 +207,7 @@ export default function WohngeldRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnungsdetails</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnungsdetails">
               <table className="w-full text-sm">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   <tr>

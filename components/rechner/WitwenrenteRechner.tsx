@@ -97,12 +97,12 @@ export default function WitwenrenteRechner() {
       {/* Renten-Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rente des Verstorbenen</label>
-          <NummerEingabe value={renteVerstorbener} onChange={setRenteVerstorbener} placeholder="1500" einheit="€/Monat" />
+          <label htmlFor="witwenrente-rente-des-verstorbenen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rente des Verstorbenen</label>
+          <NummerEingabe id="witwenrente-rente-des-verstorbenen" value={renteVerstorbener} onChange={setRenteVerstorbener} placeholder="1500" einheit="€/Monat" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Nettoeinkommen</label>
-          <NummerEingabe value={eigenesNetto} onChange={setEigenesNetto} placeholder="1800" einheit="€/Monat" />
+          <label htmlFor="witwenrente-eigenes-nettoeinkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Nettoeinkommen</label>
+          <NummerEingabe id="witwenrente-eigenes-nettoeinkommen" value={eigenesNetto} onChange={setEigenesNetto} placeholder="1800" einheit="€/Monat" />
         </div>
       </div>
 
@@ -130,6 +130,10 @@ export default function WitwenrenteRechner() {
             <p className="text-xs text-gray-600 dark:text-gray-400">Große Rente: 55 % statt 60 %. Kleine Rente auf 24 Monate befristet.</p>
           </div>
           <button
+            type="button"
+            role="switch"
+            aria-checked={neuesRecht}
+            aria-label="Neues Recht (Heirat nach 2001)"
             onClick={() => setNeuesRecht(!neuesRecht)}
             className={`w-12 h-7 rounded-full relative transition-colors shrink-0 ml-3 ${neuesRecht ? 'bg-primary-500' : 'bg-gray-300 dark:bg-gray-600'}`}
           >

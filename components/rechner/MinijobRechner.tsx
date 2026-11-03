@@ -78,7 +78,7 @@ export default function MinijobRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Monatlicher Verdienst
         </h2>
-        <NummerEingabe value={verdienst} onChange={setVerdienst} placeholder="538" einheit="€" />
+        <NummerEingabe aria-label="Monatlicher Verdienst" value={verdienst} onChange={setVerdienst} placeholder="538" einheit="€" />
         <div className="flex flex-wrap gap-2 mt-2">
           {SCHNELLWAHL.map(v => (
             <button
@@ -143,7 +143,7 @@ export default function MinijobRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Stunden pro Woche <span className="text-xs font-normal text-gray-600 dark:text-gray-400">(optional)</span>
         </h2>
-        <NummerEingabe value={stunden} onChange={setStunden} placeholder="z.B. 10" einheit="Std." />
+        <NummerEingabe aria-label="Stunden pro Woche (optional)" value={stunden} onChange={setStunden} placeholder="z.B. 10" einheit="Std." />
       </div>
 
       {/* === ERGEBNIS === */}
@@ -176,7 +176,7 @@ export default function MinijobRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Aufschlüsselung">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

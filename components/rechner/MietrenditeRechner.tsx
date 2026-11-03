@@ -77,17 +77,17 @@ export default function MietrenditeRechner() {
     <div>
       {/* Kaufpreis */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufpreis der Immobilie</label>
+        <label htmlFor="mietrendite-kaufpreis-der-immobilie" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufpreis der Immobilie</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={kaufpreis} onChange={setKaufpreis} placeholder="z.B. 250.000" einheit="€" />
+          <NummerEingabe id="mietrendite-kaufpreis-der-immobilie" value={kaufpreis} onChange={setKaufpreis} placeholder="z.B. 250.000" einheit="€" />
         </div>
       </div>
 
       {/* Kaufnebenkosten */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufnebenkosten</label>
+        <label htmlFor="mietrendite-kaufnebenkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufnebenkosten</label>
         <div className="w-full sm:w-1/3">
-          <NummerEingabe value={kaufnebenkostenProzent} onChange={setKaufnebenkostenProzent} placeholder="z.B. 10" einheit="%" />
+          <NummerEingabe id="mietrendite-kaufnebenkosten" value={kaufnebenkostenProzent} onChange={setKaufnebenkostenProzent} placeholder="z.B. 10" einheit="%" />
         </div>
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Typisch: 8–15% je nach Bundesland (Grunderwerbsteuer + Notar + Makler)</p>
         <CrossLink href="/wohnen/grunderwerbsteuer-rechner" emoji="📋" text="Grunderwerbsteuer genau berechnen" />
@@ -95,26 +95,26 @@ export default function MietrenditeRechner() {
 
       {/* Monatliche Kaltmiete */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Kaltmiete</label>
+        <label htmlFor="mietrendite-monatliche-kaltmiete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Kaltmiete</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={monatlicheKaltmiete} onChange={setMonatlicheKaltmiete} placeholder="z.B. 800" einheit="€" />
+          <NummerEingabe id="mietrendite-monatliche-kaltmiete" value={monatlicheKaltmiete} onChange={setMonatlicheKaltmiete} placeholder="z.B. 800" einheit="€" />
         </div>
       </div>
 
       {/* Nicht umlagefähige NK */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nicht umlagefähige Nebenkosten</label>
+        <label htmlFor="mietrendite-nicht-umlagefaehige-nebenkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nicht umlagefähige Nebenkosten</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={nichtUmlagefaehigeNK} onChange={setNichtUmlagefaehigeNK} placeholder="z.B. 150" einheit="€/Monat" />
+          <NummerEingabe id="mietrendite-nicht-umlagefaehige-nebenkosten" value={nichtUmlagefaehigeNK} onChange={setNichtUmlagefaehigeNK} placeholder="z.B. 150" einheit="€/Monat" />
         </div>
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Verwaltung, Instandhaltungsrücklage, anteilige Reparaturen</p>
       </div>
 
       {/* Instandhaltung */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jährliche Instandhaltungsrücklage</label>
+        <label htmlFor="mietrendite-jaehrliche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jährliche Instandhaltungsrücklage</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={instandhaltung} onChange={setInstandhaltung} placeholder="z.B. 1500" einheit="€/Jahr" />
+          <NummerEingabe id="mietrendite-jaehrliche" value={instandhaltung} onChange={setInstandhaltung} placeholder="z.B. 1500" einheit="€/Jahr" />
         </div>
       </div>
 
@@ -150,19 +150,19 @@ export default function MietrenditeRechner() {
         {finanzierung === 'kredit' && (
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenkapital</label>
+              <label htmlFor="mietrendite-eigenkapital" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenkapital</label>
               <div className="w-full sm:w-1/2">
-                <NummerEingabe value={eigenkapital} onChange={setEigenkapital} placeholder="z.B. 50.000" einheit="€" />
+                <NummerEingabe id="mietrendite-eigenkapital" value={eigenkapital} onChange={setEigenkapital} placeholder="z.B. 50.000" einheit="€" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zinssatz</label>
-                <NummerEingabe value={zinssatz} onChange={setZinssatz} placeholder="z.B. 3,5" einheit="%" />
+                <label htmlFor="mietrendite-zinssatz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zinssatz</label>
+                <NummerEingabe id="mietrendite-zinssatz" value={zinssatz} onChange={setZinssatz} placeholder="z.B. 3,5" einheit="%" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tilgung</label>
-                <NummerEingabe value={tilgungStr} onChange={setTilgungStr} placeholder="z.B. 2" einheit="%" />
+                <label htmlFor="mietrendite-tilgung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tilgung</label>
+                <NummerEingabe id="mietrendite-tilgung" value={tilgungStr} onChange={setTilgungStr} placeholder="z.B. 2" einheit="%" />
               </div>
             </div>
           </div>

@@ -83,17 +83,17 @@ export default function SchritteKilometerRechner() {
         {modus === 's2k' ? (
           <div>
             <label htmlFor="sk-schritte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schritte</label>
-            <NummerEingabe value={schritte} onChange={setSchritte} placeholder="10000" einheit="Schritte" />
+            <NummerEingabe id="sk-schritte" value={schritte} onChange={setSchritte} placeholder="10000" einheit="Schritte" />
           </div>
         ) : (
           <div>
             <label htmlFor="sk-km" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Distanz</label>
-            <NummerEingabe value={km} onChange={setKm} placeholder="5" einheit="km" />
+            <NummerEingabe id="sk-km" value={km} onChange={setKm} placeholder="5" einheit="km" />
           </div>
         )}
         <div>
           <label htmlFor="sk-groesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße</label>
-          <NummerEingabe value={groesse} onChange={setGroesse} placeholder="175" einheit="cm" />
+          <NummerEingabe id="sk-groesse" value={groesse} onChange={setGroesse} placeholder="175" einheit="cm" />
         </div>
         <div>
           <label htmlFor="sk-geschlecht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschlecht (Gehschritt)</label>
@@ -112,12 +112,12 @@ export default function SchritteKilometerRechner() {
         </div>
         <div>
           <label htmlFor="sk-eigene" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigene Schrittlänge (optional)</label>
-          <NummerEingabe value={eigeneSL} onChange={setEigeneSL} placeholder="z. B. 74" einheit="cm" />
+          <NummerEingabe id="sk-eigene" value={eigeneSL} onChange={setEigeneSL} placeholder="z. B. 74" einheit="cm" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Überschreibt die Schätzung aus der Körpergröße.</p>
         </div>
         <div>
           <label htmlFor="sk-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht (für Kalorien)</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
+          <NummerEingabe id="sk-gewicht" value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
         </div>
       </div>
 
@@ -162,7 +162,7 @@ export default function SchritteKilometerRechner() {
           {/* Schritte-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Schritte in Kilometer bei deiner Schrittlänge</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Schritte in Kilometer bei deiner Schrittlänge">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

@@ -100,8 +100,9 @@ export default function KuendigungsfristRechner() {
       {/* Beschäftigt seit + Kündigungsdatum */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Beschäftigt seit</label>
+          <label htmlFor="kuendigungsfrist-beschaeftigt-seit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Beschäftigt seit</label>
           <input
+            id="kuendigungsfrist-beschaeftigt-seit"
             type="date"
             value={beschaeftigtSeit}
             onChange={e => setBeschaeftigtSeit(e.target.value)}
@@ -114,8 +115,9 @@ export default function KuendigungsfristRechner() {
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kündigungsdatum (Zugang)</label>
+          <label htmlFor="kuendigungsfrist-kuendigungsdatum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kündigungsdatum (Zugang)</label>
           <input
+            id="kuendigungsfrist-kuendigungsdatum"
             type="date"
             value={kuendigungsDatum}
             onChange={e => setKuendigungsDatum(e.target.value)}

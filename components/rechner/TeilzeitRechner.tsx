@@ -72,16 +72,16 @@ export default function TeilzeitRechner() {
       {/* Gehalt und Stunden */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vollzeit-Bruttogehalt</label>
-          <NummerEingabe value={vollzeitBrutto} onChange={setVollzeitBrutto} placeholder="z.B. 3500" einheit="€/Mon." />
+          <label htmlFor="teilzeit-vollzeit-bruttogehalt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vollzeit-Bruttogehalt</label>
+          <NummerEingabe id="teilzeit-vollzeit-bruttogehalt" value={vollzeitBrutto} onChange={setVollzeitBrutto} placeholder="z.B. 3500" einheit="€/Mon." />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vollzeit-Wochenstunden</label>
-          <NummerEingabe value={vollzeitStunden} onChange={setVollzeitStunden} placeholder="z.B. 40" einheit="Std." />
+          <label htmlFor="teilzeit-vollzeit-wochenstunden" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vollzeit-Wochenstunden</label>
+          <NummerEingabe id="teilzeit-vollzeit-wochenstunden" value={vollzeitStunden} onChange={setVollzeitStunden} placeholder="z.B. 40" einheit="Std." />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Teilzeit-Wochenstunden</label>
-          <NummerEingabe value={teilzeitStunden} onChange={setTeilzeitStunden} placeholder="z.B. 30" einheit="Std." />
+          <label htmlFor="teilzeit-teilzeit-wochenstunden" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Teilzeit-Wochenstunden</label>
+          <NummerEingabe id="teilzeit-teilzeit-wochenstunden" value={teilzeitStunden} onChange={setTeilzeitStunden} placeholder="z.B. 30" einheit="Std." />
         </div>
       </div>
 
@@ -153,8 +153,8 @@ export default function TeilzeitRechner() {
       {/* Urlaub */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Urlaubstage (Vollzeit)</label>
-          <NummerEingabe value={urlaubstage} onChange={setUrlaubstage} placeholder="z.B. 30" einheit="Tage" />
+          <label htmlFor="teilzeit-urlaubstage" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Urlaubstage (Vollzeit)</label>
+          <NummerEingabe id="teilzeit-urlaubstage" value={urlaubstage} onChange={setUrlaubstage} placeholder="z.B. 30" einheit="Tage" />
         </div>
         <div>
           <label htmlFor="teilzeit-select-vz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Arbeitstage/Woche (Vollzeit)</label>
@@ -195,7 +195,7 @@ export default function TeilzeitRechner() {
           </div>
 
           {/* Vergleichstabelle */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6 overflow-x-auto">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Vollzeit vs. Teilzeit</h2>
             <table className="w-full text-sm">
               <thead>

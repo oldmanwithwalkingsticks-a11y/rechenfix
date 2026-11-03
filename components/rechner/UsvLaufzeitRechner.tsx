@@ -81,7 +81,7 @@ export default function UsvLaufzeitRechner() {
         {kapModus === 'wh' ? (
           <div>
             <label htmlFor="usv-wh" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kapazität</label>
-            <NummerEingabe value={wh} onChange={setWh} placeholder="216" einheit="Wh" />
+            <NummerEingabe id="usv-wh" value={wh} onChange={setWh} placeholder="216" einheit="Wh" />
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
@@ -95,7 +95,7 @@ export default function UsvLaufzeitRechner() {
             </div>
             <div>
               <label htmlFor="usv-ah" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kapazität</label>
-              <NummerEingabe value={ah} onChange={setAh} placeholder="9" einheit="Ah" />
+              <NummerEingabe id="usv-ah" value={ah} onChange={setAh} placeholder="9" einheit="Ah" />
             </div>
           </div>
         )}
@@ -113,13 +113,13 @@ export default function UsvLaufzeitRechner() {
         {lastModus === 'w' ? (
           <div>
             <label htmlFor="usv-watt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last</label>
-            <NummerEingabe value={watt} onChange={setWatt} placeholder="200" einheit="W" />
+            <NummerEingabe id="usv-watt" value={watt} onChange={setWatt} placeholder="200" einheit="W" />
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label htmlFor="usv-va" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Scheinleistung</label>
-              <NummerEingabe value={va} onChange={setVa} placeholder="1500" einheit="VA" />
+              <NummerEingabe id="usv-va" value={va} onChange={setVa} placeholder="1500" einheit="VA" />
             </div>
             <div>
               <label htmlFor="usv-pf" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistungsfaktor</label>
@@ -189,7 +189,7 @@ export default function UsvLaufzeitRechner() {
           {/* Last-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Laufzeit dieser USV bei verschiedenen Lasten</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Laufzeit dieser USV bei verschiedenen Lasten">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

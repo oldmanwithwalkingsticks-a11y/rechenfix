@@ -58,19 +58,19 @@ export default function EtfSparplanRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Sparrate</label>
-          <NummerEingabe value={sparrate} onChange={setSparrate} placeholder="z.B. 200" einheit="€" />
+          <label htmlFor="etf-sparplan-monatliche-sparrate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Sparrate</label>
+          <NummerEingabe id="etf-sparplan-monatliche-sparrate" value={sparrate} onChange={setSparrate} placeholder="z.B. 200" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einmalanlage zu Beginn</label>
-          <NummerEingabe value={einmalanlage} onChange={setEinmalanlage} placeholder="z.B. 5000" einheit="€" />
+          <label htmlFor="etf-sparplan-einmalanlage-zu-beginn" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einmalanlage zu Beginn</label>
+          <NummerEingabe id="etf-sparplan-einmalanlage-zu-beginn" value={einmalanlage} onChange={setEinmalanlage} placeholder="z.B. 5000" einheit="€" />
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anlagedauer</label>
-          <NummerEingabe value={anlagedauer} onChange={setAnlagedauer} placeholder="z.B. 20" einheit="Jahre" />
+          <label htmlFor="etf-sparplan-anlagedauer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anlagedauer</label>
+          <NummerEingabe id="etf-sparplan-anlagedauer" value={anlagedauer} onChange={setAnlagedauer} placeholder="z.B. 20" einheit="Jahre" />
           <input
             type="range"
             min={1}
@@ -85,8 +85,8 @@ export default function EtfSparplanRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erwartete jährl. Rendite</label>
-          <NummerEingabe value={rendite} onChange={setRendite} placeholder="z.B. 7" einheit="%" />
+          <label htmlFor="etf-sparplan-erwartete-jaehrl-rendite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erwartete jährl. Rendite</label>
+          <NummerEingabe id="etf-sparplan-erwartete-jaehrl-rendite" value={rendite} onChange={setRendite} placeholder="z.B. 7" einheit="%" />
           <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Historische Durchschnittsrendite MSCI World: ca. 7–8 % p.a.
           </p>
@@ -111,8 +111,8 @@ export default function EtfSparplanRechner() {
 
       {dynamik && (
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jährliche Erhöhung</label>
-          <NummerEingabe value={dynamikProzent} onChange={setDynamikProzent} placeholder="z.B. 2" einheit="%" />
+          <label htmlFor="etf-sparplan-jaehrliche-erhoehung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jährliche Erhöhung</label>
+          <NummerEingabe id="etf-sparplan-jaehrliche-erhoehung" value={dynamikProzent} onChange={setDynamikProzent} placeholder="z.B. 2" einheit="%" />
         </div>
       )}
 
@@ -269,7 +269,7 @@ export default function EtfSparplanRechner() {
                 <span className={`transition-transform ${tabelleOffen ? 'rotate-180' : ''}`}>▼</span>
               </button>
               {tabelleOffen && (
-                <div className="px-5 pb-5 overflow-x-auto">
+                <div className="px-5 pb-5 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-600">

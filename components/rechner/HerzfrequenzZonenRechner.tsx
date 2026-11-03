@@ -57,7 +57,7 @@ export default function HerzfrequenzZonenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Alter
         </h2>
-        <NummerEingabe value={alter} onChange={setAlter} placeholder="30" einheit="Jahre" />
+        <NummerEingabe aria-label="Alter" value={alter} onChange={setAlter} placeholder="30" einheit="Jahre" />
       </div>
 
       {/* === 2: Ruhepuls === */}
@@ -66,7 +66,7 @@ export default function HerzfrequenzZonenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Ruhepuls (optional — für Karvonen-Formel)
         </h2>
-        <NummerEingabe value={ruhepuls} onChange={setRuhepuls} placeholder="65" einheit="bpm" />
+        <NummerEingabe aria-label="Ruhepuls (optional — für Karvonen-Formel)" value={ruhepuls} onChange={setRuhepuls} placeholder="65" einheit="bpm" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Morgens im Bett messen, vor dem Aufstehen. Trainierte: 50–60 bpm. Untrainierte: 70–80 bpm.
         </p>
@@ -78,7 +78,7 @@ export default function HerzfrequenzZonenRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Maximale Herzfrequenz (optional)
         </h2>
-        <NummerEingabe value={hfmaxEigen} onChange={setHfmaxEigen} placeholder="z. B. 185" einheit="bpm" />
+        <NummerEingabe aria-label="Maximale Herzfrequenz (optional)" value={hfmaxEigen} onChange={setHfmaxEigen} placeholder="z. B. 185" einheit="bpm" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Falls Sie Ihre HFmax aus einem Belastungstest kennen — sonst wird sie nach Formel berechnet.
         </p>
@@ -173,7 +173,7 @@ export default function HerzfrequenzZonenRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Formeln im Vergleich</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Formeln im Vergleich">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

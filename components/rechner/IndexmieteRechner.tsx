@@ -53,7 +53,7 @@ export default function IndexmieteRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Aktuelle Kaltmiete
         </h2>
-        <NummerEingabe value={kaltmiete} onChange={setKaltmiete} placeholder="800" einheit="€/Monat" />
+        <NummerEingabe aria-label="Aktuelle Kaltmiete" value={kaltmiete} onChange={setKaltmiete} placeholder="800" einheit="€/Monat" />
       </div>
 
       {/* === 2: VPI alt === */}
@@ -62,7 +62,7 @@ export default function IndexmieteRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           VPI bei Vertragsabschluss / letzter Anpassung
         </h2>
-        <NummerEingabe value={vpiAlt} onChange={setVpiAlt} placeholder="117,4" einheit="Punkte" />
+        <NummerEingabe aria-label="VPI bei Vertragsabschluss / letzter Anpassung" value={vpiAlt} onChange={setVpiAlt} placeholder="117,4" einheit="Punkte" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Steht in Ihrem Mietvertrag oder der letzten Anpassungsmitteilung. VPI-Werte finden Sie beim Statistischen Bundesamt (destatis.de).
         </p>
@@ -74,7 +74,7 @@ export default function IndexmieteRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Aktueller VPI
         </h2>
-        <NummerEingabe value={vpiNeu} onChange={setVpiNeu} placeholder="127,8" einheit="Punkte" />
+        <NummerEingabe aria-label="Aktueller VPI" value={vpiNeu} onChange={setVpiNeu} placeholder="127,8" einheit="Punkte" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Aktuellen Wert prüfen auf destatis.de → Verbraucherpreisindex (Basisjahr 2020 = 100).
         </p>
@@ -87,6 +87,7 @@ export default function IndexmieteRechner() {
           Datum der letzten Anpassung
         </h2>
         <input
+          aria-label="Datum der letzten Anpassung"
           type="date"
           value={datumLetzteAnpassung}
           onChange={e => setDatumLetzteAnpassung(e.target.value)}
@@ -109,7 +110,7 @@ export default function IndexmieteRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               <tr>

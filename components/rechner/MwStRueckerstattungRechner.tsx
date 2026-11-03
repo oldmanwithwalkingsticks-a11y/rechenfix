@@ -33,8 +33,8 @@ export default function MwstRueckerstattungRechner() {
       <div className="space-y-4 mb-6">
         {/* Kaufbetrag */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufbetrag (brutto)</label>
-          <NummerEingabe value={kaufbetrag} onChange={setKaufbetrag} einheit="€" placeholder="500" />
+          <label htmlFor="mw-st-rueckerstattung-kaufbetrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufbetrag (brutto)</label>
+          <NummerEingabe id="mw-st-rueckerstattung-kaufbetrag" value={kaufbetrag} onChange={setKaufbetrag} einheit="€" placeholder="500" />
         </div>
 
         {/* MwSt-Satz */}

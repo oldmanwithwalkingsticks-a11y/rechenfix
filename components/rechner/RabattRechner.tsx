@@ -101,12 +101,12 @@ export default function RabattRechner() {
         {modus === 'rabatt' && (
           <>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Originalpreis (€)</label>
-              <NummerEingabe value={wert1} onChange={setWert1} placeholder="z. B. 149,99" einheit="€" />
+              <label htmlFor="rabatt-originalpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Originalpreis (€)</label>
+              <NummerEingabe id="rabatt-originalpreis" value={wert1} onChange={setWert1} placeholder="z. B. 149,99" einheit="€" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rabatt (%)</label>
-              <NummerEingabe value={wert2} onChange={setWert2} placeholder="z. B. 20" einheit="%" />
+              <label htmlFor="rabatt-rabatt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rabatt (%)</label>
+              <NummerEingabe id="rabatt-rabatt" value={wert2} onChange={setWert2} placeholder="z. B. 20" einheit="%" />
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {QUICK_RABATTE.map(v => (
                   <button
@@ -129,12 +129,12 @@ export default function RabattRechner() {
         {modus === 'endpreis' && (
           <>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Originalpreis (€)</label>
-              <NummerEingabe value={wert1} onChange={setWert1} placeholder="z. B. 199,00" einheit="€" />
+              <label htmlFor="rabatt-originalpreis-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Originalpreis (€)</label>
+              <NummerEingabe id="rabatt-originalpreis-2" value={wert1} onChange={setWert1} placeholder="z. B. 199,00" einheit="€" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reduzierter Preis (€)</label>
-              <NummerEingabe value={wert2} onChange={setWert2} placeholder="z. B. 149,00" einheit="€" />
+              <label htmlFor="rabatt-reduzierter-preis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reduzierter Preis (€)</label>
+              <NummerEingabe id="rabatt-reduzierter-preis" value={wert2} onChange={setWert2} placeholder="z. B. 149,00" einheit="€" />
             </div>
           </>
         )}
@@ -142,16 +142,16 @@ export default function RabattRechner() {
         {modus === 'doppelrabatt' && (
           <>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Originalpreis (€)</label>
-              <NummerEingabe value={wert1} onChange={setWert1} placeholder="z. B. 200,00" einheit="€" />
+              <label htmlFor="rabatt-originalpreis-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Originalpreis (€)</label>
+              <NummerEingabe id="rabatt-originalpreis-3" value={wert1} onChange={setWert1} placeholder="z. B. 200,00" einheit="€" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erster Rabatt (%)</label>
-              <NummerEingabe value={wert2} onChange={setWert2} placeholder="z. B. 20" einheit="%" />
+              <label htmlFor="rabatt-erster-rabatt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erster Rabatt (%)</label>
+              <NummerEingabe id="rabatt-erster-rabatt" value={wert2} onChange={setWert2} placeholder="z. B. 20" einheit="%" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zweiter Rabatt (%)</label>
-              <NummerEingabe value={wert3} onChange={setWert3} placeholder="z. B. 10" einheit="%" />
+              <label htmlFor="rabatt-zweiter-rabatt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zweiter Rabatt (%)</label>
+              <NummerEingabe id="rabatt-zweiter-rabatt" value={wert3} onChange={setWert3} placeholder="z. B. 10" einheit="%" />
             </div>
           </>
         )}

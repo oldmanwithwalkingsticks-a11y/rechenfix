@@ -64,8 +64,9 @@ export default function KreditRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kreditsumme</label>
+          <label htmlFor="kredit-kreditsumme" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kreditsumme</label>
           <NummerEingabe
+            id="kredit-kreditsumme"
             value={kreditsumme}
             onChange={setKreditsumme}
             placeholder="z.B. 10000"
@@ -73,8 +74,9 @@ export default function KreditRechner() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sollzinssatz (p.a.)</label>
+          <label htmlFor="kredit-sollzinssatz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sollzinssatz (p.a.)</label>
           <NummerEingabe
+            id="kredit-sollzinssatz"
             value={sollzins}
             onChange={setSollzins}
             placeholder="z.B. 5,9"
@@ -94,8 +96,9 @@ export default function KreditRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Sondertilgung (optional)</label>
+          <label htmlFor="kredit-monatliche-sondertilgung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Sondertilgung (optional)</label>
           <NummerEingabe
+            id="kredit-monatliche-sondertilgung"
             value={sondertilgung}
             onChange={setSondertilgung}
             placeholder="z.B. 50"
@@ -223,7 +226,7 @@ export default function KreditRechner() {
                       </button>
                     </div>
                   )}
-                  <div className="overflow-x-auto mt-3">
+                  <div className="overflow-x-auto mt-3" tabIndex={0} role="region" aria-label="Tabelle">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-gray-200 dark:border-gray-600 text-left">

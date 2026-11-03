@@ -33,8 +33,8 @@ export default function GrunderwerbsteuerRechner() {
   return (
     <div>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufpreis der Immobilie</label>
-        <NummerEingabe value={kaufpreis} onChange={setKaufpreis} placeholder="300000" einheit="€" />
+        <label htmlFor="grunderwerbsteuer-kaufpreis-der-immobilie" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufpreis der Immobilie</label>
+        <NummerEingabe id="grunderwerbsteuer-kaufpreis-der-immobilie" value={kaufpreis} onChange={setKaufpreis} placeholder="300000" einheit="€" />
       </div>
 
       <div className="mb-4">
@@ -52,16 +52,16 @@ export default function GrunderwerbsteuerRechner() {
 
       <div className="grid grid-cols-3 gap-3 mb-6">
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Makler inkl. MwSt</label>
-          <NummerEingabe value={makler} onChange={setMakler} placeholder="3,57" einheit="%" />
+          <label htmlFor="grunderwerbsteuer-makler-inkl-mwst" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Makler inkl. MwSt</label>
+          <NummerEingabe id="grunderwerbsteuer-makler-inkl-mwst" value={makler} onChange={setMakler} placeholder="3,57" einheit="%" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Notarkosten</label>
-          <NummerEingabe value={notar} onChange={setNotar} placeholder="1,5" einheit="%" />
+          <label htmlFor="grunderwerbsteuer-notarkosten" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Notarkosten</label>
+          <NummerEingabe id="grunderwerbsteuer-notarkosten" value={notar} onChange={setNotar} placeholder="1,5" einheit="%" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundbuch</label>
-          <NummerEingabe value={grundbuch} onChange={setGrundbuch} placeholder="0,5" einheit="%" />
+          <label htmlFor="grunderwerbsteuer-grundbuch" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundbuch</label>
+          <NummerEingabe id="grunderwerbsteuer-grundbuch" value={grundbuch} onChange={setGrundbuch} placeholder="0,5" einheit="%" />
         </div>
       </div>
 
@@ -145,7 +145,7 @@ export default function GrunderwerbsteuerRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Grunderwerbsteuersätze nach Bundesland</p>
             </div>
-            <div className="overflow-x-auto max-h-64 overflow-y-auto">
+            <div className="overflow-x-auto max-h-64 overflow-y-auto" tabIndex={0} role="region" aria-label="Grunderwerbsteuersätze nach Bundesland">
               <table className="w-full text-sm">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   {BUNDESLAENDER.map(bl => (

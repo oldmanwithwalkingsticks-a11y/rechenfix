@@ -65,8 +65,9 @@ export default function SswRechner() {
         {methode === 'periode' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erster Tag der letzten Periode</label>
+              <label htmlFor="ssw-erster-tag-der-letzten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Erster Tag der letzten Periode</label>
               <input
+                id="ssw-erster-tag-der-letzten"
                 type="date"
                 value={periodeDatum}
                 onChange={e => setPeriodeDatum(e.target.value)}
@@ -88,8 +89,9 @@ export default function SswRechner() {
           </div>
         ) : (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Errechneter Geburtstermin</label>
+            <label htmlFor="ssw-errechneter-geburtstermin" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Errechneter Geburtstermin</label>
             <input
+              id="ssw-errechneter-geburtstermin"
               type="date"
               value={terminDatum}
               onChange={e => setTerminDatum(e.target.value)}
@@ -184,7 +186,7 @@ export default function SswRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">📅 Wichtige Termine</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="📅 Wichtige Termine">
               <table className="w-full text-sm">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   <tr>

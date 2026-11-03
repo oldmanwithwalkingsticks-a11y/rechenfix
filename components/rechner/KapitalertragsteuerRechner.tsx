@@ -131,8 +131,8 @@ export default function KapitalertragsteuerRechner() {
 
       {/* Ertrag */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe der Erträge pro Jahr</label>
-        <NummerEingabe value={ertrag} onChange={setErtrag} placeholder="2000" einheit="€/Jahr" />
+        <label htmlFor="kapitalertragsteuer-hoehe-der-ertraege-pro" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe der Erträge pro Jahr</label>
+        <NummerEingabe id="kapitalertragsteuer-hoehe-der-ertraege-pro" value={ertrag} onChange={setErtrag} placeholder="2000" einheit="€/Jahr" />
       </div>
 
       {/* Familienstand */}
@@ -173,8 +173,8 @@ export default function KapitalertragsteuerRechner() {
         </div>
         {pauschStatus === 'teilweise' && (
           <div className="mt-3">
-            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Restlicher Freibetrag</label>
-            <NummerEingabe value={restFreibetrag} onChange={setRestFreibetrag} placeholder="500" einheit="€" />
+            <label htmlFor="kapitalertragsteuer-restlicher-freibetrag" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Restlicher Freibetrag</label>
+            <NummerEingabe id="kapitalertragsteuer-restlicher-freibetrag" value={restFreibetrag} onChange={setRestFreibetrag} placeholder="500" einheit="€" />
           </div>
         )}
       </div>
@@ -224,19 +224,19 @@ export default function KapitalertragsteuerRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verlustverrechnung (optional)</label>
         {!verlusteAufgeteilt ? (
           <>
-            <NummerEingabe value={verlusteAllgemein} onChange={setVerlusteAllgemein} placeholder="0" einheit="€" />
+            <NummerEingabe aria-label="Verlustverrechnung" value={verlusteAllgemein} onChange={setVerlusteAllgemein} placeholder="0" einheit="€" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Realisierte Verluste aus dem gleichen Verlusttopf, die mit den Erträgen verrechnet werden können.</p>
           </>
         ) : (
           <div className="space-y-3">
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verluste Aktien-Topf</label>
-              <NummerEingabe value={verlusteAktien} onChange={setVerlusteAktien} placeholder="0" einheit="€" />
+              <label htmlFor="kapitalertragsteuer-verluste-aktien-topf" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verluste Aktien-Topf</label>
+              <NummerEingabe id="kapitalertragsteuer-verluste-aktien-topf" value={verlusteAktien} onChange={setVerlusteAktien} placeholder="0" einheit="€" />
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Nur aus direkt gehaltenen Aktien — nur mit Aktien-Kursgewinnen verrechenbar.</p>
             </div>
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verluste allgemeiner Topf</label>
-              <NummerEingabe value={verlusteAllgemein} onChange={setVerlusteAllgemein} placeholder="0" einheit="€" />
+              <label htmlFor="kapitalertragsteuer-verluste-allgemeiner-topf" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verluste allgemeiner Topf</label>
+              <NummerEingabe id="kapitalertragsteuer-verluste-allgemeiner-topf" value={verlusteAllgemein} onChange={setVerlusteAllgemein} placeholder="0" einheit="€" />
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">ETF, Anleihen, Zertifikate u. a. — mit allen Erträgen außer direkten Aktien-Gewinnen verrechenbar.</p>
             </div>
             <div className="text-xs text-blue-800 dark:text-blue-300 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-2">

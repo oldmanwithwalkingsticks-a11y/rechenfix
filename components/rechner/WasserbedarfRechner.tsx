@@ -52,8 +52,8 @@ export default function WasserbedarfRechner() {
       {/* Gewicht & Aktivität */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="z.B. 75" einheit="kg" />
+          <label htmlFor="wasserbedarf-koerpergewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
+          <NummerEingabe id="wasserbedarf-koerpergewicht" value={gewicht} onChange={setGewicht} placeholder="z.B. 75" einheit="kg" />
         </div>
         <div>
           <label htmlFor="wasserbedarf-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktivitätslevel</label>
@@ -72,8 +72,8 @@ export default function WasserbedarfRechner() {
       {/* Sport & Temperatur */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sportdauer heute</label>
-          <NummerEingabe value={sportMinuten} onChange={setSportMinuten} placeholder="z.B. 60" einheit="Min." />
+          <label htmlFor="wasserbedarf-sportdauer-heute" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sportdauer heute</label>
+          <NummerEingabe id="wasserbedarf-sportdauer-heute" value={sportMinuten} onChange={setSportMinuten} placeholder="z.B. 60" einheit="Min." />
           <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Pro 30 Min. Sport ca. 350 ml zusätzlich.
           </p>

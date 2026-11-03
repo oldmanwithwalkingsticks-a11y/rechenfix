@@ -65,8 +65,9 @@ export default function BinaerRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Zahl</label>
+          <label htmlFor="binaer-zahl" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Zahl</label>
           <input
+            id="binaer-zahl"
             type="text"
             value={input}
             onChange={e => setInput(e.target.value)}

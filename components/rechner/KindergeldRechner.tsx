@@ -65,7 +65,7 @@ export default function KindergeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Jahresbruttoeinkommen
         </h2>
-        <NummerEingabe value={brutto} onChange={setBrutto} placeholder="60.000" einheit="€/Jahr" />
+        <NummerEingabe aria-label="Jahresbruttoeinkommen" value={brutto} onChange={setBrutto} placeholder="60.000" einheit="€/Jahr" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Bei Zusammenveranlagung bitte das gesamte Bruttoeinkommen beider Elternteile eingeben (vor Steuern und Sozialabgaben). Für die Günstigerprüfung wird das zu versteuernde Einkommen grob geschätzt (SV-Pauschale 20 %, WK- und Sonderausgabenpauschale).
         </p>
@@ -195,7 +195,7 @@ export default function KindergeldRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Steuerberechnung im Detail</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Steuerberechnung im Detail">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
@@ -243,7 +243,7 @@ export default function KindergeldRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Kindergeld-Übersicht 2026</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Kindergeld-Übersicht 2026">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

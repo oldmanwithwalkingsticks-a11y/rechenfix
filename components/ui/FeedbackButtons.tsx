@@ -198,6 +198,7 @@ export default function FeedbackButtons() {
           </p>
 
           <textarea
+            aria-label="Ergänzung zu Ihrer Rückmeldung, freiwillig"
             value={nachricht}
             onChange={(e) => setNachricht(e.target.value.slice(0, MAX_ZEICHEN))}
             maxLength={MAX_ZEICHEN}

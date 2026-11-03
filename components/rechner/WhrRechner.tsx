@@ -55,22 +55,22 @@ export default function WhrRechner() {
         {/* Maße */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Taillenumfang</label>
-            <NummerEingabe value={taillenumfang} onChange={setTaillenumfang} einheit="cm" placeholder="78" />
+            <label htmlFor="whr-taillenumfang" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Taillenumfang</label>
+            <NummerEingabe id="whr-taillenumfang" value={taillenumfang} onChange={setTaillenumfang} einheit="cm" placeholder="78" />
             {/* W187: vorher „Auf Nabelhöhe messen“; WHO-Protokoll: Mitte zwischen unterem Rippenbogen und Beckenkamm */}
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Mitte zwischen unterem Rippenbogen und Beckenkamm messen</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hüftumfang</label>
-            <NummerEingabe value={hueftumfang} onChange={setHueftumfang} einheit="cm" placeholder="100" />
+            <label htmlFor="whr-hueftumfang" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hüftumfang</label>
+            <NummerEingabe id="whr-hueftumfang" value={hueftumfang} onChange={setHueftumfang} einheit="cm" placeholder="100" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">An der breitesten Stelle</p>
           </div>
         </div>
 
         {/* Körpergröße (optional für WHtR) */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße (optional, für WHtR)</label>
-          <NummerEingabe value={koerpergroesse} onChange={setKoerpergroesse} einheit="cm" placeholder="168" />
+          <label htmlFor="whr-koerpergroesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße (optional, für WHtR)</label>
+          <NummerEingabe id="whr-koerpergroesse" value={koerpergroesse} onChange={setKoerpergroesse} einheit="cm" placeholder="168" />
         </div>
       </div>
 

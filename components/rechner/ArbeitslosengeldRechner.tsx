@@ -39,7 +39,7 @@ export default function ArbeitslosengeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Letztes Monatsbrutto
         </h2>
-        <NummerEingabe value={brutto} onChange={setBrutto} placeholder="3500" einheit="€" />
+        <NummerEingabe aria-label="Letztes Monatsbrutto" value={brutto} onChange={setBrutto} placeholder="3500" einheit="€" />
       </div>
 
       {/* 2: Steuerklasse */}
@@ -89,7 +89,7 @@ export default function ArbeitslosengeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Alter bei Arbeitslosmeldung
         </h2>
-        <NummerEingabe value={alter} onChange={setAlter} placeholder="40" einheit="Jahre" />
+        <NummerEingabe aria-label="Alter bei Arbeitslosmeldung" value={alter} onChange={setAlter} placeholder="40" einheit="Jahre" />
       </div>
 
       {/* 5: Beschäftigungsdauer */}

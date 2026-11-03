@@ -56,16 +56,16 @@ export default function MegapixelRechner() {
       {/* Eingaben */}
       <div className="grid gap-4 sm:grid-cols-3 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
-          <NummerEingabe value={breite} onChange={setBreite} placeholder="6000" einheit="px" />
+          <label htmlFor="megapixel-breite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
+          <NummerEingabe id="megapixel-breite" value={breite} onChange={setBreite} placeholder="6000" einheit="px" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe</label>
-          <NummerEingabe value={hoehe} onChange={setHoehe} placeholder="4000" einheit="px" />
+          <label htmlFor="megapixel-hoehe" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe</label>
+          <NummerEingabe id="megapixel-hoehe" value={hoehe} onChange={setHoehe} placeholder="4000" einheit="px" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Auflösung (Druck)</label>
-          <NummerEingabe value={dpi} onChange={setDpi} placeholder="300" einheit="DPI" />
+          <label htmlFor="megapixel-aufloesung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Auflösung (Druck)</label>
+          <NummerEingabe id="megapixel-aufloesung" value={dpi} onChange={setDpi} placeholder="300" einheit="DPI" />
         </div>
       </div>
 
@@ -102,7 +102,7 @@ export default function MegapixelRechner() {
           {/* Druckgrößen-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Maximale Druckgröße je Auflösung</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Maximale Druckgröße je Auflösung">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

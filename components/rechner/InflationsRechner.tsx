@@ -53,15 +53,15 @@ export default function InflationsRechner() {
 
       {/* Eingaben */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="inflations-feld" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           {modus === 'kaufkraft' ? 'Geldbetrag' : 'Aktueller Preis'}
         </label>
-        <NummerEingabe value={betrag} onChange={setBetrag} placeholder={modus === 'kaufkraft' ? '1000' : '100'} einheit="€" />
+        <NummerEingabe id="inflations-feld" value={betrag} onChange={setBetrag} placeholder={modus === 'kaufkraft' ? '1000' : '100'} einheit="€" />
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Inflationsrate</label>
-        <NummerEingabe value={inflationsrate} onChange={setInflationsrate} placeholder="2" einheit="%" />
+        <label htmlFor="inflations-inflationsrate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Inflationsrate</label>
+        <NummerEingabe id="inflations-inflationsrate" value={inflationsrate} onChange={setInflationsrate} placeholder="2" einheit="%" />
         <div className="flex gap-1.5 mt-2">
           {SCHNELLWAHL.map(r => (
             <button
@@ -80,8 +80,8 @@ export default function InflationsRechner() {
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zeitraum</label>
-        <NummerEingabe value={zeitraum} onChange={setZeitraum} placeholder="10" einheit="Jahre" />
+        <label htmlFor="inflations-zeitraum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zeitraum</label>
+        <NummerEingabe id="inflations-zeitraum" value={zeitraum} onChange={setZeitraum} placeholder="10" einheit="Jahre" />
       </div>
 
       {/* Ergebnis */}
@@ -246,7 +246,7 @@ export default function InflationsRechner() {
               </svg>
             </button>
             {tabelleOffen && (
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/20">

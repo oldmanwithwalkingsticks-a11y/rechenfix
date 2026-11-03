@@ -162,7 +162,7 @@ export default function PaceRechner() {
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
             Distanz
           </h2>
-          <NummerEingabe value={distanz} onChange={setDistanz} placeholder="10" einheit="km" />
+          <NummerEingabe aria-label="Distanz" value={distanz} onChange={setDistanz} placeholder="10" einheit="km" />
           <div className="mt-2 flex flex-wrap gap-2">
             {DISTANZ_PRESETS.map(p => (
               <button
@@ -342,7 +342,7 @@ export default function PaceRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Pace für gängige Zielzeiten</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Pace für gängige Zielzeiten">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

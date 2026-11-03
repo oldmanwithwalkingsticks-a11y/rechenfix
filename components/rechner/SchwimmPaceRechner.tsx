@@ -102,7 +102,7 @@ export default function SchwimmPaceRechner() {
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
           <div>
             <label htmlFor="swim-dist" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Distanz</label>
-            <NummerEingabe value={distanz} onChange={setDistanz} placeholder="1500" einheit="m" />
+            <NummerEingabe id="swim-dist" value={distanz} onChange={setDistanz} placeholder="1500" einheit="m" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gesamtzeit</label>
@@ -171,7 +171,7 @@ export default function SchwimmPaceRechner() {
           {/* Zonen-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Deine Trainingszonen (aus der CSS)</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Deine Trainingszonen (aus der CSS)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

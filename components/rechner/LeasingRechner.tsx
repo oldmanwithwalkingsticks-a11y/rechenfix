@@ -77,8 +77,8 @@ export default function LeasingRechner() {
       {/* Eingaben */}
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Listenpreis (Brutto)</label>
-          <NummerEingabe value={listenpreis} onChange={setListenpreis} einheit="€" />
+          <label htmlFor="leasing-listenpreis" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Listenpreis (Brutto)</label>
+          <NummerEingabe id="leasing-listenpreis" value={listenpreis} onChange={setListenpreis} einheit="€" />
         </div>
 
         <div>
@@ -96,20 +96,20 @@ export default function LeasingRechner() {
 
         {faktorModus === 'faktor' ? (
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Leasingfaktor</label>
-            <NummerEingabe value={leasingfaktor} onChange={setLeasingfaktor} einheit="%" />
+            <label htmlFor="leasing-leasingfaktor" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Leasingfaktor</label>
+            <NummerEingabe id="leasing-leasingfaktor" value={leasingfaktor} onChange={setLeasingfaktor} einheit="%" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Typisch 0,6–1,2 %. Niedriger = günstiger. Steht im Leasingangebot.</p>
           </div>
         ) : (
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Leasingrate (Brutto)</label>
-            <NummerEingabe value={leasingrateDirekt} onChange={setLeasingrateDirekt} einheit="€/Monat" />
+            <label htmlFor="leasing-leasingrate" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Leasingrate (Brutto)</label>
+            <NummerEingabe id="leasing-leasingrate" value={leasingrateDirekt} onChange={setLeasingrateDirekt} einheit="€/Monat" />
           </div>
         )}
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anzahlung / Sonderzahlung</label>
-          <NummerEingabe value={anzahlung} onChange={setAnzahlung} einheit="€" />
+          <label htmlFor="leasing-anzahlung-sonderzahlung" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anzahlung / Sonderzahlung</label>
+          <NummerEingabe id="leasing-anzahlung-sonderzahlung" value={anzahlung} onChange={setAnzahlung} einheit="€" />
         </div>
 
         <div>
@@ -126,8 +126,8 @@ export default function LeasingRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Kilometer pro Jahr</label>
-          <NummerEingabe value={kmProJahr} onChange={setKmProJahr} einheit="km" />
+          <label htmlFor="leasing-kilometer-pro-jahr" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Kilometer pro Jahr</label>
+          <NummerEingabe id="leasing-kilometer-pro-jahr" value={kmProJahr} onChange={setKmProJahr} einheit="km" />
           <div className="flex gap-2 mt-2">
             {['10000', '15000', '20000'].map(v => (
               <button key={v} onClick={() => setKmProJahr(v)} className="text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-primary-100 dark:hover:bg-primary-500/20">
@@ -138,8 +138,8 @@ export default function LeasingRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Mehr-/Minderkilometer-Satz</label>
-          <NummerEingabe value={mehrKmSatz} onChange={setMehrKmSatz} einheit="€/km" />
+          <label htmlFor="leasing-mehr-minderkilometer-satz" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Mehr-/Minderkilometer-Satz</label>
+          <NummerEingabe id="leasing-mehr-minderkilometer-satz" value={mehrKmSatz} onChange={setMehrKmSatz} einheit="€/km" />
         </div>
       </div>
 
@@ -176,19 +176,19 @@ export default function LeasingRechner() {
           <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Leasing vs. Finanzierung</h2>
           <div className="space-y-3 mb-4">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Kaufpreis (Finanzierung)</label>
-              <NummerEingabe value={kaufpreis} onChange={setKaufpreis} einheit="€" />
+              <label htmlFor="leasing-kaufpreis" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Kaufpreis (Finanzierung)</label>
+              <NummerEingabe id="leasing-kaufpreis" value={kaufpreis} onChange={setKaufpreis} einheit="€" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Finanzierungszins</label>
-              <NummerEingabe value={zins} onChange={setZins} einheit="%" />
+              <label htmlFor="leasing-finanzierungszins" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Finanzierungszins</label>
+              <NummerEingabe id="leasing-finanzierungszins" value={zins} onChange={setZins} einheit="%" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Geschätzter Restwert nach Laufzeit</label>
-              <NummerEingabe value={restwert} onChange={setRestwert} einheit="€" />
+              <label htmlFor="leasing-geschaetzter-restwert-nach" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Geschätzter Restwert nach Laufzeit</label>
+              <NummerEingabe id="leasing-geschaetzter-restwert-nach" value={restwert} onChange={setRestwert} einheit="€" />
             </div>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

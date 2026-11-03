@@ -135,7 +135,7 @@ export default function BackformUmrechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Zutatenmengen umgerechnet</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Zutatenmengen umgerechnet">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
@@ -172,7 +172,7 @@ export default function BackformUmrechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Gängige Springform-Größen</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Gängige Springform-Größen">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
@@ -257,7 +257,7 @@ function FormEingabe({
       {form.typ === 'rund' && (
         <div>
           <label htmlFor={`${prefix}-d`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Durchmesser (cm)</label>
-          <NummerEingabe value={form.durchmesser} onChange={v => setForm({ ...form, durchmesser: v })} placeholder="26" einheit="cm" />
+          <NummerEingabe id={`${prefix}-d`} value={form.durchmesser} onChange={v => setForm({ ...form, durchmesser: v })} placeholder="26" einheit="cm" />
         </div>
       )}
 
@@ -265,11 +265,11 @@ function FormEingabe({
         <div className="grid grid-cols-2 gap-2">
           <div>
             <label htmlFor={`${prefix}-l`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge (cm)</label>
-            <NummerEingabe value={form.laenge} onChange={v => setForm({ ...form, laenge: v })} placeholder="30" einheit="cm" />
+            <NummerEingabe id={`${prefix}-l`} value={form.laenge} onChange={v => setForm({ ...form, laenge: v })} placeholder="30" einheit="cm" />
           </div>
           <div>
             <label htmlFor={`${prefix}-b`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite (cm)</label>
-            <NummerEingabe value={form.breite} onChange={v => setForm({ ...form, breite: v })} placeholder="20" einheit="cm" />
+            <NummerEingabe id={`${prefix}-b`} value={form.breite} onChange={v => setForm({ ...form, breite: v })} placeholder="20" einheit="cm" />
           </div>
         </div>
       )}
@@ -278,15 +278,15 @@ function FormEingabe({
         <div className="grid grid-cols-3 gap-2">
           <div>
             <label htmlFor={`${prefix}-kl`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
-            <NummerEingabe value={form.laenge} onChange={v => setForm({ ...form, laenge: v })} placeholder="30" einheit="cm" />
+            <NummerEingabe id={`${prefix}-kl`} value={form.laenge} onChange={v => setForm({ ...form, laenge: v })} placeholder="30" einheit="cm" />
           </div>
           <div>
             <label htmlFor={`${prefix}-kb`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
-            <NummerEingabe value={form.breite} onChange={v => setForm({ ...form, breite: v })} placeholder="11" einheit="cm" />
+            <NummerEingabe id={`${prefix}-kb`} value={form.breite} onChange={v => setForm({ ...form, breite: v })} placeholder="11" einheit="cm" />
           </div>
           <div>
             <label htmlFor={`${prefix}-kh`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
-            <NummerEingabe value={form.hoehe} onChange={v => setForm({ ...form, hoehe: v })} placeholder="7" einheit="cm" />
+            <NummerEingabe id={`${prefix}-kh`} value={form.hoehe} onChange={v => setForm({ ...form, hoehe: v })} placeholder="7" einheit="cm" />
           </div>
         </div>
       )}

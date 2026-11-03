@@ -133,10 +133,11 @@ export default function DurchschnittRechner() {
 
       {eingabeArt === 'text' ? (
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="durchschnitt-werte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Werte (durch Semikolon oder Komma getrennt)
           </label>
           <input
+            id="durchschnitt-werte"
             type="text"
             value={werteText}
             onChange={e => setWerteText(e.target.value)}
@@ -153,7 +154,7 @@ export default function DurchschnittRechner() {
               <div key={e.id} className="flex items-center gap-2">
                 <span className="text-xs text-gray-600 dark:text-gray-400 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
-                  <NummerEingabe value={e.wert} onChange={v => updateEinzel(e.id, v)} placeholder="Wert" />
+                  <NummerEingabe aria-label={`Wert ${idx + 1}`} value={e.wert} onChange={v => updateEinzel(e.id, v)} placeholder="Wert" />
                 </div>
                 {einzelWerte.length > 2 && (
                   <button
@@ -265,11 +266,11 @@ export default function DurchschnittRechner() {
               <div key={e.id} className="flex items-center gap-2">
                 <span className="text-xs text-gray-600 dark:text-gray-400 w-5 shrink-0">{idx + 1}.</span>
                 <div className="flex-1">
-                  <NummerEingabe value={e.wert} onChange={v => updateG(e.id, 'wert', v)} placeholder="Wert" />
+                  <NummerEingabe aria-label={`Wert ${idx + 1}`} value={e.wert} onChange={v => updateG(e.id, 'wert', v)} placeholder="Wert" />
                 </div>
                 <span className="text-xs text-gray-600 dark:text-gray-400 shrink-0">×</span>
                 <div className="w-16">
-                  <NummerEingabe value={e.gewicht} onChange={v => updateG(e.id, 'gewicht', v)} placeholder="1" />
+                  <NummerEingabe aria-label={`Gewicht von Wert ${idx + 1}`} value={e.gewicht} onChange={v => updateG(e.id, 'gewicht', v)} placeholder="1" />
                 </div>
                 {gEintraege.length > 2 && (
                   <button

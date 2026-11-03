@@ -130,24 +130,24 @@ export default function GrundsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Bodenrichtwert
         </h2>
-        <NummerEingabe value={bodenrichtwert} onChange={setBodenrichtwert} placeholder="200" einheit="€/m²" />
+        <NummerEingabe aria-label="Bodenrichtwert" value={bodenrichtwert} onChange={setBodenrichtwert} placeholder="200" einheit="€/m²" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Finden Sie auf boris.de oder beim Gutachterausschuss Ihrer Gemeinde.</p>
       </div>
 
       {/* 4: Grundfläche */}
       <div className="mb-6">
-        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 id="grundsteuer-schritt-1" className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           {istBund && art === 'etw' ? 'Grundstücksfläche der gesamten Wohnanlage' : 'Grundstücksfläche'}
         </h2>
-        <NummerEingabe value={grundflaeche} onChange={setGrundflaeche} placeholder="400" einheit="m²" />
+        <NummerEingabe aria-labelledby="grundsteuer-schritt-1" value={grundflaeche} onChange={setGrundflaeche} placeholder="400" einheit="m²" />
         {/* W187: Miteigentumsanteil — beim Wohnungseigentum zählt nur der anteilige Bodenwert */}
         {istBund && art === 'etw' && (
           <div className="mt-3">
             <span className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Miteigentumsanteil laut Grundbuch</span>
             <div className="grid grid-cols-2 gap-2">
-              <NummerEingabe id="grundsteuer-mea-zaehler" value={meaZaehler} onChange={setMeaZaehler} placeholder="250" einheit="Anteile" />
-              <NummerEingabe id="grundsteuer-mea-nenner" value={meaNenner} onChange={setMeaNenner} placeholder="1000" einheit="von gesamt" />
+              <NummerEingabe id="grundsteuer-mea-zaehler" aria-label="Miteigentumsanteil, Anteile" value={meaZaehler} onChange={setMeaZaehler} placeholder="250" einheit="Anteile" />
+              <NummerEingabe id="grundsteuer-mea-nenner" aria-label="Miteigentumsanteil, von gesamt" value={meaNenner} onChange={setMeaNenner} placeholder="1000" einheit="von gesamt" />
             </div>
           </div>
         )}
@@ -167,7 +167,7 @@ export default function GrundsteuerRechner() {
               <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">5</span>
               Wohnfläche
             </h2>
-            <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="120" einheit="m²" />
+            <NummerEingabe aria-label="Wohnfläche" value={wohnflaeche} onChange={setWohnflaeche} placeholder="120" einheit="m²" />
           </div>
 
           {/* 6: Baujahr */}
@@ -176,7 +176,7 @@ export default function GrundsteuerRechner() {
               <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">6</span>
               Baujahr
             </h2>
-            <NummerEingabe value={baujahr} onChange={setBaujahr} placeholder="1990" einheit="" />
+            <NummerEingabe aria-label="Baujahr" value={baujahr} onChange={setBaujahr} placeholder="1990" einheit="" />
           </div>
 
           {istBund && (
@@ -212,7 +212,7 @@ export default function GrundsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">7</span>
           Hebesatz der Gemeinde
         </h2>
-        <NummerEingabe value={hebesatz} onChange={setHebesatz} placeholder="500" einheit="%" />
+        <NummerEingabe aria-label="Hebesatz der Gemeinde" value={hebesatz} onChange={setHebesatz} placeholder="500" einheit="%" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Finden Sie auf der Website Ihrer Gemeinde. Durchschnitt: ca. 500 %.</p>
       </div>
 

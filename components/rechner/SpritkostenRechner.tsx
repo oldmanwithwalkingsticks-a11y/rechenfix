@@ -52,8 +52,9 @@ export default function SpritkostenRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strecke</label>
+          <label htmlFor="spritkosten-strecke" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strecke</label>
           <NummerEingabe
+            id="spritkosten-strecke"
             value={strecke}
             onChange={setStrecke}
             placeholder="z.B. 100"
@@ -61,8 +62,9 @@ export default function SpritkostenRechner() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch</label>
+          <label htmlFor="spritkosten-verbrauch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch</label>
           <NummerEingabe
+            id="spritkosten-verbrauch"
             value={verbrauch}
             onChange={setVerbrauch}
             placeholder="z.B. 7,5"
@@ -70,8 +72,9 @@ export default function SpritkostenRechner() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Spritpreis</label>
+          <label htmlFor="spritkosten-spritpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Spritpreis</label>
           <NummerEingabe
+            id="spritkosten-spritpreis"
             value={spritpreis}
             onChange={setSpritpreis}
             placeholder="z.B. 1,65"

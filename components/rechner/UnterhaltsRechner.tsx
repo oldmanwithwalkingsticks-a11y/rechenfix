@@ -197,7 +197,7 @@ export default function UnterhaltsRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Bereinigtes Nettoeinkommen des Unterhaltspflichtigen
         </h2>
-        <NummerEingabe value={netto} onChange={setNetto} placeholder="3000" einheit="€/Monat" />
+        <NummerEingabe aria-label="Bereinigtes Nettoeinkommen des Unterhaltspflichtigen" value={netto} onChange={setNetto} placeholder="3000" einheit="€/Monat" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Nach Abzug berufsbedingter Aufwendungen (typ. 5 % pauschal) und Schulden.</p>
       </div>
 
@@ -307,6 +307,7 @@ export default function UnterhaltsRechner() {
                       Eigenes Einkommen des Kindes (Ausbildungsvergütung, Nebenjob)
                     </label>
                     <NummerEingabe
+                      id={`${kgId}-eigen`}
                       value={k.eigenesEinkommen}
                       onChange={v => updateKind(i, { eigenesEinkommen: v })}
                       placeholder="0"
@@ -451,6 +452,7 @@ export default function UnterhaltsRechner() {
                 Bereinigtes Netto des unterhaltspflichtigen Kindes
               </label>
               <NummerEingabe
+                id="eltern-netto-kind"
                 value={elternNettoKind}
                 onChange={setElternNettoKind}
                 placeholder="3500"
@@ -482,6 +484,7 @@ export default function UnterhaltsRechner() {
                   Bereinigtes Netto des Ehegatten
                 </label>
                 <NummerEingabe
+                  id="eltern-netto-ehegatte"
                   value={elternNettoEhegatte}
                   onChange={setElternNettoEhegatte}
                   placeholder="2800"

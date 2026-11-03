@@ -5,7 +5,7 @@
 export default function MeterSollIst() {
   return (
     <figure className="my-8">
-      <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+      <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700" tabIndex={0} role="region" aria-label="Tabelle">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-200 dark:border-gray-700">

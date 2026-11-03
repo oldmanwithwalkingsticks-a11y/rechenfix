@@ -45,11 +45,11 @@ export default function PowerbankRechner() {
       <div className="grid gap-4 sm:grid-cols-3 mb-6">
         <div>
           <label htmlFor="pb-kapazitaet" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Powerbank-Kapazität</label>
-          <NummerEingabe value={pbKap} onChange={setPbKap} placeholder="20000" einheit="mAh" />
+          <NummerEingabe id="pb-kapazitaet" value={pbKap} onChange={setPbKap} placeholder="20000" einheit="mAh" />
         </div>
         <div>
           <label htmlFor="pb-geraet" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geräte-Akku</label>
-          <NummerEingabe value={geraetKap} onChange={setGeraetKap} placeholder="5000" einheit="mAh" />
+          <NummerEingabe id="pb-geraet" value={geraetKap} onChange={setGeraetKap} placeholder="5000" einheit="mAh" />
         </div>
         <div>
           <label htmlFor="pb-wirkungsgrad" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wirkungsgrad</label>
@@ -97,7 +97,7 @@ export default function PowerbankRechner() {
           {/* Geräte-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Wie oft lädt diese Powerbank verschiedene Geräte</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Wie oft lädt diese Powerbank verschiedene Geräte">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

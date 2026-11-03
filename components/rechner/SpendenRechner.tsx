@@ -42,10 +42,11 @@ export default function SpendenRechner() {
       <div className="space-y-4 mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="spenden-spendenbetrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Spendenbetrag (pro Jahr)
             </label>
             <NummerEingabe
+              id="spenden-spendenbetrag"
               value={spendenbetrag}
               onChange={setSpendenbetrag}
               einheit="€"
@@ -53,10 +54,11 @@ export default function SpendenRechner() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="spenden-zu-versteuerndes-einkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Zu versteuerndes Einkommen (pro Jahr)
             </label>
             <NummerEingabe
+              id="spenden-zu-versteuerndes-einkommen"
               value={zvE}
               onChange={setZvE}
               einheit="€"

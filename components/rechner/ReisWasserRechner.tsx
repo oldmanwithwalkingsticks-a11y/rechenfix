@@ -72,7 +72,7 @@ export default function ReisWasserRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Reismenge (trocken)
         </h2>
-        <NummerEingabe value={menge} onChange={setMenge} placeholder="150" einheit="g" />
+        <NummerEingabe aria-label="Reismenge (trocken)" value={menge} onChange={setMenge} placeholder="150" einheit="g" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Faustregel: 60–75 g Trockenreis pro Person als Beilage, 100 g als Hauptgericht.
         </p>
@@ -160,7 +160,7 @@ export default function ReisWasserRechner() {
                 Wassermenge je Sorte bei {fmt(g)} g ({methode === 'reiskocher' ? 'Reiskocher' : 'Herd'})
               </h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

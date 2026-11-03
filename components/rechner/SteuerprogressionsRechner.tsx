@@ -121,10 +121,11 @@ export default function SteuerprogressionsRechner() {
       <div className="space-y-5 mb-6">
         {/* ZvE + Slider */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="steuerprogressions-zu-versteuerndes-einkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Zu versteuerndes Einkommen (€/Jahr)
           </label>
           <NummerEingabe
+            id="steuerprogressions-zu-versteuerndes-einkommen"
             value={zveStr}
             onChange={handleNummerChange}
             einheit="€"
@@ -226,7 +227,7 @@ export default function SteuerprogressionsRechner() {
             <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">
               Steuerverlauf: Durchschnitts- und Grenzsteuersatz
             </h2>
-            <div className="w-full overflow-x-auto">
+            <div className="w-full overflow-x-auto" tabIndex={0} role="region" aria-label="Steuerverlauf: Durchschnitts- und Grenzsteuersatz">
               <svg
                 viewBox={`0 0 ${SVG_W} ${SVG_H}`}
                 className="w-full"
@@ -451,7 +452,7 @@ export default function SteuerprogressionsRechner() {
                 Steuertabelle nach Einkommenshöhe
               </h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Steuertabelle nach Einkommenshöhe">
               <table className="w-full text-sm" aria-label="Steuertabelle nach Einkommenshöhe">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/30">

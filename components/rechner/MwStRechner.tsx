@@ -219,10 +219,11 @@ export default function MwStRechner() {
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label htmlFor="mw-st-feld" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {tab === 'netto-brutto' ? 'Nettobetrag' : 'Bruttobetrag'}
               </label>
               <NummerEingabe
+                id="mw-st-feld"
                 value={betrag}
                 onChange={setBetrag}
                 placeholder="Betrag eingeben"
@@ -252,6 +253,7 @@ export default function MwStRechner() {
               {istCustom && (
                 <div className="mt-2">
                   <NummerEingabe
+                    aria-label="Eigener Steuersatz in Prozent"
                     value={customSatz}
                     onChange={setCustomSatz}
                     placeholder="z.B. 16"
@@ -350,6 +352,7 @@ export default function MwStRechner() {
                   {idx === 0 && <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bezeichnung</label>}
                   <input
                     type="text"
+                    aria-label={`Position ${idx + 1}, Bezeichnung`}
                     value={z.bezeichnung}
                     onChange={e => updateZeile(z.id, 'bezeichnung', e.target.value)}
                     className="input-field !py-2 !text-sm"
@@ -359,14 +362,15 @@ export default function MwStRechner() {
                 <div className="w-full sm:w-32">
                   {idx === 0 && <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Netto (€)</label>}
                   <NummerEingabe
+                    aria-label={`Position ${idx + 1}, Netto in Euro`}
                     value={z.netto}
                     onChange={val => updateZeile(z.id, 'netto', val)}
                     placeholder="0,00"
                   />
                 </div>
                 <div className="w-full sm:w-24">
-                  {idx === 0 && <label htmlFor="mwst-select-1" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">MwSt %</label>}
-                  <select id="mwst-select-1"
+                  {idx === 0 && <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">MwSt %</label>}
+                  <select aria-label={`Position ${idx + 1}, MwSt-Satz`}
                     value={z.mwstSatz}
                     onChange={e => updateZeile(z.id, 'mwstSatz', Number(e.target.value))}
                     className="input-field !py-2 !text-sm"
@@ -402,7 +406,7 @@ export default function MwStRechner() {
           {/* Multi-Ergebnis */}
           {multiErgebnis && multiErgebnis.zeilen.length > 0 && (
             <>
-              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 overflow-x-auto">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-600">

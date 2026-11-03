@@ -139,12 +139,12 @@ export default function UhrzeitRechner() {
       {tab === 'diff' && (
         <div className="mb-6 space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Startzeit</label>
-            <input type="time" value={startZeit} onChange={e => setStartZeit(e.target.value)} className={inputClass} />
+            <label htmlFor="uhrzeit-startzeit" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Startzeit</label>
+            <input id="uhrzeit-startzeit" type="time" value={startZeit} onChange={e => setStartZeit(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endzeit</label>
-            <input type="time" value={endZeit} onChange={e => setEndZeit(e.target.value)} className={inputClass} />
+            <label htmlFor="uhrzeit-endzeit" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endzeit</label>
+            <input id="uhrzeit-endzeit" type="time" value={endZeit} onChange={e => setEndZeit(e.target.value)} className={inputClass} />
           </div>
           <div>
             <RadioToggleGroup
@@ -167,8 +167,8 @@ export default function UhrzeitRechner() {
       {tab === 'addsub' && (
         <div className="mb-6 space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Ausgangszeit</label>
-            <input type="time" value={basisZeit} onChange={e => setBasisZeit(e.target.value)} className={inputClass} />
+            <label htmlFor="uhrzeit-ausgangszeit" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Ausgangszeit</label>
+            <input id="uhrzeit-ausgangszeit" type="time" value={basisZeit} onChange={e => setBasisZeit(e.target.value)} className={inputClass} />
           </div>
           <div>
             <RadioToggleGroup
@@ -186,12 +186,12 @@ export default function UhrzeitRechner() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Stunden</label>
-              <input type="number" value={stunden} onChange={e => setStunden(e.target.value)} className={inputClass} />
+              <label htmlFor="uhrzeit-stunden" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Stunden</label>
+              <input id="uhrzeit-stunden" type="number" value={stunden} onChange={e => setStunden(e.target.value)} className={inputClass} />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Minuten</label>
-              <input type="number" value={minuten} onChange={e => setMinuten(e.target.value)} className={inputClass} />
+              <label htmlFor="uhrzeit-minuten" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Minuten</label>
+              <input id="uhrzeit-minuten" type="number" value={minuten} onChange={e => setMinuten(e.target.value)} className={inputClass} />
             </div>
           </div>
         </div>
@@ -205,8 +205,8 @@ export default function UhrzeitRechner() {
             <input id="uhrzeit-datum" type="date" value={zoneDatum} onChange={e => setZoneDatum(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Uhrzeit</label>
-            <input type="time" value={zoneZeit} onChange={e => setZoneZeit(e.target.value)} className={inputClass} />
+            <label htmlFor="uhrzeit-uhrzeit" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Uhrzeit</label>
+            <input id="uhrzeit-uhrzeit" type="time" value={zoneZeit} onChange={e => setZoneZeit(e.target.value)} className={inputClass} />
           </div>
           <div>
             <label htmlFor="uhrzeit-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Von Zeitzone</label>

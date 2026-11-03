@@ -298,7 +298,7 @@ export default function RezeptUmrechner() {
             Umgerechnete Zutaten für {gewuenschtZahl} Portionen
           </h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

@@ -51,16 +51,16 @@ export default function TaxiRechner() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="taxi-strecke" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Strecke (km)
             </label>
-            <NummerEingabe value={strecke} onChange={setStrecke} placeholder="10" />
+            <NummerEingabe id="taxi-strecke" value={strecke} onChange={setStrecke} placeholder="10" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="taxi-wartezeit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Wartezeit (Minuten, optional)
             </label>
-            <NummerEingabe value={wartezeit} onChange={setWartezeit} placeholder="0" />
+            <NummerEingabe id="taxi-wartezeit" value={wartezeit} onChange={setWartezeit} placeholder="0" />
           </div>
         </div>
 

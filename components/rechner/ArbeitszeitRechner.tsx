@@ -252,6 +252,10 @@ export default function ArbeitszeitRechner() {
         <div>
           <div className="flex items-center gap-2 mb-4">
             <button
+              type="button"
+              role="switch"
+              aria-checked={gleicheZeiten}
+              aria-label="Gleiche Zeiten für Mo–Fr"
               onClick={() => setGleicheZeiten(!gleicheZeiten)}
               className={`w-10 h-6 rounded-full transition-all relative ${
                 gleicheZeiten ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
@@ -364,7 +368,7 @@ export default function ArbeitszeitRechner() {
                 <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Wochenübersicht</p>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Wochenübersicht">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-700">

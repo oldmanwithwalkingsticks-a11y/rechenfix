@@ -142,7 +142,7 @@ export default function VdotRechner() {
         {preset === 'custom' && (
           <div>
             <label htmlFor="vdot-customdist" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigene Distanz</label>
-            <NummerEingabe value={customDist} onChange={setCustomDist} placeholder="10" einheit="km" />
+            <NummerEingabe id="vdot-customdist" value={customDist} onChange={setCustomDist} placeholder="10" einheit="km" />
           </div>
         )}
       </div>
@@ -205,7 +205,7 @@ export default function VdotRechner() {
           {/* Trainingspaces */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Deine Trainingspaces (Richtwerte nach Daniels)</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Deine Trainingspaces (Richtwerte nach Daniels)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">
@@ -230,7 +230,7 @@ export default function VdotRechner() {
           {/* Äquivalenz */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Was dein VDOT für andere Distanzen bedeutet</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Was dein VDOT für andere Distanzen bedeutet">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

@@ -84,14 +84,14 @@ export default function HochRechner() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{LABEL[eingabe]}</label>
-          <NummerEingabe value={betrag} onChange={setBetrag} einheit="€" />
+          <label htmlFor="hoch-feld" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{LABEL[eingabe]}</label>
+          <NummerEingabe id="hoch-feld" value={betrag} onChange={setBetrag} einheit="€" />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Stunden / Woche</label>
-            <NummerEingabe value={stdWoche} onChange={setStdWoche} einheit="h" />
+            <label htmlFor="hoch-stunden-woche" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Stunden / Woche</label>
+            <NummerEingabe id="hoch-stunden-woche" value={stdWoche} onChange={setStdWoche} einheit="h" />
           </div>
           <div>
             <label htmlFor="hoch-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Tage / Woche</label>

@@ -64,7 +64,7 @@ export default function PfaendungRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Monatliches Nettoeinkommen
         </h2>
-        <NummerEingabe value={netto} onChange={setNetto} placeholder="2.500" einheit="€" />
+        <NummerEingabe aria-label="Monatliches Nettoeinkommen" value={netto} onChange={setNetto} placeholder="2.500" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Nettolohn nach Steuern und Sozialabgaben. Bei unregelmäßigem Einkommen: Durchschnitt der letzten 12 Monate.
         </p>
@@ -172,7 +172,7 @@ export default function PfaendungRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail ({ZEITRAUM_LABEL[zeitraum]})</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               <tr>
@@ -227,7 +227,7 @@ export default function PfaendungRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Beispiele ({ergebnis.unterhaltspflichten} Unterhaltspflichten)</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

@@ -66,16 +66,16 @@ export default function BetonRechner() {
         {form === 'rechteck' && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge (m)</label>
-              <NummerEingabe value={laenge} onChange={setLaenge} placeholder="3" />
+              <label htmlFor="beton-laenge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge (m)</label>
+              <NummerEingabe id="beton-laenge" value={laenge} onChange={setLaenge} placeholder="3" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite (m)</label>
-              <NummerEingabe value={breite} onChange={setBreite} placeholder="2" />
+              <label htmlFor="beton-breite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite (m)</label>
+              <NummerEingabe id="beton-breite" value={breite} onChange={setBreite} placeholder="2" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe/Dicke (m)</label>
-              <NummerEingabe value={hoehe} onChange={setHoehe} placeholder="0,15" />
+              <label htmlFor="beton-hoehe-dicke" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe/Dicke (m)</label>
+              <NummerEingabe id="beton-hoehe-dicke" value={hoehe} onChange={setHoehe} placeholder="0,15" />
             </div>
           </div>
         )}
@@ -83,12 +83,12 @@ export default function BetonRechner() {
         {form === 'rund' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Durchmesser (m)</label>
-              <NummerEingabe value={durchmesser} onChange={setDurchmesser} placeholder="0,3" />
+              <label htmlFor="beton-durchmesser" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Durchmesser (m)</label>
+              <NummerEingabe id="beton-durchmesser" value={durchmesser} onChange={setDurchmesser} placeholder="0,3" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe (m)</label>
-              <NummerEingabe value={rundHoehe} onChange={setRundHoehe} placeholder="0,8" />
+              <label htmlFor="beton-hoehe" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe (m)</label>
+              <NummerEingabe id="beton-hoehe" value={rundHoehe} onChange={setRundHoehe} placeholder="0,8" />
             </div>
           </div>
         )}
@@ -98,28 +98,28 @@ export default function BetonRechner() {
             <p className="text-sm text-gray-600 dark:text-gray-400">Schenkel 1</p>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge (m)</label>
-                <NummerEingabe value={l1Laenge} onChange={setL1Laenge} placeholder="3" />
+                <label htmlFor="beton-laenge-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge (m)</label>
+                <NummerEingabe id="beton-laenge-2" value={l1Laenge} onChange={setL1Laenge} placeholder="3" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite (m)</label>
-                <NummerEingabe value={l1Breite} onChange={setL1Breite} placeholder="1" />
+                <label htmlFor="beton-breite-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite (m)</label>
+                <NummerEingabe id="beton-breite-2" value={l1Breite} onChange={setL1Breite} placeholder="1" />
               </div>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">Schenkel 2</p>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge (m)</label>
-                <NummerEingabe value={l2Laenge} onChange={setL2Laenge} placeholder="2" />
+                <label htmlFor="beton-laenge-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Länge (m)</label>
+                <NummerEingabe id="beton-laenge-3" value={l2Laenge} onChange={setL2Laenge} placeholder="2" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite (m)</label>
-                <NummerEingabe value={l2Breite} onChange={setL2Breite} placeholder="1" />
+                <label htmlFor="beton-breite-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite (m)</label>
+                <NummerEingabe id="beton-breite-3" value={l2Breite} onChange={setL2Breite} placeholder="1" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dicke (m)</label>
-              <NummerEingabe value={lDicke} onChange={setLDicke} placeholder="0,15" />
+              <label htmlFor="beton-dicke" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dicke (m)</label>
+              <NummerEingabe id="beton-dicke" value={lDicke} onChange={setLDicke} placeholder="0,15" />
             </div>
           </>
         )}

@@ -61,18 +61,18 @@ export default function StromkostenRechner() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stromverbrauch pro Jahr</label>
-        <NummerEingabe value={verbrauch} onChange={setVerbrauch} placeholder="2500" einheit="kWh" />
+        <label htmlFor="stromkosten-stromverbrauch-pro-jahr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stromverbrauch pro Jahr</label>
+        <NummerEingabe id="stromkosten-stromverbrauch-pro-jahr" value={verbrauch} onChange={setVerbrauch} placeholder="2500" einheit="kWh" />
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Arbeitspreis</label>
-          <NummerEingabe value={preisProKwh} onChange={setPreisProKwh} placeholder="36" einheit="ct/kWh" />
+          <label htmlFor="stromkosten-arbeitspreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Arbeitspreis</label>
+          <NummerEingabe id="stromkosten-arbeitspreis" value={preisProKwh} onChange={setPreisProKwh} placeholder="36" einheit="ct/kWh" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Grundpreis</label>
-          <NummerEingabe value={grundpreis} onChange={setGrundpreis} placeholder="12" einheit="€/Monat" />
+          <label htmlFor="stromkosten-grundpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Grundpreis</label>
+          <NummerEingabe id="stromkosten-grundpreis" value={grundpreis} onChange={setGrundpreis} placeholder="12" einheit="€/Monat" />
         </div>
       </div>
 
@@ -160,7 +160,7 @@ export default function StromkostenRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Durchschnittlicher Stromverbrauch in Deutschland</p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Durchschnittlicher Stromverbrauch in Deutschland">
               <table className="w-full text-sm">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   {[

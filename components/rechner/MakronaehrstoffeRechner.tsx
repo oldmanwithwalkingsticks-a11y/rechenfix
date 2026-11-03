@@ -73,7 +73,7 @@ export default function MakronaehrstoffeRechner() {
       <div className="grid gap-4 sm:grid-cols-2 mb-6">
         <div>
           <label htmlFor="mk-kcal" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ziel-Kalorien</label>
-          <NummerEingabe value={kcal} onChange={setKcal} placeholder="2500" einheit="kcal" />
+          <NummerEingabe id="mk-kcal" value={kcal} onChange={setKcal} placeholder="2500" einheit="kcal" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Aus dem Kalorienbedarf-Rechner oder selbst gewählt.</p>
         </div>
         <div>
@@ -86,21 +86,21 @@ export default function MakronaehrstoffeRechner() {
           <div className="sm:col-span-2 grid grid-cols-3 gap-3">
             <div>
               <label htmlFor="mk-cp" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Protein %</label>
-              <NummerEingabe value={cp} onChange={setCp} placeholder="30" einheit="%" />
+              <NummerEingabe id="mk-cp" value={cp} onChange={setCp} placeholder="30" einheit="%" />
             </div>
             <div>
               <label htmlFor="mk-ck" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Kohlenhydrate %</label>
-              <NummerEingabe value={ck} onChange={setCk} placeholder="40" einheit="%" />
+              <NummerEingabe id="mk-ck" value={ck} onChange={setCk} placeholder="40" einheit="%" />
             </div>
             <div>
               <label htmlFor="mk-cf" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fett %</label>
-              <NummerEingabe value={cf} onChange={setCf} placeholder="30" einheit="%" />
+              <NummerEingabe id="mk-cf" value={cf} onChange={setCf} placeholder="30" einheit="%" />
             </div>
           </div>
         )}
         <div>
           <label htmlFor="mk-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht (für Protein je kg)</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
+          <NummerEingabe id="mk-gewicht" value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
         </div>
       </div>
 
@@ -161,7 +161,7 @@ export default function MakronaehrstoffeRechner() {
           {/* Split-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Deine Makros je Verteilung (bei {fmt0(nKcal)} kcal)</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Rechenweg (Beispiel Protein)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

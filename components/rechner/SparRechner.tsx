@@ -37,32 +37,32 @@ export default function SparRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anfangskapital</label>
-          <NummerEingabe value={anfangskapital} onChange={setAnfangskapital} placeholder="0" einheit="€" />
+          <label htmlFor="spar-anfangskapital" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anfangskapital</label>
+          <NummerEingabe id="spar-anfangskapital" value={anfangskapital} onChange={setAnfangskapital} placeholder="0" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Sparrate</label>
-          <NummerEingabe value={sparrate} onChange={setSparrate} placeholder="100" einheit="€" />
+          <label htmlFor="spar-monatliche-sparrate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Sparrate</label>
+          <NummerEingabe id="spar-monatliche-sparrate" value={sparrate} onChange={setSparrate} placeholder="100" einheit="€" />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zinssatz / Rendite p.a.</label>
-          <NummerEingabe value={zinssatz} onChange={setZinssatz} placeholder="5" einheit="%" />
+          <label htmlFor="spar-zinssatz-rendite-p-a" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zinssatz / Rendite p.a.</label>
+          <NummerEingabe id="spar-zinssatz-rendite-p-a" value={zinssatz} onChange={setZinssatz} placeholder="5" einheit="%" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sparzeit</label>
-          <NummerEingabe value={sparzeit} onChange={setSparzeit} placeholder="10" einheit="Jahre" />
+          <label htmlFor="spar-sparzeit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sparzeit</label>
+          <NummerEingabe id="spar-sparzeit" value={sparzeit} onChange={setSparzeit} placeholder="10" einheit="Jahre" />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="spar-dynamik" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Dynamik (jährl. Erhöhung)
           </label>
-          <NummerEingabe value={dynamik} onChange={setDynamik} placeholder="0" einheit="%" />
+          <NummerEingabe id="spar-dynamik" value={dynamik} onChange={setDynamik} placeholder="0" einheit="%" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Sparrate jährlich erhöhen</p>
         </div>
         <div>
@@ -208,7 +208,7 @@ export default function SparRechner() {
               </svg>
             </button>
             {tabelleOffen && (
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/20">

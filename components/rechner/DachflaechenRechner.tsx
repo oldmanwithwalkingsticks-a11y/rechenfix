@@ -112,25 +112,25 @@ export default function DachflaechenRechner() {
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Gebäudelänge</label>
-            <NummerEingabe value={laenge} onChange={setLaenge} einheit="m" />
+            <label htmlFor="dachflaechen-gebaeudelaenge" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Gebäudelänge</label>
+            <NummerEingabe id="dachflaechen-gebaeudelaenge" value={laenge} onChange={setLaenge} einheit="m" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Gebäudebreite</label>
-            <NummerEingabe value={breite} onChange={setBreite} einheit="m" />
+            <label htmlFor="dachflaechen-gebaeudebreite" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Gebäudebreite</label>
+            <NummerEingabe id="dachflaechen-gebaeudebreite" value={breite} onChange={setBreite} einheit="m" />
           </div>
         </div>
 
         {form !== 'flach' && (
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachneigung</label>
-            <NummerEingabe value={neigung} onChange={setNeigung} einheit="°" />
+            <label htmlFor="dachflaechen-dachneigung" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachneigung</label>
+            <NummerEingabe id="dachflaechen-dachneigung" value={neigung} onChange={setNeigung} einheit="°" />
           </div>
         )}
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachüberstand</label>
-          <NummerEingabe value={ueberstand} onChange={setUeberstand} einheit="m" />
+          <label htmlFor="dachflaechen-dachueberstand" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachüberstand</label>
+          <NummerEingabe id="dachflaechen-dachueberstand" value={ueberstand} onChange={setUeberstand} einheit="m" />
         </div>
       </div>
 

@@ -87,8 +87,9 @@ export default function MutterschutzRechner() {
       {/* Geburtstermin */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Errechneter Geburtstermin</label>
+          <label htmlFor="mutterschutz-errechneter-geburtstermin" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Errechneter Geburtstermin</label>
           <input
+            id="mutterschutz-errechneter-geburtstermin"
             type="date"
             value={geburtstermin}
             onChange={e => setGeburtstermin(e.target.value)}
@@ -112,8 +113,9 @@ export default function MutterschutzRechner() {
 
       {/* Tatsächliches Geburtsdatum */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tatsächliches Geburtsdatum (optional)</label>
+        <label htmlFor="mutterschutz-tatsaechliches-geburtsdatum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tatsächliches Geburtsdatum (optional)</label>
         <input
+          id="mutterschutz-tatsaechliches-geburtsdatum"
           type="date"
           value={tatsaechlich}
           onChange={e => setTatsaechlich(e.target.value)}
@@ -127,8 +129,8 @@ export default function MutterschutzRechner() {
       {/* Gehalt und Beschäftigung */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Netto-Monatsgehalt (Ø letzte 3 Monate)</label>
-          <NummerEingabe value={nettoGehalt} onChange={setNettoGehalt} placeholder="z.B. 2500" einheit="€" />
+          <label htmlFor="mutterschutz-netto-monatsgehalt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Netto-Monatsgehalt (Ø letzte 3 Monate)</label>
+          <NummerEingabe id="mutterschutz-netto-monatsgehalt" value={nettoGehalt} onChange={setNettoGehalt} placeholder="z.B. 2500" einheit="€" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Bei schwankendem Einkommen: Durchschnitt der letzten 3 abgerechneten Monate eingeben (§ 24i Abs. 2 SGB V).
           </p>

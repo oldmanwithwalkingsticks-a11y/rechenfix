@@ -113,8 +113,9 @@ export default function UeberstundenRechner() {
       {modus === 'berechnen' && (
         <div>
           <div className="mb-4">
-            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Vertragliche Wochenarbeitszeit</label>
+            <label htmlFor="ueberstunden-vertragliche-wochenarbeitszeit" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Vertragliche Wochenarbeitszeit</label>
             <NummerEingabe
+              id="ueberstunden-vertragliche-wochenarbeitszeit"
               value={vertraglicheStunden}
               onChange={v => setVertraglicheStunden(clampInputValue(v, 0, 80))}
               onBlur={v => setVertraglicheStunden(clampInputValueOnBlur(v, 0, 80))}
@@ -146,8 +147,9 @@ export default function UeberstundenRechner() {
 
           {eingabeArt === 'gesamt' ? (
             <div className="mb-4">
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tatsächliche Wochenarbeitszeit</label>
+              <label htmlFor="ueberstunden-tatsaechliche-wochenarbeitszeit" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tatsächliche Wochenarbeitszeit</label>
               <NummerEingabe
+                id="ueberstunden-tatsaechliche-wochenarbeitszeit"
                 value={tatsaechlich}
                 onChange={v => setTatsaechlich(clampInputValue(v, 0, 120))}
                 onBlur={v => setTatsaechlich(clampInputValueOnBlur(v, 0, 120))}
@@ -163,6 +165,7 @@ export default function UeberstundenRechner() {
                   <span className="text-xs font-medium text-gray-600 dark:text-gray-400 w-12">{tag.slice(0, 2)}</span>
                   <div className="flex-1">
                     <NummerEingabe
+                      aria-label={`Stunden am ${tag}`}
                       value={tagesStunden[idx]}
                       onChange={v => updateTag(idx, clampInputValue(v, 0, 24))}
                       onBlur={v => updateTag(idx, clampInputValueOnBlur(v, 0, 24))}
@@ -208,6 +211,7 @@ export default function UeberstundenRechner() {
                   inputMode="numeric"
                   min="1"
                   max="52"
+                  aria-label="Zeitraum in Wochen"
                   value={customWochen}
                   onChange={e => setCustomWochen(clampInputValue(e.target.value, 1, 52))}
                   onBlur={e => setCustomWochen(clampInputValueOnBlur(e.target.value, 1, 52))}
@@ -343,8 +347,9 @@ export default function UeberstundenRechner() {
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Überstundenzuschlag</label>
+              <label htmlFor="ueberstunden-ueberstundenzuschlag" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Überstundenzuschlag</label>
               <NummerEingabe
+                id="ueberstunden-ueberstundenzuschlag"
                 value={zuschlag}
                 onChange={v => setZuschlag(clampInputValue(v, 0, 200))}
                 onBlur={v => setZuschlag(clampInputValueOnBlur(v, 0, 200))}
@@ -431,7 +436,7 @@ export default function UeberstundenRechner() {
                 <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Zuschlag-Vergleich</p>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Zuschlag-Vergleich">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-700">

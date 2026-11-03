@@ -176,7 +176,7 @@ function OperandEingabe({
         <div>
           <p className="text-xs text-gray-600 dark:text-gray-400 mb-1.5">Zahl {nr} (Dezimalzahl)</p>
           <div className="w-32">
-            <NummerEingabe value={dezimal} onChange={setDezimal} placeholder="0,75" />
+            <NummerEingabe aria-label={`Zahl ${nr} als Dezimalzahl`} value={dezimal} onChange={setDezimal} placeholder="0,75" />
           </div>
         </div>
       ) : (
@@ -200,16 +200,16 @@ function BruchEingabe({
       <div className="flex items-center gap-2">
         {ganz !== undefined && setGanz && (
           <div className="w-14">
-            <NummerEingabe value={ganz} onChange={setGanz} placeholder="0" />
+            <NummerEingabe aria-label={`${label}, ganze Zahl`} value={ganz} onChange={setGanz} placeholder="0" />
           </div>
         )}
         <div className="flex flex-col items-center gap-0.5">
           <div className="w-16">
-            <NummerEingabe value={zaehler} onChange={setZaehler} placeholder="1" />
+            <NummerEingabe aria-label={`${label}, Zähler`} value={zaehler} onChange={setZaehler} placeholder="1" />
           </div>
           <div className="w-16 border-t-2 border-gray-400 dark:border-gray-500" />
           <div className="w-16">
-            <NummerEingabe value={nenner} onChange={setNenner} placeholder="2" />
+            <NummerEingabe aria-label={`${label}, Nenner`} value={nenner} onChange={setNenner} placeholder="2" />
           </div>
         </div>
       </div>
@@ -494,7 +494,7 @@ export default function BruchRechner() {
               <div>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1.5">Dezimalzahl</p>
                 <div className="w-32">
-                  <NummerEingabe value={dezWert} onChange={setDezWert} placeholder="0,75" />
+                  <NummerEingabe aria-label="Dezimalzahl" value={dezWert} onChange={setDezWert} placeholder="0,75" />
                 </div>
               </div>
             ) : (

@@ -53,10 +53,10 @@ export default function SteuererstattungRechner() {
         {/* Brutto + Steuerklasse */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="steuererstattung-jahresbruttoeinkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Jahresbruttoeinkommen
             </label>
-            <NummerEingabe value={brutto} onChange={setBrutto} einheit="€" placeholder="z.B. 40.000" />
+            <NummerEingabe id="steuererstattung-jahresbruttoeinkommen" value={brutto} onChange={setBrutto} einheit="€" placeholder="z.B. 40.000" />
           </div>
           <div>
             <label htmlFor="steuererstattung-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -79,17 +79,17 @@ export default function SteuererstattungRechner() {
         {/* Pendler + Arbeitstage */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="steuererstattung-entfernung-wohnung-arbeit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Entfernung Wohnung–Arbeit (einfach)
             </label>
-            <NummerEingabe value={entfernung} onChange={setEntfernung} einheit="km" placeholder="z.B. 25" />
+            <NummerEingabe id="steuererstattung-entfernung-wohnung-arbeit" value={entfernung} onChange={setEntfernung} einheit="km" placeholder="z.B. 25" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="steuererstattung-arbeitstage-pro-jahr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               {/* W187: vorher „Arbeitstage pro Jahr“ — Homeoffice-Tage wurden zusätzlich als Pendeltage gezählt */}
               Arbeitstage pro Jahr (gesamt)
             </label>
-            <NummerEingabe value={arbeitstage} onChange={setArbeitstage} placeholder="220" />
+            <NummerEingabe id="steuererstattung-arbeitstage-pro-jahr" value={arbeitstage} onChange={setArbeitstage} placeholder="220" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">inklusive Homeoffice-Tage</p>
           </div>
         </div>
@@ -97,18 +97,18 @@ export default function SteuererstattungRechner() {
         {/* Homeoffice + Berufsausgaben */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="steuererstattung-davon-homeoffice-tage" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               davon Homeoffice-Tage
             </label>
-            <NummerEingabe value={homeofficeTage} onChange={setHomeofficeTage} placeholder="0" />
+            <NummerEingabe id="steuererstattung-davon-homeoffice-tage" value={homeofficeTage} onChange={setHomeofficeTage} placeholder="0" />
             {/* W187: Hinweis auf Pendeltage = Arbeitstage − Homeoffice-Tage und den Sonderfall § 4 Abs. 5 S. 1 Nr. 6c S. 2 EStG */}
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Tage ohne Fahrt zur Arbeitsstätte: 6 €/Tag, max. 1.260 €/Jahr. Für diese Tage entfällt die Pendlerpauschale. Ausnahme: Steht dauerhaft kein anderer Arbeitsplatz zur Verfügung (z. B. Lehrkräfte), gibt es die 6 € auch an Tagen mit Fahrt; das bildet der Rechner nicht ab.</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="steuererstattung-berufsbedingte-ausgaben" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Berufsbedingte Ausgaben
             </label>
-            <NummerEingabe value={beruflicheAusgaben} onChange={setBeruflicheAusgaben} einheit="€" placeholder="0" />
+            <NummerEingabe id="steuererstattung-berufsbedingte-ausgaben" value={beruflicheAusgaben} onChange={setBeruflicheAusgaben} einheit="€" placeholder="0" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Fachliteratur, Fortbildung, Arbeitsmittel</p>
           </div>
         </div>
@@ -116,6 +116,10 @@ export default function SteuererstattungRechner() {
         {/* Kirchensteuer Toggle */}
         <div className="flex items-center gap-3">
           <button
+            type="button"
+            role="switch"
+            aria-checked={kirchensteuer}
+            aria-label="Kirchensteuer zahlen"
             onClick={() => setKirchensteuer(!kirchensteuer)}
             className={`relative w-12 h-7 rounded-full transition-colors duration-200 ${
               kirchensteuer ? 'bg-green-500' : 'bg-red-400'
@@ -133,17 +137,17 @@ export default function SteuererstattungRechner() {
         {/* Haushaltsnahe DL + Spenden */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="steuererstattung-haushaltsnahe-dienstleistungen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Haushaltsnahe Dienstleistungen
             </label>
-            <NummerEingabe value={haushaltsnaheDL} onChange={setHaushaltsnaheDL} einheit="€" placeholder="0" />
+            <NummerEingabe id="steuererstattung-haushaltsnahe-dienstleistungen" value={haushaltsnaheDL} onChange={setHaushaltsnaheDL} einheit="€" placeholder="0" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">z.B. Putzhilfe, Handwerker</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="steuererstattung-spenden" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Spenden
             </label>
-            <NummerEingabe value={spenden} onChange={setSpenden} einheit="€" placeholder="0" />
+            <NummerEingabe id="steuererstattung-spenden" value={spenden} onChange={setSpenden} einheit="€" placeholder="0" />
           </div>
         </div>
       </div>

@@ -200,7 +200,7 @@ export default function ZyklusRechner() {
           </div>
 
           {modus > 1 && (
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4 overflow-x-auto">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3 text-sm">Zyklus-Übersicht</h2>
               <table className="w-full text-xs">
                 <thead>

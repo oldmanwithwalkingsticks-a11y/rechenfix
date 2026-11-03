@@ -80,11 +80,11 @@ export default function FtpRechner() {
           <label htmlFor="ftp-leistung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             {protokoll === 'ramp' ? 'Höchste 1-Minuten-Leistung' : protokoll === 'ftp' ? 'Bekannte FTP' : 'Durchschnittsleistung im Test'}
           </label>
-          <NummerEingabe value={leistung} onChange={setLeistung} placeholder="260" einheit="W" />
+          <NummerEingabe id="ftp-leistung" value={leistung} onChange={setLeistung} placeholder="260" einheit="W" />
         </div>
         <div>
           <label htmlFor="ftp-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht (für W/kg)</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
+          <NummerEingabe id="ftp-gewicht" value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
         </div>
       </div>
 
@@ -123,7 +123,7 @@ export default function FtpRechner() {
           {/* Zonen-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Deine 7 Trainingszonen (Coggan)</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Deine 7 Trainingszonen (Coggan)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

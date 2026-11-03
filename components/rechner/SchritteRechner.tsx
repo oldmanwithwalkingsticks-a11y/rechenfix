@@ -29,16 +29,16 @@ export default function SchritteRechner() {
       <div className="space-y-4 mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schritte</label>
-            <NummerEingabe value={schritte} onChange={setSchritte} placeholder="8000" />
+            <label htmlFor="schritte-schritte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schritte</label>
+            <NummerEingabe id="schritte-schritte" value={schritte} onChange={setSchritte} placeholder="8000" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße (cm)</label>
-            <NummerEingabe value={groesse} onChange={setGroesse} placeholder="175" />
+            <label htmlFor="schritte-koerpergroesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße (cm)</label>
+            <NummerEingabe id="schritte-koerpergroesse" value={groesse} onChange={setGroesse} placeholder="175" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht (kg)</label>
-            <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="75" />
+            <label htmlFor="schritte-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht (kg)</label>
+            <NummerEingabe id="schritte-gewicht" value={gewicht} onChange={setGewicht} placeholder="75" />
           </div>
           <div>
             <label htmlFor="geschwindigkeit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschwindigkeit</label>

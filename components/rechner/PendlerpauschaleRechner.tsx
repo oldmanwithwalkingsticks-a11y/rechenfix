@@ -59,10 +59,11 @@ export default function PendlerpauschaleRechner() {
     <div>
       {/* Entfernung */}
       <div className="mb-4">
-        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
+        <label htmlFor="pendlerpauschale-einfache-entfernung-wohnung" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
           Einfache Entfernung Wohnung — Arbeitsstätte
         </label>
         <NummerEingabe
+          id="pendlerpauschale-einfache-entfernung-wohnung"
           value={entfernung}
           onChange={v => setEntfernung(clampInputValue(v, 1, 999))}
           onBlur={v => setEntfernung(clampInputValueOnBlur(v, 1, 999))}
@@ -95,6 +96,7 @@ export default function PendlerpauschaleRechner() {
               inputMode="numeric"
               min="1"
               max="365"
+              aria-label="Arbeitstage pro Jahr"
               value={arbeitstage}
               onChange={e => setArbeitstage(clampInputValue(e.target.value, 1, 365))}
               onBlur={e => setArbeitstage(clampInputValueOnBlur(e.target.value, 1, 365))}
@@ -106,8 +108,9 @@ export default function PendlerpauschaleRechner() {
           <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Arbeitstage/Woche</label>
+                <label htmlFor="pendlerpauschale-arbeitstage-woche" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Arbeitstage/Woche</label>
                 <input
+                  id="pendlerpauschale-arbeitstage-woche"
                   type="number"
                   inputMode="numeric"
                   min="1"
@@ -119,8 +122,9 @@ export default function PendlerpauschaleRechner() {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Urlaubstage</label>
+                <label htmlFor="pendlerpauschale-urlaubstage" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Urlaubstage</label>
                 <input
+                  id="pendlerpauschale-urlaubstage"
                   type="number"
                   inputMode="numeric"
                   min="0"
@@ -132,8 +136,9 @@ export default function PendlerpauschaleRechner() {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Feiertage</label>
+                <label htmlFor="pendlerpauschale-feiertage" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Feiertage</label>
                 <input
+                  id="pendlerpauschale-feiertage"
                   type="number"
                   inputMode="numeric"
                   min="0"
@@ -145,8 +150,9 @@ export default function PendlerpauschaleRechner() {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Krankheitstage</label>
+                <label htmlFor="pendlerpauschale-krankheitstage" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Krankheitstage</label>
                 <input
+                  id="pendlerpauschale-krankheitstage"
                   type="number"
                   inputMode="numeric"
                   min="0"
@@ -159,8 +165,9 @@ export default function PendlerpauschaleRechner() {
               </div>
             </div>
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Homeoffice-Tage pro Woche</label>
+              <label htmlFor="pendlerpauschale-homeoffice-tage-pro-woche" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Homeoffice-Tage pro Woche</label>
               <NummerEingabe
+                id="pendlerpauschale-homeoffice-tage-pro-woche"
                 value={homeofficeTage}
                 onChange={v => setHomeofficeTage(clampInputValue(v, 0, homeofficeMax))}
                 onBlur={v => setHomeofficeTage(clampInputValueOnBlur(v, 0, homeofficeMax))}
@@ -178,10 +185,11 @@ export default function PendlerpauschaleRechner() {
 
       {/* Grenzsteuersatz */}
       <div className="mb-6">
-        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grenzsteuersatz</label>
+        <label htmlFor="pendlerpauschale-grenzsteuersatz" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grenzsteuersatz</label>
         <div className="flex items-center gap-2 mb-2">
           <div className="flex-1">
             <NummerEingabe
+              id="pendlerpauschale-grenzsteuersatz"
               value={grenzsteuersatz}
               onChange={v => setGrenzsteuersatz(clampInputValue(v, 0, 100))}
               onBlur={v => setGrenzsteuersatz(clampInputValueOnBlur(v, 0, 100))}
@@ -213,8 +221,8 @@ export default function PendlerpauschaleRechner() {
 
       {/* W187: weitere Werbungskosten (Arbeitnehmer-Pauschbetrag) */}
       <div className="mb-6">
-        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Weitere Werbungskosten (€/Jahr)</label>
-        <NummerEingabe value={weitereWK} onChange={setWeitereWK} einheit="€" placeholder="0" />
+        <label htmlFor="pendlerpauschale-weitere-werbungskosten" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Weitere Werbungskosten (€/Jahr)</label>
+        <NummerEingabe id="pendlerpauschale-weitere-werbungskosten" value={weitereWK} onChange={setWeitereWK} einheit="€" placeholder="0" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Z. B. Arbeitsmittel, Fortbildung, Homeoffice-Pauschale. Der Arbeitnehmer-Pauschbetrag von 1.230 € wird ohnehin abgezogen; die Pendlerpauschale spart nur mit dem Teil Steuern, um den Ihre Werbungskosten insgesamt darüber liegen.
         </p>

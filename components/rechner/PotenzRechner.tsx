@@ -76,12 +76,12 @@ export default function PotenzRechner() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Basis (x)</label>
-                <NummerEingabe value={basis} onChange={setBasis} placeholder="2" />
+                <label htmlFor="potenz-basis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Basis (x)</label>
+                <NummerEingabe id="potenz-basis" value={basis} onChange={setBasis} placeholder="2" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Exponent (n)</label>
-                <NummerEingabe value={exponent} onChange={setExponent} placeholder="10" />
+                <label htmlFor="potenz-exponent" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Exponent (n)</label>
+                <NummerEingabe id="potenz-exponent" value={exponent} onChange={setExponent} placeholder="10" />
               </div>
             </div>
 
@@ -99,12 +99,12 @@ export default function PotenzRechner() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Radikand (x)</label>
-                <NummerEingabe value={radikand} onChange={setRadikand} placeholder="144" />
+                <label htmlFor="potenz-radikand" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Radikand (x)</label>
+                <NummerEingabe id="potenz-radikand" value={radikand} onChange={setRadikand} placeholder="144" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wurzelgrad (n)</label>
-                <NummerEingabe value={wurzelgrad} onChange={setWurzelgrad} placeholder="2" />
+                <label htmlFor="potenz-wurzelgrad" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wurzelgrad (n)</label>
+                <NummerEingabe id="potenz-wurzelgrad" value={wurzelgrad} onChange={setWurzelgrad} placeholder="2" />
               </div>
             </div>
 
@@ -127,12 +127,12 @@ export default function PotenzRechner() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl (x)</label>
-                <NummerEingabe value={logZahl} onChange={setLogZahl} placeholder="100" />
+                <label htmlFor="potenz-zahl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl (x)</label>
+                <NummerEingabe id="potenz-zahl" value={logZahl} onChange={setLogZahl} placeholder="100" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Basis (a)</label>
-                <NummerEingabe value={logBasis} onChange={setLogBasis} placeholder="10" />
+                <label htmlFor="potenz-basis-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Basis (a)</label>
+                <NummerEingabe id="potenz-basis-2" value={logBasis} onChange={setLogBasis} placeholder="10" />
               </div>
             </div>
 

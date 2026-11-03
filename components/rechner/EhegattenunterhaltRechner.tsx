@@ -98,17 +98,17 @@ export default function EhegattenunterhaltRechner() {
 
       {/* Einkommen */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="ehegattenunterhalt-bereinigtes-nettoeinkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Bereinigtes Nettoeinkommen Partner 1 (höherverdienend)
         </label>
-        <NummerEingabe value={netto1} onChange={setNetto1} placeholder="3500" einheit="€/Monat" />
+        <NummerEingabe id="ehegattenunterhalt-bereinigtes-nettoeinkommen" value={netto1} onChange={setNetto1} placeholder="3500" einheit="€/Monat" />
       </div>
 
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="ehegattenunterhalt-bereinigtes-nettoeinkommen-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Bereinigtes Nettoeinkommen Partner 2
         </label>
-        <NummerEingabe value={netto2} onChange={setNetto2} placeholder="1200" einheit="€/Monat" />
+        <NummerEingabe id="ehegattenunterhalt-bereinigtes-nettoeinkommen-2" value={netto2} onChange={setNetto2} placeholder="1200" einheit="€/Monat" />
       </div>
 
       {/* Kindesunterhalt */}
@@ -129,10 +129,10 @@ export default function EhegattenunterhaltRechner() {
 
       {!kuBeruecksichtigt && (
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="ehegattenunterhalt-zu-zahlender-kindesunterhalt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Zu zahlender Kindesunterhalt (wird vom Einkommen P1 abgezogen)
           </label>
-          <NummerEingabe value={kindesunterhalt} onChange={setKindesunterhalt} placeholder="400" einheit="€/Monat" />
+          <NummerEingabe id="ehegattenunterhalt-zu-zahlender-kindesunterhalt" value={kindesunterhalt} onChange={setKindesunterhalt} placeholder="400" einheit="€/Monat" />
         </div>
       )}
 

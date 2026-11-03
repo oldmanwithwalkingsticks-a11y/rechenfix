@@ -116,16 +116,16 @@ export default function TapetenbedarfRechner() {
       {modus === 'schnell' ? (
         <div className="grid grid-cols-3 gap-3 mb-5">
           <div>
-            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumlänge</label>
-            <NummerEingabe value={raumLaenge} onChange={setRaumLaenge} placeholder="5" einheit="m" />
+            <label htmlFor="tapetenbedarf-raumlaenge" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumlänge</label>
+            <NummerEingabe id="tapetenbedarf-raumlaenge" value={raumLaenge} onChange={setRaumLaenge} placeholder="5" einheit="m" />
           </div>
           <div>
-            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumbreite</label>
-            <NummerEingabe value={raumBreite} onChange={setRaumBreite} placeholder="4" einheit="m" />
+            <label htmlFor="tapetenbedarf-raumbreite" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumbreite</label>
+            <NummerEingabe id="tapetenbedarf-raumbreite" value={raumBreite} onChange={setRaumBreite} placeholder="4" einheit="m" />
           </div>
           <div>
-            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumhöhe</label>
-            <NummerEingabe value={raumHoehe} onChange={setRaumHoehe} placeholder="2,50" einheit="m" />
+            <label htmlFor="tapetenbedarf-raumhoehe" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Raumhöhe</label>
+            <NummerEingabe id="tapetenbedarf-raumhoehe" value={raumHoehe} onChange={setRaumHoehe} placeholder="2,50" einheit="m" />
           </div>
         </div>
       ) : (
@@ -139,11 +139,11 @@ export default function TapetenbedarfRechner() {
             <div key={w.label} className="flex items-center gap-2">
               <span className="text-sm text-gray-600 dark:text-gray-400 w-16 shrink-0">{w.label}</span>
               <div className="flex-1">
-                <NummerEingabe value={w.b} onChange={w.setB} placeholder="Breite" einheit="m" />
+                <NummerEingabe aria-label={`${w.label}: Breite in Metern`} value={w.b} onChange={w.setB} placeholder="Breite" einheit="m" />
               </div>
               <span className="text-gray-600 dark:text-gray-400">×</span>
               <div className="flex-1">
-                <NummerEingabe value={w.h} onChange={w.setH} placeholder="Höhe" einheit="m" />
+                <NummerEingabe aria-label={`${w.label}: Höhe in Metern`} value={w.h} onChange={w.setH} placeholder="Höhe" einheit="m" />
               </div>
             </div>
           ))}
@@ -154,30 +154,30 @@ export default function TapetenbedarfRechner() {
       <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Abzüge</p>
       <div className="grid grid-cols-2 gap-3 mb-2">
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster (Anzahl)</label>
-          <NummerEingabe value={fenster} onChange={setFenster} placeholder="1" einheit="Stk" />
+          <label htmlFor="tapetenbedarf-fenster" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster (Anzahl)</label>
+          <NummerEingabe id="tapetenbedarf-fenster" value={fenster} onChange={setFenster} placeholder="1" einheit="Stk" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Türen (Anzahl)</label>
-          <NummerEingabe value={tueren} onChange={setTueren} placeholder="1" einheit="Stk" />
+          <label htmlFor="tapetenbedarf-tueren" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Türen (Anzahl)</label>
+          <NummerEingabe id="tapetenbedarf-tueren" value={tueren} onChange={setTueren} placeholder="1" einheit="Stk" />
         </div>
       </div>
       <div className="grid grid-cols-4 gap-2 mb-5">
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster B</label>
-          <NummerEingabe value={fensterB} onChange={setFensterB} placeholder="1,2" einheit="m" />
+          <label htmlFor="tapetenbedarf-fenster-b" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster B</label>
+          <NummerEingabe id="tapetenbedarf-fenster-b" value={fensterB} onChange={setFensterB} placeholder="1,2" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster H</label>
-          <NummerEingabe value={fensterH} onChange={setFensterH} placeholder="1,4" einheit="m" />
+          <label htmlFor="tapetenbedarf-fenster-h" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Fenster H</label>
+          <NummerEingabe id="tapetenbedarf-fenster-h" value={fensterH} onChange={setFensterH} placeholder="1,4" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tür B</label>
-          <NummerEingabe value={tuerB} onChange={setTuerB} placeholder="0,9" einheit="m" />
+          <label htmlFor="tapetenbedarf-tuer-b" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tür B</label>
+          <NummerEingabe id="tapetenbedarf-tuer-b" value={tuerB} onChange={setTuerB} placeholder="0,9" einheit="m" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tür H</label>
-          <NummerEingabe value={tuerH} onChange={setTuerH} placeholder="2,1" einheit="m" />
+          <label htmlFor="tapetenbedarf-tuer-h" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Tür H</label>
+          <NummerEingabe id="tapetenbedarf-tuer-h" value={tuerH} onChange={setTuerH} placeholder="2,1" einheit="m" />
         </div>
       </div>
 
@@ -223,16 +223,16 @@ export default function TapetenbedarfRechner() {
       </div>
       <div className="grid grid-cols-3 gap-3 mb-6">
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Rapport</label>
-          <NummerEingabe value={rapport} onChange={setRapport} placeholder="0" einheit="cm" />
+          <label htmlFor="tapetenbedarf-rapport" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Rapport</label>
+          <NummerEingabe id="tapetenbedarf-rapport" value={rapport} onChange={setRapport} placeholder="0" einheit="cm" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verschnitt</label>
-          <NummerEingabe value={verschnitt} onChange={setVerschnitt} placeholder="10" einheit="%" />
+          <label htmlFor="tapetenbedarf-verschnitt" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Verschnitt</label>
+          <NummerEingabe id="tapetenbedarf-verschnitt" value={verschnitt} onChange={setVerschnitt} placeholder="10" einheit="%" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Preis/Rolle</label>
-          <NummerEingabe value={preisProRolle} onChange={setPreisProRolle} placeholder="0" einheit="€" />
+          <label htmlFor="tapetenbedarf-preis-rolle" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Preis/Rolle</label>
+          <NummerEingabe id="tapetenbedarf-preis-rolle" value={preisProRolle} onChange={setPreisProRolle} placeholder="0" einheit="€" />
         </div>
       </div>
 

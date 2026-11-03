@@ -51,11 +51,11 @@ export default function LaufbandSteigungRechner() {
       <div className="grid gap-4 sm:grid-cols-2 mb-6">
         <div>
           <label htmlFor="lb-band" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Band-Geschwindigkeit</label>
-          <NummerEingabe value={band} onChange={setBand} placeholder="10" einheit="km/h" />
+          <NummerEingabe id="lb-band" value={band} onChange={setBand} placeholder="10" einheit="km/h" />
         </div>
         <div>
           <label htmlFor="lb-steigung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Steigung</label>
-          <NummerEingabe value={steigung} onChange={setSteigung} placeholder="2" einheit="%" />
+          <NummerEingabe id="lb-steigung" value={steigung} onChange={setSteigung} placeholder="2" einheit="%" />
         </div>
       </div>
 
@@ -95,7 +95,7 @@ export default function LaufbandSteigungRechner() {
           {/* Steigungs-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Dein Tempo bei verschiedenen Steigungen</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Dein Tempo bei verschiedenen Steigungen">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

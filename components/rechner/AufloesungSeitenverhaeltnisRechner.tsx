@@ -142,22 +142,22 @@ export default function AufloesungSeitenverhaeltnisRechner() {
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
           <div>
             <label htmlFor="sv-breite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
-            <NummerEingabe value={breite} onChange={setBreite} placeholder="1920" einheit="px" />
+            <NummerEingabe id="sv-breite" value={breite} onChange={setBreite} placeholder="1920" einheit="px" />
           </div>
           <div>
             <label htmlFor="sv-hoehe" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe</label>
-            <NummerEingabe value={hoehe} onChange={setHoehe} placeholder="1080" einheit="px" />
+            <NummerEingabe id="sv-hoehe" value={hoehe} onChange={setHoehe} placeholder="1080" einheit="px" />
           </div>
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
           <div>
             <label htmlFor="sv-vw" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verhältnis Breite</label>
-            <NummerEingabe value={vw} onChange={setVw} placeholder="16" />
+            <NummerEingabe id="sv-vw" value={vw} onChange={setVw} placeholder="16" />
           </div>
           <div>
             <label htmlFor="sv-vh" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verhältnis Höhe</label>
-            <NummerEingabe value={vh} onChange={setVh} placeholder="9" />
+            <NummerEingabe id="sv-vh" value={vh} onChange={setVh} placeholder="9" />
           </div>
           <div>
             <label htmlFor="sv-bekannt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bekannte Seite</label>
@@ -173,7 +173,7 @@ export default function AufloesungSeitenverhaeltnisRechner() {
           </div>
           <div>
             <label htmlFor="sv-pixel" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{bekannteSeite === 'breite' ? 'Breite' : 'Höhe'} in Pixeln</label>
-            <NummerEingabe value={pixelwert} onChange={setPixelwert} placeholder="1920" einheit="px" />
+            <NummerEingabe id="sv-pixel" value={pixelwert} onChange={setPixelwert} placeholder="1920" einheit="px" />
           </div>
         </div>
       )}
@@ -242,7 +242,7 @@ export default function AufloesungSeitenverhaeltnisRechner() {
           {/* Referenz-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Gängige Auflösungen und ihr Seitenverhältnis</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Gängige Auflösungen und ihr Seitenverhältnis">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

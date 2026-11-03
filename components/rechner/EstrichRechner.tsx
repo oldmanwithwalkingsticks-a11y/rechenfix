@@ -53,12 +53,12 @@ export default function EstrichRechner() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fläche (m²)</label>
-            <NummerEingabe value={flaeche} onChange={setFlaeche} placeholder="20" />
+            <label htmlFor="estrich-flaeche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fläche (m²)</label>
+            <NummerEingabe id="estrich-flaeche" value={flaeche} onChange={setFlaeche} placeholder="20" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schichtdicke (mm)</label>
-            <NummerEingabe value={dicke} onChange={setDicke} placeholder={material === 'estrich' ? '50' : '15'} />
+            <label htmlFor="estrich-schichtdicke" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schichtdicke (mm)</label>
+            <NummerEingabe id="estrich-schichtdicke" value={dicke} onChange={setDicke} placeholder={material === 'estrich' ? '50' : '15'} />
           </div>
           <div>
             <label htmlFor="materialtyp" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Materialtyp</label>

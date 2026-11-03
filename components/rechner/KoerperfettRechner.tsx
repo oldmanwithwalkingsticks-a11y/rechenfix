@@ -75,26 +75,26 @@ export default function KoerperfettRechner() {
 
       {/* Körpergröße */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße</label>
+        <label htmlFor="koerperfett-koerpergroesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={groesse} onChange={setGroesse} placeholder="z.B. 178" einheit="cm" />
+          <NummerEingabe id="koerperfett-koerpergroesse" value={groesse} onChange={setGroesse} placeholder="z.B. 178" einheit="cm" />
         </div>
       </div>
 
       {/* Bauchumfang */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bauchumfang</label>
+        <label htmlFor="koerperfett-bauchumfang" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bauchumfang</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={bauchumfang} onChange={setBauchumfang} placeholder="z.B. 85" einheit="cm" />
+          <NummerEingabe id="koerperfett-bauchumfang" value={bauchumfang} onChange={setBauchumfang} placeholder="z.B. 85" einheit="cm" />
         </div>
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Auf Nabelhöhe messen, morgens nüchtern</p>
       </div>
 
       {/* Halsumfang */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Halsumfang</label>
+        <label htmlFor="koerperfett-halsumfang" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Halsumfang</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={halsumfang} onChange={setHalsumfang} placeholder="z.B. 38" einheit="cm" />
+          <NummerEingabe id="koerperfett-halsumfang" value={halsumfang} onChange={setHalsumfang} placeholder="z.B. 38" einheit="cm" />
         </div>
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Unterhalb des Kehlkopfes messen</p>
       </div>
@@ -102,9 +102,9 @@ export default function KoerperfettRechner() {
       {/* Hüftumfang (nur Frauen) */}
       {geschlecht === 'frau' && (
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hüftumfang</label>
+          <label htmlFor="koerperfett-hueftumfang" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hüftumfang</label>
           <div className="w-full sm:w-1/2">
-            <NummerEingabe value={hueftumfang} onChange={setHueftumfang} placeholder="z.B. 95" einheit="cm" />
+            <NummerEingabe id="koerperfett-hueftumfang" value={hueftumfang} onChange={setHueftumfang} placeholder="z.B. 95" einheit="cm" />
           </div>
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">An der breitesten Stelle messen</p>
         </div>
@@ -112,17 +112,17 @@ export default function KoerperfettRechner() {
 
       {/* Alter */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter <span className="text-gray-600 dark:text-gray-400 font-normal">(für Vergleichswerte)</span></label>
+        <label htmlFor="koerperfett-alter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter <span className="text-gray-600 dark:text-gray-400 font-normal">(für Vergleichswerte)</span></label>
         <div className="w-full sm:w-1/3">
-          <NummerEingabe value={alter} onChange={setAlter} placeholder="z.B. 30" einheit="Jahre" />
+          <NummerEingabe id="koerperfett-alter" value={alter} onChange={setAlter} placeholder="z.B. 30" einheit="Jahre" />
         </div>
       </div>
 
       {/* Gewicht (optional) */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht <span className="text-gray-600 dark:text-gray-400 font-normal">(optional, für Fett-/Magermasse)</span></label>
+        <label htmlFor="koerperfett-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewicht <span className="text-gray-600 dark:text-gray-400 font-normal">(optional, für Fett-/Magermasse)</span></label>
         <div className="w-full sm:w-1/3">
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="z.B. 80" einheit="kg" />
+          <NummerEingabe id="koerperfett-gewicht" value={gewicht} onChange={setGewicht} placeholder="z.B. 80" einheit="kg" />
         </div>
       </div>
 

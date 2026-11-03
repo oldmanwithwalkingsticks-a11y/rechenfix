@@ -68,16 +68,16 @@ export default function IdealgewichtRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter</label>
-          <NummerEingabe value={alter} onChange={setAlter} placeholder="z.B. 30" einheit="Jahre" />
+          <label htmlFor="idealgewicht-alter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter</label>
+          <NummerEingabe id="idealgewicht-alter" value={alter} onChange={setAlter} placeholder="z.B. 30" einheit="Jahre" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Größe</label>
-          <NummerEingabe value={groesse} onChange={setGroesse} placeholder="z.B. 170" einheit="cm" />
+          <label htmlFor="idealgewicht-groesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Größe</label>
+          <NummerEingabe id="idealgewicht-groesse" value={groesse} onChange={setGroesse} placeholder="z.B. 170" einheit="cm" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktuelles Gewicht</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="z.B. 70" einheit="kg" />
+          <label htmlFor="idealgewicht-aktuelles-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktuelles Gewicht</label>
+          <NummerEingabe id="idealgewicht-aktuelles-gewicht" value={gewicht} onChange={setGewicht} placeholder="z.B. 70" einheit="kg" />
         </div>
       </div>
 
@@ -123,7 +123,7 @@ export default function IdealgewichtRechner() {
           {/* Vergleichstabelle */}
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Vergleich der drei Formeln</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Vergleich der drei Formeln">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

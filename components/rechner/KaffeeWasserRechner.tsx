@@ -145,11 +145,11 @@ export default function KaffeeWasserRechner() {
 
       {/* === 3: Menge === */}
       <div className="mb-6">
-        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 id="kaffee-wasser-schritt-1" className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">{istEspresso ? '2' : '3'}</span>
           {istEspresso ? 'Kaffee-Dosis (g)' : effModus === 'wasser' ? 'Wassermenge (ml)' : 'Kaffeemenge (g)'}
         </h2>
-        <NummerEingabe value={menge} onChange={setMenge} placeholder={istEspresso ? '18' : '500'} einheit={einheit} />
+        <NummerEingabe aria-labelledby="kaffee-wasser-schritt-1" value={menge} onChange={setMenge} placeholder={istEspresso ? '18' : '500'} einheit={einheit} />
         {istEspresso ? (
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Übliche Dosis: 18–20 g im doppelten Siebträger, ergibt bei 1:2 rund 36–40 g Espresso.
@@ -252,7 +252,7 @@ export default function KaffeeWasserRechner() {
                     : `Wassermenge je Methode bei ${gE(eingabeMenge)} g`}
                 </h2>
               </div>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

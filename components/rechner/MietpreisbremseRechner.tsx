@@ -52,21 +52,21 @@ export default function MietpreisbremseRechner() {
     <div>
       {/* Vergleichsmiete */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ortsübliche Vergleichsmiete</label>
-        <NummerEingabe value={vergleichsmiete} onChange={setVergleichsmiete} placeholder="10" einheit="€/m² kalt" />
+        <label htmlFor="mietpreisbremse-ortsuebliche-vergleichsmiete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ortsübliche Vergleichsmiete</label>
+        <NummerEingabe id="mietpreisbremse-ortsuebliche-vergleichsmiete" value={vergleichsmiete} onChange={setVergleichsmiete} placeholder="10" einheit="€/m² kalt" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Finden Sie im Mietspiegel Ihrer Stadt (oft kostenlos online).</p>
       </div>
 
       {/* Aktuelle Miete */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ihre aktuelle Kaltmiete</label>
-        <NummerEingabe value={aktuelleMiete} onChange={setAktuelleMiete} placeholder="12" einheit="€/m²" />
+        <label htmlFor="mietpreisbremse-ihre-aktuelle-kaltmiete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ihre aktuelle Kaltmiete</label>
+        <NummerEingabe id="mietpreisbremse-ihre-aktuelle-kaltmiete" value={aktuelleMiete} onChange={setAktuelleMiete} placeholder="12" einheit="€/m²" />
       </div>
 
       {/* Wohnfläche */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnfläche</label>
-        <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="65" einheit="m²" />
+        <label htmlFor="mietpreisbremse-wohnflaeche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnfläche</label>
+        <NummerEingabe id="mietpreisbremse-wohnflaeche" value={wohnflaeche} onChange={setWohnflaeche} placeholder="65" einheit="m²" />
       </div>
 
       {/* Gilt Bremse */}

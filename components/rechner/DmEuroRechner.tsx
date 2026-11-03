@@ -69,8 +69,8 @@ export default function DmEuroRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Betrag</label>
-          <NummerEingabe value={betrag} onChange={setBetrag} einheit={von} />
+          <label htmlFor="dm-euro-betrag" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Betrag</label>
+          <NummerEingabe id="dm-euro-betrag" value={betrag} onChange={setBetrag} einheit={von} />
         </div>
         <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">
           <div>

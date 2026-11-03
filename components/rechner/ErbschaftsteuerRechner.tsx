@@ -82,11 +82,11 @@ export default function ErbschaftsteuerRechner() {
 
       {/* === 2: Wert === */}
       <div className="mb-6">
-        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 id="erbschaftsteuer-schritt-1" className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Wert der {erwerbsart === 'erbschaft' ? 'Erbschaft' : 'Schenkung'}
         </h2>
-        <NummerEingabe value={wert} onChange={setWert} placeholder="300.000" einheit="€" />
+        <NummerEingabe aria-labelledby="erbschaftsteuer-schritt-1" value={wert} onChange={setWert} placeholder="300.000" einheit="€" />
       </div>
 
       {/* === 3: Verwandtschaft === */}
@@ -110,6 +110,7 @@ export default function ErbschaftsteuerRechner() {
               Alter des Kindes bei Erbfall (optional)
             </label>
             <NummerEingabe
+              id="erbschaftsteuer-alter-kind"
               value={alterKindRaw}
               onChange={setAlterKindRaw}
               placeholder="leer = 27 Jahre oder älter (kein Versorgungsfreibetrag)"
@@ -128,7 +129,7 @@ export default function ErbschaftsteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Vorherige Schenkungen (letzte 10 Jahre)
         </h2>
-        <NummerEingabe value={vorschenkungen} onChange={setVorschenkungen} placeholder="0" einheit="€" />
+        <NummerEingabe aria-label="Vorherige Schenkungen (letzte 10 Jahre)" value={vorschenkungen} onChange={setVorschenkungen} placeholder="0" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           § 14 ErbStG: Schenkungen der letzten 10 Jahre werden zum Gesamterwerb kumuliert. Die auf den Vorerwerb tatsächlich oder fiktiv zu zahlende Steuer wird anschließend angerechnet.
         </p>
@@ -209,7 +210,7 @@ export default function ErbschaftsteuerRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               <tr>
@@ -294,7 +295,7 @@ export default function ErbschaftsteuerRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Freibeträge-Übersicht (§ 16 ErbStG)</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Freibeträge-Übersicht (§ 16 ErbStG)">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

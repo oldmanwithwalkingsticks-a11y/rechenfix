@@ -42,12 +42,12 @@ export default function SkontoRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Rechnungsbetrag</label>
-          <NummerEingabe value={betrag} onChange={setBetrag} einheit="€" />
+          <label htmlFor="skonto-rechnungsbetrag" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Rechnungsbetrag</label>
+          <NummerEingabe id="skonto-rechnungsbetrag" value={betrag} onChange={setBetrag} einheit="€" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Skontosatz</label>
-          <NummerEingabe value={skontosatz} onChange={setSkontosatz} einheit="%" />
+          <label htmlFor="skonto-skontosatz" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Skontosatz</label>
+          <NummerEingabe id="skonto-skontosatz" value={skontosatz} onChange={setSkontosatz} einheit="%" />
           <div className="flex gap-2 mt-2">
             {['2', '3', '5'].map(v => (
               <button key={v} onClick={() => setSkontosatz(v)} className="text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-primary-100 dark:hover:bg-primary-500/20">
@@ -57,12 +57,12 @@ export default function SkontoRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Skontofrist</label>
-          <NummerEingabe value={skontofrist} onChange={setSkontofrist} einheit="Tage" />
+          <label htmlFor="skonto-skontofrist" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Skontofrist</label>
+          <NummerEingabe id="skonto-skontofrist" value={skontofrist} onChange={setSkontofrist} einheit="Tage" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Zahlungsziel</label>
-          <NummerEingabe value={zahlungsziel} onChange={setZahlungsziel} einheit="Tage" />
+          <label htmlFor="skonto-zahlungsziel" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Zahlungsziel</label>
+          <NummerEingabe id="skonto-zahlungsziel" value={zahlungsziel} onChange={setZahlungsziel} einheit="Tage" />
         </div>
       </div>
 

@@ -104,8 +104,8 @@ export default function ReichweitenRechner() {
     <div>
       {/* Akku */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Akkukapazität</label>
-        <NummerEingabe value={akku} onChange={setAkku} placeholder="60" einheit="kWh" />
+        <label htmlFor="reichweiten-akkukapazitaet" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Akkukapazität</label>
+        <NummerEingabe id="reichweiten-akkukapazitaet" value={akku} onChange={setAkku} placeholder="60" einheit="kWh" />
         <div className="flex flex-wrap gap-2 mt-2">
           {['40', '60', '77', '100'].map(v => (
             <button
@@ -121,8 +121,8 @@ export default function ReichweitenRechner() {
 
       {/* WLTP */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">WLTP-Reichweite (Herstellerangabe)</label>
-        <NummerEingabe value={wltp} onChange={setWltp} placeholder="400" einheit="km" />
+        <label htmlFor="reichweiten-wltp-reichweite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">WLTP-Reichweite (Herstellerangabe)</label>
+        <NummerEingabe id="reichweiten-wltp-reichweite" value={wltp} onChange={setWltp} placeholder="400" einheit="km" />
       </div>
 
       {/* Fahrprofil */}
@@ -187,8 +187,8 @@ export default function ReichweitenRechner() {
 
       {/* Strompreis */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-        <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder="32" einheit="ct/kWh" />
+        <label htmlFor="reichweiten-strompreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
+        <NummerEingabe id="reichweiten-strompreis" value={strompreis} onChange={setStrompreis} placeholder="32" einheit="ct/kWh" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Haushaltsstrom ≈ 32 ct, Wallbox-Sondertarif ≈ 28 ct, öffentlich AC ≈ 45 ct, DC-Schnelllader ≈ 60 ct.</p>
       </div>
 

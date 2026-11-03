@@ -39,27 +39,28 @@ export default function ProzVeraenderungRechner() {
     <div>
       {/* Alter Wert */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter Wert (Ausgangswert)</label>
+        <label htmlFor="proz-veraenderung-alter-wert" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter Wert (Ausgangswert)</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={alterWert} onChange={setAlterWert} placeholder="z.B. 100" einheit={e || undefined} />
+          <NummerEingabe id="proz-veraenderung-alter-wert" value={alterWert} onChange={setAlterWert} placeholder="z.B. 100" einheit={e || undefined} />
         </div>
       </div>
 
       {/* Neuer Wert */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Neuer Wert</label>
+        <label htmlFor="proz-veraenderung-neuer-wert" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Neuer Wert</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={neuerWert} onChange={setNeuerWert} placeholder="z.B. 125" einheit={e || undefined} />
+          <NummerEingabe id="proz-veraenderung-neuer-wert" value={neuerWert} onChange={setNeuerWert} placeholder="z.B. 125" einheit={e || undefined} />
         </div>
       </div>
 
       {/* Einheit */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="proz-veraenderung-einheit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Einheit <span className="text-gray-600 dark:text-gray-400 font-normal">(optional)</span>
         </label>
         <div className="w-full sm:w-1/3">
           <input
+            id="proz-veraenderung-einheit"
             type="text"
             value={einheit}
             onChange={ev => setEinheit(ev.target.value)}

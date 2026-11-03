@@ -96,20 +96,20 @@ export default function MalerkostenRechner() {
           {modus === 'raum' ? (
             <div className="grid grid-cols-3 gap-2">
               <div>
-                <label className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Länge</label>
-                <NummerEingabe value={laenge} onChange={setLaenge} einheit="m" />
+                <label htmlFor="malerkosten-laenge" className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Länge</label>
+                <NummerEingabe id="malerkosten-laenge" value={laenge} onChange={setLaenge} einheit="m" />
               </div>
               <div>
-                <label className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Breite</label>
-                <NummerEingabe value={breite} onChange={setBreite} einheit="m" />
+                <label htmlFor="malerkosten-breite" className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Breite</label>
+                <NummerEingabe id="malerkosten-breite" value={breite} onChange={setBreite} einheit="m" />
               </div>
               <div>
-                <label className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
-                <NummerEingabe value={hoehe} onChange={setHoehe} einheit="m" />
+                <label htmlFor="malerkosten-hoehe" className="block text-[10px] text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
+                <NummerEingabe id="malerkosten-hoehe" value={hoehe} onChange={setHoehe} einheit="m" />
               </div>
             </div>
           ) : (
-            <NummerEingabe value={direktFlaeche} onChange={setDirektFlaeche} einheit="m²" />
+            <NummerEingabe aria-label="Zu streichende Fläche in m²" value={direktFlaeche} onChange={setDirektFlaeche} einheit="m²" />
           )}
         </div>
 
@@ -122,12 +122,12 @@ export default function MalerkostenRechner() {
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Fenster (à 1,5 m²)</label>
-            <NummerEingabe value={fenster} onChange={setFenster} einheit="" />
+            <label htmlFor="malerkosten-fenster" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Fenster (à 1,5 m²)</label>
+            <NummerEingabe id="malerkosten-fenster" value={fenster} onChange={setFenster} einheit="" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Türen (à 2,0 m²)</label>
-            <NummerEingabe value={tueren} onChange={setTueren} einheit="" />
+            <label htmlFor="malerkosten-tueren" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Türen (à 2,0 m²)</label>
+            <NummerEingabe id="malerkosten-tueren" value={tueren} onChange={setTueren} einheit="" />
           </div>
         </div>
 

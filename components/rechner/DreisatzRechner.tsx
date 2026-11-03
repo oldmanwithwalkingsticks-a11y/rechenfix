@@ -58,20 +58,22 @@ export default function DreisatzRechner() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="dreisatz-wert-a1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Wert A1
             </label>
             <NummerEingabe
+              id="dreisatz-wert-a1"
               value={a1}
               onChange={setA1}
               placeholder="z.B. 3"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="dreisatz-wert-b1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Wert B1
             </label>
             <NummerEingabe
+              id="dreisatz-wert-b1"
               value={b1}
               onChange={setB1}
               placeholder="z.B. 6"
@@ -84,10 +86,11 @@ export default function DreisatzRechner() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="dreisatz-wert-a2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Wert A2
             </label>
             <NummerEingabe
+              id="dreisatz-wert-a2"
               value={a2}
               onChange={setA2}
               placeholder="z.B. 7"

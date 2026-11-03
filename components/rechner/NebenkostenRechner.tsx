@@ -43,48 +43,48 @@ export default function NebenkostenRechner() {
     <div>
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaltmiete</label>
-          <NummerEingabe value={kaltmiete} onChange={setKaltmiete} placeholder="650" einheit="€" />
+          <label htmlFor="nebenkosten-kaltmiete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaltmiete</label>
+          <NummerEingabe id="nebenkosten-kaltmiete" value={kaltmiete} onChange={setKaltmiete} placeholder="650" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnfläche</label>
-          <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="65" einheit="m²" />
+          <label htmlFor="nebenkosten-wohnflaeche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnfläche</label>
+          <NummerEingabe id="nebenkosten-wohnflaeche" value={wohnflaeche} onChange={setWohnflaeche} placeholder="65" einheit="m²" />
         </div>
       </div>
 
       <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nebenkosten (monatlich)</p>
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Heizkosten</label>
-          <NummerEingabe value={heizkosten} onChange={setHeizkosten} placeholder="80" einheit="€" />
+          <label htmlFor="nebenkosten-heizkosten" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Heizkosten</label>
+          <NummerEingabe id="nebenkosten-heizkosten" value={heizkosten} onChange={setHeizkosten} placeholder="80" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Warmwasser</label>
-          <NummerEingabe value={warmwasser} onChange={setWarmwasser} placeholder="25" einheit="€" />
+          <label htmlFor="nebenkosten-warmwasser" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Warmwasser</label>
+          <NummerEingabe id="nebenkosten-warmwasser" value={warmwasser} onChange={setWarmwasser} placeholder="25" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wasser/Abwasser</label>
-          <NummerEingabe value={wasser} onChange={setWasser} placeholder="35" einheit="€" />
+          <label htmlFor="nebenkosten-wasser-abwasser" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wasser/Abwasser</label>
+          <NummerEingabe id="nebenkosten-wasser-abwasser" value={wasser} onChange={setWasser} placeholder="35" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Müllentsorgung</label>
-          <NummerEingabe value={muell} onChange={setMuell} placeholder="20" einheit="€" />
+          <label htmlFor="nebenkosten-muellentsorgung" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Müllentsorgung</label>
+          <NummerEingabe id="nebenkosten-muellentsorgung" value={muell} onChange={setMuell} placeholder="20" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundsteuer</label>
-          <NummerEingabe value={grundsteuer} onChange={setGrundsteuer} placeholder="15" einheit="€" />
+          <label htmlFor="nebenkosten-grundsteuer" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundsteuer</label>
+          <NummerEingabe id="nebenkosten-grundsteuer" value={grundsteuer} onChange={setGrundsteuer} placeholder="15" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Gebäudeversicherung</label>
-          <NummerEingabe value={versicherung} onChange={setVersicherung} placeholder="10" einheit="€" />
+          <label htmlFor="nebenkosten-gebaeudeversicherung" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Gebäudeversicherung</label>
+          <NummerEingabe id="nebenkosten-gebaeudeversicherung" value={versicherung} onChange={setVersicherung} placeholder="10" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Hauswart</label>
-          <NummerEingabe value={hauswart} onChange={setHauswart} placeholder="15" einheit="€" />
+          <label htmlFor="nebenkosten-hauswart" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Hauswart</label>
+          <NummerEingabe id="nebenkosten-hauswart" value={hauswart} onChange={setHauswart} placeholder="15" einheit="€" />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Sonstige</label>
-          <NummerEingabe value={sonstige} onChange={setSonstige} placeholder="0" einheit="€" />
+          <label htmlFor="nebenkosten-sonstige" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Sonstige</label>
+          <NummerEingabe id="nebenkosten-sonstige" value={sonstige} onChange={setSonstige} placeholder="0" einheit="€" />
         </div>
       </div>
 

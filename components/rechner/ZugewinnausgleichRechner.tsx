@@ -118,12 +118,12 @@ export default function ZugewinnausgleichRechner() {
         <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Heiratsjahr</label>
-              <NummerEingabe value={heiratsjahr} onChange={setHeiratsjahr} placeholder="2010" />
+              <label htmlFor="zugewinnausgleich-heiratsjahr" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Heiratsjahr</label>
+              <NummerEingabe id="zugewinnausgleich-heiratsjahr" value={heiratsjahr} onChange={setHeiratsjahr} placeholder="2010" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endstichtag (Scheidungsantrag)</label>
-              <NummerEingabe value={endstichtagJahr} onChange={setEndstichtagJahr} placeholder={String(VPI_JAHR_MAX)} />
+              <label htmlFor="zugewinnausgleich-endstichtag" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endstichtag (Scheidungsantrag)</label>
+              <NummerEingabe id="zugewinnausgleich-endstichtag" value={endstichtagJahr} onChange={setEndstichtagJahr} placeholder={String(VPI_JAHR_MAX)} />
             </div>
           </div>
           <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -148,21 +148,21 @@ export default function ZugewinnausgleichRechner() {
         </h2>
         <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anfangsvermögen (bei Heirat)</label>
-            <NummerEingabe value={anfangP1} onChange={setAnfangP1} placeholder="15.000" einheit="€" />
+            <label htmlFor="zugewinnausgleich-anfangsvermoegen" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anfangsvermögen (bei Heirat)</label>
+            <NummerEingabe id="zugewinnausgleich-anfangsvermoegen" value={anfangP1} onChange={setAnfangP1} placeholder="15.000" einheit="€" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               Vermögen am Tag der Heirat. Schulden als negativer Wert möglich.
             </p>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endvermögen (bei Scheidungsantrag/Erbfall)</label>
-            <NummerEingabe value={endP1} onChange={setEndP1} placeholder="80.000" einheit="€" />
+            <label htmlFor="zugewinnausgleich-endvermoegen" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endvermögen (bei Scheidungsantrag/Erbfall)</label>
+            <NummerEingabe id="zugewinnausgleich-endvermoegen" value={endP1} onChange={setEndP1} placeholder="80.000" einheit="€" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Privilegierter Erwerb (optional)</label>
+            <label htmlFor="zugewinnausgleich-privilegierter-erwerb" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Privilegierter Erwerb (optional)</label>
             <div className="grid grid-cols-2 gap-2">
-              <NummerEingabe value={privilegP1} onChange={setPrivilegP1} placeholder="0" einheit="€" />
-              <NummerEingabe value={privilegJahrP1} onChange={setPrivilegJahrP1} placeholder="2015" einheit="Jahr" />
+              <NummerEingabe id="zugewinnausgleich-privilegierter-erwerb" value={privilegP1} onChange={setPrivilegP1} placeholder="0" einheit="€" />
+              <NummerEingabe aria-label="Jahr des privilegierten Erwerbs" value={privilegJahrP1} onChange={setPrivilegJahrP1} placeholder="2015" einheit="Jahr" />
             </div>
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               Erbschaften und Schenkungen während der Ehe werden dem Anfangsvermögen zugerechnet (mit VPI zum Erwerbsjahr indexiert).
@@ -179,18 +179,18 @@ export default function ZugewinnausgleichRechner() {
         </h2>
         <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anfangsvermögen (bei Heirat)</label>
-            <NummerEingabe value={anfangP2} onChange={setAnfangP2} placeholder="5.000" einheit="€" />
+            <label htmlFor="zugewinnausgleich-anfangsvermoegen-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anfangsvermögen (bei Heirat)</label>
+            <NummerEingabe id="zugewinnausgleich-anfangsvermoegen-2" value={anfangP2} onChange={setAnfangP2} placeholder="5.000" einheit="€" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endvermögen (bei Scheidungsantrag/Erbfall)</label>
-            <NummerEingabe value={endP2} onChange={setEndP2} placeholder="120.000" einheit="€" />
+            <label htmlFor="zugewinnausgleich-endvermoegen-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Endvermögen (bei Scheidungsantrag/Erbfall)</label>
+            <NummerEingabe id="zugewinnausgleich-endvermoegen-2" value={endP2} onChange={setEndP2} placeholder="120.000" einheit="€" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Privilegierter Erwerb (optional)</label>
+            <label htmlFor="zugewinnausgleich-privilegierter-erwerb-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Privilegierter Erwerb (optional)</label>
             <div className="grid grid-cols-2 gap-2">
-              <NummerEingabe value={privilegP2} onChange={setPrivilegP2} placeholder="0" einheit="€" />
-              <NummerEingabe value={privilegJahrP2} onChange={setPrivilegJahrP2} placeholder="2015" einheit="Jahr" />
+              <NummerEingabe id="zugewinnausgleich-privilegierter-erwerb-2" value={privilegP2} onChange={setPrivilegP2} placeholder="0" einheit="€" />
+              <NummerEingabe aria-label="Jahr des privilegierten Erwerbs" value={privilegJahrP2} onChange={setPrivilegJahrP2} placeholder="2015" einheit="Jahr" />
             </div>
           </div>
         </div>
@@ -214,7 +214,7 @@ export default function ZugewinnausgleichRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

@@ -54,7 +54,7 @@ export default function TrinkmengeRechner() {
       <div className="grid gap-4 sm:grid-cols-2 mb-6">
         <div>
           <label htmlFor="tr-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
+          <NummerEingabe id="tr-gewicht" value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
         </div>
         <div>
           <label htmlFor="tr-geschlecht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschlecht</label>
@@ -65,7 +65,7 @@ export default function TrinkmengeRechner() {
         </div>
         <div>
           <label htmlFor="tr-sport" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sportdauer heute</label>
-          <NummerEingabe value={sportMin} onChange={setSportMin} placeholder="45" einheit="min" />
+          <NummerEingabe id="tr-sport" value={sportMin} onChange={setSportMin} placeholder="45" einheit="min" />
         </div>
         <div>
           <label htmlFor="tr-klima" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Klima</label>
@@ -115,7 +115,7 @@ export default function TrinkmengeRechner() {
           {/* Gewichts-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Basis-Bedarf nach Gewicht (ohne Sport, normales Klima)</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Basis-Bedarf nach Gewicht (ohne Sport, normales Klima)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

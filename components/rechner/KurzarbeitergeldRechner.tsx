@@ -47,19 +47,19 @@ export default function KurzarbeitergeldRechner() {
     <div>
       {/* Soll-Brutto */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="kurzarbeitergeld-soll-brutto" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Soll-Brutto (normales Monatsgehalt)
         </label>
-        <NummerEingabe value={sollBrutto} onChange={setSollBrutto} placeholder="3500" einheit="€" />
+        <NummerEingabe id="kurzarbeitergeld-soll-brutto" value={sollBrutto} onChange={setSollBrutto} placeholder="3500" einheit="€" />
         <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💶" text="Brutto-Netto berechnen" />
       </div>
 
       {/* Ist-Brutto */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="kurzarbeitergeld-ist-brutto" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Ist-Brutto (reduziertes Gehalt während Kurzarbeit)
         </label>
-        <NummerEingabe value={istBrutto} onChange={setIstBrutto} placeholder="1750" einheit="€" />
+        <NummerEingabe id="kurzarbeitergeld-ist-brutto" value={istBrutto} onChange={setIstBrutto} placeholder="1750" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Gehalt für die tatsächlich geleisteten Stunden (z. B. bei 50 % Kurzarbeit = halbes Brutto)
         </p>

@@ -82,7 +82,7 @@ export default function BremswegRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Geschwindigkeit
         </h2>
-        <NummerEingabe value={tempo} onChange={setTempo} placeholder="50" einheit="km/h" />
+        <NummerEingabe aria-label="Geschwindigkeit" value={tempo} onChange={setTempo} placeholder="50" einheit="km/h" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Faustformeln der Fahrschule für trockene Fahrbahn und gute Reifen.
         </p>
@@ -288,7 +288,7 @@ export default function BremswegRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Wege nach Geschwindigkeit</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Wege nach Geschwindigkeit">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

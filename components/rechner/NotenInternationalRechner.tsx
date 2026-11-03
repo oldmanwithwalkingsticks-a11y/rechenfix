@@ -108,10 +108,11 @@ export default function NotenInternationalRechner() {
       <div className="mb-6">
         {system === 'deutsch' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="noten-international-deutsche-note" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Deutsche Note (1,0 – 5,0)
             </label>
             <NummerEingabe
+              id="noten-international-deutsche-note"
               value={deutschWert}
               onChange={setDeutschWert}
               placeholder="2,0"
@@ -227,7 +228,7 @@ export default function NotenInternationalRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Umrechnungstabelle</p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Umrechnungstabelle">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-700">

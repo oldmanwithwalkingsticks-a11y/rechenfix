@@ -101,7 +101,7 @@ export default function EautoLadekostenRechner() {
         </div>
         <div>
           <label htmlFor="ek-verbrauch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch</label>
-          <NummerEingabe value={verbrauch} onChange={(v) => { setVerbrauch(v); setVerbrauchProfil('custom'); }} placeholder="18" einheit="kWh/100km" />
+          <NummerEingabe id="ek-verbrauch" value={verbrauch} onChange={(v) => { setVerbrauch(v); setVerbrauchProfil('custom'); }} placeholder="18" einheit="kWh/100km" />
         </div>
         <div>
           <label htmlFor="ek-ladeort" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ladeort / Strompreis</label>
@@ -111,15 +111,15 @@ export default function EautoLadekostenRechner() {
         </div>
         <div>
           <label htmlFor="ek-strompreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-          <NummerEingabe value={strompreis} onChange={(v) => { setStrompreis(v); setLadeort('custom'); }} placeholder={ladepreisDe(LADEPREISE.wallbox)} einheit="€/kWh" />
+          <NummerEingabe id="ek-strompreis" value={strompreis} onChange={(v) => { setStrompreis(v); setLadeort('custom'); }} placeholder={ladepreisDe(LADEPREISE.wallbox)} einheit="€/kWh" />
         </div>
         <div>
           <label htmlFor="ek-akku" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Akku-Kapazität</label>
-          <NummerEingabe value={akku} onChange={setAkku} placeholder="60" einheit="kWh" />
+          <NummerEingabe id="ek-akku" value={akku} onChange={setAkku} placeholder="60" einheit="kWh" />
         </div>
         <div>
           <label htmlFor="ek-jahreskm" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahresfahrleistung</label>
-          <NummerEingabe value={jahresKm} onChange={setJahresKm} placeholder="15000" einheit="km" />
+          <NummerEingabe id="ek-jahreskm" value={jahresKm} onChange={setJahresKm} placeholder="15000" einheit="km" />
         </div>
       </div>
 
@@ -161,7 +161,7 @@ export default function EautoLadekostenRechner() {
           {/* Vergleich je Ladeort */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Dieselbe Fahrt je Ladeort (pro 100 km)</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Dieselbe Fahrt je Ladeort (pro 100 km)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

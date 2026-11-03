@@ -74,8 +74,8 @@ export default function GehaltsvergleichRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ihr Bruttogehalt (monatlich)</label>
-          <NummerEingabe value={brutto} onChange={setBrutto} placeholder="z. B. 3.500" einheit="€" />
+          <label htmlFor="gehaltsvergleich-ihr-bruttogehalt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ihr Bruttogehalt (monatlich)</label>
+          <NummerEingabe id="gehaltsvergleich-ihr-bruttogehalt" value={brutto} onChange={setBrutto} placeholder="z. B. 3.500" einheit="€" />
         </div>
         <div>
           <label htmlFor="gehaltsvergleich-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Berufsgruppe</label>

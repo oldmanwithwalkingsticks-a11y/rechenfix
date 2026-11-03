@@ -108,9 +108,10 @@ export default function TageRechner() {
       {/* Eingaben */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Startdatum</label>
+          <label htmlFor="tage-startdatum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Startdatum</label>
           <div className="relative">
             <input
+              id="tage-startdatum"
               type="text"
               value={startText}
               onChange={e => handleStartTextChange(e.target.value)}
@@ -119,6 +120,7 @@ export default function TageRechner() {
             />
             <input
               type="date"
+              aria-label="Startdatum im Kalender auswählen"
               value={startIso}
               onChange={e => handleStartPickerChange(e.target.value)}
               className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 opacity-0 cursor-pointer"
@@ -130,9 +132,10 @@ export default function TageRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Enddatum</label>
+          <label htmlFor="tage-enddatum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Enddatum</label>
           <div className="relative">
             <input
+              id="tage-enddatum"
               type="text"
               value={endText}
               onChange={e => handleEndTextChange(e.target.value)}
@@ -141,6 +144,7 @@ export default function TageRechner() {
             />
             <input
               type="date"
+              aria-label="Enddatum im Kalender auswählen"
               value={endIso}
               onChange={e => handleEndPickerChange(e.target.value)}
               className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 opacity-0 cursor-pointer"

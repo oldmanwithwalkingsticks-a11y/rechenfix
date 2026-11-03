@@ -100,7 +100,7 @@ export default function BruttoNettoTabelle() {
             </p>
 
             {/* Tabelle */}
-            <div className="overflow-x-auto -mx-2">
+            <div className="overflow-x-auto -mx-2" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm border-collapse min-w-[500px]">
                 <thead>
                   <tr className="bg-primary-50 dark:bg-primary-500/10">

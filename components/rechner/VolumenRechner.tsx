@@ -158,37 +158,37 @@ export default function VolumenRechner() {
       <div className="mb-6 space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
         {koerper === 'quader' && (
           <>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Länge (a)</label><NummerEingabe value={qa} onChange={setQa} einheit={einheit} /></div>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Breite (b)</label><NummerEingabe value={qb} onChange={setQb} einheit={einheit} /></div>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe (c)</label><NummerEingabe value={qc} onChange={setQc} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-laenge" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Länge (a)</label><NummerEingabe id="volumen-laenge" value={qa} onChange={setQa} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-breite" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Breite (b)</label><NummerEingabe id="volumen-breite" value={qb} onChange={setQb} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-hoehe" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe (c)</label><NummerEingabe id="volumen-hoehe" value={qc} onChange={setQc} einheit={einheit} /></div>
           </>
         )}
         {koerper === 'zylinder' && (
           <>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Radius (r)</label><NummerEingabe value={zr} onChange={setZr} einheit={einheit} /></div>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe (h)</label><NummerEingabe value={zh} onChange={setZh} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-radius" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Radius (r)</label><NummerEingabe id="volumen-radius" value={zr} onChange={setZr} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-hoehe-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe (h)</label><NummerEingabe id="volumen-hoehe-2" value={zh} onChange={setZh} einheit={einheit} /></div>
           </>
         )}
         {(koerper === 'kugel' || koerper === 'halbkugel') && (
-          <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Radius (r)</label><NummerEingabe value={kr} onChange={setKr} einheit={einheit} /></div>
+          <div><label htmlFor="volumen-radius-2" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Radius (r)</label><NummerEingabe id="volumen-radius-2" value={kr} onChange={setKr} einheit={einheit} /></div>
         )}
         {koerper === 'kegel' && (
           <>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Radius (r)</label><NummerEingabe value={ker} onChange={setKer} einheit={einheit} /></div>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe (h)</label><NummerEingabe value={keh} onChange={setKeh} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-radius-3" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Radius (r)</label><NummerEingabe id="volumen-radius-3" value={ker} onChange={setKer} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-hoehe-3" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe (h)</label><NummerEingabe id="volumen-hoehe-3" value={keh} onChange={setKeh} einheit={einheit} /></div>
           </>
         )}
         {koerper === 'pyramide' && (
           <>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Seitenlänge Grundfläche (a)</label><NummerEingabe value={pa} onChange={setPa} einheit={einheit} /></div>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe (h)</label><NummerEingabe value={ph} onChange={setPh} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-seitenlaenge-grundflaeche" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Seitenlänge Grundfläche (a)</label><NummerEingabe id="volumen-seitenlaenge-grundflaeche" value={pa} onChange={setPa} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-hoehe-4" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe (h)</label><NummerEingabe id="volumen-hoehe-4" value={ph} onChange={setPh} einheit={einheit} /></div>
           </>
         )}
         {koerper === 'prisma' && (
           <>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Grundseite Dreieck (a)</label><NummerEingabe value={pra} onChange={setPra} einheit={einheit} /></div>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe Dreieck (h_d)</label><NummerEingabe value={prhd} onChange={setPrhd} einheit={einheit} /></div>
-            <div><label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Länge Prisma (l)</label><NummerEingabe value={prl} onChange={setPrl} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-grundseite-dreieck" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Grundseite Dreieck (a)</label><NummerEingabe id="volumen-grundseite-dreieck" value={pra} onChange={setPra} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-hoehe-dreieck" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Höhe Dreieck (h_d)</label><NummerEingabe id="volumen-hoehe-dreieck" value={prhd} onChange={setPrhd} einheit={einheit} /></div>
+            <div><label htmlFor="volumen-laenge-prisma" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Länge Prisma (l)</label><NummerEingabe id="volumen-laenge-prisma" value={prl} onChange={setPrl} einheit={einheit} /></div>
           </>
         )}
         <div>

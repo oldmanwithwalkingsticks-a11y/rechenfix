@@ -48,7 +48,7 @@ export default function Quellen({ quellen }: QuellenProps) {
                   href={q.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary-600 dark:text-primary-400 hover:underline"
+                  className="text-primary-600 dark:text-primary-400 underline underline-offset-2"
                 >
                   Originaltext
                 </a>

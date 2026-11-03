@@ -70,12 +70,12 @@ export default function KalorienverbrauchRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="70" einheit="kg" />
+          <label htmlFor="kalorienverbrauch-koerpergewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
+          <NummerEingabe id="kalorienverbrauch-koerpergewicht" value={gewicht} onChange={setGewicht} placeholder="70" einheit="kg" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dauer</label>
-          <NummerEingabe value={dauer} onChange={setDauer} placeholder="30" einheit="min" />
+          <label htmlFor="kalorienverbrauch-dauer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dauer</label>
+          <NummerEingabe id="kalorienverbrauch-dauer" value={dauer} onChange={setDauer} placeholder="30" einheit="min" />
         </div>
       </div>
 

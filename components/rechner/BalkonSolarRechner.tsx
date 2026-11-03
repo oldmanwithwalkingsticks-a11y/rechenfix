@@ -72,8 +72,8 @@ export default function BalkonSolarRechner() {
 
         {leistungModus === 'eigene' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistung (Watt)</label>
-            <NummerEingabe value={leistungEigen} onChange={setLeistungEigen} placeholder="800" einheit="W" />
+            <label htmlFor="balkon-solar-leistung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistung (Watt)</label>
+            <NummerEingabe id="balkon-solar-leistung" value={leistungEigen} onChange={setLeistungEigen} placeholder="800" einheit="W" />
             {leistungWarning && (
               <div
                 role="alert"
@@ -122,16 +122,16 @@ export default function BalkonSolarRechner() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahres-Stromverbrauch (kWh)</label>
-            <NummerEingabe value={stromverbrauch} onChange={setStromverbrauch} placeholder="3000" />
+            <label htmlFor="balkon-solar-jahres-stromverbrauch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jahres-Stromverbrauch (kWh)</label>
+            <NummerEingabe id="balkon-solar-jahres-stromverbrauch" value={stromverbrauch} onChange={setStromverbrauch} placeholder="3000" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis (ct/kWh)</label>
-            <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} />
+            <label htmlFor="balkon-solar-strompreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis (ct/kWh)</label>
+            <NummerEingabe id="balkon-solar-strompreis" value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anschaffungskosten (€)</label>
-            <NummerEingabe value={kosten} onChange={setKosten} placeholder="600" />
+            <label htmlFor="balkon-solar-anschaffungskosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anschaffungskosten (€)</label>
+            <NummerEingabe id="balkon-solar-anschaffungskosten" value={kosten} onChange={setKosten} placeholder="600" />
             <div className="flex gap-2 mt-1">
               {[{ l: '400 €', v: '400' }, { l: '600 €', v: '600' }, { l: '900 €', v: '900' }].map(p => (
                 <button

@@ -58,7 +58,7 @@ export default function SteuerklassenVergleichRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Bruttojahresgehalt Person 1
         </h2>
-        <NummerEingabe value={brutto1} onChange={setBrutto1} placeholder="55.000" einheit="€" />
+        <NummerEingabe aria-label="Bruttojahresgehalt Person 1" value={brutto1} onChange={setBrutto1} placeholder="55.000" einheit="€" />
       </div>
 
       {/* === 2: Gehalt Person 2 === */}
@@ -67,7 +67,7 @@ export default function SteuerklassenVergleichRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Bruttojahresgehalt Person 2
         </h2>
-        <NummerEingabe value={brutto2} onChange={setBrutto2} placeholder="35.000" einheit="€" />
+        <NummerEingabe aria-label="Bruttojahresgehalt Person 2" value={brutto2} onChange={setBrutto2} placeholder="35.000" einheit="€" />
       </div>
 
       {/* === 3: Kirchensteuer === */}
@@ -164,7 +164,7 @@ export default function SteuerklassenVergleichRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich aller Kombinationen</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Vergleich aller Kombinationen">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

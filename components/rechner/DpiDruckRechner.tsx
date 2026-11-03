@@ -87,11 +87,11 @@ export default function DpiDruckRechner() {
         <div className="grid gap-4 sm:grid-cols-3 mb-6">
           <div>
             <label htmlFor="dpi-breite-px" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
-            <NummerEingabe value={breitePx} onChange={setBreitePx} placeholder="6000" einheit="px" />
+            <NummerEingabe id="dpi-breite-px" value={breitePx} onChange={setBreitePx} placeholder="6000" einheit="px" />
           </div>
           <div>
             <label htmlFor="dpi-hoehe-px" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe</label>
-            <NummerEingabe value={hoehePx} onChange={setHoehePx} placeholder="4000" einheit="px" />
+            <NummerEingabe id="dpi-hoehe-px" value={hoehePx} onChange={setHoehePx} placeholder="4000" einheit="px" />
           </div>
           <div>
             <label htmlFor="dpi-wert-a" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Auflösung</label>
@@ -108,11 +108,11 @@ export default function DpiDruckRechner() {
         <div className="grid gap-4 sm:grid-cols-3 mb-6">
           <div>
             <label htmlFor="dpi-breite-cm" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Breite</label>
-            <NummerEingabe value={breiteCm} onChange={setBreiteCm} placeholder="21" einheit="cm" />
+            <NummerEingabe id="dpi-breite-cm" value={breiteCm} onChange={setBreiteCm} placeholder="21" einheit="cm" />
           </div>
           <div>
             <label htmlFor="dpi-hoehe-cm" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Höhe</label>
-            <NummerEingabe value={hoeheCm} onChange={setHoeheCm} placeholder="29,7" einheit="cm" />
+            <NummerEingabe id="dpi-hoehe-cm" value={hoeheCm} onChange={setHoeheCm} placeholder="29,7" einheit="cm" />
           </div>
           <div>
             <label htmlFor="dpi-wert-b" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Auflösung</label>
@@ -190,7 +190,7 @@ export default function DpiDruckRechner() {
           {/* DPI-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Gleiche Pixelbreite bei verschiedenen DPI</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Gleiche Pixelbreite bei verschiedenen DPI">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

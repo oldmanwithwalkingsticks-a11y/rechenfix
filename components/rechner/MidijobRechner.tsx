@@ -144,7 +144,7 @@ export default function MidijobRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Monatlicher Bruttoverdienst
         </h2>
-        <NummerEingabe value={brutto} onChange={setBrutto} placeholder="1200" einheit="€" />
+        <NummerEingabe aria-label="Monatlicher Bruttoverdienst" value={brutto} onChange={setBrutto} placeholder="1200" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Übergangsbereich: {fmtUntergrenze} – 2.000 €</p>
         <div className={`mt-3 inline-block px-3 py-1 rounded-lg text-xs font-semibold text-white ${status.color}`}>{status.text}</div>
       </div>

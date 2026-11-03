@@ -61,7 +61,7 @@ export default function AkkuLadezeitRechner() {
       <div className="grid gap-4 sm:grid-cols-2 mb-6">
         <div>
           <label htmlFor="akku-kapazitaet" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Akkukapazität</label>
-          <NummerEingabe value={kapazitaet} onChange={setKapazitaet} placeholder="5000" einheit="mAh" />
+          <NummerEingabe id="akku-kapazitaet" value={kapazitaet} onChange={setKapazitaet} placeholder="5000" einheit="mAh" />
         </div>
         <div>
           <label htmlFor="akku-modus" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eingabe als</label>
@@ -79,17 +79,17 @@ export default function AkkuLadezeitRechner() {
         {modus === 'mA' ? (
           <div>
             <label htmlFor="akku-ladestrom" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ladestrom</label>
-            <NummerEingabe value={ladestrom} onChange={setLadestrom} placeholder="2000" einheit="mA" />
+            <NummerEingabe id="akku-ladestrom" value={ladestrom} onChange={setLadestrom} placeholder="2000" einheit="mA" />
           </div>
         ) : (
           <>
             <div>
               <label htmlFor="akku-watt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ladeleistung</label>
-              <NummerEingabe value={watt} onChange={setWatt} placeholder="10" einheit="W" />
+              <NummerEingabe id="akku-watt" value={watt} onChange={setWatt} placeholder="10" einheit="W" />
             </div>
             <div>
               <label htmlFor="akku-volt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Spannung</label>
-              <NummerEingabe value={volt} onChange={setVolt} placeholder="5" einheit="V" />
+              <NummerEingabe id="akku-volt" value={volt} onChange={setVolt} placeholder="5" einheit="V" />
             </div>
           </>
         )}
@@ -145,7 +145,7 @@ export default function AkkuLadezeitRechner() {
           {/* Ladestrom-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Gleiche Kapazität bei verschiedenen Ladeströmen</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Gleiche Kapazität bei verschiedenen Ladeströmen">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

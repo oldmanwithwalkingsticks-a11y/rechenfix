@@ -133,12 +133,12 @@ export default function EnergiekostenRechner() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistung</label>
-              <NummerEingabe value={g.leistung} onChange={v => updateGeraet(g.id, { leistung: v, preset: 'eigene' })} placeholder="100" einheit="W" />
+              <label htmlFor="energiekosten-leistung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leistung</label>
+              <NummerEingabe id="energiekosten-leistung" value={g.leistung} onChange={v => updateGeraet(g.id, { leistung: v, preset: 'eigene' })} placeholder="100" einheit="W" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nutzung pro Tag</label>
-              <NummerEingabe value={g.stunden} onChange={v => updateGeraet(g.id, { stunden: v, preset: 'eigene' })} placeholder="4" einheit="h" />
+              <label htmlFor="energiekosten-nutzung-pro-tag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nutzung pro Tag</label>
+              <NummerEingabe id="energiekosten-nutzung-pro-tag" value={g.stunden} onChange={v => updateGeraet(g.id, { stunden: v, preset: 'eigene' })} placeholder="4" einheit="h" />
             </div>
           </div>
 
@@ -168,8 +168,8 @@ export default function EnergiekostenRechner() {
 
       {/* Strompreis */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
-        <NummerEingabe value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} einheit="ct/kWh" />
+        <label htmlFor="energiekosten-strompreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Strompreis</label>
+        <NummerEingabe id="energiekosten-strompreis" value={strompreis} onChange={setStrompreis} placeholder={STROMPREIS_DEFAULT} einheit="ct/kWh" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">BDEW-Durchschnitt 2026 in Deutschland: ca. 37 ct/kWh (Festpreis-Neuvertrag günstiger, Grundversorgung höher)</p>
       </div>
 
@@ -195,7 +195,7 @@ export default function EnergiekostenRechner() {
 
       {/* Tabelle pro Gerät + Anteil */}
       {result.rows.length > 0 && result.gesamtJahr > 0 && (
-        <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto">
+        <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Aufschlüsselung pro Gerät</p>
           <table className="w-full text-xs text-left">
             <thead>

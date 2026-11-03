@@ -126,16 +126,16 @@ export default function GleichungsloeserRechner() {
         <>
           <div className="grid grid-cols-3 gap-3 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">a</label>
-              <NummerEingabe value={a} onChange={setA} placeholder="2" />
+              <label htmlFor="gleichungsloeser-a" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">a</label>
+              <NummerEingabe id="gleichungsloeser-a" value={a} onChange={setA} placeholder="2" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">b</label>
-              <NummerEingabe value={b} onChange={setB} placeholder="5" />
+              <label htmlFor="gleichungsloeser-b" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">b</label>
+              <NummerEingabe id="gleichungsloeser-b" value={b} onChange={setB} placeholder="5" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">c</label>
-              <NummerEingabe value={c} onChange={setC} placeholder="11" />
+              <label htmlFor="gleichungsloeser-c" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">c</label>
+              <NummerEingabe id="gleichungsloeser-c" value={c} onChange={setC} placeholder="11" />
             </div>
           </div>
 
@@ -176,16 +176,16 @@ export default function GleichungsloeserRechner() {
         <>
           <div className="grid grid-cols-3 gap-3 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">a</label>
-              <NummerEingabe value={qa} onChange={setQa} placeholder="1" />
+              <label htmlFor="gleichungsloeser-a-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">a</label>
+              <NummerEingabe id="gleichungsloeser-a-2" value={qa} onChange={setQa} placeholder="1" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">b</label>
-              <NummerEingabe value={qb} onChange={setQb} placeholder="-5" />
+              <label htmlFor="gleichungsloeser-b-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">b</label>
+              <NummerEingabe id="gleichungsloeser-b-2" value={qb} onChange={setQb} placeholder="-5" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">c</label>
-              <NummerEingabe value={qc} onChange={setQc} placeholder="6" />
+              <label htmlFor="gleichungsloeser-c-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">c</label>
+              <NummerEingabe id="gleichungsloeser-c-2" value={qc} onChange={setQc} placeholder="6" />
             </div>
           </div>
 

@@ -57,8 +57,8 @@ export default function RentenRechner() {
       {/* Alter & Renteneintritt */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktuelles Alter</label>
-          <NummerEingabe value={alter} onChange={setAlter} placeholder="z.B. 35" einheit="Jahre" />
+          <label htmlFor="renten-aktuelles-alter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktuelles Alter</label>
+          <NummerEingabe id="renten-aktuelles-alter" value={alter} onChange={setAlter} placeholder="z.B. 35" einheit="Jahre" />
         </div>
         <div>
           <label htmlFor="renten-select-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewünschtes Renteneintrittsalter</label>
@@ -77,12 +77,12 @@ export default function RentenRechner() {
       {/* Gehalt & Beitragsjahre */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktuelles Monatsbrutto</label>
-          <NummerEingabe value={monatsbrutto} onChange={setMonatsbrutto} placeholder="z.B. 3500" einheit="€" />
+          <label htmlFor="renten-aktuelles-monatsbrutto" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktuelles Monatsbrutto</label>
+          <NummerEingabe id="renten-aktuelles-monatsbrutto" value={monatsbrutto} onChange={setMonatsbrutto} placeholder="z.B. 3500" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bisherige Beitragsjahre</label>
-          <NummerEingabe value={beitragsjahre} onChange={setBeitragsjahre} placeholder="z.B. 15" einheit="Jahre" />
+          <label htmlFor="renten-bisherige-beitragsjahre" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bisherige Beitragsjahre</label>
+          <NummerEingabe id="renten-bisherige-beitragsjahre" value={beitragsjahre} onChange={setBeitragsjahre} placeholder="z.B. 15" einheit="Jahre" />
           <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Inkl. Ausbildung, Studium (wenn versichert), Kindererziehungszeiten.
           </p>
@@ -92,15 +92,15 @@ export default function RentenRechner() {
       {/* Rentenpunkte & Gehaltssteigerung */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bereits gesammelte Rentenpunkte (optional)</label>
-          <NummerEingabe value={rentenpunkte} onChange={setRentenpunkte} placeholder="z.B. 12,5" einheit="EP" />
+          <label htmlFor="renten-bereits-gesammelte-rentenpunkte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bereits gesammelte Rentenpunkte (optional)</label>
+          <NummerEingabe id="renten-bereits-gesammelte-rentenpunkte" value={rentenpunkte} onChange={setRentenpunkte} placeholder="z.B. 12,5" einheit="EP" />
           <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Finden Sie auf Ihrer Renteninformation. Falls unbekannt, wird geschätzt.
           </p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gehaltsentwicklung über dem Lohndurchschnitt pro Jahr</label>
-          <NummerEingabe value={gehaltssteigerung} onChange={setGehaltssteigerung} placeholder="z.B. 1" einheit="%" />
+          <label htmlFor="renten-gehaltsentwicklung-ueber-dem" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gehaltsentwicklung über dem Lohndurchschnitt pro Jahr</label>
+          <NummerEingabe id="renten-gehaltsentwicklung-ueber-dem" value={gehaltssteigerung} onChange={setGehaltssteigerung} placeholder="z.B. 1" einheit="%" />
           <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             0 % = Ihr Gehalt steigt wie die Löhne insgesamt. Alle Beträge in heutigen Werten.
           </p>
@@ -109,9 +109,9 @@ export default function RentenRechner() {
 
       {/* Gewünschtes Netto im Alter */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewünschtes Netto-Einkommen im Alter</label>
+        <label htmlFor="renten-gewuenschtes-netto-einkommen-im" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewünschtes Netto-Einkommen im Alter</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={gewuenschtesNetto} onChange={setGewuenschtesNetto} placeholder="z.B. 2000" einheit="€/Monat" />
+          <NummerEingabe id="renten-gewuenschtes-netto-einkommen-im" value={gewuenschtesNetto} onChange={setGewuenschtesNetto} placeholder="z.B. 2000" einheit="€/Monat" />
         </div>
         <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
           Für die Berechnung Ihrer Rentenlücke.

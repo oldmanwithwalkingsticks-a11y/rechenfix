@@ -95,11 +95,11 @@ export default function BackzeitRechner() {
         <div className="grid grid-cols-2 gap-2">
           <div>
             <label htmlFor="bz-orig-temp" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Temperatur</label>
-            <NummerEingabe value={origTemp} onChange={setOrigTemp} placeholder="180" einheit="°C" />
+            <NummerEingabe id="bz-orig-temp" value={origTemp} onChange={setOrigTemp} placeholder="180" einheit="°C" />
           </div>
           <div>
             <label htmlFor="bz-orig-zeit" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Backzeit</label>
-            <NummerEingabe value={origZeit} onChange={setOrigZeit} placeholder="45" einheit="Min" />
+            <NummerEingabe id="bz-orig-zeit" value={origZeit} onChange={setOrigZeit} placeholder="45" einheit="Min" />
           </div>
         </div>
       </div>
@@ -134,11 +134,11 @@ export default function BackzeitRechner() {
 
       {/* === 3: Zieltemperatur === */}
       <div className="mb-6">
-        <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+        <h2 id="backzeit-schritt-1" className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Gewünschte Temperatur ({zielHerdart === 'ou' ? 'O/U' : zielHerdart === 'umluft' ? 'Umluft' : 'Gasmark°C'})
         </h2>
-        <NummerEingabe value={zielTemp} onChange={setZielTemp} placeholder="160" einheit="°C" />
+        <NummerEingabe aria-labelledby="backzeit-schritt-1" value={zielTemp} onChange={setZielTemp} placeholder="160" einheit="°C" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Tipp: Umluft liegt meist 20 °C unter Ober-/Unterhitze bei gleicher Zeit.
         </p>
@@ -166,7 +166,7 @@ export default function BackzeitRechner() {
             <label htmlFor="bz-faktor" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
               Backform-Faktor (z. B. 0,7 für kleinere Form — aus dem Backform-Umrechner)
             </label>
-            <NummerEingabe value={formFaktor} onChange={setFormFaktor} placeholder="0,7" einheit="×" />
+            <NummerEingabe id="bz-faktor" value={formFaktor} onChange={setFormFaktor} placeholder="0,7" einheit="×" />
           </div>
         )}
       </div>
@@ -195,7 +195,7 @@ export default function BackzeitRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Herdart-Umrechnung</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Herdart-Umrechnung">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
@@ -226,7 +226,7 @@ export default function BackzeitRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Gasmark-Tabelle (komplett)</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Gasmark-Tabelle (komplett)">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

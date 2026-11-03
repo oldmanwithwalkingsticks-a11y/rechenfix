@@ -36,8 +36,8 @@ export default function HeizkostenRechner() {
   return (
     <div>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnfläche</label>
-        <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="80" einheit="m²" />
+        <label htmlFor="heizkosten-wohnflaeche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnfläche</label>
+        <NummerEingabe id="heizkosten-wohnflaeche" value={wohnflaeche} onChange={setWohnflaeche} placeholder="80" einheit="m²" />
       </div>
 
       <div className="mb-5">
@@ -61,12 +61,12 @@ export default function HeizkostenRechner() {
 
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch</label>
-          <NummerEingabe value={verbrauch} onChange={setVerbrauch} placeholder="140" einheit="kWh/m²" />
+          <label htmlFor="heizkosten-verbrauch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch</label>
+          <NummerEingabe id="heizkosten-verbrauch" value={verbrauch} onChange={setVerbrauch} placeholder="140" einheit="kWh/m²" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Energiepreis</label>
-          <NummerEingabe value={preis} onChange={setPreis} placeholder="12" einheit="ct/kWh" />
+          <label htmlFor="heizkosten-energiepreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Energiepreis</label>
+          <NummerEingabe id="heizkosten-energiepreis" value={preis} onChange={setPreis} placeholder="12" einheit="ct/kWh" />
         </div>
       </div>
 
@@ -117,7 +117,7 @@ export default function HeizkostenRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Energieträger-Vergleich für {parseDeutscheZahl(wohnflaeche).toLocaleString('de-DE')} m²</p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-700">

@@ -64,17 +64,17 @@ export default function StundenlohnRechner() {
       {modus === 'stundenlohn' && (
         <>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttogehalt (monatlich)</label>
-            <NummerEingabe value={bruttogehalt} onChange={setBruttogehalt} placeholder="z. B. 3500" einheit="€" />
+            <label htmlFor="stundenlohn-bruttogehalt" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttogehalt (monatlich)</label>
+            <NummerEingabe id="stundenlohn-bruttogehalt" value={bruttogehalt} onChange={setBruttogehalt} placeholder="z. B. 3500" einheit="€" />
           </div>
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stunden/Woche</label>
-              <NummerEingabe value={wochenstunden} onChange={setWochenstunden} placeholder="40" einheit="Std" />
+              <label htmlFor="stundenlohn-stunden-woche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stunden/Woche</label>
+              <NummerEingabe id="stundenlohn-stunden-woche" value={wochenstunden} onChange={setWochenstunden} placeholder="40" einheit="Std" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tage/Woche</label>
-              <NummerEingabe value={arbeitstage} onChange={setArbeitstage} placeholder="5" einheit="Tage" />
+              <label htmlFor="stundenlohn-tage-woche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tage/Woche</label>
+              <NummerEingabe id="stundenlohn-tage-woche" value={arbeitstage} onChange={setArbeitstage} placeholder="5" einheit="Tage" />
             </div>
           </div>
         </>
@@ -83,12 +83,12 @@ export default function StundenlohnRechner() {
       {modus === 'monatsgehalt' && (
         <>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stundenlohn (brutto)</label>
-            <NummerEingabe value={stundenlohn} onChange={setStundenlohn} placeholder="z. B. 20" einheit="€/Std" />
+            <label htmlFor="stundenlohn-stundenlohn" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stundenlohn (brutto)</label>
+            <NummerEingabe id="stundenlohn-stundenlohn" value={stundenlohn} onChange={setStundenlohn} placeholder="z. B. 20" einheit="€/Std" />
           </div>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stunden/Woche</label>
-            <NummerEingabe value={wochenstunden} onChange={setWochenstunden} placeholder="40" einheit="Std" />
+            <label htmlFor="stundenlohn-stunden-woche-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stunden/Woche</label>
+            <NummerEingabe id="stundenlohn-stunden-woche-2" value={wochenstunden} onChange={setWochenstunden} placeholder="40" einheit="Std" />
           </div>
         </>
       )}
@@ -96,27 +96,27 @@ export default function StundenlohnRechner() {
       {modus === 'jahresgehalt' && (
         <>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stundenlohn (brutto)</label>
-            <NummerEingabe value={stundenlohn} onChange={setStundenlohn} placeholder="z. B. 20" einheit="€/Std" />
+            <label htmlFor="stundenlohn-stundenlohn-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stundenlohn (brutto)</label>
+            <NummerEingabe id="stundenlohn-stundenlohn-2" value={stundenlohn} onChange={setStundenlohn} placeholder="z. B. 20" einheit="€/Std" />
           </div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stunden/Woche</label>
-              <NummerEingabe value={wochenstunden} onChange={setWochenstunden} placeholder="40" einheit="Std" />
+              <label htmlFor="stundenlohn-stunden-woche-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stunden/Woche</label>
+              <NummerEingabe id="stundenlohn-stunden-woche-3" value={wochenstunden} onChange={setWochenstunden} placeholder="40" einheit="Std" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tage/Woche</label>
-              <NummerEingabe value={arbeitstage} onChange={setArbeitstage} placeholder="5" einheit="Tage" />
+              <label htmlFor="stundenlohn-tage-woche-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tage/Woche</label>
+              <NummerEingabe id="stundenlohn-tage-woche-2" value={arbeitstage} onChange={setArbeitstage} placeholder="5" einheit="Tage" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Urlaubstage/Jahr</label>
-              <NummerEingabe value={urlaubstage} onChange={setUrlaubstage} placeholder="30" einheit="Tage" />
+              <label htmlFor="stundenlohn-urlaubstage-jahr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Urlaubstage/Jahr</label>
+              <NummerEingabe id="stundenlohn-urlaubstage-jahr" value={urlaubstage} onChange={setUrlaubstage} placeholder="30" einheit="Tage" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Feiertage/Jahr</label>
-              <NummerEingabe value={feiertage} onChange={setFeiertage} placeholder="10" einheit="Tage" />
+              <label htmlFor="stundenlohn-feiertage-jahr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Feiertage/Jahr</label>
+              <NummerEingabe id="stundenlohn-feiertage-jahr" value={feiertage} onChange={setFeiertage} placeholder="10" einheit="Tage" />
             </div>
           </div>
         </>
@@ -244,7 +244,7 @@ export default function StundenlohnRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Typische Stundenlöhne in Deutschland (brutto)</p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Typische Stundenlöhne in Deutschland (brutto)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-700">

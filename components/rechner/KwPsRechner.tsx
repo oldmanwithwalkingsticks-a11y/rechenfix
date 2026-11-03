@@ -46,10 +46,11 @@ export default function KwPsRechner() {
 
       {/* Eingabe */}
       <div className="max-w-sm mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="kw-ps-feld" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           {richtung === 'kw-zu-ps' ? 'Leistung in kW' : 'Leistung in PS'}
         </label>
         <NummerEingabe
+          id="kw-ps-feld"
           value={wert}
           onChange={setWert}
           placeholder={richtung === 'kw-zu-ps' ? 'z.B. 100' : 'z.B. 136'}
@@ -107,7 +108,7 @@ export default function KwPsRechner() {
       {/* Umrechnungstabelle */}
       <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5">
         <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Umrechnungstabelle kW ↔ PS</h2>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Umrechnungstabelle kW ↔ PS">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-600">

@@ -71,8 +71,9 @@ export default function SchlafRechner() {
       {/* Eingabefelder */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewünschte Aufwachzeit</label>
+          <label htmlFor="schlaf-gewuenschte-aufwachzeit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gewünschte Aufwachzeit</label>
           <input
+            id="schlaf-gewuenschte-aufwachzeit"
             type="time"
             value={aufwachzeit}
             onChange={e => setAufwachzeit(e.target.value)}
@@ -80,9 +81,10 @@ export default function SchlafRechner() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter</label>
+          <label htmlFor="schlaf-alter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter</label>
           <div className="relative">
             <input
+              id="schlaf-alter"
               type="number"
               value={alter}
               onChange={e => setAlter(clampInputValue(e.target.value, 1, 120))}
@@ -96,9 +98,10 @@ export default function SchlafRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einschlafzeit</label>
+          <label htmlFor="schlaf-einschlafzeit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einschlafzeit</label>
           <div className="relative">
             <input
+              id="schlaf-einschlafzeit"
               type="number"
               value={einschlafzeit}
               onChange={e => setEinschlafzeit(clampInputValue(e.target.value, 0, 60))}
@@ -227,7 +230,7 @@ export default function SchlafRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Empfohlene Schlafdauer nach Alter (WHO)</p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Empfohlene Schlafdauer nach Alter (WHO)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-gray-600 dark:text-gray-400 text-xs uppercase tracking-wider">

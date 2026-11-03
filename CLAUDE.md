@@ -8,7 +8,7 @@
 5. Live-Berechnung ohne Submit-Button
 6. Default-Werte für alle Eingabefelder
 7. Input-Felder min. 48px Höhe
-8. Fertig ist ein Rechner erst, wenn Karola Rechner (Skill `karola-rechner`) ihn nach dem Deploy abgenommen hat: Urteil „abnahmefähig“. Ihre Prüfskripte laufen schon vor dem Commit (rechner-builder Step 11b, Teil 2). Dasselbe gilt für jede Welle, die Rechenkern, Texte oder Komponente eines Rechners ändert.
+8. Fertig ist ein Rechner erst, wenn Karola Rechner (Skill `karola-rechner`) ihn nach dem Deploy abgenommen hat: Urteil „abnahmefähig“. Ihre Prüfskripte laufen schon vor dem Commit (rechner-builder Step 11b, Teil 2). Dasselbe gilt für jede Welle, die Rechenkern, Texte oder Komponente eines Rechners ändert. Ausgenommen sind Wellen, die an Rechner-Komponenten nur Barrierefreiheits-Attribute (`id`, `htmlFor`, `aria-*`, `role`, `type="button"`, `tabIndex`) oder Linkklassen ändern: Dort ersetzt die axe-Messung über alle Seiten die Abnahme, `verify:alle` läuft wie immer vor dem Commit (Welle 201).
 
 ## Affiliate-System
 - Komponente: `components/AffiliateBox.tsx` (NICHT `src/components/...` — Pfad seit jeher unter `components/`)
@@ -106,6 +106,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 - Custom-Toggle-Buttons statt `<RadioToggleGroup>`
 - Custom-Button-Tabs statt `<TabGroup>`
 - Selects ohne sichtbares `<label>`
+- `<label>` ohne `htmlFor` oder Eingabefeld ohne `id` — ein Platzhalter wie „z. B. 75“ ist keine Beschriftung, auch wenn axe ihn als Namen gelten lässt (Welle 201; Prüfskript `verify-barrierefreiheit`)
 - `text-gray-400` oder `text-gray-500` als Sekundärtextfarbe auf weißem Grund (seit Welle 188 auch `-500`; Prüfskript `verify-textfarben`)
 - Ergebnis-Updates ohne aria-live-Region
 - Erklärtext, FAQ, Disclaimer oder andere Crawler-relevante Text-Sektionen in client-only Lazy-Wrappern (`<LazySection>`, `IntersectionObserver`-gated Render) — bei SSR liefern solche Wrapper nur einen leeren Placeholder, AdSense-Crawler bewertet die Seite als „thin content" (Lehre 25 / Vorfall 27.04.2026, Sprint 154+155+156)
@@ -129,6 +130,14 @@ rechenfix erfüllt WCAG 2.1 AA (Lighthouse ≥97 auf Referenzseiten, Stand April
 - Skip-Link im Root-Layout (`app/layout.tsx`, `href="#main-content"`)
 - aria-live-Ergebnis-Pattern in `ErgebnisAktionen` (debounced, 750 ms)
 - `<AiExplain>` Disclosure: `aria-expanded`, `aria-controls`, Fokus-Lenkung auf Panel + zurück zum Button
+
+### Formularfelder, Schalter, Links, Tabellen (seit Welle 201)
+- Jedes Eingabefeld (`NummerEingabe`, `input`, `select`, `textarea`) ist programmatisch beschriftet: sichtbares `<label htmlFor="…">` und dieselbe `id` am Feld, Schema `<rechner>-<feld>` (z. B. `bmi-gewicht`). Felder ohne eigenes Label — Zeilen in Listen, Felder unter Schnellwahl-Knöpfen, Freitextfelder — bekommen `aria-label`; Felder unter einer Schritt-Überschrift (`<h2><span>1</span> Titel</h2>`) `aria-label` mit deren Text. `NummerEingabe` reicht `id`, `aria-label` und `aria-labelledby` an das `<input>` durch.
+- Komponenten, die mehrfach auf einer Seite stehen können oder in `.map()` rendern, nehmen `useId()` oder eine `aria-label` je Zeile, nie eine feste `id`.
+- Schalter (runder Knopf mit Kreis): `type="button" role="switch" aria-checked={zustand} aria-label="…"`. Für Werte-Auswahl weiter `<RadioToggleGroup>`.
+- Links im Fließtext: `text-primary-600 dark:text-primary-400 underline underline-offset-2`. Nie nur die Farbe (WCAG 1.4.1; axe `link-in-text-block`: Kontrast zum Text 1,53 : 1 hell, 1,72 : 1 dunkel).
+- Waagerecht scrollbare Bereiche: `<div className="overflow-x-auto" tabIndex={0} role="region" aria-label="…">` (WCAG 2.1.1). In der Handyansicht (390 px) scrollen fast alle Tabellen.
+- Gegenprobe: `npx tsx scripts/verify-barrierefreiheit.ts` (läuft in `verify:alle`) und axe über alle Seiten der Sitemap, hell, dunkel und Handy; Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`.
 
 ### Headings
 H1 → H2 → H3 ohne Sprünge. Section-Titel sind H2, nicht H3.

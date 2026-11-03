@@ -46,25 +46,25 @@ export default function FreelancerStundensatzRechner() {
       <div className="space-y-4 mb-6">
         {/* Netto-Wunsch */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="freelancer-stundensatz-gewuenschtes-netto" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Gewünschtes Netto-Monatseinkommen
           </label>
-          <NummerEingabe value={nettoWunsch} onChange={setNettoWunsch} einheit="€" placeholder="z.B. 3.000" />
+          <NummerEingabe id="freelancer-stundensatz-gewuenschtes-netto" value={nettoWunsch} onChange={setNettoWunsch} einheit="€" placeholder="z.B. 3.000" />
         </div>
 
         {/* Arbeitszeit */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="freelancer-stundensatz-arbeitstage-pro-woche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Arbeitstage pro Woche
             </label>
-            <NummerEingabe value={arbeitstage} onChange={setArbeitstage} placeholder="5" />
+            <NummerEingabe id="freelancer-stundensatz-arbeitstage-pro-woche" value={arbeitstage} onChange={setArbeitstage} placeholder="5" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="freelancer-stundensatz-produktive-stunden-pro-tag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Produktive Stunden pro Tag
             </label>
-            <NummerEingabe value={produktiveStunden} onChange={setProduktiveStunden} einheit="h" placeholder="6" />
+            <NummerEingabe id="freelancer-stundensatz-produktive-stunden-pro-tag" value={produktiveStunden} onChange={setProduktiveStunden} einheit="h" placeholder="6" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Fakturierbare Stunden (ohne Akquise, Admin etc.)</p>
           </div>
         </div>
@@ -72,49 +72,49 @@ export default function FreelancerStundensatzRechner() {
         {/* Urlaub + Krankheit */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="freelancer-stundensatz-urlaubstage-pro-jahr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Urlaubstage pro Jahr
             </label>
-            <NummerEingabe value={urlaubstage} onChange={setUrlaubstage} placeholder="30" />
+            <NummerEingabe id="freelancer-stundensatz-urlaubstage-pro-jahr" value={urlaubstage} onChange={setUrlaubstage} placeholder="30" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="freelancer-stundensatz-krankheitstage-pro-jahr" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Krankheitstage pro Jahr
             </label>
-            <NummerEingabe value={krankheitstage} onChange={setKrankheitstage} placeholder="10" />
+            <NummerEingabe id="freelancer-stundensatz-krankheitstage-pro-jahr" value={krankheitstage} onChange={setKrankheitstage} placeholder="10" />
           </div>
         </div>
 
         {/* Versicherungen */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="freelancer-stundensatz-krankenversicherung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Krankenversicherung
             </label>
-            <NummerEingabe value={krankenversicherung} onChange={setKrankenversicherung} einheit="€/Monat" placeholder="450" />
+            <NummerEingabe id="freelancer-stundensatz-krankenversicherung" value={krankenversicherung} onChange={setKrankenversicherung} einheit="€/Monat" placeholder="450" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="freelancer-stundensatz-rentenvorsorge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Rentenvorsorge
             </label>
-            <NummerEingabe value={rentenvorsorge} onChange={setRentenvorsorge} einheit="€/Monat" placeholder="300" />
+            <NummerEingabe id="freelancer-stundensatz-rentenvorsorge" value={rentenvorsorge} onChange={setRentenvorsorge} einheit="€/Monat" placeholder="300" />
           </div>
         </div>
 
         {/* Betriebsausgaben + Steuersatz */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="freelancer-stundensatz-betriebsausgaben" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Betriebsausgaben
             </label>
-            <NummerEingabe value={betriebsausgaben} onChange={setBetriebsausgaben} einheit="€/Monat" placeholder="200" />
+            <NummerEingabe id="freelancer-stundensatz-betriebsausgaben" value={betriebsausgaben} onChange={setBetriebsausgaben} einheit="€/Monat" placeholder="200" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Büro, Software, Telefon, Internet etc.</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="freelancer-stundensatz-einkommensteuersatz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Einkommensteuersatz (geschätzt)
             </label>
-            <NummerEingabe value={steuersatz} onChange={setSteuersatz} einheit="%" placeholder="30" />
+            <NummerEingabe id="freelancer-stundensatz-einkommensteuersatz" value={steuersatz} onChange={setSteuersatz} einheit="%" placeholder="30" />
           </div>
         </div>
 

@@ -111,7 +111,7 @@ export default function FleischGarzeitRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Gewicht (kg)
         </h2>
-        <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="1.5" einheit="kg" />
+        <NummerEingabe aria-label="Gewicht (kg)" value={gewicht} onChange={setGewicht} placeholder="1.5" einheit="kg" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Richtwert für den Ofen bei rund 160–180 °C. Die Fleischdicke zählt für die Zeit mehr als das reine Gewicht.
         </p>
@@ -184,7 +184,7 @@ export default function FleischGarzeitRechner() {
                 Garzeit nach Gewicht — {ART_LABEL[art]}
               </h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
@@ -219,7 +219,7 @@ export default function FleischGarzeitRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Sichere Kerntemperaturen (USDA/FSIS)</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Sichere Kerntemperaturen (USDA/FSIS)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

@@ -123,16 +123,16 @@ export default function ZufallszahlRechner() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Minimum</label>
-                <NummerEingabe value={zMin} onChange={setZMin} placeholder="1" />
+                <label htmlFor="zufallszahl-minimum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Minimum</label>
+                <NummerEingabe id="zufallszahl-minimum" value={zMin} onChange={setZMin} placeholder="1" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maximum</label>
-                <NummerEingabe value={zMax} onChange={setZMax} placeholder="100" />
+                <label htmlFor="zufallszahl-maximum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maximum</label>
+                <NummerEingabe id="zufallszahl-maximum" value={zMax} onChange={setZMax} placeholder="100" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl</label>
-                <NummerEingabe value={zAnzahl} onChange={setZAnzahl} placeholder="1" />
+                <label htmlFor="zufallszahl-anzahl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl</label>
+                <NummerEingabe id="zufallszahl-anzahl" value={zAnzahl} onChange={setZAnzahl} placeholder="1" />
               </div>
             </div>
             <button onClick={genZufallszahl} className="w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors">
@@ -183,8 +183,8 @@ export default function ZufallszahlRechner() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Würfel (1–10)</label>
-                <NummerEingabe value={wAnzahl} onChange={setWAnzahl} placeholder="2" />
+                <label htmlFor="zufallszahl-anzahl-wuerfel" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Würfel (1–10)</label>
+                <NummerEingabe id="zufallszahl-anzahl-wuerfel" value={wAnzahl} onChange={setWAnzahl} placeholder="2" />
               </div>
               <div>
                 <label htmlFor="wuerfel-seiten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Seitenanzahl</label>
@@ -227,8 +227,8 @@ export default function ZufallszahlRechner() {
         {tab === 'muenzwurf' && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Würfe (1–100)</label>
-              <NummerEingabe value={mAnzahl} onChange={setMAnzahl} placeholder="1" />
+              <label htmlFor="zufallszahl-anzahl-wuerfe" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Würfe (1–100)</label>
+              <NummerEingabe id="zufallszahl-anzahl-wuerfe" value={mAnzahl} onChange={setMAnzahl} placeholder="1" />
             </div>
             <button onClick={genMuenzwurf} className="w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors">
               🪙 Werfen
@@ -270,12 +270,12 @@ export default function ZufallszahlRechner() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahlen ziehen</label>
-                <NummerEingabe value={lAnzahl} onChange={setLAnzahl} placeholder="6" />
+                <label htmlFor="zufallszahl-zahlen-ziehen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahlen ziehen</label>
+                <NummerEingabe id="zufallszahl-zahlen-ziehen" value={lAnzahl} onChange={setLAnzahl} placeholder="6" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">aus 1 bis …</label>
-                <NummerEingabe value={lAus} onChange={setLAus} placeholder="49" />
+                <label htmlFor="zufallszahl-aus-1-bis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">aus 1 bis …</label>
+                <NummerEingabe id="zufallszahl-aus-1-bis" value={lAus} onChange={setLAus} placeholder="49" />
               </div>
             </div>
             <button onClick={genLosziehung} className="w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors">
@@ -300,8 +300,8 @@ export default function ZufallszahlRechner() {
         {tab === 'passwort' && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Passwort-Länge (8–64)</label>
-              <NummerEingabe value={pLaenge} onChange={setPLaenge} placeholder="16" />
+              <label htmlFor="zufallszahl-passwort-laenge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Passwort-Länge (8–64)</label>
+              <NummerEingabe id="zufallszahl-passwort-laenge" value={pLaenge} onChange={setPLaenge} placeholder="16" />
             </div>
             <fieldset>
               <legend className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Zeichenarten</legend>

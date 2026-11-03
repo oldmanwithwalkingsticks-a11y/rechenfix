@@ -218,6 +218,7 @@ export default function NaehrwertRechner() {
               </div>
               <div className="w-28 shrink-0">
                 <NummerEingabe
+                  aria-label="Menge in Gramm"
                   value={z.menge}
                   onChange={v => updateZutat(z.id, 'menge', v)}
                   placeholder="g/ml"
@@ -251,7 +252,7 @@ export default function NaehrwertRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
           Anzahl Portionen
         </h2>
-        <NummerEingabe value={portionen} onChange={setPortionen} placeholder="4" einheit="Portionen" />
+        <NummerEingabe aria-label="Anzahl Portionen" value={portionen} onChange={setPortionen} placeholder="4" einheit="Portionen" />
       </div>
 
       {/* === ERGEBNIS === */}
@@ -310,7 +311,7 @@ export default function NaehrwertRechner() {
           <div className="px-4 pt-4 pb-1">
             <h2 className="font-bold text-gray-700 dark:text-gray-200">Nährwerte je Zutat</h2>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Nährwerte je Zutat">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

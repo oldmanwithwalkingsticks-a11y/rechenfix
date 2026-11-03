@@ -60,20 +60,20 @@ export default function Vo2maxRechner() {
       {/* Eingaben je Methode */}
       {methode === 'cooper' ? (
         <div className="max-w-sm mb-6">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="vo2max-in-12-minuten-gelaufene" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             In 12 Minuten gelaufene Distanz
           </label>
-          <NummerEingabe value={distanz} onChange={setDistanz} placeholder="2400" einheit="m" />
+          <NummerEingabe id="vo2max-in-12-minuten-gelaufene" value={distanz} onChange={setDistanz} placeholder="2400" einheit="m" />
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maximalpuls (HFmax)</label>
-            <NummerEingabe value={hfmax} onChange={setHfmax} placeholder="190" einheit="Schläge/min" />
+            <label htmlFor="vo2max-maximalpuls" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maximalpuls (HFmax)</label>
+            <NummerEingabe id="vo2max-maximalpuls" value={hfmax} onChange={setHfmax} placeholder="190" einheit="Schläge/min" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ruhepuls (HFruhe)</label>
-            <NummerEingabe value={hfruhe} onChange={setHfruhe} placeholder="60" einheit="Schläge/min" />
+            <label htmlFor="vo2max-ruhepuls" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ruhepuls (HFruhe)</label>
+            <NummerEingabe id="vo2max-ruhepuls" value={hfruhe} onChange={setHfruhe} placeholder="60" einheit="Schläge/min" />
           </div>
         </div>
       )}

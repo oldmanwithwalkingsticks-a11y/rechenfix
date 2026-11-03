@@ -101,8 +101,9 @@ export default function KfzSteuerRechner() {
       {!istElektro && (
         <div className={`grid grid-cols-1 ${zulassung !== 'vor-2009' ? 'sm:grid-cols-2' : ''} gap-4 mb-6`}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hubraum</label>
+            <label htmlFor="kfz-steuer-hubraum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hubraum</label>
             <NummerEingabe
+              id="kfz-steuer-hubraum"
               value={hubraum}
               onChange={setHubraum}
               placeholder="z.B. 1498"
@@ -112,8 +113,9 @@ export default function KfzSteuerRechner() {
           {zulassung !== 'vor-2009' && (
             <div>
               {/* W187: vorher „CO₂-Ausstoß (WLTP)“ — bei Erstzulassung bis 2018 steht im Schein oft der NEFZ-Wert */}
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CO₂-Ausstoß (Fahrzeugschein, Feld V.7)</label>
+              <label htmlFor="kfz-steuer-co-ausstoss" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CO₂-Ausstoß (Fahrzeugschein, Feld V.7)</label>
               <NummerEingabe
+                id="kfz-steuer-co-ausstoss"
                 value={co2}
                 onChange={setCo2}
                 placeholder="z.B. 128"

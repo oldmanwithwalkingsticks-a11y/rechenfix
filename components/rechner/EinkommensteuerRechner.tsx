@@ -57,7 +57,7 @@ export default function EinkommensteuerRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Zu versteuerndes Einkommen (Jahr)
         </h2>
-        <NummerEingabe value={zvE} onChange={setZvE} placeholder="50.000" einheit="€" />
+        <NummerEingabe aria-label="Zu versteuerndes Einkommen (Jahr)" value={zvE} onChange={setZvE} placeholder="50.000" einheit="€" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Bruttoeinkommen abzüglich Werbungskosten, Sonderausgaben, außergewöhnliche Belastungen und Freibeträge.
         </p>
@@ -189,7 +189,7 @@ export default function EinkommensteuerRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               <tr>
@@ -284,7 +284,7 @@ export default function EinkommensteuerRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleichswerte {ergebnis.splitting ? '(Splitting)' : '(Einzelveranlagung)'}</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

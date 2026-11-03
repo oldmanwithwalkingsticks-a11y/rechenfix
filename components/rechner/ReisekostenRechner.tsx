@@ -77,8 +77,8 @@ export default function ReisekostenRechner() {
         {/* Basis */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reisedauer (Nächte)</label>
-            <NummerEingabe value={naechte} onChange={setNaechte} placeholder="7" />
+            <label htmlFor="reisekosten-reisedauer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reisedauer (Nächte)</label>
+            <NummerEingabe id="reisekosten-reisedauer" value={naechte} onChange={setNaechte} placeholder="7" />
           </div>
           <div>
             <label htmlFor="personen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Reisende</label>
@@ -114,33 +114,33 @@ export default function ReisekostenRechner() {
         {anreiseTyp === 'auto' ? (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Entfernung (km)</label>
-              <NummerEingabe value={entfernung} onChange={setEntfernung} placeholder="500" />
+              <label htmlFor="reisekosten-entfernung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Entfernung (km)</label>
+              <NummerEingabe id="reisekosten-entfernung" value={entfernung} onChange={setEntfernung} placeholder="500" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch (l/100km)</label>
-              <NummerEingabe value={spritverbrauch} onChange={setSpritverbrauch} placeholder="7" />
+              <label htmlFor="reisekosten-verbrauch" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Verbrauch (l/100km)</label>
+              <NummerEingabe id="reisekosten-verbrauch" value={spritverbrauch} onChange={setSpritverbrauch} placeholder="7" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Spritpreis (€/l)</label>
-              <NummerEingabe value={spritpreis} onChange={setSpritpreis} placeholder={SPRIT_DEFAULT} />
+              <label htmlFor="reisekosten-spritpreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Spritpreis (€/l)</label>
+              <NummerEingabe id="reisekosten-spritpreis" value={spritpreis} onChange={setSpritpreis} placeholder={SPRIT_DEFAULT} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maut/Vignette (€)</label>
-              <NummerEingabe value={maut} onChange={setMaut} placeholder="30" />
+              <label htmlFor="reisekosten-maut-vignette" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Maut/Vignette (€)</label>
+              <NummerEingabe id="reisekosten-maut-vignette" value={maut} onChange={setMaut} placeholder="30" />
             </div>
           </div>
         ) : (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Preis pro Person (einfach, €)</label>
-            <NummerEingabe value={anreisePreis} onChange={setAnreisePreis} placeholder="80" />
+            <label htmlFor="reisekosten-preis-pro-person" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Preis pro Person (einfach, €)</label>
+            <NummerEingabe id="reisekosten-preis-pro-person" value={anreisePreis} onChange={setAnreisePreis} placeholder="80" />
           </div>
         )}
 
         {/* Unterkunft */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Unterkunft (€/Nacht)</label>
-          <NummerEingabe value={unterkunft} onChange={setUnterkunft} placeholder="80" />
+          <label htmlFor="reisekosten-unterkunft" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Unterkunft (€/Nacht)</label>
+          <NummerEingabe id="reisekosten-unterkunft" value={unterkunft} onChange={setUnterkunft} placeholder="80" />
         </div>
 
         {/* Verpflegung */}
@@ -160,8 +160,8 @@ export default function ReisekostenRechner() {
           </div>
           {verpflegungModus === 'eigene' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betrag (€/Tag/Person)</label>
-              <NummerEingabe value={verpflegungEigen} onChange={setVerpflegungEigen} placeholder="50" />
+              <label htmlFor="reisekosten-betrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betrag (€/Tag/Person)</label>
+              <NummerEingabe id="reisekosten-betrag" value={verpflegungEigen} onChange={setVerpflegungEigen} placeholder="50" />
             </div>
           )}
         </div>
@@ -169,12 +169,12 @@ export default function ReisekostenRechner() {
         {/* Aktivitäten + Versicherung */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktivitäten/Eintritte (€/Tag/Person)</label>
-            <NummerEingabe value={aktivitaeten} onChange={setAktivitaeten} placeholder="20" />
+            <label htmlFor="reisekosten-aktivitaeten-eintritte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktivitäten/Eintritte (€/Tag/Person)</label>
+            <NummerEingabe id="reisekosten-aktivitaeten-eintritte" value={aktivitaeten} onChange={setAktivitaeten} placeholder="20" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reiseversicherung (€, gesamt)</label>
-            <NummerEingabe value={versicherung} onChange={setVersicherung} placeholder="0" />
+            <label htmlFor="reisekosten-reiseversicherung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reiseversicherung (€, gesamt)</label>
+            <NummerEingabe id="reisekosten-reiseversicherung" value={versicherung} onChange={setVersicherung} placeholder="0" />
           </div>
         </div>
       </div>

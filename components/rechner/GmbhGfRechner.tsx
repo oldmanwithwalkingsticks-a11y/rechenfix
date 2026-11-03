@@ -150,8 +150,8 @@ export default function GmbhGfRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">GF-Bruttogehalt / Monat</label>
-          <NummerEingabe value={brutto} onChange={setBrutto} einheit="€" />
+          <label htmlFor="gmbh-gf-gf-bruttogehalt-monat" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">GF-Bruttogehalt / Monat</label>
+          <NummerEingabe id="gmbh-gf-gf-bruttogehalt-monat" value={brutto} onChange={setBrutto} einheit="€" />
         </div>
 
         <div>
@@ -197,8 +197,8 @@ export default function GmbhGfRechner() {
 
         {kv === 'gkv' && (
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">KV-Zusatzbeitrag</label>
-            <NummerEingabe value={kvZusatz} onChange={setKvZusatz} einheit="%" />
+            <label htmlFor="gmbh-gf-kv-zusatzbeitrag" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">KV-Zusatzbeitrag</label>
+            <NummerEingabe id="gmbh-gf-kv-zusatzbeitrag" value={kvZusatz} onChange={setKvZusatz} einheit="%" />
           </div>
         )}
 
@@ -207,7 +207,7 @@ export default function GmbhGfRechner() {
             <label htmlFor="gmbhgf-pkv" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
               Monatlicher PKV-Beitrag
             </label>
-            <NummerEingabe value={pkvBeitrag} onChange={setPkvBeitrag} einheit="€" />
+            <NummerEingabe id="gmbhgf-pkv" value={pkvBeitrag} onChange={setPkvBeitrag} einheit="€" />
             <p id="gmbhgf-pkv-hint" className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               {beherrschend
                 ? 'PKV-Beiträge variieren individuell (Alter, Tarif, Selbstbehalt). Typische Bandbreite: 400–1.000 € pro Monat. Tragen Sie Ihren Gesamtbeitrag für Kranken- und Pflegepflichtversicherung ein — als beherrschender GGF zahlen Sie ihn ohne gesetzlichen Arbeitgeberzuschuss.'
@@ -217,8 +217,8 @@ export default function GmbhGfRechner() {
         )}
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anzahl Kinder</label>
-          <NummerEingabe value={kinder} onChange={setKinder} einheit="" />
+          <label htmlFor="gmbh-gf-anzahl-kinder" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anzahl Kinder</label>
+          <NummerEingabe id="gmbh-gf-anzahl-kinder" value={kinder} onChange={setKinder} einheit="" />
         </div>
 
         <div className="flex items-center gap-2">
@@ -251,12 +251,12 @@ export default function GmbhGfRechner() {
         {firmenwagen && (
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Listenpreis</label>
-              <NummerEingabe value={listenpreis} onChange={setListenpreis} einheit="€" />
+              <label htmlFor="gmbh-gf-listenpreis" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Listenpreis</label>
+              <NummerEingabe id="gmbh-gf-listenpreis" value={listenpreis} onChange={setListenpreis} einheit="€" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Entfernung Arbeit</label>
-              <NummerEingabe value={km} onChange={setKm} einheit="km" />
+              <label htmlFor="gmbh-gf-entfernung-arbeit" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Entfernung Arbeit</label>
+              <NummerEingabe id="gmbh-gf-entfernung-arbeit" value={km} onChange={setKm} einheit="km" />
             </div>
           </div>
         )}

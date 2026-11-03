@@ -181,8 +181,9 @@ export default function FeedbackClient() {
             {aktiverTyp === 'rechner-wunsch' && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Beschreibung *</label>
+                  <label htmlFor="feedback-beschreibung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Beschreibung *</label>
                   <textarea
+                    id="feedback-beschreibung"
                     value={wunschBeschreibung}
                     onChange={e => setWunschBeschreibung(e.target.value)}
                     className="input-field min-h-[100px]"
@@ -190,8 +191,9 @@ export default function FeedbackClient() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kategorie</label>
+                  <label htmlFor="feedback-kategorie" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kategorie</label>
                   <select
+                    id="feedback-kategorie"
                     value={wunschKategorie}
                     onChange={e => setWunschKategorie(e.target.value)}
                     className="input-field"
@@ -209,8 +211,9 @@ export default function FeedbackClient() {
             {aktiverTyp === 'fehler' && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Welcher Rechner? *</label>
+                  <label htmlFor="feedback-welcher-rechner" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Welcher Rechner? *</label>
                   <select
+                    id="feedback-welcher-rechner"
                     value={fehlerRechner}
                     onChange={e => setFehlerRechner(e.target.value)}
                     className="input-field"
@@ -222,8 +225,9 @@ export default function FeedbackClient() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Problem beschreiben *</label>
+                  <label htmlFor="feedback-problem-beschreiben" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Problem beschreiben *</label>
                   <textarea
+                    id="feedback-problem-beschreiben"
                     value={fehlerProblem}
                     onChange={e => setFehlerProblem(e.target.value)}
                     className="input-field min-h-[100px]"
@@ -241,8 +245,9 @@ export default function FeedbackClient() {
                   <Sterne wert={bewertungSterne} onChange={setBewertungSterne} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Was gefällt Ihnen?</label>
+                  <label htmlFor="feedback-was-gefaellt-ihnen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Was gefällt Ihnen?</label>
                   <textarea
+                    id="feedback-was-gefaellt-ihnen"
                     value={bewertungGefaellt}
                     onChange={e => setBewertungGefaellt(e.target.value)}
                     className="input-field min-h-[80px]"
@@ -250,8 +255,9 @@ export default function FeedbackClient() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Was können wir verbessern?</label>
+                  <label htmlFor="feedback-was-koennen-wir-verbessern" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Was können wir verbessern?</label>
                   <textarea
+                    id="feedback-was-koennen-wir-verbessern"
                     value={bewertungVerbessern}
                     onChange={e => setBewertungVerbessern(e.target.value)}
                     className="input-field min-h-[80px]"
@@ -265,8 +271,9 @@ export default function FeedbackClient() {
             {aktiverTyp === 'rechner-verbessern' && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Welcher Rechner? *</label>
+                  <label htmlFor="feedback-welcher-rechner-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Welcher Rechner? *</label>
                   <select
+                    id="feedback-welcher-rechner-2"
                     value={verbessernRechner}
                     onChange={e => setVerbessernRechner(e.target.value)}
                     className="input-field"
@@ -278,8 +285,9 @@ export default function FeedbackClient() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Was fehlt oder sollte verbessert werden? *</label>
+                  <label htmlFor="feedback-was-fehlt-oder-sollte" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Was fehlt oder sollte verbessert werden? *</label>
                   <textarea
+                    id="feedback-was-fehlt-oder-sollte"
                     value={verbessernWasFehlt}
                     onChange={e => setVerbessernWasFehlt(e.target.value)}
                     className="input-field min-h-[100px]"
@@ -316,8 +324,9 @@ export default function FeedbackClient() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anmerkung</label>
+                  <label htmlFor="feedback-anmerkung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anmerkung</label>
                   <textarea
+                    id="feedback-anmerkung"
                     value={kiAnmerkung}
                     onChange={e => setKiAnmerkung(e.target.value)}
                     className="input-field min-h-[80px]"
@@ -329,8 +338,9 @@ export default function FeedbackClient() {
 
             {/* E-Mail (optional, bei allen) */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-Mail (optional)</label>
+              <label htmlFor="feedback-e-mail" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-Mail (optional)</label>
               <input
+                id="feedback-e-mail"
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}

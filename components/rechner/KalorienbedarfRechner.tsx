@@ -59,15 +59,15 @@ export default function KalorienbedarfRechner() {
       <div className="grid gap-4 sm:grid-cols-2 mb-6">
         <div>
           <label htmlFor="tdee-gewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
-          <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
+          <NummerEingabe id="tdee-gewicht" value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
         </div>
         <div>
           <label htmlFor="tdee-groesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergröße</label>
-          <NummerEingabe value={groesse} onChange={setGroesse} placeholder="178" einheit="cm" />
+          <NummerEingabe id="tdee-groesse" value={groesse} onChange={setGroesse} placeholder="178" einheit="cm" />
         </div>
         <div>
           <label htmlFor="tdee-alter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter</label>
-          <NummerEingabe value={alter} onChange={setAlter} placeholder="30" einheit="Jahre" />
+          <NummerEingabe id="tdee-alter" value={alter} onChange={setAlter} placeholder="30" einheit="Jahre" />
         </div>
         <div>
           <label htmlFor="tdee-geschlecht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschlecht</label>
@@ -115,7 +115,7 @@ export default function KalorienbedarfRechner() {
           {/* Aktivitäts-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Dein Bedarf je Aktivitätslevel</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Dein Bedarf je Aktivitätslevel">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

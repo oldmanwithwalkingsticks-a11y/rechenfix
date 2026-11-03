@@ -111,11 +111,12 @@ export default function StreamingKostenRechner() {
 
           {/* Sonstige */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
-            <label className="block font-medium text-gray-900 dark:text-white mb-2">
+            <label htmlFor="streaming-kosten-sonstige-abos" className="block font-medium text-gray-900 dark:text-white mb-2">
               Sonstige Abos
             </label>
             <div className="flex items-center gap-2">
               <input
+                id="streaming-kosten-sonstige-abos"
                 type="text"
                 inputMode="decimal"
                 placeholder="0,00"

@@ -292,13 +292,13 @@ export default function BuergergeldRechner() {
       <div className="grid grid-cols-2 gap-3 mb-4">
         {/* W183: vorher „Warmmiete“ — das Feld wird zu den Heizkosten addiert, die Heizung zählte doppelt. */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Miete inkl. Nebenkosten (ohne Heizung)</label>
-          <NummerEingabe value={warmmiete} onChange={setWarmmiete} placeholder="z. B. 450" einheit="€" />
+          <label htmlFor="buergergeld-miete-inkl-nebenkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Miete inkl. Nebenkosten (ohne Heizung)</label>
+          <NummerEingabe id="buergergeld-miete-inkl-nebenkosten" value={warmmiete} onChange={setWarmmiete} placeholder="z. B. 450" einheit="€" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Kaltmiete + kalte Nebenkosten (Bruttokaltmiete)</p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Heizkosten</label>
-          <NummerEingabe value={heizkosten} onChange={setHeizkosten} placeholder="z. B. 80" einheit="€" />
+          <label htmlFor="buergergeld-heizkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Heizkosten</label>
+          <NummerEingabe id="buergergeld-heizkosten" value={heizkosten} onChange={setHeizkosten} placeholder="z. B. 80" einheit="€" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Abschlag für Heizung (und Warmwasser)</p>
         </div>
       </div>
@@ -314,13 +314,13 @@ export default function BuergergeldRechner() {
       {/* Einkommen & Vermögen */}
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einkommen (Brutto)</label>
-          <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€" />
+          <label htmlFor="buergergeld-einkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Einkommen (Brutto)</label>
+          <NummerEingabe id="buergergeld-einkommen" value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Monatliches Brutto</p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vermögen</label>
-          <NummerEingabe value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
+          <label htmlFor="buergergeld-vermoegen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vermögen</label>
+          <NummerEingabe id="buergergeld-vermoegen" value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Gesamt-Vermögen</p>
         </div>
       </div>
@@ -457,17 +457,17 @@ export default function BuergergeldRechner() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label htmlFor="buergergeld-kostenaufwaendige-ernaehrung" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Kostenaufwändige Ernährung <span className="font-normal text-gray-600 dark:text-gray-400">(§ 21 Abs. 5)</span>
               </label>
-              <NummerEingabe value={ernaehrungEuro} onChange={setErnaehrungEuro} placeholder="0" einheit="€/Mo" />
+              <NummerEingabe id="buergergeld-kostenaufwaendige-ernaehrung" value={ernaehrungEuro} onChange={setErnaehrungEuro} placeholder="0" einheit="€/Mo" />
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Laut ärztl. Attest, angemessene Höhe.</p>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label htmlFor="buergergeld-sonstiger-unabweisbarer-bedarf" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Sonstiger unabweisbarer Bedarf <span className="font-normal text-gray-600 dark:text-gray-400">(§ 21 Abs. 6)</span>
               </label>
-              <NummerEingabe value={atypischEuro} onChange={setAtypischEuro} placeholder="0" einheit="€/Mo" />
+              <NummerEingabe id="buergergeld-sonstiger-unabweisbarer-bedarf" value={atypischEuro} onChange={setAtypischEuro} placeholder="0" einheit="€/Mo" />
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Atypisch, individuell vom Jobcenter geprüft.</p>
             </div>
           </div>
@@ -708,7 +708,7 @@ export default function BuergergeldRechner() {
                 {params.bezeichnung}-Regelsätze {new Date().getFullYear()}
               </p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   {regelsatzInfo.map((zeile) => (

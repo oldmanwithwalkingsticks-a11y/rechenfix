@@ -94,15 +94,15 @@ export default function EautoLadezeitRechner() {
       <div className="grid gap-4 sm:grid-cols-3 mb-4">
         <div>
           <label htmlFor="ev-akku" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Akku-Kapazität</label>
-          <NummerEingabe value={akku} onChange={setAkku} placeholder="60" einheit="kWh" />
+          <NummerEingabe id="ev-akku" value={akku} onChange={setAkku} placeholder="60" einheit="kWh" />
         </div>
         <div>
           <label htmlFor="ev-start" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Start-Ladestand</label>
-          <NummerEingabe value={startSoc} onChange={setStartSoc} placeholder="10" einheit="%" />
+          <NummerEingabe id="ev-start" value={startSoc} onChange={setStartSoc} placeholder="10" einheit="%" />
         </div>
         <div>
           <label htmlFor="ev-ziel" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ziel-Ladestand</label>
-          <NummerEingabe value={zielSoc} onChange={setZielSoc} placeholder="80" einheit="%" />
+          <NummerEingabe id="ev-ziel" value={zielSoc} onChange={setZielSoc} placeholder="80" einheit="%" />
         </div>
       </div>
 
@@ -143,7 +143,7 @@ export default function EautoLadezeitRechner() {
           </div>
           <div>
             <label htmlFor="ev-dclimit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fahrzeug-DC-Limit</label>
-            <NummerEingabe value={dcLimit} onChange={setDcLimit} placeholder="150" einheit="kW" />
+            <NummerEingabe id="ev-dclimit" value={dcLimit} onChange={setDcLimit} placeholder="150" einheit="kW" />
           </div>
         </div>
       )}
@@ -204,7 +204,7 @@ export default function EautoLadezeitRechner() {
           {/* AC-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Ladezeit je Akkugröße (AC 11 kW, 10 → 80 %)</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Ladezeit je Akkugröße (AC 11 kW, 10 → 80 %)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

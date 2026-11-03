@@ -85,8 +85,9 @@ export default function UrlaubstageRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Vertragliche Urlaubstage/Jahr</label>
+              <label htmlFor="urlaubstage-vertragliche-urlaubstage-jahr" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Vertragliche Urlaubstage/Jahr</label>
               <input
+                id="urlaubstage-vertragliche-urlaubstage-jahr"
                 type="number"
                 inputMode="numeric"
                 min="0"
@@ -114,8 +115,9 @@ export default function UrlaubstageRechner() {
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Beschäftigungszeitraum (optional)</p>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Eintritt</label>
+              <label htmlFor="urlaubstage-eintritt" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Eintritt</label>
               <input
+                id="urlaubstage-eintritt"
                 type="date"
                 value={beschaeftigungsBeginn}
                 onChange={e => setBeschaeftigungsBeginn(e.target.value)}
@@ -123,8 +125,9 @@ export default function UrlaubstageRechner() {
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Austritt</label>
+              <label htmlFor="urlaubstage-austritt" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Austritt</label>
               <input
+                id="urlaubstage-austritt"
                 type="date"
                 value={beschaeftigungsEnde}
                 onChange={e => setBeschaeftigungsEnde(e.target.value)}
@@ -150,6 +153,10 @@ export default function UrlaubstageRechner() {
           {/* Teilzeit */}
           <div className="flex items-center gap-3 mb-3">
             <button
+              type="button"
+              role="switch"
+              aria-checked={teilzeit}
+              aria-label="Teilzeit"
               onClick={() => setTeilzeit(!teilzeit)}
               className={`w-10 h-6 rounded-full transition-all relative ${
                 teilzeit ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
@@ -163,8 +170,9 @@ export default function UrlaubstageRechner() {
           </div>
           {teilzeit && (
             <div className="mb-4">
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Arbeitstage pro Woche (Teilzeit)</label>
+              <label htmlFor="urlaubstage-arbeitstage-pro-woche" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Arbeitstage pro Woche (Teilzeit)</label>
               <input
+                id="urlaubstage-arbeitstage-pro-woche"
                 type="number"
                 inputMode="numeric"
                 min="1"
@@ -183,6 +191,10 @@ export default function UrlaubstageRechner() {
           {/* Schwerbehinderung */}
           <div className="flex items-center gap-3 mb-6">
             <button
+              type="button"
+              role="switch"
+              aria-checked={schwerbehindert}
+              aria-label="Schwerbehindert (GdB ≥ 50)"
               onClick={() => setSchwerbehindert(!schwerbehindert)}
               className={`w-10 h-6 rounded-full transition-all relative ${
                 schwerbehindert ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
@@ -283,8 +295,9 @@ export default function UrlaubstageRechner() {
         <div>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Urlaubstage pro Jahr</label>
+              <label htmlFor="urlaubstage-urlaubstage-pro-jahr" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Urlaubstage pro Jahr</label>
               <input
+                id="urlaubstage-urlaubstage-pro-jahr"
                 type="number"
                 inputMode="numeric"
                 min="0"
@@ -310,8 +323,9 @@ export default function UrlaubstageRechner() {
 
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Austrittsdatum (letzter Tag)</label>
+              <label htmlFor="urlaubstage-austrittsdatum" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Austrittsdatum (letzter Tag)</label>
               <input
+                id="urlaubstage-austrittsdatum"
                 type="date"
                 value={kuendigungsDatum}
                 onChange={e => setKuendigungsDatum(e.target.value)}
@@ -319,8 +333,9 @@ export default function UrlaubstageRechner() {
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bereits genommene Tage</label>
+              <label htmlFor="urlaubstage-bereits-genommene-tage" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Bereits genommene Tage</label>
               <input
+                id="urlaubstage-bereits-genommene-tage"
                 type="number"
                 inputMode="numeric"
                 min="0"

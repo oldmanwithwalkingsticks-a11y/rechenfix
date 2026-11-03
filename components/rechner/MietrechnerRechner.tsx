@@ -30,24 +30,24 @@ export default function MietrechnerRechner() {
     <div>
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaltmiete</label>
-          <NummerEingabe value={kaltmiete} onChange={setKaltmiete} placeholder="650" einheit="€" />
+          <label htmlFor="mietrechner-kaltmiete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaltmiete</label>
+          <NummerEingabe id="mietrechner-kaltmiete" value={kaltmiete} onChange={setKaltmiete} placeholder="650" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nebenkosten</label>
-          <NummerEingabe value={nebenkosten} onChange={setNebenkosten} placeholder="200" einheit="€" />
+          <label htmlFor="mietrechner-nebenkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nebenkosten</label>
+          <NummerEingabe id="mietrechner-nebenkosten" value={nebenkosten} onChange={setNebenkosten} placeholder="200" einheit="€" />
           <CrossLink href="/wohnen/nebenkosten-rechner" emoji="📋" text="Nebenkosten genau berechnen" />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnfläche</label>
-          <NummerEingabe value={wohnflaeche} onChange={setWohnflaeche} placeholder="65" einheit="m²" />
+          <label htmlFor="mietrechner-wohnflaeche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnfläche</label>
+          <NummerEingabe id="mietrechner-wohnflaeche" value={wohnflaeche} onChange={setWohnflaeche} placeholder="65" einheit="m²" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nettoeinkommen</label>
-          <NummerEingabe value={nettoEinkommen} onChange={setNettoEinkommen} placeholder="2500" einheit="€" />
+          <label htmlFor="mietrechner-nettoeinkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nettoeinkommen</label>
+          <NummerEingabe id="mietrechner-nettoeinkommen" value={nettoEinkommen} onChange={setNettoEinkommen} placeholder="2500" einheit="€" />
         </div>
       </div>
 

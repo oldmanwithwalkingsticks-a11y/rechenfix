@@ -100,8 +100,9 @@ export default function CountdownRechner() {
       {istEigen && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Datum</label>
+            <label htmlFor="countdown-datum" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Datum</label>
             <input
+              id="countdown-datum"
               type="date"
               value={eigenDatum}
               onChange={e => setEigenDatum(e.target.value)}
@@ -109,8 +110,9 @@ export default function CountdownRechner() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bezeichnung (optional)</label>
+            <label htmlFor="countdown-bezeichnung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bezeichnung (optional)</label>
             <input
+              id="countdown-bezeichnung"
               type="text"
               value={eigenLabel}
               onChange={e => setEigenLabel(e.target.value)}

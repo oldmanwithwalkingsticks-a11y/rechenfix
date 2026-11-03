@@ -118,8 +118,8 @@ export default function PhotovoltaikRechner() {
     <div>
       <div className="space-y-4 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Verfügbare Dachfläche</label>
-          <NummerEingabe value={dachflaeche} onChange={setDachflaeche} einheit="m²" />
+          <label htmlFor="photovoltaik-verfuegbare-dachflaeche" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Verfügbare Dachfläche</label>
+          <NummerEingabe id="photovoltaik-verfuegbare-dachflaeche" value={dachflaeche} onChange={setDachflaeche} einheit="m²" />
         </div>
         <div>
           <label htmlFor="photovoltaik-select-1" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Dachausrichtung</label>
@@ -134,8 +134,8 @@ export default function PhotovoltaikRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jährlicher Stromverbrauch</label>
-          <NummerEingabe value={verbrauch} onChange={setVerbrauch} einheit="kWh" />
+          <label htmlFor="photovoltaik-jaehrlicher-stromverbrauch" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Jährlicher Stromverbrauch</label>
+          <NummerEingabe id="photovoltaik-jaehrlicher-stromverbrauch" value={verbrauch} onChange={setVerbrauch} einheit="kWh" />
           <div className="flex flex-wrap gap-2 mt-2">
             {[{ l: '1 Pers.', v: '2000' }, { l: '2 Pers.', v: '3500' }, { l: '3–4 Pers.', v: '4500' }, { l: '5+ Pers.', v: '6000' }].map(p => (
               <button key={p.v} onClick={() => setVerbrauch(p.v)} className="text-xs px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 hover:border-primary-400">{p.l}</button>
@@ -143,15 +143,15 @@ export default function PhotovoltaikRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Aktueller Strompreis</label>
-          <NummerEingabe value={strompreis} onChange={setStrompreis} einheit="ct/kWh" />
+          <label htmlFor="photovoltaik-aktueller-strompreis" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Aktueller Strompreis</label>
+          <NummerEingabe id="photovoltaik-aktueller-strompreis" value={strompreis} onChange={setStrompreis} einheit="ct/kWh" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
             Default {STROMPREIS_DEFAULT} ct = typischer Festpreis-Neuvertrag (Verivox/Check24, 04/2026).
           </p>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anlagengröße (leer = automatisch)</label>
-          <NummerEingabe value={kwp} onChange={setKwp} einheit="kWp" placeholder={`Ø ${fmt(ergebnis.kwpWert, 1)}`} />
+          <label htmlFor="photovoltaik-anlagengroesse" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anlagengröße (leer = automatisch)</label>
+          <NummerEingabe id="photovoltaik-anlagengroesse" value={kwp} onChange={setKwp} einheit="kWp" placeholder={`Ø ${fmt(ergebnis.kwpWert, 1)}`} />
           <div className="flex flex-wrap gap-2 mt-2">
             {['5', '8', '10', '15'].map(v => (
               <button key={v} onClick={() => setKwp(v)} className="text-xs px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 hover:border-primary-400">{v} kWp</button>
@@ -159,8 +159,8 @@ export default function PhotovoltaikRechner() {
           </div>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anlagenkosten (leer = ca. 1.300 €/kWp)</label>
-          <NummerEingabe value={kosten} onChange={setKosten} einheit="€" placeholder={`Ø ${fmt(ergebnis.kostenWert)}`} />
+          <label htmlFor="photovoltaik-anlagenkosten" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Anlagenkosten (leer = ca. 1.300 €/kWp)</label>
+          <NummerEingabe id="photovoltaik-anlagenkosten" value={kosten} onChange={setKosten} einheit="€" placeholder={`Ø ${fmt(ergebnis.kostenWert)}`} />
         </div>
         <div>
           <RadioToggleGroup
@@ -177,12 +177,12 @@ export default function PhotovoltaikRechner() {
         {mitSpeicher && (
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Speicherkapazität</label>
-              <NummerEingabe value={speicherKwh} onChange={setSpeicherKwh} einheit="kWh" />
+              <label htmlFor="photovoltaik-speicherkapazitaet" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Speicherkapazität</label>
+              <NummerEingabe id="photovoltaik-speicherkapazitaet" value={speicherKwh} onChange={setSpeicherKwh} einheit="kWh" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Speicherkosten</label>
-              <NummerEingabe value={speicherKostenProKwh} onChange={setSpeicherKostenProKwh} einheit="€/kWh" />
+              <label htmlFor="photovoltaik-speicherkosten" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Speicherkosten</label>
+              <NummerEingabe id="photovoltaik-speicherkosten" value={speicherKostenProKwh} onChange={setSpeicherKostenProKwh} einheit="€/kWh" />
             </div>
           </div>
         )}

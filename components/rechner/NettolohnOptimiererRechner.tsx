@@ -137,8 +137,8 @@ export default function NettolohnOptimiererRechner() {
     <div>
       {/* Monatsbrutto */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktuelles Monatsbrutto</label>
-        <NummerEingabe value={brutto} onChange={setBrutto} placeholder="3500" einheit="€/Monat" />
+        <label htmlFor="nettolohn-optimierer-aktuelles-monatsbrutto" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Aktuelles Monatsbrutto</label>
+        <NummerEingabe id="nettolohn-optimierer-aktuelles-monatsbrutto" value={brutto} onChange={setBrutto} placeholder="3500" einheit="€/Monat" />
       </div>
 
       {/* Steuerklasse */}
@@ -163,8 +163,8 @@ export default function NettolohnOptimiererRechner() {
 
       {/* AG-Budget */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geplanter Betrag vom Arbeitgeber</label>
-        <NummerEingabe value={agBetrag} onChange={setAgBetrag} placeholder="200" einheit="€/Monat" />
+        <label htmlFor="nettolohn-optimierer-geplanter-betrag-vom-arbeitgeber" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geplanter Betrag vom Arbeitgeber</label>
+        <NummerEingabe id="nettolohn-optimierer-geplanter-betrag-vom-arbeitgeber" value={agBetrag} onChange={setAgBetrag} placeholder="200" einheit="€/Monat" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Budget, das der Arbeitgeber für Sie bereitstellt — als Gehaltserhöhung ODER Sachbezug.</p>
       </div>
 
@@ -210,7 +210,7 @@ export default function NettolohnOptimiererRechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Vergleich aller Optionen</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Vergleich aller Optionen">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

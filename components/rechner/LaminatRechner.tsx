@@ -63,18 +63,18 @@ export default function LaminatRechner() {
         {flaecheModus === 'masse' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Raumlänge</label>
-              <NummerEingabe value={laengeM} onChange={setLaengeM} einheit="m" placeholder="5" />
+              <label htmlFor="laminat-raumlaenge" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Raumlänge</label>
+              <NummerEingabe id="laminat-raumlaenge" value={laengeM} onChange={setLaengeM} einheit="m" placeholder="5" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Raumbreite</label>
-              <NummerEingabe value={breiteM} onChange={setBreiteM} einheit="m" placeholder="4" />
+              <label htmlFor="laminat-raumbreite" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Raumbreite</label>
+              <NummerEingabe id="laminat-raumbreite" value={breiteM} onChange={setBreiteM} einheit="m" placeholder="4" />
             </div>
           </div>
         ) : (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Raumfläche</label>
-            <NummerEingabe value={flaecheQm} onChange={setFlaecheQm} einheit="m²" placeholder="20" />
+            <label htmlFor="laminat-raumflaeche" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Raumfläche</label>
+            <NummerEingabe id="laminat-raumflaeche" value={flaecheQm} onChange={setFlaecheQm} einheit="m²" placeholder="20" />
           </div>
         )}
 
@@ -86,8 +86,8 @@ export default function LaminatRechner() {
 
         {/* Paketgröße */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Paketgröße</label>
-          <NummerEingabe value={paketGroesse} onChange={setPaketGroesse} einheit="m²/Paket" placeholder="2,49" />
+          <label htmlFor="laminat-paketgroesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Paketgröße</label>
+          <NummerEingabe id="laminat-paketgroesse" value={paketGroesse} onChange={setPaketGroesse} einheit="m²/Paket" placeholder="2,49" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Steht auf der Verpackung — typisch 2,0–3,0 m²</p>
         </div>
 
@@ -103,8 +103,8 @@ export default function LaminatRechner() {
 
         {/* Preis */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Preis pro Paket (optional)</label>
-          <NummerEingabe value={preis} onChange={setPreis} einheit="€" placeholder="30" />
+          <label htmlFor="laminat-preis-pro-paket" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Preis pro Paket (optional)</label>
+          <NummerEingabe id="laminat-preis-pro-paket" value={preis} onChange={setPreis} einheit="€" placeholder="30" />
         </div>
       </div>
 

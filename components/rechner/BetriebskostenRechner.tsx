@@ -72,28 +72,28 @@ export default function BetriebskostenRechner() {
         <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fixkosten pro Monat</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Miete / Büro</label>
-            <NummerEingabe value={miete} onChange={setMiete} einheit="€" placeholder="500" />
+            <label htmlFor="betriebskosten-miete-buero" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Miete / Büro</label>
+            <NummerEingabe id="betriebskosten-miete-buero" value={miete} onChange={setMiete} einheit="€" placeholder="500" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Versicherungen</label>
-            <NummerEingabe value={versicherungen} onChange={setVersicherungen} einheit="€" placeholder="200" />
+            <label htmlFor="betriebskosten-versicherungen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Versicherungen</label>
+            <NummerEingabe id="betriebskosten-versicherungen" value={versicherungen} onChange={setVersicherungen} einheit="€" placeholder="200" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Software / Tools</label>
-            <NummerEingabe value={software} onChange={setSoftware} einheit="€" placeholder="100" />
+            <label htmlFor="betriebskosten-software-tools" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Software / Tools</label>
+            <NummerEingabe id="betriebskosten-software-tools" value={software} onChange={setSoftware} einheit="€" placeholder="100" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Telefon / Internet</label>
-            <NummerEingabe value={telefonInternet} onChange={setTelefonInternet} einheit="€" placeholder="60" />
+            <label htmlFor="betriebskosten-telefon-internet" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Telefon / Internet</label>
+            <NummerEingabe id="betriebskosten-telefon-internet" value={telefonInternet} onChange={setTelefonInternet} einheit="€" placeholder="60" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Buchhaltung / Steuerberater</label>
-            <NummerEingabe value={buchhaltung} onChange={setBuchhaltung} einheit="€" placeholder="150" />
+            <label htmlFor="betriebskosten-buchhaltung-steuerberater" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Buchhaltung / Steuerberater</label>
+            <NummerEingabe id="betriebskosten-buchhaltung-steuerberater" value={buchhaltung} onChange={setBuchhaltung} einheit="€" placeholder="150" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sonstige Fixkosten</label>
-            <NummerEingabe value={sonstigeFix} onChange={setSonstigeFix} einheit="€" placeholder="100" />
+            <label htmlFor="betriebskosten-sonstige-fixkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sonstige Fixkosten</label>
+            <NummerEingabe id="betriebskosten-sonstige-fixkosten" value={sonstigeFix} onChange={setSonstigeFix} einheit="€" placeholder="100" />
           </div>
         </div>
 
@@ -101,23 +101,23 @@ export default function BetriebskostenRechner() {
         <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Variable Kosten pro Monat</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Material / Wareneinsatz</label>
-            <NummerEingabe value={material} onChange={setMaterial} einheit="€" placeholder="0" />
+            <label htmlFor="betriebskosten-material-wareneinsatz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Material / Wareneinsatz</label>
+            <NummerEingabe id="betriebskosten-material-wareneinsatz" value={material} onChange={setMaterial} einheit="€" placeholder="0" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fahrtkosten</label>
-            <NummerEingabe value={fahrtkosten} onChange={setFahrtkosten} einheit="€" placeholder="100" />
+            <label htmlFor="betriebskosten-fahrtkosten" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fahrtkosten</label>
+            <NummerEingabe id="betriebskosten-fahrtkosten" value={fahrtkosten} onChange={setFahrtkosten} einheit="€" placeholder="100" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Marketing</label>
-            <NummerEingabe value={marketing} onChange={setMarketing} einheit="€" placeholder="200" />
+            <label htmlFor="betriebskosten-marketing" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Marketing</label>
+            <NummerEingabe id="betriebskosten-marketing" value={marketing} onChange={setMarketing} einheit="€" placeholder="200" />
           </div>
         </div>
 
         {/* Unternehmerlohn */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Gehalt / Unternehmerlohn</label>
-          <NummerEingabe value={unternehmerlohn} onChange={setUnternehmerlohn} einheit="€" placeholder="3.000" />
+          <label htmlFor="betriebskosten-eigenes-gehalt-unternehmerlohn" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Gehalt / Unternehmerlohn</label>
+          <NummerEingabe id="betriebskosten-eigenes-gehalt-unternehmerlohn" value={unternehmerlohn} onChange={setUnternehmerlohn} einheit="€" placeholder="3.000" />
         </div>
       </div>
 

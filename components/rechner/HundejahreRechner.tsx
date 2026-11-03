@@ -91,8 +91,8 @@ export default function HundejahreRechner() {
     <div>
       <div className="space-y-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6">
         <div>
-          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Alter Ihres Hundes</label>
-          <NummerEingabe value={alter} onChange={setAlter} einheit="Jahre" />
+          <label htmlFor="hundejahre-alter-ihres-hundes" className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Alter Ihres Hundes</label>
+          <NummerEingabe id="hundejahre-alter-ihres-hundes" value={alter} onChange={setAlter} einheit="Jahre" />
         </div>
 
         <div>

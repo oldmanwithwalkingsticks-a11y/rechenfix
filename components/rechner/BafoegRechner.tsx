@@ -162,14 +162,14 @@ export default function BafoegRechner() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliches Einkommen</label>
-            <NummerEingabe value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€/Monat" />
+            <label htmlFor="bafoeg-monatliches-einkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliches Einkommen</label>
+            <NummerEingabe id="bafoeg-monatliches-einkommen" value={einkommen} onChange={setEinkommen} placeholder="0" einheit="€/Monat" />
             {/* W187: vorher „Minijob bis 603 € teilweise angerechnet. Freibetrag: 330 €“ */}
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Bruttoverdienst. Freibetrag {fmtEuro(params.freibetraege.eigenesEinkommen)} € nach Abzug von Werbungskosten- und Sozialpauschale — ein Minijob bis {fmtEuro(anrechnungsfreierVerdienstMonat(params))} € bleibt anrechnungsfrei.</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
-            <NummerEingabe value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
+            <label htmlFor="bafoeg-eigenes-vermoegen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenes Vermögen</label>
+            <NummerEingabe id="bafoeg-eigenes-vermoegen" value={vermoegen} onChange={setVermoegen} placeholder="0" einheit="€" />
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Freibetrag: 15.000 € (unter 30) bzw. 45.000 € (ab 30)</p>
           </div>
         </div>
@@ -208,15 +208,15 @@ export default function BafoegRechner() {
           {!elternunabhaengig && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label htmlFor="bafoeg-feld" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   {verheiratet ? 'Bruttoeinkommen Elternteil 1' : 'Bruttoeinkommen Elternteil'}
                 </label>
-                <NummerEingabe value={einkommenEltern1} onChange={setEinkommenEltern1} placeholder="40.000" einheit="€/Jahr" />
+                <NummerEingabe id="bafoeg-feld" value={einkommenEltern1} onChange={setEinkommenEltern1} placeholder="40.000" einheit="€/Jahr" />
               </div>
               {verheiratet && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttoeinkommen Elternteil 2</label>
-                  <NummerEingabe value={einkommenEltern2} onChange={setEinkommenEltern2} placeholder="0" einheit="€/Jahr" />
+                  <label htmlFor="bafoeg-bruttoeinkommen-elternteil-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bruttoeinkommen Elternteil 2</label>
+                  <NummerEingabe id="bafoeg-bruttoeinkommen-elternteil-2" value={einkommenEltern2} onChange={setEinkommenEltern2} placeholder="0" einheit="€/Jahr" />
                 </div>
               )}
             </div>
@@ -396,7 +396,7 @@ export default function BafoegRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Berechnung im Detail</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Berechnung im Detail">
               <table className="w-full text-sm">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   {/* BEDARF */}

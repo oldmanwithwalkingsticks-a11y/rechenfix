@@ -29,20 +29,20 @@ export default function GgtKgvRechner() {
       <div className="space-y-4 mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl 1</label>
-            <NummerEingabe value={zahl1} onChange={setZahl1} placeholder="24" />
+            <label htmlFor="ggt-kgv-zahl-1" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl 1</label>
+            <NummerEingabe id="ggt-kgv-zahl-1" value={zahl1} onChange={setZahl1} placeholder="24" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl 2</label>
-            <NummerEingabe value={zahl2} onChange={setZahl2} placeholder="36" />
+            <label htmlFor="ggt-kgv-zahl-2" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl 2</label>
+            <NummerEingabe id="ggt-kgv-zahl-2" value={zahl2} onChange={setZahl2} placeholder="36" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl 3 (optional)</label>
-            <NummerEingabe value={zahl3} onChange={setZahl3} placeholder="" />
+            <label htmlFor="ggt-kgv-zahl-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl 3 (optional)</label>
+            <NummerEingabe id="ggt-kgv-zahl-3" value={zahl3} onChange={setZahl3} placeholder="" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl 4 (optional)</label>
-            <NummerEingabe value={zahl4} onChange={setZahl4} placeholder="" />
+            <label htmlFor="ggt-kgv-zahl-4" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahl 4 (optional)</label>
+            <NummerEingabe id="ggt-kgv-zahl-4" value={zahl4} onChange={setZahl4} placeholder="" />
           </div>
         </div>
       </div>

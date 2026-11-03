@@ -42,12 +42,12 @@ export default function ZeitwertRechner() {
       <div className="space-y-4 mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Neupreis (€)</label>
-            <NummerEingabe value={neupreis} onChange={setNeupreis} placeholder="1000" />
+            <label htmlFor="zeitwert-neupreis" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Neupreis (€)</label>
+            <NummerEingabe id="zeitwert-neupreis" value={neupreis} onChange={setNeupreis} placeholder="1000" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter (Jahre)</label>
-            <NummerEingabe value={alter} onChange={setAlter} placeholder="3" />
+            <label htmlFor="zeitwert-alter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alter (Jahre)</label>
+            <NummerEingabe id="zeitwert-alter" value={alter} onChange={setAlter} placeholder="3" />
           </div>
         </div>
 
@@ -67,8 +67,8 @@ export default function ZeitwertRechner() {
           </div>
           {nutzungsdauerModus === 'eigene' ? (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nutzungsdauer (Jahre)</label>
-              <NummerEingabe value={nutzungsdauerEigen} onChange={setNutzungsdauerEigen} placeholder="5" />
+              <label htmlFor="zeitwert-nutzungsdauer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nutzungsdauer (Jahre)</label>
+              <NummerEingabe id="zeitwert-nutzungsdauer" value={nutzungsdauerEigen} onChange={setNutzungsdauerEigen} placeholder="5" />
             </div>
           ) : (
             <div>

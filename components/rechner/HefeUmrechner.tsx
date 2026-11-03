@@ -71,7 +71,7 @@ export default function HefeUmrechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Menge
         </h2>
-        <NummerEingabe value={menge} onChange={setMenge} placeholder="42" einheit="g" />
+        <NummerEingabe aria-label="Menge" value={menge} onChange={setMenge} placeholder="42" einheit="g" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Tipp: 1 Würfel Frischhefe = 42 g. 1 Päckchen Trockenhefe = 7 g.
         </p>
@@ -163,7 +163,7 @@ export default function HefeUmrechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Hefe-Mengen für gängige Mehlmengen</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Hefe-Mengen für gängige Mehlmengen">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

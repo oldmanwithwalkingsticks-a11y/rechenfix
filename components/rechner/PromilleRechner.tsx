@@ -112,8 +112,9 @@ export default function PromilleRechner() {
       {/* Gewicht & Trinkzeit */}
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Körpergewicht</label>
+          <label htmlFor="promille-koerpergewicht" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Körpergewicht</label>
           <NummerEingabe
+            id="promille-koerpergewicht"
             value={gewicht}
             onChange={v => setGewicht(clampInputValue(v, 30, 250))}
             onBlur={v => setGewicht(clampInputValueOnBlur(v, 30, 250))}
@@ -123,8 +124,9 @@ export default function PromilleRechner() {
           />
         </div>
         <div>
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Trinkbeginn vor</label>
+          <label htmlFor="promille-trinkbeginn-vor" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Trinkbeginn vor</label>
           <NummerEingabe
+            id="promille-trinkbeginn-vor"
             value={trinkzeit}
             onChange={v => setTrinkzeit(clampInputValue(v, 0, 48))}
             onBlur={v => setTrinkzeit(clampInputValueOnBlur(v, 0, 48))}
@@ -164,6 +166,7 @@ export default function PromilleRechner() {
                   inputMode="decimal"
                   data-min={0.01}
                   data-max={5}
+                  aria-label={`${g.name}: Menge in Litern`}
                   value={g.mengeLText ?? alsFeldtext(g.mengeL)}
                   onChange={e => { if (istGueltigeZahleneingabe(e.target.value)) setzeMenge(g.id, clampInputValue(e.target.value, 0.01, 5)); }}
                   onBlur={e => setzeMenge(g.id, clampInputValueOnBlur(e.target.value, 0.01, 5))}
@@ -177,6 +180,7 @@ export default function PromilleRechner() {
                   inputMode="decimal"
                   data-min={0.1}
                   data-max={100}
+                  aria-label={`${g.name}: Alkoholgehalt in Prozent`}
                   value={g.alkoholProzentText ?? alsFeldtext(g.alkoholProzent)}
                   onChange={e => { if (istGueltigeZahleneingabe(e.target.value)) setzeAlkohol(g.id, clampInputValue(e.target.value, 0.1, 100)); }}
                   onBlur={e => setzeAlkohol(g.id, clampInputValueOnBlur(e.target.value, 0.1, 100))}
@@ -291,7 +295,7 @@ export default function PromilleRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Aufschlüsselung</p>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Aufschlüsselung">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-700">

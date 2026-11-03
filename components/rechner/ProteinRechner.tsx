@@ -63,8 +63,8 @@ export default function ProteinRechner() {
     <div>
       {/* Gewicht */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
-        <NummerEingabe value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
+        <label htmlFor="protein-koerpergewicht" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Körpergewicht</label>
+        <NummerEingabe id="protein-koerpergewicht" value={gewicht} onChange={setGewicht} placeholder="75" einheit="kg" />
       </div>
 
       {/* Aktivität */}

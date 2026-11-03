@@ -66,15 +66,15 @@ export default function ReifengroesseRechner() {
       <div className="grid grid-cols-3 gap-3">
         <div>
           <label htmlFor={`${idPrefix}-b`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite (mm)</label>
-          <NummerEingabe value={b} onChange={setB} placeholder="205" />
+          <NummerEingabe id={`${idPrefix}-b`} value={b} onChange={setB} placeholder="205" />
         </div>
         <div>
           <label htmlFor={`${idPrefix}-q`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Querschnitt (%)</label>
-          <NummerEingabe value={q} onChange={setQ} placeholder="55" />
+          <NummerEingabe id={`${idPrefix}-q`} value={q} onChange={setQ} placeholder="55" />
         </div>
         <div>
           <label htmlFor={`${idPrefix}-z`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Zoll (R)</label>
-          <NummerEingabe value={z} onChange={setZ} placeholder="16" />
+          <NummerEingabe id={`${idPrefix}-z`} value={z} onChange={setZ} placeholder="16" />
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@ export default function ReifengroesseRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Tacho-Anzeige (km/h)
         </h2>
-        <NummerEingabe value={tacho} onChange={setTacho} placeholder="100" einheit="km/h" />
+        <NummerEingabe aria-label="Tacho-Anzeige (km/h)" value={tacho} onChange={setTacho} placeholder="100" einheit="km/h" />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Zeigt die reale Geschwindigkeit mit dem neuen Reifen bei dieser Tacho-Anzeige.
         </p>
@@ -112,7 +112,7 @@ export default function ReifengroesseRechner() {
 
           {/* Durchmesser/Abrollumfang beider Reifen */}
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden mb-4">
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
@@ -182,7 +182,7 @@ export default function ReifengroesseRechner() {
                 Gängige Größen ggü. {d0(ergebnis.ba)}/{d0(ergebnis.qa)} R{d0(ergebnis.za)}
               </h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

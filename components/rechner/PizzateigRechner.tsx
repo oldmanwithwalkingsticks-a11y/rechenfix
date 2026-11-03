@@ -67,14 +67,14 @@ export default function PizzateigRechner() {
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
             Anzahl Pizzen
           </h2>
-          <NummerEingabe value={anzahl} onChange={setAnzahl} placeholder="4" einheit="Stück" />
+          <NummerEingabe aria-label="Anzahl Pizzen" value={anzahl} onChange={setAnzahl} placeholder="4" einheit="Stück" />
         </div>
         <div>
           <h2 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-1 flex items-center gap-2">
             <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">2</span>
             Gewicht pro Pizza
           </h2>
-          <NummerEingabe value={gewichtProPizza} onChange={setGewichtProPizza} placeholder="270" einheit="g" />
+          <NummerEingabe aria-label="Gewicht pro Pizza" value={gewichtProPizza} onChange={setGewichtProPizza} placeholder="270" einheit="g" />
           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Napoletana: 250–280 g | Normal: 300–350 g</p>
         </div>
       </div>

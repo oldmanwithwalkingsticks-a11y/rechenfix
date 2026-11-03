@@ -85,10 +85,10 @@ export default function BussgeldRechner() {
         {verstoss === 'geschwindigkeit' && (
           <>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label htmlFor="bussgeld-ueberschreitung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Überschreitung
               </label>
-              <NummerEingabe value={ueberschreitung} onChange={setUeberschreitung} einheit="km/h" placeholder="z.B. 20" />
+              <NummerEingabe id="bussgeld-ueberschreitung" value={ueberschreitung} onChange={setUeberschreitung} einheit="km/h" placeholder="z.B. 20" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -136,8 +136,8 @@ export default function BussgeldRechner() {
         {verstoss === 'abstand' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschwindigkeit</label>
-              <NummerEingabe value={abstandGeschwindigkeit} onChange={setAbstandGeschwindigkeit} einheit="km/h" placeholder="100" />
+              <label htmlFor="bussgeld-geschwindigkeit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geschwindigkeit</label>
+              <NummerEingabe id="bussgeld-geschwindigkeit" value={abstandGeschwindigkeit} onChange={setAbstandGeschwindigkeit} einheit="km/h" placeholder="100" />
             </div>
             <div>
               <label htmlFor="bussgeld-select-3" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Abstand</label>

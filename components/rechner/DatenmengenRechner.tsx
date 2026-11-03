@@ -75,8 +75,8 @@ export default function DatenmengenRechner() {
       {/* Eingabe */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 mb-6">
         <div className="flex-1">
-          <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wert</label>
-          <NummerEingabe value={wert} onChange={setWert} placeholder="500" />
+          <label htmlFor="datenmengen-wert" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Wert</label>
+          <NummerEingabe id="datenmengen-wert" value={wert} onChange={setWert} placeholder="500" />
         </div>
         <div className="flex-1">
           <label htmlFor="datenmenge-von" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Von</label>

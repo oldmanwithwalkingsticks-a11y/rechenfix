@@ -43,9 +43,9 @@ export default function TrinkgeldRechner() {
     <div>
       {/* Rechnungsbetrag */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rechnungsbetrag</label>
+        <label htmlFor="trinkgeld-rechnungsbetrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rechnungsbetrag</label>
         <div className="w-full sm:w-1/2">
-          <NummerEingabe value={rechnungsbetrag} onChange={setRechnungsbetrag} placeholder="z.B. 45" einheit="€" />
+          <NummerEingabe id="trinkgeld-rechnungsbetrag" value={rechnungsbetrag} onChange={setRechnungsbetrag} placeholder="z.B. 45" einheit="€" />
         </div>
       </div>
 
@@ -82,19 +82,19 @@ export default function TrinkgeldRechner() {
               ))}
             </div>
             <div className="w-full sm:w-1/2">
-              <NummerEingabe value={trinkgeldProzent} onChange={setTrinkgeldProzent} placeholder="z.B. 10" einheit="%" />
+              <NummerEingabe aria-label="Trinkgeld in Prozent" value={trinkgeldProzent} onChange={setTrinkgeldProzent} placeholder="z.B. 10" einheit="%" />
             </div>
           </>
         ) : (
           <div className="w-full sm:w-1/2">
-            <NummerEingabe value={trinkgeldBetrag} onChange={setTrinkgeldBetrag} placeholder="z.B. 5" einheit="€" />
+            <NummerEingabe aria-label="Trinkgeld als fester Betrag in Euro" value={trinkgeldBetrag} onChange={setTrinkgeldBetrag} placeholder="z.B. 5" einheit="€" />
           </div>
         )}
       </div>
 
       {/* Personen */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Personen</label>
+        <label htmlFor="trinkgeld-anzahl-personen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Personen</label>
         <div className="flex flex-wrap gap-2 mb-2">
           {PERSONEN_SCHNELLWAHL.map(p => (
             <button
@@ -111,7 +111,7 @@ export default function TrinkgeldRechner() {
           ))}
         </div>
         <div className="w-full sm:w-1/3">
-          <NummerEingabe value={personen} onChange={setPersonen} placeholder="z.B. 2" einheit="Pers." />
+          <NummerEingabe id="trinkgeld-anzahl-personen" value={personen} onChange={setPersonen} placeholder="z.B. 2" einheit="Pers." />
         </div>
       </div>
 

@@ -71,12 +71,12 @@ export default function BaufinanzierungRechner() {
       {/* Kaufpreis & Eigenkapital */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufpreis der Immobilie</label>
-          <NummerEingabe value={kaufpreis} onChange={setKaufpreis} placeholder="z.B. 350000" einheit="€" />
+          <label htmlFor="baufinanzierung-kaufpreis-der-immobilie" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kaufpreis der Immobilie</label>
+          <NummerEingabe id="baufinanzierung-kaufpreis-der-immobilie" value={kaufpreis} onChange={setKaufpreis} placeholder="z.B. 350000" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenkapital</label>
-          <NummerEingabe value={eigenkapital} onChange={setEigenkapital} placeholder="z.B. 70000" einheit="€" />
+          <label htmlFor="baufinanzierung-eigenkapital" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigenkapital</label>
+          <NummerEingabe id="baufinanzierung-eigenkapital" value={eigenkapital} onChange={setEigenkapital} placeholder="z.B. 70000" einheit="€" />
           {nKaufpreis > 0 && (
             <p className={`mt-1 text-xs font-medium ${ekBewertung.farbe}`}>
               Eigenkapitalquote: {ekQuote.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% — {ekBewertung.text}
@@ -118,12 +118,12 @@ export default function BaufinanzierungRechner() {
       {/* Sollzins & Tilgung */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sollzinssatz (p.a.)</label>
-          <NummerEingabe value={sollzins} onChange={setSollzins} placeholder="z.B. 3,5" einheit="%" />
+          <label htmlFor="baufinanzierung-sollzinssatz" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sollzinssatz (p.a.)</label>
+          <NummerEingabe id="baufinanzierung-sollzinssatz" value={sollzins} onChange={setSollzins} placeholder="z.B. 3,5" einheit="%" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anfängliche Tilgung (p.a.)</label>
-          <NummerEingabe value={tilgung} onChange={setTilgung} placeholder="z.B. 2" einheit="%" />
+          <label htmlFor="baufinanzierung-anfaengliche-tilgung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anfängliche Tilgung (p.a.)</label>
+          <NummerEingabe id="baufinanzierung-anfaengliche-tilgung" value={tilgung} onChange={setTilgung} placeholder="z.B. 2" einheit="%" />
           <div className="flex gap-2 mt-2">
             {TILGUNG_SCHNELLWAHL.map(t => (
               <button
@@ -160,8 +160,8 @@ export default function BaufinanzierungRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Sondertilgung (optional)</label>
-          <NummerEingabe value={sondertilgung} onChange={setSondertilgung} placeholder="z.B. 200" einheit="€" />
+          <label htmlFor="baufinanzierung-monatliche-sondertilgung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatliche Sondertilgung (optional)</label>
+          <NummerEingabe id="baufinanzierung-monatliche-sondertilgung" value={sondertilgung} onChange={setSondertilgung} placeholder="z.B. 200" einheit="€" />
         </div>
       </div>
 
@@ -315,7 +315,7 @@ export default function BaufinanzierungRechner() {
               </svg>
             </button>
             {tilgungsplanOffen && (
-              <div className="overflow-x-auto mt-4">
+              <div className="overflow-x-auto mt-4" tabIndex={0} role="region" aria-label="Tabelle">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-200 dark:border-gray-600 text-left">

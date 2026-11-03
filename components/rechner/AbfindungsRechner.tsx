@@ -46,12 +46,12 @@ export default function AbfindungsRechner() {
       {/* Monatsbutto und Betriebsjahre */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatsbruttoeinkommen</label>
-          <NummerEingabe value={monatsBrutto} onChange={setMonatsBrutto} placeholder="z.B. 3500" einheit="€" />
+          <label htmlFor="abfindungs-monatsbruttoeinkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monatsbruttoeinkommen</label>
+          <NummerEingabe id="abfindungs-monatsbruttoeinkommen" value={monatsBrutto} onChange={setMonatsBrutto} placeholder="z.B. 3500" einheit="€" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betriebszugehörigkeit</label>
-          <NummerEingabe value={betriebsjahre} onChange={setBetriebsjahre} placeholder="z.B. 8" einheit="Jahre" />
+          <label htmlFor="abfindungs-betriebszugehoerigkeit" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betriebszugehörigkeit</label>
+          <NummerEingabe id="abfindungs-betriebszugehoerigkeit" value={betriebsjahre} onChange={setBetriebsjahre} placeholder="z.B. 8" einheit="Jahre" />
           <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Angefangene Jahre über 6 Monate zählen als volles Jahr
           </p>
@@ -83,13 +83,13 @@ export default function AbfindungsRechner() {
 
       {eigeneAbfindung ? (
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Abfindungsbetrag (brutto)</label>
-          <NummerEingabe value={eigeneAbfindungBetrag} onChange={setEigeneAbfindungBetrag} placeholder="z.B. 14000" einheit="€" />
+          <label htmlFor="abfindungs-abfindungsbetrag" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Abfindungsbetrag (brutto)</label>
+          <NummerEingabe id="abfindungs-abfindungsbetrag" value={eigeneAbfindungBetrag} onChange={setEigeneAbfindungBetrag} placeholder="z.B. 14000" einheit="€" />
         </div>
       ) : (
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Faktor</label>
-          <NummerEingabe value={faktor} onChange={setFaktor} placeholder="z.B. 0,5" einheit="×" />
+          <label htmlFor="abfindungs-faktor" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Faktor</label>
+          <NummerEingabe id="abfindungs-faktor" value={faktor} onChange={setFaktor} placeholder="z.B. 0,5" einheit="×" />
           <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Standard: 0,5 Monatsgehälter pro Beschäftigungsjahr. Bei älteren AN oder langer Zugehörigkeit teils höher.
           </p>
@@ -98,8 +98,8 @@ export default function AbfindungsRechner() {
 
       {/* zvE */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen (ohne Abfindung)</label>
-        <NummerEingabe value={jahresBrutto} onChange={setJahresBrutto} placeholder="z.B. 42000" einheit="€" />
+        <label htmlFor="abfindungs-zu-versteuerndes-einkommen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zu versteuerndes Einkommen (ohne Abfindung)</label>
+        <NummerEingabe id="abfindungs-zu-versteuerndes-einkommen" value={jahresBrutto} onChange={setJahresBrutto} placeholder="z.B. 42000" einheit="€" />
         <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
           Bitte das <strong>zu versteuernde Einkommen (zvE)</strong> eintragen — nicht das Brutto. Sie finden den Wert im letzten Steuerbescheid. Die Fünftelregelung (§ 34 EStG) wirkt auf das zvE, nicht auf Brutto oder Lohnsteuer.
         </p>
@@ -178,7 +178,7 @@ export default function AbfindungsRechner() {
           {/* Vergleichsbox */}
           <div className="bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-green-800 dark:text-green-300 mb-4">Vergleich: Fünftelregelung vs. Normalbesteuerung</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Vergleich: Fünftelregelung vs. Normalbesteuerung">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-green-200 dark:border-green-500/30">
