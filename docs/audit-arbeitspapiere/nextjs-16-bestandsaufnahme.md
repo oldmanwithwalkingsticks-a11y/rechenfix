@@ -1130,6 +1130,179 @@ führt der Termin `npm-audit-buildwerkzeuge` (02.11.2026).
 
 ---
 
+## 11. Nachzug auf 16.4.5, zusammen mit diekonkursmasse und wuerdezeit (03.11.2026)
+
+**Anlass:** Next.js 16.4.5 erschien am 03.11.2026 um 18:01 UTC als angekündigtes Sicherheitsrelease
+(Ankündigung vom 27.10.2026: sieben mittlere Lücken; `15.5.29` am selben Abend). Am selben Tag waren die
+Termine `serwist-browserslist-override` und `npm-audit-buildwerkzeuge` fällig. Sie waren am 02.11.2026 auf
+diesen Tag gelegt worden, weil beide dieselbe `package-lock.json` betreffen wie der Nachzug. Beim
+Nachmessen fiel auf, dass diekonkursmasse.de und wuerdezeit.de den Nachzug auf 16.4.1 (Abschnitt 9) nicht
+mitgemacht hatten. Beide führen keine eigene Bestandsaufnahme; ihr Protokoll steht deshalb hier.
+
+### 11.1 Ausgangslage
+
+Gemessen in einer Chat-Sitzung am 03.11.2026, **nicht in der Sitzung der Welle**.
+
+**Live-Fassungen,** gelesen als Zeichenkette `version:"…"` in den ausgelieferten Chunks unter
+`/_next/static/` (Verfahren wie 9.7):
+
+| Domain | live | `package.json` |
+|---|---|---|
+| www.rechenfix.de | 16.4.1 | 16.4.1 |
+| www.diekonkursmasse.de | 16.3.6 | 16.3.6 |
+| www.wuerdezeit.de | 16.3.5 | 16.3.5 |
+
+**`npm audit --json`** auf Karstens Rechner, installierter Baum:
+
+| Repo | gesamt | kritisch | hoch | mittel | `next` gemeldet |
+|---|---|---|---|---|---|
+| rechenfix | 23 | 1 | 4 | 18 | nein |
+| diekonkursmasse | 20 | 1 | 3 | 16 | ja, kritisch |
+| wuerdezeit | 22 | 1 | 3 | 18 | ja, kritisch |
+
+- **diekonkursmasse und wuerdezeit, `next`:** unter anderem die drei Advisories aus 6.9
+  (GHSA-673q-mjm6-r5xr und GHSA-2464-fhr4-w9xw kritisch, GHSA-p3m5-59mp-jv5r hoch), dazu
+  GHSA-cjq9-62q9-8jv4 (hoch, SSRF in der Bildoptimierung, betroffen `< 16.3.8`); bei wuerdezeit zusätzlich
+  GHSA-vcvr-r3jv-pc5j (kritisch, betroffen `>= 16.2.0 < 16.3.6`). Die kritischen sind seit dem 14.10.2026
+  veröffentlicht. Beide Repos haben `sharp` 0.35.4, die Abhilfe von GHSA-2464-fhr4-w9xw (`sharp` ≥ 0.35.5)
+  war also nicht erfüllt. Git-Grep vom 03.11.2026: diekonkursmasse `use cache` 0, `use server` 0,
+  `next.config.ts` ohne Einträge; wuerdezeit `use cache` 0, `use server` in 2 Dateien. Ob die Lücken auf
+  Vercel ausnutzbar waren, ist nicht geprüft; angehoben wird unabhängig davon.
+- **wuerdezeit, `nodemailer` 10.0.10:** fünf mittlere Advisories, behoben in 10.1.4 bzw. nach 10.0.12.
+- **rechenfix:** `next` 16.4.1 nicht gemeldet; die sieben Advisories vom 03.11.2026 standen am Abend noch
+  nicht in der Datenbank. Kritisch: `dompurify` 3.4.16 unter `jspdf` (GHSA-cg2g-xh64-v4q7; `jsPDF.html()`
+  wird laut 8.8 nicht aufgerufen). Hoch: `zod` (GHSA-mrhx-c7xc-m3w5) und darüber die drei
+  `@serwist`-Pakete. Mittel: `minimatch` (GHSA-g3hv-75wg-m249) mit der eslint-Kette, `glob`
+  (GHSA-3g3m-2fjr-6pw4), `postcss-selector-parser` (GHSA-rj75-hqrm-r3gf, inzwischen in 6.1.5 behoben).
+  `braces` meldet npm audit nicht mehr.
+- **`@serwist/next` 9.5.13** (npm, 03.11.2026) verlangt `browserslist` `^4.29.3` und pinnt genau `zod`
+  4.6.5 und `glob` 13.0.6 (über `@serwist/build`).
+
+### 11.2 Probe der Chat-Sitzung
+
+Am 03.11.2026 mit npm 11.11.0 gegen Kopien von `package.json` und `package-lock.json` (`npm install
+--package-lock-only`, danach `npm audit fix --package-lock-only` ohne `--force`):
+
+| Repo | Änderung | `npm audit --omit=dev` | `npm audit` danach |
+|---|---|---|---|
+| rechenfix | wie 11.4 | 0 | 21 (4 hoch, 17 mittel), nur Build-Werkzeuge |
+| diekonkursmasse | wie 11.4 | 0 | 16 mittel, nur die `minimatch`-Kette unter eslint |
+| wuerdezeit | wie 11.4 | 0 | 16 mittel, nur die `minimatch`-Kette unter eslint |
+
+Die so erzeugten Lockfiles sind die, die diese Welle einspielt (Prüfsummen in der Übergabe, Einbau mit
+`npm ci`). Bei Paketen mit unveränderter Fassung weichen die Kennzeichen `dev`/`devOptional` nur in
+rechenfix ab, und nur bei den 13 Paketen, die mit `@serwist/next` in die devDependencies wandern.
+
+### 11.3 Entscheidungen
+
+1. **Alle drei Repos auf `next` 16.4.5**, `eslint-config-next` mit, in rechenfix auch `@next/mdx`.
+   `npm audit fix` ohne `--force`.
+2. **rechenfix: `@serwist/next` und `serwist` auf `^9.5.13`.** 9.5.13 verlangt selbst `browserslist`
+   `^4.29.3`; das Override aus 8.8 fällt weg. Termin `serwist-browserslist-override` erledigt und aus
+   `lib/termine.ts` entfernt.
+3. **rechenfix: `@serwist/next` in die devDependencies.** Es ist das Build-Plugin: `next.config.mjs` bindet
+   es ein, `app/sw.ts` importiert `defaultCache` aus `@serwist/next/worker`, und der Build bündelt daraus
+   `public/sw.js`. Keine Serverfunktion lädt das Paket zur Laufzeit. Vercel installiert devDependencies
+   für den Build, wie bei `tailwindcss`. `serwist` bleibt in dependencies. Damit zählen `zod`, `glob` und
+   `minimatch` unter `@serwist/build` dorthin, wo sie laufen, und `npm audit --omit=dev` meldet 0.
+4. **Kein Override auf eine Hauptversion** (`glob` 14, `minimatch` 11). Die drei offenen Lücken sind
+   Denial-of-Service-Formen in Build und Lint, die Eingaben sind die eigenen Dateien des Repositorys.
+   Termin `npm-audit-buildwerkzeuge` neu gefasst, fällig am 03.12.2026.
+5. **MDX-Hook:** nach dem Nachzug einmal ohne Hook bauen, wie in `next.config.mjs` verlangt. Grün: Hook
+   raus. Rot: Hook bleibt, neue Zeile im Kommentar.
+6. **wuerdezeit:** Das lokale `main` stand vier Commits vor `origin` (`764a5f3`, `505ab9b`, `74844ce`,
+   `bcf9c4d`, 23.09. bis 21.10.2026: Quelle des Skills wuerdezeit-skript, `bestand.md`, Ausschluss aus
+   Build und Lint). Sie gehen mit diesem Push hinaus, ohne Rebase. Scheitert der Turbopack-Build an
+   `next/font/google` wie bei diekonkursmasse am 02.11.2026 (`f20d975`), wechselt wuerdezeit auf
+   `next/font/local` mit den Dateien aus `@fontsource/atkinson-hyperlegible` 5.3.0 (Lizenz OFL 1.1).
+7. **Abhängigkeitswache:** Die Betriebsmeldung soll die Next.js-Fassung aller drei Domains beobachten.
+   Eigene Welle, Termin `abhaengigkeitswache-domains` am 17.11.2026.
+
+### 11.4 Änderung
+
+Fassungen laut Lockfile, vorher → nachher (Auswahl; vollständig im Diff der Lockfiles):
+
+| Paket | rechenfix | diekonkursmasse | wuerdezeit |
+|---|---|---|---|
+| `next` | 16.4.1 → 16.4.5 | 16.3.6 → 16.4.5 | 16.3.5 → 16.4.5 |
+| `eslint-config-next` | 16.4.1 → 16.4.5 | 16.3.6 → 16.4.5 | 16.3.5 → 16.4.5 |
+| `@next/mdx` | 16.4.1 → 16.4.5 | — | — |
+| `@serwist/next` | 9.5.12 → 9.5.13, jetzt devDependency | — | — |
+| `serwist` | 9.5.12 → 9.5.13 | — | — |
+| `browserslist` | 4.29.3, ohne Override | — | — |
+| `dompurify` | 3.4.16 → 3.4.17 | — | — |
+| `postcss-selector-parser` | 6.1.4 → 6.1.5 | — | 6.1.4 → 6.1.5 |
+| `sharp` | 0.35.5 | 0.35.4 → 0.35.5 | 0.35.4 → 0.35.5 |
+| `source-map-js` | 1.2.2 | 1.2.1 → 1.2.2 | 1.2.1 → 1.2.2 |
+| `zod` | 4.4.3 → 4.6.5 (von `@serwist/build` gepinnt) | 4.6.5 → 4.6.7 | 4.6.5 → 4.6.7 |
+| `nodemailer` | — | — | 10.0.10 → 10.3.1 |
+| `typescript-eslint` | 8.70.1 → 8.72.1 | 8.70.1 → 8.72.1 | 8.70.0 → 8.72.1 |
+| `react`, `react-dom` | unverändert | unverändert (19.2.8) | unverändert (19.3.0) |
+
+### 11.5 Durchführung
+
+Gemessen in der Sitzung der Welle am 03.11.2026, 21:06 Uhr. Windows, Node v24.14.1, npm 11.11.0. Lockfiles aus der Übergabe vom 03.11.2026, Prüfsummen geprüft, eingespielt mit `npm ci`.
+
+| Repo | `npm ci` | `next` | `npm audit --omit=dev` | `npm audit` gesamt | Lint vorher → nachher | Build |
+|---|---|---|---|---|---|---|
+| wuerdezeit | rc=0 | 16.4.5 | found 0 vulnerabilities | 16 (0 hoch, 16 mittel) | 0/0 → 0/0 | rc=0, „Generating static pages using 15 workers (40/40)“ |
+| diekonkursmasse | rc=0 | 16.4.5 | found 0 vulnerabilities | 16 (0 hoch, 16 mittel) | 0/0 → 0/0 | rc=0, „Generating static pages using 15 workers (14/14)“ |
+| rechenfix | rc=0 | 16.4.5 | found 0 vulnerabilities | 21 (4 hoch, 17 mittel) | im Build | rc=0, „Generating static pages using 15 workers (272/272)“ |
+
+**wuerdezeit:**
+- Schrift-Rückfall: nicht nötig, der Build lief mit `next/font/google` durch.
+- Teil A endete in A.5 mit STOP: `next start` lieferte für `/` und `/datenschutz` je 401 statt 200. Ursache ist der Zugangsschutz in `proxy.ts`: Die ungetrackte `.env.local` setzt `SEITE_PASSWORT`, im Produktionsmodus fragt der Server deshalb nach Benutzer und Kennwort. Live ist die Seite öffentlich (`/` 200 text/html). Zusatzmessung mit `SEITE_OEFFENTLICH=ja npx next start -p 3123`: `/` 200 text/html 75328 B, `/datenschutz` 200 text/html 69117 B.
+- Mitgepusht: nichts. `764a5f3`, `505ab9b`, `74844ce`, `bcf9c4d` liegen weiter nur lokal.
+- Commit(s): keiner. `package.json` und `package-lock.json` auf 16.4.5 stehen uncommittet im Arbeitsbaum; die Rücknahme aus Teil A wurde in der Sitzung abgelehnt und nicht ausgeführt.
+
+**diekonkursmasse:** Commit `649c484`.
+
+**rechenfix:**
+- MDX-Hook: Build ohne Hook rc=1. Rot: erste Fehlerzeilen wörtlich (`grep -n -m5 "Error\|page.mdx\|use client"`, Farbcodes entfernt):
+
+  ```
+  91:✓ check-mdx-nur-seiten: 21 MDX-Seiten, keine MDX außerhalb von app/**/page.mdx, kein MDX-Import in 729 Quelldateien.
+  161:./app/blog/warum-das-bankjahr-360-tage-hat/page.mdx
+  162:Error:   x You are attempting to export "metadata" from a component marked with "use client", which is disallowed. "metadata" must be resolved on the server before the page component is rendered. Keep your page as a Server Component and move Client Component logic to a separate file. Read more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#why-generatemetadata-is-server-component-only
+  165:   ,-[G:\Projekte\Rechenfix\app\blog\warum-das-bankjahr-360-tage-hat\page.mdx:6:1]
+  177:./app/blog/warum-das-bankjahr-360-tage-hat/page.mdx
+  ```
+
+  Fünf Zeilen `Error:` im Protokoll, „Build failed because of webpack errors“. Der Hook bleibt, `next.config.mjs` trägt die Zeile „Ohne Hook erneut gebaut mit next 16.4.5 am 03.11.2026: scheitert weiter (Nachzug 16.4.5).“
+- Build: „✓ Compiled successfully in 22.7s“, „✓ Generating static pages using 15 workers (272/272) in 11.3s“. Warnungen: nur die bekannten („The Edge Runtime is deprecated“, „Using edge runtime on a page currently disables static generation for that page“). Lint ohne Ausgabe: 0 Fehler, die zwei bekannten Warnungen `react-hooks/exhaustive-deps` erscheinen nicht mehr.
+- `public/sw.js` 132064 B (Welle 159: 131.355 B).
+- `browserslist` 4 × `browserslist@4.29.3`, keine 4.28.x.
+
+**Server lokal** (`next start -p 3123`):
+
+| Repo | Pfad | Status | Content-Type | Bytes |
+|---|---|---|---|---|
+| wuerdezeit | `/` | 401 | text/plain; charset=utf-8 | 116 |
+| wuerdezeit | `/datenschutz` | 401 | text/plain; charset=utf-8 | 116 |
+| diekonkursmasse | `/` | 200 | text/html; charset=utf-8 | 10378 |
+| diekonkursmasse | `/ki-transparenz` | 200 | text/html; charset=utf-8 | 15940 |
+| diekonkursmasse | `/datenschutz` | 200 | text/html; charset=utf-8 | 24132 |
+| rechenfix | `/` | 200 | text/html; charset=utf-8 | 235536 |
+| rechenfix | `/sw.js` | 200 | application/javascript; charset=UTF-8 | 132064 |
+| rechenfix | `/api/stats` ohne Cookie | 401 | application/json | 24 |
+| rechenfix | `/blog/warum-1-terabyte-nur-931-gigabyte-sind` | 200 | text/html; charset=utf-8 | 279223 |
+| rechenfix | `/finanzen/kreditrechner` | 200 | text/html; charset=utf-8 | 278960 |
+| rechenfix | `/_next/image?url=%2Fabout%2Fkarsten-kautz-v3.webp&w=640&q=75` (Browser-`Accept`) | 200 | image/webp | 73736 |
+
+„Gemini 3 Pro Image“ auf `/ki-transparenz` (diekonkursmasse): 1.
+
+„Achtung! Kreditaufnahme kostet Geld.“ auf `/finanzen/kreditrechner`: 1.
+
+### 11.6 Produktion
+
+| Domain | `live-fassung.py` | Zeit der Messung |
+|---|---|---|
+| www.wuerdezeit.de | nicht gemessen: kein Push, Teil A endete mit STOP in A.5 | — |
+| www.diekonkursmasse.de | OK: https://www.diekonkursmasse.de liefert 16.4.5 | 03.11.2026, 21:01:33 |
+| www.rechenfix.de | misst die Chat-Sitzung nach dem Push nach | — |
+
+---
+
 ## Anhang A — Dateien mit `next/link` (36)
 
 Suchmuster `from ['"]next/link['"]` in `app/`, `components/`, `lib/`:
