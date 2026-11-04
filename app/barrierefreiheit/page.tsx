@@ -27,7 +27,7 @@ export default function BarrierefreiheitSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Erklärung zur Barrierefreiheit
         </h1>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">Stand: Mai 2026</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">Stand: 4. November 2026</p>
 
         <div className="space-y-8 text-gray-700 dark:text-gray-300">
           <p className="text-base leading-relaxed">
@@ -51,14 +51,16 @@ export default function BarrierefreiheitSeite() {
             </h2>
             <p className="leading-relaxed">
               Wir prüfen die Website gegen die Anforderungen der{' '}
-              <strong>WCAG 2.1 Stufe AA</strong>. Bei der letzten Prüfung im April 2026 erfüllte sie
-              alle automatisiert prüfbaren Kriterien vollständig (Lighthouse Accessibility{' '}
-              <strong>100/100</strong>, axe ohne Befunde).
+              <strong>WCAG 2.1 Stufe AA</strong>. Am <strong>4. November 2026</strong> haben wir alle
+              258 Seiten gemessen, die die Sitemap an diesem Tag enthielt, jeweils am Desktop im hellen
+              und im dunklen Modus sowie in einer Handyansicht. Das Prüfwerkzeug axe-core fand dabei
+              keinen Verstoß gegen die automatisiert prüfbaren Kriterien der Stufen A und AA.
             </p>
             <p className="mt-3 leading-relaxed">
               Automatisierte Prüfungen decken allerdings nur einen Teil der Erfolgskriterien ab.
               Anforderungen wie verständliche Sprache, sinnvolle Alternativtexte oder eine schlüssige
-              Fokusreihenfolge lassen sich nur manuell beurteilen. Eine vollständige Vereinbarkeit
+              Fokusreihenfolge lassen sich nur manuell beurteilen. Eine Prüfung mit Screenreadern hat
+              für diese Fassung der Erklärung nicht stattgefunden. Eine vollständige Vereinbarkeit
               behaupten wir deshalb nicht.
             </p>
           </section>
@@ -69,16 +71,20 @@ export default function BarrierefreiheitSeite() {
               Umgesetzte Maßnahmen
             </h2>
             <p className="leading-relaxed mb-3">
-              Folgende Maßnahmen wurden implementiert, um die Barrierefreiheit von rechenfix.de sicherzustellen:
+              Folgende Maßnahmen sind umgesetzt:
             </p>
             <ul className="list-disc pl-6 space-y-1.5 leading-relaxed">
-              <li>Ausreichende Farbkontraste gemäß WCAG 2.1 AA (mindestens 4,5:1 für Fließtext, 3:1 für große Schrift)</li>
-              <li>Korrekte Überschriften-Hierarchie (h1 &rarr; h2 &rarr; h3) auf allen Seiten</li>
-              <li>Alle Formularfelder (&lt;select&gt;, &lt;input&gt;) sind mit zugehörigen Labels verknüpft</li>
+              <li>Farbkontraste nach WCAG 2.1 AA (mindestens 4,5:1 für Fließtext, 3:1 für große Schrift), im hellen und im dunklen Modus</li>
+              <li>Überschriften ohne übersprungene Ebenen (h1 &rarr; h2 &rarr; h3) und genau eine Hauptüberschrift je Seite</li>
+              <li>Jedes Eingabe- und Auswahlfeld ist programmatisch mit seiner Beschriftung verknüpft</li>
               <li>Skip-Link zum Überspringen der Navigation für Tastaturnutzer</li>
-              <li>Auswahlgruppen (z.&thinsp;B. Geschlecht, Berechnungsart) als native Radio-Buttons mit Fieldset/Legend</li>
+              <li>Auswahlgruppen (z.&thinsp;B. Geschlecht, Berechnungsart) als native Radio-Buttons mit Fieldset/Legend; Ein-/Aus-Schalter sind als Schalter mit ihrem Zustand ausgezeichnet</li>
+              <li>Links im Fließtext sind unterstrichen und nicht nur an der Farbe zu erkennen</li>
+              <li>Tabellen, die auf kleinen Bildschirmen seitlich scrollen, sind per Tastatur erreichbar und tragen einen Namen</li>
               <li>Automatische Screenreader-Ansage bei Ergebnisänderung (aria-live mit Debounce)</li>
               <li>Fokus-Lenkung bei &bdquo;Fix erklärt&ldquo;-KI-Erklärungen: Fokus wandert automatisch zum neuen Inhalt, beim Schließen zurück zum Auslöser</li>
+              <li>Der wissenschaftliche Taschenrechner ist per Tastatur bedienbar (Tasten per Tab und Eingabetaste, Ziffern und Rechenzeichen auch direkt); Tasten mit Zeichen tragen einen gesprochenen Namen, das Ergebnis steht in einem aria-live-Bereich</li>
+              <li>Bei jeder Änderung der Website prüft ein automatischer Test, dass Beschriftungen, Schalter, Links und Tabellen diesen Regeln folgen</li>
               <li>Responsives Design für alle Bildschirmgrößen</li>
               <li>Unterstützung für Dark Mode</li>
             </ul>
@@ -100,10 +106,6 @@ export default function BarrierefreiheitSeite() {
                 zugänglich sind. Die wesentlichen Zahlenwerte werden jedoch immer auch als Text ausgegeben.
               </li>
               <li>
-                <strong>Wissenschaftlicher Taschenrechner:</strong>{' '}
-                Der Taschenrechner mit seinem Button-Raster ist nur eingeschränkt per Tastatur bedienbar.
-              </li>
-              <li>
                 <strong>Externe Inhalte:</strong>{' '}
                 Affiliate-Links führen zu externen Websites, deren Barrierefreiheit außerhalb unserer
                 Kontrolle liegt.
@@ -117,26 +119,30 @@ export default function BarrierefreiheitSeite() {
               Erstellung dieser Erklärung
             </h2>
             <p className="leading-relaxed">
-              Diese Erklärung wurde am <strong>16. April 2026</strong> erstellt.
+              Diese Erklärung wurde am <strong>16. April 2026</strong> erstellt und am{' '}
+              <strong>4. November 2026</strong> überarbeitet.
             </p>
             <p className="mt-2 leading-relaxed">
-              Die Bewertung beruht auf einer Selbstbewertung mittels automatisierter Tests
-              (Google Lighthouse, axe DevTools) sowie manueller Prüfung mit Screenreadern
-              und Tastaturnavigation.
+              Die Bewertung beruht auf einer Selbstbewertung. Grundlage ist eine automatisierte Messung
+              mit axe-core 4.11.2 im Browser Chromium über alle Seiten der Sitemap, je Seite in drei
+              Ansichten: Desktop hell, Desktop dunkel und Handy. Weil axe einen Platzhaltertext wie
+              &bdquo;z.&thinsp;B. 75&ldquo; als Beschriftung gelten lässt, prüfen wir zusätzlich auf jeder
+              Seite, ob jedes Eingabefeld eine verknüpfte Beschriftung hat.
             </p>
             <p className="mt-2 leading-relaxed">
-              Zuletzt geprüft durch Lighthouse- und axe-DevTools-Sweep am{' '}
-              <strong>18. April 2026</strong>: eine Stichprobe von 19 Rechnern aus den damals
-              bestehenden 9 Kategorien (Re-Runs nach Prompts 78z-B und 78z-A).
-            </p>
-            <p className="mt-2 leading-relaxed">
-              Ergebnis der Stichprobe:
+              Ergebnis der Messung vom <strong>4. November 2026</strong>:
             </p>
             <ul className="mt-2 list-disc pl-6 space-y-1 leading-relaxed">
-              <li>Durchschnittlicher Lighthouse-Accessibility-Score: <strong>100/100</strong> (Mobile und Desktop)</li>
-              <li>axe DevTools: <strong>0 Findings</strong> (Critical, Serious, Moderate, Minor)</li>
-              <li>Alle 19 geprüften Rechner-Seiten erfüllen die Stichprobe vollständig</li>
+              <li>258 Seiten, die die Sitemap an diesem Tag enthielt, in drei Ansichten: <strong>774 Messungen</strong></li>
+              <li>Verstöße gegen die Regeln der WCAG 2.1 Stufen A und AA: <strong>0</strong></li>
+              <li>Eingabefelder ohne verknüpfte Beschriftung: <strong>0</strong></li>
             </ul>
+            <p className="mt-2 leading-relaxed">
+              Die vorige Fassung dieser Erklärung stützte sich auf eine Stichprobe von 19 Rechnern vom
+              18. April 2026. Die erste Messung über alle Seiten am 2. November 2026 fand Verstöße auf
+              142 Seiten, vor allem Links, die nur an ihrer Farbe zu erkennen waren, und Eingabefelder
+              ohne verknüpfte Beschriftung. Sie sind seit dem 3. November 2026 behoben.
+            </p>
           </section>
 
           {/* Feedback */}
