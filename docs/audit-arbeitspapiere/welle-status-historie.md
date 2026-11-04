@@ -6,6 +6,49 @@
 
 ---
 
+## 04.11.2026 — Welle 202: Barrierefreiheit — gute Praxis, Taschenrechner, neue Erklärung — ✅ ABGESCHLOSSEN 04.11.2026
+
+**Anlass:** Nach Welle 201 hat die Chat-Sitzung am 04.11.2026 live alle 258 Seiten gemessen. Gegen WCAG 2.1 A/AA fand axe keinen Verstoß. Die Zusatzmessung mit den Regeln für gute Praxis (Tag `best-practice`, Desktop hell) zeigte aber, dass zwei Aussagen auf /barrierefreiheit nicht stimmten:
+- `heading-order` auf 80 Seiten: Die Gliederung sprang von h1 auf h3, weil die Baustein-Titel im ContentBlockRenderer h3 waren.
+- Taschenrechner: Enter auf einer angesteuerten Taste rechnete, statt die Taste auszulösen. Funktionsprobe live 2 von 8.
+
+Weitere Funde:
+- `landmark-complementary-is-top-level` auf 21 Blogseiten (KarstenSagt als `<aside>`);
+- `landmark-unique` auf 6 Seiten;
+- `landmark-no-duplicate-main` auf /aktualisierungen;
+- `empty-table-header` auf 5 Seiten.
+
+Messbericht: `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`.
+
+**Änderungen:**
+- Baustein-Titel im ContentBlockRenderer h2 statt h3.
+- /aktualisierungen ohne zweites `<main>`.
+- 39 scrollbare Bereiche mit sprechendem Namen statt „Tabelle“; Bausteine ohne Titel benennen sich nach ihren Spalten; vier Rechner-Tabellen heißen „Rechner: …“.
+- Leere Tabellenköpfe in 6 Rechnern mit sr-only-Text.
+- KarstenSagt als `div role="note"`.
+- Taschenrechner: Enter und Leertaste lösen die angesteuerte Taste aus; Ergebnis in aria-live; 31 Tasten mit gesprochenem Namen.
+- `scripts/verify-barrierefreiheit.ts` mit 9 Prüfungen. Am Stand vor der Welle sind 6 von 9 grün, danach 9 von 9.
+- CLAUDE.md: Lighthouse durch die axe-Messung ersetzt, neue Regeln, Ausnahme in Regel 8 erweitert.
+- recht: /barrierefreiheit neu, Stand 4. November 2026, mit Zeile in der Änderungshistorie der Rechtstexte.
+- Fehlender Trenner vor Welle 200 in dieser Historie.
+
+**Commits:** `b299ddf` (Code), `63dbb1c` (recht:), dieser Commit (Historie).
+
+**Geprüft in dieser Sitzung (04.11.2026, 11:06:38):**
+- verify-barrierefreiheit rc=0, „Barrierefreiheit: 9/9 grün“
+- verify:alle rc=0, „Prüfskripte: 88/88 grün.“
+- `npx eslint . --no-cache` rc=0, keine Ausgabe
+- Build rc=0, „✓ Generating static pages using 15 workers (272/272) in 9.6s“
+- lokale Abrufe aus A.4: alle wie erwartet
+
+**Messung in der Chat-Sitzung (04.11.2026, lokal am Stand der Welle):** 258 Seiten × 3 Ansichten, Regeln der WCAG 2.1 A/AA und `best-practice`. Kein Verstoß, kein unbeschriftetes Feld, kein `<label for>` ohne Ziel, keine doppelte id, genau eine h1 je Seite. Funktionsprobe Taschenrechner per Tastatur 8 von 8 (live vorher 2 von 8).
+
+**Offen:**
+- Live-Messung nach dem Deploy (WCAG 2.1 A/AA und gute Praxis, drei Ansichten) und Funktionsprobe Taschenrechner live, durch die Chat-Sitzung.
+- Die Vorlage im Skill rechner-builder kennt die Regeln aus den Wellen 201 und 202 noch nicht. Neue Fehler fängt verify-barrierefreiheit in verify:alle und in der CI; Überschriften-Sprünge fängt nur die axe-Messung.
+
+---
+
 ## 03.11.2026 — Welle 201: Barrierefreiheit — Beschriftung, Schalter, Links, scrollbare Tabellen — ✅ ABGESCHLOSSEN 03.11.2026
 
 **Anlass:** Vollprüfung Q4/2026. Statt einer erweiterten Stichprobe hat die Chat-Sitzung am 02.11.2026 alle 258 Seiten der Sitemap mit axe-core 4.11.2 gemessen, hell und dunkel. 142 Seiten hatten Verstöße:
@@ -43,6 +86,8 @@ Eigene Prüfungen im DOM fanden 321 verschiedene Felder ohne programmatische Bes
 - Live-Messung nach dem Deploy, danach der neue Text von /barrierefreiheit mit Stand-Datum als eigene recht:-Welle.
 - 39 der 120 scrollbaren Bereiche heißen nur „Tabelle“, weil keine Überschrift in der Nähe steht.
 - Die Vorlage im Skill rechner-builder kennt die neuen Regeln noch nicht. Neue Fehler fängt verify-barrierefreiheit in verify:alle und in der CI.
+
+---
 
 ## 29.10.2026 — Welle 200: Karola Rechner v1.1 und Werte, die am 01.01.2027 umschalten — ✅ ABGESCHLOSSEN 29.10.2026
 
