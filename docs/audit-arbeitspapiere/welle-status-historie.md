@@ -6,6 +6,35 @@
 
 ---
 
+## 04.11.2026 — Welle 203: Abhängigkeitswache für alle drei Domains, rechner-builder v5 — ✅ ABGESCHLOSSEN 04.11.2026
+
+**Anlass:** diekonkursmasse.de lief vom 14.10. bis 03.11.2026 mit Next.js 16.3.6, wuerdezeit.de mit 16.3.5, beide unter den kritischen Advisories GHSA-2464-fhr4-w9xw und GHSA-673q-mjm6-r5xr. Bemerkt hat es erst die Bestandsaufnahme vom 03.11.2026, weil nur rechenfix.de beobachtet wurde (`docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md`, Abschnitte 11 und 12).
+
+**Änderungen:**
+- `lib/abhaengigkeiten.ts` (neu): ausgelieferte Next.js-Fassung von rechenfix.de, diekonkursmasse.de und wuerdezeit.de, je Fassung eine Anfrage an die Advisory-Datenbank von npm.
+- Betriebsmeldung (`app/api/cron/health-check/route.ts`): Abschnitt „ABHÄNGIGKEITEN“, Betreff-Zusatz bei kritisch oder hoch; Maschinenzeile (`lib/betriebsmeldung.ts`) mit abh_seiten, abh_fehler, abh_kritisch, abh_hoch, abh_mittel. Gelesen ab berichtswache v46.
+- `scripts/verify-abhaengigkeiten.ts` (neu, 7 Fälle ohne Netz, mit der echten Antwort der Datenbank für 16.3.6); `scripts/verify-betriebsmeldung.ts` 8 Fälle.
+- `lib/termine.ts`: `abhaengigkeitswache-domains` erledigt und entfernt; neu monatlich `npm-audit-dkm-wz` ab 03.12.2026.
+- Bestandsaufnahme Abschnitt 12; Messbericht Barrierefreiheit Messung 6 (live 04.11.2026, kein Verstoß).
+- rechner-builder v5: Regeln der Wellen 201 und 202 (Beschriftung, Schalter, scrollbare Tabellen, Tabellenköpfe, Links, Überschriften) in Step 3, Step 11, Common Mistakes und Checkliste.
+
+**Commits:** `ad61e2f` (Code und Doku), dieser Commit (Historie). Die Skills folgen im Repo rechenfix-skills (Teil B dieses Laufs).
+
+**Geprüft in dieser Sitzung (04.11.2026, 15:44:22):**
+- verify-abhaengigkeiten rc=0, „Abhaengigkeiten: 7/7 grün“, verify-betriebsmeldung rc=0, „8/8 grün“
+- verify:alle rc=0, „Prüfskripte: 89/89 grün.“
+- `npx eslint . --no-cache` rc=0, keine Ausgabe
+- Build rc=0, „✓ Generating static pages using 15 workers (272/272) in 10.1s“
+- Probe der Abhängigkeitswache von Karstens Rechner (A.4): {"seiten":3,"fehler":0,"kritisch":0,"hoch":0,"mittel":0}
+
+**Messung in der Chat-Sitzung (04.11.2026):** Abhängigkeitswache live aus dem Container: alle drei Domains next 16.4.5, keine Lücke. Gegenprobe 16.3.6: 2 kritisch, 2 hoch, 6 mittel oder niedrig. Messung 6 Barrierefreiheit live: 774 Messungen, kein Verstoß.
+
+**Offen:**
+- Die erste Betriebsmeldung mit Abschnitt „ABHÄNGIGKEITEN“ kommt am Morgen nach dem Deploy (06:00 UTC); die Chat-Sitzung prüft sie und die Wache des Tages.
+- Pakete peter-ki v57, susanne-recht v81, berichtswache v46 und rechner-builder v5 installiert Karsten zusammen.
+
+---
+
 ## 04.11.2026 — Welle 202: Barrierefreiheit — gute Praxis, Taschenrechner, neue Erklärung — ✅ ABGESCHLOSSEN 04.11.2026
 
 **Anlass:** Nach Welle 201 hat die Chat-Sitzung am 04.11.2026 live alle 258 Seiten gemessen. Gegen WCAG 2.1 A/AA fand axe keinen Verstoß. Die Zusatzmessung mit den Regeln für gute Praxis (Tag `best-practice`, Desktop hell) zeigte aber, dass zwei Aussagen auf /barrierefreiheit nicht stimmten:
