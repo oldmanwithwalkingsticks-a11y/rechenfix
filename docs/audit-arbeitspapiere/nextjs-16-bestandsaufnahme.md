@@ -1216,7 +1216,8 @@ rechenfix ab, und nur bei den 13 Paketen, die mit `@serwist/next` in die devDepe
    `next/font/google` wie bei diekonkursmasse am 02.11.2026 (`f20d975`), wechselt wuerdezeit auf
    `next/font/local` mit den Dateien aus `@fontsource/atkinson-hyperlegible` 5.3.0 (Lizenz OFL 1.1).
 7. **Abhängigkeitswache:** Die Betriebsmeldung soll die Next.js-Fassung aller drei Domains beobachten.
-   Eigene Welle, Termin `abhaengigkeitswache-domains` am 17.11.2026.
+   Eigene Welle, Termin `abhaengigkeitswache-domains` am 17.11.2026. Gebaut in Welle 203 (04.11.2026),
+   Abschnitt 12; der Termin ist entfernt.
 
 ### 11.4 Änderung
 
@@ -1304,6 +1305,50 @@ Gemessen in der Sitzung der Welle am 03.11.2026, 21:06 Uhr. Windows, Node v24.14
 | www.rechenfix.de | misst die Chat-Sitzung nach dem Push nach | — |
 
 ---
+
+## 12. Abhängigkeitswache (Welle 203, 04.11.2026)
+
+### 12.1 Anlass
+
+diekonkursmasse.de lief vom 14.10. bis 03.11.2026 mit `next` 16.3.6, wuerdezeit.de mit 16.3.5. Beide Fassungen
+lagen unter den kritischen Advisories GHSA-2464-fhr4-w9xw und GHSA-673q-mjm6-r5xr, veröffentlicht am 14.10.2026
+mit 16.4.1. Bemerkt hat es erst die Bestandsaufnahme vom 03.11.2026 (Abschnitt 11.1): Welle 158 hob nur rechenfix
+an, und für die beiden anderen Domains gab es keine Wache.
+
+### 12.2 Verfahren
+
+`lib/abhaengigkeiten.ts`, aufgerufen vom täglichen Cron `app/api/cron/health-check/route.ts` (06:00 UTC),
+parallel zu den KI-Proben:
+
+1. Für `www.rechenfix.de`, `www.diekonkursmasse.de` und `www.wuerdezeit.de` die Startseite holen und die Skripte
+   unter `/_next/static/` in der Reihenfolge des HTML lesen, bis eines `window.next={version:"…"}` enthält
+   (höchstens 40). Das ist die ausgelieferte Fassung, nicht die aus einer `package.json`. Gemessen am 04.11.2026:
+   bei allen drei Domains das dritte Skript, zusammen etwa 2 s.
+2. Je gefundener Fassung eine Anfrage an die Advisory-Datenbank von npm, dieselbe Quelle wie `npm audit`:
+   `POST https://registry.npmjs.org/-/npm/v1/security/advisories/bulk`, Körper `{"next":["<Fassung>"]}`. Mit genau
+   einer Fassung je Anfrage betrifft jeder Treffer diese Fassung; Versionsbereiche müssen nicht ausgewertet werden.
+3. Die Mail bekommt den Abschnitt „ABHÄNGIGKEITEN“ (je Domain Fassung und Treffer nach Schwere), der Betreff bei
+   kritisch oder hoch den Zusatz „· N Sicherheitslücke(n)“, die Maschinenzeile fünf Felder: `abh_seiten`,
+   `abh_fehler`, `abh_kritisch`, `abh_hoch`, `abh_mittel` (moderate und low).
+4. Die Berichtswache (ab v46) wertet `abh_kritisch` und `abh_hoch` über 0 als Befund, `abh_fehler` über 0 als
+   Nichtprüfung, `abh_mittel` über 0 als Hinweis; fehlen die Felder, ist das eine Nichtprüfung.
+
+Gegenprobe am 04.11.2026: alle drei Domains `next` 16.4.5, die Datenbank antwortet für 16.4.5 leer. Für 16.3.6,
+die Lage von diekonkursmasse bis zum 03.11.2026, antwortet sie mit zehn Treffern: 2 kritisch (GHSA-2464-fhr4-w9xw,
+GHSA-673q-mjm6-r5xr), 2 hoch (GHSA-cjq9-62q9-8jv4, GHSA-p3m5-59mp-jv5r), 5 mittel, 1 niedrig. Diese Antwort ist der
+Prüffall in `scripts/verify-abhaengigkeiten.ts` (ohne Netz, 7 Fälle); `scripts/verify-betriebsmeldung.ts` prüft die
+Maschinenzeile mit den neuen Feldern (8 Fälle).
+
+### 12.3 Grenzen
+
+- Gesehen wird nur `next`. Was sonst in den Repos steckt, verrät die ausgelieferte Seite nicht. Am 03.11.2026 lagen
+  in diekonkursmasse und wuerdezeit dazu `sharp` 0.35.4 (hoch) und in wuerdezeit `nodemailer` 10.0.10 (mittel).
+  Dafür steht der monatliche Termin `npm-audit-dkm-wz` (erstmals 03.12.2026); rechenfix selbst deckt weiter der
+  Termin `npm-audit-buildwerkzeuge`.
+- Die Datenbank kennt eine Lücke erst, wenn das Advisory veröffentlicht ist. Am 03.11.2026 abends standen die sieben
+  mittleren Lücken, die nextjs.org am 27.10.2026 angekündigt hatte, für 16.4.1 noch nicht darin.
+- Ist eine Domain nicht erreichbar oder antwortet die Datenbank nicht, steht das als Fehler je Domain in der Mail
+  und als `abh_fehler` in der Maschinenzeile. Der HTTP-Status des Cron-Endpunkts hängt weiter nur an den KI-Proben.
 
 ## Anhang A — Dateien mit `next/link` (36)
 

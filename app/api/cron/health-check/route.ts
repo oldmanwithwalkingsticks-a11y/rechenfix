@@ -13,11 +13,17 @@
  *
  * Die Mail geht zusätzlich an BERICHTSWACHE_EMAIL, damit die Berichtswache sie über den
  * Gmail-Konnektor lesen kann; sie endet mit einer Maschinenzeile aus lib/betriebsmeldung.ts.
+ *
+ * Seit Welle 203 zusätzlich die Abhängigkeitswache (lib/abhaengigkeiten.ts): ausgelieferte
+ * Next.js-Fassung von rechenfix.de, diekonkursmasse.de und wuerdezeit.de gegen die
+ * Advisory-Datenbank von npm. Läuft parallel zu den KI-Proben; ihr Ergebnis ändert den
+ * HTTP-Status dieses Endpunkts nicht.
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { getTerminlage } from '@/lib/termine';
 import { baueMaschinenzeile } from '@/lib/betriebsmeldung';
+import { pruefeAbhaengigkeiten, zaehle, abschnitt, type DomainErgebnis } from '@/lib/abhaengigkeiten';
 import { pruefeCronGeheimnis } from '@/lib/admin-session';
 
 export const dynamic = 'force-dynamic';
@@ -99,7 +105,7 @@ async function probe(
   }
 }
 
-async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<void> {
+async function sendStatusMail(results: ProbeResult[], allOk: boolean, abh: DomainErgebnis[]): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.ADMIN_NOTIFICATION_EMAIL;
   if (!apiKey || !to) {
@@ -151,9 +157,15 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     lines.push('', 'Gepflegt in lib/termine.ts. Erledigte Einmaltermine dort entfernen, erledigte wiederkehrende dort quittieren (quittiertVorkommen, quittiertAm, quittungVermerk). Ohne Quittung bleibt ein Vorkommen ab dem Folgetag ÜBERFÄLLIG.');
   }
 
-  // Letzte Zeile, in jeder Mail — die Berichtswache liest sie mechanisch.
-  lines.push('', baueMaschinenzeile(results, lage, new Date()));
+  // Seit Welle 203: Abhängigkeiten, in jeder Mail.
+  lines.push('', ...abschnitt(abh));
+  const abhZahl = zaehle(abh);
 
+  // Letzte Zeile, in jeder Mail — die Berichtswache liest sie mechanisch.
+  lines.push('', baueMaschinenzeile(results, lage, new Date(), abhZahl));
+
+  const lueckenMarke =
+    abhZahl.kritisch + abhZahl.hoch > 0 ? ` · ${abhZahl.kritisch + abhZahl.hoch} Sicherheitslücke(n)` : '';
   const terminMarke =
     lage.ueberfaellig.length > 0
       ? ` · ${lage.ueberfaellig.length} ÜBERFÄLLIG`
@@ -166,7 +178,7 @@ async function sendStatusMail(results: ProbeResult[], allOk: boolean): Promise<v
     await resend.emails.send({
       from: 'Rechenfix Stats <feedback@rechenfix.de>',
       to: empfaenger,
-      subject: `[Rechenfix KI-Check] ${statusWord}${terminMarke} — ${date}`,
+      subject: `[Rechenfix KI-Check] ${statusWord}${lueckenMarke}${terminMarke} — ${date}`,
       text: lines.join('\n'),
     });
   } catch (err) {
@@ -184,6 +196,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return unauthorized('missing or invalid Authorization header');
   }
 
+  // Seit Welle 203: Abhängigkeitswache, parallel zu den Proben. Wirft nie.
+  const abhLauf = pruefeAbhaengigkeiten();
+
   // Probe 1: KI-Erklärung (Standard-Pfad, BMI-Rechner)
   const p1 = await probe('KI-Erklärung (BMI)', {
     rechner_name: 'BMI-Rechner',
@@ -200,11 +215,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   const results = [p1, p2];
   const allOk = results.every((r) => r.ok);
+  const abh = await abhLauf;
 
-  await sendStatusMail(results, allOk);
+  await sendStatusMail(results, allOk, abh);
 
   return NextResponse.json(
-    { date: new Date().toISOString().slice(0, 10), allOk, results },
+    { date: new Date().toISOString().slice(0, 10), allOk, results, abhaengigkeiten: abh },
     { status: allOk ? 200 : 503 },
   );
 }

@@ -1,6 +1,6 @@
 # Barrierefreiheit: axe-Messung über die ganze Sitemap (November 2026)
 
-**Stand:** 04.11.2026. **Wellen:** 201 und 202. **Zweck:** Grundlage für den Text von `/barrierefreiheit`, neu seit Welle 202.
+**Stand:** 04.11.2026. **Wellen:** 201 und 202, Messung 6 nachgetragen mit Welle 203. **Zweck:** Grundlage für den Text von `/barrierefreiheit`, neu seit Welle 202.
 Dort stand bis zu Welle 202 die Stichprobe vom 18.04.2026 (19 Rechner aus 9 Kategorien) und der Satz „Alle Formularfelder
 (&lt;select&gt;, &lt;input&gt;) sind mit zugehörigen Labels verknüpft“. Die Vollprüfung Q4/2026 hatte entschieden, statt einer
 erweiterten Stichprobe die ganze Sitemap zu messen.
@@ -171,6 +171,14 @@ Taschenrechner, Funktionsprobe per Tastatur: **8 von 8**.
 
 `npm run verify:alle` 88 von 88 grün, `npx eslint . --no-cache` ohne Befund, Build 272/272.
 
-## Messung 6 — live, nach dem Deploy von Welle 202
+## Messung 6 — live, 04.11.2026, nach Welle 202
 
-Folgt durch die Chat-Sitzung: WCAG 2.1 A/AA und `best-practice`, drei Ansichten, Funktionsprobe Taschenrechner.
+www.rechenfix.de am Stand `1dfff6d` (Vercel `dpl_CAGUm53ZtpwDmgZkD9LCNMHSbQLc`), 12:06–12:21 Uhr. Sitemap unverändert
+258 Seiten. Regeln WCAG 2.1 A/AA **und** `best-practice`, alle drei Ansichten: 774 Messungen, alle mit HTTP 200.
+**Kein Verstoß**, auch nicht im ersten Durchgang. Eigene Prüfungen: **0** Eingabefelder ohne Beschriftung (3.370
+Felder auf 226 Seiten), **0** `<label for>` ohne Ziel, **0** doppelte `id`; genau eine h1 je Seite, kein Sprung in
+der Überschriftenfolge.
+
+Taschenrechner, Funktionsprobe per Tastatur, live: **8 von 8** (vor Welle 202: 2 von 8).
+
+Damit ist jede Aussage im Text von `/barrierefreiheit` (Stand 4. November 2026) an der Live-Seite belegt.

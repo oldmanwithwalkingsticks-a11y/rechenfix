@@ -9,7 +9,14 @@
  * Die Zeile enthält ausschließlich ASCII: keine Umlaute, keine Emoji, keine Domain, kein
  * Schema. Gmail schreibt alles, was nach einer Domain aussieht, in eine Weiterleitungsadresse
  * um, und die Wache liest die Zeile nach einer Umlaut-Umschreibung.
+ *
+ * Seit Welle 203 fünf Felder der Abhängigkeitswache (lib/abhaengigkeiten.ts), gelesen ab
+ * berichtswache v46: abh_seiten (geprüfte Domains), abh_fehler (Domains ohne Ergebnis, eine
+ * Nichtprüfung), abh_kritisch und abh_hoch (Treffer je Domain, ein Befund), abh_mittel
+ * (moderate und low, ein Hinweis).
  */
+
+import type { Zaehlung } from './abhaengigkeiten';
 
 export interface ProbeKurz { ok: boolean }
 
@@ -29,6 +36,7 @@ export function baueMaschinenzeile(
   proben: ProbeKurz[],
   lage: { ueberfaellig: { tage: number }[]; faellig: { tage: number }[] },
   jetzt: Date,
+  abh: Zaehlung,
 ): string {
   const felder: [string, string | number][] = [
     ['lauf', 'betrieb'],
@@ -38,6 +46,11 @@ export function baueMaschinenzeile(
     ['termine_ueberfaellig', lage.ueberfaellig.length],
     ['termine_heute', lage.faellig.filter((e) => e.tage === 0).length],
     ['termine_vorlauf', lage.faellig.filter((e) => e.tage > 0).length],
+    ['abh_seiten', abh.seiten],
+    ['abh_fehler', abh.fehler],
+    ['abh_kritisch', abh.kritisch],
+    ['abh_hoch', abh.hoch],
+    ['abh_mittel', abh.mittel],
   ];
   return 'MASCHINENZEILE: ' + felder.map(([k, v]) => `${k}=${v}`).join('; ');
 }

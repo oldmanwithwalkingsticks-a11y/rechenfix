@@ -5,7 +5,7 @@ description: Template and checklist for building standardized online calculators
 
 # Rechner Builder für rechenfix.de
 
-**Stand: v4 (27.10.2026).** Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
+**Stand: v5 (04.11.2026).** Build standardized, SEO-optimized calculator pages for the German calculator portal rechenfix.de. Every calculator must follow this template to ensure consistency, completeness, and maximum SEO impact.
 
 **Zur Fassungszählung (eingeführt 18.09.2026):** Dieser Skill hatte als einziger der
 fünf keine Stand-Zeile, und `scripts/skill-paket.sh` verweigerte deshalb den Paketbau — die
@@ -27,6 +27,15 @@ Zahlen im Text nie gegen die Lib gerechnet wurden. v4 schließt beide Lücken: d
 Teil 2 von Step 11b (Prüfskripte von Karola Rechner, Zahlenprotokoll, Querabgleich) und Step 15,
 die Abnahme durch **Karola Rechner** (eigener Skill `karola-rechner`). Ein Rechner ist erst
 fertig, wenn ihr Urteil „abnahmefähig“ lautet.
+
+**v5 (04.11.2026): Barrierefreiheit.** Die axe-Messung über alle 258 Seiten vom 02. und 03.11.2026 fand
+321 Eingabefelder ohne programmatische Beschriftung auf 207 Seiten (axe sah die meisten nicht, weil ein
+Platzhalter wie „z. B. 75“ als Name durchgeht), Schalter ohne Namen, Links, die nur an der Farbe zu
+erkennen waren, 475 waagerecht scrollbare Tabellen ohne Tastaturzugang und eine Gliederung, die auf 80
+Seiten von h1 auf h3 sprang. Die Wellen 201 und 202 haben das behoben und `scripts/verify-barrierefreiheit.ts`
+(9 Prüfungen, läuft in `verify:alle` und in der CI) eingeführt. v5 bringt die Regeln dorthin, wo ein neuer
+Rechner entsteht: Step 3, Step 11, „Common Mistakes“ und `references/checklist.md`. Die vollständigen Regeln
+stehen in CLAUDE.md, Abschnitt „Accessibility (WCAG 2.1 AA)“.
 
 ## WARUM diese Standards existieren (Skill v2, 10.05.2026 · Content-Bausteine-Update Welle 19, 10.06.2026 · Goldstandard-Update 11.06.2026 · Referenzwerte-Update Wellen 82–102, 14.08.2026 · Prüfvorschriften-Update Welle 114, 26.08.2026 · Struktur-Umbau und R7, Welle 114b/118, 27.08.2026)
 
@@ -323,9 +332,13 @@ Requirements for all input fields:
 - Use `type="number"` and `inputmode="decimal"` for number fields
 - Use `type="date"` for date fields
 - Provide sensible **default values** so the calculator shows a result immediately
-- Add **labels** above every field (not placeholder-only)
-- For dropdowns: Use native `<select>` elements
-- For toggles: Use clear toggle buttons (not checkboxes)
+- Add **labels** above every field (not placeholder-only) — und **programmatisch verknüpft** (v5): `<label htmlFor="<rechner>-<feld>">` und dieselbe `id` am Feld, z. B. `bmi-gewicht`. `NummerEingabe` reicht `id`, `aria-label` und `aria-labelledby` an das `<input>` durch. Ein Feld ohne eigenes Label (Zeile in einer Liste, Feld unter Schnellwahl-Knöpfen, Freitext) bekommt `aria-label`; ein Feld unter einer Schritt-Überschrift `<h2><span>1</span> Titel</h2>` `aria-label` mit deren Text. Ein Platzhalter ist keine Beschriftung, auch wenn axe ihn gelten lässt.
+- Komponenten, die mehrfach auf einer Seite stehen oder in `.map()` rendern: `useId()` oder `aria-label` je Zeile, nie eine feste `id`.
+- For dropdowns: Use native `<select>` elements, mit `<label htmlFor>` wie oben.
+- For toggles: Werte-Auswahl mit 2–4 Optionen über `<RadioToggleGroup>`; ein Ein/Aus-Schalter (runder Knopf mit Kreis) trägt `type="button" role="switch" aria-checked={zustand} aria-label="…"` (v5).
+- Tabellen, die waagerecht scrollen (`overflow-x-auto`; auf dem Handy fast alle): `<div className="overflow-x-auto" tabIndex={0} role="region" aria-label="…">`. Der Name sagt, was die Tabelle zeigt, nie nur „Tabelle“, und kommt auf der Seite nur einmal vor; steht dieselbe Tabelle auch als Baustein in der Config, heißt die in der Komponente „Rechner: …“. Kopfzellen nie leer: über einer Spalte mit Zeilenbeschriftungen `<th><span className="sr-only">Posten</span></th>` (v5).
+- Links im Fließtext: `text-primary-600 dark:text-primary-400 underline underline-offset-2`, nie nur farbig (v5).
+- Eigene Überschriften der Komponente ohne Sprung: Die Baustein-Titel des `ContentBlockRenderer` sind h2; innerhalb der Komponente h2 und darunter h3, nie h1 (die h1 setzt die Seite).
 
 ### Step 3a: Input Clamping (Pflicht)
 
@@ -521,6 +534,8 @@ After creating the calculator, verify:
 - [ ] Page is added to sidebar navigation with correct category count
 - [ ] Page is mobile-responsive (test at 320px width)
 - [ ] Input fields are minimum 48px height
+- [ ] **`npx tsx scripts/verify-barrierefreiheit.ts`** grün, 9 von 9 (v5; läuft auch in `npm run verify:alle`)
+- [ ] **axe-Messung der neuen Seite** mit den Regeln der WCAG 2.1 A/AA und `best-practice`, Desktop hell und dunkel und Handy (390 px): kein Verstoß (v5; CLAUDE.md „Vor Deploy“)
 - [ ] **Meta-Description ≤ 155 Zeichen** (zählen! `node -e "console.log('…'.length)"`)
 - [ ] Kein `✓ Kostenlos. ✓ Mit KI-Erklärung.`-Suffix, keine ✓-Emojis in der Description
 - [ ] **Smoke-Test v3** nach Deploy über die betroffenen Routen laufen lassen: `scripts/smoke-test-v3.js` in die Browser-Konsole auf `https://www.rechenfix.de` pasten und `await runSmokeTestV3({ filter: /<slug>/ })` ausführen. Alle 9 Checks (C1–C9) müssen grün sein.
@@ -865,6 +880,12 @@ sinnvoll ist.
 - Tarif-Parameter hartkodiert statt über zentrale Lib (siehe Abschnitt "Referenz-Werkzeuge")
 - PV-Kinderabschlag mit Kinderfreibeträgen verwechselt — zwei getrennte Konzepte (§ 55 Abs. 3 SGB XI vs. § 32 EStG)
 - Controlled/uncontrolled Inputs vermischt — clamping funktioniert nur mit `value={state}`, nicht mit `defaultValue`
+- Platzhalter als einzige Beschriftung, `<label>` ohne `htmlFor` oder Feld ohne `id` (v5; Welle 201 fand 321 solcher Felder)
+- Schalter ohne `role="switch"`, `aria-checked` und Namen (v5)
+- `overflow-x-auto` ohne `tabIndex={0} role="region" aria-label`, oder ein Bereichsname „Tabelle“ bzw. ein Name, der auf der Seite zweimal vorkommt (v5)
+- Leere Tabellenkopfzelle `<th></th>` oder `<th />` (v5)
+- Link im Fließtext nur über die Farbe erkennbar (`hover:underline` statt `underline`) (v5)
+- Abschnittsüberschrift als h3 direkt unter der h1 (v5; bis Welle 202 auf 80 Seiten)
 
 ## Referenz-Werkzeuge
 
@@ -919,6 +940,7 @@ Ohne diesen Schritt geben Claude-Chat und Claude-Code inkonsistente Ratschläge,
 | 26.08.2026 | Welle 114: Prüfvorschriften-Regeln R1–R6 in der Operativen Disziplin, Anti-Pattern zur Namenswahl exportierter Helfer, Working-Tree-Disziplin um Worktree-Pflege und untracked Artefakte erweitert, Checkliste um den Block „Prüfvorschrift schreiben". **Struktur-Umbau:** SKILL.md 1966 → 898 Zeilen, sechs neue Referenzdateien (Qualitäts-Guards, Anti-Patterns, Audit-Methodik, Kategorien, Zentrale Libs, Content-Standards), Sync-Ablauf auf ZIP-Upload umgestellt. | [ ] noch offen |
 | 02.09.2026 | Wellen 128–131: R8 (Abschluss-Commit mit Historienblock gehört in jeden Wellen-Prompt) und R9 (Text mit typografischen Zeichen über Dateien statt zitierter Literale) in der Operativen Disziplin, dazu zwei Zählfallen als Ergänzung zu R2 und R3 (`types.ts`/`index.ts` bei der Rechner-Zählung, Quote-Form bei Objektschlüsseln mit Bindestrich). Bestandszahlen nachgemessen: 16→17 Blogartikel, 73→76 Grafik-Komponenten, 14→15 prebuild-Glieder. | [ ] noch offen |
 | 18.09.2026 | Durchsicht aller Skills: Bestandszahlen nachgemessen an HEAD `4193aa1` — 17→18 Blogartikel, 76→79 Grafik-Komponenten, 15→16 prebuild-Glieder. Unverändert bestätigt: 206 Rechner (R2-Zählfalle greift — roh gegrept sind es 220, `client-data.ts`/`index.ts`/`types.ts` gehören abgezogen), 13 Affiliate-Programme (R3-Zählfalle greift — `'ks-auxilia'` steht in Quote-Form), 55 Aufrufe in 52 Dateien. Drei überholte Stellen berichtigt: Smoketest-Erwartung 178→206 Rechner-URLs, der AdSense-Noise-Hinweis (Ladecode seit 16.08.2026 entfernt, kein `adsbygoogle` mehr im Repo) und die Empfehlung eines nie existierenden `scripts/word-count.mjs`. Dazu die Stand-Zeile `Stand: v3` eingeführt, ohne die `skill-paket.sh` den Paketbau verweigerte. | [ ] noch offen |
+| 04.11.2026 | v5 nach den Wellen 201 und 202 (Welle 203): Barrierefreiheit in Step 3 (Beschriftung, Schalter, scrollbare Tabellen, Tabellenköpfe, Links, Überschriften), Step 11 (verify-barrierefreiheit 9/9, axe-Messung der neuen Seite), Common Mistakes und `references/checklist.md` | [ ] noch offen |
 | 27.10.2026 | v4 nach den Wellen 196 und 197 (Welle 198): Abschnitt „Pre-Build: Wertherkunft“, fünfter Standard, Step 11b Teil 2 (Prüfskripte von Karola Rechner, Zahlenprotokoll, Querabgleich), Step 15 Abnahme durch Karola Rechner, Integrations-Checkliste um drei Punkte ergänzt, Lehre zu „Beispielrechnungen“. Referenzen: G10 ohne Ausnahme für geteilte Konventionen und Text, Anti-Pattern „Monatsstunden als 160 (4 × 40)“, Konventionen-Kurzliste in `zentrale-libs.md`, Checklisten-Block „Wertherkunft und Abnahme“. Neuer Skill `karola-rechner` daneben. | [ ] noch offen |
 
 ---

@@ -16,6 +16,7 @@ Kopiere diese Checkliste und arbeite jeden Punkt ab:
 - [ ] H1 mit Emoji + Name
 - [ ] Beschreibungstext (1 Satz)
 - [ ] Eingabefelder mit Default-Werten
+- [ ] Jedes Feld mit `<label htmlFor>` und gleicher `id` oder mit `aria-label`; Schalter mit `role="switch"` und `aria-checked`; scrollbare Tabellen mit `tabIndex={0} role="region"` und eigenem Namen; keine leere Kopfzelle; Links im Fließtext unterstrichen (v5, CLAUDE.md „Accessibility“)
 - [ ] Live-Berechnung (kein Submit-Button)
 - [ ] Ergebnis-Anzeige (groß, farbig)
 
@@ -46,9 +47,11 @@ Kopiere diese Checkliste und arbeite jeden Punkt ab:
 - [ ] npm run dev fehlerfrei
 - [ ] Mobile getestet (320px Breite)
 - [ ] Eingabefelder mindestens 48px hoch
+- [ ] `npx tsx scripts/verify-barrierefreiheit.ts` 9/9 grün (v5)
 
 ## Nach Deploy
 - [ ] Seite live aufrufbar
+- [ ] axe-Messung der Seite (WCAG 2.1 A/AA und `best-practice`), hell, dunkel und Handy: kein Verstoß (v5)
 - [ ] Fix erklärt funktioniert
 - [ ] URL in Google Search Console einreichen
 
