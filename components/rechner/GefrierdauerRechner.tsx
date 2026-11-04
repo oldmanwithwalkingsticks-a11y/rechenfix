@@ -602,7 +602,7 @@ function RichtwertTabelle({
       <h2 className="text-base font-semibold text-gray-800 mb-4">
         Richtwerte: {KATEGORIEN[aktuelleKategorie].label}
       </h2>
-      <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+      <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Haltbarkeit nach Lebensmittel">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-200">

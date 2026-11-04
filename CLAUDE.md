@@ -8,7 +8,7 @@
 5. Live-Berechnung ohne Submit-Button
 6. Default-Werte für alle Eingabefelder
 7. Input-Felder min. 48px Höhe
-8. Fertig ist ein Rechner erst, wenn Karola Rechner (Skill `karola-rechner`) ihn nach dem Deploy abgenommen hat: Urteil „abnahmefähig“. Ihre Prüfskripte laufen schon vor dem Commit (rechner-builder Step 11b, Teil 2). Dasselbe gilt für jede Welle, die Rechenkern, Texte oder Komponente eines Rechners ändert. Ausgenommen sind Wellen, die an Rechner-Komponenten nur Barrierefreiheits-Attribute (`id`, `htmlFor`, `aria-*`, `role`, `type="button"`, `tabIndex`) oder Linkklassen ändern: Dort ersetzt die axe-Messung über alle Seiten die Abnahme, `verify:alle` läuft wie immer vor dem Commit (Welle 201).
+8. Fertig ist ein Rechner erst, wenn Karola Rechner (Skill `karola-rechner`) ihn nach dem Deploy abgenommen hat: Urteil „abnahmefähig“. Ihre Prüfskripte laufen schon vor dem Commit (rechner-builder Step 11b, Teil 2). Dasselbe gilt für jede Welle, die Rechenkern, Texte oder Komponente eines Rechners ändert. Ausgenommen sind Wellen, die an Rechner-Komponenten nur Barrierefreiheits-Attribute (`id`, `htmlFor`, `aria-*`, `role`, `type="button"`, `tabIndex`), Linkklassen, Überschriften-Ebenen, Texte nur für Screenreader (`sr-only`) oder die Tastaturbedienung ändern, ohne Rechenweg und angezeigte Zahlen zu berühren: Dort ersetzt die axe-Messung über alle Seiten die Abnahme, bei Tastaturbedienung zusätzlich eine Funktionsprobe per Tastatur; `verify:alle` läuft wie immer vor dem Commit (Wellen 201 und 202).
 
 ## Affiliate-System
 - Komponente: `components/AffiliateBox.tsx` (NICHT `src/components/...` — Pfad seit jeher unter `components/`)
@@ -115,7 +115,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 
 ## Accessibility (WCAG 2.1 AA)
 
-rechenfix erfüllt WCAG 2.1 AA (Lighthouse ≥97 auf Referenzseiten, Stand April 2026).
+rechenfix orientiert sich an WCAG 2.1 AA. Gemessen wird mit axe-core über alle Seiten der Sitemap, Desktop hell und dunkel und Handy; am 04.11.2026 live auf 258 Seiten kein Verstoß gegen die Regeln der Stufen A und AA (Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`). Lighthouse ist kein Maßstab mehr: Die Stichprobe vom April 2026 mit 100/100 übersah unbeschriftete Felder und Links, die nur an der Farbe zu erkennen waren.
 
 ### Farb-Regeln
 - Text auf weiß: min. `text-gray-600`, NIE `-500`, `-400` oder `-300` — auch nicht für kleine Zusatz- und Hinweiszeilen (`-500` hat auf `bg-gray-100` nur 4,2:1). Immer mit Dark-Variante, meist `text-gray-600 dark:text-gray-400`. Ausnahme: rein dekorative Zeichen (Trennpunkt, Pfeil, Stern); die zulässigen stehen in `scripts/verify-textfarben.ts`. SVG-Grafiken: grauer Text nur mit `fill="#9ca3af"`, `app/globals.css` macht ihn im hellen Modus zu gray-600 (Welle 188).
@@ -131,22 +131,26 @@ rechenfix erfüllt WCAG 2.1 AA (Lighthouse ≥97 auf Referenzseiten, Stand April
 - aria-live-Ergebnis-Pattern in `ErgebnisAktionen` (debounced, 750 ms)
 - `<AiExplain>` Disclosure: `aria-expanded`, `aria-controls`, Fokus-Lenkung auf Panel + zurück zum Button
 
-### Formularfelder, Schalter, Links, Tabellen (seit Welle 201)
+### Formularfelder, Schalter, Links, Tabellen (seit Welle 201, ergänzt in Welle 202)
 - Jedes Eingabefeld (`NummerEingabe`, `input`, `select`, `textarea`) ist programmatisch beschriftet: sichtbares `<label htmlFor="…">` und dieselbe `id` am Feld, Schema `<rechner>-<feld>` (z. B. `bmi-gewicht`). Felder ohne eigenes Label — Zeilen in Listen, Felder unter Schnellwahl-Knöpfen, Freitextfelder — bekommen `aria-label`; Felder unter einer Schritt-Überschrift (`<h2><span>1</span> Titel</h2>`) `aria-label` mit deren Text. `NummerEingabe` reicht `id`, `aria-label` und `aria-labelledby` an das `<input>` durch.
 - Komponenten, die mehrfach auf einer Seite stehen können oder in `.map()` rendern, nehmen `useId()` oder eine `aria-label` je Zeile, nie eine feste `id`.
 - Schalter (runder Knopf mit Kreis): `type="button" role="switch" aria-checked={zustand} aria-label="…"`. Für Werte-Auswahl weiter `<RadioToggleGroup>`.
 - Links im Fließtext: `text-primary-600 dark:text-primary-400 underline underline-offset-2`. Nie nur die Farbe (WCAG 1.4.1; axe `link-in-text-block`: Kontrast zum Text 1,53 : 1 hell, 1,72 : 1 dunkel).
 - Waagerecht scrollbare Bereiche: `<div className="overflow-x-auto" tabIndex={0} role="region" aria-label="…">` (WCAG 2.1.1). In der Handyansicht (390 px) scrollen fast alle Tabellen.
-- Gegenprobe: `npx tsx scripts/verify-barrierefreiheit.ts` (läuft in `verify:alle`) und axe über alle Seiten der Sitemap, hell, dunkel und Handy; Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`.
+- Der Name eines scrollbaren Bereichs sagt, was er zeigt (meist die Überschrift darüber), nie nur „Tabelle“, und kommt auf einer Seite nur einmal vor. Steht dieselbe Tabelle als Baustein in der Config und in der Rechner-Komponente, heißt die in der Komponente „Rechner: …“ (axe `landmark-unique`, Welle 202).
+- Tabellenkopf nie leer: Über einer Spalte mit Zeilenbeschriftungen steht `<th><span className="sr-only">Posten</span></th>` o. Ä. (axe `empty-table-header`).
+- Genau ein `<main>`, im Root-Layout. Seiten nutzen `div`, `article` oder `section`. Kästen im Fließtext (`KarstenSagt`) sind `<div role="note">`, kein `<aside>`: Ein `<aside>` in `<main>` ist eine eigene Landmarke (axe `landmark-*`, Welle 202).
+- Tasten-Raster wie im wissenschaftlichen Taschenrechner: native `<button type="button">`; ein globaler `keydown`-Handler lässt Enter und Leertaste auf einem fokussierten Knopf durch (sonst rechnet Enter, statt die Taste auszulösen); Tasten mit Zeichen als Beschriftung (√, ÷, ←) tragen `aria-label` mit gesprochenem Namen; das Ergebnis steht in einer `aria-live`-Region.
+- Gegenprobe: `npx tsx scripts/verify-barrierefreiheit.ts` (läuft in `verify:alle`) und axe über alle Seiten der Sitemap mit den Regeln der WCAG 2.1 A/AA und `best-practice`, hell, dunkel und Handy; Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`.
 
 ### Headings
-H1 → H2 → H3 ohne Sprünge. Section-Titel sind H2, nicht H3.
+H1 → H2 → H3 ohne Sprünge. Section-Titel sind H2, nicht H3. Die Baustein-Titel im `ContentBlockRenderer` sind h2 (bis Welle 202 h3: Sprung von h1 auf h3 auf 80 Seiten). Gegenprobe axe `heading-order`.
 
 ### Vor Deploy
-Lighthouse Accessibility ≥95 auf neuer/geänderter Seite.
+`verify:alle` grün (enthält `verify-barrierefreiheit`). Neue Seite, neuer Baustein-Typ oder neue Komponente: axe-Messung dieser Seite mit WCAG 2.1 A/AA und `best-practice`, hell, dunkel und Handy, ohne Verstoß.
 
 ### Barrierefreiheitserklärung
-`/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen.
+`/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen. Das Stand-Datum ist der Tag der letzten Messung über die ganze Sitemap; Zahlen im Text sind an diesen Tag gebunden („alle 258 Seiten, die die Sitemap am … enthielt“) und stehen im Messbericht. Jede Änderung als `recht:`-Commit mit Zeile in `docs/rechtstexte/aenderungshistorie.md`.
 
 ## SSOT-Patterns (bewährt, seit April-Audit 2026)
 

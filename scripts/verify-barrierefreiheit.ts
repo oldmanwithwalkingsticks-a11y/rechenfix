@@ -1,5 +1,5 @@
 /**
- * Verify-Script für die Barrierefreiheits-Regeln aus CLAUDE.md (Welle 201).
+ * Verify-Script für die Barrierefreiheits-Regeln aus CLAUDE.md (Welle 201, erweitert in Welle 202).
  *
  * Anlass: Die axe-Messung über alle 258 Seiten der Sitemap vom 02.11.2026 fand Eingabefelder ohne
  * Beschriftung auf 32 Seiten, Schalter ohne Namen, ein Auswahlfeld ohne Namen, Links im Fließtext, die
@@ -15,6 +15,13 @@
  *  3. Jedes <div> mit overflow-x-auto trägt tabIndex (role="region" und aria-label dazu).
  *  4. Die alte Fließtext-Linkklasse „text-primary-600 dark:text-primary-400 hover:underline“ kommt nicht vor.
  *  5. Schalter (runder Knopf, der einen Zustand umkehrt) tragen role="switch" und aria-checked.
+ *  6. Kein scrollbarer Bereich heißt nur „Tabelle“, und in einer Datei trägt kein fester Name zweimal
+ *     role="region" (Welle 202; axe landmark-unique).
+ *  7. Kein leerer Tabellenkopf <th></th> oder <th />; über einer Zeilenbeschriftung steht ein
+ *     <span className="sr-only">…</span> (Welle 202; axe empty-table-header).
+ *  8. Genau ein <main>, in app/layout.tsx (Welle 202; axe landmark-no-duplicate-main).
+ *
+ * Die Überschriften-Hierarchie (axe heading-order) prüft die axe-Messung, nicht dieses Skript.
  *
  * Ausführen: npx tsx scripts/verify-barrierefreiheit.ts
  */
@@ -85,6 +92,9 @@ const idOhneLabel: string[] = [];
 const scrollOhneTab: string[] = [];
 const alteLinks: string[] = [];
 const schalterOhneRolle: string[] = [];
+const bereichOhneNamen: string[] = [];
+const leereKoepfe: string[] = [];
+const mains: string[] = [];
 let felder = 0;
 
 for (const f of dateien) {
@@ -124,6 +134,25 @@ for (const f of dateien) {
     if (!/rounded-full/.test(attr) || !/set\w+\(!\w+\)/.test(attr)) continue;
     if (!/role="switch"/.test(attr) || !/aria-checked=/.test(attr)) schalterOhneRolle.push(`${f}:${zeile(s, m.index!)}`);
   }
+
+  for (const m of s.matchAll(/aria-label=(?:"Tabelle"|\{[^}]*'Tabelle'[^}]*\})/g)) {
+    bereichOhneNamen.push(`${f}:${zeile(s, m.index!)}`);
+  }
+  const bereichsNamen = new Map<string, number>();
+  for (const m of s.matchAll(/role="region"\s+aria-label="([^"]+)"/g)) {
+    bereichsNamen.set(m[1], (bereichsNamen.get(m[1]) ?? 0) + 1);
+  }
+  for (const [name, n] of bereichsNamen) if (n > 1) bereichOhneNamen.push(`${f} (${n}× „${name}“)`);
+
+  for (const m of s.matchAll(/<th\b/g)) {
+    const ende = tagEnde(s, m.index!);
+    if (ende < 0) continue;
+    const selbstschliessend = s[ende - 1] === '/';
+    const leer = /^\s*<\/th>/.test(s.slice(ende + 1));
+    if (selbstschliessend || leer) leereKoepfe.push(`${f}:${zeile(s, m.index!)}`);
+  }
+
+  for (const m of s.matchAll(/<main\b/g)) mains.push(`${f}:${zeile(s, m.index!)}`);
 }
 
 const liste = (a: string[]) => (a.length ? ': ' + a.slice(0, 12).join(', ') + (a.length > 12 ? ` … (+${a.length - 12})` : '') : '');
@@ -133,6 +162,10 @@ faelle.push({ name: `Feld mit fester id hat ein label htmlFor oder aria-label${l
 faelle.push({ name: `scrollbare Bereiche (overflow-x-auto) per Tastatur erreichbar${liste(scrollOhneTab)}`, ist: scrollOhneTab.length, soll: 0 });
 faelle.push({ name: `Links im Fließtext unterstrichen (keine hover:underline-Fließtextklasse)${liste(alteLinks)}`, ist: alteLinks.length, soll: 0 });
 faelle.push({ name: `Schalter mit role="switch" und aria-checked${liste(schalterOhneRolle)}`, ist: schalterOhneRolle.length, soll: 0 });
+faelle.push({ name: `scrollbare Bereiche mit eigenem Namen (nicht „Tabelle“, in einer Datei nicht doppelt)${liste(bereichOhneNamen)}`, ist: bereichOhneNamen.length, soll: 0 });
+faelle.push({ name: `Tabellenköpfe nicht leer${liste(leereKoepfe)}`, ist: leereKoepfe.length, soll: 0 });
+const mainOk = mains.length === 1 && mains[0].startsWith('app/layout.tsx:');
+faelle.push({ name: 'genau ein <main>', ist: mainOk ? 'app/layout.tsx' : mains.join(', ') || 'keins', soll: 'app/layout.tsx' });
 
 let ok = 0;
 for (const f of faelle) {

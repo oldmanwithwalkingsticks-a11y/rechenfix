@@ -199,7 +199,7 @@ export default function KindergeldRechner() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
-                    <th className="px-4 py-2 text-left font-semibold"></th>
+                    <th className="px-4 py-2 text-left font-semibold"><span className="sr-only">Posten</span></th>
                     <th className="px-4 py-2 text-right font-semibold">Ohne Freibetrag</th>
                     <th className="px-4 py-2 text-right font-semibold">Mit Freibetrag</th>
                   </tr>

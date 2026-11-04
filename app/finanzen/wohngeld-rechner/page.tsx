@@ -222,7 +222,7 @@ export default function WohngeldErklaerseite() {
                 tatsächliche Miete wird nur bis zum Höchstbetrag zuzüglich Klimakomponente
                 angesetzt.
               </p>
-              <div className="overflow-x-auto -mx-2" tabIndex={0} role="region" aria-label="Tabelle">
+              <div className="overflow-x-auto -mx-2" tabIndex={0} role="region" aria-label="Höchstbeträge der Miete nach Haushaltsgröße und Mietstufe">
                 <table className="w-full text-sm border-collapse min-w-[540px]">
                   <thead>
                     <tr className="bg-primary-50 dark:bg-primary-500/10">

@@ -223,7 +223,7 @@ export default function AfaRechner() {
 
       {/* AfA-Plan Tabelle */}
       {result.rows.length > 0 && result.methode !== 'gwg' && !(result.methode === 'sammelposten' && !result.gwgOk) && (
-        <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+        <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto" tabIndex={0} role="region" aria-label="AfA-Plan">
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">AfA-Plan</p>
           <table className="w-full text-xs text-left">
             <thead>

@@ -12,6 +12,8 @@ interface Taste {
   wert: string;
   typ: TastenTyp;
   breit?: boolean;
+  /** Gesprochener Name, wo die Beschriftung nur ein Zeichen ist oder einer Erklärung bedarf (Welle 202). */
+  name?: string;
 }
 
 const tastenReihen: Taste[][] = [
@@ -19,63 +21,63 @@ const tastenReihen: Taste[][] = [
     { label: 'sin', wert: 'sin(', typ: 'funktion' },
     { label: 'cos', wert: 'cos(', typ: 'funktion' },
     { label: 'tan', wert: 'tan(', typ: 'funktion' },
-    { label: 'π', wert: 'π', typ: 'spezial' },
-    { label: 'e', wert: 'e', typ: 'spezial' },
+    { label: 'π', wert: 'π', typ: 'spezial', name: 'Pi' },
+    { label: 'e', wert: 'e', typ: 'spezial', name: 'e, Eulersche Zahl' },
   ],
   [
-    { label: 'sin⁻¹', wert: 'asin(', typ: 'funktion' },
-    { label: 'cos⁻¹', wert: 'acos(', typ: 'funktion' },
-    { label: 'tan⁻¹', wert: 'atan(', typ: 'funktion' },
-    { label: '(', wert: '(', typ: 'funktion' },
-    { label: ')', wert: ')', typ: 'funktion' },
+    { label: 'sin⁻¹', wert: 'asin(', typ: 'funktion', name: 'sin⁻¹, Arkussinus' },
+    { label: 'cos⁻¹', wert: 'acos(', typ: 'funktion', name: 'cos⁻¹, Arkuskosinus' },
+    { label: 'tan⁻¹', wert: 'atan(', typ: 'funktion', name: 'tan⁻¹, Arkustangens' },
+    { label: '(', wert: '(', typ: 'funktion', name: 'Klammer auf' },
+    { label: ')', wert: ')', typ: 'funktion', name: 'Klammer zu' },
   ],
   [
-    { label: 'x²', wert: '^2', typ: 'funktion' },
-    { label: 'x³', wert: '^3', typ: 'funktion' },
-    { label: 'xʸ', wert: '^', typ: 'funktion' },
-    { label: '√', wert: 'sqrt(', typ: 'funktion' },
-    { label: '³√', wert: 'cbrt(', typ: 'funktion' },
+    { label: 'x²', wert: '^2', typ: 'funktion', name: 'x Quadrat' },
+    { label: 'x³', wert: '^3', typ: 'funktion', name: 'x hoch 3' },
+    { label: 'xʸ', wert: '^', typ: 'funktion', name: 'x hoch y' },
+    { label: '√', wert: 'sqrt(', typ: 'funktion', name: 'Quadratwurzel' },
+    { label: '³√', wert: 'cbrt(', typ: 'funktion', name: 'Kubikwurzel' },
   ],
   [
-    { label: 'log', wert: 'log(', typ: 'funktion' },
-    { label: 'ln', wert: 'ln(', typ: 'funktion' },
-    { label: '10ˣ', wert: '10^', typ: 'funktion' },
-    { label: 'eˣ', wert: 'exp(', typ: 'funktion' },
-    { label: '1/x', wert: '1/', typ: 'funktion' },
+    { label: 'log', wert: 'log(', typ: 'funktion', name: 'log, Zehnerlogarithmus' },
+    { label: 'ln', wert: 'ln(', typ: 'funktion', name: 'ln, natürlicher Logarithmus' },
+    { label: '10ˣ', wert: '10^', typ: 'funktion', name: '10 hoch x' },
+    { label: 'eˣ', wert: 'exp(', typ: 'funktion', name: 'e hoch x' },
+    { label: '1/x', wert: '1/', typ: 'funktion', name: '1 durch x' },
   ],
   [
     { label: '7', wert: '7', typ: 'zahl' },
     { label: '8', wert: '8', typ: 'zahl' },
     { label: '9', wert: '9', typ: 'zahl' },
-    { label: '÷', wert: '÷', typ: 'operator' },
-    { label: '←', wert: 'BACK', typ: 'loeschen' },
+    { label: '÷', wert: '÷', typ: 'operator', name: 'geteilt durch' },
+    { label: '←', wert: 'BACK', typ: 'loeschen', name: 'Letztes Zeichen löschen' },
   ],
   [
     { label: '4', wert: '4', typ: 'zahl' },
     { label: '5', wert: '5', typ: 'zahl' },
     { label: '6', wert: '6', typ: 'zahl' },
-    { label: '×', wert: '×', typ: 'operator' },
-    { label: 'C', wert: 'CLEAR', typ: 'loeschen' },
+    { label: '×', wert: '×', typ: 'operator', name: 'mal' },
+    { label: 'C', wert: 'CLEAR', typ: 'loeschen', name: 'C, alles löschen' },
   ],
   [
     { label: '1', wert: '1', typ: 'zahl' },
     { label: '2', wert: '2', typ: 'zahl' },
     { label: '3', wert: '3', typ: 'zahl' },
-    { label: '−', wert: '−', typ: 'operator' },
-    { label: 'CE', wert: 'CE', typ: 'loeschen' },
+    { label: '−', wert: '−', typ: 'operator', name: 'minus' },
+    { label: 'CE', wert: 'CE', typ: 'loeschen', name: 'CE, Eingabe löschen' },
   ],
   [
     { label: '0', wert: '0', typ: 'zahl' },
-    { label: ',', wert: ',', typ: 'zahl' },
-    { label: '±', wert: 'NEGATE', typ: 'spezial' },
-    { label: '+', wert: '+', typ: 'operator' },
-    { label: '=', wert: 'EQUALS', typ: 'gleich' },
+    { label: ',', wert: ',', typ: 'zahl', name: 'Komma' },
+    { label: '±', wert: 'NEGATE', typ: 'spezial', name: 'Vorzeichen wechseln' },
+    { label: '+', wert: '+', typ: 'operator', name: 'plus' },
+    { label: '=', wert: 'EQUALS', typ: 'gleich', name: 'ist gleich' },
   ],
   [
-    { label: 'Ans', wert: 'Ans', typ: 'spezial' },
-    { label: 'EXP', wert: 'E', typ: 'spezial' },
-    { label: '%', wert: '%', typ: 'spezial' },
-    { label: 'n!', wert: '!', typ: 'spezial' },
+    { label: 'Ans', wert: 'Ans', typ: 'spezial', name: 'Ans, letztes Ergebnis' },
+    { label: 'EXP', wert: 'E', typ: 'spezial', name: 'EXP, mal 10 hoch' },
+    { label: '%', wert: '%', typ: 'spezial', name: 'Prozent' },
+    { label: 'n!', wert: '!', typ: 'spezial', name: 'n Fakultät' },
     { label: 'DEG', wert: 'TOGGLE_MODE', typ: 'spezial' },
   ],
 ];
@@ -179,6 +181,9 @@ export default function TaschenrechnerRechner() {
     const handler = (e: KeyboardEvent) => {
       // Nicht abfangen wenn in anderem Input
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      // Enter und Leertaste auf einer fokussierten Taste lösen diese Taste aus, nicht „=“ (Welle 202).
+      // Vorher rechnete Enter auch dann, wenn per Tab z. B. die 7 angesteuert war.
+      if (e.target instanceof HTMLButtonElement && (e.key === 'Enter' || e.key === ' ')) return;
 
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -218,7 +223,7 @@ export default function TaschenrechnerRechner() {
           <div className="text-right text-gray-600 dark:text-gray-400 text-sm font-mono min-h-[1.5rem] break-all leading-relaxed">
             {eingabe || '\u00A0'}
           </div>
-          <div className="text-right text-white text-3xl font-bold font-mono mt-1 break-all leading-tight">
+          <div className="text-right text-white text-3xl font-bold font-mono mt-1 break-all leading-tight" aria-live="polite" aria-atomic="true">
             {ergebnis}
           </div>
           <div className="text-right mt-1">
@@ -227,7 +232,7 @@ export default function TaschenrechnerRechner() {
         </div>
 
         {/* Tasten */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5" role="group" aria-label="Tasten des Taschenrechners">
           {tastenReihen.map((reihe, ri) => (
             <div key={ri} className="grid grid-cols-5 gap-1.5">
               {reihe.map((taste) => {
@@ -236,6 +241,8 @@ export default function TaschenrechnerRechner() {
                 return (
                   <button
                     key={taste.label}
+                    type="button"
+                    aria-label={istModusBtn ? `${modus}, Winkelmodus ${modus === 'DEG' ? 'Grad' : 'Bogenmaß'}, umschalten` : taste.name}
                     onClick={() => tasteDruecken(taste)}
                     className={`${tastenFarbe(taste.typ, displayLabel)}
                       rounded-xl font-medium transition-all active:scale-95 active:brightness-90

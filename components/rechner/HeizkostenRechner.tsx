@@ -117,7 +117,7 @@ export default function HeizkostenRechner() {
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Energieträger-Vergleich für {parseDeutscheZahl(wohnflaeche).toLocaleString('de-DE')} m²</p>
             </div>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Kosten nach Energieträger">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100 dark:border-gray-700">

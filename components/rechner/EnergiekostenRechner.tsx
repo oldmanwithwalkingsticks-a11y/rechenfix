@@ -195,7 +195,7 @@ export default function EnergiekostenRechner() {
 
       {/* Tabelle pro Gerät + Anteil */}
       {result.rows.length > 0 && result.gesamtJahr > 0 && (
-        <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+        <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 overflow-x-auto" tabIndex={0} role="region" aria-label="Kosten pro Gerät">
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Aufschlüsselung pro Gerät</p>
           <table className="w-full text-xs text-left">
             <thead>

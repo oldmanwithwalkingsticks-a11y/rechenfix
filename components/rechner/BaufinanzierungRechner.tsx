@@ -315,7 +315,7 @@ export default function BaufinanzierungRechner() {
               </svg>
             </button>
             {tilgungsplanOffen && (
-              <div className="overflow-x-auto mt-4" tabIndex={0} role="region" aria-label="Tabelle">
+              <div className="overflow-x-auto mt-4" tabIndex={0} role="region" aria-label="Tilgungsplan nach Jahren">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-200 dark:border-gray-600 text-left">

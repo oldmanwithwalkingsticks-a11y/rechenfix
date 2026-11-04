@@ -115,7 +115,7 @@ export default function TrinkmengeRechner() {
           {/* Gewichts-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Basis-Bedarf nach Gewicht (ohne Sport, normales Klima)</h2>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Basis-Bedarf nach Gewicht (ohne Sport, normales Klima)">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Rechner: Basis-Bedarf nach Gewicht (ohne Sport, normales Klima)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

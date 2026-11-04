@@ -406,7 +406,7 @@ export default function MwStRechner() {
           {/* Multi-Ergebnis */}
           {multiErgebnis && multiErgebnis.zeilen.length > 0 && (
             <>
-              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Positionen mit Netto, MwSt und Brutto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-600">

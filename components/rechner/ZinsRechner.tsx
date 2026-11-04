@@ -182,7 +182,7 @@ export default function ZinsRechner() {
                 </svg>
               </button>
               {tabelleOffen && (
-                <div className="overflow-x-auto mt-3" tabIndex={0} role="region" aria-label="Tabelle">
+                <div className="overflow-x-auto mt-3" tabIndex={0} role="region" aria-label="Entwicklung pro Jahr">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-600 text-left">

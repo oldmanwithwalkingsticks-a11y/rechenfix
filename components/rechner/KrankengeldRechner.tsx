@@ -124,7 +124,7 @@ export default function KrankengeldRechner() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
-                    <th className="px-3 py-2 text-left"></th>
+                    <th className="px-3 py-2 text-left"><span className="sr-only">Zeitraum</span></th>
                     <th className="px-3 py-2 text-right">Netto-Gehalt</th>
                     <th className="px-3 py-2 text-right">Krankengeld</th>
                     <th className="px-3 py-2 text-right">Differenz</th>

@@ -160,7 +160,7 @@ export default function ReisWasserRechner() {
                 Wassermenge je Sorte bei {fmt(g)} g ({methode === 'reiskocher' ? 'Reiskocher' : 'Herd'})
               </h2>
             </div>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Wassermenge je Reissorte">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

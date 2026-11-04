@@ -245,7 +245,7 @@ export default function ElterngeldRechner() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
-                      <th className="text-left px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium"></th>
+                      <th className="text-left px-4 py-2.5 text-gray-600 dark:text-gray-400 font-medium"><span className="sr-only">Zeitraum</span></th>
                       <th className={`text-right px-4 py-2.5 font-semibold ${variante === 'basis' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-600 dark:text-gray-300'}`}>
                         Basiselterngeld
                       </th>

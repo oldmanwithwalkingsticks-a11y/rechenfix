@@ -218,7 +218,7 @@ export default function PhotovoltaikRechner() {
         <table className="w-full text-sm">
           <thead>
             <tr className="text-xs text-gray-600 dark:text-gray-400">
-              <th></th>
+              <th><span className="sr-only">Posten</span></th>
               <th className="text-right font-normal">pro Jahr</th>
               <th className="text-right font-normal">über 20 Jahre</th>
             </tr>

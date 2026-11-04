@@ -319,7 +319,7 @@ export default function AlkoholgehaltRechner() {
                 Restalkohol nach USDA — für {fmt(parseDeutscheZahl(kochMl) || 0, 0)} ml {fmt(parseDeutscheZahl(kochProzent) || 0, 1)} % vol
               </h2>
             </div>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Restalkohol nach Methode und Zeit">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

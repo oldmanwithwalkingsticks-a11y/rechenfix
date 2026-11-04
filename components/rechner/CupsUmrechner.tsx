@@ -178,7 +178,7 @@ export default function CupsUmrechner() {
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Schnellreferenz: {zutat.name}</h2>
         </div>
-        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={`Schnellreferenz: ${zutat.name}`}>
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

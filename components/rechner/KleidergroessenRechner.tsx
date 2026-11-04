@@ -254,7 +254,7 @@ export default function KleidergroessenRechner() {
       />
 
       {/* Maßtabelle */}
-      <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+      <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label="Maßtabelle">
         <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Maßtabelle {typ === 'damen' ? 'Damen' : 'Herren'}</p>
         <table className="w-full text-xs border-collapse">
           <thead>

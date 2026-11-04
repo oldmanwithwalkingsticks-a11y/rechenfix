@@ -112,7 +112,7 @@ export default function ReifengroesseRechner() {
 
           {/* Durchmesser/Abrollumfang beider Reifen */}
           <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden mb-4">
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Alter und neuer Reifen im Vergleich">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">
@@ -182,7 +182,7 @@ export default function ReifengroesseRechner() {
                 Gängige Größen ggü. {d0(ergebnis.ba)}/{d0(ergebnis.qa)} R{d0(ergebnis.za)}
               </h2>
             </div>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Gängige Größen im Vergleich zur alten Größe">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

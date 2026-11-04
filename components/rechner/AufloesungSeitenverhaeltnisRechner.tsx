@@ -242,7 +242,7 @@ export default function AufloesungSeitenverhaeltnisRechner() {
           {/* Referenz-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Gängige Auflösungen und ihr Seitenverhältnis</h2>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Gängige Auflösungen und ihr Seitenverhältnis">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Rechner: Gängige Auflösungen und ihr Seitenverhältnis">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

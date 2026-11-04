@@ -195,12 +195,12 @@ export default function TeilzeitRechner() {
           </div>
 
           {/* Vergleichstabelle */}
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6 overflow-x-auto" tabIndex={0} role="region" aria-label="Vollzeit und Teilzeit im Vergleich">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4">Vollzeit vs. Teilzeit</h2>
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-200 dark:border-gray-600">
-                  <th className="text-left py-2 pr-3 text-gray-600 dark:text-gray-400 font-medium" />
+                  <th className="text-left py-2 pr-3 text-gray-600 dark:text-gray-400 font-medium"><span className="sr-only">Merkmal</span></th>
                   <th className="text-right py-2 px-3 text-gray-600 dark:text-gray-400 font-medium">Vollzeit</th>
                   <th className="text-right py-2 px-3 text-gray-600 dark:text-gray-400 font-medium">Teilzeit</th>
                   <th className="text-right py-2 pl-3 text-gray-600 dark:text-gray-400 font-medium">Differenz</th>

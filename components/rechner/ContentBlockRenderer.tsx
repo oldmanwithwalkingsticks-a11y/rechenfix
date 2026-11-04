@@ -47,10 +47,14 @@ function fmtWert(n: number, einheit: string | undefined, cent: boolean): string 
   return n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
 }
 
-/** Block-Überschrift im Marken-Ton — steht ÜBER der Kachel (W19.0f), groß. */
+/**
+ * Block-Überschrift im Marken-Ton — steht ÜBER der Kachel (W19.0f), groß.
+ * h2, nicht h3 (Welle 202): Die Bausteine sind Abschnitte der Seite, gleichrangig mit „Häufige Fragen“.
+ * Als h3 sprang die Gliederung auf 80 Seiten von h1 direkt auf h3 (axe heading-order).
+ */
 function BlockTitel({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-300 mb-3">{children}</h3>
+    <h2 className="text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-300 mb-3">{children}</h2>
   );
 }
 
@@ -81,7 +85,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
     case 'tabelle':
       return (
         <DatenKachel titel={block.titel}>
-          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={block.titel || 'Tabelle'}>
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={block.titel || `Tabelle: ${block.kopf.join(', ')}`}>
             <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <thead>
                 <tr className="bg-primary-50 dark:bg-primary-500/10">
@@ -142,7 +146,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
     case 'vergleich':
       return (
         <DatenKachel titel={block.titel}>
-          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={block.titel || 'Tabelle'}>
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={block.titel || `Vergleich: ${block.spalteA} und ${block.spalteB}`}>
             <table className="w-full text-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <thead>
                 <tr className="bg-primary-50 dark:bg-primary-500/10">
@@ -195,9 +199,9 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
       return (
         <section className="bg-emerald-50 dark:bg-emerald-500/10 rounded-2xl p-5 md:p-6">
           {block.titel && (
-            <h3 className="text-lg md:text-xl font-bold text-emerald-800 dark:text-emerald-300 mb-4">
+            <h2 className="text-lg md:text-xl font-bold text-emerald-800 dark:text-emerald-300 mb-4">
               {block.titel}
-            </h3>
+            </h2>
           )}
           <ul className="space-y-2">
             {block.punkte.map((p, j) => (

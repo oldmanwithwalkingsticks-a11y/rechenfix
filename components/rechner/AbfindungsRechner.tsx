@@ -182,7 +182,7 @@ export default function AbfindungsRechner() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-green-200 dark:border-green-500/30">
-                    <th className="text-left py-2 pr-3 text-green-700 dark:text-green-400 font-medium" />
+                    <th className="text-left py-2 pr-3 text-green-700 dark:text-green-400 font-medium"><span className="sr-only">Posten</span></th>
                     <th className="text-right py-2 px-3 text-green-700 dark:text-green-400 font-medium">Ohne Fünftelr.</th>
                     <th className="text-right py-2 px-3 text-green-700 dark:text-green-400 font-medium">Mit Fünftelr.</th>
                     <th className="text-right py-2 pl-3 text-green-700 dark:text-green-400 font-medium">Ersparnis</th>

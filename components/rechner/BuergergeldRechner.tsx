@@ -708,7 +708,7 @@ export default function BuergergeldRechner() {
                 {params.bezeichnung}-Regelsätze {new Date().getFullYear()}
               </p>
             </div>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={`${params.bezeichnung}-Regelsätze`}>
               <table className="w-full text-sm">
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   {regelsatzInfo.map((zeile) => (

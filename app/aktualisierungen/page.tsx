@@ -107,7 +107,7 @@ export default function AktualisierungenPage() {
       <Breadcrumbs items={[{ label: 'Aktualisierungen' }]} />
       <ZurueckButton />
 
-      <main>
+      <div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">
           {PAGE_TITLE}
         </h1>
@@ -177,7 +177,7 @@ export default function AktualisierungenPage() {
             );
           })}
         </ul>
-      </main>
+      </div>
     </div>
   );
 }

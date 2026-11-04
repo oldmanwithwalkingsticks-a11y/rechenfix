@@ -136,7 +136,7 @@ export default function FfmiRechner() {
           {/* Einordnungs-Tabelle */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Einordnung ({geschlecht === 'm' ? 'Männer' : 'Frauen'}) — Orientierung, kein Ziel</h2>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Einordnung des FFMI">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-600">

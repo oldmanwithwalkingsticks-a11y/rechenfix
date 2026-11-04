@@ -269,7 +269,7 @@ export default function EtfSparplanRechner() {
                 <span className={`transition-transform ${tabelleOffen ? 'rotate-180' : ''}`}>▼</span>
               </button>
               {tabelleOffen && (
-                <div className="px-5 pb-5 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+                <div className="px-5 pb-5 overflow-x-auto" tabIndex={0} role="region" aria-label="Jahr-für-Jahr-Übersicht">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-600">

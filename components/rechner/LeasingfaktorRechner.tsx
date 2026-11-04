@@ -158,7 +158,7 @@ export default function LeasingfaktorRechner() {
             <div className="px-4 pt-4 pb-1">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Bewertungsskala (Privat, brutto)</h2>
             </div>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Bewertungsskala (Privat, brutto)">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Rechner: Bewertungsskala (Privat, brutto)">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-700/30 text-xs uppercase tracking-wider text-gray-600 dark:text-gray-400">

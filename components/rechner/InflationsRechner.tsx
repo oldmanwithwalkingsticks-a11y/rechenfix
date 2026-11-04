@@ -246,7 +246,7 @@ export default function InflationsRechner() {
               </svg>
             </button>
             {tabelleOffen && (
-              <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Tabelle">
+              <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Entwicklung Jahr für Jahr">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/20">
