@@ -6,6 +6,35 @@
 
 ---
 
+## 08.11.2026 — Welle 204: Messskript Barrierefreiheit im Repo — ✅ ABGESCHLOSSEN 08.11.2026
+
+**Anlass:** Die axe-Messungen 1 bis 6 (02. bis 04.11.2026) liefen mit Skripten aus einer Chat-Sitzung. Darauf stützt sich der Text von `/barrierefreiheit` (Stand 4. November 2026), und CLAUDE.md verlangt die Messung für jede neue Seite. Im Repo lag kein Werkzeug dafür.
+
+**Änderungen:**
+- `scripts/messung-barrierefreiheit.mjs` (neu, nicht in `verify:alle`, braucht Netz und Playwright):
+  - axe-core WCAG 2.1 A/AA und `best-practice` über die Sitemap oder einzelne Seiten (`--pfad`), live oder gegen `npm run start` (`--basis`);
+  - Desktop hell und dunkel, Handy; eigene Prüfungen (unbeschriftete Felder, `label for` ohne Ziel, doppelte `id`, Überschriften);
+  - Tastaturprobe des Taschenrechners; Rückgabewert 0 = kein Verstoß.
+  - Playwright steht bewusst nicht in `package.json`.
+- Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`:
+  - Verfahren mit Skript;
+  - Messung 7 (live 06.11.2026): kein Verstoß, 1.190 Felder auf 226 Seiten in jeder Ansicht, Tastatur 8/8;
+  - Wartezeit bis zum fertigen Seitenaufbau, der Befund von Messung 6 trägt.
+- CLAUDE.md: Gegenprobe und „Vor Deploy“ nennen das Skript; ein reiner Bestätigungslauf rückt das Stand-Datum von `/barrierefreiheit` nicht.
+
+**Commits:** `732301d` (Skript und Doku), dieser Commit (Historie). Im selben Lauf folgt im Repo wuerdezeit der Nachtrag der Änderungshistorie (c75a284, 8467ca8, 2a8bd5a ohne `recht:`; Teil B).
+
+**Geprüft in dieser Sitzung (08.11.2026, 00:38:21):**
+- Skript auf diesem Rechner (A.2): rc=2, „Playwright nicht gefunden. Einmalig: npm i --no-save playwright && npx playwright install chromium“
+- verify:alle rc=0, „Prüfskripte: 89/89 grün.“, `npx eslint . --no-cache` rc=0, keine Ausgabe
+- Build „✓ Generating static pages using 15 workers (272/272) in 10.4s“, 2 Zeilen mit „⚠“
+
+**Messung in der Chat-Sitzung (06.11.2026):** Messung 7 live, 774 Messungen, kein Verstoß, Rückgabewert 0. Gegenprobe des Skripts an einer absichtlich fehlerhaften Testseite: jeder Fehler gefunden, Rückgabewert 1.
+
+**Offen:** Nächste Messung, die den Text von `/barrierefreiheit` tragen soll: zur Vollprüfung am 01.02.2027.
+
+---
+
 ## 04.11.2026 — Welle 203: Abhängigkeitswache für alle drei Domains, rechner-builder v5 — ✅ ABGESCHLOSSEN 04.11.2026
 
 **Anlass:** diekonkursmasse.de lief vom 14.10. bis 03.11.2026 mit Next.js 16.3.6, wuerdezeit.de mit 16.3.5, beide unter den kritischen Advisories GHSA-2464-fhr4-w9xw und GHSA-673q-mjm6-r5xr. Bemerkt hat es erst die Bestandsaufnahme vom 03.11.2026, weil nur rechenfix.de beobachtet wurde (`docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md`, Abschnitte 11 und 12).
