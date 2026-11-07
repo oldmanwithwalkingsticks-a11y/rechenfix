@@ -1,6 +1,6 @@
 # Barrierefreiheit: axe-Messung über die ganze Sitemap (November 2026)
 
-**Stand:** 04.11.2026. **Wellen:** 201 und 202, Messung 6 nachgetragen mit Welle 203. **Zweck:** Grundlage für den Text von `/barrierefreiheit`, neu seit Welle 202.
+**Stand:** 08.11.2026. **Wellen:** 201 und 202, Messung 6 nachgetragen mit Welle 203, Skript im Repo und Messung 7 mit Welle 204. **Zweck:** Grundlage für den Text von `/barrierefreiheit`, neu seit Welle 202.
 Dort stand bis zu Welle 202 die Stichprobe vom 18.04.2026 (19 Rechner aus 9 Kategorien) und der Satz „Alle Formularfelder
 (&lt;select&gt;, &lt;input&gt;) sind mit zugehörigen Labels verknüpft“. Die Vollprüfung Q4/2026 hatte entschieden, statt einer
 erweiterten Stichprobe die ganze Sitemap zu messen.
@@ -9,13 +9,17 @@ erweiterten Stichprobe die ganze Sitemap zu messen.
 
 - **Werkzeug:** axe-core 4.11.2 in Chromium über Playwright. Regeln mit den Tags `wcag2a`, `wcag2aa`, `wcag21a`,
   `wcag21aa`, Ergebnisart `violations`.
+- **Skript:** `scripts/messung-barrierefreiheit.mjs`, seit Welle 204 im Repo. Es fasst die Werkzeuge der Messungen 1 bis 6
+  zusammen (Messung, Auswertung, Tastaturprobe), die bis dahin nur in der Chat-Sitzung lagen. Aufruf, Voraussetzungen und
+  Rückgabewert stehen im Kopf des Skripts. Playwright steht bewusst nicht in `package.json`.
 - **Seiten:** alle 258 Adressen der Sitemap vom 02.11.2026.
 - **Ansichten:** Desktop hell und Desktop dunkel (1280 × 900, `prefers-color-scheme`), seit der zweiten Messung
   zusätzlich Handy hell (390 × 844, Touch). Dunkel wird erst gemessen, wenn `<html>` die Klasse `dark` trägt.
 - **Regeln für gute Praxis:** seit der Zusatzmessung vom 04.11.2026 auch der axe-Tag `best-practice` (u. a.
   `heading-order`, `landmark-*`, `empty-table-header`). Diese Regeln sind keine Erfolgskriterien der WCAG; sie prüfen
   aber, was `/barrierefreiheit` über Überschriften und Seitenaufbau sagt.
-- **Ablauf je Seite:** laden bis `load`, Schriften fertig, 400–500 ms warten, axe einspielen und ausführen. Seiten mit
+- **Ablauf je Seite:** laden bis `load`, Schriften fertig, 400–500 ms warten (bis Messung 6; seit Messung 7 warten,
+  bis das Netz ruht und der Seitenaufbau sich nicht mehr ändert), axe einspielen und ausführen. Seiten mit
   Verstoß oder Ladefehler werden ein zweites Mal gemessen; gezählt wird die zweite Messung (in der ersten Messung: die
   erste, die zweite als Wiederholung daneben).
 - **Eigene Prüfungen im DOM** (seit der zweiten Messung), weil axe einen Platzhalter wie „z. B. 75“ als Namen gelten
@@ -182,3 +186,26 @@ der Überschriftenfolge.
 Taschenrechner, Funktionsprobe per Tastatur, live: **8 von 8** (vor Welle 202: 2 von 8).
 
 Damit ist jede Aussage im Text von `/barrierefreiheit` (Stand 4. November 2026) an der Live-Seite belegt.
+
+## Messung 7 — live, 06.11.2026, Skript im Repo (Welle 204)
+
+www.rechenfix.de am Stand `90c48d1` (Welle 203), 21:41–21:54 Uhr, aus der Chat-Sitzung mit
+`node scripts/messung-barrierefreiheit.mjs` (Fassung dieser Welle, parallel 4). Sitemap 258 Seiten. Regeln WCAG 2.1 A/AA
+und `best-practice`, alle drei Ansichten: 774 Messungen, alle mit HTTP 200. **Kein Verstoß**, auch nicht im ersten
+Durchgang. Eigene Prüfungen: **0** Eingabefelder ohne Beschriftung (1.190 Felder auf 226 Seiten, in jeder Ansicht dieselbe
+Zahl), **0** `<label for>` ohne Ziel, **0** doppelte `id`; genau eine h1 je Seite, kein Sprung in der Überschriftenfolge.
+Taschenrechner per Tastatur: **8 von 8**. Rückgabewert 0.
+
+**Warten auf den Seitenaufbau.** Ein erster Lauf am selben Abend mit der Wartezeit der Messungen 1 bis 6 (`load`,
+Schriften, 400 ms) zählte je Ansicht 989 bis 1.124 Felder. Auf einzelnen Seiten stand 0, weil der Rechner beim Messen noch
+nachlud; seine Felder blieben in dieser Ansicht ungeprüft. Das Skript wartet deshalb, bis das Netz ruht (das Vorabladen
+verlinkter Seiten, `?_rsc=`, wird dafür abgebrochen) und Element- und Feldzahl dreimal in Folge gleich sind. Danach in
+allen drei Ansichten 1.190 Felder.
+
+**Folge für Messung 6:** Sie zählte 1.102 Felder in der hellen Ansicht und 3.370 über alle drei. Über alle drei Ansichten
+war aber jede Seite mindestens einmal mit ihrer vollen Feldzahl erfasst (Abgleich Seite für Seite gegen Messung 7). Ihr
+Befund „0 Eingabefelder ohne Beschriftung“ trägt.
+
+**Kein neues Stand-Datum.** Messung 7 ist der Abnahmelauf des Skripts. Sie bestätigt Messung 6 und ersetzt sie nicht als
+Grundlage des Textes von `/barrierefreiheit` (Stand 4. November 2026). Die nächste Messung, die den Text tragen soll,
+gehört zur Vollprüfung am 01.02.2027.

@@ -141,16 +141,16 @@ rechenfix orientiert sich an WCAG 2.1 AA. Gemessen wird mit axe-core über alle 
 - Tabellenkopf nie leer: Über einer Spalte mit Zeilenbeschriftungen steht `<th><span className="sr-only">Posten</span></th>` o. Ä. (axe `empty-table-header`).
 - Genau ein `<main>`, im Root-Layout. Seiten nutzen `div`, `article` oder `section`. Kästen im Fließtext (`KarstenSagt`) sind `<div role="note">`, kein `<aside>`: Ein `<aside>` in `<main>` ist eine eigene Landmarke (axe `landmark-*`, Welle 202).
 - Tasten-Raster wie im wissenschaftlichen Taschenrechner: native `<button type="button">`; ein globaler `keydown`-Handler lässt Enter und Leertaste auf einem fokussierten Knopf durch (sonst rechnet Enter, statt die Taste auszulösen); Tasten mit Zeichen als Beschriftung (√, ÷, ←) tragen `aria-label` mit gesprochenem Namen; das Ergebnis steht in einer `aria-live`-Region.
-- Gegenprobe: `npx tsx scripts/verify-barrierefreiheit.ts` (läuft in `verify:alle`) und axe über alle Seiten der Sitemap mit den Regeln der WCAG 2.1 A/AA und `best-practice`, hell, dunkel und Handy; Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`.
+- Gegenprobe: `npx tsx scripts/verify-barrierefreiheit.ts` (läuft in `verify:alle`) und axe über alle Seiten der Sitemap mit den Regeln der WCAG 2.1 A/AA und `best-practice`, hell, dunkel und Handy: `node scripts/messung-barrierefreiheit.mjs` (seit Welle 204; live, mit Tastaturprobe des Taschenrechners, Rückgabewert 0 = kein Verstoß); Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`.
 
 ### Headings
 H1 → H2 → H3 ohne Sprünge. Section-Titel sind H2, nicht H3. Die Baustein-Titel im `ContentBlockRenderer` sind h2 (bis Welle 202 h3: Sprung von h1 auf h3 auf 80 Seiten). Gegenprobe axe `heading-order`.
 
 ### Vor Deploy
-`verify:alle` grün (enthält `verify-barrierefreiheit`). Neue Seite, neuer Baustein-Typ oder neue Komponente: axe-Messung dieser Seite mit WCAG 2.1 A/AA und `best-practice`, hell, dunkel und Handy, ohne Verstoß.
+`verify:alle` grün (enthält `verify-barrierefreiheit`). Neue Seite, neuer Baustein-Typ oder neue Komponente: axe-Messung dieser Seite mit WCAG 2.1 A/AA und `best-practice`, hell, dunkel und Handy, ohne Verstoß — `node scripts/messung-barrierefreiheit.mjs --basis http://localhost:3000 --pfad /neue-seite` gegen `npm run start`, Rückgabewert 0. Das Skript braucht Playwright, das bewusst nicht in package.json steht; wie man es ohne Änderung an package.json bekommt, steht im Kopf des Skripts.
 
 ### Barrierefreiheitserklärung
-`/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen. Das Stand-Datum ist der Tag der letzten Messung über die ganze Sitemap; Zahlen im Text sind an diesen Tag gebunden („alle 258 Seiten, die die Sitemap am … enthielt“) und stehen im Messbericht. Jede Änderung als `recht:`-Commit mit Zeile in `docs/rechtstexte/aenderungshistorie.md`.
+`/barrierefreiheit` wird gepflegt. Bei strukturellen A11y-Änderungen prüfen, ob Inhalte aktualisiert werden müssen. Das Stand-Datum ist der Tag der Messung über die ganze Sitemap, auf die sich der Text stützt; ein Lauf, der den Text nur bestätigt, rückt es nicht (so Messung 7 vom 06.11.2026, Probelauf des Skripts). Zahlen im Text sind an diesen Tag gebunden („alle 258 Seiten, die die Sitemap am … enthielt“) und stehen im Messbericht. Jede Änderung als `recht:`-Commit mit Zeile in `docs/rechtstexte/aenderungshistorie.md`.
 
 ## SSOT-Patterns (bewährt, seit April-Audit 2026)
 
