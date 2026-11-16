@@ -1345,6 +1345,9 @@ Maschinenzeile mit den neuen Feldern (8 Fälle).
   in diekonkursmasse und wuerdezeit dazu `sharp` 0.35.4 (hoch) und in wuerdezeit `nodemailer` 10.0.10 (mittel).
   Dafür steht der monatliche Termin `npm-audit-dkm-wz` (erstmals 03.12.2026); rechenfix selbst deckt weiter der
   Termin `npm-audit-buildwerkzeuge`.
+- Nachtrag 16.11.2026: `npm-audit-dkm-wz` ist vor seinem ersten Vorkommen entfallen. Die Pakete aller drei
+  Repos prüft seit 16.11.2026 jeden Montag Paul (Skill paul-sicher, Prüfpunkt Z09: Lockdatei von main gegen die
+  Advisory-Datenbank von npm, kritisch oder hoch zur Laufzeit ist ein Befund). `npm-audit-buildwerkzeuge` bleibt.
 - Die Datenbank kennt eine Lücke erst, wenn das Advisory veröffentlicht ist. Am 03.11.2026 abends standen die sieben
   mittleren Lücken, die nextjs.org am 27.10.2026 angekündigt hatte, für 16.4.1 noch nicht darin.
 - Ist eine Domain nicht erreichbar oder antwortet die Datenbank nicht, steht das als Fehler je Domain in der Mail

@@ -18,8 +18,8 @@
  *      Nichtprüfung, kein Befund (Berichtswache ab v46).
  *
  * Grenze: Gesehen wird nur `next`. Die übrigen Pakete von diekonkursmasse und wuerdezeit (z. B.
- * sharp, nodemailer) verrät die ausgelieferte Seite nicht; für sie steht der monatliche Termin
- * `npm-audit-dkm-wz` in lib/termine.ts.
+ * sharp, nodemailer) verrät die ausgelieferte Seite nicht. Die Pakete aller drei Repos prüft seit
+ * 16.11.2026 jeden Montag Paul (Skill paul-sicher, Prüfpunkt Z09).
  *
  * Die reinen Funktionen (skriptPfade, fassungAusSkript, zaehle, abschnitt) prüft
  * scripts/verify-abhaengigkeiten.ts ohne Netz.
@@ -188,7 +188,7 @@ export function abschnitt(ergebnisse: DomainErgebnis[]): string[] {
   }
   zeilen.push(
     '',
-    'Bei kritisch oder hoch: next im betroffenen Repo auf eine behobene Fassung anheben, bauen, deployen (Muster: Nachzug vom 03.11.2026, docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md Abschnitt 11). Gesehen wird nur next; die übrigen Pakete von diekonkursmasse und wuerdezeit prüft der monatliche Termin npm-audit-dkm-wz.',
+    'Bei kritisch oder hoch: next im betroffenen Repo auf eine behobene Fassung anheben, bauen, deployen (Muster: Nachzug vom 03.11.2026, docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md Abschnitt 11). Gesehen wird nur next; die übrigen Pakete aller drei Repos prüft jeden Montag Paul (paul-sicher, Z09).',
   );
   return zeilen;
 }

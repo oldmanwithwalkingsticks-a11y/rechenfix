@@ -171,16 +171,6 @@ export const TERMINE: Termin[] = [
     quelle: 'docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md Abschnitte 10 und 11',
   },
   {
-    id: 'npm-audit-dkm-wz',
-    titel: 'npm audit in diekonkursmasse und wuerdezeit',
-    datum: '2026-12-03',
-    vorlaufTage: 0,
-    wiederholungMonate: 1,
-    bereich: 'Betrieb',
-    was: 'Die Betriebsmeldung sieht seit Welle 203 täglich die ausgelieferte Next.js-Fassung der drei Domains (Abschnitt ABHÄNGIGKEITEN), aber keine anderen Pakete. Am 03.11.2026 lagen in diekonkursmasse und wuerdezeit dazu sharp 0.35.4 (hoch, behoben in 0.35.5) und in wuerdezeit nodemailer 10.0.10 (fünfmal mittel) — sichtbar nur mit npm audit. In beiden Repos npm audit --omit=dev laufen lassen. Treffer kritisch oder hoch: npm audit fix ohne --force, bauen, Startseite und /datenschutz lokal prüfen (wuerdezeit mit SEITE_OEFFENTLICH=ja), committen, pushen. Mittel: im Quittungsvermerk nennen. Danach quittieren.',
-    quelle: 'docs/audit-arbeitspapiere/nextjs-16-bestandsaufnahme.md Abschnitte 11 und 12',
-  },
-  {
     id: 'sv-rechengroessen',
     titel: 'SV-Rechengrößenverordnung Folgejahr',
     datum: '2026-10-01',
@@ -218,10 +208,10 @@ export const TERMINE: Termin[] = [
   {
     id: 'lohnsteuer-pap-2027-endfassung',
     titel: 'Lohnsteuer-PAP 2027: Endfassung und XML',
-    datum: '2026-11-16',
+    datum: '2026-11-23',
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
-    was: 'Stand 15.10.2026: Vom PAP 2027 liegen nur Entwürfe vor (BMF-Schreiben vom 08.10.2026, IV C 5 - S 2361/00025/017/004, nicht verbindlich, Endfassung ohne Datum angekündigt); der BMF-Steuerrechner führt als neuestes Jahr 2026. Die Endfassung für 2026 erschien am 12.11.2025. Nachsehen, ob Endfassung und XML-Pseudocode für 2027 veröffentlicht sind. Wenn ja: Verfahren nach Dezember-Audit Punkt 9 (XML laden, SHA256 und Abrufdatum in docs/referenzen/itzbund-README.md, lib/berechnungen/_lohnsteuer-pap-2027.ts ableiten, Jahres-Switch in lohnsteuer.ts, Stützpunkte in scripts/verify-lohnsteuer-pap.ts). Wenn nein: um eine Woche verschieben. Einmaltermin: nach Erledigung entfernen.',
+    was: 'Stand 15.10.2026: Vom PAP 2027 liegen nur Entwürfe vor (BMF-Schreiben vom 08.10.2026, IV C 5 - S 2361/00025/017/004, nicht verbindlich, Endfassung ohne Datum angekündigt); der BMF-Steuerrechner führt als neuestes Jahr 2026. Die Endfassung für 2026 erschien am 12.11.2025. Nachsehen, ob Endfassung und XML-Pseudocode für 2027 veröffentlicht sind. Wenn ja: Verfahren nach Dezember-Audit Punkt 9 (XML laden, SHA256 und Abrufdatum in docs/referenzen/itzbund-README.md, lib/berechnungen/_lohnsteuer-pap-2027.ts ableiten, Jahres-Switch in lohnsteuer.ts, Stützpunkte in scripts/verify-lohnsteuer-pap.ts). Wenn nein: um eine Woche verschieben. Einmaltermin: nach Erledigung entfernen. Stand 16.11.2026: keine Endfassung. Die BMF-Seite Programmablaufplan zeigte am 16.11.2026 keine Endfassung 2027, die Fachmeldungen (Haufe vom 14.10.2026, DATEV, lohn-info.de) führen nur die Entwürfe vom 08.10.2026; Termin auf 23.11.2026 verschoben.',
     quelle: 'docs/jahreswerte-kalender.md, Dezember-Audit Punkt 9',
   },
   {
@@ -240,10 +230,10 @@ export const TERMINE: Termin[] = [
   {
     id: 'wohngeld-2027-gesetzgebung',
     titel: 'Wohngeld 2027: Gesetzgebung verfolgen',
-    datum: '2026-11-16',
+    datum: '2026-11-30',
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
-    was: 'Keine Fortschreibung zum 01.01.2027 geplant. Der Entwurf des Gesetzes zur Vereinfachung und Fortentwicklung des Wohngeldgesetzes (BT-Drs. 21/8284 vom 30.09.2026) setzt sie aus (§ 43 Abs. 11 neu), halbiert die dauerhafte Heizkostenkomponente, ändert Parameter c und die Mietenstufen; Inkrafttreten 01.01.2027 geplant. Bei Verkündung Rechner und Texte nachziehen. Wird nichts verkündet, gelten die Werte 2025 weiter. Stellen im Code, die bei Verkündung nachzuziehen sind: app/finanzen/wohngeld-rechner/page.tsx Z. 157–158 (‚alle zwei Jahre dynamisiert …‘) und Z. 275 (‚Dynamisierungsverordnung vom 21.10.2024‘), lib/berechnungen/wohngeld.ts Z. 65 (Kommentar). Zeilen Stand 01.10.2026. Stand 02.11.2026: nicht verkündet (BGBl. I bis Nr. 327 ohne Wohngeldgesetz, Peter Tageslauf 02.11.2026, QP01); Termin auf 16.11.2026 verschoben.',
+    was: 'Keine Fortschreibung zum 01.01.2027 geplant. Der Entwurf des Gesetzes zur Vereinfachung und Fortentwicklung des Wohngeldgesetzes (BT-Drs. 21/8284 vom 30.09.2026) setzt sie aus (§ 43 Abs. 11 neu), halbiert die dauerhafte Heizkostenkomponente, ändert Parameter c und die Mietenstufen; Inkrafttreten 01.01.2027 geplant. Bei Verkündung Rechner und Texte nachziehen. Wird nichts verkündet, gelten die Werte 2025 weiter. Stellen im Code, die bei Verkündung nachzuziehen sind: app/finanzen/wohngeld-rechner/page.tsx Z. 157–158 (‚alle zwei Jahre dynamisiert …‘) und Z. 275 (‚Dynamisierungsverordnung vom 21.10.2024‘), lib/berechnungen/wohngeld.ts Z. 65 (Kommentar). Zeilen Stand 01.10.2026. Stand 02.11.2026: nicht verkündet (BGBl. I bis Nr. 327 ohne Wohngeldgesetz, Peter Tageslauf 02.11.2026, QP01); Termin auf 16.11.2026 verschoben. Stand 16.11.2026: nicht verkündet. Der Bundestag hat nach der ersten Lesung (08.10.2026) und der Anhörung im Ausschuss (04.11.2026) noch nicht in zweiter und dritter Lesung beraten (Textarchiv des Bundestags, Stand 15.11.2026), vom Bundesrat liegt nur die Stellungnahme im ersten Durchgang vor (25.09.2026, BR-Drs. 474/26 B); Termin auf 30.11.2026 verschoben.',
     quelle: 'BT-Drs. 21/8284 vom 30.09.2026; docs/jahreswerte-kalender.md, Abschnitt Wohngeld-Dynamisierung',
   },
   {
