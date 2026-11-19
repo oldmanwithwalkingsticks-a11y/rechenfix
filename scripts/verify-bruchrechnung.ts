@@ -14,6 +14,11 @@
 // Sollwerte von Hand: Hauptnenner, Erweiterungsfaktor ⌈(Anzahl + 1)/(Zählerabstand)⌉, Zähler
 // darüber, gekürzt. Der Fall mit sechsstelligen Nennern prüft nur Eigenschaften (Anzahl, echt
 // zwischen, aufsteigend), über Kreuzmultiplikation statt über die Lib.
+//
+// W205: Prozent im Reiter „Dezimal ↔ Bruch“ (Nutzerfeedback 18.11.2026 „17/25“). Sollwerte von
+// Hand (17/25 = 68/100 = 68 %); dazu ein Abgleich über 15.000 Brüche, ob die Prozentanzeige genau
+// die Dezimalanzeige mit um zwei Stellen verschobenem Komma ist — über Textverschiebung, nicht
+// über die Lib.
 import {
   dezimalTextZuBruch,
   ganzzahlText,
@@ -21,6 +26,10 @@ import {
   bruecheDazwischen,
   rechenwegDazwischen,
   mediantText,
+  dezimalAnzeige,
+  prozentAnzeige,
+  kuerzen,
+  rechenwegBruchZuDezimal,
   type Bruch,
 } from '../lib/berechnungen/bruchrechnung';
 
@@ -133,9 +142,77 @@ if (!eGross || eGross.brueche.length !== 20 || !kette.every((x, i) => i === 0 ||
   fehler.push(`bruecheDazwischen(1/1000000, 1/999999, 20): ${eGross ? `${eGross.brueche.length} Brüche, nicht echt aufsteigend zwischen beiden` : 'null'}`);
 }
 
+// --- W205: Prozent ---
+// Eingabe, Zeichen, Wert (ohne „%“), von Hand gerechnet
+const prozent: [string, string, string][] = [
+  ['17/25', '=', '68'],
+  ['3/4', '=', '75'],
+  ['1/8', '=', '12,5'],
+  ['1/16', '=', '6,25'],
+  ['1/3', '≈', '33,3333'],
+  ['2/3', '≈', '66,6667'],
+  ['1/7', '≈', '14,2857'],
+  ['-1/2', '=', '−50'],
+  ['5/4', '=', '125'],
+  ['25/1', '=', '2.500'],
+  ['0/7', '=', '0'],
+  ['1/40000', '=', '0,0025'],
+  ['34/50', '=', '68'],
+];
+const bz2 = (t: string): Bruch => { const [z, n] = t.split('/'); return { zaehler: B(z), nenner: B(n) }; };
+for (const [ein, zeichen, wert] of prozent) {
+  const p = prozentAnzeige(bz2(ein));
+  if (!p || p.zeichen !== zeichen || p.wert !== wert) fehler.push(`prozentAnzeige(${ein}): ${p ? `${p.zeichen} ${p.wert}` : 'null'} statt ${zeichen} ${wert}`);
+}
+if (prozentAnzeige({ zaehler: B(1), nenner: B(0) }) !== null) fehler.push('prozentAnzeige(1/0) nicht null');
+
+// Abgleich: Prozent = Dezimalanzeige mit Komma zwei Stellen weiter rechts (Textverschiebung).
+function kommaZweiRechts(d: string): string {
+  const neg = d.startsWith('−');
+  const [ganzT, nach] = (neg ? d.slice(1) : d).replace(/\./g, '').split(',');
+  const nach2 = (nach + '00').slice(0, 2);
+  const rest = nach.slice(2).replace(/0+$/, '');
+  const ganzZahl = (ganzT + nach2).replace(/^0+(?=\d)/, '');
+  const mitPunkten = ganzZahl.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return `${neg ? '−' : ''}${mitPunkten}${rest ? `,${rest}` : ''}`;
+}
+let abgleich = 0;
+for (let n = 1; n <= 100; n++) {
+  for (let z = -30; z <= 119; z++) {
+    const br = { zaehler: B(z), nenner: B(n) };
+    const d = dezimalAnzeige(br);
+    const p = prozentAnzeige(br);
+    abgleich++;
+    if (!d || !p || p.zeichen !== d.zeichen || p.wert !== kommaZweiRechts(d.wert)) {
+      fehler.push(`Abgleich ${z}/${n}: Dezimal ${d ? `${d.zeichen} ${d.wert}` : 'null'}, Prozent ${p ? `${p.zeichen} ${p.wert}` : 'null'}`);
+      break;
+    }
+  }
+}
+
+// Rechenweg Bruch → Dezimal und Prozent: letzter Schritt
+const prozentWeg: [string, string, string][] = [
+  ['17/25', 'Auf Hundertstel erweitern', '(17 × 4)/(25 × 4) = 68/100 = 68 %'],
+  ['-3/4', 'Auf Hundertstel erweitern', '−(3 × 25)/(4 × 25) = −75/100 = −75 %'],
+  ['2/6', 'In Prozent umrechnen', '1/3 × 100 ≈ 33,3333 %'],
+  ['1/8', 'In Prozent umrechnen', '1/8 × 100 = 12,5 %'],
+  ['50/25', 'In Prozent umrechnen', '2 × 100 = 200 %'],
+  ['3/100', 'In Prozent umrechnen', '3/100 × 100 = 3 %'],
+];
+for (const [ein, titel, rechnung] of prozentWeg) {
+  const eingabe = bz2(ein);
+  const weg = rechenwegBruchZuDezimal(eingabe, kuerzen(eingabe));
+  const letzter = weg[weg.length - 1];
+  if (!letzter || letzter.titel !== titel || letzter.rechnung !== rechnung) {
+    fehler.push(`Rechenweg ${ein} letzter Schritt: ${letzter ? `${letzter.titel}: ${letzter.rechnung}` : 'fehlt'} statt ${titel}: ${rechnung}`);
+  }
+}
+const weg1725 = rechenwegBruchZuDezimal(bz2('17/25'), bz2('17/25'));
+if (weg1725.length !== 2 || weg1725[0].rechnung !== '17 ÷ 25 = 0,68') fehler.push(`Rechenweg 17/25: ${JSON.stringify(weg1725)}`);
+
 if (fehler.length) {
   console.error(`Bruchrechnung ROT: ${fehler.length} Abweichungen`);
   for (const f of fehler) console.error('  ' + f);
   process.exit(1);
 }
-console.log(`Bruchrechnung grün: ${text.length} Texteingaben, ${ganz.length} Ganzzahlfelder, 3 Rechenbeispiele, ${dazwischen.length + 1} Fälle „Brüche dazwischen“ mit Rechenweg und Mediant.`);
+console.log(`Bruchrechnung grün: ${text.length} Texteingaben, ${ganz.length} Ganzzahlfelder, 3 Rechenbeispiele, ${dazwischen.length + 1} Fälle „Brüche dazwischen“ mit Rechenweg und Mediant, ${prozent.length + 1} Prozentwerte, Abgleich Dezimal/Prozent ${abgleich}, ${prozentWeg.length + 1} Rechenwege mit Prozent.`);

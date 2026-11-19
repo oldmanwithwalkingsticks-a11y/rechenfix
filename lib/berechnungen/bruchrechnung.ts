@@ -27,6 +27,8 @@ const B0 = BigInt(0);
 const B1 = BigInt(1);
 const B2 = BigInt(2);
 const B10 = BigInt(10);
+const HUNDERT = BigInt(100);
+const ZEHNTAUSEND = BigInt(10000);
 const MILLION = BigInt(1000000);
 
 // --- Hilfsfunktionen ---
@@ -411,6 +413,29 @@ export function dezimalAnzeige(b: Bruch): DezimalAnzeige | null {
   };
 }
 
+export interface ProzentAnzeige {
+  /** „=“, wenn der angezeigte Wert exakt ist, sonst „≈“ — immer wie bei dezimalAnzeige(). */
+  zeichen: '=' | '≈';
+  /** Angezeigter Wert ohne „%“, Minuszeichen U+2212. */
+  wert: string;
+}
+
+/**
+ * Prozentwert eines Bruchs (W205, Nutzerfeedback 18.11.2026 „17/25“). Abgeleitet aus den
+ * Millionsteln von dezimalAnzeige(), also derselbe gerundete Wert mal 100: 0,68 → 68,
+ * 0,333333 → 33,3333. Dezimalzahl und Prozent können so nie auseinanderlaufen, und „=“/„≈“
+ * gilt für beide gleich. Bis zu vier Nachkommastellen, Nullen am Ende entfallen, ohne
+ * Nachkommastellen kein Komma (68, nicht 68,0). Vorzeichen wie in der Dezimalanzeige.
+ */
+export function prozentAnzeige(b: Bruch): ProzentAnzeige | null {
+  const d = dezimalAnzeige(b);
+  if (!d) return null;
+  const q = betrag(d.millionstel); // Zehntausendstel Prozent
+  const nachkomma = (q % ZEHNTAUSEND).toString().padStart(4, '0').replace(/0+$/, '');
+  const wert = `${d.wert.startsWith(MINUS) ? MINUS : ''}${gruppiert(q / ZEHNTAUSEND)}${nachkomma ? `,${nachkomma}` : ''}`;
+  return { zeichen: d.zeichen, wert };
+}
+
 // --- Rechenweg Schritt für Schritt (W152) ---
 //
 // Reine Funktionen ohne UI. Sie bilden den Rechenweg aus den Zwischenwerten der Funktionen
@@ -496,6 +521,27 @@ function schrittDezimal(b: Bruch): RechenwegSchritt | null {
   const a = dezimalAnzeige(b);
   if (!a) return null;
   return { titel: 'Zähler durch Nenner teilen', rechnung: `${zahl(b.zaehler)} ÷ ${b.nenner} ${a.zeichen} ${a.wert}` };
+}
+
+/**
+ * In Prozent (W205), `b` gekürzt mit positivem Nenner. Geht der Nenner in 100 auf (2, 4, 5, 10,
+ * 20, 25, 50), der Schulweg über Hundertstel: 17/25 = (17 × 4)/(25 × 4) = 68/100 = 68 %.
+ * Sonst mal 100 mit „=“ oder „≈“ aus prozentAnzeige(): 1/3 × 100 ≈ 33,3333 %.
+ */
+function schrittProzent(b: Bruch): RechenwegSchritt | null {
+  const p = prozentAnzeige(b);
+  if (!p) return null;
+  const n = b.nenner;
+  if (n > B1 && n < HUNDERT && HUNDERT % n === B0) {
+    const f = HUNDERT / n;
+    const vz = bruchText(b).startsWith(MINUS) ? MINUS : '';
+    const z = betrag(b.zaehler);
+    return {
+      titel: 'Auf Hundertstel erweitern',
+      rechnung: `${vz}(${z} × ${f})/(${n} × ${f}) = ${vz}${z * f}/100 = ${p.wert} %`,
+    };
+  }
+  return { titel: 'In Prozent umrechnen', rechnung: `${bruchOderGanz(b)} × 100 ${p.zeichen} ${p.wert} %` };
 }
 
 function schritteUmwandeln(o: OperandQuelle, nr: 1 | 2): RechenwegSchritt[] {
@@ -625,8 +671,8 @@ export function rechenwegDezimalZuBruch(text: string, r: { roh: Bruch; bruch: Br
 }
 
 /**
- * Reiter „Dezimal ↔ Bruch“, Richtung Bruch → Dezimal. `eingabe` ist der eingegebene Bruch,
- * `gekuerzt` der Bruch der Ergebnisanzeige.
+ * Reiter „Dezimal ↔ Bruch“, Richtung Bruch → Dezimal und Prozent. `eingabe` ist der
+ * eingegebene Bruch, `gekuerzt` der Bruch der Ergebnisanzeige. Seit W205 mit Prozentschritt.
  */
 export function rechenwegBruchZuDezimal(eingabe: Bruch, gekuerzt: Bruch): RechenwegSchritt[] {
   const schritte: RechenwegSchritt[] = [];
@@ -634,6 +680,8 @@ export function rechenwegBruchZuDezimal(eingabe: Bruch, gekuerzt: Bruch): Rechen
   if (ggtWert > B1) schritte.push(schrittKuerzen(eingabe, gekuerzt, ggtWert));
   const dezimal = schrittDezimal(gekuerzt);
   if (dezimal) schritte.push(dezimal);
+  const prozent = schrittProzent(gekuerzt);
+  if (prozent) schritte.push(prozent);
   return schritte;
 }
 

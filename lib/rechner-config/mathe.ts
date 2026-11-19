@@ -3,14 +3,14 @@ import type { RechnerConfig } from './types';
 export const matheRechner: RechnerConfig[] = [
   {
     slug: 'bruchrechner',
-    letzteAktualisierung: '2026-10-21',
+    letzteAktualisierung: '2026-11-19',
     titel: 'Bruchrechner',
     beschreibung: 'Brüche berechnen: Addieren, subtrahieren, multiplizieren, dividieren. Mit Rechenweg, Kürzen, Umrechnung und Brüchen dazwischen.',
     kategorie: 'Mathe & Schule',
     kategorieSlug: 'mathe',
     metaTitle: 'Bruchrechner — Brüche berechnen & kürzen',
     metaDescription: 'Bruchrechner ✓ Addieren, subtrahieren, multiplizieren, dividieren ✓ Kürzen ✓ Mit Rechenweg ✓ Kostenlos. Jetzt Brüche berechnen! ✓ Mit KI-Erklärung.',
-    keywords: ['bruchrechner', 'brüche berechnen', 'bruch kürzen', 'bruchrechnung', 'brüche addieren', 'brüche multiplizieren', 'dezimalzahl in bruch', 'dezimalzahl mal bruch', 'brüche zwischen zwei brüchen'],
+    keywords: ['bruchrechner', 'brüche berechnen', 'bruch kürzen', 'bruchrechnung', 'brüche addieren', 'brüche multiplizieren', 'dezimalzahl in bruch', 'dezimalzahl mal bruch', 'brüche zwischen zwei brüchen', 'bruch in prozent'],
     icon: '🔢',
     beispiel: '1/3 + 2/5: Hauptnenner 15 → 5/15 + 6/15 = 11/15. Multiplikation: 2/3 × 3/4 = 6/12 = 1/2. Mit Dezimalzahl: 0,75 × 2/3 = 3/4 × 2/3 = 1/2.',
     faq: [
@@ -29,6 +29,10 @@ export const matheRechner: RechnerConfig[] = [
       {
         frage: 'Wie wandle ich einen Bruch in eine Dezimalzahl um?',
         antwort: 'Teilen Sie den Zähler durch den Nenner. Beispiel: 3/4 = 3÷4 = 0,75. Manche Brüche ergeben periodische Dezimalzahlen, z. B. 1/3 = 0,333...',
+      },
+      {
+        frage: 'Wie rechne ich einen Bruch in Prozent um?',
+        antwort: 'Teilen Sie den Zähler durch den Nenner und nehmen Sie das Ergebnis mal 100. Beispiel: 17/25 = 17 ÷ 25 = 0,68, also 68 %. Geht der Nenner in 100 auf, reicht das Erweitern auf Hundertstel: 17/25 = 68/100 = 68 %. Im Rechner zeigt der Reiter „Dezimal ↔ Bruch“ in der Richtung „Bruch → Dezimal und Prozent“ beide Werte mit Rechenweg. Welche Note 17 von 25 Punkten in einer Klassenarbeit ergeben, rechnet der Notenschlüssel-Rechner aus.',
       },
       {
         frage: 'Wie rechnet man eine Dezimalzahl mal einen Bruch?',

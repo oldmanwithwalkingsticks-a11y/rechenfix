@@ -11,6 +11,7 @@ import {
   zuGemischt,
   kuerzen,
   dezimalAnzeige,
+  prozentAnzeige,
   rechenwegBrueche,
   rechenwegKuerzen,
   rechenwegDezimalZuBruch,
@@ -29,6 +30,7 @@ import {
   type OperandQuelle,
   type RechenwegSchritt,
   type DezimalAnzeige,
+  type ProzentAnzeige,
   type DazwischenErgebnis,
 } from '@/lib/berechnungen/bruchrechnung';
 import NummerEingabe from '@/components/ui/NummerEingabe';
@@ -298,12 +300,12 @@ export default function BruchRechner() {
   const kuerzenErgebnis = kuerzen2.ok ? kuerzen2.e : null;
 
   // Ergebnis Tab 3
-  const dezimal3 = useMemo<Pruefung<{ e: { bruch: Bruch; anzeige: DezimalAnzeige | null; gemischt: GemischteZahl | null; weg: RechenwegSchritt[] } }>>(() => {
+  const dezimal3 = useMemo<Pruefung<{ e: { bruch: Bruch; anzeige: DezimalAnzeige | null; prozent: ProzentAnzeige | null; gemischt: GemischteZahl | null; weg: RechenwegSchritt[] } }>>(() => {
     if (dezMode === 'zuBruch') {
       // Exakt aus den Ziffern (W150) statt über die Gleitkommazahl
       const r = dezimalTextZuBruch(dezWert);
       if (!r) return { ok: false, fehler: 'Bitte eine Dezimalzahl eingeben, zum Beispiel 0,75.' };
-      return { ok: true, e: { bruch: r.bruch, anzeige: null, gemischt: zuGemischt(r.bruch), weg: rechenwegDezimalZuBruch(dezWert, r) } };
+      return { ok: true, e: { bruch: r.bruch, anzeige: null, prozent: null, gemischt: zuGemischt(r.bruch), weg: rechenwegDezimalZuBruch(dezWert, r) } };
     } else {
       const z = ganzzahl(dz);
       const n = ganzzahl(dn);
@@ -311,8 +313,10 @@ export default function BruchRechner() {
       if (n === NULL) return { ok: false, fehler: 'Der Nenner darf nicht 0 sein.' };
       const b = kuerzen({ zaehler: z, nenner: n });
       const anzeige = dezimalAnzeige(b);
-      if (anzeige === null) return { ok: false, fehler: 'Dieser Bruch lässt sich nicht umrechnen.' };
-      return { ok: true, e: { bruch: b, anzeige, gemischt: zuGemischt(b), weg: rechenwegBruchZuDezimal({ zaehler: z, nenner: n }, b) } };
+      // Prozent aus demselben gerundeten Wert wie die Dezimalzahl (W205)
+      const prozent = prozentAnzeige(b);
+      if (anzeige === null || prozent === null) return { ok: false, fehler: 'Dieser Bruch lässt sich nicht umrechnen.' };
+      return { ok: true, e: { bruch: b, anzeige, prozent, gemischt: zuGemischt(b), weg: rechenwegBruchZuDezimal({ zaehler: z, nenner: n }, b) } };
     }
   }, [dezMode, dezWert, dz, dn]);
   const dezimalErgebnis = dezimal3.ok ? dezimal3.e : null;
@@ -481,7 +485,7 @@ export default function BruchRechner() {
               legend="Umrechnungsrichtung"
               options={[
                 { value: 'zuBruch', label: 'Dezimal → Bruch' },
-                { value: 'zuDezimal', label: 'Bruch → Dezimal' },
+                { value: 'zuDezimal', label: 'Bruch → Dezimal und Prozent' },
               ]}
               value={dezMode}
               onChange={(v) => setDezMode(v as 'zuBruch' | 'zuDezimal')}
@@ -525,6 +529,10 @@ export default function BruchRechner() {
                     <p className="text-4xl font-extrabold text-primary-700 dark:text-primary-300 [overflow-wrap:anywhere]">
                       {dezimalErgebnis.anzeige?.zeichen === '≈' ? '≈ ' : ''}{dezimalErgebnis.anzeige?.wert}
                     </p>
+                    {/* Prozent (W205, Nutzerfeedback 18.11.2026 „17/25“): 0,68 = 68 % */}
+                    <p className="text-2xl font-bold text-primary-700 dark:text-primary-300 mt-2 [overflow-wrap:anywhere]">
+                      {dezimalErgebnis.prozent?.zeichen} {dezimalErgebnis.prozent?.wert} %
+                    </p>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 inline-flex items-center justify-center max-w-full">
                       <BruchAnzeige zaehler={dezimalErgebnis.bruch.zaehler} nenner={dezimalErgebnis.bruch.nenner} className="text-base" />
                       <span className="ml-1 min-w-0 [overflow-wrap:anywhere]">{dezimalErgebnis.anzeige?.zeichen} {dezimalErgebnis.anzeige?.wert}</span>
@@ -534,6 +542,11 @@ export default function BruchRechner() {
               </div>
 
               <Rechenweg schritte={dezimalErgebnis.weg} />
+
+              {/* Punkte wie 17 von 25 als Note: Notenschlüssel-Rechner (W205) */}
+              {dezMode === 'zuDezimal' && (
+                <CrossLink href="/mathe/notenschluessel-rechner" emoji="📝" text="Punkte einer Klassenarbeit in eine Note umrechnen" />
+              )}
             </div>
           )}
         </div>

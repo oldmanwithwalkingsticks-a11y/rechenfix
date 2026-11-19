@@ -27,6 +27,21 @@ export type FeedbackEntry = {
 
 export const FEEDBACK_LOG: FeedbackEntry[] = [
   {
+    id: '2026-11-18-01',
+    datumAnfrage: '2026-11-18',
+    datumUmsetzung: '2026-11-19',
+    status: 'umgesetzt',
+    bereich: 'mathe/bruchrechner',
+    wunsch: 'Einen einzelnen Bruch wie 17/25 umrechnen',
+    kommentar:
+      'Der Reiter „Dezimal ↔ Bruch“ zeigt in der Richtung „Bruch → ' +
+      'Dezimal und Prozent“ jetzt auch den Prozentwert, mit Rechenweg: ' +
+      '17/25 = 0,68 = 68 %. Geht der Nenner in 100 auf, erweitert der ' +
+      'Rechenweg auf Hundertstel (17/25 = 68/100). Wer Punkte aus einer ' +
+      'Klassenarbeit wie 17 von 25 in eine Note umrechnen möchte, kommt ' +
+      'von dort direkt zum Notenschlüssel-Rechner.',
+  },
+  {
     id: '2026-10-20-01',
     datumAnfrage: '2026-10-20',
     datumUmsetzung: '2026-10-21',
