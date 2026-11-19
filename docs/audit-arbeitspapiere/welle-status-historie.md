@@ -6,6 +6,48 @@
 
 ---
 
+## 19.11.2026 — Welle 205: Bruchrechner zeigt den Prozentwert — ✅ ABGESCHLOSSEN 19.11.2026
+
+**Anlass:** Rückmeldung über den Feedback-Knopf am 18.11.2026, 14:44, auf `/mathe/bruchrechner`: Grund „Ich wollte etwas anderes berechnen“, Text nur „17/25“, keine E-Mail. Der Rechner konnte 17/25 schon kürzen (bereits vollständig gekürzt) und in 0,68 umwandeln, zeigte aber nirgends den Prozentwert und verlinkte den Notenschlüssel-Rechner nicht. Gelesen als „Bruch in Prozent“ oder „17 von 25 Punkten als Note“; das ist eine Deutung, eine Rückfrage war nicht möglich.
+
+**Änderungen:**
+- `lib/berechnungen/bruchrechnung.ts`:
+  - `prozentAnzeige()` leitet den Prozentwert aus den Millionsteln von `dezimalAnzeige()` ab: derselbe gerundete Wert mal 100, bis vier Nachkommastellen, „=“/„≈“ wie dort (0,333333 → 33,3333 %).
+  - Der Rechenweg Bruch → Dezimal endet mit einem Prozentschritt. Geht der Nenner in 100 auf, heißt er „Auf Hundertstel erweitern“: 17/25 = (17 × 4)/(25 × 4) = 68/100 = 68 %. Sonst heißt er „In Prozent umrechnen“: 1/3 × 100 ≈ 33,3333 %.
+- `components/rechner/BruchRechner.tsx`:
+  - Die Richtung heißt jetzt „Bruch → Dezimal und Prozent“.
+  - Unter der Dezimalzahl steht die Prozentzeile.
+  - Nur in dieser Richtung erscheint der Link „Punkte einer Klassenarbeit in eine Note umrechnen“ auf `/mathe/notenschluessel-rechner`.
+- `lib/rechner-config/mathe.ts`: neue FAQ „Wie rechne ich einen Bruch in Prozent um?“, Stichwort „bruch in prozent“, `letzteAktualisierung` 2026-11-19.
+- `lib/feedback-log.ts`: Eintrag `2026-11-18-01`, umgesetzt 2026-11-19.
+- `scripts/verify-bruchrechnung.ts`: 14 Prozentwerte von Hand; Abgleich Dezimal/Prozent über 15.000 Brüche per Textverschiebung des Kommas (nicht über die Lib); 7 Rechenwege mit Prozentschritt.
+
+**Commits:** `9762c5b` (Inhalt), dieser Commit (Historie).
+
+**Geprüft in dieser Sitzung (19.11.2026, 23:02:42):**
+- Vorlage: „20 Ersetzungen in 5 Dateien geschrieben, Datum 2026-11-19.“
+- `npx tsx scripts/verify-bruchrechnung.ts`: „Bruchrechnung grün: 16 Texteingaben, 9 Ganzzahlfelder, 3 Rechenbeispiele, 11 Fälle „Brüche dazwischen“ mit Rechenweg und Mediant, 14 Prozentwerte, Abgleich Dezimal/Prozent 15000, 7 Rechenwege mit Prozent.“
+- verify:alle rc=0, „Prüfskripte: 89/89 grün.“; mit `TZ=UTC` rc=0, „Prüfskripte: 89/89 grün.“
+- `npx eslint . --no-cache` rc=0, keine Ausgabe
+- Build „✓ Generating static pages using 15 workers (272/272) in 13.0s“
+- Gegenprobe `.next`: „Gegenprobe Welle 205 (.next): 12/12 grün.“
+
+**Probelauf in der Chat-Sitzung (19.11.2026, Linux, Stand c27703b):**
+- Vorlage: 20 Ersetzungen in 5 Dateien, Ergebnis byte-gleich mit dem Probelauf; zweiter Lauf ABBRUCH ohne geschriebene Datei; auch mit CRLF-Dateien und anderem Datum gleich.
+- verify:alle 89/89 in Berlin, UTC, New York und Tokio. Build 272 Seiten.
+- Zwei absichtlich falsche Fassungen der Lib machen `verify-bruchrechnung` rot: zwei statt vier Nachkommastellen 92 Abweichungen, falscher Erweiterungsfaktor 2 Abweichungen.
+- Gegenprobe `.next` 12/12, am alten Live-Stand 0/7.
+- Im gebauten Stand per Browser, hell und dunkel, 375 und 1280 px:
+  - 17/25 → 0,68, „= 68 %“, Rechenweg Schritt 2 „(17 × 4)/(25 × 4) = 68/100 = 68 %“, Link auf `/mathe/notenschluessel-rechner`.
+  - 1/3 → „≈ 33,3333 %“; −3/4 → „= −75 %“; 50/25 → „= 200 %“.
+  - Richtung Dezimal → Bruch ohne Prozentzeile und ohne Link.
+- axe (WCAG 2.1 A/AA und best-practice) im Ergebniszustand hell und dunkel: kein Verstoß.
+- Karola: Selbsttest 65/65, Formeln 4 Ketten 0 Befunde, Register 0 Befunde.
+
+**Offen:** keine.
+
+---
+
 ## 08.11.2026 — Welle 204: Messskript Barrierefreiheit im Repo — ✅ ABGESCHLOSSEN 08.11.2026
 
 **Anlass:** Die axe-Messungen 1 bis 6 (02. bis 04.11.2026) liefen mit Skripten aus einer Chat-Sitzung. Darauf stützt sich der Text von `/barrierefreiheit` (Stand 4. November 2026), und CLAUDE.md verlangt die Messung für jede neue Seite. Im Repo lag kein Werkzeug dafür.
