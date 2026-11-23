@@ -101,9 +101,9 @@ export const TERMINE: Termin[] = [
     projekt: 'wuerdezeit.de',
     was: 'Ordner „Formular“ im Postfach info@wuerdezeit.de öffnen und zwei Sorten löschen: erledigte Anliegen, und Nachrichten OHNE Antwortadresse, die älter als drei Monate sind. Beides steht so in Abschnitt 9 der Datenschutzerklärung und ist damit eine Zusage an den Absender, keine Absichtserklärung. MONATLICH und nicht quartalsweise, weil die Zusage drei Monate lautet: Bei einem Quartalsrhythmus käme eine Nachricht, die einen Tag nach dem Termin eingeht, erst beim übernächsten Lauf dran — nach bis zu sechs Monaten. Die zugesagte Frist und der Rhythmus, der sie einhält, sind zwei verschiedene Zahlen, und die zweite muss kleiner sein. Der Lauf dauert eine halbe Minute, solange die Postfachregel greift; greift sie nicht mehr, ist DAS der eigentliche Befund und nicht die Arbeit.',
     quelle: 'app/datenschutz/page.tsx (WürdeZeit), Abschnitt 9; docs/kontaktformular/spezifikation.md Abschnitt 5',
-    quittiertVorkommen: '2026-10-20',
-    quittiertAm: '2026-10-18',
-    quittungVermerk: 'Ordner Formular im Postfach info@wuerdezeit.de am 18.10.2026 von Karsten bereinigt (erledigte Anliegen und Nachrichten ohne Antwortadresse älter als drei Monate gelöscht), zwei Tage vor dem Termin quittiert.',
+    quittiertVorkommen: '2026-11-20',
+    quittiertAm: '2026-11-22',
+    quittungVermerk: 'Karsten am 22.11.2026: Löschlauf im Ordner Formular des Postfachs info@wuerdezeit.de erledigt, zwei Tage nach dem Termin; eingetragen am 23.11.2026 (Berichtswache 22. und 23.11.2026, termine_ueberfaellig).',
   },
   {
     id: 'domain-checkdomain',
@@ -186,10 +186,10 @@ export const TERMINE: Termin[] = [
   {
     id: 'sv-rechengroessen-2027-verfahren',
     titel: 'SV-Rechengrößen 2027: Verfahren verfolgen',
-    datum: '2026-11-23',
+    datum: '2026-11-30',
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
-    was: 'Stand 15.10.2026: Kabinettsbeschluss vom 07.10.2026 (BMAS-Pressemitteilung vom selben Tag); Zustimmung des Bundesrats und Verkündung stehen aus. Kabinettswerte 2027, noch nicht verkündet: BBG allgemeine RV und AV 8.850 € im Monat (106.200 € im Jahr), knappschaftliche RV 10.900 € (130.800 €), BBG KV 6.375 € (76.500 €), JAEG nach § 6 Abs. 6 SGB V 7.012,50 € (84.150 €), JAEG nach § 6 Abs. 7 SGB V 6.075 € (72.900 €), Bezugsgröße 4.130 € (49.560 €), vorläufiges Durchschnittsentgelt 53.452 €. Werte erst aus der verkündeten Verordnung übernehmen. BBG Pflegeversicherung 2027: Folgt sie nach § 55 Abs. 2 SGB XI der JAEG nach § 6 Abs. 7 SGB V, liegt sie bei 72.900 € und damit 3.600 € unter der BBG KV (§ 223 Abs. 4 SGB V, BGBl. 2026 I Nr. 228). Die BMAS-Mitteilung nennt keine eigene BBG PV. Vor der Übernahme an der Verordnung oder ihrer Begründung bestätigen und dann klären, ob brutto-netto.ts getrennte Grenzen für KV und PV braucht. Nachsehen, ob der Bundesrat zugestimmt hat und die Verordnung verkündet ist; wenn nicht, um eine Woche verschieben. Einmaltermin: nach Übernahme der Werte entfernen.',
+    was: 'Stand 15.10.2026: Kabinettsbeschluss vom 07.10.2026 (BMAS-Pressemitteilung vom selben Tag); Zustimmung des Bundesrats und Verkündung stehen aus. Kabinettswerte 2027, noch nicht verkündet: BBG allgemeine RV und AV 8.850 € im Monat (106.200 € im Jahr), knappschaftliche RV 10.900 € (130.800 €), BBG KV 6.375 € (76.500 €), JAEG nach § 6 Abs. 6 SGB V 7.012,50 € (84.150 €), JAEG nach § 6 Abs. 7 SGB V 6.075 € (72.900 €), Bezugsgröße 4.130 € (49.560 €), vorläufiges Durchschnittsentgelt 53.452 €. Werte erst aus der verkündeten Verordnung übernehmen. BBG Pflegeversicherung 2027: Folgt sie nach § 55 Abs. 2 SGB XI der JAEG nach § 6 Abs. 7 SGB V, liegt sie bei 72.900 € und damit 3.600 € unter der BBG KV (§ 223 Abs. 4 SGB V, BGBl. 2026 I Nr. 228). Die BMAS-Mitteilung nennt keine eigene BBG PV. Vor der Übernahme an der Verordnung oder ihrer Begründung bestätigen und dann klären, ob brutto-netto.ts getrennte Grenzen für KV und PV braucht. Nachsehen, ob der Bundesrat zugestimmt hat und die Verordnung verkündet ist; wenn nicht, um eine Woche verschieben. Einmaltermin: nach Übernahme der Werte entfernen. Stand 23.11.2026: Der Bundesrat hat am 20.11.2026 zugestimmt (Pressemeldung der Deutschen Rentenversicherung und Meldung der Bundesregierung, beide vom 20.11.2026). Verkündet ist die Verordnung noch nicht: Bundesgesetzblatt Teil I am 23.11.2026 gelesen bis Nr. 348 vom 23.11.2026, Nr. 349 HTTP 404. Die Bundesregierung nennt für RV, knappschaftliche RV, KV, Versicherungspflichtgrenze und vorläufiges Durchschnittsentgelt dieselben Werte wie oben. DRV und Bundesregierung nennen eine gemeinsame Beitragsbemessungsgrenze für die gesetzliche Kranken- und Pflegeversicherung von 6.375 €; das sind Pressemeldungen, nicht die Verordnung, die PV-Frage oben bleibt bis zur Verkündung offen. Termin auf 30.11.2026 verschoben.',
     quelle: 'docs/jahreswerte-kalender.md, Dezember-Audit Punkt 3',
   },
   {
@@ -208,10 +208,10 @@ export const TERMINE: Termin[] = [
   {
     id: 'lohnsteuer-pap-2027-endfassung',
     titel: 'Lohnsteuer-PAP 2027: Endfassung und XML',
-    datum: '2026-11-23',
+    datum: '2026-11-30',
     vorlaufTage: 0,
     bereich: 'Gesetzeswerte',
-    was: 'Stand 15.10.2026: Vom PAP 2027 liegen nur Entwürfe vor (BMF-Schreiben vom 08.10.2026, IV C 5 - S 2361/00025/017/004, nicht verbindlich, Endfassung ohne Datum angekündigt); der BMF-Steuerrechner führt als neuestes Jahr 2026. Die Endfassung für 2026 erschien am 12.11.2025. Nachsehen, ob Endfassung und XML-Pseudocode für 2027 veröffentlicht sind. Wenn ja: Verfahren nach Dezember-Audit Punkt 9 (XML laden, SHA256 und Abrufdatum in docs/referenzen/itzbund-README.md, lib/berechnungen/_lohnsteuer-pap-2027.ts ableiten, Jahres-Switch in lohnsteuer.ts, Stützpunkte in scripts/verify-lohnsteuer-pap.ts). Wenn nein: um eine Woche verschieben. Einmaltermin: nach Erledigung entfernen. Stand 16.11.2026: keine Endfassung. Die BMF-Seite Programmablaufplan zeigte am 16.11.2026 keine Endfassung 2027, die Fachmeldungen (Haufe vom 14.10.2026, DATEV, lohn-info.de) führen nur die Entwürfe vom 08.10.2026; Termin auf 23.11.2026 verschoben.',
+    was: 'Stand 15.10.2026: Vom PAP 2027 liegen nur Entwürfe vor (BMF-Schreiben vom 08.10.2026, IV C 5 - S 2361/00025/017/004, nicht verbindlich, Endfassung ohne Datum angekündigt); der BMF-Steuerrechner führt als neuestes Jahr 2026. Die Endfassung für 2026 erschien am 12.11.2025. Nachsehen, ob Endfassung und XML-Pseudocode für 2027 veröffentlicht sind. Wenn ja: Verfahren nach Dezember-Audit Punkt 9 (XML laden, SHA256 und Abrufdatum in docs/referenzen/itzbund-README.md, lib/berechnungen/_lohnsteuer-pap-2027.ts ableiten, Jahres-Switch in lohnsteuer.ts, Stützpunkte in scripts/verify-lohnsteuer-pap.ts). Wenn nein: um eine Woche verschieben. Einmaltermin: nach Erledigung entfernen. Stand 16.11.2026: keine Endfassung. Die BMF-Seite Programmablaufplan zeigte am 16.11.2026 keine Endfassung 2027, die Fachmeldungen (Haufe vom 14.10.2026, DATEV, lohn-info.de) führen nur die Entwürfe vom 08.10.2026; Termin auf 23.11.2026 verschoben. Stand 23.11.2026: keine Endfassung belegt. Haufe (14.10.2026), DATEV, lohn-info.de und Personal Experts (19.11.2026) führen nur die Entwürfe vom 08.10.2026; Haufe: „Die verbindlichen Programmablaufpläne werden zu einem späteren Zeitpunkt bekannt gemacht.“ BMF-Seite und BMF-Steuerrechner waren aus der Chat-Sitzung nicht erreichbar. Termin auf 30.11.2026 verschoben.',
     quelle: 'docs/jahreswerte-kalender.md, Dezember-Audit Punkt 9',
   },
   {
@@ -336,15 +336,6 @@ export const TERMINE: Termin[] = [
     bereich: 'Recht',
     was: 'Anhang 3 des Hostinger-Auftragsverarbeitungsvertrags gegen den geführten Stand vom 04.09.2026 prüfen: AWS EMEA, Google Cloud EMEA, Cloudflare, MailChannels, Proofpoint, Anthropic Ireland, spectra tech. Nach Abschnitt 6.3 des Vertrags werden neue Unterauftragnehmer dort ergänzt, mit zehn Tagen Widerspruchsfrist. Zugänge außerhalb der EU können Abschnitt 11 der Datenschutzerklärung berühren.',
     quelle: 'https://www.hostinger.com/legal/dpa, Anhang 3',
-  },
-  {
-    id: 'uwg-23e-kreditwerbung',
-    titel: 'Anhang Nr. 23e UWG gilt: Warnhinweis bei Kreditwerbung live prüfen',
-    datum: '2026-11-20',
-    vorlaufTage: 0,
-    bereich: 'Recht',
-    was: 'Ab heute gilt Anhang Nr. 23e UWG (BGBl. 2026 I Nr. 139, Art. 6; Art. 16 Abs. 1). Im Inkognito-Fenster prüfen, dass Kreditrechner, Leasing-Rechner und Wertverlust-Auto-Rechner in der Anzeige „Achtung! Kreditaufnahme kostet Geld.“ zeigen, auch in Handybreite. Danach diesen Termin entfernen.',
-    quelle: 'Welle 157, docs/audit-arbeitspapiere/welle-status-historie.md; scripts/verify-kreditwerbung.ts',
   },
   {
     id: 'beg-degression',
