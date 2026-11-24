@@ -6,6 +6,70 @@
 
 ---
 
+## 25.11.2026 — Welle 206: Minijob-Pauschale zur Krankenversicherung ab 2027 und neue Formel für Faktor F — ✅ ABGESCHLOSSEN 25.11.2026
+
+**Anlass:** Das GKV-Beitragssatzstabilisierungsgesetz vom 24.07.2026 (BGBl. 2026 I Nr. 228, verkündet am 29.07.2026) ändert zum 01.01.2027 zwei Stellen, die im Repo fehlten:
+- **§ 249b Satz 1 SGB V** (Art. 1 Nr. 64, in Kraft am 01.01.2027 nach Art. 8 Abs. 2): Die Pauschale des Arbeitgebers zur Krankenversicherung im gewerblichen Minijob ist nicht mehr 13 %, sondern der allgemeine Beitragssatz (14,6 %) plus der durchschnittliche Zusatzbeitragssatz, den das BMG am 30.10.2026 für 2027 auf 2,9 % festgelegt hat; zusammen 17,5 %. Im Privathaushalt bleibt es bei 5 % (§ 249b Satz 2).
+- **§ 20 Abs. 2a Satz 2 SGB IV** (Art. 2 Nr. 1, ebenfalls ab 01.01.2027): Faktor F teilt nicht mehr 28 % (13 % + 15 %), sondern 14,6 % + durchschnittlichen Zusatzbeitragssatz + 15 % durch den Gesamtsozialversicherungsbeitragssatz. Mit den Sätzen 2027 (KV 14,6 + 2,9, RV 18,6, AV 2,6, PV 3,6 = 42,3 %) sind das 32,5 ÷ 42,3 = 0,7683 statt 0,6619. Der Termin `midijob-parameter-2027` nannte noch 28 %.
+
+Der Minijob-Rechner rechnet zum Tagesdatum: Ab 01.01.2027 nahm er schon die Grenze 633 € und den Mindestlohn 14,60 €, aber weiter 13 % KV.
+
+**Änderungen:**
+- `lib/berechnungen/sv-parameter.ts`: neu `KV_ALLGEMEINER_BEITRAGSSATZ_PROZENT` (14,6), `KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2027_PROZENT` (2,9) und `getMinijobKvPauschaleProzent(stichtag)`, 13 bis 31.12.2026 und ab 01.01.2027 17,5.
+- `lib/berechnungen/_helpers.ts`: neu `anteilCent(entgelt, satz)`, rechnet in ganzen Zahlen und rundet kaufmännisch auf Cent.
+- `lib/berechnungen/minijob.ts`: `berechneMinijob(eingabe, stichtag = new Date())` nimmt Grenze, Mindestlohn und KV-Pauschale zum Stichtag, gibt den Satz als `agKvSatzProzent` zurück und rechnet alle Pauschalen und den RV-Eigenanteil über `anteilCent`.
+- `lib/berechnungen/nebenjob.ts`: ruft `berechneMinijob` mit `SV_RECHENSTAND` auf, wie die Grenze darüber.
+- `lib/berechnungen/brutto-netto.ts`: Der Minijob-Zweig von `berechneArbeitgeberSvMonat` nimmt `getMinijobKvPauschaleProzent(SV_RECHENSTAND)` statt fest 0,13, beide Minijob-Zweige rechnen über `anteilCent`.
+- `lib/berechnungen/midijob-parameter.ts`: nur Doku, Formel für F bis 2026 (28 ÷ 42,3 = 0,6619) und ab 2027 (32,5 ÷ 42,3 = 0,7683).
+- `components/rechner/MinijobRechner.tsx`: Der Satz der KV-Pauschale in der Abgabentabelle kommt aus dem Ergebnis statt aus `'13' : '5'`.
+- `lib/rechner-config/finanzen.ts`, Block `minijob-rechner`: Text „Steuer & Abgaben“ und FAQ zu den Arbeitgeber-Abgaben mit 2026 und ab 2027, Beispiel „Arbeitgeber-Sicht 2026“ mit Fazit 110,78 € bei 633 €, Statistik mit Jahr und zwei neuen Kacheln (17,5 %, 110,78 €), Quelle § 249b SGB V, `letzteAktualisierung` 2026-11-25.
+- `lib/termine.ts`: `midijob-parameter-2027` neu gefasst (neue Formel, 21.12.2026, Voraussetzungen für `SV_RECHENSTAND` 2027), `switch-wirksamkeit-2027` nennt die KV-Pauschale, Nachtrag in `sv-rechengroessen-2027-verfahren` (Verordnung ohne BBG PV, § 6 Abs. 8 SGB V), neu `pnog-2027-pflegeversicherung` (19.12.), `minijob-umlagen-2027` (17.12.) und `estreformg-2027` (19.12.).
+- `docs/jahreswerte-kalender.md`: zwei Zeilen für den 01.01.2027, Formel für F im Dezember-Audit Punkt 8, Eintrag in der Änderungshistorie.
+- `scripts/verify-stichtag-2027.ts`: 38 statt 20 Fälle, neu der Abschnitt Minijob ab 2027 und ein Scan-Muster gegen den festen Satz in Rechner-Komponenten.
+
+**Rundung:** `anteilCent` multipliziert das Entgelt in Cent mit dem Satz in Hundertstelprozent und rundet kaufmännisch. Vorher rundete `Math.round(x × satz × 100) ÷ 100` halbe Cent teils ab: 175 € × 17,5 % = 30,624999… ergab 30,62 € statt 30,63 €; 690 € × 0,15 % Insolvenzgeldumlage ergab 1,03 € statt 1,04 €. Laut Probelauf ändern sich über alle Cent-Beträge von 0 bis 2.500 € nur Fälle mit genau einem halben Cent, bei ganzen Euro nur 690 € und 1.630 € (Umlagen je +0,01 €, beides kein Minijob mehr). Die Werte 2026 im Text (603 € → KV 78,39 €, Gesamtkosten 790,95 €) bleiben.
+
+**Bewusst nicht geändert:**
+- `SV_RECHENSTAND` und der Bucket `MIDIJOB_2027` (Termin `midijob-parameter-2027`); Brutto-Netto, Midijob, Nebenjob und der Arbeitgeberanteil bleiben beim Rechenstand 2026, die KV-Pauschale dort wechselt erst mit ihm.
+- BBG und PV 2027 (Termine `sv-rechengroessen-2027-verfahren`, `pnog-2027-pflegeversicherung`).
+- Umlagen und Pauschsteuer des Minijobs 2027 (Termine `minijob-umlagen-2027`, `estreformg-2027`).
+- Die übrigen Texte des Minijob-Blocks mit 603 € (Stand 2026, Dezember-Audit Punkt 10), Blogartikel, das private Skill-Repo.
+
+**Gegenprobe:** `verify-stichtag-2027` auf dem alten Stand (Lib, Komponente, Config und Doku per `git stash push -- lib components docs` beiseite, neues Prüfskript stehen gelassen): rc=1, „Stichtag 01.01.2027: 23/33 grün“, genau zehn Zeilen `✗`:
+- Quelltext-Scan über 268 Dateien: `components/rechner/MinijobRechner.tsx:205` (Satz der KV-Pauschale fest)
+- `getMinijobKvPauschaleProzent` vorhanden: ist `undefined`
+- 633 € gewerblich am 01.01.2027: Minijob: ist `midijob`
+- 633 € gewerblich am 01.01.2027: KV 633 × 17,5 % = 110,78 €: ist 82.29
+- 633 € gewerblich am 01.01.2027: Satz im Ergebnis: ist `fehlt`
+- 633 € am 01.01.2027: Grenze und Mindestlohn des Stichtags: ist 603 / 13.9
+- 633 € Privathaushalt am 01.01.2027: KV 5 % = 31,65 €: ist 31.65 / fehlt
+- 175 € gewerblich am 01.01.2027: KV 30,625 kaufmännisch 30,63 €: ist 22.75
+- `anteilCent` vorhanden: ist `undefined`
+- Minijob-Text nennt 82,29 € (aus der Lib): ist `false`
+
+**Commits:** `6c93b8b` (Inhalt), dieser Commit (Historie).
+
+**Geprüft in dieser Sitzung (25.11.2026, Berliner Zeit, Windows, Git Bash):**
+- Phase 0: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `f9db67e`, darunter `20d3d33`; Skill-Repo-Status leer; 2 Stash-Einträge; „Stichtag 01.01.2027: 20/20 grün“; verify:alle rc=0, „Prüfskripte: 89/89 grün.“
+- Vorlage: „OK — 38 Ersetzungen in 11 Dateien.“, rc=0; `git status --short` genau die elf Dateien; Skill-Repo-Status leer; unter `slug: 'minijob-rechner'` steht `letzteAktualisierung: '2026-11-25'`; Grep-Zählung 1.
+- „Stichtag 01.01.2027: 38/38 grün“, auch nach der Gegenprobe.
+- Karola: Selbsttest „65 von 65 Faellen wie erwartet — gruen.“, rc=0; Formeln „192 Ketten in 448 Dateien, 0 Befund(e), 3 Hinweis(e)“ (`arbeit.ts:1134`, `sport.ts:1915`, `wohnen.ts:3290`), rc=0; Register KV01 bis KV05 je 0 Stellen, KV06 95 Stellen Stufe `pruefen`, „Register: 0 Befund(e)“, rc=0.
+- Diff-Statistik vor dem Stash und nach dem Pop gleich: „11 files changed, 190 insertions(+), 46 deletions(-)“. Nach `git stash push` nur ` M scripts/verify-stichtag-2027.ts`; `git stash pop` ohne Konflikt; Stash-Einträge vorher 2, nachher 2.
+- verify:alle rc=0, „Prüfskripte: 89/89 grün.“
+- Build rc=0, „✓ Generating static pages using 15 workers (272/272) in 10.8s“; danach `git status --short` 11 Zeilen.
+- Commit A: 11 Dateien, „11 files changed, 190 insertions(+), 46 deletions(-)“, Baum `3c9b1f1` wie im Probelauf.
+
+**Probelauf in der Chat-Sitzung (25.11.2026, Linux, Stand `f9db67e`):**
+- Vorlage: Ergebnis Datei für Datei gleich dem Zielstand, bis auf die Datumszeile; zweiter Lauf „ABBRUCH — 31 Fehler, keine Datei geschrieben.“, Exit 1.
+- Werte: 603 € gewerblich 2026 → KV 78,39 €, Gesamtkosten 790,95 €; 633 € gewerblich ab 01.01.2027 → Minijob, KV 110,78 €; 633 € Privathaushalt → KV 31,65 € (5 %). verify:alle 89/89 in Berlin, UTC, New York und Tokio.
+- Build: 272 Seiten, danach `git status` unverändert.
+- Im gebauten Stand per Browser: heute 538 € gewerblich „Pauschale Krankenversicherung (13 %)“ −69,94 €, Arbeitgeber 705,69 €; Privathaushalt „(5 %)“ −26,90 €. Mit auf den 01.01.2027 gestellter Uhr: 538 € „(17,5 %)“ −94,15 €, 633 € −110,78 €, 175 € −30,63 €. Neue Kacheln, Beispieltitel und Quelle sichtbar, FAQ-JSON-LD mit 17,5 %.
+- Ganzer Prompt einmal durchgespielt, mit zwei alten Stash-Einträgen, Stash, Gegenprobe und beiden Commits, auf einem Test-Remote; Baum von Commit A mit Ausführungstag 2026-11-25: `3c9b1f1`.
+
+**Offen:** Live-Prüfung nach dem Deploy (Karsten, inkognito); am 02.01.2027 Termin `switch-wirksamkeit-2027` (633 € gewerblich: „Pauschale Krankenversicherung (17,5 %)“, 110,78 €).
+
+---
+
 ## 19.11.2026 — Welle 205: Bruchrechner zeigt den Prozentwert — ✅ ABGESCHLOSSEN 19.11.2026
 
 **Anlass:** Rückmeldung über den Feedback-Knopf am 18.11.2026, 14:44, auf `/mathe/bruchrechner`: Grund „Ich wollte etwas anderes berechnen“, Text nur „17/25“, keine E-Mail. Der Rechner konnte 17/25 schon kürzen (bereits vollständig gekürzt) und in 0,68 umwandeln, zeigte aber nirgends den Prozentwert und verlinkte den Notenschlüssel-Rechner nicht. Gelesen als „Bruch in Prozent“ oder „17 von 25 Punkten als Note“; das ist eine Deutung, eine Rückfrage war nicht möglich.
