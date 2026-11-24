@@ -21,6 +21,7 @@ export interface MinijobErgebnis {
   // AG-Seite
   agRentenversicherung: number;
   agKrankenversicherung: number;
+  agKvSatzProzent: number;      // W206: Pauschale zur KV in Prozent (gewerblich 13 bzw. ab 2027 17,5; Privathaushalt 5)
   agLohnsteuer: number;
   agUmlagen: number;
   agUnfallversicherung: number; // nur Privathaushalt
@@ -43,12 +44,15 @@ export interface MinijobErgebnis {
 }
 
 // Mindestlohn und Minijob-Grenze aus zentraler SSOT mit Stichtag-Switch:
-// MINDESTLOHN springt am 01.01.2027 auf 14,60 €, MINIJOB_GRENZE_MONAT auf 633 €.
+// der Mindestlohn springt am 01.01.2027 auf 14,60 €, die Minijob-Grenze auf 633 €.
 // MINDESTLOHN_2026 bleibt als Re-Export für Konsumenten, die explizit den
 // 2026er Wert brauchen (z.B. SEO-Texte mit Jahresbezug).
-import { MINDESTLOHN, MINIJOB_GRENZE_MONAT } from './mindestlohn';
+// W206: berechneMinijob nimmt einen Stichtag (Standard heute) und bestimmt Grenze, Mindestlohn und
+// KV-Pauschale zu diesem Tag. Der Nebenjob-Rechner übergibt SV_RECHENSTAND.
+import { getAktuellerMindestlohn, getMinijobGrenzeMonat, MINIJOB_GRENZE_MONAT } from './mindestlohn';
 import { DURCHSCHNITTSENTGELT_2026 } from './rente';
-import { WOCHEN_PRO_MONAT } from './_helpers';
+import { getMinijobKvPauschaleProzent } from './sv-parameter';
+import { anteilCent, WOCHEN_PRO_MONAT } from './_helpers';
 export { MINDESTLOHN_2026 } from './mindestlohn';
 export { WOCHEN_PRO_MONAT } from './_helpers';
 
@@ -75,30 +79,36 @@ const UNFALLVERSICHERUNG_PRIVATHAUSHALT_2026 = 0.016;
 const RV_BEITRAGSSATZ_2026 = 0.186;
 const RV_MINDESTBEMESSUNG = 175;
 
-function getStatus(verdienst: number): JobStatus {
-  if (verdienst <= MINIJOB_GRENZE) return 'minijob';
+function getStatus(verdienst: number, minijobGrenze: number): JobStatus {
+  if (verdienst <= minijobGrenze) return 'minijob';
   if (verdienst <= MIDIJOB_OBERGRENZE) return 'midijob';
   return 'regulaer';
 }
 
-export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
+export function berechneMinijob(e: MinijobEingabe, stichtag: Date = new Date()): MinijobErgebnis {
   const { verdienst, art, rentenversicherungspflicht, stundenProWoche } = e;
-  const status = getStatus(verdienst);
+  const minijobGrenze = getMinijobGrenzeMonat(stichtag);
+  const mindestlohn = getAktuellerMindestlohn(stichtag);
+  const status = getStatus(verdienst, minijobGrenze);
 
   // === ARBEITGEBER-ABGABEN ===
+  // W206: KV-Pauschale gewerblich zum Stichtag (bis 2026 13 %, ab 01.01.2027 14,6 % plus durchschnittlicher
+  // Zusatzbeitrag, 2027 zusammen 17,5 %; § 249b SGB V). Alle Beträge mit anteilCent: kaufmännisch auf
+  // Cent, vorher rund2(Entgelt × Satz), das halbe Cent teils abrundete.
   let agRv = 0, agKv = 0, agLst = 0, agUml = 0, agUnfall = 0;
+  const agKvSatzProzent = art === 'gewerblich' ? getMinijobKvPauschaleProzent(stichtag) : 5;
 
   if (art === 'gewerblich') {
-    agRv = rund2(verdienst * 0.15);   // 15% RV
-    agKv = rund2(verdienst * 0.13);   // 13% KV
-    agLst = rund2(verdienst * 0.02);  // 2% pauschale Lohnsteuer
-    agUml = rund2(rund2(verdienst * UMLAGE_U1_2026) + rund2(verdienst * UMLAGE_U2_2026) + rund2(verdienst * INSOLVENZGELDUMLAGE_2026));
+    agRv = anteilCent(verdienst, 0.15);   // 15 % RV
+    agKv = anteilCent(verdienst, agKvSatzProzent / 100);
+    agLst = anteilCent(verdienst, 0.02);  // 2 % pauschale Lohnsteuer
+    agUml = rund2(anteilCent(verdienst, UMLAGE_U1_2026) + anteilCent(verdienst, UMLAGE_U2_2026) + anteilCent(verdienst, INSOLVENZGELDUMLAGE_2026));
   } else {
-    agRv = rund2(verdienst * 0.05);           // 5% RV
-    agKv = rund2(verdienst * 0.05);           // 5% KV
-    agLst = rund2(verdienst * 0.02);          // 2% Pauschsteuer
-    agUml = rund2(rund2(verdienst * UMLAGE_U1_2026) + rund2(verdienst * UMLAGE_U2_2026)); // keine Insolvenzgeldumlage
-    agUnfall = rund2(verdienst * UNFALLVERSICHERUNG_PRIVATHAUSHALT_2026);
+    agRv = anteilCent(verdienst, 0.05);           // 5 % RV
+    agKv = anteilCent(verdienst, agKvSatzProzent / 100); // 5 % KV
+    agLst = anteilCent(verdienst, 0.02);          // 2 % Pauschsteuer
+    agUml = rund2(anteilCent(verdienst, UMLAGE_U1_2026) + anteilCent(verdienst, UMLAGE_U2_2026)); // keine Insolvenzgeldumlage
+    agUnfall = anteilCent(verdienst, UNFALLVERSICHERUNG_PRIVATHAUSHALT_2026);
   }
 
   const agAbgabenGesamt = rund2(agRv + agKv + agLst + agUml + agUnfall);
@@ -108,7 +118,7 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
   // === ARBEITNEHMER-ABGABEN ===
   // AN-Eigenanteil zur RV: voller Beitrag (mindestens aus 175 €) minus AG-Pauschale (W167)
   const rvEigenanteil = (status === 'minijob' && rentenversicherungspflicht && verdienst > 0)
-    ? Math.max(0, rund2(rund2(Math.max(verdienst, RV_MINDESTBEMESSUNG) * RV_BEITRAGSSATZ_2026) - agRv))
+    ? Math.max(0, rund2(anteilCent(Math.max(verdienst, RV_MINDESTBEMESSUNG), RV_BEITRAGSSATZ_2026) - agRv))
     : 0;
 
   const nettoAN = rund2(verdienst - rvEigenanteil);
@@ -119,9 +129,9 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
   let unterMindestlohn = false;
   if (stundenProWoche && stundenProWoche > 0) {
     stundenlohn = rund2(verdienst / (stundenProWoche * WOCHEN_PRO_MONAT));
-    unterMindestlohn = stundenlohn < MINDESTLOHN;
+    unterMindestlohn = stundenlohn < mindestlohn;
   }
-  const maxStundenProWoche = rund2(verdienst / MINDESTLOHN / WOCHEN_PRO_MONAT);
+  const maxStundenProWoche = rund2(verdienst / mindestlohn / WOCHEN_PRO_MONAT);
 
   // === RENTENPUNKTE (grob) ===
   // 1 Rentenpunkt = Durchschnittsbrutto 2026: 51.944 €/Jahr (§ 69 SGB VI + Anlage 1).
@@ -138,6 +148,7 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
     nettoAN_ohneRv,
     agRentenversicherung: agRv,
     agKrankenversicherung: agKv,
+    agKvSatzProzent,
     agLohnsteuer: agLst,
     agUmlagen: agUml,
     agUnfallversicherung: agUnfall,
@@ -147,9 +158,9 @@ export function berechneMinijob(e: MinijobEingabe): MinijobErgebnis {
     stundenlohn,
     unterMindestlohn,
     maxStundenProWoche,
-    minijobGrenze: MINIJOB_GRENZE,
+    minijobGrenze,
     midijobObergrenze: MIDIJOB_OBERGRENZE,
-    mindestlohn: MINDESTLOHN,
+    mindestlohn,
     rentenpunkteProJahrMitRv,
   };
 }

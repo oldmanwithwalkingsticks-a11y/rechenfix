@@ -3,7 +3,8 @@ import { pvAnteilAn2026, PV_BASIS_SATZ_2026 } from './pflegeversicherung';
 import { istImUebergangsbereich, berechneBemessungsgrundlageAN, berechneBemessungsgrundlageGesamt, getMidijobUntergrenze, MIDIJOB_OBERGRENZE_MONAT } from './midijob-uebergang';
 import { getAktuelleMidijobParameter } from './midijob-parameter';
 import { getMinijobGrenzeMonat } from './mindestlohn';
-import { VOLLZEIT_STUNDEN_MONAT } from './_helpers';
+import { getMinijobKvPauschaleProzent } from './sv-parameter';
+import { anteilCent, VOLLZEIT_STUNDEN_MONAT } from './_helpers';
 
 export interface BruttoNettoEingabe {
   bruttoMonat: number;
@@ -358,9 +359,10 @@ function anSvMonat(
   if (ae <= 0) return { kv: privat ? eingabe.kvPrivatBeitrag : 0, rv: 0, av: 0, pv: 0 };
 
   if (zone === 'minijob') {
+    // W206: Cent kaufmännisch über anteilCent, wie im Minijob-Rechner (minijob.ts)
     const rv = eingabe.rvBefreit
       ? 0
-      : Math.max(0, r(Math.max(ae, RV_MINDESTBEMESSUNG_MINIJOB) * 0.186) - r(ae * 0.15));
+      : Math.max(0, r(anteilCent(Math.max(ae, RV_MINDESTBEMESSUNG_MINIJOB), 0.186) - anteilCent(ae, 0.15)));
     return { kv: privat ? eingabe.kvPrivatBeitrag : 0, rv, av: 0, pv: 0 };
   }
 
@@ -393,7 +395,9 @@ function anSvMonat(
 /**
  * W166: Arbeitgeberanteil zur Sozialversicherung für ein Monatsentgelt, gesetzlich krankenversichert,
  * Rechenstand 2026, ohne Umlagen (U1, U2, Insolvenzgeld) und ohne Unfallversicherung.
- *  - Minijob (gewerblich): Pauschalbeiträge KV 13 % (§ 249b SGB V) und RV 15 % (§ 168 Abs. 1 Nr. 1b SGB VI).
+ *  - Minijob (gewerblich): Pauschalbeiträge KV (§ 249b SGB V) und RV 15 % (§ 168 Abs. 1 Nr. 1b SGB VI).
+ *    W206: KV-Pauschale zum Rechenstand aus sv-parameter.ts, 2026 13 %, ab 2027 14,6 % plus durchschnittlicher
+ *    Zusatzbeitrag (2027: 17,5 %, GKV-Beitragssatzstabilisierungsgesetz). Beträge über anteilCent.
  *  - Übergangsbereich: Gesamtbeitrag je Zweig aus BE_gesamt (halber Satz, auf Cent gerundet, verdoppelt)
  *    minus Arbeitnehmeranteil je Zweig aus BE_AN; der PV-Zuschlag für Kinderlose belastet nur den
  *    Arbeitnehmer (§ 20 Abs. 2a SGB IV; DRV, Übergangsbereich). Prüfanker lohn-info.de: AE 1.000 €,
@@ -409,7 +413,7 @@ export function berechneArbeitgeberSvMonat(
   const r = (x: number) => Math.round(x * 100) / 100;
   if (bruttoMonat <= 0) return 0;
   if (bruttoMonat <= getMinijobGrenzeMonat(SV_RECHENSTAND)) {
-    return r(bruttoMonat * 0.13) + r(bruttoMonat * 0.15);
+    return r(anteilCent(bruttoMonat, getMinijobKvPauschaleProzent(SV_RECHENSTAND) / 100) + anteilCent(bruttoMonat, 0.15));
   }
   const halbKv = KV_BASISSATZ_AN_2026 + kvZusatzbeitragProzent / 200;
   // W167: Steuerklasse VI (Zweitjob) ohne Übergangsbereich, wie in berechneBruttoNetto.

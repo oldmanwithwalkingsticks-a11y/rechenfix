@@ -3715,7 +3715,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'minijob-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-11-25',
     titel: 'Minijob-Rechner',
     beschreibung: 'Minijob-Abgaben berechnen: Verdienst, Abgaben für Arbeitgeber und Arbeitnehmer sowie Übergang zum Midijob.',
     kategorie: 'Finanzen',
@@ -3733,6 +3733,8 @@ export const finanzenRechner: RechnerConfig[] = [
     // U1 0,8 %, U2 0,22 %, Insolvenzgeld 0,15 % nur gewerblich, Unfall Privathaushalt 1,6 %; Minijob-Zentrale)
     // (lib/berechnungen/minijob.ts); RV-Eigenanteil 3,6 %; Rentenpunkt = 51.944 €
     // Durchschnittsentgelt (§ 69 SGB VI) → 0,14 EP/Jahr. Kein Autorenblock. erklaerung Fallback.
+    // W206: KV-Pauschale gewerblich ab 01.01.2027 17,5 % (14,6 % + Ø-Zusatzbeitrag 2,9 %, § 249b SGB V);
+    // minijob.ts schaltet zum Stichtag um, die Texte nennen beide Jahre.
     contentBloecke: [
       {
         typ: 'text',
@@ -3786,11 +3788,11 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Steuer & Abgaben: für Arbeitnehmer (fast) frei',
-        html: `<p>Der größte Vorteil des Minijobs für Arbeitnehmer: Er ist <strong>lohnsteuerfrei</strong> und — bis auf einen kleinen Rentenbeitrag — <strong>sozialabgabenfrei</strong>. Die gesamte Abgabenlast trägt der Arbeitgeber über Pauschalen, die er an die Minijob-Zentrale abführt.</p><p>Bei einem <strong>gewerblichen Minijob</strong> zahlt der Arbeitgeber rund <strong>31,2 %</strong> Pauschalabgaben zusätzlich zum Lohn: 15 % pauschale Rentenversicherung, 13 % pauschale Krankenversicherung, 2 % pauschale Lohnsteuer und 1,17 % Umlagen (U1 0,8 % für Krankheit, U2 0,22 % für Mutterschutz, Insolvenzgeldumlage 0,15 %), dazu der Beitrag zur Berufsgenossenschaft. Im <strong>Privathaushalt</strong> sind die Pauschalen mit rund 14,6 % (5 % RV, 5 % KV, 2 % Steuer, 1,02 % Umlagen, 1,6 % Unfallversicherung) nicht einmal halb so hoch, weil der Staat haushaltsnahe Beschäftigung fördert. Dafür trägt der Minijobber dort einen höheren RV-Eigenanteil von 13,6 % — Privathaushalte können zudem 20 % der Kosten (höchstens 510 € pro Jahr) von der Steuer absetzen.</p><p>Der Arbeitnehmer muss den Minijob <strong>nicht in der Steuererklärung angeben</strong>; die 2-%-Pauschale gilt als abgegolten. Anders ist es nur, wenn der Arbeitgeber statt der Pauschale die individuelle Versteuerung über die Lohnsteuerklasse wählt — das lohnt fast nur in Steuerklasse I ohne weiteres Einkommen.</p>`,
+        html: `<p>Der größte Vorteil des Minijobs für Arbeitnehmer: Er ist <strong>lohnsteuerfrei</strong> und — bis auf einen kleinen Rentenbeitrag — <strong>sozialabgabenfrei</strong>. Die gesamte Abgabenlast trägt der Arbeitgeber über Pauschalen, die er an die Minijob-Zentrale abführt.</p><p>Bei einem <strong>gewerblichen Minijob</strong> zahlt der Arbeitgeber 2026 rund <strong>31,2 %</strong> Pauschalabgaben zusätzlich zum Lohn: 15 % pauschale Rentenversicherung, 13 % pauschale Krankenversicherung, 2 % pauschale Lohnsteuer und 1,17 % Umlagen (U1 0,8 % für Krankheit, U2 0,22 % für Mutterschutz, Insolvenzgeldumlage 0,15 %), dazu der Beitrag zur Berufsgenossenschaft. Ab 1. Januar 2027 steigt die Pauschale zur Krankenversicherung auf den allgemeinen Beitragssatz von 14,6 % plus den durchschnittlichen Zusatzbeitrag von 2,9 %, zusammen <strong>17,5 %</strong> (§ 249b SGB V, geändert durch das GKV-Beitragssatzstabilisierungsgesetz). Im <strong>Privathaushalt</strong> sind die Pauschalen mit rund 14,6 % (5 % RV, 5 % KV, 2 % Steuer, 1,02 % Umlagen, 1,6 % Unfallversicherung) nicht einmal halb so hoch, weil der Staat haushaltsnahe Beschäftigung fördert. Dafür trägt der Minijobber dort einen höheren RV-Eigenanteil von 13,6 % — Privathaushalte können zudem 20 % der Kosten (höchstens 510 € pro Jahr) von der Steuer absetzen.</p><p>Der Arbeitnehmer muss den Minijob <strong>nicht in der Steuererklärung angeben</strong>; die 2-%-Pauschale gilt als abgegolten. Anders ist es nur, wenn der Arbeitgeber statt der Pauschale die individuelle Versteuerung über die Lohnsteuerklasse wählt — das lohnt fast nur in Steuerklasse I ohne weiteres Einkommen.</p>`,
       },
       {
         typ: 'beispielrechnung',
-        titel: 'Arbeitgeber-Sicht: Pauschalabgaben auf 603 €',
+        titel: 'Arbeitgeber-Sicht 2026: Pauschalabgaben auf 603 €',
         schritte: [
           { label: 'Pauschale Rentenversicherung (15 %)', formel: '603 € × 15 %', ergebnis: '90,45 €' },
           { label: 'Pauschale Krankenversicherung (13 %)', formel: '603 € × 13 %', ergebnis: '78,39 €' },
@@ -3798,16 +3800,18 @@ export const finanzenRechner: RechnerConfig[] = [
           { label: 'Umlagen U1/U2/Insolvenz (1,17 %)', formel: '603 € × 0,8 % + × 0,22 % + × 0,15 %, je gerundet', ergebnis: '7,05 €' },
           { label: 'Arbeitgeber-Gesamtkosten', formel: '603 € + 187,95 €', ergebnis: '790,95 €' },
         ],
-        fazit: 'Ein gewerblicher 603-€-Minijob kostet den Arbeitgeber rund 790,95 € — ein Aufschlag von etwa 31,2 % auf den Lohn, ohne den Beitrag zur Berufsgenossenschaft. Im Privathaushalt läge der Aufschlag bei rund 14,6 %.',
+        fazit: 'Ein gewerblicher 603-€-Minijob kostet den Arbeitgeber 2026 rund 790,95 € — ein Aufschlag von etwa 31,2 % auf den Lohn, ohne den Beitrag zur Berufsgenossenschaft. Im Privathaushalt läge der Aufschlag bei rund 14,6 %. Ab 2027 beträgt die Pauschale zur Krankenversicherung 17,5 % statt 13 %; bei der neuen Grenze von 633 € sind das 110,78 € im Monat.',
       },
       {
         typ: 'statistik',
         titel: 'Pauschalabgaben: gewerblich vs. Privathaushalt',
         werte: [
-          { label: 'Gewerblich gesamt', wert: '≈ 31,2 %', hinweis: '15 % RV + 13 % KV + 2 % LSt + 1,17 % Umlagen' },
-          { label: 'Privathaushalt gesamt', wert: '≈ 14,6 %', hinweis: '5 % RV + 5 % KV + 2 % LSt + 1,02 % Umlagen + 1,6 % Unfall' },
-          { label: 'AG-Kosten gewerblich (603 €)', wert: '790,95 €', hinweis: '+187,95 € Pauschalen' },
+          { label: 'Gewerblich gesamt 2026', wert: '≈ 31,2 %', hinweis: '15 % RV + 13 % KV + 2 % LSt + 1,17 % Umlagen' },
+          { label: 'Privathaushalt gesamt 2026', wert: '≈ 14,6 %', hinweis: '5 % RV + 5 % KV + 2 % LSt + 1,02 % Umlagen + 1,6 % Unfall' },
+          { label: 'AG-Kosten gewerblich 2026 (603 €)', wert: '790,95 €', hinweis: '+187,95 € Pauschalen' },
           { label: 'Steuerbonus Privathaushalt', wert: '20 %, max. 510 €/Jahr', hinweis: 'haushaltsnahe Beschäftigung, § 35a EStG' },
+          { label: 'KV-Pauschale gewerblich ab 2027', wert: '17,5 %', hinweis: '14,6 % + Ø-Zusatzbeitrag 2,9 % (§ 249b SGB V)' },
+          { label: 'KV-Pauschale bei 633 € (2027)', wert: '110,78 €', hinweis: '633 € × 17,5 %, bisher 13 %' },
         ],
       },
       {
@@ -3902,7 +3906,7 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Welche Abgaben zahlt der Arbeitgeber beim Minijob?',
-        antwort: 'Bei einem gewerblichen Minijob zahlt der Arbeitgeber rund 31,2 % Pauschalabgaben: 15 % pauschale Rentenversicherung, 13 % pauschale Krankenversicherung, 2 % pauschale Lohnsteuer und 1,17 % für Umlagen (U1, U2, Insolvenzgeld), dazu den Beitrag zur Berufsgenossenschaft. Bei einem Minijob im Privathaushalt sind die Abgaben mit rund 14,6 % deutlich niedriger, darin enthalten 1,6 % Unfallversicherung.',
+        antwort: 'Bei einem gewerblichen Minijob zahlt der Arbeitgeber 2026 rund 31,2 % Pauschalabgaben: 15 % pauschale Rentenversicherung, 13 % pauschale Krankenversicherung, 2 % pauschale Lohnsteuer und 1,17 % für Umlagen (U1, U2, Insolvenzgeld), dazu den Beitrag zur Berufsgenossenschaft. Ab 1. Januar 2027 beträgt die Pauschale zur Krankenversicherung 14,6 % plus den durchschnittlichen Zusatzbeitrag von 2,9 %, zusammen 17,5 % (§ 249b SGB V). Bei einem Minijob im Privathaushalt sind die Abgaben mit rund 14,6 % deutlich niedriger, darin enthalten 1,6 % Unfallversicherung; die Pauschale zur Krankenversicherung bleibt dort bei 5 %.',
       },
       {
         frage: 'Ist ein Minijob steuerfrei?',
@@ -3929,6 +3933,7 @@ export const finanzenRechner: RechnerConfig[] = [
       { titel: '§ 8 SGB IV: Geringfügige Beschäftigung', url: 'https://www.gesetze-im-internet.de/sgb_4/__8.html', hinweis: 'Minijob-Definition; Grenze = Mindestlohn × 130 ÷ 3' },
       { titel: '§ 20 SGB IV: Übergangsbereich (Midijob)', url: 'https://www.gesetze-im-internet.de/sgb_4/__20.html', hinweis: 'Abs. 2 und 2a: Übergangsbereich 603,01 – 2.000 €' },
       { titel: 'Minijob-Zentrale (Knappschaft-Bahn-See)', url: 'https://www.minijob-zentrale.de', hinweis: 'Grenze 603 €/Monat (2026); zuständige Meldestelle' },
+      { titel: '§ 249b SGB V: Beitrag des Arbeitgebers bei geringfügiger Beschäftigung', url: 'https://www.gesetze-im-internet.de/sgb_5/__249b.html', hinweis: 'Pauschale zur Krankenversicherung: 13 % bis 2026, ab 01.01.2027 allgemeiner Beitragssatz plus durchschnittlicher Zusatzbeitrag (GKV-Beitragssatzstabilisierungsgesetz, BGBl. 2026 I Nr. 228)' },
     ],
   },
   {

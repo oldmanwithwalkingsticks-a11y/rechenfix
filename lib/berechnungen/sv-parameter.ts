@@ -49,3 +49,27 @@ export const KV_ERMAESSIGTER_BEITRAGSSATZ_2026 = 0.14;
  */
 export const JAEG_2026_JAHR = 77400;
 export const JAEG_2026_MONAT = 6450;
+
+/** W206: Allgemeiner Beitragssatz der GKV in Prozent (§ 241 SGB V). */
+export const KV_ALLGEMEINER_BEITRAGSSATZ_PROZENT = 14.6;
+
+/**
+ * W206: Durchschnittlicher Zusatzbeitragssatz 2027 nach § 242a SGB V als voller Prozentwert,
+ * festgelegt vom Bundesministerium für Gesundheit (Pressemitteilung vom 30.10.2026: 2,9 %, wie 2026).
+ */
+export const KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2027_PROZENT = 2.9;
+
+/**
+ * W206: Pauschalbeitrag des Arbeitgebers zur Krankenversicherung im gewerblichen Minijob
+ * (§ 249b Satz 1 SGB V), in Prozent des Entgelts.
+ *  - bis 31.12.2026: 13 %.
+ *  - ab 01.01.2027: allgemeiner Beitragssatz plus durchschnittlicher Zusatzbeitragssatz,
+ *    2027 also 14,6 % + 2,9 % = 17,5 %. GKV-Beitragssatzstabilisierungsgesetz vom 24.07.2026
+ *    (BGBl. 2026 I Nr. 228), Art. 1 Nr. 64, in Kraft am 01.01.2027 (Art. 8 Abs. 2).
+ * Nach 2027 bleibt es beim Wert 2027, bis der Zusatzbeitragssatz des Folgejahres eingetragen ist.
+ * Im Privathaushalt (§ 249b Satz 2 SGB V) bleibt es bei 5 %; dieser Satz steht in minijob.ts.
+ */
+export function getMinijobKvPauschaleProzent(stichtag: Date = new Date()): number {
+  if (stichtag < new Date(2027, 0, 1)) return 13;
+  return Math.round((KV_ALLGEMEINER_BEITRAGSSATZ_PROZENT + KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2027_PROZENT) * 10) / 10;
+}

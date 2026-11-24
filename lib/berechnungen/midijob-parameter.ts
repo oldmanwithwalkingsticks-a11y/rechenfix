@@ -13,10 +13,16 @@
  * Der AG trägt den Differenzbetrag (mehr als die Hälfte der Gesamtlast) —
  * das ist der eigentliche Midijob-Vorteil.
  *
- * Faktor F = 28 % ÷ Gesamtsozialversicherungsbeitragssatz des Jahres; das BMAS
- * gibt ihn bis zum 31.12. im Bundesanzeiger für das Folgejahr bekannt
+ * Faktor F = Summe der Minijob-Pauschalen KV und RV ÷ Gesamtsozialversicherungsbeitragssatz des
+ * Jahres; das BMAS gibt ihn bis zum 31.12. im Bundesanzeiger für das Folgejahr bekannt
  * (§ 20 Abs. 2a Sätze 2 bis 5 SGB IV). F bildet die Durchschnittsbeiträge auf der
  * Arbeitgeber-Pauschalseite ab (Midijob-Modell vs. Minijob-Pauschalen).
+ *  - bis 2026: 28 % (13 % KV + 15 % RV) ÷ Gesamtsatz; 2026: 28 ÷ 42,3 = 0,6619.
+ *  - W206, ab 01.01.2027: allgemeiner Beitragssatz KV (14,6 %) + durchschnittlicher Zusatzbeitragssatz
+ *    + 15 % RV, geteilt durch den Gesamtsatz (§ 20 Abs. 2a Satz 2 SGB IV in der Fassung von Art. 2 Nr. 1
+ *    GKV-Beitragssatzstabilisierungsgesetz vom 24.07.2026, BGBl. 2026 I Nr. 228, in Kraft am 01.01.2027).
+ *    Mit den Sätzen 2027 (KV 14,6 + 2,9, RV 18,6, AV 2,6, PV 3,6; Gesamtsatz 42,3 %) ergibt das
+ *    32,5 ÷ 42,3 = 0,7683. Maßgeblich bleibt die Bekanntmachung des BMAS (Termin midijob-parameter-2027).
  *
  * Stichtag-Switch-Pattern analog `mindestlohn.ts`/`bafoeg-parameter.ts`:
  * Pro Kalenderjahr ein Bucket; Getter wählt nach Stichtag.
@@ -51,7 +57,7 @@ export const MIDIJOB_2026: MidijobParameter = {
 /**
  * Liefert den jeweils geltenden Midijob-Parameter-Satz zum Stichtag.
  * Aktuell nur ein Bucket; bei Jahreswechsel 2027 wird ein
- * `MIDIJOB_2027`-Bucket ergänzt (dann u. a. G = 633 €, neuer F).
+ * `MIDIJOB_2027`-Bucket ergänzt (dann u. a. G = 633 €, neuer F nach der ab 2027 geltenden Formel).
  */
 export function getAktuelleMidijobParameter(
   stichtag: Date = new Date(),

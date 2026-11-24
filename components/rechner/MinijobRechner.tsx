@@ -202,7 +202,7 @@ export default function MinijobRechner() {
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.agRentenversicherung)} €</td>
               </tr>
               <tr>
-                <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Pauschale Krankenversicherung ({art === 'gewerblich' ? '13' : '5'} %)</td>
+                <td className="px-4 py-2.5 text-gray-600 dark:text-gray-400">Pauschale Krankenversicherung ({ergebnis.agKvSatzProzent.toLocaleString('de-DE')} %)</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-400">—</td>
                 <td className="px-4 py-2.5 text-right tabular-nums text-red-700 dark:text-red-300">−{fmtEuro(ergebnis.agKrankenversicherung)} €</td>
               </tr>

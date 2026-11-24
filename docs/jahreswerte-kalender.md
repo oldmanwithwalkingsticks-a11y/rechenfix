@@ -17,6 +17,8 @@
 | **~November 2026** | Inflationsausgleichsgesetz 2027 | Grundfreibetrag + ESt-Zonengrenzen in `einkommensteuer.ts` einpflegen | ⏳ warten auf Bekanntgabe |
 | **01.01.2027** | Mindestlohn 13,90 € → 14,60 € | **Switch aktiv** — automatischer Wechsel in `mindestlohn.ts` | ✅ vorbereitet |
 | **01.01.2027** | Minijob-Grenze 603 € → 633 € | **Switch aktiv** — abgeleitet aus Mindestlohn | ✅ vorbereitet |
+| **01.01.2027** | Minijob: KV-Pauschale gewerblich 13 % → 17,5 % (14,6 % + Ø-Zusatzbeitrag 2,9 %, § 249b SGB V, GKV-Beitragssatzstabilisierungsgesetz) | **Switch aktiv** — `getMinijobKvPauschaleProzent` in `sv-parameter.ts`; Minijob-Rechner zum Tagesdatum, Arbeitgeberanteil in `brutto-netto.ts` zum `SV_RECHENSTAND` | ✅ vorbereitet (Welle 206) |
+| **01.01.2027** | Midijob: neue Formel für Faktor F (§ 20 Abs. 2a Satz 2 SGB IV, GKV-Beitragssatzstabilisierungsgesetz) | Bucket `MIDIJOB_2027` mit F aus der BMAS-Bekanntmachung, erwartet 0,7683 | ⏳ Termin `midijob-parameter-2027` |
 | **01.01.2027** | Grundfreibetrag ESt | Neuer Wert + Zonen-Anpassung in `einkommensteuer.ts` | ⏳ warten |
 | **01.01.2027** | Kinderfreibetrag | Neuer sächlicher Teil in `kindergeld.ts` | ⏳ warten |
 | **01.01.2027** | Altersentlastungsbetrag Kohorte 2026 | Neue Zeile in Jahrgangsstaffel | ⏳ warten |
@@ -193,6 +195,7 @@
 7. [ ] **PV-Beitragssätze**: Änderungen bei § 55 SGB XI?
 8. [ ] **Midijob F-Faktor** § 20a Abs. 2 SGB IV (wird jährlich aus den Durchschnittsbeitragssätzen abgeleitet, gemeinsames Rundschreiben GKV-Spitzenverband / DRV Bund / BA):
    - 2026: `F = 0,6619` in `MIDIJOB_2026` in [`lib/berechnungen/midijob-parameter.ts`](../lib/berechnungen/midijob-parameter.ts) (seit Prompt 125a)
+   - Formel bis 2026: 28 % (13 % KV-Pauschale + 15 % RV-Pauschale) ÷ Gesamtsozialversicherungsbeitragssatz. Ab 2027 (GKV-Beitragssatzstabilisierungsgesetz, BGBl. 2026 I Nr. 228, Art. 2 Nr. 1): allgemeiner Beitragssatz KV + durchschnittlicher Zusatzbeitragssatz + 15 %, geteilt durch den Gesamtsatz. 2027 erwartet: 32,5 ÷ 42,3 = 0,7683.
    - Für (X+1): Neuen Bucket `MIDIJOB_{X+1}` mit aktualisiertem F + ggf. neuer Geringfügigkeitsgrenze G anlegen, Kaskade in `getAktuelleMidijobParameter(stichtag)` ergänzen (Stichtag-Switch 01.01.)
    - Quelle: https://www.gkv-spitzenverband.de/ (gemeinsame Rundschreiben)
 9. [ ] **Lohnsteuer-PAP** § 39b EStG (BMF/ITZBund veröffentlicht den neuen Programmablaufplan typischerweise Oktober/November für das Folgejahr):
@@ -280,6 +283,11 @@ Wenn ein Gesetz verabschiedet wird, das einen Parameter ändert (z. B. StÄndG 2
 ## 🗒️ Änderungshistorie dieser Datei
 
 Neue Einträge oben anfügen.
+
+### 2026-11-25 — Welle 206: Minijob-Pauschale und Faktor F ab 2027
+- Neuer Stichtag-Switch: KV-Pauschale des gewerblichen Minijobs ab 01.01.2027 17,5 % statt 13 % (§ 249b SGB V in der Fassung des GKV-Beitragssatzstabilisierungsgesetzes vom 24.07.2026, BGBl. 2026 I Nr. 228). `getMinijobKvPauschaleProzent` in `sv-parameter.ts`, Minijob-Rechner zum Tagesdatum, Arbeitgeberanteil in `brutto-netto.ts` zum `SV_RECHENSTAND`.
+- Faktor F: neue Formel ab 2027, Dezember-Audit Punkt 8 ergänzt; Termin `midijob-parameter-2027` neu gefasst.
+- Neue Termine `pnog-2027-pflegeversicherung`, `minijob-umlagen-2027`, `estreformg-2027`.
 
 ### 2026-10-29 — Welle 200: Texte mit Jahreswerten im Dezember-Audit
 - Dezember-Audit Punkt 10: Karolas Register (KV04 bis KV06) als Liste der Textstellen, BAföG-Freibetrag nach § 23 Abs. 6, AFBG-Freibetrag, `verify-stichtag-2027.ts`.

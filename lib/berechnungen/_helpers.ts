@@ -42,3 +42,18 @@ export const VOLLZEIT_WOCHENSTUNDEN = 40;
  * im Schnitt 52 ÷ 12 = 4,33 Wochen, nicht 4.
  */
 export const VOLLZEIT_STUNDEN_MONAT = VOLLZEIT_WOCHENSTUNDEN * WOCHEN_PRO_MONAT;
+
+/**
+ * W206: Beitrag als Anteil eines Entgelts, kaufmännisch auf Cent gerundet und ohne Gleitkommafehler.
+ * Gerechnet wird in ganzen Zahlen: Entgelt in Cent mal Satz in Hundertstelprozent. `satz` ist ein
+ * Anteil (0,175 für 17,5 %), höchstens vier Nachkommastellen.
+ * Vorher hieß es Math.round(entgelt × satz × 100) ÷ 100. Das rundet bei einem halben Cent falsch ab,
+ * wenn das Produkt knapp darunter dargestellt wird: 175 × 0,175 ergibt 30,624999…, also 30,62 € statt 30,63 €.
+ */
+export function anteilCent(entgelt: number, satz: number): number {
+  const cent = Math.round(entgelt * 100);
+  const hundertstelProzent = Math.round(satz * 10000);
+  const produkt = cent * hundertstelProzent;
+  const gerundet = produkt >= 0 ? Math.floor((produkt + 5000) / 10000) : -Math.floor((-produkt + 5000) / 10000);
+  return gerundet / 100;
+}

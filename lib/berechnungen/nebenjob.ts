@@ -136,7 +136,7 @@ export function berechneNebenjob(
       verdienst: nebenjobBrutto,
       art: 'gewerblich',
       rentenversicherungspflicht: true,
-    }).rvEigenanteil;
+    }, SV_RECHENSTAND).rvEigenanteil; // W206: zum Rechenstand, wie die Grenze oben
     hinweis = 'Minijob: keine Lohnsteuer für Sie (der Arbeitgeber zahlt 2 % pauschal), nur der RV-Eigenanteil von 3,6 %. Davon können Sie sich auf Antrag befreien lassen.';
   } else if (art === 'steuerkarte' || art === 'minijob') {
     const neben = bruttoNetto(nebenjobBrutto, 6, kirchensteuer, bundesland);
