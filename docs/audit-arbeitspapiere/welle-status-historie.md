@@ -6,6 +6,58 @@
 
 ---
 
+## 25.11.2026 — Welle 211: Keine Seite breiter als 320 px (WCAG 1.4.10 Umbruch) — ✅ ABGESCHLOSSEN 25.11.2026
+
+**Anlass:** Welle 208 ließ bei 320 px 25 Seiten der Sitemap zurück, die seitwärts scrollten (`document.documentElement.scrollWidth` > 320), mit anderen Verursachern als den Kennzahl-Kacheln (Liste dort). WCAG 2.1 AA 1.4.10 verlangt, dass Inhalte bei 320 CSS-Pixel ohne waagerechtes Scrollen lesbar bleiben; axe prüft das nicht. Waagerecht scrollende Tabellen in `overflow-x-auto`-Regionen sind zulässig und bleiben.
+
+**Messung vorher** (live, inhaltlich Stand `31cd3d1`, alle 258 Seiten, Chromium 1208 über Playwright, 6 parallel, je Seite nach dem Laden rund 1 s gewartet und zweimal gemessen; gezählt wird die größere Breite; zusätzlich die Textknoten per `Range.getBoundingClientRect`, weil Welle 208 gezeigt hat, dass Elemente in ihrer Spalte bleiben, während ihr Text hinausläuft): 320 px 25 Seiten, 360 px 12, 375 px 5.
+
+**Verursacher und Änderungen:**
+- Zentral:
+  - `app/[kategorie]/[rechner]/page.tsx`: H1, FAQ-Frage (Text in eigenem `span` mit `min-w-0`, sonst schiebt der Flex-Eintrag das Klappsymbol hinaus) und FAQ-Antwort `break-words hyphens-auto`. Betraf u. a. Grunderwerbsteuer, Vorfälligkeitsentschädigung, Internetgeschwindigkeit (lange H1-Komposita), Bußgeld und Kurzarbeitergeld (FAQ).
+  - `components/Quellen.tsx`, `components/blog/Quellen.tsx`: Liste `break-words hyphens-auto` (lange Titel und Links; Hochrechner, Kurzarbeitergeld, Gewerbesteuer, Blogartikel zu den Kalorien).
+  - `components/ui/CrossLink.tsx`: Text `min-w-0 break-words hyphens-auto`, Pfeil `ml-auto shrink-0` (Mietrechner).
+  - `components/ui/RadioToggleGroup.tsx`: drei Optionen unter 360 px untereinander (`grid-cols-1 min-[360px]:grid-cols-3`), Beschriftung und Beschreibung `min-w-0 break-words hyphens-auto` (Grundsteuer). Bei 320 px blieben je Knopf sonst rund 43 px für den Text.
+  - `components/rechner/ContentBlockRenderer.tsx`: Bausteine Beispielrechnung (Beschriftung, Ergebnis), Fazit, Checkliste und Infobox `break-words hyphens-auto` bzw. `min-w-0` (u. a. die grünen Merksatz-Kästen bei Bürgergeld, Gewerbesteuer, Zufallszahl; Pfändung).
+- Je Rechner (Layout, kein Rechenweg):
+  - Bürgergeld: Aufklapper „Weitere Bedarfe“ (`summary` und Inhalt) umbrechend.
+  - Kindergeld, Quadratmeter: Knopfreihen `flex-wrap` statt fester Reihe („Einzelveranlagung“, „Millimeter“).
+  - Wärmepumpe: Laufzeit-Knöpfe als Raster `grid-cols-2 sm:grid-cols-4` („25 Jahre“).
+  - Alkohol-Abbau: Getränkeauswahl `min-w-0`, damit der Löschknopf in der Zeile bleibt.
+  - Betriebskosten, Freelancer-Stundensatz: Legende der Balken unter 360 px einspaltig (`grid-cols-1 min-[360px]:grid-cols-2`), Einträge umbrechend.
+  - Mutterschutz: Zeitleiste unter `sm` untereinander (Beschriftung über Wert statt daneben mit fester Breite).
+  - Backform-Umrechner: Formen-Vorschau schrumpft (`max-w-full h-auto` am SVG, `min-w-0` am Behälter).
+  - Brutto-Netto: Ergebnis-Tabelle mit kleinerem Innenabstand unter `sm`, Prozentspalte `w-12 sm:w-16`, Beschriftungen trennen auch innerhalb langer Wörter (`[overflow-wrap:anywhere]`, weil `break-words` in Tabellenzellen die Mindestbreite nicht senkt).
+  - Hefe-Umrechner: Ergebniszahl `text-4xl sm:text-5xl`, Einheit umbrechend („Trockenhefe (Päckchen)“).
+  - Nettolohn-Optimierer: Name des Siegers umbrechend („Essensmarken (Restaurantschecks)“).
+  - Stundenlohn: die drei Ergebniskacheln unter 360 px einspaltig. Der Rechner steht eingebettet im Blogartikel „Warum ein Monat keine 160 Stunden hat“; dort ragten die Beträge in `text-lg` über den Rand.
+
+**Gemessen** (wie oben; vorher live auf `31cd3d1`, nachher lokal mit `npm run start` auf dem Stand dieser Welle, zwei vollständige Läufe):
+
+| Breite | Seiten zu breit vorher | nachher (Lauf 1 / Lauf 2) | behoben | neu zu breit |
+|---|---|---|---|---|
+| 320 px | 25 | 0 / 0 | 25 | 0 |
+| 360 px | 12 | 0 / 0 | 12 | 0 |
+| 375 px | 5 | 0 / 0 | 5 | 0 |
+
+Lauf 1 dauerte 650 s, Lauf 2 647 s, je 0 Fehler und 0 Seiten mit HTTP-Status ungleich 200. Auf allen 258 Seiten ist `scrollWidth` bei jeder der drei Breiten gleich der Fensterbreite.
+
+**axe** (`node scripts/messung-barrierefreiheit.mjs --basis http://localhost:3109`, lokaler Build dieser Welle; Playwright aus dem Scratchpad wie in Welle 208, am Repo nichts geändert): 774 Messungen (258 Seiten × hell, dunkel, Handy), HTTP-Status ungleich 200: 0, axe-Verstöße: keine, Eingabefelder ohne Beschriftung 0 (1.190 Felder auf 226 Seiten), `<label for>` ohne Ziel 0, doppelte `id` 0, Überschriften in Ordnung, Taschenrechner per Tastatur 8/8, Rückgabewert 0.
+
+**Regel 8 (Abnahme):** Alle Änderungen betreffen nur Umbruch, Raster und Abstände (Tailwind-Klassen und ein `span` um vorhandenen Text), keinen Rechenweg und keine angezeigte Zahl; `lib/` ist unverändert. Layoutklassen nennt die Ausnahmeliste der Regel nicht ausdrücklich. Wie in Welle 208 stehen deshalb statt einzelner Abnahmen der 13 berührten Rechner die Breitenmessung über alle Seiten und axe über alle Seiten.
+
+**Barrierefreiheitserklärung:** nicht geändert. `/barrierefreiheit` erwähnt den Umbruch bei 320 px nicht eigens (nur „Responsives Design für alle Bildschirmgrößen“); eine Zeile dazu wäre ein `recht:`-Commit mit Eintrag in `docs/rechtstexte/aenderungshistorie.md` und wartet auf Karstens Entscheidung. Der Messbericht `barrierefreiheit-axe-2026-11.md` beschreibt die axe-Messung und bleibt ebenfalls unverändert.
+
+**Commits:** `458e356` (Inhalt), dieser Commit (Historie).
+
+**Geprüft in dieser Sitzung (25.11.2026, Windows, Git Bash):** verify:alle rc=0, „Prüfskripte: 90/90 grün.“; Build rc=0, „(272/272)“; beide auf dem Stand nach dem Rebase auf `d8043d8` (Welle 210, Minijob-Grenze: nur Texte in `lib/rechner-config/` und `lib/termine.ts`, keine Datei dieser Welle; `fe96484` danach nur Historie). Breiten- und axe-Messung liefen vor dem Rebase; die Live-Messung nach dem Deploy erfasst beide Wellen zusammen. Geradzeichen-Prüfung über den Diff (`>[^<{]*"[^<]*<`) ohne Treffer.
+
+**Deploy und Live-Messung:** folgen in einem eigenen Historie-Eintrag nach dem Push.
+
+**Offen:** Kindergeld, Wärmepumpe und Quadratmeter nutzen weiter eigene Knopfgruppen statt `<RadioToggleGroup>` (Altbestand, CLAUDE.md „Häufige Fehler“); ein Prüfskript für die Seitenbreite liegt nicht im Repo, die Messung lief aus dem Scratchpad.
+
+---
+
 ## 25.11.2026 — Welle 210: Minijob-Grenze mit Jahr in fünf weiteren Rechnern — ✅ ABGESCHLOSSEN 25.11.2026
 
 **Anlass:** Der erste Lauf des erweiterten Registereintrags KV04 (Welle 209) fand 18 Stellen, die die Minijob-Grenze 603 € ohne Jahr und ohne Termin nennen: 14 im Nebenjob-Rechner, je eine im Hochrechner, Stundenlohn-, BAföG- und Teilzeit-Rechner. Ab dem 01.01.2027 gilt 633 €. Karsten hat die Korrektur am 25.11.2026 freigegeben.
