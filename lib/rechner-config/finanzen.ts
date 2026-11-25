@@ -852,7 +852,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'stundenlohn-rechner',
-    letzteAktualisierung: '2026-10-29',
+    letzteAktualisierung: '2026-11-25',
     zeigtAuthorBio: true,
     titel: 'Stundenlohnrechner',
     beschreibung: 'Stundenlohn aus Monatsgehalt berechnen oder umgekehrt — mit Mindestlohn-Vergleich und effektivem Stundenlohn.',
@@ -913,7 +913,7 @@ export const finanzenRechner: RechnerConfig[] = [
           { kriterium: 'Monatsbrutto', a: '3.120 €', b: '1.560 €' },
           { kriterium: 'Stundenlohn', a: '18,00 €', b: '18,00 €' },
           { kriterium: 'Urlaub & Lohnfortzahlung', a: 'voll', b: 'anteilig (pro Stunde gleich)' },
-          { kriterium: 'Sozialversicherung', a: 'voll pflichtig', b: 'pflichtig über Minijob-Grenze (603 €)' },
+          { kriterium: 'Sozialversicherung', a: 'voll pflichtig', b: 'pflichtig über der Minijob-Grenze (2026: 603 €)' },
         ],
       },
       {
@@ -2810,7 +2810,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'bafoeg-rechner',
-    letzteAktualisierung: '2026-10-20',
+    letzteAktualisierung: '2026-11-25',
     titel: 'BAföG-Rechner',
     beschreibung: 'BAföG berechnen: Anspruch und voraussichtliche Höhe der Ausbildungsförderung für Studierende und Schüler.',
     kategorie: 'Finanzen',
@@ -2904,7 +2904,7 @@ export const finanzenRechner: RechnerConfig[] = [
         // W187: vorher Netto ≈ 3.126 € (21,6 % aufs Brutto, Grundtarif), Freibetrag 2.415 €, Anrechnung ≈ 356 €, BAföG ≈ 636 €
         schritte: [
           { label: 'Gesamtbedarf (selbst versichert)', formel: '', ergebnis: '992 €' },
-          { label: 'Einkünfte der Eltern', formel: '60.000 € − 1.230 € Werbungskosten-Pauschbetrag', ergebnis: '58.770 €/Jahr' },
+          { label: 'Einkünfte der Eltern', formel: '60.000 € − 1.230 € Werbungskosten-Pauschbetrag (2026)', ergebnis: '58.770 €/Jahr' },
           { label: '− Sozialpauschale 22,3 %', formel: '§ 21 Abs. 2 BAföG', ergebnis: '− 13.106 €' },
           { label: '− Einkommensteuer (Splitting, geschätzt)', formel: '', ergebnis: '− 4.860 €' },
           { label: '= Einkommen nach § 21 BAföG', formel: '40.804 € ÷ 12', ergebnis: '≈ 3.400 €/Monat' },
@@ -2946,7 +2946,7 @@ export const finanzenRechner: RechnerConfig[] = [
           // W187: vorher 2.415 / 1.605 €, „Geschwister in Ausbildung … +730 €“, eigenes Einkommen über 330 €
           'Das Elterneinkommen abzüglich Werbungskosten-Pauschbetrag, Sozialpauschale (22,3 %), Steuer und Freibetrag (2.540 / 1.690 €).',
           'Weitere Kinder ohne förderfähige Ausbildung: höherer Freibetrag (+770 €) und niedrigere Anrechnungsquote; Geschwister in förderfähiger Ausbildung teilen sich die Anrechnung.',
-          'Eigenes Einkommen über 389 €/Monat nach Pauschalen (ein Minijob bis 603 € bleibt frei) und Vermögen über 15.000 € (unter 30 J.) werden angerechnet.',
+          'Eigenes Einkommen über 389 €/Monat nach Pauschalen (2026; ein Minijob bis 603 € bleibt frei) und Vermögen über 15.000 € (unter 30 J.) werden angerechnet.',
           'Elternunabhängiges BAföG: in Sonderfällen zählt nur das eigene Einkommen, nicht das der Eltern.',
           'Das Ergebnis ist eine Schätzung — verbindlich entscheidet das Amt für Ausbildungsförderung.',
         ],
@@ -4502,7 +4502,7 @@ export const finanzenRechner: RechnerConfig[] = [
   },
   {
     slug: 'hochrechner',
-    letzteAktualisierung: '2026-10-29',
+    letzteAktualisierung: '2026-11-25',
     titel: 'Hochrechner (Gehalt)',
     beschreibung: 'Rechnen Sie Stunden-, Tages-, Wochen-, Monats- oder Jahreslohn ineinander um — inkl. Mindestlohn-Vergleich 2026.',
     kategorie: 'Finanzen',
@@ -4587,7 +4587,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'infobox',
         variante: 'hinweis',
-        titel: 'Mindestlohn-Stichtag: 13,90 € → 14,60 €',
+        titel: 'Mindestlohn-Stichtag 01.01.2027: 13,90 € → 14,60 €',
         text: 'Der Mindestlohn-Vergleich dieses Rechners nutzt den jeweils geltenden Wert: 13,90 € pro Stunde im Jahr 2026. Zum 1. Januar 2027 steigt der Mindestlohn automatisch auf 14,60 € (Fünfte Mindestlohnanpassungsverordnung) — der Rechner schaltet dann ohne Zutun auf den neuen Wert um. Wer Angebote für 2027 plant, sollte den Stundenlohn bereits am höheren Mindestlohn messen.',
       },
       {
@@ -4600,7 +4600,7 @@ export const finanzenRechner: RechnerConfig[] = [
         titel: 'Minijob: Wie viele Stunden zum Mindestlohn?',
         schritte: [
           { label: 'Minijob-Grenze 2026', formel: 'Mindestlohn × 130 ÷ 3, aufgerundet', ergebnis: '603 €/Monat' },
-          { label: 'Maximale Stunden/Monat', formel: '603 € ÷ 13,90 €/h', ergebnis: '43,4 Std' },
+          { label: 'Maximale Stunden/Monat (2026)', formel: '603 € ÷ 13,90 €/h', ergebnis: '43,4 Std' },
           { label: 'Maximale Stunden/Woche', formel: '43,4 Std × 12 ÷ 52', ergebnis: '≈ 10 Std' },
         ],
         fazit: 'Die Minijob-Grenze ist an den Mindestlohn gekoppelt: 2026 sind es 603 €/Monat, ab 2027 dann 633 €. Wer zum Mindestlohn arbeitet, darf im Minijob also höchstens rund 43 Stunden pro Monat (gut 10 pro Woche) leisten, ohne die Grenze zu überschreiten. Liegt der Stundenlohn höher, sinkt die mögliche Stundenzahl entsprechend — bei 20 €/h sind im Minijob nur noch gut 30 Stunden im Monat möglich, bevor die 603 € erreicht sind.',
@@ -6622,11 +6622,11 @@ export const finanzenRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist besser: Minijob oder Nebenjob auf Steuerkarte?',
-        antwort: 'Bis 603 € ist der Minijob fast immer besser — Sie erhalten 96,4 % netto, mit RV-Befreiung 100 %. Darüber hinaus ist die Steuerkarte alternativlos. Prüfen Sie aber, ob ein selbstständiger Nebenjob möglich ist — durch den Wegfall der SV-Beiträge bleibt oft mehr netto.',
+        antwort: 'Bis 603 € (Minijob-Grenze 2026) ist der Minijob fast immer besser — Sie erhalten 96,4 % netto, mit RV-Befreiung 100 %. Darüber hinaus ist die Steuerkarte alternativlos. Prüfen Sie aber, ob ein selbstständiger Nebenjob möglich ist — durch den Wegfall der SV-Beiträge bleibt oft mehr netto.',
       },
       {
         frage: 'Zahle ich im Nebenjob Sozialversicherung?',
-        antwort: 'Im Minijob nur den RV-Eigenanteil von 3,6 %; die Versicherungspflicht ist der Normalfall, befreien lassen geht auf Antrag. Auf Steuerkarte über 603 €: volle Beiträge (rund 21 % AN-Anteil). Selbstständig: Nein, wenn Sie hauptberuflich angestellt sind — die SV-Pflicht besteht nur im Hauptjob.',
+        antwort: 'Im Minijob nur den RV-Eigenanteil von 3,6 %; die Versicherungspflicht ist der Normalfall, befreien lassen geht auf Antrag. Auf Steuerkarte über 603 € (2026): volle Beiträge (rund 21 % AN-Anteil). Selbstständig: Nein, wenn Sie hauptberuflich angestellt sind — die SV-Pflicht besteht nur im Hauptjob.',
       },
       {
         frage: 'Kann mein Arbeitgeber den Nebenjob verbieten?',
@@ -6637,16 +6637,16 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Was ein Nebenjob ist',
-        html: `<p>Wer neben dem Hauptberuf etwas dazuverdienen möchte, hat <strong>drei Wege</strong> — und sie unterscheiden sich steuerlich erheblich. Als <strong>Minijob</strong> (bis 603 €/Monat) bleibt der Verdienst steuerfrei; vom Lohn geht nur der RV-Eigenanteil von 3,6 % ab. Auf <strong>Steuerkarte</strong> läuft jeder weitere Job in <strong>Steuerklasse VI</strong> mit hohem Abzug. Und ein <strong>selbstständiger</strong> Nebenjob wird zum übrigen Einkommen hinzugerechnet und mit dem persönlichen Steuersatz belastet.</p><p>Welche Variante netto am meisten übrig lässt, hängt vor allem von der Höhe des Nebenverdienstes ab. Dieser Rechner stellt die Arten gegenüber und zeigt den Netto-Zuwachs neben einem bestehenden Hauptjob. Den Hauptjob rechnet er in Steuerklasse I mit derselben Lohnsteuer-Berechnung wie der Brutto-Netto-Rechner. Anders als beim Midijob geht es hier nicht um einen einzelnen Job im Übergangsbereich, sondern um die <strong>Kombination</strong> aus Haupt- und Nebenbeschäftigung. Eingegeben werden das Hauptjob-Brutto, die Art des Nebenjobs und dessen Verdienst; der Rechner zeigt dann, wie viel vom Nebenverdienst nach Steuern und Sozialabgaben übrig bleibt und wie stark das Haushaltsnetto insgesamt steigt.</p>`,
+        html: `<p>Wer neben dem Hauptberuf etwas dazuverdienen möchte, hat <strong>drei Wege</strong> — und sie unterscheiden sich steuerlich erheblich. Als <strong>Minijob</strong> (2026 bis 603 €/Monat) bleibt der Verdienst steuerfrei; vom Lohn geht nur der RV-Eigenanteil von 3,6 % ab. Auf <strong>Steuerkarte</strong> läuft jeder weitere Job in <strong>Steuerklasse VI</strong> mit hohem Abzug. Und ein <strong>selbstständiger</strong> Nebenjob wird zum übrigen Einkommen hinzugerechnet und mit dem persönlichen Steuersatz belastet.</p><p>Welche Variante netto am meisten übrig lässt, hängt vor allem von der Höhe des Nebenverdienstes ab. Dieser Rechner stellt die Arten gegenüber und zeigt den Netto-Zuwachs neben einem bestehenden Hauptjob. Den Hauptjob rechnet er in Steuerklasse I mit derselben Lohnsteuer-Berechnung wie der Brutto-Netto-Rechner. Anders als beim Midijob geht es hier nicht um einen einzelnen Job im Übergangsbereich, sondern um die <strong>Kombination</strong> aus Haupt- und Nebenbeschäftigung. Eingegeben werden das Hauptjob-Brutto, die Art des Nebenjobs und dessen Verdienst; der Rechner zeigt dann, wie viel vom Nebenverdienst nach Steuern und Sozialabgaben übrig bleibt und wie stark das Haushaltsnetto insgesamt steigt.</p>`,
       },
       {
         typ: 'vergleich',
         titel: 'Minijob vs. Steuerkarte (Nebenjob 450 €, Hauptjob 3.500 €)',
-        spalteA: 'Minijob (bis 603 €)',
+        spalteA: 'Minijob (2026 bis 603 €)',
         spalteB: 'Steuerkarte (Steuerklasse VI)',
         zeilen: [
           { kriterium: 'Lohnsteuer', a: '0 € (2 % pauschal beim Arbeitgeber)', b: '57,08 € (Klasse VI)' },
-          { kriterium: 'Sozialversicherung (AN)', a: '16,20 € (3,6 % RV)', b: '16,20 € (bis 603 € ebenfalls nur RV)' },
+          { kriterium: 'Sozialversicherung (AN)', a: '16,20 € (3,6 % RV)', b: '16,20 € (2026 bis 603 € ebenfalls nur RV)' },
           { kriterium: 'Netto vom 450-€-Nebenjob', a: '433,80 €', b: '376,72 €, nach der Steuererklärung rund 304 €' },
           { kriterium: 'Abgabenbelastung', a: '3,6 %', b: '14,8 %, nach der Steuererklärung rund 32 %' },
           { kriterium: 'Voraussetzung', a: 'nur EIN Minijob neben dem Hauptjob', b: 'für jeden weiteren Job' },
@@ -6663,7 +6663,7 @@ export const finanzenRechner: RechnerConfig[] = [
         schritte: [
           { label: 'Hauptjob brutto', formel: '', ergebnis: '3.500 €' },
           { label: 'Hauptjob netto (Klasse I)', formel: 'wie im Brutto-Netto-Rechner', ergebnis: '2.333,25 €' },
-          { label: 'Minijob brutto', formel: 'bis 603 € pauschal', ergebnis: '450 €' },
+          { label: 'Minijob brutto', formel: 'bis 603 € (2026) pauschal', ergebnis: '450 €' },
           { label: 'Minijob netto', formel: '450 € − 3,6 % RV-Eigenanteil (16,20 €)', ergebnis: '433,80 €' },
           { label: 'Haushaltsnetto gesamt', formel: '2.333,25 + 433,80', ergebnis: '2.767,05 €' },
         ],
@@ -6682,7 +6682,7 @@ export const finanzenRechner: RechnerConfig[] = [
       {
         typ: 'text',
         titel: 'Steuerklasse VI: warum der Abzug so hoch ist',
-        html: `<p>Sobald ein zweiter <strong>sozialversicherungspflichtiger</strong> Job dazukommt, läuft er über <strong>Steuerklasse VI</strong>. Deren Besonderheit: Es gibt <strong>keinen Grundfreibetrag und keinen Arbeitnehmer-Pauschbetrag</strong> — Lohnsteuer fällt vom ersten Euro an. Der Grund ist, dass diese Freibeträge bereits beim Hauptjob berücksichtigt werden und nicht doppelt zählen dürfen.</p><p>Über 603 € kommen die <strong>vollen Sozialversicherungsbeiträge</strong> dazu (rund 21 % Arbeitnehmeranteil). Die Lohnsteuer in Klasse VI ist dagegen oft <strong>zu niedrig</strong>: Sie kennt den persönlichen Steuersatz aus dem Hauptjob nicht. Bei 3.500 € Hauptjob und 1.000 € Nebenjob behält der Arbeitgeber im Monat 111,75 € Lohnsteuer ein; nach der <strong>Pflicht-Steuererklärung</strong> sind rund 1.600 € im Jahr nachzuzahlen. Unterm Strich gehen vom Nebenjob dann etwa 46 % ab. Steuerklasse VI ist deshalb keine Strafe, sondern nur eine Vorauszahlung; die endgültige Steuer richtet sich nach dem Gesamteinkommen. Wer einen Steuerkarten-Job annimmt, sollte die Nachzahlung einplanen und Geld dafür zurücklegen.</p>`,
+        html: `<p>Sobald ein zweiter <strong>sozialversicherungspflichtiger</strong> Job dazukommt, läuft er über <strong>Steuerklasse VI</strong>. Deren Besonderheit: Es gibt <strong>keinen Grundfreibetrag und keinen Arbeitnehmer-Pauschbetrag</strong> — Lohnsteuer fällt vom ersten Euro an. Der Grund ist, dass diese Freibeträge bereits beim Hauptjob berücksichtigt werden und nicht doppelt zählen dürfen.</p><p>Über 603 € (2026) kommen die <strong>vollen Sozialversicherungsbeiträge</strong> dazu (rund 21 % Arbeitnehmeranteil). Die Lohnsteuer in Klasse VI ist dagegen oft <strong>zu niedrig</strong>: Sie kennt den persönlichen Steuersatz aus dem Hauptjob nicht. Bei 3.500 € Hauptjob und 1.000 € Nebenjob behält der Arbeitgeber im Monat 111,75 € Lohnsteuer ein; nach der <strong>Pflicht-Steuererklärung</strong> sind rund 1.600 € im Jahr nachzuzahlen. Unterm Strich gehen vom Nebenjob dann etwa 46 % ab. Steuerklasse VI ist deshalb keine Strafe, sondern nur eine Vorauszahlung; die endgültige Steuer richtet sich nach dem Gesamteinkommen. Wer einen Steuerkarten-Job annimmt, sollte die Nachzahlung einplanen und Geld dafür zurücklegen.</p>`,
       },
       {
         typ: 'tabelle',
@@ -6691,8 +6691,8 @@ export const finanzenRechner: RechnerConfig[] = [
         zeilen: [
           ['450 €', '433,80 €', '376,72 €', '≈ 304 €'],
           ['600 €', '578,40 €', '502,24 €', '≈ 404 €'],
-          ['1.000 €', 'nicht möglich (> 603 €)', '670,75 €', '≈ 538 €'],
-          ['1.500 €', 'nicht möglich (> 603 €)', '999,17 €', '≈ 797 €'],
+          ['1.000 €', 'nicht möglich (über 603 €, Grenze 2026)', '670,75 €', '≈ 538 €'],
+          ['1.500 €', 'nicht möglich (über 603 €, Grenze 2026)', '999,17 €', '≈ 797 €'],
         ],
         fussnote: 'Hauptjob 3.500 €, Steuerklasse I, kinderlos, ohne Kirchensteuer, Stand 2026. Der Minijob ist nur bis 603 € möglich; abgezogen wird nur der RV-Eigenanteil von 3,6 %. Auf Steuerkarte rechnet die Lohnabrechnung Lohnsteuer nach Klasse VI und bis 603 € nur den RV-Anteil, darüber die vollen Sozialabgaben. Die letzte Spalte schätzt den Monatswert nach der Pflicht-Steuererklärung: Der Nebenverdienst wird zum persönlichen Steuersatz besteuert, die Lohnsteuer aus Klasse VI angerechnet. Bei diesem Hauptjob-Gehalt folgt immer eine Nachzahlung.',
       },
@@ -6702,7 +6702,7 @@ export const finanzenRechner: RechnerConfig[] = [
         spalteA: 'Selbstständig (Freelance)',
         spalteB: 'Anstellung (Steuerklasse VI)',
         zeilen: [
-          { kriterium: 'Sozialversicherung', a: 'meist keine (Ausnahmen z. B. selbstständige Lehrkräfte)', b: 'über 603 € volle AN-Beiträge (21,75 %), darunter 3,6 % RV' },
+          { kriterium: 'Sozialversicherung', a: 'meist keine (Ausnahmen z. B. selbstständige Lehrkräfte)', b: 'über 603 € (2026) volle AN-Beiträge (21,75 %), darunter 3,6 % RV' },
           { kriterium: 'Besteuerung', a: 'persönlicher Steuersatz auf den Gewinn', b: 'im Monat Klasse VI, endgültig persönlicher Steuersatz' },
           { kriterium: 'Netto aus 450 € (Hauptjob 3.500 €)', a: '315,33 €', b: '376,72 €, nach der Steuererklärung ≈ 304 €' },
           { kriterium: 'Netto aus 1.000 €', a: '689,33 €', b: '670,75 €, nach der Steuererklärung ≈ 538 €' },
@@ -6725,9 +6725,9 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'checkliste',
         titel: 'Welche Nebenjob-Art zur eigenen Situation passt',
         punkte: [
-          'Bis 603 €/Monat: Minijob — für den Arbeitnehmer steuerfrei, nur 3,6 % RV-Eigenanteil (Befreiung auf Antrag).',
+          'Bis 603 €/Monat (2026): Minijob — für den Arbeitnehmer steuerfrei, nur 3,6 % RV-Eigenanteil (Befreiung auf Antrag).',
           'Nur EIN steuerfreier Minijob neben dem Hauptjob; weitere werden zusammengerechnet.',
-          'Über 603 € oder zweiter Job: Steuerkarte (Klasse VI) — Steuer ab dem ersten Euro, volle Sozialversicherung.',
+          'Über 603 € (2026) oder zweiter Job: Steuerkarte (Klasse VI) — Steuer ab dem ersten Euro, volle Sozialversicherung.',
           'Selbstständiger Nebenjob: keine zusätzliche Sozialversicherung, aber Grenzsteuersatz auf die Einkünfte.',
           'Härteausgleich: selbstständige Nebeneinkünfte bis 410 €/Jahr bleiben steuerfrei, bis 820 € gemildert.',
           'Bei Klasse VI und selbstständig ist die Steuererklärung Pflicht (bei VI oft mit Nachzahlung).',
@@ -6745,7 +6745,7 @@ export const finanzenRechner: RechnerConfig[] = [
         typ: 'infobox',
         variante: 'tipp',
         titel: 'Ein Minijob ist meist am günstigsten',
-        text: 'Für die meisten Arbeitnehmer ist ein Minijob (bis 603 €) der steuerlich günstigste Nebenverdienst — 96,4 % netto, mit RV-Befreiung 100 %, bei minimaler Bürokratie. Wer mehr verdienen will, sollte selbstständige Tätigkeit und Steuerkarte vergleichen: Weil beim selbstständigen Nebenjob die Sozialversicherungsbeiträge entfallen (die Pflicht besteht nur im Hauptjob), bleibt dort trotz höherem Steuersatz oft mehr übrig als in Steuerklasse VI. Im Beispiel mit 1.000 € Nebenverdienst sind es selbstständig rund 689 € netto gegenüber rund 538 € auf Steuerkarte nach der Steuererklärung — gut 150 € im Monat. Ab welchem Punkt sich was lohnt, hängt vom Hauptjob-Einkommen ab — der Rechner zeigt es für die eigenen Zahlen. Eine Faustregel: Bis 603 € fast immer Minijob; darüber selbstständig prüfen, wenn die Tätigkeit das hergibt, sonst Steuerkarte — und die Nachzahlung aus der Steuererklärung einplanen.',
+        text: 'Für die meisten Arbeitnehmer ist ein Minijob (2026 bis 603 €) der steuerlich günstigste Nebenverdienst — 96,4 % netto, mit RV-Befreiung 100 %, bei minimaler Bürokratie. Wer mehr verdienen will, sollte selbstständige Tätigkeit und Steuerkarte vergleichen: Weil beim selbstständigen Nebenjob die Sozialversicherungsbeiträge entfallen (die Pflicht besteht nur im Hauptjob), bleibt dort trotz höherem Steuersatz oft mehr übrig als in Steuerklasse VI. Im Beispiel mit 1.000 € Nebenverdienst sind es selbstständig rund 689 € netto gegenüber rund 538 € auf Steuerkarte nach der Steuererklärung — gut 150 € im Monat. Ab welchem Punkt sich was lohnt, hängt vom Hauptjob-Einkommen ab — der Rechner zeigt es für die eigenen Zahlen. Eine Faustregel: Bis 603 € fast immer Minijob; darüber selbstständig prüfen, wenn die Tätigkeit das hergibt, sonst Steuerkarte — und die Nachzahlung aus der Steuererklärung einplanen.',
       },
     ],
     quellen: [

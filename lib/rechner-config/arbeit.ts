@@ -1494,7 +1494,7 @@ export const arbeitRechner: RechnerConfig[] = [
   },
   {
     slug: 'teilzeit-rechner',
-    letzteAktualisierung: '2026-10-29',
+    letzteAktualisierung: '2026-11-25',
     titel: 'Teilzeit-Rechner',
     beschreibung: 'Teilzeitgehalt berechnen: Brutto, geschätztes Netto, Stundenlohn und Urlaubstage bei Reduzierung der Arbeitszeit.',
     kategorie: 'Arbeit & Recht',
@@ -1554,7 +1554,7 @@ export const arbeitRechner: RechnerConfig[] = [
           { label: 'Teilzeit-Brutto', formel: '3.000 € × 0,50', ergebnis: '1.500 €/Monat' },
           { label: 'Halbe Stelle, halbes Brutto', formel: '3.000 € ÷ 2', ergebnis: '1.500 €/Monat' },
         ],
-        fazit: 'Eine halbe Stelle (20 von 40 Stunden) bedeutet genau die Hälfte des Brutto-Gehalts: 1.500 € statt 3.000 €. Das Brutto halbiert sich exakt, während sich das Netto etwas anders verhält, weil Steuer- und Sozialabgaben nicht linear verlaufen. Wichtig bei kleinen Stundenzahlen: Unterhalb bestimmter Grenzen gelten besondere Beitragsregeln — bis 603 € Minijob, bis 2.000 € Midijob mit reduzierten Arbeitnehmerbeiträgen. Mit 1.500 € liegt diese Stelle im Midijob-Übergangsbereich. Für die Krankenversicherung kann eine Teilzeitstelle ebenfalls relevant sein: Wer verheiratet ist und mit dem Verdienst unter der Familienversicherungsgrenze bleibt, ist unter Umständen beitragsfrei mitversichert — oberhalb davon wird die Stelle eigenständig beitragspflichtig.',
+        fazit: 'Eine halbe Stelle (20 von 40 Stunden) bedeutet genau die Hälfte des Brutto-Gehalts: 1.500 € statt 3.000 €. Das Brutto halbiert sich exakt, während sich das Netto etwas anders verhält, weil Steuer- und Sozialabgaben nicht linear verlaufen. Wichtig bei kleinen Stundenzahlen: Unterhalb bestimmter Grenzen gelten besondere Beitragsregeln — 2026 bis 603 € Minijob, bis 2.000 € Midijob mit reduzierten Arbeitnehmerbeiträgen. Mit 1.500 € liegt diese Stelle im Midijob-Übergangsbereich. Für die Krankenversicherung kann eine Teilzeitstelle ebenfalls relevant sein: Wer verheiratet ist und mit dem Verdienst unter der Familienversicherungsgrenze bleibt, ist unter Umständen beitragsfrei mitversichert — oberhalb davon wird die Stelle eigenständig beitragspflichtig.',
       },
       {
         typ: 'tabelle',
