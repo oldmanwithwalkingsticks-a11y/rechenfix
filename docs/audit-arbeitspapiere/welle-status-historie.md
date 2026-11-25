@@ -46,7 +46,23 @@ WCAG 1.4.10 (Umbruch bei 320 CSS-Pixel) misst axe nicht. Die Messung über alle 
 
 **Geprüft in dieser Sitzung (25.11.2026, Windows, Git Bash):** verify:alle rc=0, „Prüfskripte: 90/90 grün.“; Build rc=0, „(272/272)“; die Regeln `min-[360px]:grid-cols-2`, `hyphens:auto`, `min-w-0` und `break-words` stehen im Voll-CSS `public/styles/app.*.css` (nicht im kritischen CSS, weil die Kacheln unter dem ersten Bildschirm liegen). Bilder der Kacheln bei 320 und 375 px vom Minijob- und Nebenjob-Rechner angesehen.
 
-**Offen:** Karolas Nachprüfung des Minijob-Rechners zu C9 nach dem Deploy; die 25 Seiten, die bei 320 px weiter zu breit sind (eigene Welle zu WCAG 1.4.10, danach Barrierefreiheitserklärung prüfen).
+**Deploy:** Push `8c78776..f79aecf`, Deployment `dpl_DqT3ZD6meLYGUKbL2GG441ZM313i` für `f79aecf`, READY am 25.11.2026 (der Doku-Push `8c78776` davor: CANCELED, wie vorgesehen). Im ausgelieferten HTML: „liegt 2026 bei 603 Euro monatlich“ 4-mal (Seite und FAQ-JSON-LD), „rund 603 Euro“ 0-mal; im Voll-CSS die Regel `@media (min-width:360px){.min-\[360px\]\:grid-cols-2{…}}`.
+
+**Live gemessen bei 320 px** (alle 258 Seiten, Chromium): 21 Seiten breiter als der Bildschirm, lokal waren es 25. Die vier Unterschiede (Nettolohn-Optimierer, Alkohol-Abbau, Grundsteuer, Wärmepumpe) gehören zu den übrigen Verursachern. Die Zahl schwankt je Lauf um einige Seiten, weil Rechner nachladen; schon die beiden Ausgangsläufe ergaben 36 und 41. Die 16 Seiten mit Kennzahl-Kacheln sind in allen Läufen behoben. Minijob-Rechner live: `scrollWidth` 320 (vorher 347).
+
+**Karolas Nachprüfung (25.11.2026, Prüfklon auf `f79aecf`):** Urteil **abnahmefähig**, 0 Befunde A, 0 Befunde B, 1 Hinweis (Bericht `_lokal/karola-berichte/2026-11-25-minijob-rechner-nachpruefung-w208.md`).
+- C8 und C9 behoben. C2 erledigt sich ohne Änderung: Der Minijob-Rechner steht auf Platz 151 der Social-Queue, gepostet wird inzwischen Platz 174, der Post ist gelaufen.
+- Rechenkern und Minijob-Komponente unverändert (`git diff 75a25c6 f79aecf -- lib/berechnungen components/rechner/MinijobRechner.tsx` leer); Zahlen-Inventar, Formeln und Register ohne Befund.
+- verify:alle 90/90 im Prüfklon, GitHub Actions „Prüfskripte“ für `f79aecf` success.
+- KR10 live: Standard, 150 €, Privathaushalt, 1.500 €, 2.500 €, ungültige Eingaben und Uhr auf dem 01.01.2027 wie das Soll; axe hell und dunkel ohne Verstoß.
+- Hinweis C10: die übrigen Seiten, die bei 320 px zu breit sind (siehe oben).
+
+```
+PRUEFPUNKTE: KR01=ok KR02=ok KR03=ok KR04=ok KR05=ok KR06=ok KR07=ok KR08=ok KR09=ok KR10=befund
+URTEIL: abnahmefähig; slug=minijob-rechner; commit=f79aecf; datum=25.11.2026; befunde_a=0; befunde_b=0; hinweise=1
+```
+
+**Offen:** die Seiten, die bei 320 px weiter zu breit sind (eigene Welle zu WCAG 1.4.10, danach Barrierefreiheitserklärung prüfen).
 
 ---
 
