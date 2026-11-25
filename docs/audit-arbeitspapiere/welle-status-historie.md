@@ -6,6 +6,40 @@
 
 ---
 
+## 25.11.2026 — Welle 209: Karola v1.2, Register KV04 auch in den Rechner-Texten — ✅ ABGESCHLOSSEN 25.11.2026
+
+**Anlass:** Befund B2 aus Karolas Abnahme des Minijob-Rechners vom 25.11.2026: 13 Stellen im Minijob-Text nannten Grenze, Übergangsbereich oder Jahresgrenze ohne Jahr. Das Konventionen-Register sah sie nicht, weil KV04 (Minijob-Grenze) nur in `components/`, `app/` und `lib/berechnungen/` suchte, nicht in `lib/rechner-config/`. Karsten hat die Ausweitung am 25.11.2026 freigegeben.
+
+**Änderungen** (nur Skill `karola-rechner`, kein Rechner, keine Seite):
+- `assets/karola.json`: KV04 sucht zusätzlich in `lib/rechner-config/`; `_stand` 25.11.2026. Muster, Stufe (`pruefen`) und Ausnahmen unverändert.
+- `references/konventionen.md`: Stand v1.2, bei KV04 die Pfade und die Einordnung des ersten Laufs.
+- `SKILL.md`: Stand v1.2, Zeile in der Versionsgeschichte.
+
+**Erster Lauf** (`karola.py register . --alle` auf `31cd3d1`): KV04 meldet 36 Stellen, alle in `lib/rechner-config/`, keine mehr in Komponenten (die drei vom 27.10.2026 sind behoben). Das Skript sucht zeilenweise und sieht ein Jahr im Titel des Bausteins nicht; deshalb von Hand eingeordnet:
+
+| Rechner | Stellen | Einordnung |
+|---|---|---|
+| Minijob (`finanzen.ts` 3750–3919) | 14 | getragen: Jahr im Titel des Bausteins („Eckwerte Minijob 2026“, „Arbeitgeber-Sicht 2026“) oder Beispielbetrag, der auch 2027 ein Minijob bleibt |
+| Midijob (`finanzen.ts` 4708, 4721, 4768, 4803) | 4 | getragen: rechnet mit `SV_RECHENSTAND` 2026, der Termin `midijob-parameter-2027` nennt die Texte des Blocks |
+| Nebenjob (`finanzen.ts` 6625–6748) | 14 | ohne Jahr, ohne Termin; `nebenjob.ts` rechnet zwar mit `SV_RECHENSTAND`, aber kein Termin nennt diese Texte |
+| Hochrechner (`finanzen.ts:4603`), Stundenlohn (`:916`), BAföG (`:2949`), Teilzeit (`arbeit.ts:1557`) | 4 | ohne Jahr, ohne Termin; ab 01.01.2027 nennen sie die alte Grenze |
+
+Nach Karolas Regel für Stufe `pruefen` wäre jede der 18 Stellen aus den letzten beiden Zeilen in einer Abnahme dieser Rechner ein Befund B.
+
+**Nachgemessen:** Auf dem Stand der Abnahme (`6c49d05`) hätte KV04 mit dem neuen Pfad 5 der 13 Stellen aus B2 gemeldet. Die übrigen 8 nennen 603,01 €, 7.236 € oder „603-€-…“, die das Muster nicht trifft. Karolas Nachprüfung vom 25.11.2026 hatte angenommen, KV04 hätte im Minijob-Block seit Welle 207 nichts mehr zu melden; tatsächlich meldet er dort 14 Zeilen, alle getragen, weil das Jahr im Titel des Bausteins steht.
+
+**Geprüft in dieser Sitzung (25.11.2026, Windows, Git Bash):** Selbsttest „65 von 65 Faellen wie erwartet — gruen.“; verify:alle rc=0, „Prüfskripte: 90/90 grün.“ Der Skill gehört nicht zu den Prüfskripten des Repos; der Lauf belegt nur, dass sonst nichts berührt ist.
+
+**Regel 8:** Kein Rechner geändert, keine Abnahme fällig.
+
+**Skill in Claude.ai nachziehen:** `karola-rechner` mit `SKILL.md`, `assets/karola.json` und `references/konventionen.md`.
+
+**Commits:** `ad37805` (Skill), dieser Commit (Historie).
+
+**Offen:** die 18 Stellen ohne Jahr und ohne Termin (Nebenjob 14, Hochrechner, Stundenlohn, BAföG, Teilzeit), vor dem 01.01.2027.
+
+---
+
 ## 25.11.2026 — Welle 208: Kennzahl-Kacheln auf schmalen Bildschirmen, Minijob-FAQ — ✅ ABGESCHLOSSEN 25.11.2026
 
 **Anlass:** Zwei Hinweise aus Karolas Bericht vom 25.11.2026 zum Minijob-Rechner, die Welle 207 bewusst ausgelassen hatte:
