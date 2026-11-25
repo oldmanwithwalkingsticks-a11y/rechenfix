@@ -6,6 +6,50 @@
 
 ---
 
+## 25.11.2026 — Welle 208: Kennzahl-Kacheln auf schmalen Bildschirmen, Minijob-FAQ — ✅ ABGESCHLOSSEN 25.11.2026
+
+**Anlass:** Zwei Hinweise aus Karolas Bericht vom 25.11.2026 zum Minijob-Rechner, die Welle 207 bewusst ausgelassen hatte:
+- **C8:** Bei 320 px Breite scrollte die Seite 27 px seitwärts (`scrollWidth` 347), wegen der Kennzahl-Kacheln (Baustein `statistik`).
+- **C9:** Die FAQ „Wie viel darf ich im Minijob 2026 verdienen?“ sagte „rund 603 Euro“, obwohl 603 € der genaue Wert ist (13,90 × 130 ÷ 3 = 602,33, aufgerundet).
+
+Eine Messung über alle 258 Seiten der Sitemap bei 320 px (live, Chromium, Stand `8c78776`) ergab 41 Seiten, die breiter als der Bildschirm waren. Bei 16 davon lag es an den Kennzahl-Kacheln: Werte in `text-2xl` brachen nicht um, z. B. „volle Entgeltpunkte“, „kein Grundfreibetrag“ und „nach Arbeitstagen“, im Hinweis „Personengesellschaft/Einzelunternehmen“. Die Elemente selbst blieben in ihrer Rasterspalte, nur ihr Text lief hinaus; deshalb fand eine Suche über `getBoundingClientRect` der Elemente die Ursache nicht, erst die Messung der Textknoten.
+
+**Änderungen:**
+- `components/rechner/ContentBlockRenderer.tsx`, Baustein `statistik` (163 Bausteine in 11 Config-Dateien): Raster unter 360 px einspaltig (`grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-3`, vorher `grid-cols-2 sm:grid-cols-3`); Kachel `min-w-0`; Beschriftung, Wert und Hinweis `break-words hyphens-auto`. Ab 360 px bleibt das Raster wie bisher, lange Wörter werden dort getrennt („Entgelt-punkte“). Ein erster Versuch nur mit Umbruch, bei zwei Spalten auch bei 320 px, ließ je Kachel rund 83 px Text und trennte „€/Monat“ ohne Strich in „€/Mon“ und „at“; deshalb die eine Spalte.
+- `lib/rechner-config/finanzen.ts`, Block `minijob-rechner`: FAQ „liegt 2026 bei 603 Euro monatlich“.
+
+**Gemessen** (Seitenbreite `document.documentElement.scrollWidth` je Sitemap-Seite, Chromium über Playwright, 4 parallel; vorher live auf `8c78776`, nachher lokal mit `npm run start` auf dem Stand dieser Welle):
+
+| Breite | Seiten zu breit vorher | nachher | behoben | neu zu breit |
+|---|---|---|---|---|
+| 320 px | 41 | 25 | 16 | 0 |
+| 375 px | 8 | 5 | 3 | 0 |
+| 360 px | — | 12 | — | — |
+
+Keine Seite ist breiter geworden. Bei 320 px behoben: Währungs-, Teilzeit-, Überstunden-, kW-PS-, Leasing-, Taxi-, Minijob-, Nebenjob-, Pflegegeld-, Witwenrente-, Schlaf-, Einheiten-, Grundumsatz-, VO2max- und Mietrendite-Rechner sowie Gehaltsvergleich.
+
+**Bei 320 px weiter zu breit (25 Seiten, andere Verursacher, nicht in dieser Welle):**
+- grüne Merksatz-Kästen (`text-emerald-900`): Bürgergeld, Gewerbesteuer, Zufallszahl
+- Knopf- und Auswahlgruppen: Kindergeld („Einzelveranlagung“), Wärmepumpe („25 Jahre“), Quadratmeter („Millimeter“), Alkohol-Abbau (Löschknopf)
+- Balkenbeschriftungen „Betrag (Anteil)“: Freelancer-Stundensatz, Betriebskosten
+- Zeitleiste: Mutterschutz; Formen-Vorschau: Backform-Umrechner; Ergebnis-Tabelle: Brutto-Netto
+- Verweise: Mietrechner (Pfeil einer Link-Karte), Blogartikel zu den Kalorien auf der Packung (langer Link)
+- ohne eindeutigen Verursacher im Messskript (Klappsymbole der FAQ liegen nur außerhalb, weil davor etwas verbreitert): Bußgeld, Hochrechner, Kurzarbeitergeld, Nettolohn-Optimierer, Pfändung, Hefe, Internetgeschwindigkeit, Grunderwerbsteuer, Grundsteuer, Vorfälligkeitsentschädigung, Blogartikel zu den 160 Stunden
+
+WCAG 1.4.10 (Umbruch bei 320 CSS-Pixel) misst axe nicht. Die Messung über alle Seiten in `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md` hat diesen Punkt deshalb nicht erfasst.
+
+**axe** (`node scripts/messung-barrierefreiheit.mjs --basis http://localhost:3108`, lokaler Build dieser Welle; Playwright aus dem Scratchpad, `chromium.launch` per `--require` auf das vorhandene Chromium 1208 gelenkt, am Repo nichts geändert): 774 Messungen (258 Seiten × hell, dunkel, Handy), HTTP-Status ungleich 200: 0, axe-Verstöße: keine, Eingabefelder ohne Beschriftung 0 (1.190 Felder auf 226 Seiten), Überschriften in Ordnung, Taschenrechner per Tastatur 8/8, Rückgabewert 0.
+
+**Regel 8 (Abnahme):** Die Änderung am Renderer betrifft alle Rechner mit Kennzahl-Bausteinen, ändert aber nur, wie Text umbricht, keinen Rechenweg und keine angezeigte Zahl. Die Ausnahmeliste der Regel nennt Layoutklassen nicht ausdrücklich; statt 206 einzelner Abnahmen stehen hier die Breitenmessung und axe über alle Seiten. Die Textänderung C9 nimmt Karola nach dem Deploy nach.
+
+**Commits:** `228f9b0` (Inhalt), dieser Commit (Historie).
+
+**Geprüft in dieser Sitzung (25.11.2026, Windows, Git Bash):** verify:alle rc=0, „Prüfskripte: 90/90 grün.“; Build rc=0, „(272/272)“; die Regeln `min-[360px]:grid-cols-2`, `hyphens:auto`, `min-w-0` und `break-words` stehen im Voll-CSS `public/styles/app.*.css` (nicht im kritischen CSS, weil die Kacheln unter dem ersten Bildschirm liegen). Bilder der Kacheln bei 320 und 375 px vom Minijob- und Nebenjob-Rechner angesehen.
+
+**Offen:** Karolas Nachprüfung des Minijob-Rechners zu C9 nach dem Deploy; die 25 Seiten, die bei 320 px weiter zu breit sind (eigene Welle zu WCAG 1.4.10, danach Barrierefreiheitserklärung prüfen).
+
+---
+
 ## 25.11.2026 — Welle 207: Minijob-Rechner, Korrekturen nach Karolas Abnahme — ✅ ABGESCHLOSSEN 25.11.2026
 
 **Anlass:** Karola Rechner hat den Minijob-Rechner am 25.11.2026 nach Welle 206 abgenommen, Urteil **gesperrt** (3 Befunde A, 3 Befunde B, 8 Hinweise; Bericht `_lokal/karola-berichte/2026-11-25-minijob-rechner.md`). Was Welle 206 eingeführt hat, rechnete richtig; die Befunde betrafen den Bestand:
