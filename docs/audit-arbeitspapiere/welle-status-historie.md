@@ -48,11 +48,21 @@ Lauf 1 dauerte 650 s, Lauf 2 647 s, je 0 Fehler und 0 Seiten mit HTTP-Status ung
 
 **Barrierefreiheitserklärung:** nicht geändert. `/barrierefreiheit` erwähnt den Umbruch bei 320 px nicht eigens (nur „Responsives Design für alle Bildschirmgrößen“); eine Zeile dazu wäre ein `recht:`-Commit mit Eintrag in `docs/rechtstexte/aenderungshistorie.md` und wartet auf Karstens Entscheidung. Der Messbericht `barrierefreiheit-axe-2026-11.md` beschreibt die axe-Messung und bleibt ebenfalls unverändert.
 
-**Commits:** `458e356` (Inhalt), dieser Commit (Historie).
+**Commits:** `458e356` (Inhalt), `4547299` (Historie), dieser Commit (Deploy und Live-Messung, nur Doku).
 
 **Geprüft in dieser Sitzung (25.11.2026, Windows, Git Bash):** verify:alle rc=0, „Prüfskripte: 90/90 grün.“; Build rc=0, „(272/272)“; beide auf dem Stand nach dem Rebase auf `d8043d8` (Welle 210, Minijob-Grenze: nur Texte in `lib/rechner-config/` und `lib/termine.ts`, keine Datei dieser Welle; `fe96484` danach nur Historie). Breiten- und axe-Messung liefen vor dem Rebase; die Live-Messung nach dem Deploy erfasst beide Wellen zusammen. Geradzeichen-Prüfung über den Diff (`>[^<{]*"[^<]*<`) ohne Treffer.
 
-**Deploy und Live-Messung:** folgen in einem eigenen Historie-Eintrag nach dem Push.
+**Deploy:** Push `fe96484..4547299`, genau eine Deployment `dpl_2duAVSdtxS1twkNcqtuKsKXJyKsR` für `4547299` (Inhalt und Historie im selben Push), READY am 26.11.2026 um 00:19 Uhr, Production. GitHub Actions „Prüfskripte“ für `4547299`: success. Im ausgelieferten HTML des Grundsteuer-Rechners steht `min-[360px]:grid-cols-3`, im Voll-CSS `/styles/app.ce41f1047f567dae.css` die Regel `@media (min-width:360px){… .min-\[360px\]\:grid-cols-3{…}}` und `overflow-wrap:anywhere`.
+
+**Live gemessen** (26.11.2026, www.rechenfix.de auf `4547299`, alle 258 Seiten, Messung wie oben, zwei vollständige Läufe; erfasst Welle 210 und 211 zusammen):
+
+| Breite | Seiten zu breit vorher (live) | nachher live (Lauf 1 / Lauf 2) |
+|---|---|---|
+| 320 px | 25 | 0 / 0 |
+| 360 px | 12 | 0 / 0 |
+| 375 px | 5 | 0 / 0 |
+
+Lauf 1 dauerte 466 s, Lauf 2 445 s, je 0 Seiten mit HTTP-Status ungleich 200. Auf allen 258 Seiten ist `scrollWidth` bei jeder der drei Breiten gleich der Fensterbreite. Anders als in Welle 208 (live 21 statt lokal 25, Schwankung durch nachladende Rechner) stimmen live und lokal hier überein.
 
 **Offen:** Kindergeld, Wärmepumpe und Quadratmeter nutzen weiter eigene Knopfgruppen statt `<RadioToggleGroup>` (Altbestand, CLAUDE.md „Häufige Fehler“); ein Prüfskript für die Seitenbreite liegt nicht im Repo, die Messung lief aus dem Scratchpad.
 
