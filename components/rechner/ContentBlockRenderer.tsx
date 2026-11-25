@@ -118,7 +118,8 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
     case 'statistik':
       return (
         <DatenKachel titel={block.titel}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {/* W208: unter 360 px eine Spalte (zwei Spalten ließen bei 320 px nur rund 83 px Text je Kachel) */}
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-3 gap-3">
             {block.werte.map((w, j) => {
               // Rotierende Marken-Akzente (Index % 3): primary / amber / emerald.
               const akzent = [
@@ -126,12 +127,15 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
                 { box: 'bg-amber-50 dark:bg-amber-500/10', label: 'text-amber-700 dark:text-amber-300' },
                 { box: 'bg-emerald-50 dark:bg-emerald-500/10', label: 'text-emerald-700 dark:text-emerald-300' },
               ][j % 3];
+              // W208: Lange Wörter brechen um, mit Trennstrich, wo der Browser trennen kann (bei 320 px ragten
+              // z. B. „volle Entgeltpunkte“ und „Personengesellschaft/Einzelunternehmen“ über den Rand, die Seite
+              // scrollte bis 98 px seitwärts; WCAG 1.4.10). min-w-0 hält die Kachel in ihrer Rasterspalte.
               return (
-                <div key={j} className={`${akzent.box} rounded-xl p-4 min-h-[6rem] flex flex-col`}>
-                  <span className={`text-xs font-medium ${akzent.label}`}>{w.label}</span>
-                  <span className="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-0.5">{w.wert}</span>
+                <div key={j} className={`${akzent.box} rounded-xl p-4 min-h-[6rem] min-w-0 flex flex-col`}>
+                  <span className={`text-xs font-medium break-words hyphens-auto ${akzent.label}`}>{w.label}</span>
+                  <span className="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-0.5 break-words hyphens-auto">{w.wert}</span>
                   {w.hinweis && (
-                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-auto pt-2">{w.hinweis}</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-auto pt-2 break-words hyphens-auto">{w.hinweis}</span>
                   )}
                 </div>
               );

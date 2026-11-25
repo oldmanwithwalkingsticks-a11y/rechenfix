@@ -3904,7 +3904,7 @@ export const finanzenRechner: RechnerConfig[] = [
     faq: [
       {
         frage: 'Wie viel darf ich im Minijob 2026 verdienen?',
-        antwort: 'Die Minijob-Grenze liegt 2026 bei rund 603 Euro monatlich. Sie ist seit 2022 dynamisch an den gesetzlichen Mindestlohn gekoppelt und wird automatisch angepasst. Ein gelegentliches Überschreiten (höchstens zweimal pro Jahr durch unvorhergesehene Mehrarbeit) ist erlaubt. Wer dauerhaft mehr verdient, rutscht in den Midijob-Übergangsbereich bis 2.000 Euro.',
+        antwort: 'Die Minijob-Grenze liegt 2026 bei 603 Euro monatlich. Sie ist seit 2022 dynamisch an den gesetzlichen Mindestlohn gekoppelt und wird automatisch angepasst. Ein gelegentliches Überschreiten (höchstens zweimal pro Jahr durch unvorhergesehene Mehrarbeit) ist erlaubt. Wer dauerhaft mehr verdient, rutscht in den Midijob-Übergangsbereich bis 2.000 Euro.',
       },
       {
         frage: 'Welche Abgaben zahlt der Arbeitgeber beim Minijob?',
