@@ -58,7 +58,23 @@
 - Im gebauten Stand per Browser: 538 € unverändert (KV 13 % −69,94 €, Netto 518,63 €, Arbeitgeber 705,69 €); 1.500 € „Kein Minijob“ ohne Aufschlüsselung, mit Link zum Midijob-Rechner; „-“, „,“ und „.“ ergeben 0,00 €, „-100“ wird zu „100“, nirgends „NaN“; axe hell und dunkel bei 538 € und 1.500 € ohne Verstöße; Uhr auf dem 01.01.2027: 633 € −110,78 €, 633,01 € „Kein Minijob … Grenze von 633 €“.
 - Phase 0 und Phase 3 nicht durchgespielt.
 
-**Offen:** Live-Prüfung nach dem Deploy (Karsten, inkognito); Karolas Nachprüfung nach dem Deploy (CLAUDE.md Regel 8), erst mit „abnahmefähig“ ist der Minijob-Rechner wieder fertig; am 01.01.2027 Production-Deploy (Termin `switch-wirksamkeit-2027`).
+**Deploy:** Push `6c49d05..75a25c6`, Deployment `dpl_4j7CPwJUstH9DCQp2Bf4qXcKotXX` für `75a25c6`, READY am 25.11.2026. Im ausgelieferten HTML (`curl`): „voller Satz (rund 21 %)“ und „bis 603 € (2026), ab 2027 bis 633 €“, kein „NaN“; im Nebenjob-Rechner „rund 31 % (2026; ab 2027 steigt die Pauschale zur Krankenversicherung von 13 auf 17,5 %)“.
+
+**Karolas Nachprüfung (25.11.2026, frischer Klon von `75a25c6`):** Urteil **abnahmefähig**, 0 Befunde A, 0 Befunde B, 3 Hinweise (Bericht `_lokal/karola-berichte/2026-11-25-minijob-rechner-nachpruefung.md`). Damit ist der Minijob-Rechner nach CLAUDE.md Regel 8 wieder fertig.
+- A1 bis B3 behoben und nachgemessen, C1 und C3 bis C7 erledigt.
+- KR02: 23 Fälle gegen eine eigene Referenz (Python, Decimal, ohne die Lib zu lesen), 0 abweichende Felder, auch bei NaN, −100, Infinity und −0,01.
+- KR05: Register beim Slug KV01 bis KV06 je 0 Stellen (am Vormittag KV06 2).
+- KR06: RV-Eigenanteil und Netto gleich mit `nebenjob.ts`, Arbeitgeberanteil RV + KV gleich mit `berechneArbeitgeberSvMonat` bei 150, 450, 538 und 603 €. `nebenjob.ts` ruft `berechneMinijob` nur bis zur Grenze auf und ist von A1 nicht berührt.
+- KR08: verify:alle 90/90 im Klon, GitHub Actions „Prüfskripte“ für `75a25c6` success, Wortzahl rund 1.815.
+- KR10 live (Playwright, Chromium): 538 €, 150 €, Privathaushalt, 1.500 € („Kein Minijob“, Kopiertext ohne Beträge), 2.500 €, „-“, „,“, „.“, „-100“ und Uhr auf dem 01.01.2027 wie das Soll aus KR02; axe hell und dunkel bei 538 € und 1.500 € ohne Verstoß.
+- Hinweise: C2 (Caption ohne Jahr) und C8 (320 px, `scrollWidth` 347) bleiben wie geplant offen; neu C9: Die FAQ „Wie viel darf ich im Minijob 2026 verdienen?“ sagt „rund 603 Euro“, 603 € ist aber der genaue Wert.
+
+```
+PRUEFPUNKTE: KR01=ok KR02=ok KR03=befund KR04=ok KR05=ok KR06=ok KR07=ok KR08=ok KR09=ok KR10=befund
+URTEIL: abnahmefähig; slug=minijob-rechner; commit=75a25c6; datum=25.11.2026; befunde_a=0; befunde_b=0; hinweise=3
+```
+
+**Offen:** Live-Prüfung im Inkognito-Fenster (Karsten); am 01.01.2027 Production-Deploy (Termin `switch-wirksamkeit-2027`); Karolas Register-Vorschlag, KV04 auf `lib/rechner-config/` auszuweiten (nur mit Karstens OK); C9 mit der nächsten Textänderung am Minijob-Rechner.
 
 ---
 
