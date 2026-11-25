@@ -29,7 +29,25 @@
 
 **Commits:** `6d88710` (Inhalt), dieser Commit (Historie).
 
-**Offen:** Karolas Nachprüfung der fünf Rechner nach dem Deploy.
+**Deploy:** Push `9545e15..d8043d8`, Deployment `dpl_7gEzELGPaenajFUdome4ysLvFYRz` für `d8043d8`, READY am 25.11.2026, Alias www.rechenfix.de. GitHub Actions „Prüfskripte“ für `d8043d8`: success. Im ausgelieferten HTML stehen die neuen Texte, die alten Formulierungen („nicht möglich (&gt; 603 €)“, „Minijob-Grenze (603 €)“, „— bis 603 € Minijob“) 0-mal, „ab 2027 bis 633“ 0-mal, „NaN“ auf keiner der fünf Seiten.
+
+**Karolas Nachprüfung (25.11.2026, frischer Klon auf `d8043d8`):** alle fünf Rechner **abnahmefähig**, 0 Befunde A, 0 Befunde B. Umfang: die geänderten Stellen (KR01, KR03 bis KR08, KR10), KR02 und KR09 entfallen, weil Rechenkern und Komponenten unverändert sind; keine Bestandsprüfung. Berichte `_lokal/karola-berichte/2026-11-25-<slug>-nachpruefung-w210.md`.
+- Selbsttest 65 von 65, verify:alle im Klon 90/90.
+- Lib-Läufe im Klon gegen eigene Rechnung: Minijob-Grenze 603 € (25.11.2026) und 633 € (01.01.2027) = aufgerundet 13,90 × 130 ÷ 3 und 14,60 × 130 ÷ 3; zum Rechenstand 603 €; BAföG-Freibetrag 389 € (ein Minijob mit 603 € ergibt nach Pauschalen 388,89 €, bleibt also frei); Werbungskosten-Pauschbetrag 1.230 €.
+- Register je Rechner: nur noch die Nebenjob-Kachel unter dem Titel mit Jahr; Rechenketten ohne Befund.
+- Chromium live bei 1280 und 320 px: keine Konsolenfehler, kein „NaN“. Hinweis C1 beim Hochrechner: bei 320 px 337 px breit, unverändert gegenüber Welle 208 (dort vorher, nachher und live je 337), gehört zur Welle zu WCAG 1.4.10.
+
+```
+PRUEFPUNKTE: KR01=ok KR02=entfaellt KR03=ok KR04=ok KR05=ok KR06=ok KR07=ok KR08=ok KR09=entfaellt KR10=ok
+URTEIL: abnahmefähig; slug=nebenjob-rechner; commit=d8043d8; datum=25.11.2026; befunde_a=0; befunde_b=0; hinweise=0
+URTEIL: abnahmefähig; slug=stundenlohn-rechner; commit=d8043d8; datum=25.11.2026; befunde_a=0; befunde_b=0; hinweise=0
+URTEIL: abnahmefähig; slug=bafoeg-rechner; commit=d8043d8; datum=25.11.2026; befunde_a=0; befunde_b=0; hinweise=0
+URTEIL: abnahmefähig; slug=teilzeit-rechner; commit=d8043d8; datum=25.11.2026; befunde_a=0; befunde_b=0; hinweise=0
+PRUEFPUNKTE (hochrechner): KR01=ok KR02=entfaellt KR03=ok KR04=ok KR05=ok KR06=ok KR07=ok KR08=ok KR09=entfaellt KR10=befund
+URTEIL: abnahmefähig; slug=hochrechner; commit=d8043d8; datum=25.11.2026; befunde_a=0; befunde_b=0; hinweise=1
+```
+
+**Offen:** nichts aus dieser Welle. Eine Bestandsprüfung dieser fünf Rechner war nicht Teil der Welle.
 
 ---
 
