@@ -130,7 +130,7 @@ export default function HefeUmrechner() {
         <p className="text-white/80 text-sm mb-1">
           {fmt(parseDeutscheZahl(menge))} g {HEFE_LABEL[quellTyp]} entspricht
         </p>
-        <p className="text-5xl font-bold">{fmt(ergebnis.zielMenge)} g {HEFE_LABEL[zielTyp]}</p>
+        <p className="text-4xl sm:text-5xl font-bold break-words hyphens-auto">{fmt(ergebnis.zielMenge)} g {HEFE_LABEL[zielTyp]}</p>
         {ergebnis.paeckchen > 0 && (
           <p className="text-white/90 text-sm mt-2">
             = {fmt(ergebnis.paeckchen, 1)} Päckchen (à 7 g)

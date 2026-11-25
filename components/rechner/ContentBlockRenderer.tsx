@@ -183,15 +183,15 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
                   {j + 1}
                 </span>
                 <div className="min-w-0">
-                  <span className="block text-gray-700 dark:text-gray-300">{s.label}</span>
+                  <span className="block text-gray-700 dark:text-gray-300 break-words hyphens-auto">{s.label}</span>
                   <span className="block font-mono text-xs text-gray-600 dark:text-gray-400 mt-0.5 break-words">{s.formel}</span>
-                  <span className="block font-semibold text-gray-800 dark:text-gray-100 mt-0.5">= {s.ergebnis}</span>
+                  <span className="block font-semibold text-gray-800 dark:text-gray-100 mt-0.5 break-words">= {s.ergebnis}</span>
                 </div>
               </li>
             ))}
           </ol>
           {block.fazit && (
-            <div className="mt-4 bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-4 font-medium text-gray-800 dark:text-gray-100">
+            <div className="mt-4 bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30 rounded-xl p-4 font-medium text-gray-800 dark:text-gray-100 break-words hyphens-auto">
               {block.fazit}
             </div>
           )}
@@ -219,7 +219,7 @@ function ContentBlockItem({ block }: { block: ContentBlock }) {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-emerald-900 dark:text-emerald-100">{p}</span>
+                <span className="min-w-0 break-words hyphens-auto text-emerald-900 dark:text-emerald-100">{p}</span>
               </li>
             ))}
           </ul>
@@ -453,7 +453,7 @@ function Infobox({ block }: { block: Extract<ContentBlock, { typ: 'infobox' }> }
   };
   return (
     <section>
-      <div className={`rounded-xl border p-4 ${stile[block.variante]}`}>
+      <div className={`rounded-xl border p-4 break-words hyphens-auto ${stile[block.variante]}`}>
         {block.titel && (
           <p className={`font-semibold mb-1 ${titelFarbe[block.variante]}`}>{block.titel}</p>
         )}

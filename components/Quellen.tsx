@@ -37,7 +37,7 @@ export default function Quellen({ quellen }: QuellenProps) {
       <h2 className="text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-300 mb-4">
         {ueberschrift}
       </h2>
-      <ol className="list-decimal pl-6 space-y-3 text-gray-700 dark:text-gray-300 leading-relaxed">
+      <ol className="list-decimal pl-6 space-y-3 text-gray-700 dark:text-gray-300 leading-relaxed break-words hyphens-auto">
         {quellen.map((q, i) => (
           <li key={i}>
             {q.titel}

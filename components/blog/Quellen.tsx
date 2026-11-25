@@ -9,7 +9,7 @@ export default function Quellen({ eintraege }: { eintraege: QuellenEintrag[] }) 
   return (
     <section className="my-8">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-10 mb-4">Quellen</h2>
-      <ol className="list-decimal pl-6 space-y-2 text-gray-700 dark:text-gray-300">
+      <ol className="list-decimal pl-6 space-y-2 text-gray-700 dark:text-gray-300 break-words hyphens-auto">
         {eintraege.map((e, i) => (
           <li key={i}>
             {e.url ? (

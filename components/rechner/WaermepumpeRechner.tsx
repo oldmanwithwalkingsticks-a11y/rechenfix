@@ -286,12 +286,12 @@ export default function WaermepumpeRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">9</span>
           Betrachtungszeitraum
         </h2>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {['10', '15', '20', '25'].map(v => (
             <button
               key={v}
               onClick={() => setJahre(v)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] flex-1 ${jahre === v ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${jahre === v ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
             >
               {v} Jahre
             </button>

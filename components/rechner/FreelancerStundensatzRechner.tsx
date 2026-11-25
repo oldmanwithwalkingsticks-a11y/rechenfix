@@ -196,11 +196,11 @@ export default function FreelancerStundensatzRechner() {
             </div>
 
             {/* Legende */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-3 gap-2">
               {ergebnis.aufschluesselung.map(a => (
                 <div key={a.label} className="flex items-center gap-2">
                   <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: a.farbe }} />
-                  <div className="min-w-0">
+                  <div className="min-w-0 break-words">
                     <span className="text-xs text-gray-600 dark:text-gray-400">{a.label}</span>
                     <span className="text-xs font-medium text-gray-800 dark:text-gray-200 ml-1">{fmt(a.betrag)} € ({a.anteilProzent.toFixed(0)}%)</span>
                   </div>

@@ -118,7 +118,7 @@ export default async function RechnerSeite({ params }: Props) {
                 </div>
               </div>
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2 print-compact">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2 print-compact break-words hyphens-auto">
               {config.icon} {config.titel}
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mb-6 no-print">{config.beschreibung}</p>
@@ -185,12 +185,12 @@ export default async function RechnerSeite({ params }: Props) {
                 {config.faq.map((item, i) => (
                   <details key={i} className="group border border-gray-100 dark:border-gray-700 rounded-xl">
                     <summary className="cursor-pointer p-4 font-medium text-gray-800 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors list-none flex justify-between items-center">
-                      {item.frage}
+                      <span className="min-w-0 break-words hyphens-auto">{item.frage}</span>
                       <svg className="w-5 h-5 text-gray-600 dark:text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </summary>
-                    <div className="px-4 pb-4 text-sm text-gray-600 dark:text-gray-400">
+                    <div className="px-4 pb-4 text-sm text-gray-600 dark:text-gray-400 break-words hyphens-auto">
                       {item.antwort}
                     </div>
                   </details>

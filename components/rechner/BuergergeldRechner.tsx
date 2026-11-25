@@ -327,10 +327,10 @@ export default function BuergergeldRechner() {
 
       {/* § 11b Abs. 2b SGB II — Jugendlichen-Freibetrag (aufklappbar, Paket 5 Prompt 123) */}
       <details className="mb-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800" open={jugendlicherStatus !== 'none'}>
-        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 select-none">
+        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 select-none break-words hyphens-auto">
           Sonderstatus Einkommensfreibetrag (Schüler/Azubi/Student/Freiwilligendienst) — § 11b Abs. 2b SGB II
         </summary>
-        <div className="px-4 pb-4 pt-1 space-y-3 border-t border-gray-100 dark:border-gray-700">
+        <div className="px-4 pb-4 pt-1 space-y-3 border-t border-gray-100 dark:border-gray-700 break-words hyphens-auto">
           <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed italic">
             {/* W183: vorher „statt der üblichen Stufen-Regelung“ und 250 € für alle ab 25. */}
             § 11b Abs. 2b SGB II: Für Schüler/Azubis/Studierende/Freiwilligendienstler unter

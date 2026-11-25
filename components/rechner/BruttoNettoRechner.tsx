@@ -605,7 +605,7 @@ export default function BruttoNettoRechner() {
           </div>
 
           {/* Aufschlüsselung */}
-          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-5" id="brutto-netto-tabelle">
+          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 sm:p-5" id="brutto-netto-tabelle">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-3">Aufschlüsselung (monatlich)</h2>
             <table className="w-full text-sm">
               <tbody>
@@ -999,11 +999,11 @@ function Zeile({ label, wert, hervorgehoben = false, brutto }: { label: string; 
   const prozent = brutto && brutto > 0 ? ((Math.abs(wert) / brutto) * 100).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : null;
   return (
     <tr className={hervorgehoben ? 'font-semibold text-gray-800 dark:text-gray-100' : 'text-gray-600 dark:text-gray-400'}>
-      <td className="py-1.5">{label}</td>
+      <td className="py-1.5 pr-2 hyphens-auto [overflow-wrap:anywhere]">{label}</td>
       <td className={`py-1.5 text-right ${wert < 0 ? 'text-red-700 dark:text-red-300' : ''}`}>
         {wert < 0 ? `−${fmt(Math.abs(wert))}` : fmt(wert)} &euro;
       </td>
-      <td className="py-1.5 text-right text-xs text-gray-600 dark:text-gray-400 w-16">
+      <td className="py-1.5 text-right text-xs text-gray-600 dark:text-gray-400 w-12 sm:w-16">
         {prozent ? `${prozent}%` : ''}
       </td>
     </tr>

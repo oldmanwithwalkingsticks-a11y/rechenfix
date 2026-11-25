@@ -308,8 +308,8 @@ function FormSvg({
   const size = Math.max(skala * maxSize, 20);
 
   return (
-    <div className="text-center">
-      <svg width={maxSize} height={maxSize} viewBox={`0 0 ${maxSize} ${maxSize}`}>
+    <div className="text-center min-w-0 break-words">
+      <svg width={maxSize} height={maxSize} viewBox={`0 0 ${maxSize} ${maxSize}`} className="block mx-auto max-w-full h-auto">
         {form.typ === 'rund' && (
           <circle
             cx={maxSize / 2}

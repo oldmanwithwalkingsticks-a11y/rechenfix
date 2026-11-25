@@ -195,7 +195,7 @@ export default function NettolohnOptimiererRechner() {
       {sieger && (
         <div className="result-box mb-6" style={{ background: 'linear-gradient(135deg, #059669, #10b981)' }}>
           <p className="text-white/80 text-sm mb-1">Optimale Strategie für {fmt(betrag)} € AG-Budget</p>
-          <p className="text-3xl md:text-4xl font-bold">{sieger.label}</p>
+          <p className="text-3xl md:text-4xl font-bold break-words hyphens-auto">{sieger.label}</p>
           <p className="text-white/90 mt-2">
             Netto-Zugewinn: <strong>{fmt2(sieger.nettoZugewinn)} €/Monat</strong>
             {vorteilVsBrutto > 0.5 && (

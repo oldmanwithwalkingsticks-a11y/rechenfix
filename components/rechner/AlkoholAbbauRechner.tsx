@@ -136,7 +136,7 @@ export default function AlkoholAbbauRechner() {
             {getraenke.map(g => (
               <div key={g.id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2">
                 <div className="flex gap-2 items-start">
-                  <select aria-label="Getränkeart" value={g.art} onChange={e => updateGetraenk(g.id, { art: e.target.value as GetraenkArt })} className="flex-1 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm">
+                  <select aria-label="Getränkeart" value={g.art} onChange={e => updateGetraenk(g.id, { art: e.target.value as GetraenkArt })} className="flex-1 min-w-0 min-h-[44px] px-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm">
                     {(Object.keys(GETRAENKE) as GetraenkArt[]).map(k => <option key={k} value={k}>{GETRAENKE[k].label}</option>)}
                   </select>
                   <input

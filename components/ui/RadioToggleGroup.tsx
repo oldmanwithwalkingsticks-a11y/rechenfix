@@ -20,7 +20,8 @@ interface RadioToggleGroupProps {
 
 const COLUMN_CLASSES: Record<number, string> = {
   2: 'grid grid-cols-1 sm:grid-cols-2 gap-2',
-  3: 'grid grid-cols-3 gap-2',
+  // W211: unter 360 px eine Spalte (bei 320 px blieben je Knopf nur rund 43 px Text)
+  3: 'grid grid-cols-1 min-[360px]:grid-cols-3 gap-2',
   4: 'grid grid-cols-2 sm:grid-cols-4 gap-2',
 };
 
@@ -72,14 +73,14 @@ export default function RadioToggleGroup({
                 className="sr-only"
               />
               {opt.description ? (
-                <div className="text-left w-full">
+                <div className="text-left w-full min-w-0 break-words hyphens-auto">
                   <div className="font-semibold">{opt.label}</div>
                   <div className={`text-xs mt-0.5 ${checked ? 'text-white' : 'text-gray-600 dark:text-gray-300'}`}>
                     {opt.description}
                   </div>
                 </div>
               ) : (
-                opt.label
+                <span className="min-w-0 break-words hyphens-auto text-center">{opt.label}</span>
               )}
             </label>
           );

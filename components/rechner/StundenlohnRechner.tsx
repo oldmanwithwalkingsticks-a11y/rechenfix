@@ -144,8 +144,8 @@ export default function StundenlohnRechner() {
             )}
           </div>
 
-          {/* Alle drei Werte */}
-          <div className="grid grid-cols-3 gap-3">
+          {/* Alle drei Werte — W211: unter 360 px eine Spalte */}
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-3 gap-3">
             <div className={`rounded-xl p-4 text-center ${modus === 'stundenlohn' ? 'bg-primary-50 dark:bg-primary-500/10 ring-2 ring-primary-200 dark:ring-primary-500/30' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
               <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Stundenlohn</p>
               <p className="text-lg font-bold text-gray-800 dark:text-gray-100">{fmt(ergebnis.stundenlohn)} €</p>

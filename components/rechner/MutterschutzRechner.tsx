@@ -286,17 +286,17 @@ export default function MutterschutzRechner() {
           <div className="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-xl p-5 mb-6">
             <h2 className="font-bold text-blue-800 dark:text-blue-300 mb-3">Wichtige Termine</h2>
             <div className="space-y-2 text-sm text-blue-800 dark:text-blue-300">
-              <div className="flex gap-3">
-                <span className="font-semibold flex-shrink-0 w-44">Arbeitgeber informieren:</span>
-                <span>{ergebnis.meldeTermin}</span>
+              <div className="flex flex-col sm:flex-row sm:gap-3">
+                <span className="font-semibold flex-shrink-0 sm:w-44">Arbeitgeber informieren:</span>
+                <span className="min-w-0 break-words">{ergebnis.meldeTermin}</span>
               </div>
-              <div className="flex gap-3">
-                <span className="font-semibold flex-shrink-0 w-44">Mutterschaftsgeld beantragen:</span>
-                <span>Ab {fmtDatumKurz(ergebnis.antragTermin)} (7 Wochen vor ET)</span>
+              <div className="flex flex-col sm:flex-row sm:gap-3">
+                <span className="font-semibold flex-shrink-0 sm:w-44">Mutterschaftsgeld beantragen:</span>
+                <span className="min-w-0 break-words">Ab {fmtDatumKurz(ergebnis.antragTermin)} (7 Wochen vor ET)</span>
               </div>
-              <div className="flex gap-3">
-                <span className="font-semibold flex-shrink-0 w-44">Elterngeld beantragen:</span>
-                <span>{ergebnis.elterngeldFrist}</span>
+              <div className="flex flex-col sm:flex-row sm:gap-3">
+                <span className="font-semibold flex-shrink-0 sm:w-44">Elterngeld beantragen:</span>
+                <span className="min-w-0 break-words">{ergebnis.elterngeldFrist}</span>
               </div>
               <div className="mt-2 pt-2 border-t border-blue-200 dark:border-blue-500/30">
                 <Link href="/finanzen/elterngeld-rechner" className="text-primary-600 dark:text-primary-400 underline font-medium">

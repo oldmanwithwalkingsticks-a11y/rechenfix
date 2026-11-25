@@ -77,7 +77,7 @@ export default function KindergeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Veranlagung
         </h2>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {([['zusammen', '👫 Zusammenveranlagung'], ['einzeln', '👤 Einzelveranlagung']] as const).map(([val, label]) => (
             <button
               key={val}
