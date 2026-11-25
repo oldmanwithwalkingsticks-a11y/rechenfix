@@ -6,6 +6,33 @@
 
 ---
 
+## 25.11.2026 — Welle 210: Minijob-Grenze mit Jahr in fünf weiteren Rechnern — ✅ ABGESCHLOSSEN 25.11.2026
+
+**Anlass:** Der erste Lauf des erweiterten Registereintrags KV04 (Welle 209) fand 18 Stellen, die die Minijob-Grenze 603 € ohne Jahr und ohne Termin nennen: 14 im Nebenjob-Rechner, je eine im Hochrechner, Stundenlohn-, BAföG- und Teilzeit-Rechner. Ab dem 01.01.2027 gilt 633 €. Karsten hat die Korrektur am 25.11.2026 freigegeben.
+
+**Änderungen:**
+- `lib/rechner-config/finanzen.ts`, Nebenjob-Rechner: 13 Stellen mit Jahr („2026 bis 603 €“, „über 603 € (2026)“, in der Tabelle „nicht möglich (über 603 €, Grenze 2026)“). Die Kachel „Minijob-Grenze 603 €/Monat“ bleibt, wie sie ist: Ihr Baustein heißt „Nebenjob auf einen Blick (2026)“.
+- Stundenlohn-Rechner: „pflichtig über der Minijob-Grenze (2026: 603 €)“. BAföG-Rechner: „über 389 €/Monat nach Pauschalen (2026; ein Minijob bis 603 € bleibt frei)“, dazu im Beispiel „1.230 € Werbungskosten-Pauschbetrag (2026)“ (KV06). Hochrechner: „Maximale Stunden/Monat (2026)“, dazu der Titel „Mindestlohn-Stichtag 01.01.2027: 13,90 € → 14,60 €“ (KV06).
+- `lib/rechner-config/arbeit.ts`, Teilzeit-Rechner: „2026 bis 603 € Minijob, bis 2.000 € Midijob“.
+- `letzteAktualisierung` von Stundenlohn-, BAföG-, Hochrechner- und Teilzeit-Rechner auf 2026-11-25 (Nebenjob stand schon darauf).
+- `lib/termine.ts`: Der Termin `midijob-parameter-2027` nennt jetzt auch die Nebenjob-Texte und die Tabelle „Nebenjob-Netto: Minijob vs. Steuerkarte“; der Termin zum Mindestlohn 2027 zählt den Nebenjob-Rechner zu den Rechnern, die bis dahin mit dem Stand 2026 rechnen.
+
+**Kein „ab 2027 633 €“ im Nebenjob- und Teilzeit-Text:** Beide Rechner rechnen über `SV_RECHENSTAND` bewusst mit 2026, bis der Termin `midijob-parameter-2027` erledigt ist (`nebenjob.ts:120`, `teilzeit.ts` über `berechneBruttoNetto`); die Auswahl im Nebenjob-Rechner zeigt „Minijob (bis 603 €)“ auch im Januar 2027. Ein Satz „ab 2027 bis 633 €“ hätte dann dem Ergebnis widersprochen. Ein erster Entwurf hatte ihn, er ist vor dem Commit wieder herausgenommen.
+
+**Register danach** (`karola.py register . --alle`): KV04 19 Stellen (14 Minijob und 4 Midijob, getragen, Einordnung in Welle 209; dazu die Nebenjob-Kachel unter dem Titel mit Jahr), in den fünf Rechnern keine KV-Stelle ohne Jahr mehr.
+
+**Rechenkern unverändert:** keine Datei unter `lib/berechnungen/` und `components/` geändert.
+
+**Geprüft in dieser Sitzung (25.11.2026, Windows, Git Bash):** verify:alle rc=0, „Prüfskripte: 90/90 grün.“; Build rc=0, „(272/272)“; beides auf dem Endstand wiederholt, nachdem der Zusatz „ab 2027“ wieder herausgenommen war. Register für die fünf Rechner (`--slug … --alle`): keine Stelle ohne Jahr außer der Nebenjob-Kachel unter dem Titel mit Jahr.
+
+**Regel 8:** Texte von fünf Rechnern geändert, Abnahme durch Karola nach dem Deploy als Nachprüfung der KV04-Stellen (KR03 bis KR06, KR08, KR10), keine Bestandsprüfung.
+
+**Commits:** `6d88710` (Inhalt), dieser Commit (Historie).
+
+**Offen:** Karolas Nachprüfung der fünf Rechner nach dem Deploy.
+
+---
+
 ## 25.11.2026 — Welle 209: Karola v1.2, Register KV04 auch in den Rechner-Texten — ✅ ABGESCHLOSSEN 25.11.2026
 
 **Anlass:** Befund B2 aus Karolas Abnahme des Minijob-Rechners vom 25.11.2026: 13 Stellen im Minijob-Text nannten Grenze, Übergangsbereich oder Jahresgrenze ohne Jahr. Das Konventionen-Register sah sie nicht, weil KV04 (Minijob-Grenze) nur in `components/`, `app/` und `lib/berechnungen/` suchte, nicht in `lib/rechner-config/`. Karsten hat die Ausweitung am 25.11.2026 freigegeben.
