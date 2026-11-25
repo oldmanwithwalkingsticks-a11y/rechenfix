@@ -1,5 +1,5 @@
 {
-  "_stand": "29.10.2026",
+  "_stand": "25.11.2026",
   "_hinweis": "Konfiguration von Karola Rechner. Stabile Werte gehoeren hierher: Pruefkatalog und Konventionen-Register. Pruefberichte werden fortgeschrieben und gehoeren nicht in diese Datei, sondern nach docs/audit-arbeitspapiere/_lokal/karola-berichte/.",
 
   "pruefkatalog": [
@@ -99,7 +99,7 @@
       "quelle": "§ 8 Abs. 1a SGB IV",
       "seit": "27.10.2026",
       "stufe": "pruefen",
-      "pfade": ["components/", "app/", "lib/berechnungen/"],
+      "pfade": ["components/", "app/", "lib/berechnungen/", "lib/rechner-config/"],
       "ausnahmen": ["lib/berechnungen/mindestlohn.ts"],
       "ausnahmen_praefix": ["app/blog/", "components/blog/"],
       "zeilen": "code",

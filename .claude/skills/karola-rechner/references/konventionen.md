@@ -1,6 +1,6 @@
 # Konventionen-Register
 
-Stand 29.10.2026 (v1.1). Maschinenlesbar in `assets/karola.json`, Block `konventionen`; `scripts/karola.py register` sucht die Muster, der Selbsttest prüft jedes Muster gegen sein Positiv- und Negativbeispiel und dass diese Datei für jede Kennung einen Abschnitt hat.
+Stand 25.11.2026 (v1.2). Maschinenlesbar in `assets/karola.json`, Block `konventionen`; `scripts/karola.py register` sucht die Muster, der Selbsttest prüft jedes Muster gegen sein Positiv- und Negativbeispiel und dass diese Datei für jede Kennung einen Abschnitt hat.
 
 **Warum ein Register.** Rechtswerte haben seit April 2026 eine SSOT und einen Wächter (`scripts/check-jahreswerte.mjs`). Konventionen hatten keinen: Guard G10 nahm „nicht rechts- oder jahresabhängige Konstanten" ausdrücklich aus. Genau dort lag der 160-Stunden-Fehler. Eine Konvention ist eine Festlegung, die mehrere Rechner teilen und die anders getroffen werden könnte — 52 ÷ 12 statt 4,348, Arbeitstage aus dem Kalender statt pauschal. Sie braucht dieselbe Behandlung wie ein Rechtswert: einen Ort im Code, einen Grund, eine Suche nach Abweichlern.
 
@@ -38,6 +38,12 @@ Stand 29.10.2026 (v1.1). Maschinenlesbar in `assets/karola.json`, Block `konvent
 - **SSOT:** `lib/berechnungen/mindestlohn.ts`, `getMinijobGrenzeMonat`.
 - **Grund:** § 8 Abs. 1a SGB IV koppelt die Grenze an den Mindestlohn. Zum 01.01.2027 springt sie auf 633 €; jedes „603 €" ohne Jahr ist ab dann falsch.
 - **Stufe:** `pruefen`. Stand 27.10.2026: drei Stellen in Komponenten (`AfbgRechner.tsx:128`, `BafoegRechner.tsx:167`, `NebenjobRechner.tsx:67`).
+- **Pfade seit v1.2:** `components/`, `app/`, `lib/berechnungen/` und `lib/rechner-config/`. Bis v1.1 fehlten die Rechner-Texte. Die Abnahme des Minijob-Rechners vom 25.11.2026 fand 13 Stellen ohne Jahr von Hand (Befund B2, behoben in Welle 207); mit dem neuen Pfad hätte KV04 5 davon gemeldet. Die übrigen 8 nennen 603,01 €, 7.236 € oder „603-€-…“, die das Muster nicht trifft; das Muster ist unverändert.
+- **Stand 25.11.2026 (v1.2):** 36 Stellen, alle in `lib/rechner-config/`, keine mehr in Komponenten. Das Skript sucht zeilenweise und sieht ein Jahr im Titel des Bausteins nicht; deshalb die Einordnung von Hand:
+  - 14 im Minijob-Rechner (`finanzen.ts` 3750 bis 3919): getragen. Das Jahr steht im Titel des Bausteins („Eckwerte Minijob 2026“, „Arbeitgeber-Sicht 2026: Pauschalabgaben auf 603 €“), oder 603 € ist ein Beispielbetrag, der auch 2027 ein Minijob bleibt (Arbeitnehmer-Sicht, „Eigenanteil bei 603 €“, FAQ zur RV-Befreiung).
+  - 4 im Midijob-Rechner (`finanzen.ts` 4708, 4721, 4768, 4803): getragen. Der Rechner rechnet mit `SV_RECHENSTAND` 2026, bis der Termin `midijob-parameter-2027` erledigt ist, und der Termin nennt die Texte des Midijob-Blocks.
+  - 14 im Nebenjob-Rechner (`finanzen.ts` 6625 bis 6748): ohne Jahr und ohne Termin. `nebenjob.ts` rechnet zwar ebenfalls mit `SV_RECHENSTAND`, aber kein Termin nennt diese Texte; wechselt der Rechenstand auf 2027, bleiben sie bei 603 €.
+  - 4 in anderen Rechnern, ohne Jahr und ohne Termin: Hochrechner (`finanzen.ts:4603`, „603 € ÷ 13,90 €/h“), Stundenlohn-Rechner (`finanzen.ts:916`), BAföG-Rechner (`finanzen.ts:2949`), Teilzeit-Rechner (`arbeit.ts:1557`). Ab 01.01.2027 nennen sie die alte Grenze.
 
 ## KV05 Mindestlohn-Monatsbrutto bei 40 Wochenstunden
 

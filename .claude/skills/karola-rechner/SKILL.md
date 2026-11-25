@@ -5,7 +5,7 @@ description: Karola Rechner nimmt jeden Rechner auf rechenfix.de ab, nachdem er 
 
 # Karola Rechner
 
-**Stand: v1.1 (29.10.2026).** Abnahme für jeden Rechner auf rechenfix.de. Karola baut nicht, sie prüft — unabhängig vom Bauweg, auf einem frischen Klon des gepushten Stands, nie auf der Selbstauskunft des Bau-Laufs.
+**Stand: v1.2 (25.11.2026).** Abnahme für jeden Rechner auf rechenfix.de. Karola baut nicht, sie prüft — unabhängig vom Bauweg, auf einem frischen Klon des gepushten Stands, nie auf der Selbstauskunft des Bau-Laufs.
 
 ## Warum es Karola gibt
 
@@ -138,3 +138,4 @@ Eine neue Konvention bekommt einen Eintrag in `assets/karola.json` (mit Positiv-
 |---|---|---|
 | v1 | 27.10.2026 | Erstfassung nach den Wellen 196 und 197: Prüfkatalog KR01 bis KR10, Register KV01 bis KV06, `scripts/karola.py` mit Selbsttest |
 | v1.1 | 29.10.2026 | Welle 200. `zahlen` übergeht Stylesheets in Template-Literalen (Hexfarben waren als Zahlen gezählt). Formel-Prüfer mit Einheiten wie €/h. KV01: „× 4,33“ als Rechenschritt im Text ist ein Befund; KV02: Monatsstunden 173 oder 173,5 statt 173,33. KV01 bis KV03 nehmen wie KV04 bis KV06 Blogartikel und ihre Grafiken aus. Anlass: `app/finanzen/2000-euro-brutto-netto` rechnete 13,90 € × 173,5 h = 2.413 €, keiner der Prüfwege fand es. Selbsttest 65 Fälle |
+| v1.2 | 25.11.2026 | Welle 209. KV04 (Minijob-Grenze) sucht auch in `lib/rechner-config/`. Anlass: Befund B2 der Abnahme des Minijob-Rechners vom 25.11.2026, 13 Stellen ohne Jahr, die das Register nicht sah; mit dem Pfad hätte es 5 davon gemeldet, das Muster ist unverändert. Erster Lauf: 36 Stellen, davon 18 ohne Jahr und ohne Termin (Nebenjob-, Hochrechner, Stundenlohn-, BAföG- und Teilzeit-Rechner; Einordnung in `references/konventionen.md`). Selbsttest 65 Fälle |
