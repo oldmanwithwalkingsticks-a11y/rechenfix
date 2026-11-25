@@ -6,6 +6,62 @@
 
 ---
 
+## 25.11.2026 — Welle 207: Minijob-Rechner, Korrekturen nach Karolas Abnahme — ✅ ABGESCHLOSSEN 25.11.2026
+
+**Anlass:** Karola Rechner hat den Minijob-Rechner am 25.11.2026 nach Welle 206 abgenommen, Urteil **gesperrt** (3 Befunde A, 3 Befunde B, 8 Hinweise; Bericht `_lokal/karola-berichte/2026-11-25-minijob-rechner.md`). Was Welle 206 eingeführt hat, rechnete richtig; die Befunde betrafen den Bestand:
+- **A1:** Bei Status Midijob oder regulär rechnete `berechneMinijob` weiter die Minijob-Pauschalen. Live bei 1.500 €: „Netto für Arbeitnehmer 1.500,00 €“, Arbeitgeberkosten 1.967,55 € (RV −225,00, KV −195,00, LSt −30,00, Umlagen −17,55), im Warnkasten als „für die Arbeitgeberseite korrekt“ bezeichnet. Pauschalen gibt es nur bei geringfügiger Beschäftigung (§ 249b SGB V, § 172 Abs. 3 und 3a SGB VI, § 40a Abs. 2 EStG). Im Übergangsbereich (§ 20 Abs. 2 SGB IV) zahlt der Arbeitgeber seinen regulären Anteil, bei 1.500 € 332,03 € statt 420,00 € für KV und RV.
+- **A2:** Eingabe „-“ oder „,“ zeigte „NaN €“, „-100“ negative Beträge und „−-15,00 €“.
+- **A3:** Kachel „AN-Beitrag bei 2.000 €: voller Satz (~20 %)“; dieselbe Seite nennt „rund 21 %“ (2026: 21,15 %).
+- **B1:** Nebenjob-Text „pauschalen Abgaben von rund 31 %“ ohne Jahr.
+- **B2:** 13 Stellen im Minijob-Text nannten Grenze 603 €, Übergangsbereich ab 603,01 € oder Jahresgrenze 7.236 € ohne Jahr.
+- **B3:** Kein Termin und kein Audit-Punkt für den durchschnittlichen Zusatzbeitragssatz des Folgejahres, aus dem seit 2027 die KV-Pauschale folgt (§ 249b SGB V; das BMG gibt ihn bis 1. November bekannt, § 242a Abs. 2 SGB V).
+
+**Änderungen:**
+- `lib/berechnungen/minijob.ts`: Pauschalen nur bei `status === 'minijob'`, sonst alle Arbeitgeberbeträge 0 und Netto gleich Verdienst (Kommentar am Interface: außerhalb des Minijobs nicht anzeigen). Der Verdienst ist als zweite Sicherung auf endliche Werte ≥ 0 geklammert.
+- `components/rechner/MinijobRechner.tsx`: Außerhalb des Minijobs zeigt die Ergebnisbox „Kein Minijob“ mit Grenze und Einordnung (Midijob-Übergangsbereich oder reguläre Beschäftigung). Aufschlüsselung, Arbeitgeberkosten-Hinweis und KV-Hinweis erscheinen nur im Minijob; der Midijob-Warnkasten nennt keine Beträge mehr und verlinkt den Midijob-Rechner; Kopiertext und PDF zeigen außerhalb des Minijobs nur die Einordnung. Verdienst und Stunden mit `clampInputValue(v, 0, null)` und `min={0}`; „-“, „,“ und „.“ zählen als 0.
+- `lib/rechner-config/finanzen.ts`: Block `minijob-rechner` mit Kachel „voller Satz (rund 21 %)“, Tabelle „2026 rund 21 %“, den 13 Stellen aus B2 mit Jahr, `beispiel` mit Jahr und Kommentar W207. Block `nebenjob-rechner`: „rund 31 % (2026; ab 2027 steigt die Pauschale zur Krankenversicherung von 13 auf 17,5 %)“. `letzteAktualisierung` beider Rechner 2026-11-25.
+- `lib/termine.ts`: neu `minijob-kv-pauschale-folgejahr` (05.11.2027, jährlich); `switch-wirksamkeit-2027` verlangt einen Production-Deploy am 01.01.2027; `audit-dezember` spricht von der Zehn-Punkte-Checkliste.
+- `docs/jahreswerte-kalender.md`: Dezember-Audit Punkt 3 um den durchschnittlichen Zusatzbeitragssatz und den RV-Beitragssatz ergänzt, Eintrag in der Änderungshistorie.
+- neu `scripts/verify-minijob.ts`: 29 Fälle zu A1 bis B3, Sollwerte aus dem Gesetz und von Hand gerechnet; `verify:alle` zählt 90 statt 89 Skripte.
+
+**Beifang:**
+- C1: Das Feld `beispiel` des Minijob-Rechners nennt das Jahr.
+- C3: Grenze und Mindestlohn im Text der Komponente kommen aus `ergebnis` statt aus Modulkonstanten.
+- C4: „Fix erklärt“ bekommt den Satz der KV-Pauschale und den Aufschlag formatiert (nur die Übergabe geändert, nicht ausgelöst).
+- C5: Termin `switch-wirksamkeit-2027` verlangt einen Deploy am 01.01.2027, weil die Seite statisch gebaut ist (im Browser mit Uhr auf dem 01.01.2027: React-Fehler #418).
+- C6: Dezember-Audit Punkt 3 prüft den RV-Beitragssatz 2027, für den bisher nur Sekundärquellen 18,6 % nennen.
+- C7: Termin `audit-dezember` passt zu den zehn Punkten im Kalender.
+
+**Bewusst nicht geändert:**
+- C2: Caption und Headline in `lib/social/captions.json` (zöge Bilder und Videos nach sich, eigene Welle).
+- C8: Kennzahl-Kacheln bei 320 px (`ContentBlockRenderer.tsx`, die Seite scrollt 27 px seitwärts); wirkt auf alle Seiten, eigene Welle mit axe-Messung.
+- Karolas Register: KV04 auf `lib/rechner-config/` ausweiten nur mit Karstens OK.
+- Beispielbeträge mit 603 € im Minijob-Text (bleiben auch 2027 richtig); `SV_RECHENSTAND`, Bucket `MIDIJOB_2027`, Umlagen und Pauschsteuer 2027 (eigene Termine).
+
+**Gegenprobe:** `verify-minijob` auf dem alten Stand (Lib, Komponente, Config und Doku per `git stash push -- lib components docs` beiseite, neues Prüfskript stehen gelassen): rc=1, „Minijob: 7/29 grün“, 22 Zeilen `✗`. Grün blieben nur die Fälle, die schon vorher stimmten: Status Midijob bei 1.500 €, Pauschalen und 790,95 € bei 603 € (2026), 110,78 € bei 633 € (2027), Blockfund und die beiden Scan-Selbsttests. Die rote Zeile „Grenze, Übergangsbereich und Jahresgrenze nur mit Jahr“ listete die 13 Fundstellen aus B2.
+
+**Commits:** `113f2ce` (Inhalt), dieser Commit (Historie).
+
+**Geprüft in dieser Sitzung (25.11.2026, Berliner Zeit, Windows, Git Bash):**
+- Phase 0: `git status` leer, `git pull --ff-only` „Already up to date.“, oben `6c49d05`, darunter `6c93b8b`; Skill-Repo-Status leer; 2 Stash-Einträge; „Stichtag 01.01.2027: 38/38 grün“; verify:alle rc=0, „Prüfskripte: 89/89 grün.“
+- Vorlage: „OK — 36 Ersetzungen in 5 Dateien, 1 neue Dateien.“, rc=0; `git status --short` genau die fünf Dateien und `?? scripts/verify-minijob.ts`; Skill-Repo-Status leer; unter beiden Slugs `letzteAktualisierung: '2026-11-25'`; Kalenderzeile `### 2026-11-25 — Welle 207: Minijob-Korrekturen nach Karolas Abnahme`.
+- „Minijob: 29/29 grün“, „Stichtag 01.01.2027: 38/38 grün“.
+- Karola: Selbsttest „65 von 65 Faellen wie erwartet — gruen.“, rc=0; Formeln „192 Ketten in 448 Dateien, 0 Befund(e), 3 Hinweis(e)“ (`arbeit.ts:1134`, `sport.ts:1915`, `wohnen.ts:3290`), rc=0; Register KV01 bis KV05 je 0 Stellen, KV06 93 Stellen Stufe `pruefen` (vorher 95), „Register: 0 Befund(e)“, rc=0.
+- Diff-Statistik vor dem Stash und nach dem Pop gleich: „5 files changed, 166 insertions(+), 98 deletions(-)“. Nach `git stash push` nur `?? scripts/verify-minijob.ts`; `git stash pop` ohne Konflikt; Stash-Einträge vorher 2, nachher 2; danach wieder „Minijob: 29/29 grün“.
+- verify:alle rc=0, „Prüfskripte: 90/90 grün.“
+- Build rc=0, „✓ Generating static pages using 15 workers (272/272) in 9.9s“; danach `git status --short` 6 Zeilen.
+- Commit A: 6 Dateien, „6 files changed, 290 insertions(+), 98 deletions(-)“.
+
+**Probelauf in der Chat-Sitzung (25.11.2026, Windows, Stand `6c49d05`, Phasen 1 und 2):**
+- Vorlage: Ergebnis Datei für Datei gleich dem Zielstand bis auf die Datumszeilen; zweiter Lauf „ABBRUCH — 33 Fehler, keine Datei geschrieben.“, Exit 1.
+- `verify-minijob` 29/29 und `verify-stichtag-2027` 38/38 in Berlin, UTC und New York.
+- Im gebauten Stand per Browser: 538 € unverändert (KV 13 % −69,94 €, Netto 518,63 €, Arbeitgeber 705,69 €); 1.500 € „Kein Minijob“ ohne Aufschlüsselung, mit Link zum Midijob-Rechner; „-“, „,“ und „.“ ergeben 0,00 €, „-100“ wird zu „100“, nirgends „NaN“; axe hell und dunkel bei 538 € und 1.500 € ohne Verstöße; Uhr auf dem 01.01.2027: 633 € −110,78 €, 633,01 € „Kein Minijob … Grenze von 633 €“.
+- Phase 0 und Phase 3 nicht durchgespielt.
+
+**Offen:** Live-Prüfung nach dem Deploy (Karsten, inkognito); Karolas Nachprüfung nach dem Deploy (CLAUDE.md Regel 8), erst mit „abnahmefähig“ ist der Minijob-Rechner wieder fertig; am 01.01.2027 Production-Deploy (Termin `switch-wirksamkeit-2027`).
+
+---
+
 ## 25.11.2026 — Welle 206: Minijob-Pauschale zur Krankenversicherung ab 2027 und neue Formel für Faktor F — ✅ ABGESCHLOSSEN 25.11.2026
 
 **Anlass:** Das GKV-Beitragssatzstabilisierungsgesetz vom 24.07.2026 (BGBl. 2026 I Nr. 228, verkündet am 29.07.2026) ändert zum 01.01.2027 zwei Stellen, die im Repo fehlten:
