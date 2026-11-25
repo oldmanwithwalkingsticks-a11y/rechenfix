@@ -243,7 +243,7 @@ export const TERMINE: Termin[] = [
     vorlaufTage: 10,
     wiederholungMonate: 12,
     bereich: 'Gesetzeswerte',
-    was: 'Neun-Punkte-Checkliste für die 01.01.-Wechsel abarbeiten und Letzter-Check-Daten fortschreiben.',
+    was: 'Zehn-Punkte-Checkliste für die 01.01.-Wechsel abarbeiten und Letzter-Check-Daten fortschreiben.',
     quelle: 'docs/jahreswerte-kalender.md, Dezember-Audit',
   },
   {
@@ -252,7 +252,7 @@ export const TERMINE: Termin[] = [
     datum: '2027-01-02',
     vorlaufTage: 3,
     bereich: 'Gesetzeswerte',
-    was: 'Mindestlohn 14,60 € und Minijob-Grenze 633 € sind als automatischer Switch vorbereitet (Mindestlohn- und Minijob-Rechner), seit Welle 206 auch die KV-Pauschale des gewerblichen Minijobs (17,5 statt 13 Prozent; Minijob-Rechner mit 633 € gewerblich: Zeile „Pauschale Krankenversicherung (17,5 %)“, 110,78 €). Am Stichtag live gegenprüfen, dass sie tatsächlich greifen. Brutto-Netto-, Midijob-, Nettolohn-Optimierer- und Wahrer-Stundenlohn-Rechner rechnen dagegen bewusst mit dem Stand 2026, bis der Termin midijob-parameter-2027 erledigt ist (SV_RECHENSTAND in lib/berechnungen/brutto-netto.ts).',
+    was: 'Mindestlohn 14,60 € und Minijob-Grenze 633 € sind als automatischer Switch vorbereitet (Mindestlohn- und Minijob-Rechner), seit Welle 206 auch die KV-Pauschale des gewerblichen Minijobs (17,5 statt 13 Prozent; Minijob-Rechner mit 633 € gewerblich: Zeile „Pauschale Krankenversicherung (17,5 %)“, 110,78 €). Am Stichtag live gegenprüfen, dass sie tatsächlich greifen. Die Rechnerseiten sind statisch gebaut: Bis zum ersten Deploy nach dem 01.01.2027 liefert das HTML noch Grenze 603 €, Mindestlohn 13,90 € und KV-Pauschale 13 Prozent aus, erst der Browser rechnet um, und React meldet dabei einen Hydration-Fehler (Nr. 418, gemessen in Welle 207 mit auf den 01.01.2027 gestellter Uhr). Deshalb am 01.01.2027 einen Production-Deploy auslösen (Deploy-Hook oder Redeploy in Vercel) und im Seitenquelltext von /finanzen/minijob-rechner nachsehen, dass die Schnellwahl „633 € (Grenze)“ zeigt. Brutto-Netto-, Midijob-, Nettolohn-Optimierer- und Wahrer-Stundenlohn-Rechner rechnen dagegen bewusst mit dem Stand 2026, bis der Termin midijob-parameter-2027 erledigt ist (SV_RECHENSTAND in lib/berechnungen/brutto-netto.ts).',
     quelle: 'lib/berechnungen/mindestlohn.ts',
   },
   {
@@ -281,6 +281,16 @@ export const TERMINE: Termin[] = [
     bereich: 'Gesetzeswerte',
     was: 'Die Minijob-Zentrale gibt die Umlagesätze des Folgejahres im Dezember bekannt (für 2026 am 16.12.2025). In lib/berechnungen/minijob.ts stehen U1 0,8 Prozent, U2 0,22 Prozent und Insolvenzgeldumlage 0,15 Prozent (Stand 2026); der Minijob-Rechner rechnet sie ab 01.01.2027 unverändert weiter. Ändert sich ein Satz zum 01.01.2027: als Stichtag-Switch einbauen wie die KV-Pauschale (getMinijobKvPauschaleProzent in lib/berechnungen/sv-parameter.ts, Welle 206) und die Umlagen-Texte im Block minijob-rechner von lib/rechner-config/finanzen.ts (1,17 Prozent gewerblich, 1,02 Prozent Privathaushalt) mit Jahr versehen. Bleiben alle gleich: Termin entfernen. Einmaltermin.',
     quelle: 'lib/berechnungen/minijob.ts (Welle 167)',
+  },
+  {
+    id: 'minijob-kv-pauschale-folgejahr',
+    titel: 'Minijob: KV-Pauschale des Folgejahres eintragen',
+    datum: '2027-11-05',
+    vorlaufTage: 5,
+    wiederholungMonate: 12,
+    bereich: 'Gesetzeswerte',
+    was: 'Seit 01.01.2027 ist die Pauschale des Arbeitgebers zur Krankenversicherung im gewerblichen Minijob der allgemeine Beitragssatz (14,6 Prozent) plus der durchschnittliche Zusatzbeitragssatz des Jahres (§ 249b Satz 1 SGB V). Das BMG gibt den Zusatzbeitragssatz des Folgejahres bis zum 1. November im Bundesanzeiger bekannt (§ 242a Abs. 2 SGB V). In lib/berechnungen/sv-parameter.ts die Konstante für das Folgejahr anlegen (Muster KV_ZUSATZBEITRAG_VOLL_DURCHSCHNITT_2027_PROZENT) und getMinijobKvPauschaleProzent um den Stichtag 01.01. des Folgejahres erweitern; ohne Eintrag rechnet die Funktion weiter mit dem Satz 2027 (17,5 Prozent). Danach die Texte im Block minijob-rechner von lib/rechner-config/finanzen.ts (17,5 Prozent, 110,78 € bei 633 €), den Satz zur Krankenversicherung im Block nebenjob-rechner und scripts/verify-stichtag-2027.ts nach dem Muster für das neue Jahr nachziehen. Der Zusatzbeitragssatz geht auch in Faktor F ein (Dezember-Audit Punkt 8).',
+    quelle: '§ 242a Abs. 2 und § 249b SGB V; Karola-Bericht minijob-rechner vom 25.11.2026 (B3); Welle 207',
   },
   {
     id: 'estreformg-2027',

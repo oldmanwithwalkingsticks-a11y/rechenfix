@@ -18,7 +18,10 @@ export interface MinijobErgebnis {
   nettoAN: number;
   nettoAN_ohneRv: number;   // Vergleich
 
-  // AG-Seite
+  // AG-Seite. W207: Pauschalen nur bei status 'minijob'. Im Übergangsbereich und darüber zahlt der
+  // Arbeitgeber keine Pauschalen, sondern seinen regulären Anteil (berechneArbeitgeberSvMonat in
+  // brutto-netto.ts); dort sind alle AG-Beträge 0, agGesamtkosten = verdienst, und nettoAN enthält
+  // keine Abzüge. Der Minijob-Rechner zeigt diese Werte außerhalb des Minijobs nicht an.
   agRentenversicherung: number;
   agKrankenversicherung: number;
   agKvSatzProzent: number;      // W206: Pauschale zur KV in Prozent (gewerblich 13 bzw. ab 2027 17,5; Privathaushalt 5)
@@ -86,7 +89,9 @@ function getStatus(verdienst: number, minijobGrenze: number): JobStatus {
 }
 
 export function berechneMinijob(e: MinijobEingabe, stichtag: Date = new Date()): MinijobErgebnis {
-  const { verdienst, art, rentenversicherungspflicht, stundenProWoche } = e;
+  const { art, rentenversicherungspflicht, stundenProWoche } = e;
+  // W207: zweite Sicherung neben der Komponente — NaN, Infinity und negative Werte zählen als 0 (Guard G1)
+  const verdienst = Number.isFinite(e.verdienst) && e.verdienst > 0 ? e.verdienst : 0;
   const minijobGrenze = getMinijobGrenzeMonat(stichtag);
   const mindestlohn = getAktuellerMindestlohn(stichtag);
   const status = getStatus(verdienst, minijobGrenze);
@@ -95,15 +100,19 @@ export function berechneMinijob(e: MinijobEingabe, stichtag: Date = new Date()):
   // W206: KV-Pauschale gewerblich zum Stichtag (bis 2026 13 %, ab 01.01.2027 14,6 % plus durchschnittlicher
   // Zusatzbeitrag, 2027 zusammen 17,5 %; § 249b SGB V). Alle Beträge mit anteilCent: kaufmännisch auf
   // Cent, vorher rund2(Entgelt × Satz), das halbe Cent teils abrundete.
+  // W207: Pauschalen nur im Minijob. § 249b SGB V, § 172 Abs. 3 und 3a SGB VI und § 40a Abs. 2 EStG
+  // gelten für geringfügig Beschäftigte; im Übergangsbereich (§ 20 Abs. 2 SGB IV) und darüber zahlt der
+  // Arbeitgeber seinen regulären Anteil. Vorher rechnete die Lib die Pauschalen bei jedem Verdienst
+  // (1.500 €: KV und RV 420,00 € statt 332,03 € Arbeitgeberanteil, dazu 2 % Pauschsteuer).
   let agRv = 0, agKv = 0, agLst = 0, agUml = 0, agUnfall = 0;
   const agKvSatzProzent = art === 'gewerblich' ? getMinijobKvPauschaleProzent(stichtag) : 5;
 
-  if (art === 'gewerblich') {
+  if (status === 'minijob' && art === 'gewerblich') {
     agRv = anteilCent(verdienst, 0.15);   // 15 % RV
     agKv = anteilCent(verdienst, agKvSatzProzent / 100);
     agLst = anteilCent(verdienst, 0.02);  // 2 % pauschale Lohnsteuer
     agUml = rund2(anteilCent(verdienst, UMLAGE_U1_2026) + anteilCent(verdienst, UMLAGE_U2_2026) + anteilCent(verdienst, INSOLVENZGELDUMLAGE_2026));
-  } else {
+  } else if (status === 'minijob') {
     agRv = anteilCent(verdienst, 0.05);           // 5 % RV
     agKv = anteilCent(verdienst, agKvSatzProzent / 100); // 5 % KV
     agLst = anteilCent(verdienst, 0.02);          // 2 % Pauschsteuer

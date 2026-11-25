@@ -185,6 +185,8 @@
    - BBG RV (Monat + Jahr)
    - BBG KV/PV (Monat + Jahr)
    - Durchschnittsentgelt (vorläufiger Wert)
+   - Durchschnittlicher Zusatzbeitragssatz der GKV für das Folgejahr (BMG, bis 1. November im Bundesanzeiger, § 242a Abs. 2 SGB V): seit 2027 Teil der KV-Pauschale im gewerblichen Minijob (`getMinijobKvPauschaleProzent` in `sv-parameter.ts`, § 249b SGB V) und von Faktor F (Punkt 8). Termin `minijob-kv-pauschale-folgejahr`.
+   - Beitragssatz der Rentenversicherung (Beitragssatzverordnung): im Minijob `RV_BEITRAGSSATZ_2026` in `minijob.ts`, daraus der Eigenanteil (3,6 % gewerblich, 13,6 % Privathaushalt). Für 2027 lag Ende November 2026 nur der Stand der Fachpresse vor (18,6 %, unverändert).
    - Quelle: https://www.bmas.de/ + BGBl.
 4. [ ] **Mindestlohn / Minijob** (Mindestlohnkommission typisch alle 2 Jahre):
    - Mindestlohn
@@ -283,6 +285,10 @@ Wenn ein Gesetz verabschiedet wird, das einen Parameter ändert (z. B. StÄndG 2
 ## 🗒️ Änderungshistorie dieser Datei
 
 Neue Einträge oben anfügen.
+
+### 2026-11-25 — Welle 207: Minijob-Korrekturen nach Karolas Abnahme
+- Dezember-Audit Punkt 3: durchschnittlicher Zusatzbeitragssatz des Folgejahres (KV-Pauschale Minijob, Faktor F) und RV-Beitragssatz im Minijob ergänzt.
+- Neuer jährlicher Termin `minijob-kv-pauschale-folgejahr` (fällig 05.11.); Termin `switch-wirksamkeit-2027` verlangt einen Deploy am 01.01.2027.
 
 ### 2026-11-25 — Welle 206: Minijob-Pauschale und Faktor F ab 2027
 - Neuer Stichtag-Switch: KV-Pauschale des gewerblichen Minijobs ab 01.01.2027 17,5 % statt 13 % (§ 249b SGB V in der Fassung des GKV-Beitragssatzstabilisierungsgesetzes vom 24.07.2026, BGBl. 2026 I Nr. 228). `getMinijobKvPauschaleProzent` in `sv-parameter.ts`, Minijob-Rechner zum Tagesdatum, Arbeitgeberanteil in `brutto-netto.ts` zum `SV_RECHENSTAND`.

@@ -7,8 +7,7 @@ import {
   MIDIJOB_OBERGRENZE,
   type MinijobArt,
 } from '@/lib/berechnungen/minijob';
-import { MINDESTLOHN } from '@/lib/berechnungen/mindestlohn';
-import { parseDeutscheZahl } from '@/lib/zahlenformat';
+import { clampInputValue, parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
@@ -19,42 +18,47 @@ import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 const GRENZE = String(MINIJOB_GRENZE);
 const SCHNELLWAHL = Array.from(new Set(['450', '520', '538', '556', '603', GRENZE]));
 
+// W207: „-“, „,“ und „.“ sowie negative Werte zählen als 0, vorher zeigte der Rechner „NaN €“ (Guard G1)
+function zahlOderNull(wert: string): number {
+  const zahl = parseDeutscheZahl(wert);
+  return Number.isFinite(zahl) && zahl > 0 ? zahl : 0;
+}
+
 export default function MinijobRechner() {
   const [verdienst, setVerdienst] = useState('538');
   const [art, setArt] = useState<MinijobArt>('gewerblich');
   const [rvPflicht, setRvPflicht] = useState(true);
   const [stunden, setStunden] = useState('');
 
-  const ergebnis = useMemo(() => {
-    const stundenNum = stunden.trim() ? parseDeutscheZahl(stunden) : undefined;
-    return berechneMinijob({
-      verdienst: parseDeutscheZahl(verdienst),
-      art,
-      rentenversicherungspflicht: rvPflicht,
-      stundenProWoche: stundenNum && stundenNum > 0 ? stundenNum : undefined,
-    });
-  }, [verdienst, art, rvPflicht, stunden]);
+  const verdienstNum = zahlOderNull(verdienst);
+  const stundenNum = zahlOderNull(stunden) || undefined;
+
+  const ergebnis = useMemo(() => berechneMinijob({
+    verdienst: verdienstNum,
+    art,
+    rentenversicherungspflicht: rvPflicht,
+    stundenProWoche: stundenNum,
+  }), [verdienstNum, art, rvPflicht, stundenNum]);
 
   // Zum Vergleich: immer beide Varianten rechnen
-  const vergleichOhneRv = useMemo(() => {
-    const stundenNum = stunden.trim() ? parseDeutscheZahl(stunden) : undefined;
-    return berechneMinijob({
-      verdienst: parseDeutscheZahl(verdienst),
-      art,
-      rentenversicherungspflicht: false,
-      stundenProWoche: stundenNum && stundenNum > 0 ? stundenNum : undefined,
-    });
-  }, [verdienst, art, stunden]);
+  const vergleichOhneRv = useMemo(() => berechneMinijob({
+    verdienst: verdienstNum,
+    art,
+    rentenversicherungspflicht: false,
+    stundenProWoche: stundenNum,
+  }), [verdienstNum, art, stundenNum]);
 
-  const vergleichMitRv = useMemo(() => {
-    const stundenNum = stunden.trim() ? parseDeutscheZahl(stunden) : undefined;
-    return berechneMinijob({
-      verdienst: parseDeutscheZahl(verdienst),
-      art,
-      rentenversicherungspflicht: true,
-      stundenProWoche: stundenNum && stundenNum > 0 ? stundenNum : undefined,
-    });
-  }, [verdienst, art, stunden]);
+  const vergleichMitRv = useMemo(() => berechneMinijob({
+    verdienst: verdienstNum,
+    art,
+    rentenversicherungspflicht: true,
+    stundenProWoche: stundenNum,
+  }), [verdienstNum, art, stundenNum]);
+
+  // W207: Pauschalen, Netto und Aufschlüsselung gibt es nur im Minijob. Darüber zeigt der Rechner die
+  // Einordnung und verweist auf den Midijob- bzw. Brutto-Netto-Rechner.
+  const istMinijob = ergebnis.status === 'minijob';
+  const statusText = ergebnis.status === 'midijob' ? 'Midijob-Übergangsbereich' : 'reguläre Beschäftigung';
 
   const fmtEuro = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   // W184: gewerblich enthalten die AG-Kosten den Beitrag zur Berufsgenossenschaft (gesetzliche
@@ -78,7 +82,7 @@ export default function MinijobRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Monatlicher Verdienst
         </h2>
-        <NummerEingabe aria-label="Monatlicher Verdienst" value={verdienst} onChange={setVerdienst} placeholder="538" einheit="€" />
+        <NummerEingabe aria-label="Monatlicher Verdienst" value={verdienst} onChange={v => setVerdienst(clampInputValue(v, 0, null))} min={0} placeholder="538" einheit="€" />
         <div className="flex flex-wrap gap-2 mt-2">
           {SCHNELLWAHL.map(v => (
             <button
@@ -143,35 +147,46 @@ export default function MinijobRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Stunden pro Woche <span className="text-xs font-normal text-gray-600 dark:text-gray-400">(optional)</span>
         </h2>
-        <NummerEingabe aria-label="Stunden pro Woche (optional)" value={stunden} onChange={setStunden} placeholder="z.B. 10" einheit="Std." />
+        <NummerEingabe aria-label="Stunden pro Woche (optional)" value={stunden} onChange={v => setStunden(clampInputValue(v, 0, null))} min={0} placeholder="z.B. 10" einheit="Std." />
       </div>
 
       {/* === ERGEBNIS === */}
-      <div className="result-box mb-6">
-        <p className="text-white/80 text-sm mb-1">Netto für Arbeitnehmer</p>
-        <p className="text-5xl font-bold">{fmtEuro(ergebnis.nettoAN)} €</p>
-        <p className="text-white/80 text-sm mt-1">
-          {agKostenLabel}: <strong>{fmtEuro(ergebnis.agGesamtkosten)} €</strong>
-        </p>
-      </div>
+      {istMinijob ? (
+        <div className="result-box mb-6">
+          <p className="text-white/80 text-sm mb-1">Netto für Arbeitnehmer</p>
+          <p className="text-5xl font-bold">{fmtEuro(ergebnis.nettoAN)} €</p>
+          <p className="text-white/80 text-sm mt-1">
+            {agKostenLabel}: <strong>{fmtEuro(ergebnis.agGesamtkosten)} €</strong>
+          </p>
+        </div>
+      ) : (
+        <div className="result-box mb-6">
+          <p className="text-white/80 text-sm mb-1">{fmtEuro(ergebnis.verdienst)} € im Monat</p>
+          <p className="text-4xl font-bold">Kein Minijob</p>
+          <p className="text-white/80 text-sm mt-1">
+            Über der Minijob-Grenze von {ergebnis.minijobGrenze} €: {statusText}, keine Pauschalabgaben
+          </p>
+        </div>
+      )}
 
       {/* Midijob-Warnung */}
       {ergebnis.status === 'midijob' && (
         <div className="bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/30 rounded-xl p-4 mb-6">
           <p className="text-orange-800 dark:text-orange-300 text-sm">
-            <strong>⚠️ Übergangsbereich (Midijob):</strong> Ihr Verdienst liegt über der Minijob-Grenze von {MINIJOB_GRENZE} € und unter {MIDIJOB_OBERGRENZE} €. Hier gelten reduzierte Sozialabgaben für Arbeitnehmer (gleitend ansteigend). Die hier angezeigten Beträge sind nur für die Arbeitgeberseite korrekt — für den exakten Netto-Verdienst nutzen Sie bitte den <a href="/finanzen/brutto-netto-rechner" className="underline">Brutto-Netto-Rechner</a>.
+            <strong>⚠️ Übergangsbereich (Midijob):</strong> Ihr Verdienst liegt über der Minijob-Grenze von {ergebnis.minijobGrenze} € und höchstens bei {MIDIJOB_OBERGRENZE.toLocaleString('de-DE')} €. Pauschalabgaben fallen hier nicht an: Der Arbeitgeber zahlt seinen regulären Anteil zur Sozialversicherung, Ihre Beiträge sind reduziert und steigen gleitend bis zum vollen Satz (§ 20 Abs. 2 SGB IV). Netto und Arbeitgeberkosten berechnet der <a href="/finanzen/midijob-rechner" className="underline underline-offset-2">Midijob-Rechner</a>.
           </p>
         </div>
       )}
       {ergebnis.status === 'regulaer' && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-4 mb-6">
           <p className="text-red-800 dark:text-red-300 text-sm">
-            <strong>⚠️ Reguläre Beschäftigung:</strong> Ihr Verdienst liegt über dem Midijob-Übergangsbereich. Es gelten volle Sozialabgaben und Lohnsteuer nach Ihrer persönlichen Steuerklasse. Nutzen Sie den <a href="/finanzen/brutto-netto-rechner" className="underline">Brutto-Netto-Rechner</a>.
+            <strong>⚠️ Reguläre Beschäftigung:</strong> Ihr Verdienst liegt über dem Midijob-Übergangsbereich. Es gelten volle Sozialabgaben und Lohnsteuer nach Ihrer persönlichen Steuerklasse. Nutzen Sie den <a href="/finanzen/brutto-netto-rechner" className="underline underline-offset-2">Brutto-Netto-Rechner</a>.
           </p>
         </div>
       )}
 
-      {/* Aufschlüsselung AN/AG */}
+      {/* Aufschlüsselung AN/AG — W207: nur im Minijob */}
+      {istMinijob && (
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
         <div className="px-4 pt-4 pb-1">
           <h2 className="font-bold text-gray-700 dark:text-gray-200">Aufschlüsselung</h2>
@@ -239,12 +254,13 @@ export default function MinijobRechner() {
           )}
         </div>
       </div>
+      )}
 
       {/* Stundenlohn-Info */}
       {ergebnis.stundenlohn !== null && (
         <div className={`border rounded-xl p-4 mb-6 ${ergebnis.unterMindestlohn ? 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30' : 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/30'}`}>
           <p className={`text-sm ${ergebnis.unterMindestlohn ? 'text-red-800 dark:text-red-300' : 'text-green-800 dark:text-green-300'}`}>
-            {ergebnis.unterMindestlohn ? '⚠️' : '✓'} <strong>Ihr Stundenlohn:</strong> {fmtEuro(ergebnis.stundenlohn)} €/Std. (aktueller Mindestlohn: {fmtEuro(MINDESTLOHN)} €/Std.)
+            {ergebnis.unterMindestlohn ? '⚠️' : '✓'} <strong>Ihr Stundenlohn:</strong> {fmtEuro(ergebnis.stundenlohn)} €/Std. (aktueller Mindestlohn: {fmtEuro(ergebnis.mindestlohn)} €/Std.)
             {ergebnis.unterMindestlohn && <> — <strong>Stundenlohn unter Mindestlohn!</strong></>}
           </p>
           <p className="text-xs mt-1 text-gray-600 dark:text-gray-400">
@@ -276,55 +292,80 @@ export default function MinijobRechner() {
         </div>
       )}
 
-      {/* Hinweis KV */}
-      <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
-        <p className="text-amber-800 dark:text-amber-300 text-xs">
-          <strong>⚠️ Hinweis:</strong> Als Minijobber sind Sie steuerfrei, aber auch nicht krankenversichert durch den Minijob. Sie müssen anderweitig krankenversichert sein (z.B. Familienversicherung, Studentenversicherung oder freiwillige Versicherung).
-        </p>
-      </div>
+      {/* Hinweis KV — W207: nur im Minijob, im Midijob besteht Versicherungsschutz */}
+      {istMinijob && (
+        <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 mb-6">
+          <p className="text-amber-800 dark:text-amber-300 text-xs">
+            <strong>⚠️ Hinweis:</strong> Als Minijobber sind Sie steuerfrei, aber auch nicht krankenversichert durch den Minijob. Sie müssen anderweitig krankenversichert sein (z.B. Familienversicherung, Studentenversicherung oder freiwillige Versicherung).
+          </p>
+        </div>
+      )}
 
       <CrossLink href="/finanzen/brutto-netto-rechner" emoji="💰" text="Brutto-Netto-Rechner für reguläre Gehälter" />
       <CrossLink href="/finanzen/stundenlohn-rechner" emoji="⏱️" text="Stundenlohn berechnen" />
       <CrossLink href="/arbeit/teilzeit-rechner" emoji="📅" text="Teilzeit-Rechner: Gehalt bei reduzierter Arbeitszeit" />
 
-      <ErgebnisAktionen
-        ergebnisText={`Minijob ${fmtEuro(ergebnis.verdienst)} € (${art}): Netto ${fmtEuro(ergebnis.nettoAN)} € | RV-Eigenanteil ${fmtEuro(ergebnis.rvEigenanteil)} € | ${ohneBg ? 'AG-Kosten ohne BG-Beitrag' : 'AG-Gesamtkosten'} ${fmtEuro(ergebnis.agGesamtkosten)} € (+${fmtZ(ergebnis.agAufschlagProzent)} %)`}
-        seitenTitel="Minijob-Rechner"
-        pdfDaten={[
-          {
-            titel: 'Minijob',
-            zeilen: [
-              { label: 'Verdienst pro Monat', wert: `${fmtEuro(ergebnis.verdienst)} €` },
-              { label: 'Netto (Arbeitnehmer)', wert: `${fmtEuro(ergebnis.nettoAN)} €`, highlight: true },
-              { label: 'RV-Eigenanteil', wert: `- ${fmtEuro(ergebnis.rvEigenanteil)} €` },
-              { label: 'Stundenlohn', wert: ergebnis.stundenlohn !== null ? `${fmtEuro(ergebnis.stundenlohn)} €` : 'n/a' },
-              { label: 'Max. Stunden pro Woche', wert: `${fmtZ(ergebnis.maxStundenProWoche)} h` },
-            ],
-          },
-          {
-            titel: 'Arbeitgeber-Kosten',
-            zeilen: [
-              { label: ohneBg ? 'AG-Kosten (ohne Beitrag zur Berufsgenossenschaft)' : 'AG-Gesamtkosten', wert: `${fmtEuro(ergebnis.agGesamtkosten)} €` },
-              { label: 'Aufschlag', wert: `+ ${fmtZ(ergebnis.agAufschlagProzent)} %` },
-            ],
-          },
-        ]}
-      />
+      {istMinijob ? (
+        <ErgebnisAktionen
+          ergebnisText={`Minijob ${fmtEuro(ergebnis.verdienst)} € (${art}): Netto ${fmtEuro(ergebnis.nettoAN)} € | RV-Eigenanteil ${fmtEuro(ergebnis.rvEigenanteil)} € | ${ohneBg ? 'AG-Kosten ohne BG-Beitrag' : 'AG-Gesamtkosten'} ${fmtEuro(ergebnis.agGesamtkosten)} € (+${fmtZ(ergebnis.agAufschlagProzent)} %)`}
+          seitenTitel="Minijob-Rechner"
+          pdfDaten={[
+            {
+              titel: 'Minijob',
+              zeilen: [
+                { label: 'Verdienst pro Monat', wert: `${fmtEuro(ergebnis.verdienst)} €` },
+                { label: 'Netto (Arbeitnehmer)', wert: `${fmtEuro(ergebnis.nettoAN)} €`, highlight: true },
+                { label: 'RV-Eigenanteil', wert: `- ${fmtEuro(ergebnis.rvEigenanteil)} €` },
+                { label: 'Stundenlohn', wert: ergebnis.stundenlohn !== null ? `${fmtEuro(ergebnis.stundenlohn)} €` : 'n/a' },
+                { label: 'Max. Stunden pro Woche', wert: `${fmtZ(ergebnis.maxStundenProWoche)} h` },
+              ],
+            },
+            {
+              titel: 'Arbeitgeber-Kosten',
+              zeilen: [
+                { label: ohneBg ? 'AG-Kosten (ohne Beitrag zur Berufsgenossenschaft)' : 'AG-Gesamtkosten', wert: `${fmtEuro(ergebnis.agGesamtkosten)} €` },
+                { label: `Pauschale Krankenversicherung (${fmtZ(ergebnis.agKvSatzProzent)} %)`, wert: `${fmtEuro(ergebnis.agKrankenversicherung)} €` },
+                { label: 'Aufschlag', wert: `+ ${fmtZ(ergebnis.agAufschlagProzent)} %` },
+              ],
+            },
+          ]}
+        />
+      ) : (
+        <ErgebnisAktionen
+          ergebnisText={`${fmtEuro(ergebnis.verdienst)} € im Monat: kein Minijob (Grenze ${ergebnis.minijobGrenze} €), ${statusText}, keine Pauschalabgaben`}
+          seitenTitel="Minijob-Rechner"
+          pdfDaten={[
+            {
+              titel: 'Einordnung',
+              zeilen: [
+                { label: 'Verdienst pro Monat', wert: `${fmtEuro(ergebnis.verdienst)} €` },
+                { label: 'Minijob-Grenze', wert: `${ergebnis.minijobGrenze} €` },
+                { label: 'Einordnung', wert: statusText, highlight: true },
+              ],
+            },
+          ]}
+        />
+      )}
 
       <AiExplain
         rechnerName="Minijob-Rechner"
         eingaben={{
-          verdienst: `${fmtEuro(parseDeutscheZahl(verdienst))} €`,
+          verdienst: `${fmtEuro(verdienstNum)} €`,
           art,
           rvPflicht: rvPflicht ? 'Ja' : 'Nein (befreit)',
           stunden: stunden || 'nicht angegeben',
         }}
-        ergebnis={{
+        ergebnis={istMinijob ? {
           status: ergebnis.status,
           nettoAN: `${fmtEuro(ergebnis.nettoAN)} €`,
           rvEigenanteil: `${fmtEuro(ergebnis.rvEigenanteil)} €`,
+          agKvPauschale: `${fmtZ(ergebnis.agKvSatzProzent)} % = ${fmtEuro(ergebnis.agKrankenversicherung)} €`,
           agGesamtkosten: `${fmtEuro(ergebnis.agGesamtkosten)} €${ohneBg ? ' (ohne Beitrag zur Berufsgenossenschaft)' : ''}`,
-          agAufschlag: `${ergebnis.agAufschlagProzent} %`,
+          agAufschlag: `${fmtZ(ergebnis.agAufschlagProzent)} %`,
+          stundenlohn: ergebnis.stundenlohn !== null ? `${fmtEuro(ergebnis.stundenlohn)} €` : 'n/a',
+        } : {
+          status: ergebnis.status,
+          einordnung: `kein Minijob, ${statusText}: über der Minijob-Grenze von ${ergebnis.minijobGrenze} €, keine Pauschalabgaben`,
           stundenlohn: ergebnis.stundenlohn !== null ? `${fmtEuro(ergebnis.stundenlohn)} €` : 'n/a',
         }}
       />
