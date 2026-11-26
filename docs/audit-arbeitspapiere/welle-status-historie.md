@@ -6,7 +6,7 @@
 
 ---
 
-## 26.11.2026 — Welle 212: Prüfskript Seitenbreite und RadioToggleGroup in drei Rechnern
+## 26.11.2026 — Welle 212: Prüfskript Seitenbreite und RadioToggleGroup in drei Rechnern — ✅ ABGESCHLOSSEN 26.11.2026
 
 **Anlass:** Zwei offene Punkte aus Welle 211. (1) Die Messung der Seitenbreite lief nur aus einer Chat-Sitzung; eine neue Seite, die wieder zu breit ist, fiele niemandem auf. (2) Kindergeld-, Wärmepumpen- und Quadratmeter-Rechner nutzten eigene Knopfgruppen statt `<RadioToggleGroup>` (CLAUDE.md „Häufige Fehler“). Diese Knöpfe zeigten den gewählten Wert nur über die Farbe, ohne Radio-Rolle und ohne `aria-pressed`; Screenreader erfuhren nicht, was gewählt ist (WCAG 4.1.2). axe meldet das nicht.
 
@@ -30,12 +30,30 @@
 
 **Regel 8 (Abnahme):** Geändert sind nur die Eingabesteuerung und ids, nicht Rechenweg und angezeigte Zahlen. Die Ausnahmeliste der Regel nennt Tastaturbedienung und Attribute, hier ändert sich aber auch, wie Kinderzahl und Kirchensteuer an den Zustand übergeben werden (als Text statt Zahl bzw. Wahrheitswert). Deshalb nimmt Karola die drei Rechner nach dem Deploy ab.
 
-**Commits:** `7e3dce4` (Prüfskript), `73940cf` (Komponenten), dieser Commit (Historie).
+**Commits:** `7e3dce4` (Prüfskript), `73940cf` (Komponenten), `9c32b6d` (Historie), dieser Commit (Deploy und Abnahme, nur Doku).
+
+**Deploy:** Push `5e7e8da..9c32b6d` (drei Commits in einem Push), genau eine Deployment `dpl_udYTQvU5GzmpBakbVXbXhdBNtkfj` für `9c32b6d`, READY am 26.11.2026, Production. GitHub Actions „Prüfskripte“ für `9c32b6d`: success. Im ausgelieferten HTML stehen die neuen Radiogruppen (`name="kindergeld-veranlagung"`, `name="waermepumpe-jahre"`, `name="quadratmeter-einheit"`).
+
+**Live-Probe nach dem Deploy** (Chromium 1208, dieselben 15 Zustände wie oben, je bei 1280 und bei 320 px): Ansage und alle Zahlen mit Einheit 15 von 15 gleich dem Stand vor der Welle, kein „NaN“, keine Konsolenfehler, doppelte ids 0, Tastatur 5 von 5, `scrollWidth` bei 320 px nie über 320. axe nach Eingaben (Quadratmeter Kreis/Durchmesser und zweite Fläche als L-Form, Kindergeld Kirchensteuer ja und einzeln) hell und dunkel: keine Verstöße (vorher live `color-contrast` im Quadratmeter-Zustand).
+
+**Karolas Abnahme (26.11.2026, frischer Klon auf `9c32b6d`):** alle drei Rechner **abnahmefähig**, 0 Befunde A, 0 Befunde B. Umfang: die geänderte Komponente (KR01, KR04, KR05, KR08 bis KR10); KR02, KR03, KR06 und KR07 entfallen, weil Rechenkern, Config-Texte und Zahlen unverändert sind; keine Bestandsprüfung. Selbsttest 65 von 65, verify:alle im Klon 90/90, `git diff 5e7e8da 9c32b6d -- lib app` leer. Berichte `_lokal/karola-berichte/2026-11-26-<slug>-abnahme-w212.md`.
+- Hinweis Kindergeld (KR05): KV06 meldet 12 Stellen der Stufe „pruefen“ mit dem Kinderfreibetrag 4.878 € bzw. 9.756 € ohne Jahr in der Zeile, alle in Config-Texten, die diese Welle nicht berührt (`finanzen.ts` 3232 bis 3313). `lib/termine.ts` nennt sie nicht; der Jahreswerte-Kalender führt den Kinderfreibetrag zum 01.01.2027 (Dezember-Audit Punkt 2). Einordnung bei der Bestandsprüfung oder im Dezember-Audit.
+- Hinweis Wärmepumpe (KR08): Schnellwahl der Anschaffungskosten ohne `aria-pressed` (siehe „Offen“).
+
+```
+PRUEFPUNKTE (kindergeld-rechner): KR01=ok KR02=entfaellt KR03=entfaellt KR04=ok KR05=befund KR06=entfaellt KR07=entfaellt KR08=ok KR09=ok KR10=ok
+URTEIL: abnahmefähig; slug=kindergeld-rechner; commit=9c32b6d; datum=26.11.2026; befunde_a=0; befunde_b=0; hinweise=1
+PRUEFPUNKTE (waermepumpen-rechner): KR01=ok KR02=entfaellt KR03=entfaellt KR04=ok KR05=ok KR06=entfaellt KR07=entfaellt KR08=befund KR09=ok KR10=ok
+URTEIL: abnahmefähig; slug=waermepumpen-rechner; commit=9c32b6d; datum=26.11.2026; befunde_a=0; befunde_b=0; hinweise=1
+PRUEFPUNKTE (quadratmeter-rechner): KR01=ok KR02=entfaellt KR03=entfaellt KR04=ok KR05=ok KR06=entfaellt KR07=entfaellt KR08=ok KR09=ok KR10=ok
+URTEIL: abnahmefähig; slug=quadratmeter-rechner; commit=9c32b6d; datum=26.11.2026; befunde_a=0; befunde_b=0; hinweise=0
+```
 
 **Offen:**
-- Deploy, Live-Probe und Karolas Abnahme der drei Rechner.
 - Weitere eigene Knopfgruppen: In 16 Rechner-Komponenten zeigt mindestens ein Knopf den gewählten Zustand nur über eine Farbklasse (Suche nach `=== … ? 'bg-primary-… text-white` bzw. `bg-accent-…` in einer Zeile, ohne `aria-pressed`, `aria-checked` oder `role="switch"`; mehrzeilige Schreibweisen fehlen in der Zählung): Abi, AFBG, Arbeitslosengeld, Arbeitstage, Autokosten, BAföG, Binär, Dachfläche, Gehaltserhöhung, Hochrechner, Hundejahre, Minijob, Pflegegeld, Reichweite, Uhrzeit und die Schnellwahl der Anschaffungskosten im Wärmepumpen-Rechner. Ein Teil davon sind Schnellwahlen wie beim Minijob-Rechner, die `aria-pressed` bräuchten statt einer RadioToggleGroup. Nicht Teil dieser Welle.
-- Barrierefreiheitserklärung unverändert, Entscheidung wie in Welle 211 offen.
+- Barrierefreiheitserklärung unverändert, Entscheidung wie in Welle 211 offen. Dabei beachten: Die Erklärung sagt unter „Umgesetzte Maßnahmen“, Auswahlgruppen seien native Radio-Buttons mit Fieldset/Legend; für die Knöpfe ohne Zustandsangabe oben trifft das noch nicht zu.
+
+---
 
 ## 25.11.2026 — Welle 211: Keine Seite breiter als 320 px (WCAG 1.4.10 Umbruch) — ✅ ABGESCHLOSSEN 25.11.2026
 
