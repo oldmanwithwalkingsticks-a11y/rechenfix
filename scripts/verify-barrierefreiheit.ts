@@ -20,6 +20,11 @@
  *  7. Kein leerer Tabellenkopf <th></th> oder <th />; über einer Zeilenbeschriftung steht ein
  *     <span className="sr-only">…</span> (Welle 202; axe empty-table-header).
  *  8. Genau ein <main>, in app/layout.tsx (Welle 202; axe landmark-no-duplicate-main).
+ *  9. Ein <button>, der seinen gewählten Zustand über eine bedingte Farbklasse zeigt
+ *     (className={`… ${bedingung ? 'bg-…' : 'bg-…'}`}), sagt den Zustand auch Screenreadern:
+ *     aria-pressed, aria-checked, aria-selected, aria-expanded oder eine role (Welle 213; WCAG 4.1.2).
+ *     Ausgenommen: Knöpfe mit disabled= (die Farbe zeigt, ob der Knopf bedienbar ist) und die
+ *     Einträge in AKTION_OK (Aktionen, deren Ergebnis anders angesagt wird).
  *
  * Die Überschriften-Hierarchie (axe heading-order) prüft die axe-Messung, nicht dieses Skript.
  *
@@ -72,6 +77,69 @@ function tagEnde(s: string, i: number): number {
   return -1;
 }
 
+/** s[i] ist das Zeichen nach '${'; Index der schließenden '}' oder -1. */
+function ausdruckEnde(s: string, i: number): number {
+  let tiefe = 1;
+  let q: string | null = null;
+  for (let j = i; j < s.length; j++) {
+    const c = s[j];
+    if (q) {
+      if (c === '\\') { j++; continue; }
+      if (c === q) q = null;
+    } else if (c === '"' || c === "'" || c === '`') q = c;
+    else if (c === '{' || c === '(') tiefe++;
+    else if (c === '}' || c === ')') {
+      tiefe--;
+      if (tiefe === 0) return j;
+    }
+  }
+  return -1;
+}
+
+/** Zerlegt „A ? B : C“ auf oberster Ebene; null, wenn es keine Fallunterscheidung ist. */
+function ternaere(a: string): [string, string, string] | null {
+  let tiefe = 0;
+  let q: string | null = null;
+  let frage = -1;
+  for (let j = 0; j < a.length; j++) {
+    const c = a[j];
+    if (q) {
+      if (c === q) q = null;
+      continue;
+    }
+    if (c === '"' || c === "'" || c === '`') q = c;
+    else if ('([{'.includes(c)) tiefe++;
+    else if (')]}'.includes(c)) tiefe--;
+    else if (c === '?' && tiefe === 0 && frage < 0) {
+      if (a[j + 1] === '.' || a[j + 1] === '?') continue;
+      frage = j;
+    } else if (c === ':' && tiefe === 0 && frage >= 0) {
+      return [a.slice(0, frage).trim(), a.slice(frage + 1, j).trim(), a.slice(j + 1).trim()];
+    }
+  }
+  return null;
+}
+
+const FARBE = /\b(?:bg|border)-[a-z]+-\d{2,3}\b/;
+const ZUSTAND_ARIA = /aria-pressed|aria-checked|aria-selected|aria-expanded|\brole=/;
+/** Bedingung einer Fallunterscheidung zwischen zwei Farbklassen im className, sonst null. */
+function farbBedingung(attr: string): string | null {
+  const cn = attr.indexOf('className={`');
+  if (cn < 0) return null;
+  const rest = attr.slice(cn + 'className={`'.length);
+  for (const m of rest.matchAll(/\$\{/g)) {
+    const ende = ausdruckEnde(rest, m.index! + 2);
+    if (ende < 0) continue;
+    const t = ternaere(rest.slice(m.index! + 2, ende));
+    if (t && FARBE.test(t[1]) && FARBE.test(t[2]) && t[1] !== t[2]) return t[0];
+  }
+  return null;
+}
+/** Aktionen, keine Auswahl: Datei|Bedingung. */
+const AKTION_OK = new Set([
+  'components/ui/ErgebnisAktionen.tsx|kopiert', // Kopieren; Ergebnis steht im aria-label und in der Live-Region
+]);
+
 /** Alle Eingabefelder einer Datei: Tag, Attributtext, Position. */
 function felderIn(s: string): { tag: string; attr: string; index: number }[] {
   const aus: { tag: string; attr: string; index: number }[] = [];
@@ -95,7 +163,9 @@ const schalterOhneRolle: string[] = [];
 const bereichOhneNamen: string[] = [];
 const leereKoepfe: string[] = [];
 const mains: string[] = [];
+const knoepfeOhneZustand: string[] = [];
 let felder = 0;
+let farbKnoepfe = 0;
 
 for (const f of dateien) {
   const s = ohneKommentare(readFileSync(f, 'utf-8'));
@@ -153,6 +223,17 @@ for (const f of dateien) {
   }
 
   for (const m of s.matchAll(/<main\b/g)) mains.push(`${f}:${zeile(s, m.index!)}`);
+
+  for (const m of s.matchAll(/<button\b/g)) {
+    const ende = tagEnde(s, m.index!);
+    if (ende < 0) continue;
+    const attr = s.slice(m.index! + 7, ende);
+    const bedingung = farbBedingung(attr);
+    if (bedingung === null) continue;
+    farbKnoepfe++;
+    if (ZUSTAND_ARIA.test(attr) || /\bdisabled=/.test(attr) || AKTION_OK.has(`${f}|${bedingung}`)) continue;
+    knoepfeOhneZustand.push(`${f}:${zeile(s, m.index!)} (${bedingung.replace(/\s+/g, ' ').slice(0, 40)})`);
+  }
 }
 
 const liste = (a: string[]) => (a.length ? ': ' + a.slice(0, 12).join(', ') + (a.length > 12 ? ` … (+${a.length - 12})` : '') : '');
@@ -166,6 +247,7 @@ faelle.push({ name: `scrollbare Bereiche mit eigenem Namen (nicht „Tabelle“,
 faelle.push({ name: `Tabellenköpfe nicht leer${liste(leereKoepfe)}`, ist: leereKoepfe.length, soll: 0 });
 const mainOk = mains.length === 1 && mains[0].startsWith('app/layout.tsx:');
 faelle.push({ name: 'genau ein <main>', ist: mainOk ? 'app/layout.tsx' : mains.join(', ') || 'keins', soll: 'app/layout.tsx' });
+faelle.push({ name: `Knöpfe mit Farbe für den gewählten Zustand sagen ihn auch an (aria-pressed u. a.; ${farbKnoepfe} Knöpfe mit bedingter Farbklasse)${liste(knoepfeOhneZustand)}`, ist: knoepfeOhneZustand.length, soll: 0 });
 
 let ok = 0;
 for (const f of faelle) {
