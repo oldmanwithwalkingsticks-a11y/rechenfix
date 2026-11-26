@@ -42,7 +42,7 @@
 
 ---
 
-## 26.11.2026 — Welle 213: Auswahlknöpfe sagen ihren Zustand an (aria-pressed, Schalter)
+## 26.11.2026 — Welle 213: Auswahlknöpfe sagen ihren Zustand an (aria-pressed, Schalter) — ✅ ABGESCHLOSSEN 26.11.2026
 
 **Anlass:** Offener Punkt aus Welle 212. Dort standen „16 Rechner-Komponenten“ mit Knöpfen, die den gewählten Zustand nur über eine Farbklasse zeigen. Die Zahl war zu klein: Die Suche fand nur einzeilige Schreibweisen. Eine Erfassung über das ganze Repo, die das öffnende Tag samt mehrzeiliger `className`-Fallunterscheidung liest, fand **105 Knöpfe** in 65 Rechner-Komponenten und im Feedback-Formular. Screenreader erfuhren bei keinem davon, was gewählt ist (WCAG 4.1.2); axe meldet das nicht. Karstens Entscheidung: erst die Attribute, an allen Knöpfen, in einer Welle.
 
@@ -65,10 +65,17 @@
 
 **Geprüft in dieser Sitzung (26.11.2026, Windows, Git Bash):** `tsc --noEmit` 0 (zweimal, auch nach dem Midijob-Nachtrag), eslint der geänderten Dateien 0 Fehler, Geradzeichen-Prüfung über die geänderten Rechner-Komponenten ohne Treffer, verify:alle „Prüfskripte: 90/90 grün.“ (zweimal), verify-barrierefreiheit 10/10, Build rc=0 (zweimal).
 
-**Commits:** `aab2f78` (Prüfregel), `90e220c` (Komponenten), dieser Commit (Historie).
+**Commits:** `aab2f78` (Prüfregel), `90e220c` (Komponenten), `2139cb7` (Historie), dieser Commit (Deploy und Live-Messungen, nur Doku).
+
+**Deploy:** Push `387960b..2139cb7` (drei Commits in einem Push), genau eine Deployment `dpl_F6YKtXMCzyceDyoZMWUFoXWG3xE2` für `2139cb7`, READY am 26.11.2026, Production; die neuen `aria-pressed` standen 140 s nach dem Push im ausgelieferten HTML des Minijob-Rechners. GitHub Actions „Prüfskripte“ für `2139cb7`: success.
+
+**Live-Probe nach dem Deploy** (26.11.2026 abends, Chromium 1208, 1280 px, alle 258 Seiten, dasselbe Skript wie lokal): 75 Seiten mit Zustandsknöpfen, 398 Knöpfe mit `aria-pressed` und 13 Schalter, alle Werte `true` oder `false`, alle mit `type="button"`. 300 Schritte per Tastatur: 300 wirksam. Tastatur gegen Mausklick auf denselben Knöpfen: 292 von 300 gleich, die übrigen 8 nur Uhrzeit (Prozentrechner, Countdown). Live gegen den lokalen Lauf (Ansage und Text von `<main>`, Uhrzeit herausgerechnet): 372 von 375 Zuständen gleich; die drei übrigen sind die Stundensumme im Countdown (649 statt 650), weil zwischen den Läufen gut 40 Minuten lagen. Konsole live nur die RSC-Abrufe, die die Probe selbst abbricht.
+
+**Live-Messungen über die ganze Sitemap** (www.rechenfix.de, ausgeliefert `2139cb7`):
+- axe (`messung-barrierefreiheit.mjs`, 26.11.2026, 22:41 bis 22:51 Uhr, axe-core 4.11.2): 774 Messungen (258 Seiten × hell, dunkel, Handy), HTTP ungleich 200: 0, keine Verstöße, nur im ersten Durchgang verletzt 0, Felder ohne Beschriftung 0 (1219 Felder auf 226 Seiten), `<label for>` ohne Ziel 0, doppelte id 0, Überschriften in Ordnung, Taschenrechner-Tastatur 8/8, Rückgabewert 0.
+- Seitenbreite (`messung-seitenbreite.mjs`, 26.11.2026, 22:52 bis 23:00 Uhr, parallel 6): 258 Seiten je Breite bei 320, 360 und 375 px, zu breit 0 / 0 / 0, Text über dem Rand 0 / 0 / 0, HTTP ungleich 200: 0, Rückgabewert 0.
 
 **Offen:**
-- Deploy und Live-Probe.
 - Barrierefreiheitserklärung: Sie sagt unter „Umgesetzte Maßnahmen“, Auswahlgruppen seien native Radio-Buttons mit Fieldset/Legend. Für die Knöpfe dieser Welle trifft das nicht zu; sie sind Knöpfe mit `aria-pressed`. Entwurf einer Anpassung („Auswahlknöpfe geben ihren Zustand an“) folgt als `recht:`-Commit nach Karstens OK.
 - Ob einzelne Knopfreihen besser eine `<RadioToggleGroup>` wären (Werte-Auswahl mit zwei bis vier Optionen), bleibt eine Einzelentscheidung je Rechner; mit `aria-pressed` ist der Zustand jetzt in jedem Fall ansagbar.
 
