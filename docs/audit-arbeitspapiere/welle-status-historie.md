@@ -6,6 +6,42 @@
 
 ---
 
+## 26.11.2026 — Welle 217: Bruchrechner, Eingabe verständlicher (Nutzerfeedback 25.11.2026) — ✅ ABGESCHLOSSEN 26.11.2026
+
+**Anlass:** Feedback vom 25.11.2026, 15:42 Uhr (Safari auf dem Mac), Typ „Rechner verbessern“, Rechner `/mathe/bruchrechner`, Grund „unklar“: „Ich verstehe nicht wie ich das dort eingeben soll“. Im Probelauf nachgestellt: (1) Wer `3/4` ins Zählerfeld tippt, bekommt `34`; `NummerEingabe` verwirft jedes Zeichen, das keine Zahl ergibt, stumm. (2) Keine Anleitung: Nur das Aussehen der Felder (zwei Kästchen übereinander mit Strich) erklärt, wohin Zähler und Nenner gehören. (3) Links neben jedem Bruch steht ein drittes Feld mit dem Platzhalter „0“ für die ganze Zahl einer gemischten Zahl; auf dem Bildschirm steht das nirgends. Vorbereitet am 25.11. als Welle 209, am 26.11. als 215 und 216; alle drei Nummern gingen an parallel laufende Wellen. Deshalb wurde die Nummer erst beim Ausführen vergeben (`welle-bruch-nummer.mjs`), im Code steht die Kennung `Feedback 2026-11-25-01`.
+
+**Änderungen** (Commit `33ae11b`, 6 Dateien, 161 Einfügungen, 16 Löschungen):
+- `lib/berechnungen/bruchrechnung.ts`: neu `zerlegeBruchEingabe(text, mitGanz)` zerlegt `3/4` in Zähler und Nenner, `3/` in Zähler und leeren Nenner, mit Feld für die ganze Zahl auch `2 3/4`, `2 ` und `2 3`; alles andere ergibt `null`.
+- `components/ui/NummerEingabe.tsx`: optionaler Aufruf `beiSonderEingabe(wert)` für Eingaben, die keine Zahl sind; ohne ihn verhält sich das Feld wie bisher, alle anderen Rechner sind unberührt.
+- `components/rechner/BruchRechner.tsx`: `3/4` im Zählerfeld (alle Reiter, getippt oder eingefügt) verteilt sich auf Zähler und Nenner, der Cursor springt ins Nennerfeld; das Feld für die ganze Zahl erscheint im Reiter „Brüche rechnen“ erst nach „+ ganze Zahl davor“ unter dem Bruch (Knopf mit `aria-pressed`, dann „− ohne ganze Zahl“), trägt die Beschriftung „Ganze“ und nimmt `2 3/4` in einem Zug an; ohne das Feld zählt die ganze Zahl nicht mit; Anleitung über den Feldern; Fehlerhinweis im Modus „Bruch“ spricht von Zähler und Nenner; Rechenzeichen ab 640 px mit `pb-4 sm:pb-14`.
+- `lib/rechner-config/mathe.ts`: neue erste FAQ „Wie gebe ich einen Bruch in den Rechner ein?“, FAQ „Was ist eine gemischte Zahl?“ nennt den neuen Knopf, `letzteAktualisierung` 2026-11-26.
+- `lib/feedback-log.ts`: Eintrag `2026-11-25-01` („Unklar, wie man im Bruchrechner etwas eingibt“), umgesetzt 2026-11-26.
+- `scripts/verify-bruchrechnung.ts`: 16 neue Fälle für `zerlegeBruchEingabe` mit Sollwerten von Hand; die Funktion wird über einen Namensraum gelesen, so dass der alte Stand „zerlegeBruchEingabe fehlt“ meldet, statt beim Import abzubrechen.
+
+**Gegenprobe:** Mit `git stash push -- lib components` (nur das Prüfskript neu) meldet `verify-bruchrechnung` „Bruchrechnung ROT: 1 Abweichungen“, darunter „zerlegeBruchEingabe fehlt“, Exit 1. Nach `git stash pop` grün mit „… 7 Rechenwege mit Prozent, 16 Eingaben in Bruchschreibweise.“; Diff-Statistik vor dem Stash und nach dem Pop gleich („6 files changed, 161 insertions(+), 16 deletions(-)“).
+
+**Karolas Prüfskripte vor dem Commit** (CLAUDE.md Regel 8, rechner-builder Step 11b, Teil 2):
+- `karola.py selbsttest`: „Selbsttest: 65 von 65 Faellen wie erwartet — gruen.“, Exit 0.
+- `register . --slug bruchrechner --alle`: „Register: 0 Befund(e)“.
+- `formeln . bruchrechner`: „Formel-Pruefer: 4 Ketten in 2 Dateien, 0 Befund(e), 0 Hinweis(e)“.
+- `zahlen . bruchrechner`: „Zahlen-Inventar: 604 von Hand einzuordnen, 21 in stimmigen Ketten, automatisch eingeordnet: keine“ (vorher 589). Zahlenprotokoll: neu sind nur die Beispielzahlen 3/4, 2 3/4 und 0,75 in Anleitung und FAQ (Herkunft E), keine neue Ergebniszahl.
+
+**Regel 8:** Texte und Komponente des Bruchrechners geändert; Abnahme durch Karola nach dem Deploy als Nachprüfung der geänderten Stellen, keine Bestandsprüfung. `NummerEingabe` ist geteilt, verhält sich ohne `beiSonderEingabe` aber wie bisher; die anderen Rechner brauchen keine Abnahme.
+
+**Geprüft in dieser Sitzung (26.11.2026, Windows, Git Bash):**
+- Phase 0: `git status` leer, `pull --ff-only` „Already up to date.“, oben `0da155d`, 2 Stash-Einträge, `verify-bruchrechnung` grün (16 Texteingaben, 9 Ganzzahlfelder, 3 Rechenbeispiele, 11 Fälle „Brüche dazwischen“, 14 Prozentwerte, Abgleich 15000, 7 Rechenwege mit Prozent), verify:alle „Prüfskripte: 90/90 grün.“, Exit 0.
+- Phase 1: „OK — 27 Ersetzungen in 6 Dateien.“, Exit 0; genau die sechs Dateien geändert; `letzteAktualisierung` und `datumUmsetzung` 2026-11-26.
+- Phase 2: Gegenprobe wie oben; nach dem Pop wieder 2 Stash-Einträge; verify:alle „Prüfskripte: 90/90 grün.“, Exit 0; Build Exit 0, „(272/272)“; Karolas Prüfskripte wie oben; 6 geänderte Dateien.
+- Phase 3: `git fetch`, nicht hinter `origin/main`; `welle-bruch-nummer.mjs` „Höchste vergebene Nummer: 216 (Historie 216, Commit-Betreffs 216)“, „Wellennummer: 217“, Exit 0. Baum von Commit A `88a0f4b`, wie im Probelauf für den Ausführungstag 2026-11-26 vorhergesagt.
+
+**Probelauf in der Chat-Sitzung** (Linux, 26.11.2026, Basis `0da155d`): Vorlage Datei für Datei gleich dem Zielstand bis auf die beiden Datumszeilen, auch mit CRLF-Dateien; ein zweiter Lauf bricht ab, ohne zu schreiben. verify:alle 90/90 in Berlin, UTC, New York und Tokio; Build 272 Seiten. Im gebauten Stand per Browser (Chromium, 1280, 375 und 320 px, hell und dunkel): `3/4` in Bruch 1 getippt ergibt oben 3, unten 4, Cursor unten, Ergebnis 23/20; `5/6` in Bruch 2 eingefügt ergibt 19/12; „+ ganze Zahl davor“ und `2 3/4` ins Feld „Ganze“ ergibt 43/12, zurück mit „− ohne ganze Zahl“ wieder 19/12; Reiter „Kürzen“ mit `18/24` ergibt 3/4; keine Skriptfehler; bei 320 und 375 px nichts breiter als der Bildschirm, auch mit beiden Feldern „Ganze“. axe (`--pfad /mathe/bruchrechner`) hell, dunkel und Handy ohne Verstoß, 8 Felder beschriftet; mit beiden Feldern „Ganze“ bei 320 und 375 px kein Verstoß, 10 Felder beschriftet. Seitenbreite bei 320, 360 und 375 px 0. Der ganze Prompt einmal auf einem Test-Remote durchgespielt, auch mit einer parallelen Probe-Welle.
+
+**Commits:** `33ae11b` (Inhalt), dieser Commit (Historie).
+
+**Offen:** Deploy, Live-Probe und Karolas Nachprüfung der geänderten Stellen.
+
+---
+
 ## 26.11.2026 — Welle 216: Barrierefreiheitserklärung auf Stand 26. November 2026 — ✅ ABGESCHLOSSEN 26.11.2026
 
 **Anlass:** Offener Punkt aus den Wellen 211 bis 213. Die Erklärung sagte unter „Umgesetzte Maßnahmen“, Auswahlgruppen seien Radio-Buttons mit Fieldset/Legend; für die 105 Auswahlknöpfe aus Welle 213 traf das nicht zu. Die Seitenbreite bei 320 px (Welle 211) stand gar nicht darin. Karstens OK zum Entwurf vom 26.11.2026.
