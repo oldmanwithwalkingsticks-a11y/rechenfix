@@ -6,6 +6,38 @@
 
 ---
 
+## 26.11.2026 — Welle 213: Auswahlknöpfe sagen ihren Zustand an (aria-pressed, Schalter)
+
+**Anlass:** Offener Punkt aus Welle 212. Dort standen „16 Rechner-Komponenten“ mit Knöpfen, die den gewählten Zustand nur über eine Farbklasse zeigen. Die Zahl war zu klein: Die Suche fand nur einzeilige Schreibweisen. Eine Erfassung über das ganze Repo, die das öffnende Tag samt mehrzeiliger `className`-Fallunterscheidung liest, fand **105 Knöpfe** in 65 Rechner-Komponenten und im Feedback-Formular. Screenreader erfuhren bei keinem davon, was gewählt ist (WCAG 4.1.2); axe meldet das nicht. Karstens Entscheidung: erst die Attribute, an allen Knöpfen, in einer Welle.
+
+**Einordnung nach CLAUDE.md Regel 8:** Die Welle setzt nur `type="button"`, `aria-pressed`, `role="switch"`, `aria-checked`, `aria-label`, `aria-labelledby` und an zwei Beschriftungen `id`/`htmlFor`. Rechenweg und angezeigte Zahlen bleiben unberührt (`git diff` über `lib/` leer; der Wort-Diff über `components/` und `app/` entfernt kein einziges Wort). Statt Karolas Abnahme je Rechner daher: axe über alle Seiten, Funktionsprobe per Tastatur und `verify:alle`.
+
+**Teil 1 — Prüfregel 9 in `scripts/verify-barrierefreiheit.ts`** (Commit `aab2f78`): Ein `<button>`, dessen `className` zwischen zwei Farbklassen wählt (`${bedingung ? 'bg-…' : 'bg-…'}`, auch mehrzeilig und verschachtelt), braucht `aria-pressed`, `aria-checked`, `aria-selected`, `aria-expanded` oder eine `role`. Ausgenommen sind Knöpfe mit `disabled=` (dort zeigt die Farbe, ob der Knopf bedienbar ist: „Feedback absenden“ in `FeedbackButtons` und auf `/feedback`) und, über `AKTION_OK`, „Kopieren“ in `ErgebnisAktionen` (Ergebnis steht im `aria-label` und in der Live-Region). Der Menüknopf im Kopf hat `aria-expanded` und fällt damit nicht darunter. Gegenprobe am Stand vor der Welle (`git archive 387960b`): 105 Funde; danach 0. Über alle Dateien gibt es 126 Knöpfe mit bedingter Farbklasse.
+
+**Teil 2 — Komponenten** (Commit `90e220c`):
+- 101 Auswahlknöpfe in 63 Rechner-Komponenten und im Feedback-Formular (Kacheln der Feedback-Art, „Waren die Erklärungen hilfreich?“ beim KI-Feedback): `aria-pressed` mit genau der Bedingung, nach der die Farbklasse wählt; dazu `type="button"`, wo kein `type` stand. Die Bedingungen wurden vor dem Einsetzen einzeln gelesen (Liste mit Bedingung, gewählter und nicht gewählter Klasse); alle sind Vergleiche oder boolesche Werte, so dass nie `aria-pressed=""` entsteht.
+- Vier Ein/Aus-Knöpfe, deren Beschriftung mit dem Zustand wechselt, als Schalter (`role="switch"`, `aria-checked`): Arbeitszeit (je Wochentag, Name „<Tag> ist Arbeitstag“), Elterngeld (`ToggleButton`), Kurzarbeitergeld „Kind im Haushalt“ und „Kirchensteuer“ (Name über `aria-labelledby` aus der Frage und dem Knopftext; die Frage war ein `<label>` ohne Ziel und hat jetzt `id` und `htmlFor`).
+- Midijob: Die Kinderzahl hatte schon `aria-pressed`, aber kein `type`; jetzt `type="button"`. Danach gibt es im Repo keinen Knopf mit `aria-pressed` oder `role="switch"` ohne `type`.
+
+**Funktionsprobe** (Chromium 1208, 1280 px, alle 258 Seiten der Sitemap): lokal (`next start` auf diesem Stand) je Seite bis zu vier Knöpfe mit `aria-pressed="false"` oder `role="switch"` per Tastatur ausgelöst, abwechselnd Enter und Leertaste; live (www.rechenfix.de, Stand Welle 212, alte Knöpfe) dieselben Knöpfe (gleicher Index unter `main button`) per Mausklick. Ergebnis:
+- 75 Seiten mit Zustandsknöpfen, im Startzustand 398 Knöpfe mit `aria-pressed` und 13 Schalter; alle Werte `true` oder `false`, alle mit `type="button"` (nach dem Midijob-Nachtrag).
+- 300 Schritte: Tastatur wirkt 300 von 300 (`aria-pressed` springt auf `true`, `aria-checked` kippt), kein „NaN“.
+- Ansage der aria-live-Region und Text von `<main>` lokal gegen live: 292 von 300 Schritten gleich. Die übrigen 8 (Prozentrechner, Countdown) weichen nur in der Uhrzeit ab: Prozentrechner zeigt die aktuelle Uhrzeit, Countdown die Restzeit; zwischen den beiden Läufen lagen knapp vier Minuten (Countdown je Schritt genau 228 s). Mit herausgerechneter Uhrzeit 300 von 300 gleich.
+- Konsolenfehler lokal nur durch Vercel Insights (`/_vercel/insights/script.js` fehlt lokal) und abgebrochene RSC-Abrufe der Probe.
+
+**Messungen lokal** (`next start` auf dem Endstand mit Midijob-Nachtrag): axe (`messung-barrierefreiheit.mjs`, 258 Seiten × hell, dunkel, Handy = 774 Messungen, axe-core 4.11.2): keine Verstöße, HTTP ungleich 200: 0, Felder ohne Beschriftung 0 (1219 Felder auf 226 Seiten), doppelte id 0, Überschriften in Ordnung, Taschenrechner-Tastatur 8/8, Rückgabewert 0. Seitenbreite (`messung-seitenbreite.mjs`, Stand vor dem Midijob-Nachtrag, der nur ein Attribut setzt): 258 Seiten je Breite bei 320, 360 und 375 px, zu breit 0, Text über dem Rand 0, Rückgabewert 0.
+
+**Geprüft in dieser Sitzung (26.11.2026, Windows, Git Bash):** `tsc --noEmit` 0 (zweimal, auch nach dem Midijob-Nachtrag), eslint der geänderten Dateien 0 Fehler, Geradzeichen-Prüfung über die geänderten Rechner-Komponenten ohne Treffer, verify:alle „Prüfskripte: 90/90 grün.“ (zweimal), verify-barrierefreiheit 10/10, Build rc=0 (zweimal).
+
+**Commits:** `aab2f78` (Prüfregel), `90e220c` (Komponenten), dieser Commit (Historie).
+
+**Offen:**
+- Deploy und Live-Probe.
+- Barrierefreiheitserklärung: Sie sagt unter „Umgesetzte Maßnahmen“, Auswahlgruppen seien native Radio-Buttons mit Fieldset/Legend. Für die Knöpfe dieser Welle trifft das nicht zu; sie sind Knöpfe mit `aria-pressed`. Entwurf einer Anpassung („Auswahlknöpfe geben ihren Zustand an“) folgt als `recht:`-Commit nach Karstens OK.
+- Ob einzelne Knopfreihen besser eine `<RadioToggleGroup>` wären (Werte-Auswahl mit zwei bis vier Optionen), bleibt eine Einzelentscheidung je Rechner; mit `aria-pressed` ist der Zustand jetzt in jedem Fall ansagbar.
+
+---
+
 ## 26.11.2026 — Welle 212: Prüfskript Seitenbreite und RadioToggleGroup in drei Rechnern — ✅ ABGESCHLOSSEN 26.11.2026
 
 **Anlass:** Zwei offene Punkte aus Welle 211. (1) Die Messung der Seitenbreite lief nur aus einer Chat-Sitzung; eine neue Seite, die wieder zu breit ist, fiele niemandem auf. (2) Kindergeld-, Wärmepumpen- und Quadratmeter-Rechner nutzten eigene Knopfgruppen statt `<RadioToggleGroup>` (CLAUDE.md „Häufige Fehler“). Diese Knöpfe zeigten den gewählten Wert nur über die Farbe, ohne Radio-Rolle und ohne `aria-pressed`; Screenreader erfuhren nicht, was gewählt ist (WCAG 4.1.2). axe meldet das nicht.
@@ -50,7 +82,7 @@ URTEIL: abnahmefähig; slug=quadratmeter-rechner; commit=9c32b6d; datum=26.11.20
 ```
 
 **Offen:**
-- Weitere eigene Knopfgruppen: In 16 Rechner-Komponenten zeigt mindestens ein Knopf den gewählten Zustand nur über eine Farbklasse (Suche nach `=== … ? 'bg-primary-… text-white` bzw. `bg-accent-…` in einer Zeile, ohne `aria-pressed`, `aria-checked` oder `role="switch"`; mehrzeilige Schreibweisen fehlen in der Zählung): Abi, AFBG, Arbeitslosengeld, Arbeitstage, Autokosten, BAföG, Binär, Dachfläche, Gehaltserhöhung, Hochrechner, Hundejahre, Minijob, Pflegegeld, Reichweite, Uhrzeit und die Schnellwahl der Anschaffungskosten im Wärmepumpen-Rechner. Ein Teil davon sind Schnellwahlen wie beim Minijob-Rechner, die `aria-pressed` bräuchten statt einer RadioToggleGroup. Nicht Teil dieser Welle.
+- Weitere eigene Knopfgruppen (**berichtigt in Welle 213:** Die Zählung unten war zu klein; es waren 105 Knöpfe in 65 Rechner-Komponenten und im Feedback-Formular, alle in Welle 213 mit `aria-pressed` bzw. als Schalter versehen): In 16 Rechner-Komponenten zeigt mindestens ein Knopf den gewählten Zustand nur über eine Farbklasse (Suche nach `=== … ? 'bg-primary-… text-white` bzw. `bg-accent-…` in einer Zeile, ohne `aria-pressed`, `aria-checked` oder `role="switch"`; mehrzeilige Schreibweisen fehlen in der Zählung): Abi, AFBG, Arbeitslosengeld, Arbeitstage, Autokosten, BAföG, Binär, Dachfläche, Gehaltserhöhung, Hochrechner, Hundejahre, Minijob, Pflegegeld, Reichweite, Uhrzeit und die Schnellwahl der Anschaffungskosten im Wärmepumpen-Rechner. Ein Teil davon sind Schnellwahlen wie beim Minijob-Rechner, die `aria-pressed` bräuchten statt einer RadioToggleGroup. Nicht Teil dieser Welle.
 - Barrierefreiheitserklärung unverändert, Entscheidung wie in Welle 211 offen. Dabei beachten: Die Erklärung sagt unter „Umgesetzte Maßnahmen“, Auswahlgruppen seien native Radio-Buttons mit Fieldset/Legend; für die Knöpfe ohne Zustandsangabe oben trifft das noch nicht zu.
 
 ---
