@@ -19,7 +19,9 @@
 //                                                                  gegen `npm run start`; die Sitemap
 //                                                                  kommt vom selben Server
 //   node scripts/messung-seitenbreite.mjs --pfad /neue/seite --pfad /andere
-//                                                                  nur diese Seiten
+//                                                                  nur diese Seiten; in Git Bash unter
+//                                                                  Windows mit MSYS_NO_PATHCONV=1 davor,
+//                                                                  sonst bricht das Skript ab (Welle 214)
 //   Weitere Schalter: --breiten 320,360,375 · --parallel 4 · --ziel ergebnis.json (alle Einzelergebnisse)
 //   Dauer: ganze Sitemap (258 Seiten), drei Breiten, live rund 8 Minuten (Welle 211: 466 und 445 s).
 //
@@ -66,6 +68,10 @@ function argumente(argv) {
     else throw new Error(`unbekannter Schalter ${s}`);
   }
   if (!a.breiten.length) throw new Error('--breiten ohne gültige Breite');
+  // Git Bash unter Windows schreibt Argumente, die mit / beginnen, in Windows-Pfade um
+  // (/blog → C:/Program Files/Git/blog). Gemessen würde dann eine 404-Seite (Welle 214).
+  const umgeschrieben = a.pfade.find((p) => /^[A-Za-z]:[\\/]/.test(p));
+  if (umgeschrieben) throw new Error(`--pfad ${umgeschrieben} ist ein Windows-Pfad; Git Bash hat /pfad umgeschrieben. MSYS_NO_PATHCONV=1 voranstellen.`);
   return a;
 }
 
