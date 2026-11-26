@@ -6,6 +6,23 @@
 
 ---
 
+## 26.11.2026 — Welle 215: Barrierefreiheits-Skript bricht bei umgeschriebenem Pfad ab — ✅ ABGESCHLOSSEN 26.11.2026
+
+**Anlass:** Offener Punkt aus Welle 214. `scripts/messung-barrierefreiheit.mjs` hatte dieselbe Schwäche wie das Seitenbreiten-Skript: Git Bash unter Windows schreibt `--pfad /blog` in einen Windows-Pfad um. Mit der Fassung vor dieser Welle gemessen (26.11.2026, Karstens Rechner): `--pfad /blog --ansichten hell` ergab „HTTP-Status ungleich 200: 1“, `/C:/Program Files/EpsonNet/Git/blog (hell) 404`, Rückgabewert 1. Gemessen wurde also eine 404-Seite statt der gewünschten. Karsten hat die Übernahme am 26.11.2026 freigegeben.
+
+**Änderung:** Wie Welle 214: Das Skript prüft die `--pfad`-Werte. Beginnt einer mit Laufwerksbuchstabe und Doppelpunkt, bricht es mit Rückgabewert 2 ab und nennt `MSYS_NO_PATHCONV=1`. Der Kopf des Skripts beschreibt das beim Aufruf mit `--pfad`. Prüfungen, Zählung und Ausgabe sind unverändert.
+
+**Geprüft (26.11.2026, Windows, Git Bash):**
+- Ohne `MSYS_NO_PATHCONV`: `--pfad /blog --ansichten hell` → Abbruch mit Hinweis, Rückgabewert 2.
+- Mit `MSYS_NO_PATHCONV=1`: `--pfad /blog --pfad /wohnen/grundsteuer-rechner` live, hell, dunkel und Handy → 6 Messungen, HTTP-Status ungleich 200: 0, axe-Verstöße: keine, Rückgabewert 0.
+- verify:alle rc=0, „Prüfskripte: 90/90 grün.“; slug-drift-scan und check-backticks rc=0.
+
+**Regel 8:** keine Rechner-Komponente, kein Rechenkern, kein Rechner-Text berührt; keine Abnahme nötig.
+
+**Commits:** `8125a7d` (Skript), dieser Commit (Historie).
+
+---
+
 ## 26.11.2026 — Welle 214: Seitenbreiten-Skript bricht bei umgeschriebenem Pfad ab — ✅ ABGESCHLOSSEN 26.11.2026
 
 **Anlass:** Git Bash unter Windows schreibt Argumente, die mit `/` beginnen, in Windows-Pfade um. `node scripts/messung-seitenbreite.mjs --pfad /blog` maß deshalb auf Karstens Rechner `/C:/Program Files/EpsonNet/Git/blog`, eine 404-Seite, und meldete „HTTP ungleich 200“ statt der Breite. Aufgefallen beim Probelauf einer zweiten Fassung des Skripts in einer anderen Sitzung, die nach Welle 212 nicht mehr gebraucht wurde; übernommen wurde nur dieser Schutz (Karstens Freigabe vom 26.11.2026).
@@ -21,7 +38,7 @@
 
 **Commits:** `1221aab` (Skript), dieser Commit (Historie).
 
-**Offen:** `scripts/messung-barrierefreiheit.mjs` hat dieselbe Schwäche bei `--pfad` (dort wird `https://www.rechenfix.de/C:/Program Files/…` daraus, ebenfalls eine 404-Seite); nicht in dieser Welle.
+**Offen:** `scripts/messung-barrierefreiheit.mjs` hat dieselbe Schwäche bei `--pfad` (dort wird `https://www.rechenfix.de/C:/Program Files/…` daraus, ebenfalls eine 404-Seite); nicht in dieser Welle. Erledigt in Welle 215.
 
 ---
 
