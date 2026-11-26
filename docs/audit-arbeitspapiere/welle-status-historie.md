@@ -6,7 +6,7 @@
 
 ---
 
-## 26.11.2026 — Welle 216: Barrierefreiheitserklärung auf Stand 26. November 2026
+## 26.11.2026 — Welle 216: Barrierefreiheitserklärung auf Stand 26. November 2026 — ✅ ABGESCHLOSSEN 26.11.2026
 
 **Anlass:** Offener Punkt aus den Wellen 211 bis 213. Die Erklärung sagte unter „Umgesetzte Maßnahmen“, Auswahlgruppen seien Radio-Buttons mit Fieldset/Legend; für die 105 Auswahlknöpfe aus Welle 213 traf das nicht zu. Die Seitenbreite bei 320 px (Welle 211) stand gar nicht darin. Karstens OK zum Entwurf vom 26.11.2026.
 
@@ -16,9 +16,13 @@
 
 **Regel 8:** kein Rechner berührt; keine Abnahme nötig.
 
-**Commits:** dieser Commit (Erklärung, Messbericht, Änderungshistorie, Historie).
+**Commits:** `b10ed31` (Erklärung, Messbericht, Änderungshistorie, Historie), dieser Commit (Deploy und Live-Prüfung, nur Doku).
 
-**Offen:** Deploy, Live-Prüfung des Seitentexts, axe und Seitenbreite auf `/barrierefreiheit`.
+**Deploy:** Push `2608a2b..b10ed31`, Deployment `dpl_5pCUcN1Sa68VgpK7ateD8rJeevaH` für `b10ed31`, READY am 26.11.2026, Production; das neue Stand-Datum stand 100 s nach dem Push im ausgelieferten HTML. GitHub Actions „Prüfskripte“ für `b10ed31`: success.
+
+**Live-Prüfung:** Alle sechs neuen Formulierungen stehen im ausgelieferten HTML von `/barrierefreiheit`, „Responsives Design für alle Bildschirmgrößen“ und „4. November 2026 überarbeitet“ nicht mehr. axe (`messung-barrierefreiheit.mjs --pfad /barrierefreiheit`, hell, dunkel, Handy): keine Verstöße, Überschriften in Ordnung, Rückgabewert 0. Seitenbreite (`messung-seitenbreite.mjs --pfad /barrierefreiheit`): 320, 360 und 375 px je 0, Rückgabewert 0.
+
+**Geprüft vor dem Commit (26.11.2026, Windows, Git Bash):** `tsc --noEmit` 0, eslint der Seite 0, check-wellenhistorie und slug-drift-scan rc=0, verify:alle „Prüfskripte: 90/90 grün.“, Build rc=0 „(272/272)“.
 
 ---
 
