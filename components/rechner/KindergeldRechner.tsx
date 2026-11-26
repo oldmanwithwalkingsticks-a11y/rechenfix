@@ -7,6 +7,7 @@ import {
   type Veranlagung,
 } from '@/lib/berechnungen/kindergeld';
 import { BUNDESLAENDER, type Bundesland } from '@/lib/berechnungen/einkommensteuer';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import { parseDeutscheZahl } from '@/lib/zahlenformat';
 import NummerEingabe from '@/components/ui/NummerEingabe';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
@@ -43,17 +44,14 @@ export default function KindergeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">1</span>
           Anzahl der Kinder
         </h2>
-        <div className="flex gap-2 flex-wrap">
-          {[1, 2, 3, 4, 5].map(n => (
-            <button
-              key={n}
-              onClick={() => setAnzahlKinder(n)}
-              className={`px-5 py-3 rounded-xl text-sm font-semibold transition-all min-h-[48px] min-w-[56px] ${anzahlKinder === n ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {n === 5 ? '5+' : n} {n === 1 ? 'Kind' : 'Kinder'}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="kindergeld-kinder"
+          legend="Anzahl der Kinder"
+          srOnlyLegend
+          options={[1, 2, 3, 4, 5].map(n => ({ value: String(n), label: `${n === 5 ? '5+' : n} ${n === 1 ? 'Kind' : 'Kinder'}` }))}
+          value={String(anzahlKinder)}
+          onChange={v => setAnzahlKinder(Number(v))}
+        />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
           Kindergeld 2026: <strong>{KINDERGELD_PRO_KIND_MONAT} €/Monat pro Kind</strong> (einheitlich)
         </p>
@@ -77,17 +75,17 @@ export default function KindergeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">3</span>
           Veranlagung
         </h2>
-        <div className="flex flex-wrap gap-2">
-          {([['zusammen', '👫 Zusammenveranlagung'], ['einzeln', '👤 Einzelveranlagung']] as const).map(([val, label]) => (
-            <button
-              key={val}
-              onClick={() => setVeranlagung(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${veranlagung === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="kindergeld-veranlagung"
+          legend="Veranlagung"
+          srOnlyLegend
+          options={[
+            { value: 'zusammen', label: '👫 Zusammenveranlagung' },
+            { value: 'einzeln', label: '👤 Einzelveranlagung' },
+          ]}
+          value={veranlagung}
+          onChange={v => setVeranlagung(v as Veranlagung)}
+        />
         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
           Verheiratete profitieren vom Splittingtarif und dem doppelten Kinderfreibetrag.
         </p>
@@ -99,16 +97,18 @@ export default function KindergeldRechner() {
           <span className="w-6 h-6 bg-primary-100 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-bold">4</span>
           Kirchensteuer
         </h2>
-        <div className="flex gap-2 mb-3">
-          {([false, true] as const).map(val => (
-            <button
-              key={String(val)}
-              onClick={() => setKirchensteuer(val)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${kirchensteuer === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
-            >
-              {val ? `⛪ Ja (${kistSatzProzent} %)` : '✖ Nein'}
-            </button>
-          ))}
+        <div className="mb-3">
+          <RadioToggleGroup
+            name="kindergeld-kirchensteuer"
+            legend="Kirchensteuer"
+            srOnlyLegend
+            options={[
+              { value: 'nein', label: '✖ Nein' },
+              { value: 'ja', label: `⛪ Ja (${kistSatzProzent} %)` },
+            ]}
+            value={kirchensteuer ? 'ja' : 'nein'}
+            onChange={v => setKirchensteuer(v === 'ja')}
+          />
         </div>
         {kirchensteuer && (
           <>

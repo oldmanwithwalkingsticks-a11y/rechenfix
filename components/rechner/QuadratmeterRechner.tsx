@@ -9,6 +9,7 @@ import {
   type Einheit,
 } from '@/lib/berechnungen/quadratmeter';
 import NummerEingabe from '@/components/ui/NummerEingabe';
+import RadioToggleGroup from '@/components/ui/RadioToggleGroup';
 import ErgebnisAktionen from '@/components/ui/ErgebnisAktionen';
 import AiExplain from '@/components/rechner/AiExplain';
 import CrossLink from '@/components/ui/CrossLink';
@@ -138,22 +139,13 @@ export default function QuadratmeterRechner() {
     <div>
       {/* Einheit */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Eingabe-Einheit</label>
-        <div className="flex flex-wrap gap-2">
-          {einheitOptionen.map(o => (
-            <button
-              key={o.key}
-              onClick={() => setEinheit(o.key)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                einheit === o.key
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {o.label}
-            </button>
-          ))}
-        </div>
+        <RadioToggleGroup
+          name="quadratmeter-einheit"
+          legend="Eingabe-Einheit"
+          options={einheitOptionen.map(o => ({ value: o.key, label: o.label }))}
+          value={einheit}
+          onChange={v => setEinheit(v as Einheit)}
+        />
       </div>
 
       {/* Flächen */}
@@ -174,69 +166,56 @@ export default function QuadratmeterRechner() {
           </div>
 
           {/* Form-Tabs */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {formOptionen.map(o => (
-              <button
-                key={o.key}
-                onClick={() => updateFlaeche(f.id, { form: o.key })}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  f.form === o.key
-                    ? 'bg-primary-500 text-white shadow-md'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                }`}
-              >
-                {o.label}
-              </button>
-            ))}
+          <div className="mb-4">
+            <RadioToggleGroup
+              name={`quadratmeter-form-${f.id}`}
+              legend={flaechen.length > 1 ? `Form von Fläche ${idx + 1}` : 'Form der Fläche'}
+              srOnlyLegend
+              options={formOptionen.map(o => ({ value: o.key, label: o.label }))}
+              value={f.form}
+              onChange={v => updateFlaeche(f.id, { form: v as FormTyp })}
+            />
           </div>
 
           {/* Form-spezifische Eingaben */}
           {f.form === 'rechteck' && (
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label htmlFor="quadratmeter-laenge" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
-                <NummerEingabe id="quadratmeter-laenge" value={f.laenge} onChange={v => updateFlaeche(f.id, { laenge: v })} placeholder="5" einheit={einheitLabel} />
+                <label htmlFor={`quadratmeter-${f.id}-laenge`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
+                <NummerEingabe id={`quadratmeter-${f.id}-laenge`} value={f.laenge} onChange={v => updateFlaeche(f.id, { laenge: v })} placeholder="5" einheit={einheitLabel} />
               </div>
               <div>
-                <label htmlFor="quadratmeter-breite" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
-                <NummerEingabe id="quadratmeter-breite" value={f.breite} onChange={v => updateFlaeche(f.id, { breite: v })} placeholder="4" einheit={einheitLabel} />
+                <label htmlFor={`quadratmeter-${f.id}-breite`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
+                <NummerEingabe id={`quadratmeter-${f.id}-breite`} value={f.breite} onChange={v => updateFlaeche(f.id, { breite: v })} placeholder="4" einheit={einheitLabel} />
               </div>
             </div>
           )}
 
           {f.form === 'kreis' && (
             <div>
-              <div className="flex gap-2 mb-3">
-                <button
-                  onClick={() => updateFlaeche(f.id, { kreisMode: 'radius' })}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    f.kreisMode === 'radius'
-                      ? 'bg-accent-500 text-white'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-                  }`}
-                >
-                  Radius
-                </button>
-                <button
-                  onClick={() => updateFlaeche(f.id, { kreisMode: 'durchmesser' })}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    f.kreisMode === 'durchmesser'
-                      ? 'bg-accent-500 text-white'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-                  }`}
-                >
-                  Durchmesser
-                </button>
+              <div className="mb-3">
+                <RadioToggleGroup
+                  name={`quadratmeter-kreismass-${f.id}`}
+                  legend={flaechen.length > 1 ? `Kreis von Fläche ${idx + 1} angeben über` : 'Kreis angeben über'}
+                  srOnlyLegend
+                  activeColor="accent"
+                  options={[
+                    { value: 'radius', label: 'Radius' },
+                    { value: 'durchmesser', label: 'Durchmesser' },
+                  ]}
+                  value={f.kreisMode}
+                  onChange={v => updateFlaeche(f.id, { kreisMode: v as 'radius' | 'durchmesser' })}
+                />
               </div>
               {f.kreisMode === 'radius' ? (
                 <div>
-                  <label htmlFor="quadratmeter-radius" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Radius</label>
-                  <NummerEingabe id="quadratmeter-radius" value={f.radius} onChange={v => updateFlaeche(f.id, { radius: v })} placeholder="3" einheit={einheitLabel} />
+                  <label htmlFor={`quadratmeter-${f.id}-radius`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Radius</label>
+                  <NummerEingabe id={`quadratmeter-${f.id}-radius`} value={f.radius} onChange={v => updateFlaeche(f.id, { radius: v })} placeholder="3" einheit={einheitLabel} />
                 </div>
               ) : (
                 <div>
-                  <label htmlFor="quadratmeter-durchmesser" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Durchmesser</label>
-                  <NummerEingabe id="quadratmeter-durchmesser" value={f.durchmesser} onChange={v => updateFlaeche(f.id, { durchmesser: v })} placeholder="6" einheit={einheitLabel} />
+                  <label htmlFor={`quadratmeter-${f.id}-durchmesser`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Durchmesser</label>
+                  <NummerEingabe id={`quadratmeter-${f.id}-durchmesser`} value={f.durchmesser} onChange={v => updateFlaeche(f.id, { durchmesser: v })} placeholder="6" einheit={einheitLabel} />
                 </div>
               )}
             </div>
@@ -245,12 +224,12 @@ export default function QuadratmeterRechner() {
           {f.form === 'dreieck' && (
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label htmlFor="quadratmeter-grundseite" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundseite</label>
-                <NummerEingabe id="quadratmeter-grundseite" value={f.grundseite} onChange={v => updateFlaeche(f.id, { grundseite: v })} placeholder="6" einheit={einheitLabel} />
+                <label htmlFor={`quadratmeter-${f.id}-grundseite`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Grundseite</label>
+                <NummerEingabe id={`quadratmeter-${f.id}-grundseite`} value={f.grundseite} onChange={v => updateFlaeche(f.id, { grundseite: v })} placeholder="6" einheit={einheitLabel} />
               </div>
               <div>
-                <label htmlFor="quadratmeter-hoehe" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
-                <NummerEingabe id="quadratmeter-hoehe" value={f.hoehe} onChange={v => updateFlaeche(f.id, { hoehe: v })} placeholder="4" einheit={einheitLabel} />
+                <label htmlFor={`quadratmeter-${f.id}-hoehe`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
+                <NummerEingabe id={`quadratmeter-${f.id}-hoehe`} value={f.hoehe} onChange={v => updateFlaeche(f.id, { hoehe: v })} placeholder="4" einheit={einheitLabel} />
               </div>
             </div>
           )}
@@ -261,23 +240,23 @@ export default function QuadratmeterRechner() {
               <p className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-2">Rechteck 1</p>
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
-                  <label htmlFor="quadratmeter-laenge-2" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
-                  <NummerEingabe id="quadratmeter-laenge-2" value={f.r1Laenge} onChange={v => updateFlaeche(f.id, { r1Laenge: v })} placeholder="5" einheit={einheitLabel} />
+                  <label htmlFor={`quadratmeter-${f.id}-laenge-2`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
+                  <NummerEingabe id={`quadratmeter-${f.id}-laenge-2`} value={f.r1Laenge} onChange={v => updateFlaeche(f.id, { r1Laenge: v })} placeholder="5" einheit={einheitLabel} />
                 </div>
                 <div>
-                  <label htmlFor="quadratmeter-breite-2" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
-                  <NummerEingabe id="quadratmeter-breite-2" value={f.r1Breite} onChange={v => updateFlaeche(f.id, { r1Breite: v })} placeholder="3" einheit={einheitLabel} />
+                  <label htmlFor={`quadratmeter-${f.id}-breite-2`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
+                  <NummerEingabe id={`quadratmeter-${f.id}-breite-2`} value={f.r1Breite} onChange={v => updateFlaeche(f.id, { r1Breite: v })} placeholder="3" einheit={einheitLabel} />
                 </div>
               </div>
               <p className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-2">Rechteck 2</p>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="quadratmeter-laenge-3" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
-                  <NummerEingabe id="quadratmeter-laenge-3" value={f.r2Laenge} onChange={v => updateFlaeche(f.id, { r2Laenge: v })} placeholder="3" einheit={einheitLabel} />
+                  <label htmlFor={`quadratmeter-${f.id}-laenge-3`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Länge</label>
+                  <NummerEingabe id={`quadratmeter-${f.id}-laenge-3`} value={f.r2Laenge} onChange={v => updateFlaeche(f.id, { r2Laenge: v })} placeholder="3" einheit={einheitLabel} />
                 </div>
                 <div>
-                  <label htmlFor="quadratmeter-breite-3" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
-                  <NummerEingabe id="quadratmeter-breite-3" value={f.r2Breite} onChange={v => updateFlaeche(f.id, { r2Breite: v })} placeholder="2" einheit={einheitLabel} />
+                  <label htmlFor={`quadratmeter-${f.id}-breite-3`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Breite</label>
+                  <NummerEingabe id={`quadratmeter-${f.id}-breite-3`} value={f.r2Breite} onChange={v => updateFlaeche(f.id, { r2Breite: v })} placeholder="2" einheit={einheitLabel} />
                 </div>
               </div>
             </div>
@@ -286,16 +265,16 @@ export default function QuadratmeterRechner() {
           {f.form === 'trapez' && (
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label htmlFor="quadratmeter-seite-a" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Seite a (oben)</label>
-                <NummerEingabe id="quadratmeter-seite-a" value={f.seiteA} onChange={v => updateFlaeche(f.id, { seiteA: v })} placeholder="3" einheit={einheitLabel} />
+                <label htmlFor={`quadratmeter-${f.id}-seite-a`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Seite a (oben)</label>
+                <NummerEingabe id={`quadratmeter-${f.id}-seite-a`} value={f.seiteA} onChange={v => updateFlaeche(f.id, { seiteA: v })} placeholder="3" einheit={einheitLabel} />
               </div>
               <div>
-                <label htmlFor="quadratmeter-seite-c" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Seite c (unten)</label>
-                <NummerEingabe id="quadratmeter-seite-c" value={f.seiteC} onChange={v => updateFlaeche(f.id, { seiteC: v })} placeholder="5" einheit={einheitLabel} />
+                <label htmlFor={`quadratmeter-${f.id}-seite-c`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Seite c (unten)</label>
+                <NummerEingabe id={`quadratmeter-${f.id}-seite-c`} value={f.seiteC} onChange={v => updateFlaeche(f.id, { seiteC: v })} placeholder="5" einheit={einheitLabel} />
               </div>
               <div>
-                <label htmlFor="quadratmeter-hoehe-2" className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
-                <NummerEingabe id="quadratmeter-hoehe-2" value={f.trapezHoehe} onChange={v => updateFlaeche(f.id, { trapezHoehe: v })} placeholder="4" einheit={einheitLabel} />
+                <label htmlFor={`quadratmeter-${f.id}-hoehe-2`} className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Höhe</label>
+                <NummerEingabe id={`quadratmeter-${f.id}-hoehe-2`} value={f.trapezHoehe} onChange={v => updateFlaeche(f.id, { trapezHoehe: v })} placeholder="4" einheit={einheitLabel} />
               </div>
             </div>
           )}
