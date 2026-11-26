@@ -52,7 +52,20 @@
 
 **Beobachtung außerhalb der Welle (nicht geändert):** Die Screenreader-Ansage von `ErgebnisAktionen` bleibt im Bruchrechner stumm, wenn man ein Feld leert und neu tippt. Beim leeren Feld verschwindet das Ergebnis samt `ErgebnisAktionen`; beim nächsten gültigen Ergebnis wird die Komponente neu eingehängt und behandelt es als „erste Berechnung“, die sie bewusst nicht ansagt (`components/ui/ErgebnisAktionen.tsx` Z. 53–57). Angesagt wird nur, was sich bei stehendem Ergebnis ändert (hier: „− ohne ganze Zahl“ → 23/20). Schon in der Probe von Welle 213 war die Ansage im Bruchrechner bei allen Reiterwechseln leer. Ob andere Rechner mit Ergebnis, das bei leerem Feld verschwindet, ebenso betroffen sind, ist nicht gemessen.
 
-**Offen:** Karolas Nachprüfung der geänderten Stellen (in einer neuen Sitzung, CLAUDE.md Regel 8); erst mit „abnahmefähig“ ist die Welle fertig.
+**Karolas Nachprüfung (27.11.2026, frischer Klon auf `77a20c5`):** Urteil **abnahmefähig**, 0 Befunde A, 0 Befunde B, 3 Hinweise. Umfang: die geänderten Stellen aus `33ae11b` und die Kennungen, die sie berühren, dazu KR04 und KR05; KR07 entfällt (keine Rechtswerte, keine Stichtage); keine Bestandsprüfung. Bericht `_lokal/karola-berichte/2026-11-27-bruchrechner-nachpruefung-w217.md`. Damit ist die Welle nach CLAUDE.md Regel 8 fertig.
+- Selbsttest 65 von 65, verify:alle im Klon 90/90, GitHub Actions „Prüfskripte“ für `3ffec76` success (Lauf 45909441185), Vercel-Deploy `dpl_9p3N3AXtWD9pBRnNV3Qi3cZuGvyV` READY.
+- KR02: Rechenkern in 13 Fällen (Startwerte, die vier Rechenarten, gemischte und negative gemischte Zahl, Kürzen, Nenner 0, Division durch 0, sehr große Zahl) und `zerlegeBruchEingabe` in 20 Fällen gegen eine eigene Referenz (Python, `fractions.Fraction`, ohne die Lib zu lesen), 0 Abweichungen.
+- Zahlen-Inventar (neue Zahlen 3/4, 2 3/4, 0,75, 11/4 nachgerechnet), Rechenketten (4 Ketten) und Register (KV01 bis KV06 je 0 Stellen) ohne Befund.
+- KR10 live (Playwright, Chromium) bei 1280 und 320 px: Startwerte 11/15 ≈ 0,733333; „3/4“ getippt und eingefügt 23/20 = 1,15; „2 3/4“ ins Feld „Ganze“ getippt und eingefügt 63/20 = 3,15; Kürzen 18/24 = 3/4 mit ggT 6; Kopier- und WhatsApp-Text mit denselben Zahlen; bei 320 px `scrollWidth` 320, kein Feld außerhalb; keine Konsolenfehler. „Fix erklärt“ nicht ausgelöst.
+- Hinweise: C1 `NummerEingabe` setzt `inputMode="decimal"` (Z. 83); die Zifferntastatur auf dem iPhone hat vermutlich weder „/“ noch Leerzeichen, „3/4“ in einem Zug zu tippen ginge dort dann nicht, Einfügen schon — nicht am Gerät gemessen. C2 Beim Tippen von „3/“ erscheint kurz „Der Nenner darf nicht 0 sein.“, bis die 4 kommt. C3 die stumme Ansage nach geleertem Feld (Beobachtung oben), kein Befund dieser Welle.
+- Außerhalb der Welle, nur zur Kenntnis: `lib/rechner-config/mathe.ts` Z. 12 `metaDescription` trägt noch das Suffix „✓ Kostenlos. … ✓ Mit KI-Erklärung.“ (Bestand, von `33ae11b` nicht berührt); Karolas SKILL nennt „FAQ 5 bis 8 Fragen“, `rechner-builder/references/content-standards.md` Z. 58 „mindestens 8“.
+
+```
+PRUEFPUNKTE: KR01=ok KR02=ok KR03=ok KR04=ok KR05=ok KR06=ok KR07=entfaellt KR08=ok KR09=ok KR10=ok
+URTEIL: abnahmefähig; slug=bruchrechner; commit=77a20c5; datum=27.11.2026; befunde_a=0; befunde_b=0; hinweise=3
+```
+
+**Offen:** nichts aus dieser Welle. Hinweis C1 lässt sich nur am iPhone klären; bestätigt er sich, gehört die Korrektur in eine eigene Welle.
 
 ---
 
