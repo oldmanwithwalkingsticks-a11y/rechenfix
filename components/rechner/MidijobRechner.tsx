@@ -157,7 +157,7 @@ export default function MidijobRechner() {
         </h2>
         <div className="flex flex-wrap gap-2">
           {(['I', 'II', 'III', 'IV', 'V'] as const).map(k => (
-            <button
+            <button type="button" aria-pressed={klasse === k}
               key={k}
               onClick={() => setKlasse(k)}
               className={`min-w-[48px] min-h-[48px] px-4 rounded-xl text-sm font-medium transition-all ${klasse === k ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
@@ -181,6 +181,7 @@ export default function MidijobRechner() {
           {[0, 1, 2, 3, 4, 5].map(n => (
             <button
               key={n}
+              type="button"
               onClick={() => setAnzahlKinder(n)}
               className={`min-w-[48px] min-h-[48px] px-4 rounded-xl text-sm font-medium transition-all ${anzahlKinder === n ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
               aria-pressed={anzahlKinder === n}
@@ -202,7 +203,7 @@ export default function MidijobRechner() {
         </h2>
         <div className="flex gap-2">
           {([[true, 'Ja'], [false, 'Nein']] as const).map(([val, label]) => (
-            <button
+            <button type="button" aria-pressed={kirchensteuer === val}
               key={String(val)}
               onClick={() => setKirchensteuer(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] min-w-[80px] ${kirchensteuer === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}

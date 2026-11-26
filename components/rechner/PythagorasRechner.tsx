@@ -68,7 +68,7 @@ export default function PythagorasRechner() {
             { val: 'a' as Gesucht, label: 'Kathete (a)' },
             { val: 'b' as Gesucht, label: 'Kathete (b)' },
           ].map(opt => (
-            <button
+            <button type="button" aria-pressed={gesucht === opt.val}
               key={opt.val}
               onClick={() => setGesucht(opt.val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
@@ -110,7 +110,7 @@ export default function PythagorasRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Einheit</label>
         <div className="grid grid-cols-4 gap-2">
           {(['mm', 'cm', 'm', 'km'] as Einheit[]).map(e => (
-            <button
+            <button type="button" aria-pressed={einheit === e}
               key={e}
               onClick={() => setEinheit(e)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${

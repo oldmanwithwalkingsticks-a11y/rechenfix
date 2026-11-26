@@ -88,7 +88,7 @@ export default function TeilzeitRechner() {
       {/* Schnellwahl */}
       <div className="flex flex-wrap gap-2 mb-6">
         {SCHNELLWAHL.map(s => (
-          <button
+          <button type="button" aria-pressed={nTeilzeitStunden === s}
             key={s}
             onClick={() => setTeilzeitStunden(String(s))}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
@@ -135,7 +135,7 @@ export default function TeilzeitRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kirchensteuer</label>
         <div className="flex gap-2">
           {([false, true] as const).map(v => (
-            <button
+            <button type="button" aria-pressed={kirchensteuer === v}
               key={String(v)}
               onClick={() => setKirchensteuer(v)}
               className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${

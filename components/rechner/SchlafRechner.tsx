@@ -53,7 +53,7 @@ export default function SchlafRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Aufwachzeit (Schnellwahl)</label>
         <div className="flex flex-wrap gap-2">
           {SCHNELLWAHL_ZEITEN.map(z => (
-            <button
+            <button type="button" aria-pressed={aufwachzeit === z}
               key={z}
               onClick={() => setAufwachzeit(z)}
               className={`px-3 py-2 rounded-xl text-sm font-medium transition-all ${

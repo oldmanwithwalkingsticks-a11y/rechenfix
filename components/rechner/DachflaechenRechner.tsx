@@ -103,7 +103,7 @@ export default function DachflaechenRechner() {
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Dachform</label>
           <div className="grid grid-cols-4 gap-2">
             {(['sattel', 'pult', 'walm', 'flach'] as Dachform[]).map(f => (
-              <button key={f} onClick={() => setForm(f)} className={`min-h-[48px] px-2 rounded-xl border text-xs font-medium ${form === f ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
+              <button type="button" aria-pressed={form === f} key={f} onClick={() => setForm(f)} className={`min-h-[48px] px-2 rounded-xl border text-xs font-medium ${form === f ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
                 {f === 'sattel' ? 'Sattel' : f === 'pult' ? 'Pult' : f === 'walm' ? 'Walm' : 'Flach'}
               </button>
             ))}

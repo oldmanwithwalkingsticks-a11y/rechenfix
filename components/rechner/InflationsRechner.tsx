@@ -64,7 +64,7 @@ export default function InflationsRechner() {
         <NummerEingabe id="inflations-inflationsrate" value={inflationsrate} onChange={setInflationsrate} placeholder="2" einheit="%" />
         <div className="flex gap-1.5 mt-2">
           {SCHNELLWAHL.map(r => (
-            <button
+            <button type="button" aria-pressed={inflationsrate === r}
               key={r}
               onClick={() => setInflationsrate(r)}
               className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-all ${

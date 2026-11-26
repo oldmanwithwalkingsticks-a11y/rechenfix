@@ -138,7 +138,7 @@ export default function VolumenRechner() {
         <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Körper auswählen</label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {KOERPER.map(k => (
-            <button
+            <button type="button" aria-pressed={koerper === k.id}
               key={k.id}
               onClick={() => setKoerper(k.id)}
               className={`min-h-[48px] px-3 py-2 rounded-xl border text-sm font-medium transition ${

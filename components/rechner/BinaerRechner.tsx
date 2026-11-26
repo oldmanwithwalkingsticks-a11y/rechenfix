@@ -58,7 +58,7 @@ export default function BinaerRechner() {
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Eingabesystem</label>
           <div className="grid grid-cols-4 gap-2">
             {(['dec', 'bin', 'oct', 'hex'] as Basis[]).map(b => (
-              <button key={b} onClick={() => setBasis(b)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${basis === b ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
+              <button type="button" aria-pressed={basis === b} key={b} onClick={() => setBasis(b)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${basis === b ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
                 {b === 'dec' ? 'Dezimal' : b === 'bin' ? 'Binär' : b === 'oct' ? 'Oktal' : 'Hex'}
               </button>
             ))}

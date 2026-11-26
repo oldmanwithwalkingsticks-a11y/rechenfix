@@ -86,7 +86,7 @@ export default function FuehrerscheinRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Region</label>
         <div className="flex flex-wrap gap-2">
           {(Object.keys(REGIONEN) as Region[]).map(key => (
-            <button
+            <button type="button" aria-pressed={region === key}
               key={key}
               onClick={() => setRegion(key)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${

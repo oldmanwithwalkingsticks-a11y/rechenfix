@@ -202,7 +202,7 @@ export default function DurchschnittRechner() {
       {/* Tabs */}
       <div className="flex flex-wrap gap-1.5 mb-5">
         {modusTabs.map(t => (
-          <button
+          <button type="button" aria-pressed={modus === t.key}
             key={t.key}
             onClick={() => setModus(t.key)}
             className={`px-3 py-2 rounded-xl text-sm font-medium transition-all ${

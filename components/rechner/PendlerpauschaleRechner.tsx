@@ -201,7 +201,7 @@ export default function PendlerpauschaleRechner() {
         </div>
         <div className="flex gap-1.5 flex-wrap">
           {STEUERSAETZE.map(s => (
-            <button
+            <button type="button" aria-pressed={parseDeutscheZahl(grenzsteuersatz) === s}
               key={s}
               onClick={() => setGrenzsteuersatz(String(s))}
               className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${

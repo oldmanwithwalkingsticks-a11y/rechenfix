@@ -210,7 +210,7 @@ export default function WaermepumpeRechner() {
             ['25000', '25.000 € (Luft-Wasser)'],
             ['35000', '35.000 € (Erdwärme)'],
           ].map(([v, label]) => (
-            <button
+            <button type="button" aria-pressed={anschaffung === v}
               key={v}
               onClick={() => setAnschaffung(v)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${anschaffung === v ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}

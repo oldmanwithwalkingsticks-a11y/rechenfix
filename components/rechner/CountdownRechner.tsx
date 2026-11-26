@@ -70,7 +70,7 @@ export default function CountdownRechner() {
       {/* Event-Auswahl */}
       <div className="flex flex-wrap gap-2">
         {voreingestellteEvents.map(e => (
-          <button
+          <button type="button" aria-pressed={auswahl === e.key}
             key={e.key}
             onClick={() => setAuswahl(e.key)}
             className={`px-3 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-1.5 ${
@@ -83,7 +83,7 @@ export default function CountdownRechner() {
             <span className="hidden sm:inline">{e.label}</span>
           </button>
         ))}
-        <button
+        <button type="button" aria-pressed={istEigen}
           onClick={() => setAuswahl('eigen')}
           className={`px-3 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-1.5 ${
             istEigen

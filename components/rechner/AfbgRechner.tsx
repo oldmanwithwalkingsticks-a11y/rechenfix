@@ -70,7 +70,7 @@ export default function AfbgRechner() {
         </h2>
         <div className="flex gap-2">
           {([['vollzeit', '📚 Vollzeit'], ['teilzeit', '🕒 Teilzeit']] as const).map(([val, label]) => (
-            <button key={val} onClick={() => setFortbildungsart(val)}
+            <button type="button" aria-pressed={fortbildungsart === val} key={val} onClick={() => setFortbildungsart(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${fortbildungsart === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
               {label}
             </button>
@@ -141,7 +141,7 @@ export default function AfbgRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ehegatte / Lebenspartner</label>
             <div className="flex gap-2">
               {([false, true] as const).map(val => (
-                <button key={String(val)} onClick={() => setEhegatteVorhanden(val)}
+                <button type="button" aria-pressed={ehegatteVorhanden === val} key={String(val)} onClick={() => setEhegatteVorhanden(val)}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${ehegatteVorhanden === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
                   {val ? '💍 Vorhanden' : 'Nein'}
                 </button>

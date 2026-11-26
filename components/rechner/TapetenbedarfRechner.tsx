@@ -89,7 +89,7 @@ export default function TapetenbedarfRechner() {
       <div className="mb-5">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Raumeingabe</label>
         <div className="flex gap-2">
-          <button
+          <button type="button" aria-pressed={modus === 'schnell'}
             onClick={() => setModus('schnell')}
             className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
               modus === 'schnell'
@@ -99,7 +99,7 @@ export default function TapetenbedarfRechner() {
           >
             Schnelleingabe
           </button>
-          <button
+          <button type="button" aria-pressed={modus === 'detail'}
             onClick={() => setModus('detail')}
             className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
               modus === 'detail'
@@ -188,7 +188,7 @@ export default function TapetenbedarfRechner() {
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Rollenbreite</label>
           <div className="flex gap-1.5">
             {['0,53', '1,06'].map(v => (
-              <button
+              <button type="button" aria-pressed={rollenBreite === v}
                 key={v}
                 onClick={() => setRollenBreite(v)}
                 className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${
@@ -206,7 +206,7 @@ export default function TapetenbedarfRechner() {
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Rollenlänge</label>
           <div className="flex gap-1.5">
             {['10,05', '25'].map(v => (
-              <button
+              <button type="button" aria-pressed={rollenLaenge === v}
                 key={v}
                 onClick={() => setRollenLaenge(v)}
                 className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${

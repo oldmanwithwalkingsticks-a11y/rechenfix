@@ -126,7 +126,7 @@ export default function BaufinanzierungRechner() {
           <NummerEingabe id="baufinanzierung-anfaengliche-tilgung" value={tilgung} onChange={setTilgung} placeholder="z.B. 2" einheit="%" />
           <div className="flex gap-2 mt-2">
             {TILGUNG_SCHNELLWAHL.map(t => (
-              <button
+              <button type="button" aria-pressed={parseDeutscheZahl(tilgung) === t}
                 key={t}
                 onClick={() => setTilgung(String(t))}
                 className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${

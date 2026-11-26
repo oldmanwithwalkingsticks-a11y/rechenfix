@@ -85,7 +85,7 @@ export default function StreamingKostenRechner() {
                 {aktiv && dienst.varianten.length > 1 && (
                   <div className="mt-3 ml-8 flex flex-wrap gap-2">
                     {dienst.varianten.map((v, i) => (
-                      <button
+                      <button type="button" aria-pressed={auswahl[dienst.id] === i}
                         key={i}
                         onClick={() => setVariante(dienst.id, i)}
                         className={`px-3 py-1 text-sm rounded-full border transition-colors ${

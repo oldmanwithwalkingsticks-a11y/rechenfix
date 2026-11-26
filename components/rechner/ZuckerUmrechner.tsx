@@ -162,7 +162,7 @@ export default function ZuckerUmrechner() {
         </h2>
         <div className="flex rounded-xl overflow-hidden border border-gray-200 dark:border-gray-600">
           {(['backen', 'kochen'] as Rezepttyp[]).map(rt => (
-            <button
+            <button aria-pressed={rezepttyp === rt}
               key={rt}
               type="button"
               onClick={() => setRezepttyp(rt)}

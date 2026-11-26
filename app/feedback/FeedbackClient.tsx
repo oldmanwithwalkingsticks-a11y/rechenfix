@@ -153,7 +153,7 @@ export default function FeedbackClient() {
       {/* Typ-Kacheln */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
         {TYPEN.map(typ => (
-          <button
+          <button type="button" aria-pressed={aktiverTyp === typ.id}
             key={typ.id}
             onClick={() => setAktiverTyp(aktiverTyp === typ.id ? null : typ.id)}
             className={`p-4 rounded-xl border-2 text-left transition-all ${
@@ -308,7 +308,7 @@ export default function FeedbackClient() {
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Waren die Erklärungen hilfreich? *</label>
                   <div className="flex gap-2">
                     {(['ja', 'teilweise', 'nein'] as const).map(opt => (
-                      <button
+                      <button aria-pressed={kiHilfreich === opt}
                         key={opt}
                         type="button"
                         onClick={() => setKiHilfreich(opt)}

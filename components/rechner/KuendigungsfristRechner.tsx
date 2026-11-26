@@ -82,7 +82,7 @@ export default function KuendigungsfristRechner() {
             { key: 'arbeitnehmer' as const, label: 'Ich kündige (Arbeitnehmer)' },
             { key: 'arbeitgeber' as const, label: 'Mir wird gekündigt (Arbeitgeber)' },
           ]).map(o => (
-            <button
+            <button type="button" aria-pressed={kuendiger === o.key}
               key={o.key}
               onClick={() => setKuendiger(o.key)}
               className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -134,7 +134,7 @@ export default function KuendigungsfristRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Probezeit?</label>
         <div className="flex gap-2">
           {([false, true] as const).map(v => (
-            <button
+            <button type="button" aria-pressed={probezeit === v}
               key={String(v)}
               onClick={() => setProbezeit(v)}
               className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -171,7 +171,7 @@ export default function KuendigungsfristRechner() {
             { key: false, label: 'Gesetzliche Frist' },
             { key: true, label: 'Abweichende Frist' },
           ] as const).map(o => (
-            <button
+            <button type="button" aria-pressed={abweichendeFrist === o.key}
               key={String(o.key)}
               onClick={() => setAbweichendeFrist(o.key)}
               className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all ${

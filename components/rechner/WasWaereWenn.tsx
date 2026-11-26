@@ -138,7 +138,7 @@ export default function WasWaereWenn({ eingaben, ergebnis }: Props) {
             {/* Beispiel-Chips */}
             <div className="flex flex-wrap gap-2">
               {BEISPIELE.map((b) => (
-                <button
+                <button type="button" aria-pressed={frage === b}
                   key={b}
                   onClick={() => handleBeispiel(b)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${

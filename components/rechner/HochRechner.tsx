@@ -76,7 +76,7 @@ export default function HochRechner() {
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Ich kenne mein...</label>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
             {(['stunde', 'tag', 'woche', 'monat', 'jahr'] as Eingabe[]).map(e => (
-              <button key={e} onClick={() => onSetEingabe(e)} className={`min-h-[48px] px-2 rounded-xl border text-xs font-medium ${eingabe === e ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
+              <button type="button" aria-pressed={eingabe === e} key={e} onClick={() => onSetEingabe(e)} className={`min-h-[48px] px-2 rounded-xl border text-xs font-medium ${eingabe === e ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
                 {LABEL[e].replace('Pro ', '')}
               </button>
             ))}

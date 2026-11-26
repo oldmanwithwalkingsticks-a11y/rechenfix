@@ -64,7 +64,7 @@ export default function HandykostenRechner() {
           </label>
           <div className="flex gap-2">
             {LAUFZEITEN.map(l => (
-              <button
+              <button type="button" aria-pressed={laufzeit === l.value}
                 key={l.value}
                 onClick={() => setLaufzeit(l.value)}
                 className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${

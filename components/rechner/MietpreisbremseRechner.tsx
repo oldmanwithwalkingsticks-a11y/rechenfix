@@ -77,7 +77,7 @@ export default function MietpreisbremseRechner() {
             { val: true, label: 'Ja (angespannter Wohnungsmarkt)' },
             { val: false, label: 'Nein / Unsicher' },
           ].map(opt => (
-            <button
+            <button type="button" aria-pressed={giltBremse === opt.val}
               key={String(opt.val)}
               onClick={() => setGiltBremse(opt.val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${

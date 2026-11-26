@@ -81,7 +81,7 @@ export default function RabattRechner() {
       {/* Modus-Tabs */}
       <div className="flex flex-wrap gap-2">
         {modi.map(m => (
-          <button
+          <button type="button" aria-pressed={modus === m.key}
             key={m.key}
             onClick={() => { setModus(m.key); setWert1(''); setWert2(''); setWert3(''); }}
             className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
@@ -109,7 +109,7 @@ export default function RabattRechner() {
               <NummerEingabe id="rabatt-rabatt" value={wert2} onChange={setWert2} placeholder="z. B. 20" einheit="%" />
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {QUICK_RABATTE.map(v => (
-                  <button
+                  <button type="button" aria-pressed={wert2 === String(v)}
                     key={v}
                     onClick={() => setWert2(String(v))}
                     className={`px-3 py-1.5 text-xs rounded-lg font-medium transition-all ${

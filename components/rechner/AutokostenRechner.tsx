@@ -168,7 +168,7 @@ export default function AutokostenRechner() {
             <div className="w-full sm:w-1/2"><NummerEingabe id="autokosten-jaehrliche-fahrleistung" value={fahrleistung} onChange={setFahrleistung} placeholder="15.000" einheit="km" /></div>
             <div className="flex flex-wrap gap-2 mt-2">
               {FAHRLEISTUNG_SCHNELLWAHL.map(km => (
-                <button key={km} onClick={() => setFahrleistung(String(km))}
+                <button type="button" aria-pressed={parseDeutscheZahl(fahrleistung) === km} key={km} onClick={() => setFahrleistung(String(km))}
                   className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${parseDeutscheZahl(fahrleistung) === km ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
                   {km.toLocaleString('de-DE')} km
                 </button>

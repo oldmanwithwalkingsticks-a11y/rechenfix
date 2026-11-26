@@ -204,7 +204,7 @@ export default function KreditRechner() {
                 <>
                   {ergebnis.tilgungsplan.length > 24 && (
                     <div className="flex gap-2 mt-3 mb-3">
-                      <button
+                      <button type="button" aria-pressed={!alleMonateZeigen}
                         onClick={() => setAlleMonateZeigen(false)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                           !alleMonateZeigen
@@ -214,7 +214,7 @@ export default function KreditRechner() {
                       >
                         Jahresübersicht
                       </button>
-                      <button
+                      <button type="button" aria-pressed={alleMonateZeigen}
                         onClick={() => setAlleMonateZeigen(true)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                           alleMonateZeigen

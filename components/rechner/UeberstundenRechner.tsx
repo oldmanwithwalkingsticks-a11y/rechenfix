@@ -95,7 +95,7 @@ export default function UeberstundenRechner() {
           { key: 'berechnen' as Modus, label: 'Überstunden berechnen' },
           { key: 'verguetung' as Modus, label: 'Überstunden-Vergütung' },
         ]).map(t => (
-          <button
+          <button type="button" aria-pressed={modus === t.key}
             key={t.key}
             onClick={() => setModus(t.key)}
             className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
@@ -131,7 +131,7 @@ export default function UeberstundenRechner() {
               { key: 'gesamt' as EingabeArt, label: 'Gesamtstunden' },
               { key: 'tageweise' as EingabeArt, label: 'Tageweise (Mo–Fr)' },
             ]).map(t => (
-              <button
+              <button type="button" aria-pressed={eingabeArt === t.key}
                 key={t.key}
                 onClick={() => setEingabeArt(t.key)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
@@ -191,7 +191,7 @@ export default function UeberstundenRechner() {
                 { key: 'monat' as const, label: '1 Monat' },
                 { key: 'custom' as const, label: 'Benutzerdefiniert' },
               ]).map(t => (
-                <button
+                <button type="button" aria-pressed={zeitraum === t.key}
                   key={t.key}
                   onClick={() => setZeitraum(t.key)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${

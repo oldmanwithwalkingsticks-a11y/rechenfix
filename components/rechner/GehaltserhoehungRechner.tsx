@@ -93,7 +93,7 @@ export default function GehaltserhoehungRechner() {
         </h2>
         <div className="flex gap-2 mb-2">
           {([['euro', 'In Euro'], ['prozent', 'In Prozent']] as const).map(([val, label]) => (
-            <button
+            <button type="button" aria-pressed={modus === val}
               key={val}
               onClick={() => setModus(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[44px] ${modus === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
@@ -117,7 +117,7 @@ export default function GehaltserhoehungRechner() {
         </h2>
         <div className="flex flex-wrap gap-2">
           {([1, 2, 3, 4, 5, 6] as StKl[]).map(k => (
-            <button
+            <button type="button" aria-pressed={steuerklasse === k}
               key={k}
               onClick={() => setSteuerklasse(k)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[44px] min-w-[48px] ${steuerklasse === k ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
@@ -153,7 +153,7 @@ export default function GehaltserhoehungRechner() {
         </h2>
         <div className="flex gap-2">
           {([[false, 'Nein'], [true, `Ja (${kirchensteuersatz} %)`]] as const).map(([val, label]) => (
-            <button
+            <button type="button" aria-pressed={kirchensteuer === val}
               key={String(val)}
               onClick={() => setKirchensteuer(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${kirchensteuer === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
@@ -172,7 +172,7 @@ export default function GehaltserhoehungRechner() {
         </h2>
         <div className="flex flex-wrap gap-2">
           {['0', '1', '2', '3', '4'].map(k => (
-            <button
+            <button type="button" aria-pressed={kinder === k}
               key={k}
               onClick={() => setKinder(k)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[44px] min-w-[48px] ${kinder === k ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}

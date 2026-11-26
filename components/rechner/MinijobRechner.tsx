@@ -85,7 +85,7 @@ export default function MinijobRechner() {
         <NummerEingabe aria-label="Monatlicher Verdienst" value={verdienst} onChange={v => setVerdienst(clampInputValue(v, 0, null))} min={0} placeholder="538" einheit="€" />
         <div className="flex flex-wrap gap-2 mt-2">
           {SCHNELLWAHL.map(v => (
-            <button
+            <button type="button" aria-pressed={verdienst === v}
               key={v}
               onClick={() => setVerdienst(v)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${verdienst === v ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}

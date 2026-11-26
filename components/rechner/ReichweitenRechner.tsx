@@ -108,7 +108,7 @@ export default function ReichweitenRechner() {
         <NummerEingabe id="reichweiten-akkukapazitaet" value={akku} onChange={setAkku} placeholder="60" einheit="kWh" />
         <div className="flex flex-wrap gap-2 mt-2">
           {['40', '60', '77', '100'].map(v => (
-            <button
+            <button type="button" aria-pressed={akku === v}
               key={v}
               onClick={() => setAkku(v)}
               className={`px-3 py-1.5 text-xs rounded-lg ${akku === v ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}`}

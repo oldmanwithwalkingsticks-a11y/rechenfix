@@ -363,7 +363,7 @@ export default function BruchRechner() {
       {/* Tabs */}
       <div className="flex flex-wrap gap-1.5 mb-5">
         {tabOptionen.map(t => (
-          <button
+          <button type="button" aria-pressed={tab === t.key}
             key={t.key}
             onClick={() => setTab(t.key)}
             className={`px-3 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -385,7 +385,7 @@ export default function BruchRechner() {
 
             <div className="flex gap-1 pb-4">
               {operationen.map(o => (
-                <button
+                <button type="button" aria-pressed={op === o}
                   key={o}
                   onClick={() => setOp(o)}
                   className={`w-10 h-10 rounded-lg text-lg font-bold transition-all ${

@@ -45,7 +45,7 @@ export default function StundenlohnRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Was möchten Sie berechnen?</label>
         <div className="flex flex-col sm:flex-row gap-2">
           {MODI.map(m => (
-            <button
+            <button type="button" aria-pressed={modus === m.key}
               key={m.key}
               onClick={() => setModus(m.key)}
               className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-center gap-1.5 ${

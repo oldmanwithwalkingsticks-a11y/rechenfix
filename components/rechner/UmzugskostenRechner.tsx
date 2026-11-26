@@ -73,7 +73,7 @@ export default function UmzugskostenRechner() {
         <label htmlFor="umzugskosten-wohnungsgroesse" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnungsgröße</label>
         <div className="flex flex-wrap gap-2 mb-2">
           {GROESSE_SCHNELLWAHL.map(g => (
-            <button
+            <button type="button" aria-pressed={nWohnungsgroesse === g.wert}
               key={g.wert}
               onClick={() => setWohnungsgroesse(String(g.wert))}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
@@ -96,7 +96,7 @@ export default function UmzugskostenRechner() {
         <label htmlFor="umzugskosten-entfernung" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Entfernung</label>
         <div className="flex flex-wrap gap-2 mb-2">
           {ENTFERNUNG_SCHNELLWAHL.map(e => (
-            <button
+            <button type="button" aria-pressed={nEntfernung === e.wert}
               key={e.wert}
               onClick={() => setEntfernung(String(e.wert))}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${

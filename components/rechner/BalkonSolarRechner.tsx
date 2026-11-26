@@ -134,7 +134,7 @@ export default function BalkonSolarRechner() {
             <NummerEingabe id="balkon-solar-anschaffungskosten" value={kosten} onChange={setKosten} placeholder="600" />
             <div className="flex gap-2 mt-1">
               {[{ l: '400 €', v: '400' }, { l: '600 €', v: '600' }, { l: '900 €', v: '900' }].map(p => (
-                <button
+                <button aria-pressed={kosten === p.v}
                   key={p.v}
                   type="button"
                   onClick={() => setKosten(p.v)}

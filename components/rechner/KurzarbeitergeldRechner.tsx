@@ -83,8 +83,13 @@ export default function KurzarbeitergeldRechner() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kinder auf Lohnsteuerkarte?</label>
+          <label id="kurzarbeitergeld-kind-frage" htmlFor="kurzarbeitergeld-kind" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kinder auf Lohnsteuerkarte?</label>
           <button
+            id="kurzarbeitergeld-kind"
+            type="button"
+            role="switch"
+            aria-checked={mitKind}
+            aria-labelledby="kurzarbeitergeld-kind-frage kurzarbeitergeld-kind"
             onClick={() => setMitKind(!mitKind)}
             className={`w-full px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
               mitKind
@@ -113,8 +118,13 @@ export default function KurzarbeitergeldRechner() {
           </p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuerpflichtig?</label>
+          <label id="kurzarbeitergeld-kirchensteuer-frage" htmlFor="kurzarbeitergeld-kirchensteuer" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kirchensteuerpflichtig?</label>
           <button
+            id="kurzarbeitergeld-kirchensteuer"
+            type="button"
+            role="switch"
+            aria-checked={kirchensteuer}
+            aria-labelledby="kurzarbeitergeld-kirchensteuer-frage kurzarbeitergeld-kirchensteuer"
             onClick={() => setKirchensteuer(!kirchensteuer)}
             className={`w-full px-4 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
               kirchensteuer

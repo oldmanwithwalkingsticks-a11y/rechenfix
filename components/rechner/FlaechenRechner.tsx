@@ -301,7 +301,7 @@ export default function FlaechenRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Form auswählen</label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {FORM_OPTIONEN.map(f => (
-            <button
+            <button type="button" aria-pressed={form === f.value}
               key={f.value}
               onClick={() => setForm(f.value)}
               className={`flex items-center gap-2 px-3 py-3 rounded-xl text-sm font-medium transition-all min-h-[48px] ${

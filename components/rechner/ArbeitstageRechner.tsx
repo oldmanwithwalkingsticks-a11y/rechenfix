@@ -70,7 +70,7 @@ export default function ArbeitstageRechner() {
         <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Modus</label>
         <div className="grid grid-cols-3 gap-2">
           {(['monat', 'zeitraum', 'jahr'] as Modus[]).map(m => (
-            <button key={m} onClick={() => setModus(m)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${modus === m ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
+            <button type="button" aria-pressed={modus === m} key={m} onClick={() => setModus(m)} className={`min-h-[48px] px-3 rounded-xl border text-sm font-medium ${modus === m ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'}`}>
               {m === 'monat' ? 'Monat' : m === 'zeitraum' ? 'Zeitraum' : 'Ganzes Jahr'}
             </button>
           ))}
@@ -128,7 +128,7 @@ export default function ArbeitstageRechner() {
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Arbeitstage pro Woche</label>
           <div className="grid grid-cols-7 gap-1">
             {['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'].map((lab, i) => (
-              <button key={i} onClick={() => toggleTag(i)} className={`min-h-[44px] px-2 rounded-lg border text-xs font-medium ${tage.includes(i) ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400'}`}>
+              <button type="button" aria-pressed={tage.includes(i)} key={i} onClick={() => toggleTag(i)} className={`min-h-[44px] px-2 rounded-lg border text-xs font-medium ${tage.includes(i) ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400'}`}>
                 {lab}
               </button>
             ))}

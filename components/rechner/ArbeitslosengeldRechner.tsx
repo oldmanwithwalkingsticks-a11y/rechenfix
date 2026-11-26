@@ -50,7 +50,7 @@ export default function ArbeitslosengeldRechner() {
         </h2>
         <div className="flex flex-wrap gap-2">
           {(['I', 'II', 'III', 'IV', 'V', 'VI'] as const).map(k => (
-            <button
+            <button type="button" aria-pressed={klasse === k}
               key={k}
               onClick={() => setKlasse(k)}
               className={`min-w-[48px] min-h-[48px] px-4 rounded-xl text-sm font-medium transition-all ${klasse === k ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}
@@ -72,7 +72,7 @@ export default function ArbeitslosengeldRechner() {
             [true, 'Mit Kind (67 %)'],
             [false, 'Ohne Kind (60 %)'],
           ] as const).map(([val, label]) => (
-            <button
+            <button type="button" aria-pressed={mitKind === val}
               key={String(val)}
               onClick={() => setMitKind(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${mitKind === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}

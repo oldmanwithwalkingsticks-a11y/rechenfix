@@ -122,7 +122,7 @@ export default function SchuhgroessenRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Typ</label>
         <div className="grid grid-cols-3 gap-2">
           {(['damen', 'herren', 'kinder'] as Typ[]).map(t => (
-            <button
+            <button type="button" aria-pressed={typ === t}
               key={t}
               onClick={() => changeTyp(t)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
@@ -142,7 +142,7 @@ export default function SchuhgroessenRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Eingabe-System</label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {(['eu', 'us', 'uk', 'cm'] as System[]).map(s => (
-            <button
+            <button type="button" aria-pressed={system === s}
               key={s}
               onClick={() => setSystem(s)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${

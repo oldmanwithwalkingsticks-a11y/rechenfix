@@ -53,7 +53,7 @@ export default function PflegegeldRechner() {
         </h2>
         <div className="grid grid-cols-5 gap-2">
           {([1, 2, 3, 4, 5] as const).map(n => (
-            <button
+            <button type="button" aria-pressed={pflegegrad === n}
               key={n}
               onClick={() => setPflegegrad(n)}
               className={`px-2 py-3 rounded-xl text-sm font-semibold transition-all min-h-[56px] ${pflegegrad === n ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}

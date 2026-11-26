@@ -109,7 +109,7 @@ export default function KapitalertragsteuerRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Art der Kapitalerträge</label>
         <div className="flex flex-wrap gap-2">
           {ERTRAGSARTEN.map(a => (
-            <button
+            <button type="button" aria-pressed={ertragsart === a.key}
               key={a.key}
               onClick={() => setErtragsart(a.key)}
               className={`px-3 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
@@ -158,7 +158,7 @@ export default function KapitalertragsteuerRechner() {
             ['teilweise', 'Teilweise'],
             ['ja', 'Ja (komplett)'],
           ] as const).map(([val, label]) => (
-            <button
+            <button type="button" aria-pressed={pauschStatus === val}
               key={val}
               onClick={() => setPauschStatus(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${
@@ -187,7 +187,7 @@ export default function KapitalertragsteuerRechner() {
             [false, 'Nein'],
             [true, 'Ja'],
           ] as const).map(([val, label]) => (
-            <button
+            <button type="button" aria-pressed={kirchensteuer === val}
               key={String(val)}
               onClick={() => setKirchensteuer(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${

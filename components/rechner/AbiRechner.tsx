@@ -98,11 +98,11 @@ export default function AbiRechner() {
       <div className="mb-6">
         <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Berechnungsmodus</label>
         <div className="grid grid-cols-2 gap-2">
-          <button
+          <button type="button" aria-pressed={modus === 'schnell'}
             onClick={() => setModus('schnell')}
             className={`min-h-[48px] px-3 py-2 rounded-xl border text-sm font-medium transition ${modus === 'schnell' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-primary-400'}`}
           >Schnell (Gesamtpunkte)</button>
-          <button
+          <button type="button" aria-pressed={modus === 'detail'}
             onClick={() => setModus('detail')}
             className={`min-h-[48px] px-3 py-2 rounded-xl border text-sm font-medium transition ${modus === 'detail' ? 'bg-primary-500 text-white border-primary-500' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-primary-400'}`}
           >Detailliert (Kurse)</button>

@@ -66,7 +66,7 @@ export default function UrlaubstageRechner() {
           { key: 'anspruch' as Modus, label: 'Urlaubsanspruch berechnen' },
           { key: 'resturlaub' as Modus, label: 'Resturlaub bei Kündigung' },
         ]).map(t => (
-          <button
+          <button type="button" aria-pressed={modus === t.key}
             key={t.key}
             onClick={() => setModus(t.key)}
             className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${

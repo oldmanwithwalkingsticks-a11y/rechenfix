@@ -69,7 +69,7 @@ export default function EinheitenRechner() {
       {/* Kategorie-Tabs */}
       <div className="flex flex-wrap gap-1.5 mb-5">
         {katTabs.map(t => (
-          <button
+          <button type="button" aria-pressed={kat === t.key}
             key={t.key}
             onClick={() => wechsleKategorie(t.key)}
             className={`px-3 py-2 rounded-xl text-sm font-medium transition-all ${

@@ -45,7 +45,7 @@ export default function StromkostenRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Haushaltsgröße (Schnellwahl)</label>
         <div className="flex gap-2">
           {SCHNELLWAHL.map(s => (
-            <button
+            <button type="button" aria-pressed={verbrauch === s.kwh}
               key={s.kwh}
               onClick={() => setVerbrauch(s.kwh)}
               className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all ${

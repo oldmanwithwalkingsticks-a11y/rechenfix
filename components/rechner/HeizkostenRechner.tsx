@@ -44,7 +44,7 @@ export default function HeizkostenRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Energieträger</label>
         <div className="flex flex-wrap gap-2">
           {alle.map(e => (
-            <button
+            <button type="button" aria-pressed={energietraeger === e.key}
               key={e.key}
               onClick={() => setEnergietraeger(e.key)}
               className={`px-3 py-2 rounded-xl text-sm font-medium transition-all ${

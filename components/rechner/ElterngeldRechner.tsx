@@ -357,6 +357,9 @@ function ToggleButton({
 }) {
   return (
     <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
       onClick={() => onChange(!checked)}
       className={`flex-1 flex items-center gap-3 p-3 rounded-xl border transition-all text-left ${
         checked

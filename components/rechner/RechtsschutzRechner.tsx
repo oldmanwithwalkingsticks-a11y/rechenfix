@@ -78,7 +78,7 @@ export default function RechtsschutzRechner() {
           </label>
           <div className="flex gap-2">
             {LEBENSSITUATIONEN.map(ls => (
-              <button
+              <button type="button" aria-pressed={lebenssituation === ls.value}
                 key={ls.value}
                 onClick={() => setLebenssituation(ls.value)}
                 className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
@@ -102,7 +102,7 @@ export default function RechtsschutzRechner() {
             {BAUSTEINE.map(b => {
               const aktiv = bausteine.includes(b.key);
               return (
-                <button
+                <button type="button" aria-pressed={aktiv}
                   key={b.key}
                   onClick={() => toggleBaustein(b.key)}
                   className={`flex items-center gap-3 p-3 rounded-xl border text-left transition-all ${
@@ -139,7 +139,7 @@ export default function RechtsschutzRechner() {
           </label>
           <div className="flex gap-2">
             {SELBSTBETEILIGUNGEN.map(sb => (
-              <button
+              <button type="button" aria-pressed={selbstbeteiligung === sb}
                 key={sb}
                 onClick={() => setSelbstbeteiligung(sb)}
                 className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${

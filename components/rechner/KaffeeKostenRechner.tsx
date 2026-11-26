@@ -68,7 +68,7 @@ export default function KaffeeKostenRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Ihre Kaffee-Art</label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {Object.entries(PREISE).map(([key, val]) => (
-            <button
+            <button type="button" aria-pressed={art === key}
               key={key}
               onClick={() => setArt(key as typeof art)}
               className={`p-3 rounded-xl text-sm font-medium border-2 transition-all text-center ${
@@ -85,7 +85,7 @@ export default function KaffeeKostenRechner() {
             </button>
           ))}
         </div>
-        <button
+        <button type="button" aria-pressed={art === 'custom'}
           onClick={() => setArt('custom')}
           className={`mt-2 w-full p-2 rounded-xl text-sm border-2 transition-all ${
             art === 'custom'

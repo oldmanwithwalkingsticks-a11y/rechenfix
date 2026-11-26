@@ -190,7 +190,7 @@ export default function Prozentrechner() {
             {aktuellerModus.einheit2 === '%' && (
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {QUICK_VALUES.map(val => (
-                  <button
+                  <button type="button" aria-pressed={wert2 === val.toString()}
                     key={val}
                     onClick={() => handleQuick(val)}
                     className={`min-h-[32px] px-3 rounded-lg text-xs font-medium transition-all ${

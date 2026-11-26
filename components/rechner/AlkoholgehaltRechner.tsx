@@ -122,7 +122,7 @@ export default function AlkoholgehaltRechner() {
       <div className="mb-6">
         <div className="flex rounded-xl overflow-hidden border border-gray-200 dark:border-gray-600">
           {(['mischen', 'kochen'] as Modus[]).map(m => (
-            <button
+            <button aria-pressed={modus === m}
               key={m}
               type="button"
               onClick={() => setModus(m)}

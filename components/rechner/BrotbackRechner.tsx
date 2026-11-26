@@ -158,7 +158,7 @@ export default function BrotbackRechner() {
         </h2>
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
           {(Object.entries(BROT_REZEPTE) as [BrotTyp, BrotRezept][]).map(([key, r]) => (
-            <button
+            <button aria-pressed={brotTyp === key}
               key={key}
               type="button"
               onClick={() => setBrotTyp(key)}

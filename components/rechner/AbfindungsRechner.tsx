@@ -66,7 +66,7 @@ export default function AbfindungsRechner() {
             { key: false, label: 'Regelabfindung berechnen' },
             { key: true, label: 'Eigene Abfindung eingeben' },
           ] as const).map(o => (
-            <button
+            <button type="button" aria-pressed={eigeneAbfindung === o.key}
               key={String(o.key)}
               onClick={() => setEigeneAbfindung(o.key)}
               className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all ${

@@ -146,7 +146,7 @@ export default function NettolohnOptimiererRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Steuerklasse</label>
         <div className="flex flex-wrap gap-2">
           {([1, 2, 3, 4, 5, 6] as StKl[]).map(k => (
-            <button
+            <button type="button" aria-pressed={steuerklasse === k}
               key={k}
               onClick={() => setSteuerklasse(k)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] min-w-[48px] ${
@@ -176,7 +176,7 @@ export default function NettolohnOptimiererRechner() {
             [false, 'Nein'],
             [true, 'Ja (9 %)'],
           ] as const).map(([val, label]) => (
-            <button
+            <button type="button" aria-pressed={kirchensteuer === val}
               key={String(val)}
               onClick={() => setKirchensteuer(val)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${

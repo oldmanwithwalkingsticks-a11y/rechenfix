@@ -145,7 +145,7 @@ export default function ArbeitszeitRechner() {
           { key: 'tag' as Modus, label: 'Tägliche Arbeitszeit' },
           { key: 'woche' as Modus, label: 'Wöchentliche Arbeitszeit' },
         ]).map(t => (
-          <button
+          <button type="button" aria-pressed={modus === t.key}
             key={t.key}
             onClick={() => setModus(t.key)}
             className={`flex-1 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
@@ -285,6 +285,10 @@ export default function ArbeitszeitRechner() {
                 </div>
 
                 <button
+                  type="button"
+                  role="switch"
+                  aria-checked={!tag.frei}
+                  aria-label={`${tag.label} ist Arbeitstag`}
                   onClick={() => updateTag(idx, { frei: !tag.frei })}
                   className={`shrink-0 w-10 h-6 rounded-full transition-all relative ${
                     !tag.frei ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'

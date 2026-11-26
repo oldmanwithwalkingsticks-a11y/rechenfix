@@ -119,7 +119,7 @@ export default function AfaRechner() {
             { key: 'wohngebaeude-5', label: 'Wohngebäude (5 %)' },
             { key: 'sammelposten', label: 'Sammelposten' },
           ] as const).map(o => (
-            <button
+            <button type="button" aria-pressed={methode === o.key}
               key={o.key}
               onClick={() => setMethode(o.key)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${

@@ -68,7 +68,7 @@ export default function TrinkgeldRechner() {
           <>
             <div className="flex flex-wrap gap-2 mb-2">
               {PROZENT_SCHNELLWAHL.map(p => (
-                <button
+                <button type="button" aria-pressed={nTrinkgeldProzent === p}
                   key={p}
                   onClick={() => setTrinkgeldProzent(String(p))}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -97,7 +97,7 @@ export default function TrinkgeldRechner() {
         <label htmlFor="trinkgeld-anzahl-personen" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Anzahl Personen</label>
         <div className="flex flex-wrap gap-2 mb-2">
           {PERSONEN_SCHNELLWAHL.map(p => (
-            <button
+            <button type="button" aria-pressed={nPersonen === p}
               key={p}
               onClick={() => setPersonen(String(p))}
               className={`w-10 h-10 rounded-lg text-sm font-medium transition-all ${

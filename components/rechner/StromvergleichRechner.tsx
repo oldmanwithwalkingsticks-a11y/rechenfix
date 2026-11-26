@@ -48,7 +48,7 @@ export default function StromvergleichRechner() {
           </label>
           <div className="flex flex-wrap gap-2">
             {HAUSHALTSGROESSEN.map((h, i) => (
-              <button
+              <button type="button" aria-pressed={ausgewaehlteGroesse === i}
                 key={h.label}
                 onClick={() => handleGroesseClick(i, h.verbrauch)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${

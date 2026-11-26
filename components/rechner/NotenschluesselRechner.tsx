@@ -116,7 +116,7 @@ export default function NotenschluesselRechner() {
       {/* Tabs */}
       <div className="flex flex-wrap gap-1.5 mb-5">
         {modusTabs.map(t => (
-          <button
+          <button type="button" aria-pressed={modus === t.key}
             key={t.key}
             onClick={() => setModus(t.key)}
             className={`px-3 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -155,7 +155,7 @@ export default function NotenschluesselRechner() {
               <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Schlüsseltyp</label>
               <div className="flex gap-1.5">
                 {(['linear', 'knick'] as Schluesseltyp[]).map(s => (
-                  <button
+                  <button type="button" aria-pressed={schluessel === s}
                     key={s}
                     onClick={() => setSchluessel(s)}
                     className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${
@@ -268,7 +268,7 @@ export default function NotenschluesselRechner() {
               <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Schlüsseltyp</label>
               <div className="flex gap-1.5">
                 {(['linear', 'knick'] as Schluesseltyp[]).map(s => (
-                  <button
+                  <button type="button" aria-pressed={sSchluessel === s}
                     key={s}
                     onClick={() => setSSchluessel(s)}
                     className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${

@@ -107,7 +107,7 @@ export default function BafoegRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Art der Ausbildung</label>
             <div className="flex gap-2">
               {([['studium', '🎓 Studium'], ['schule', '📚 Schulische Ausbildung']] as const).map(([val, label]) => (
-                <button key={val} onClick={() => setAusbildung(val)}
+                <button type="button" aria-pressed={ausbildung === val} key={val} onClick={() => setAusbildung(val)}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${ausbildung === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
                   {label}
                 </button>
@@ -119,7 +119,7 @@ export default function BafoegRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Wohnsituation</label>
             <div className="flex gap-2">
               {([['eltern', '🏠 Bei den Eltern'], ['eigene', '🏢 Eigene Wohnung']] as const).map(([val, label]) => (
-                <button key={val} onClick={() => setWohnsituation(val)}
+                <button type="button" aria-pressed={wohnsituation === val} key={val} onClick={() => setWohnsituation(val)}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${wohnsituation === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
                   {label}
                 </button>
@@ -312,7 +312,7 @@ export default function BafoegRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Krankenversicherung</label>
             <div className="flex gap-2">
               {([false, true] as const).map(val => (
-                <button key={String(val)} onClick={() => setSelbstVersichert(val)}
+                <button type="button" aria-pressed={selbstVersichert === val} key={String(val)} onClick={() => setSelbstVersichert(val)}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${selbstVersichert === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
                   {val ? '💳 Selbst versichert' : '👨‍👩‍👧 Familienversichert'}
                 </button>
@@ -324,7 +324,7 @@ export default function BafoegRechner() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Eigene Kinder</label>
             <div className="flex gap-2">
               {([false, true] as const).map(val => (
-                <button key={String(val)} onClick={() => setHatKinder(val)}
+                <button type="button" aria-pressed={hatKinder === val} key={String(val)} onClick={() => setHatKinder(val)}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all min-h-[48px] ${hatKinder === val ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600'}`}>
                   {val ? '👶 Ja' : 'Nein'}
                 </button>

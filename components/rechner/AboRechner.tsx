@@ -97,7 +97,7 @@ export default function AboRechner() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Wählen Sie Ihre Abos</label>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
           {VORDEFINIERTE_ABOS.map(v => (
-            <button
+            <button type="button" aria-pressed={isActive(v.name)}
               key={v.name}
               onClick={() => toggleAbo(v.name, v.betrag)}
               className={`p-3 rounded-xl text-sm font-medium border-2 transition-all text-center ${
