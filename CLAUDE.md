@@ -115,7 +115,7 @@ Affiliate ist erlaubt, wenn **thematischer Match** zum Rechner besteht. Entschei
 
 ## Accessibility (WCAG 2.1 AA)
 
-rechenfix orientiert sich an WCAG 2.1 AA. Gemessen wird mit axe-core über alle Seiten der Sitemap, Desktop hell und dunkel und Handy; am 04.11.2026 live auf 258 Seiten kein Verstoß gegen die Regeln der Stufen A und AA (Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`). Lighthouse ist kein Maßstab mehr: Die Stichprobe vom April 2026 mit 100/100 übersah unbeschriftete Felder und Links, die nur an der Farbe zu erkennen waren.
+rechenfix orientiert sich an WCAG 2.1 AA. Gemessen wird mit axe-core über alle Seiten der Sitemap, Desktop hell und dunkel und Handy; zuletzt am 26.11.2026 (Messung 8, Grundlage des Textes von `/barrierefreiheit`) live auf 258 Seiten kein Verstoß gegen die Regeln der Stufen A und AA und bei 320, 360 und 375 px keine Seite zu breit (Messbericht `docs/audit-arbeitspapiere/barrierefreiheit-axe-2026-11.md`). Lighthouse ist kein Maßstab mehr: Die Stichprobe vom April 2026 mit 100/100 übersah unbeschriftete Felder und Links, die nur an der Farbe zu erkennen waren.
 
 ### Farb-Regeln
 - Text auf weiß: min. `text-gray-600`, NIE `-500`, `-400` oder `-300` — auch nicht für kleine Zusatz- und Hinweiszeilen (`-500` hat auf `bg-gray-100` nur 4,2:1). Immer mit Dark-Variante, meist `text-gray-600 dark:text-gray-400`. Ausnahme: rein dekorative Zeichen (Trennpunkt, Pfeil, Stern); die zulässigen stehen in `scripts/verify-textfarben.ts`. SVG-Grafiken: grauer Text nur mit `fill="#9ca3af"`, `app/globals.css` macht ihn im hellen Modus zu gray-600 (Welle 188).

@@ -6,6 +6,22 @@
 
 ---
 
+## 26.11.2026 — Welle 216: Barrierefreiheitserklärung auf Stand 26. November 2026
+
+**Anlass:** Offener Punkt aus den Wellen 211 bis 213. Die Erklärung sagte unter „Umgesetzte Maßnahmen“, Auswahlgruppen seien Radio-Buttons mit Fieldset/Legend; für die 105 Auswahlknöpfe aus Welle 213 traf das nicht zu. Die Seitenbreite bei 320 px (Welle 211) stand gar nicht darin. Karstens OK zum Entwurf vom 26.11.2026.
+
+**Grundlage:** Live-Messungen vom 26.11.2026 auf `2139cb7` (Welle 213), im Messbericht `barrierefreiheit-axe-2026-11.md` als Messung 8: axe 774 Messungen ohne Verstoß, Seitenbreite 258 Seiten × 3 Breiten ohne Abweichung. Das Stand-Datum folgt dem Tag dieser Messung (CLAUDE.md, Abschnitt Barrierefreiheitserklärung).
+
+**Änderung `app/barrierefreiheit/page.tsx`** (`recht:`-Commit, Zeile in `docs/rechtstexte/aenderungshistorie.md`): Stand, „überarbeitet am“ und „Ergebnis der Messung vom“ auf 26. November 2026; Satz zur Seitenbreite unter „Stand der Vereinbarkeit“; Maßnahmen: Auswahlknöpfe geben ihren Zustand an, Seitenbreite bei 320 px statt „Responsives Design für alle Bildschirmgrößen“, automatischer Test nennt Auswahlknöpfe; „Erstellung“: Messverfahren der Seitenbreite, Ergebniszeile, Vorgeschichte (25 Seiten bei 320 px und 105 Auswahlknöpfe bis zum 26.11.2026).
+
+**Regel 8:** kein Rechner berührt; keine Abnahme nötig.
+
+**Commits:** dieser Commit (Erklärung, Messbericht, Änderungshistorie, Historie).
+
+**Offen:** Deploy, Live-Prüfung des Seitentexts, axe und Seitenbreite auf `/barrierefreiheit`.
+
+---
+
 ## 26.11.2026 — Welle 215: Barrierefreiheits-Skript bricht bei umgeschriebenem Pfad ab — ✅ ABGESCHLOSSEN 26.11.2026
 
 **Anlass:** Offener Punkt aus Welle 214. `scripts/messung-barrierefreiheit.mjs` hatte dieselbe Schwäche wie das Seitenbreiten-Skript: Git Bash unter Windows schreibt `--pfad /blog` in einen Windows-Pfad um. Mit der Fassung vor dieser Welle gemessen (26.11.2026, Karstens Rechner): `--pfad /blog --ansichten hell` ergab „HTTP-Status ungleich 200: 1“, `/C:/Program Files/EpsonNet/Git/blog (hell) 404`, Rückgabewert 1. Gemessen wurde also eine 404-Seite statt der gewünschten. Karsten hat die Übernahme am 26.11.2026 freigegeben.

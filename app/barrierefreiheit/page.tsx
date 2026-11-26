@@ -27,7 +27,7 @@ export default function BarrierefreiheitSeite() {
         <h1 className="text-2xl md:text-3xl font-extrabold text-primary-700 dark:text-primary-300 mb-2">
           Erklärung zur Barrierefreiheit
         </h1>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">Stand: 4. November 2026</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-8">Stand: 26. November 2026</p>
 
         <div className="space-y-8 text-gray-700 dark:text-gray-300">
           <p className="text-base leading-relaxed">
@@ -51,10 +51,12 @@ export default function BarrierefreiheitSeite() {
             </h2>
             <p className="leading-relaxed">
               Wir prüfen die Website gegen die Anforderungen der{' '}
-              <strong>WCAG 2.1 Stufe AA</strong>. Am <strong>4. November 2026</strong> haben wir alle
+              <strong>WCAG 2.1 Stufe AA</strong>. Am <strong>26. November 2026</strong> haben wir alle
               258 Seiten gemessen, die die Sitemap an diesem Tag enthielt, jeweils am Desktop im hellen
               und im dunklen Modus sowie in einer Handyansicht. Das Prüfwerkzeug axe-core fand dabei
-              keinen Verstoß gegen die automatisiert prüfbaren Kriterien der Stufen A und AA.
+              keinen Verstoß gegen die automatisiert prüfbaren Kriterien der Stufen A und AA. Am selben
+              Tag haben wir jede Seite bei 320, 360 und 375 Pixel Breite geladen: Keine musste seitlich
+              gescrollt werden.
             </p>
             <p className="mt-3 leading-relaxed">
               Automatisierte Prüfungen decken allerdings nur einen Teil der Erfolgskriterien ab.
@@ -78,14 +80,14 @@ export default function BarrierefreiheitSeite() {
               <li>Überschriften ohne übersprungene Ebenen (h1 &rarr; h2 &rarr; h3) und genau eine Hauptüberschrift je Seite</li>
               <li>Jedes Eingabe- und Auswahlfeld ist programmatisch mit seiner Beschriftung verknüpft</li>
               <li>Skip-Link zum Überspringen der Navigation für Tastaturnutzer</li>
-              <li>Auswahlgruppen (z.&thinsp;B. Geschlecht, Berechnungsart) als native Radio-Buttons mit Fieldset/Legend; Ein-/Aus-Schalter sind als Schalter mit ihrem Zustand ausgezeichnet</li>
+              <li>Auswahlgruppen (z.&thinsp;B. Geschlecht, Berechnungsart) als native Radio-Buttons mit Fieldset/Legend; Auswahlknöpfe wie Schnellwahlen und Kacheln geben an, ob sie gewählt sind; Ein-/Aus-Schalter sind als Schalter mit ihrem Zustand ausgezeichnet</li>
               <li>Links im Fließtext sind unterstrichen und nicht nur an der Farbe zu erkennen</li>
               <li>Tabellen, die auf kleinen Bildschirmen seitlich scrollen, sind per Tastatur erreichbar und tragen einen Namen</li>
               <li>Automatische Screenreader-Ansage bei Ergebnisänderung (aria-live mit Debounce)</li>
               <li>Fokus-Lenkung bei &bdquo;Fix erklärt&ldquo;-KI-Erklärungen: Fokus wandert automatisch zum neuen Inhalt, beim Schließen zurück zum Auslöser</li>
               <li>Der wissenschaftliche Taschenrechner ist per Tastatur bedienbar (Tasten per Tab und Eingabetaste, Ziffern und Rechenzeichen auch direkt); Tasten mit Zeichen tragen einen gesprochenen Namen, das Ergebnis steht in einem aria-live-Bereich</li>
-              <li>Bei jeder Änderung der Website prüft ein automatischer Test, dass Beschriftungen, Schalter, Links und Tabellen diesen Regeln folgen</li>
-              <li>Responsives Design für alle Bildschirmgrößen</li>
+              <li>Bei jeder Änderung der Website prüft ein automatischer Test, dass Beschriftungen, Schalter, Auswahlknöpfe, Links und Tabellen diesen Regeln folgen</li>
+              <li>Responsives Design: Auch bei 320 Pixel Bildschirmbreite muss keine Seite seitlich gescrollt werden; nur breite Tabellen scrollen in einem eigenen Bereich</li>
               <li>Unterstützung für Dark Mode</li>
             </ul>
           </section>
@@ -120,28 +122,33 @@ export default function BarrierefreiheitSeite() {
             </h2>
             <p className="leading-relaxed">
               Diese Erklärung wurde am <strong>16. April 2026</strong> erstellt und am{' '}
-              <strong>4. November 2026</strong> überarbeitet.
+              <strong>26. November 2026</strong> überarbeitet.
             </p>
             <p className="mt-2 leading-relaxed">
               Die Bewertung beruht auf einer Selbstbewertung. Grundlage ist eine automatisierte Messung
               mit axe-core 4.11.2 im Browser Chromium über alle Seiten der Sitemap, je Seite in drei
               Ansichten: Desktop hell, Desktop dunkel und Handy. Weil axe einen Platzhaltertext wie
               &bdquo;z.&thinsp;B. 75&ldquo; als Beschriftung gelten lässt, prüfen wir zusätzlich auf jeder
-              Seite, ob jedes Eingabefeld eine verknüpfte Beschriftung hat.
+              Seite, ob jedes Eingabefeld eine verknüpfte Beschriftung hat. Die Seitenbreite messen wir
+              mit einem eigenen Skript: Jede Seite wird bei 320, 360 und 375 Pixel Breite geladen; gezählt
+              wird, ob sie breiter als der Bildschirm ist oder Text über den rechten Rand ragt.
             </p>
             <p className="mt-2 leading-relaxed">
-              Ergebnis der Messung vom <strong>4. November 2026</strong>:
+              Ergebnis der Messung vom <strong>26. November 2026</strong>:
             </p>
             <ul className="mt-2 list-disc pl-6 space-y-1 leading-relaxed">
               <li>258 Seiten, die die Sitemap an diesem Tag enthielt, in drei Ansichten: <strong>774 Messungen</strong></li>
               <li>Verstöße gegen die Regeln der WCAG 2.1 Stufen A und AA: <strong>0</strong></li>
               <li>Eingabefelder ohne verknüpfte Beschriftung: <strong>0</strong></li>
+              <li>Seiten, die bei 320, 360 oder 375 Pixel Breite seitlich gescrollt werden müssen: <strong>0</strong></li>
             </ul>
             <p className="mt-2 leading-relaxed">
-              Die vorige Fassung dieser Erklärung stützte sich auf eine Stichprobe von 19 Rechnern vom
-              18. April 2026. Die erste Messung über alle Seiten am 2. November 2026 fand Verstöße auf
+              Bis zum 4. November 2026 stützte sich diese Erklärung auf eine Stichprobe von 19 Rechnern
+              vom 18. April 2026. Die erste Messung über alle Seiten am 2. November 2026 fand Verstöße auf
               142 Seiten, vor allem Links, die nur an ihrer Farbe zu erkennen waren, und Eingabefelder
-              ohne verknüpfte Beschriftung. Sie sind seit dem 3. November 2026 behoben.
+              ohne verknüpfte Beschriftung. Sie sind seit dem 3. November 2026 behoben. Bis zum
+              26. November 2026 waren bei 320 Pixel Breite noch 25 Seiten breiter als der Bildschirm, und
+              105 Auswahlknöpfe zeigten nur über ihre Farbe, ob sie gewählt sind.
             </p>
           </section>
 

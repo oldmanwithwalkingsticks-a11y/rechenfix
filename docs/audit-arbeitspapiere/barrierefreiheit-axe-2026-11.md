@@ -1,6 +1,6 @@
 # Barrierefreiheit: axe-Messung über die ganze Sitemap (November 2026)
 
-**Stand:** 08.11.2026. **Wellen:** 201 und 202, Messung 6 nachgetragen mit Welle 203, Skript im Repo und Messung 7 mit Welle 204. **Zweck:** Grundlage für den Text von `/barrierefreiheit`, neu seit Welle 202.
+**Stand:** 26.11.2026. **Wellen:** 201 und 202, Messung 6 nachgetragen mit Welle 203, Skript im Repo und Messung 7 mit Welle 204, Messung 8 und neuer Text mit Welle 216. **Zweck:** Grundlage für den Text von `/barrierefreiheit`, neu seit Welle 202.
 Dort stand bis zu Welle 202 die Stichprobe vom 18.04.2026 (19 Rechner aus 9 Kategorien) und der Satz „Alle Formularfelder
 (&lt;select&gt;, &lt;input&gt;) sind mit zugehörigen Labels verknüpft“. Die Vollprüfung Q4/2026 hatte entschieden, statt einer
 erweiterten Stichprobe die ganze Sitemap zu messen.
@@ -209,3 +209,25 @@ Befund „0 Eingabefelder ohne Beschriftung“ trägt.
 **Kein neues Stand-Datum.** Messung 7 ist der Abnahmelauf des Skripts. Sie bestätigt Messung 6 und ersetzt sie nicht als
 Grundlage des Textes von `/barrierefreiheit` (Stand 4. November 2026). Die nächste Messung, die den Text tragen soll,
 gehört zur Vollprüfung am 01.02.2027.
+
+## Messung 8 — live, 26.11.2026, nach den Wellen 211 bis 213
+
+www.rechenfix.de am Stand `2139cb7` (Welle 213, Vercel `dpl_F6YKtXMCzyceDyoZMWUFoXWG3xE2`), 22:41–22:51 Uhr, aus der
+Sitzung mit `node scripts/messung-barrierefreiheit.mjs` (Fassung von Welle 213, parallel 4). Sitemap 258 Seiten. Regeln
+WCAG 2.1 A/AA und `best-practice`, alle drei Ansichten: 774 Messungen, alle mit HTTP 200. **Kein Verstoß**, auch nicht im
+ersten Durchgang. Eigene Prüfungen: **0** Eingabefelder ohne Beschriftung (1.219 Felder auf 226 Seiten, Ansicht hell),
+**0** `<label for>` ohne Ziel, **0** doppelte `id`; genau eine h1 je Seite, kein Sprung in der Überschriftenfolge.
+Taschenrechner per Tastatur: **8 von 8**. Rückgabewert 0.
+
+**Seitenbreite (WCAG 1.4.10), am selben Stand,** 22:52–23:00 Uhr, `node scripts/messung-seitenbreite.mjs` (seit Welle 212
+im Repo, parallel 6): 258 Seiten je Breite bei 320, 360 und 375 px, **0** Seiten breiter als der Bildschirm, **0** Seiten
+mit Text über dem rechten Rand, alle mit HTTP 200. Rückgabewert 0. Vor Welle 211 waren es live 25 / 12 / 5 Seiten.
+
+**Was seit Messung 6 dazukam:** Welle 211 (Seiten bei 320 px, live seit 26.11.2026, 00:19 Uhr), Welle 212
+(RadioToggleGroup in drei Rechnern, Seitenbreiten-Skript im Repo) und Welle 213 (105 Auswahlknöpfe, die ihren Zustand nur
+über die Farbe zeigten, tragen `aria-pressed` bzw. sind Schalter mit `aria-checked`; axe prüft das nicht, eine
+Funktionsprobe per Tastatur über alle Seiten schon: 300 von 300 Schritten wirksam). Die Felderzahl stieg von 1.190
+(Messung 7) auf 1.219, weil Rechner dazukamen oder Felder bekamen.
+
+**Neues Stand-Datum.** Messung 8 trägt den Text von `/barrierefreiheit` ab Welle 216 (Stand 26. November 2026): Er nennt
+jetzt auch die Seitenbreite und die Auswahlknöpfe, und dafür reicht Messung 6 nicht.
