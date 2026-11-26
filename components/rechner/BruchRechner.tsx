@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useId } from 'react';
 import {
   berechneBrueche,
   kuerzeBruch,
@@ -20,6 +20,7 @@ import {
   bruecheDazwischen,
   rechenwegDazwischen,
   mediantText,
+  zerlegeBruchEingabe,
   DAZWISCHEN_MAX,
   type Operation,
   type Bruch,
@@ -117,7 +118,9 @@ function Hinweis({ text }: { text: string }) {
   );
 }
 
-type OperandModus = 'bruch' | 'dezimal';
+// Feedback 2026-11-25-01: Die ganze Zahl einer gemischten Zahl hat einen eigenen Modus, ein- und ausgeschaltet unter dem
+// Bruch. Vorher stand das Feld immer links daneben, ohne sichtbare Beschriftung und mit „0“ als Platzhalter.
+type OperandModus = 'bruch' | 'gemischt' | 'dezimal';
 
 type OperandOk = { ok: true; bruch: Bruch; text: string; quelle: OperandQuelle };
 type Operand = OperandOk | { ok: false; fehler: string };
@@ -141,7 +144,8 @@ function leseOperand(
   const nenner = ganzzahl(n);
   const ganz = ganzzahl(g); // leeres Feld = 0
   if (zaehler === null || nenner === null || ganz === null) {
-    return { ok: false, fehler: `${name}: ${HINWEIS_GANZZAHL} Für Kommazahlen auf „Dezimalzahl“ umschalten.` };
+    const hinweis = modus === 'gemischt' ? HINWEIS_GANZZAHL : HINWEIS_ZN;
+    return { ok: false, fehler: `${name}: ${hinweis} Für Kommazahlen auf „Dezimalzahl“ umschalten.` };
   }
   if (nenner === NULL) return { ok: false, fehler: `${name}: Der Nenner darf nicht 0 sein.` };
   const bruch: Bruch = ganz !== NULL ? gemischtZuBruch(ganz, zaehler, nenner) : { zaehler, nenner };
@@ -161,6 +165,7 @@ function OperandEingabe({
   nenner: string; setNenner: (v: string) => void;
   ganz: string; setGanz: (v: string) => void;
 }) {
+  const gemischt = modus === 'gemischt';
   return (
     <div className="flex flex-col items-center gap-2">
       <RadioToggleGroup
@@ -171,7 +176,7 @@ function OperandEingabe({
           { value: 'bruch', label: 'Bruch' },
           { value: 'dezimal', label: 'Dezimalzahl' },
         ]}
-        value={modus}
+        value={modus === 'dezimal' ? 'dezimal' : 'bruch'}
         onChange={(v) => setModus(v as OperandModus)}
       />
       {modus === 'dezimal' ? (
@@ -182,8 +187,23 @@ function OperandEingabe({
           </div>
         </div>
       ) : (
-        <BruchEingabe zaehler={zaehler} setZaehler={setZaehler} nenner={nenner} setNenner={setNenner} ganz={ganz} setGanz={setGanz} label={`Bruch ${nr}`} />
+        modus === 'gemischt'
+          ? <BruchEingabe zaehler={zaehler} setZaehler={setZaehler} nenner={nenner} setNenner={setNenner} ganz={ganz} setGanz={setGanz} label={`Zahl ${nr} (gemischte Zahl)`} />
+          : <BruchEingabe zaehler={zaehler} setZaehler={setZaehler} nenner={nenner} setNenner={setNenner} label={`Bruch ${nr}`} />
       )}
+      {/* Feste Höhe auch ohne Knopf, damit die Rechenzeichen in allen Modi gleich stehen */}
+      <div className="h-8 flex items-center">
+        {modus !== 'dezimal' && (
+          <button
+            type="button"
+            aria-pressed={gemischt}
+            onClick={() => setModus(gemischt ? 'bruch' : 'gemischt')}
+            className="text-xs font-medium text-primary-700 dark:text-primary-300 underline underline-offset-2 px-2 py-1.5 rounded-md hover:bg-primary-50 dark:hover:bg-primary-500/10"
+          >
+            {gemischt ? '−\u00a0ohne ganze Zahl' : '+\u00a0ganze Zahl davor'}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -196,26 +216,61 @@ function BruchEingabe({
   ganz?: string; setGanz?: (v: string) => void;
   label: string;
 }) {
+  // Feedback 2026-11-25-01: „3/4“ im Zählerfeld (getippt oder eingefügt) verteilt sich auf Zähler und Nenner, der
+  // Cursor springt ins Nennerfeld; im Feld für die ganze Zahl geht es mit Leerzeichen weiter
+  // („2 3/4“). Vorher verwarf das Feld den Schrägstrich stumm.
+  const basisId = useId();
+  const id = { ganz: `${basisId}-ganz`, zaehler: `${basisId}-zaehler`, nenner: `${basisId}-nenner` };
+  const mitGanz = ganz !== undefined && setGanz !== undefined;
+  const sonderEingabe = (feld: 'ganz' | 'zaehler') => (wert: string) => {
+    const t = zerlegeBruchEingabe(wert, mitGanz);
+    if (!t) return;
+    if (setGanz && (t.ganz !== undefined || feld === 'ganz')) setGanz(t.ganz ?? '');
+    setZaehler(t.zaehler);
+    if (t.nenner !== undefined) setNenner(t.nenner);
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id[t.weiter]) as HTMLInputElement | null;
+      if (!el) return;
+      el.focus();
+      el.setSelectionRange(el.value.length, el.value.length);
+    });
+  };
   return (
     <div>
       <p className="text-xs text-gray-600 dark:text-gray-400 mb-1.5">{label}</p>
       <div className="flex items-center gap-2">
-        {ganz !== undefined && setGanz && (
-          <div className="w-14">
-            <NummerEingabe aria-label={`${label}, ganze Zahl`} value={ganz} onChange={setGanz} placeholder="0" />
+        {mitGanz && (
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-14">
+              <NummerEingabe id={id.ganz} aria-label={`${label}, ganze Zahl`} value={ganz} onChange={setGanz} placeholder="2" beiSonderEingabe={sonderEingabe('ganz')} />
+            </div>
+            <span className="text-xs text-gray-600 dark:text-gray-400">Ganze</span>
           </div>
         )}
         <div className="flex flex-col items-center gap-0.5">
           <div className="w-16">
-            <NummerEingabe aria-label={`${label}, Zähler`} value={zaehler} onChange={setZaehler} placeholder="1" />
+            <NummerEingabe id={id.zaehler} aria-label={`${label}, Zähler`} value={zaehler} onChange={setZaehler} placeholder="1" beiSonderEingabe={sonderEingabe('zaehler')} />
           </div>
           <div className="w-16 border-t-2 border-gray-400 dark:border-gray-500" />
           <div className="w-16">
-            <NummerEingabe aria-label={`${label}, Nenner`} value={nenner} onChange={setNenner} placeholder="2" />
+            <NummerEingabe id={id.nenner} aria-label={`${label}, Nenner`} value={nenner} onChange={setNenner} placeholder="2" />
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Feedback 2026-11-25-01: kurze Anleitung über den Eingabefeldern (Nutzerfeedback 25.11.2026). Bis dahin erklärte
+ * nur das Aussehen der Felder, wohin Zähler und Nenner gehören.
+ */
+function EingabeHinweis({ gemischt = false }: { gemischt?: boolean }) {
+  return (
+    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      Zähler ins obere Feld, Nenner ins untere – für 3/4 also 3 oben und 4 unten. Sie können 3/4 auch in einem Zug ins obere Feld tippen.
+      {gemischt && ' Für eine gemischte Zahl wie 2\u00a03/4 unter dem Bruch auf „+\u00a0ganze Zahl davor“ tippen.'}
+    </p>
   );
 }
 
@@ -271,8 +326,9 @@ export default function BruchRechner() {
 
   // Ergebnis Tab 1
   const rechnung = useMemo<Pruefung<{ o1: OperandOk; o2: OperandOk; ergebnis: BruchRechenErgebnis }>>(() => {
-    const o1 = leseOperand(modus1 === 'dezimal' ? 'Zahl 1' : 'Bruch 1', modus1, d1, z1, n1, g1);
-    const o2 = leseOperand(modus2 === 'dezimal' ? 'Zahl 2' : 'Bruch 2', modus2, d2, z2, n2, g2);
+    // Feedback 2026-11-25-01: Die ganze Zahl zählt nur, wenn ihr Feld eingeblendet ist („+ ganze Zahl davor“)
+    const o1 = leseOperand(modus1 === 'bruch' ? 'Bruch 1' : 'Zahl 1', modus1, d1, z1, n1, modus1 === 'gemischt' ? g1 : '');
+    const o2 = leseOperand(modus2 === 'bruch' ? 'Bruch 2' : 'Zahl 2', modus2, d2, z2, n2, modus2 === 'gemischt' ? g2 : '');
     if (!o1.ok) return { ok: false, fehler: o1.fehler };
     if (!o2.ok) return { ok: false, fehler: o2.fehler };
     if (op === '÷' && o2.bruch.zaehler === NULL) return { ok: false, fehler: 'Durch 0 kann man nicht teilen.' };
@@ -377,13 +433,16 @@ export default function BruchRechner() {
         ))}
       </div>
 
+      {/* Feedback 2026-11-25-01: Anleitung, wo Bruchfelder stehen (im Reiter „Dezimal → Bruch“ gibt es keine) */}
+      {(tab !== 'dezimal' || dezMode === 'zuDezimal') && <EingabeHinweis gemischt={tab === 'rechnen'} />}
+
       {/* Tab 1: Brüche rechnen */}
       {tab === 'rechnen' && (
         <div>
           <div className="flex flex-wrap items-end justify-center gap-3 mb-6">
             <OperandEingabe nr={1} modus={modus1} setModus={setModus1} dezimal={d1} setDezimal={setD1} zaehler={z1} setZaehler={setZ1} nenner={n1} setNenner={setN1} ganz={g1} setGanz={setG1} />
 
-            <div className="flex gap-1 pb-4">
+            <div className="flex gap-1 pb-4 sm:pb-14">
               {operationen.map(o => (
                 <button type="button" aria-pressed={op === o}
                   key={o}

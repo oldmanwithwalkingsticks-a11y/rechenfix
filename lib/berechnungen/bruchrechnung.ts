@@ -129,6 +129,30 @@ export function ganzzahlText(text: string): bigint | null {
   return r.bruch.zaehler;
 }
 
+/** Felder aus einer Eingabe in Bruchschreibweise (Feedback 2026-11-25-01). `weiter`: das Feld, in dem es weitergeht. */
+export type BruchEingabeTeile = { ganz?: string; zaehler: string; nenner?: string; weiter: 'zaehler' | 'nenner' };
+
+/**
+ * Zerlegt eine getippte oder eingefügte Bruchschreibweise in die Felder des Rechners (Feedback 2026-11-25-01,
+ * Nutzerfeedback 25.11.2026: „Ich verstehe nicht wie ich das dort eingeben soll“). Vorher
+ * verschluckte das Feld den Schrägstrich, aus „3/4“ wurde stumm „34“.
+ *  - „3/4“ → Zähler 3, Nenner 4; „3/“ → Zähler 3, Nenner leer. Weiter im Nennerfeld.
+ *  - nur mit Feld für die ganze Zahl (`mitGanz`): „2 3/4“ → 2, 3, 4 (weiter im Nennerfeld);
+ *    „2 “ oder „2 3“ → ganze Zahl 2, Zähler leer bzw. 3 (weiter im Zählerfeld).
+ * Jeder Teil ist leer oder eine Ziffernfolge, nur vorn darf ein Minus stehen. null: keine
+ * Bruchschreibweise, das Feld behandelt die Eingabe wie bisher.
+ */
+export function zerlegeBruchEingabe(text: string, mitGanz: boolean): BruchEingabeTeile | null {
+  let m = /^\s*(-?\d*)\s*\/\s*(\d*)\s*$/.exec(text);
+  if (m) return { zaehler: m[1], nenner: m[2], weiter: 'nenner' };
+  if (!mitGanz) return null;
+  m = /^\s*(-?\d+)\s+(\d*)\s*\/\s*(\d*)\s*$/.exec(text);
+  if (m) return { ganz: m[1], zaehler: m[2], nenner: m[3], weiter: 'nenner' };
+  m = /^\s*(-?\d+)\s+(\d*)\s*$/.exec(text);
+  if (m) return { ganz: m[1], zaehler: m[2], weiter: 'zaehler' };
+  return null;
+}
+
 // --- Tab 1: Brüche rechnen ---
 
 export interface RechenSchritte {

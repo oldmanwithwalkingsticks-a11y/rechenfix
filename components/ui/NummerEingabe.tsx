@@ -25,6 +25,11 @@ interface NummerEingabeProps {
    */
   min?: number;
   max?: number;
+  /**
+   * Feedback 2026-11-25-01: Wird mit Eingaben aufgerufen, die keine Zahl sind und sonst verworfen würden, etwa „3/4“
+   * im Zählerfeld des Bruchrechners. Der Aufrufer entscheidet, ob und wie er sie übernimmt.
+   */
+  beiSonderEingabe?: (wert: string) => void;
 }
 
 /**
@@ -50,12 +55,15 @@ export default function NummerEingabe({
   max,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledby,
+  beiSonderEingabe,
 }: NummerEingabeProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const neuerWert = e.target.value;
     // Nur gültige Zahleneingaben durchlassen (Ziffern, ein Komma/Punkt, optionales Minus)
     if (neuerWert === '' || neuerWert === '-' || istGueltigeZahleneingabe(neuerWert)) {
       onChange(neuerWert);
+    } else if (beiSonderEingabe) {
+      beiSonderEingabe(neuerWert);
     }
   };
 

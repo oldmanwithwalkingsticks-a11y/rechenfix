@@ -19,6 +19,10 @@
 // Hand (17/25 = 68/100 = 68 %); dazu ein Abgleich über 15.000 Brüche, ob die Prozentanzeige genau
 // die Dezimalanzeige mit um zwei Stellen verschobenem Komma ist — über Textverschiebung, nicht
 // über die Lib.
+//
+// Feedback 2026-11-25-01: Eingabe in Bruchschreibweise (Nutzerfeedback 25.11.2026 „Ich verstehe nicht wie ich das
+// dort eingeben soll“). Das Zählerfeld verwarf den Schrägstrich, aus „3/4“ wurde stumm „34“.
+// zerlegeBruchEingabe verteilt „3/4“ und „2 3/4“ auf die Felder; Sollwerte von Hand.
 import {
   dezimalTextZuBruch,
   ganzzahlText,
@@ -32,6 +36,8 @@ import {
   rechenwegBruchZuDezimal,
   type Bruch,
 } from '../lib/berechnungen/bruchrechnung';
+// Als Namensraum: Auf dem Stand vor dieser Änderung meldet das Skript „fehlt“, statt beim Import abzubrechen.
+import * as bruchLib from '../lib/berechnungen/bruchrechnung';
 
 const fehler: string[] = [];
 const b = (x: Bruch | null | undefined) => (x ? `${x.zaehler}/${x.nenner}` : 'null');
@@ -210,9 +216,37 @@ for (const [ein, titel, rechnung] of prozentWeg) {
 const weg1725 = rechenwegBruchZuDezimal(bz2('17/25'), bz2('17/25'));
 if (weg1725.length !== 2 || weg1725[0].rechnung !== '17 ÷ 25 = 0,68') fehler.push(`Rechenweg 17/25: ${JSON.stringify(weg1725)}`);
 
+// Eingabe in Bruchschreibweise (Feedback 2026-11-25-01): [Text, mit Feld für die ganze Zahl, Soll als ganz|zaehler|nenner|weiter oder null]
+const eingaben: [string, boolean, string | null][] = [
+  ['3/4', false, '–|3|4|nenner'],
+  ['3/', false, '–|3||nenner'],
+  ['-3/4', false, '–|-3|4|nenner'],
+  [' 17 / 25 ', false, '–|17|25|nenner'],
+  ['/4', false, '–||4|nenner'],
+  ['2 3/4', false, null],
+  ['2 3/4', true, '2|3|4|nenner'],
+  ['-2 3/4', true, '-2|3|4|nenner'],
+  ['2 ', true, '2||–|zaehler'],
+  ['2 3', true, '2|3|–|zaehler'],
+  ['3/4', true, '–|3|4|nenner'],
+  ['3/-4', false, null],
+  ['1/2/3', true, null],
+  ['3,5/4', false, null],
+  ['abc', true, null],
+  ['34', false, null],
+];
+const zerlegeBruchEingabe = (bruchLib as Record<string, unknown>).zerlegeBruchEingabe as
+  ((t: string, g: boolean) => { ganz?: string; zaehler: string; nenner?: string; weiter: string } | null) | undefined;
+if (!zerlegeBruchEingabe) fehler.push('zerlegeBruchEingabe fehlt');
+for (const [ein, mitGanz, soll] of zerlegeBruchEingabe ? eingaben : []) {
+  const t = zerlegeBruchEingabe!(ein, mitGanz);
+  const ist = t ? `${t.ganz ?? '–'}|${t.zaehler}|${t.nenner ?? '–'}|${t.weiter}` : null;
+  if (ist !== soll) fehler.push(`zerlegeBruchEingabe(${JSON.stringify(ein)}, ${mitGanz}): ${ist} statt ${soll}`);
+}
+
 if (fehler.length) {
   console.error(`Bruchrechnung ROT: ${fehler.length} Abweichungen`);
   for (const f of fehler) console.error('  ' + f);
   process.exit(1);
 }
-console.log(`Bruchrechnung grün: ${text.length} Texteingaben, ${ganz.length} Ganzzahlfelder, 3 Rechenbeispiele, ${dazwischen.length + 1} Fälle „Brüche dazwischen“ mit Rechenweg und Mediant, ${prozent.length + 1} Prozentwerte, Abgleich Dezimal/Prozent ${abgleich}, ${prozentWeg.length + 1} Rechenwege mit Prozent.`);
+console.log(`Bruchrechnung grün: ${text.length} Texteingaben, ${ganz.length} Ganzzahlfelder, 3 Rechenbeispiele, ${dazwischen.length + 1} Fälle „Brüche dazwischen“ mit Rechenweg und Mediant, ${prozent.length + 1} Prozentwerte, Abgleich Dezimal/Prozent ${abgleich}, ${prozentWeg.length + 1} Rechenwege mit Prozent, ${eingaben.length} Eingaben in Bruchschreibweise.`);

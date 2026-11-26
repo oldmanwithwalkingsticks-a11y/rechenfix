@@ -27,6 +27,22 @@ export type FeedbackEntry = {
 
 export const FEEDBACK_LOG: FeedbackEntry[] = [
   {
+    id: '2026-11-25-01',
+    datumAnfrage: '2026-11-25',
+    datumUmsetzung: '2026-11-26',
+    status: 'umgesetzt',
+    bereich: 'mathe/bruchrechner',
+    wunsch: 'Unklar, wie man im Bruchrechner etwas eingibt',
+    kommentar:
+      'Über den Feldern steht jetzt, wohin Zähler und Nenner gehören. ' +
+      'Wer 3/4 in einem Zug ins obere Feld tippt oder einfügt, bekommt ' +
+      'den Zähler oben und den Nenner unten; bisher verschluckte das ' +
+      'Feld den Schrägstrich, und aus 3/4 wurde 34. Das Feld für die ' +
+      'ganze Zahl erscheint nur noch, wenn man unter dem Bruch auf ' +
+      '„+ ganze Zahl davor“ tippt; dort lässt sich 2 3/4 ebenfalls in ' +
+      'einem Zug tippen. In den Fragen steht neu, wie die Eingabe geht.',
+  },
+  {
     id: '2026-11-18-01',
     datumAnfrage: '2026-11-18',
     datumUmsetzung: '2026-11-19',

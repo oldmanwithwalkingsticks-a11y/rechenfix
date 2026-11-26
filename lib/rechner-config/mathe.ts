@@ -3,7 +3,7 @@ import type { RechnerConfig } from './types';
 export const matheRechner: RechnerConfig[] = [
   {
     slug: 'bruchrechner',
-    letzteAktualisierung: '2026-11-19',
+    letzteAktualisierung: '2026-11-26',
     titel: 'Bruchrechner',
     beschreibung: 'Brüche berechnen: Addieren, subtrahieren, multiplizieren, dividieren. Mit Rechenweg, Kürzen, Umrechnung und Brüchen dazwischen.',
     kategorie: 'Mathe & Schule',
@@ -15,6 +15,10 @@ export const matheRechner: RechnerConfig[] = [
     beispiel: '1/3 + 2/5: Hauptnenner 15 → 5/15 + 6/15 = 11/15. Multiplikation: 2/3 × 3/4 = 6/12 = 1/2. Mit Dezimalzahl: 0,75 × 2/3 = 3/4 × 2/3 = 1/2.',
     faq: [
       {
+        frage: 'Wie gebe ich einen Bruch in den Rechner ein?',
+        antwort: 'Den Zähler ins obere Feld, den Nenner ins untere: für 3/4 also 3 oben und 4 unten. Schneller geht es, 3/4 in einem Zug ins obere Feld zu tippen oder einzufügen; der Rechner verteilt die Zahlen und springt ins untere Feld. Für eine gemischte Zahl wie 2 3/4 unter dem Bruch auf „+ ganze Zahl davor“ tippen, für eine Kommazahl wie 0,75 oben „Dezimalzahl“ wählen.',
+      },
+      {
         frage: 'Wie addiert man Brüche mit unterschiedlichem Nenner?',
         antwort: 'Zuerst den Hauptnenner (kleinstes gemeinsames Vielfaches der Nenner) bestimmen. Dann beide Brüche erweitern, sodass sie den gleichen Nenner haben. Anschließend die Zähler addieren und das Ergebnis kürzen. Beispiel: 1/3 + 2/5 → 5/15 + 6/15 = 11/15.',
       },
@@ -24,7 +28,7 @@ export const matheRechner: RechnerConfig[] = [
       },
       {
         frage: 'Was ist eine gemischte Zahl?',
-        antwort: 'Eine gemischte Zahl besteht aus einer ganzen Zahl und einem echten Bruch, z. B. 2¾. Sie lässt sich in einen unechten Bruch umwandeln: 2¾ = (2×4+3)/4 = 11/4. Unser Rechner unterstützt die direkte Eingabe gemischter Zahlen.',
+        antwort: 'Eine gemischte Zahl besteht aus einer ganzen Zahl und einem echten Bruch, z. B. 2¾. Sie lässt sich in einen unechten Bruch umwandeln: 2¾ = (2×4+3)/4 = 11/4. Im Rechner dafür unter dem Bruch auf „+ ganze Zahl davor“ tippen: links steht dann die ganze Zahl, rechts Zähler und Nenner. 2 3/4 lässt sich auch in einem Zug ins linke Feld tippen.',
       },
       {
         frage: 'Wie wandle ich einen Bruch in eine Dezimalzahl um?',
