@@ -6,6 +6,37 @@
 
 ---
 
+## 26.11.2026 — Welle 212: Prüfskript Seitenbreite und RadioToggleGroup in drei Rechnern
+
+**Anlass:** Zwei offene Punkte aus Welle 211. (1) Die Messung der Seitenbreite lief nur aus einer Chat-Sitzung; eine neue Seite, die wieder zu breit ist, fiele niemandem auf. (2) Kindergeld-, Wärmepumpen- und Quadratmeter-Rechner nutzten eigene Knopfgruppen statt `<RadioToggleGroup>` (CLAUDE.md „Häufige Fehler“). Diese Knöpfe zeigten den gewählten Wert nur über die Farbe, ohne Radio-Rolle und ohne `aria-pressed`; Screenreader erfuhren nicht, was gewählt ist (WCAG 4.1.2). axe meldet das nicht.
+
+**Teil 1 — `scripts/messung-seitenbreite.mjs`** (Commit `7e3dce4`):
+- Verfahren wie Welle 211: jede Seite der Sitemap bei 320, 360 und 375 px; gemessen, wenn das Netz ruht und der Seitenaufbau sich nicht mehr ändert, und eine Sekunde später ein zweites Mal; es zählt das größere `scrollWidth`. Neu gegenüber Welle 211: Text, der rechts über den Rand ragt, ohne in einem eigenen Scrollbereich zu liegen, wird auf **jeder** Seite gesucht (Welle 211 nur auf zu breiten Seiten) und zählt als Abweichung. Bei jeder Abweichung nennt das Skript die obersten Verursacher und die Textstellen.
+- Playwright wie bei `messung-barrierefreiheit.mjs` ohne Eintrag in package.json; Aufruf, Rückgabewert und Grenzen im Kopf des Skripts. CLAUDE.md nennt es unter „Gegenprobe“ und „Vor Deploy“.
+- Probe, ob es findet: vier Seiten bei 280 px (unter der Anforderung, kein Befund): Kindergeld 294 px breit, Ursache Überschrift „Anspruchsvoraussetzungen im Überblick“ bis 294 px; Brutto-Netto 308 px, Ursache das Klappsymbol eines aufklappbaren Eintrags (`details`/`summary`) bis 308 px. Bei 320 px dieselben Seiten 0.
+- Live-Lauf über die ganze Sitemap (26.11.2026, 00:52 bis 01:00 Uhr, www.rechenfix.de, ausgeliefert `4547299`, parallel 6, 494 s): 258 Seiten je Breite, zu breit 0 / 0 / 0, Text über dem Rand 0 / 0 / 0, HTTP ungleich 200: 0, Rückgabewert 0. Das bestätigt die Live-Messung von Welle 211.
+
+**Teil 2 — RadioToggleGroup** (Commit `73940cf`, nur Komponenten; Rechenweg und `lib/` unverändert):
+- Kindergeld: Anzahl der Kinder (fünf Optionen), Veranlagung, Kirchensteuer. Legende ist jeweils die Schrittüberschrift (nur für Screenreader).
+- Wärmepumpe: Betrachtungszeitraum (vier Optionen, `columns={4}` = bisheriges Raster). Die Schnellwahl der Anschaffungskosten bleibt eine Knopfreihe: Sie setzt den Wert des Eingabefelds und ist keine Auswahl.
+- Quadratmeter: Eingabe-Einheit (bisher ein `<label>` ohne zugehöriges Feld, jetzt Legende), Form je Fläche, Radius oder Durchmesser beim Kreis (`activeColor="accent"`, damit `accent-700` statt `accent-500` mit weißer Schrift). Die Knöpfe für Form und Kreismaß bekommen die Größe der RadioToggleGroup (mindestens 48 px hoch, `text-sm` statt `text-xs`).
+- Quadratmeter, feste ids: Die 13 Eingabefelder in `flaechen.map` trugen feste ids (`quadratmeter-laenge` usw.). Mit einer zweiten Fläche gab es sie live doppelt (`quadratmeter-laenge`, `quadratmeter-breite`), und die Beschriftungen der zweiten Fläche zeigten auf die Felder der ersten. Jetzt `quadratmeter-<Fläche>-<feld>` (CLAUDE.md: in `.map()` nie eine feste id). Die Messung über alle Seiten sah das nicht, weil sie nur den Startzustand mit einer Fläche prüft.
+
+**Funktionsprobe** (Chromium 1208, 1280 px): 15 Zustände mit denselben Klicks und Eingaben lokal (`next start` auf diesem Stand) und live (alte Knöpfe): Kindergeld 5 (Start, 3 Kinder, Einzelveranlagung, Kirchensteuer ja, 5+ Kinder zusammen ohne Kirchensteuer), Wärmepumpe 3 (Start, 25 Jahre, 10 Jahre), Quadratmeter 7 (Start, Rechteck 5 × 4 m, Zentimeter, Kreis r = 3, Kreis d = 6, zweite Fläche 2 × 3, zwei Rechtecke 5 × 4 und 2 × 3 = 26,00 m²). Ansage der aria-live-Region und alle Zahlen mit Einheit auf der Seite: 15 von 15 gleich, kein „NaN“. Doppelte ids nach dem letzten Zustand: live 2, lokal 0; alle Beschriftungen der Flächen zeigen lokal auf ein Feld derselben Fläche. Tastatur lokal 5 von 5: Pfeil rechts wechselt Veranlagung (zusammen → einzeln), Kinderzahl (2 → 3, Ansage danach „… für 3 Kinder …“), Jahre (20 → 25) und Einheit (m → cm). Konsolenfehler lokal nur durch Vercel Insights, das lokal fehlt; live 0.
+
+**Messungen lokal** (`next start`, drei Seiten): Seitenbreite bei 320, 360 und 375 px je 0, Rückgabewert 0. axe (`messung-barrierefreiheit.mjs`, hell, dunkel, Handy, 9 Messungen): keine Verstöße, 36 Felder, keines ohne Beschriftung, doppelte id 0, Überschriften in Ordnung, Rückgabewert 0. axe nach Eingaben (Quadratmeter mit Kreis und Durchmesser und zweiter Fläche als L-Form; Kindergeld mit Kirchensteuer ja und Einzelveranlagung), hell und dunkel: lokal keine Verstöße; live derselbe Quadratmeter-Zustand hell und dunkel je `color-contrast` an 1 Element (weiße Schrift auf `accent-500`).
+
+**Geprüft in dieser Sitzung (26.11.2026, Windows, Git Bash):** `tsc --noEmit` 0, eslint der drei Komponenten 0, Geradzeichen-Prüfung über den Diff ohne Treffer, verify:alle rc=0 „Prüfskripte: 90/90 grün.“, Build rc=0 „(272/272)“; verify:alle und Build nach der Umbenennung der ids ein zweites Mal, beide grün.
+
+**Regel 8 (Abnahme):** Geändert sind nur die Eingabesteuerung und ids, nicht Rechenweg und angezeigte Zahlen. Die Ausnahmeliste der Regel nennt Tastaturbedienung und Attribute, hier ändert sich aber auch, wie Kinderzahl und Kirchensteuer an den Zustand übergeben werden (als Text statt Zahl bzw. Wahrheitswert). Deshalb nimmt Karola die drei Rechner nach dem Deploy ab.
+
+**Commits:** `7e3dce4` (Prüfskript), `73940cf` (Komponenten), dieser Commit (Historie).
+
+**Offen:**
+- Deploy, Live-Probe und Karolas Abnahme der drei Rechner.
+- Weitere eigene Knopfgruppen: In 16 Rechner-Komponenten zeigt mindestens ein Knopf den gewählten Zustand nur über eine Farbklasse (Suche nach `=== … ? 'bg-primary-… text-white` bzw. `bg-accent-…` in einer Zeile, ohne `aria-pressed`, `aria-checked` oder `role="switch"`; mehrzeilige Schreibweisen fehlen in der Zählung): Abi, AFBG, Arbeitslosengeld, Arbeitstage, Autokosten, BAföG, Binär, Dachfläche, Gehaltserhöhung, Hochrechner, Hundejahre, Minijob, Pflegegeld, Reichweite, Uhrzeit und die Schnellwahl der Anschaffungskosten im Wärmepumpen-Rechner. Ein Teil davon sind Schnellwahlen wie beim Minijob-Rechner, die `aria-pressed` bräuchten statt einer RadioToggleGroup. Nicht Teil dieser Welle.
+- Barrierefreiheitserklärung unverändert, Entscheidung wie in Welle 211 offen.
+
 ## 25.11.2026 — Welle 211: Keine Seite breiter als 320 px (WCAG 1.4.10 Umbruch) — ✅ ABGESCHLOSSEN 25.11.2026
 
 **Anlass:** Welle 208 ließ bei 320 px 25 Seiten der Sitemap zurück, die seitwärts scrollten (`document.documentElement.scrollWidth` > 320), mit anderen Verursachern als den Kennzahl-Kacheln (Liste dort). WCAG 2.1 AA 1.4.10 verlangt, dass Inhalte bei 320 CSS-Pixel ohne waagerechtes Scrollen lesbar bleiben; axe prüft das nicht. Waagerecht scrollende Tabellen in `overflow-x-auto`-Regionen sind zulässig und bleiben.
