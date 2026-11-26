@@ -6,6 +6,25 @@
 
 ---
 
+## 26.11.2026 — Welle 214: Seitenbreiten-Skript bricht bei umgeschriebenem Pfad ab — ✅ ABGESCHLOSSEN 26.11.2026
+
+**Anlass:** Git Bash unter Windows schreibt Argumente, die mit `/` beginnen, in Windows-Pfade um. `node scripts/messung-seitenbreite.mjs --pfad /blog` maß deshalb auf Karstens Rechner `/C:/Program Files/EpsonNet/Git/blog`, eine 404-Seite, und meldete „HTTP ungleich 200“ statt der Breite. Aufgefallen beim Probelauf einer zweiten Fassung des Skripts in einer anderen Sitzung, die nach Welle 212 nicht mehr gebraucht wurde; übernommen wurde nur dieser Schutz (Karstens Freigabe vom 26.11.2026).
+
+**Änderung:** `scripts/messung-seitenbreite.mjs` prüft die `--pfad`-Werte. Beginnt einer mit Laufwerksbuchstabe und Doppelpunkt, bricht das Skript mit Rückgabewert 2 ab und nennt `MSYS_NO_PATHCONV=1`. Der Kopf des Skripts beschreibt das beim Aufruf mit `--pfad`. Messverfahren, Zählung und Ausgabe sind unverändert.
+
+**Geprüft (26.11.2026, Windows, Git Bash):**
+- Ohne `MSYS_NO_PATHCONV`: `--pfad /blog --breiten 320` → Abbruch mit Hinweis, Rückgabewert 2.
+- Mit `MSYS_NO_PATHCONV=1`: `--pfad /blog --pfad /wohnen/grundsteuer-rechner --breiten 320` live → 2 Seiten, zu breit 0, Rückgabewert 0.
+- verify:alle rc=0, „Prüfskripte: 90/90 grün.“, vor und nach dem Rebase auf `2139cb7` (Welle 213); slug-drift-scan, check-backticks und check-wellenhistorie rc=0.
+
+**Regel 8:** keine Rechner-Komponente, kein Rechenkern, kein Rechner-Text berührt; keine Abnahme nötig.
+
+**Commits:** `1221aab` (Skript), dieser Commit (Historie).
+
+**Offen:** `scripts/messung-barrierefreiheit.mjs` hat dieselbe Schwäche bei `--pfad` (dort wird `https://www.rechenfix.de/C:/Program Files/…` daraus, ebenfalls eine 404-Seite); nicht in dieser Welle.
+
+---
+
 ## 26.11.2026 — Welle 213: Auswahlknöpfe sagen ihren Zustand an (aria-pressed, Schalter)
 
 **Anlass:** Offener Punkt aus Welle 212. Dort standen „16 Rechner-Komponenten“ mit Knöpfen, die den gewählten Zustand nur über eine Farbklasse zeigen. Die Zahl war zu klein: Die Suche fand nur einzeilige Schreibweisen. Eine Erfassung über das ganze Repo, die das öffnende Tag samt mehrzeiliger `className`-Fallunterscheidung liest, fand **105 Knöpfe** in 65 Rechner-Komponenten und im Feedback-Formular. Screenreader erfuhren bei keinem davon, was gewählt ist (WCAG 4.1.2); axe meldet das nicht. Karstens Entscheidung: erst die Attribute, an allen Knöpfen, in einer Welle.
