@@ -26,7 +26,10 @@
 //                                                                  kommt vom selben Server, ihre Adressen
 //                                                                  werden auf die Basis umgeschrieben
 //   node scripts/messung-barrierefreiheit.mjs --pfad /neue/seite --pfad /andere
-//                                                                  nur diese Seiten, ohne Tastaturprobe
+//                                                                  nur diese Seiten, ohne Tastaturprobe;
+//                                                                  in Git Bash unter Windows mit
+//                                                                  MSYS_NO_PATHCONV=1 davor, sonst bricht
+//                                                                  das Skript ab (Welle 215)
 //   Weitere Schalter: --ansichten hell,dunkel,handy · --tags wcag2a,wcag2aa,wcag21a,wcag21aa,best-practice
 //   · --parallel 4 · --ziel ergebnis.json (alle Einzelergebnisse) · --tastatur / --ohne-tastatur
 //   Dauer: ganze Sitemap (258 Seiten), drei Ansichten, parallel 4 — 13 Minuten am 06.11.2026 (Messung 7).
@@ -75,6 +78,11 @@ function argumente(argv) {
     else throw new Error(`unbekannter Schalter ${s}`);
   }
   if (a.tastatur === null) a.tastatur = a.pfade.length === 0;
+  // Git Bash unter Windows schreibt Argumente, die mit / beginnen, in Windows-Pfade um
+  // (/blog → C:/Program Files/Git/blog). Gemessen würde dann eine 404-Seite (Welle 215, wie Welle 214
+  // in messung-seitenbreite.mjs).
+  const umgeschrieben = a.pfade.find((p) => /^[A-Za-z]:[\\/]/.test(p));
+  if (umgeschrieben) throw new Error(`--pfad ${umgeschrieben} ist ein Windows-Pfad; Git Bash hat /pfad umgeschrieben. MSYS_NO_PATHCONV=1 voranstellen.`);
   return a;
 }
 
