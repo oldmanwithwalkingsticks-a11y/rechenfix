@@ -36,9 +36,23 @@
 
 **Probelauf in der Chat-Sitzung** (Linux, 26.11.2026, Basis `0da155d`): Vorlage Datei für Datei gleich dem Zielstand bis auf die beiden Datumszeilen, auch mit CRLF-Dateien; ein zweiter Lauf bricht ab, ohne zu schreiben. verify:alle 90/90 in Berlin, UTC, New York und Tokio; Build 272 Seiten. Im gebauten Stand per Browser (Chromium, 1280, 375 und 320 px, hell und dunkel): `3/4` in Bruch 1 getippt ergibt oben 3, unten 4, Cursor unten, Ergebnis 23/20; `5/6` in Bruch 2 eingefügt ergibt 19/12; „+ ganze Zahl davor“ und `2 3/4` ins Feld „Ganze“ ergibt 43/12, zurück mit „− ohne ganze Zahl“ wieder 19/12; Reiter „Kürzen“ mit `18/24` ergibt 3/4; keine Skriptfehler; bei 320 und 375 px nichts breiter als der Bildschirm, auch mit beiden Feldern „Ganze“. axe (`--pfad /mathe/bruchrechner`) hell, dunkel und Handy ohne Verstoß, 8 Felder beschriftet; mit beiden Feldern „Ganze“ bei 320 und 375 px kein Verstoß, 10 Felder beschriftet. Seitenbreite bei 320, 360 und 375 px 0. Der ganze Prompt einmal auf einem Test-Remote durchgespielt, auch mit einer parallelen Probe-Welle.
 
-**Commits:** `33ae11b` (Inhalt), dieser Commit (Historie).
+**Commits:** `33ae11b` (Inhalt), `3ffec76` (Historie), dieser Commit (Deploy und Live-Probe, nur Doku).
 
-**Offen:** Deploy, Live-Probe und Karolas Nachprüfung der geänderten Stellen.
+**Deploy:** Push `0da155d..3ffec76` (beide Commits in einem Push), Deployment `dpl_9p3N3AXtWD9pBRnNV3Qi3cZuGvyV` für `3ffec76`, READY, Production; die neue FAQ stand 160 s nach dem Push im ausgelieferten HTML. GitHub Actions „Prüfskripte“ für `3ffec76`: success.
+
+**Live-Probe** (27.11.2026 kurz nach Mitternacht, Chromium 1208, www.rechenfix.de; die Schritte aus „Für Karsten danach“ des Prompts):
+- Anleitung über den Feldern steht da; im Startzustand kein Feld für die ganze Zahl; zwei Knöpfe „+ ganze Zahl davor“.
+- `3/4` ins obere Feld von Bruch 1 getippt: Zähler 3, Nenner 4, Fokus im Nennerfeld; Ergebnis „23/20 = 1,15“.
+- „+ ganze Zahl davor“: Feld „Zahl 1 (gemischte Zahl), ganze Zahl“ erscheint, Knopf heißt „− ohne ganze Zahl“ mit `aria-pressed="true"`; `2 3/4` dort getippt: 2, 3, 4, Ergebnis „63/20 = 3,15“; zurück mit „− ohne ganze Zahl“: 23/20.
+- `5/6` in Bruch 2 eingefügt (`fill`): 5 und 6, Ergebnis 19/12.
+- Reiter „Kürzen“, `18/24` getippt: „Gekürzter Bruch 3/4“, GGT 6.
+- Erste FAQ „Wie gebe ich einen Bruch in den Rechner ein?“; `/aktualisierungen` zeigt den Eintrag „Unklar, wie man im Bruchrechner etwas eingibt“. Keine Konsolenfehler.
+- Mit beiden Feldern „Ganze“ bei 320 und 375 px, hell und dunkel: axe (WCAG 2.1 A/AA und `best-practice`) ohne Verstoß, `scrollWidth` nicht über der Fensterbreite, alle 6 sichtbaren Felder beschriftet.
+- `messung-barrierefreiheit.mjs --pfad /mathe/bruchrechner`: hell, dunkel, Handy ohne Verstoß, 8 Felder beschriftet, Rückgabewert 0. `messung-seitenbreite.mjs --pfad /mathe/bruchrechner`: 320, 360 und 375 px je 0.
+
+**Beobachtung außerhalb der Welle (nicht geändert):** Die Screenreader-Ansage von `ErgebnisAktionen` bleibt im Bruchrechner stumm, wenn man ein Feld leert und neu tippt. Beim leeren Feld verschwindet das Ergebnis samt `ErgebnisAktionen`; beim nächsten gültigen Ergebnis wird die Komponente neu eingehängt und behandelt es als „erste Berechnung“, die sie bewusst nicht ansagt (`components/ui/ErgebnisAktionen.tsx` Z. 53–57). Angesagt wird nur, was sich bei stehendem Ergebnis ändert (hier: „− ohne ganze Zahl“ → 23/20). Schon in der Probe von Welle 213 war die Ansage im Bruchrechner bei allen Reiterwechseln leer. Ob andere Rechner mit Ergebnis, das bei leerem Feld verschwindet, ebenso betroffen sind, ist nicht gemessen.
+
+**Offen:** Karolas Nachprüfung der geänderten Stellen (in einer neuen Sitzung, CLAUDE.md Regel 8); erst mit „abnahmefähig“ ist die Welle fertig.
 
 ---
 
