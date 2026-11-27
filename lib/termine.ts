@@ -129,6 +129,9 @@ export const TERMINE: Termin[] = [
     wiederholungMonate: 3,
     bereich: 'Betrieb',
     was: 'Abrechnung läuft automatisch am 30. jedes Monats. Vierteljährlich statt monatlich erinnert, weil die Abbuchung selbst keine Handlung erfordert — geprüft werden Verbrauch, Rechnungshöhe und ob der Tarif noch passt. Seit der 30-Tage-Aufbewahrung (23.10.2026) unter Usage zusätzlich auf Zeilen für Deployment Storage und Functions Storage achten (0,10 $ pro GB und Monat je Speicherart laut Vercel-Mail vom 10.10.2026); am 26.10.2026 gab es noch keine.',
+    quittiertVorkommen: '2026-11-27',
+    quittiertAm: '2026-11-27',
+    quittungVermerk: 'Karsten am 27.11.2026 im Vercel-Dashboard, Pro Plan Usage, Abrechnungszyklus 30.10. bis 30.11.2026: Infrastruktur 3,51 $, vollständig vom Guthaben (20 $) gedeckt, Rechnung 20,00 $ (Pro-Lizenz). Größte Posten Observability Events 1,21 $, Fast Origin Transfer 0,59 $, ISR Reads 0,49 $, Fluid Active CPU 0,45 $. Keine Zeile für Deployment Storage oder Functions Storage. Firewall Rate Limit Requests 27 zu 0,00 $ (Regel Kontaktformular-Obergrenze bei wuerdezeit seit 26.11.2026). Fast Data Transfer 18 GB von 1 TB, CDN Requests 856,83 Tsd. von 10 Mio. Keine Alerts in den letzten drei Tagen. Vergleich 26.10.2026: 2,73 $.',
   },
   {
     id: 'awin-programme',
